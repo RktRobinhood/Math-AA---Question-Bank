@@ -7,6 +7,7 @@
     <title>IB Math AA SL Exam Bank</title>
     <meta name="description" content="Static searchable IB Math AA SL question bank and exam statistics.">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
   </head>
   <body data-initial-tab="syllabus">
     <main id="app" class="app-shell">
@@ -14,5 +15,17 @@
     </main>
     <script src="assets/js/data.js"></script>
     <script src="assets/js/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (!window.katex) return;
+    document.querySelectorAll('.formula').forEach(function(el) {
+      try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(_) {}
+    });
+    document.querySelectorAll('.formula-inline').forEach(function(el) {
+      try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(_) {}
+    });
+  });
+</script>
   </body>
 </html>

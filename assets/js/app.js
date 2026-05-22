@@ -36,12 +36,23 @@
     const focus = captureFocus();
     app.innerHTML = "";
     app.append(renderSiteHeader());
-    app.append(renderPageTabs());
 
     if (state.tab === "questions") app.append(renderQuestionBank());
     if (state.tab === "statistics") app.append(renderStatistics());
-    if (state.tab === "syllabus") app.append(renderSyllabus());
+    if (state.tab === "syllabus") { app.append(renderSyllabus()); renderMath(app); }
     restoreFocus(focus);
+  }
+
+  function renderMath(container) {
+    if (!window.katex) return;
+    container.querySelectorAll(".formula").forEach(el => {
+      try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); }
+      catch (_) {}
+    });
+    container.querySelectorAll(".formula-inline").forEach(el => {
+      try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); }
+      catch (_) {}
+    });
   }
 
   function renderSiteHeader() {
@@ -54,84 +65,49 @@
         menuGroup("Question Bank", [
           ["question-bank/", "Search all questions"],
           ...allYears.slice().reverse().map(year => [`exams/${year}/`, String(year)])
-        ]),
+        ], () => { state.tab = "questions"; render(); }, state.tab === "questions"),
         menuGroup("Statistics", [
           ["statistics/", "Exam statistics"],
           ["statistics/?mode=recency", "Recency forecast"],
           ["statistics/?mode=primacy", "Long-term pattern"]
-        ]),
+        ], () => { state.tab = "statistics"; render(); }, state.tab === "statistics"),
         menuGroup("Syllabus", [
           ["syllabus/", "All syllabus topics"],
           ...Object.entries(DATA.topics || {}).map(([topic, name]) => [`syllabus/topic-${topic}/`, `Topic ${topic}: ${name}`])
-        ]),
+        ], () => { state.tab = "syllabus"; render(); }, state.tab === "syllabus"),
         el("a", { class: "site-menu-link", href: DATA.assets?.formulaSheet || "#", target: "_blank", text: "Formula Sheet" })
-      ),
-      el("button", { class: "secondary-btn", type: "button", text: "Reset filters", onclick: resetFilters })
+      )
     );
   }
 
-  function menuGroup(label, links) {
+  function menuGroup(label, links, onTabSwitch, isActive) {
     return el("div", { class: "menu-group" },
-      el("button", { class: "site-menu-link", type: "button", text: label }),
+      el("button", {
+        class: `site-menu-link${isActive ? " active" : ""}`,
+        type: "button",
+        text: label,
+        onclick: onTabSwitch || null
+      }),
       el("div", { class: "submenu" },
         ...links.map(([href, text]) => el("a", { href, text }))
       )
     );
   }
 
-  function renderPageTabs() {
-    return el("nav", { class: "nav-tabs" },
-      pageTab("questions", "Question Bank", "question-bank/"),
-      pageTab("statistics", "Statistics", "statistics/"),
-      pageTab("syllabus", "Syllabus", "syllabus/")
-    );
-  }
-
-  function pageTab(id, label, href) {
-    return el("a", {
-      class: `tab-btn${state.tab === id ? " on" : ""}`,
-      href,
-      text: label
-    });
-  }
-
   function renderQuestionBank() {
     const results = filterQuestions();
-    if (!results.some(q => q.id === state.selectedId)) {
-      state.selectedId = results[0]?.id || "";
-    }
-    const selected = results.find(q => q.id === state.selectedId) || results[0];
-
     return el("section", {},
       renderFilters(true),
       renderKpis(results),
-      el("div", { class: "question-workspace" },
-        el("div", { class: "panel" },
-          el("div", { class: "section-title", text: `Matches (${results.length})` }),
-          renderQuestionList(results)
-        ),
-        renderViewer(selected)
+      el("div", { class: "panel" },
+        el("div", { class: "section-title", text: `Matches (${results.length})` }),
+        renderQuestionList(results)
       )
     );
   }
 
   function renderFilters(showSubtopics) {
     const panel = el("section", { class: "panel filter-panel" },
-      el("div", { class: "input-row" },
-        el("input", {
-          class: "search-input",
-          type: "search",
-          "data-focus-key": "main-search",
-          value: state.query,
-          placeholder: 'Search: calculus AND NOT trig, "normal distribution" OR binomial',
-          title: "Supports AND, OR, NOT, parentheses, and quoted phrases.",
-          oninput: event => {
-            state.query = event.target.value;
-            render();
-          }
-        }),
-        el("button", { class: "secondary-btn", type: "button", text: "Clear Search", onclick: () => { state.query = ""; render(); } })
-      ),
       filterRow("Topic", [
         ["", "All"],
         ["1", "1"],
@@ -144,7 +120,10 @@
       filterRow("Time zone", [["", "All"], ["TZ0", "TZ0"], ["TZ1", "TZ1"], ["TZ2", "TZ2"], ["TZ3", "TZ3"]], "timezone"),
       filterRow("Paper", [["", "All"], ["P1", "P1"], ["P2", "P2"]], "paper"),
       filterRow("Section", [["", "All"], ["A", "A"], ["B", "B"]], "section"),
-      renderYearPills()
+      renderYearPills(),
+      el("div", { class: "filter-row", style: "justify-content:flex-end; border-top:1px solid var(--border); padding-top:8px; margin-top:4px;" },
+        el("button", { class: "secondary-btn", type: "button", text: "Reset all filters", onclick: resetFilters })
+      )
     );
 
     if (showSubtopics) panel.append(renderSubtopicControls());
@@ -240,13 +219,11 @@
     const marks = sum(questions.map(q => Number(q.marks || 0)));
     const years = new Set(questions.map(q => q.year));
     const subtopics = new Set(questions.flatMap(q => q.syllabus || []));
-    const imageCount = sum(questions.map(q => (q.paperImages || []).length));
     return el("div", { class: "kpi-grid" },
       kpi("Questions", questions.length, "current scope"),
       kpi("Total marks", marks, questions.length ? `avg ${(marks / questions.length).toFixed(1)}` : "none"),
       kpi("Years", years.size ? `${Math.min(...years)}-${Math.max(...years)}` : "-", `${years.size} sitting${years.size === 1 ? "" : "s"}`),
-      kpi("Subtopics", subtopics.size, "unique syllabus tags"),
-      kpi("Images", imageCount, "cropped question pages")
+      kpi("Subtopics", subtopics.size, "unique syllabus tags")
     );
   }
 
@@ -262,7 +239,7 @@
     if (!results.length) return el("div", { class: "empty-state", text: "No questions match the current filters." });
     return el("div", { class: "question-list" },
       ...results.map(q => el("a", {
-        class: `question-card${state.selectedId === q.id ? " selected" : ""}`,
+        class: "question-card",
         href: q.url || `questions/${q.id}/`
       },
         el("div", { class: "question-title", text: q.title }),
@@ -273,8 +250,7 @@
         ),
         el("div", { class: "tag-line" },
           ...(q.syllabus || []).slice(0, 3).map(s => el("span", { class: "tag", text: s }))
-        ),
-        el("div", { class: "card-link-text", text: "Open question page" })
+        )
       ))
     );
   }

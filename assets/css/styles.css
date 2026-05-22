@@ -130,6 +130,7 @@ a:hover {
 }
 
 .site-menu-link:hover,
+.site-menu-link.active,
 .menu-group:focus-within > .site-menu-link,
 .menu-group:hover > .site-menu-link {
   color: var(--accent);
@@ -140,13 +141,16 @@ a:hover {
 
 .submenu {
   position: absolute;
-  top: calc(100% + 6px);
+  top: 100%;
   left: 0;
   min-width: 230px;
   max-height: 360px;
   overflow: auto;
   display: none;
-  padding: 7px;
+  /* padding-top bridges the visual gap so hover state doesn't drop when
+     moving from the button down into the submenu */
+  padding: 8px 7px 7px;
+  margin-top: 0;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: var(--surface);
@@ -377,11 +381,9 @@ a:hover {
 
 .question-list {
   display: grid;
-  gap: 8px;
-  max-height: calc(100vh - 260px);
-  min-height: 360px;
-  overflow: auto;
-  padding-right: 4px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 10px;
+  padding: 4px 2px;
 }
 
 .question-card {
@@ -810,12 +812,19 @@ a.question-card:hover {
 .formula {
   overflow: auto;
   margin: 8px 0;
-  padding: 10px 12px;
+  padding: 10px 16px;
   border-radius: 8px;
   background: var(--surface-2);
   color: var(--text);
+  /* fallback monospace shown before KaTeX loads */
   font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
   font-size: 0.88rem;
+  text-align: center;
+}
+
+.formula-inline {
+  font-family: "Cascadia Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9em;
 }
 
 .warning {
