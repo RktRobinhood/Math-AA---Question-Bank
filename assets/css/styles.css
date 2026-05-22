@@ -395,6 +395,8 @@ a:hover {
   border-radius: 12px;
   background: var(--surface);
   color: var(--text);
+  overflow: hidden;      /* clip anything that escapes the card */
+  min-width: 0;          /* allow shrinking inside grid/flex */
 }
 
 a.question-card:hover {
@@ -425,6 +427,8 @@ a.question-card:hover {
   flex-wrap: wrap;
   gap: 5px;
   align-items: center;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .badge,
@@ -453,6 +457,9 @@ a.question-card:hover {
   padding: 2px 6px;
   color: var(--muted);
   background: var(--surface-2);
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .viewer {
@@ -593,13 +600,248 @@ a.question-card:hover {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  margin-bottom: 12px;
+}
+
+.stats-full {
+  grid-template-columns: 1fr;
 }
 
 .stat-card {
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
-  padding: 14px;
+  padding: 18px 20px;
+}
+
+.stat-card-wide {
+  /* spans full width when inside stats-full grid */
+}
+
+.stat-card-head {
+  margin-bottom: 16px;
+}
+
+.stat-card-head h2 {
+  margin: 0 0 4px;
+}
+
+.stat-desc {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.stat-hint {
+  font-size: 0.8rem;
+  color: var(--muted);
+  line-height: 1.3;
+  max-width: 420px;
+}
+
+/* ── Forecast chart ─────────────────────────────── */
+.forecast-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.forecast-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 2fr 72px;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 6px;
+  border-radius: 7px;
+  cursor: default;
+  transition: background 0.12s;
+}
+
+.forecast-row:hover {
+  background: var(--surface-2);
+}
+
+.forecast-rank {
+  font-size: 0.72rem;
+  color: var(--faint);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.85rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.forecast-bar-wrap {
+  height: 10px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.forecast-bar {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.forecast-meta {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.forecast-count { color: var(--text); font-weight: 600; }
+.forecast-marks { color: var(--faint); }
+
+/* Topic badge pill */
+.topic-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 7px;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.topic-1 { background: #6366f1; }
+.topic-2 { background: #059669; }
+.topic-3 { background: #d97706; }
+.topic-4 { background: #7c3aed; }
+.topic-5 { background: #dc2626; }
+
+/* Topic-coloured bars (match topicColor in JS) */
+.topic-bar-1 { background: #6366f1; }
+.topic-bar-2 { background: #059669; }
+.topic-bar-3 { background: #d97706; }
+.topic-bar-4 { background: #7c3aed; }
+.topic-bar-5 { background: #dc2626; }
+
+/* ── Topic spread chart ─────────────────────────── */
+.topic-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topic-bar-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1.2fr) minmax(100px, 2fr) 70px;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.topic-bar-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+}
+
+.topic-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.topic-bar-track {
+  height: 12px;
+  background: var(--surface-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.topic-bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.topic-bar-count {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.topic-bar-pct {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* ── Paper / section split ──────────────────────── */
+.split-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.split-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.split-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(80px, 2fr) 64px;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.split-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.split-name { font-weight: 600; }
+.split-sub { font-size: 0.75rem; color: var(--muted); }
+
+.split-count {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.split-pct {
+  font-weight: 400;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* ── Heatmap improvements ───────────────────────── */
+.heat-head {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--surface-2);
+  border-color: var(--border) !important;
 }
 
 .table-wrap {

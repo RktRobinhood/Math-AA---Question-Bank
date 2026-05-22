@@ -66,11 +66,7 @@
           ["question-bank/", "Search all questions"],
           ...allYears.slice().reverse().map(year => [`exams/${year}/`, String(year)])
         ], () => { state.tab = "questions"; render(); }, state.tab === "questions"),
-        menuGroup("Statistics", [
-          ["statistics/", "Exam statistics"],
-          ["statistics/?mode=recency", "Recency forecast"],
-          ["statistics/?mode=primacy", "Long-term pattern"]
-        ], () => { state.tab = "statistics"; render(); }, state.tab === "statistics"),
+        menuGroup("Statistics", [], () => { state.tab = "statistics"; render(); }, state.tab === "statistics"),
         menuGroup("Syllabus", [
           ["syllabus/", "All syllabus topics"],
           ...Object.entries(DATA.topics || {}).map(([topic, name]) => [`syllabus/topic-${topic}/`, `Topic ${topic}: ${name}`])
@@ -81,13 +77,15 @@
   }
 
   function menuGroup(label, links, onTabSwitch, isActive) {
+    const btn = el("button", {
+      class: `site-menu-link${isActive ? " active" : ""}`,
+      type: "button",
+      text: label,
+      onclick: onTabSwitch || null
+    });
+    if (!links.length) return el("div", { class: "menu-group no-submenu" }, btn);
     return el("div", { class: "menu-group" },
-      el("button", {
-        class: `site-menu-link${isActive ? " active" : ""}`,
-        type: "button",
-        text: label,
-        onclick: onTabSwitch || null
-      }),
+      btn,
       el("div", { class: "submenu" },
         ...links.map(([href, text]) => el("a", { href, text }))
       )
@@ -312,90 +310,131 @@
       renderFilters(false),
       renderWeightControls(),
       renderKpis(questions),
+      el("div", { class: "stats-grid stats-full" },
+        renderForecast(analytics)
+      ),
       el("div", { class: "stats-grid" },
-        renderForecast(analytics),
         renderTopicMix(analytics),
-        renderCoverage(analytics),
         renderPaperSplit(analytics)
+      ),
+      el("div", { class: "stats-grid stats-full" },
+        renderCoverage(analytics)
       )
     );
   }
 
   function renderWeightControls() {
-    const modes = [
-      ["primacy", "Primacy"],
-      ["neutral", "Neutral"],
-      ["recency", "Recency"]
-    ];
+    const modeInfo = {
+      primacy: "Weights older exam years more heavily — reveals long-standing syllabus patterns",
+      neutral: "All exam years contribute equally to the forecast",
+      recency: "Weights recent exams more heavily — highlights topics trending upward"
+    };
+    const modes = [["primacy", "Primacy"], ["neutral", "Neutral"], ["recency", "Recency"]];
     return el("section", { class: "panel filter-panel" },
-      el("div", { class: "filter-row" },
-        el("span", { class: "filter-label", text: "Year weight" }),
-        ...modes.map(([mode, label]) => el("button", {
-          class: `fbtn${state.yearMode === mode ? " on" : ""}`,
-          type: "button",
-          text: label,
-          onclick: () => {
-            state.yearMode = mode;
-            render();
-          }
-        }))
+      el("div", { class: "filter-row", style: "align-items:flex-start; gap:16px; flex-wrap:wrap;" },
+        el("div", { style: "display:flex; flex-direction:column; gap:4px;" },
+          el("span", { class: "filter-label", text: "Forecast weighting" }),
+          el("span", { class: "stat-hint", text: modeInfo[state.yearMode] })
+        ),
+        el("div", { style: "display:flex; gap:6px; padding-top:2px;" },
+          ...modes.map(([mode, label]) => el("button", {
+            class: `fbtn${state.yearMode === mode ? " on" : ""}`,
+            type: "button",
+            text: label,
+            title: modeInfo[mode],
+            onclick: () => { state.yearMode = mode; render(); }
+          }))
+        )
       )
     );
   }
 
   function renderForecast(analytics) {
-    const rows = analytics.rows.slice(0, 20);
-    return el("section", { class: "stat-card" },
-      el("h2", { class: "section-title", text: "Forecast" }),
-      rows.length ? el("div", { class: "table-wrap" },
-        el("table", { class: "data-table" },
-          el("thead", {}, el("tr", {},
-            el("th", { text: "Subtopic" }),
-            el("th", { text: "Score" }),
-            el("th", { text: "Q" }),
-            el("th", { text: "Marks" })
-          )),
-          el("tbody", {}, ...rows.map(row => el("tr", {},
-            el("td", {}, topicBadge(row.topic), document.createTextNode(` ${row.subtopic}`)),
-            el("td", {}, scoreBar(row.score)),
-            el("td", { class: "rn", text: row.rawCount.toFixed(0) }),
-            el("td", { class: "rn", text: row.marks.toFixed(1) })
-          )))
+    const rows = analytics.rows.slice(0, 25);
+    const maxScore = Math.max(1, ...rows.map(r => r.score));
+    const total = rows.reduce((s, r) => s + r.rawCount, 0);
+
+    return el("section", { class: "stat-card stat-card-wide" },
+      el("div", { class: "stat-card-head" },
+        el("div", {},
+          el("h2", { class: "section-title", text: "Forecast — most likely topics" }),
+          el("p", { class: "stat-desc", text: "Ranked by weighted historical frequency. A higher score means this subtopic has appeared more consistently across past exams." })
         )
+      ),
+      rows.length ? el("div", { class: "forecast-list" },
+        ...rows.map((row, i) => {
+          const pct = (row.score / maxScore * 100).toFixed(1);
+          const freq = total ? Math.round(row.rawCount / total * 100) : 0;
+          return el("div", { class: "forecast-row", title: `${row.subtopic}: appeared in ${row.rawCount} question(s), ${row.marks.toFixed(1)} total marks` },
+            el("div", { class: "forecast-rank", text: String(i + 1) }),
+            el("div", { class: "forecast-label" },
+              el("span", { class: `topic-badge topic-${row.topic}`, text: `T${row.topic}` }),
+              el("span", { text: row.subtopic })
+            ),
+            el("div", { class: "forecast-bar-wrap" },
+              el("div", { class: `forecast-bar topic-bar-${row.topic}`, style: `width:${pct}%` })
+            ),
+            el("div", { class: "forecast-meta" },
+              el("span", { class: "forecast-count", title: "Questions seen", text: `${row.rawCount}q` }),
+              el("span", { class: "forecast-marks", title: "Total marks across all appearances", text: `${row.marks.toFixed(0)}m` })
+            )
+          );
+        })
       ) : el("div", { class: "empty-state", text: "No data in scope." })
     );
   }
 
   function renderTopicMix(analytics) {
-    const entries = Object.entries(DATA.topics || {}).map(([topic, name]) => ({
-      label: `T${topic} ${name}`,
-      value: analytics.topicCounts.get(topic) || 0,
-      color: topicColor(topic)
-    }));
+    const totalQ = [...analytics.topicCounts.values()].reduce((a, b) => a + b, 0) || 1;
+    const entries = Object.entries(DATA.topics || {}).map(([topic, name]) => {
+      const count = analytics.topicCounts.get(topic) || 0;
+      return { topic, label: `T${topic}`, name, count, pct: (count / totalQ * 100) };
+    });
     return el("section", { class: "stat-card" },
-      el("h2", { class: "section-title", text: "Topic mix" }),
-      renderBars(entries)
+      el("div", { class: "stat-card-head" },
+        el("h2", { class: "section-title", text: "Topic spread" }),
+        el("p", { class: "stat-desc", text: "How questions are distributed across the 5 syllabus topics." })
+      ),
+      el("div", { class: "topic-chart" },
+        ...entries.map(e => el("div", { class: "topic-bar-row", title: `${e.name}: ${e.count} questions (${e.pct.toFixed(0)}%)` },
+          el("div", { class: "topic-bar-label" },
+            el("span", { class: `topic-badge topic-${e.topic}`, text: e.label }),
+            el("span", { class: "topic-name", text: e.name })
+          ),
+          el("div", { class: "topic-bar-track" },
+            el("div", { class: `topic-bar-fill topic-bar-${e.topic}`, style: `width:${e.pct.toFixed(1)}%` })
+          ),
+          el("div", { class: "topic-bar-count" },
+            el("span", { text: `${e.count}` }),
+            el("span", { class: "topic-bar-pct", text: ` (${e.pct.toFixed(0)}%)` })
+          )
+        ))
+      )
     );
   }
 
   function renderCoverage(analytics) {
     const years = analytics.years;
     const max = Math.max(1, ...analytics.rows.flatMap(row => years.map(year => row.years.get(year) || 0)));
-    return el("section", { class: "stat-card" },
-      el("h2", { class: "section-title", text: "Coverage" }),
+    return el("section", { class: "stat-card stat-card-wide" },
+      el("div", { class: "stat-card-head" },
+        el("h2", { class: "section-title", text: "Coverage heatmap" }),
+        el("p", { class: "stat-desc", text: "How many questions from each subtopic appeared in each exam sitting. Darker = appeared more." })
+      ),
       el("div", { class: "heatmap", style: `--year-count:${years.length || 1};` },
         el("div", { class: "heat-row" },
-          el("div", { class: "heat-label", text: "Subtopic" }),
-          ...years.map(year => el("div", { class: "heat-cell", text: String(year) }))
+          el("div", { class: "heat-label", text: "" }),
+          ...years.map(year => el("div", { class: "heat-cell heat-head", text: String(year) }))
         ),
-        ...analytics.rows.slice(0, 24).map(row => el("div", { class: "heat-row" },
+        ...analytics.rows.slice(0, 28).map(row => el("div", { class: "heat-row" },
           el("div", { class: "heat-label", title: row.subtopic, text: row.subtopic }),
           ...years.map(year => {
             const value = row.years.get(year) || 0;
-            const alpha = value ? 0.12 + (value / max) * 0.72 : 0;
+            const alpha = value ? 0.15 + (value / max) * 0.72 : 0;
             return el("div", {
               class: "heat-cell",
-              style: value ? `background:rgba(99,102,241,${alpha.toFixed(2)});border-color:rgba(99,102,241,.28);` : "",
+              title: value ? `${row.subtopic} — ${year}: ${value} question(s)` : `${row.subtopic} — ${year}: not tested`,
+              style: value ? `background:rgba(99,102,241,${alpha.toFixed(2)});border-color:rgba(99,102,241,.3);color:${alpha > 0.5 ? "#fff" : "var(--text)"}` : "",
               text: value ? String(value) : ""
             });
           })
@@ -405,15 +444,45 @@
   }
 
   function renderPaperSplit(analytics) {
-    const entries = [
-      { label: "P1", value: analytics.paperCounts.get("P1") || 0, color: "var(--accent)" },
-      { label: "P2", value: analytics.paperCounts.get("P2") || 0, color: "var(--green)" },
-      { label: "Section A", value: analytics.sectionCounts.get("A") || 0, color: "var(--amber)" },
-      { label: "Section B", value: analytics.sectionCounts.get("B") || 0, color: "var(--red)" }
+    const totalQ = [...analytics.paperCounts.values()].reduce((a, b) => a + b, 0) || 1;
+    const paperEntries = [
+      { label: "Paper 1", sub: "Calculator-free", value: analytics.paperCounts.get("P1") || 0, color: "var(--accent)" },
+      { label: "Paper 2", sub: "GDC allowed", value: analytics.paperCounts.get("P2") || 0, color: "var(--green)" }
+    ];
+    const sectionEntries = [
+      { label: "Section A", sub: "Short answer", value: analytics.sectionCounts.get("A") || 0, color: "var(--amber)" },
+      { label: "Section B", sub: "Extended response", value: analytics.sectionCounts.get("B") || 0, color: "var(--red)" }
     ];
     return el("section", { class: "stat-card" },
-      el("h2", { class: "section-title", text: "Paper and section" }),
-      renderBars(entries)
+      el("div", { class: "stat-card-head" },
+        el("h2", { class: "section-title", text: "Paper & section breakdown" }),
+        el("p", { class: "stat-desc", text: "Distribution of questions by paper type and answer format." })
+      ),
+      el("div", { class: "split-section" },
+        el("div", { class: "split-label", text: "BY PAPER" }),
+        ...paperEntries.map(e => splitBar(e, totalQ))
+      ),
+      el("div", { class: "split-section", style: "margin-top:18px" },
+        el("div", { class: "split-label", text: "BY SECTION" }),
+        ...sectionEntries.map(e => splitBar(e, totalQ))
+      )
+    );
+  }
+
+  function splitBar(entry, total) {
+    const pct = (entry.value / total * 100).toFixed(0);
+    return el("div", { class: "split-row", title: `${entry.label}: ${entry.value} questions (${pct}%)` },
+      el("div", { class: "split-info" },
+        el("span", { class: "split-name", text: entry.label }),
+        el("span", { class: "split-sub", text: entry.sub })
+      ),
+      el("div", { class: "bar-track" },
+        el("div", { class: "bar-fill", style: `width:${pct}%;background:${entry.color}` })
+      ),
+      el("div", { class: "split-count" },
+        el("span", { text: String(entry.value) }),
+        el("span", { class: "split-pct", text: ` ${pct}%` })
+      )
     );
   }
 
