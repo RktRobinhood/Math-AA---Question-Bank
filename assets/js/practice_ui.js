@@ -16,6 +16,19 @@
     }[ch]));
   }
 
+  // Replace \quad that sits OUTSIDE $...$ math delimiters with an HTML em-space.
+  // Templates use \quad as a spacer between "(a) $expr$" and "(b) $expr$" answer
+  // parts, but KaTeX only processes content inside delimiters so it renders as
+  // literal text. Splitting on $ and only touching even-indexed (non-math) chunks
+  // fixes this without touching \quad that is correctly inside math.
+  function processAnswer(text) {
+    const parts = String(text ?? '').split('$');
+    return parts.map((part, i) => {
+      if (i % 2 === 1) return '$' + part + '$'; // inside math – restore delimiters
+      return part.replace(/\\quad/g, '&emsp;'); // outside math – replace with space
+    }).join('');
+  }
+
   function unique(values) {
     return [...new Set(values.filter(Boolean))];
   }
@@ -225,6 +238,12 @@
     });
 
     Object.entries(byTopic).sort(([a], [b]) => +a - +b).forEach(([topic, templates]) => {
+      // Sort within each topic group by syllabus ref numerically, then by title
+      templates.sort((a, b) =>
+        String(a.syllabus).localeCompare(String(b.syllabus), undefined, { numeric: true }) ||
+        a.title.localeCompare(b.title)
+      );
+
       const heading = document.createElement('div');
       heading.style.cssText = 'font-size:.72rem;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;padding:10px 10px 4px;font-weight:700;';
       heading.textContent = topicLabel(topic);
@@ -315,7 +334,7 @@
         </div>
         <div class="reveal-box answer" id="box-ans">
           <div class="reveal-heading">Answer</div>
-          <div>${q.answer}</div>
+          <div>${processAnswer(q.answer)}</div>
         </div>
         <div class="reveal-box working" id="box-work">
           <div class="reveal-heading">Worked Solution</div>
@@ -462,7 +481,7 @@
             ${items.map(item => `
               <div class="answer-item">
                 <strong>Question ${item.index}</strong>
-                <div>${item.q.answer}</div>
+                <div>${processAnswer(item.q.answer)}</div>
                 ${includeWorked ? `<div>${(item.q.working || []).map(step => `<div class="working-step">${step}</div>`).join('')}</div>` : ''}
               </div>
             `).join('')}
