@@ -67,12 +67,16 @@
 
     /* ── Heat indicator ── */
     .heat-row { display: flex; align-items: center; gap: 10px; }
-    .heat-label { font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
-    .heat-dots { display: flex; gap: 3px; flex-wrap: wrap; }
-    .heat-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .heat-dot.filled { background: var(--green); }
-    .heat-dot.empty { background: var(--border); }
-    .heat-count { font-size: 0.8rem; color: var(--green); font-weight: 600; white-space: nowrap; }
+    .heat-label { font-size: 0.78rem; color: var(--faint); white-space: nowrap; flex-shrink: 0; }
+    .heat-bar-track {
+      flex: 1; min-width: 0; height: 8px; border-radius: 99px;
+      background: var(--border); overflow: hidden;
+    }
+    .heat-bar-fill { height: 100%; border-radius: 99px; transition: width .3s ease; }
+    .heat-bar-fill.cold { background: var(--muted); opacity: .5; }
+    .heat-bar-fill.warm { background: var(--accent); }
+    .heat-bar-fill.hot  { background: var(--green); }
+    .heat-count { font-size: 0.8rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
 
     /* ── Card actions ── */
     .template-actions { display: flex; gap: 8px; margin-top: 4px; }
@@ -311,10 +315,10 @@ function buildTemplateGrid() {
     const heat = HEAT[tmpl.id] || 0;
     const matches = (MATCHES[tmpl.id] || []).slice(0, 8);
 
-    // Heat dots
-    const dots = Array.from({ length: TOTAL }, (_, i) =>
-      `<span class="heat-dot ${i < heat ? 'filled' : 'empty'}"></span>`
-    ).join('');
+    // Heat progress bar
+    const heatPct = TOTAL ? (heat / TOTAL * 100).toFixed(1) : 0;
+    const heatClass = heatPct >= 80 ? 'hot' : heatPct >= 40 ? 'warm' : 'cold';
+    const heatColor = heatPct >= 80 ? 'var(--green)' : heatPct >= 40 ? 'var(--accent)' : 'var(--muted)';
 
     // Examples list
     const exampleLinks = matches.map(m => {
@@ -338,9 +342,11 @@ function buildTemplateGrid() {
       </div>
       <p class="template-desc">${tmpl.desc}</p>
       <div class="heat-row">
-        <span class="heat-label">Exam frequency</span>
-        <div class="heat-dots">${dots}</div>
-        <span class="heat-count">${heat}/${TOTAL}</span>
+        <span class="heat-label">Frequency</span>
+        <div class="heat-bar-track">
+          <div class="heat-bar-fill ${heatClass}" style="width:${heatPct}%"></div>
+        </div>
+        <span class="heat-count" style="color:${heatColor}">${heat}/${TOTAL} sittings</span>
       </div>
       <div class="template-actions">
         <button class="btn-outline toggle-ex-btn">Real examples (${matches.length})</button>

@@ -218,10 +218,17 @@
     const marks = sum(questions.map(q => Number(q.marks || 0)));
     const years = new Set(questions.map(q => q.year));
     const subtopics = new Set(questions.flatMap(q => q.syllabus || []));
+    // Count distinct sittings (year+session) — May and Nov counted separately
+    const sittings = new Set(
+      questions.map(q => q.year && q.session ? `${q.year} ${q.session}` : null).filter(Boolean)
+    );
+    const avgMarksPerQ = questions.length ? (marks / questions.length).toFixed(1) : "—";
+    const avgQperSitting = sittings.size ? (questions.length / sittings.size).toFixed(1) : "—";
+    const yearRange = years.size ? `${Math.min(...years)}–${Math.max(...years)}` : "—";
     return el("div", { class: "kpi-grid" },
-      kpi("Questions", questions.length, "current scope"),
-      kpi("Total marks", marks, questions.length ? `avg ${(marks / questions.length).toFixed(1)}` : "none"),
-      kpi("Years", years.size ? `${Math.min(...years)}-${Math.max(...years)}` : "-", `${years.size} sitting${years.size === 1 ? "" : "s"}`),
+      kpi("Questions", questions.length, `avg ${avgMarksPerQ} marks each`),
+      kpi("Total marks", marks, `avg ${avgQperSitting}q per sitting`),
+      kpi("Sittings", sittings.size, `${yearRange} · May & Nov`),
       kpi("Subtopics", subtopics.size, "unique syllabus tags")
     );
   }
@@ -353,20 +360,21 @@
   function renderForecast(analytics) {
     const rows = analytics.rows.slice(0, 25);
     const maxScore = Math.max(1, ...rows.map(r => r.score));
-    const total = rows.reduce((s, r) => s + r.rawCount, 0);
+    const T = analytics.totalSittings || 1;
 
     return el("section", { class: "stat-card stat-card-wide" },
       el("div", { class: "stat-card-head" },
         el("div", {},
           el("h2", { class: "section-title", text: "Forecast — most likely topics" }),
-          el("p", { class: "stat-desc", text: "Ranked by weighted historical frequency. A higher score means this subtopic has appeared more consistently across past exams." })
+          el("p", { class: "stat-desc", text: `Ranked by weighted frequency across ${T} exam sittings. Sitting % = how often this subtopic appeared per sitting (May & Nov counted separately).` })
         )
       ),
       rows.length ? el("div", { class: "forecast-list" },
         ...rows.map((row, i) => {
           const pct = (row.score / maxScore * 100).toFixed(1);
-          const freq = total ? Math.round(row.rawCount / total * 100) : 0;
-          return el("div", { class: "forecast-row", title: `${row.subtopic}: appeared in ${row.rawCount} question(s), ${row.marks.toFixed(1)} total marks` },
+          const sittingPct = Math.round(row.sittingRatio * 100);
+          return el("div", { class: "forecast-row",
+            title: `${row.subtopic}: appeared in ${row.sittingCount}/${T} sittings (${sittingPct}%), ${row.rawCount} question(s) total` },
             el("div", { class: "forecast-rank", text: String(i + 1) }),
             el("div", { class: "forecast-label" },
               el("span", { class: `topic-badge topic-${row.topic}`, text: `T${row.topic}` }),
@@ -376,8 +384,12 @@
               el("div", { class: `forecast-bar topic-bar-${row.topic}`, style: `width:${pct}%` })
             ),
             el("div", { class: "forecast-meta" },
-              el("span", { class: "forecast-count", title: "Questions seen", text: `${row.rawCount}q` }),
-              el("span", { class: "forecast-marks", title: "Total marks across all appearances", text: `${row.marks.toFixed(0)}m` })
+              el("span", { class: "forecast-count",
+                title: `Appeared in ${row.sittingCount} of ${T} sittings`,
+                text: `${sittingPct}% of sittings` }),
+              el("span", { class: "forecast-marks",
+                title: `${row.rawCount} questions, ${row.marks.toFixed(0)} weighted marks`,
+                text: `${row.rawCount}q` })
             )
           );
         })
@@ -415,26 +427,32 @@
   }
 
   function renderCoverage(analytics) {
-    const years = analytics.years;
-    const max = Math.max(1, ...analytics.rows.flatMap(row => years.map(year => row.years.get(year) || 0)));
+    const sittings = analytics.sittings;
+    function sittingLabel(s) {
+      const [year, sess] = s.split(' ');
+      return String(year).slice(2) + (sess === 'May' ? 'M' : 'N');
+    }
+    const max = Math.max(1, ...analytics.rows.flatMap(row =>
+      sittings.map(s => row.sittings.get(s) || 0)
+    ));
     return el("section", { class: "stat-card stat-card-wide" },
       el("div", { class: "stat-card-head" },
         el("h2", { class: "section-title", text: "Coverage heatmap" }),
-        el("p", { class: "stat-desc", text: "How many questions from each subtopic appeared in each exam sitting. Darker = appeared more." })
+        el("p", { class: "stat-desc", text: "Questions per subtopic per exam sitting (M = May, N = Nov). Darker = more questions. Shows each sitting separately." })
       ),
-      el("div", { class: "heatmap", style: `--year-count:${years.length || 1};` },
+      el("div", { class: "heatmap", style: `--year-count:${sittings.length || 1};` },
         el("div", { class: "heat-row" },
           el("div", { class: "heat-label", text: "" }),
-          ...years.map(year => el("div", { class: "heat-cell heat-head", text: String(year) }))
+          ...sittings.map(s => el("div", { class: "heat-cell heat-head", title: s, text: sittingLabel(s) }))
         ),
         ...analytics.rows.slice(0, 28).map(row => el("div", { class: "heat-row" },
           el("div", { class: "heat-label", title: row.subtopic, text: row.subtopic }),
-          ...years.map(year => {
-            const value = row.years.get(year) || 0;
+          ...sittings.map(s => {
+            const value = row.sittings.get(s) || 0;
             const alpha = value ? 0.15 + (value / max) * 0.72 : 0;
             return el("div", {
               class: "heat-cell",
-              title: value ? `${row.subtopic} — ${year}: ${value} question(s)` : `${row.subtopic} — ${year}: not tested`,
+              title: value ? `${row.subtopic} — ${s}: ${value} question(s)` : `${row.subtopic} — ${s}: not tested`,
               style: value ? `background:rgba(99,102,241,${alpha.toFixed(2)});border-color:rgba(99,102,241,.3);color:${alpha > 0.5 ? "#fff" : "var(--text)"}` : "",
               text: value ? String(value) : ""
             });
@@ -566,7 +584,13 @@
   }
 
   function computeAnalytics(questions) {
+    const sittingSet = new Set(
+      questions.map(q => q.year && q.session ? `${q.year} ${q.session}` : null).filter(Boolean)
+    );
+    const sittings = [...sittingSet].sort();
+    const totalSittings = sittings.length || 1;
     const years = [...new Set(questions.map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
+
     const bySubtopic = new Map();
     const topicCounts = new Map();
     const paperCounts = new Map();
@@ -578,6 +602,7 @@
       const markShare = Number(q.marks || 0) / subs.length;
       addCount(paperCounts, q.paper, 1);
       addCount(sectionCounts, q.section || "Other", 1);
+      const sitting = q.year && q.session ? `${q.year} ${q.session}` : null;
 
       for (const subtopic of subs) {
         const topic = topicNumber(subtopic);
@@ -589,26 +614,36 @@
             weightedCount: 0,
             rawCount: 0,
             marks: 0,
-            years: new Map()
+            sittingsSet: new Set(),
+            sittings: new Map()
           });
         }
         const row = bySubtopic.get(subtopic);
         row.weightedCount += w;
         row.rawCount += 1;
         row.marks += markShare * w;
-        addCount(row.years, q.year, 1);
+        if (sitting) {
+          row.sittingsSet.add(sitting);
+          addCount(row.sittings, sitting, 1);
+        }
       }
     }
 
     const rows = [...bySubtopic.values()];
+    for (const row of rows) {
+      row.sittingCount = row.sittingsSet.size;
+      row.sittingRatio = row.sittingCount / totalSittings;
+    }
     const maxCount = Math.max(1, ...rows.map(r => r.weightedCount));
     const maxMarks = Math.max(1, ...rows.map(r => r.marks));
     for (const row of rows) {
-      row.score = 0.4 * (row.weightedCount / maxCount) + 0.6 * (row.marks / maxMarks);
+      row.score = 0.25 * (row.weightedCount / maxCount)
+                + 0.5  * (row.marks / maxMarks)
+                + 0.25 * row.sittingRatio;
     }
     rows.sort((a, b) => b.score - a.score || naturalCompare(a.subtopic, b.subtopic));
 
-    return { rows, years, topicCounts, paperCounts, sectionCounts };
+    return { rows, years, sittings, totalSittings, topicCounts, paperCounts, sectionCounts };
   }
 
   function yearWeight(year, years) {
