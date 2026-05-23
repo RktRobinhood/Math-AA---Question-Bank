@@ -1,10 +1,10 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="./">
-  <title>Practice — IB Math AA SL</title>
+  <title>Practice â€” IB Math AA SL</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -13,11 +13,12 @@
   <script src="assets/js/data.js"></script>
   <script src="assets/js/template_matches.js"></script>
   <script src="assets/js/practice_templates.js"></script>
+  <script src="assets/js/practice_expansion.js"></script>
   <style>
-    /* ── Page layout ── */
+    /* â”€â”€ Page layout â”€â”€ */
     .practice-shell { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-    /* ── Tab nav ── */
+    /* â”€â”€ Tab nav â”€â”€ */
     .tab-nav { display: flex; gap: 6px; margin-bottom: 24px; }
     .tab-btn {
       padding: 9px 22px; border: 1px solid var(--border); border-radius: 10px;
@@ -29,7 +30,7 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* ── Topic filter ── */
+    /* â”€â”€ Topic filter â”€â”€ */
     .topic-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
     .topic-btn {
       padding: 6px 16px; border: 1px solid var(--border); border-radius: 999px;
@@ -39,10 +40,42 @@
     .topic-btn:hover { border-color: var(--accent); color: var(--accent); }
     .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-    /* ── Template grid ── */
+    .practice-filter-panel {
+      margin: 0 0 18px; padding: 14px; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--surface);
+    }
+    .filter-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px; align-items: end;
+    }
+    .filter-field { display: grid; gap: 5px; min-width: 0; }
+    .filter-field.wide { grid-column: span 2; }
+    @media (max-width: 680px) { .filter-field.wide { grid-column: span 1; } }
+    .filter-field span {
+      color: var(--muted); font-size: 0.72rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: .04em;
+    }
+    .filter-field input,
+    .filter-field select {
+      width: 100%; min-height: 38px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface); color: var(--text); padding: 8px 10px; outline: none;
+    }
+    .filter-field input:focus,
+    .filter-field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .filter-summary {
+      display: flex; justify-content: space-between; gap: 10px; align-items: center;
+      margin-top: 10px; color: var(--muted); font-size: 0.82rem; flex-wrap: wrap;
+    }
+    .filter-reset {
+      border: 1px solid var(--border); border-radius: 8px; background: transparent;
+      color: var(--muted); padding: 6px 10px; font-size: 0.82rem; font-weight: 650;
+    }
+    .filter-reset:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* â”€â”€ Template grid â”€â”€ */
     .template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
 
-    /* ── Template card ── */
+    /* â”€â”€ Template card â”€â”€ */
     .template-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;
@@ -64,8 +97,13 @@
     }
 
     .template-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
+    .template-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+    .template-meta span {
+      padding: 3px 8px; border-radius: 999px; background: var(--surface-2);
+      border: 1px solid var(--border); color: var(--muted); font-size: 0.74rem; font-weight: 650;
+    }
 
-    /* ── Heat indicator ── */
+    /* â”€â”€ Heat indicator â”€â”€ */
     .heat-row { display: flex; align-items: center; gap: 10px; }
     .heat-label { font-size: 0.78rem; color: var(--faint); white-space: nowrap; flex-shrink: 0; }
     .heat-bar-track {
@@ -78,7 +116,7 @@
     .heat-bar-fill.hot  { background: var(--green); }
     .heat-count { font-size: 0.8rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
 
-    /* ── Card actions ── */
+    /* â”€â”€ Card actions â”€â”€ */
     .template-actions { display: flex; gap: 8px; margin-top: 4px; }
     .btn-outline {
       flex: 1; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
@@ -93,7 +131,7 @@
     }
     .btn-primary:hover { opacity: 0.88; }
 
-    /* ── Examples list ── */
+    /* â”€â”€ Examples list â”€â”€ */
     .examples-list { display: none; border-top: 1px solid var(--border); padding-top: 12px; }
     .examples-list.open { display: block; }
     .example-link {
@@ -108,7 +146,7 @@
       font-size: 0.75rem; color: var(--muted); font-weight: 500;
     }
 
-    /* ── Practice panel ── */
+    /* â”€â”€ Practice panel â”€â”€ */
     .practice-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
     @media (max-width: 800px) { .practice-layout { grid-template-columns: 1fr; } }
 
@@ -119,6 +157,12 @@
     }
     .selector-heading { font-size: 0.8rem; font-weight: 600; color: var(--muted); letter-spacing: .03em;
       text-transform: uppercase; margin-bottom: 10px; }
+    .selector-tools { display: grid; gap: 8px; margin-bottom: 12px; }
+    .selector-tools input,
+    .selector-tools select {
+      width: 100%; min-height: 34px; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface); color: var(--text); padding: 7px 9px; font-size: 0.82rem;
+    }
     .selector-item {
       display: flex; align-items: center; gap: 8px;
       padding: 8px 10px; border-radius: 8px; cursor: pointer;
@@ -198,16 +242,56 @@
     .working-step { padding: 3px 0; border-bottom: 1px solid var(--border); }
     .working-step:last-child { border: none; }
 
+    .empty-state {
+      grid-column: 1 / -1; border: 1px dashed var(--border); border-radius: 12px;
+      padding: 28px; color: var(--muted); text-align: center; background: var(--surface);
+    }
+
+    .worksheet-layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 20px; align-items: start; }
+    @media (max-width: 860px) { .worksheet-layout { grid-template-columns: 1fr; } }
+    .worksheet-panel,
+    .worksheet-output {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px;
+    }
+    .worksheet-controls { display: grid; gap: 10px; }
+    .worksheet-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .check-inline { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 0.86rem; }
+    .worksheet-doc h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .worksheet-doc p { margin: 0; color: var(--muted); font-size: 0.86rem; }
+    .worksheet-list { margin: 18px 0 0; padding-left: 24px; }
+    .worksheet-question { margin-bottom: 20px; break-inside: avoid; }
+    .worksheet-question .q-stem,
+    .worksheet-question .q-part { background: transparent; }
+    .answer-key {
+      margin-top: 24px; padding-top: 16px; border-top: 2px solid var(--border);
+      break-before: page;
+    }
+    .answer-key h3 { margin: 0 0 12px; }
+    .answer-item { margin-bottom: 14px; break-inside: avoid; }
+
     /* Page header */
     .page-hero { margin-bottom: 28px; }
     .page-hero h1 { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; }
     .page-hero p { color: var(--muted); font-size: 0.93rem; margin: 0; }
+
+    @media print {
+      body { background: #fff; }
+      .site-header, .page-hero, .tab-nav, .worksheet-panel, .topic-filter,
+      .practice-filter-panel, .template-selector, .q-actions { display: none !important; }
+      .practice-shell { max-width: none; padding: 0; }
+      .tab-panel { display: none !important; }
+      #tab-worksheet.active { display: block !important; }
+      .worksheet-layout { display: block; }
+      .worksheet-output { border: 0; padding: 0; }
+      .worksheet-question { page-break-inside: avoid; }
+    }
   </style>
 </head>
 <body>
 <main class="practice-shell">
 
-  <!-- ── Header ── -->
+  <!-- â”€â”€ Header â”€â”€ -->
   <header class="site-header">
     <a class="site-brand" href="./">
       <strong>IB Math AA SL</strong>
@@ -217,28 +301,72 @@
     </nav>
   </header>
 
-  <!-- ── Hero ── -->
+  <!-- â”€â”€ Hero â”€â”€ -->
   <div class="page-hero">
     <h1>Practice & Templates</h1>
-    <p>Explore the recurring question archetypes across all 34 exam sittings — then generate unlimited fresh variants to practise or set for students.</p>
+    <p>Explore the recurring question archetypes across all 34 exam sittings â€” then generate unlimited fresh variants to practise or set for students.</p>
   </div>
 
-  <!-- ── Tabs ── -->
+  <!-- â”€â”€ Tabs â”€â”€ -->
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="map">Template Map</button>
     <button class="tab-btn" data-tab="practice">Practice Generator</button>
+    <button class="tab-btn" data-tab="worksheet">Worksheet Builder</button>
   </div>
 
-  <!-- ══ TAB: Template Map ══════════════════════════════════════════════════ -->
+  <!-- â•â• TAB: Template Map â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="tab-panel active" id="tab-map">
 
     <div class="topic-filter">
       <button class="topic-btn active" data-topic="all">All Topics</button>
-      <button class="topic-btn" data-topic="1">Topic 1 · Numbers &amp; Algebra</button>
-      <button class="topic-btn" data-topic="2">Topic 2 · Functions</button>
-      <button class="topic-btn" data-topic="3">Topic 3 · Geometry &amp; Trig</button>
-      <button class="topic-btn" data-topic="4">Topic 4 · Statistics &amp; Probability</button>
-      <button class="topic-btn" data-topic="5">Topic 5 · Calculus</button>
+      <button class="topic-btn" data-topic="1">Topic 1 Â· Numbers &amp; Algebra</button>
+      <button class="topic-btn" data-topic="2">Topic 2 Â· Functions</button>
+      <button class="topic-btn" data-topic="3">Topic 3 Â· Geometry &amp; Trig</button>
+      <button class="topic-btn" data-topic="4">Topic 4 Â· Statistics &amp; Probability</button>
+      <button class="topic-btn" data-topic="5">Topic 5 Â· Calculus</button>
+    </div>
+
+    <div class="practice-filter-panel" aria-label="Template filters">
+      <div class="filter-grid">
+        <label class="filter-field wide">
+          <span>Search templates</span>
+          <input id="filter-search" type="search" placeholder="Try Section B, normal, inverse, 5.7">
+        </label>
+        <label class="filter-field">
+          <span>Subtopic</span>
+          <select id="filter-syllabus"></select>
+        </label>
+        <label class="filter-field">
+          <span>Section</span>
+          <select id="filter-section">
+            <option value="all">All sections</option>
+            <option value="A">Section A</option>
+            <option value="B">Section B</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+        </label>
+        <label class="filter-field">
+          <span>Paper</span>
+          <select id="filter-paper">
+            <option value="all">All papers</option>
+            <option value="P1">Paper 1</option>
+            <option value="P2">Paper 2</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+        </label>
+        <label class="filter-field">
+          <span>Difficulty</span>
+          <select id="filter-difficulty"></select>
+        </label>
+        <label class="filter-field">
+          <span>Question type</span>
+          <select id="filter-type"></select>
+        </label>
+      </div>
+      <div class="filter-summary">
+        <span id="filter-count">Showing templates</span>
+        <button class="filter-reset" id="reset-template-filters" type="button">Reset filters</button>
+      </div>
     </div>
 
     <div class="template-grid" id="template-grid">
@@ -246,13 +374,32 @@
     </div>
   </div>
 
-  <!-- ══ TAB: Practice Generator ═══════════════════════════════════════════ -->
+  <!-- â•â• TAB: Practice Generator â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
   <div class="tab-panel" id="tab-practice">
     <div class="practice-layout">
 
       <!-- Sidebar: template selector -->
       <div class="template-selector">
         <div class="selector-heading">Choose a template</div>
+        <div class="selector-tools" aria-label="Practice template filters">
+          <input id="practice-search" type="search" placeholder="Search templates">
+          <select id="practice-topic">
+            <option value="all">All topics</option>
+            <option value="1">Topic 1</option>
+            <option value="2">Topic 2</option>
+            <option value="3">Topic 3</option>
+            <option value="4">Topic 4</option>
+            <option value="5">Topic 5</option>
+          </select>
+          <select id="practice-syllabus"></select>
+          <select id="practice-section">
+            <option value="all">All sections</option>
+            <option value="A">Section A</option>
+            <option value="B">Section B</option>
+            <option value="Mixed">Mixed</option>
+          </select>
+          <button class="btn-outline" id="practice-random" type="button">Random from filters</button>
+        </div>
         <div id="selector-list">
           <!-- Populated by JS -->
         </div>
@@ -272,269 +419,77 @@
     </div>
   </div>
 
+  <!-- TAB: Worksheet Builder -->
+  <div class="tab-panel" id="tab-worksheet">
+    <div class="worksheet-layout">
+      <aside class="worksheet-panel">
+        <div class="selector-heading">Build worksheet</div>
+        <div class="worksheet-controls">
+          <label class="filter-field">
+            <span>Questions</span>
+            <input id="worksheet-count" type="number" min="1" max="30" value="10">
+          </label>
+          <label class="filter-field">
+            <span>Topic</span>
+            <select id="worksheet-topic">
+              <option value="all">All topics</option>
+              <option value="1">Topic 1</option>
+              <option value="2">Topic 2</option>
+              <option value="3">Topic 3</option>
+              <option value="4">Topic 4</option>
+              <option value="5">Topic 5</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Subtopic</span>
+            <select id="worksheet-syllabus"></select>
+          </label>
+          <label class="filter-field">
+            <span>Section mix</span>
+            <select id="worksheet-section">
+              <option value="all">Any section</option>
+              <option value="A">Section A only</option>
+              <option value="B">Section B only</option>
+              <option value="Mixed">Mixed templates</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Difficulty</span>
+            <select id="worksheet-difficulty"></select>
+          </label>
+          <label class="filter-field">
+            <span>Question type</span>
+            <select id="worksheet-type"></select>
+          </label>
+          <label class="check-inline">
+            <input id="worksheet-answers" type="checkbox" checked>
+            Include answer key
+          </label>
+          <label class="check-inline">
+            <input id="worksheet-worked" type="checkbox">
+            Include worked steps
+          </label>
+          <div class="worksheet-actions">
+            <button class="btn-primary" id="worksheet-generate" type="button">Generate worksheet</button>
+            <button class="btn-outline" id="worksheet-print" type="button">Print</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="worksheet-output" id="worksheet-output" aria-live="polite">
+        <div class="practice-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>
+          </svg>
+          <p>Choose filters, then generate a worksheet with an answer key.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
 </main>
 
-<script>
-// ─── Data ───────────────────────────────────────────────────────────────────
-const DATA       = window.AASL_DATA;
-const qById      = Object.fromEntries(DATA.questions.map(q => [q.id, q]));
-const TOTAL      = TOTAL_SITTINGS;   // from template_matches.js
-const HEAT       = TEMPLATE_HEAT;
-const MATCHES    = TEMPLATE_MATCHES;
-const TEMPLATES  = PRACTICE_TEMPLATES; // from practice_templates.js
-
-// ─── Tab switching ──────────────────────────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-    if (btn.dataset.tab === 'practice') renderMath();
-  });
-});
-
-// ─── Topic filter ────────────────────────────────────────────────────────────
-let activeTopic = 'all';
-document.querySelectorAll('.topic-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeTopic = btn.dataset.topic;
-    document.querySelectorAll('.template-card').forEach(card => {
-      card.classList.toggle('hidden',
-        activeTopic !== 'all' && card.dataset.topic !== activeTopic);
-    });
-  });
-});
-
-// ─── Build template grid ─────────────────────────────────────────────────────
-function buildTemplateGrid() {
-  const grid = document.getElementById('template-grid');
-  TEMPLATES.forEach(tmpl => {
-    const heat = HEAT[tmpl.id] || 0;
-    const matches = (MATCHES[tmpl.id] || []).slice(0, 8);
-
-    // Heat progress bar
-    const heatPct = TOTAL ? (heat / TOTAL * 100).toFixed(1) : 0;
-    const heatClass = heatPct >= 80 ? 'hot' : heatPct >= 40 ? 'warm' : 'cold';
-    const heatColor = heatPct >= 80 ? 'var(--green)' : heatPct >= 40 ? 'var(--accent)' : 'var(--muted)';
-
-    // Examples list
-    const exampleLinks = matches.map(m => {
-      const q = qById[m.id];
-      const label = q ? q.title : m.id;
-      const url = q ? q.url : '#';
-      return `<a class="example-link" href="${url}">
-        <span>${label}</span>
-        <span class="marks-chip">${m.marks}m</span>
-      </a>`;
-    }).join('');
-
-    const card = document.createElement('div');
-    card.className = 'template-card';
-    card.dataset.topic = tmpl.topic;
-    card.innerHTML = `
-      <div class="template-header">
-        <span class="syllabus-badge">${tmpl.syllabus}</span>
-        <span class="template-title">${tmpl.title}</span>
-        <span class="marks-badge">~${tmpl.marks}m</span>
-      </div>
-      <p class="template-desc">${tmpl.desc}</p>
-      <div class="heat-row">
-        <span class="heat-label">Frequency</span>
-        <div class="heat-bar-track">
-          <div class="heat-bar-fill ${heatClass}" style="width:${heatPct}%"></div>
-        </div>
-        <span class="heat-count" style="color:${heatColor}">${heat}/${TOTAL} sittings</span>
-      </div>
-      <div class="template-actions">
-        <button class="btn-outline toggle-ex-btn">Real examples (${matches.length})</button>
-        <button class="btn-primary practice-from-map" data-id="${tmpl.id}">Practice →</button>
-      </div>
-      <div class="examples-list">${exampleLinks}</div>
-    `;
-
-    card.querySelector('.toggle-ex-btn').addEventListener('click', function () {
-      const list = card.querySelector('.examples-list');
-      list.classList.toggle('open');
-      this.textContent = list.classList.contains('open')
-        ? `Hide examples` : `Real examples (${matches.length})`;
-    });
-    card.querySelector('.practice-from-map').addEventListener('click', () => {
-      // Switch to practice tab and select this template
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelector('[data-tab="practice"]').classList.add('active');
-      document.getElementById('tab-practice').classList.add('active');
-      selectTemplate(tmpl.id);
-    });
-
-    grid.appendChild(card);
-  });
-}
-
-// ─── Build practice sidebar ──────────────────────────────────────────────────
-let activeTemplateId = null;
-
-function buildSelectorList() {
-  const list = document.getElementById('selector-list');
-  // Group by topic
-  const byTopic = {};
-  TEMPLATES.forEach(t => {
-    if (!byTopic[t.topic]) byTopic[t.topic] = [];
-    byTopic[t.topic].push(t);
-  });
-  const topicNames = { 1: 'Algebra', 2: 'Functions', 3: 'Geometry', 4: 'Stats & Prob', 5: 'Calculus' };
-  Object.entries(byTopic).sort(([a],[b]) => +a - +b).forEach(([topic, tmpls]) => {
-    const heading = document.createElement('div');
-    heading.style.cssText = 'font-size:.72rem;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;padding:10px 10px 4px;font-weight:700;';
-    heading.textContent = `Topic ${topic} · ${topicNames[topic]}`;
-    list.appendChild(heading);
-    tmpls.forEach(t => {
-      const item = document.createElement('div');
-      item.className = 'selector-item';
-      item.dataset.id = t.id;
-      item.innerHTML = `<span class="selector-badge">${t.syllabus}</span><span>${t.title}</span>`;
-      item.addEventListener('click', () => selectTemplate(t.id));
-      list.appendChild(item);
-    });
-  });
-}
-
-function selectTemplate(id) {
-  activeTemplateId = id;
-  document.querySelectorAll('.selector-item').forEach(el => {
-    el.classList.toggle('active', el.dataset.id === id);
-  });
-  generateQuestion(id);
-}
-
-// ─── Question generation ─────────────────────────────────────────────────────
-function generateQuestion(id) {
-  const tmpl = TEMPLATES.find(t => t.id === id);
-  if (!tmpl) return;
-
-  let q;
-  try { q = tmpl.generate(); } catch (e) { console.error(e); return; }
-
-  const area = document.getElementById('practice-area');
-  area.innerHTML = `
-    <div class="q-meta">
-      <span class="q-meta-tag syllabus">${tmpl.syllabus} · ${tmpl.title}</span>
-      <span class="q-meta-tag marks">${tmpl.marks} marks</span>
-      <span class="q-meta-tag fresh">Generated</span>
-    </div>
-    <div class="q-stem">${q.stem}</div>
-    <div class="q-parts">
-      ${q.parts.length === 1 && !q.parts[0].label
-        ? `<div class="q-part">${q.parts[0].instr}<span class="q-part-marks">[${q.parts[0].marks} marks]</span></div>`
-        : q.parts.map((p, i) => `<div class="q-part"><span class="q-part-label">(${String.fromCharCode(97+i)})</span>${p.instr}<span class="q-part-marks">[${p.marks} marks]</span></div>`).join('')
-      }
-    </div>
-    <div class="q-actions">
-      <button class="btn-reveal answer" id="btn-ans">Show Answer</button>
-      <button class="btn-reveal working" id="btn-work">Show Working</button>
-      <button class="btn-new" id="btn-new">New Question ↺</button>
-    </div>
-    <div class="reveal-box answer" id="box-ans">
-      <div class="reveal-heading">Answer</div>
-      <div>${q.answer}</div>
-    </div>
-    <div class="reveal-box working" id="box-work">
-      <div class="reveal-heading">Worked Solution</div>
-      ${q.working.map(s => `<div class="working-step">${s}</div>`).join('')}
-    </div>
-  `;
-
-  document.getElementById('btn-ans').addEventListener('click', function() {
-    const box = document.getElementById('box-ans');
-    box.classList.toggle('open');
-    this.textContent = box.classList.contains('open') ? 'Hide Answer' : 'Show Answer';
-    renderMath();
-  });
-  document.getElementById('btn-work').addEventListener('click', function() {
-    const box = document.getElementById('box-work');
-    box.classList.toggle('open');
-    this.textContent = box.classList.contains('open') ? 'Hide Working' : 'Show Working';
-    renderMath();
-  });
-  document.getElementById('btn-new').addEventListener('click', () => generateQuestion(id));
-
-  renderMath();
-}
-
-function renderMath() {
-  if (window.renderMathInElement) {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$', right: '$', display: false },
-        { left: '\\[', right: '\\]', display: true }
-      ],
-      throwOnError: false
-    });
-  }
-}
-
-// ─── Nav ─────────────────────────────────────────────────────────────────────
-function buildNav() {
-  const nav = document.getElementById('site-nav');
-  const D = window.AASL_DATA;
-  const years = [...new Set(D.questions.map(q => q.year))].sort((a,b) => b-a);
-
-  function menuGroup(label, links, href) {
-    if (!links.length) {
-      const a = document.createElement('a');
-      a.className = 'site-menu-link';
-      a.href = href || './';
-      a.textContent = label;
-      return a;
-    }
-    const wrap = document.createElement('div');
-    wrap.className = 'menu-group';
-    const btn = document.createElement('a');
-    btn.className = 'site-menu-link';
-    btn.href = href || './';
-    btn.textContent = label;
-    const sub = document.createElement('div');
-    sub.className = 'submenu';
-    links.forEach(([url, text]) => {
-      const a = document.createElement('a');
-      a.href = url;
-      a.textContent = text;
-      sub.appendChild(a);
-    });
-    wrap.appendChild(btn);
-    wrap.appendChild(sub);
-    return wrap;
-  }
-
-  nav.appendChild(menuGroup('Question Bank', [
-    ['question-bank/', 'Search all questions'],
-    ...years.map(y => ['exams/' + y + '/', String(y)])
-  ]));
-  nav.appendChild(menuGroup('Statistics', [], './'));
-  nav.appendChild(menuGroup('Syllabus', [
-    ['syllabus/', 'All syllabus topics'],
-    ...Object.entries(D.topics || {}).map(([t, n]) => ['syllabus/topic-' + t + '/', 'Topic ' + t + ': ' + n])
-  ]));
-  const practiceA = document.createElement('a');
-  practiceA.className = 'site-menu-link active';
-  practiceA.href = 'practice.html';
-  practiceA.textContent = 'Practice';
-  nav.appendChild(practiceA);
-  const fsA = document.createElement('a');
-  fsA.className = 'site-menu-link';
-  fsA.href = (D.assets && D.assets.formulaSheet) || '#';
-  fsA.target = '_blank';
-  fsA.textContent = 'Formula Sheet';
-  nav.appendChild(fsA);
-}
-
-// ─── Init ────────────────────────────────────────────────────────────────────
-buildNav();
-buildTemplateGrid();
-buildSelectorList();
-</script>
+<script src="assets/js/practice_ui.js"></script>
 </body>
 </html>
