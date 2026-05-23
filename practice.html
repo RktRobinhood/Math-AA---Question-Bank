@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <base href="./">
-  <title>Practice â€” IB Math AA SL</title>
+  <title>Practice – IB Math AA SL</title>
   <link rel="stylesheet" href="assets/css/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
@@ -15,11 +15,14 @@
   <script src="assets/js/practice_templates.js"></script>
   <script src="assets/js/practice_expansion.js"></script>
   <style>
-    /* â”€â”€ Page layout â”€â”€ */
+    /* -- Page layout -- */
     .practice-shell { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-    /* â”€â”€ Tab nav â”€â”€ */
-    .tab-nav { display: flex; gap: 6px; margin-bottom: 24px; }
+    /* -- Tab nav -- */
+    .tab-nav {
+      display: flex; gap: 6px; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 2px solid var(--border);
+    }
     .tab-btn {
       padding: 9px 22px; border: 1px solid var(--border); border-radius: 10px;
       background: var(--surface); color: var(--muted); font-size: 0.92rem; font-weight: 500;
@@ -30,8 +33,12 @@
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
 
-    /* â”€â”€ Topic filter â”€â”€ */
-    .topic-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    /* -- Topic filter -- */
+    .topic-filter-label {
+      font-size: 0.72rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted); margin-bottom: 8px;
+    }
+    .topic-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .topic-btn {
       padding: 6px 16px; border: 1px solid var(--border); border-radius: 999px;
       background: var(--surface); color: var(--muted); font-size: 0.85rem;
@@ -72,10 +79,10 @@
     }
     .filter-reset:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* â”€â”€ Template grid â”€â”€ */
+    /* -- Template grid -- */
     .template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
 
-    /* â”€â”€ Template card â”€â”€ */
+    /* -- Template card -- */
     .template-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;
@@ -103,7 +110,7 @@
       border: 1px solid var(--border); color: var(--muted); font-size: 0.74rem; font-weight: 650;
     }
 
-    /* â”€â”€ Heat indicator â”€â”€ */
+    /* -- Heat indicator -- */
     .heat-row { display: flex; align-items: center; gap: 10px; }
     .heat-label { font-size: 0.78rem; color: var(--faint); white-space: nowrap; flex-shrink: 0; }
     .heat-bar-track {
@@ -116,7 +123,7 @@
     .heat-bar-fill.hot  { background: var(--green); }
     .heat-count { font-size: 0.8rem; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
 
-    /* â”€â”€ Card actions â”€â”€ */
+    /* -- Card actions -- */
     .template-actions { display: flex; gap: 8px; margin-top: 4px; }
     .btn-outline {
       flex: 1; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
@@ -131,7 +138,7 @@
     }
     .btn-primary:hover { opacity: 0.88; }
 
-    /* â”€â”€ Examples list â”€â”€ */
+    /* -- Examples list -- */
     .examples-list { display: none; border-top: 1px solid var(--border); padding-top: 12px; }
     .examples-list.open { display: block; }
     .example-link {
@@ -146,7 +153,7 @@
       font-size: 0.75rem; color: var(--muted); font-weight: 500;
     }
 
-    /* â”€â”€ Practice panel â”€â”€ */
+    /* -- Practice panel -- */
     .practice-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
     @media (max-width: 800px) { .practice-layout { grid-template-columns: 1fr; } }
 
@@ -270,7 +277,7 @@
     .answer-key h3 { margin: 0 0 12px; }
     .answer-item { margin-bottom: 14px; break-inside: avoid; }
 
-    /* Page header */
+    /* -- Page header -- */
     .page-hero { margin-bottom: 28px; }
     .page-hero h1 { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; }
     .page-hero p { color: var(--muted); font-size: 0.93rem; margin: 0; }
@@ -291,7 +298,7 @@
 <body>
 <main class="practice-shell">
 
-  <!-- â”€â”€ Header â”€â”€ -->
+  <!-- Header -->
   <header class="site-header">
     <a class="site-brand" href="./">
       <strong>IB Math AA SL</strong>
@@ -301,29 +308,30 @@
     </nav>
   </header>
 
-  <!-- â”€â”€ Hero â”€â”€ -->
+  <!-- Hero -->
   <div class="page-hero">
     <h1>Practice & Templates</h1>
-    <p>Explore the recurring question archetypes across all 34 exam sittings â€” then generate unlimited fresh variants to practise or set for students.</p>
+    <p>Explore the recurring question archetypes across all 34 exam sittings – then generate unlimited fresh variants to practise or set for students.</p>
   </div>
 
-  <!-- â”€â”€ Tabs â”€â”€ -->
+  <!-- Tabs -->
   <div class="tab-nav">
     <button class="tab-btn active" data-tab="map">Template Map</button>
     <button class="tab-btn" data-tab="practice">Practice Generator</button>
     <button class="tab-btn" data-tab="worksheet">Worksheet Builder</button>
   </div>
 
-  <!-- â•â• TAB: Template Map â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- TAB: Template Map -->
   <div class="tab-panel active" id="tab-map">
 
+    <p class="topic-filter-label">Filter by topic</p>
     <div class="topic-filter">
       <button class="topic-btn active" data-topic="all">All Topics</button>
-      <button class="topic-btn" data-topic="1">Topic 1 Â· Numbers &amp; Algebra</button>
-      <button class="topic-btn" data-topic="2">Topic 2 Â· Functions</button>
-      <button class="topic-btn" data-topic="3">Topic 3 Â· Geometry &amp; Trig</button>
-      <button class="topic-btn" data-topic="4">Topic 4 Â· Statistics &amp; Probability</button>
-      <button class="topic-btn" data-topic="5">Topic 5 Â· Calculus</button>
+      <button class="topic-btn" data-topic="1">Topic 1 · Numbers &amp; Algebra</button>
+      <button class="topic-btn" data-topic="2">Topic 2 · Functions</button>
+      <button class="topic-btn" data-topic="3">Topic 3 · Geometry &amp; Trig</button>
+      <button class="topic-btn" data-topic="4">Topic 4 · Statistics &amp; Probability</button>
+      <button class="topic-btn" data-topic="5">Topic 5 · Calculus</button>
     </div>
 
     <div class="practice-filter-panel" aria-label="Template filters">
@@ -374,7 +382,7 @@
     </div>
   </div>
 
-  <!-- â•â• TAB: Practice Generator â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+  <!-- TAB: Practice Generator -->
   <div class="tab-panel" id="tab-practice">
     <div class="practice-layout">
 
