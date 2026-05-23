@@ -203,16 +203,13 @@
 <body>
 <main class="practice-shell">
 
-  <!-- ── Header (matches app.js style) ── -->
+  <!-- ── Header ── -->
   <header class="site-header">
     <a class="site-brand" href="./">
       <strong>IB Math AA SL</strong>
       <span>Exam Question Bank</span>
     </a>
-    <nav class="site-menu" aria-label="Main navigation">
-      <a class="site-menu-link" href="./">Question Bank</a>
-      <a class="site-menu-link" href="statistics.html">Statistics</a>
-      <a class="site-menu-link active" href="practice.html">Practice</a>
+    <nav class="site-menu" aria-label="Main navigation" id="site-nav">
     </nav>
   </header>
 
@@ -473,7 +470,63 @@ function renderMath() {
   }
 }
 
+// ─── Nav ─────────────────────────────────────────────────────────────────────
+function buildNav() {
+  const nav = document.getElementById('site-nav');
+  const D = window.AASL_DATA;
+  const years = [...new Set(D.questions.map(q => q.year))].sort((a,b) => b-a);
+
+  function menuGroup(label, links, href) {
+    if (!links.length) {
+      const a = document.createElement('a');
+      a.className = 'site-menu-link';
+      a.href = href || './';
+      a.textContent = label;
+      return a;
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'menu-group';
+    const btn = document.createElement('a');
+    btn.className = 'site-menu-link';
+    btn.href = href || './';
+    btn.textContent = label;
+    const sub = document.createElement('div');
+    sub.className = 'submenu';
+    links.forEach(([url, text]) => {
+      const a = document.createElement('a');
+      a.href = url;
+      a.textContent = text;
+      sub.appendChild(a);
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(sub);
+    return wrap;
+  }
+
+  nav.appendChild(menuGroup('Question Bank', [
+    ['question-bank/', 'Search all questions'],
+    ...years.map(y => ['exams/' + y + '/', String(y)])
+  ]));
+  nav.appendChild(menuGroup('Statistics', [], './'));
+  nav.appendChild(menuGroup('Syllabus', [
+    ['syllabus/', 'All syllabus topics'],
+    ...Object.entries(D.topics || {}).map(([t, n]) => ['syllabus/topic-' + t + '/', 'Topic ' + t + ': ' + n])
+  ]));
+  const practiceA = document.createElement('a');
+  practiceA.className = 'site-menu-link active';
+  practiceA.href = 'practice.html';
+  practiceA.textContent = 'Practice';
+  nav.appendChild(practiceA);
+  const fsA = document.createElement('a');
+  fsA.className = 'site-menu-link';
+  fsA.href = (D.assets && D.assets.formulaSheet) || '#';
+  fsA.target = '_blank';
+  fsA.textContent = 'Formula Sheet';
+  nav.appendChild(fsA);
+}
+
 // ─── Init ────────────────────────────────────────────────────────────────────
+buildNav();
 buildTemplateGrid();
 buildSelectorList();
 </script>
