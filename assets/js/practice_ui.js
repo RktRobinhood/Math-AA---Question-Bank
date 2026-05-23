@@ -102,7 +102,11 @@
 
     if (filters.search && !blob.includes(filters.search)) return false;
     if (filters.topic !== 'all' && String(tmpl.topic) !== filters.topic) return false;
-    if (filters.syllabus !== 'all' && !templatePrefixes(tmpl).includes(filters.syllabus)) return false;
+    if (filters.syllabus !== 'all') {
+      const prefixes = templatePrefixes(tmpl);
+      const selected = Array.isArray(filters.syllabus) ? filters.syllabus : [filters.syllabus];
+      if (!selected.some(s => prefixes.includes(s))) return false;
+    }
     if (!choiceMatches(tmpl.section || 'Mixed', filters.section)) return false;
     if (!choiceMatches(tmpl.paper || 'Mixed', filters.paper)) return false;
     if (filters.difficulty !== 'all' && tmpl.difficulty !== filters.difficulty) return false;
@@ -352,15 +356,51 @@
   }
 
   function worksheetFilters() {
+    const advanced = $('worksheet-advanced')?.checked;
+    let syllabus = 'all';
+    let topic = 'all';
+    if (advanced) {
+      const checked = [...document.querySelectorAll('#worksheet-multi-syllabus input[type="checkbox"]:checked')]
+        .map(cb => cb.value);
+      syllabus = checked.length ? checked : 'all';
+    } else {
+      topic = $('worksheet-topic')?.value || 'all';
+      syllabus = $('worksheet-syllabus')?.value || 'all';
+    }
     return {
       search: '',
-      topic: $('worksheet-topic')?.value || 'all',
-      syllabus: $('worksheet-syllabus')?.value || 'all',
+      topic,
+      syllabus,
       section: $('worksheet-section')?.value || 'all',
       paper: 'all',
       difficulty: $('worksheet-difficulty')?.value || 'all',
       type: $('worksheet-type')?.value || 'all'
     };
+  }
+
+  function buildMultiSyllabus() {
+    const container = $('worksheet-multi-syllabus');
+    if (!container) return;
+    const labels = buildSyllabusLabels();
+    const prefixes = [...labels.keys()].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const byTopic = {};
+    prefixes.forEach(prefix => {
+      const topic = prefix.split('.')[0];
+      if (!byTopic[topic]) byTopic[topic] = [];
+      byTopic[topic].push(prefix);
+    });
+    container.innerHTML = Object.entries(byTopic).sort(([a], [b]) => +a - +b).map(([topic, refs]) => `
+      <div class="multi-syl-group">
+        <div class="multi-syl-topic">${esc(topicLabel(topic))}</div>
+        ${refs.map(ref => `
+          <label class="multi-syl-item">
+            <input type="checkbox" value="${esc(ref)}">
+            <span class="multi-syl-ref">${esc(ref)}</span>
+            <span class="multi-syl-name">${esc(labels.get(ref) || ref)}</span>
+          </label>
+        `).join('')}
+      </div>
+    `).join('');
   }
 
   function renderWorksheet() {
@@ -387,9 +427,14 @@
 
     const includeAnswers = $('worksheet-answers')?.checked;
     const includeWorked = $('worksheet-worked')?.checked;
+    const syllabusLabel = filters.syllabus === 'all'
+      ? 'all subtopics'
+      : Array.isArray(filters.syllabus)
+        ? filters.syllabus.join(', ')
+        : filters.syllabus;
     const summary = [
       filters.topic !== 'all' ? topicLabel(filters.topic) : 'All topics',
-      filters.syllabus !== 'all' ? filters.syllabus : 'all subtopics',
+      syllabusLabel,
       filters.section !== 'all' ? `Section ${filters.section}` : 'any section',
       filters.difficulty !== 'all' ? filters.difficulty : 'any difficulty'
     ].join(' | ');
@@ -457,12 +502,17 @@
       .forEach(id => $(id)?.addEventListener(id === 'practice-search' ? 'input' : 'change', renderSelector));
     $('practice-random')?.addEventListener('click', chooseRandomPractice);
 
-    ['worksheet-topic', 'worksheet-syllabus', 'worksheet-section', 'worksheet-difficulty', 'worksheet-type']
-      .forEach(id => $(id)?.addEventListener('change', renderWorksheet));
-    $('worksheet-count')?.addEventListener('input', renderWorksheet);
-    $('worksheet-answers')?.addEventListener('change', renderWorksheet);
-    $('worksheet-worked')?.addEventListener('change', renderWorksheet);
     $('worksheet-generate')?.addEventListener('click', renderWorksheet);
+
+    $('worksheet-advanced')?.addEventListener('change', () => {
+      const on = $('worksheet-advanced').checked;
+      const basicFields = $('worksheet-basic-filters');
+      const multiPanel = $('worksheet-multi-syllabus');
+      const multiLabel = $('worksheet-multi-label');
+      if (basicFields) basicFields.style.display = on ? 'none' : '';
+      if (multiPanel) multiPanel.style.display = on ? 'block' : 'none';
+      if (multiLabel) multiLabel.style.display = on ? 'block' : 'none';
+    });
     $('worksheet-print')?.addEventListener('click', () => {
       activateTab('worksheet');
       if (!$('worksheet-output')?.querySelector('.worksheet-doc')) renderWorksheet();
@@ -536,6 +586,7 @@
   function init() {
     buildNav();
     populateFilters();
+    buildMultiSyllabus();
     bindEvents();
     renderGrid();
     renderSelector();

@@ -277,6 +277,32 @@
     .answer-key h3 { margin: 0 0 12px; }
     .answer-item { margin-bottom: 14px; break-inside: avoid; }
 
+    /* -- Advanced multi-syllabus picker -- */
+    .advanced-toggle-row { margin: 10px 0 4px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .multi-syl-hint {
+      margin: 0 0 6px; font-size: 0.78rem; color: var(--muted); line-height: 1.4;
+    }
+    .multi-syl-panel {
+      border: 1px solid var(--border); border-radius: 8px;
+      background: var(--surface-2); max-height: 240px; overflow-y: auto;
+      padding: 8px; margin-bottom: 4px;
+    }
+    .multi-syl-group { margin-bottom: 6px; }
+    .multi-syl-group:last-child { margin-bottom: 0; }
+    .multi-syl-topic {
+      font-size: 0.68rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--faint); padding: 4px 6px 3px;
+    }
+    .multi-syl-item {
+      display: flex; align-items: baseline; gap: 6px;
+      padding: 4px 6px; border-radius: 5px; cursor: pointer; font-size: 0.82rem;
+      transition: background .1s;
+    }
+    .multi-syl-item:hover { background: var(--accent-soft); }
+    .multi-syl-item input[type="checkbox"] { flex-shrink: 0; accent-color: var(--accent); }
+    .multi-syl-ref { font-weight: 600; color: var(--accent); flex-shrink: 0; min-width: 28px; }
+    .multi-syl-name { color: var(--muted); font-size: 0.79rem; }
+
     /* -- Page header -- */
     .page-hero { margin-bottom: 28px; }
     .page-hero h1 { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; }
@@ -437,21 +463,41 @@
             <span>Questions</span>
             <input id="worksheet-count" type="number" min="1" max="30" value="10">
           </label>
-          <label class="filter-field">
-            <span>Topic</span>
-            <select id="worksheet-topic">
-              <option value="all">All topics</option>
-              <option value="1">Topic 1</option>
-              <option value="2">Topic 2</option>
-              <option value="3">Topic 3</option>
-              <option value="4">Topic 4</option>
-              <option value="5">Topic 5</option>
-            </select>
-          </label>
-          <label class="filter-field">
-            <span>Subtopic</span>
-            <select id="worksheet-syllabus"></select>
-          </label>
+          <!-- Basic filters (hidden when advanced mode is on) -->
+          <div id="worksheet-basic-filters">
+            <label class="filter-field">
+              <span>Topic</span>
+              <select id="worksheet-topic">
+                <option value="all">All topics</option>
+                <option value="1">Topic 1</option>
+                <option value="2">Topic 2</option>
+                <option value="3">Topic 3</option>
+                <option value="4">Topic 4</option>
+                <option value="5">Topic 5</option>
+              </select>
+            </label>
+            <label class="filter-field" style="margin-top:8px;">
+              <span>Subtopic</span>
+              <select id="worksheet-syllabus"></select>
+            </label>
+          </div>
+
+          <!-- Advanced multi-syllabus toggle -->
+          <div class="advanced-toggle-row">
+            <label class="check-inline">
+              <input type="checkbox" id="worksheet-advanced">
+              Advanced: pick specific syllabus refs
+            </label>
+          </div>
+
+          <!-- Multi-syllabus picker (shown in advanced mode) -->
+          <p id="worksheet-multi-label" class="multi-syl-hint" style="display:none;">
+            Select one or more syllabus points — questions will be drawn from all checked refs.
+          </p>
+          <div id="worksheet-multi-syllabus" class="multi-syl-panel" style="display:none;">
+            <!-- Populated by JS -->
+          </div>
+
           <label class="filter-field">
             <span>Section mix</span>
             <select id="worksheet-section">
