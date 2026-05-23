@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="./">
+  <title>Practice — IB Math AA SL</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"
+    onload="renderMathInElement(document.body, {delimiters:[{left:'$',right:'$',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/template_matches.js"></script>
+  <script src="assets/js/practice_templates.js"></script>
+  <style>
+    /* ── Page layout ── */
+    .practice-shell { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    /* ── Tab nav ── */
+    .tab-nav { display: flex; gap: 6px; margin-bottom: 24px; }
+    .tab-btn {
+      padding: 9px 22px; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--surface); color: var(--muted); font-size: 0.92rem; font-weight: 500;
+      cursor: pointer; transition: all .15s;
+    }
+    .tab-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .tab-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Topic filter ── */
+    .topic-filter { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .topic-btn {
+      padding: 6px 16px; border: 1px solid var(--border); border-radius: 999px;
+      background: var(--surface); color: var(--muted); font-size: 0.85rem;
+      cursor: pointer; transition: all .15s;
+    }
+    .topic-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .topic-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* ── Template grid ── */
+    .template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+
+    /* ── Template card ── */
+    .template-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 12px;
+      transition: box-shadow .15s;
+    }
+    .template-card:hover { box-shadow: var(--shadow); }
+    .template-card.hidden { display: none; }
+
+    .template-header { display: flex; align-items: flex-start; gap: 10px; }
+    .syllabus-badge {
+      flex-shrink: 0; background: var(--accent-soft); color: var(--accent);
+      border: 1px solid var(--accent-strong); border-radius: 6px;
+      padding: 3px 9px; font-size: 0.8rem; font-weight: 600; line-height: 1.4;
+    }
+    .template-title { font-size: 1rem; font-weight: 600; line-height: 1.3; flex: 1; }
+    .marks-badge {
+      flex-shrink: 0; background: var(--surface-2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 3px 8px; font-size: 0.78rem; color: var(--muted); font-weight: 500;
+    }
+
+    .template-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
+
+    /* ── Heat indicator ── */
+    .heat-row { display: flex; align-items: center; gap: 10px; }
+    .heat-label { font-size: 0.78rem; color: var(--faint); white-space: nowrap; }
+    .heat-dots { display: flex; gap: 3px; flex-wrap: wrap; }
+    .heat-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .heat-dot.filled { background: var(--green); }
+    .heat-dot.empty { background: var(--border); }
+    .heat-count { font-size: 0.8rem; color: var(--green); font-weight: 600; white-space: nowrap; }
+
+    /* ── Card actions ── */
+    .template-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .btn-outline {
+      flex: 1; padding: 8px 14px; border: 1px solid var(--border); border-radius: 8px;
+      background: transparent; color: var(--muted); font-size: 0.84rem; cursor: pointer;
+      transition: all .15s; text-align: center;
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-primary {
+      flex: 1; padding: 8px 14px; border: 1px solid var(--accent); border-radius: 8px;
+      background: var(--accent); color: #fff; font-size: 0.84rem; font-weight: 600;
+      cursor: pointer; transition: all .15s; text-align: center;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    /* ── Examples list ── */
+    .examples-list { display: none; border-top: 1px solid var(--border); padding-top: 12px; }
+    .examples-list.open { display: block; }
+    .example-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 10px; border-radius: 7px; margin-bottom: 4px;
+      font-size: 0.83rem; color: var(--text); background: var(--surface-2);
+      text-decoration: none; transition: background .12s;
+    }
+    .example-link:hover { background: var(--accent-soft); text-decoration: none; }
+    .example-link .marks-chip {
+      background: var(--border); border-radius: 4px; padding: 1px 6px;
+      font-size: 0.75rem; color: var(--muted); font-weight: 500;
+    }
+
+    /* ── Practice panel ── */
+    .practice-layout { display: grid; grid-template-columns: 260px 1fr; gap: 20px; align-items: start; }
+    @media (max-width: 800px) { .practice-layout { grid-template-columns: 1fr; } }
+
+    /* Selector sidebar */
+    .template-selector {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px;
+    }
+    .selector-heading { font-size: 0.8rem; font-weight: 600; color: var(--muted); letter-spacing: .03em;
+      text-transform: uppercase; margin-bottom: 10px; }
+    .selector-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 10px; border-radius: 8px; cursor: pointer;
+      font-size: 0.84rem; color: var(--text); transition: background .12s;
+    }
+    .selector-item:hover { background: var(--surface-2); }
+    .selector-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+    .selector-badge {
+      width: 26px; height: 18px; border-radius: 4px; font-size: 0.7rem; font-weight: 700;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--accent-soft); color: var(--accent); flex-shrink: 0;
+    }
+
+    /* Practice area */
+    .practice-area {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px; min-height: 400px;
+    }
+    .practice-placeholder {
+      min-height: 300px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 12px; color: var(--muted);
+    }
+    .practice-placeholder svg { opacity: .35; }
+    .practice-placeholder p { font-size: 0.9rem; }
+
+    /* Generated question */
+    .q-meta { display: flex; gap: 8px; align-items: center; margin-bottom: 18px; flex-wrap: wrap; }
+    .q-meta-tag {
+      padding: 3px 10px; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+    }
+    .q-meta-tag.syllabus { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-strong); }
+    .q-meta-tag.marks { background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
+    .q-meta-tag.fresh { background: rgba(5,150,105,.10); color: var(--green); border: 1px solid rgba(5,150,105,.3); }
+
+    .q-stem {
+      background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 18px; margin-bottom: 16px; font-size: 0.95rem; line-height: 1.7;
+    }
+    .q-parts { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .q-part {
+      padding: 12px 16px; border-left: 3px solid var(--accent-strong);
+      background: var(--surface-2); border-radius: 0 8px 8px 0; font-size: 0.9rem;
+    }
+    .q-part-label { font-weight: 700; color: var(--accent); margin-right: 6px; }
+    .q-part-marks { color: var(--muted); font-size: 0.82rem; margin-left: 6px; }
+
+    .q-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+    .btn-reveal {
+      padding: 9px 20px; border-radius: 9px; font-size: 0.88rem; font-weight: 600;
+      cursor: pointer; transition: all .15s;
+    }
+    .btn-reveal.answer {
+      background: var(--green); border: 1px solid var(--green); color: #fff;
+    }
+    .btn-reveal.working {
+      background: transparent; border: 1px solid var(--border); color: var(--muted);
+    }
+    .btn-reveal.working:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-new {
+      padding: 9px 20px; border-radius: 9px; font-size: 0.88rem; font-weight: 600;
+      background: var(--accent); border: 1px solid var(--accent); color: #fff; cursor: pointer;
+      margin-left: auto; transition: opacity .15s;
+    }
+    .btn-new:hover { opacity: .85; }
+
+    .reveal-box {
+      border-radius: 10px; padding: 14px 18px; margin-top: 12px;
+      font-size: 0.9rem; line-height: 1.7; display: none;
+    }
+    .reveal-box.answer { background: rgba(5,150,105,.08); border: 1px solid rgba(5,150,105,.3); }
+    .reveal-box.working { background: var(--surface-2); border: 1px solid var(--border); }
+    .reveal-box.open { display: block; }
+    .reveal-heading { font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; margin-bottom: 8px; }
+    .reveal-box.answer .reveal-heading { color: var(--green); }
+    .reveal-box.working .reveal-heading { color: var(--muted); }
+    .working-step { padding: 3px 0; border-bottom: 1px solid var(--border); }
+    .working-step:last-child { border: none; }
+
+    /* Page header */
+    .page-hero { margin-bottom: 28px; }
+    .page-hero h1 { font-size: 1.6rem; font-weight: 700; margin: 0 0 6px; }
+    .page-hero p { color: var(--muted); font-size: 0.93rem; margin: 0; }
+  </style>
+</head>
+<body>
+<main class="practice-shell">
+
+  <!-- ── Header (matches app.js style) ── -->
+  <header class="site-header">
+    <a class="site-brand" href="./">
+      <strong>IB Math AA SL</strong>
+      <span>Exam Question Bank</span>
+    </a>
+    <nav class="site-menu" aria-label="Main navigation">
+      <a class="site-menu-link" href="./">Question Bank</a>
+      <a class="site-menu-link" href="statistics.html">Statistics</a>
+      <a class="site-menu-link active" href="practice.html">Practice</a>
+    </nav>
+  </header>
+
+  <!-- ── Hero ── -->
+  <div class="page-hero">
+    <h1>Practice & Templates</h1>
+    <p>Explore the recurring question archetypes across all 34 exam sittings — then generate unlimited fresh variants to practise or set for students.</p>
+  </div>
+
+  <!-- ── Tabs ── -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="map">Template Map</button>
+    <button class="tab-btn" data-tab="practice">Practice Generator</button>
+  </div>
+
+  <!-- ══ TAB: Template Map ══════════════════════════════════════════════════ -->
+  <div class="tab-panel active" id="tab-map">
+
+    <div class="topic-filter">
+      <button class="topic-btn active" data-topic="all">All Topics</button>
+      <button class="topic-btn" data-topic="1">Topic 1 · Numbers &amp; Algebra</button>
+      <button class="topic-btn" data-topic="2">Topic 2 · Functions</button>
+      <button class="topic-btn" data-topic="3">Topic 3 · Geometry &amp; Trig</button>
+      <button class="topic-btn" data-topic="4">Topic 4 · Statistics &amp; Probability</button>
+      <button class="topic-btn" data-topic="5">Topic 5 · Calculus</button>
+    </div>
+
+    <div class="template-grid" id="template-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- ══ TAB: Practice Generator ═══════════════════════════════════════════ -->
+  <div class="tab-panel" id="tab-practice">
+    <div class="practice-layout">
+
+      <!-- Sidebar: template selector -->
+      <div class="template-selector">
+        <div class="selector-heading">Choose a template</div>
+        <div id="selector-list">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Main: generated question -->
+      <div class="practice-area" id="practice-area">
+        <div class="practice-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+            <rect x="9" y="3" width="6" height="4" rx="1"/>
+            <line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/>
+          </svg>
+          <p>Select a template on the left to generate a question.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+// ─── Data ───────────────────────────────────────────────────────────────────
+const DATA       = window.AASL_DATA;
+const qById      = Object.fromEntries(DATA.questions.map(q => [q.id, q]));
+const TOTAL      = TOTAL_SITTINGS;   // from template_matches.js
+const HEAT       = TEMPLATE_HEAT;
+const MATCHES    = TEMPLATE_MATCHES;
+const TEMPLATES  = PRACTICE_TEMPLATES; // from practice_templates.js
+
+// ─── Tab switching ──────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'practice') renderMath();
+  });
+});
+
+// ─── Topic filter ────────────────────────────────────────────────────────────
+let activeTopic = 'all';
+document.querySelectorAll('.topic-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeTopic = btn.dataset.topic;
+    document.querySelectorAll('.template-card').forEach(card => {
+      card.classList.toggle('hidden',
+        activeTopic !== 'all' && card.dataset.topic !== activeTopic);
+    });
+  });
+});
+
+// ─── Build template grid ─────────────────────────────────────────────────────
+function buildTemplateGrid() {
+  const grid = document.getElementById('template-grid');
+  TEMPLATES.forEach(tmpl => {
+    const heat = HEAT[tmpl.id] || 0;
+    const matches = (MATCHES[tmpl.id] || []).slice(0, 8);
+
+    // Heat dots
+    const dots = Array.from({ length: TOTAL }, (_, i) =>
+      `<span class="heat-dot ${i < heat ? 'filled' : 'empty'}"></span>`
+    ).join('');
+
+    // Examples list
+    const exampleLinks = matches.map(m => {
+      const q = qById[m.id];
+      const label = q ? q.title : m.id;
+      const url = q ? q.url : '#';
+      return `<a class="example-link" href="${url}">
+        <span>${label}</span>
+        <span class="marks-chip">${m.marks}m</span>
+      </a>`;
+    }).join('');
+
+    const card = document.createElement('div');
+    card.className = 'template-card';
+    card.dataset.topic = tmpl.topic;
+    card.innerHTML = `
+      <div class="template-header">
+        <span class="syllabus-badge">${tmpl.syllabus}</span>
+        <span class="template-title">${tmpl.title}</span>
+        <span class="marks-badge">~${tmpl.marks}m</span>
+      </div>
+      <p class="template-desc">${tmpl.desc}</p>
+      <div class="heat-row">
+        <span class="heat-label">Exam frequency</span>
+        <div class="heat-dots">${dots}</div>
+        <span class="heat-count">${heat}/${TOTAL}</span>
+      </div>
+      <div class="template-actions">
+        <button class="btn-outline toggle-ex-btn">Real examples (${matches.length})</button>
+        <button class="btn-primary practice-from-map" data-id="${tmpl.id}">Practice →</button>
+      </div>
+      <div class="examples-list">${exampleLinks}</div>
+    `;
+
+    card.querySelector('.toggle-ex-btn').addEventListener('click', function () {
+      const list = card.querySelector('.examples-list');
+      list.classList.toggle('open');
+      this.textContent = list.classList.contains('open')
+        ? `Hide examples` : `Real examples (${matches.length})`;
+    });
+    card.querySelector('.practice-from-map').addEventListener('click', () => {
+      // Switch to practice tab and select this template
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelector('[data-tab="practice"]').classList.add('active');
+      document.getElementById('tab-practice').classList.add('active');
+      selectTemplate(tmpl.id);
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+// ─── Build practice sidebar ──────────────────────────────────────────────────
+let activeTemplateId = null;
+
+function buildSelectorList() {
+  const list = document.getElementById('selector-list');
+  // Group by topic
+  const byTopic = {};
+  TEMPLATES.forEach(t => {
+    if (!byTopic[t.topic]) byTopic[t.topic] = [];
+    byTopic[t.topic].push(t);
+  });
+  const topicNames = { 1: 'Algebra', 2: 'Functions', 3: 'Geometry', 4: 'Stats & Prob', 5: 'Calculus' };
+  Object.entries(byTopic).sort(([a],[b]) => +a - +b).forEach(([topic, tmpls]) => {
+    const heading = document.createElement('div');
+    heading.style.cssText = 'font-size:.72rem;color:var(--faint);text-transform:uppercase;letter-spacing:.04em;padding:10px 10px 4px;font-weight:700;';
+    heading.textContent = `Topic ${topic} · ${topicNames[topic]}`;
+    list.appendChild(heading);
+    tmpls.forEach(t => {
+      const item = document.createElement('div');
+      item.className = 'selector-item';
+      item.dataset.id = t.id;
+      item.innerHTML = `<span class="selector-badge">${t.syllabus}</span><span>${t.title}</span>`;
+      item.addEventListener('click', () => selectTemplate(t.id));
+      list.appendChild(item);
+    });
+  });
+}
+
+function selectTemplate(id) {
+  activeTemplateId = id;
+  document.querySelectorAll('.selector-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.id === id);
+  });
+  generateQuestion(id);
+}
+
+// ─── Question generation ─────────────────────────────────────────────────────
+function generateQuestion(id) {
+  const tmpl = TEMPLATES.find(t => t.id === id);
+  if (!tmpl) return;
+
+  let q;
+  try { q = tmpl.generate(); } catch (e) { console.error(e); return; }
+
+  const area = document.getElementById('practice-area');
+  area.innerHTML = `
+    <div class="q-meta">
+      <span class="q-meta-tag syllabus">${tmpl.syllabus} · ${tmpl.title}</span>
+      <span class="q-meta-tag marks">${tmpl.marks} marks</span>
+      <span class="q-meta-tag fresh">Generated</span>
+    </div>
+    <div class="q-stem">${q.stem}</div>
+    <div class="q-parts">
+      ${q.parts.length === 1 && !q.parts[0].label
+        ? `<div class="q-part">${q.parts[0].instr}<span class="q-part-marks">[${q.parts[0].marks} marks]</span></div>`
+        : q.parts.map((p, i) => `<div class="q-part"><span class="q-part-label">(${String.fromCharCode(97+i)})</span>${p.instr}<span class="q-part-marks">[${p.marks} marks]</span></div>`).join('')
+      }
+    </div>
+    <div class="q-actions">
+      <button class="btn-reveal answer" id="btn-ans">Show Answer</button>
+      <button class="btn-reveal working" id="btn-work">Show Working</button>
+      <button class="btn-new" id="btn-new">New Question ↺</button>
+    </div>
+    <div class="reveal-box answer" id="box-ans">
+      <div class="reveal-heading">Answer</div>
+      <div>${q.answer}</div>
+    </div>
+    <div class="reveal-box working" id="box-work">
+      <div class="reveal-heading">Worked Solution</div>
+      ${q.working.map(s => `<div class="working-step">${s}</div>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('btn-ans').addEventListener('click', function() {
+    const box = document.getElementById('box-ans');
+    box.classList.toggle('open');
+    this.textContent = box.classList.contains('open') ? 'Hide Answer' : 'Show Answer';
+    renderMath();
+  });
+  document.getElementById('btn-work').addEventListener('click', function() {
+    const box = document.getElementById('box-work');
+    box.classList.toggle('open');
+    this.textContent = box.classList.contains('open') ? 'Hide Working' : 'Show Working';
+    renderMath();
+  });
+  document.getElementById('btn-new').addEventListener('click', () => generateQuestion(id));
+
+  renderMath();
+}
+
+function renderMath() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$', right: '$', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+}
+
+// ─── Init ────────────────────────────────────────────────────────────────────
+buildTemplateGrid();
+buildSelectorList();
+</script>
+</body>
+</html>
