@@ -173,7 +173,7 @@
                   <input type="checkbox" id="cs-show-teacher" ${s.showTeacherName ? 'checked' : ''}>
                   Teacher name
                 </label>
-                <input type="text" id="cs-teacher" value="${escHtml(s.teacherName)}" placeholder="e.g. Mr Pilley" ${s.showTeacherName ? '' : 'disabled'}>
+                <input type="text" id="cs-teacher" value="${escHtml(s.teacherName)}" placeholder="e.g. Mr Smith" ${s.showTeacherName ? '' : 'disabled'}>
               </div>
 
               <div class="aasl-cover-field">
@@ -181,7 +181,7 @@
                   <input type="checkbox" id="cs-show-class" ${s.showClassCode ? 'checked' : ''}>
                   Class / code
                 </label>
-                <input type="text" id="cs-class" value="${escHtml(s.classCode)}" placeholder="e.g. 12B Math AA SL" ${s.showClassCode ? '' : 'disabled'}>
+                <input type="text" id="cs-class" value="${escHtml(s.classCode)}" placeholder="e.g. 12A Math AA SL" ${s.showClassCode ? '' : 'disabled'}>
               </div>
 
               <!-- Core fields -->
