@@ -778,11 +778,15 @@
       BorderStyle, ShadingType, PageSize
     } = window.docx;
 
-    // A4 in EMU
-    const A4_EMU_W = 7560000, A4_EMU_H = 10692000;
-    const marginEMU = 720000; // ~2cm
-    const contentEMU = A4_EMU_W - marginEMU * 2;
-    const IMG_TARGET_W_EMU = contentEMU;
+    // A4 page dimensions in twips (1 inch = 1440 twips)
+    // A4 = 8.268 × 11.693 inches
+    const A4_W_TWIPS  = 11906;  // 8.268 in × 1440
+    const A4_H_TWIPS  = 16838;  // 11.693 in × 1440
+    const MARGIN_TWIPS = 1134;  // ~2 cm (0.787 in × 1440)
+    // Image width in pixels (docx ImageRun uses px at 96 DPI)
+    // Usable width = (8.268 - 2×0.787) in = 6.694 in = 643 px
+    const IMG_PX      = 643;
+    const IMG_PX_H    = Math.round(IMG_PX * 1324 / IMG_PX_W);
 
     const sections = [];
 
@@ -815,11 +819,10 @@
           const bytes = new Uint8Array(binaryStr.length);
           for (let b = 0; b < binaryStr.length; b++) bytes[b] = binaryStr.charCodeAt(b);
 
-          const imgH = Math.round(IMG_TARGET_W_EMU * 1324 / IMG_PX_W);
           children.push(new Paragraph({
             children: [new ImageRun({
               data: bytes,
-              transformation: { width: Math.round(IMG_TARGET_W_EMU / 9144), height: Math.round(imgH / 9144) }
+              transformation: { width: IMG_PX, height: IMG_PX_H }
             })]
           }));
         } catch (_) {
@@ -843,8 +846,8 @@
       sections: sections.map((sec, i) => ({
         properties: {
           page: {
-            size: { width: Math.round(A4_EMU_W / 914.4 * 20), height: Math.round(A4_EMU_H / 914.4 * 20), orientation: 'portrait' },
-            margin: { top: Math.round(marginEMU / 914.4 * 20), right: Math.round(marginEMU / 914.4 * 20), bottom: Math.round(marginEMU / 914.4 * 20), left: Math.round(marginEMU / 914.4 * 20) }
+            size: { width: A4_W_TWIPS, height: A4_H_TWIPS, orientation: 'portrait' },
+            margin: { top: MARGIN_TWIPS, right: MARGIN_TWIPS, bottom: MARGIN_TWIPS, left: MARGIN_TWIPS }
           }
         },
         children: sec.children
