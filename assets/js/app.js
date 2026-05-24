@@ -29,6 +29,10 @@
     yearMode: "neutral"
   };
 
+  // ── Bulk-select state ──────────────────────────────────────────────────────
+  let selectMode = false;
+  const selected = new Set(); // question IDs checked in bulk-select mode
+
   applyInitialParams();
   render();
 
@@ -240,10 +244,6 @@
       el("div", { class: "kpi-sub", text: sub || "" })
     );
   }
-
-  // ── Bulk-select state ──────────────────────────────────────────────────────
-  let selectMode = false;
-  const selected = new Set(); // question IDs checked in bulk-select mode
 
   // Called by basket.js after any basket change so checkboxes stay in sync
   window._AASL_APP_SYNC = () => {
