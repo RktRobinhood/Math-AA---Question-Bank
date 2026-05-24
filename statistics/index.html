@@ -8,11 +8,18 @@
     <meta name="description" content="Static searchable IB Math AA SL question bank and exam statistics.">
     <link rel="stylesheet" href="assets/css/styles.css">
   </head>
-  <body data-initial-tab="statistics">
+  <body data-initial-tab="statistics" data-base="./">
     <main id="app" class="app-shell">
       <div class="loading">Loading exam bank...</div>
     </main>
     <script src="assets/js/data.js"></script>
+    <script src="assets/js/masks.json" type="application/json" id="aasl-masks-raw"></script>
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/basket.js"></script>
+    <script src="assets/js/generate.js"></script>
+    <script>
+      // Load masks.json via fetch since it's not a JS file
+      fetch('assets/js/masks.json').then(r=>r.json()).then(d=>{window.AASL_MASKS=d;}).catch(()=>{});
+    </script>
   </body>
 </html>

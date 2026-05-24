@@ -241,24 +241,125 @@
     );
   }
 
+  // ── Bulk-select state ──────────────────────────────────────────────────────
+  let selectMode = false;
+  const selected = new Set(); // question IDs checked in bulk-select mode
+
+  // Called by basket.js after any basket change so checkboxes stay in sync
+  window._AASL_APP_SYNC = () => {
+    document.querySelectorAll('.aasl-card-checkbox-wrap input').forEach(cb => {
+      const id = cb.dataset.qid;
+      if (!id) return;
+      cb.checked = window.AASL_BASKET?.has(id) || selected.has(id);
+    });
+    const bulkBar = document.getElementById('aasl-bulk-bar');
+    if (bulkBar) {
+      const countEl = bulkBar.querySelector('.aasl-bulk-count');
+      const addBtn  = bulkBar.querySelector('.aasl-bulk-add');
+      if (countEl) countEl.textContent = `${selected.size} selected`;
+      if (addBtn)  addBtn.disabled = selected.size === 0;
+    }
+  };
+
   function renderQuestionList(results) {
     if (!results.length) return el("div", { class: "empty-state", text: "No questions match the current filters." });
-    return el("div", { class: "question-list" },
-      ...results.map(q => el("a", {
-        class: "question-card",
-        href: q.url || `questions/${q.id}/`
-      },
-        el("div", { class: "question-title", text: q.title }),
-        el("div", { class: "meta-line" },
-          badge(`${q.marks || 0} marks`),
-          badge(q.section ? `Section ${q.section}` : "No section", true),
-          badge((q.topicNumbers || []).map(t => `T${t}`).join(" ") || "No topic", true)
-        ),
-        el("div", { class: "tag-line" },
-          ...(q.syllabus || []).slice(0, 3).map(s => el("span", { class: "tag", text: s }))
-        )
-      ))
+
+    const container = el("div", {});
+
+    // Bulk-select toolbar
+    const selectToggle = el("button", {
+      class: `aasl-select-toggle${selectMode ? " aasl-select-toggle--active" : ""}`,
+      type: "button",
+      text: selectMode ? "✓ Selecting — done" : "Select multiple",
+      onclick: () => {
+        selectMode = !selectMode;
+        if (!selectMode) selected.clear();
+        render();
+      }
+    });
+
+    const toolRow = el("div", { style: "display:flex;justify-content:flex-end;margin-bottom:8px;" }, selectToggle);
+    container.append(toolRow);
+
+    // Bulk add bar (visible in select mode)
+    if (selectMode) {
+      const bulkBar = el("div", { class: "aasl-bulk-bar", id: "aasl-bulk-bar" },
+        el("span", { class: "aasl-bulk-count", text: `${selected.size} selected` }),
+        el("button", {
+          class: "aasl-bulk-add",
+          type: "button",
+          text: "Add to output",
+          disabled: selected.size === 0,
+          onclick: () => {
+            let added = 0;
+            selected.forEach(id => {
+              const q = results.find(r => r.id === id) || allQuestions.find(r => r.id === id);
+              if (q && window.AASL_BASKET?.add(q)) added++;
+            });
+            selected.clear();
+            selectMode = false;
+            render();
+          }
+        })
+      );
+      container.append(bulkBar);
+    }
+
+    const list = el("div", { class: "question-list" },
+      ...results.map(q => {
+        const inBasket = window.AASL_BASKET?.has(q.id);
+        const isSelected = selected.has(q.id);
+        const card = el("div", { style: "position:relative;" });
+
+        const link = el("a", {
+          class: `question-card${isSelected ? " aasl-card-selected" : ""}`,
+          href: selectMode ? "#" : (q.url || `questions/${q.id}/`),
+          onclick: selectMode ? (e) => {
+            e.preventDefault();
+            if (selected.has(q.id)) selected.delete(q.id); else selected.add(q.id);
+            window._AASL_APP_SYNC();
+            // Toggle card selected style
+            link.classList.toggle("aasl-card-selected", selected.has(q.id));
+            const cb = card.querySelector('input[type=checkbox]');
+            if (cb) cb.checked = selected.has(q.id);
+          } : null
+        },
+          el("div", { class: "question-title", text: q.title }),
+          el("div", { class: "meta-line" },
+            badge(`${q.marks || 0} marks`),
+            badge(q.section ? `Section ${q.section}` : "No section", true),
+            badge((q.topicNumbers || []).map(t => `T${t}`).join(" ") || "No topic", true),
+            inBasket && !selectMode ? badge("✓ Added", false) : null
+          ),
+          el("div", { class: "tag-line" },
+            ...(q.syllabus || []).slice(0, 3).map(s => el("span", { class: "tag", text: s }))
+          )
+        );
+        card.append(link);
+
+        // Checkbox overlay in select mode
+        if (selectMode) {
+          const wrap = el("div", { class: "aasl-card-checkbox-wrap" });
+          const cb = el("input", {
+            type: "checkbox",
+            "data-qid": q.id,
+            checked: isSelected,
+            onclick: (e) => {
+              e.stopPropagation();
+              if (e.target.checked) selected.add(q.id); else selected.delete(q.id);
+              link.classList.toggle("aasl-card-selected", e.target.checked);
+              window._AASL_APP_SYNC();
+            }
+          });
+          wrap.append(cb);
+          card.append(wrap);
+        }
+
+        return card;
+      })
     );
+    container.append(list);
+    return container;
   }
 
   function badge(text, neutral = false) {
