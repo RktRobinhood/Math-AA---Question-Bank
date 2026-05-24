@@ -24,7 +24,8 @@
     coverSheet:        true,
     // Cover fields
     schoolName:        '',        showSchoolName:    false,
-    logoUrl:           '',        showLogo:          false,
+    logoDataUrl:       '',        showLogo:          false,
+    logoW:             0,         logoH:             0,
     teacherName:       '',        showTeacherName:   false,
     classCode:         '',        showClassCode:     false,
     showNameLine:      true,
@@ -70,6 +71,8 @@
 
   // ─── Modal ────────────────────────────────────────────────────────────────
   let modalEl = null;
+  let _logoDataUrl = null; // base64 PNG data URL of uploaded logo (set at modal open)
+  let _logoW = 0, _logoH = 0; // natural pixel dims of loaded logo
 
   function openModal() {
     if (!window.AASL_BASKET || window.AASL_BASKET.count() === 0) return;
@@ -87,6 +90,11 @@
         if (e.target === modalEl) closeModal();
       });
     }
+    // Load logo state from settings into module vars
+    _logoDataUrl = s.logoDataUrl || null;
+    _logoW = s.logoW || 0;
+    _logoH = s.logoH || 0;
+
     modalEl.innerHTML = buildModalHtml(s);
     modalEl.style.display = 'flex';
     document.body.style.overflow = 'hidden';
@@ -163,9 +171,20 @@
               <div class="aasl-cover-field">
                 <label class="aasl-field-label">
                   <input type="checkbox" id="cs-show-logo" ${s.showLogo ? 'checked' : ''}>
-                  Logo URL
+                  Logo
                 </label>
-                <input type="url" id="cs-logo" value="${escHtml(s.logoUrl)}" placeholder="https://…/logo.png" ${s.showLogo ? '' : 'disabled'}>
+                <div id="cs-logo-wrap" style="${s.showLogo ? '' : 'opacity:0.45;pointer-events:none'}">
+                  ${s.logoDataUrl
+                    ? `<div id="cs-logo-preview" class="aasl-logo-preview">
+                         <img src="${s.logoDataUrl}" alt="Logo preview" style="max-height:40px;max-width:120px;object-fit:contain;border:1px solid #ddd;padding:2px;border-radius:3px;vertical-align:middle;">
+                         <button type="button" id="cs-logo-clear" style="margin-left:8px;font-size:11px;color:#c00;background:none;border:none;cursor:pointer;vertical-align:middle;">Remove</button>
+                       </div>`
+                    : `<label id="cs-logo-preview" style="display:inline-block;cursor:pointer;font-size:12px;color:#555;background:#f5f5f5;border:1px dashed #aaa;padding:5px 10px;border-radius:4px;">
+                         Upload logo…
+                         <input type="file" id="cs-logo-file" accept="image/*" style="display:none">
+                       </label>`
+                  }
+                </div>
               </div>
 
               <div class="aasl-cover-field">
@@ -309,10 +328,74 @@
       };
     }
 
+    // Logo checkbox — toggles opacity/pointer-events on the whole wrap div
+    const logoChk  = $('cs-show-logo');
+    const logoWrap = $('cs-logo-wrap');
+    if (logoChk && logoWrap) {
+      logoChk.onchange = () => {
+        logoWrap.style.opacity       = logoChk.checked ? '' : '0.45';
+        logoWrap.style.pointerEvents = logoChk.checked ? '' : 'none';
+      };
+    }
+
+    // Logo file picker + clear button (re-wired after DOM swap)
+    function wireLogoControls() {
+      const fileInput = $('cs-logo-file');
+      const clearBtn  = $('cs-logo-clear');
+      if (fileInput) {
+        fileInput.onchange = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const img = new Image();
+            img.onload = () => {
+              const canvas = document.createElement('canvas');
+              const maxDim = 400;
+              const scale  = Math.min(1, maxDim / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
+              canvas.width  = Math.round((img.naturalWidth  || 200) * scale);
+              canvas.height = Math.round((img.naturalHeight || 100) * scale);
+              canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+              _logoDataUrl = canvas.toDataURL('image/png');
+              _logoW = canvas.width;
+              _logoH = canvas.height;
+              // Swap placeholder for preview
+              const prev = $('cs-logo-preview');
+              if (prev) {
+                prev.outerHTML = `<div id="cs-logo-preview" class="aasl-logo-preview">
+                  <img src="${_logoDataUrl}" alt="Logo preview" style="max-height:40px;max-width:120px;object-fit:contain;border:1px solid #ddd;padding:2px;border-radius:3px;vertical-align:middle;">
+                  <button type="button" id="cs-logo-clear" style="margin-left:8px;font-size:11px;color:#c00;background:none;border:none;cursor:pointer;vertical-align:middle;">Remove</button>
+                </div>`;
+                wireLogoControls();
+              }
+            };
+            img.onerror = () => alert('Could not load that image. Please try a different file.');
+            img.src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        };
+      }
+      if (clearBtn) {
+        clearBtn.onclick = () => {
+          _logoDataUrl = null;
+          _logoW = 0;
+          _logoH = 0;
+          const prev = $('cs-logo-preview');
+          if (prev) {
+            prev.outerHTML = `<label id="cs-logo-preview" style="display:inline-block;cursor:pointer;font-size:12px;color:#555;background:#f5f5f5;border:1px dashed #aaa;padding:5px 10px;border-radius:4px;">
+              Upload logo…
+              <input type="file" id="cs-logo-file" accept="image/*" style="display:none">
+            </label>`;
+            wireLogoControls();
+          }
+        };
+      }
+    }
+    wireLogoControls();
+
     // Enable/disable text inputs when their checkbox toggles
     [
       ['cs-show-school',   'cs-school'],
-      ['cs-show-logo',     'cs-logo'],
       ['cs-show-teacher',  'cs-teacher'],
       ['cs-show-class',    'cs-class'],
       ['cs-show-time',     'cs-time'],
@@ -353,7 +436,8 @@
       format:            activeFmt ? activeFmt.dataset.fmt : 'pdf',
       coverSheet:        chk('gen-cover'),
       showSchoolName:    chk('cs-show-school'),   schoolName:   val('cs-school'),
-      showLogo:          chk('cs-show-logo'),      logoUrl:      val('cs-logo'),
+      showLogo:          chk('cs-show-logo'),      logoDataUrl:  _logoDataUrl || '',
+      logoW:             _logoW || 0,             logoH:        _logoH || 0,
       showTeacherName:   chk('cs-show-teacher'),  teacherName:  val('cs-teacher'),
       showClassCode:     chk('cs-show-class'),    classCode:    val('cs-class'),
       showNameLine:      chk('cs-show-nameline'),
@@ -615,19 +699,18 @@
       });
     }
 
-    // Logo
-    if (s.showLogo && s.logoUrl) {
+    // Logo (always PNG — converted via canvas at upload time, no fetch needed)
+    if (s.showLogo && s.logoDataUrl) {
       try {
-        const resp = await fetch(s.logoUrl);
-        const ab = await resp.arrayBuffer();
-        const imgBytes = new Uint8Array(ab);
-        let logoImg;
-        if (s.logoUrl.toLowerCase().endsWith('.png') || imgBytes[0] === 137) {
-          logoImg = await page.doc.embedPng(imgBytes);
-        } else {
-          logoImg = await page.doc.embedJpg(imgBytes);
-        }
-        page.drawImage(logoImg, { x: A4_W - MARGIN - 60, y: y - 44, width: 60, height: 44 });
+        const b64 = s.logoDataUrl.split(',')[1];
+        const imgBytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+        const logoImg  = await page.doc.embedPng(imgBytes);
+        const logoMaxW = 90, logoMaxH = 50;
+        const srcW = s.logoW || logoImg.width || 90;
+        const srcH = s.logoH || logoImg.height || 50;
+        const scale = Math.min(logoMaxW / srcW, logoMaxH / srcH, 1);
+        const lw = srcW * scale, lh = srcH * scale;
+        page.drawImage(logoImg, { x: A4_W - MARGIN - lw, y: y - lh, width: lw, height: lh });
       } catch (_) {}
     }
 
@@ -792,7 +875,7 @@
 
     // Cover sheet
     if (s.coverSheet && type === 'questions') {
-      const children = buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle });
+      const children = buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle });
       sections.push({ children });
     }
 
@@ -857,8 +940,27 @@
     return await Packer.toBlob(doc);
   }
 
-  function buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle }) {
+  function buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle }) {
     const paras = [];
+
+    // Logo (right-aligned, above branding)
+    if (s.showLogo && s.logoDataUrl) {
+      try {
+        const [, b64] = s.logoDataUrl.split(',');
+        const binaryStr = atob(b64);
+        const bytes = new Uint8Array(binaryStr.length);
+        for (let i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+        const srcW = s.logoW || 160, srcH = s.logoH || 80;
+        const logoMaxPx = 120;
+        const scale = Math.min(1, logoMaxPx / Math.max(srcW, srcH));
+        const lw = Math.round(srcW * scale), lh = Math.round(srcH * scale);
+        paras.push(new Paragraph({
+          children: [new ImageRun({ data: bytes, transformation: { width: lw, height: lh } })],
+          alignment: AlignmentType.RIGHT,
+          spacing: { after: 80 }
+        }));
+      } catch (_) {}
+    }
 
     if (s.showSchoolName && s.schoolName)
       paras.push(new Paragraph({ children: [new TextRun({ text: s.schoolName, size: 18, color: '666666' })] }));
