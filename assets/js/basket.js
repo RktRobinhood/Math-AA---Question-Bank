@@ -147,7 +147,7 @@
         <span class="aasl-item-title">${escHtml(q.title)}</span>
         ${topicLabel ? `<span class="aasl-item-badge">${escHtml(topicLabel)}</span>` : ''}
         <span class="aasl-item-badge">${q.marks || 0} marks</span>
-        ${q.section ? `<span class="aasl-item-badge aasl-item-badge--section">§${escHtml(q.section)}</span>` : ''}
+        ${q.section ? `<span class="aasl-item-badge aasl-item-badge--section">${escHtml(q.section)}</span>` : ''}
         <a class="aasl-item-view" href="${base}questions/${q.id}/" title="View question">View →</a>
         <span class="aasl-item-gap"></span>
         <button class="aasl-item-remove" data-remove="${q.id}" title="Remove from output">×</button>

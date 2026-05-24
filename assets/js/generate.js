@@ -723,9 +723,14 @@
       line(y, 0);
       y -= 16;
 
-      const labelText = '──────── To be filled out by teacher ────────';
+      const labelText = 'To be filled out by teacher';
       const lw = fontReg.widthOfTextAtSize(labelText, 8);
-      txt(labelText, (A4_W - lw) / 2, y, 8, fontReg, rgb(0.55, 0.55, 0.55));
+      const labelX = (A4_W - lw) / 2;
+      txt(labelText, labelX, y, 8, fontReg, rgb(0.55, 0.55, 0.55));
+      const lineY2 = y + 3;
+      const lineGap = 8;
+      page.drawLine({ start: { x: MARGIN, y: lineY2 }, end: { x: labelX - lineGap, y: lineY2 }, thickness: 0.5, color: rgb(0.75, 0.75, 0.75) });
+      page.drawLine({ start: { x: labelX + lw + lineGap, y: lineY2 }, end: { x: MARGIN + CONTENT_W, y: lineY2 }, thickness: 0.5, color: rgb(0.75, 0.75, 0.75) });
       y -= 18;
 
       const cellW  = Math.min(46, (CONTENT_W) / (items.length + 1));
