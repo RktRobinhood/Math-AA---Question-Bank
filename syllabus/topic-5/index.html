@@ -6,6 +6,19 @@
     <title>Topic 5: Calculus | IB Math AA SL</title>
     <link rel="stylesheet" href="../../assets/css/styles.css">
     
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!window.katex) return;
+        document.querySelectorAll(".formula").forEach(el => {
+          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+        });
+        document.querySelectorAll(".formula-inline").forEach(el => {
+          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+        });
+      });
+    </script>
   </head>
   <body>
     
@@ -25,46 +38,85 @@
         <nav class="breadcrumbs"><a href="../../">Home</a><span>/</span><a href="../../syllabus/">Syllabus</a><span>/</span><span>Topic 5</span></nav>
         <section class="panel static-hero">
           <h1>Topic 5: Calculus</h1>
-          <p>28 syllabus hours - 79 mapped exam questions</p>
+          <p>28 syllabus hours - 86 mapped exam questions</p>
         </section>
         <div class="page-grid">
           <article class="syllabus-card"><h2>Topic 5: Calculus</h2>
-<h3>5.1 Introduction to Calculus</h3>
+<h3>5.1 Introduction to calculus</h3>
 <ul>
-<li>Limits</li>
-<li>Rates of change</li>
+<li>Limits from a table or graph.</li>
+<li>Derivative interpreted as a gradient function and as a rate of change.</li>
+<li>Notation including <span class="formula-inline">\frac{dy}{dx}</span>, <span class="formula-inline">f'(x)</span> and related contextual notation.</li>
 </ul>
-<h3>5.2 Differentiation</h3>
-<div class="formula">\frac{d}{dx}(x^n)=nx^{n-1}</div>
+<h3>5.2 Increasing and decreasing functions</h3>
+<ul>
+<li>Graphical interpretation of <span class="formula-inline">f'(x)&gt;0</span>, <span class="formula-inline">f'(x)=0</span> and <span class="formula-inline">f'(x)&lt;0</span>.</li>
+<li>Intervals of increase and decrease.</li>
+</ul>
+<h3>5.3 Differentiating polynomials, n in Z</h3>
+<div class="formula">\frac{d}{dx}(ax^n)=anx^{n-1}, \quad n\in\mathbb{Z}</div>
+<ul>
+<li>Differentiating sums and multiples of polynomial terms with integer exponents.</li>
+</ul>
+<h3>5.4 Tangents and normals</h3>
+<ul>
+<li>Tangents and normals at a given point.</li>
+<li>Equations of tangents and normals.</li>
+</ul>
+<h3>5.5 Integration introduction, areas between curve and x-axis</h3>
+<ul>
+<li>Integration as anti-differentiation for polynomial functions with integer exponents.</li>
+<li>Anti-differentiation with boundary conditions.</li>
+<li>Definite integrals using technology.</li>
+<li>Area under a curve where <span class="formula-inline">f(x)&gt;0</span>.</li>
+</ul>
+<h3>5.6 Differentiating polynomials n in Q, chain, product and quotient rules</h3>
+<div class="formula">\frac{d}{dx}(x^n)=nx^{n-1}, \quad n\in\mathbb{Q}</div>
 <div class="formula">\frac{d}{dx}(\sin x)=\cos x</div>
 <div class="formula">\frac{d}{dx}(\cos x)=-\sin x</div>
 <div class="formula">\frac{d}{dx}(e^x)=e^x</div>
 <div class="formula">\frac{d}{dx}(\ln x)=\frac{1}{x}</div>
-<h3>5.3 Rules of Differentiation</h3>
 <h4>Chain rule</h4>
 <div class="formula">\frac{dy}{dx}=\frac{dy}{du}\frac{du}{dx}</div>
 <h4>Product rule</h4>
 <div class="formula">\frac{d}{dx}(uv)=u\frac{dv}{dx}+v\frac{du}{dx}</div>
 <h4>Quotient rule</h4>
 <div class="formula">\frac{d}{dx}\left(\frac{u}{v}\right)=\frac{v\frac{du}{dx}-u\frac{dv}{dx}}{v^2}</div>
-<h3>5.4 Integration</h3>
-<div class="formula">\int x^n\,dx=\frac{x^{n+1}}{n+1}+C \quad (n\neq -1)</div>
-<div class="formula">\int \frac{1}{x}\,dx=\ln x+C</div>
-<div class="formula">\int e^x\,dx=e^x+C</div>
-<h3>5.5 Area Under a Curve</h3>
-<div class="formula">A=\int_a^b y\,dx</div>
-<h3>5.6 Kinematics</h3>
+<h3>5.7 The second derivative</h3>
+<ul>
+<li>Second derivative notation including <span class="formula-inline">\frac{d^2y}{dx^2}</span> and <span class="formula-inline">f''(x)</span>.</li>
+<li>Graphical behaviour and relationships between <span class="formula-inline">f</span>, <span class="formula-inline">f'</span> and <span class="formula-inline">f''</span>.</li>
+</ul>
+<h3>5.8 Optimization, local extrema and points of inflexion</h3>
+<ul>
+<li>Local maximum and minimum points.</li>
+<li>Testing for maxima and minima using the first or second derivative.</li>
+<li>Optimization problems.</li>
+<li>Points of inflexion and concavity.</li>
+</ul>
+<h3>5.9 Kinematics problems</h3>
+<div class="formula">v=\frac{ds}{dt}</div>
 <div class="formula">a=\frac{dv}{dt}=\frac{d^2s}{dt^2}</div>
 <div class="formula">\text{displacement}=\int_{t_1}^{t_2}v(t)\,dt</div>
-<div class="formula">\text{distance}=\int_{t_1}^{t_2}|v(t)|\,dt</div></article>
+<div class="formula">\text{distance}=\int_{t_1}^{t_2}|v(t)|\,dt</div>
+<h3>5.10 Indefinite integration, reverse chain and substitution</h3>
+<div class="formula">\int x^n\,dx=\frac{x^{n+1}}{n+1}+C \quad (n\ne -1)</div>
+<div class="formula">\int \frac{1}{x}\,dx=\ln x+C</div>
+<div class="formula">\int e^x\,dx=e^x+C</div>
+<ul>
+<li>Includes composites with linear functions.</li>
+<li>Integration by inspection or reverse chain rule.</li>
+</ul>
+<h3>5.11 Definite integrals, areas under curve onto x-axis and areas between curves</h3>
+<ul>
+<li>Definite integrals, including analytical approaches.</li>
+</ul>
+<div class="formula">\int_a^b g'(x)\,dx=g(b)-g(a)</div>
+<ul>
+<li>Areas under curves, including when <span class="formula-inline">f(x)</span> is positive or negative.</li>
+<li>Areas between curves.</li>
+</ul></article>
           <aside class="panel side-panel">
             <h2 class="section-title">Mapped questions</h2>
             <div class="link-list">
-              <a href="../../questions/aa-sl-2021-may-tz1-p1-q05/">2021 May P1 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p1-q07/">2021 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p1-q08/">2021 May P1 TZ1 Q8 - 16 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q01/">2021 May P2 TZ1 Q1 - 6 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q05/">2021 May P2 TZ1 Q5 - 6 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q09/">2021 May P2 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q05/">2021 May P1 TZ2 Q5 - 9 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q08/">2021 May P1 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q09/">2021 May P1 TZ2 Q9 - 14 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p2-q02/">2021 May P2 TZ2 Q2 - 5 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q02/">2021 Nov P1 TZ0 Q2 - 4 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q05/">2021 Nov P1 TZ0 Q5 - 7 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q07/">2021 Nov P1 TZ0 Q7 - 16 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q09/">2021 Nov P1 TZ0 Q9 - 14 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p2-q07/">2021 Nov P2 TZ0 Q7 - 14 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q02/">2022 May P1 TZ1 Q2 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q05/">2022 May P1 TZ1 Q5 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q07/">2022 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q09/">2022 May P1 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p2-q05/">2022 May P2 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p2-q08/">2022 May P2 TZ1 Q8 - 16 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p1-q07/">2022 May P1 TZ2 Q7 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p1-q08/">2022 May P1 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q02/">2022 May P2 TZ2 Q2 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q06/">2022 May P2 TZ2 Q6 - 7 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q08/">2022 May P2 TZ2 Q8 - 12 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q02/">2022 Nov P1 TZ0 Q2 - 4 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q05/">2022 Nov P1 TZ0 Q5 - 5 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q09/">2022 Nov P1 TZ0 Q9 - 15 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p2-q03/">2022 Nov P2 TZ0 Q3 - 6 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p2-q07/">2022 Nov P2 TZ0 Q7 - 16 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p1-q07/">2023 May P1 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p1-q09/">2023 May P1 TZ1 Q9 - 17 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p2-q07/">2023 May P2 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p2-q09/">2023 May P2 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q05/">2023 May P1 TZ2 Q5 - 6 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q07/">2023 May P1 TZ2 Q7 - 17 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q09/">2023 May P1 TZ2 Q9 - 14 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p2-q06/">2023 May P2 TZ2 Q6 - 6 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p2-q07/">2023 May P2 TZ2 Q7 - 15 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p1-q09/">2023 Nov P1 TZ1 Q9 - 13 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p2-q07/">2023 Nov P2 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p2-q09/">2023 Nov P2 TZ1 Q9 - 16 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p1-q05/">2023 Nov P1 TZ2 Q5 - 6 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p1-q09/">2023 Nov P1 TZ2 Q9 - 13 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p2-q02/">2023 Nov P2 TZ2 Q2 - 6 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p2-q07/">2023 Nov P2 TZ2 Q7 - 14 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p1-q05/">2024 May P1 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p1-q07/">2024 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p2-q05/">2024 May P2 TZ1 Q5 - 6 marks</a><a href="../../questions/aa-sl-2024-may-tz2-p1-q08/">2024 May P1 TZ2 Q8 - 17 marks</a><a href="../../questions/aa-sl-2024-may-tz2-p2-q06/">2024 May P2 TZ2 Q6 - 5 marks</a><a href="../../questions/aa-sl-2024-may-tz2-p2-q08/">2024 May P2 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2024-nov-tz1-p1-q05/">2024 Nov P1 TZ1 Q5 - 6 marks</a><a href="../../questions/aa-sl-2024-nov-tz1-p1-q07/">2024 Nov P1 TZ1 Q7 - 16 marks</a><a href="../../questions/aa-sl-2024-nov-tz1-p2-q05/">2024 Nov P2 TZ1 Q5 - 8 marks</a><a href="../../questions/aa-sl-2024-nov-tz2-p1-q08/">2024 Nov P1 TZ2 Q8 - 14 marks</a><a href="../../questions/aa-sl-2024-nov-tz2-p2-q05/">2024 Nov P2 TZ2 Q5 - 8 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p1-q02/">2025 May P1 TZ1 Q2 - 5 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p1-q04/">2025 May P1 TZ1 Q4 - 4 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p1-q07/">2025 May P1 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p1-q09/">2025 May P1 TZ1 Q9 - 17 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p2-q01/">2025 May P2 TZ1 Q1 - 5 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p2-q04/">2025 May P2 TZ1 Q4 - 6 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p2-q06/">2025 May P2 TZ1 Q6 - 6 marks</a><a href="../../questions/aa-sl-2025-may-tz1-p2-q09/">2025 May P2 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p1-q01/">2025 May P1 TZ2 Q1 - 4 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p1-q02/">2025 May P1 TZ2 Q2 - 5 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p1-q06/">2025 May P1 TZ2 Q6 - 7 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p1-q08/">2025 May P1 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p1-q09/">2025 May P1 TZ2 Q9 - 17 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p2-q03/">2025 May P2 TZ2 Q3 - 6 marks</a><a href="../../questions/aa-sl-2025-may-tz2-p2-q05/">2025 May P2 TZ2 Q5 - 7 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p1-q04/">2025 May P1 TZ3 Q4 - 6 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p1-q07/">2025 May P1 TZ3 Q7 - 15 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p1-q09/">2025 May P1 TZ3 Q9 - 16 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p2-q06/">2025 May P2 TZ3 Q6 - 7 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p2-q07/">2025 May P2 TZ3 Q7 - 15 marks</a><a href="../../questions/aa-sl-2025-may-tz3-p2-q09/">2025 May P2 TZ3 Q9 - 14 marks</a>
-            </div>
-          </aside>
-        </div>
-      </main>
-    
-  </body>
-</html>
+              <a href="../../questions/aa-sl-2021-may-tz1-p1-q05/">2021 May P1 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p1-q07/">2021 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p1-q08/">2021 May P1 TZ1 Q8 - 16 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q01/">2021 May P2 TZ1 Q1 - 6 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q05/">2021 May P2 TZ1 Q5 - 6 marks</a><a href="../../questions/aa-sl-2021-may-tz1-p2-q09/">2021 May P2 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q05/">2021 May P1 TZ2 Q5 - 9 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q08/">2021 May P1 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p1-q09/">2021 May P1 TZ2 Q9 - 14 marks</a><a href="../../questions/aa-sl-2021-may-tz2-p2-q02/">2021 May P2 TZ2 Q2 - 5 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q02/">2021 Nov P1 TZ0 Q2 - 4 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q05/">2021 Nov P1 TZ0 Q5 - 7 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q07/">2021 Nov P1 TZ0 Q7 - 16 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p1-q09/">2021 Nov P1 TZ0 Q9 - 14 marks</a><a href="../../questions/aa-sl-2021-nov-tz0-p2-q07/">2021 Nov P2 TZ0 Q7 - 14 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q02/">2022 May P1 TZ1 Q2 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q05/">2022 May P1 TZ1 Q5 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q07/">2022 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p1-q09/">2022 May P1 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p2-q05/">2022 May P2 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p2-q07/">2022 May P2 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2022-may-tz1-p2-q08/">2022 May P2 TZ1 Q8 - 16 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p1-q07/">2022 May P1 TZ2 Q7 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p1-q08/">2022 May P1 TZ2 Q8 - 15 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q02/">2022 May P2 TZ2 Q2 - 5 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q06/">2022 May P2 TZ2 Q6 - 7 marks</a><a href="../../questions/aa-sl-2022-may-tz2-p2-q08/">2022 May P2 TZ2 Q8 - 12 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q02/">2022 Nov P1 TZ0 Q2 - 4 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q05/">2022 Nov P1 TZ0 Q5 - 5 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p1-q09/">2022 Nov P1 TZ0 Q9 - 15 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p2-q03/">2022 Nov P2 TZ0 Q3 - 6 marks</a><a href="../../questions/aa-sl-2022-nov-tz0-p2-q07/">2022 Nov P2 TZ0 Q7 - 16 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p1-q07/">2023 May P1 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p1-q09/">2023 May P1 TZ1 Q9 - 17 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p2-q07/">2023 May P2 TZ1 Q7 - 13 marks</a><a href="../../questions/aa-sl-2023-may-tz1-p2-q09/">2023 May P2 TZ1 Q9 - 15 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q05/">2023 May P1 TZ2 Q5 - 6 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q07/">2023 May P1 TZ2 Q7 - 17 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p1-q09/">2023 May P1 TZ2 Q9 - 14 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p2-q06/">2023 May P2 TZ2 Q6 - 6 marks</a><a href="../../questions/aa-sl-2023-may-tz2-p2-q07/">2023 May P2 TZ2 Q7 - 15 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p1-q09/">2023 Nov P1 TZ1 Q9 - 13 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p2-q01/">2023 Nov P2 TZ1 Q1 - 7 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p2-q05/">2023 Nov P2 TZ1 Q5 - 5 marks</a><a href="../../questions/aa-sl-2023-nov-tz1-p2-q07/">2023 Nov P2 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p1-q09/">2023 Nov P1 TZ2 Q9 - 13 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p2-q01/">2023 Nov P2 TZ2 Q1 - 7 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p2-q05/">2023 Nov P2 TZ2 Q5 - 5 marks</a><a href="../../questions/aa-sl-2023-nov-tz2-p2-q07/">2023 Nov P2 TZ2 Q7 - 14 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p1-q05/">2024 May P1 TZ1 Q5 - 7 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p1-q07/">2024 May P1 TZ1 Q7 - 14 marks</a><a href="../../questions/aa-sl-2024-may-tz1-p2-q05/">

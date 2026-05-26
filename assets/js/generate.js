@@ -553,12 +553,13 @@
     }, 'image/png'));
   }
 
-  function getMaskRegions(questionId, type) {
+  function getMaskRegions(questionId, type, imageIndex) {
     const masks = window.AASL_MASKS;
     if (!masks || !masks[questionId]) return [];
     const entry = masks[questionId][type]; // 'paper' or 'markscheme'
-    if (!entry || !entry[0]) return [];
-    return entry[0].regions || [];
+    if (!entry || !entry.length) return [];
+    const page = entry.find(p => p && p.imageIndex === imageIndex);
+    return page?.regions || [];
   }
 
   // ─── PDF Generation ───────────────────────────────────────────────────────
@@ -586,7 +587,7 @@
       for (let ii = 0; ii < images.length; ii++) {
         pageNum++;
         const page = pdfDoc.addPage([A4_W, A4_H]);
-        const maskRegions = ii === 0 ? getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme') : [];
+        const maskRegions = getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme', ii);
 
         // Banner on first image of each question
         let yOffset = A4_H - MARGIN;
@@ -894,7 +895,7 @@
       }));
 
       for (let ii = 0; ii < images.length; ii++) {
-        const maskRegions = ii === 0 ? getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme') : [];
+        const maskRegions = getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme', ii);
         try {
           const dataUrl = await fetchImageAsPng(images[ii], maskRegions);
           const base64  = dataUrl.split(',')[1];
