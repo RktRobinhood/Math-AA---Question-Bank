@@ -11,6 +11,7 @@
   const allYears = [...new Set(allQuestions.map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
   const allSubtopics = [...new Set(allQuestions.flatMap(q => q.syllabus || []))]
     .sort((a, b) => naturalCompare(a, b));
+  let pendingMathRender = false;
 
   const state = {
     tab: document.body.dataset.initialTab || "questions",
@@ -48,13 +49,30 @@
   }
 
   function renderMath(container) {
-    if (!window.katex) return;
+    if (!window.katex) {
+      if (!pendingMathRender) {
+        pendingMathRender = true;
+        window.addEventListener("load", () => {
+          pendingMathRender = false;
+          renderMath(app);
+        }, { once: true });
+      }
+      return;
+    }
     container.querySelectorAll(".formula").forEach(el => {
-      try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); }
+      if (el.dataset.mathRendered) return;
+      try {
+        katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+        el.dataset.mathRendered = "true";
+      }
       catch (_) {}
     });
     container.querySelectorAll(".formula-inline").forEach(el => {
-      try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); }
+      if (el.dataset.mathRendered) return;
+      try {
+        katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+        el.dataset.mathRendered = "true";
+      }
       catch (_) {}
     });
   }

@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.katex) return;
+      function renderSyllabusMath() {
+        if (!window.katex) return false;
         document.querySelectorAll(".formula").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
         document.querySelectorAll(".formula-inline").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
+        return true;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if (renderSyllabusMath()) return;
+        window.addEventListener("load", renderSyllabusMath, { once: true });
       });
     </script>
   </head>
@@ -63,8 +76,84 @@
 <h3>2.3 Graphs of functions</h3>
 <ul>
 <li>The graph of a function and its equation <span class="formula-inline">y=f(x)</span>.</li>
-<li>Sketchi</li>
-</ul></article>
+<li>Sketching graphs from information given or from context.</li>
+<li>Using technology to graph functions, including sums and differences.</li>
+</ul>
+<h3>2.4 Key features of graphs</h3>
+<ul>
+<li>Maximum and minimum values.</li>
+<li>Intercepts, symmetry, vertex and zeros.</li>
+<li>Vertical and horizontal asymptotes.</li>
+<li>Points of intersection of curves or lines using technology.</li>
+</ul>
+<h3>2.5 Composite functions, identity and finding inverse</h3>
+<ul>
+<li>Composite functions.</li>
+</ul>
+<div class="formula">(f \circ g)(x)=f(g(x))</div>
+<ul>
+<li>Identity function.</li>
+<li>Finding inverse functions.</li>
+</ul>
+<div class="formula">(f \circ f^{-1})(x)=(f^{-1}\circ f)(x)=x</div>
+<h3>2.6 Quadratic function</h3>
+<h4>Standard form</h4>
+<div class="formula">f(x)=ax^2+bx+c</div>
+<h4>Factorized form</h4>
+<div class="formula">f(x)=a(x-p)(x-q)</div>
+<h4>Vertex form</h4>
+<div class="formula">f(x)=a(x-h)^2+k</div>
+<ul>
+<li>Includes graph, intercepts, axis of symmetry and vertex.</li>
+</ul>
+<h3>2.7 Solutions of quadratic equations and inequalities, discriminant and nature of roots</h3>
+<h4>Quadratic formula</h4>
+<div class="formula">x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}</div>
+<h4>Discriminant</h4>
+<div class="formula">\Delta=b^2-4ac</div>
+<h3>2.8 Reciprocal and simple rational functions, equations of asymptotes</h3>
+<ul>
+<li>Reciprocal function <span class="formula-inline">f(x)=\frac{1}{x}</span>.</li>
+<li>Rational functions of the form</li>
+</ul>
+<div class="formula">f(x)=\frac{ax+b}{cx+d}</div>
+<ul>
+<li>Vertical and horizontal asymptotes.</li>
+</ul>
+<h3>2.9 Exponential and logarithmic functions</h3>
+<ul>
+<li>Exponential functions and their graphs.</li>
+</ul>
+<div class="formula">f(x)=a^x,\quad a&gt;0</div>
+<div class="formula">f(x)=e^x</div>
+<ul>
+<li>Logarithmic functions and their graphs.</li>
+</ul>
+<div class="formula">f(x)=\log_a x,\quad x&gt;0</div>
+<div class="formula">f(x)=\ln x,\quad x&gt;0</div>
+<h3>2.10 Solving equations graphically and analytically</h3>
+<ul>
+<li>Solving equations using graphical and analytic methods.</li>
+<li>Use of technology where there is no suitable analytic approach.</li>
+<li>Interpreting roots and intersections of functions.</li>
+</ul>
+<h3>2.11 Transformations of graphs</h3>
+<ul>
+<li>Translations:</li>
+</ul>
+<div class="formula">y=f(x)+b,\quad y=f(x-a)</div>
+<ul>
+<li>Reflections:</li>
+</ul>
+<div class="formula">y=-f(x),\quad y=f(-x)</div>
+<ul>
+<li>Vertical stretch:</li>
+</ul>
+<div class="formula">y=pf(x)</div>
+<ul>
+<li>Horizontal stretch:</li>
+</ul>
+<div class="formula">y=f(qx)</div></article>
           <aside class="panel side-panel">
             <h2 class="section-title">Mapped questions</h2>
             <div class="link-list">

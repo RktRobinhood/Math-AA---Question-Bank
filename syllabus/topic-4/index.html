@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.katex) return;
+      function renderSyllabusMath() {
+        if (!window.katex) return false;
         document.querySelectorAll(".formula").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
         document.querySelectorAll(".formula-inline").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
+        return true;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if (renderSyllabusMath()) return;
+        window.addEventListener("load", renderSyllabusMath, { once: true });
       });
     </script>
   </head>
@@ -65,7 +78,73 @@
 <li>Measures of central tendency and dispersion.</li>
 <li>Standard deviation and variance using technology.</li>
 </ul>
-<h3>4.4 Pearson's, scatter diagrams and</h3></article>
+<h3>4.4 Pearson's, scatter diagrams and equation of y on x</h3>
+<ul>
+<li>Linear correlation of bivariate data.</li>
+<li>Pearson's product-moment correlation coefficient.</li>
+<li>Scatter diagrams and lines of best fit.</li>
+<li>Regression line of <span class="formula-inline">y</span> on <span class="formula-inline">x</span>.</li>
+<li>Interpreting correlation and limits of extrapolation.</li>
+</ul>
+<h3>4.5 Probability concepts and expected numbers</h3>
+<div class="formula">P(A)=\frac{n(A)}{n(U)}</div>
+<div class="formula">P(A')=1-P(A)</div>
+<ul>
+<li>Trial, outcome, sample space and event.</li>
+<li>Expected number of occurrences.</li>
+</ul>
+<h3>4.6 Combined, mutually exclusive, conditional, independence and probability diagrams</h3>
+<ul>
+<li>Venn diagrams, tree diagrams, sample-space diagrams and tables of outcomes.</li>
+<li>Combined events:</li>
+</ul>
+<div class="formula">P(A\cup B)=P(A)+P(B)-P(A\cap B)</div>
+<ul>
+<li>Conditional probability:</li>
+</ul>
+<div class="formula">P(A\mid B)=\frac{P(A\cap B)}{P(B)}</div>
+<ul>
+<li>Independent events:</li>
+</ul>
+<div class="formula">P(A\cap B)=P(A)P(B)</div>
+<h3>4.7 Discrete random variables</h3>
+<div class="formula">E(X)=\sum x_iP(X=x_i)</div>
+<ul>
+<li>Probability distributions.</li>
+<li>Expected value and fair games.</li>
+</ul>
+<h3>4.8 Binomial distribution</h3>
+<div class="formula">X\sim B(n,p)</div>
+<div class="formula">E(X)=np</div>
+<div class="formula">\text{Var}(X)=np(1-p)</div>
+<h3>4.9 Normal distribution and calculations</h3>
+<ul>
+<li>Normal distribution and curve.</li>
+<li>Normal probability calculations.</li>
+<li>Inverse normal calculations where mean and standard deviation are given.</li>
+</ul>
+<h3>4.10 Regression line of x on y</h3>
+<ul>
+<li>Equation of the regression line of <span class="formula-inline">x</span> on <span class="formula-inline">y</span>.</li>
+<li>Prediction using the appropriate regression direction.</li>
+<li>Awareness that regression predictions cannot always be reversed.</li>
+</ul>
+<h3>4.11 Formal conditional probability and independence</h3>
+<ul>
+<li>Formal use of conditional probability formulae.</li>
+</ul>
+<div class="formula">P(A\mid B)=\frac{P(A\cap B)}{P(B)}</div>
+<div class="formula">P(A\cap B)=P(B)P(A\mid B)</div>
+<ul>
+<li>Testing for independence.</li>
+</ul>
+<h3>4.12 Standardization of normal variables</h3>
+<h4>Standardized variable</h4>
+<div class="formula">z=\frac{x-\mu}{\sigma}</div>
+<ul>
+<li>Use of <span class="formula-inline">z</span>-values.</li>
+<li>Inverse normal calculations where mean or standard deviation is unknown.</li>
+</ul></article>
           <aside class="panel side-panel">
             <h2 class="section-title">Mapped questions</h2>
             <div class="link-list">

@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.katex) return;
+      function renderSyllabusMath() {
+        if (!window.katex) return false;
         document.querySelectorAll(".formula").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
         document.querySelectorAll(".formula-inline").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
+        return true;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if (renderSyllabusMath()) return;
+        window.addEventListener("load", renderSyllabusMath, { once: true });
       });
     </script>
   </head>
@@ -75,7 +88,33 @@
 <h3>3.4 Circle: radians, arcs and sectors</h3>
 <h4>Arc length</h4>
 <div class="formula">l=r\theta</div>
-<h4>Secto</h4></article>
+<h4>Sector area</h4>
+<div class="formula">A=\frac{1}{2}r^2\theta</div>
+<h3>3.5 Unit circle definitions, exact trig ratios and ambiguous case of sine rule</h3>
+<ul>
+<li>Definitions of <span class="formula-inline">\sin\theta</span>, <span class="formula-inline">\cos\theta</span> and <span class="formula-inline">\tan\theta</span> using the unit circle.</li>
+<li>Exact trigonometric ratios.</li>
+<li>Ambiguous case of the sine rule.</li>
+</ul>
+<h3>3.6 Pythagorean identity and double angles</h3>
+<div class="formula">\sin^2\theta+\cos^2\theta=1</div>
+<div class="formula">\sin2\theta=2\sin\theta\cos\theta</div>
+<div class="formula">\cos2\theta=\cos^2\theta-\sin^2\theta</div>
+<h3>3.7 Circular functions: graphs, composites and transformations</h3>
+<ul>
+<li>Graphs of <span class="formula-inline">\sin x</span>, <span class="formula-inline">\cos x</span> and <span class="formula-inline">\tan x</span>.</li>
+<li>Amplitude and periodicity.</li>
+<li>Composite circular functions such as</li>
+</ul>
+<div class="formula">f(x)=a\sin(b(x+c))+d</div>
+<ul>
+<li>Real-life periodic models.</li>
+</ul>
+<h3>3.8 Solving trigonometric equations</h3>
+<ul>
+<li>Solving trigonometric equations in a finite interval, graphically and analytically.</li>
+<li>Equations leading to quadratic equations in <span class="formula-inline">\sin x</span>, <span class="formula-inline">\cos x</span> or <span class="formula-inline">\tan x</span>.</li>
+</ul></article>
           <aside class="panel side-panel">
             <h2 class="section-title">Mapped questions</h2>
             <div class="link-list">

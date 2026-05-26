@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.katex) return;
+      function renderSyllabusMath() {
+        if (!window.katex) return false;
         document.querySelectorAll(".formula").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
         document.querySelectorAll(".formula-inline").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
+        return true;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if (renderSyllabusMath()) return;
+        window.addEventListener("load", renderSyllabusMath, { once: true });
       });
     </script>
   </head>

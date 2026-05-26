@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        if (!window.katex) return;
+      function renderSyllabusMath() {
+        if (!window.katex) return false;
         document.querySelectorAll(".formula").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: true, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: true, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
         document.querySelectorAll(".formula-inline").forEach(el => {
-          try { katex.render(el.textContent, el, { displayMode: false, throwOnError: false }); } catch(e) {}
+          if (el.dataset.mathRendered) return;
+          try {
+            katex.render(el.textContent, el, { displayMode: false, throwOnError: false });
+            el.dataset.mathRendered = "true";
+          } catch(e) {}
         });
+        return true;
+      }
+      document.addEventListener("DOMContentLoaded", () => {
+        if (renderSyllabusMath()) return;
+        window.addEventListener("load", renderSyllabusMath, { once: true });
       });
     </script>
   </head>
@@ -86,10 +99,36 @@
 <h4>Natural logarithm</h4>
 <div class="formula">\ln x = \log_e x</div>
 <ul>
-<li>Includes base 10 and base \(e\) logarithms.</li>
+<li>Includes base 10 and base <span class="formula-inline">e</span> logarithms.</li>
 <li>Includes numerical evaluation of logarithms using technology.</li>
 </ul>
-<h3>1.6 Simple dedu</h3></article>
+<h3>1.6 Simple deductive proof</h3>
+<ul>
+<li>Numerical and algebraic proof.</li>
+<li>LHS-to-RHS proof structure.</li>
+<li>Equality versus identity.</li>
+</ul>
+<h3>1.7 Laws of exponents and logarithms</h3>
+<h4>Rational exponent laws</h4>
+<div class="formula">a^{\frac{1}{m}}=\sqrt[m]{a}</div>
+<div class="formula">a^{\frac{m}{n}}=\sqrt[n]{a^m}</div>
+<h4>Logarithm laws</h4>
+<div class="formula">\log_a(xy)=\log_a x+\log_a y</div>
+<div class="formula">\log_a\left(\frac{x}{y}\right)=\log_a x-\log_a y</div>
+<div class="formula">\log_a(x^m)=m\log_a x</div>
+<h4>Change of base</h4>
+<div class="formula">\log_a x=\frac{\log_b x}{\log_b a}</div>
+<ul>
+<li>Includes solving exponential equations using logarithms.</li>
+</ul>
+<h3>1.8 Sum of infinite geometric sequences</h3>
+<h4>Sum to infinity</h4>
+<div class="formula">S_\infty = \frac{u_1}{1-r}, \quad |r|&lt;1</div>
+<h3>1.9 Binomial theorem</h3>
+<p>For <span class="formula-inline">n \in \mathbb{N}</span>:</p>
+<div class="formula">(a+b)^n=\sum_{r=0}^{n}\binom{n}{r}a^{n-r}b^r</div>
+<h4>Binomial coefficient</h4>
+<div class="formula">\binom{n}{r}=\frac{n!}{r!(n-r)!}</div></article>
           <aside class="panel side-panel">
             <h2 class="section-title">Mapped questions</h2>
             <div class="link-list">
