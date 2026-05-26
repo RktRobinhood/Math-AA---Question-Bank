@@ -485,5 +485,65 @@
           <!-- Advanced multi-syllabus toggle -->
           <div class="advanced-toggle-row">
             <label class="check-inline">
-              <i
+              <input type="checkbox" id="worksheet-advanced">
+              Advanced: pick specific syllabus refs
+            </label>
+          </div>
 
+          <!-- Multi-syllabus picker (shown in advanced mode) -->
+          <p id="worksheet-multi-label" class="multi-syl-hint" style="display:none;">
+            Select one or more syllabus points — questions will be drawn from all checked refs.
+          </p>
+          <div id="worksheet-multi-syllabus" class="multi-syl-panel" style="display:none;">
+            <!-- Populated by JS -->
+          </div>
+
+          <label class="filter-field">
+            <span>Section mix</span>
+            <select id="worksheet-section">
+              <option value="all">Any section</option>
+              <option value="A">Section A only</option>
+              <option value="B">Section B only</option>
+              <option value="Mixed">Mixed templates</option>
+            </select>
+          </label>
+          <label class="filter-field">
+            <span>Difficulty</span>
+            <select id="worksheet-difficulty"></select>
+          </label>
+          <label class="filter-field">
+            <span>Question type</span>
+            <select id="worksheet-type"></select>
+          </label>
+          <label class="check-inline">
+            <input id="worksheet-answers" type="checkbox" checked>
+            Include answer key
+          </label>
+          <label class="check-inline">
+            <input id="worksheet-worked" type="checkbox">
+            Include worked steps
+          </label>
+          <div class="worksheet-actions">
+            <button class="btn-primary" id="worksheet-generate" type="button">Generate worksheet</button>
+            <button class="btn-outline" id="worksheet-print" type="button">Print</button>
+          </div>
+        </div>
+      </aside>
+
+      <section class="worksheet-output" id="worksheet-output" aria-live="polite">
+        <div class="practice-placeholder">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h5"/>
+          </svg>
+          <p>Choose filters, then generate a worksheet with an answer key.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</main>
+
+<script src="assets/js/practice_ui.js"></script>
+</body>
+</html>
