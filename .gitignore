@@ -1,3 +1,15 @@
 .DS_Store
 Thumbs.db
 setup-github.ps1
+
+# Debug/verification images from build process
+assets/*.png
+assets/chk_*.png
+assets/check*.png
+assets/ms_*.png
+assets/mb*.png
+assets/paper_*.png
+assets/q0*.png
+assets/q5_*.png
+assets/spot_*.png
+assets/vi_*.png
