@@ -4,11 +4,13 @@
  * Features:
  * - Hover over a question to preview it.
  * - Move onto the preview to keep it open.
+ * - No dead gap between result and preview.
  * - Mouse wheel zooms in/out.
  * - Drag to pan while zoomed.
  * - Buttons provide zoom controls.
  * - Footer explains the controls.
  * - Escape closes the preview.
+ * - Clicking zoom controls no longer causes the preview to linger.
  */
 (function questionHoverPreview() {
   'use strict';
@@ -17,7 +19,10 @@
     openDelayMs: 260,
     focusDelayMs: 80,
     closeDelayMs: 90,
-    previewGapPx: 14,
+
+    // No dead space between the result and preview.
+    previewGapPx: 0,
+
     viewportMarginPx: 12,
     renderedPageTimeoutMs: 6000,
     maxCacheEntries: 80,
@@ -628,10 +633,6 @@
       popover
     );
 
-    /*
-     * Moving onto the preview
-     * keeps it open.
-     */
     popover.addEventListener(
       'mouseenter',
       () => {
@@ -652,9 +653,6 @@
       }
     );
 
-    /*
-     * Zoom and pan interaction.
-     */
     popover.addEventListener(
       'wheel',
       handlePreviewWheel,
@@ -1056,11 +1054,6 @@
       return;
     }
 
-    /*
-     * The wheel is intentionally
-     * reserved for zoom while the
-     * pointer is inside the preview.
-     */
     event.preventDefault();
 
     const direction =
@@ -1125,6 +1118,24 @@
       setZoom(
         1
       );
+    }
+
+    /*
+     * Mouse clicks normally leave keyboard focus
+     * sitting on the zoom button.
+     *
+     * The preview intentionally stays open while
+     * something inside it has focus. That caused
+     * the preview to linger after clicking + / -.
+     *
+     * Blur only real mouse/pointer clicks.
+     * Keyboard activation has event.detail === 0,
+     * so keyboard accessibility is preserved.
+     */
+    if (
+      event.detail > 0
+    ) {
+      button.blur();
     }
   }
 
@@ -1896,10 +1907,6 @@
         )
         .then(
           (preview) => {
-            /*
-             * Do not permanently
-             * cache a failed load.
-             */
             if (!preview) {
               previewCache.delete(
                 key
@@ -2213,11 +2220,6 @@
       );
     }
 
-    /*
-     * Classic scripts may expose
-     * top-level const/let variables
-     * without putting them on window.
-     */
     if (
       typeof AASL_DATA !==
       'undefined'
@@ -3297,11 +3299,6 @@
       ).href;
     }
 
-    /*
-     * Generated data often stores
-     * root-relative paths without
-     * a leading slash.
-     */
     if (
       /^(?:assets|questions|exams|question-bank)\//i.test(
         value
@@ -3451,10 +3448,6 @@
   function onClick(
     event
   ) {
-    /*
-     * Do not close when interacting
-     * with the preview controls.
-     */
     if (
       popover?.contains(
         event.target
