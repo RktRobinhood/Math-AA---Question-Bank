@@ -1,16 +1,17 @@
 /**
- * Hover previews for question-bank result cards.
+ * Question Bank Hover Preview
  *
  * Features:
- * - Hover over a question to preview it.
+ * - Hover a search result to preview the question.
+ * - Uses the whole result card as the hover anchor.
+ * - Preview slightly overlaps the card edge to eliminate dead space.
+ * - Invisible hover bridge protects slow/diagonal mouse movement.
  * - Move onto the preview to keep it open.
- * - No dead gap between result and preview.
- * - Mouse wheel zooms in/out.
+ * - Mouse wheel zoom.
+ * - + / - / reset zoom controls.
  * - Drag to pan while zoomed.
- * - Buttons provide zoom controls.
- * - Footer explains the controls.
- * - Escape closes the preview.
- * - Clicking zoom controls no longer causes the preview to linger.
+ * - Escape closes preview.
+ * - Keyboard focus supported.
  */
 (function questionHoverPreview() {
   'use strict';
@@ -18,10 +19,25 @@
   const CONFIG = Object.freeze({
     openDelayMs: 260,
     focusDelayMs: 80,
-    closeDelayMs: 90,
 
-    // No dead space between the result and preview.
-    previewGapPx: 0,
+    /*
+     * A slightly forgiving close delay helps mouse movement
+     * between the result and preview without making the UI
+     * feel sticky.
+     */
+    closeDelayMs: 160,
+
+    /*
+     * Negative means the preview overlaps the card slightly.
+     * This eliminates any visible dead strip.
+     */
+    previewGapPx: -4,
+
+    /*
+     * Extra invisible corridor around the path between
+     * the question card and the preview.
+     */
+    bridgePaddingPx: 14,
 
     viewportMarginPx: 12,
     renderedPageTimeoutMs: 6000,
@@ -37,6 +53,21 @@
     'a[href^="./questions/"]',
     'a[href^="../questions/"]',
     'a[href*="/questions/"]',
+  ].join(',');
+
+  /*
+   * Prefer the whole visible search-result card as our anchor,
+   * rather than the text/link inside the card.
+   */
+  const CARD_SELECTOR = [
+    '[data-question-id]',
+    '[data-question-url]',
+    '[data-href]',
+    '.question-card',
+    '.question-result',
+    '.result-card',
+    '.search-result',
+    'article',
   ].join(',');
 
   const DATA_IMAGE_ATTRIBUTES = [
@@ -76,6 +107,8 @@
     : { matches: true };
 
   let popover = null;
+  let hoverBridge = null;
+
   let currentTrigger = null;
   let currentRequest = 0;
 
@@ -85,6 +118,10 @@
 
   let zoomLevel = 1;
   let panState = null;
+
+  /* -------------------------------------------------------
+     STYLES
+  ------------------------------------------------------- */
 
   function injectStyles() {
     if (
@@ -105,33 +142,21 @@
         position: fixed;
         z-index: 10000;
 
-        width: min(
-          620px,
-          calc(100vw - 24px)
-        );
-
-        max-height: min(
-          76vh,
-          760px
-        );
+        width: min(620px, calc(100vw - 24px));
+        max-height: min(76vh, 760px);
 
         display: flex;
         flex-direction: column;
 
-        overflow: hidden;
         box-sizing: border-box;
+        overflow: hidden;
 
-        border:
-          1px solid
-          rgba(15, 23, 42, 0.18);
-
-        border:
-          1px solid
-          color-mix(
-            in srgb,
-            CanvasText 18%,
-            transparent
-          );
+        border: 1px solid rgba(15, 23, 42, 0.18);
+        border: 1px solid color-mix(
+          in srgb,
+          CanvasText 18%,
+          transparent
+        );
 
         border-radius: 14px;
 
@@ -139,79 +164,76 @@
         color: CanvasText;
 
         box-shadow:
-          0 18px 54px
-          rgba(15, 23, 42, 0.24),
-          0 4px 14px
-          rgba(15, 23, 42, 0.14);
+          0 18px 54px rgba(15, 23, 42, 0.24),
+          0 4px 14px rgba(15, 23, 42, 0.14);
 
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
 
-        transform:
-          translateY(4px)
-          scale(0.992);
-
-        transform-origin: top left;
+        transform: translateY(4px) scale(0.992);
 
         transition:
           opacity 120ms ease,
           transform 120ms ease,
           visibility 0s linear 120ms;
-
-        pointer-events: none;
-
-        contain: layout paint;
       }
 
       .aasl-question-preview[data-open="true"] {
         opacity: 1;
-
+        visibility: visible;
         pointer-events: auto;
 
-        visibility: visible;
-
-        transform:
-          translateY(0)
-          scale(1);
+        transform: translateY(0) scale(1);
 
         transition-delay: 0s;
       }
 
+      /*
+       * Invisible pointer-safe corridor between the result
+       * and the preview.
+       */
+      .aasl-question-preview__bridge {
+        position: fixed;
+        z-index: 9999;
+
+        display: none;
+
+        background: transparent;
+
+        pointer-events: auto;
+      }
+
+      .aasl-question-preview__bridge[data-open="true"] {
+        display: block;
+      }
+
       .aasl-question-preview__header {
+        min-height: 42px;
+
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         gap: 12px;
 
-        min-height: 42px;
-
-        padding:
-          9px
-          12px;
+        padding: 9px 12px;
 
         box-sizing: border-box;
 
-        border-bottom:
-          1px solid
-          rgba(15, 23, 42, 0.12);
-
-        border-bottom:
-          1px solid
-          color-mix(
-            in srgb,
-            CanvasText 12%,
-            transparent
-          );
+        border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+        border-bottom: 1px solid color-mix(
+          in srgb,
+          CanvasText 12%,
+          transparent
+        );
 
         background: #f8fafc;
-
-        background:
-          color-mix(
-            in srgb,
-            Canvas 94%,
-            CanvasText 6%
-          );
+        background: color-mix(
+          in srgb,
+          Canvas 94%,
+          CanvasText 6%
+        );
       }
 
       .aasl-question-preview__title {
@@ -222,8 +244,7 @@
         color: inherit;
 
         font:
-          650
-          0.84rem/1.25
+          650 0.84rem/1.25
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
@@ -247,17 +268,14 @@
         min-width: 42px;
 
         color: #64748b;
-
-        color:
-          color-mix(
-            in srgb,
-            CanvasText 64%,
-            transparent
-          );
+        color: color-mix(
+          in srgb,
+          CanvasText 64%,
+          transparent
+        );
 
         font:
-          600
-          0.72rem/1.2
+          600 0.72rem/1.2
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
@@ -276,17 +294,12 @@
 
         padding: 0;
 
-        border:
-          1px solid
-          rgba(15, 23, 42, 0.14);
-
-        border:
-          1px solid
-          color-mix(
-            in srgb,
-            CanvasText 14%,
-            transparent
-          );
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border: 1px solid color-mix(
+          in srgb,
+          CanvasText 14%,
+          transparent
+        );
 
         border-radius: 7px;
 
@@ -296,8 +309,7 @@
         cursor: pointer;
 
         font:
-          650
-          0.9rem/1
+          650 0.9rem/1
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
@@ -308,13 +320,11 @@
       .aasl-question-preview__button:hover,
       .aasl-question-preview__button:focus-visible {
         background: #eef2f7;
-
-        background:
-          color-mix(
-            in srgb,
-            Canvas 90%,
-            CanvasText 10%
-          );
+        background: color-mix(
+          in srgb,
+          Canvas 90%,
+          CanvasText 10%
+        );
 
         outline: none;
       }
@@ -330,10 +340,9 @@
         overflow: auto;
 
         overscroll-behavior: contain;
+        scrollbar-gutter: stable;
 
         background: #fff;
-
-        scrollbar-gutter: stable;
       }
 
       .aasl-question-preview__body[data-zoomed="true"] {
@@ -359,58 +368,45 @@
         transform-origin: top left;
 
         user-select: none;
-
         -webkit-user-drag: none;
       }
 
       .aasl-question-preview__hint {
+        min-height: 30px;
+
         display: flex;
         align-items: center;
         justify-content: center;
 
         gap: 8px;
 
-        min-height: 30px;
-
-        padding:
-          6px
-          10px;
+        padding: 6px 10px;
 
         box-sizing: border-box;
 
-        border-top:
-          1px solid
-          rgba(15, 23, 42, 0.10);
-
-        border-top:
-          1px solid
-          color-mix(
-            in srgb,
-            CanvasText 10%,
-            transparent
-          );
+        border-top: 1px solid rgba(15, 23, 42, 0.10);
+        border-top: 1px solid color-mix(
+          in srgb,
+          CanvasText 10%,
+          transparent
+        );
 
         background: #f8fafc;
-
-        background:
-          color-mix(
-            in srgb,
-            Canvas 96%,
-            CanvasText 4%
-          );
+        background: color-mix(
+          in srgb,
+          Canvas 96%,
+          CanvasText 4%
+        );
 
         color: #64748b;
-
-        color:
-          color-mix(
-            in srgb,
-            CanvasText 62%,
-            transparent
-          );
+        color: color-mix(
+          in srgb,
+          CanvasText 62%,
+          transparent
+        );
 
         font:
-          500
-          0.72rem/1.2
+          500 0.72rem/1.2
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
@@ -418,29 +414,20 @@
           sans-serif;
 
         text-align: center;
-
         white-space: nowrap;
       }
 
       .aasl-question-preview__hint kbd {
-        padding:
-          1px
-          5px;
+        padding: 1px 5px;
 
-        border:
-          1px solid
-          rgba(15, 23, 42, 0.14);
-
-        border:
-          1px solid
-          color-mix(
-            in srgb,
-            CanvasText 14%,
-            transparent
-          );
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        border: 1px solid color-mix(
+          in srgb,
+          CanvasText 14%,
+          transparent
+        );
 
         border-bottom-width: 2px;
-
         border-radius: 5px;
 
         background: Canvas;
@@ -450,13 +437,13 @@
       }
 
       .aasl-question-preview__status {
+        min-height: 132px;
+
         display: flex;
         align-items: center;
         justify-content: center;
 
         gap: 10px;
-
-        min-height: 132px;
 
         padding: 18px;
 
@@ -465,8 +452,7 @@
         color: #475569;
 
         font:
-          500
-          0.84rem/1.4
+          500 0.84rem/1.4
           system-ui,
           -apple-system,
           BlinkMacSystemFont,
@@ -484,19 +470,14 @@
 
         box-sizing: border-box;
 
-        border:
-          2px solid
-          rgba(71, 85, 105, 0.22);
-
+        border: 2px solid rgba(71, 85, 105, 0.22);
         border-top-color: #475569;
 
         border-radius: 999px;
 
         animation:
           aasl-question-preview-spin
-          650ms
-          linear
-          infinite;
+          650ms linear infinite;
       }
 
       @keyframes aasl-question-preview-spin {
@@ -506,7 +487,8 @@
       }
 
       @media (hover: none) {
-        .aasl-question-preview {
+        .aasl-question-preview,
+        .aasl-question-preview__bridge {
           display: none !important;
         }
       }
@@ -520,20 +502,14 @@
           animation-duration: 1.25s;
         }
       }
-
-      @media (forced-colors: active) {
-        .aasl-question-preview {
-          border:
-            1px solid
-            CanvasText;
-
-          box-shadow: none;
-        }
-      }
     `;
 
     document.head.appendChild(style);
   }
+
+  /* -------------------------------------------------------
+     PREVIEW + BRIDGE CREATION
+  ------------------------------------------------------- */
 
   function ensurePopover() {
     if (popover) {
@@ -542,8 +518,7 @@
 
     injectStyles();
 
-    popover =
-      document.createElement('div');
+    popover = document.createElement('div');
 
     popover.className =
       'aasl-question-preview';
@@ -613,9 +588,7 @@
         </span>
       </div>
 
-      <div
-        class="aasl-question-preview__body"
-      ></div>
+      <div class="aasl-question-preview__body"></div>
 
       <div
         class="aasl-question-preview__hint"
@@ -629,20 +602,58 @@
       </div>
     `;
 
-    document.body.appendChild(
-      popover
+    document.body.appendChild(popover);
+
+    /*
+     * Transparent pointer-safe bridge.
+     */
+    hoverBridge =
+      document.createElement('div');
+
+    hoverBridge.className =
+      'aasl-question-preview__bridge';
+
+    hoverBridge.setAttribute(
+      'aria-hidden',
+      'true'
     );
+
+    document.body.appendChild(
+      hoverBridge
+    );
+
+    /*
+     * Entering either the preview or bridge
+     * cancels pending closure.
+     */
+    const keepAlive = () => {
+      window.clearTimeout(
+        closeTimer
+      );
+    };
 
     popover.addEventListener(
       'mouseenter',
-      () => {
-        window.clearTimeout(
-          closeTimer
-        );
-      }
+      keepAlive
+    );
+
+    hoverBridge.addEventListener(
+      'mouseenter',
+      keepAlive
     );
 
     popover.addEventListener(
+      'mouseleave',
+      () => {
+        if (currentTrigger) {
+          scheduleHide(
+            currentTrigger
+          );
+        }
+      }
+    );
+
+    hoverBridge.addEventListener(
       'mouseleave',
       () => {
         if (currentTrigger) {
@@ -689,15 +700,15 @@
     return popover;
   }
 
-  function isQuestionHref(
-    rawHref
-  ) {
+  /* -------------------------------------------------------
+     QUESTION RESULT DETECTION
+  ------------------------------------------------------- */
+
+  function isQuestionHref(rawHref) {
     if (
       !rawHref ||
       rawHref.startsWith('#') ||
-      /^javascript:/i.test(
-        rawHref
-      )
+      /^javascript:/i.test(rawHref)
     ) {
       return false;
     }
@@ -717,75 +728,58 @@
     }
   }
 
-  function findQuestionTrigger(
-    startNode
-  ) {
-    if (
-      !(
-        startNode instanceof
-        Element
-      )
-    ) {
+  function findQuestionTrigger(startNode) {
+    if (!(startNode instanceof Element)) {
       return null;
     }
 
-    let link =
+    /*
+     * First locate the actual question link.
+     */
+    const link =
       startNode.closest(
         QUESTION_LINK_SELECTOR
-      );
+      ) ||
+      startNode
+        .closest(CARD_SELECTOR)
+        ?.querySelector(
+          QUESTION_LINK_SELECTOR
+        );
 
     if (
       link &&
       isQuestionHref(
-        link.getAttribute(
-          'href'
-        )
+        link.getAttribute('href')
       )
     ) {
+      /*
+       * IMPORTANT:
+       *
+       * Anchor the preview to the surrounding card,
+       * not to the inner text/link.
+       *
+       * This is the main fix for the gap visible
+       * in the screenshot.
+       */
+      const card =
+        link.closest(
+          CARD_SELECTOR
+        );
+
       return makeTrigger(
-        link,
-        link.getAttribute(
-          'href'
-        )
+        card || link,
+        link.getAttribute('href'),
+        link
       );
     }
 
     const card =
       startNode.closest(
-        [
-          '[data-question-id]',
-          '[data-question-url]',
-          '[data-href]',
-          '.question-card',
-          '.question-result',
-          'article',
-        ].join(',')
+        CARD_SELECTOR
       );
 
     if (!card) {
       return null;
-    }
-
-    link =
-      card.querySelector(
-        QUESTION_LINK_SELECTOR
-      );
-
-    if (
-      link &&
-      isQuestionHref(
-        link.getAttribute(
-          'href'
-        )
-      )
-    ) {
-      return makeTrigger(
-        card,
-        link.getAttribute(
-          'href'
-        ),
-        link
-      );
     }
 
     const rawHref =
@@ -794,9 +788,7 @@
       card.dataset.url;
 
     if (
-      isQuestionHref(
-        rawHref
-      )
+      isQuestionHref(rawHref)
     ) {
       return makeTrigger(
         card,
@@ -835,9 +827,7 @@
     }
   }
 
-  function triggerTitle(
-    trigger
-  ) {
+  function triggerTitle(trigger) {
     const source =
       trigger.link ||
       trigger.element;
@@ -876,18 +866,18 @@
     );
   }
 
-  function renderLoading(
-    trigger
-  ) {
+  /* -------------------------------------------------------
+     DISPLAY CONTENT
+  ------------------------------------------------------- */
+
+  function renderLoading(trigger) {
     const panel =
       ensurePopover();
 
     panel.querySelector(
       '.aasl-question-preview__title'
     ).textContent =
-      triggerTitle(
-        trigger
-      );
+      triggerTitle(trigger);
 
     const body =
       panel.querySelector(
@@ -916,9 +906,7 @@
       </div>
     `;
 
-    updateZoomIndicator(
-      1
-    );
+    updateZoomIndicator(1);
   }
 
   function renderError() {
@@ -938,18 +926,13 @@
       'false';
 
     body.innerHTML = `
-      <div
-        class="aasl-question-preview__status"
-      >
+      <div class="aasl-question-preview__status">
         Preview unavailable.
-        Click the question
-        to open it.
+        Click the question to open it.
       </div>
     `;
 
-    updateZoomIndicator(
-      1
-    );
+    updateZoomIndicator(1);
 
     queueReposition();
   }
@@ -970,9 +953,7 @@
     body.replaceChildren();
 
     const image =
-      document.createElement(
-        'img'
-      );
+      document.createElement('img');
 
     image.className =
       'aasl-question-preview__image';
@@ -1006,18 +987,12 @@
       }
     );
 
-    body.appendChild(
-      image
-    );
+    body.appendChild(image);
 
-    setZoom(
-      1
-    );
+    setZoom(1);
   }
 
-  function updateZoomIndicator(
-    zoom
-  ) {
+  function updateZoomIndicator(zoom) {
     if (!popover) {
       return;
     }
@@ -1029,15 +1004,15 @@
 
     if (indicator) {
       indicator.textContent =
-        `${Math.round(
-          zoom * 100
-        )}%`;
+        `${Math.round(zoom * 100)}%`;
     }
   }
 
-  function handlePreviewWheel(
-    event
-  ) {
+  /* -------------------------------------------------------
+     ZOOM
+  ------------------------------------------------------- */
+
+  function handlePreviewWheel(event) {
     if (
       !popover ||
       popover.dataset.open !==
@@ -1080,9 +1055,7 @@
 
     if (
       !button ||
-      !popover?.contains(
-        button
-      )
+      !popover?.contains(button)
     ) {
       return;
     }
@@ -1091,168 +1064,36 @@
     event.stopPropagation();
 
     const action =
-      button.dataset
-        .previewZoom;
+      button.dataset.previewZoom;
 
-    if (
-      action === 'in'
-    ) {
+    if (action === 'in') {
       setZoom(
         zoomLevel +
           CONFIG.zoomStep
       );
     }
 
-    if (
-      action === 'out'
-    ) {
+    if (action === 'out') {
       setZoom(
         zoomLevel -
           CONFIG.zoomStep
       );
     }
 
-    if (
-      action === 'reset'
-    ) {
-      setZoom(
-        1
-      );
+    if (action === 'reset') {
+      setZoom(1);
     }
 
     /*
-     * Mouse clicks normally leave keyboard focus
-     * sitting on the zoom button.
+     * Mouse clicks otherwise leave focus on the button.
+     * That focus would deliberately keep the preview alive.
      *
-     * The preview intentionally stays open while
-     * something inside it has focus. That caused
-     * the preview to linger after clicking + / -.
-     *
-     * Blur only real mouse/pointer clicks.
-     * Keyboard activation has event.detail === 0,
-     * so keyboard accessibility is preserved.
+     * Keyboard activation has detail === 0, so keyboard
+     * users retain normal focus behavior.
      */
-    if (
-      event.detail > 0
-    ) {
+    if (event.detail > 0) {
       button.blur();
     }
-  }
-
-  function startPreviewPan(
-    event
-  ) {
-    if (
-      event.button !== 0 ||
-      zoomLevel <= 1 ||
-      !popover
-    ) {
-      return;
-    }
-
-    const body =
-      event.target.closest(
-        '.aasl-question-preview__body'
-      );
-
-    if (
-      !body ||
-      !popover.contains(
-        body
-      )
-    ) {
-      return;
-    }
-
-    panState = {
-      pointerId:
-        event.pointerId,
-
-      body,
-
-      startX:
-        event.clientX,
-
-      startY:
-        event.clientY,
-
-      scrollLeft:
-        body.scrollLeft,
-
-      scrollTop:
-        body.scrollTop,
-    };
-
-    body.dataset.panning =
-      'true';
-
-    body.setPointerCapture?.(
-      event.pointerId
-    );
-
-    event.preventDefault();
-  }
-
-  function movePreviewPan(
-    event
-  ) {
-    if (
-      !panState ||
-      event.pointerId !==
-        panState.pointerId
-    ) {
-      return;
-    }
-
-    panState.body.scrollLeft =
-      panState.scrollLeft -
-      (
-        event.clientX -
-        panState.startX
-      );
-
-    panState.body.scrollTop =
-      panState.scrollTop -
-      (
-        event.clientY -
-        panState.startY
-      );
-
-    event.preventDefault();
-  }
-
-  function endPreviewPan(
-    event
-  ) {
-    if (
-      !panState
-    ) {
-      return;
-    }
-
-    if (
-      event.pointerId != null &&
-      event.pointerId !==
-        panState.pointerId
-    ) {
-      return;
-    }
-
-    panState.body.dataset
-      .panning =
-      'false';
-
-    try {
-      panState.body
-        .releasePointerCapture?.(
-          panState.pointerId
-        );
-    } catch (_) {
-      /* no-op */
-    }
-
-    panState =
-      null;
   }
 
   function setZoom(
@@ -1274,10 +1115,7 @@
         '.aasl-question-preview__image'
       );
 
-    if (
-      !body ||
-      !image
-    ) {
+    if (!body || !image) {
       return;
     }
 
@@ -1288,9 +1126,9 @@
       clamp(
         Math.round(
           nextZoom /
-          CONFIG.zoomStep
+            CONFIG.zoomStep
         ) *
-        CONFIG.zoomStep,
+          CONFIG.zoomStep,
 
         CONFIG.minZoom,
         CONFIG.maxZoom
@@ -1307,9 +1145,7 @@
       body.getBoundingClientRect();
 
     const focusX =
-      Number.isFinite(
-        pointerX
-      )
+      Number.isFinite(pointerX)
         ? (
           pointerX -
           bodyRect.left +
@@ -1322,9 +1158,7 @@
         );
 
     const focusY =
-      Number.isFinite(
-        pointerY
-      )
+      Number.isFinite(pointerY)
         ? (
           pointerY -
           bodyRect.top +
@@ -1365,18 +1199,14 @@
         ? 'true'
         : 'false';
 
-    if (
-      newZoom === 1
-    ) {
+    if (newZoom === 1) {
       body.dataset.panning =
         'false';
     }
 
     requestAnimationFrame(
       () => {
-        if (
-          newZoom === 1
-        ) {
+        if (newZoom === 1) {
           body.scrollTo({
             left: 0,
             top: 0,
@@ -1430,6 +1260,118 @@
     );
   }
 
+  /* -------------------------------------------------------
+     DRAG TO PAN
+  ------------------------------------------------------- */
+
+  function startPreviewPan(event) {
+    if (
+      event.button !== 0 ||
+      zoomLevel <= 1 ||
+      !popover
+    ) {
+      return;
+    }
+
+    const body =
+      event.target.closest(
+        '.aasl-question-preview__body'
+      );
+
+    if (
+      !body ||
+      !popover.contains(body)
+    ) {
+      return;
+    }
+
+    panState = {
+      pointerId:
+        event.pointerId,
+
+      body,
+
+      startX:
+        event.clientX,
+
+      startY:
+        event.clientY,
+
+      scrollLeft:
+        body.scrollLeft,
+
+      scrollTop:
+        body.scrollTop,
+    };
+
+    body.dataset.panning =
+      'true';
+
+    body.setPointerCapture?.(
+      event.pointerId
+    );
+
+    event.preventDefault();
+  }
+
+  function movePreviewPan(event) {
+    if (
+      !panState ||
+      event.pointerId !==
+        panState.pointerId
+    ) {
+      return;
+    }
+
+    panState.body.scrollLeft =
+      panState.scrollLeft -
+      (
+        event.clientX -
+        panState.startX
+      );
+
+    panState.body.scrollTop =
+      panState.scrollTop -
+      (
+        event.clientY -
+        panState.startY
+      );
+
+    event.preventDefault();
+  }
+
+  function endPreviewPan(event) {
+    if (!panState) {
+      return;
+    }
+
+    if (
+      event.pointerId != null &&
+      event.pointerId !==
+        panState.pointerId
+    ) {
+      return;
+    }
+
+    panState.body.dataset.panning =
+      'false';
+
+    try {
+      panState.body
+        .releasePointerCapture?.(
+          panState.pointerId
+        );
+    } catch (_) {
+      /* no-op */
+    }
+
+    panState = null;
+  }
+
+  /* -------------------------------------------------------
+     OPEN / CLOSE
+  ------------------------------------------------------- */
+
   function showPanel() {
     const panel =
       ensurePopover();
@@ -1444,6 +1386,11 @@
       'aria-hidden',
       'false'
     );
+
+    if (hoverBridge) {
+      hoverBridge.dataset.open =
+        'true';
+    }
 
     queueReposition();
   }
@@ -1466,6 +1413,11 @@
 
     panState =
       null;
+
+    if (hoverBridge) {
+      hoverBridge.dataset.open =
+        'false';
+    }
 
     if (!popover) {
       return;
@@ -1501,9 +1453,7 @@
     );
   }
 
-  function scheduleHide(
-    trigger
-  ) {
+  function scheduleHide(trigger) {
     window.clearTimeout(
       openTimer
     );
@@ -1531,9 +1481,15 @@
               document.activeElement
             );
 
+          const bridgeActive =
+            hoverBridge?.matches(
+              ':hover'
+            );
+
           if (
             !triggerActive &&
-            !panelActive
+            !panelActive &&
+            !bridgeActive
           ) {
             hidePanel();
           }
@@ -1568,49 +1524,30 @@
       return;
     }
 
-    if (
-      currentTrigger &&
-      currentTrigger.element !==
-        trigger.element &&
-      popover?.dataset.open ===
-        'true'
-    ) {
-      hidePanel();
-    }
-
     openTimer =
       window.setTimeout(
         () => {
-          openPreview(
-            trigger
-          );
+          openPreview(trigger);
         },
         delayMs
       );
   }
 
-  async function openPreview(
-    trigger
-  ) {
+  async function openPreview(trigger) {
     const requestId =
       ++currentRequest;
 
     currentTrigger =
       trigger;
 
-    zoomLevel =
-      1;
+    zoomLevel = 1;
 
-    renderLoading(
-      trigger
-    );
+    renderLoading(trigger);
 
     showPanel();
 
     const preview =
-      await getPreview(
-        trigger
-      );
+      await getPreview(trigger);
 
     if (
       requestId !==
@@ -1621,9 +1558,7 @@
       return;
     }
 
-    if (
-      preview?.src
-    ) {
+    if (preview?.src) {
       renderImage(
         preview,
         trigger
@@ -1632,6 +1567,10 @@
       renderError();
     }
   }
+
+  /* -------------------------------------------------------
+     POSITIONING
+  ------------------------------------------------------- */
 
   function queueReposition() {
     if (
@@ -1662,10 +1601,9 @@
     }
 
     if (
-      !document.documentElement
-        .contains(
-          currentTrigger.element
-        )
+      !document.documentElement.contains(
+        currentTrigger.element
+      )
     ) {
       hidePanel({
         immediate: true,
@@ -1724,11 +1662,14 @@
 
     let left;
     let top;
+    let placement;
 
     if (
       roomRight >=
       panel.width
     ) {
+      placement = 'right';
+
       left =
         anchor.right +
         gap;
@@ -1736,13 +1677,14 @@
       top =
         anchor.top;
 
-      popover.style
-        .transformOrigin =
+      popover.style.transformOrigin =
         'top left';
     } else if (
       roomLeft >=
       panel.width
     ) {
+      placement = 'left';
+
       left =
         anchor.left -
         panel.width -
@@ -1751,8 +1693,7 @@
       top =
         anchor.top;
 
-      popover.style
-        .transformOrigin =
+      popover.style.transformOrigin =
         'top right';
     } else {
       left =
@@ -1770,29 +1711,34 @@
         gap -
         margin;
 
+      const roomAbove =
+        anchor.top -
+        gap -
+        margin;
+
       if (
         roomBelow >=
           panel.height ||
         roomBelow >=
-          anchor.top -
-            gap -
-            margin
+          roomAbove
       ) {
+        placement = 'below';
+
         top =
           anchor.bottom +
           gap;
 
-        popover.style
-          .transformOrigin =
+        popover.style.transformOrigin =
           'top left';
       } else {
+        placement = 'above';
+
         top =
           anchor.top -
           panel.height -
           gap;
 
-        popover.style
-          .transformOrigin =
+        popover.style.transformOrigin =
           'bottom left';
       }
     }
@@ -1816,14 +1762,203 @@
       );
 
     popover.style.left =
-      `${Math.round(
-        left
-      )}px`;
+      `${Math.round(left)}px`;
 
     popover.style.top =
-      `${Math.round(
-        top
-      )}px`;
+      `${Math.round(top)}px`;
+
+    positionHoverBridge(
+      anchor,
+      {
+        left,
+        top,
+        right:
+          left +
+          panel.width,
+        bottom:
+          top +
+          panel.height,
+        width:
+          panel.width,
+        height:
+          panel.height,
+      },
+      placement
+    );
+  }
+
+  /*
+   * Create a transparent rectangle joining the result card
+   * and preview. The rectangle intentionally overlaps both
+   * ends slightly.
+   *
+   * This means a slow or diagonal mouse movement cannot
+   * accidentally cross unowned page space.
+   */
+  function positionHoverBridge(
+    anchor,
+    panel,
+    placement
+  ) {
+    if (!hoverBridge) {
+      return;
+    }
+
+    const padding =
+      CONFIG.bridgePaddingPx;
+
+    let left;
+    let top;
+    let width;
+    let height;
+
+    if (
+      placement === 'right'
+    ) {
+      left =
+        Math.min(
+          anchor.right,
+          panel.left
+        ) -
+        padding;
+
+      top =
+        Math.min(
+          anchor.top,
+          panel.top
+        ) -
+        padding;
+
+      width =
+        Math.abs(
+          panel.left -
+          anchor.right
+        ) +
+        padding * 2;
+
+      height =
+        Math.max(
+          anchor.height,
+          panel.height
+        ) +
+        padding * 2;
+    } else if (
+      placement === 'left'
+    ) {
+      left =
+        Math.min(
+          panel.right,
+          anchor.left
+        ) -
+        padding;
+
+      top =
+        Math.min(
+          anchor.top,
+          panel.top
+        ) -
+        padding;
+
+      width =
+        Math.abs(
+          anchor.left -
+          panel.right
+        ) +
+        padding * 2;
+
+      height =
+        Math.max(
+          anchor.height,
+          panel.height
+        ) +
+        padding * 2;
+    } else if (
+      placement === 'below'
+    ) {
+      left =
+        Math.min(
+          anchor.left,
+          panel.left
+        ) -
+        padding;
+
+      top =
+        Math.min(
+          anchor.bottom,
+          panel.top
+        ) -
+        padding;
+
+      width =
+        Math.max(
+          anchor.width,
+          panel.width
+        ) +
+        padding * 2;
+
+      height =
+        Math.abs(
+          panel.top -
+          anchor.bottom
+        ) +
+        padding * 2;
+    } else {
+      left =
+        Math.min(
+          anchor.left,
+          panel.left
+        ) -
+        padding;
+
+      top =
+        Math.min(
+          panel.bottom,
+          anchor.top
+        ) -
+        padding;
+
+      width =
+        Math.max(
+          anchor.width,
+          panel.width
+        ) +
+        padding * 2;
+
+      height =
+        Math.abs(
+          anchor.top -
+          panel.bottom
+        ) +
+        padding * 2;
+    }
+
+    /*
+     * Because the preview overlaps the result by a few
+     * pixels, width/height could otherwise become tiny.
+     */
+    width =
+      Math.max(
+        width,
+        padding * 2
+      );
+
+    height =
+      Math.max(
+        height,
+        padding * 2
+      );
+
+    hoverBridge.style.left =
+      `${Math.round(left)}px`;
+
+    hoverBridge.style.top =
+      `${Math.round(top)}px`;
+
+    hoverBridge.style.width =
+      `${Math.round(width)}px`;
+
+    hoverBridge.style.height =
+      `${Math.round(height)}px`;
   }
 
   function clamp(
@@ -1831,9 +1966,7 @@
     min,
     max
   ) {
-    if (
-      max < min
-    ) {
+    if (max < min) {
       return min;
     }
 
@@ -1846,9 +1979,11 @@
     );
   }
 
-  function cacheKey(
-    trigger
-  ) {
+  /* -------------------------------------------------------
+     PREVIEW CACHE
+  ------------------------------------------------------- */
+
+  function cacheKey(trigger) {
     return trigger.url.href
       .split('#')[0];
   }
@@ -1880,18 +2015,12 @@
     return promise;
   }
 
-  function getPreview(
-    trigger
-  ) {
+  function getPreview(trigger) {
     const key =
-      cacheKey(
-        trigger
-      );
+      cacheKey(trigger);
 
     if (
-      previewCache.has(
-        key
-      )
+      previewCache.has(key)
     ) {
       return previewCache.get(
         key
@@ -1899,9 +2028,7 @@
     }
 
     const promise =
-      resolvePreview(
-        trigger
-      )
+      resolvePreview(trigger)
         .catch(
           () => null
         )
@@ -1923,13 +2050,13 @@
     );
   }
 
-  async function resolvePreview(
-    trigger
-  ) {
+  /* -------------------------------------------------------
+     FIND PREVIEW IMAGE
+  ------------------------------------------------------- */
+
+  async function resolvePreview(trigger) {
     const identifiers =
-      collectIdentifiers(
-        trigger
-      );
+      collectIdentifiers(trigger);
 
     const direct =
       previewFromTriggerAttributes(
@@ -1974,10 +2101,7 @@
         trigger.link,
       ].filter(Boolean);
 
-    for (
-      const source
-      of sources
-    ) {
+    for (const source of sources) {
       for (
         const attribute
         of DATA_IMAGE_ATTRIBUTES
@@ -1988,9 +2112,7 @@
           ];
 
         if (
-          isImageString(
-            value
-          ) &&
+          isImageString(value) &&
           !NEGATIVE_IMAGE_RE.test(
             value
           )
@@ -2025,9 +2147,7 @@
         );
 
       if (
-        isImageString(
-          rawSrc
-        ) &&
+        isImageString(rawSrc) &&
         !NEGATIVE_IMAGE_RE.test(
           rawSrc
         )
@@ -2041,9 +2161,7 @@
 
           alt:
             inlineImage
-              .getAttribute(
-                'alt'
-              ) ||
+              .getAttribute('alt') ||
             '',
         };
       }
@@ -2052,32 +2170,25 @@
     return null;
   }
 
-  function collectIdentifiers(
-    trigger
-  ) {
+  function collectIdentifiers(trigger) {
     const values =
       new Set();
 
-    const add =
-      (value) => {
-        if (
-          value == null ||
-          value === ''
-        ) {
-          return;
-        }
+    const add = (value) => {
+      if (
+        value == null ||
+        value === ''
+      ) {
+        return;
+      }
 
-        const normalized =
-          normalizeIdentity(
-            value
-          );
+      const normalized =
+        normalizeIdentity(value);
 
-        if (normalized) {
-          values.add(
-            normalized
-          );
-        }
-      };
+      if (normalized) {
+        values.add(normalized);
+      }
+    };
 
     const pathname =
       decodeURIComponent(
@@ -2091,17 +2202,9 @@
         .pop() ||
       '';
 
-    add(
-      trigger.url.href
-    );
-
-    add(
-      pathname
-    );
-
-    add(
-      basename
-    );
+    add(trigger.url.href);
+    add(pathname);
+    add(basename);
 
     add(
       basename.replace(
@@ -2118,13 +2221,9 @@
       ].filter(Boolean)
     ) {
       for (
-        const [
-          key,
-          value,
-        ]
+        const [key, value]
         of Object.entries(
-          source.dataset ||
-          {}
+          source.dataset || {}
         )
       ) {
         if (
@@ -2132,9 +2231,7 @@
             key
           )
         ) {
-          add(
-            value
-          );
+          add(value);
         }
       }
     }
@@ -2142,12 +2239,8 @@
     return values;
   }
 
-  function normalizeIdentity(
-    value
-  ) {
-    return String(
-      value
-    )
+  function normalizeIdentity(value) {
+    return String(value)
       .trim()
       .toLowerCase()
       .replace(
@@ -2178,37 +2271,28 @@
 
   function globalDataRoots() {
     const roots = [];
+    const added = new Set();
 
-    const added =
-      new Set();
+    const add = (
+      key,
+      value
+    ) => {
+      if (
+        !value ||
+        typeof value !==
+          'object' ||
+        added.has(value)
+      ) {
+        return;
+      }
 
-    const add =
-      (
+      added.add(value);
+
+      roots.push([
         key,
-        value
-      ) => {
-        if (
-          !value ||
-          typeof value !==
-            'object' ||
-          added.has(
-            value
-          )
-        ) {
-          return;
-        }
-
-        added.add(
-          value
-        );
-
-        roots.push(
-          [
-            key,
-            value,
-          ]
-        );
-      };
+        value,
+      ]);
+    };
 
     for (
       const key
@@ -2277,17 +2361,13 @@
     identifiers,
     pageUrl
   ) {
-    let best =
-      null;
+    let best = null;
 
     const seen =
       new WeakSet();
 
     for (
-      const [
-        key,
-        root,
-      ]
+      const [key, root]
       of globalDataRoots()
     ) {
       if (
@@ -2314,8 +2394,7 @@
           ),
 
         alt:
-          best.alt ||
-          '',
+          best.alt || '',
       }
       : null;
 
@@ -2339,21 +2418,15 @@
       }
 
       if (
-        seen.has(
-          value
-        )
+        seen.has(value)
       ) {
         return;
       }
 
-      seen.add(
-        value
-      );
+      seen.add(value);
 
       if (
-        !Array.isArray(
-          value
-        )
+        !Array.isArray(value)
       ) {
         const identityScore =
           scoreRecordIdentity(
@@ -2363,8 +2436,7 @@
           );
 
         if (
-          identityScore >
-          0
+          identityScore > 0
         ) {
           const image =
             bestImageInObject(
@@ -2391,9 +2463,7 @@
       }
 
       if (
-        Array.isArray(
-          value
-        )
+        Array.isArray(value)
       ) {
         for (
           const item
@@ -2407,10 +2477,7 @@
         }
       } else {
         for (
-          const [
-            key,
-            child,
-          ]
+          const [key, child]
           of Object.entries(
             value
           )
@@ -2436,13 +2503,11 @@
     parentKey,
     identifiers
   ) {
-    let score =
-      0;
+    let score = 0;
 
     const parentIdentity =
       normalizeIdentity(
-        parentKey ||
-        ''
+        parentKey || ''
       );
 
     if (
@@ -2460,13 +2525,8 @@
     }
 
     for (
-      const [
-        key,
-        value,
-      ]
-      of Object.entries(
-        record
-      )
+      const [key, value]
+      of Object.entries(record)
     ) {
       if (
         !IDENTITY_KEYS_RE.test(
@@ -2483,9 +2543,7 @@
       }
 
       const normalized =
-        normalizeIdentity(
-          value
-        );
+        normalizeIdentity(value);
 
       const similarity =
         identitySimilarity(
@@ -2535,10 +2593,8 @@
       }
 
       if (
-        candidate.length >=
-          7 &&
-        identifier.length >=
-          7 &&
+        candidate.length >= 7 &&
+        identifier.length >= 7 &&
         (
           candidate.endsWith(
             identifier
@@ -2555,11 +2611,8 @@
     return 0;
   }
 
-  function bestImageInObject(
-    record
-  ) {
-    let best =
-      null;
+  function bestImageInObject(record) {
+    let best = null;
 
     const visited =
       new WeakSet();
@@ -2589,9 +2642,7 @@
         'string'
       ) {
         if (
-          !isImageString(
-            value
-          )
+          !isImageString(value)
         ) {
           return;
         }
@@ -2623,26 +2674,19 @@
       if (
         typeof value !==
           'object' ||
-        visited.has(
-          value
-        )
+        visited.has(value)
       ) {
         return;
       }
 
-      visited.add(
-        value
-      );
+      visited.add(value);
 
       if (
-        Array.isArray(
-          value
-        )
+        Array.isArray(value)
       ) {
         for (
           let i = 0;
-          i <
-          value.length;
+          i < value.length;
           i += 1
         ) {
           walk(
@@ -2653,10 +2697,7 @@
         }
       } else {
         for (
-          const [
-            key,
-            child,
-          ]
+          const [key, child]
           of Object.entries(
             value
           )
@@ -2688,8 +2729,7 @@
       return -200;
     }
 
-    let score =
-      15;
+    let score = 15;
 
     if (
       POSITIVE_IMAGE_RE.test(
@@ -2776,13 +2816,9 @@
       }
 
       for (
-        const [
-          key,
-          value,
-        ]
+        const [key, value]
         of Object.entries(
-          element.dataset ||
-          {}
+          element.dataset || {}
         )
       ) {
         if (
@@ -2791,9 +2827,7 @@
           )
         ) {
           identifiers.add(
-            normalizeIdentity(
-              value
-            )
+            normalizeIdentity(value)
           );
         }
       }
@@ -2821,9 +2855,7 @@
       );
 
     if (
-      isImageString(
-        metaImage
-      ) &&
+      isImageString(metaImage) &&
       !NEGATIVE_IMAGE_RE.test(
         metaImage
       )
@@ -2849,9 +2881,7 @@
     );
   }
 
-  function previewFromRenderedPage(
-    url
-  ) {
+  function previewFromRenderedPage(url) {
     if (
       url.origin !==
       window.location.origin
@@ -2871,11 +2901,8 @@
         const startedAt =
           Date.now();
 
-        let finished =
-          false;
-
-        let scanTimer =
-          0;
+        let finished = false;
+        let scanTimer = 0;
 
         const finish =
           (value) => {
@@ -2883,8 +2910,7 @@
               return;
             }
 
-            finished =
-              true;
+            finished = true;
 
             window.clearTimeout(
               scanTimer
@@ -2893,8 +2919,7 @@
             frame.remove();
 
             resolve(
-              value ||
-              null
+              value || null
             );
           };
 
@@ -2910,16 +2935,11 @@
               frameDocument =
                 frame.contentDocument;
             } catch (_) {
-              finish(
-                null
-              );
-
+              finish(null);
               return;
             }
 
-            if (
-              frameDocument
-            ) {
+            if (frameDocument) {
               prepareRenderedImages(
                 frameDocument
               );
@@ -2935,10 +2955,7 @@
                 );
 
               if (image) {
-                finish(
-                  image
-                );
-
+                finish(image);
                 return;
               }
             }
@@ -2948,10 +2965,7 @@
               startedAt >=
               CONFIG.renderedPageTimeoutMs
             ) {
-              finish(
-                null
-              );
-
+              finish(null);
               return;
             }
 
@@ -2967,20 +2981,18 @@
           'true'
         );
 
-        frame.tabIndex =
-          -1;
+        frame.tabIndex = -1;
 
-        frame.style.cssText =
-          [
-            'position:fixed',
-            'left:-10000px',
-            'top:0',
-            'width:1200px',
-            'height:900px',
-            'visibility:hidden',
-            'pointer-events:none',
-            'border:0',
-          ].join(';');
+        frame.style.cssText = [
+          'position:fixed',
+          'left:-10000px',
+          'top:0',
+          'width:1200px',
+          'height:900px',
+          'visibility:hidden',
+          'pointer-events:none',
+          'border:0',
+        ].join(';');
 
         frame.addEventListener(
           'load',
@@ -2993,9 +3005,7 @@
         frame.addEventListener(
           'error',
           () => {
-            finish(
-              null
-            );
+            finish(null);
           },
           {
             once: true,
@@ -3030,18 +3040,14 @@
         'eager';
 
       if (
-        !image.getAttribute(
-          'src'
-        )
+        !image.getAttribute('src')
       ) {
         const deferredSrc =
           image.dataset.src ||
           image.dataset.lazySrc ||
           image.dataset.original;
 
-        if (
-          deferredSrc
-        ) {
+        if (deferredSrc) {
           image.setAttribute(
             'src',
             deferredSrc
@@ -3060,13 +3066,10 @@
   ) {
     const candidates =
       Array.from(
-        root.querySelectorAll(
-          'img'
-        )
+        root.querySelectorAll('img')
       );
 
-    let best =
-      null;
+    let best = null;
 
     for (
       const image
@@ -3074,9 +3077,7 @@
     ) {
       const rawSrc =
         image.currentSrc ||
-        image.getAttribute(
-          'src'
-        ) ||
+        image.getAttribute('src') ||
         image.dataset.src;
 
       if (
@@ -3091,22 +3092,15 @@
       const descriptors =
         [
           rawSrc,
-          image.getAttribute(
-            'alt'
-          ) ||
-          '',
-          image.id ||
-          '',
-          image.className ||
-          '',
+          image.getAttribute('alt') || '',
+          image.id || '',
+          image.className || '',
           image.closest(
             '[class], [id]'
-          )?.className ||
-          '',
+          )?.className || '',
           image.closest(
             '[class], [id]'
-          )?.id ||
-          '',
+          )?.id || '',
         ].join(' ');
 
       if (
@@ -3126,25 +3120,20 @@
       const width =
         image.naturalWidth ||
         Number(
-          image.getAttribute(
-            'width'
-          )
+          image.getAttribute('width')
         ) ||
         0;
 
       const height =
         image.naturalHeight ||
         Number(
-          image.getAttribute(
-            'height'
-          )
+          image.getAttribute('height')
         ) ||
         0;
 
       const visible =
         image.getClientRects?.()
-          .length >
-        0;
+          .length > 0;
 
       if (
         POSITIVE_IMAGE_RE.test(
@@ -3172,15 +3161,11 @@
         score += 35;
       }
 
-      if (
-        width >= 320
-      ) {
+      if (width >= 320) {
         score += 25;
       }
 
-      if (
-        height >= 100
-      ) {
+      if (height >= 100) {
         score += 15;
       }
 
@@ -3206,16 +3191,13 @@
         continue;
       }
 
-      if (
-        score < 55
-      ) {
+      if (score < 55) {
         continue;
       }
 
       if (
         !best ||
-        score >
-          best.score
+        score > best.score
       ) {
         best = {
           src:
@@ -3227,8 +3209,7 @@
           alt:
             image.getAttribute(
               'alt'
-            ) ||
-            '',
+            ) || '',
 
           score,
         };
@@ -3240,18 +3221,13 @@
       best.src
     )
       ? {
-        src:
-          best.src,
-
-        alt:
-          best.alt,
+        src: best.src,
+        alt: best.alt,
       }
       : null;
   }
 
-  function isImageString(
-    value
-  ) {
+  function isImageString(value) {
     if (
       typeof value !==
         'string' ||
@@ -3278,9 +3254,7 @@
     pageUrl
   ) {
     const value =
-      String(
-        rawSrc
-      ).trim();
+      String(rawSrc).trim();
 
     if (
       /^(?:data:|blob:|https?:\/\/)/i.test(
@@ -3316,9 +3290,11 @@
     ).href;
   }
 
-  function onPointerOver(
-    event
-  ) {
+  /* -------------------------------------------------------
+     EVENTS
+  ------------------------------------------------------- */
+
+  function onPointerOver(event) {
     if (
       !finePointerQuery.matches ||
       event.pointerType ===
@@ -3352,9 +3328,7 @@
     );
   }
 
-  function onPointerOut(
-    event
-  ) {
+  function onPointerOut(event) {
     if (
       !finePointerQuery.matches ||
       event.pointerType ===
@@ -3382,14 +3356,10 @@
       return;
     }
 
-    scheduleHide(
-      trigger
-    );
+    scheduleHide(trigger);
   }
 
-  function onFocusIn(
-    event
-  ) {
+  function onFocusIn(event) {
     const trigger =
       findQuestionTrigger(
         event.target
@@ -3403,9 +3373,7 @@
     }
   }
 
-  function onFocusOut(
-    event
-  ) {
+  function onFocusOut(event) {
     const trigger =
       findQuestionTrigger(
         event.target
@@ -3425,17 +3393,12 @@
       return;
     }
 
-    scheduleHide(
-      trigger
-    );
+    scheduleHide(trigger);
   }
 
-  function onKeyDown(
-    event
-  ) {
+  function onKeyDown(event) {
     if (
-      event.key ===
-        'Escape' &&
+      event.key === 'Escape' &&
       popover?.dataset.open ===
         'true'
     ) {
@@ -3445,9 +3408,7 @@
     }
   }
 
-  function onClick(
-    event
-  ) {
+  function onClick(event) {
     if (
       popover?.contains(
         event.target
@@ -3466,6 +3427,10 @@
       });
     }
   }
+
+  /* -------------------------------------------------------
+     INITIALIZE
+  ------------------------------------------------------- */
 
   function init() {
     injectStyles();
