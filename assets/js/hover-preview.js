@@ -45,7 +45,15 @@
 
     minZoom: 1,
     maxZoom: 4,
-    zoomStep: 0.25,
+    zoomStep: 0.1,
+
+    /*
+     * Wheel zoom scales with how far the wheel moved.
+     * One mouse-wheel notch (~100px of deltaY) gives ~10%;
+     * trackpad gestures send many small deltas and zoom smoothly.
+     */
+    wheelZoomSensitivity: 0.001,
+    maxWheelDeltaPx: 200,
   });
 
   const QUESTION_LINK_SELECTOR = [
@@ -1031,15 +1039,31 @@
 
     event.preventDefault();
 
-    const direction =
-      event.deltaY < 0
-        ? 1
-        : -1;
+    /*
+     * Normalise deltaY to pixels. Firefox reports lines
+     * (deltaMode 1) or pages (deltaMode 2) for some mice.
+     */
+    const pixelsPerUnit =
+      event.deltaMode === 1
+        ? 16
+        : event.deltaMode === 2
+          ? 800
+          : 1;
+
+    const deltaPx =
+      clamp(
+        event.deltaY *
+          pixelsPerUnit,
+        -CONFIG.maxWheelDeltaPx,
+        CONFIG.maxWheelDeltaPx
+      );
 
     setZoom(
-      zoomLevel +
-        direction *
-        CONFIG.zoomStep,
+      zoomLevel *
+        Math.exp(
+          -deltaPx *
+            CONFIG.wheelZoomSensitivity
+        ),
       event.clientX,
       event.clientY
     );
@@ -1122,13 +1146,15 @@
     const oldZoom =
       zoomLevel;
 
+    /*
+     * Round to 0.1% only to avoid floating-point drift;
+     * zoom is not restricted to zoomStep increments.
+     */
     const newZoom =
       clamp(
         Math.round(
-          nextZoom /
-            CONFIG.zoomStep
-        ) *
-          CONFIG.zoomStep,
+          nextZoom * 1000
+        ) / 1000,
 
         CONFIG.minZoom,
         CONFIG.maxZoom
