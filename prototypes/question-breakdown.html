@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototype: question breakdown</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    /* Prototype only (issue #4). Three ways to show what each part of a question targets. */
+    :root { --t1: #6366f1; --t2: #059669; --t3: #d97706; --t4: #7c3aed; --t5: #dc2626; }
+    .proto-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 14px; }
+    .proto-bar a { padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface); color: var(--text); font-size: 14px; }
+    .proto-bar a.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .proto-bar .hint { color: var(--muted); font-size: 13px; }
+    .q-frame { position: relative; }
+    .q-frame img { display: block; width: 100%; border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+    .code { font: 600 11.5px/1 ui-monospace, Consolas, monospace; padding: 3px 6px; border-radius: 4px; color: #fff; white-space: nowrap; }
+    .t1 { background: var(--t1); } .t2 { background: var(--t2); } .t3 { background: var(--t3); } .t4 { background: var(--t4); } .t5 { background: var(--t5); }
+
+    /* A — sticky notes pinned in the margin beside each part */
+    .postit-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 0 18px; }
+    .postit-col { position: relative; }
+    .postit { position: absolute; left: 0; right: 0; transform: rotate(-.5deg); background: #fff7c2; border: 1px solid #ecd97a; border-radius: 3px;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, .12); padding: 8px 10px 9px; font-size: 13px; line-height: 1.35; }
+    .postit:nth-child(odd) { transform: rotate(.6deg); background: #ffefc9; }
+    .postit h4 { margin: 0 0 5px; display: flex; justify-content: space-between; font-size: 13px; }
+    .postit .codes { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 5px; }
+    .postit .skill { color: #4b5563; }
+    .pin { position: absolute; left: -6px; width: 10px; height: 10px; border-radius: 50%; background: #e0b400; box-shadow: 0 0 0 3px rgba(224, 180, 0, .25); transform: translateY(-5px); }
+
+    /* B — breakdown panel; hovering a part highlights its region on the page */
+    .panel-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 18px; align-items: start; }
+    .band { position: absolute; left: 0; right: 0; background: rgba(99, 102, 241, .10); border-left: 4px solid var(--accent); opacity: 0; transition: opacity .15s; pointer-events: none; }
+    .band.on { opacity: 1; }
+    .parts-list { display: grid; gap: 8px; position: sticky; top: 12px; }
+    .part-row { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 10px 12px; cursor: default; display: grid; gap: 6px; }
+    .part-row:hover, .part-row.on { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .part-row .top { display: flex; justify-content: space-between; font-weight: 600; }
+    .part-row .names { font-size: 12.5px; color: var(--muted); }
+    .marks-split { display: flex; height: 10px; border-radius: 5px; overflow: hidden; margin: 2px 0 6px; }
+    .legend { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; color: var(--muted); }
+    .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+
+    /* C — tags printed on the page at each part, plus a marks split */
+    .strip { position: absolute; right: 8px; transform: translateY(-2px); display: flex; gap: 4px; align-items: center; background: rgba(255, 255, 255, .92); padding: 3px 5px; border-radius: 6px; border: 1px solid var(--border); }
+    .strip .k { font-size: 11.5px; color: var(--muted); max-width: 260px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sliced { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #fff; margin-bottom: 12px; }
+    .slice { position: relative; overflow: hidden; width: 100%; }
+    .slice img { position: absolute; left: 0; width: 100%; max-width: none; }
+    .tagband { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 5px 12px; background: var(--surface-2); border-block: 1px solid var(--border); font-size: 13px; }
+    .tagband b { font-family: ui-monospace, Consolas, monospace; font-size: 12.5px; }
+    .tagband .k { color: var(--muted); min-width: 0; }
+    .tagband .mk { margin-left: auto; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .split-card { border: 1px solid var(--border); border-radius: 10px; background: var(--surface); padding: 12px 14px; margin-bottom: 12px; }
+    .split-card h3 { margin: 0 0 8px; font-size: 14px; }
+
+    @media (max-width: 860px) {
+      .postit-wrap, .panel-wrap { grid-template-columns: 1fr; }
+      .postit-col { display: grid; gap: 10px; margin-top: 12px; }
+      .postit { position: static; transform: none !important; }
+      .leaders { display: none; }
+      .strip .k { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <div class="proto-bar" id="bar"></div>
+    <section class="panel static-hero"><h1 id="title"></h1><p id="sub"></p></section>
+    <div class="panel" style="margin-top:14px" id="stage"></div>
+  </main>
+  <script src="../assets/js/data.js"></script>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get("q") || "aa-sl-2021-may-tz1-p1-q08";
+    const v = params.get("v") || "postit";
+    const q = window.AASL_DATA.questions.find(x => x.id === id);
+    const code = s => s.split(" ")[0];
+    const t = s => "t" + s.split(".")[0];
+    const chip = s => `<span class="code ${t(s)}" title="${s}">${code(s)}</span>`;
+    const name = l => l ? "(" + l.replace("(", ")(") + (l.includes("(") ? "" : ")") : "Whole question";
+
+    document.getElementById("bar").innerHTML =
+      [["postit", "A · Post-it notes"], ["panel", "B · Breakdown panel"], ["bands", "C · On-page tags + marks split"]]
+        .map(([k, l]) => `<a class="${k === v ? "on" : ""}" href="?q=${id}&v=${k}">${l}</a>`).join("") +
+      `<span class="hint">Try another: <a href="?q=aa-sl-2024-nov-tz2-p2-q09&v=${v}">2024 Nov P2 Q9</a> <a href="?q=aa-sl-2022-may-tz1-p1-q07&v=${v}">2022 May P1 Q7</a></span>`;
+    document.getElementById("title").textContent = q.title;
+    document.getElementById("sub").textContent = `${q.marks} marks · ${q.parts.length} part${q.parts.length > 1 ? "s" : ""}`;
+
+    // Parts grouped by the image they start on, with the y-range each one covers.
+    const imgs = q.paperImages.map((src, i) => {
+      const ps = q.parts.filter(p => p.anchor?.image === i);
+      return { src, ps: ps.map((p, j) => ({ ...p, y0: p.anchor.y, y1: ps[j + 1] ? ps[j + 1].anchor.y : 1 })) };
+    });
+
+    // Marks per syllabus statement (a part's marks shared evenly between its tags).
+    const split = {};
+    for (const p of q.parts) for (const s of p.syllabus) split[s] = (split[s] || 0) + p.marks / p.syllabus.length;
+    const splitHtml = () => {
+      const ents = Object.entries(split).sort((a, b) => b[1] - a[1]);
+      const shades = {};
+      return `<div class="marks-split">${ents.map(([s, m]) => {
+        const k = t(s); shades[k] = (shades[k] || 0) + 1;
+        return `<span class="${k}" style="flex:${m};opacity:${1 - (shades[k] - 1) * 0.28};border-right:2px solid #fff" title="${s}: ${m.toFixed(1)} marks"></span>`;
+      }).join("")}</div><div class="legend">${ents.map(([s, m]) => `<span><i class="${t(s)}"></i>${code(s)} ${s.slice(code(s).length + 1)} · ${+m.toFixed(1)}</span>`).join("")}</div>`;
+    };
+
+    const stage = document.getElementById("stage");
+    if (v === "postit") {
+      stage.innerHTML = imgs.map(im => `<div class="postit-wrap"><div class="q-frame"><img src="../${im.src}" alt="Question page"></div>
+        <div class="postit-col"><svg class="leaders" style="position:absolute;left:-18px;top:0;width:30px;height:100%;overflow:visible;pointer-events:none"></svg>
+        ${im.ps.map(p => `<div class="postit" data-y="${p.y0}">
+          <h4><span>${name(p.label)}</span><span>[${p.marks}]</span></h4><div class="codes">${p.syllabus.map(chip).join("")}</div>
+          <div class="skill">${p.skill}</div></div>`).join("")}</div></div>`).join('<div style="height:16px"></div>');
+      // Stack notes so they never overlap: each sits at its part's line, or just below the previous note.
+      const layout = () => {
+        if (matchMedia("(max-width: 860px)").matches) return;
+        stage.querySelectorAll(".postit-wrap").forEach(w => {
+          const h = w.querySelector("img").getBoundingClientRect().height, col = w.querySelector(".postit-col"), svg = col.querySelector("svg");
+          let bottom = -Infinity, lines = "";
+          col.querySelectorAll(".postit").forEach(n => {
+            const want = +n.dataset.y * h, top = Math.max(want - 14, bottom + 8);
+            n.style.top = top + "px"; bottom = top + n.offsetHeight;
+            lines += `<circle cx="0" cy="${want}" r="4.5" fill="#e0b400"/><path d="M0 ${want} C 10 ${want}, 8 ${top + 16}, 18 ${top + 16}" fill="none" stroke="#d9c25a" stroke-width="2" stroke-dasharray="4 3"/>`;
+          });
+          svg.innerHTML = lines; col.style.minHeight = Math.max(h, bottom) + "px";
+        });
+      };
+      stage.querySelectorAll("img").forEach(i => i.complete ? layout() : i.addEventListener("load", layout));
+      addEventListener("resize", layout);
+    } else if (v === "panel") {
+      stage.innerHTML = `<div class="panel-wrap"><div>${imgs.map((im, i) => `<div class="q-frame" style="margin-bottom:12px">
+          <img src="../${im.src}" alt="Question page">${im.ps.map(p => `<div class="band" data-l="${p.label}" style="top:${p.y0 * 100}%;height:${(p.y1 - p.y0) * 100}%"></div>`).join("")}</div>`).join("")}</div>
+        <aside class="parts-list"><div class="part-row" style="cursor:auto"><div class="top"><span>Question breakdown</span><span>${q.marks} marks</span></div>${splitHtml()}</div>
+        ${q.parts.map(p => `<div class="part-row" data-l="${p.label}"><div class="top"><span>${name(p.label)}</span><span>[${p.marks}]</span></div>
+          <div>${p.skill}</div><div style="display:flex;gap:4px;flex-wrap:wrap">${p.syllabus.map(chip).join("")}</div>
+          <div class="names">${p.syllabus.map(s => s.slice(code(s).length + 1)).join(" · ")}</div></div>`).join("")}</aside></div>`;
+      stage.querySelectorAll(".part-row[data-l]").forEach(r => {
+        const set = on => stage.querySelectorAll(`.band[data-l="${r.dataset.l}"]`).forEach(b => b.classList.toggle("on", on));
+        r.addEventListener("mouseenter", () => set(true)); r.addEventListener("mouseleave", () => set(false));
+      });
+      if (params.get("hover")) { const r = stage.querySelector(`.part-row[data-l="${params.get("hover")}"]`); r?.classList.add("on"); r?.dispatchEvent(new Event("mouseenter")); }
+    } else {
+      // Slice each page image at the part anchors and slot a tag band in front of every part.
+      const slice = (src, w, h, y0, y1) => `<div class="slice" style="aspect-ratio:${w} / ${Math.max(1, (y1 - y0) * h)}">
+        <img src="../${src}" alt="" style="top:${(-y0 / (y1 - y0) * 100).toFixed(3)}%"></div>`;
+      // Move a cut up from the part's text line to the nearest fully blank row, so tall maths isn't sliced.
+      const blankAbove = (i, y) => {
+        const c = document.createElement("canvas"); c.width = i.naturalWidth; c.height = i.naturalHeight;
+        const g = c.getContext("2d"); g.drawImage(i, 0, 0);
+        const d = g.getImageData(0, 0, c.width, c.height).data;
+        const isBlank = r => { for (let x = 0; x < c.width; x += 2) { const k = (r * c.width + x) * 4; if (d[k] < 235) return false; } return true; };
+        // Walk up from the label line; the first run of >= 8 blank rows is the gap between this part and what's above.
+        let run = 0;
+        for (let r = Math.round(y * c.height) + 4, s = 0; s < 160 && r > 0; s++, r--) {
+          run = isBlank(r) ? run + 1 : 0;
+          if (run >= 8) return (r + 4) / c.height;
+        }
+        return y;
+      };
+      Promise.all(imgs.map(im => new Promise(res => { const i = new Image(); i.onload = () => res({ ...im, i, w: i.naturalWidth, h: i.naturalHeight }); i.src = "../" + im.src; })))
+        .then(loaded => {
+          stage.innerHTML = `<div class="split-card"><h3>Where the ${q.marks} marks go</h3>${splitHtml()}</div>` + loaded.map(im => {
+            const cuts = [0, ...im.ps.map(p => blankAbove(im.i, p.y0)), 1];
+            let html = slice(im.src, im.w, im.h, cuts[0], cuts[1]);
+            im.ps.forEach((p, j) => {
+              html += `<div class="tagband"><b>${name(p.label)}</b>${p.syllabus.map(chip).join("")}<span class="k">${p.skill}</span><span class="mk">${p.marks} mark${p.marks > 1 ? "s" : ""}</span></div>`;
+              html += slice(im.src, im.w, im.h, cuts[j + 1], cuts[j + 2]);
+            });
+            return `<div class="sliced">${html}</div>`;
+          }).join("");
+        });
+    }
+  </script>
+</body>
+</html>
