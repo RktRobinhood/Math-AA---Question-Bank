@@ -212,6 +212,9 @@ Every question is tagged **per part**: (a), (b), (c)(i) and so on. Each part has
   - Each part was tagged by two independent reviewers working blind from the question and markscheme.
   - Where they disagreed, an adjudicator decided and recorded a `rationale`, along with both original tag sets. These parts are marked `"review": "adjudicated"`.
   - To correct a tag, edit this file and re-run the build.
+- **Sub-tags** ([#5](https://github.com/RktRobinhood/Math-AA---Question-Bank/issues/5)): each statement lists its `subtags`, the skills inside it, with ids like `SL2.1.gradient`. A part's `sub` names the skills that earn its marks: at least one under each of its codes, and none from other statements.
+  - AA SL's sub-tags are Wasteland Academy's skill map (`curriculum/aa-sl.json`), id for id. AI statements shared with AA take AA's list.
+  - `node scripts/build.mjs --todo-sub <course> [prefix]` lists tagged questions whose parts still lack sub-tags, with the sub-tags each part may use.
 - `data/crops.json` lists, for each question, its section, its images, its parts and their marks, and where each part label sits on the image (`anchor`).
 - A question that has been cropped but not tagged yet is published with a "Tags pending" badge.
 
