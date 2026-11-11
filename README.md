@@ -188,8 +188,8 @@ AA SL keeps the original file names, because Wasteland Academy's `tools/question
 
 | AA SL stat | Value |
 |---|---|
-| Questions | 306 |
-| Tagged parts | 869 |
+| Questions | 342 |
+| Tagged parts | 973 |
 | Exam years | 2021–2025 |
 | Sessions | May & November |
 | Time zones | TZ0, TZ1, TZ2, TZ3 |
