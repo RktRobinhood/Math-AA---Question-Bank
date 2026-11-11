@@ -45,6 +45,10 @@
    "canonical": "aa-sl-2021-may-tz2-p2-q08",
    "section": "B"
   },
+  "aa-hl-2021-nov-tz0-p1-q01": {
+   "canonical": "aa-sl-2021-nov-tz0-p1-q02",
+   "section": "A"
+  },
   "aa-hl-2021-nov-tz0-p1-q04": {
    "canonical": "aa-sl-2021-nov-tz0-p1-q04",
    "section": "A"
@@ -449,6 +453,10 @@
    "canonical": "aa-sl-2024-nov-tz2-p1-q09",
    "section": "B"
   },
+  "aa-hl-2025-may-tz1-p1-q01": {
+   "canonical": "aa-sl-2025-may-tz1-p1-q02",
+   "section": "A"
+  },
   "aa-hl-2025-may-tz1-p1-q02": {
    "canonical": "aa-sl-2025-may-tz1-p1-q03",
    "section": "A"
@@ -480,6 +488,10 @@
   "aa-hl-2025-may-tz2-p1-q06": {
    "canonical": "aa-sl-2025-may-tz2-p1-q06",
    "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p1-q10": {
+   "canonical": "aa-sl-2025-may-tz2-p1-q09",
+   "section": "B"
   },
   "aa-hl-2025-may-tz2-p2-q01": {
    "canonical": "aa-sl-2025-may-tz2-p2-q01",
@@ -580,6 +592,10 @@
   "aa-hl-2025-nov-tz3-p1-q04": {
    "canonical": "aa-sl-2025-nov-tz3-p1-q06",
    "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p1-q09": {
+   "canonical": "aa-sl-2025-nov-tz3-p1-q08",
+   "section": "B"
   },
   "aa-hl-2025-nov-tz3-p2-q01": {
    "canonical": "aa-sl-2025-nov-tz3-p2-q03",
