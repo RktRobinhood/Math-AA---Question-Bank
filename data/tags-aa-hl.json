@@ -3688,6 +3688,1113 @@
    ],
    "confidence": "low"
   },
+  "aa-hl-2023-may-tz1-p1-q03": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.8",
+      "3.6",
+      "2.7"
+     ],
+     "skill": "Rewrite cos 2x with the double angle identity to get a quadratic in sin x and solve over an interval",
+     "review": "adjudicated",
+     "rationale": "Most marks come from finding the angles in the interval (3.8), the opening A1 is the cos 2x double angle identity (3.6), and a separate M1 is given for solving the disguised quadratic in sin x (2.7).",
+     "passA": [
+      "3.8",
+      "3.6"
+     ],
+     "passB": [
+      "3.8",
+      "3.6",
+      "2.7"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14",
+      "3.2"
+     ],
+     "skill": "Related rates: area of an equilateral triangle via 1/2 ab sin C, then chain rule for dA/dt",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.14",
+      "2.12",
+      "1.12"
+     ],
+     "skill": "Use the conjugate root and sum/product of roots (or coefficient comparison) to find a parameter and all roots of a cubic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Sketch y = |f(|x|)| from a given graph, with intercepts and asymptote",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.16",
+      "2.3"
+     ],
+     "skill": "Use the sketch of the squared modulus function to find k giving exactly two solutions",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17",
+      "3.1"
+     ],
+     "skill": "Volume of revolution about the y-axis for a drilled sphere, subtracting a cylinder, and solve for the height",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2",
+      "3.9"
+     ],
+     "skill": "Right-angled trig to express a length in sec and cosec",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.15",
+      "5.8"
+     ],
+     "skill": "Differentiate sec and cosec and set derivative to zero to locate the stationary angle",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.15",
+      "5.7",
+      "3.9"
+     ],
+     "skill": "Second derivative of sec/cosec expression using product rule, evaluated exactly at arctan 2",
+     "review": "adjudicated",
+     "rationale": "The M1A1A1 are for differentiating sec and cosec terms with the product rule (5.15), which produces the second derivative (5.7), and the remaining marks need exact reciprocal ratios at arctan 2 (3.9).",
+     "passA": [
+      "5.15",
+      "5.7",
+      "3.9"
+     ],
+     "passB": [
+      "5.7",
+      "5.15",
+      "3.9"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Justify a minimum with the second derivative test and evaluate the minimum length",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Interpret the minimum length in context to decide if a pole fits round the corner",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14",
+      "3.13"
+     ],
+     "skill": "Use the scalar product and magnitudes with a given angle between lines to form an equation in t",
+     "review": "adjudicated",
+     "rationale": "The part uses the angle between two lines, which the 3.14 tagWhen lists as primary with 3.13 added because the scalar product and magnitudes earn every mark.",
+     "passA": [
+      "3.13",
+      "3.14"
+     ],
+     "passB": [
+      "3.14",
+      "3.13"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Square and solve the resulting quadratic, rejecting the invalid root",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.14",
+      "3.2"
+     ],
+     "skill": "Shortest distance from a point to a line using the angle and a vector magnitude (or vector methods)",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Normal to a plane containing two lines via the vector product",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.12",
+      "3.1"
+     ],
+     "skill": "Find cone height from its volume, then move from the base centre along the plane normal to locate both vertices",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Apply De Moivre to a power of a cis number and find the smallest n giving a required argument",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13",
+      "1.14"
+     ],
+     "skill": "Compare arguments of z and a power of z to describe the rotation on the Argand diagram",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Complete branch probabilities on a tree diagram",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.13",
+      "4.11"
+     ],
+     "skill": "Reverse conditional probability from a tree to estimate an unknown prior proportion",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.18",
+      "3.13"
+     ],
+     "skill": "Angle between a line and a plane via direction and normal vectors, solved for a parameter angle",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Proof by contradiction using parity of integers",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14",
+      "5.10"
+     ],
+     "skill": "Exact mean of a continuous random variable, integrating by inspection/reverse chain",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Probability from a pdf by definite integration on the GDC",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.8",
+      "4.5"
+     ],
+     "skill": "Least number of independent trials for at least one success with a given probability",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Binomial probability of exactly three successes",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count arrangements of a consecutive block of successes",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.10",
+      "4.5"
+     ],
+     "skill": "Probability of consecutive successes as favourable over nC3 arrangements, solved for the largest n",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method with a given step to approximate a solution value",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.7"
+     ],
+     "skill": "Evaluate first and second derivatives at x = 0 from a differential equation using implicit and product/quotient rules",
+     "review": "adjudicated",
+     "rationale": "The marks are for implicit and product-rule differentiation of the differential equation (5.14) to get and evaluate the second derivative (5.7); no series is built in this part, so 5.19 belongs to the next part.",
+     "passA": [
+      "5.19",
+      "5.14"
+     ],
+     "passB": [
+      "5.14",
+      "5.7"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Build a Maclaurin series from derivative values and use it to approximate y",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.18",
+      "5.15"
+     ],
+     "skill": "Solve a separable differential equation, integrating to arctan, apply the initial condition and evaluate",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.18",
+      "5.7"
+     ],
+     "skill": "Explain Euler underestimation from concavity of the solution curve",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p1-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "State the mean of a uniform-type pdf by symmetry",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Variance of a continuous random variable by integrating x^2 f(x)",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Proof by induction of a factorial series sum formula",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.5"
+     ],
+     "skill": "Equate cos and tan at an intersection and rearrange using tan = sin/cos",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.4",
+      "5.15",
+      "2.1"
+     ],
+     "skill": "Differentiate cos and tan and show the tangent gradients multiply to -1",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.7",
+      "3.6"
+     ],
+     "skill": "Use the Pythagorean identity to form a quadratic in sin k and select the valid exact root",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Express position and displacement vectors in a parallelogram in terms of a and c",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.13",
+      "3.12"
+     ],
+     "skill": "Expand a scalar product with given magnitudes and angle to derive a stated equation",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.8",
+      "3.5"
+     ],
+     "skill": "Use the parameter range to find the interval of angles giving two solutions",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Rearrange the circle equation to express the upper semicircle as a function of x",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Form the triangle area as a function of x from base and height",
+     "review": "adjudicated",
+     "rationale": "Building the area function from base and height is the modelling stage of an optimisation problem, which the 5.8 tagWhen covers; 2.2 is for domain, range or evaluating a function, not forming one.",
+     "passA": [
+      "2.2"
+     ],
+     "passB": [
+      "5.8"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a product involving a square root using product and chain rules",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8",
+      "2.7"
+     ],
+     "skill": "Set the derivative to zero, solve the quadratic and find the coordinate giving maximum area",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "low"
+  },
+  "aa-hl-2023-may-tz2-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.13",
+      "1.12"
+     ],
+     "skill": "Find modulus and argument to convert a Cartesian complex number to Euler form",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Use De Moivre to find the least power giving a real number and evaluate it",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Use conjugate roots and sum/product of roots to find all roots, then transform via w = 1/z",
+     "review": "adjudicated",
+     "rationale": "Most of the nine marks come from sum or product of roots and the reciprocal transformation of the cubic (2.12), with the conjugate-root theorem (1.14) earning the first root; the reciprocal values may be left unsimplified, so 1.12 earns no separate mark.",
+     "passA": [
+      "1.14",
+      "2.12"
+     ],
+     "passB": [
+      "1.14",
+      "2.12",
+      "1.12"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Solve an equation with a conjugate by equating real and imaginary parts",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Integrate cos(sqrt x) by a substitution followed by integration by parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Write the next term of a general term formula by replacing n with n+1",
+     "review": "adjudicated",
+     "rationale": "The one mark is for substituting n+1 into a given rule, which is function notation (2.2); the intercepts are not an arithmetic sequence, so 1.2 does not apply.",
+     "passA": [
+      "1.2"
+     ],
+     "passB": [
+      "2.2"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.11",
+      "3.5"
+     ],
+     "skill": "Area of the nth region between curve and axis using a definite integral with exact trig values at general limits",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Show consecutive areas have constant difference so form an arithmetic sequence",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Find the y-on-x regression line coefficients with the GDC",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Predict a value from the regression line",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p2-q02": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.2",
+      "3.3"
+     ],
+     "skill": "Cosine rule for an angle, then angles of elevation and right-angled trig to find a building height",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p2-q04": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.9",
+      "1.3"
+     ],
+     "skill": "Binomial coefficients of an expansion forming a geometric sequence, solved via common ratio",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.18",
+      "3.17"
+     ],
+     "skill": "Verify the line of intersection of two planes by substitution or normals",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.14",
+      "3.13"
+     ],
+     "skill": "Point on a line nearest the origin using perpendicularity via scalar product",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p2-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17",
+      "3.9"
+     ],
+     "skill": "Volume of revolution about the y-axis after inverting an arctan function to express x in terms of y",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.13",
+      "2.2"
+     ],
+     "skill": "Range of a rational function with quadratic denominator from its turning points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.16",
+      "2.15",
+      "3.5"
+     ],
+     "skill": "Use the sign of cos t to reduce to a modulus rational inequality and solve it",
+     "review": "adjudicated",
+     "rationale": "Solving the inequality in |x| is a modulus inequality (2.16 by its tagWhen), solving the rational inequality earns the M1A1 (2.15), and the R1 needs the sign of cosine in the second quadrant (3.5).",
+     "passA": [
+      "2.16",
+      "2.15",
+      "3.5"
+     ],
+     "passB": [
+      "2.15",
+      "2.16"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p2-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count selections of three integers with sum divisible by 3 using residue classes and combinations",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-may-tz2-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Probability of two yellows without replacement set equal to a value and rearranged",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Solve a quadratic in y with the formula and reject the negative root",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.10"
+     ],
+     "skill": "Search for positive integer pairs satisfying the derived relation",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Probability of three yellows drawn without replacement in terms of y",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.6",
+      "2.7"
+     ],
+     "skill": "Set up an equation comparing two without-replacement probabilities and solve for y",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "One step of Euler's method from an initial condition",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18",
+      "5.10"
+     ],
+     "skill": "Solve a homogeneous differential equation with y = vx, separate variables and use log laws with the initial condition",
+     "review": "adjudicated",
+     "rationale": "The y = vx substitution and separation of variables are 5.18, and the reverse-chain integral of v over 2v^2+1 earns its own A1 (5.10); the log rearrangement only leads to the answer given, so 1.7 is not tagged.",
+     "passA": [
+      "5.18",
+      "1.7"
+     ],
+     "passB": [
+      "5.18",
+      "5.10"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate the exact solution at a given x",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.18",
+      "5.7"
+     ],
+     "skill": "Use concavity to explain why Euler's method underestimates",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Locate a point of inflexion by graphing a derivative on the GDC",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.8",
+      "2.7"
+     ],
+     "skill": "Set the second derivative to zero and solve a disguised quadratic in y/x to find the line through the inflexion point",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.9",
+      "2.3"
+     ],
+     "skill": "Sketch log graphs with different bases alongside y = x, showing intercepts and asymptotic behaviour",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8",
+      "5.6",
+      "5.7"
+     ],
+     "skill": "Differentiate x - ln x, find the stationary point and justify a minimum",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.6",
+      "5.8"
+     ],
+     "skill": "Deduce an inequality from the minimum value of an expression",
+     "review": "adjudicated",
+     "rationale": "The R1 is for deducing a general inequality for all positive x (1.6 general statement), justified by the minimum value from optimisation (5.8).",
+     "passA": [
+      "5.8"
+     ],
+     "passB": [
+      "1.6",
+      "5.8"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4",
+      "2.9"
+     ],
+     "skill": "Investigate graphically the number of intersections of log graphs with y = x for ranges of the base",
+     "review": "adjudicated",
+     "rationale": "The marks are for counting intersection points read from graphs or a GDC (2.4), done on log graphs as the base changes (2.9).",
+     "passA": [
+      "2.4",
+      "2.9"
+     ],
+     "passB": [
+      "2.9",
+      "2.4"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.4",
+      "5.15",
+      "1.7"
+     ],
+     "skill": "Differentiate log base a and use tangency conditions to find the exact point and base",
+     "review": "agreed"
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "2.9",
+      "2.4"
+     ],
+     "skill": "State the exact range of bases giving two intersection points",
+     "review": "adjudicated",
+     "rationale": "No graph is read here: the mark is for using the exact critical base e^(1/e) to describe how log graphs with different bases behave (2.9), and the count of intersections (2.4) is the context.",
+     "passA": [
+      "2.4",
+      "2.9"
+     ],
+     "passB": [
+      "2.9",
+      "2.4"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "2.9",
+      "2.4"
+     ],
+     "skill": "State the exact range of bases giving no intersection points",
+     "review": "adjudicated",
+     "rationale": "As in f(i), the mark is for giving the base interval from how the log function depends on its base (2.9), with intersection count (2.4) as the context.",
+     "passA": [
+      "2.4",
+      "2.9"
+     ],
+     "passB": [
+      "2.9",
+      "2.4"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz2-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Verify gradient, root and intercept form an arithmetic sequence via a common difference",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Find the root of a general linear function",
+     "review": "adjudicated",
+     "rationale": "The single mark is for finding the x-intercept of the linear function, which the 2.4 tagWhen covers; no gradient or line-equation work for 2.1 is assessed.",
+     "passA": [
+      "2.4"
+     ],
+     "passB": [
+      "2.1"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Use the arithmetic sequence condition to express the intercept in terms of the gradient",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "State the restriction on the parameter from the denominator",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.2",
+      "2.10"
+     ],
+     "skill": "Find the remaining integer cases of the arithmetic-sequence linear functions",
+     "review": "adjudicated",
+     "rationale": "The M1 is for searching for integer solutions of an equation in m by table, graph or trial (2.10, as no specific statement covers it), and the A marks give the arithmetic triples (1.2).",
+     "passA": [
+      "1.2"
+     ],
+     "passB": [
+      "1.2",
+      "2.10"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State the sum of roots of a quadratic in terms of coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State the product of roots of a quadratic in terms of coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Express the difference of roots using the common difference of the sequence",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "1.2",
+      "2.12"
+     ],
+     "skill": "Combine the sum of roots with the common difference to express one root",
+     "review": "agreed"
+    },
+    {
+     "label": "e(iii)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Equate two expressions for a root from the sequence to derive conditions on coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.2",
+      "2.12"
+     ],
+     "skill": "Use the sequence and root relations to find the two quadratics when b = 0",
+     "review": "agreed"
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Express a root in terms of b using the arithmetic sequence",
+     "review": "agreed"
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "2.7",
+      "1.2"
+     ],
+     "skill": "Substitute roots to form and solve a quadratic in b, giving exact surd values of b and c",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "low"
+  },
   "aa-hl-2024-nov-tz0-p1-q06": {
    "parts": [
     {
