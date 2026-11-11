@@ -7,7 +7,9 @@ of that session is tried. A pair with
 the same marks and the same text (similarity >= 0.98) is a common question:
   - data/shared.json gets  "<hl id>": {"canonical": "<sl id>", "section": "<hl section>"}
   - the HL entry leaves the HL manifest and its images are deleted (the SL images are used).
-Near misses (0.85-0.98) are printed for a person to check; they are never merged.
+A pair whose words are identical but come out of the PDF in a different order (stacked fractions
+often do) also counts. Near misses (0.85-0.98) are printed for a person to check; they are never
+merged: most are HL versions with different numbers or an extra part.
 
 Usage:
   py scripts/match_shared.py --sl-pdfs <dir> --hl-pdfs <dir> --sl-manifest data/crops.json \\
@@ -88,7 +90,8 @@ def main():
                 continue
             ratio, g, j, sm = best
             hl_id, sl_id = f"{hl_group}-q{i:02d}", f"{g}-q{j:02d}"
-            if ratio >= SAME and sm == hm:
+            same_words = sorted(ht.split()) == sorted(next(st for g2, j2, sm2, st in sl_q if (g2, j2) == (g, j)).split())
+            if sm == hm and (ratio >= SAME or same_words):
                 pairs.append((hl_id, sl_id))
             elif ratio >= NEAR:
                 print(f"   near miss, not merged: {hl_id} ~ {sl_id} ({ratio:.3f}, marks {hm}/{sm})")
