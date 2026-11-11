@@ -1,0 +1,1084 @@
+{
+ "about": "Per-part syllabus tags for AA HL. Each part was tagged by two independent blind reviewers against data/syllabus.json and data/syllabus-aa-hl.json; parts where they disagreed were settled by an adjudicator (review: adjudicated, with rationale and both original tag sets). HL appearances of SL questions (data/shared.json) take the SL tags and are not listed here.",
+ "questions": {
+  "aa-hl-2022-nov-tz0-p1-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Use the conjugate root and the product of roots of a quartic to find a real root",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Use the sum of roots to find an unknown coefficient of a quartic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2022-nov-tz0-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14",
+      "5.8"
+     ],
+     "skill": "Implicitly differentiate a relation and show dy/dx = 0 has no solutions in the domain",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2022-nov-tz0-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.14",
+      "3.7"
+     ],
+     "skill": "Find the largest domain on which a shifted cosine function is one-to-one",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.14",
+      "3.7"
+     ],
+     "skill": "Find the largest domain for an inverse of a shifted cosine for a second phase shift",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.14",
+      "3.7"
+     ],
+     "skill": "Find the largest domain for an inverse in terms of the phase shift parameter",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a homogeneous differential equation with the substitution y = vx and an initial condition",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8",
+      "5.18"
+     ],
+     "skill": "Set dy/dx = 0 in the differential equation to locate points of zero gradient on lines y = mx",
+     "review": "adjudicated",
+     "rationale": "Both marks come from setting the gradient to zero to locate stationary points, which is the 5.8 idea; the differential equation only supplies the gradient expression and is not solved here, so 5.18 is secondary.",
+     "passA": [
+      "5.18",
+      "5.8"
+     ],
+     "passB": [
+      "5.8",
+      "5.18"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.8",
+      "3.6"
+     ],
+     "skill": "Reduce a quadratic trig equation to one trig ratio with the Pythagorean identity and solve in an interval",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Differentiate squared trig terms by the chain rule and find the stationary points",
+     "review": "adjudicated",
+     "rationale": "Five of the seven marks are for solving f'(x)=0 and giving the stationary-point coordinates (5.8), with two for the chain-rule derivative of squared trig terms (5.6); solving sin 2x = 0 is a single routine mark inside the 5.8 work, so 3.8 is not added.",
+     "passA": [
+      "5.6",
+      "5.8"
+     ],
+     "passB": [
+      "5.6",
+      "5.8",
+      "3.8"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.16",
+      "3.7"
+     ],
+     "skill": "Sketch the modulus of a trig function showing turning points, cusps and intercepts",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.16",
+      "3.8"
+     ],
+     "skill": "Solve a modulus inequality involving a trig function using the graph and a trig equation",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count codes with and without repetition using the product principle and permutations",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Use the factor theorem to relate coefficients of a cubic, deduce the coefficients, factorise and sketch the cubic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2022-nov-tz0-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Find the argument of a complex number given in Cartesian form, generally in terms of n",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.10",
+      "1.13",
+      "3.9"
+     ],
+     "skill": "Prove the arctan addition formula with the tan compound angle identity and apply it to the argument of a product",
+     "review": "adjudicated",
+     "rationale": "Part (i) is earned by the tan compound angle identity (3.10), and part (ii) by adding arguments of a product in polar terms (1.13) before applying the arctan result, so 1.13 carries more marks than the inverse-trig notation of 3.9.",
+     "passA": [
+      "3.10",
+      "3.9",
+      "1.13"
+     ],
+     "passB": [
+      "3.10",
+      "1.13",
+      "3.9"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.15",
+      "1.13",
+      "3.10"
+     ],
+     "skill": "Prove by induction a formula for the argument of a product of complex numbers using the arctan addition result",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14",
+      "5.16"
+     ],
+     "skill": "Use integration by parts on a pdf integrating to 1 to find the constant in terms of the upper limit",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the median of a continuous random variable by setting the integral to one half and solving with technology",
+     "review": "adjudicated",
+     "rationale": "The marks are for setting the cumulative integral of the pdf to one half and solving for the median, which 4.14 names directly; the technology solve is incidental and does not need 2.10.",
+     "passA": [
+      "4.14",
+      "2.10"
+     ],
+     "passB": [
+      "4.14"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2022-nov-tz0-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.13",
+      "3.6"
+     ],
+     "skill": "Find the cosine of the angle between two vectors with the scalar product, simplifying with sin^2 + cos^2 = 1",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.12",
+      "3.5"
+     ],
+     "skill": "Find the exact limit of the angle between vectors as n tends to infinity",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p2-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14",
+      "2.10"
+     ],
+     "skill": "Find a rate of change of height from a volume rate using related rates, solving a cubic for h with technology",
+     "review": "adjudicated",
+     "rationale": "Most marks are for linking dh/dt to dV/dt through the chain rule (5.14 related rates), and a separate independent M1A1 is for solving the cubic V=200 for h on the GDC, a technology solve that 2.10 covers.",
+     "passA": [
+      "5.14",
+      "2.10"
+     ],
+     "passB": [
+      "5.14"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2",
+      "3.9"
+     ],
+     "skill": "Express a diagonal with the cosine rule in two triangles and equate to relate the angles using arccos",
+     "review": "adjudicated",
+     "rationale": "Three marks come from the cosine rule in each triangle (3.2), and the final mark needs the angle expressed with arccos, which is inverse trig as a function under 3.9.",
+     "passA": [
+      "3.2",
+      "3.9"
+     ],
+     "passB": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.2",
+      "2.4"
+     ],
+     "skill": "Express the quadrilateral area as a function of one angle using triangle area formulas and maximise with technology",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a product of an exponential and a linear function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Find the point where the tangent has gradient 1 by solving f'(x) = 1 with technology",
+     "review": "adjudicated",
+     "rationale": "The marks are for setting the tangent gradient equal to 1 and finding the point, which 5.4 covers as where a tangent has a given gradient; the GDC solve is just the way to finish, not the assessed skill, so 2.10 is not added.",
+     "passA": [
+      "5.4",
+      "2.10"
+     ],
+     "passB": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Find the volume of revolution about the x-axis of the region bounded by the curve and the axes",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.5",
+      "5.6"
+     ],
+     "skill": "Evaluate a composite function and its derivative at a point using the chain rule",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2022-nov-tz0-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Write displacement vectors between points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Use parallel vectors to find a parameter for collinear points",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.15",
+      "3.14"
+     ],
+     "skill": "Write a vector equation of a line and show two lines are skew",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.17",
+      "3.18",
+      "3.16"
+     ],
+     "skill": "Find a plane's Cartesian equation via a vector product and the foot of the perpendicular from the origin",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Derive the sum of the first n integers from the arithmetic series formula",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Evaluate a small finite sum of squares",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Set up a system of three linear equations for unknown polynomial coefficients from data values",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Solve a 3x3 linear system for the coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate a polynomial with general n terms and multiply by x",
+     "review": "agreed"
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate a general power sum term by term to obtain a sigma expression",
+     "review": "agreed"
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "1.15",
+      "5.3"
+     ],
+     "skill": "Prove by induction a sigma formula for a recursively defined family of derivative functions",
+     "review": "agreed"
+    },
+    {
+     "label": "d(iii)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Write the value of a power sum at x = 1 in sigma notation",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Use the finite geometric series sum formula with ratio x and n+1 terms",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a rational expression with the quotient rule and simplify to a given form",
+     "review": "agreed"
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Show a limit is of the indeterminate form 0/0",
+     "review": "agreed"
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Apply l'Hopital's rule twice to evaluate a limit giving the sum of integers",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2022-nov-tz0-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Evaluate a given definite integral for a cone's curved surface area with specific values",
+     "review": "adjudicated",
+     "rationale": "Both marks come from evaluating a definite integral exactly by hand, which the 5.11 tagWhen names, rather than the indefinite integration of 5.5.",
+     "passA": [
+      "5.11"
+     ],
+     "passB": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Deduce the radius of a cone formed by rotating a line segment",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Deduce the slant height of the cone in terms of the parameters",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Evaluate the general surface area integral to derive the cone curved surface area formula",
+     "review": "adjudicated",
+     "rationale": "All three marks are for evaluating the general definite integral and rewriting it in terms of r and l (5.11); the cone formula is the target, but no 3.1 solid-geometry work earns marks.",
+     "passA": [
+      "5.11",
+      "3.1"
+     ],
+     "passB": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a square root function using the chain rule",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Substitute into a surface area integral and simplify to derive the surface area of a sphere",
+     "review": "adjudicated",
+     "rationale": "The marks are for substituting y and dy/dx into the surface-area integral, simplifying, and evaluating it by hand between -r and r (5.11); the derivative was found in (c), so 5.6 is not new content here.",
+     "passA": [
+      "5.11"
+     ],
+     "passB": [
+      "5.5"
+     ]
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "2.11"
+     ],
+     "skill": "Describe the horizontal stretch given by y = f(kx)",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "2.11"
+     ],
+     "skill": "State the x-intercepts of a horizontally stretched graph",
+     "review": "adjudicated",
+     "rationale": "The single mark comes from applying the horizontal stretch to the original intercepts at plus and minus r, which is a 2.11 transformation; nothing is read from a graph or GDC, so 2.4 is not added.",
+     "passA": [
+      "2.11",
+      "2.4"
+     ],
+     "passB": [
+      "2.11"
+     ]
+    },
+    {
+     "label": "e(iii)",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate the transformed square root function with the chain rule",
+     "review": "agreed"
+    },
+    {
+     "label": "e(iv)",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Form and simplify a definite integral with correct limits for the surface area of an ellipsoid",
+     "review": "adjudicated",
+     "rationale": "The marks are for substituting into the integral, simplifying the integrand to a polynomial under the root, and setting correct limits, all 5.11 definite-integral work; the derivative comes from (iii), so 5.6 is not re-tagged.",
+     "passA": [
+      "5.11"
+     ],
+     "passB": [
+      "5.11",
+      "5.6"
+     ]
+    },
+    {
+     "label": "e(v)",
+     "syllabus": [
+      "5.5",
+      "1.1"
+     ],
+     "skill": "Choose model parameters and evaluate a surface area integral with technology, giving the answer in standard form",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "low"
+  },
+  "aa-hl-2024-nov-tz0-p1-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Solve a quadratic inequality using its critical values",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.14",
+      "2.2"
+     ],
+     "skill": "Find the largest domain boundary for which a square-root of a quadratic has an inverse, with justification",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.9",
+      "2.2"
+     ],
+     "skill": "Determine the range of a translated secant function on a restricted domain",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.17",
+      "5.15"
+     ],
+     "skill": "Find a volume of revolution by integrating sec squared exactly",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Express the position vector of a point dividing a line segment in terms of a and b",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.13",
+      "3.12"
+     ],
+     "skill": "Use a zero scalar product with given magnitudes and dot product to find a ratio parameter",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.10",
+      "3.6",
+      "1.6"
+     ],
+     "skill": "Prove a trig identity using the tan compound angle formula and double angle identities",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.8"
+     ],
+     "skill": "Use the proved identity to solve a trig equation in an interval",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-nov-tz0-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Evaluate a limit at infinity of an exponential quotient using l'Hopital's rule or dividing through",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate an exponential quotient and relate the derivative to 1 - y^2",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.14",
+      "5.12"
+     ],
+     "skill": "Use implicit differentiation to find the second and third derivatives in terms of y",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Build a Maclaurin series up to x^3 from derivative values at zero",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Find the fourth roots of a complex number with De Moivre's theorem",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13",
+      "1.3"
+     ],
+     "skill": "Find the common ratio of roots forming a geometric sequence by dividing in polar form",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Plot complex roots on an Argand diagram",
+     "review": "adjudicated",
+     "rationale": "The marks are for plotting points on an Argand diagram with equal modulus and correct angular spacing, which falls under the 1.12 boundary for points on the diagram; no conversion between forms or polar multiplication is needed, so 1.13 is not added.",
+     "passA": [
+      "1.12"
+     ],
+     "passB": [
+      "1.12",
+      "1.13"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.14",
+      "1.12"
+     ],
+     "skill": "Find the equation whose roots are the conjugates of given roots",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Find the modulus and argument of midpoints and deduce the least power for which they are roots of w^p = 2^q",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-nov-tz0-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Evaluate the next term of a population recurrence with growth and removal",
+     "review": "adjudicated",
+     "rationale": "The marks are for applying the growth-and-removal recurrence once; this is a population model, not money, so 1.3 applies rather than 1.4, which the tagWhen keeps for financial contexts.",
+     "passA": [
+      "1.3"
+     ],
+     "passB": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Verify a further term of the recurrence",
+     "review": "adjudicated",
+     "rationale": "One mark is for iterating the population recurrence again; the context is not financial, so 1.3 is used rather than 1.4.",
+     "passA": [
+      "1.3"
+     ],
+     "passB": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Compute a later term of the recurrence",
+     "review": "adjudicated",
+     "rationale": "The marks are for one more iteration of the recurrence; with a population rather than money context, 1.3 is used instead of 1.4.",
+     "passA": [
+      "1.3"
+     ],
+     "passB": [
+      "1.4"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Simplify a closed form containing a geometric series sum",
+     "review": "agreed"
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Evaluate a term from the closed-form geometric model",
+     "review": "adjudicated",
+     "rationale": "The marks are for evaluating a term from the closed form that contains a geometric term (1.3); the finance-solver route is only an alternative method, and the trout context is not financial, so 1.4 is not used.",
+     "passA": [
+      "1.3"
+     ],
+     "passB": [
+      "1.4",
+      "1.3"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "1.5",
+      "1.3"
+     ],
+     "skill": "Show the difference of consecutive terms of the closed form is a geometric expression",
+     "review": "adjudicated",
+     "rationale": "The marks come from manipulating integer powers of 1.1 to simplify the difference of consecutive terms (1.5), with the geometric-sequence closed form (1.3) as the setting.",
+     "passA": [
+      "1.3",
+      "1.5"
+     ],
+     "passB": [
+      "1.5"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Use the sign of the consecutive difference to deduce the sequence is decreasing",
+     "review": "adjudicated",
+     "rationale": "The reasoning mark is for using the sign of the consecutive-term difference to conclude that the sequence decreases, a property of the sequence model (1.3); no exponent manipulation earns this mark, so 1.5 does not fit.",
+     "passA": [
+      "1.3"
+     ],
+     "passB": [
+      "1.5"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.7",
+      "1.3"
+     ],
+     "skill": "Find the first n for which the model becomes non-positive using logarithms or tabulation",
+     "review": "adjudicated",
+     "rationale": "The main method solves the exponential inequality with logarithms or change of base (1.7), and the equally valid route of evaluating terms either side of zero makes the sequence (1.3) secondary.",
+     "passA": [
+      "1.7",
+      "1.3"
+     ],
+     "passB": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Find the removal amount that keeps the modelled population constant",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "1.15",
+      "1.3"
+     ],
+     "skill": "Prove by induction the closed form of a first-order linear recurrence",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "low"
+  },
+  "aa-hl-2024-nov-tz0-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Solve a quadratic giving exact surd roots",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Show two surd roots are reciprocals via their product or rationalising",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Show the imaginary roots of x^2 + 1 = 0 are reciprocals using complex arithmetic",
+     "review": "adjudicated",
+     "rationale": "The marks come from Cartesian complex arithmetic showing that the reciprocal of i is -i, or that the product of the roots is 1 (1.12); finding the roots of x^2+1=0 is immediate, so 2.7 earns nothing.",
+     "passA": [
+      "1.12",
+      "2.7"
+     ],
+     "passB": [
+      "1.12"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Verify algebraically a general identity linking p(x) and p(1/x) for a palindromic quadratic",
+     "review": "adjudicated",
+     "rationale": "The marks are for algebraically verifying an identity that holds for all a, b and nonzero x, which is proving a general identity under 1.6 rather than a numerical show-that; it uses no factor or remainder theorem, so 2.12 does not apply.",
+     "passA": [
+      "1.6"
+     ],
+     "passB": [
+      "2.12"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.6",
+      "2.12"
+     ],
+     "skill": "Prove that the reciprocal of a nonzero root of a palindromic polynomial is also a root",
+     "review": "adjudicated",
+     "rationale": "The A1 and R1 are for a deductive argument that a general statement about roots holds (1.6), and the statement concerns zeros of a polynomial of any degree (2.12), which is the secondary tag.",
+     "passA": [
+      "1.6",
+      "2.12"
+     ],
+     "passB": [
+      "2.12",
+      "1.6"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.6",
+      "2.12"
+     ],
+     "skill": "Prove that the product of two palindromic polynomials is palindromic",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.12",
+      "2.7"
+     ],
+     "skill": "Equate coefficients of a quartic and its quadratic factorisation and solve for the unknowns",
+     "review": "adjudicated",
+     "rationale": "Expanding the quadratic factors and equating coefficients to find unknown coefficients is 2.12, and solving the resulting system reduces to a quadratic in u or v, which earns its own M1A1 under 2.7.",
+     "passA": [
+      "2.12",
+      "2.7"
+     ],
+     "passB": [
+      "2.12"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "2.7",
+      "1.12"
+     ],
+     "skill": "Solve the quadratic factors to find exact real and complex roots of a quartic",
+     "review": "agreed"
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "2.12",
+      "1.6"
+     ],
+     "skill": "Prove -1 is always a root of an odd-degree palindromic polynomial using the factor theorem",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  }
+ }
+}
