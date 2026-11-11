@@ -1,7 +1,9 @@
 (function () {
   if (typeof PRACTICE_TEMPLATES === 'undefined') return;
 
-  const DATA = window.AASL_DATA || { questions: [] };
+  // Practice templates are written for AA SL, so only AA SL exam questions are matched.
+  const RAW = window.AASL_DATA || { questions: [] };
+  const DATA = { ...RAW, questions: (RAW.questions || []).filter(q => (q.courses || ['aa-sl']).includes('aa-sl')) };
   const qById = Object.fromEntries((DATA.questions || []).map(q => [q.id, q]));
   const totalSittings = typeof TOTAL_SITTINGS !== 'undefined' ? TOTAL_SITTINGS : 9;
 

@@ -7,11 +7,44 @@
     return;
   }
 
-  const allQuestions = DATA.questions || [];
-  const allYears = [...new Set(allQuestions.map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
-  const allSubtopics = [...new Set(allQuestions.flatMap(q => q.syllabus || []))]
-    .sort((a, b) => naturalCompare(a, b));
+  const allRecords = DATA.questions || [];
+  const courses = DATA.courses || [];
+  const COURSE = window.QB_COURSE;
+  // Everything below works on the chosen course's questions. A question shared by an SL and an
+  // HL paper is stored once; in the HL course it shows its HL paper, timezone and number.
+  let course;
+  let allQuestions = [];
+  let allYears = [];
+  let allSubtopics = [];
   let pendingMathRender = false;
+
+  function loadCourse() {
+    course = courses.find(c => c.id === COURSE?.get()) || courses[0];
+    allQuestions = allRecords
+      .filter(q => (q.courses || [q.course]).includes(course.id))
+      .map(q => asCourseRow(q, course.id));
+    allYears = [...new Set(allQuestions.map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
+    allSubtopics = [...new Set(allQuestions.flatMap(q => q.syllabus || []))]
+      .sort((a, b) => naturalCompare(a, b));
+  }
+
+  function asCourseRow(q, courseId) {
+    const here = (q.appearances || []).find(a => a.course === courseId);
+    const elsewhere = (q.appearances || []).filter(a => a.course !== courseId);
+    const row = here && here.id !== q.id
+      ? { ...q, title: here.title, paper: here.paper, timezone: here.timezone, section: here.section, question: here.question }
+      : { ...q };
+    row.alsoIn = elsewhere;
+    return row;
+  }
+
+  function courseShort(id) {
+    return courses.find(c => c.id === id)?.short || id;
+  }
+
+  function hasSections() {
+    return (course?.papers || []).some(p => p.sections);
+  }
 
   const state = {
     tab: document.body.dataset.initialTab || "questions",
@@ -34,16 +67,33 @@
   let selectMode = false;
   const selected = new Set(); // question IDs checked in bulk-select mode
 
+  loadCourse();
   applyInitialParams();
   render();
+
+  COURSE?.onChange(() => {
+    // Paper, section, timezone and syllabus picks don't carry over between courses.
+    state.paper = "";
+    state.section = "";
+    state.timezone = "";
+    state.and.clear();
+    state.or.clear();
+    state.not.clear();
+    state.years.clear();
+    selected.clear();
+    loadCourse();
+    render();
+  });
 
   function render() {
     const focus = captureFocus();
     app.innerHTML = "";
     app.append(renderSiteHeader());
+    if (COURSE) app.append(COURSE.bar());
 
-    if (state.tab === "questions") app.append(renderQuestionBank());
-    if (state.tab === "statistics") app.append(renderStatistics());
+    if (!allQuestions.length && state.tab !== "syllabus") app.append(renderComingSoon());
+    else if (state.tab === "questions") app.append(renderQuestionBank());
+    else if (state.tab === "statistics") app.append(renderStatistics());
     if (state.tab === "syllabus") { app.append(renderSyllabus()); renderMath(app); }
     restoreFocus(focus);
   }
@@ -80,8 +130,8 @@
   function renderSiteHeader() {
     return el("header", { class: "site-header" },
       el("a", { class: "site-brand", href: "./" },
-        el("strong", { text: "IB Math AA SL" }),
-        el("span", { text: `${allQuestions.length} mapped questions` })
+        el("strong", { text: "IB Math Question Bank" }),
+        el("span", { text: `${course.short}: ${allQuestions.length} mapped questions` })
       ),
       el("nav", { class: "site-menu", "aria-label": "Main navigation" },
         menuGroup("Question Bank", [
@@ -94,7 +144,7 @@
           ...Object.entries(DATA.topics || {}).map(([topic, name]) => [`syllabus/topic-${topic}/`, `Topic ${topic}: ${name}`])
         ], () => { state.tab = "syllabus"; render(); }, state.tab === "syllabus"),
         el("a", { class: "site-menu-link", href: "practice.html", text: "Practice" }),
-        el("a", { class: "site-menu-link", href: DATA.assets?.formulaSheet || "#", target: "_blank", text: "Formula Sheet" })
+        course.formulaBooklet ? el("a", { class: "site-menu-link", href: course.formulaBooklet, target: "_blank", text: "Formula Sheet" }) : null
       )
     );
   }
@@ -112,6 +162,13 @@
       el("div", { class: "submenu" },
         ...links.map(([href, text]) => el("a", { href, text }))
       )
+    );
+  }
+
+  function renderComingSoon() {
+    return el("section", { class: "panel static-hero" },
+      el("h1", { text: `${course.fullName}: coming soon` }),
+      el("p", { text: `The ${course.short} papers are being cropped and tagged. They'll appear here as each year is added. The ${course.short} syllabus is already on the Syllabus tab.` })
     );
   }
 
@@ -138,9 +195,9 @@
         ["5", "5"]
       ], "topic"),
       filterRow("Session", [["", "All"], ["May", "May"], ["Nov", "Nov"]], "session"),
-      filterRow("Time zone", [["", "All"], ["TZ0", "TZ0"], ["TZ1", "TZ1"], ["TZ2", "TZ2"], ["TZ3", "TZ3"]], "timezone"),
-      filterRow("Paper", [["", "All"], ["P1", "P1"], ["P2", "P2"]], "paper"),
-      filterRow("Section", [["", "All"], ["A", "A"], ["B", "B"]], "section"),
+      filterRow("Time zone", [["", "All"], ...[...new Set(allQuestions.map(q => q.timezone))].sort().map(tz => [tz, tz])], "timezone"),
+      filterRow("Paper", [["", "All"], ...course.papers.map(p => [p.id, p.id])], "paper"),
+      hasSections() ? filterRow("Section", [["", "All"], ["A", "A"], ["B", "B"]], "section") : null,
       renderYearPills(),
       el("div", { class: "filter-row", style: "justify-content:flex-end; border-top:1px solid var(--border); padding-top:8px; margin-top:4px;" },
         el("button", { class: "secondary-btn", type: "button", text: "Reset all filters", onclick: resetFilters })
@@ -345,8 +402,9 @@
           el("div", { class: "question-title", text: q.title }),
           el("div", { class: "meta-line" },
             badge(`${q.marks || 0} marks`),
-            badge(q.section ? `Section ${q.section}` : "No section", true),
-            badge((q.topicNumbers || []).map(t => `T${t}`).join(" ") || "No topic", true),
+            q.section ? badge(`Section ${q.section}`, true) : null,
+            q.tagged === false ? el("span", { class: "badge pending", text: "Tags pending" }) : badge((q.topicNumbers || []).map(t => `T${t}`).join(" ") || "No topic", true),
+            ...(q.alsoIn || []).map(a => el("span", { class: "badge also", title: `The same question is ${courseShort(a.course)} ${a.title}`, text: `Also ${courseShort(a.course)} ${a.paper} Q${a.question}` })),
             inBasket && !selectMode ? badge("✓ Added", false) : null
           ),
           el("div", { class: "tag-line" },
@@ -583,27 +641,27 @@
 
   function renderPaperSplit(analytics) {
     const totalQ = [...analytics.paperCounts.values()].reduce((a, b) => a + b, 0) || 1;
-    const paperEntries = [
-      { label: "Paper 1", sub: "Calculator-free", value: analytics.paperCounts.get("P1") || 0, color: "var(--accent)" },
-      { label: "Paper 2", sub: "GDC allowed", value: analytics.paperCounts.get("P2") || 0, color: "var(--green)" }
-    ];
+    const paperColors = ["var(--accent)", "var(--green)", "#0ea5e9"];
+    const paperEntries = course.papers.map((p, i) => (
+      { label: p.name, sub: p.calculator ? "GDC allowed" : "Calculator-free", value: analytics.paperCounts.get(p.id) || 0, color: paperColors[i] }
+    ));
     const sectionEntries = [
       { label: "Section A", sub: "Short answer", value: analytics.sectionCounts.get("A") || 0, color: "var(--amber)" },
       { label: "Section B", sub: "Extended response", value: analytics.sectionCounts.get("B") || 0, color: "var(--red)" }
     ];
     return el("section", { class: "stat-card" },
       el("div", { class: "stat-card-head" },
-        el("h2", { class: "section-title", text: "Paper & section breakdown" }),
-        el("p", { class: "stat-desc", text: "Distribution of questions by paper type and answer format." })
+        el("h2", { class: "section-title", text: hasSections() ? "Paper & section breakdown" : "Paper breakdown" }),
+        el("p", { class: "stat-desc", text: hasSections() ? "Distribution of questions by paper type and answer format." : "Distribution of questions by paper." })
       ),
       el("div", { class: "split-section" },
         el("div", { class: "split-label", text: "BY PAPER" }),
         ...paperEntries.map(e => splitBar(e, totalQ))
       ),
-      el("div", { class: "split-section", style: "margin-top:18px" },
+      hasSections() ? el("div", { class: "split-section", style: "margin-top:18px" },
         el("div", { class: "split-label", text: "BY SECTION" }),
         ...sectionEntries.map(e => splitBar(e, totalQ))
-      )
+      ) : null
     );
   }
 
@@ -642,7 +700,7 @@
 
   function renderSyllabus() {
     const matcher = buildSearchMatcher(state.query);
-    const items = (DATA.syllabus || []).filter(item => matcher(`${item.title} ${stripHtml(item.html)}`));
+    const items = syllabusItems().filter(item => matcher(`${item.title} ${stripHtml(item.html)}`));
     return el("section", {},
       el("section", { class: "panel filter-panel" },
         el("div", { class: "input-row" },
@@ -663,11 +721,35 @@
       ),
       el("div", { class: "syllabus-grid" },
         ...items.map(item => el("article", { class: "syllabus-card" },
-          el("h2", { text: `Topic ${item.topic}: ${item.title}` }),
+          el("h2", { text: item.title }),
           el("div", { html: item.html })
         ))
       )
     );
+  }
+
+  // AA courses use the AA reference pages (with formulas); AA HL adds its AHL statements under each
+  // topic. AI courses list their statements, numbered as in the AI guide.
+  function syllabusItems() {
+    const list = statements => `<ul class="statement-list">${statements.map(s =>
+      `<li><strong>${escapeHtml(s.code)} ${escapeHtml(s.title)}</strong><br>${escapeHtml(s.content)}</li>`).join("")}</ul>`;
+    const topics = Object.entries(DATA.topics || {});
+    if (course.subject !== "aa") {
+      return topics.map(([t, name]) => ({ topic: Number(t), title: `Topic ${t}: ${name}`, html: list(course.statements.filter(s => s.topic === t)) }));
+    }
+    const items = (DATA.syllabusDocs?.aa || []).map(d => ({ topic: d.topic, title: `Topic ${d.topic}: ${d.title}`, html: d.html }));
+    if (course.level === "HL") {
+      for (const [t, name] of topics) {
+        const extra = course.statements.filter(s => s.topic === t && s.id.startsWith("AHL"));
+        if (extra.length) items.push({ topic: Number(t), title: `Topic ${t}: ${name}, additional higher level`, html: list(extra) });
+      }
+      items.sort((a, b) => a.topic - b.topic);
+    }
+    return items;
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 
   function filterQuestions() {

@@ -1624,3 +1624,111 @@ a.question-card:hover {
 body.aasl-tray-active {
   padding-bottom: 62px;
 }
+
+/* ── Course bar: which course the reader is studying ─────────────────────── */
+.course-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.course-tab {
+  --course: var(--accent);
+  display: grid;
+  gap: 1px;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: border-color 0.12s, background 0.12s;
+}
+
+.course-tab.course-ai {
+  --course: #0d9488;
+}
+
+.course-tab:hover {
+  text-decoration: none;
+  border-color: var(--course);
+}
+
+.course-tab strong {
+  font-size: 1.25rem;
+  line-height: 1.15;
+  color: var(--course);
+}
+
+.course-tab-name {
+  font-size: 0.8rem;
+  font-weight: 650;
+}
+
+.course-tab-count {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.course-tab.on {
+  border-color: var(--course);
+  background: var(--course);
+  color: #fff;
+}
+
+.course-tab.on strong,
+.course-tab.on .course-tab-count {
+  color: #fff;
+}
+
+.appears-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.badge.also {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.badge.pending {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.course-section-title {
+  margin: 18px 0 10px;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 720px) {
+  .course-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-tab-name {
+    display: none;
+  }
+}
+
+.statement-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.statement-list li {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.statement-list strong {
+  color: var(--text);
+}

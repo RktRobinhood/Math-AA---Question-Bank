@@ -13,3 +13,6 @@ assets/q0*.png
 assets/q5_*.png
 assets/spot_*.png
 assets/vi_*.png
+
+# Local working files (downloaded PDFs, logs, screenshots)
+_scratch/
