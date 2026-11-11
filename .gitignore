@@ -16,3 +16,4 @@ assets/vi_*.png
 
 # Local working files (downloaded PDFs, logs, screenshots)
 _scratch/
+__pycache__/
