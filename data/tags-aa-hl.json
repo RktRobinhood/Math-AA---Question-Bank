@@ -9013,6 +9013,800 @@
     }
    ],
    "confidence": "low"
+  },
+  "aa-hl-2025-nov-tz1-p1-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.19",
+      "1.10"
+     ],
+     "skill": "Find the first Maclaurin coefficients of a negative power of (1-x) by differentiation or binomial expansion",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.19",
+      "1.4"
+     ],
+     "skill": "Use the series approximation to reverse a depreciation and estimate an original value",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Row-reduce a 3x3 system with parameters to find conditions for infinitely many solutions",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18",
+      "3.6"
+     ],
+     "skill": "Solve a separable differential equation using the double angle identity to integrate cos squared",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply an initial condition to find the constant in the general solution",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.10",
+      "3.6",
+      "1.6"
+     ],
+     "skill": "Prove a triple angle identity for sine using compound and double angle identities",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.11",
+      "3.7"
+     ],
+     "skill": "Rewrite a trig expression via the identity and describe the stretches and translation of the sine graph",
+     "review": "adjudicated",
+     "rationale": "Three of the four marks are for naming the vertical stretch, horizontal stretch and horizontal translation in the right order, which is 2.11's describing-a-transformation boundary; 3.7 is secondary because the graph being transformed is a sine curve, and the rewrite using part (a) is a reused hence result.",
+     "passA": [
+      "3.7",
+      "2.11"
+     ],
+     "passB": [
+      "2.11",
+      "3.7"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p1-q10": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Binomial expansion with a negative index",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "5.19",
+      "5.5"
+     ],
+     "skill": "Integrate a power series term by term",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10",
+      "5.19"
+     ],
+     "skill": "Binomial expansion with a fractional negative index, then integrate term by term",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.15",
+      "5.19"
+     ],
+     "skill": "Recognise the arcsin integral and evaluate the series approximation at a point",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.9",
+      "5.19"
+     ],
+     "skill": "Use the exact value of arcsin(1/2) with the series to approximate pi",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Divide complex numbers using the conjugate",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Find the modulus and argument of a complex number",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Find square roots of a complex number by De Moivre in exponential form",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.12",
+      "2.7"
+     ],
+     "skill": "Equate real and imaginary parts of a square and solve a disguised quadratic",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.12",
+      "3.5"
+     ],
+     "skill": "Use the argument of a complex number to find an exact tangent value as a surd",
+     "review": "adjudicated",
+     "rationale": "The method marks come from treating pi/12 as the argument of a + bi so that tan of it equals b/a (1.12, argument as a value), and the answer is an exact surd value of a trig ratio (3.5); no change between Cartesian and polar form earns marks, so 1.13 does not apply.",
+     "passA": [
+      "1.12",
+      "3.5"
+     ],
+     "passB": [
+      "1.12",
+      "1.13"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p2-q02": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count selections with ordered roles then an unordered choice using the multiplication principle",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Estimate mean and standard deviation from grouped data",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.9",
+      "4.3"
+     ],
+     "skill": "Use inverse normal to estimate quartiles and the interquartile range",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.8"
+     ],
+     "skill": "Sum to infinity of a geometric series",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.8"
+     ],
+     "skill": "Convert a recurring decimal to a fraction using a geometric sum to infinity",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Volume of revolution about the y-axis formed by two curves, rewriting each in terms of y",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14",
+      "3.2"
+     ],
+     "skill": "Related rates linking a side length to an angle via the cosine rule, using the triangle area to fix the angle",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16",
+      "5.15"
+     ],
+     "skill": "Integrate arccos x by parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14",
+      "5.10",
+      "2.10"
+     ],
+     "skill": "Use total probability of a pdf to form an equation for its upper limit, then solve it with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the mean and variance of a continuous random variable",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find a probability within one standard deviation of the mean by integrating the pdf",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Find the intersection point of two lines given in vector and Cartesian form",
+     "review": "adjudicated",
+     "rationale": "All marks are for equating the two lines' components, solving for a parameter and substituting back to find the meeting point, which is exactly 3.15's finding-where-two-lines-meet; turning the Cartesian line into parametric form earns no separate mark, so 3.14 is not added.",
+     "passA": [
+      "3.15"
+     ],
+     "passB": [
+      "3.15",
+      "3.14"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.17"
+     ],
+     "skill": "Write the vector equation of a plane containing two lines and convert to Cartesian form using a normal",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.17"
+     ],
+     "skill": "Find the axis intercepts of a plane from its Cartesian equation",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Area of a triangle using the magnitude of a vector product",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.14",
+      "3.17"
+     ],
+     "skill": "Write a line through a point along the normal of a plane",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Find the parameter for a given point on a line",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "3.12",
+      "3.1"
+     ],
+     "skill": "Use the perpendicular distance as a vector magnitude to find the volume of a pyramid",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p1-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Sketch y=f(|x|) and y=|f(x)| from a given graph",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.16",
+      "2.3"
+     ],
+     "skill": "Solve an inequality between |f(x)| and f(x) squared using values read from the graph",
+     "review": "adjudicated",
+     "rationale": "The method mark is for reducing the inequality to |f(x)| <= 1 (2.16, an inequality involving a modulus), and the three accuracy marks come from reading off the graph the x-intervals where the curve lies between -1 and 1, which is 2.3's reading-information-off-a-graph.",
+     "passA": [
+      "2.16",
+      "2.3"
+     ],
+     "passB": [
+      "2.16"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a linear first-order differential equation with an integrating factor and initial condition",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Use non-negative probabilities to find the range of a parameter in a distribution table",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14",
+      "4.7"
+     ],
+     "skill": "Find the variance of a linear transformation of a discrete random variable using E(X^2)",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Form a time expression from trigonometric distances in a worded context",
+     "review": "adjudicated",
+     "rationale": "The marks are for adding distance-over-speed times using the given trig lengths, which builds the objective function for the optimisation problem (5.8); the lengths are given, so no triangle solving happens and 3.3 does not apply, and time = distance/speed is prior learning.",
+     "passA": [
+      "3.3"
+     ],
+     "passB": [
+      "5.8"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.15"
+     ],
+     "skill": "Differentiate an expression in sec and tan",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.8",
+      "3.9"
+     ],
+     "skill": "Set the derivative to zero to minimise time and use reciprocal trig ratios to find an exact length",
+     "review": "adjudicated",
+     "rationale": "The method mark is for setting dT/dtheta = 0 to minimise time (5.8), and the remaining marks come from simplifying the sec and tan terms to get sin theta and then turning it into tan theta or sec theta for the length, which is reciprocal-ratio work under 3.9 rather than the plain sin/cos identities of 3.6.",
+     "passA": [
+      "5.8",
+      "3.9"
+     ],
+     "passB": [
+      "5.8",
+      "3.6"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Write a vector equation of a line from a point and direction",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.14",
+      "3.12"
+     ],
+     "skill": "Write a vector equation of a line through two points",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Show two lines are skew: not parallel and no consistent intersection",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.13",
+      "3.12"
+     ],
+     "skill": "Form a displacement vector to a general point on a line and take its scalar product with a direction",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.13",
+      "3.14"
+     ],
+     "skill": "Use a zero scalar product to find the foot of the perpendicular from a point to a line",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Find the Cartesian equation of a plane through three points using a vector product",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Convert to Euler form and use De Moivre to evaluate a sum of conjugate powers",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.11",
+      "1.14"
+     ],
+     "skill": "Use a given De Moivre-type identity with odd/even trig symmetry to show a sum identity",
+     "review": "adjudicated",
+     "rationale": "Every mark depends on spotting that 1 - i tan theta is 1 + i tan(-theta) and then using the odd/even symmetry of tan, sin and cos to simplify, which is 3.11's symmetry-relation boundary; 1.14 is secondary because the De Moivre-type identity used is given, not derived.",
+     "passA": [
+      "1.14",
+      "3.11"
+     ],
+     "passB": [
+      "3.11",
+      "1.14"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.8"
+     ],
+     "skill": "Solve a trig equation in 4 theta to find the roots of a quartic in the required form",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.9",
+      "2.7"
+     ],
+     "skill": "Expand binomially, solve a quadratic in z squared and select the correct root to get an exact tangent value",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p2-q05": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17",
+      "2.5"
+     ],
+     "skill": "Volume of revolution about the y-axis after expressing x in terms of y via a logarithm",
+     "review": "adjudicated",
+     "rationale": "Three marks are for setting up and evaluating pi times the integral of x squared dy between the right limits (5.17), and two marks are for rearranging the exponential into x in terms of y, which the markscheme also accepts as finding the inverse function (2.5).",
+     "passA": [
+      "5.17"
+     ],
+     "passB": [
+      "5.17",
+      "2.5"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p2-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.12",
+      "2.7"
+     ],
+     "skill": "Use the remainder theorem and sum/product of roots of a quadratic to find unknown coefficients",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Give the general parametric solution of two linear equations in three unknowns",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Solve a 3x3 linear system with a unique solution",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Find parameter values giving no unique solution and infinitely many solutions",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count arrangements of distinct objects in a line",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count arrangements with items grouped together",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count selections using combinations and the addition principle across cases",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p2-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Prove an inequality by contradiction using a perfect square",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Use total probability of a polynomial pdf to form a linear condition on its coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Use a boundary value of the pdf with the area condition to find its two coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the mode as the pdf maximum and compare it with the median via cumulative area",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14",
+      "4.11"
+     ],
+     "skill": "Conditional probability for a continuous random variable by integrating the pdf",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-nov-tz3-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18",
+      "5.7"
+     ],
+     "skill": "Evaluate a derivative from the DE, apply two Euler steps and deduce concavity from changing gradients",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.7"
+     ],
+     "skill": "Differentiate the DE implicitly to obtain the second derivative and evaluate it at a point",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Split a rational expression in v into partial fractions",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.18",
+      "1.7"
+     ],
+     "skill": "Solve a homogeneous DE by y = vx, separating and integrating partial fractions, then simplify with log laws",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
   }
  }
 }
