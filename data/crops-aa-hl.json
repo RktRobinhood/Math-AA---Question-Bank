@@ -3898,5 +3898,2756 @@
    "assets/exam-images/aa-hl-2022-nov-tz0-p3-q02/markscheme-06.webp",
    "assets/exam-images/aa-hl-2022-nov-tz0-p3-q02/markscheme-07.webp"
   ]
+ },
+ "aa-hl-2023-may-tz1-p1-q03": {
+  "id": "aa-hl-2023-may-tz1-p1-q03",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q03/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q03/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q06": {
+  "id": "aa-hl-2023-may-tz1-p1-q06",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q06/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q07": {
+  "id": "aa-hl-2023-may-tz1-p1-q07",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q07/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q07/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q07/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q08": {
+  "id": "aa-hl-2023-may-tz1-p1-q08",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q08/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q08/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 1,
+     "y": 0.0458
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 1,
+     "y": 0.5325
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q08/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q09": {
+  "id": "aa-hl-2023-may-tz1-p1-q09",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q09/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q09/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q09/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q11": {
+  "id": "aa-hl-2023-may-tz1-p1-q11",
+  "marks": 19,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q11/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q11/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.8389
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.8974
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 1,
+     "y": 0.0678
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 1,
+     "y": 0.3787
+    }
+   },
+   {
+    "label": "e",
+    "marks": 2,
+    "anchor": {
+     "image": 1,
+     "y": 0.8894
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q11/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p1-q12": {
+  "id": "aa-hl-2023-may-tz1-p1-q12",
+  "marks": 21,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.688
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.7302
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.7724
+    }
+   },
+   {
+    "label": "d",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.8569
+    }
+   },
+   {
+    "label": "e",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.9675
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-06.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p1-q12/markscheme-07.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q06": {
+  "id": "aa-hl-2023-may-tz1-p2-q06",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.0891
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1259
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q06/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q06/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q07": {
+  "id": "aa-hl-2023-may-tz1-p2-q07",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1518
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.5226
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q07/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q07/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q07/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q08": {
+  "id": "aa-hl-2023-may-tz1-p2-q08",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q09": {
+  "id": "aa-hl-2023-may-tz1-p2-q09",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q09/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q11": {
+  "id": "aa-hl-2023-may-tz1-p2-q11",
+  "marks": 19,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.2629
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3185
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.5411
+    }
+   },
+   {
+    "label": "d",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.6523
+    }
+   },
+   {
+    "label": "e",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.7078
+    }
+   },
+   {
+    "label": "f",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.847
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q11/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz1-p2-q12": {
+  "id": "aa-hl-2023-may-tz1-p2-q12",
+  "marks": 21,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.1539
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.2664
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.4383
+    }
+   },
+   {
+    "label": "d",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.6177
+    }
+   },
+   {
+    "label": "e",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.9216
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-may-tz1-p2-q12/markscheme-05.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q06": {
+  "id": "aa-hl-2023-may-tz2-p1-q06",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.2092
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.2461
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q06/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q06/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q07": {
+  "id": "aa-hl-2023-may-tz2-p1-q07",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q08": {
+  "id": "aa-hl-2023-may-tz2-p1-q08",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.2408
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.2777
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.3302
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q09": {
+  "id": "aa-hl-2023-may-tz2-p1-q09",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3434
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.3803
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.4172
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q09/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q10": {
+  "id": "aa-hl-2023-may-tz2-p1-q10",
+  "marks": 14,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q10/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.7695
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.8301
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.8925
+    }
+   },
+   {
+    "label": "d",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.9531
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q10/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q10/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q10/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q11": {
+  "id": "aa-hl-2023-may-tz2-p1-q11",
+  "marks": 22,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.21
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.3055
+    }
+   },
+   {
+    "label": "c",
+    "marks": 9,
+    "anchor": {
+     "image": 0,
+     "y": 0.592
+    }
+   },
+   {
+    "label": "d",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.831
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q11/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q11/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p1-q12": {
+  "id": "aa-hl-2023-may-tz2-p1-q12",
+  "marks": 17,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.0681
+    }
+   },
+   {
+    "label": "b",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.6733
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.8144
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.9272
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p1-q12/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q01": {
+  "id": "aa-hl-2023-may-tz2-p2-q01",
+  "marks": 4,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q01/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3876
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.4807
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q01/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q02": {
+  "id": "aa-hl-2023-may-tz2-p2-q02",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q02/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q02/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q04": {
+  "id": "aa-hl-2023-may-tz2-p2-q04",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q04/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q04/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q06": {
+  "id": "aa-hl-2023-may-tz2-p2-q06",
+  "marks": 8,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.2166
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.2718
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q06/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q06/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q06/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q06/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q07": {
+  "id": "aa-hl-2023-may-tz2-p2-q07",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q08": {
+  "id": "aa-hl-2023-may-tz2-p2-q08",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.0827
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1891
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q08/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q09": {
+  "id": "aa-hl-2023-may-tz2-p2-q09",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q09/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q11": {
+  "id": "aa-hl-2023-may-tz2-p2-q11",
+  "marks": 20,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.3225
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.421
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.4884
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.752
+    }
+   },
+   {
+    "label": "e",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.9498
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q11/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p2-q12": {
+  "id": "aa-hl-2023-may-tz2-p2-q12",
+  "marks": 21,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.2257
+    }
+   },
+   {
+    "label": "b",
+    "marks": 8,
+    "anchor": {
+     "image": 0,
+     "y": 0.3059
+    }
+   },
+   {
+    "label": "c",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.3701
+    }
+   },
+   {
+    "label": "d",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.4503
+    }
+   },
+   {
+    "label": "e",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.6993
+    }
+   },
+   {
+    "label": "f",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.8936
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p2-q12/markscheme-06.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p3-q01": {
+  "id": "aa-hl-2023-may-tz2-p3-q01",
+  "marks": 24,
+  "section": null,
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.5265
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.0664
+    }
+   },
+   {
+    "label": "c",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.1558
+    }
+   },
+   {
+    "label": "d",
+    "marks": 4,
+    "anchor": {
+     "image": 1,
+     "y": 0.2153
+    }
+   },
+   {
+    "label": "e",
+    "marks": 8,
+    "anchor": {
+     "image": 1,
+     "y": 0.7768
+    }
+   },
+   {
+    "label": "f(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.8957
+    }
+   },
+   {
+    "label": "f(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.9551
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-06.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-07.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-08.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q01/markscheme-09.webp"
+  ]
+ },
+ "aa-hl-2023-may-tz2-p3-q02": {
+  "id": "aa-hl-2023-may-tz2-p3-q02",
+  "marks": 31,
+  "section": null,
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3168
+    }
+   },
+   {
+    "label": "b(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.4362
+    }
+   },
+   {
+    "label": "b(ii)",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.4932
+    }
+   },
+   {
+    "label": "b(iii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.545
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.6747
+    }
+   },
+   {
+    "label": "d(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.9079
+    }
+   },
+   {
+    "label": "d(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.9597
+    }
+   },
+   {
+    "label": "e(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.2007
+    }
+   },
+   {
+    "label": "e(ii)",
+    "marks": 2,
+    "anchor": {
+     "image": 1,
+     "y": 0.3065
+    }
+   },
+   {
+    "label": "e(iii)",
+    "marks": 3,
+    "anchor": {
+     "image": 1,
+     "y": 0.4064
+    }
+   },
+   {
+    "label": "f",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.5596
+    }
+   },
+   {
+    "label": "g(i)",
+    "marks": 2,
+    "anchor": {
+     "image": 1,
+     "y": 0.7361
+    }
+   },
+   {
+    "label": "g(ii)",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.8127
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-06.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-07.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-08.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-09.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-10.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-11.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-12.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-13.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-14.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-15.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-16.webp",
+   "assets/exam-images/aa-hl-2023-may-tz2-p3-q02/markscheme-17.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz0-p3-q01": {
+  "id": "aa-hl-2023-nov-tz0-p3-q01",
+  "marks": 24,
+  "section": null,
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3318
+    }
+   },
+   {
+    "label": "b(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.5125
+    }
+   },
+   {
+    "label": "b(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.5847
+    }
+   },
+   {
+    "label": "c(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.8012
+    }
+   },
+   {
+    "label": "c(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.8734
+    }
+   },
+   {
+    "label": "c(iii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.9456
+    }
+   },
+   {
+    "label": "d",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.1198
+    }
+   },
+   {
+    "label": "e",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.2255
+    }
+   },
+   {
+    "label": "f(i)",
+    "marks": 3,
+    "anchor": {
+     "image": 1,
+     "y": 0.4552
+    }
+   },
+   {
+    "label": "f(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.5952
+    }
+   },
+   {
+    "label": "g(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.7359
+    }
+   },
+   {
+    "label": "g(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 1,
+     "y": 0.8416
+    }
+   },
+   {
+    "label": "h",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.912
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-06.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-07.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q01/markscheme-08.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz0-p3-q02": {
+  "id": "aa-hl-2023-nov-tz0-p3-q02",
+  "marks": 31,
+  "section": null,
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a(i)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.3094
+    }
+   },
+   {
+    "label": "a(ii)",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.3833
+    }
+   },
+   {
+    "label": "a(iii)",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.4583
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.6739
+    }
+   },
+   {
+    "label": "c",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.8394
+    }
+   },
+   {
+    "label": "d",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.9306
+    }
+   },
+   {
+    "label": "e(i)",
+    "marks": 2,
+    "anchor": {
+     "image": 1,
+     "y": 0.509
+    }
+   },
+   {
+    "label": "e(ii)",
+    "marks": 9,
+    "anchor": {
+     "image": 1,
+     "y": 0.5905
+    }
+   },
+   {
+    "label": "f",
+    "marks": 2,
+    "anchor": {
+     "image": 1,
+     "y": 0.7463
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-05.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-06.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-07.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-08.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz0-p3-q02/markscheme-09.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q01": {
+  "id": "aa-hl-2023-nov-tz1-p1-q01",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q01/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.0959
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1413
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q01/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q02": {
+  "id": "aa-hl-2023-nov-tz1-p1-q02",
+  "marks": 4,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q02/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.0778
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1147
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q02/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q03": {
+  "id": "aa-hl-2023-nov-tz1-p1-q03",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q03/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.1333
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1701
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q03/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q04": {
+  "id": "aa-hl-2023-nov-tz1-p1-q04",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q04/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q04/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q04/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q05": {
+  "id": "aa-hl-2023-nov-tz1-p1-q05",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q05/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q05/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q06": {
+  "id": "aa-hl-2023-nov-tz1-p1-q06",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q06/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q07": {
+  "id": "aa-hl-2023-nov-tz1-p1-q07",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q08": {
+  "id": "aa-hl-2023-nov-tz1-p1-q08",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.048
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0989
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q09": {
+  "id": "aa-hl-2023-nov-tz1-p1-q09",
+  "marks": 8,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.0919
+    }
+   },
+   {
+    "label": "b",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.1316
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q09/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q09/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q09/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q10": {
+  "id": "aa-hl-2023-nov-tz1-p1-q10",
+  "marks": 15,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q10/paper-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q10/paper-02.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.4635
+    }
+   },
+   {
+    "label": "b",
+    "marks": 9,
+    "anchor": {
+     "image": 0,
+     "y": 0.6887
+    }
+   },
+   {
+    "label": "c",
+    "marks": 5,
+    "anchor": {
+     "image": 1,
+     "y": 0.8811
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q10/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q10/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q11": {
+  "id": "aa-hl-2023-nov-tz1-p1-q11",
+  "marks": 21,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.2131
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.302
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.4356
+    }
+   },
+   {
+    "label": "d",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.5692
+    }
+   },
+   {
+    "label": "e",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.8358
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q11/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q11/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p1-q12": {
+  "id": "aa-hl-2023-nov-tz1-p1-q12",
+  "marks": 17,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.1135
+    }
+   },
+   {
+    "label": "b",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.2696
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.4574
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p1-q12/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q01": {
+  "id": "aa-hl-2023-nov-tz1-p2-q01",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q01/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.5407
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.5873
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q01/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q01/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q04": {
+  "id": "aa-hl-2023-nov-tz1-p2-q04",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q04/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1389
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1758
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q04/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q06": {
+  "id": "aa-hl-2023-nov-tz1-p2-q06",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0778
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1516
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q06/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q07": {
+  "id": "aa-hl-2023-nov-tz1-p2-q07",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1516
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.2254
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q08": {
+  "id": "aa-hl-2023-nov-tz1-p2-q08",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.1052
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1652
+    }
+   },
+   {
+    "label": "c",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.2021
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q09": {
+  "id": "aa-hl-2023-nov-tz1-p2-q09",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0891
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.1494
+    }
+   },
+   {
+    "label": "c",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.1863
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q09/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q09/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q09/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q10": {
+  "id": "aa-hl-2023-nov-tz1-p2-q10",
+  "marks": 16,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q10/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.2793
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.396
+    }
+   },
+   {
+    "label": "c",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.5905
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.9407
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q10/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q10/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q10/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q11": {
+  "id": "aa-hl-2023-nov-tz1-p2-q11",
+  "marks": 19,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.2539
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3566
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.5618
+    }
+   },
+   {
+    "label": "d",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.6645
+    }
+   },
+   {
+    "label": "e",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.8187
+    }
+   },
+   {
+    "label": "f",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.9214
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q11/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q11/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz1-p2-q12": {
+  "id": "aa-hl-2023-nov-tz1-p2-q12",
+  "marks": 18,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.3657
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.4805
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.693
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.8244
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz1-p2-q12/markscheme-05.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q06": {
+  "id": "aa-hl-2023-nov-tz2-p1-q06",
+  "marks": 7,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q06/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q07": {
+  "id": "aa-hl-2023-nov-tz2-p1-q07",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.004
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q08": {
+  "id": "aa-hl-2023-nov-tz2-p1-q08",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.048
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0989
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q09": {
+  "id": "aa-hl-2023-nov-tz2-p1-q09",
+  "marks": 8,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.0919
+    }
+   },
+   {
+    "label": "b",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.1316
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q09/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q09/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q09/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q11": {
+  "id": "aa-hl-2023-nov-tz2-p1-q11",
+  "marks": 21,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.2131
+    }
+   },
+   {
+    "label": "b",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.302
+    }
+   },
+   {
+    "label": "c",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.4356
+    }
+   },
+   {
+    "label": "d",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.5692
+    }
+   },
+   {
+    "label": "e",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.8358
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q11/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q11/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p1-q12": {
+  "id": "aa-hl-2023-nov-tz2-p1-q12",
+  "marks": 17,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.1135
+    }
+   },
+   {
+    "label": "b",
+    "marks": 6,
+    "anchor": {
+     "image": 0,
+     "y": 0.2696
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.4574
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p1-q12/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q06": {
+  "id": "aa-hl-2023-nov-tz2-p2-q06",
+  "marks": 5,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q06/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0778
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.1516
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q06/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q07": {
+  "id": "aa-hl-2023-nov-tz2-p2-q07",
+  "marks": 6,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q07/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1516
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.2254
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q07/markscheme-01.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q08": {
+  "id": "aa-hl-2023-nov-tz2-p2-q08",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q08/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.1052
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.1652
+    }
+   },
+   {
+    "label": "c",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.2021
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q08/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q08/markscheme-02.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q09": {
+  "id": "aa-hl-2023-nov-tz2-p2-q09",
+  "marks": 9,
+  "section": "A",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q09/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.0891
+    }
+   },
+   {
+    "label": "b",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.1494
+    }
+   },
+   {
+    "label": "c",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.1863
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q09/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q09/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q09/markscheme-03.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q11": {
+  "id": "aa-hl-2023-nov-tz2-p2-q11",
+  "marks": 19,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q11/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 1,
+    "anchor": {
+     "image": 0,
+     "y": 0.2539
+    }
+   },
+   {
+    "label": "b",
+    "marks": 2,
+    "anchor": {
+     "image": 0,
+     "y": 0.3566
+    }
+   },
+   {
+    "label": "c",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.5618
+    }
+   },
+   {
+    "label": "d",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.6645
+    }
+   },
+   {
+    "label": "e",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.8187
+    }
+   },
+   {
+    "label": "f",
+    "marks": 4,
+    "anchor": {
+     "image": 0,
+     "y": 0.9214
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q11/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q11/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q11/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q11/markscheme-04.webp"
+  ]
+ },
+ "aa-hl-2023-nov-tz2-p2-q12": {
+  "id": "aa-hl-2023-nov-tz2-p2-q12",
+  "marks": 18,
+  "section": "B",
+  "warnings": [],
+  "notes": [],
+  "paperImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/paper-01.webp"
+  ],
+  "parts": [
+   {
+    "label": "a",
+    "marks": 5,
+    "anchor": {
+     "image": 0,
+     "y": 0.3657
+    }
+   },
+   {
+    "label": "b",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.4805
+    }
+   },
+   {
+    "label": "c",
+    "marks": 7,
+    "anchor": {
+     "image": 0,
+     "y": 0.693
+    }
+   },
+   {
+    "label": "d",
+    "marks": 3,
+    "anchor": {
+     "image": 0,
+     "y": 0.8244
+    }
+   }
+  ],
+  "markschemeImages": [
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/markscheme-01.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/markscheme-02.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/markscheme-03.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/markscheme-04.webp",
+   "assets/exam-images/aa-hl-2023-nov-tz2-p2-q12/markscheme-05.webp"
+  ]
  }
 }
