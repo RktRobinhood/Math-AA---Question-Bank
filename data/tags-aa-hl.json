@@ -7559,6 +7559,1460 @@
     }
    ],
    "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.15",
+      "3.13"
+     ],
+     "skill": "Use perpendicular direction vectors and an intersection condition to find unknown line parameters",
+     "review": "adjudicated",
+     "rationale": "Half the marks come from solving the intersection equations for the unknown constant (3.15) and half from setting the scalar product of the directions to zero (3.13); reading off direction vectors is incidental use of 3.14 and does not need its own tag.",
+     "passA": [
+      "3.15",
+      "3.13",
+      "3.14"
+     ],
+     "passB": [
+      "3.15",
+      "3.13"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.5"
+     ],
+     "skill": "Express an integer as a power of e using natural log",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13",
+      "1.7"
+     ],
+     "skill": "Rewrite a complex power in Euler form and extract real parts of z and 1/z",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.7",
+      "1.6"
+     ],
+     "skill": "Use log laws and monotonicity to establish a log inequality",
+     "review": "adjudicated",
+     "rationale": "The A1 is for combining logs with a log law (1.7) and the R1 argues a general inequality for all positive integers via monotonicity, which is a deductive proof of a general statement rather than a numerical show-that, so 1.6 is added.",
+     "passA": [
+      "1.7",
+      "1.6"
+     ],
+     "passB": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.15",
+      "1.7"
+     ],
+     "skill": "Prove an inequality involving logs by mathematical induction",
+     "review": "adjudicated",
+     "rationale": "All five marks are for the induction structure (1.15), and per the 1.15 boundary the statement being proved, a base-2 log inequality, is listed second as 1.7.",
+     "passA": [
+      "1.15"
+     ],
+     "passB": [
+      "1.15",
+      "1.7"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.18",
+      "5.10"
+     ],
+     "skill": "Solve a homogeneous differential equation via y=vx with an initial condition",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Convert a quadratic from factored to vertex form",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.6",
+      "2.3"
+     ],
+     "skill": "Sketch a quadratic showing intercepts and vertex",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Solve a quadratic inequality",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.5",
+      "1.5"
+     ],
+     "skill": "Form a composite with ln and solve the resulting inequality using the earlier result",
+     "review": "adjudicated",
+     "rationale": "Marks go to writing the composite and reusing part (c) with ln x in place of x (2.5); the final step only converts the log bounds into exponential form, which is the 1.5 conversion rather than log laws (1.7).",
+     "passA": [
+      "2.5",
+      "1.5"
+     ],
+     "passB": [
+      "2.5",
+      "1.7"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.5",
+      "2.2",
+      "2.7"
+     ],
+     "skill": "Find the domain of a log composite by solving a quadratic inequality",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.18",
+      "3.13"
+     ],
+     "skill": "Find the acute angle between two planes from their normals",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Find a plane perpendicular to two given planes using a cross product of normals and a known point",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.10",
+      "3.2",
+      "3.5"
+     ],
+     "skill": "Derive an exact sine value by a compound angle identity, then apply the sine rule and rationalise",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16",
+      "3.6"
+     ],
+     "skill": "Derive a reduction formula for powers of cosine using integration by parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Rearrange the reduction relation to isolate the integral",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Apply a reduction formula repeatedly to integrate cos^4 x",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.17",
+      "5.11"
+     ],
+     "skill": "Find a volume of revolution about the x-axis using the earlier integral",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.19",
+      "5.13"
+     ],
+     "skill": "Build a Maclaurin series for a power of cosine and use it to evaluate a 0/0 limit",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Compute the expected value from a discrete distribution table",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Recognise that a probability generating polynomial at t=1 sums the probabilities to 1",
+     "review": "agreed"
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate a polynomial with fractional coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "4.7",
+      "5.3"
+     ],
+     "skill": "Evaluate the derivative at 1 and link it to the expected value",
+     "review": "adjudicated",
+     "rationale": "The derivative was found in c(i), so after hence the new content is evaluating at t=1 and recognising the result as the expectation (4.7), with substituting into the polynomial derivative a secondary 5.3 step.",
+     "passA": [
+      "4.7",
+      "5.3"
+     ],
+     "passB": [
+      "5.3",
+      "4.7"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.6",
+      "4.7"
+     ],
+     "skill": "Find a distribution for selection without replacement to justify polynomial coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Find an unknown coin probability from the probability of two independent tails",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "4.6",
+      "4.7"
+     ],
+     "skill": "Complete the distribution of the number of tails and write it as a polynomial",
+     "review": "adjudicated",
+     "rationale": "Two A1s are for products of independent coin probabilities giving P(Y=0) and P(Y=1) (4.6 combined events), and the M1/A1 assemble these into the distribution's polynomial (4.7).",
+     "passA": [
+      "4.6",
+      "4.7"
+     ],
+     "passB": [
+      "4.7",
+      "4.6"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.7",
+      "5.3"
+     ],
+     "skill": "Find the expected value of a sum by differentiating a product of generating polynomials",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Use first and second derivatives of a linear function in a curvature formula",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Locate a maximum by setting a given derivative to zero",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Evaluate the maximum curvature of a quadratic in terms of its leading coefficient",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "5.12"
+     ],
+     "skill": "State a limit at infinity and interpret it",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iv)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Compare maximum curvatures of two quadratics using a general result",
+     "review": "agreed"
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Find the exact x-value of a maximum from a given derivative",
+     "review": "agreed"
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "5.8",
+      "1.7"
+     ],
+     "skill": "Evaluate the maximum value exactly using rational exponents and surds",
+     "review": "agreed"
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "5.8",
+      "1.7"
+     ],
+     "skill": "Solve an exponential equation from k'=0 and evaluate the maximum exactly",
+     "review": "agreed"
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Explain equal maxima by the inverse-function reflection in y=x",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "5.7",
+      "5.6"
+     ],
+     "skill": "Find the second derivative of a semicircle function using chain and quotient rules",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Substitute derivatives into the curvature formula to show it is constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz2-p1-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Convert a Cartesian line equation to vector form",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Find the intersection point of two lines in 3D",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p1-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Use a Venn diagram or addition rule to find a probability",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.11",
+      "4.6"
+     ],
+     "skill": "Use independence and the conditional probability formula to find a conditional probability",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Find unknown coefficients of a quartic given a repeated linear factor",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.9"
+     ],
+     "skill": "Sketch the arccos graph with intercept and end points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.10",
+      "3.9",
+      "3.6"
+     ],
+     "skill": "Solve an equation in inverse cosines using a compound angle identity and rejecting an invalid root",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz2-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15",
+      "2.7"
+     ],
+     "skill": "Prove a rational-function inequality by contradiction via a perfect-square quadratic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Expand a square root binomially with a fractional index",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Expand a product with a negative-index binomial up to x^2",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Equate coefficients of two expansions to find unknown constants",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Use a rational approximation to estimate a square root and compare accuracy by size of x",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Find complex square roots in modulus-argument form using De Moivre",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13",
+      "1.12"
+     ],
+     "skill": "Convert roots to Cartesian form and deduce related roots via conjugates",
+     "review": "adjudicated",
+     "rationale": "Converting the polar roots to a+bi earns the first two marks (1.13), and the deduced roots are simply conjugates of those found, which is Cartesian conjugate work (1.12) not the conjugate-root theorem for a real polynomial (1.14).",
+     "passA": [
+      "1.13",
+      "1.14"
+     ],
+     "passB": [
+      "1.13",
+      "1.12"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Plot roots on an Argand diagram and find the area of the polygon they form",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Find the polynomial equation satisfied by reciprocals of given roots",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.12",
+      "1.13"
+     ],
+     "skill": "Find a reciprocal complex number and deduce the scaled polygon area",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz2-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.4"
+     ],
+     "skill": "Apply annual percentage depreciation to find a value after several years",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.4"
+     ],
+     "skill": "Use a real interest rate adjusted for inflation to find when an investment first exceeds a target",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Find the common ratio from two terms and compute the second term",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Find the common difference and the maximum partial sum of a decreasing arithmetic series",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p2-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Use mean and variance of a frequency table to set up and solve for unknown value and frequency",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Find a plane containing a line and a point using a vector product normal",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.18",
+      "1.16"
+     ],
+     "skill": "Find parameters so three planes meet in a line using elimination or a determinant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count ways to split a group into three unlabelled equal teams",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.16",
+      "4.14"
+     ],
+     "skill": "Integrate a pdf of the form t e^(-3t) by parts with a variable upper limit",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.13",
+      "4.14"
+     ],
+     "skill": "Use l'Hopital's rule for a limit at infinity and set total probability to 1 to find k",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the median of a continuous distribution by solving with technology",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz2-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Differentiate an ellipse equation implicitly",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "2.7",
+      "2.2"
+     ],
+     "skill": "Find where the gradient is undefined and solve a quadratic to give the domain of the curve",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.14",
+      "2.7"
+     ],
+     "skill": "Locate the maximum point from a zero gradient and solve for its y-coordinate",
+     "review": "adjudicated",
+     "rationale": "The maximum comes from making the implicit derivative zero, which the 5.14 boundary keeps under implicit differentiation rather than 5.8, and two of the three marks are for solving the resulting quadratic in y (2.7).",
+     "passA": [
+      "5.14",
+      "2.7"
+     ],
+     "passB": [
+      "5.8",
+      "5.14"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.7",
+      "5.4"
+     ],
+     "skill": "Use the discriminant to find gradients of tangent lines through the origin",
+     "review": "adjudicated",
+     "rationale": "Every mark comes from substituting the line and setting the discriminant to zero (2.7), with 5.4 added second because the condition being found is a tangent to the curve.",
+     "passA": [
+      "2.7"
+     ],
+     "passB": [
+      "5.4",
+      "2.7"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.7",
+      "5.4"
+     ],
+     "skill": "Find the point of tangency by solving the resulting quadratic",
+     "review": "adjudicated",
+     "rationale": "Marks are for substituting the tangent line into the curve and solving the resulting quadratic (2.7), with 5.4 second since the answer is where the tangent meets the curve.",
+     "passA": [
+      "2.7"
+     ],
+     "passB": [
+      "5.4",
+      "2.7"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.17",
+      "2.7"
+     ],
+     "skill": "Make x the subject and find a volume of revolution about the y-axis with technology",
+     "review": "adjudicated",
+     "rationale": "The volume about the y-axis earns the integral and answer marks (5.17), and the M1/A1 for making x the subject by the quadratic formula or completing the square justify adding 2.7.",
+     "passA": [
+      "5.17",
+      "2.7"
+     ],
+     "passB": [
+      "5.17"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz2-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.13",
+      "2.3"
+     ],
+     "skill": "Sketch a cubic-over-quadratic rational curve with technology",
+     "review": "adjudicated",
+     "rationale": "The single mark is for sketching a cubic-over-quadratic curve, which the 2.13 boundary explicitly covers as the sketch of a rational function with a quadratic denominator, with general graphing 2.3 second.",
+     "passA": [
+      "2.3",
+      "2.13"
+     ],
+     "passB": [
+      "2.3"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Read the x-intercepts of a curve",
+     "review": "agreed"
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Find local maximum and minimum points with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.14"
+     ],
+     "skill": "Decide a function is odd by testing f(-x) or symmetry",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.6",
+      "1.6"
+     ],
+     "skill": "Differentiate a rational function by the quotient rule and show a derivative value is independent of a parameter",
+     "review": "agreed"
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Rewrite a rational function as a quotient plus proper remainder",
+     "review": "adjudicated",
+     "rationale": "The marks are for rewriting the rational function as a linear part plus a proper fraction to set up its oblique asymptote (2.13); polynomial division is only one alternative method and does not justify a separate 2.12 tag.",
+     "passA": [
+      "2.13",
+      "2.12"
+     ],
+     "passB": [
+      "2.13"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Deduce an oblique asymptote from the divided form",
+     "review": "agreed"
+    },
+    {
+     "label": "d(iii)",
+     "syllabus": [
+      "5.4",
+      "2.13"
+     ],
+     "skill": "Identify a point where the tangent has the same gradient as the asymptote",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.15",
+      "1.11"
+     ],
+     "skill": "Split into partial fractions and integrate to a log form with a constant",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.18",
+      "1.7"
+     ],
+     "skill": "Solve a homogeneous differential equation by separating variables after y=vx and simplify using log laws",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Rearrange the implicit solution of a differential equation to make y the subject",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz2-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "3.3"
+     ],
+     "skill": "Find a distance in a right-angled flat-map model",
+     "review": "adjudicated",
+     "rationale": "The distance comes from Pythagoras, which is prior learning, inside a worded map context (3.3); there is no SOHCAHTOA, sine or cosine rule, so 3.2 does not apply.",
+     "passA": [
+      "3.3",
+      "3.2"
+     ],
+     "passB": [
+      "3.3"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "3.3",
+      "3.2"
+     ],
+     "skill": "Find a bearing using an inverse trig ratio",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Use a zero scalar product to find the angle between position vectors",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Find an arc length on a sphere from the central angle",
+     "review": "agreed"
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "3.16"
+     ],
+     "skill": "Compute a vector product",
+     "review": "agreed"
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "3.16",
+      "3.13"
+     ],
+     "skill": "Find the angle between two vector products to get a spherical triangle angle",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Find a central angle from an arc length and convert radians to degrees",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.13",
+      "3.4"
+     ],
+     "skill": "Find the angle between two position vectors and the corresponding great-circle distance",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "3.16",
+      "3.13"
+     ],
+     "skill": "Compute a vector product and an angle between vector products to find a spherical bearing",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p2-q02": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Use the factor and remainder theorems to form and solve equations for two coefficients",
+     "review": "adjudicated",
+     "rationale": "The marks are for using the factor and remainder theorems to form equations in the unknown coefficients (2.12); solving the resulting pair of linear equations is a step inside another topic, which the 1.16 boundary treats as prior learning.",
+     "passA": [
+      "2.12",
+      "1.16"
+     ],
+     "passB": [
+      "2.12"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Compute scalar products of 2D vectors with a parameter",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Equate cosines of angles between vectors and solve for the parameter",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p2-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.10",
+      "1.7"
+     ],
+     "skill": "Find a coefficient in a fractional-index binomial expansion and solve for an unknown base",
+     "review": "adjudicated",
+     "rationale": "The main marks are for the binomial expansion with a fractional negative index (1.10), and rewriting with a factor of q to the power -1/2 and then solving q^(-7/2) for q both need rational indices (1.7).",
+     "passA": [
+      "1.10",
+      "1.7"
+     ],
+     "passB": [
+      "1.10"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p2-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.10",
+      "2.7"
+     ],
+     "skill": "Count pairings in a round-robin with a missing player and solve the resulting quadratic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2",
+      "3.9"
+     ],
+     "skill": "Express a viewing angle as a difference of arctangents from right triangles",
+     "review": "adjudicated",
+     "rationale": "The marks are for right-triangle tangent ratios in a non-trivial diagram with the angle written as a difference (3.2), with the arctan form adding 3.9 as a secondary tag.",
+     "passA": [
+      "3.9",
+      "3.2"
+     ],
+     "passB": [
+      "3.2",
+      "3.9"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.15"
+     ],
+     "skill": "Differentiate arctan expressions and use related rates to find a speed",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.8",
+      "4.11"
+     ],
+     "skill": "Find a binomial cumulative probability and a conditional probability within it",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Find the number of trials giving a stated binomial cumulative probability",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.13",
+      "4.6"
+     ],
+     "skill": "Use total probability over three workers then reverse the conditional with Bayes",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Set total probability equal to one branch's conditional probability and solve",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Integrate a quadratic times e^x by repeated integration by parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a linear first-order differential equation with an integrating factor",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.3",
+      "5.18",
+      "2.4"
+     ],
+     "skill": "Find the particular solution through a point and sketch it with turning points",
+     "review": "adjudicated",
+     "rationale": "Two sketch marks (shape and domain) are 2.3, two marks for fixing the constant in the general solution are 5.18, and the labelled turning points read from the GDC are one 2.4 mark.",
+     "passA": [
+      "2.3",
+      "2.4",
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "2.3",
+      "2.4"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.4",
+      "5.18"
+     ],
+     "skill": "Use the differential equation for tangent gradients and show a family of tangents is concurrent",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Compose a linear function with itself",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Form the triple self-composite of a linear function",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Extend the composite pattern to four compositions",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "2.5",
+      "1.3"
+     ],
+     "skill": "Generalise the nth self-composite as a geometric sum of powers",
+     "review": "agreed"
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Specialise the nth composite to gradient 1",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.15",
+      "2.5"
+     ],
+     "skill": "Prove a closed form for the nth self-composite by induction",
+     "review": "adjudicated",
+     "rationale": "The induction structure carries the marks (1.15), and the statement proved concerns repeated composition (2.5); the geometric-series view is only one of three alternative ways to simplify, so 1.3 is not tagged.",
+     "passA": [
+      "1.15",
+      "2.5",
+      "1.3"
+     ],
+     "passB": [
+      "1.15",
+      "2.5"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.8",
+      "5.12"
+     ],
+     "skill": "Find the limiting line as powers of m with |m|<1 tend to zero",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "2.5",
+      "1.5"
+     ],
+     "skill": "Use powers of -1 for odd n to simplify the composite",
+     "review": "adjudicated",
+     "rationale": "The part is about simplifying the nth self-composite for m=-1 (2.5), and the R1 depends on the integer-power fact that (-1)^n is -1 for odd n (1.5).",
+     "passA": [
+      "1.5",
+      "2.5"
+     ],
+     "passB": [
+      "2.5"
+     ]
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "2.5",
+      "1.5"
+     ],
+     "skill": "Use powers of -1 for even n to simplify the composite",
+     "review": "adjudicated",
+     "rationale": "The marks are for using (-1)^n = 1 for even n (1.5) to reduce the composite to the identity function (2.5); no mark is given for a self-inverse argument, so 2.14 is not tagged.",
+     "passA": [
+      "1.5",
+      "2.5"
+     ],
+     "passB": [
+      "2.5",
+      "2.14"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate a volume function at an endpoint",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate a volume function at the other endpoint",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Expand a box volume expression into a cubic",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.8",
+      "5.3",
+      "2.7"
+     ],
+     "skill": "Differentiate the volume and solve dV/dx=0 with the quadratic formula",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.7",
+      "5.8"
+     ],
+     "skill": "Use the second derivative to confirm a local maximum",
+     "review": "adjudicated",
+     "rationale": "Four of the five marks are for finding the second derivative and showing it is negative at the point (5.7), confirming a local maximum in an optimisation context (5.8).",
+     "passA": [
+      "5.7",
+      "5.8"
+     ],
+     "passB": [
+      "5.8",
+      "5.7"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Argue the local maximum is global by comparing with endpoint values",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Deduce an inequality between parameters from a<b",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Substitute parametrised values to simplify the maximising x",
+     "review": "adjudicated",
+     "rationale": "The marks are for substituting and simplifying the maximising x of the optimisation problem; as a show-that calculation it is not 1.6, so the optimisation statement 5.8 is the only fitting tag.",
+     "passA": [
+      "5.8"
+     ],
+     "passB": [
+      "1.6"
+     ]
+    },
+    {
+     "label": "h(i)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Reason about parity to show the maximum volume is an integer",
+     "review": "agreed"
+    },
+    {
+     "label": "h(ii)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "State another parity condition giving integer results",
+     "review": "agreed"
+    },
+    {
+     "label": "h(iii)",
+     "syllabus": [
+      "5.8",
+      "3.1"
+     ],
+     "skill": "Choose valid parameters and compute integer maximising x and maximum volume",
+     "review": "adjudicated",
+     "rationale": "Marks come from choosing valid parameters and evaluating the optimal cut and the maximum volume (5.8), with the box volume giving 3.1 as the secondary statement.",
+     "passA": [
+      "5.8",
+      "2.2"
+     ],
+     "passB": [
+      "3.1"
+     ]
+    }
+   ],
+   "confidence": "low"
   }
  }
 }
