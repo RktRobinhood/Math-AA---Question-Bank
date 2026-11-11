@@ -5596,6 +5596,9 @@
      ],
      "passB": [
       "3.1"
+     ],
+     "sub": [
+      "SL2.1.midpoint"
      ]
     },
     {
@@ -5604,7 +5607,11 @@
       "2.1"
      ],
      "skill": "Gradient of segment then perpendicular gradient",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.1.gradient",
+      "SL2.1.parallel-perpendicular"
+     ]
     },
     {
      "label": "c",
@@ -5612,7 +5619,10 @@
       "2.1"
      ],
      "skill": "Equation of a line through a point with given gradient",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.1.equation-of-line"
+     ]
     }
    ],
    "confidence": "medium"
@@ -5635,6 +5645,10 @@
      "passB": [
       "2.4",
       "2.8"
+     ],
+     "sub": [
+      "SL2.8.rational-intercepts",
+      "SL2.4.zeros-intercepts"
      ]
     },
     {
@@ -5643,7 +5657,10 @@
       "2.8"
      ],
      "skill": "Vertical and horizontal asymptotes of (ax+b)/(cx+d)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.asymptotes"
+     ]
     },
     {
      "label": "c",
@@ -5651,7 +5668,10 @@
       "2.5"
      ],
      "skill": "Find inverse of a rational function algebraically",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.find-inverse"
+     ]
     }
    ],
    "confidence": "high"
@@ -5665,7 +5685,11 @@
       "4.7"
      ],
      "skill": "Probability from frequency table and expected value of rides",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.5.relative-frequency",
+      "SL4.7.expected-value"
+     ]
     },
     {
      "label": "b",
@@ -5673,7 +5697,10 @@
       "4.5"
      ],
      "skill": "Expected number of rides scaled to 1000 visitors",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.5.expected-occurrences"
+     ]
     }
    ],
    "confidence": "medium"
@@ -5686,7 +5713,16 @@
       "3.6"
      ],
      "skill": "Double angle identity to rewrite cos 2x in sin x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.6.simplify"
+     ],
+     "subPassA": [
+      "SL3.6.prove-identity"
+     ],
+     "subPassB": [
+      "SL3.6.simplify"
+     ]
     },
     {
      "label": "b",
@@ -5705,6 +5741,17 @@
      "passB": [
       "3.8",
       "2.7"
+     ],
+     "sub": [
+      "SL3.8.quadratic-in-trig",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "SL3.8.quadratic-in-trig",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "SL3.8.quadratic-in-trig"
      ]
     }
    ],
@@ -5728,6 +5775,21 @@
      "passB": [
       "2.7",
       "1.7"
+     ],
+     "sub": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.hidden-quadratic",
+      "SL1.5.exp-log-form"
+     ],
+     "subPassA": [
+      "SL2.7.hidden-quadratic",
+      "SL2.7.discriminant-parameter",
+      "SL1.5.exp-log-form"
+     ],
+     "subPassB": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.hidden-quadratic",
+      "SL1.7.hidden-quadratic"
      ]
     }
    ],
@@ -5741,7 +5803,10 @@
       "3.7"
      ],
      "skill": "Relate period of sin qx to graph intercepts",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
     },
     {
      "label": "b",
@@ -5760,6 +5825,11 @@
       "3.7",
       "2.11",
       "2.3"
+     ],
+     "sub": [
+      "SL3.7.sketch",
+      "SL3.7.transformations",
+      "SL2.11.stretch"
      ]
     }
    ],
@@ -5773,7 +5843,10 @@
       "2.4"
      ],
      "skill": "y-intercept by substituting x = 0",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.4.zeros-intercepts"
+     ]
     },
     {
      "label": "b",
@@ -5781,7 +5854,18 @@
       "5.6"
      ],
      "skill": "Product rule to differentiate 2x e^x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.product-rule",
+      "SL5.6.standard-derivatives"
+     ],
+     "subPassA": [
+      "SL5.6.product-rule",
+      "SL5.6.standard-derivatives"
+     ],
+     "subPassB": [
+      "SL5.6.product-rule"
+     ]
     },
     {
      "label": "c",
@@ -5789,7 +5873,10 @@
       "5.8"
      ],
      "skill": "Set h'(x)=0 to find local minimum coordinates",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points"
+     ]
     },
     {
      "label": "d",
@@ -5798,7 +5885,22 @@
       "5.6"
      ],
      "skill": "Second derivative by product rule; h''>0 for concave up",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "SL5.7.concavity",
+      "SL5.6.product-rule"
+     ],
+     "subPassA": [
+      "SL5.7.find-second-derivative",
+      "SL5.7.concavity",
+      "SL5.6.show-derivative-form"
+     ],
+     "subPassB": [
+      "SL5.7.find-second-derivative",
+      "SL5.7.concavity",
+      "SL5.6.product-rule"
+     ]
     }
    ],
    "confidence": "high"
@@ -5811,7 +5913,11 @@
       "1.2"
      ],
      "skill": "Evaluate S_5 and find u_6 from S_6 - S_5",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sum",
+      "SL1.2.nth-term"
+     ]
     },
     {
      "label": "b",
@@ -5819,7 +5925,10 @@
       "1.2"
      ],
      "skill": "First term of arithmetic sequence from S_n formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.find-u1-d"
+     ]
     },
     {
      "label": "c",
@@ -5827,7 +5936,10 @@
       "1.2"
      ],
      "skill": "General term u_n of arithmetic sequence",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.nth-term"
+     ]
     },
     {
      "label": "d",
@@ -5835,7 +5947,17 @@
       "1.3"
      ],
      "skill": "Common ratio of geometric sequence from two terms",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.3.find-r-u1"
+     ],
+     "subPassA": [
+      "SL1.3.find-r-u1",
+      "SL1.3.nth-term"
+     ],
+     "subPassB": [
+      "SL1.3.find-r-u1"
+     ]
     },
     {
      "label": "e",
@@ -5843,7 +5965,10 @@
       "1.3"
      ],
      "skill": "Choose sign of r and find a geometric term",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.3.nth-term"
+     ]
     }
    ],
    "confidence": "high"
@@ -5857,7 +5982,19 @@
       "5.5"
      ],
      "skill": "Integrate polynomial velocity to find displacement at t=1",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.9.displacement-from-velocity",
+      "SL5.5.antidiff-power"
+     ],
+     "subPassA": [
+      "SL5.9.displacement-from-velocity",
+      "SL5.10.standard-integrals"
+     ],
+     "subPassB": [
+      "SL5.9.displacement-from-velocity",
+      "SL5.5.antidiff-power"
+     ]
     },
     {
      "label": "b",
@@ -5866,7 +6003,18 @@
       "5.3"
      ],
      "skill": "Differentiate polynomial velocity to get acceleration",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.9.velocity-acceleration",
+      "SL5.3.power-rule"
+     ],
+     "subPassA": [
+      "SL5.9.velocity-acceleration"
+     ],
+     "subPassB": [
+      "SL5.9.velocity-acceleration",
+      "SL5.3.power-rule"
+     ]
     },
     {
      "label": "c",
@@ -5886,6 +6034,19 @@
      "passB": [
       "5.8",
       "5.9"
+     ],
+     "sub": [
+      "SL5.9.max-speed",
+      "SL5.8.find-stationary-points",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "SL5.9.max-speed",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "SL5.9.max-speed",
+      "SL5.8.find-stationary-points"
      ]
     },
     {
@@ -5904,6 +6065,17 @@
      "passB": [
       "5.8",
       "5.9"
+     ],
+     "sub": [
+      "SL5.9.max-speed",
+      "SL5.8.closed-interval-extremes"
+     ],
+     "subPassA": [
+      "SL5.9.max-speed"
+     ],
+     "subPassB": [
+      "SL5.9.max-speed",
+      "SL5.8.closed-interval-extremes"
      ]
     },
     {
@@ -5913,7 +6085,21 @@
       "5.11"
      ],
      "skill": "Integral expression for distance while speed increases",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.9.rest-and-direction",
+      "SL5.9.total-distance",
+      "SL5.11.area-with-negative-regions"
+     ],
+     "subPassA": [
+      "SL5.9.total-distance",
+      "SL5.11.evaluate-definite"
+     ],
+     "subPassB": [
+      "SL5.9.total-distance",
+      "SL5.9.rest-and-direction",
+      "SL5.11.area-with-negative-regions"
+     ]
     }
    ],
    "confidence": "medium"
@@ -5926,7 +6112,10 @@
       "3.3"
      ],
      "skill": "Use a bearing to find an angle in a triangle",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.3.bearings"
+     ]
     },
     {
      "label": "b",
@@ -5935,7 +6124,11 @@
       "3.3"
      ],
      "skill": "Sine rule to find a distance between cities",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.sine-rule",
+      "SL3.3.bearings"
+     ]
     }
    ],
    "confidence": "high"
@@ -5948,7 +6141,10 @@
       "1.4"
      ],
      "skill": "Read annual depreciation rate from exponential model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.depreciation"
+     ]
     },
     {
      "label": "b",
@@ -5964,6 +6160,9 @@
      "passB": [
       "1.4",
       "2.9"
+     ],
+     "sub": [
+      "SL1.4.depreciation"
      ]
     },
     {
@@ -5972,7 +6171,10 @@
       "1.4"
      ],
      "skill": "Compound interest value and compare with car value",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.future-value"
+     ]
     }
    ],
    "confidence": "high"
@@ -5985,7 +6187,10 @@
       "2.5"
      ],
      "skill": "Form composite of cubic and tan x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.composite-expression"
+     ]
     },
     {
      "label": "b",
@@ -5994,7 +6199,11 @@
       "2.4"
      ],
      "skill": "Sketch composite on GDC and label local extrema",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.max-min"
+     ]
     }
    ],
    "confidence": "high"
@@ -6007,16 +6216,37 @@
       "2.2"
      ],
      "skill": "Evaluate a quadratic model at a given input",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.2.function-model"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
-      "4.10",
-      "4.4"
+      "4.10"
      ],
      "skill": "Choose and find the x-on-y regression line",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.10",
+       "4.4"
+      ],
+      "why": "Old codes included 4.4, but the M1 is for recognising x on y and the A marks are for that line, so no y-on-x work earns marks."
+     },
+     "sub": [
+      "SL4.10.choose-line",
+      "SL4.10.x-on-y-line"
+     ],
+     "subPassA": [
+      "SL4.10.x-on-y-line",
+      "SL4.10.choose-line"
+     ],
+     "subPassB": [
+      "SL4.10.x-on-y-line"
+     ]
     },
     {
      "label": "c",
@@ -6024,7 +6254,10 @@
       "4.10"
      ],
      "skill": "Predict x from regression line using model output",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.10.predict-x"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6049,6 +6282,11 @@
       "4.12",
       "4.9",
       "4.3"
+     ],
+     "sub": [
+      "SL4.12.unknown-mean-or-sd",
+      "SL4.9.inverse-normal",
+      "SL4.3.quartiles-from-iqr"
      ]
     }
    ],
@@ -6072,6 +6310,11 @@
      "passB": [
       "1.9",
       "2.10"
+     ],
+     "sub": [
+      "SL1.9.specific-term",
+      "SL1.9.find-unknown",
+      "SL2.10.solve-analytic"
      ]
     }
    ],
@@ -6085,14 +6328,17 @@
       "2.9"
      ],
      "skill": "Evaluate an exponential cooling model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
-      "5.6"
+      "5.1"
      ],
-     "skill": "Find derivative of exponential model at a point with GDC",
+     "skill": "Find the gradient of the model at a point with technology",
      "review": "adjudicated",
      "rationale": "The A2 is for the value of the derivative of 21 + 75e^(-0.08t) at t=3, an exponential derivative (5.6); interpreting it as a rate of change (5.1) is assessed separately in (c).",
      "passA": [
@@ -6100,6 +6346,16 @@
      ],
      "passB": [
       "5.1"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.6"
+      ],
+      "why": "Old code 5.6 was wrong: this is a 'write down' answer where the A2 is for the GDC value of H'(3), so no differentiation earns marks. Finding a gradient with technology is 5.1."
+     },
+     "sub": [
+      "SL5.1.gradient-from-graph"
      ]
     },
     {
@@ -6108,7 +6364,10 @@
       "5.1"
      ],
      "skill": "Interpret a derivative as a rate of change in context",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.1.interpret-derivative"
+     ]
     },
     {
      "label": "d",
@@ -6126,6 +6385,17 @@
      "passB": [
       "1.7",
       "2.10"
+     ],
+     "sub": [
+      "SL1.7.solve-with-logs",
+      "SL2.10.solve-gdc"
+     ],
+     "subPassA": [
+      "SL2.10.solve-gdc",
+      "SL2.9.exp-model"
+     ],
+     "subPassB": [
+      "SL2.10.context-apply"
      ]
     },
     {
@@ -6134,7 +6404,17 @@
       "2.9"
      ],
      "skill": "Horizontal asymptote of exponential model as long-run value",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ],
+     "subPassA": [
+      "SL2.4.asymptotes",
+      "SL2.9.exp-model"
+     ],
+     "subPassB": [
+      "SL2.9.exp-model"
+     ]
     },
     {
      "label": "f",
@@ -6150,6 +6430,9 @@
      ],
      "passB": [
       "5.1"
+     ],
+     "sub": [
+      "SL5.1.estimate-limit"
      ]
     }
    ],
@@ -6163,7 +6446,10 @@
       "4.6"
      ],
      "skill": "Complete missing values in a two-way table",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.sample-space-grid"
+     ]
     },
     {
      "label": "b",
@@ -6180,6 +6466,17 @@
      ],
      "passB": [
       "4.6"
+     ],
+     "sub": [
+      "SL4.6.tree",
+      "SL4.5.equally-likely"
+     ],
+     "subPassA": [
+      "SL4.6.tree",
+      "SL4.5.equally-likely"
+     ],
+     "subPassB": [
+      "SL4.6.tree"
      ]
     },
     {
@@ -6189,7 +6486,11 @@
       "4.6"
      ],
      "skill": "Use conditional probability from table to find unknown",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.11.conditional-formula",
+      "SL4.6.conditional-diagram"
+     ]
     },
     {
      "label": "d",
@@ -6206,6 +6507,17 @@
      "passB": [
       "4.11",
       "4.6"
+     ],
+     "sub": [
+      "SL4.11.test-independence",
+      "SL4.6.independent"
+     ],
+     "subPassA": [
+      "SL4.11.test-independence",
+      "SL4.6.independent"
+     ],
+     "subPassB": [
+      "SL4.11.test-independence"
      ]
     },
     {
@@ -6214,7 +6526,11 @@
       "4.8"
      ],
      "skill": "Binomial probability of at least five successes",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability"
+     ]
     }
    ],
    "confidence": "high"
@@ -6227,7 +6543,10 @@
       "3.4"
      ],
      "skill": "Arc length in radians to show angle value",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.arc-length"
+     ]
     },
     {
      "label": "b",
@@ -6236,13 +6555,26 @@
       "3.2"
      ],
      "skill": "Area of composite shape using sector, triangle and rectangle",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.segment-shaded",
+      "SL3.2.cosine-rule-side",
+      "SL3.2.area-sine"
+     ],
+     "subPassA": [
+      "SL3.4.segment-shaded",
+      "SL3.2.cosine-rule-side",
+      "SL3.2.area-sine"
+     ],
+     "subPassB": [
+      "SL3.4.segment-shaded",
+      "SL3.2.cosine-rule-side"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
-      "5.5",
-      "3.1"
+      "5.5"
      ],
      "skill": "Integrate rate over 60 s, compare with gutter volume",
      "review": "adjudicated",
@@ -6254,6 +6586,18 @@
      "passB": [
       "5.11",
       "3.1"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.5",
+       "3.1"
+      ],
+      "why": "Old codes included 3.1, but the gutter volume is a prism (600 times the cross-section area), which is prior learning and not 3.1 solid work. The marks that remain are for the GDC integral of the rate as total rainfall (5.5)."
+     },
+     "sub": [
+      "SL5.5.total-change-from-rate",
+      "SL5.5.definite-integral-gdc"
      ]
     }
    ],
@@ -6267,7 +6611,10 @@
       "3.4"
      ],
      "skill": "Perimeter of a sector from arc length and radius",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.arc-length"
+     ]
     },
     {
      "label": "b",
@@ -6275,7 +6622,10 @@
       "3.4"
      ],
      "skill": "Find angle in radians from arc length",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.arc-length"
+     ]
     },
     {
      "label": "c",
@@ -6283,7 +6633,10 @@
       "3.4"
      ],
      "skill": "Area of a sector in radians",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.sector-area"
+     ]
     }
    ],
    "confidence": "high"
@@ -6296,7 +6649,10 @@
       "1.2"
      ],
      "skill": "Common difference from first and fourth terms",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.find-u1-d"
+     ]
     },
     {
      "label": "b",
@@ -6305,7 +6661,20 @@
       "1.2"
      ],
      "skill": "Probabilities sum to 1 using arithmetic sequence terms",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.find-k",
+      "SL1.2.nth-term",
+      "SL1.2.sum"
+     ],
+     "subPassA": [
+      "SL4.7.find-k",
+      "SL1.2.nth-term"
+     ],
+     "subPassB": [
+      "SL4.7.find-k",
+      "SL1.2.sum"
+     ]
     }
    ],
    "confidence": "high"
@@ -6318,7 +6687,10 @@
       "2.8"
      ],
      "skill": "Vertical and horizontal asymptotes of a rational function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.asymptotes"
+     ]
     },
     {
      "label": "b",
@@ -6327,16 +6699,32 @@
       "2.8"
      ],
      "skill": "Axis intercepts of a rational function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.4.zeros-intercepts",
+      "SL2.8.rational-intercepts"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
-      "2.3",
-      "2.8"
+      "2.8",
+      "2.3"
      ],
      "skill": "Sketch rational function showing asymptotes and intercepts",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "2.3",
+       "2.8"
+      ],
+      "why": "Codes kept but reordered: the A1 is for two rational-function branches with the right asymptote behaviour and intercepts, so 2.8 is the primary statement (A and B both put it first) and 2.3 sketching comes second."
+     },
+     "sub": [
+      "SL2.8.sketch-rational",
+      "SL2.3.sketch-from-equation"
+     ]
     }
    ],
    "confidence": "high"
@@ -6350,7 +6738,19 @@
       "4.6"
      ],
      "skill": "Find P(B) from conditional probability and union formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.11.conditional-formula",
+      "SL4.6.union"
+     ],
+     "subPassA": [
+      "SL4.11.conditional-formula",
+      "SL4.6.union"
+     ],
+     "subPassB": [
+      "SL4.11.multiplication-rule",
+      "SL4.6.union"
+     ]
     }
    ],
    "confidence": "high"
@@ -6365,7 +6765,12 @@
       "1.7"
      ],
      "skill": "Integrate x/(x^2+2) by substitution; solve for upper limit using log laws",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.10.inspection-substitution",
+      "SL5.11.unknown-limit-or-parameter",
+      "SL1.7.log-laws"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6375,11 +6780,21 @@
     {
      "label": "",
      "syllabus": [
-      "2.5",
-      "2.7"
+      "2.5"
      ],
-     "skill": "Form composite g(f(x)), equate coefficients, solve quadratic for b",
-     "review": "agreed"
+     "skill": "Form composite g(f(x)) and equate coefficients to find both possible f",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "2.5",
+       "2.7"
+      ],
+      "why": "2.7 removed: the markscheme gives its marks for forming (g o f)(x), equating coefficients, a = +-2 from a^2 = 4, and pairing values through the linear equation 2ab + a = -14, so no mark is for solving a quadratic (A and B agree)."
+     },
+     "sub": [
+      "SL2.5.composite-expression"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6392,7 +6807,10 @@
       "2.6"
      ],
      "skill": "Axis of symmetry from the vertex",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.6.axis-symmetry"
+     ]
     },
     {
      "label": "b",
@@ -6400,7 +6818,10 @@
       "2.6"
      ],
      "skill": "Vertex form parameters h and k from vertex",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.6.vertex"
+     ]
     },
     {
      "label": "c",
@@ -6408,7 +6829,16 @@
       "2.6"
      ],
      "skill": "y-intercept of quadratic in vertex form",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.6.y-intercept"
+     ],
+     "subPassA": [
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL2.6.vertex"
+     ]
     },
     {
      "label": "d",
@@ -6417,7 +6847,18 @@
       "5.3"
      ],
      "skill": "Equation of normal to a parabola at the y-intercept",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.normal-equation",
+      "SL5.3.gradient-at-point"
+     ],
+     "subPassA": [
+      "SL5.4.normal-equation",
+      "SL5.3.gradient-at-point"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation"
+     ]
     },
     {
      "label": "e",
@@ -6434,6 +6875,17 @@
      "passB": [
       "2.7",
       "3.1"
+     ],
+     "sub": [
+      "SL2.7.solve-equation",
+      "SL5.4.tangent-meets-axes-or-curve"
+     ],
+     "subPassA": [
+      "SL2.7.solve-equation",
+      "SL2.4.intersection"
+     ],
+     "subPassB": [
+      "SL2.7.solve-equation"
      ]
     }
    ],
@@ -6447,7 +6899,11 @@
       "3.6"
      ],
      "skill": "Pythagorean identity for sin, then double angle for sin 2theta",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.6.ratio-from-ratio",
+      "SL3.6.double-angle-values"
+     ]
     },
     {
      "label": "b",
@@ -6456,7 +6912,11 @@
       "3.6"
      ],
      "skill": "Sine rule with double angle to show b = 3a/4",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.sine-rule",
+      "SL3.6.simplify"
+     ]
     },
     {
      "label": "c",
@@ -6465,7 +6925,19 @@
       "3.2"
      ],
      "skill": "Sine of supplementary angle (or sine rule) for sin CAD",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.5.unit-circle",
+      "SL3.2.sine-rule"
+     ],
+     "subPassA": [
+      "SL3.5.related-angles",
+      "SL3.2.sine-rule"
+     ],
+     "subPassB": [
+      "SL3.5.unit-circle",
+      "SL3.2.sine-rule"
+     ]
     },
     {
      "label": "d",
@@ -6473,7 +6945,10 @@
       "3.2"
      ],
      "skill": "Area of triangle using 1/2 ab sin C in terms of a",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.area-sine"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6493,6 +6968,15 @@
      ],
      "passB": [
       "2.10"
+     ],
+     "sub": [
+      "SL2.10.solve-analytic"
+     ],
+     "subPassA": [
+      "SL2.10.solve-analytic"
+     ],
+     "subPassB": [
+      "SL2.2.evaluate-notation"
      ]
     },
     {
@@ -6501,7 +6985,10 @@
       "5.8"
      ],
      "skill": "Form area of inscribed triangle as function of x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.optimisation-modelling"
+     ]
     },
     {
      "label": "c",
@@ -6509,7 +6996,12 @@
       "5.6"
      ],
      "skill": "Product and chain rule to differentiate (x+3)sqrt(9-x^2)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.product-rule",
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ]
     },
     {
      "label": "d",
@@ -6518,7 +7010,11 @@
       "2.7"
      ],
      "skill": "Set dA/dx = 0, solve quadratic, find y-coordinate of R",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points",
+      "SL2.7.solve-equation"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6531,7 +7027,10 @@
       "4.4"
      ],
      "skill": "GDC regression line of h on d",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.regression-y-on-x"
+     ]
     },
     {
      "label": "b",
@@ -6539,7 +7038,10 @@
       "4.4"
      ],
      "skill": "Write down Pearson's correlation coefficient r",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.pearson-r"
+     ]
     },
     {
      "label": "c",
@@ -6547,7 +7049,10 @@
       "4.4"
      ],
      "skill": "Predict height from regression line",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.predict"
+     ]
     }
    ],
    "confidence": "high"
@@ -6560,7 +7065,10 @@
       "3.2"
      ],
      "skill": "Cosine rule to find an angle",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.cosine-rule-angle"
+     ]
     },
     {
      "label": "b",
@@ -6569,7 +7077,11 @@
       "3.3"
      ],
      "skill": "Angles on a line then right-angled trig for height",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side",
+      "SL3.3.elevation-depression"
+     ]
     }
    ],
    "confidence": "high"
@@ -6582,7 +7094,10 @@
       "2.9"
      ],
      "skill": "Initial value of exponential decay model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
     },
     {
      "label": "b",
@@ -6591,7 +7106,18 @@
       "2.9"
      ],
      "skill": "Solve exponential equation for decay constant k",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.7.solve-with-logs",
+      "SL2.9.find-parameters"
+     ],
+     "subPassA": [
+      "SL2.9.find-parameters"
+     ],
+     "subPassB": [
+      "SL2.9.find-parameters",
+      "SL1.7.solve-with-logs"
+     ]
     },
     {
      "label": "c",
@@ -6600,7 +7126,18 @@
       "2.9"
      ],
      "skill": "Solve exponential model equation for time",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.7.solve-with-logs",
+      "SL2.9.exp-model"
+     ],
+     "subPassA": [
+      "SL2.9.exp-model"
+     ],
+     "subPassB": [
+      "SL1.7.solve-with-logs",
+      "SL2.9.exp-model"
+     ]
     }
    ],
    "confidence": "high"
@@ -6613,7 +7150,10 @@
       "4.9"
      ],
      "skill": "Normal probability P(W > 210)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.normal-probability"
+     ]
     },
     {
      "label": "b",
@@ -6621,7 +7161,16 @@
       "4.9"
      ],
      "skill": "Use normal symmetry/complements to find P(W < w)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.symmetry-probability"
+     ],
+     "subPassA": [
+      "SL4.9.normal-probability"
+     ],
+     "subPassB": [
+      "SL4.9.symmetry-probability"
+     ]
     },
     {
      "label": "c",
@@ -6629,7 +7178,10 @@
       "4.9"
      ],
      "skill": "Inverse normal with known mean and SD",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.inverse-normal"
+     ]
     },
     {
      "label": "d",
@@ -6637,7 +7189,19 @@
       "4.8"
      ],
      "skill": "Binomial probability of exactly one success",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.exact-probability"
+     ],
+     "subPassA": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.exact-probability"
+     ],
+     "subPassB": [
+      "SL4.8.identify",
+      "SL4.8.exact-probability"
+     ]
     }
    ],
    "confidence": "high"
@@ -6650,16 +7214,29 @@
       "1.9"
      ],
      "skill": "Binomial expansion coefficients of (x+h)^8",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.9.specific-term"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
-      "1.3",
-      "1.9"
+      "1.3"
      ],
      "skill": "Common ratio of geometric sequence to find h",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.3",
+       "1.9"
+      ],
+      "why": "1.9 was wrong: the binomial coefficients are reused from (a), and every mark in (b) is for equating common ratios of the geometric sequence and solving for h."
+     },
+     "sub": [
+      "SL1.3.find-r-u1"
+     ]
     }
    ],
    "confidence": "high"
@@ -6669,11 +7246,21 @@
     {
      "label": "a",
      "syllabus": [
-      "5.9",
-      "5.8"
+      "5.9"
      ],
-     "skill": "Acceleration zero at maximum of velocity, using GDC",
-     "review": "agreed"
+     "skill": "Acceleration zero where v'(t)=0, found with the GDC",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.9",
+       "5.8"
+      ],
+      "why": "5.8 was wrong: no optimisation or classification is assessed; the M1 is for recognising that acceleration v'(t)=0, which is kinematics, and the answer comes from the GDC."
+     },
+     "sub": [
+      "SL5.9.velocity-acceleration"
+     ]
     },
     {
      "label": "b",
@@ -6691,6 +7278,10 @@
      "passB": [
       "5.9",
       "2.10"
+     ],
+     "sub": [
+      "SL5.9.rest-and-direction",
+      "SL2.4.zeros-intercepts"
      ]
     },
     {
@@ -6700,7 +7291,11 @@
       "5.11"
      ],
      "skill": "Distance travelled as integral of |v|",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.9.total-distance",
+      "SL5.11.area-with-negative-regions"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6714,7 +7309,12 @@
       "2.2"
      ],
      "skill": "Find inverse of square root function, its domain and range",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.find-inverse",
+      "SL2.5.inverse-domain-range",
+      "SL2.2.range"
+     ]
     },
     {
      "label": "b",
@@ -6722,7 +7322,10 @@
       "2.4"
      ],
      "skill": "Intersections of function and inverse with GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.4.intersection"
+     ]
     },
     {
      "label": "c",
@@ -6730,7 +7333,10 @@
       "5.11"
      ],
      "skill": "Area between curve and its inverse with GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.11.area-between-curves"
+     ]
     },
     {
      "label": "d",
@@ -6738,16 +7344,40 @@
       "5.6"
      ],
      "skill": "Chain rule to differentiate sqrt(4x-2)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.chain-rule"
+     ]
     },
     {
      "label": "e",
      "syllabus": [
-      "5.6",
+      "5.3",
       "2.10"
      ],
-     "skill": "Equate derivatives of function and inverse, solve",
-     "review": "agreed"
+     "skill": "Differentiate the polynomial inverse and equate to h', solving with GDC",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.6",
+       "2.10"
+      ],
+      "why": "5.6 was wrong: h' is reused from (d), and the only new differentiation is of (x^2+2)/4, which uses integer powers (5.3); the equation is then solved with technology (2.10)."
+     },
+     "sub": [
+      "SL5.3.power-rule",
+      "SL2.10.solve-gdc"
+     ],
+     "subPassA": [
+      "SL5.6.standard-derivatives",
+      "SL2.4.intersection"
+     ],
+     "subPassB": [
+      "SL5.6.chain-rule",
+      "SL5.3.power-rule",
+      "SL2.10.solve-gdc"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6760,7 +7390,10 @@
       "3.7"
      ],
      "skill": "Period of a cosine model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
     },
     {
      "label": "b",
@@ -6768,7 +7401,10 @@
       "3.7"
      ],
      "skill": "Amplitude and vertical shift from max and min",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "c",
@@ -6776,7 +7412,17 @@
       "3.7"
      ],
      "skill": "Count maxima in an interval using period",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.model-context",
+      "SL3.7.read-features"
+     ],
+     "subPassA": [
+      "SL3.7.read-features"
+     ],
+     "subPassB": [
+      "SL3.7.model-context"
+     ]
     },
     {
      "label": "d",
@@ -6784,7 +7430,10 @@
       "3.8"
      ],
      "skill": "Solve trig model equation for first time",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.8.compound-angle"
+     ]
     },
     {
      "label": "e",
@@ -6793,7 +7442,11 @@
       "4.5"
      ],
      "skill": "Time above a height as probability",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.8.compound-angle",
+      "SL4.5.equally-likely"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6807,7 +7460,11 @@
       "4.5"
      ],
      "skill": "Probabilities without replacement in terms of n",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree",
+      "SL4.5.equally-likely"
+     ]
     },
     {
      "label": "b",
@@ -6815,7 +7472,10 @@
       "4.6"
      ],
      "skill": "Show probability of two reds without replacement",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
     },
     {
      "label": "c",
@@ -6823,16 +7483,31 @@
       "4.6"
      ],
      "skill": "Probability of three reds without replacement",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
     },
     {
      "label": "d",
      "syllabus": [
-      "4.6",
-      "4.5"
+      "4.5",
+      "4.6"
      ],
      "skill": "At least one green via complement",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.6",
+       "4.5"
+      ],
+      "why": "The primary was wrong: the M1 is for using the complement 1 - P(three red), with P(three red) reused from (c), so 4.5 should come first."
+     },
+     "sub": [
+      "SL4.5.complement",
+      "SL4.6.tree"
+     ]
     },
     {
      "label": "e",
@@ -6841,7 +7516,12 @@
       "4.6"
      ],
      "skill": "Expected score per game then solve inequality for k",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.build-distribution",
+      "SL4.7.expected-value",
+      "SL4.6.tree"
+     ]
     }
    ],
    "confidence": "high"
@@ -6854,7 +7534,10 @@
       "3.7"
      ],
      "skill": "Read amplitude of a sin(bx) from graph",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
     },
     {
      "label": "b",
@@ -6862,7 +7545,11 @@
       "3.7"
      ],
      "skill": "Read period from graph and use period = 2pi/b",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features",
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "c",
@@ -6878,6 +7565,16 @@
      "passB": [
       "3.5",
       "3.7"
+     ],
+     "sub": [
+      "SL3.5.exact-special"
+     ],
+     "subPassA": [
+      "SL3.5.exact-special",
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL3.5.exact-special"
      ]
     }
    ],
@@ -6891,7 +7588,10 @@
       "2.5"
      ],
      "skill": "Form composite function (g o f)(x)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.composite-expression"
+     ]
     },
     {
      "label": "b",
@@ -6907,6 +7607,9 @@
      ],
      "passB": [
       "2.5"
+     ],
+     "sub": [
+      "SL2.5.composite-value"
      ]
     }
    ],
@@ -6920,7 +7623,10 @@
       "4.6"
      ],
      "skill": "Use P(A union B) = P(A) + P(B) - P(A intersect B)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.union"
+     ]
     },
     {
      "label": "b",
@@ -6937,6 +7643,17 @@
      ],
      "passB": [
       "4.6"
+     ],
+     "sub": [
+      "SL4.6.union",
+      "SL4.5.complement"
+     ],
+     "subPassA": [
+      "SL4.6.venn",
+      "SL4.5.complement"
+     ],
+     "subPassB": [
+      "SL4.6.union"
      ]
     }
    ],
@@ -6950,7 +7667,18 @@
       "1.2"
      ],
      "skill": "Use given S_n values to form and solve simultaneous equations",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sum-unknown",
+      "SL1.2.find-u1-d"
+     ],
+     "subPassA": [
+      "SL1.2.sum",
+      "SL1.2.find-u1-d"
+     ],
+     "subPassB": [
+      "SL1.2.sum-unknown"
+     ]
     },
     {
      "label": "b",
@@ -6958,7 +7686,10 @@
       "1.2"
      ],
      "skill": "Find u_6 as S_6 - S_5",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.nth-term"
+     ]
     }
    ],
    "confidence": "high"
@@ -6972,7 +7703,11 @@
       "3.6"
      ],
      "skill": "Find sin A from cos A, then triangle area (1/2)ab sin C",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.area-sine",
+      "SL3.6.ratio-from-ratio"
+     ]
     }
    ],
    "confidence": "high"
@@ -6986,7 +7721,18 @@
       "2.7"
      ],
      "skill": "Match binomial coefficients to find n and k",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.9.find-unknown",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "SL1.9.find-unknown",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "SL1.9.find-unknown"
+     ]
     }
    ],
    "confidence": "medium"
@@ -6996,10 +7742,22 @@
     {
      "label": "a",
      "syllabus": [
-      "4.3"
+      "4.3",
+      "4.2"
      ],
      "skill": "Missing frequency from total; state modal class",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.3"
+      ],
+      "why": "Old code missed 4.2: one of the two marks is for completing the frequency table from the total (4.2), the other for the modal class (4.3); both reviewers agreed."
+     },
+     "sub": [
+      "SL4.3.grouped-mean",
+      "SL4.2.frequency-histogram"
+     ]
     },
     {
      "label": "b",
@@ -7007,7 +7765,11 @@
       "4.2"
      ],
      "skill": "Read median and count above value from cumulative frequency curve",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.2.cumfreq-quartiles",
+      "SL4.2.cumfreq-count"
+     ]
     },
     {
      "label": "c",
@@ -7015,7 +7777,11 @@
       "4.1"
      ],
      "skill": "Sampling bias, systematic and quota sampling",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.1.bias-reliability",
+      "SL4.1.sampling-technique"
+     ]
     },
     {
      "label": "d",
@@ -7024,7 +7790,18 @@
       "4.3"
      ],
      "skill": "Interpret box plot quartiles and median in context",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.2.box-plot",
+      "SL4.3.quartiles-discrete"
+     ],
+     "subPassA": [
+      "SL4.2.box-plot",
+      "SL4.3.quartiles-discrete"
+     ],
+     "subPassB": [
+      "SL4.2.box-plot"
+     ]
     },
     {
      "label": "e",
@@ -7032,7 +7809,18 @@
       "4.3"
      ],
      "skill": "Effect of adding a constant on mean and variance",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.constant-changes",
+      "SL4.3.mean-totals"
+     ],
+     "subPassA": [
+      "SL4.3.constant-changes"
+     ],
+     "subPassB": [
+      "SL4.3.constant-changes",
+      "SL4.3.mean-totals"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7045,7 +7833,10 @@
       "2.9"
      ],
      "skill": "Vertical asymptote of a logarithmic function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.log-graph"
+     ]
     },
     {
      "label": "b",
@@ -7063,6 +7854,22 @@
      "passB": [
       "1.7",
       "2.7"
+     ],
+     "sub": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.inequality",
+      "SL1.7.log-laws"
+     ],
+     "subPassA": [
+      "SL1.7.log-laws",
+      "SL1.7.log-equations",
+      "SL2.7.discriminant",
+      "SL2.7.inequality"
+     ],
+     "subPassB": [
+      "SL1.7.log-laws",
+      "SL2.7.discriminant",
+      "SL2.7.inequality"
      ]
     },
     {
@@ -7071,7 +7878,10 @@
       "2.7"
      ],
      "skill": "Solve quadratic with surds and find difference of roots",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.7.solve-equation"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7084,7 +7894,12 @@
       "5.6"
      ],
      "skill": "Quotient/chain rule to differentiate 12x/(x^2+2)^3",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.quotient-rule",
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ]
     },
     {
      "label": "b",
@@ -7092,13 +7907,16 @@
       "5.10"
      ],
      "skill": "Integrate 12x/(x^2+2)^3 by substitution or inspection",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.10.inspection-substitution"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
       "5.11",
-      "5.5"
+      "5.10"
      ],
      "skill": "Find k from g = f + k and area between curves",
      "review": "adjudicated",
@@ -7110,6 +7928,19 @@
      "passB": [
       "5.11",
       "5.10"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.11",
+       "5.5"
+      ],
+      "why": "5.5 was wrong: the A1 for recovering g = f + k from g' = f' is finding a (rational, non-polynomial) function from its derivative, which is 5.10, not integer-power antidifferentiation; both reviewers agreed."
+     },
+     "sub": [
+      "SL5.11.area-between-curves",
+      "SL5.11.unknown-limit-or-parameter",
+      "SL5.10.find-function-from-derivative"
      ]
     }
    ],
@@ -7124,7 +7955,11 @@
       "5.3"
      ],
      "skill": "Gradient of tangent and normal to a quadratic at a point",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.normal-equation",
+      "SL5.3.gradient-at-point"
+     ]
     },
     {
      "label": "b",
@@ -7140,6 +7975,9 @@
      "passB": [
       "5.4",
       "2.1"
+     ],
+     "sub": [
+      "SL5.4.normal-equation"
      ]
     },
     {
@@ -7149,7 +7987,11 @@
       "2.4"
      ],
      "skill": "Second intersection of normal with the curve",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.tangent-meets-axes-or-curve",
+      "SL2.4.intersection"
+     ]
     }
    ],
    "confidence": "high"
@@ -7162,7 +8004,10 @@
       "3.1"
      ],
      "skill": "Distance between two points in 3D",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.distance-3d"
+     ]
     },
     {
      "label": "b",
@@ -7171,7 +8016,11 @@
       "3.1"
      ],
      "skill": "Cosine rule for an angle in a 3D pyramid",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.1.angle-two-lines"
+     ]
     }
    ],
    "confidence": "high"
@@ -7185,7 +8034,11 @@
       "2.4"
      ],
      "skill": "Sketch e^x - 2x - 5 with roots, minimum and endpoints",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.zeros-intercepts"
+     ]
     },
     {
      "label": "b",
@@ -7193,7 +8046,18 @@
       "2.11"
      ],
      "skill": "Identify horizontal stretch and vertical translation parameters",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.11.stretch",
+      "SL2.11.translate"
+     ],
+     "subPassA": [
+      "SL2.11.stretch",
+      "SL2.11.translate"
+     ],
+     "subPassB": [
+      "SL2.11.composite-transform"
+     ]
     }
    ],
    "confidence": "high"
@@ -7206,7 +8070,11 @@
       "3.4"
      ],
      "skill": "Area of annular sector using sector area formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.sector-area",
+      "SL3.4.segment-shaded"
+     ]
     },
     {
      "label": "b",
@@ -7222,6 +8090,20 @@
      "passB": [
       "3.4",
       "2.7"
+     ],
+     "sub": [
+      "SL3.4.sector-area",
+      "SL3.4.arc-length",
+      "SL3.4.segment-shaded"
+     ],
+     "subPassA": [
+      "SL3.4.sector-area",
+      "SL2.7.solve-equation",
+      "SL3.4.arc-length"
+     ],
+     "subPassB": [
+      "SL3.4.arc-length",
+      "SL2.7.solve-equation"
      ]
     }
    ],
@@ -7232,11 +8114,28 @@
     {
      "label": "a",
      "syllabus": [
-      "5.9",
-      "5.6"
+      "5.9"
      ],
      "skill": "Find when particle first at rest (ds/dt = 0)",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.9",
+       "5.6"
+      ],
+      "why": "The M1 is for recognising rest as ds/dt = 0 (or s minimum) and q comes from the GDC, so no marks are earned for differentiating with the chain rule and 5.6 is dropped."
+     },
+     "sub": [
+      "SL5.9.rest-and-direction"
+     ],
+     "subPassA": [
+      "SL5.9.rest-and-direction"
+     ],
+     "subPassB": [
+      "SL5.9.rest-and-direction",
+      "SL5.6.chain-rule"
+     ]
     },
     {
      "label": "b",
@@ -7245,7 +8144,18 @@
       "5.11"
      ],
      "skill": "Total distance travelled via integral of |v|",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.9.total-distance",
+      "SL5.11.area-with-negative-regions"
+     ],
+     "subPassA": [
+      "SL5.9.total-distance",
+      "SL5.5.definite-integral-gdc"
+     ],
+     "subPassB": [
+      "SL5.9.total-distance"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7259,7 +8169,12 @@
       "2.10"
      ],
      "skill": "Use E(X) and sum of probabilities to find unknown",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.find-k",
+      "SL4.7.unknowns-from-mean",
+      "SL2.10.solve-gdc"
+     ]
     }
    ],
    "confidence": "high"
@@ -7272,7 +8187,11 @@
       "3.1"
      ],
      "skill": "Surface area of cylinder with hemispheres in terms of x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.surface-area",
+      "SL3.1.volume-solids"
+     ]
     },
     {
      "label": "b",
@@ -7290,16 +8209,33 @@
      "passB": [
       "5.3",
       "5.8"
+     ],
+     "sub": [
+      "SL5.8.find-stationary-points",
+      "SL5.3.negative-powers"
      ]
     },
     {
      "label": "c",
      "syllabus": [
-      "5.7",
-      "5.8"
+      "5.8",
+      "5.7"
      ],
      "skill": "Second derivative test to confirm minimum surface area",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.7",
+       "5.8"
+      ],
+      "why": "Primary was wrong: four of six marks are for the second derivative test and evaluating the minimum S (5.8), only two for finding d2S/dx2 (5.7)."
+     },
+     "sub": [
+      "SL5.8.classify-stationary-points",
+      "SL5.8.optimise-given-function",
+      "SL5.7.find-second-derivative"
+     ]
     }
    ],
    "confidence": "high"
@@ -7309,7 +8245,6 @@
     {
      "label": "a",
      "syllabus": [
-      "1.4",
       "1.3"
      ],
      "skill": "Total of constant payments and of payments growing 4% monthly",
@@ -7322,6 +8257,17 @@
      "passB": [
       "1.3",
       "1.4"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.4",
+       "1.3"
+      ],
+      "why": "1.4 was wrong: there is no compound interest, loan, savings or depreciation here and no 1.4 sub-tag fits; the marks are for 4200 x 36 (prior learning) and the finite geometric sum S_36 (1.3)."
+     },
+     "sub": [
+      "SL1.3.sum"
      ]
     },
     {
@@ -7330,7 +8276,10 @@
       "1.4"
      ],
      "skill": "Compound interest expression with monthly compounding",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.future-value"
+     ]
     },
     {
      "label": "c",
@@ -7340,7 +8289,22 @@
       "2.10"
      ],
      "skill": "Combine compound interest and geometric sum; solve with GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.future-value",
+      "SL1.3.sum",
+      "SL2.10.inequality-graphical"
+     ],
+     "subPassA": [
+      "SL1.4.future-value",
+      "SL1.3.sum",
+      "SL1.4.find-time"
+     ],
+     "subPassB": [
+      "SL1.4.future-value",
+      "SL1.3.sum",
+      "SL2.10.inequality-graphical"
+     ]
     },
     {
      "label": "d",
@@ -7348,7 +8312,10 @@
       "1.4"
      ],
      "skill": "Find nominal interest rate with quarterly compounding",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.find-rate-or-pv"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7361,7 +8328,16 @@
       "4.9"
      ],
      "skill": "Normal probability between two values using complement",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.properties"
+     ],
+     "subPassA": [
+      "SL4.9.symmetry-probability"
+     ],
+     "subPassB": [
+      "SL4.9.properties"
+     ]
     },
     {
      "label": "b",
@@ -7377,6 +8353,9 @@
      "passB": [
       "4.12",
       "4.9"
+     ],
+     "sub": [
+      "SL4.12.unknown-mean-and-sd"
      ]
     },
     {
@@ -7396,13 +8375,27 @@
       "4.8",
       "4.11",
       "4.6"
+     ],
+     "sub": [
+      "SL4.8.exact-probability",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassA": [
+      "SL4.8.exact-probability",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassB": [
+      "SL4.8.exact-probability",
+      "SL4.11.conditional-distributions"
      ]
     },
     {
      "label": "d",
      "syllabus": [
       "4.12",
-      "4.3"
+      "4.9"
      ],
      "skill": "Find unknown standard deviation from interquartile range",
      "review": "adjudicated",
@@ -7415,6 +8408,26 @@
       "4.12",
       "4.9",
       "4.3"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.12",
+       "4.3"
+      ],
+      "why": "4.3 was wrong: the A1 is for placing the quartiles symmetrically about the mean so the middle 50% of the normal curve lies between them (4.9 central interval, as both reviewers found), not a data-set quartile calculation; the M1A1 use the z-value to find sigma (4.12)."
+     },
+     "sub": [
+      "SL4.12.unknown-mean-or-sd",
+      "SL4.9.central-interval"
+     ],
+     "subPassA": [
+      "SL4.12.unknown-mean-or-sd",
+      "SL4.9.central-interval"
+     ],
+     "subPassB": [
+      "SL4.12.unknown-mean-or-sd",
+      "SL4.9.inverse-normal"
      ]
     }
    ],
@@ -7436,6 +8449,9 @@
      "passB": [
       "3.7",
       "2.3"
+     ],
+     "sub": [
+      "SL3.7.read-features"
      ]
     },
     {
@@ -7444,7 +8460,11 @@
       "3.7"
      ],
      "skill": "Read period from graph and find b = 2pi/period",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features",
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "c",
@@ -7460,6 +8480,16 @@
      "passB": [
       "3.5",
       "2.2"
+     ],
+     "sub": [
+      "SL3.5.exact-special"
+     ],
+     "subPassA": [
+      "SL3.5.exact-special"
+     ],
+     "subPassB": [
+      "SL3.5.exact-special",
+      "SL2.2.evaluate-notation"
      ]
     }
    ],
@@ -7473,7 +8503,10 @@
       "2.5"
      ],
      "skill": "Form composite (g o f)(x) of linear and quadratic",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.composite-expression"
+     ]
     },
     {
      "label": "b",
@@ -7481,7 +8514,10 @@
       "2.5"
      ],
      "skill": "Evaluate composite at x=2 and solve k^2 = 9",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.composite-value"
+     ]
     }
    ],
    "confidence": "high"
@@ -7494,7 +8530,10 @@
       "4.6"
      ],
      "skill": "Use P(A u B) = P(A) + P(B) - P(A n B)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.union"
+     ]
     },
     {
      "label": "b",
@@ -7503,7 +8542,18 @@
       "4.5"
      ],
      "skill": "Find P(A' n B') as complement of the union",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.venn",
+      "SL4.5.complement"
+     ],
+     "subPassA": [
+      "SL4.6.venn"
+     ],
+     "subPassB": [
+      "SL4.6.venn",
+      "SL4.5.complement"
+     ]
     }
    ],
    "confidence": "high"
@@ -7516,7 +8566,10 @@
       "1.2"
      ],
      "skill": "Use given S_4 and S_5 to find constants in S_n formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sum-unknown"
+     ]
     },
     {
      "label": "b",
@@ -7524,7 +8577,10 @@
       "1.2"
      ],
      "skill": "Find u_5 as S_5 - S_4",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.nth-term"
+     ]
     }
    ],
    "confidence": "high"
@@ -7538,7 +8594,11 @@
       "3.6"
      ],
      "skill": "Find sin A from cos A, then triangle area",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.area-sine",
+      "SL3.6.ratio-from-ratio"
+     ]
     }
    ],
    "confidence": "high"
@@ -7552,7 +8612,18 @@
       "2.7"
      ],
      "skill": "Match binomial coefficients; solve n(n-1)/2 = 28 for n, k",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.9.find-unknown",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "SL1.9.find-unknown"
+     ],
+     "subPassB": [
+      "SL1.9.find-unknown",
+      "SL1.9.ncr-pascal"
+     ]
     }
    ],
    "confidence": "high"
@@ -7562,10 +8633,22 @@
     {
      "label": "a",
      "syllabus": [
-      "4.3"
+      "4.3",
+      "4.2"
      ],
      "skill": "Find missing frequency and state modal class",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.3"
+      ],
+      "why": "Both reviewers agree and the markscheme gives a separate A1 for completing the frequency table (p = 9), which is 4.2 content the old codes left out; the modal class is 4.3."
+     },
+     "sub": [
+      "SL4.3.grouped-mean",
+      "SL4.2.frequency-histogram"
+     ]
     },
     {
      "label": "b",
@@ -7573,7 +8656,11 @@
       "4.2"
      ],
      "skill": "Read median and a count from cumulative frequency curve",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.2.cumfreq-quartiles",
+      "SL4.2.cumfreq-count"
+     ]
     },
     {
      "label": "c",
@@ -7581,7 +8668,11 @@
       "4.1"
      ],
      "skill": "Sampling bias, systematic sampling and quota sampling",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.1.bias-reliability",
+      "SL4.1.sampling-technique"
+     ]
     },
     {
      "label": "d",
@@ -7590,7 +8681,18 @@
       "4.3"
      ],
      "skill": "Interpret quartiles and median from a box plot",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.2.box-plot",
+      "SL4.3.quartiles-discrete"
+     ],
+     "subPassA": [
+      "SL4.2.box-plot"
+     ],
+     "subPassB": [
+      "SL4.2.box-plot",
+      "SL4.3.quartiles-discrete"
+     ]
     },
     {
      "label": "e",
@@ -7598,7 +8700,18 @@
       "4.3"
      ],
      "skill": "Effect of adding a constant on mean and variance",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.constant-changes",
+      "SL4.3.mean-totals"
+     ],
+     "subPassA": [
+      "SL4.3.constant-changes"
+     ],
+     "subPassB": [
+      "SL4.3.constant-changes",
+      "SL4.3.mean-totals"
+     ]
     }
    ],
    "confidence": "high"
@@ -7611,7 +8724,10 @@
       "2.9"
      ],
      "skill": "State vertical asymptote of a log function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.log-graph"
+     ]
     },
     {
      "label": "b",
@@ -7620,7 +8736,12 @@
       "2.7"
      ],
      "skill": "Log laws to form quadratic; discriminant inequality for d",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.7.log-laws",
+      "SL2.7.discriminant",
+      "SL2.7.inequality"
+     ]
     },
     {
      "label": "c",
@@ -7628,7 +8749,10 @@
       "2.7"
      ],
      "skill": "Solve quadratic to find distance between intersection points",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.7.solve-equation"
+     ]
     }
    ],
    "confidence": "high"
@@ -7641,7 +8765,12 @@
       "5.6"
      ],
      "skill": "Quotient/chain rule to differentiate 8x/(x^2+1)^3",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.quotient-rule",
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ]
     },
     {
      "label": "b",
@@ -7649,16 +8778,32 @@
       "5.10"
      ],
      "skill": "Integrate 8x/(x^2+1)^3 by substitution or inspection",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.10.inspection-substitution"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
       "5.11",
-      "5.5"
+      "5.10"
      ],
      "skill": "Use g = f + k and area between curves to find k",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.11",
+       "5.5"
+      ],
+      "why": "5.5 was wrong: the A1 for g = f + k comes from recovering a function from a non-polynomial derivative (5.10, as both reviewers agree), and the rest is an area between curves giving k (5.11)."
+     },
+     "sub": [
+      "SL5.11.area-between-curves",
+      "SL5.11.unknown-limit-or-parameter",
+      "SL5.10.find-function-from-derivative"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7672,7 +8817,11 @@
       "5.3"
      ],
      "skill": "Gradient of tangent to quadratic, then perpendicular normal gradient",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.normal-equation",
+      "SL5.3.gradient-at-point"
+     ]
     },
     {
      "label": "b",
@@ -7680,7 +8829,10 @@
       "5.4"
      ],
      "skill": "Equation of the normal at a given point",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.normal-equation"
+     ]
     },
     {
      "label": "c",
@@ -7698,6 +8850,10 @@
      "passB": [
       "2.4",
       "2.7"
+     ],
+     "sub": [
+      "SL5.4.tangent-meets-axes-or-curve",
+      "SL2.4.intersection"
      ]
     }
    ],
@@ -7711,7 +8867,10 @@
       "3.1"
      ],
      "skill": "Distance between two points in 3D",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.distance-3d"
+     ]
     },
     {
      "label": "b",
@@ -7720,7 +8879,19 @@
       "3.1"
      ],
      "skill": "Cosine rule for an angle in a 3D pyramid",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.1.angle-two-lines"
+     ],
+     "subPassA": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.1.angle-two-lines"
+     ],
+     "subPassB": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.1.distance-3d"
+     ]
     }
    ],
    "confidence": "high"
@@ -7734,7 +8905,11 @@
       "2.4"
      ],
      "skill": "Sketch e^x - 3x - 4 showing roots, intercept and minimum",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.zeros-intercepts"
+     ]
     },
     {
      "label": "b",
@@ -7742,7 +8917,19 @@
       "2.11"
      ],
      "skill": "Identify horizontal stretch factor and vertical translation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.11.composite-transform",
+      "SL2.11.stretch",
+      "SL2.11.translate"
+     ],
+     "subPassA": [
+      "SL2.11.composite-transform",
+      "SL2.11.stretch"
+     ],
+     "subPassB": [
+      "SL2.11.composite-transform"
+     ]
     }
    ],
    "confidence": "high"
@@ -7755,7 +8942,10 @@
       "3.4"
      ],
      "skill": "Area of annular sector using sector area formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.segment-shaded"
+     ]
     },
     {
      "label": "b",
@@ -7771,6 +8961,22 @@
      "passB": [
       "3.4",
       "2.7"
+     ],
+     "sub": [
+      "SL3.4.sector-area",
+      "SL3.4.arc-length",
+      "SL3.4.segment-shaded"
+     ],
+     "subPassA": [
+      "SL3.4.sector-area",
+      "SL3.4.arc-length",
+      "SL3.4.segment-shaded",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "SL3.4.arc-length",
+      "SL3.4.sector-area",
+      "SL2.7.solve-equation"
      ]
     }
    ],
@@ -7781,20 +8987,47 @@
     {
      "label": "a",
      "syllabus": [
-      "5.9",
-      "5.6"
+      "5.9"
      ],
-     "skill": "Find when particle first at rest (ds/dt = 0)",
-     "review": "agreed"
+     "skill": "Find when particle first at rest (v = 0 or s minimum) with GDC",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.9",
+       "5.6"
+      ],
+      "why": "Old 5.6 earned no marks: the markscheme gives M1 for recognising rest as ds/dt = 0 or s at a minimum and the answer comes from the GDC, with no differentiation by hand."
+     },
+     "sub": [
+      "SL5.9.rest-and-direction"
+     ],
+     "subPassA": [
+      "SL5.9.rest-and-direction"
+     ],
+     "subPassB": [
+      "SL5.9.rest-and-direction",
+      "SL5.6.chain-rule"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
-      "5.9",
-      "5.11"
+      "5.9"
      ],
      "skill": "Total distance travelled via integral of |v| with GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.9",
+       "5.11"
+      ],
+      "why": "Old 5.11 was wrong: the integral of |v| is a GDC evaluation (or a displacement difference), not a by-hand definite integral or area, so only the 5.9 total-distance skill earns the marks."
+     },
+     "sub": [
+      "SL5.9.total-distance"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7808,7 +9041,21 @@
       "2.10"
      ],
      "skill": "Use sum of probabilities and E(X) to find unknown",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.unknowns-from-mean",
+      "SL4.7.find-k",
+      "SL2.10.solve-gdc"
+     ],
+     "subPassA": [
+      "SL4.7.unknowns-from-mean",
+      "SL4.7.find-k",
+      "SL2.10.solve-gdc"
+     ],
+     "subPassB": [
+      "SL4.7.find-k",
+      "SL4.7.unknowns-from-mean"
+     ]
     }
    ],
    "confidence": "high"
@@ -7821,7 +9068,18 @@
       "3.1"
      ],
      "skill": "Surface area of cylinder with hemispheres, eliminating h",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.surface-area",
+      "SL3.1.volume-solids"
+     ],
+     "subPassA": [
+      "SL3.1.surface-area",
+      "SL3.1.volume-solids"
+     ],
+     "subPassB": [
+      "SL3.1.surface-area"
+     ]
     },
     {
      "label": "b",
@@ -7830,7 +9088,11 @@
       "5.3"
      ],
      "skill": "Differentiate S and set dS/dx = 0 for exact a",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points",
+      "SL5.3.negative-powers"
+     ]
     },
     {
      "label": "c",
@@ -7839,7 +9101,12 @@
       "5.8"
      ],
      "skill": "Second derivative test and minimum surface area",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "SL5.8.classify-stationary-points",
+      "SL5.8.optimise-given-function"
+     ]
     }
    ],
    "confidence": "high"
@@ -7853,7 +9120,20 @@
       "1.4"
      ],
      "skill": "Total of constant payments and geometric series of payments",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.3.sum",
+      "SL1.4.compare-options"
+     ],
+     "subPassA": [
+      "SL1.3.sum",
+      "SL1.3.model",
+      "SL1.2.sum"
+     ],
+     "subPassB": [
+      "SL1.3.sum",
+      "SL1.2.sum"
+     ]
     },
     {
      "label": "b",
@@ -7861,17 +9141,33 @@
       "1.4"
      ],
      "skill": "Compound interest expression, monthly compounding",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.future-value"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
       "1.4",
-      "1.3",
-      "2.10"
+      "1.3"
      ],
-     "skill": "Combine compound interest and geometric sum; solve with GDC",
-     "review": "agreed"
+     "skill": "Combine compound interest and geometric sum; find months to reach target with GDC",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.4",
+       "1.3",
+       "2.10"
+      ],
+      "why": "Old 2.10 broke the solving rule: finding the number of months to reach the target is covered by 1.4 find-time, alongside the compound-interest value and geometric sum."
+     },
+     "sub": [
+      "SL1.4.future-value",
+      "SL1.4.find-time",
+      "SL1.3.sum"
+     ]
     },
     {
      "label": "d",
@@ -7879,7 +9175,10 @@
       "1.4"
      ],
      "skill": "Find interest rate with TVM solver or compound formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.4.find-rate-or-pv"
+     ]
     }
    ],
    "confidence": "medium"
@@ -7892,7 +9191,10 @@
       "4.9"
      ],
      "skill": "Normal probabilities sum to 1 for middle interval",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.symmetry-probability"
+     ]
     },
     {
      "label": "b",
@@ -7908,6 +9210,9 @@
      "passB": [
       "4.12",
       "4.9"
+     ],
+     "sub": [
+      "SL4.12.unknown-mean-and-sd"
      ]
     },
     {
@@ -7917,16 +9222,45 @@
       "4.11"
      ],
      "skill": "Binomial probability and conditional probability with binomial",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.exact-probability",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassA": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.exact-probability",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassB": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.exact-probability",
+      "SL4.11.conditional-distributions"
+     ]
     },
     {
      "label": "d",
      "syllabus": [
       "4.12",
-      "4.3"
+      "4.9"
      ],
-     "skill": "Find unknown standard deviation from interquartile range",
-     "review": "agreed"
+     "skill": "Find unknown standard deviation from the interquartile range",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "4.12",
+       "4.3"
+      ],
+      "why": "Old 4.3 was wrong: no IQR is calculated from data; the marks are for placing the quartiles symmetrically about the mean as a central 50% normal interval (4.9) and using inverse normal to find the unknown sd (4.12)."
+     },
+     "sub": [
+      "SL4.12.unknown-mean-or-sd",
+      "SL4.9.central-interval"
+     ]
     }
    ],
    "confidence": "high"
