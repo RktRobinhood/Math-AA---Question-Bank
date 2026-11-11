@@ -15,6 +15,7 @@
 // fails. A question with crops but no tags yet is published with "tags pending" unless --strict.
 //
 // Usage: node scripts/build.mjs [--check] [--strict]
+//        node scripts/build.mjs --todo <course> [prefix]   list questions still to tag, as JSON lines
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,6 +26,7 @@ const readJson = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
 const readJsonIf = (p, fallback) => (p && exists(p) ? readJson(p) : fallback);
 const checkOnly = process.argv.includes("--check");
 const strict = process.argv.includes("--strict");
+const todo = process.argv.includes("--todo") ? process.argv.slice(process.argv.indexOf("--todo") + 1) : null;
 
 const { courses, topics } = readJson("data/courses.json");
 const courseById = Object.fromEntries(courses.map((c) => [c.id, c]));
@@ -129,6 +131,16 @@ for (const [alias, a] of Object.entries(shared)) {
 if (errors.length) {
   console.error(`${errors.length} problem(s):\n  ` + errors.join("\n  "));
   process.exit(1);
+}
+if (todo) {
+  // A tagging worklist: one JSON line per untagged question, with its parts, marks and images.
+  const [courseId, prefix = ""] = todo;
+  for (const q of questions) {
+    if (q.course.id !== courseId || q.tags || !q.id.startsWith(prefix)) continue;
+    console.log(JSON.stringify({ id: q.id, marks: q.crop.marks, parts: q.crop.parts.map((p) => ({ label: p.label, marks: p.marks })),
+      paperImages: q.crop.paperImages, markschemeImages: q.crop.markschemeImages }));
+  }
+  process.exit(0);
 }
 const pending = warnings.length;
 console.log(`OK: ${questions.length} questions, ${Object.keys(shared).length} shared appearances, ${pending} without tags yet`);

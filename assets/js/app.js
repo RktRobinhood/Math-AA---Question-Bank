@@ -22,7 +22,9 @@
     course = courses.find(c => c.id === COURSE?.get()) || courses[0];
     allQuestions = allRecords
       .filter(q => (q.courses || [q.course]).includes(course.id))
-      .map(q => asCourseRow(q, course.id));
+      .map(q => asCourseRow(q, course.id))
+      .sort((a, b) => a.year - b.year || a.session.localeCompare(b.session) || a.timezone.localeCompare(b.timezone)
+        || a.paper.localeCompare(b.paper) || a.question - b.question);
     allYears = [...new Set(allQuestions.map(q => q.year).filter(Boolean))].sort((a, b) => a - b);
     allSubtopics = [...new Set(allQuestions.flatMap(q => q.syllabus || []))]
       .sort((a, b) => naturalCompare(a, b));

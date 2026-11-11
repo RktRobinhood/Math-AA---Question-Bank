@@ -32,7 +32,7 @@
       "syllabus": ["data/syllabus.json", "data/syllabus-aa-hl.json"],
       "crops": "data/crops-aa-hl.json",
       "tags": "data/tags-aa-hl.json",
-      "formulaBooklet": null
+      "formulaBooklet": "assets/formula-booklet-aa.pdf"
     },
     {
       "id": "ai-sl",
@@ -48,7 +48,7 @@
       "syllabus": ["data/syllabus-ai.json"],
       "crops": "data/crops-ai-sl.json",
       "tags": "data/tags-ai-sl.json",
-      "formulaBooklet": null
+      "formulaBooklet": "assets/formula-booklet-ai.pdf"
     },
     {
       "id": "ai-hl",
@@ -65,7 +65,7 @@
       "syllabus": ["data/syllabus-ai.json"],
       "crops": "data/crops-ai-hl.json",
       "tags": "data/tags-ai-hl.json",
-      "formulaBooklet": null
+      "formulaBooklet": "assets/formula-booklet-ai.pdf"
     }
   ],
   "topics": {
