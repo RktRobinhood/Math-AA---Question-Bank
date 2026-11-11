@@ -10719,6 +10719,1155 @@
     }
    ],
    "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p1-q01": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.11"
+     ],
+     "skill": "Match translations, a reflection and a horizontal stretch of a piecewise graph to their equations",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Find the common difference from two terms and then a later term of an arithmetic sequence",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Use the arithmetic series sum formula to find how many terms give a zero sum",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Use the addition rule to find the probability of a union",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "Test independence by comparing P(A)P(B) with the intersection probability",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.11",
+      "4.6"
+     ],
+     "skill": "Find a conditional probability involving a complement using the formula or a Venn diagram",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Find the parameters of a quadratic y=ax^2+c from its intercept points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.11",
+      "5.5"
+     ],
+     "skill": "Evaluate by hand the definite integral giving the area between a parabola and a line",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Factorise and cancel algebraic fractions to verify a simplified form",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Combine logs with the quotient law and rewrite a constant as a log to solve a log equation",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Locate the vertex of a quadratic and use that it lies on a line to fix a constant",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.6",
+      "2.7"
+     ],
+     "skill": "Express a vertex in terms of a parameter, substitute into a line and solve the resulting quadratic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5",
+      "2.2"
+     ],
+     "skill": "Evaluate a linear function and find its inverse algebraically",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.1"
+     ],
+     "skill": "Write the equation of a line from its intercepts on a graph",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Solve an equation involving an inverse function using the inverse relationship",
+     "review": "adjudicated",
+     "rationale": "Both marks are for using the inverse relationship (or finding the inverse) to undo h, which is 2.5; evaluating h at a point is a trivial step inside it, not a separate 2.2 mark.",
+     "passA": [
+      "2.5",
+      "2.2"
+     ],
+     "passB": [
+      "2.5"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Use a composite involving an inverse to determine unknown coefficients of a linear function",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Identify that the required function is the inverse and find it",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "State that a function and its inverse are reflections in y=x",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.8",
+      "2.7"
+     ],
+     "skill": "Set the derivative to zero and solve the quadratic to locate stationary points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8",
+      "5.2"
+     ],
+     "skill": "Classify a stationary point from the change in sign of the first derivative",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.7",
+      "5.3"
+     ],
+     "skill": "Differentiate the derivative and solve f''=0",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Justify a point of inflexion by a change in concavity",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Integrate a polynomial derivative and use a known point to find the constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.6",
+      "3.5",
+      "1.6"
+     ],
+     "skill": "Prove a trig identity using tan=sin/cos, the Pythagorean identity and the double angle for sine",
+     "review": "adjudicated",
+     "rationale": "The method marks are for the Pythagorean or double-angle identity (3.6) and for tan = sin/cos (3.5), with the final mark for completing the LHS = RHS identity proof (1.6), so the statements are ordered by the marks they carry.",
+     "passA": [
+      "3.6",
+      "1.6",
+      "3.5"
+     ],
+     "passB": [
+      "3.6",
+      "3.5",
+      "1.6"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.8"
+     ],
+     "skill": "Solve a double-angle sine equation in a degree interval using exact values",
+     "review": "adjudicated",
+     "rationale": "Every mark is for solving the trig equation in the interval (3.8); the exact value of sin is part of that solving, not a separately assessed 3.5 skill.",
+     "passA": [
+      "3.8",
+      "3.5"
+     ],
+     "passB": [
+      "3.8"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.5"
+     ],
+     "skill": "Substitute a specific angle into the identity and use an exact value to derive a quadratic",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.7",
+      "3.5"
+     ],
+     "skill": "Solve the quadratic with the formula and choose the root consistent with the size of the tangent",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Find the central angle of a regular pentagon in radians and use arc length to find the radius",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.4",
+      "3.2"
+     ],
+     "skill": "Find total segment area using sector area minus triangle area 1/2 ab sin C",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p2-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Find a cumulative probability for the standard normal distribution",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Represent a normal probability between two bounds by shading a sketch",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Use the inverse normal to find a lower bound giving a known central probability",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Calculate the mean of a data set",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.4",
+      "4.3"
+     ],
+     "skill": "Use that the regression line passes through the mean point to find the y mean and a missing value",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Find Pearson's correlation coefficient with technology",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p2-q04": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.9"
+     ],
+     "skill": "Identify the required general term of a binomial expansion with a root term and solve for an unknown constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.7"
+     ],
+     "skill": "Find amplitude sign and period parameter of a cosine model from max and min points",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.7"
+     ],
+     "skill": "State the period of a circular function",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.7",
+      "2.11"
+     ],
+     "skill": "Rewrite a cosine model as a horizontally translated sine function",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.8",
+      "4.6"
+     ],
+     "skill": "Combine binomial probabilities for two equally likely machines",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.11",
+      "4.6"
+     ],
+     "skill": "Find a reverse conditional probability using P(A and B)/P(B)",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.8"
+     ],
+     "skill": "State the vertical and horizontal asymptotes of a rational function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a rational function using the quotient rule",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.2"
+     ],
+     "skill": "Argue from the sign of the derivative that a function never increases",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Express the distance from a point on a curve to a fixed point as a function of x",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8",
+      "2.4"
+     ],
+     "skill": "Minimise a distance function using technology to find the closest point",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "Evaluate an exponential growth model at a given time",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.10",
+      "2.9"
+     ],
+     "skill": "Solve an exponential inequality with technology and interpret as whole months",
+     "review": "adjudicated",
+     "rationale": "Two of the three marks are for solving the inequality with a table, graph or logs on the GDC (2.10); setting up the exponential model earns the first mark (2.9).",
+     "passA": [
+      "2.9",
+      "2.10"
+     ],
+     "passB": [
+      "2.10",
+      "2.9"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Rewrite a base-a exponential model in base e to find an exact rate constant",
+     "review": "adjudicated",
+     "rationale": "Both marks are for rewriting the base as e^k and taking a natural log to get an exact k, which is exponent and log law work (1.7) rather than the model as a function (2.9).",
+     "passA": [
+      "1.7",
+      "2.9"
+     ],
+     "passB": [
+      "1.7"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.1",
+      "5.6"
+     ],
+     "skill": "Find an instantaneous rate of change of an exponential model",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.10",
+      "2.9"
+     ],
+     "skill": "Solve for an unknown parameter in a logistic model with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Find when growth rate is greatest using the maximum of the derivative or G''=0",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "Compare models by reasoning about bounded versus unbounded long-term behaviour",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.9"
+     ],
+     "skill": "Read initial speeds from velocity functions at t=0",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.9",
+      "2.10"
+     ],
+     "skill": "Equate two velocity models and solve with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.9",
+      "5.10"
+     ],
+     "skill": "Integrate exponential and linear velocities and use an initial condition to form a separation function",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.9",
+      "2.10"
+     ],
+     "skill": "Solve separation equal to zero with technology to find the meeting time",
+     "review": "adjudicated",
+     "rationale": "The part sits in a kinematics context (5.9, listed first as in the bank's other kinematics parts) and its marks are for solving the separation equation with technology (2.10).",
+     "passA": [
+      "2.10",
+      "5.9"
+     ],
+     "passB": [
+      "5.9",
+      "2.10"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.9",
+      "5.5"
+     ],
+     "skill": "Find distance travelled by integrating a velocity over a time interval",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p1-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Use total probability equal to 1 to find a missing value in a distribution table",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Sum relevant probabilities from a discrete distribution for an inequality event",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Compute the expected value of a discrete random variable",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q02": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.10",
+      "5.5"
+     ],
+     "skill": "Integrate a sine/cosine gradient function and fix the constant using a given point",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q03": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Form and solve simultaneous equations from arithmetic term conditions to find first term and difference",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "Rearrange the conditional probability formula to find an intersection probability",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.11",
+      "4.6"
+     ],
+     "skill": "Find a conditional probability given a complement using complements and the formula",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.8"
+     ],
+     "skill": "Find unknown coefficients of a rational function from points on its graph",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.11",
+      "2.8"
+     ],
+     "skill": "Rewrite a rational function in asymptote form and describe stretch and translations from 1/x",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Solve a log equation using log laws and change of base to a common base",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2"
+     ],
+     "skill": "Apply the cosine rule with an exact 60 degree cosine to find a side",
+     "review": "adjudicated",
+     "rationale": "The marks are for applying the cosine rule (3.2); substituting cos 60 = 1/2 is part of that working and earns no mark of its own.",
+     "passA": [
+      "3.2",
+      "3.5"
+     ],
+     "passB": [
+      "3.2"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.2"
+     ],
+     "skill": "Apply the cosine rule with algebraic side lengths and simplify to an expression",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.7",
+      "3.2"
+     ],
+     "skill": "Solve the resulting quadratic choosing the valid root, then find the triangle area with half ab sin C",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Use a negative discriminant condition to bound an integer parameter",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "State the axis of symmetry and find the vertex of a quadratic",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.4",
+      "5.3"
+     ],
+     "skill": "Differentiate a polynomial and find the equation of the normal at a point",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.11",
+      "5.5"
+     ],
+     "skill": "Find an area between a curve and a line by evaluating definite integrals by hand",
+     "review": "adjudicated",
+     "rationale": "The area between the curve and the line is set up as a difference of definite integrals evaluated by hand (5.11), and the A2 is for integrating integer powers of x (5.5).",
+     "passA": [
+      "5.11",
+      "5.5"
+     ],
+     "passB": [
+      "5.11"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.4",
+      "1.7"
+     ],
+     "skill": "Find axis intercepts of an exponential rational function, solving an exponential equation with logs",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "State the range of a function from its maximum value and graph",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a quotient of exponential expressions using quotient or product rule",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8",
+      "2.7"
+     ],
+     "skill": "Set derivative to zero and solve a disguised quadratic in e^x to locate a maximum",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.3",
+      "2.1"
+     ],
+     "skill": "Compute data means and form the equation of a line through the origin and the mean point",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Find the y-on-x least squares regression line coefficients with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Predict a y value by substituting into the regression line",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p2-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.3"
+     ],
+     "skill": "Deduce an interior angle from bearings",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.2",
+      "3.3"
+     ],
+     "skill": "Find a missing angle from bearings and use the sine rule to find a distance",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.6"
+     ],
+     "skill": "Rewrite an expression using the cos 2x double angle identity in terms of sine",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.8",
+      "2.7"
+     ],
+     "skill": "Solve a trig equation that reduces to a quadratic in sin x over a given interval",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.3",
+      "4.2"
+     ],
+     "skill": "Reason why adding one value either side of the median leaves it unchanged",
+     "review": "adjudicated",
+     "rationale": "The mark is for reasoning that one new value either side leaves the median unchanged (4.3), using the median read from the given box plot (4.2).",
+     "passA": [
+      "4.3",
+      "4.2"
+     ],
+     "passB": [
+      "4.3"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Use totals from means and the range to set up and solve for two unknown data values",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Form an equation linking sector perimeter (arc plus radii) to a circle circumference",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.4",
+      "2.7"
+     ],
+     "skill": "Equate sector and circle areas and solve the resulting quadratic for the angle",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.12"
+     ],
+     "skill": "Use inverse normal to find the z-score corresponding to an upper tail probability",
+     "review": "adjudicated",
+     "rationale": "The marks are for standardising with unknown mu and sigma to get the z-value, which is 4.12's tagWhen; 4.9 is for calculations with known mu and sigma.",
+     "passA": [
+      "4.12",
+      "4.9"
+     ],
+     "passB": [
+      "4.12"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.12"
+     ],
+     "skill": "Set up two standardisation equations and solve for unknown mean and standard deviation",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-sl-2025-nov-tz3-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Model fixed simple interest as an arithmetic sequence and evaluate it",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.4"
+     ],
+     "skill": "Compute a compound interest future value and the interest earned",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.4",
+      "2.10"
+     ],
+     "skill": "Write a compound growth model and solve an inequality against a linear model with technology",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Compute volume of a cone plus hemisphere and the curved surface area of a cone",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Rearrange a composite solid volume formula to express height in terms of radius",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Express cone curved surface area in terms of radius using slant height",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4",
+      "5.8"
+     ],
+     "skill": "Find the minimum of a surface area function using the GDC in an optimisation context",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-sl-2025-nov-tz3-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.9",
+      "2.4"
+     ],
+     "skill": "Find maximum displacement from the graph and maximum velocity as the derivative at a point",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.9",
+      "2.4"
+     ],
+     "skill": "Find the minimum displacement with technology and evaluate displacement at a time",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.9"
+     ],
+     "skill": "Find total distance travelled by summing distances between turning points or integrating speed",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4",
+      "3.7"
+     ],
+     "skill": "Read off the first nonzero zero of the oscillating displacement function",
+     "review": "adjudicated",
+     "rationale": "The single mark is for the first zero of the displacement after t = 0, a key feature found from the graph or GDC (2.4), which can also be seen as half the period of the sine factor (3.7).",
+     "passA": [
+      "2.4",
+      "3.7"
+     ],
+     "passB": [
+      "3.7"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.8",
+      "1.3"
+     ],
+     "skill": "Find a geometric ratio from successive peaks and use a sum to infinity for total distance",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
   }
  }
 }
