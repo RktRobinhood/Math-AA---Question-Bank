@@ -241,7 +241,7 @@ function header(base) {
   const sub = (links) => `<div class="submenu">${links.map(([h, t]) => `<a href="${base}${h}">${esc(t)}</a>`).join("")}</div>`;
   return `
     <header class="site-header">
-      <a class="site-brand" href="${base}"><strong>IB Math Question Bank</strong><span>AA SL · AA HL · AI SL · AI HL</span></a>
+      <a class="site-brand" href="${base}"><strong>IB Math Question Bank</strong><span>Course: <b data-course-name>AA SL</b></span></a>
       <nav class="site-menu" aria-label="Main navigation">
         <div class="menu-group"><button class="site-menu-link" type="button">Question Bank</button>${sub([["question-bank/", "Search all questions"], ...years.map((y) => [`exams/${y}/`, String(y)])])}</div>
         <div class="menu-group"><button class="site-menu-link" type="button">Statistics</button>${sub([["statistics/", "Exam statistics"], ["statistics/?mode=recency", "Recency forecast"], ["statistics/?mode=primacy", "Long-term pattern"]])}</div>
@@ -249,8 +249,7 @@ function header(base) {
         <a class="site-menu-link" href="${base}practice.html">Practice</a>
         <a class="site-menu-link" data-formula-booklet href="${base}assets/formula-sheet-aasl.pdf" target="_blank">Formula Sheet</a>
       </nav>
-    </header>
-    <div id="course-bar"></div>`;
+    </header>`;
 }
 
 function page({ base, title, head = "", body, scripts = [] }) {
@@ -307,14 +306,16 @@ for (const r of records) {
   const head = `\n    <script>window.AASL_Q=${JSON.stringify(pageQ).replace(/</g, "\\u003c")};</script>`;
   const sectionText = r.section ? ` - Section ${r.section}` : "";
   const also = r.appearances.length > 1
-    ? `\n            <div class="appears-in">Appears in ${r.appearances.map((a) => `<span class="badge${a.course === r.course ? "" : " also"}">${esc(appearanceText(a))}</span>`).join("")}</div>`
+    ? `\n            <div class="appears-in">Appears in ${r.appearances.map((a) => `<span class="badge${a.course === r.course ? "" : " also"}" data-appearance="${a.course}">${esc(appearanceText(a))}</span>`).join("")}</div>`
     : "";
+  // A shared question takes the title of its appearance in the reader's course (course.js).
+  const titles = Object.fromEntries(r.appearances.map((a) => [a.course, `${courseById[a.course].short} ${a.title}`]));
   const tags = r.tagged
     ? r.syllabus.map((s) => `<a class="tag" href="${base}syllabus/topic-${s.split(".")[0]}/">${esc(s)}</a>`).join("")
     : `<span class="badge pending">Syllabus tags pending</span>`;
   const body = `        <nav class="breadcrumbs"><a href="${base}">Home</a><span>/</span><a href="${base}exams/${r.year}/">${r.year}</a><span>/</span><span>${esc(r.title)}</span></nav>
         <section class="panel static-hero">
-          <h1>${esc(c.short)} ${esc(r.title)}</h1>
+          <h1${r.appearances.length > 1 ? ` data-course-titles="${esc(JSON.stringify(titles))}"` : ""}>${esc(c.short)} ${esc(r.title)}</h1>
           <p>${r.marks} marks - ${r.session} ${r.paper} ${r.timezone}${sectionText} - ${esc(c.fullName)}</p>
         </section>
         <div class="page-grid">
