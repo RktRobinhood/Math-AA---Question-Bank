@@ -165,7 +165,7 @@ An interactive practice mode that generates randomised questions. Separate from 
 
 ### Formula Sheet
 
-Opens the official IB formula booklet for your course as a PDF in a new tab. Only the AA SL booklet is in the site so far.
+Opens the official IB formula booklet for your course as a PDF in a new tab: the AA SL booklet, the full AA booklet for AA HL, or the AI booklet.
 
 ---
 
@@ -219,14 +219,31 @@ Every question is tagged **per part**: (a), (b), (c)(i) and so on. Each part has
 
 Question and markscheme images are cropped straight from the official PDFs. The script finds each question's boundaries from the PDF text, trims page furniture (page numbers, barcodes, "Turn over"), and checks every question's marks against the paper and the markscheme. All images are WebP.
 
+PDFs are named like `AA_HL_2021_May_TZ1_P3_Paper.pdf` and `AA_HL_2021_May_TZ1_P3_Markscheme.pdf`.
+
 ```
 py -m pip install pymupdf pillow
+
+# Re-crop questions already in the bank
 py scripts/recrop.py --pdfs "<vault>/Exams/PDFs" --out assets --manifest data/crops.json
+
+# Add new papers: questions, marks, parts and sections are found in the PDF itself
+py scripts/recrop.py --pdfs <dir> --out assets --manifest data/crops-aa-hl.json --discover aa-hl-2021
+
+# Store questions common to the SL and HL papers once (run after both papers are cropped)
+py scripts/match_shared.py --sl-pdfs <sl dir> --hl-pdfs <hl dir> --sl-manifest data/crops.json \
+    --hl-manifest data/crops-aa-hl.json --prefix aa-hl-2021 --apply
+
 py scripts/contact_sheet.py assets/exam-images sheet.png aa-sl-2024-may-tz1-p1-   # eyeball one paper's crops
 node scripts/build.mjs              # validates, then writes data.js and the static pages
 node scripts/build.mjs --check      # validate only
 node scripts/build.mjs --strict     # also fail on questions without tags
+node scripts/build.mjs --todo aa-hl # tagging worklist: untagged questions with their parts and images
 ```
+
+`--discover` reproduces the 306 AA SL crops exactly: the same marks, sections, parts, part positions and image sizes.
+
+`match_shared.py` compares each HL question's text with every question on the SL paper of the same exam. Only same-marks, same-text pairs are merged; near misses are printed for a person to check.
 
 `build.mjs` refuses to write anything if any check fails:
 - a tag isn't a statement in that course's syllabus;

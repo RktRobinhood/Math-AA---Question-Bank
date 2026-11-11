@@ -14,8 +14,12 @@ reported in the manifest's "warnings" and on stdout.
 
 Usage:
   py scripts/recrop.py --pdfs "<vault>/Exams/PDFs" --out <dir> [--only aa-sl-2021-may-tz1-p1]
+      re-crop questions already in assets/js/data.js
+  py scripts/recrop.py --pdfs <dir> --out assets --manifest data/crops-aa-hl.json --discover aa-hl-2021
+      crop every paper in <dir> whose id starts with the prefix; the questions are found in the PDF
 
-Writes <out>/exam-images/<id>/{paper,markscheme}-NN.webp and <out>/crops.json.
+PDFs are named like AA_HL_2021_May_TZ1_P3_Paper.pdf and AA_HL_2021_May_TZ1_P3_Markscheme.pdf.
+Writes <out>/exam-images/<id>/{paper,markscheme}-NN.webp and <out>/crops.json (or --manifest).
 Requires: pip install pymupdf pillow
 """
 import argparse
@@ -58,8 +62,39 @@ def load_questions():
 
 def pdf_name(group, kind):
     # aa-sl-2021-may-tz1-p1 -> AA_SL_2021_May_TZ1_P1_Paper.pdf
-    _, _, year, session, tz, paper = group.split("-")
-    return f"AA_SL_{year}_{session.capitalize()}_{tz.upper()}_{paper.upper()}_{kind}.pdf"
+    subject, level, year, session, tz, paper = group.split("-")
+    return f"{subject.upper()}_{level.upper()}_{year}_{session.capitalize()}_{tz.upper()}_{paper.upper()}_{kind}.pdf"
+
+
+def group_of(pdf):
+    # AA_HL_2021_May_TZ1_P3_Paper.pdf -> aa-hl-2021-may-tz1-p3
+    m = re.match(r"^(AA|AI)_(SL|HL)_(\d{4})_(May|Nov)_(TZ\d)_(P[123])_Paper\.pdf$", pdf.name)
+    return "-".join(x.lower() for x in m.groups()) if m else None
+
+
+def discover_groups(pdf_dir, prefix):
+    """{group: [question stubs]} for every paper in pdf_dir whose id starts with prefix and that
+    has a markscheme. Questions are numbered 1..n from the paper's own headings."""
+    groups = {}
+    for pdf in sorted(pdf_dir.glob("*_Paper.pdf")):
+        group = group_of(pdf)
+        if not group or not group.startswith(prefix):
+            continue
+        if not (pdf_dir / pdf_name(group, "Markscheme")).exists():
+            print(f"{group}: no markscheme, skipped")
+            continue
+        starts = find_paper_starts(Doc(pdf), 99)
+        groups[group] = [{"id": f"{group}-q{k:02d}", "question": k, "marks": st["max"]} for k, st in enumerate(starts, start=1)]
+    return groups
+
+
+def find_section_b(doc):
+    """(page, y) of the "Section B" heading, or None for papers without sections."""
+    for p, ls in enumerate(doc.lines):
+        for x0, y0, x1, y1, t in ls:
+            if t == "Section B" and 200 < (x0 + x1) / 2 < 400:
+                return (p, y0)
+    return None
 
 
 class Doc:
@@ -269,15 +304,18 @@ def process_group(group, qs, pdf_dir, out_dir):
     starts = find_paper_starts(paper, n)
     ms_ranges, ms_err = find_ms_ranges(ms, n)
     last_page = len(paper.doc) - 1
+    section_b = find_section_b(paper)
 
     for k, q in enumerate(qs, start=1):
         warn = []
-        rec = {"id": q["id"], "marks": q["marks"], "warnings": warn, "notes": []}
+        rec = {"id": q["id"], "marks": q["marks"], "section": None, "warnings": warn, "notes": []}
         results[q["id"]] = rec
         if len(starts) < k:
             warn.append(f"paper: question {k} heading not found")
             continue
         st = starts[k - 1]
+        if section_b:
+            rec["section"] = "B" if (st["page"], st["y"]) > section_b else "A"
         if k < len(starts):
             end = {"page": starts[k]["page"], "y": starts[k]["y"] - 6}
         else:
@@ -349,13 +387,17 @@ def main():
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--only", help="limit to ids starting with this prefix")
     ap.add_argument("--manifest", type=Path, help="manifest path (default <out>/crops.json)")
+    ap.add_argument("--discover", metavar="PREFIX", help="crop new papers found in --pdfs, e.g. aa-hl-2021")
     args = ap.parse_args()
 
     groups = {}
-    for q in load_questions():
-        if args.only and not q["id"].startswith(args.only):
-            continue
-        groups.setdefault(re.sub(r"-q\d+$", "", q["id"]), []).append(q)
+    if args.discover:
+        groups = discover_groups(args.pdfs, args.discover)
+    else:
+        for q in load_questions():
+            if args.only and not q["id"].startswith(args.only):
+                continue
+            groups.setdefault(re.sub(r"-q\d+$", "", q["id"]), []).append(q)
 
     manifest_path = args.manifest or args.out / "crops.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
