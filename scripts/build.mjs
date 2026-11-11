@@ -15,7 +15,8 @@
 // fails. A question with crops but no tags yet is published with "tags pending" unless --strict.
 //
 // Usage: node scripts/build.mjs [--check] [--strict]
-//        node scripts/build.mjs --todo <course> [prefix]   list questions still to tag, as JSON lines
+//        node scripts/build.mjs --todo <course> [prefix]       list questions still to tag, as JSON lines
+//        node scripts/build.mjs --todo-sub <course> [prefix]   list tagged questions with parts still missing sub-tags
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -26,7 +27,9 @@ const readJson = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
 const readJsonIf = (p, fallback) => (p && exists(p) ? readJson(p) : fallback);
 const checkOnly = process.argv.includes("--check");
 const strict = process.argv.includes("--strict");
-const todo = process.argv.includes("--todo") ? process.argv.slice(process.argv.indexOf("--todo") + 1) : null;
+const argAfter = (flag) => (process.argv.includes(flag) ? process.argv.slice(process.argv.indexOf(flag) + 1) : null);
+const todo = argAfter("--todo");
+const todoSub = argAfter("--todo-sub");
 
 const { courses, topics } = readJson("data/courses.json");
 const courseById = Object.fromEntries(courses.map((c) => [c.id, c]));
@@ -40,7 +43,7 @@ const aaSl = readJson("data/syllabus.json");
 const aaHl = readJson("data/syllabus-aa-hl.json");
 const ai = readJson("data/syllabus-ai.json");
 for (const s of [...aaSl.statements, ...aaHl.statements]) {
-  tables.aa.set(s.code, { code: s.code, id: s.id, topic: String(s.topic || s.code.split(".")[0]), title: s.title, content: s.content, courses: s.courses });
+  tables.aa.set(s.code, { code: s.code, id: s.id, topic: String(s.topic || s.code.split(".")[0]), title: s.title, content: s.content, courses: s.courses, subtags: s.subtags || [] });
 }
 const aaById = new Map([...tables.aa.values()].map((s) => [s.id, s]));
 for (const s of ai.shared) {
@@ -48,7 +51,7 @@ for (const s of ai.shared) {
   tables.ai.set(s.code, { ...base, code: s.code, courses: s.courses });
 }
 for (const s of ai.statements) {
-  tables.ai.set(s.code, { code: s.code, id: s.id, topic: String(s.topic), title: s.title, content: s.content, courses: s.courses });
+  tables.ai.set(s.code, { code: s.code, id: s.id, topic: String(s.topic), title: s.title, content: s.content, courses: s.courses, subtags: s.subtags || [] });
 }
 const label = (s) => `${s.code} ${s.title}`;
 const courseStatements = (c) =>
@@ -71,6 +74,17 @@ const titleOf = (m) => `${m.year} ${m.session} ${m.paper} ${m.timezone} Q${m.que
 // ---- load and validate --------------------------------------------------------
 const errors = [];
 const warnings = [];
+// Sub-tags (#5): the skills under each statement, ids "<statement id>.<slug>". AA SL's list is
+// Wasteland Academy's skill map; AI statements shared with AA take AA's list.
+const subtagName = new Map();
+for (const s of [...tables.aa.values(), ...ai.statements.map((x) => tables.ai.get(x.code))]) {
+  for (const st of s.subtags) {
+    if (!st.id.startsWith(`${s.id}.`)) errors.push(`sub-tag ${st.id}: must start with ${s.id}.`);
+    else if (subtagName.has(st.id)) errors.push(`sub-tag ${st.id}: listed twice`);
+    subtagName.set(st.id, st.name);
+  }
+}
+let missingSub = 0;
 const questions = [];
 for (const c of courses) {
   const crops = readJsonIf(c.crops, {});
@@ -102,6 +116,15 @@ for (const c of courses) {
           const s = tables[c.subject].get(code);
           if (!s) errors.push(`${id} (${p.label}): unknown ${c.subject.toUpperCase()} code ${code}`);
           else if (!s.courses.includes(c.id)) errors.push(`${id} (${p.label}): ${code} is not in the ${c.short} syllabus`);
+        }
+        if (!p.sub) { missingSub++; continue; }
+        // Every sub-tag sits under one of the part's codes, and every code has at least one.
+        const codes = (p.syllabus || []).map((code) => tables[c.subject].get(code)).filter(Boolean);
+        for (const sub of p.sub) {
+          if (!codes.some((s) => s.subtags.some((st) => st.id === sub))) errors.push(`${id} (${p.label}): sub-tag ${sub} is not under ${p.syllabus.join(", ")}`);
+        }
+        for (const s of codes) {
+          if (!p.sub.some((sub) => sub.startsWith(`${s.id}.`))) errors.push(`${id} (${p.label}): ${s.code} has no sub-tag`);
         }
       }
     }
@@ -142,8 +165,19 @@ if (todo) {
   }
   process.exit(0);
 }
+if (todoSub) {
+  const [courseId, prefix = ""] = todoSub;
+  for (const q of questions) {
+    if (q.course.id !== courseId || !q.tags || !q.id.startsWith(prefix) || q.tags.parts.every((p) => p.sub)) continue;
+    const table = tables[q.course.subject];
+    console.log(JSON.stringify({ id: q.id, parts: q.tags.parts.map((p, i) => ({ label: p.label, marks: q.crop.parts[i].marks, syllabus: p.syllabus, skill: p.skill,
+      subtags: p.syllabus.flatMap((code) => table.get(code)?.subtags.map((st) => st.id) || []) })),
+      paperImages: q.crop.paperImages, markschemeImages: q.crop.markschemeImages }));
+  }
+  process.exit(0);
+}
 const pending = warnings.length;
-console.log(`OK: ${questions.length} questions, ${Object.keys(shared).length} shared appearances, ${pending} without tags yet`);
+console.log(`OK: ${questions.length} questions, ${Object.keys(shared).length} shared appearances, ${pending} without tags yet, ${missingSub} tagged parts without sub-tags yet`);
 if (checkOnly) process.exit(0);
 
 // ---- question records ---------------------------------------------------------
@@ -156,6 +190,7 @@ for (const q of questions.sort((a, b) => a.id.localeCompare(b.id))) {
     marks: p.marks,
     syllabus: t ? t.parts[i].syllabus.map((code) => label(table.get(code))) : [],
     skill: t ? t.parts[i].skill : "",
+    sub: t?.parts[i].sub ? t.parts[i].sub.map((id) => ({ id, name: subtagName.get(id) })) : [],
     anchor: p.anchor,
   }));
   // Question tags: union of part tags, ordered by the marks they carry; ties keep part order,
