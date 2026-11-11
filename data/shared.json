@@ -1,0 +1,81 @@
+{
+ "about": "Questions that sit on both the SL and the HL paper of an exam are stored once, under their SL id. Each entry is an HL appearance: its own id (paper, timezone and number) points at the stored SL question, with the section it has on the HL paper. Written by scripts/match_shared.py.",
+ "appearances": {
+  "aa-hl-2021-may-tz2-p1-q01": {
+   "canonical": "aa-sl-2021-may-tz2-p1-q02",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p1-q03": {
+   "canonical": "aa-sl-2021-may-tz2-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p1-q04": {
+   "canonical": "aa-sl-2021-may-tz2-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p1-q06": {
+   "canonical": "aa-sl-2021-may-tz2-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p1-q10": {
+   "canonical": "aa-sl-2021-may-tz2-p1-q08",
+   "section": "B"
+  },
+  "aa-hl-2021-may-tz2-p2-q01": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q01",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p2-q02": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q03",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p2-q03": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q04",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p2-q04": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p2-q05": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q06",
+   "section": "A"
+  },
+  "aa-hl-2021-may-tz2-p2-q10": {
+   "canonical": "aa-sl-2021-may-tz2-p2-q08",
+   "section": "B"
+  },
+  "aa-hl-2021-nov-tz0-p1-q04": {
+   "canonical": "aa-sl-2021-nov-tz0-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p1-q05": {
+   "canonical": "aa-sl-2021-nov-tz0-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p1-q06": {
+   "canonical": "aa-sl-2021-nov-tz0-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p1-q10": {
+   "canonical": "aa-sl-2021-nov-tz0-p1-q07",
+   "section": "B"
+  },
+  "aa-hl-2021-nov-tz0-p2-q02": {
+   "canonical": "aa-sl-2021-nov-tz0-p2-q03",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p2-q03": {
+   "canonical": "aa-sl-2021-nov-tz0-p2-q04",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p2-q04": {
+   "canonical": "aa-sl-2021-nov-tz0-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2021-nov-tz0-p2-q05": {
+   "canonical": "aa-sl-2021-nov-tz0-p2-q06",
+   "section": "A"
+  }
+ }
+}
