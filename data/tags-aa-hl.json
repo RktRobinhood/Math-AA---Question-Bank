@@ -4795,6 +4795,1250 @@
    ],
    "confidence": "low"
   },
+  "aa-hl-2023-nov-tz0-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12",
+      "2.4"
+     ],
+     "skill": "Use technology to vary a parameter and find when a cubic has two x-intercepts",
+     "review": "agreed"
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State parameter values giving a cubic exactly one root",
+     "review": "agreed"
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State parameter values giving a cubic three roots",
+     "review": "agreed"
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State parameter values giving a cubic two roots in a second case",
+     "review": "agreed"
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State parameter values giving a cubic one root in a second case",
+     "review": "agreed"
+    },
+    {
+     "label": "c(iii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "State parameter values giving a cubic three roots in a second case",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.12",
+      "2.4"
+     ],
+     "skill": "Relate the positions of a cubic's turning points to having three roots",
+     "review": "adjudicated",
+     "rationale": "The single mark is for reasoning from the shape of a cubic graph that its turning points sit on opposite sides of the axis when there are three zeros, which is polynomial graph and zeros work (2.12) with key graph features (2.4); no calculus is used, so 5.8 does not apply.",
+     "passA": [
+      "2.12",
+      "2.4"
+     ],
+     "passB": [
+      "2.12",
+      "5.8"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8",
+      "5.3"
+     ],
+     "skill": "Find general stationary points of a cubic family by differentiation",
+     "review": "agreed"
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "5.7",
+      "5.8"
+     ],
+     "skill": "Use the second derivative to classify general stationary points",
+     "review": "agreed"
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Decide the sign of the y-values at the stationary points",
+     "review": "adjudicated",
+     "rationale": "The mark comes from judging the sign of the y-values of the already classified local extrema, which is reasoning about local maxima and minima (5.8); nothing specific to polynomial factors or roots is needed for 2.12.",
+     "passA": [
+      "5.8",
+      "2.12"
+     ],
+     "passB": [
+      "5.8"
+     ]
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Classify a stationary point and its position for a different sign case",
+     "review": "adjudicated",
+     "rationale": "The mark is for stating that P is a local maximum above the axis, a max/min classification (5.8) that relies on the sign of the second derivative from f(i) when a is negative (5.7).",
+     "passA": [
+      "5.7",
+      "5.8"
+     ],
+     "passB": [
+      "5.8"
+     ]
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "5.8",
+      "2.12"
+     ],
+     "skill": "Give a condition for a turning point to lie below the x-axis",
+     "review": "agreed"
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "1.6",
+      "2.12"
+     ],
+     "skill": "Prove a discriminant-like condition guarantees three real roots of a cubic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz0-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.1"
+     ],
+     "skill": "Express the gradient of a line through the origin in terms of x and y",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.1"
+     ],
+     "skill": "Use the perpendicular-gradient condition to get an orthogonal gradient",
+     "review": "agreed"
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a separable differential equation to get a family of circles",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.3"
+     ],
+     "skill": "Sketch two sideways parabolas with intercepts",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.10"
+     ],
+     "skill": "Solve two curve equations simultaneously by factorising to find intersections",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.14",
+      "2.1"
+     ],
+     "skill": "Use implicit differentiation to show two curves meet at right angles",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "3.5"
+     ],
+     "skill": "Substitute a given gradient and exact tan value into a formula and simplify",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "5.18",
+      "5.15"
+     ],
+     "skill": "Solve a homogeneous differential equation with y = vx, integrating to ln and arctan terms",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.12"
+     ],
+     "skill": "Evaluate a limit by reasoning about tan approaching infinity",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p1-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Form a composite of a linear and a quadratic function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Evaluate the composite at a point and solve for an unknown constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Use the addition rule to find the probability of a union",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.6",
+      "4.5"
+     ],
+     "skill": "Probability of neither event via the complement of the union",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Use given arithmetic series sums to set up and solve for unknown constants in S_n",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Find a term of an arithmetic sequence from consecutive partial sums",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q04": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.2",
+      "3.6"
+     ],
+     "skill": "Find sine from a given exact cosine and use the triangle area formula",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q05": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.9",
+      "2.7"
+     ],
+     "skill": "Match binomial coefficients to given terms and solve for the power and constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Prove a divisibility result for exponential expressions by induction",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Substitute a complex root and equate real and imaginary parts to find unknowns",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Repeated integration by parts of a product involving a squared logarithm",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.11",
+      "1.7"
+     ],
+     "skill": "Evaluate the definite integral exactly and simplify using log laws",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.14",
+      "3.11"
+     ],
+     "skill": "Show a trig-over-power function is even by evaluating f(-x)",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.13",
+      "5.6"
+     ],
+     "skill": "Evaluate a 0/0 limit by l'Hopital or series and solve for a constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "State the vertical asymptote of a logarithmic function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.7",
+      "2.7"
+     ],
+     "skill": "Use log laws to form a quadratic at intersections, then use the discriminant and solve a quadratic inequality for the parameter",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Solve a quadratic exactly and find the surd difference of its roots",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.8",
+      "5.6",
+      "3.8"
+     ],
+     "skill": "Chain rule derivative set to zero to find stationary points in an interval",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.7",
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Classify stationary points using the second derivative via the product rule",
+     "review": "adjudicated",
+     "rationale": "Marks go to finding f'' and evaluating it (5.7), using its sign to classify the two maxima and one minimum (5.8), and the M1 is explicitly for applying the product rule to a chain-rule derivative (5.6).",
+     "passA": [
+      "5.7",
+      "5.6"
+     ],
+     "passB": [
+      "5.7",
+      "5.8"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.3",
+      "5.7"
+     ],
+     "skill": "Sketch the curve showing extrema and relative curvature",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Build Maclaurin series by substitution and composition of standard series",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.19",
+      "5.11"
+     ],
+     "skill": "Approximate a definite integral by integrating a truncated Maclaurin series",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.9",
+      "1.12"
+     ],
+     "skill": "Binomially expand a complex power and separate real and imaginary parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14",
+      "3.6"
+     ],
+     "skill": "Use De Moivre and the Pythagorean identity to derive a multiple-angle identity",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.8",
+      "2.7"
+     ],
+     "skill": "Use the identity to identify roots of a trig quartic and deduce a product of exact sines",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Distance between two points in 3D",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.2",
+      "3.1"
+     ],
+     "skill": "Find an angle at the apex of a pyramid using the cosine rule (or vectors)",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.9"
+     ],
+     "skill": "Find when a particle is first at rest from its displacement function",
+     "review": "adjudicated",
+     "rationale": "The marks are for recognising that rest means zero velocity and getting the time from the GDC, a kinematics task (5.9); no hand differentiation earns a mark, so 5.6 is not tagged.",
+     "passA": [
+      "5.9"
+     ],
+     "passB": [
+      "5.9",
+      "5.6"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.9"
+     ],
+     "skill": "Total distance travelled using the integral of |v| or displacement change",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.8",
+      "2.7"
+     ],
+     "skill": "Use the binomial variance formula to solve for p",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Variance of a linear transformation of a random variable",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count arrangements in a line, with and without a block restriction",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count selections with an at-least condition using combinations",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Form displacement vectors and compute their vector product",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.12",
+      "2.4"
+     ],
+     "skill": "Square the magnitude of a vector expression and find its minimum with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.16"
+     ],
+     "skill": "Use half the magnitude of a cross product for a triangle's area",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method to approximate a differential equation solution",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a first-order differential equation by separating variables with an initial condition",
+     "review": "adjudicated",
+     "rationale": "All five marks come from separating variables, integrating, using the initial condition and rearranging, which is solving a separable differential equation (5.18); the log integral is routine inside the separation and 5.18's tagWhen only adds extra codes for partial fractions or substitution/parts.",
+     "passA": [
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "5.10"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Compare the Euler approximation with the exact solution value",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p2-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Find a middle normal probability using total probability",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.12"
+     ],
+     "skill": "Find unknown mean and standard deviation from two normal probabilities",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.8",
+      "4.11"
+     ],
+     "skill": "Binomial probability and a conditional binomial probability",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.12",
+      "4.3"
+     ],
+     "skill": "Find an unknown standard deviation from the interquartile range of a normal",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "State the vertical asymptote of a quadratic-over-linear rational function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Find x-intercepts of a rational function from its quadratic numerator",
+     "review": "adjudicated",
+     "rationale": "The two A1 marks are just for the axis-crossing coordinates of a quadratic-over-linear rational function (2.13); the numerator factorises trivially and no quadratic-solving marks are awarded, so 2.7 is not tagged.",
+     "passA": [
+      "2.13",
+      "2.7"
+     ],
+     "passB": [
+      "2.13"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Find the oblique asymptote by polynomial division",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.13",
+      "2.3"
+     ],
+     "skill": "Sketch a rational function with vertical and oblique asymptotes and intercepts",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.2",
+      "2.4"
+     ],
+     "skill": "Determine the range of a rational function from its turning points",
+     "review": "adjudicated",
+     "rationale": "Marks are for writing the range as two inequalities (2.2) using the local max and min values from the GDC (2.4); 2.13's tagWhen covers asymptotes, intercepts and sketches, not range.",
+     "passA": [
+      "2.2",
+      "2.13"
+     ],
+     "passB": [
+      "2.2",
+      "2.4"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.15"
+     ],
+     "skill": "Solve a rational-function inequality against a line",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Show two 3D lines intersect and find the intersection point",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.17",
+      "3.13"
+     ],
+     "skill": "Verify that lines lie in a plane using the scalar-product plane equation",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.18",
+      "3.12",
+      "3.14"
+     ],
+     "skill": "Find where a perpendicular line meets a plane and the distance from a point to the plane",
+     "review": "adjudicated",
+     "rationale": "Most marks come from substituting the perpendicular line into the plane and solving for the meeting point (3.18), then finding BC as a displacement vector and its magnitude (3.12); one mark is for writing the line through B in vector form (3.14).",
+     "passA": [
+      "3.18",
+      "3.12"
+     ],
+     "passB": [
+      "3.18",
+      "3.14",
+      "3.12"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.12",
+      "3.14"
+     ],
+     "skill": "Find the reflection of a point in a plane using the foot of the perpendicular",
+     "review": "adjudicated",
+     "rationale": "The reflection is found with vector algebra, adding the displacement BC again to C or doubling it from B (3.12), or by extending along the perpendicular line's parameter (3.14); no new line-plane intersection is solved, so 3.18 is not tagged.",
+     "passA": [
+      "3.18",
+      "3.12"
+     ],
+     "passB": [
+      "3.12",
+      "3.14"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Prove a divisibility result for exponential expressions by induction",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Substitute a complex root and equate real and imaginary parts to find unknowns",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.16"
+     ],
+     "skill": "Repeated integration by parts of a product involving a squared logarithm",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.11",
+      "1.7"
+     ],
+     "skill": "Evaluate the definite integral exactly and simplify using log laws",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.14",
+      "3.11"
+     ],
+     "skill": "Show a trig-over-power function is even by evaluating f(-x)",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.13",
+      "5.6"
+     ],
+     "skill": "Evaluate a 0/0 limit by l'Hopital or series and solve for a constant",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz2-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.8",
+      "5.6",
+      "3.8"
+     ],
+     "skill": "Chain rule derivative set to zero to find stationary points in an interval",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.7",
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Classify stationary points using the second derivative via the product rule",
+     "review": "adjudicated",
+     "rationale": "Marks go to finding f'' and evaluating it (5.7), using its sign to classify the two maxima and one minimum (5.8), and the M1 is explicitly for applying the product rule to a chain-rule derivative (5.6).",
+     "passA": [
+      "5.7",
+      "5.6"
+     ],
+     "passB": [
+      "5.7",
+      "5.8"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.3",
+      "5.7"
+     ],
+     "skill": "Sketch the curve showing extrema and relative curvature",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Build Maclaurin series by substitution and composition of standard series",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.19",
+      "5.11"
+     ],
+     "skill": "Approximate a definite integral by integrating a truncated Maclaurin series",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.9",
+      "1.12"
+     ],
+     "skill": "Binomially expand a complex power and separate real and imaginary parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14",
+      "3.6"
+     ],
+     "skill": "Use De Moivre and the Pythagorean identity to derive a multiple-angle identity",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.8",
+      "2.7"
+     ],
+     "skill": "Use the identity to identify roots of a trig quartic and deduce a product of exact sines",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz2-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.8",
+      "2.7"
+     ],
+     "skill": "Use the binomial variance formula to solve for p",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Variance of a linear transformation of a random variable",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count arrangements in a line, with and without a block restriction",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count selections with an at-least condition using combinations",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Form displacement vectors and compute their vector product",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.12",
+      "2.4"
+     ],
+     "skill": "Square the magnitude of a vector expression and find its minimum with technology",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.16"
+     ],
+     "skill": "Use half the magnitude of a cross product for a triangle's area",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz2-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method to approximate a differential equation solution",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a first-order differential equation by separating variables with an initial condition",
+     "review": "adjudicated",
+     "rationale": "All five marks come from separating variables, integrating, using the initial condition and rearranging, which is solving a separable differential equation (5.18); the log integral is routine inside the separation and 5.18's tagWhen only adds extra codes for partial fractions or substitution/parts.",
+     "passA": [
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "5.10"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Compare the Euler approximation with the exact solution value",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2023-nov-tz2-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "State the vertical asymptote of a quadratic-over-linear rational function",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Find x-intercepts of a rational function from its quadratic numerator",
+     "review": "adjudicated",
+     "rationale": "The two A1 marks are just for the axis-crossing coordinates of a quadratic-over-linear rational function (2.13); the numerator factorises trivially and no quadratic-solving marks are awarded, so 2.7 is not tagged.",
+     "passA": [
+      "2.13",
+      "2.7"
+     ],
+     "passB": [
+      "2.13"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Find the oblique asymptote by polynomial division",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.13",
+      "2.3"
+     ],
+     "skill": "Sketch a rational function with vertical and oblique asymptotes and intercepts",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.2",
+      "2.4"
+     ],
+     "skill": "Determine the range of a rational function from its turning points",
+     "review": "adjudicated",
+     "rationale": "Marks are for writing the range as two inequalities (2.2) using the local max and min values from the GDC (2.4); 2.13's tagWhen covers asymptotes, intercepts and sketches, not range.",
+     "passA": [
+      "2.2",
+      "2.13"
+     ],
+     "passB": [
+      "2.2",
+      "2.4"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.15"
+     ],
+     "skill": "Solve a rational-function inequality against a line",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-nov-tz2-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Show two 3D lines intersect and find the intersection point",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.17",
+      "3.13"
+     ],
+     "skill": "Verify that lines lie in a plane using the scalar-product plane equation",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.18",
+      "3.12",
+      "3.14"
+     ],
+     "skill": "Find where a perpendicular line meets a plane and the distance from a point to the plane",
+     "review": "adjudicated",
+     "rationale": "Most marks come from substituting the perpendicular line into the plane and solving for the meeting point (3.18), then finding BC as a displacement vector and its magnitude (3.12); one mark is for writing the line through B in vector form (3.14).",
+     "passA": [
+      "3.18",
+      "3.12"
+     ],
+     "passB": [
+      "3.18",
+      "3.14",
+      "3.12"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.12",
+      "3.14"
+     ],
+     "skill": "Find the reflection of a point in a plane using the foot of the perpendicular",
+     "review": "adjudicated",
+     "rationale": "The reflection is found with vector algebra, adding the displacement BC again to C or doubling it from B (3.12), or by extending along the perpendicular line's parameter (3.14); no new line-plane intersection is solved, so 3.18 is not tagged.",
+     "passA": [
+      "3.18",
+      "3.12"
+     ],
+     "passB": [
+      "3.12",
+      "3.14"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
   "aa-hl-2024-nov-tz0-p1-q06": {
    "parts": [
     {
