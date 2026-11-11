@@ -448,6 +448,158 @@
   "aa-hl-2024-nov-tz0-p1-q10": {
    "canonical": "aa-sl-2024-nov-tz2-p1-q09",
    "section": "B"
+  },
+  "aa-hl-2025-may-tz1-p1-q02": {
+   "canonical": "aa-sl-2025-may-tz1-p1-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz1-p1-q03": {
+   "canonical": "aa-sl-2025-may-tz1-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz1-p1-q04": {
+   "canonical": "aa-sl-2025-may-tz1-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz1-p1-q05": {
+   "canonical": "aa-sl-2025-may-tz1-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p1-q01": {
+   "canonical": "aa-sl-2025-may-tz2-p1-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p1-q03": {
+   "canonical": "aa-sl-2025-may-tz2-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p1-q05": {
+   "canonical": "aa-sl-2025-may-tz2-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p1-q06": {
+   "canonical": "aa-sl-2025-may-tz2-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q01": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q01",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q02": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q02",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q03": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q05": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q06": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz2-p2-q10": {
+   "canonical": "aa-sl-2025-may-tz2-p2-q08",
+   "section": "B"
+  },
+  "aa-hl-2025-may-tz3-p2-q01": {
+   "canonical": "aa-sl-2025-may-tz3-p2-q02",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz3-p2-q03": {
+   "canonical": "aa-sl-2025-may-tz3-p2-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz3-p2-q04": {
+   "canonical": "aa-sl-2025-may-tz3-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz3-p2-q05": {
+   "canonical": "aa-sl-2025-may-tz3-p2-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-may-tz3-p2-q10": {
+   "canonical": "aa-sl-2025-may-tz3-p2-q09",
+   "section": "B"
+  },
+  "aa-hl-2025-nov-tz1-p1-q01": {
+   "canonical": "aa-sl-2025-nov-tz1-p1-q02",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p1-q02": {
+   "canonical": "aa-sl-2025-nov-tz1-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p1-q03": {
+   "canonical": "aa-sl-2025-nov-tz1-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p1-q04": {
+   "canonical": "aa-sl-2025-nov-tz1-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p1-q09": {
+   "canonical": "aa-sl-2025-nov-tz1-p1-q08",
+   "section": "B"
+  },
+  "aa-hl-2025-nov-tz1-p2-q01": {
+   "canonical": "aa-sl-2025-nov-tz1-p2-q01",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p2-q03": {
+   "canonical": "aa-sl-2025-nov-tz1-p2-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p2-q04": {
+   "canonical": "aa-sl-2025-nov-tz1-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p2-q07": {
+   "canonical": "aa-sl-2025-nov-tz1-p2-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz1-p2-q10": {
+   "canonical": "aa-sl-2025-nov-tz1-p2-q09",
+   "section": "B"
+  },
+  "aa-hl-2025-nov-tz3-p1-q01": {
+   "canonical": "aa-sl-2025-nov-tz3-p1-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p1-q02": {
+   "canonical": "aa-sl-2025-nov-tz3-p1-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p1-q03": {
+   "canonical": "aa-sl-2025-nov-tz3-p1-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p1-q04": {
+   "canonical": "aa-sl-2025-nov-tz3-p1-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p2-q01": {
+   "canonical": "aa-sl-2025-nov-tz3-p2-q03",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p2-q02": {
+   "canonical": "aa-sl-2025-nov-tz3-p2-q04",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p2-q03": {
+   "canonical": "aa-sl-2025-nov-tz3-p2-q05",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p2-q04": {
+   "canonical": "aa-sl-2025-nov-tz3-p2-q06",
+   "section": "A"
+  },
+  "aa-hl-2025-nov-tz3-p2-q10": {
+   "canonical": "aa-sl-2025-nov-tz3-p2-q09",
+   "section": "B"
   }
  }
 }
