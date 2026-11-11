@@ -2,7 +2,9 @@
   if (typeof PRACTICE_TEMPLATES === 'undefined') return;
 
   const $ = id => document.getElementById(id);
-  const siteData = window.AASL_DATA || { questions: [], topics: {} };
+  // Practice templates are written for AA SL, so only AA SL exam questions are matched.
+  const rawData = window.AASL_DATA || { questions: [], topics: {} };
+  const siteData = { ...rawData, questions: (rawData.questions || []).filter(q => (q.courses || ['aa-sl']).includes('aa-sl')) };
   const TEMPLATES = PRACTICE_TEMPLATES;
   const questionLookup = Object.fromEntries((siteData.questions || []).map(q => [q.id, q]));
   const heatMap = typeof TEMPLATE_HEAT !== 'undefined' ? TEMPLATE_HEAT : {};

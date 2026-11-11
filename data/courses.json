@@ -1,0 +1,78 @@
+{
+  "about": "The four IB mathematics courses the bank serves. Each course lists its papers, where its questions and tags live, and which syllabus layers make up its syllabus. A paper's identity (P1, P2, P3) is kept separate from its calculator policy. Questions shared by an SL and an HL paper are stored once, under the SL id; data/shared.json lists the HL appearances.",
+  "courses": [
+    {
+      "id": "aa-sl",
+      "subject": "aa",
+      "level": "SL",
+      "short": "AA SL",
+      "name": "Analysis and Approaches SL",
+      "fullName": "Mathematics: Analysis and Approaches SL",
+      "papers": [
+        { "id": "P1", "name": "Paper 1", "calculator": false, "sections": true },
+        { "id": "P2", "name": "Paper 2", "calculator": true, "sections": true }
+      ],
+      "syllabus": ["data/syllabus.json"],
+      "crops": "data/crops.json",
+      "tags": "data/tags.json",
+      "formulaBooklet": "assets/formula-sheet-aasl.pdf"
+    },
+    {
+      "id": "aa-hl",
+      "subject": "aa",
+      "level": "HL",
+      "short": "AA HL",
+      "name": "Analysis and Approaches HL",
+      "fullName": "Mathematics: Analysis and Approaches HL",
+      "papers": [
+        { "id": "P1", "name": "Paper 1", "calculator": false, "sections": true },
+        { "id": "P2", "name": "Paper 2", "calculator": true, "sections": true },
+        { "id": "P3", "name": "Paper 3", "calculator": true, "sections": false }
+      ],
+      "syllabus": ["data/syllabus.json", "data/syllabus-aa-hl.json"],
+      "crops": "data/crops-aa-hl.json",
+      "tags": "data/tags-aa-hl.json",
+      "formulaBooklet": null
+    },
+    {
+      "id": "ai-sl",
+      "subject": "ai",
+      "level": "SL",
+      "short": "AI SL",
+      "name": "Applications and Interpretation SL",
+      "fullName": "Mathematics: Applications and Interpretation SL",
+      "papers": [
+        { "id": "P1", "name": "Paper 1", "calculator": true, "sections": false },
+        { "id": "P2", "name": "Paper 2", "calculator": true, "sections": false }
+      ],
+      "syllabus": ["data/syllabus-ai.json"],
+      "crops": "data/crops-ai-sl.json",
+      "tags": "data/tags-ai-sl.json",
+      "formulaBooklet": null
+    },
+    {
+      "id": "ai-hl",
+      "subject": "ai",
+      "level": "HL",
+      "short": "AI HL",
+      "name": "Applications and Interpretation HL",
+      "fullName": "Mathematics: Applications and Interpretation HL",
+      "papers": [
+        { "id": "P1", "name": "Paper 1", "calculator": true, "sections": false },
+        { "id": "P2", "name": "Paper 2", "calculator": true, "sections": false },
+        { "id": "P3", "name": "Paper 3", "calculator": true, "sections": false }
+      ],
+      "syllabus": ["data/syllabus-ai.json"],
+      "crops": "data/crops-ai-hl.json",
+      "tags": "data/tags-ai-hl.json",
+      "formulaBooklet": null
+    }
+  ],
+  "topics": {
+    "1": "Numbers and Algebra",
+    "2": "Functions",
+    "3": "Geometry and Trigonometry",
+    "4": "Statistics and Probability",
+    "5": "Calculus"
+  }
+}

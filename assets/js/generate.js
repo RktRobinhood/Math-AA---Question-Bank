@@ -48,11 +48,27 @@
     showPageNumbers:   true,
   };
 
+  // The title and formula-booklet line follow the course chosen in the course bar, unless the
+  // teacher has typed their own.
+  const COURSE_TITLES = ['Analysis and Approaches SL', 'Analysis and Approaches HL', 'Applications and Interpretation SL', 'Applications and Interpretation HL']
+    .map(n => `Mathematics: ${n}`);
+  const BOOKLET_TEXT = sub => `A clean copy of the mathematics: ${sub} formula booklet is required.`;
+  const BOOKLET_TEXTS = [BOOKLET_TEXT('analysis and approaches'), BOOKLET_TEXT('applications and interpretation')];
+
+  function applyCourseDefaults(s, stored) {
+    const c = window.QB_COURSE?.info();
+    if (!c) return s;
+    if (!stored.title || COURSE_TITLES.includes(stored.title)) s.title = c.fullName;
+    if (!stored.instrFormulaText || BOOKLET_TEXTS.includes(stored.instrFormulaText)) {
+      s.instrFormulaText = BOOKLET_TEXT(c.subject === 'ai' ? 'applications and interpretation' : 'analysis and approaches');
+    }
+    return s;
+  }
+
   function loadSettings() {
-    try {
-      const stored = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
-      return Object.assign({}, DEFAULT_SETTINGS, stored);
-    } catch (_) { return Object.assign({}, DEFAULT_SETTINGS); }
+    let stored = {};
+    try { stored = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); } catch (_) {}
+    return applyCourseDefaults(Object.assign({}, DEFAULT_SETTINGS, stored), stored);
   }
 
   function saveSettings(s) {
