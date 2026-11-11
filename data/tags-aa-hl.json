@@ -6039,6 +6039,1089 @@
    ],
    "confidence": "high"
   },
+  "aa-hl-2024-may-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17",
+      "5.10"
+     ],
+     "skill": "Volume of revolution about the x-axis, integrating x sin(x^2) by reverse chain rule with exact evaluation",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15",
+      "1.9"
+     ],
+     "skill": "Proof by induction of a summation identity involving binomial coefficients using the factorial definition",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Building Maclaurin series of a composite sine and its square from the standard series",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Deriving a further Maclaurin series by differentiating or using a double-angle rewrite of known series",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Sketching the modulus of a given graph by reflecting negative sections",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.14",
+      "2.16"
+     ],
+     "skill": "Using odd symmetry to recover the graph of f from the graph of f(|x|)",
+     "review": "adjudicated",
+     "rationale": "One mark is for the 180-degree rotation that odd symmetry demands (2.14) and the other for knowing f(|x|) matches f on the right-hand side, which is the f(|x|) graph relationship of 2.16 rather than a generic sketch under 2.3.",
+     "passA": [
+      "2.14",
+      "2.16"
+     ],
+     "passB": [
+      "2.14",
+      "2.3"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.14",
+      "5.11"
+     ],
+     "skill": "Using odd/even symmetry to deduce values of definite integrals",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p1-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.8"
+     ],
+     "skill": "Sketching a linear-over-linear rational function with intercepts and asymptotes",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.2",
+      "2.8"
+     ],
+     "skill": "Stating the range of a rational function from its horizontal asymptote",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Using the axis of symmetry of a quadratic to find the second root",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Finding quadratic coefficients from its roots or axis of symmetry",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Finding the vertex y-coordinate of a quadratic",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Forming a cubic from equating a rational function and quadratic, then using product of roots",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Verifying a linear factor of a cubic with the factor theorem or division",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Dividing a cubic by a known factor and factorising the quadratic quotient fully",
+     "review": "adjudicated",
+     "rationale": "The marks go to dividing the cubic by the known factor and writing the linear factors, and the 2.12 boundary keeps the left-over quadratic factorisation inside 2.12 because the cubic work itself earns marks, so 2.7 is not added.",
+     "passA": [
+      "2.12",
+      "2.7"
+     ],
+     "passB": [
+      "2.12"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Decomposing a rational expression with two distinct linear factors into partial fractions",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Extending a partial fraction decomposition to include a repeated linear factor",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.15",
+      "1.11"
+     ],
+     "skill": "Integrating a rational function using its partial fractions into log and power terms",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.12",
+      "5.13"
+     ],
+     "skill": "Evaluating limits of a rational function at a removable discontinuity and at infinity",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12",
+      "1.9"
+     ],
+     "skill": "Expanding the cube of a Cartesian complex number to find its real and imaginary parts",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Verifying a power of a specific complex number equals a real value",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Stating the remaining cube roots of a real number using symmetry or conjugate roots",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.12",
+      "3.2"
+     ],
+     "skill": "Finding the area of the triangle formed by roots plotted on an Argand diagram",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Rotating complex numbers by multiplying in Euler form and giving principal arguments",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Cubing a complex number in Euler form to identify the equation its roots satisfy",
+     "review": "adjudicated",
+     "rationale": "Cubing a root in Euler form is a power by De Moivre (1.14), and the final mark comes from converting the result to Cartesian c and d, which is a form conversion under 1.13.",
+     "passA": [
+      "1.14"
+     ],
+     "passB": [
+      "1.14",
+      "1.13"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Reasoning about equally spaced arguments of nth roots to find the smallest n",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Binomial probability of an exact number of successes",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Cumulative binomial probability of at least a given number of successes",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Probability of a first success on a given trial from independent events",
+     "review": "adjudicated",
+     "rationale": "Both marks come from multiplying nine no-rain probabilities by one rain probability, a simple combined-independent-events product covered by 4.6, with no formal conditional formula or independence test needed for 4.11.",
+     "passA": [
+      "4.6"
+     ],
+     "passB": [
+      "4.6",
+      "4.11"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.18",
+      "5.16"
+     ],
+     "skill": "Solving a linear first-order differential equation with an integrating factor and integration by parts",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Using total probability of a piecewise pdf equal to one to form an equation for a parameter",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Finding the median of a piecewise continuous random variable by integration",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Counting seating arrangements with two people required to sit together",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Counting arrangements with an adjacency condition and an exclusion via complementary cases",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Implicit differentiation of a relation involving an exponential of x+y",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "2.10",
+      "5.4"
+     ],
+     "skill": "Setting an implicit derivative to zero for horizontal tangents, forming an equation in x and solving with technology",
+     "review": "adjudicated",
+     "rationale": "Setting the implicit derivative's numerator to zero and substituting into the curve (5.14, with 5.4 because the condition is a horizontal tangent) sets up the equation, and the GDC solution for both x values plus the y-coordinates earns the rest, so 2.10 is added as technology solving is assessed.",
+     "passA": [
+      "5.14",
+      "2.10"
+     ],
+     "passB": [
+      "5.14",
+      "5.4",
+      "2.10"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Using a line of symmetry to deduce points where the tangent is vertical",
+     "review": "adjudicated",
+     "rationale": "The single mark is for reflecting the horizontal-tangent points in y = x to get the vertical-tangent points, a tangent property read through symmetry with no implicit differentiation done, so only 5.4 applies.",
+     "passA": [
+      "5.4",
+      "5.14"
+     ],
+     "passB": [
+      "5.4"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.14",
+      "5.4",
+      "2.10"
+     ],
+     "skill": "Finding where an implicit curve has a given gradient and solving the resulting equation with technology",
+     "review": "adjudicated",
+     "rationale": "Equating the implicit gradient to -1 to get y = x is the 5.14 work, with 5.4 added for the tangent gradient condition, and the resulting exponential equation is solved on the GDC for the final mark (2.10).",
+     "passA": [
+      "5.14",
+      "2.10"
+     ],
+     "passB": [
+      "5.4",
+      "5.14",
+      "2.10"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.16",
+      "3.13",
+      "3.6"
+     ],
+     "skill": "Proving a general relation between scalar and vector products using their magnitude-angle definitions",
+     "review": "adjudicated",
+     "rationale": "The marks come from writing the vector and scalar products as magnitude-angle expressions (3.16, 3.13) and collapsing cos^2 + sin^2 to 1, which is the Pythagorean identity of 3.6; the vector content earns the marks, not deductive-proof technique, so 1.6 is left out.",
+     "passA": [
+      "3.16",
+      "3.13",
+      "1.6"
+     ],
+     "passB": [
+      "3.16",
+      "3.13",
+      "3.6"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.13",
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Using triangle area, scalar product and magnitudes to find unknown coordinates of a vertex",
+     "review": "adjudicated",
+     "rationale": "The key equations come from the given scalar product (3.13), the cross-product magnitude from the triangle area and the identity from (a) (3.16), with displacement vectors and magnitudes (3.12) supporting; the scalar-product condition does most of the work in finding p and q.",
+     "passA": [
+      "3.13",
+      "3.16",
+      "3.12"
+     ],
+     "passB": [
+      "3.16",
+      "3.13",
+      "3.12"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.13",
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Finding a vector perpendicular to two given vectors with a prescribed magnitude from a triangle area",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p1-q02": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.7",
+      "1.7"
+     ],
+     "skill": "Solving an exponential equation by treating it as a disguised quadratic in 3^x",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p1-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Using the symmetry of the normal distribution and the 95% rule to find a tail percentage",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.13",
+      "4.9"
+     ],
+     "skill": "Reversing a conditional probability with Bayes' theorem using normal tail probabilities",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Stating the sum of the roots of a cubic from its coefficients",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Using the conjugate root and the sum of roots of a quintic to find an unknown real part",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.12",
+      "1.12"
+     ],
+     "skill": "Using the product of roots including a conjugate pair to deduce integer roots",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p1-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.13",
+      "5.15"
+     ],
+     "skill": "Applying l'Hopital's rule twice to a 0/0 limit involving secant and cosine powers",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz2-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Expressing a number of selections as a combination",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10",
+      "2.7"
+     ],
+     "skill": "Counting restricted group assignments, forming an equation in n with combinations and solving the resulting quadratic",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz2-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.17"
+     ],
+     "skill": "Checking that a point satisfies the Cartesian equation of a plane",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.18",
+      "3.13",
+      "3.17"
+     ],
+     "skill": "Using the scalar product of normals for perpendicular planes and a point on the plane to find parameters",
+     "review": "adjudicated",
+     "rationale": "Three marks come from the perpendicular-planes condition, which 3.13's tagWhen sends to 3.18 for angles between planes, done by setting the scalar product of the normals to zero (3.13), and two marks from substituting A into the plane equation to find q (3.17).",
+     "passA": [
+      "3.17",
+      "3.13"
+     ],
+     "passB": [
+      "3.18",
+      "3.13",
+      "3.17"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.17",
+      "3.12"
+     ],
+     "skill": "Using parallel normal vectors of parallel planes to find an unknown coefficient",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.18",
+      "3.14",
+      "3.12"
+     ],
+     "skill": "Finding where a normal line meets a parallel plane and computing the distance between the planes",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.17",
+      "3.12"
+     ],
+     "skill": "Finding the equation of a parallel plane at a given perpendicular distance",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.15",
+      "5.12"
+     ],
+     "skill": "Proving a formula for the nth derivative of a fractional power by induction",
+     "review": "adjudicated",
+     "rationale": "The marks are for the base case, the inductive assumption and step, and the conclusion of an induction proof about an nth-derivative pattern, which 1.15's tagWhen tags as 1.15 then 5.12; the routine chain-rule step does not justify a separate 5.6 tag.",
+     "passA": [
+      "1.15",
+      "5.12"
+     ],
+     "passB": [
+      "1.15",
+      "5.12",
+      "5.6"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Building a Maclaurin series from derivatives evaluated at zero",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Substituting into and multiplying Maclaurin series to approximate a product",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Stating the interval of validity for a product of series expansions",
+     "review": "adjudicated",
+     "rationale": "The one mark is for the validity interval of a product of series that were built by Maclaurin differentiation in (b), so it stays under 5.19 rather than the binomial-theorem statement 1.10.",
+     "passA": [
+      "5.19",
+      "1.10"
+     ],
+     "passB": [
+      "5.19"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Using a series approximation at a specific x to estimate a surd as a fraction",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p2-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Related rates: radius growth rate of a sphere from a constant volume rate via the chain rule",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz2-p2-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17",
+      "1.5"
+     ],
+     "skill": "Volume of revolution about the y-axis after rearranging a log curve to make x the subject",
+     "review": "adjudicated",
+     "rationale": "Most marks are for setting up and evaluating pi times the integral of x^2 dy about the y-axis (5.17), and the rearrangement only needs exponentiating both sides to change log form into exponential form, which is 1.5 since no log laws are used (1.7).",
+     "passA": [
+      "5.17",
+      "1.7"
+     ],
+     "passB": [
+      "5.17",
+      "1.5"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12",
+      "3.6",
+      "1.13"
+     ],
+     "skill": "Use double angle identities to express a complex number in modulus-argument form and deduce its modulus and argument",
+     "review": "adjudicated",
+     "rationale": "The main method finds the argument and modulus from the real and imaginary parts as values (1.12), with double-angle and Pythagorean identities earning several marks (3.6); the alternative method writes z in r cis theta form, which is 1.13.",
+     "passA": [
+      "1.13",
+      "3.6",
+      "1.12"
+     ],
+     "passB": [
+      "1.12",
+      "3.6",
+      "1.13"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14",
+      "2.10"
+     ],
+     "skill": "Use modulus/argument of powers of z to form an equation in theta and solve it with technology",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p2-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.13",
+      "5.8",
+      "1.16"
+     ],
+     "skill": "Find unknown coefficients of a rational function from its vertical asymptote and stationary point using the quotient rule and a 3x3 linear system",
+     "review": "adjudicated",
+     "rationale": "The vertical-asymptote condition on the quadratic denominator is 2.13, the quotient-rule derivative set to zero at the given minimum is a stationary-point condition under 5.8 (more specific than the differentiation-rules statement 5.6), and solving the resulting three linear equations earns 1.16.",
+     "passA": [
+      "2.13",
+      "5.6",
+      "1.16"
+     ],
+     "passB": [
+      "2.13",
+      "5.8",
+      "1.16"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p2-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Mode of a continuous random variable as the maximum of its pdf",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Probability over an interval by integrating a pdf",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Median of a continuous random variable by solving an integral equation",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Translate a spending condition into a weight interval and integrate the pdf",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Expected value of a piecewise function of a continuous random variable via integrals of x f(x)",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-may-tz2-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method for two steps to approximate a solution of a first-order differential equation",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.15",
+      "3.9",
+      "3.6"
+     ],
+     "skill": "Differentiate a log of cot x with the chain rule and simplify to a cosec of a double angle",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18",
+      "1.7"
+     ],
+     "skill": "Derive the integrating factor for a linear first-order differential equation using log/exponent laws",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve a linear differential equation with an integrating factor and apply the initial condition",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.18",
+      "5.7"
+     ],
+     "skill": "Compare an Euler estimate with the exact solution, explaining the error by gradient change and concavity",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.2"
+     ],
+     "skill": "Argue from the differential equation and signs of the trig terms that the gradient is positive on an interval",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a reciprocal squared linear expression using the chain rule",
+     "review": "agreed"
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate a polynomial and multiply derivatives to verify a given expression",
+     "review": "agreed"
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Apply the product rule form and simplify over a common denominator to verify a result",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Rearrange a general relation between functions and derivatives to obtain a ratio identity",
+     "review": "adjudicated",
+     "rationale": "Both marks are for algebraically rearranging a general relation between arbitrary functions into the required ratio, which is a deductive proof of a general statement (1.6), and no derivative is actually computed, so 5.6 does not apply.",
+     "passA": [
+      "1.6"
+     ],
+     "passB": [
+      "5.6",
+      "1.6"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18",
+      "5.10"
+     ],
+     "skill": "Integrate a separable relation f'/f to derive a general exponential form with an arbitrary constant",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.6",
+      "5.5"
+     ],
+     "skill": "Use the derived formula: differentiate a product with an exponential, simplify and integrate to find f",
+     "review": "agreed"
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.15",
+      "1.7",
+      "3.9"
+     ],
+     "skill": "Use the derived formula with a trig function: simplify, integrate cot x and use log laws to express f",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz2-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Use the multiplication principle to count outcomes of three die rolls",
+     "review": "agreed"
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Use the discriminant or factorising to show a quadratic has a repeated root",
+     "review": "agreed"
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.7",
+      "1.10",
+      "4.5"
+     ],
+     "skill": "Count coefficient triples giving zero discriminant to find a probability",
+     "review": "agreed"
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.7"
+     ],
+     "skill": "Use the positive discriminant condition with die constraints to find possible products ac",
+     "review": "agreed"
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "2.7",
+      "1.10"
+     ],
+     "skill": "Count quadratics with two distinct roots for a given value of ac",
+     "review": "agreed"
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "1.10",
+      "2.7"
+     ],
+     "skill": "Count coefficient triples with a given ac and positive discriminant",
+     "review": "agreed"
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.10",
+      "4.5",
+      "2.7"
+     ],
+     "skill": "Systematically count all cases with positive discriminant to find a probability",
+     "review": "agreed"
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "4.9",
+      "2.7"
+     ],
+     "skill": "Translate a discriminant condition into a standard normal probability",
+     "review": "agreed"
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "4.11",
+      "4.9",
+      "2.15"
+     ],
+     "skill": "Solve an inequality in Z for the roots and find a conditional normal probability",
+     "review": "agreed"
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2024-nov-tz0-p1-q06": {
    "parts": [
     {
