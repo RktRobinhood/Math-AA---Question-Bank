@@ -91,7 +91,8 @@
     const focus = captureFocus();
     app.innerHTML = "";
     app.append(renderSiteHeader());
-    if (COURSE) app.append(COURSE.bar());
+    // The course bar is a home-page control; other pages keep the chosen course (#14).
+    if (COURSE && "courseBar" in document.body.dataset) app.append(COURSE.bar());
 
     if (!allQuestions.length && state.tab !== "syllabus") app.append(renderComingSoon());
     else if (state.tab === "questions") app.append(renderQuestionBank());
