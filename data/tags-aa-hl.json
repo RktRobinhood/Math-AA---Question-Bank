@@ -1,6 +1,586 @@
 {
  "about": "Per-part syllabus tags for AA HL. Each part was tagged by two independent blind reviewers against data/syllabus.json and data/syllabus-aa-hl.json; parts where they disagreed were settled by an adjudicator (review: adjudicated, with rationale and both original tag sets). HL appearances of SL questions (data/shared.json) take the SL tags and are not listed here.",
  "questions": {
+  "aa-hl-2021-may-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.9",
+      "3.6"
+     ],
+     "skill": "Get cot from a given cosec via a right triangle or identity, fixing the sign from the quadrant",
+     "review": "agreed",
+     "sub": [
+      "AHL3.9.reciprocal-ratios",
+      "SL3.6.ratio-from-ratio"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Write the conjugate pair roots, then equate the sum and product of all four roots to the coefficients and solve the resulting pair of equations",
+     "review": "adjudicated",
+     "rationale": "Most marks come from setting the sum and product of roots equal to -4 and 400, with only the first A1 for the conjugate roots, so 2.12 leads and 1.14 is second.",
+     "passA": [
+      "2.12",
+      "1.14"
+     ],
+     "passB": [
+      "1.14",
+      "2.12"
+     ],
+     "sub": [
+      "AHL2.12.sum-product-roots",
+      "AHL1.14.conjugate-root"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.13",
+      "5.15"
+     ],
+     "skill": "Evaluate a 0/0 limit by l'Hopital, differentiating an arctan and a tan composite",
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.lhopital",
+      "AHL5.15.inverse-trig-derivatives",
+      "AHL5.15.trig-derivatives"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2021-may-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count placements with repetition allowed using the product rule, excluding the case where two items share a pen",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.multiplication-addition",
+      "AHL1.10.restricted-arrangements"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count one-per-pen arrangements by factorials, subtracting (or casing) arrangements where two items are adjacent",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.permutations",
+      "AHL1.10.restricted-arrangements"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2021-may-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Verify a point satisfies a Cartesian line and rewrite the line in vector form",
+     "review": "agreed",
+     "sub": [
+      "AHL3.14.point-on-line",
+      "AHL3.14.convert-forms"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.14",
+      "3.13",
+      "2.7"
+     ],
+     "skill": "Equate the scalar product of the two direction vectors to the product of their magnitudes times cos 45, square to a quadratic in the parameter and solve it with the formula",
+     "review": "adjudicated",
+     "rationale": "The markscheme gives a separate M1 and A1 for solving the resulting quadratic by formula (irrational roots), on top of the scalar-product angle marks, so 2.7 earns its place as a third code.",
+     "passA": [
+      "3.14",
+      "3.13",
+      "2.7"
+     ],
+     "passB": [
+      "3.14",
+      "3.13"
+     ],
+     "sub": [
+      "AHL3.14.angle-between-lines",
+      "AHL3.13.angle-between-vectors",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "AHL3.14.angle-between-lines",
+      "AHL3.13.angle-between-vectors",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "AHL3.14.angle-between-lines",
+      "AHL3.13.angle-between-vectors"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Equate parametric forms to find the intersection in terms of a parameter and the value making the lines parallel",
+     "review": "agreed",
+     "sub": [
+      "AHL3.15.intersection-point",
+      "AHL3.15.classify-lines"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.6",
+      "5.7"
+     ],
+     "skill": "Differentiate a root of a linear expression twice with the chain rule to reach a given second derivative",
+     "review": "agreed",
+     "sub": [
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form",
+      "SL5.7.find-second-derivative"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.15",
+      "5.12"
+     ],
+     "skill": "Prove a general nth-derivative formula by induction, manipulating factorials in the inductive step",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-derivative",
+      "AHL1.15.induction-structure",
+      "AHL5.12.higher-derivatives"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.19",
+      "5.6"
+     ],
+     "skill": "Find the x^2 coefficient of a product's Maclaurin series (via series multiplication or product-rule derivatives) and solve for the constant",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.multiply-series",
+      "AHL5.19.derive-from-derivatives",
+      "SL5.6.product-rule"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Cross the two plane normals to get a normal and write the Cartesian plane through the origin",
+     "review": "agreed",
+     "sub": [
+      "AHL3.17.plane-equation",
+      "AHL3.16.perpendicular-vector"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.18",
+      "1.16"
+     ],
+     "skill": "Solve the three plane equations simultaneously (GDC) for the single common point",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.three-planes",
+      "AHL1.16.solve-unique"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2021-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14",
+      "5.10"
+     ],
+     "skill": "Set the total integral of the pdf to 1, integrate by reverse chain rule (u = x^2 + k), then apply the limits and rearrange to the given relation",
+     "review": "adjudicated",
+     "rationale": "The reverse-chain integration earns its own A1A1 so 5.10 joins 4.14, but substituting the limits and setting the result to 1 is the normalising step already covered by 4.14, so a separate 5.11 is not needed.",
+     "passA": [
+      "4.14",
+      "5.10"
+     ],
+     "passB": [
+      "4.14",
+      "5.10",
+      "5.11"
+     ],
+     "sub": [
+      "AHL4.14.pdf-normalise",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassA": [
+      "AHL4.14.pdf-normalise",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassB": [
+      "AHL4.14.pdf-normalise",
+      "SL5.10.inspection-substitution",
+      "SL5.11.evaluate-definite"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.10"
+     ],
+     "skill": "Solve the resulting surd equation for the constant with technology",
+     "review": "agreed",
+     "sub": [
+      "SL2.10.solve-gdc"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Multiply moduli of two numbers in cis form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.multiply-divide-polar"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Add arguments of two cis-form numbers, noting the conjugate-style sign in one",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.multiply-divide-polar"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Require the product's argument to be a multiple of pi to get a real integer, find the least parameter and convert to a + bi",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.multiply-divide-polar",
+      "AHL1.13.polar-to-cartesian"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2021-may-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2",
+      "3.9"
+     ],
+     "skill": "Write a tan or cot ratio from the right triangle in the diagram to get the relation",
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-ratio",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.15"
+     ],
+     "skill": "Differentiate the distance relation with respect to time, using the derivative of cot with the chain rule, impose the speed ratio and substitute the angle rate to get the speed",
+     "review": "adjudicated",
+     "rationale": "The marks are for the time-derivative linking the rates and the cot derivative; the cosec^2 value earns one A1 that can equally come from arctan 5 on the GDC, so 3.9 does not clearly earn marks.",
+     "passA": [
+      "5.14",
+      "5.15",
+      "3.9"
+     ],
+     "passB": [
+      "5.14",
+      "5.15"
+     ],
+     "sub": [
+      "AHL5.14.related-rates",
+      "AHL5.15.trig-derivatives"
+     ],
+     "subPassA": [
+      "AHL5.14.related-rates",
+      "AHL5.15.trig-derivatives",
+      "AHL3.9.pythagorean-identities"
+     ],
+     "subPassB": [
+      "AHL5.14.related-rates",
+      "AHL5.15.trig-derivatives"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Find the values excluded from the domain of a rational function by finding where its quadratic denominator is zero",
+     "review": "adjudicated",
+     "rationale": "The function is linear over quadratic and 2.13 has a sub-tag for excluded values of a rational function; the difference-of-squares solve is prior learning, so neither 2.2 nor 2.7 is needed, and asymptotes are not asked for here.",
+     "passA": [
+      "2.13"
+     ],
+     "passB": [
+      "2.2",
+      "2.7"
+     ],
+     "sub": [
+      "AHL2.13.range-rational"
+     ],
+     "subPassA": [
+      "AHL2.13.vertical-asymptotes",
+      "AHL2.13.range-rational"
+     ],
+     "subPassB": [
+      "SL2.2.domain",
+      "SL2.7.solve-equation"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a linear-over-quadratic rational function with the quotient (or product) rule",
+     "review": "agreed",
+     "sub": [
+      "SL5.6.quotient-rule"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Locate the point of inflexion with technology, as the turning point of the derivative graph or a zero of the second derivative",
+     "review": "adjudicated",
+     "rationale": "Both marks are for finding the inflexion point, which is 5.8; locating the minimum of f' or solving f''=0 is just the GDC route to it and does not earn separate 5.7 marks.",
+     "passA": [
+      "5.8"
+     ],
+     "passB": [
+      "5.8",
+      "5.7"
+     ],
+     "sub": [
+      "SL5.8.points-of-inflexion"
+     ],
+     "subPassA": [
+      "SL5.8.points-of-inflexion"
+     ],
+     "subPassB": [
+      "SL5.8.points-of-inflexion",
+      "SL5.7.f-from-derivative-graph"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.13",
+      "2.4"
+     ],
+     "skill": "Sketch the rational function with its vertical and horizontal asymptotes, intercepts and GDC turning points",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.sketch-rational",
+      "SL2.4.max-min",
+      "SL2.4.zeros-intercepts"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "State the vertical asymptote and find the oblique asymptote of a quadratic-over-linear function by division",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.vertical-asymptotes",
+      "AHL2.13.oblique-asymptote"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.15"
+     ],
+     "skill": "Solve an inequality between two rational functions from the graph of their difference with the GDC",
+     "review": "agreed",
+     "sub": [
+      "AHL2.15.graphical-inequality"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2021-may-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Split a fraction over two distinct linear factors, finding constants by substitution or comparing coefficients",
+     "review": "agreed",
+     "sub": [
+      "AHL1.11.distinct-linear-factors",
+      "AHL1.11.cover-up-or-compare"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.15"
+     ],
+     "skill": "Integrate the partial-fraction form term by term to log terms with moduli",
+     "review": "agreed",
+     "sub": [
+      "AHL5.15.partial-fraction-integral"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Separate the variables of the logistic equation, integrate using the earlier partial-fraction result, apply the initial population and rearrange to make P the subject",
+     "review": "adjudicated",
+     "rationale": "The integral of 1/(P(k-P)) was already done in parts (a) and (b), so here it earns only one A1 as a reuse; the marks are for separating, the initial condition and the rearrangement, all of which are 5.18, so 5.15 is not added.",
+     "passA": [
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "5.15"
+     ],
+     "sub": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassA": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassB": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "AHL5.15.partial-fraction-integral"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.10"
+     ],
+     "skill": "Substitute the doubling condition into the population model and solve the resulting equation for the constant with technology",
+     "review": "agreed",
+     "sub": [
+      "SL2.10.solve-gdc",
+      "SL2.10.context-apply"
+     ],
+     "subPassA": [
+      "SL2.10.solve-gdc"
+     ],
+     "subPassB": [
+      "SL2.10.solve-gdc",
+      "SL2.10.context-apply"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Find when the rate of change of a modelled quantity is greatest, by maximising the derivative with technology or using the half-capacity condition",
+     "review": "adjudicated",
+     "rationale": "Maximising a rate of change is a calculus optimisation (5.8) even when the GDC finds it, and 2.4's line excludes maxima found via calculus; the inflexion and P = k/2 routes are just alternatives for the same mark, so no extra sub-tag is needed.",
+     "passA": [
+      "5.8",
+      "2.4"
+     ],
+     "passB": [
+      "5.8"
+     ],
+     "sub": [
+      "SL5.8.optimise-given-function"
+     ],
+     "subPassA": [
+      "SL5.8.optimise-given-function",
+      "SL2.4.max-min"
+     ],
+     "subPassB": [
+      "SL5.8.optimise-given-function",
+      "SL5.8.points-of-inflexion"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2021-may-tz1-p3-q01": {
    "parts": [
     {
@@ -6589,6 +7169,388 @@
    ],
    "confidence": "medium"
   },
+  "aa-hl-2023-may-tz1-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.3",
+      "2.4"
+     ],
+     "skill": "Sketch x e^(-x) on its domain from the origin with its asymptotic tail and label the local maximum",
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.16",
+      "5.11"
+     ],
+     "skill": "Set up the area integral and evaluate it exactly by parts with a variable upper limit",
+     "review": "agreed",
+     "sub": [
+      "AHL5.16.by-parts",
+      "SL5.11.evaluate-definite"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Evaluate an infinity-over-infinity limit by differentiating numerator and denominator",
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.lhopital"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "5.12"
+     ],
+     "skill": "Recognise the improper integral as the limit of the area function and state its value from the limit already found",
+     "review": "adjudicated",
+     "rationale": "After 'hence' the only new content is reading the infinite area as the limit, which is 5.12; no definite integral is evaluated in this one-mark part, so 5.11 earns nothing.",
+     "passA": [
+      "5.12",
+      "5.11"
+     ],
+     "passB": [
+      "5.12"
+     ],
+     "sub": [
+      "AHL5.12.limit-reasoning"
+     ],
+     "subPassA": [
+      "AHL5.12.limit-reasoning",
+      "SL5.11.evaluate-definite"
+     ],
+     "subPassB": [
+      "AHL5.12.limit-reasoning"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Approximate an improper area with a GDC definite integral using a large upper limit",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.definite-integral-gdc"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Repeat the GDC integral with a large upper limit for the next case",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.definite-integral-gdc"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Spot the factorial pattern in the computed areas and conjecture a general formula, to be proved by induction next",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.conjecture"
+     ],
+     "subPassA": [
+      "NEW:AHL1.15.conjecture|Conjecture a general formula from calculated cases"
+     ],
+     "subPassB": [
+      "AHL1.15.induction-other"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.15",
+      "5.16"
+     ],
+     "skill": "Prove the integral formula by induction, integrating by parts once in the inductive step and using the given limit to remove the boundary term",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-other",
+      "AHL1.15.induction-structure",
+      "AHL5.16.by-parts"
+     ],
+     "subPassA": [
+      "AHL1.15.induction-other",
+      "AHL1.15.induction-structure",
+      "AHL5.16.reduction-formula"
+     ],
+     "subPassB": [
+      "AHL1.15.induction-other",
+      "AHL1.15.induction-structure",
+      "AHL5.16.by-parts"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2023-may-tz1-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Use the fixed-sum condition to eliminate one variable and write the product as a quadratic function of the other",
+     "review": "adjudicated",
+     "rationale": "The two marks are for building the quadratic model that is optimised next, which 2.6's model sub-tag covers; nothing about domain, range or notation is assessed, so 2.2 adds nothing.",
+     "passA": [
+      "2.6",
+      "2.2"
+     ],
+     "passB": [
+      "2.6"
+     ],
+     "sub": [
+      "SL2.6.model"
+     ],
+     "subPassA": [
+      "SL2.6.model",
+      "SL2.2.function-model"
+     ],
+     "subPassB": [
+      "SL2.6.model"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Locate the input at the vertex of the product quadratic",
+     "review": "agreed",
+     "sub": [
+      "SL2.6.vertex"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Evaluate the quadratic at its vertex to get the maximum value",
+     "review": "agreed",
+     "sub": [
+      "SL2.6.vertex"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Substitute into the given formula and link the value to the earlier maximum",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Set all the numbers equal and show that both the geometric and arithmetic means simplify to that common value, for general n",
+     "review": "adjudicated",
+     "rationale": "This is a general algebraic proof, so 1.6 fits; undoing an nth root of an nth power is a routine step inside the same A1, not a separate 1.7 mark.",
+     "passA": [
+      "1.6",
+      "1.7"
+     ],
+     "passB": [
+      "1.6"
+     ],
+     "sub": [
+      "SL1.6.identity-lhs-rhs"
+     ],
+     "subPassA": [
+      "SL1.6.identity-lhs-rhs",
+      "SL1.7.rational-exponents"
+     ],
+     "subPassB": [
+      "SL1.6.identity-lhs-rhs"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Substitute the fixed sum into the given AM-GM inequality, raise both sides to the nth power and use the equality case to identify the maximum product",
+     "review": "agreed",
+     "sub": [
+      "SL1.6.deduce-inequality"
+     ],
+     "subPassA": [
+      "SL1.6.deduce-inequality"
+     ],
+     "subPassB": [
+      "SL1.6.deduce-inequality",
+      "SL1.6.conditional-proof"
+     ]
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate the maximum-product formula for a given n and S",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ]
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate the maximum-product formula for a given n and S",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ]
+    },
+    {
+     "label": "e(iii)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Evaluate the maximum-product formula for a non-integer quotient",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Compare the maximum-product values across integer numbers of terms to pick the greatest and the n where it occurs",
+     "review": "adjudicated",
+     "rationale": "The two A1s are for the maximum value and where it occurs; the values M_n(12) were already worked out in (e), so evaluating notation earns no new mark and 2.2 is not needed.",
+     "passA": [
+      "2.4",
+      "2.2"
+     ],
+     "passB": [
+      "2.4"
+     ],
+     "sub": [
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "SL2.4.max-min",
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Use a graph or table of the maximum-product formula on the GDC around the peak to find the integer n giving the greatest value, and that value",
+     "review": "adjudicated",
+     "rationale": "The M1 is for a GDC graph or table and the A1s for the maximum and where it occurs, which is 2.4; plugging n into the formula is part of reading the maximum, not a separate 2.2 skill.",
+     "passA": [
+      "2.4",
+      "2.2"
+     ],
+     "passB": [
+      "2.4"
+     ],
+     "sub": [
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "SL2.4.max-min",
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "5.14",
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Differentiate a log-defined relation implicitly, using the product rule on x times a log, then set the derivative to zero to locate the maximum",
+     "review": "adjudicated",
+     "rationale": "The markscheme gives a separate M1 for the product rule in every method, alongside the implicit-differentiation marks and the M1A1 for setting g'(x) = 0, so 5.6 clearly earns a mark as a third code.",
+     "passA": [
+      "5.14",
+      "5.6",
+      "5.8"
+     ],
+     "passB": [
+      "5.14",
+      "5.8"
+     ],
+     "sub": [
+      "AHL5.14.implicit-derivative",
+      "SL5.8.find-stationary-points",
+      "SL5.6.product-rule"
+     ],
+     "subPassA": [
+      "AHL5.14.implicit-derivative",
+      "SL5.6.product-rule",
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassB": [
+      "AHL5.14.implicit-derivative",
+      "SL5.8.find-stationary-points"
+     ]
+    },
+    {
+     "label": "i",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Use the log power law and remove logs to write the function explicitly",
+     "review": "agreed",
+     "sub": [
+      "SL1.7.log-laws"
+     ]
+    },
+    {
+     "label": "j",
+     "syllabus": [
+      "5.8",
+      "1.1"
+     ],
+     "skill": "Test the integers either side of the continuous optimum to get the largest product, giving it in standard form",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.optimise-given-function",
+      "SL1.1.convert"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2023-may-tz2-p1-q06": {
    "parts": [
     {
@@ -10481,6 +11443,374 @@
    ],
    "confidence": "medium"
   },
+  "aa-hl-2024-may-tz1-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Multiply independent probabilities for two failures then a success",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.independent"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "4.8",
+      "4.5"
+     ],
+     "skill": "Recognise B(6, 0.1) and find P(at least one success), or use one minus P(no successes).",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability",
+      "SL4.5.complement"
+     ],
+     "subPassA": [
+      "SL4.8.cumulative-probability",
+      "SL4.5.complement"
+     ],
+     "subPassB": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability",
+      "SL4.5.complement"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Justify the first-success probability as x-1 independent failures followed by a success",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.independent"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Write the expectation of an infinite discrete distribution as a sigma sum",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.6",
+      "5.19"
+     ],
+     "skill": "Differentiate a(1 - r)^-1 with the chain rule and the geometric series term by term to get a closed form for the new series.",
+     "review": "adjudicated",
+     "rationale": "M1A1 go to differentiating a(1 - r)^-1 (5.6) and an A1 to differentiating the series term by term to build a new series (5.19); the sum to infinity is given, not found, so 1.8 earns no marks.",
+     "passA": [
+      "5.6",
+      "5.19"
+     ],
+     "passB": [
+      "5.6",
+      "1.8"
+     ],
+     "sub": [
+      "SL5.6.chain-rule",
+      "AHL5.19.differentiate-integrate-series"
+     ],
+     "subPassA": [
+      "SL5.6.chain-rule",
+      "AHL5.19.differentiate-integrate-series"
+     ],
+     "subPassB": [
+      "SL5.6.chain-rule",
+      "SL1.8.sum-to-infinity"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Match the expectation series to the result from (c)(i) with a = p and r = 1 - p to show the mean is 1/p.",
+     "review": "adjudicated",
+     "rationale": "After 'hence' the only new content is identifying E(X) of the discrete variable with the derived series; the series used is not geometric, so no 1.8 sum to infinity is involved.",
+     "passA": [
+      "4.7"
+     ],
+     "passB": [
+      "1.8",
+      "4.7"
+     ],
+     "sub": [
+      "SL4.7.expected-value"
+     ],
+     "subPassA": [
+      "SL4.7.expected-value"
+     ],
+     "subPassB": [
+      "SL1.8.applications",
+      "SL4.7.expected-value"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.7",
+      "4.14"
+     ],
+     "skill": "Evaluate given mean and variance formulas at a specific p",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value",
+      "AHL4.14.discrete-variance"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Multiply changing conditional probabilities along a branch to verify a probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Argue from the rising boost probability that it reaches 1 after four non-boosts, which fixes the largest possible value of the variable.",
+     "review": "adjudicated",
+     "rationale": "The R1 is for reasoning about the possible values (support) of the discrete random variable from the context, which is building its distribution (4.7); no tree diagram is used or rewarded, so 4.6 does not fit.",
+     "passA": [
+      "4.7"
+     ],
+     "passB": [
+      "4.6"
+     ],
+     "sub": [
+      "SL4.7.build-distribution"
+     ],
+     "subPassA": [
+      "SL4.7.build-distribution"
+     ],
+     "subPassB": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "4.7",
+      "4.6"
+     ],
+     "skill": "Find missing probabilities of the distribution from the sequential model",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.build-distribution",
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Compute E(Y) as sum of y times probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value"
+     ]
+    },
+    {
+     "label": "g(iii)",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the variance of a discrete distribution using E(Y^2) minus mean squared",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.discrete-variance"
+     ]
+    },
+    {
+     "label": "h(i)",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Solve 1/p equal to a given mean for p",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.unknowns-from-mean"
+     ]
+    },
+    {
+     "label": "h(ii)",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Evaluate the variance formula at the found p",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.discrete-variance"
+     ]
+    },
+    {
+     "label": "h(iii)",
+     "syllabus": [
+      "4.14",
+      "4.3"
+     ],
+     "skill": "Compare variances to judge which model is more consistent",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.discrete-variance",
+      "SL4.3.sd-variance"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-may-tz1-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.7",
+      "5.3"
+     ],
+     "skill": "Differentiate a quartic twice",
+     "review": "agreed",
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "SL5.3.power-rule"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Set the second derivative to zero and find coordinates of the inflexion points",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.1"
+     ],
+     "skill": "Find the gradient and intercept of the line through two points",
+     "review": "agreed",
+     "sub": [
+      "SL2.1.gradient",
+      "SL2.1.equation-of-line"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Find another intersection of the curve and line with the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.intersection"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.8",
+      "5.7"
+     ],
+     "skill": "Find inflexion x-values of a parametrised quartic from the second derivative",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion",
+      "SL5.7.find-second-derivative"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "State the coordinates of the inflexion point at the origin",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Substitute the inflexion x-value to get its y-coordinate in terms of parameters",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "2.1"
+     ],
+     "skill": "Find the gradient of the line through the origin and a parametrised point",
+     "review": "agreed",
+     "sub": [
+      "SL2.1.gradient",
+      "SL2.1.equation-of-line"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "2.12",
+      "2.7"
+     ],
+     "skill": "Use the known inflexion abscissa as a factor of the quartic, factorise it fully, then solve the remaining quadratic with the formula.",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.factor-theorem",
+      "AHL2.12.factorise-solve",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "AHL2.12.factor-theorem",
+      "AHL2.12.factorise-solve",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "AHL2.12.factorise-solve",
+      "SL2.7.solve-equation"
+     ]
+    },
+    {
+     "label": "i",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Form the ratio of root differences and simplify to an exact constant",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.root-property"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2024-may-tz2-p1-q02": {
    "parts": [
     {
@@ -11863,6 +13193,337 @@
    ],
    "confidence": "medium"
   },
+  "aa-hl-2024-nov-tz0-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Integrate x f(x) over a piecewise pdf to get the mean",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-mean"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Use E(aX+b)=aE(X)+b to find a constant",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.linear-transformation"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Set the integral of the pdf up to m equal to one half and solve for the median",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.median-mode"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count all seatings of three people in a row of seats minus those where they sit together",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Treat the group of three as one block, count its placements and internal orders, then multiply by the ordered seatings of the others.",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations",
+      "AHL1.10.multiplication-addition"
+     ],
+     "subPassA": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ],
+     "subPassB": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.multiplication-addition"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12",
+      "1.6"
+     ],
+     "skill": "Prove that a complex number times its conjugate equals its modulus squared",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.conjugate",
+      "SL1.6.identity-lhs-rhs"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Combine the equations using w w* = |w|^2 and divide complex numbers to find z in a+bi form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.conjugate",
+      "AHL1.12.division-conjugate",
+      "AHL1.12.arithmetic"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.8",
+      "1.5"
+     ],
+     "skill": "Require the log ratio to have modulus below 1 and convert to bounds on c",
+     "review": "agreed",
+     "sub": [
+      "SL1.8.convergence",
+      "SL1.5.exp-log-form"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.8",
+      "1.3"
+     ],
+     "skill": "Compute the sum to infinity and find the least n with the partial sum within 0.1 of it",
+     "review": "agreed",
+     "sub": [
+      "SL1.8.sn-vs-sinf",
+      "SL1.8.sum-to-infinity",
+      "SL1.3.find-n"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2024-nov-tz0-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Convert a Cartesian line equation into vector form by setting each ratio to a parameter",
+     "review": "agreed",
+     "sub": [
+      "AHL3.14.convert-forms",
+      "AHL3.14.line-equation"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Find the shortest distance from the origin to a line, by minimising the distance to a general point or using the perpendicular condition.",
+     "review": "adjudicated",
+     "rationale": "Every method is the shortest-distance-to-a-line skill that AHL3.14.foot-of-perpendicular names; the magnitude (3.12) and the scalar product (3.13, method 2 only) are steps inside it, so neither earns a separate code.",
+     "passA": [
+      "3.14",
+      "3.13"
+     ],
+     "passB": [
+      "3.14",
+      "3.12"
+     ],
+     "sub": [
+      "AHL3.14.foot-of-perpendicular"
+     ],
+     "subPassA": [
+      "AHL3.14.foot-of-perpendicular",
+      "AHL3.13.perpendicular-test"
+     ],
+     "subPassB": [
+      "AHL3.14.foot-of-perpendicular",
+      "AHL3.12.distance-between-points"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.18",
+      "3.17"
+     ],
+     "skill": "Substitute the line's parametric form into the plane to show every point satisfies it",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.line-meets-plane",
+      "AHL3.17.point-in-plane"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.14",
+      "3.13"
+     ],
+     "skill": "Make the direction meet the z-axis condition, set its scalar product with the plane's normal to zero, then write the vector equation of the line.",
+     "review": "adjudicated",
+     "rationale": "The marks go to the z-axis meeting condition and the final line equation (3.14) and to setting direction · normal = 0 (3.13); the displacement vector is only a route to the point-on-line condition, so 3.12 is not needed as a third code.",
+     "passA": [
+      "3.14",
+      "3.13",
+      "3.12"
+     ],
+     "passB": [
+      "3.14",
+      "3.13"
+     ],
+     "sub": [
+      "AHL3.14.line-equation",
+      "AHL3.14.point-on-line",
+      "AHL3.13.perpendicular-test"
+     ],
+     "subPassA": [
+      "AHL3.14.line-equation",
+      "AHL3.13.perpendicular-test",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassB": [
+      "AHL3.14.line-equation",
+      "AHL3.14.point-on-line",
+      "AHL3.13.perpendicular-test"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2024-nov-tz0-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Apply the quotient rule and simplify to a given derivative",
+     "review": "agreed",
+     "sub": [
+      "SL5.6.quotient-rule",
+      "SL5.6.show-derivative-form"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.7",
+      "5.8"
+     ],
+     "skill": "Require the numerator of the derivative to have real roots, form the discriminant condition in k and solve the quadratic inequality.",
+     "review": "agreed",
+     "sub": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.inequality",
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassA": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.inequality",
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassB": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.inequality",
+      "SL5.8.find-stationary-points"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "State the vertical asymptote of a quadratic-over-linear function",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.vertical-asymptotes"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Divide the quadratic by the linear denominator to get the oblique asymptote",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.oblique-asymptote"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Rewrite the gradient function as 2 plus a positive square term to prove it exceeds 2 for every x in the domain.",
+     "review": "adjudicated",
+     "rationale": "The derivative comes from (a) with k = 2 substituted, so no quotient rule is used or rewarded (no 5.6); the marks go to the rewriting and the positivity argument, a deductive inequality proof.",
+     "passA": [
+      "1.6"
+     ],
+     "passB": [
+      "1.6",
+      "5.6"
+     ],
+     "sub": [
+      "SL1.6.inequality-proof"
+     ],
+     "subPassA": [
+      "SL1.6.inequality-proof"
+     ],
+     "subPassB": [
+      "SL1.6.inequality-proof",
+      "SL5.6.quotient-rule"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Sketch the rational curve with its vertical and oblique asymptotes and approach behaviour",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.sketch-rational"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2024-nov-tz0-p3-q01": {
    "parts": [
     {
@@ -12622,6 +14283,364 @@
     }
    ],
    "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.9",
+      "2.3",
+      "2.4"
+     ],
+     "skill": "Rewrite cot as cos over sin, then sketch the function on its domain with its x-intercept from the GDC",
+     "review": "agreed",
+     "sub": [
+      "AHL3.9.reciprocal-ratios",
+      "SL2.3.sketch-from-equation",
+      "SL2.4.zeros-intercepts"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.2",
+      "2.10"
+     ],
+     "skill": "Find an inverse value by solving f(x)=2 with technology",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.inverse-undo",
+      "SL2.10.solve-gdc"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.9",
+      "3.6"
+     ],
+     "skill": "Convert sec to cos, find sin and cot of the angle, and evaluate the function",
+     "review": "agreed",
+     "sub": [
+      "AHL3.9.reciprocal-ratios",
+      "SL3.6.ratio-from-ratio"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14",
+      "3.12"
+     ],
+     "skill": "Find speed as the magnitude of the velocity vector",
+     "review": "agreed",
+     "sub": [
+      "AHL3.14.vector-kinematics",
+      "AHL3.12.magnitude-unit"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.13",
+      "3.2"
+     ],
+     "skill": "Find the angle of descent, either between the descent velocity and its horizontal component with the scalar product, or by right-angled trigonometry.",
+     "review": "adjudicated",
+     "rationale": "The M1A1 go either to the angle between two vectors (3.13) or to tan in a right-angled triangle (3.2); writing the descent velocity is only a step inside the M1, so 3.14 kinematics earns no separate marks.",
+     "passA": [
+      "3.13",
+      "3.14",
+      "3.2"
+     ],
+     "passB": [
+      "3.13",
+      "3.2"
+     ],
+     "sub": [
+      "AHL3.13.angle-between-vectors",
+      "SL3.2.right-angle"
+     ],
+     "subPassA": [
+      "AHL3.13.angle-between-vectors",
+      "AHL3.14.vector-kinematics",
+      "SL3.2.right-angle"
+     ],
+     "subPassB": [
+      "AHL3.13.angle-between-vectors",
+      "SL3.2.right-angle"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Multiply Euler-form exponentials by adding arguments and take imaginary parts to recover the sine sum",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.multiply-divide-polar",
+      "AHL1.13.euler-trig-link"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Write a sum of complex exponentials as a single r e^(i theta)",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.euler-trig-link",
+      "AHL1.13.cartesian-to-polar"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.13",
+      "3.7"
+     ],
+     "skill": "Combine the exponential forms and take the imaginary part to express the sum as one sine wave",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.multiply-divide-polar",
+      "SL3.7.equation-from-graph"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method with a fixed step to estimate y",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.eulers-method"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18",
+      "5.7"
+     ],
+     "skill": "Judge the Euler estimate from the concavity of the solution curve, and explain which branch it follows from the sign of the starting gradient.",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.eulers-method",
+      "SL5.7.concavity"
+     ],
+     "subPassA": [
+      "AHL5.18.eulers-method",
+      "SL5.7.concavity"
+     ],
+     "subPassB": [
+      "AHL5.18.interpret-solution",
+      "SL5.7.concavity"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Integrate the pdf over an interval, read the mode at the maximum, and compare it with the median using the probability below the mode",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-probability",
+      "AHL4.14.median-mode"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Integrate the pdf to find a probability",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-probability"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.11",
+      "4.14"
+     ],
+     "skill": "Find a conditional probability as a ratio of pdf integrals",
+     "review": "agreed",
+     "sub": [
+      "SL4.11.conditional-distributions",
+      "AHL4.14.pdf-probability"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Set the integral of the pdf from the lower limit up to q equal to 0.25 and solve for the lower quartile.",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.median-mode"
+     ],
+     "subPassA": [
+      "AHL4.14.median-mode"
+     ],
+     "subPassB": [
+      "AHL4.14.median-mode",
+      "AHL4.14.pdf-probability"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Use E(a-bT) and the maximum score condition to set up and solve for a and b",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.linear-transformation"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Use Var(a-bT)=b^2 Var(T)",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.linear-transformation"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.14"
+     ],
+     "skill": "Replace x with -x in the series to show the function is even",
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.odd-even-test"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Write out terms of a geometric sigma sum as a polynomial",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.sigma"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.8"
+     ],
+     "skill": "Find the interval of convergence from |r|<1 and write the sum to infinity as a rational function",
+     "review": "agreed",
+     "sub": [
+      "SL1.8.convergence",
+      "SL1.8.sum-to-infinity"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.14",
+      "2.2"
+     ],
+     "skill": "Justify that the restricted function is one-to-one, then find its inverse by choosing the positive root, and give the inverse's domain.",
+     "review": "adjudicated",
+     "rationale": "g is the even function f restricted to x ≥ 0, so the inverse needs the restricted domain to choose the root and its domain is assessed, which is 2.14 rather than plain 2.5; the one-to-one justification earns A1R1 under 2.2.",
+     "passA": [
+      "2.14",
+      "2.2"
+     ],
+     "passB": [
+      "2.5",
+      "2.2"
+     ],
+     "sub": [
+      "AHL2.14.inverse-restricted",
+      "SL2.2.is-function"
+     ],
+     "subPassA": [
+      "AHL2.14.inverse-restricted",
+      "SL2.2.is-function"
+     ],
+     "subPassB": [
+      "SL2.5.find-inverse",
+      "SL2.5.inverse-domain-range",
+      "SL2.2.is-function"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.11",
+      "2.4"
+     ],
+     "skill": "Find where the curve meets its inverse on the GDC, then split or use symmetry to integrate the region bounded by both curves and the axes.",
+     "review": "adjudicated",
+     "rationale": "Every method earns an A1 for the GDC intersection (2.4) and the rest for the area of a region bounded by two curves (5.11); the integrals are simply evaluated on the GDC within that work, so 5.5 would double-tag them.",
+     "passA": [
+      "5.11",
+      "5.5",
+      "2.4"
+     ],
+     "passB": [
+      "5.11",
+      "2.4"
+     ],
+     "sub": [
+      "SL5.11.area-between-curves",
+      "SL2.4.intersection"
+     ],
+     "subPassA": [
+      "SL5.11.area-between-curves",
+      "SL5.5.definite-integral-gdc",
+      "SL2.4.intersection"
+     ],
+     "subPassB": [
+      "SL5.11.area-between-curves",
+      "SL2.4.intersection"
+     ]
+    }
+   ],
+   "confidence": "medium"
   },
   "aa-hl-2025-may-tz1-p3-q01": {
    "parts": [
@@ -13866,6 +15885,322 @@
      "sub": [
       "AHL3.16.vector-product",
       "AHL3.13.angle-between-vectors"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p1-q03": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.8",
+      "3.6"
+     ],
+     "skill": "Replace cos 2θ with the double angle form, factorise the resulting quadratic in cos θ and pick the root in the interval",
+     "review": "agreed",
+     "sub": [
+      "SL3.8.quadratic-in-trig",
+      "SL3.8.factorise-not-divide",
+      "SL3.6.simplify"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p1-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Sketch the modulus of a given rational graph, reflecting the negative branch and its oblique asymptote",
+     "review": "agreed",
+     "sub": [
+      "AHL2.16.modulus-graph"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Sketch a scaled reciprocal of a given graph, showing intercepts, extrema and the horizontal asymptote",
+     "review": "agreed",
+     "sub": [
+      "AHL2.16.reciprocal-graph"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Make x squared the subject and integrate pi x squared dy between the y-limits to get the exact volume about the y-axis",
+     "review": "adjudicated",
+     "rationale": "Every mark sits inside the y-axis volume of revolution (rearranging for x squared, forming and evaluating pi times the integral of x squared dy), and the polynomial integration is a routine step of that volume, not a separate 5.11 skill.",
+     "passA": [
+      "5.17",
+      "5.11"
+     ],
+     "passB": [
+      "5.17"
+     ],
+     "sub": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ],
+     "subPassA": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x",
+      "SL5.11.evaluate-definite"
+     ],
+     "subPassB": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Find modulus and argument of a Cartesian complex number and write it in Euler form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.cartesian-to-polar"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14",
+      "1.13"
+     ],
+     "skill": "Divide two Euler-form numbers then find all three cube roots with De Moivre",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots",
+      "AHL1.13.multiply-divide-polar"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2025-may-tz3-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Recognise a 0/0 trig limit and evaluate it by applying l'Hopital's rule twice or by reducing to the standard sin x / x limit",
+     "review": "adjudicated",
+     "rationale": "The marks are for the indeterminate form, the repeated l'Hopital step and the sin x / x -> 1 limit; the product-rule derivative is the mechanics of l'Hopital and does not earn a separate 5.6 tag.",
+     "passA": [
+      "5.13",
+      "5.6"
+     ],
+     "passB": [
+      "5.13"
+     ],
+     "sub": [
+      "AHL5.13.lhopital-repeated",
+      "AHL5.13.standard-limit"
+     ],
+     "subPassA": [
+      "AHL5.13.lhopital-repeated",
+      "AHL5.13.standard-limit",
+      "SL5.6.product-rule"
+     ],
+     "subPassB": [
+      "AHL5.13.lhopital",
+      "AHL5.13.lhopital-repeated",
+      "AHL5.13.standard-limit"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Find a side as a displacement vector and add it to a vertex to locate the fourth vertex of the parallelogram",
+     "review": "agreed",
+     "sub": [
+      "AHL3.12.vector-algebra",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassA": [
+      "AHL3.12.vector-algebra",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassB": [
+      "AHL3.12.vector-algebra"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.1",
+      "3.12"
+     ],
+     "skill": "Find where the diagonals cross as the midpoint of a diagonal in 3D",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.midpoint-3d",
+      "AHL3.12.vector-algebra"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Form two side vectors, take their cross product, then use its magnitude for the parallelogram area",
+     "review": "agreed",
+     "sub": [
+      "AHL3.16.vector-product",
+      "AHL3.16.area-triangle-parallelogram",
+      "AHL3.12.position-displacement"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.17"
+     ],
+     "skill": "Use the cross product as a normal with a known point to write the plane's Cartesian equation",
+     "review": "agreed",
+     "sub": [
+      "AHL3.17.plane-equation"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.18"
+     ],
+     "skill": "Take the normals of the two planes and use their scalar product and magnitudes to get the cosine of the acute angle between the planes",
+     "review": "adjudicated",
+     "rationale": "The 3.13 Tag when line sends the angle between two planes to 3.18, so the scalar product of the normals is covered there and 3.13 is not added.",
+     "passA": [
+      "3.18"
+     ],
+     "passB": [
+      "3.18",
+      "3.13"
+     ],
+     "sub": [
+      "AHL3.18.angle-two-planes"
+     ],
+     "subPassA": [
+      "AHL3.18.angle-two-planes"
+     ],
+     "subPassB": [
+      "AHL3.18.angle-two-planes",
+      "AHL3.13.angle-between-vectors"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "3.18",
+      "3.14"
+     ],
+     "skill": "Write the line through a point along the plane normal and substitute into a second plane to find the meeting point",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.line-meets-plane",
+      "AHL3.14.line-equation"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-may-tz3-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Write a complex modulus condition in x and y and expand to the circle equation",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Multiply by the conjugate of the denominator to write the quotient in a + bi form, then set its argument to pi/4 to obtain the locus equation",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.division-conjugate",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassA": [
+      "AHL1.12.division-conjugate",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassB": [
+      "AHL1.12.division-conjugate",
+      "AHL1.12.equate-parts",
+      "AHL1.12.modulus-argument-values"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.12",
+      "2.7"
+     ],
+     "skill": "Read Re = Im as an argument of pi/4 to get the second circle, eliminate to a line, solve the resulting quadratic and write the two roots as complex numbers",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "SL2.7.solve-equation"
+     ],
+     "subPassA": [
+      "AHL1.12.modulus-argument-values",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "AHL1.12.equate-parts",
+      "SL2.7.solve-equation"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Add the conjugate roots of a real quartic and use the sum of roots to find a coefficient",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.sum-product-roots",
+      "AHL1.14.conjugate-root"
      ]
     }
    ],
@@ -15228,6 +17563,419 @@
    ],
    "confidence": "high"
   },
+  "aa-hl-2025-nov-tz1-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "5.4",
+      "5.3"
+     ],
+     "skill": "Differentiate 1/x as a negative power, evaluate the tangent gradient at x = t and take the negative reciprocal for the normal",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.tangent-gradient",
+      "SL5.3.negative-powers"
+     ],
+     "subPassA": [
+      "SL5.4.tangent-gradient",
+      "SL5.3.negative-powers"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation",
+      "SL5.3.negative-powers"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Use the normal gradient and the point on the curve to write the normal's equation",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.normal-equation"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Read m and c from the given normal, write t as plus or minus root m and substitute to express the normal's intercept in terms of its gradient",
+     "review": "adjudicated",
+     "rationale": "All four marks rewrite the normal's equation in terms of its own gradient; reading m and c off y = mx + c is prior learning and the surd simplification is routine, so neither 2.1 nor 1.7 clearly earns its own mark.",
+     "passA": [
+      "5.4",
+      "2.1"
+     ],
+     "passB": [
+      "5.4",
+      "1.7"
+     ],
+     "sub": [
+      "SL5.4.normal-equation"
+     ],
+     "subPassA": [
+      "SL5.4.normal-equation",
+      "SL2.1.equation-of-line"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation",
+      "SL1.7.rational-exponents"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "5.4",
+      "2.2"
+     ],
+     "skill": "Use the normal's gradient being a square to state which gradients a normal to the curve can take",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.2.range"
+     ],
+     "subPassA": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.2.range"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation",
+      "SL2.2.range"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.4",
+      "2.10"
+     ],
+     "skill": "Find the gradient for which the two parallel normals given by t = plus or minus root m coincide, leaving exactly one normal",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassA": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation",
+      "SL2.10.number-of-solutions"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "5.4",
+      "2.10"
+     ],
+     "skill": "State the gradients for which two distinct parallel normals exist, excluding the coincident case",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassA": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassB": [
+      "SL5.4.normal-equation",
+      "SL2.10.number-of-solutions"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "2.8"
+     ],
+     "skill": "Sketch the reciprocal function",
+     "review": "agreed",
+     "sub": [
+      "SL2.8.reciprocal"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "5.4",
+      "2.3"
+     ],
+     "skill": "Draw two parallel normals to the hyperbola and mark where each is normal",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL2.3.sketch-from-info"
+     ]
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Equate the curve and the given normal and rearrange into the quadratic whose roots are the x-coordinates of the intersections",
+     "review": "adjudicated",
+     "rationale": "The marks are for forming the intersection equation of the normal with the curve and rearranging it; the quadratic is shown, not solved, so 2.7 earns nothing here.",
+     "passA": [
+      "5.4"
+     ],
+     "passB": [
+      "5.4",
+      "2.7"
+     ],
+     "sub": [
+      "SL5.4.tangent-meets-axes-or-curve"
+     ],
+     "subPassA": [
+      "SL5.4.tangent-meets-axes-or-curve"
+     ],
+     "subPassB": [
+      "SL5.4.tangent-meets-axes-or-curve",
+      "SL2.7.hidden-quadratic"
+     ]
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "2.12",
+      "5.4"
+     ],
+     "skill": "Use the sum or product of roots with the known root to get the second intersection of the normal",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.sum-product-roots",
+      "SL5.4.tangent-meets-axes-or-curve"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.1",
+      "2.4"
+     ],
+     "skill": "Get the third vertex from the curve's symmetry through the origin, then show the two segment gradients multiply to -1",
+     "review": "adjudicated",
+     "rationale": "The A1 for C comes from the hyperbola's symmetry and the other five marks are gradients and their product, which is a parametric show-that calculation rather than a 1.6 deductive proof (no 1.6 sub-tag fits).",
+     "passA": [
+      "2.1",
+      "2.4"
+     ],
+     "passB": [
+      "2.1",
+      "1.6"
+     ],
+     "sub": [
+      "SL2.1.parallel-perpendicular",
+      "SL2.1.gradient",
+      "SL2.4.symmetry"
+     ],
+     "subPassA": [
+      "SL2.1.parallel-perpendicular",
+      "SL2.1.gradient",
+      "SL2.4.symmetry"
+     ],
+     "subPassB": [
+      "SL2.1.parallel-perpendicular",
+      "SL1.6.conditional-proof"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz1-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "Interpret the limiting value of a logistic model as the long-term population",
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "Use the initial value to find a constant in a logistic model",
+     "review": "agreed",
+     "sub": [
+      "SL2.9.find-parameters"
+     ]
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "2.9",
+      "1.7"
+     ],
+     "skill": "Substitute a later data point and solve the exponential equation for the growth constant",
+     "review": "agreed",
+     "sub": [
+      "SL2.9.find-parameters",
+      "SL1.7.solve-with-logs"
+     ]
+    },
+    {
+     "label": "a(iv)",
+     "syllabus": [
+      "2.9"
+     ],
+     "skill": "Evaluate the fitted logistic model to predict a future population",
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Evaluate the rate given by the differential equation at the equilibrium value",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.interpret-solution"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "5.18",
+      "5.1"
+     ],
+     "skill": "Interpret a zero rate of change from the differential equation as a stable, equilibrium population",
+     "review": "adjudicated",
+     "rationale": "Both codes earn the single mark: the accepted answer is the equilibrium (long-run) behaviour of the differential equation model, read from a zero derivative, so 5.18 leads and 5.1 supports it.",
+     "passA": [
+      "5.1",
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "5.1"
+     ],
+     "sub": [
+      "AHL5.18.interpret-solution",
+      "SL5.1.interpret-derivative"
+     ]
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "5.6"
+     ],
+     "skill": "Differentiate a log of a log expression with the chain rule and simplify to the given form",
+     "review": "agreed",
+     "sub": [
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ]
+    },
+    {
+     "label": "b(iv)",
+     "syllabus": [
+      "5.18",
+      "5.10"
+     ],
+     "skill": "Separate variables, integrate using the previous derivative, and rearrange to the given general solution",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable",
+      "SL5.10.hence-from-derivative"
+     ]
+    },
+    {
+     "label": "b(v)",
+     "syllabus": [
+      "5.18",
+      "1.7"
+     ],
+     "skill": "Use the initial condition to find the constant exactly as a single logarithm",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.particular-solution",
+      "SL1.7.log-laws"
+     ]
+    },
+    {
+     "label": "b(vi)",
+     "syllabus": [
+      "5.18",
+      "1.7"
+     ],
+     "skill": "Substitute a second data point into the general solution and solve the resulting log/exponential equation for the rate constant",
+     "review": "adjudicated",
+     "rationale": "One A1 is for substituting the data into the differential equation's solution to fix its constant and the other is for solving the exponential equation with logs, so both codes stand, with the differential equation context first.",
+     "passA": [
+      "5.18",
+      "1.7"
+     ],
+     "passB": [
+      "1.7",
+      "5.18"
+     ],
+     "sub": [
+      "AHL5.18.particular-solution",
+      "SL1.7.solve-with-logs"
+     ]
+    },
+    {
+     "label": "b(vii)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Use the particular solution to predict the population at a later time",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.interpret-solution"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18",
+      "2.9"
+     ],
+     "skill": "Compare two models' predictions with an observed value",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.interpret-solution",
+      "SL2.9.exp-model"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method with a given step to estimate the population",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.eulers-method"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Judge the Euler estimate against the observed value and other models",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.interpret-solution"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "aa-hl-2025-nov-tz3-p1-q05": {
    "parts": [
     {
@@ -15819,6 +18567,3602 @@
       "AHL5.18.homogeneous",
       "AHL5.18.particular-solution",
       "SL1.7.log-laws"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p3-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.7",
+      "2.3"
+     ],
+     "skill": "Sketch sin x on the given domain with its intercepts, and add the composite from the GDC with the same zeros and a smaller amplitude",
+     "review": "adjudicated",
+     "rationale": "Three of the four marks are for the sine graph's shape, domain and intercepts (3.7), and the fourth is for transferring the composite's graph from the GDC (2.3), so 3.7 leads.",
+     "passA": [
+      "3.7",
+      "2.3"
+     ],
+     "passB": [
+      "2.3",
+      "3.7"
+     ],
+     "sub": [
+      "SL3.7.sketch",
+      "SL2.3.sketch-from-equation"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "3.7"
+     ],
+     "skill": "State the maximum value of the sine function",
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "2.4",
+      "2.5"
+     ],
+     "skill": "Find the maximum of a composite sine function",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.max-min",
+      "SL2.5.composite-value"
+     ]
+    },
+    {
+     "label": "b(iii)",
+     "syllabus": [
+      "2.4",
+      "2.5"
+     ],
+     "skill": "Find the maximum of a triple composite sine function",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.max-min",
+      "SL2.5.composite-value"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.5",
+      "2.4"
+     ],
+     "skill": "Use a GDC table to evaluate the repeated composite at its maximising x for increasing n, finding the first n whose maximum value drops below the threshold",
+     "review": "adjudicated",
+     "rationale": "The marks are for evaluating the iterated composites at the maximum point with technology and reading off when the maximum falls below 0.6; no equation is solved, so 2.10 does not fit.",
+     "passA": [
+      "2.5",
+      "2.4"
+     ],
+     "passB": [
+      "2.10",
+      "2.5"
+     ],
+     "sub": [
+      "SL2.5.composite-value",
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "SL2.5.composite-value",
+      "SL2.4.max-min"
+     ],
+     "subPassB": [
+      "SL2.10.solve-gdc",
+      "SL2.5.composite-expression"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8",
+      "5.6",
+      "3.8"
+     ],
+     "skill": "Differentiate the composite with the chain rule, set to zero and argue which factor gives solutions",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points",
+      "SL5.6.chain-rule",
+      "SL3.8.solve-basic"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Substitute the explicit composite expressions into the given derivative product formula for n = 3",
+     "review": "adjudicated",
+     "rationale": "The derivative formula is given, so the single mark is only for writing the composites explicitly; no differentiation is done, so 5.6 earns nothing.",
+     "passA": [
+      "2.5",
+      "5.6"
+     ],
+     "passB": [
+      "2.5"
+     ],
+     "sub": [
+      "SL2.5.composite-expression"
+     ],
+     "subPassA": [
+      "SL2.5.composite-expression",
+      "SL5.6.chain-rule"
+     ],
+     "subPassB": [
+      "SL2.5.composite-expression"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.15",
+      "5.6"
+     ],
+     "skill": "Prove the derivative product formula by induction, using the chain rule in the inductive step",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-derivative",
+      "AHL1.15.induction-structure",
+      "SL5.6.chain-rule"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Apply l'Hopital's rule using the derivative formula and evaluate at zero",
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.lhopital"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2025-nov-tz3-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.8"
+     ],
+     "skill": "Sum an infinite geometric series with ratio -x^2",
+     "review": "agreed",
+     "sub": [
+      "SL1.8.sum-to-infinity"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.19",
+      "5.15"
+     ],
+     "skill": "Integrate the geometric series term by term, recognise the arctan integral and fix the constant to get its Maclaurin series",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.differentiate-integrate-series",
+      "AHL5.15.standard-integrals"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.19",
+      "3.9"
+     ],
+     "skill": "Use the exact arctan value with a truncated series to approximate pi",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.series-approximation",
+      "AHL3.9.inverse-trig-values"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.19",
+      "2.10"
+     ],
+     "skill": "Write the general next-term error bound of the series and solve the resulting inequality with technology to find how many terms are needed",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.series-approximation",
+      "SL2.10.inequality-graphical"
+     ],
+     "subPassA": [
+      "AHL5.19.series-approximation",
+      "SL2.10.inequality-graphical"
+     ],
+     "subPassB": [
+      "AHL5.19.series-approximation",
+      "SL2.10.solve-gdc"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.16",
+      "5.15",
+      "5.10"
+     ],
+     "skill": "Integrate arctan x by parts, then integrate x/(1+x^2) by inspection and evaluate exactly",
+     "review": "agreed",
+     "sub": [
+      "AHL5.16.by-parts",
+      "AHL5.15.inverse-trig-derivatives",
+      "SL5.10.inspection-substitution"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Evaluate a definite integral of a polynomial with technology",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.definite-integral-gdc"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Equate the exact integral to its series approximation and solve for pi",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.series-approximation"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "5.19",
+      "5.11"
+     ],
+     "skill": "Integrate the next term to get the error bound and compare it with the actual error",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.series-approximation",
+      "SL5.11.evaluate-definite"
+     ]
+    },
+    {
+     "label": "i",
+     "syllabus": [
+      "5.19",
+      "5.11",
+      "2.10"
+     ],
+     "skill": "Integrate the general error term between the limits, set it below the tolerance and solve the inequality on the GDC to get the number of series terms",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.series-approximation",
+      "SL5.11.evaluate-definite",
+      "SL2.10.inequality-graphical"
+     ],
+     "subPassA": [
+      "AHL5.19.series-approximation",
+      "SL5.11.evaluate-definite",
+      "SL2.10.inequality-graphical"
+     ],
+     "subPassB": [
+      "AHL5.19.series-approximation",
+      "SL5.11.evaluate-definite",
+      "SL2.10.solve-gdc"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Express an annular region left after removing a sector as a difference of sector areas, set up the area ratio and solve for the outer radius",
+     "review": "agreed",
+     "sub": [
+      "SL3.4.segment-shaded",
+      "SL3.4.sector-area"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz1-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6",
+      "4.13"
+     ],
+     "skill": "Find the total probability of a positive test by summing the two branches of a tree",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree",
+      "AHL4.13.total-probability"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.13",
+      "4.11"
+     ],
+     "skill": "Reverse the conditional by dividing the joint probability by the total probability of a positive test from (a)",
+     "review": "agreed",
+     "sub": [
+      "AHL4.13.bayes-formula",
+      "SL4.11.conditional-formula"
+     ],
+     "subPassA": [
+      "AHL4.13.bayes-tree",
+      "SL4.11.reverse-conditional"
+     ],
+     "subPassB": [
+      "AHL4.13.bayes-formula",
+      "SL4.11.conditional-formula"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Use conjugate pairs to list all five roots, then the sum of roots to find a and the product of roots to find b",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.sum-product-roots",
+      "AHL1.14.conjugate-root"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12",
+      "1.14"
+     ],
+     "skill": "Rebuild the quintic as a linear factor times two real quadratics formed from conjugate root pairs",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-from-roots",
+      "AHL1.14.conjugate-root"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz1-p1-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Expand the scalar product of a combination of vectors and use commutativity of the dot product to show it vanishes",
+     "review": "agreed",
+     "sub": [
+      "AHL3.13.scalar-product-algebra"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.16",
+      "3.13"
+     ],
+     "skill": "Use that a cross product is orthogonal to each of its factors, so the relevant dot products vanish, after distributing the dot product over v",
+     "review": "agreed",
+     "sub": [
+      "AHL3.16.vector-product-algebra",
+      "AHL3.13.scalar-product-algebra",
+      "AHL3.13.perpendicular-test"
+     ],
+     "subPassA": [
+      "AHL3.16.vector-product-algebra",
+      "AHL3.13.scalar-product-algebra"
+     ],
+     "subPassB": [
+      "AHL3.16.perpendicular-vector",
+      "AHL3.13.scalar-product-algebra",
+      "AHL3.13.perpendicular-test"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Argue that a vector perpendicular to both a and b x c must be parallel to their cross product",
+     "review": "agreed",
+     "sub": [
+      "AHL3.16.perpendicular-vector",
+      "AHL3.12.parallel-vectors"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.10",
+      "3.9"
+     ],
+     "skill": "Prove a cot double-angle identity by writing cot as 1/tan and applying the tan double-angle formula",
+     "review": "adjudicated",
+     "rationale": "The main markscheme method rests on the tan double-angle identity (3.10) with cot as a reciprocal ratio (3.9); the sin/cos route via 3.6 is only an alternative, so 3.6 is not the primary code.",
+     "passA": [
+      "3.10",
+      "3.9"
+     ],
+     "passB": [
+      "3.6",
+      "3.9"
+     ],
+     "sub": [
+      "AHL3.10.prove-identity",
+      "AHL3.10.tan-double-angle",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassA": [
+      "AHL3.10.tan-double-angle",
+      "AHL3.10.prove-identity",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassB": [
+      "SL3.6.prove-identity",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.9",
+      "3.8"
+     ],
+     "skill": "Substitute the identity, clear the denominator to get a quadratic in cot squared, factorise without cancelling a common factor, and find all angles in the interval",
+     "review": "adjudicated",
+     "rationale": "The equation is in cot, so the more specific 3.9 leads, with 3.8 for the quadratic-in-trig method and the penalty for cancelling a factor; both reviewers chose this pair and differed only on order.",
+     "passA": [
+      "3.8",
+      "3.9"
+     ],
+     "passB": [
+      "3.9",
+      "3.8"
+     ],
+     "sub": [
+      "AHL3.9.solve-reciprocal-equation",
+      "SL3.8.quadratic-in-trig",
+      "SL3.8.factorise-not-divide"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.15",
+      "3.9"
+     ],
+     "skill": "Differentiate cot of a linear argument and the reciprocal of cot, then rewrite with cosec and sec to reach the given identity",
+     "review": "agreed",
+     "sub": [
+      "AHL5.15.trig-derivatives",
+      "AHL5.15.linear-composites",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassA": [
+      "AHL5.15.trig-derivatives",
+      "AHL5.15.linear-composites",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassB": [
+      "AHL5.15.trig-derivatives",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.6",
+      "3.9"
+     ],
+     "skill": "Find the third side in reciprocal-ratio form, then use the sin double-angle identity to simplify the area and get the length-to-area ratio",
+     "review": "agreed",
+     "sub": [
+      "SL3.6.simplify",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Split a fraction with a quadratic denominator into two linear partial fractions by substitution or comparing coefficients",
+     "review": "agreed",
+     "sub": [
+      "AHL1.11.distinct-linear-factors",
+      "AHL1.11.cover-up-or-compare"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18",
+      "5.15"
+     ],
+     "skill": "Separate variables, integrate the partial fractions to logs, and use the initial condition to fix the constant",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "AHL5.15.partial-fraction-integral"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Exponentiate a log equation, simplify the exponential of a log difference, and rearrange to make N the subject in the required form",
+     "review": "adjudicated",
+     "rationale": "Nothing in (c) uses a differential-equation technique (the DE was solved and the constant found in (b)); the marks are for solving a log equation for N with exponent/log laws, which the 2.9 Tag when line sends to 1.7.",
+     "passA": [
+      "5.18",
+      "2.9"
+     ],
+     "passB": [
+      "1.7"
+     ],
+     "sub": [
+      "SL1.7.log-equations",
+      "SL1.7.log-laws"
+     ],
+     "subPassA": [
+      "AHL5.18.particular-solution",
+      "SL2.9.exp-log-inverse"
+     ],
+     "subPassB": [
+      "SL1.7.log-laws"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.12",
+      "5.18"
+     ],
+     "skill": "Let time tend to infinity so the exponential term vanishes and read off the long-run limit in context",
+     "review": "agreed",
+     "sub": [
+      "AHL5.12.limit-reasoning",
+      "AHL5.18.interpret-solution"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Link the rate of change of pressure to the rate of change of volume with the chain rule (or implicit differentiation in t) and evaluate at the given instant",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.related-rates"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Set the total area under the piecewise linear pdf equal to 1 to find its peak height",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-normalise"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Integrate x f(x) over both pieces of the pdf, set equal to the given mean and solve for the break point",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-mean"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz1-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Raise the given complex root to the third power (or cube its modulus) to find the real constant",
+     "review": "adjudicated",
+     "rationale": "The M1 accepts cubing in any form (Cartesian, modulus or exponential), so the single assessed skill is a power of a complex number (1.14); neither the 1.12 arithmetic nor the 1.13 conversion is required, so neither second code earns marks on its own.",
+     "passA": [
+      "1.14",
+      "1.12"
+     ],
+     "passB": [
+      "1.14",
+      "1.13"
+     ],
+     "sub": [
+      "AHL1.14.de-moivre-power"
+     ],
+     "subPassA": [
+      "AHL1.14.de-moivre-power",
+      "AHL1.12.arithmetic"
+     ],
+     "subPassB": [
+      "AHL1.14.de-moivre-power",
+      "AHL1.13.cartesian-to-polar"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "State the remaining cube roots as the conjugate of the given root and the real cube root",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots",
+      "AHL1.14.conjugate-root"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.14",
+      "1.12"
+     ],
+     "skill": "Divide each earlier root by i (or take cube roots of c i) to get the new roots in Cartesian form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots",
+      "AHL1.12.division-conjugate"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.14",
+      "3.2"
+     ],
+     "skill": "Treat the three roots as vertices of an equilateral triangle on the Argand diagram and find its area",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-geometry",
+      "SL3.2.area-sine"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Make x the subject for the two halves of the circle and subtract two volumes of revolution about the y-axis, simplifying with difference of squares",
+     "review": "agreed",
+     "sub": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.volume-between-curves",
+      "AHL5.17.rearrange-for-x"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Evaluate the remaining definite integral with technology, then set the volume expression equal to the given value and solve for the unknown",
+     "review": "adjudicated",
+     "rationale": "The volume-of-revolution set-up earned its marks in (a); here the only marks are a GDC evaluation of a definite integral and a linear solve, so 5.17 does not earn marks again.",
+     "passA": [
+      "5.17",
+      "5.5"
+     ],
+     "passB": [
+      "5.5"
+     ],
+     "sub": [
+      "SL5.5.definite-integral-gdc"
+     ],
+     "subPassA": [
+      "AHL5.17.volume-y-axis",
+      "SL5.5.definite-integral-gdc"
+     ],
+     "subPassB": [
+      "SL5.5.definite-integral-gdc"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.14",
+      "3.17"
+     ],
+     "skill": "Read the normal vector off the plane's Cartesian equation and use it as the direction of a line through the vertex",
+     "review": "adjudicated",
+     "rationale": "An A1 is awarded separately for identifying the plane's normal from its Cartesian equation, which is using a plane equation (3.17), so 3.17 earns marks alongside writing the line (3.14).",
+     "passA": [
+      "3.14"
+     ],
+     "passB": [
+      "3.14",
+      "3.17"
+     ],
+     "sub": [
+      "AHL3.14.line-equation",
+      "AHL3.17.plane-equation"
+     ],
+     "subPassA": [
+      "AHL3.14.line-equation"
+     ],
+     "subPassB": [
+      "AHL3.14.line-equation",
+      "AHL3.17.plane-equation"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.18"
+     ],
+     "skill": "Substitute the parametric line into the plane equation to find the intersection point",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.line-meets-plane"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Use 3D distances for the radius and slant height, then add the curved surface areas of a cone and a hemisphere",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.distance-3d",
+      "SL3.1.surface-area"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Find the angle at the vertex between two displacement vectors using the scalar product",
+     "review": "adjudicated",
+     "rationale": "The marks are for the scalar-product angle formula and its value; forming VP and VP' is a step inside that M1 with no mark of its own, so 3.12 is not added.",
+     "passA": [
+      "3.13"
+     ],
+     "passB": [
+      "3.13",
+      "3.12"
+     ],
+     "sub": [
+      "AHL3.13.angle-between-vectors"
+     ],
+     "subPassA": [
+      "AHL3.13.angle-between-vectors"
+     ],
+     "subPassB": [
+      "AHL3.13.angle-between-vectors",
+      "AHL3.12.position-displacement"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.17",
+      "3.16"
+     ],
+     "skill": "Get a normal from the cross product of two vectors in the plane and substitute a point to find the Cartesian equation",
+     "review": "agreed",
+     "sub": [
+      "AHL3.17.normal-from-points",
+      "AHL3.17.plane-equation",
+      "AHL3.16.vector-product"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.13",
+      "2.12"
+     ],
+     "skill": "Require the numerator to vanish at the excluded point for a finite limit, then evaluate the 0/0 limit by l'Hopital's rule or division",
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.indeterminate-form-condition",
+      "AHL5.13.lhopital",
+      "AHL2.12.factor-theorem"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "State the vertical asymptote from the zero of the denominator",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.vertical-asymptotes"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Divide the quadratic numerator by the linear denominator and match the quotient to the given oblique asymptote",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.oblique-asymptote"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.6",
+      "2.7",
+      "5.8"
+     ],
+     "skill": "Differentiate with the quotient rule, require f'(x)=0 to have real roots via the discriminant, and exclude the value that removes the asymptote",
+     "review": "agreed",
+     "sub": [
+      "SL5.6.quotient-rule",
+      "SL2.7.discriminant-parameter",
+      "SL5.8.stationary-point-conditions"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.16",
+      "2.13"
+     ],
+     "skill": "Sketch y = f(|x|) for a quadratic-over-linear function with both oblique asymptotes, the cusp on the y-axis and the minima, then compare it with f to solve the inequality",
+     "review": "adjudicated",
+     "rationale": "The sketch marks are for f(|x|) and the rational function's oblique asymptotes (2.16, 2.13), and f(|x|) < f(x) is an inequality involving a modulus, which the 2.15 Tag when line sends to 2.16 rather than 2.15.",
+     "passA": [
+      "2.16",
+      "2.13"
+     ],
+     "passB": [
+      "2.16",
+      "2.13",
+      "2.15"
+     ],
+     "sub": [
+      "AHL2.16.f-of-modulus",
+      "AHL2.16.modulus-inequality",
+      "AHL2.13.sketch-rational"
+     ],
+     "subPassA": [
+      "AHL2.16.f-of-modulus",
+      "AHL2.16.modulus-inequality",
+      "AHL2.13.sketch-rational"
+     ],
+     "subPassB": [
+      "AHL2.16.f-of-modulus",
+      "AHL2.13.sketch-rational",
+      "AHL2.15.graphical-inequality"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "1.5"
+     ],
+     "skill": "Use the fact that any positive integer to the power zero is 1 to evaluate a short sum",
+     "review": "adjudicated",
+     "rationale": "The single mark rests on knowing r^0 = 1 (1.5); adding four ones uses no arithmetic-series technique, so 1.2 does not clearly earn the mark.",
+     "passA": [
+      "1.5",
+      "1.2"
+     ],
+     "passB": [
+      "1.2"
+     ],
+     "sub": [
+      "SL1.5.zero-negative"
+     ],
+     "subPassA": [
+      "SL1.5.zero-negative",
+      "SL1.2.sum"
+     ],
+     "subPassB": [
+      "SL1.2.sum"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "1.5"
+     ],
+     "skill": "Generalise that a sum of n zero-power terms equals n",
+     "review": "adjudicated",
+     "rationale": "As in (a)(i), the mark comes from r^0 = 1 for every term; counting n ones is not an arithmetic-series method, so 1.2 is not added.",
+     "passA": [
+      "1.5",
+      "1.2"
+     ],
+     "passB": [
+      "1.2"
+     ],
+     "sub": [
+      "SL1.5.zero-negative"
+     ],
+     "subPassA": [
+      "SL1.5.zero-negative",
+      "SL1.2.sum"
+     ],
+     "subPassB": [
+      "SL1.2.sum"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Identify first term and common difference and apply the arithmetic series formula to the first n integers",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sum",
+      "SL1.2.find-u1-d"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Evaluate a short sum of squares term by term",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sigma"
+     ]
+    },
+    {
+     "label": "d(i)",
+     "syllabus": [
+      "2.6"
+     ],
+     "skill": "Identify the quadratic through the rectangle corners from the graph",
+     "review": "agreed",
+     "sub": [
+      "SL2.6.find-equation"
+     ]
+    },
+    {
+     "label": "d(ii)",
+     "syllabus": [
+      "5.5",
+      "1.6"
+     ],
+     "skill": "Argue that the rectangles' total area exceeds the area under y = x^2 from 0 to n, and integrate the integer power to get the lower bound for the sum",
+     "review": "adjudicated",
+     "rationale": "The marks are for the area under a curve above the axis found by integrating x^2 (5.5) and the reasoning that proves a general inequality (1.6); a separate 5.11 code would only duplicate the same simple integral.",
+     "passA": [
+      "5.11",
+      "5.5",
+      "1.6"
+     ],
+     "passB": [
+      "5.5",
+      "1.6"
+     ],
+     "sub": [
+      "SL5.5.area-positive",
+      "SL1.6.inequality-proof"
+     ],
+     "subPassA": [
+      "SL5.11.evaluate-definite",
+      "SL5.5.area-positive",
+      "SL1.6.inequality-proof"
+     ],
+     "subPassB": [
+      "SL5.5.area-positive",
+      "SL1.6.inequality-proof"
+     ]
+    },
+    {
+     "label": "d(iii)",
+     "syllabus": [
+      "5.5",
+      "2.11",
+      "1.6"
+     ],
+     "skill": "Translate the curve so it passes through the top-left corners above the rectangles, integrate the resulting polynomial from 0 to n, and use it as an upper bound for the sum",
+     "review": "adjudicated",
+     "rationale": "Separate marks go to the translated curve (2.11), integrating the polynomial for the area (5.5) and the R1 reasoning for the upper bound (1.6); 5.5 matches (d)(ii), and 5.11 is not needed for the same integration.",
+     "passA": [
+      "5.11",
+      "2.11",
+      "1.6"
+     ],
+     "passB": [
+      "5.5",
+      "1.6",
+      "2.11"
+     ],
+     "sub": [
+      "SL5.5.area-positive",
+      "SL2.11.translate",
+      "SL1.6.inequality-proof"
+     ],
+     "subPassA": [
+      "SL5.11.evaluate-definite",
+      "SL2.11.translate",
+      "SL1.6.inequality-proof"
+     ],
+     "subPassB": [
+      "SL5.5.area-positive",
+      "SL1.6.inequality-proof",
+      "SL2.11.translate"
+     ]
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "2.2"
+     ],
+     "skill": "Substitute n = 3 into the given term formula",
+     "review": "adjudicated",
+     "rationale": "The sequence 1, 7, 19, 37 is not arithmetic, so 1.2 nth-term does not apply; the mark is simply for evaluating a given rule, which is 2.2.",
+     "passA": [
+      "2.2"
+     ],
+     "passB": [
+      "1.2"
+     ],
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassA": [
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL1.2.nth-term"
+     ]
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Add the first three terms to get the partial sum",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sigma"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Conjecture a closed form for the partial sums from the pattern in the table",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sigma"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Prove the closed form by writing out the telescoping sum and showing all but one term cancel",
+     "review": "agreed",
+     "sub": [
+      "SL1.6.series-proof"
+     ]
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "1.9"
+     ],
+     "skill": "Expand the cubic bracket and simplify the difference to a quadratic in n",
+     "review": "agreed",
+     "sub": [
+      "SL1.9.full-expansion"
+     ]
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Split the sigma sum of a quadratic into multiples of the sums of squares, integers and ones",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.sigma"
+     ]
+    },
+    {
+     "label": "g(iii)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Substitute the known closed forms into the sigma relation and rearrange to derive the general sum-of-squares formula",
+     "review": "adjudicated",
+     "rationale": "After 'hence' the new work is deriving a general series result (1.6); the arithmetic-series formula for S1(n) is reused from (b) and earns no new 1.2 marks.",
+     "passA": [
+      "1.6",
+      "1.2"
+     ],
+     "passB": [
+      "1.6"
+     ],
+     "sub": [
+      "SL1.6.series-proof"
+     ],
+     "subPassA": [
+      "SL1.6.series-proof",
+      "SL1.2.sum"
+     ],
+     "subPassB": [
+      "SL1.6.series-proof"
+     ]
+    },
+    {
+     "label": "g(iv)",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Compare the extra terms of the derived formula with the earlier bounds to show both inequalities hold for positive n",
+     "review": "agreed",
+     "sub": [
+      "SL1.6.deduce-inequality"
+     ],
+     "subPassA": [
+      "SL1.6.deduce-inequality"
+     ],
+     "subPassB": [
+      "SL1.6.inequality-proof"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz1-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Identify the real complex numbers with the given modulus",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Identify the purely imaginary complex numbers with the given modulus",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values"
+     ]
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "1.13"
+     ],
+     "skill": "Write the complex number from its modulus and argument in polar or Cartesian form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.polar-to-cartesian"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Sketch the locus of constant modulus as a circle on the Argand diagram with its axis intercepts",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.argand-diagram"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "3.7"
+     ],
+     "skill": "State the maximum value of a scaled sine function",
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "1.13",
+      "3.8"
+     ],
+     "skill": "Find the argument in the interval where the sine factor is 1, then write the complex number with that modulus and argument",
+     "review": "adjudicated",
+     "rationale": "The final A1 is for the complex number written from its modulus and argument (1.13, the main content), with an (A1) for solving sin θ = 1 in the interval (3.8); the part is about a complex number, so 1.13 leads.",
+     "passA": [
+      "1.13",
+      "3.8"
+     ],
+     "passB": [
+      "3.8",
+      "1.13"
+     ],
+     "sub": [
+      "AHL1.13.polar-to-cartesian",
+      "SL3.8.solve-basic"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.13",
+      "3.6"
+     ],
+     "skill": "Convert a polar curve to a Cartesian equation using x = r cos, y = r sin and r^2 = x^2 + y^2 (or the Pythagorean identity), then complete the square",
+     "review": "agreed",
+     "sub": [
+      "AHL1.13.polar-to-cartesian",
+      "SL3.6.simplify"
+     ]
+    },
+    {
+     "label": "e(i)",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Differentiate the circle equation implicitly and make dy/dx the subject",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.implicit-derivative"
+     ]
+    },
+    {
+     "label": "e(ii)",
+     "syllabus": [
+      "5.14",
+      "5.4"
+     ],
+     "skill": "Set the denominator of the implicit derivative to zero and solve for the x-values of the vertical tangents",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.implicit-tangent-normal",
+      "SL5.4.vertical-horizontal-tangent"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Sketch the circle through the origin on the Argand diagram showing its imaginary-axis intercept",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.argand-diagram"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.6",
+      "5.14"
+     ],
+     "skill": "Express x and y in terms of the angle, differentiate each with the product rule, and combine the rates with the chain rule to get dy/dx in the given form",
+     "review": "adjudicated",
+     "rationale": "The A1s are for the product-rule derivatives (5.6) and for linking them by the chain rule (5.14, also covering the implicit alternative); the Pythagorean identity is only absorbed into the final simplification and earns no separate mark, so 3.6 is left out.",
+     "passA": [
+      "5.6",
+      "5.14",
+      "3.6"
+     ],
+     "passB": [
+      "5.6",
+      "5.14"
+     ],
+     "sub": [
+      "SL5.6.product-rule",
+      "AHL5.14.related-rates"
+     ],
+     "subPassA": [
+      "SL5.6.product-rule",
+      "AHL5.14.related-rates",
+      "SL3.6.simplify"
+     ],
+     "subPassB": [
+      "SL5.6.product-rule",
+      "AHL5.14.related-rates"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "3.8",
+      "5.4"
+     ],
+     "skill": "Set the gradient's numerator to zero for a horizontal tangent and choose the angle in the correct quadrant",
+     "review": "agreed",
+     "sub": [
+      "SL3.8.solve-basic",
+      "SL5.4.vertical-horizontal-tangent"
+     ],
+     "subPassA": [
+      "SL3.8.factorise-not-divide",
+      "SL5.4.vertical-horizontal-tangent"
+     ],
+     "subPassB": [
+      "SL3.8.solve-basic",
+      "SL5.4.vertical-horizontal-tangent"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p1-q03": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "2.5",
+      "1.7"
+     ],
+     "skill": "Form f(g(x)), recognise a quadratic in e^x and solve it, rejecting the invalid root, to get an exact log answer",
+     "review": "agreed",
+     "sub": [
+      "SL2.5.composite-expression",
+      "SL1.7.hidden-quadratic"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p1-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.12",
+      "2.7"
+     ],
+     "skill": "Use the known root to factor out a linear factor from the cubic, then solve the remaining quadratic exactly",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-division",
+      "AHL2.12.factorise-solve",
+      "SL2.7.solve-equation"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.11"
+     ],
+     "skill": "Recognise a horizontal stretch scale factor 2 doubles each root",
+     "review": "agreed",
+     "sub": [
+      "SL2.11.stretch"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p1-q06": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Count committee selections with nCr and exclude those containing both restricted students",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.combinations",
+      "AHL1.10.restricted-arrangements"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p1-q07": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Prove divisibility by 6 by induction, using that a product of consecutive integers is even in the inductive step",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-divisibility",
+      "AHL1.15.induction-structure"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p1-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Differentiate an implicit relation term by term with the product rule and rearrange for dy/dx",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.implicit-derivative"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Link dx/dt to dy/dt through the implicit gradient at a point and evaluate",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.related-rates"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.18",
+      "5.10"
+     ],
+     "skill": "Separate variables, integrate each side to logarithms (reverse chain on the y side), apply the initial condition and rearrange for y squared",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "SL5.10.inspection-substitution"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.11"
+     ],
+     "skill": "Split a fraction over two distinct linear factors by substitution or comparing coefficients",
+     "review": "agreed",
+     "sub": [
+      "AHL1.11.distinct-linear-factors",
+      "AHL1.11.cover-up-or-compare"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.11",
+      "5.15"
+     ],
+     "skill": "Integrate the partial-fraction form to logarithms, evaluate exactly between the limits, and justify taking the positive value because the region lies below the axis",
+     "review": "adjudicated",
+     "rationale": "The marks are for integrating the partial fractions (5.15), evaluating exactly and the R1 for the region being below the axis (5.11); the single log-law step is part of the exact evaluation, so 1.7 adds nothing.",
+     "passA": [
+      "5.11",
+      "5.15",
+      "1.7"
+     ],
+     "passB": [
+      "5.11",
+      "5.15"
+     ],
+     "sub": [
+      "SL5.11.area-with-negative-regions",
+      "SL5.11.evaluate-definite",
+      "AHL5.15.partial-fraction-integral"
+     ],
+     "subPassA": [
+      "SL5.11.area-with-negative-regions",
+      "AHL5.15.partial-fraction-integral",
+      "SL1.7.log-laws"
+     ],
+     "subPassB": [
+      "SL5.11.area-with-negative-regions",
+      "SL5.11.evaluate-definite",
+      "AHL5.15.partial-fraction-integral"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Expand each partial fraction as a binomial series with index -1 up to the x^2 term and combine",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.binomial-rational-index"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Integrate the quadratic approximation term by term over the interval, evaluate it exactly, and give the area as the modulus of the negative result",
+     "review": "adjudicated",
+     "rationale": "Evaluating a definite integral by hand and turning a negative integral into an area are both 5.11; the polynomial antiderivative is just a step in that evaluation, so a separate 5.5 tag is not needed.",
+     "passA": [
+      "5.11",
+      "5.5"
+     ],
+     "passB": [
+      "5.11"
+     ],
+     "sub": [
+      "SL5.11.evaluate-definite",
+      "SL5.11.area-with-negative-regions"
+     ],
+     "subPassA": [
+      "SL5.11.evaluate-definite",
+      "SL5.11.area-with-negative-regions",
+      "SL5.5.antidiff-power"
+     ],
+     "subPassB": [
+      "SL5.11.evaluate-definite",
+      "SL5.11.area-with-negative-regions"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Compare the series-based approximation with the exact area to decide whether it over- or underestimates",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.binomial-approximation"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.12",
+      "1.13"
+     ],
+     "skill": "Solve a quadratic with complex roots by the formula, then find modulus and argument to write them in polar form",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.complex-quadratic",
+      "AHL1.13.cartesian-to-polar"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Find the six sixth roots of a negative real number with De Moivre's theorem",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Plot and label the six roots on an Argand diagram",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.argand-diagram"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Verify a quadratic factor by substitution, its roots, or polynomial division with zero remainder",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.factor-theorem"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.14",
+      "2.12"
+     ],
+     "skill": "Pair conjugate roots and multiply out to build the remaining real quadratic factors",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.conjugate-root",
+      "AHL2.12.polynomial-from-roots"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.14"
+     ],
+     "skill": "Use the regular-hexagon arrangement of the sixth roots to find the distance from one root to each of the others and add them",
+     "review": "adjudicated",
+     "rationale": "The lengths come from the roots forming a regular hexagon, which is exactly 1.14 roots-geometry; the modulus work is part of that, so adding 1.12 is not needed.",
+     "passA": [
+      "1.14",
+      "1.12"
+     ],
+     "passB": [
+      "1.14"
+     ],
+     "sub": [
+      "AHL1.14.roots-geometry"
+     ],
+     "subPassA": [
+      "AHL1.14.roots-geometry",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassB": [
+      "AHL1.14.roots-geometry"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p2-q05": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Rearrange the curve for x in terms of y and evaluate pi times the integral of x squared over the y-interval",
+     "review": "agreed",
+     "sub": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Set the integral of the pdf over its domain equal to 1 and solve for the constant",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-normalise"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Find the mean, then compute E(X^2) minus the squared mean by integration with technology",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-variance",
+      "AHL4.14.continuous-mean"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz2-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.16"
+     ],
+     "skill": "Eliminate or row-reduce the system to a zero row and choose the parameter so it is consistent",
+     "review": "agreed",
+     "sub": [
+      "AHL1.16.consistency-condition",
+      "AHL1.16.row-reduction"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.16",
+      "3.18"
+     ],
+     "skill": "Interpret a system with infinitely many solutions as three planes meeting in a line, and give its general solution in terms of a parameter",
+     "review": "adjudicated",
+     "rationale": "Both reviewers agree on 1.16 and 3.18; the question is set as a linear system and 2 of the 3 marks are for the parametric general solution, so 1.16 goes first and 3.18 covers the one-mark geometric interpretation.",
+     "passA": [
+      "1.16",
+      "3.18"
+     ],
+     "passB": [
+      "3.18",
+      "1.16"
+     ],
+     "sub": [
+      "AHL1.16.general-solution",
+      "AHL3.18.three-planes"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.14"
+     ],
+     "skill": "Substitute -x and show f(-x) = -f(x)",
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.odd-even-test"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Differentiate by the quotient rule, set the derivative to zero at the turning point and use the point on the curve to find the constants",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.stationary-point-conditions",
+      "SL5.6.quotient-rule"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.6",
+      "3.9"
+     ],
+     "skill": "Use the Pythagorean identity to simplify the denominator and rewrite the result as a reciprocal ratio",
+     "review": "agreed",
+     "sub": [
+      "SL3.6.prove-identity",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.15",
+      "1.11",
+      "5.10"
+     ],
+     "skill": "Change variable to turn the integrand into a rational function of u, split it into partial fractions, integrate to logarithms and substitute back",
+     "review": "adjudicated",
+     "rationale": "The partial-fraction split earns its own M1A1 (1.11), integrating it earns M1A1 (5.15), and the substitution step earns A1 marks; since the integrand has the form g'(x)f(g(x)), the substitution is 5.10, not 5.16.",
+     "passA": [
+      "5.15",
+      "1.11"
+     ],
+     "passB": [
+      "5.15",
+      "1.11",
+      "5.10"
+     ],
+     "sub": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.before-integrating",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassA": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.before-integrating"
+     ],
+     "subPassB": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "SL5.10.inspection-substitution"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.16",
+      "3.12"
+     ],
+     "skill": "Form two displacement vectors, compute their vector product and use half its magnitude for the triangle area",
+     "review": "agreed",
+     "sub": [
+      "AHL3.16.vector-product",
+      "AHL3.16.area-triangle-parallelogram",
+      "AHL3.12.position-displacement"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Find a midpoint, form the displacement vector to it, and use a scalar multiple of that vector to locate the required point",
+     "review": "adjudicated",
+     "rationale": "All three marks come from vector relations (the midpoint, the displacement vector and the scaled vector), which is 3.12; the midpoint is one step in that vector work, so a separate 3.1 tag is not justified.",
+     "passA": [
+      "3.12",
+      "3.1"
+     ],
+     "passB": [
+      "3.12"
+     ],
+     "sub": [
+      "AHL3.12.vector-algebra",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassA": [
+      "AHL3.12.vector-algebra",
+      "SL3.1.midpoint-3d"
+     ],
+     "subPassB": [
+      "AHL3.12.vector-algebra",
+      "AHL3.12.position-displacement"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.14"
+     ],
+     "skill": "Write a vector line equation through a point using the plane's normal as direction",
+     "review": "agreed",
+     "sub": [
+      "AHL3.14.line-equation"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.1",
+      "3.12"
+     ],
+     "skill": "Find the perpendicular height of the pyramid as the length of a vector between two points, then apply the pyramid volume formula with the known base area",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.volume-solids",
+      "AHL3.12.distance-between-points"
+     ],
+     "subPassA": [
+      "SL3.1.volume-solids",
+      "AHL3.12.magnitude-unit"
+     ],
+     "subPassB": [
+      "SL3.1.volume-solids",
+      "AHL3.12.distance-between-points"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.18"
+     ],
+     "skill": "Use the scalar product of the line direction and plane normal to find the acute line-plane angle",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.angle-line-plane"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "3.15"
+     ],
+     "skill": "Equate the parametric forms, solve two equations and show the third is inconsistent, and note the directions are not parallel",
+     "review": "agreed",
+     "sub": [
+      "AHL3.15.classify-lines"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.9",
+      "2.3"
+     ],
+     "skill": "Sketch a transformed arctan graph showing its horizontal asymptotes and intercept",
+     "review": "agreed",
+     "sub": [
+      "AHL3.9.inverse-trig-graphs",
+      "SL2.3.sketch-from-equation"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.11"
+     ],
+     "skill": "Describe the vertical stretch and translations that map the inverse-tangent graph onto the given one, and track its inflexion point through them",
+     "review": "adjudicated",
+     "rationale": "Three marks describe the transformations and the last mark is found by mapping the known inflexion point, so this is 2.11 image-point; no calculus is used, so 5.8 does not earn marks.",
+     "passA": [
+      "2.11",
+      "5.8"
+     ],
+     "passB": [
+      "2.11"
+     ],
+     "sub": [
+      "SL2.11.describe",
+      "SL2.11.image-point"
+     ],
+     "subPassA": [
+      "SL2.11.describe",
+      "SL5.8.points-of-inflexion"
+     ],
+     "subPassB": [
+      "SL2.11.describe",
+      "SL2.11.image-point"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.5",
+      "2.4"
+     ],
+     "skill": "Rearrange to find the inverse using tan, state its domain as the range of f, and find where f meets its inverse with the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL2.5.find-inverse",
+      "SL2.5.inverse-domain-range",
+      "SL2.4.intersection"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Find the gradient at a point with technology and write the tangent equation",
+     "review": "agreed",
+     "sub": [
+      "SL5.4.tangent-equation"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.11",
+      "5.4"
+     ],
+     "skill": "Find where the tangent meets the curve again using technology, then find the area enclosed between the tangent and the curve",
+     "review": "adjudicated",
+     "rationale": "The area between two graphs is 5.11, and 5.4's Tag when line explicitly covers where a tangent meets something, so it is preferred to the general 2.4 intersection.",
+     "passA": [
+      "5.11",
+      "5.4"
+     ],
+     "passB": [
+      "5.11",
+      "2.4"
+     ],
+     "sub": [
+      "SL5.11.area-between-curves",
+      "SL5.4.tangent-meets-axes-or-curve"
+     ],
+     "subPassA": [
+      "SL5.11.area-between-curves",
+      "SL5.4.tangent-meets-axes-or-curve"
+     ],
+     "subPassB": [
+      "SL5.11.area-between-curves",
+      "SL2.4.intersection"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Follow a path on the multi-stage outcome diagram and multiply the independent round probabilities",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree",
+      "SL4.6.independent"
+     ],
+     "subPassA": [
+      "SL4.6.tree",
+      "SL4.6.independent"
+     ],
+     "subPassB": [
+      "SL4.6.independent"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Extend the path on the outcome diagram by multiplying the earlier probability by further independent win probabilities",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree",
+      "SL4.6.independent"
+     ],
+     "subPassA": [
+      "SL4.6.tree",
+      "SL4.6.independent"
+     ],
+     "subPassB": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Since only the next two independent rounds matter, multiply the probabilities of a win followed by a loss",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.independent"
+     ],
+     "subPassA": [
+      "SL4.6.independent",
+      "SL4.6.tree"
+     ],
+     "subPassB": [
+      "SL4.6.independent"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Apply the win/lose branching relation at n = 2 with the given probabilities",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Substitute the known values into the branching relation to evaluate the missing probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Rewrite the recurrence by splitting R_n as (p+q)R_n and regroup to prove the general difference relation",
+     "review": "agreed",
+     "sub": [
+      "SL1.6.series-proof"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Apply the difference relation at the first step using R_0 = 0",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.nth-term"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Apply the difference relation twice to show successive differences grow by a constant ratio",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.nth-term"
+     ]
+    },
+    {
+     "label": "f(iii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Generalise to the nth term of the geometric sequence of differences",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.nth-term"
+     ]
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "1.6",
+      "1.3"
+     ],
+     "skill": "Add the consecutive differences so the sum telescopes, and replace each difference by its geometric term to prove the general series form",
+     "review": "agreed",
+     "sub": [
+      "SL1.6.series-proof",
+      "SL1.3.nth-term"
+     ],
+     "subPassA": [
+      "SL1.6.series-proof",
+      "SL1.3.nth-term"
+     ],
+     "subPassB": [
+      "SL1.6.series-proof",
+      "SL1.3.sum"
+     ]
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Sum the finite geometric series and substitute the given R_1 to simplify to the required form",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.sum"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "2.15"
+     ],
+     "skill": "Substitute into the given probability formula to form an inequality in the unknown and solve it with technology for the least integer value",
+     "review": "adjudicated",
+     "rationale": "The marks are for forming and solving an inequality g(x) >= f(x) with a graph or table, which is 2.15; 2.10 is the general SL version of the same skill, and the formula is given, so no 1.3 work earns marks.",
+     "passA": [
+      "1.3",
+      "2.15"
+     ],
+     "passB": [
+      "2.15",
+      "2.10"
+     ],
+     "sub": [
+      "AHL2.15.graphical-inequality"
+     ],
+     "subPassA": [
+      "SL1.3.find-n",
+      "AHL2.15.graphical-inequality"
+     ],
+     "subPassB": [
+      "AHL2.15.graphical-inequality",
+      "SL2.10.inequality-graphical"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz2-p3-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Find the space diagonal of a cuboid with 3D Pythagoras",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.distance-3d"
+     ]
+    },
+    {
+     "label": "b(i)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Multiply a complex number by the conjugate of another and collect real and imaginary parts",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.conjugate",
+      "AHL1.12.arithmetic"
+     ]
+    },
+    {
+     "label": "b(ii)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Read off the imaginary part of the product to express the dimension",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.arithmetic"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Substitute the given parts into the imaginary-part expression",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.arithmetic"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "1.12",
+      "2.7"
+     ],
+     "skill": "Use the positivity of two dimensions, one written with squared moduli, to bound the integer unknown from below and from above",
+     "review": "adjudicated",
+     "rationale": "The upper bound needs squared moduli (1.12) and then a quadratic inequality (2.7) that earns its own A1; this is a 'show that' bounding calculation, not a proof of a general statement, so 1.6 does not apply.",
+     "passA": [
+      "1.12",
+      "2.7"
+     ],
+     "passB": [
+      "1.12",
+      "1.6"
+     ],
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "SL2.7.inequality"
+     ],
+     "subPassA": [
+      "AHL1.12.modulus-argument-values",
+      "SL2.7.inequality"
+     ],
+     "subPassB": [
+      "AHL1.12.modulus-argument-values",
+      "SL1.6.conditional-proof"
+     ]
+    },
+    {
+     "label": "c(iii)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Multiply by the conjugate to get two of the values, and use squared moduli to get the other two",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "AHL1.12.conjugate"
+     ],
+     "subPassA": [
+      "AHL1.12.conjugate",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassB": [
+      "AHL1.12.arithmetic",
+      "AHL1.12.conjugate"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Assign the four squares to the real and imaginary parts so the positivity conditions hold, then compute the dimensions",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "AHL1.12.arithmetic"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Substitute values and simplify the complex quotient",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.arithmetic"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Express the difference of the diagonal and height in terms of a squared modulus and equate",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "1.12"
+     ],
+     "skill": "Fix the second number from the integer condition, write the quotient as a product with the conjugate over the squared modulus, and equate real and imaginary parts to find the first",
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.equate-parts",
+      "AHL1.12.division-conjugate"
+     ],
+     "subPassA": [
+      "AHL1.12.equate-parts",
+      "AHL1.12.conjugate"
+     ],
+     "subPassB": [
+      "AHL1.12.division-conjugate",
+      "AHL1.12.equate-parts"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p1-q04": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "3.10",
+      "3.9"
+     ],
+     "skill": "Get an exact cosine of 75 degrees from a compound angle expansion, then take its reciprocal as the secant and rationalise into surd form",
+     "review": "agreed",
+     "sub": [
+      "AHL3.10.exact-value",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassA": [
+      "AHL3.10.exact-value",
+      "AHL3.10.compound-angle",
+      "AHL3.9.reciprocal-ratios"
+     ],
+     "subPassB": [
+      "AHL3.10.exact-value",
+      "AHL3.9.reciprocal-ratios"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p1-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.8",
+      "1.3"
+     ],
+     "skill": "Set a finite geometric sum equal to half the sum to infinity to get r^k, then combine with the given later term to recover the first term",
+     "review": "agreed",
+     "sub": [
+      "SL1.8.sn-vs-sinf",
+      "SL1.3.find-r-u1"
+     ],
+     "subPassA": [
+      "SL1.8.sn-vs-sinf",
+      "SL1.3.sum",
+      "SL1.3.find-r-u1"
+     ],
+     "subPassB": [
+      "SL1.8.sn-vs-sinf",
+      "SL1.3.sum",
+      "SL1.3.nth-term"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.3"
+     ],
+     "skill": "Write a later geometric term as u1 times (r^k)^2 and evaluate",
+     "review": "agreed",
+     "sub": [
+      "SL1.3.nth-term"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p1-q08": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.14",
+      "1.12"
+     ],
+     "skill": "Use De Moivre to set five times the argument equal to a multiple of pi for a real fifth power, restrict to the fourth quadrant and write k via tan of the argument",
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.de-moivre-power",
+      "AHL1.12.modulus-argument-values"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p1-q09": {
+   "parts": [
+    {
+     "label": "",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Prove a lower bound on a sum of reciprocals by induction, bounding the change in the sum from n=k to n=k+1",
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-other",
+      "AHL1.15.induction-structure"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p1-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.13",
+      "3.17"
+     ],
+     "skill": "Set the dot product of the line direction and plane normal to zero for parallelism, then exclude the b value that would put the line's point in the plane",
+     "review": "agreed",
+     "sub": [
+      "AHL3.13.perpendicular-test",
+      "AHL3.17.point-in-plane"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.18",
+      "3.14"
+     ],
+     "skill": "Write the line parametrically, substitute into the plane equation, solve for the parameter and get the intersection point",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.line-meets-plane",
+      "AHL3.14.line-equation"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.18"
+     ],
+     "skill": "Find the angle between the line's direction and the plane's normal, then use the complement to get the exact sine of the line-plane angle",
+     "review": "adjudicated",
+     "rationale": "The 3.13 Tag when line sends the angle between a line and a plane to 3.18, so the scalar-product step is part of 3.18 rather than a separate 3.13 tag.",
+     "passA": [
+      "3.18"
+     ],
+     "passB": [
+      "3.18",
+      "3.13"
+     ],
+     "sub": [
+      "AHL3.18.angle-line-plane"
+     ],
+     "subPassA": [
+      "AHL3.18.angle-line-plane"
+     ],
+     "subPassB": [
+      "AHL3.18.angle-line-plane",
+      "AHL3.13.angle-between-vectors"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.18",
+      "3.2"
+     ],
+     "skill": "Use the line-plane angle in a right-angled triangle with the given slant length to get the perpendicular distance from the parallel line to the plane",
+     "review": "adjudicated",
+     "rationale": "Both reviewers agree on 3.18 and 3.2; the part asks for a line-to-plane distance (3.18) and the M1 is the right-angled trigonometry used to get it (3.2), so 3.18 leads with 3.2 second.",
+     "passA": [
+      "3.18",
+      "3.2"
+     ],
+     "passB": [
+      "3.2",
+      "3.18"
+     ],
+     "sub": [
+      "AHL3.18.distance-point-plane",
+      "SL3.2.right-side"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.18",
+      "3.14"
+     ],
+     "skill": "Run the normal line from a point of the line to the plane, double the parameter to reflect the point, and write the image line with the same direction",
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.distance-point-plane",
+      "AHL3.18.line-meets-plane",
+      "AHL3.14.line-equation"
+     ],
+     "subPassA": [
+      "AHL3.18.distance-point-plane",
+      "AHL3.14.line-equation"
+     ],
+     "subPassB": [
+      "AHL3.18.distance-point-plane",
+      "AHL3.18.line-meets-plane",
+      "AHL3.14.line-equation"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p1-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.15",
+      "3.9"
+     ],
+     "skill": "Differentiate tan of a composite with the chain rule and rewrite sec squared as 1 plus tan squared",
+     "review": "agreed",
+     "sub": [
+      "AHL5.15.trig-derivatives",
+      "AHL3.9.pythagorean-identities"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.6"
+     ],
+     "skill": "Differentiate the first-derivative expression again using the product rule and implicit differentiation of y squared, then evaluate at x = 0",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.implicit-second-derivative",
+      "SL5.6.product-rule"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.19"
+     ],
+     "skill": "Build the Maclaurin series to x squared from the values of f, f' and f'' at 0",
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.derive-from-derivatives"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.13"
+     ],
+     "skill": "Find a 0/0 limit by dividing the series by x, or by l'Hopital's rule",
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.limit-by-series",
+      "AHL5.13.lhopital"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Expand x over a linear expression with the binomial theorem for index -1 and match the first two coefficients to the earlier series to find both constants",
+     "review": "adjudicated",
+     "rationale": "The main route expands (a+bx)^-1 with the extended binomial theorem, which the 5.19 Tag when line places under 1.10; the Maclaurin and geometric-sum routes are only alternatives, and the comparison reuses the series from (c), so 5.19 and 1.8 do not earn marks of their own.",
+     "passA": [
+      "1.10",
+      "5.19"
+     ],
+     "passB": [
+      "1.10",
+      "5.19",
+      "1.8"
+     ],
+     "sub": [
+      "AHL1.10.binomial-rational-index"
+     ],
+     "subPassA": [
+      "AHL1.10.binomial-rational-index",
+      "AHL5.19.standard-series"
+     ],
+     "subPassB": [
+      "AHL1.10.binomial-rational-index",
+      "AHL5.19.derive-from-derivatives",
+      "SL1.8.sum-to-infinity"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Find the regression line coefficients with the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL4.4.regression-y-on-x"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Write down Pearson's correlation coefficient from the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL4.4.pearson-r"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Substitute a value into the regression line to make a prediction",
+     "review": "agreed",
+     "sub": [
+      "SL4.4.predict"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.10"
+     ],
+     "skill": "Find the regression line of the other variable on the first with the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL4.10.x-on-y-line"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Evaluate the curve at x = 0 to get its y-intercept",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.zeros-intercepts"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Rearrange for x squared in terms of y and evaluate pi times the integral in y for a volume about the y-axis",
+     "review": "agreed",
+     "sub": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Integrate the pdf over the interval with technology to get a probability",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-probability"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.14",
+      "4.7"
+     ],
+     "skill": "Get the discrete probabilities for the rounded variable by integrating the pdf over each rounding interval",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-probability",
+      "SL4.7.build-distribution"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Calculate the expected value from the discrete distribution table",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p2-q08": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2"
+     ],
+     "skill": "Apply Pythagoras in the right triangle formed by the radius, the surface radius and the centre-to-surface distance to express r in terms of h",
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.6"
+     ],
+     "skill": "Link dV/dt, dh/dt and dr/dt with the chain rule, differentiating the root expression, and evaluate at the given depth",
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.related-rates",
+      "SL5.6.chain-rule"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p2-q09": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Arrange the girls then place the boys in separate gaps to count arrangements with no two boys adjacent",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.10"
+     ],
+     "skill": "Fix boys at both ends and the third boy in an interior gap, then multiply by the girls' arrangements",
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.multiplication-addition"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p2-q10": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.12",
+      "4.9"
+     ],
+     "skill": "Use inverse normal z-values from two tail probabilities to set up and solve for mean and standard deviation, then find an interval probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.12.unknown-mean-and-sd",
+      "SL4.9.normal-probability"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.8",
+      "4.11"
+     ],
+     "skill": "Recognise attendance as binomial, find an at-least probability, then a conditional probability as a ratio of two binomial probabilities",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassA": [
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ],
+     "subPassB": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability",
+      "SL4.11.conditional-distributions"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Test successive values of n in a binomial cumulative probability to find the largest n meeting a threshold",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.find-n-or-p",
+      "SL4.8.cumulative-probability"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "aa-hl-2026-may-tz3-p2-q11": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Read the denominator constant from the vertical asymptote",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.vertical-asymptotes"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.13"
+     ],
+     "skill": "Use division or comparing coefficients with the oblique asymptote to find a coefficient",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.oblique-asymptote"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.8",
+      "5.6"
+     ],
+     "skill": "Differentiate the rational function with the quotient rule and set the derivative to zero at the given maximum to find c",
+     "review": "agreed",
+     "sub": [
+      "SL5.8.stationary-point-conditions",
+      "SL5.6.quotient-rule"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.13",
+      "2.4"
+     ],
+     "skill": "Sketch both branches of a quadratic-over-linear function with its vertical and oblique asymptotes, the local max and min from the GDC, and the y-intercept",
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.sketch-rational",
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "AHL2.13.sketch-rational",
+      "SL2.4.max-min"
+     ],
+     "subPassB": [
+      "AHL2.13.sketch-rational",
+      "AHL2.13.intercepts",
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.16"
+     ],
+     "skill": "Picture the modulus graph, with the lower branch reflected above the axis, and find the k values where a horizontal line meets it four times",
+     "review": "adjudicated",
+     "rationale": "The 2.16 Tag when line covers solving an equation that involves a modulus, so 2.10 is not needed; the A2 depends on reflecting the negative branch, which is the modulus-graph reasoning.",
+     "passA": [
+      "2.16",
+      "2.10"
+     ],
+     "passB": [
+      "2.16"
+     ],
+     "sub": [
+      "AHL2.16.modulus-equation",
+      "AHL2.16.modulus-graph"
+     ],
+     "subPassA": [
+      "AHL2.16.modulus-equation",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassB": [
+      "AHL2.16.modulus-graph",
+      "AHL2.16.modulus-equation"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "2.16",
+      "2.11"
+     ],
+     "skill": "Translate the function, then find the zeros of the translated function as the vertical asymptotes of its reciprocal",
+     "review": "agreed",
+     "sub": [
+      "AHL2.16.reciprocal-graph",
+      "SL2.11.translate"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p2-q12": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Apply Euler's method step by step with the given step length to approximate y",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.eulers-method"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.18",
+      "5.14"
+     ],
+     "skill": "Differentiate the substitution relation implicitly, then substitute into the differential equation and simplify it to a linear equation in the new variable",
+     "review": "adjudicated",
+     "rationale": "Half the marks are for the implicit differentiation (5.14), but the other M1 A1 are for substituting into and rewriting the differential equation, which is 5.18 work; no listed 5.18 sub-tag covers a given non-homogeneous substitution, so A's NEW tag is accepted.",
+     "passA": [
+      "5.18",
+      "5.14"
+     ],
+     "passB": [
+      "5.14"
+     ],
+     "sub": [
+      "AHL5.18.substitution-transform",
+      "AHL5.14.implicit-derivative"
+     ],
+     "subPassA": [
+      "NEW:AHL5.18.substitution-transform|Transform a differential equation with a given substitution",
+      "AHL5.14.implicit-derivative"
+     ],
+     "subPassB": [
+      "AHL5.14.implicit-derivative"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Solve the linear equation with an integrating factor, fix the constant from the initial condition, and substitute back to get y as a function of x",
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassA": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassB": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.homogeneous",
+      "AHL5.18.particular-solution"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.2",
+      "2.4"
+     ],
+     "skill": "Find where the expression under the root is defined and positive for the domain, and use the minimum point for the range",
+     "review": "agreed",
+     "sub": [
+      "SL2.2.domain",
+      "SL2.2.range",
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.7",
+      "5.18"
+     ],
+     "skill": "Use the concave-up shape of the solution curve to explain that Euler's tangent steps underestimate",
+     "review": "agreed",
+     "sub": [
+      "SL5.7.concavity",
+      "AHL5.18.eulers-method"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p3-q01": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "2.12",
+      "2.3"
+     ],
+     "skill": "Sketch a symmetric quartic with a minimum on the y-axis and label its y-intercept",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL2.3.sketch-from-equation"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Argue from the sketched quartic lying wholly above the x-axis that it has no real zeros",
+     "review": "adjudicated",
+     "rationale": "The 2.12 Tag when line covers the graph and zeros of a polynomial of degree 3 or more, so the more specific 2.12 is enough for this single mark and the generic 2.4 is not added.",
+     "passA": [
+      "2.12",
+      "2.4"
+     ],
+     "passB": [
+      "2.4"
+     ],
+     "sub": [
+      "AHL2.12.polynomial-graph"
+     ],
+     "subPassA": [
+      "AHL2.12.polynomial-graph",
+      "SL2.4.zeros-intercepts"
+     ],
+     "subPassB": [
+      "SL2.4.zeros-intercepts"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.12",
+      "2.3"
+     ],
+     "skill": "Sketch a quartic with two minima touching the x-axis and a maximum on the y-axis, labelling the intercepts",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL2.3.sketch-from-equation"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate the quartic term by term",
+     "review": "agreed",
+     "sub": [
+      "SL5.3.power-rule"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "2.14"
+     ],
+     "skill": "Substitute -x into the derivative and show it equals minus the derivative",
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.odd-even-test"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Identify a repeated root as the point where the curve touches the x-axis at a turning point",
+     "review": "adjudicated",
+     "rationale": "The single mark is for reading a root's multiplicity from the polynomial's graph (AHL2.12.polynomial-graph); no tangent equation or gradient work is assessed, so 5.4 does not earn the mark.",
+     "passA": [
+      "2.12"
+     ],
+     "passB": [
+      "2.12",
+      "5.4"
+     ],
+     "sub": [
+      "AHL2.12.polynomial-graph"
+     ],
+     "subPassA": [
+      "AHL2.12.polynomial-graph"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL5.4.vertical-horizontal-tangent"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.14",
+      "2.12"
+     ],
+     "skill": "Use the evenness of f and the oddness of f' (or the sum of the roots) to show the negative of a repeated root is also a repeated root",
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.use-symmetry",
+      "AHL2.12.root-property"
+     ],
+     "subPassA": [
+      "AHL2.14.use-symmetry",
+      "AHL2.12.root-property"
+     ],
+     "subPassB": [
+      "AHL2.14.use-symmetry",
+      "AHL2.14.odd-even-test",
+      "AHL2.12.root-property"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "2.12",
+      "5.8"
+     ],
+     "skill": "Factorise the derivative set to zero at the double root, excluding zero, to express alpha squared in terms of b",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.root-property",
+      "SL5.8.stationary-point-conditions"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Substitute alpha squared into f(alpha) = 0, or use the product of the roots, to relate d to b",
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.root-property",
+      "AHL2.12.sum-product-roots"
+     ]
+    },
+    {
+     "label": "g(i)",
+     "syllabus": [
+      "2.12"
+     ],
+     "skill": "Deduce from the square of the repeated root being -b/2 that the quartic's roots are real only when b is negative",
+     "review": "adjudicated",
+     "rationale": "The mark is a sign deduction about the roots of the quartic from the earlier result, not a discriminant calculation, so 2.12 fits and 2.7 does not.",
+     "passA": [
+      "2.12"
+     ],
+     "passB": [
+      "2.7"
+     ],
+     "sub": [
+      "AHL2.12.root-property"
+     ],
+     "subPassA": [
+      "AHL2.12.root-property"
+     ],
+     "subPassB": [
+      "SL2.7.discriminant-parameter"
+     ]
+    },
+    {
+     "label": "g(ii)",
+     "syllabus": [
+      "2.12",
+      "1.12"
+     ],
+     "skill": "Deduce that a negative value for the square of the root gives purely imaginary roots, so b must be positive",
+     "review": "adjudicated",
+     "rationale": "Like (g)(i) this is a deduction about the quartic's roots (2.12), plus knowing that a negative square gives purely imaginary roots (1.12); no discriminant is used, so 2.7 is not tagged.",
+     "passA": [
+      "2.12",
+      "1.12"
+     ],
+     "passB": [
+      "1.12",
+      "2.7"
+     ],
+     "sub": [
+      "AHL2.12.root-property",
+      "AHL1.12.complex-quadratic"
+     ],
+     "subPassA": [
+      "AHL2.12.root-property",
+      "AHL1.12.complex-quadratic"
+     ],
+     "subPassB": [
+      "AHL1.12.complex-quadratic",
+      "SL2.7.discriminant-parameter"
+     ]
+    },
+    {
+     "label": "h",
+     "syllabus": [
+      "5.7",
+      "5.8"
+     ],
+     "skill": "Find the second derivative of the quartic and solve it equal to zero for the inflexion x-values",
+     "review": "agreed",
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "SL5.8.points-of-inflexion"
+     ]
+    },
+    {
+     "label": "i",
+     "syllabus": [
+      "5.4"
+     ],
+     "skill": "Evaluate the quartic at the inflexion point and substitute the point into the given tangent form to find its constant term",
+     "review": "adjudicated",
+     "rationale": "Every mark is for completing the tangent equation at the point; the fractional-power simplification is algebra along the way and does not earn a separate 1.7 tag.",
+     "passA": [
+      "5.4",
+      "1.7"
+     ],
+     "passB": [
+      "5.4"
+     ],
+     "sub": [
+      "SL5.4.tangent-equation"
+     ],
+     "subPassA": [
+      "SL5.4.tangent-equation",
+      "SL1.7.rational-exponents"
+     ],
+     "subPassB": [
+      "SL5.4.tangent-equation"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "aa-hl-2026-may-tz3-p3-q02": {
+   "parts": [
+    {
+     "label": "a(i)",
+     "syllabus": [
+      "3.7"
+     ],
+     "skill": "Read the amplitude from the coefficient of the sine model",
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
+    },
+    {
+     "label": "a(ii)",
+     "syllabus": [
+      "5.9",
+      "3.5"
+     ],
+     "skill": "Evaluate the displacement at t = 0 using an exact sine value",
+     "review": "agreed",
+     "sub": [
+      "SL5.9.initial-displacement",
+      "SL3.5.exact-special"
+     ]
+    },
+    {
+     "label": "a(iii)",
+     "syllabus": [
+      "3.8"
+     ],
+     "skill": "Solve the sine of a transformed argument equal to zero for the first positive time",
+     "review": "agreed",
+     "sub": [
+      "SL3.8.compound-angle"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.9",
+      "5.6"
+     ],
+     "skill": "Differentiate a sinusoidal displacement twice with the chain rule to get velocity and acceleration, and check that the acceleration is a negative multiple of displacement",
+     "review": "adjudicated",
+     "rationale": "Both reviewers give 5.9 and 5.6; the part asks for velocity and acceleration from a displacement model (5.9, any kinematics context), and the chain rule on the sine composite is how the marks are earned (5.6), so 5.9 leads.",
+     "passA": [
+      "5.9",
+      "5.6"
+     ],
+     "passB": [
+      "5.6",
+      "5.9"
+     ],
+     "sub": [
+      "SL5.9.velocity-acceleration",
+      "SL5.6.chain-rule"
+     ]
+    },
+    {
+     "label": "c(i)",
+     "syllabus": [
+      "5.14",
+      "5.9"
+     ],
+     "skill": "Link the rates with the chain rule, writing acceleration as velocity times the derivative of velocity with respect to displacement",
+     "review": "adjudicated",
+     "rationale": "No function is actually differentiated, so 5.6 does not fit; the mark is for chaining dv/ds and ds/dt, which is the related-rates use of the chain rule in 5.14, in a kinematics setting (5.9).",
+     "passA": [
+      "5.14",
+      "5.9"
+     ],
+     "passB": [
+      "5.6",
+      "5.9"
+     ],
+     "sub": [
+      "AHL5.14.related-rates",
+      "SL5.9.velocity-acceleration"
+     ],
+     "subPassA": [
+      "AHL5.14.related-rates",
+      "SL5.9.velocity-acceleration"
+     ],
+     "subPassB": [
+      "SL5.6.chain-rule",
+      "SL5.9.velocity-acceleration"
+     ]
+    },
+    {
+     "label": "c(ii)",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Separate the variables in velocity and displacement, integrate both sides, and fix the constant from a known state of the motion",
+     "review": "adjudicated",
+     "rationale": "All five marks are for separating, integrating and finding the constant of a first-order differential equation; the motion values used for the constant reuse part (b), so adding 5.9 would not tag any new skill.",
+     "passA": [
+      "5.18"
+     ],
+     "passB": [
+      "5.18",
+      "5.9"
+     ],
+     "sub": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassA": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ],
+     "subPassB": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "SL5.9.velocity-acceleration"
+     ]
+    },
+    {
+     "label": "c(iii)",
+     "syllabus": [
+      "5.9"
+     ],
+     "skill": "Use the velocity-displacement relation to see speed is greatest at the origin and state it",
+     "review": "agreed",
+     "sub": [
+      "SL5.9.max-speed"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.14",
+      "5.15"
+     ],
+     "skill": "Integrate the pdf between symmetric limits using the arcsin standard integral and evaluate with exact values",
+     "review": "adjudicated",
+     "rationale": "The probability by integrating a pdf is 4.14, and the arcsin antiderivative earns its own mark, so 5.15 is added; the exact value of arcsin(1/2) is a routine final step and does not need a separate 3.9 tag.",
+     "passA": [
+      "4.14",
+      "5.15"
+     ],
+     "passB": [
+      "4.14",
+      "5.15",
+      "3.9"
+     ],
+     "sub": [
+      "AHL4.14.pdf-probability",
+      "AHL5.15.standard-integrals"
+     ],
+     "subPassA": [
+      "AHL4.14.pdf-probability",
+      "AHL5.15.standard-integrals"
+     ],
+     "subPassB": [
+      "AHL4.14.pdf-probability",
+      "AHL5.15.standard-integrals",
+      "AHL3.9.inverse-trig-values"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.14",
+      "5.9"
+     ],
+     "skill": "Write the speed as a function of displacement and match the pdf to k over speed (or normalise) to find k",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-normalise",
+      "SL5.9.use-velocity-model"
+     ]
+    },
+    {
+     "label": "f(i)",
+     "syllabus": [
+      "4.14",
+      "2.14"
+     ],
+     "skill": "State the mean of the continuous variable is zero, justified by the even pdf or odd integrand over symmetric limits",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-mean",
+      "AHL2.14.use-symmetry"
+     ]
+    },
+    {
+     "label": "f(ii)",
+     "syllabus": [
+      "4.14"
+     ],
+     "skill": "Interpret the zero mean displacement as the particle's average position being the origin",
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-mean"
      ]
     }
    ],
