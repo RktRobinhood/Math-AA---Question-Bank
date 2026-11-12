@@ -254,7 +254,9 @@ const data = {
   site: "IB Math Question Bank",
   courses: courseInfo.map((c) => ({
     ...c,
-    statements: courseStatements(courseById[c.id]).map((s) => ({ code: s.code, id: s.id, topic: s.topic, title: s.title, content: s.content })),
+    // ahl: the statement is additional higher level, i.e. not in the same subject's SL course.
+    statements: courseStatements(courseById[c.id]).map((s) => ({ code: s.code, id: s.id, topic: s.topic, title: s.title, content: s.content,
+      ahl: !s.courses.includes(`${c.subject}-sl`) })),
   })),
   topics,
   syllabusDocs: { aa: docs.topics },

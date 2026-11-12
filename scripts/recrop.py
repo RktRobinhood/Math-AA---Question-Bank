@@ -10,7 +10,9 @@ list with an anchor (image index + vertical position) for every part.
 
 Every question is checked: paper max mark == markscheme total == data.js
 marks, and the part marks must sum to the total. Anything that fails is
-reported in the manifest's "warnings" and on stdout.
+reported in the manifest's "warnings" and on stdout. A misprinted markscheme Total whose
+own part lines agree with the paper, or a markscheme with no mark lines at all, is accepted
+with a "notes" entry instead.
 
 Usage:
   py scripts/recrop.py --pdfs "<vault>/Exams/PDFs" --out <dir> [--only aa-sl-2021-may-tz1-p1]
@@ -35,6 +37,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 ZOOM = 2.3            # px per pt; ~1230px wide crops, matching the old images
 X0, X1 = 30, 566      # fixed horizontal crop (pt) on an A4 page: inside crop marks and margin hatching
+MARGIN = 36           # question numbers start at or right of this x (pt)
 A4_W, A4_H = 595.32, 842.04
 PAD_PX = 14
 INK = 200             # grey level below which a pixel counts as ink
@@ -46,12 +49,15 @@ BOILERPLATE = re.compile(
     r"Answers written on this page.*|will not be marked\.?|\d+EP\d+|References:?|©.*|"
     r"Answer all questions.*|Please start each question on a new page\.?|.*answer booklet provided.*|"
     r"Question \d+.{0,6} continued\.?|continued\s*(…|\.\.\.)?|"
-    r"Section [AB]|– ?\d+ ?–|-\s?\d+\s?-)$"
+    r"Section [AB]|Blank page|– ?\d+ ?–|-\s?\d+\s?-)$"
 )
 # Dotted answer lines are text glyphs in the PDFs; they are space for working, not content.
 ANSWER_LINE = re.compile(r"^[.…�·\s]+$")
-ROMAN = r"i|ii|iii|iv|v|vi"
+ROMAN = r"i|ii|iii|iv|v|vi|vii|viii|ix|x"
 QNUM = re.compile(r"^(\d{1,2})\s?\.(\s|$)")
+MS_QNUM = re.compile(r"^Q?(\d{1,2})\s?\.(\s|$)")   # some markschemes head questions "Q1."
+BARE_QNUM = re.compile(r"^(Q?)(\d{1,2})$")            # ...and a few drop the full stop
+GLUED_QNUM = re.compile(r"^Q?(\d{1,2}) ?\(a\)")        # ...or run the number into part (a): "1(a)"
 
 
 def load_questions():
@@ -114,6 +120,21 @@ class Doc:
             ls.sort(key=lambda r: (round(r[1]), r[0]))
             self.lines.append(ls)
             self.band.append(self._band(page, ls))
+        self.margin = self._margin()   # question numbers sit at or right of this x
+        self.x0 = self.margin - (MARGIN - X0)   # left crop edge, before the page offset
+
+    def _margin(self):
+        """A few PDFs set their whole text block further left than usual. If most pages have
+        body text left of the usual margin, the margin (and the crop) moves left with it."""
+        lefts = []
+        for page, ls, (top, bottom) in zip(self.doc, self.lines, self.band):
+            ox, _ = Doc.offset(page)
+            body = [r[0] - ox for r in ls if top <= r[1] and r[3] <= bottom]
+            if body:
+                lefts.append(min(body))
+        if sum(l < MARGIN for l in lefts) * 2 > len(lefts):
+            return min(lefts) - 1
+        return MARGIN
 
     @staticmethod
     def offset(page):
@@ -145,7 +166,7 @@ def find_paper_starts(doc, n):
     for p, ls in enumerate(doc.lines):
         for i, (x0, y0, x1, y1, t) in enumerate(ls):
             m = QNUM.match(t)
-            if not (m and 36 <= x0 <= 90 and int(m.group(1)) == want):
+            if not (m and doc.margin <= x0 <= 90 and int(m.group(1)) == want):
                 continue
             same_row = " ".join(r[4] for r in ls if abs(r[1] - y0) < 5)
             mm = re.search(r"Maximum\s*marks?:\s*(\d+)", same_row)
@@ -162,36 +183,74 @@ def find_ms_ranges(doc, n):
     """[(start, end)] for questions 1..n. Starts are found backwards from the last
     question, so numbered lists in the general instructions are skipped. Each
     question ends at its last right-aligned "[x marks]" / "Total [x marks]" line."""
-    starts, marks = {}, []
+    starts, bare, glued, marks = {}, {}, {}, []
+    left = doc.margin
     for p, ls in enumerate(doc.lines):
         for x0, y0, x1, y1, t in ls:
-            m = QNUM.match(t)
-            if m and 36 <= x0 <= 90:
+            m = MS_QNUM.match(t)
+            if m and left <= x0 <= 90:
                 starts.setdefault(int(m.group(1)), []).append((p, y0))
+            m = GLUED_QNUM.match(t)
+            if m and left <= x0 <= 60:
+                glued.setdefault(int(m.group(1)), []).append((p, y0))
+            m = BARE_QNUM.match(t)   # a lone digit must have the question's text beside it
+            if m and left <= x0 <= 60 and (m.group(1) or any(abs(r[1] - y0) < 3 and r[0] > x1 for r in ls)):
+                bare.setdefault(int(m.group(2)), []).append((p, y0))
             m = re.search(r"(Total\s*)?\[\s*(Total:?\s*)?(\d+)\s*marks?\s*\]\s*$", t)
             if m and x1 > 440:
-                marks.append(((p, y1), int(m.group(3)), bool(m.group(1) or m.group(2))))
+                marks.append(((p, y1), int(m.group(3)), bool(m.group(1) or m.group(2)), (p, y0)))
     chosen, limit = {}, (len(doc.lines), 0.0)
     for k in range(n, 0, -1):
         cands = [c for c in starts.get(k, []) if c < limit]
+        # A heading that lost its full stop ("6  (a) ...") is taken only if a question closes
+        # between the last proper "6." and it: that "6." was then in the general instructions.
+        after = cands[-1] if cands else (-1, 0.0)
+        # Likewise if a higher-numbered heading sits between them: that "6." began a numbered list.
+        later = [h for j, hs in list(starts.items()) + list(bare.items()) if j > k for h in hs]
+        loose = [c for c in bare.get(k, []) if after < c < limit
+                 and (any(m[2] and after < m[3] < c for m in marks) or any(after < h < c for h in later))]
+        if loose:
+            cands = loose
+        # "1(a)" after the last "1.": that "1." was a numbered item in the general instructions
+        glue = [c for c in glued.get(k, []) if after < c < limit]
+        if glue:
+            cands = glue[:1]
         if not cands:
             return None, f"markscheme: no start found for Q{k}"
         chosen[k] = limit = cands[-1]
     ranges = []
+    # A few markschemes print no "[n marks]" lines at all (2021 Nov AI HL P3). Their
+    # questions end at their last line of content and the total is left unchecked.
+    unmarked = not any(chosen[1] < m[3] for m in marks)
     for k in range(1, n + 1):
         nxt = chosen.get(k + 1, (len(doc.lines), 0.0))
-        inside = [m for m in marks if chosen[k] < m[0] < nxt]
+        if unmarked:
+            body = [(p, r[3]) for p, ls in enumerate(doc.lines) for r in ls
+                    if chosen[k] <= (p, r[1]) < (nxt[0], nxt[1] - 3) and doc.band[p][0] <= r[1] and r[3] <= doc.band[p][1]
+                    and not BOILERPLATE.match(r[4])]
+            p, y = body[-1]
+            start = {"page": chosen[k][0], "y": chosen[k][1]}
+            ranges.append((start, {"page": p, "y": y, "total": None, "parts": None}))
+            continue
+        # by the line's top: the next heading can sit closer below a Total than its line height
+        inside = [m for m in marks if chosen[k] < m[3] < nxt]
         if not inside:
             return None, f"markscheme: no closing marks line for Q{k}"
         totals = [m for m in inside if m[2]]
-        (p, y), total, _ = totals[-1] if totals else inside[-1]
+        (p, y), total = (totals[-1] if totals else inside[-1])[:2]
+        parts = sum(m[1] for m in inside if not m[2]) if totals else None
         start = {"page": chosen[k][0], "y": chosen[k][1]}
-        ranges.append((start, {"page": p, "y": y, "total": total}))
+        end = {"page": p, "y": y, "total": total, "parts": parts}
+        if (p, y) >= nxt:   # the closing line's box overlaps the next heading's: split between them
+            end["y"], end["cut"] = nxt[1] - 1, nxt[1] + 2
+        ranges.append((start, end))
     # Tall maths on a question's first line can rise above its number, so start each
     # question just below the previous one's closing line when they share a page.
     for k in range(1, n):
         prev_end, start = ranges[k - 1][1], ranges[k][0]
-        if prev_end["page"] == start["page"]:
+        if "cut" in prev_end:
+            start["y"] = prev_end["cut"] + 5
+        elif prev_end["page"] == start["page"]:
             start["y"] = min(start["y"], max(prev_end["y"] + 4, start["y"] - 14) + 5)
         else:
             start["y"] -= 9
@@ -209,8 +268,8 @@ def segments(doc, start, end):
         if p == end["page"]:
             bottom = min(bottom, end["y"])
         body = [r for r in doc.lines[p] if r[1] >= top - 1 and r[3] <= bottom + 1]
-        refs = next((r for r in body if re.match(r"^(References:?|©)", r[4])), None)
-        if refs:   # acknowledgements block at the end of the paper, and the rule above it
+        refs = next((r for r in body if re.match(r"^(References:?|©|Disclaimer:)", r[4])), None)
+        if refs:   # acknowledgements or disclaimer block at the end of the paper, and the rule above it
             bottom = refs[1] - 2
             body = [r for r in body if r[3] <= bottom + 1]
             last_text = max((r[3] for r in body), default=top)
@@ -234,7 +293,7 @@ def segments(doc, start, end):
 def render(doc, seg):
     """Render a band, trim blank rows; returns (PIL image, top_pt, bottom_pt) after trimming."""
     ox, _ = Doc.offset(doc.doc[seg["page"]])
-    clip = pymupdf.Rect(X0 + ox, seg["top"], X1 + ox, seg["bottom"])
+    clip = pymupdf.Rect(doc.x0 + ox, seg["top"], X1 + ox, seg["bottom"])
     pix = doc.doc[seg["page"]].get_pixmap(matrix=pymupdf.Matrix(ZOOM, ZOOM), clip=clip, alpha=False)
     img = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
     mask = img.convert("L").point(lambda v: 255 if v < INK else 0)
@@ -247,9 +306,10 @@ def render(doc, seg):
     return img, seg["top"] + y0 / ZOOM, seg["top"] + y1 / ZOOM
 
 
-def part_labels(doc, segs, qx):
+def part_labels(doc, segs, qx, clean=False):
     """Leaf parts with marks, in reading order: [{label, marks, page, y}].
-    qx is the x of the question number; labels sit at fixed offsets from it."""
+    qx is the x of the question number; labels sit at fixed offsets from it.
+    clean: drop the control characters some PDFs pad labels with ("(i)\x03")."""
     rows = []
     for s in segs:
         row_y = None
@@ -257,13 +317,16 @@ def part_labels(doc, segs, qx):
             if s["top"] - 1 <= y0 and y1 <= s["bottom"] + 1:
                 if row_y is None or y0 - row_y > 3:   # cluster lines into visual rows
                     row_y = y0
+                if clean:
+                    t = re.sub(r"[\x00-\x08\x0b-\x1f\x7f]", " ", t).strip()
                 rows.append((s["page"], row_y, x0, x1, y0, t))
     rows.sort()
     rows = [(p, y, x0, x1, t) for p, _, x0, x1, y, t in rows]
     labels, marks, letter = [], [], None
     for p, y, x0, x1, t in rows:
-        m = re.match(r"^\(([a-h])\)(\s|$)", t)
-        if m and qx + 18 <= x0 <= qx + 40:
+        m = re.match(r"^\(([a-z])\)(\s|$)", t)
+        # Letters past (h) are only taken in sequence: Paper 3 runs to (i), (j), ...
+        if m and qx + 18 <= x0 <= qx + 40 and (m.group(1) <= "h" or (letter and ord(m.group(1)) == ord(letter) + 1)):
             letter = m.group(1)
             labels.append({"label": letter, "marks": None, "page": p, "y": y, "sub": False})
             continue
@@ -279,7 +342,8 @@ def part_labels(doc, segs, qx):
              if l["sub"] or not (i + 1 < len(labels) and labels[i + 1]["sub"]
                                  and labels[i + 1]["label"].startswith(l["label"] + "("))]
     for p, y, n in marks:   # each [n] belongs to the last part label at or above it
-        above = [q for q in parts if (q["page"], q["y"] - 4) <= (p, y)]
+        # A tall glyph (|w|, a fraction) on the label's line can start its row a few pt higher.
+        above = [q for q in parts if (q["page"], q["y"] - 6) <= (p, y)]
         if above and above[-1]["marks"] is None:
             above[-1]["marks"] = n
     # Sub-parts that share one [n] (e.g. (a)(i), (a)(ii) [2]) collapse into their letter.
@@ -294,6 +358,10 @@ def part_labels(doc, segs, qx):
             continue
         out.append(q)
     return out
+
+
+def consistent(parts, total):
+    return bool(parts) and all(p["marks"] is not None for p in parts) and sum(p["marks"] for p in parts) == total
 
 
 def process_group(group, qs, pdf_dir, out_dir):
@@ -350,6 +418,12 @@ def process_group(group, qs, pdf_dir, out_dir):
             return None
 
         parts = part_labels(paper, segs, st["x"])
+        if not consistent(parts, st["max"]):
+            # Only when the plain reading fails: questions already in the bank keep the part
+            # labels their tags are keyed on (some read "(a)(i)\x03 (ii) [n]" as just a(ii)).
+            cleaned = part_labels(paper, segs, st["x"], clean=True)
+            if consistent(cleaned, st["max"]):
+                parts = cleaned
         if not parts:
             parts = [{"label": "", "marks": st["max"], "page": st["page"], "y": st["y"]}]
         for pt in parts:
@@ -367,7 +441,12 @@ def process_group(group, qs, pdf_dir, out_dir):
             rec["markschemeImages"] = []
             continue
         mstart, mtot = ms_ranges[k - 1]
-        if mtot["total"] != rec["marks"]:
+        if mtot["total"] is None:
+            rec["notes"].append("markscheme prints no [n marks] lines; total not checked")
+        elif mtot["total"] != rec["marks"] and mtot["parts"] == rec["marks"]:
+            # a misprinted Total: the markscheme's own part lines agree with the paper
+            rec["notes"].append(f"markscheme prints Total [{mtot['total']} marks]; its parts sum to {mtot['parts']}")
+        elif mtot["total"] != rec["marks"]:
             warn.append(f"markscheme total {mtot['total']} != paper max mark {rec['marks']}")
         ms_spans = []
         for s in segments(ms, mstart, {"page": mtot["page"], "y": mtot["y"] + 3}):
