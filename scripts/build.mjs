@@ -48,7 +48,8 @@ for (const s of [...aaSl.statements, ...aaHl.statements]) {
 const aaById = new Map([...tables.aa.values()].map((s) => [s.id, s]));
 for (const s of ai.shared) {
   const base = aaById.get(s.id);
-  tables.ai.set(s.code, { ...base, code: s.code, courses: s.courses });
+  // A shared entry may add AI-only sub-tags after AA's list; AA's own list stays unchanged.
+  tables.ai.set(s.code, { ...base, code: s.code, courses: s.courses, subtags: [...base.subtags, ...(s.subtags || [])] });
 }
 for (const s of ai.statements) {
   tables.ai.set(s.code, { code: s.code, id: s.id, topic: String(s.topic), title: s.title, content: s.content, courses: s.courses, subtags: s.subtags || [] });
@@ -77,7 +78,7 @@ const warnings = [];
 // Sub-tags (#5): the skills under each statement, ids "<statement id>.<slug>". AA SL's list is
 // Wasteland Academy's skill map; AI statements shared with AA take AA's list.
 const subtagName = new Map();
-for (const s of [...tables.aa.values(), ...ai.statements.map((x) => tables.ai.get(x.code))]) {
+for (const s of [...tables.aa.values(), ...ai.statements.map((x) => tables.ai.get(x.code)), ...ai.shared.filter((x) => x.subtags)]) {
   for (const st of s.subtags) {
     if (!st.id.startsWith(`${s.id}.`)) errors.push(`sub-tag ${st.id}: must start with ${s.id}.`);
     else if (subtagName.has(st.id)) errors.push(`sub-tag ${st.id}: listed twice`);
