@@ -311,6 +311,66 @@ ${scripts.map((s) => `      ${s}`).join("\n")}
 
 const imageStack = (imgs, base) =>
   `<div class="image-stack">${imgs.map((src) => `<img class="exam-image" src="${base}${src}" alt="Cropped exam page" loading="lazy">`).join("")}</div>`;
+// The question with its per-part breakdown (#4): a lettered marker at each part's anchor, a
+// region per part that breakdown.js shades on hover or focus, and a panel with one row per part.
+const partLabel = (l) => `(${l.replace("(", ")(")}` + (l.includes("(") ? "" : ")");
+const codeOf = (s) => s.split(" ")[0];
+const topicClass = (s) => `bd-t${codeOf(s).split(".")[0]}`;
+function partRegions(parts, nImages) {
+  // Each part runs from its anchor to the next part's anchor, across page breaks.
+  return parts.map((p, i) => {
+    const from = p.anchor;
+    const to = parts[i + 1]?.anchor || { image: nImages - 1, y: 1 };
+    const out = [];
+    for (let im = from.image; im <= to.image; im++) {
+      const y0 = im === from.image ? from.y : 0;
+      const y1 = im === to.image ? to.y : 1;
+      if (y1 > y0) out.push({ image: im, y0, y1 });
+    }
+    return out;
+  });
+}
+function breakdown(r, base) {
+  const multi = r.parts.length > 1;
+  const regions = partRegions(r.parts, r.paperImages.length);
+  const pct = (x) => `${+(x * 100).toFixed(2)}%`;
+  const pages = r.paperImages.map((src, im) => {
+    const overlay = r.parts.flatMap((p, i) => [
+      // A region starts and ends half a line above its anchors, so the shading covers each part's first line.
+      ...regions[i].filter((g) => g.image === im).map((g) => {
+        const up0 = g.y0 > 0 ? 10 : 0, up1 = g.y1 < 1 ? 10 : 0;
+        return `<span class="bd-region" data-part="${i}" style="top:calc(${pct(g.y0)} - ${up0}px);height:calc(${pct(g.y1 - g.y0)} + ${up0 - up1}px)"></span>`;
+      }),
+      ...(multi && p.anchor.image === im ? [`<button type="button" class="bd-marker" data-part="${i}" style="top:${pct(p.anchor.y)}" aria-label="Part ${esc(partLabel(p.label))}">${esc(p.label || "")}</button>`] : []),
+    ]).join("");
+    return `<div class="bd-page"><img class="exam-image" src="${base}${src}" alt="Cropped exam page" loading="lazy">${overlay}</div>`;
+  }).join("");
+  // Marks per syllabus statement, a part's marks shared evenly between its codes.
+  const split = new Map();
+  for (const p of r.parts) for (const s of p.syllabus) split.set(s, (split.get(s) || 0) + p.marks / p.syllabus.length);
+  const ents = [...split].sort((a, b) => b[1] - a[1]);
+  const fmt = (m) => String(+m.toFixed(1));
+  const summary = r.tagged
+    ? `<div class="bd-split" role="img" aria-label="Marks by syllabus statement">${ents.map(([s, m]) => `<span class="${topicClass(s)}" style="flex:${fmt(m)}" title="${esc(s)}: ${fmt(m)} marks"></span>`).join("")}</div>
+                <div class="bd-legend">${ents.map(([s, m]) => `<span><i class="${topicClass(s)}"></i>${esc(codeOf(s))} · ${fmt(m)}</span>`).join("")}</div>`
+    : `<p class="bd-pending">Tags pending</p>`;
+  const rows = r.parts.map((p, i) => `
+              <li class="bd-row" data-part="${i}" tabindex="0">
+                <div class="bd-row-top">${multi ? `<span class="bd-letter" aria-label="Part ${esc(partLabel(p.label))}">${esc(p.label)}</span>` : "<span>Whole question</span>"}<span class="bd-marks">${p.marks} mark${p.marks === 1 ? "" : "s"}</span></div>${p.skill ? `
+                <div class="bd-skill">${esc(p.skill)}</div>` : ""}${p.syllabus.length ? `
+                <div class="bd-codes">${p.syllabus.map((s) => `<span class="bd-code ${topicClass(s)}" title="${esc(s)}">${esc(codeOf(s))}</span><span class="bd-code-name">${esc(s.slice(codeOf(s).length + 1))}</span>`).join("")}</div>` : ""}${p.sub.length ? `
+                <div class="bd-subs">${p.sub.map((st) => `<span class="bd-sub">${esc(st.name)}</span>`).join("")}</div>` : ""}
+              </li>`).join("");
+  return `<div class="bd-box"><div class="bd" data-breakdown>
+              <aside class="bd-panel" aria-label="Question breakdown">
+                <div class="bd-head"><span>Question breakdown</span><span>${r.marks} marks</span></div>
+                ${summary}
+                <ol class="bd-rows">${rows}
+                </ol>
+              </aside>
+              <div class="bd-figure image-stack">${pages}</div>
+            </div></div>`;
+}
 const appearanceText = (a) => `${courseById[a.course].short} ${a.paper} Q${a.question}`;
 
 function related(r) {
@@ -364,8 +424,8 @@ for (const r of records) {
             <div class="tag-line" style="margin:10px 0 14px;">
               ${tags}
             </div>
-            <h2 class="section-title">Question</h2>
-            ${imageStack(r.paperImages, base)}
+            <h2 class="section-title bd-title">Question <button type="button" class="bd-toggle" data-breakdown-toggle hidden>Hide breakdown</button></h2>
+            ${breakdown(r, base)}
             <details class="details-panel">
               <summary>Markscheme</summary>
               ${imageStack(r.markschemeImages, base)}
@@ -382,6 +442,7 @@ for (const r of records) {
   write(`questions/${r.id}/index.html`, page({
     base, title: `${r.title} | IB Math ${c.short}`, head, body,
     scripts: [
+      `<script src="${base}assets/js/breakdown.js"></script>`,
       `<script src="${base}assets/js/basket.js"></script>`,
       `<script src="${base}assets/js/generate.js"></script>`,
       `<script>fetch('${base}assets/js/masks.json').then(r=>r.json()).then(d=>{window.AASL_MASKS=d;}).catch(()=>{});</script>`,

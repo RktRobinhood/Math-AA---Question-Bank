@@ -37,8 +37,28 @@
             <div class="tag-line" style="margin:10px 0 14px;">
               <span class="badge pending">Syllabus tags pending</span>
             </div>
-            <h2 class="section-title">Question</h2>
-            <div class="image-stack"><img class="exam-image" src="../../assets/exam-images/ai-sl-2024-may-tz2-p2-q03/paper-01.webp" alt="Cropped exam page" loading="lazy"></div>
+            <h2 class="section-title bd-title">Question <button type="button" class="bd-toggle" data-breakdown-toggle hidden>Hide breakdown</button></h2>
+            <div class="bd-box"><div class="bd" data-breakdown>
+              <aside class="bd-panel" aria-label="Question breakdown">
+                <div class="bd-head"><span>Question breakdown</span><span>15 marks</span></div>
+                <p class="bd-pending">Tags pending</p>
+                <ol class="bd-rows">
+              <li class="bd-row" data-part="0" tabindex="0">
+                <div class="bd-row-top"><span class="bd-letter" aria-label="Part (a)">a</span><span class="bd-marks">5 marks</span></div>
+              </li>
+              <li class="bd-row" data-part="1" tabindex="0">
+                <div class="bd-row-top"><span class="bd-letter" aria-label="Part (b)">b</span><span class="bd-marks">3 marks</span></div>
+              </li>
+              <li class="bd-row" data-part="2" tabindex="0">
+                <div class="bd-row-top"><span class="bd-letter" aria-label="Part (c)">c</span><span class="bd-marks">4 marks</span></div>
+              </li>
+              <li class="bd-row" data-part="3" tabindex="0">
+                <div class="bd-row-top"><span class="bd-letter" aria-label="Part (d)">d</span><span class="bd-marks">3 marks</span></div>
+              </li>
+                </ol>
+              </aside>
+              <div class="bd-figure image-stack"><div class="bd-page"><img class="exam-image" src="../../assets/exam-images/ai-sl-2024-may-tz2-p2-q03/paper-01.webp" alt="Cropped exam page" loading="lazy"><span class="bd-region" data-part="0" style="top:calc(76.71% - 10px);height:calc(7.65% + 0px)"></span><button type="button" class="bd-marker" data-part="0" style="top:76.71%" aria-label="Part (a)">a</button><span class="bd-region" data-part="1" style="top:calc(84.36% - 10px);height:calc(4.79% + 0px)"></span><button type="button" class="bd-marker" data-part="1" style="top:84.36%" aria-label="Part (b)">b</button><span class="bd-region" data-part="2" style="top:calc(89.15% - 10px);height:calc(4.78% + 0px)"></span><button type="button" class="bd-marker" data-part="2" style="top:89.15%" aria-label="Part (c)">c</button><span class="bd-region" data-part="3" style="top:calc(93.93% - 10px);height:calc(6.07% + 10px)"></span><button type="button" class="bd-marker" data-part="3" style="top:93.93%" aria-label="Part (d)">d</button></div></div>
+            </div></div>
             <details class="details-panel">
               <summary>Markscheme</summary>
               <div class="image-stack"><img class="exam-image" src="../../assets/exam-images/ai-sl-2024-may-tz2-p2-q03/markscheme-01.webp" alt="Cropped exam page" loading="lazy"></div>
@@ -55,6 +75,7 @@
       </main>
       <script src="../../assets/js/courses.js"></script>
       <script src="../../assets/js/course.js"></script>
+      <script src="../../assets/js/breakdown.js"></script>
       <script src="../../assets/js/basket.js"></script>
       <script src="../../assets/js/generate.js"></script>
       <script>fetch('../../assets/js/masks.json').then(r=>r.json()).then(d=>{window.AASL_MASKS=d;}).catch(()=>{});</script>

@@ -1732,3 +1732,220 @@ body.aasl-tray-active {
 .statement-list strong {
   color: var(--text);
 }
+
+/* ── Question breakdown (#4) ─────────────────────── */
+.bd-box { container-type: inline-size; }
+
+.bd {
+  --bd-t1: #6366f1; --bd-t2: #059669; --bd-t3: #d97706; --bd-t4: #7c3aed; --bd-t5: #dc2626;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-areas: "figure panel";
+  gap: 14px;
+  align-items: start;
+}
+
+.bd-figure { grid-area: figure; padding-left: 14px; }
+.bd-panel { grid-area: panel; position: sticky; top: 14px; display: grid; gap: 8px; }
+
+.bd-page { position: relative; }
+
+.bd-region {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-left: 3px solid var(--accent-strong);
+  pointer-events: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.bd-region.on {
+  background: var(--accent-soft);
+  border-left-color: var(--accent);
+}
+
+.bd-marker,
+.bd-letter {
+  display: inline-grid;
+  place-items: center;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: 750;
+  line-height: 1;
+  color: var(--accent);
+  background: var(--surface);
+  border: 1.5px solid var(--accent);
+}
+
+.bd-marker {
+  position: absolute;
+  left: -13px;
+  margin-top: -10px;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.15);
+}
+
+.bd-marker.on,
+.bd-row.on .bd-letter {
+  color: #fff;
+  background: var(--accent);
+}
+
+.bd-head,
+.bd-row-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-weight: 750;
+}
+
+.bd-head {
+  font-size: 0.9rem;
+}
+
+.bd-marks {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bd-split {
+  display: flex;
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bd-split span + span { border-left: 2px solid var(--surface); }
+
+.bd-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 10px;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.bd-legend i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 4px;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+
+.bd-pending {
+  margin: 0;
+  color: #c2410c;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.bd-rows {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bd-row {
+  display: grid;
+  gap: 6px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.bd-row:focus { outline: none; }
+
+.bd-row.on {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.bd-skill { font-size: 0.86rem; }
+
+.bd-codes {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 6px;
+  align-items: center;
+}
+
+.bd-code {
+  padding: 3px 6px;
+  border-radius: 4px;
+  color: #fff;
+  font: 650 0.72rem/1 ui-monospace, Consolas, monospace;
+  white-space: nowrap;
+}
+
+.bd-code-name {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bd-subs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.bd-sub {
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: var(--text);
+  background: var(--surface-2);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.bd-t1 { background: var(--bd-t1); }
+.bd-t2 { background: var(--bd-t2); }
+.bd-t3 { background: var(--bd-t3); }
+.bd-t4 { background: var(--bd-t4); }
+.bd-t5 { background: var(--bd-t5); }
+
+.bd-title { justify-content: space-between; }
+
+.bd-toggle {
+  padding: 3px 9px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--muted);
+  background: var(--surface);
+  font-size: 0.74rem;
+  font-weight: 650;
+  line-height: 1.3;
+  text-transform: none;
+  cursor: pointer;
+}
+
+.bd-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+.bd.bd-off { display: block; }
+.bd.bd-off .bd-panel,
+.bd.bd-off .bd-marker,
+.bd.bd-off .bd-region { display: none; }
+.bd.bd-off .bd-figure { padding-left: 0; }
+
+/* Narrow: the panel stacks above the question and the markers stay on. */
+@container (max-width: 680px) {
+  .bd {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "panel" "figure";
+  }
+
+  .bd-panel { position: static; }
+}
