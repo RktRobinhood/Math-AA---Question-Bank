@@ -12279,7 +12279,10 @@
       "4.3"
      ],
      "skill": "Mode, range and median of ordered data",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.mean-median-mode"
+     ]
     },
     {
      "label": "b",
@@ -12287,7 +12290,10 @@
       "4.3"
      ],
      "skill": "Find quartiles and interquartile range of a data list",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.quartiles-discrete"
+     ]
     }
    ],
    "confidence": "high"
@@ -12300,7 +12306,10 @@
       "3.4"
      ],
      "skill": "Find radius from sector area in radians",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.sector-area"
+     ]
     },
     {
      "label": "b",
@@ -12308,7 +12317,10 @@
       "3.4"
      ],
      "skill": "Perimeter of sector using arc length",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.4.arc-length"
+     ]
     }
    ],
    "confidence": "high"
@@ -12321,7 +12333,10 @@
       "4.6"
      ],
      "skill": "Use addition rule to find P(A and B)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.union"
+     ]
     },
     {
      "label": "b",
@@ -12339,6 +12354,10 @@
      "passB": [
       "4.6",
       "4.11"
+     ],
+     "sub": [
+      "SL4.11.conditional-formula",
+      "SL4.6.venn"
      ]
     }
    ],
@@ -12352,7 +12371,10 @@
       "1.6"
      ],
      "skill": "Prove an algebraic expression is always a multiple of 12",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.6.integer-proof"
+     ]
     }
    ],
    "confidence": "high"
@@ -12366,7 +12388,19 @@
       "3.6"
      ],
      "skill": "Cosine rule then double angle identity for exact cos theta",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.6.double-angle-values"
+     ],
+     "subPassA": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.6.double-angle-values"
+     ],
+     "subPassB": [
+      "SL3.2.cosine-rule-angle",
+      "SL3.6.simplify"
+     ]
     }
    ],
    "confidence": "high"
@@ -12379,7 +12413,11 @@
       "1.2"
      ],
      "skill": "Arithmetic sequence from u_n and S_n, find zero term",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.2.find-u1-d",
+      "SL1.2.find-n"
+     ]
     }
    ],
    "confidence": "high"
@@ -12392,7 +12430,10 @@
       "2.1"
      ],
      "skill": "Equation of line from its two intercepts",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.1.equation-of-line"
+     ]
     },
     {
      "label": "b",
@@ -12400,7 +12441,17 @@
       "2.6"
      ],
      "skill": "Find quadratic coefficient from roots or axis of symmetry",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.6.axis-symmetry",
+      "SL2.6.find-equation"
+     ],
+     "subPassA": [
+      "SL2.6.axis-symmetry"
+     ],
+     "subPassB": [
+      "SL2.6.find-equation"
+     ]
     },
     {
      "label": "c",
@@ -12408,7 +12459,10 @@
       "5.11"
      ],
      "skill": "Set up integral for area between line and parabola",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.11.area-between-curves"
+     ]
     },
     {
      "label": "d",
@@ -12425,6 +12479,10 @@
      ],
      "passB": [
       "5.11"
+     ],
+     "sub": [
+      "SL5.11.evaluate-definite",
+      "SL5.5.antidiff-power"
      ]
     },
     {
@@ -12443,6 +12501,18 @@
      "passB": [
       "5.4",
       "2.1"
+     ],
+     "sub": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL5.3.point-with-given-gradient"
+     ],
+     "subPassA": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL5.3.power-rule"
+     ],
+     "subPassB": [
+      "SL5.4.parallel-or-perpendicular",
+      "SL5.3.point-with-given-gradient"
      ]
     }
    ],
@@ -12457,7 +12527,11 @@
       "2.2"
      ],
      "skill": "Evaluate a base-2 logarithmic function at given points",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.5.exp-log-form",
+      "SL2.2.evaluate-notation"
+     ]
     },
     {
      "label": "b",
@@ -12466,7 +12540,11 @@
       "1.5"
      ],
      "skill": "Find inverse of a log function by converting to exponential",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.5.find-inverse",
+      "SL1.5.exp-log-form"
+     ]
     },
     {
      "label": "c",
@@ -12483,6 +12561,10 @@
      ],
      "passB": [
       "2.5"
+     ],
+     "sub": [
+      "SL2.5.find-inverse",
+      "SL2.2.inverse-undo"
      ]
     },
     {
@@ -12501,6 +12583,20 @@
      "passB": [
       "1.7",
       "2.11"
+     ],
+     "sub": [
+      "SL1.7.log-laws",
+      "SL2.11.describe"
+     ],
+     "subPassA": [
+      "SL2.11.describe",
+      "SL1.7.log-laws"
+     ],
+     "subPassB": [
+      "SL2.11.describe",
+      "SL2.11.stretch",
+      "SL2.11.translate",
+      "SL1.7.log-laws"
      ]
     }
    ],
@@ -12514,7 +12610,10 @@
       "3.1"
      ],
      "skill": "Derive surface area formula for a hollow cylinder",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.surface-area"
+     ]
     },
     {
      "label": "b",
@@ -12522,7 +12621,10 @@
       "3.1"
      ],
      "skill": "Express hollow cylinder volume in terms of r using constraint",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.1.volume-solids"
+     ]
     },
     {
      "label": "c",
@@ -12530,7 +12632,10 @@
       "5.3"
      ],
      "skill": "Differentiate a cubic polynomial in r",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.3.power-rule"
+     ]
     },
     {
      "label": "d",
@@ -12538,7 +12643,10 @@
       "5.8"
      ],
      "skill": "Set derivative to zero to find radius for maximum volume",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points"
+     ]
     },
     {
      "label": "e",
@@ -12546,7 +12654,10 @@
       "5.8"
      ],
      "skill": "Evaluate the maximum volume in exact surd form",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.optimise-given-function"
+     ]
     }
    ],
    "confidence": "medium"
@@ -12559,7 +12670,10 @@
       "2.2"
      ],
      "skill": "Evaluate f(0) and f(20) for a root function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation"
+     ]
     },
     {
      "label": "b",
@@ -12575,6 +12689,9 @@
      "passB": [
       "2.10",
       "2.4"
+     ],
+     "sub": [
+      "SL2.4.zeros-intercepts"
      ]
     },
     {
@@ -12584,7 +12701,19 @@
       "2.4"
      ],
      "skill": "Sketch graph showing endpoints, x-intercepts and maximum",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.zeros-intercepts",
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.max-min"
+     ],
+     "subPassB": [
+      "SL2.3.sketch-from-equation"
+     ]
     }
    ],
    "confidence": "high"
@@ -12597,7 +12726,10 @@
       "1.9"
      ],
      "skill": "Coefficient of x^6 in binomial expansion of (2x-5)^9",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.9.specific-term"
+     ]
     }
    ],
    "confidence": "high"
@@ -12610,12 +12742,22 @@
       "5.10"
      ],
      "skill": "Integrate e^(4x) + 6 using reverse chain rule",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.10.linear-composites",
+      "SL5.10.standard-integrals"
+     ],
+     "subPassA": [
+      "SL5.10.linear-composites"
+     ],
+     "subPassB": [
+      "SL5.10.standard-integrals",
+      "SL5.10.linear-composites"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
-      "5.5",
       "5.10"
      ],
      "skill": "Integrate h'(x) and use h(1.5)=105 to find the constant",
@@ -12628,6 +12770,17 @@
      "passB": [
       "5.10",
       "5.5"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.5",
+       "5.10"
+      ],
+      "why": "5.5 was wrong because it covers integer powers of x only; finding h from an exponential h' and a given value is exactly SL5.10.find-function-from-derivative."
+     },
+     "sub": [
+      "SL5.10.find-function-from-derivative"
      ]
     }
    ],
@@ -12641,7 +12794,10 @@
       "4.7"
      ],
      "skill": "Find k using probabilities summing to 1",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.find-k"
+     ]
     },
     {
      "label": "b",
@@ -12649,7 +12805,10 @@
       "4.7"
      ],
      "skill": "Expected value of a discrete random variable",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value"
+     ]
     }
    ],
    "confidence": "high"
@@ -12670,6 +12829,16 @@
      ],
      "passB": [
       "3.2"
+     ],
+     "sub": [
+      "SL3.2.right-angle"
+     ],
+     "subPassA": [
+      "SL3.2.right-angle",
+      "SL2.1.gradient"
+     ],
+     "subPassB": [
+      "SL3.2.right-angle"
      ]
     },
     {
@@ -12679,7 +12848,19 @@
       "3.3"
      ],
      "skill": "Right-angled trigonometry to find roof lengths in context",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side",
+      "SL3.3.multi-triangle"
+     ],
+     "subPassA": [
+      "SL3.2.sine-rule",
+      "SL3.3.multi-triangle"
+     ],
+     "subPassB": [
+      "SL3.3.multi-triangle",
+      "SL3.2.right-side"
+     ]
     }
    ],
    "confidence": "medium"
@@ -12690,10 +12871,22 @@
      "label": "",
      "syllabus": [
       "2.7",
-      "2.9"
+      "2.2"
      ],
      "skill": "Negative discriminant so log argument is always positive",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "2.7",
+       "2.9"
+      ],
+      "why": "2.9 was wrong because no graph, asymptote or model of the log earns marks; the R1 is for requiring the argument to be positive for every real x (a domain condition, 2.2), and the rest is the discriminant inequality (2.7)."
+     },
+     "sub": [
+      "SL2.7.discriminant-parameter",
+      "SL2.2.domain"
+     ]
     }
    ],
    "confidence": "medium"
@@ -12706,7 +12899,10 @@
       "4.5"
      ],
      "skill": "Proportion of users in a category from a frequency table",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.5.relative-frequency"
+     ]
     },
     {
      "label": "b",
@@ -12714,7 +12910,19 @@
       "4.8"
      ],
      "skill": "Binomial probability P(X < 200) with GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.cumulative-probability"
+     ],
+     "subPassA": [
+      "SL4.8.binomial-in-context",
+      "SL4.8.cumulative-probability"
+     ],
+     "subPassB": [
+      "SL4.8.identify",
+      "SL4.8.cumulative-probability"
+     ]
     },
     {
      "label": "c",
@@ -12723,7 +12931,11 @@
       "4.11"
      ],
      "skill": "Conditional probability from a frequency table",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.6.conditional-diagram",
+      "SL4.11.conditional-formula"
+     ]
     },
     {
      "label": "d",
@@ -12731,7 +12943,10 @@
       "4.3"
      ],
      "skill": "Mid-interval values of grouped data",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.grouped-mean"
+     ]
     },
     {
      "label": "e",
@@ -12739,7 +12954,11 @@
       "4.3"
      ],
      "skill": "Estimate mean and variance from grouped data",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.3.grouped-mean",
+      "SL4.3.sd-variance"
+     ]
     },
     {
      "label": "f",
@@ -12748,7 +12967,18 @@
       "4.3"
      ],
      "skill": "Match distribution curves to given means and variances",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.9.properties",
+      "SL4.3.sd-variance"
+     ],
+     "subPassA": [
+      "SL4.9.properties"
+     ],
+     "subPassB": [
+      "SL4.9.properties",
+      "SL4.3.sd-variance"
+     ]
     }
    ],
    "confidence": "medium"
@@ -12761,7 +12991,11 @@
       "4.4"
      ],
      "skill": "Linear regression coefficients and interpreting the gradient",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.regression-y-on-x",
+      "SL4.4.interpret-ab"
+     ]
     },
     {
      "label": "b",
@@ -12769,7 +13003,10 @@
       "4.4"
      ],
      "skill": "Reliability of a prediction made by extrapolation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.predict"
+     ]
     },
     {
      "label": "c",
@@ -12777,7 +13014,10 @@
       "2.9"
      ],
      "skill": "Evaluate exponential model and interpret growth factor",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
     },
     {
      "label": "d",
@@ -12785,7 +13025,10 @@
       "2.9"
      ],
      "skill": "Evaluate a logistic population model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.9.exp-model"
+     ]
     },
     {
      "label": "e",
@@ -12794,12 +13037,23 @@
       "2.9"
      ],
      "skill": "Maximise difference between two models using GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.4.max-min",
+      "SL2.9.exp-model"
+     ],
+     "subPassA": [
+      "SL2.4.max-min"
+     ],
+     "subPassB": [
+      "SL2.4.max-min",
+      "SL2.3.sum-difference"
+     ]
     },
     {
      "label": "f",
      "syllabus": [
-      "5.6"
+      "5.1"
      ],
      "skill": "Evaluate derivatives B'(75) and C'(75) with technology",
      "review": "adjudicated",
@@ -12810,6 +13064,16 @@
      "passB": [
       "5.1",
       "5.6"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.6"
+      ],
+      "why": "5.6 was wrong because the A1A1 are GDC derivative values with no differentiation rule shown or credited; finding a gradient at a point with technology is 5.1."
+     },
+     "sub": [
+      "SL5.1.gradient-from-graph"
      ]
     },
     {
@@ -12818,7 +13082,10 @@
       "5.1"
      ],
      "skill": "Interpret derivatives as rates of population growth",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.1.interpret-derivative"
+     ]
     }
    ],
    "confidence": "medium"
@@ -12831,7 +13098,10 @@
       "3.7"
      ],
      "skill": "Amplitude and period of 6cos(pi x)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.read-features"
+     ]
     },
     {
      "label": "b",
@@ -12848,6 +13118,10 @@
      ],
      "passB": [
       "3.7"
+     ],
+     "sub": [
+      "SL3.7.equation-from-graph",
+      "SL2.3.sum-difference"
      ]
     },
     {
@@ -12865,6 +13139,10 @@
      ],
      "passB": [
       "3.7"
+     ],
+     "sub": [
+      "SL3.7.model-context",
+      "SL5.9.max-speed"
      ]
     },
     {
@@ -12882,6 +13160,10 @@
      ],
      "passB": [
       "3.7"
+     ],
+     "sub": [
+      "SL3.7.model-context",
+      "SL5.9.max-speed"
      ]
     },
     {
@@ -12891,7 +13173,11 @@
       "5.9"
      ],
      "skill": "Chain rule for v'(t); maximum acceleration",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.chain-rule",
+      "SL5.9.velocity-acceleration"
+     ]
     },
     {
      "label": "f",
@@ -12909,6 +13195,10 @@
      "passB": [
       "5.5",
       "5.9"
+     ],
+     "sub": [
+      "SL5.9.displacement-from-velocity",
+      "SL5.5.definite-integral-gdc"
      ]
     }
    ],
