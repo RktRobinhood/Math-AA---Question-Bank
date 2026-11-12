@@ -19,6 +19,18 @@
      "passB": [
       "2.12",
       "5.8"
+     ],
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL2.4.max-min"
      ]
     },
     {
@@ -37,6 +49,18 @@
      "passB": [
       "2.12",
       "5.8"
+     ],
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL2.4.max-min"
+     ],
+     "subPassA": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL2.4.max-min"
      ]
     },
     {
@@ -45,7 +69,10 @@
       "5.3"
      ],
      "skill": "Differentiate a cubic containing a parameter",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.3.power-rule"
+     ]
     },
     {
      "label": "c(i)",
@@ -53,7 +80,10 @@
       "5.8"
      ],
      "skill": "Parameter value giving a stationary point of inflexion",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion"
+     ]
     },
     {
      "label": "c(ii)",
@@ -62,7 +92,18 @@
       "2.7"
      ],
      "skill": "Parameter values for which f'(x)=0 has two roots, giving a max and a min",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.stationary-point-conditions",
+      "SL2.7.discriminant-parameter"
+     ],
+     "subPassA": [
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "SL5.8.stationary-point-conditions",
+      "SL2.7.discriminant-parameter"
+     ]
     },
     {
      "label": "c(iii)",
@@ -78,6 +119,16 @@
      "passB": [
       "5.8",
       "2.7"
+     ],
+     "sub": [
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassA": [
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassB": [
+      "SL5.8.stationary-point-conditions",
+      "SL2.7.discriminant-parameter"
      ]
     },
     {
@@ -95,6 +146,10 @@
      ],
      "passB": [
       "5.8"
+     ],
+     "sub": [
+      "SL5.8.find-stationary-points",
+      "SL1.7.rational-exponents"
      ]
     },
     {
@@ -103,7 +158,10 @@
       "5.8"
      ],
      "skill": "Evaluate the minimum y-coordinate in terms of the parameter",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points"
+     ]
     },
     {
      "label": "e(i)",
@@ -112,7 +170,19 @@
       "5.8"
      ],
      "skill": "Use position of the local minimum to find when the cubic has one real root",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassA": [
+      "SL2.10.number-of-solutions",
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL2.10.number-of-solutions"
+     ]
     },
     {
      "label": "e(ii)",
@@ -121,7 +191,19 @@
       "5.8"
      ],
      "skill": "Condition for the cubic to have exactly two x-intercepts (repeated root)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassA": [
+      "SL2.10.number-of-solutions",
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL2.10.number-of-solutions"
+     ]
     },
     {
      "label": "e(iii)",
@@ -130,7 +212,19 @@
       "5.8"
      ],
      "skill": "Condition for the cubic to have three x-intercepts",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.stationary-point-conditions"
+     ],
+     "subPassA": [
+      "SL2.10.number-of-solutions",
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL2.10.number-of-solutions"
+     ]
     },
     {
      "label": "f",
@@ -139,7 +233,20 @@
       "5.8"
      ],
      "skill": "Generalise: conditions on both parameters for exactly one real root, by cases on stationary points",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassA": [
+      "SL2.10.number-of-solutions",
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-graph",
+      "SL5.8.find-stationary-points",
+      "SL2.10.number-of-solutions"
+     ]
     }
    ],
    "confidence": "medium"
@@ -152,7 +259,10 @@
       "2.7"
      ],
      "skill": "Equate area and perimeter of a square and solve the resulting quadratic",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.7.solve-equation"
+     ]
     },
     {
      "label": "b",
@@ -160,7 +270,10 @@
       "3.2"
      ],
      "skill": "Area of an isosceles triangle using half ab sin C",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.area-sine"
+     ]
     },
     {
      "label": "c",
@@ -168,7 +281,16 @@
       "3.2"
      ],
      "skill": "Express the base of an isosceles triangle using right-angled trig",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side"
+     ],
+     "subPassA": [
+      "SL3.2.right-ratio"
+     ],
+     "subPassB": [
+      "SL3.2.right-side"
+     ]
     },
     {
      "label": "d",
@@ -186,6 +308,17 @@
      "passB": [
       "3.6",
       "3.2"
+     ],
+     "sub": [
+      "SL3.6.simplify",
+      "SL3.2.area-sine"
+     ],
+     "subPassA": [
+      "SL3.6.simplify",
+      "SL3.2.area-sine"
+     ],
+     "subPassB": [
+      "SL3.6.simplify"
      ]
     },
     {
@@ -195,7 +328,11 @@
       "5.19"
      ],
      "skill": "Find a limit as n tends to infinity by substituting into a given Maclaurin series",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.limit-by-series",
+      "AHL5.19.substitute-series"
+     ]
     },
     {
      "label": "e(ii)",
@@ -211,15 +348,37 @@
      "passB": [
       "5.13",
       "3.4"
+     ],
+     "sub": [
+      "AHL5.12.limit-reasoning"
      ]
     },
     {
      "label": "f",
      "syllabus": [
+      "2.10",
       "2.8"
      ],
-     "skill": "Equate area and perimeter of a right triangle and rearrange to a rational expression",
-     "review": "agreed"
+     "skill": "Equate area and perimeter of a right triangle, isolate and square the root, and rearrange to a rational form",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "2.8"
+      ],
+      "why": "Most marks (isolating and squaring the root, then solving for a) are for solving an equation analytically, which 2.8 alone did not cover; both reviewers agreed on 2.10."
+     },
+     "sub": [
+      "SL2.10.solve-analytic",
+      "SL2.8.transformed-reciprocal"
+     ],
+     "subPassA": [
+      "SL2.10.solve-analytic"
+     ],
+     "subPassB": [
+      "SL2.10.solve-analytic",
+      "SL2.8.transformed-reciprocal"
+     ]
     },
     {
      "label": "g(i)",
@@ -227,7 +386,17 @@
       "2.8"
      ],
      "skill": "Use divisibility of the rational form to find integer-sided triangles",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.rational-equation"
+     ],
+     "subPassA": [
+      "SL2.10.solve-analytic"
+     ],
+     "subPassB": [
+      "SL1.6.integer-proof",
+      "SL2.8.rational-equation"
+     ]
     },
     {
      "label": "g(ii)",
@@ -235,7 +404,16 @@
       "3.2"
      ],
      "skill": "State area and perimeter of the integer triangles found",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.2.area-sine"
+     ],
+     "subPassA": [
+      "SL2.10.solve-analytic"
+     ],
+     "subPassB": [
+      "SL3.2.area-sine"
+     ]
     }
    ],
    "confidence": "low"
@@ -260,6 +438,11 @@
       "3.8",
       "3.6",
       "2.7"
+     ],
+     "sub": [
+      "SL3.8.quadratic-in-trig",
+      "SL3.6.simplify",
+      "SL2.7.hidden-quadratic"
      ]
     }
    ],
@@ -275,7 +458,22 @@
       "3.6"
      ],
      "skill": "Prove a vector identity linking cross and dot product magnitudes via sin^2 + cos^2 = 1",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.16.vector-product-algebra",
+      "AHL3.13.scalar-product-algebra",
+      "SL3.6.simplify"
+     ],
+     "subPassA": [
+      "AHL3.16.vector-product-algebra",
+      "AHL3.13.scalar-product",
+      "SL1.6.identity-lhs-rhs"
+     ],
+     "subPassB": [
+      "AHL3.16.vector-product-algebra",
+      "AHL3.13.scalar-product-algebra",
+      "SL3.6.simplify"
+     ]
     }
    ],
    "confidence": "medium"
@@ -288,7 +486,10 @@
       "2.12"
      ],
      "skill": "Use sum and product of roots of a cubic to find an unknown coefficient",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.sum-product-roots"
+     ]
     }
    ],
    "confidence": "high"
@@ -301,16 +502,41 @@
       "3.15"
      ],
      "skill": "Show two 3D lines do not intersect by equating components",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.15.classify-lines"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
+      "3.15",
       "3.16",
       "3.14"
      ],
-     "skill": "Shortest distance between parallel lines using a cross product or perpendicular condition",
-     "review": "agreed"
+     "skill": "Shortest distance between parallel lines using a cross product or a perpendicular condition",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "3.16",
+       "3.14"
+      ],
+      "why": "Finding the shortest distance between parallel lines is exactly 3.15, which the old codes omitted (both reviewers added it); cross product and perpendicular-foot methods remain as alternatives."
+     },
+     "sub": [
+      "AHL3.15.skew-distance",
+      "AHL3.16.vector-product",
+      "AHL3.14.foot-of-perpendicular"
+     ],
+     "subPassA": [
+      "AHL3.15.skew-distance",
+      "AHL3.14.foot-of-perpendicular"
+     ],
+     "subPassB": [
+      "AHL3.15.skew-distance",
+      "AHL3.16.vector-product"
+     ]
     }
    ],
    "confidence": "medium"
@@ -320,11 +546,35 @@
     {
      "label": "",
      "syllabus": [
-      "5.16",
-      "1.11"
+      "5.15",
+      "1.11",
+      "5.10"
      ],
-     "skill": "Integrate using a given substitution followed by partial fractions",
-     "review": "agreed"
+     "skill": "Use u = sin x to reduce to a rational integrand, split into partial fractions and integrate to logs",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.16",
+       "1.11"
+      ],
+      "why": "The integrand has the form g'(x)f(g(x)) with u = sin x, which the 5.16 Tag when line assigns to 5.10; the main marks are for the partial fraction split and log integration (5.15 with 1.11)."
+     },
+     "sub": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassA": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassB": [
+      "AHL5.16.given-substitution",
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors"
+     ]
     }
    ],
    "confidence": "high"
@@ -338,7 +588,22 @@
       "5.9"
      ],
      "skill": "Solve a separable differential equation for velocity from acceleration",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "SL5.9.velocity-acceleration"
+     ],
+     "subPassA": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "SL5.9.velocity-acceleration"
+     ],
+     "subPassB": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "SL5.9.displacement-from-velocity"
+     ]
     },
     {
      "label": "b",
@@ -358,14 +623,31 @@
       "5.9",
       "5.10",
       "1.7"
+     ],
+     "sub": [
+      "SL5.9.rest-and-direction",
+      "SL5.9.displacement-from-velocity",
+      "SL5.10.linear-composites",
+      "SL1.7.solve-with-logs"
+     ],
+     "subPassA": [
+      "SL5.9.rest-and-direction",
+      "SL5.9.displacement-from-velocity",
+      "SL5.10.standard-integrals"
+     ],
+     "subPassB": [
+      "SL5.9.rest-and-direction",
+      "SL5.9.displacement-from-velocity",
+      "SL5.10.linear-composites",
+      "SL1.7.solve-with-logs"
      ]
     },
     {
      "label": "c",
      "syllabus": [
-      "1.7"
+      "1.5"
      ],
-     "skill": "Simplify a velocity expression using exponent laws and an earlier result",
+     "skill": "Simplify a velocity expression using exponent laws and e^T = 1 + v0",
      "review": "adjudicated",
      "rationale": "Both marks are for rewriting the given velocity using exponent laws together with e^T = 1+v0 from (b)(i); no kinematics method is newly assessed, so only the exponent-laws statement applies.",
      "passA": [
@@ -374,14 +656,31 @@
      ],
      "passB": [
       "1.7"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.7"
+      ],
+      "why": "Only the product law of exponents with e^T = 1+v0 earns marks; no rational indices, log laws or log equations are involved, so 1.7 did not apply (both reviewers chose 1.5)."
+     },
+     "sub": [
+      "SL1.5.integer-exponent-laws"
+     ],
+     "subPassA": [
+      "SL1.5.integer-exponent-laws"
+     ],
+     "subPassB": [
+      "SL5.9.use-velocity-model",
+      "SL1.5.integer-exponent-laws"
      ]
     },
     {
      "label": "d",
      "syllabus": [
-      "1.7"
+      "1.5"
      ],
-     "skill": "Deduce the corresponding velocity expression after the turning time",
+     "skill": "Deduce the matching velocity expression after the turning time using exponent laws",
      "review": "adjudicated",
      "rationale": "Deducing the analogous expression uses the same exponent-law simplification as (c), and the earlier kinematics result is reused, so only 1.7 earns the marks.",
      "passA": [
@@ -390,6 +689,23 @@
      ],
      "passB": [
       "1.7"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.7"
+      ],
+      "why": "Same exponent-law simplification as (c), with no rational index or log work, so 1.5 rather than 1.7 (both reviewers agreed)."
+     },
+     "sub": [
+      "SL1.5.integer-exponent-laws"
+     ],
+     "subPassA": [
+      "SL1.5.integer-exponent-laws"
+     ],
+     "subPassB": [
+      "SL5.9.use-velocity-model",
+      "SL1.5.integer-exponent-laws"
      ]
     },
     {
@@ -399,7 +715,18 @@
       "1.7"
      ],
      "skill": "Prove an exponential sum is non-negative by writing it as a perfect square",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.6.identity-lhs-rhs",
+      "SL1.7.rational-exponents"
+     ],
+     "subPassA": [
+      "SL1.6.identity-lhs-rhs",
+      "SL1.5.integer-exponent-laws"
+     ],
+     "subPassB": [
+      "SL1.6.identity-lhs-rhs"
+     ]
     }
    ],
    "confidence": "medium"
@@ -413,7 +740,19 @@
       "3.9"
      ],
      "skill": "Describe stretches and translations mapping arctan x to a transformed arctan graph",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.11.describe",
+      "AHL3.9.inverse-trig-graphs"
+     ],
+     "subPassA": [
+      "SL2.11.describe",
+      "SL2.11.composite-transform",
+      "AHL3.9.inverse-trig-graphs"
+     ],
+     "subPassB": [
+      "SL2.11.describe"
+     ]
     },
     {
      "label": "b",
@@ -422,7 +761,11 @@
       "3.9"
      ],
      "skill": "Prove an arctan addition identity using the tan compound angle formula",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.10.prove-identity",
+      "AHL3.9.inverse-trig-values"
+     ]
     },
     {
      "label": "c",
@@ -431,16 +774,33 @@
       "3.10"
      ],
      "skill": "Verify an arctan identity using the addition result and arctan 1",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.9.inverse-trig-values",
+      "AHL3.10.compound-angle"
+     ]
     },
     {
      "label": "d",
      "syllabus": [
       "1.15",
-      "3.9"
+      "3.10"
      ],
-     "skill": "Prove a sum of arctan terms by induction using the addition identity",
-     "review": "agreed"
+     "skill": "Prove a sum of arctan terms by induction using the arctan addition identity",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.15",
+       "3.9"
+      ],
+      "why": "The inductive step marks come from applying the tan-addition (compound angle) result and simplifying, not from inverse-trig domain, graph or exact values, so 3.10 replaces 3.9 (both reviewers agreed)."
+     },
+     "sub": [
+      "AHL1.15.induction-series",
+      "AHL1.15.induction-structure",
+      "AHL3.10.compound-angle"
+     ]
     }
    ],
    "confidence": "high"
@@ -453,7 +813,10 @@
       "4.14"
      ],
      "skill": "Find the mean of a continuous random variable by integrating x f(x)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-mean"
+     ]
     },
     {
      "label": "b",
@@ -461,7 +824,10 @@
       "4.14"
      ],
      "skill": "Find the variance of a pdf via E(X^2) minus the squared mean and simplify",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.continuous-variance"
+     ]
     }
    ],
    "confidence": "high"
@@ -474,7 +840,11 @@
       "1.10"
      ],
      "skill": "Count arrangements with two people treated as an adjacent ordered block",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ]
     },
     {
      "label": "b",
@@ -482,7 +852,18 @@
       "1.10"
      ],
      "skill": "Count arrangements where one person finishes anywhere after another, using symmetry",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ],
+     "subPassA": [
+      "AHL1.10.restricted-arrangements"
+     ],
+     "subPassB": [
+      "AHL1.10.restricted-arrangements",
+      "AHL1.10.permutations"
+     ]
     }
    ],
    "confidence": "high"
@@ -496,7 +877,11 @@
       "3.6"
      ],
      "skill": "Multiply by the conjugate to show the real part of a complex quotient is zero",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.division-conjugate",
+      "SL3.6.simplify"
+     ]
     }
    ],
    "confidence": "medium"
@@ -509,7 +894,10 @@
       "1.10"
      ],
      "skill": "Binomial expansion with a negative index",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.binomial-rational-index"
+     ]
     },
     {
      "label": "b",
@@ -518,7 +906,21 @@
       "1.10"
      ],
      "skill": "Build the Maclaurin series for sec x from the cos series and a binomial expansion",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.substitute-series",
+      "AHL5.19.standard-series",
+      "AHL1.10.binomial-rational-index"
+     ],
+     "subPassA": [
+      "AHL5.19.substitute-series",
+      "AHL1.10.binomial-rational-index"
+     ],
+     "subPassB": [
+      "AHL5.19.substitute-series",
+      "AHL5.19.standard-series",
+      "AHL1.10.binomial-rational-index"
+     ]
     },
     {
      "label": "c",
@@ -527,7 +929,11 @@
       "5.19"
      ],
      "skill": "Evaluate a 0/0 limit by substituting Maclaurin series",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.13.limit-by-series",
+      "AHL5.19.substitute-series"
+     ]
     }
    ],
    "confidence": "high"
@@ -541,7 +947,20 @@
       "5.10"
      ],
      "skill": "Volume of revolution about the x-axis, integrating by recognition or substitution",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.17.volume-x-axis",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassA": [
+      "AHL5.17.volume-x-axis",
+      "SL5.10.inspection-substitution"
+     ],
+     "subPassB": [
+      "AHL5.17.volume-x-axis",
+      "SL5.10.inspection-substitution",
+      "SL5.11.evaluate-definite"
+     ]
     },
     {
      "label": "b",
@@ -549,7 +968,17 @@
       "5.17"
      ],
      "skill": "Find a parameter so the volume of revolution equals a given value",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.17.volume-x-axis"
+     ],
+     "subPassA": [
+      "SL2.10.context-apply"
+     ],
+     "subPassB": [
+      "AHL5.17.volume-x-axis",
+      "SL2.10.context-apply"
+     ]
     },
     {
      "label": "c",
@@ -557,7 +986,18 @@
       "2.2"
      ],
      "skill": "Evaluate the function at the endpoints to find radii",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.2.evaluate-notation",
+      "SL2.2.function-model"
+     ],
+     "subPassA": [
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassB": [
+      "SL2.2.evaluate-notation",
+      "SL2.2.function-model"
+     ]
     },
     {
      "label": "d",
@@ -577,6 +1017,21 @@
      "passB": [
       "5.7",
       "5.6"
+     ],
+     "sub": [
+      "SL5.7.sketch-match-graphs",
+      "SL5.8.points-of-inflexion",
+      "SL5.6.quotient-rule"
+     ],
+     "subPassA": [
+      "SL5.7.sketch-match-graphs",
+      "SL5.8.points-of-inflexion",
+      "SL5.6.quotient-rule"
+     ],
+     "subPassB": [
+      "SL5.8.points-of-inflexion",
+      "SL5.7.sketch-match-graphs",
+      "SL2.4.max-min"
      ]
     }
    ],
@@ -590,7 +1045,10 @@
       "2.14"
      ],
      "skill": "Show a function is even using f(-x) = f(x)",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.odd-even-test"
+     ]
     },
     {
      "label": "b",
@@ -599,7 +1057,19 @@
       "3.9"
      ],
      "skill": "Use a limit at infinity to find a horizontal asymptote of an arcsin function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.12.limit-reasoning",
+      "AHL3.9.inverse-trig-values"
+     ],
+     "subPassA": [
+      "AHL5.12.limit-reasoning",
+      "SL2.4.asymptotes"
+     ],
+     "subPassB": [
+      "AHL5.12.limit-reasoning",
+      "AHL3.9.inverse-trig-values"
+     ]
     },
     {
      "label": "c",
@@ -608,7 +1078,20 @@
       "5.2"
      ],
      "skill": "Differentiate an arcsin composite with chain and quotient rules and use the sign of f' to show decreasing",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.15.inverse-trig-derivatives",
+      "SL5.2.show-always-increasing"
+     ],
+     "subPassA": [
+      "AHL5.15.inverse-trig-derivatives",
+      "SL5.6.quotient-rule",
+      "SL5.2.show-always-increasing"
+     ],
+     "subPassB": [
+      "AHL5.15.inverse-trig-derivatives",
+      "SL5.2.show-always-increasing"
+     ]
     },
     {
      "label": "d",
@@ -617,7 +1100,18 @@
       "3.9"
      ],
      "skill": "Find the inverse of a restricted-domain function, justifying the choice of root",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.inverse-restricted",
+      "AHL3.9.inverse-trig-graphs"
+     ],
+     "subPassA": [
+      "SL2.5.find-inverse",
+      "AHL2.14.inverse-restricted"
+     ],
+     "subPassB": [
+      "AHL2.14.inverse-restricted"
+     ]
     },
     {
      "label": "e",
@@ -635,6 +1129,18 @@
      "passB": [
       "2.2",
       "2.14"
+     ],
+     "sub": [
+      "SL2.2.domain",
+      "AHL3.9.inverse-trig-graphs"
+     ],
+     "subPassA": [
+      "SL2.5.inverse-domain-range",
+      "AHL3.9.inverse-trig-graphs"
+     ],
+     "subPassB": [
+      "AHL2.14.inverse-restricted",
+      "AHL3.9.inverse-trig-graphs"
      ]
     },
     {
@@ -653,6 +1159,20 @@
      "passB": [
       "2.3",
       "2.14"
+     ],
+     "sub": [
+      "SL2.3.sketch-from-info",
+      "SL2.2.inverse-undo"
+     ],
+     "subPassA": [
+      "SL2.3.sketch-from-info",
+      "SL2.2.inverse-undo",
+      "SL2.4.asymptotes"
+     ],
+     "subPassB": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.asymptotes",
+      "SL2.4.zeros-intercepts"
      ]
     }
    ],
@@ -674,12 +1194,17 @@
      ],
      "passB": [
       "2.6"
+     ],
+     "sub": [
+      "SL2.6.sketch",
+      "SL2.6.vertex"
      ]
     },
     {
      "label": "b",
      "syllabus": [
       "2.4",
+      "5.8",
       "2.12"
      ],
      "skill": "Use the GDC to count maxima, minima and stationary inflexions of polynomial graphs for odd and even powers",
@@ -692,6 +1217,19 @@
      "passB": [
       "2.12",
       "2.4"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "2.4",
+       "2.12"
+      ],
+      "why": "Two of the six table marks are for counting points of inflexion with zero gradient, which only 5.8 covers (2.4 has max/min but no inflexions), so 5.8 is added as both reviewers independently found; 2.4 stays for reading max/min off the GDC."
+     },
+     "sub": [
+      "SL2.4.max-min",
+      "SL5.8.points-of-inflexion",
+      "AHL2.12.polynomial-graph"
      ]
     },
     {
@@ -700,7 +1238,21 @@
       "5.6"
      ],
      "skill": "Differentiate a product of powers with the product or chain rule and factorise",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.product-rule",
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ],
+     "subPassA": [
+      "SL5.6.product-rule",
+      "SL5.6.show-derivative-form"
+     ],
+     "subPassB": [
+      "SL5.6.product-rule",
+      "SL5.6.chain-rule",
+      "SL5.6.show-derivative-form"
+     ]
     },
     {
      "label": "d",
@@ -708,7 +1260,10 @@
       "5.8"
      ],
      "skill": "State the roots of the factorised derivative",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.find-stationary-points"
+     ]
     },
     {
      "label": "e",
@@ -724,6 +1279,17 @@
      ],
      "passB": [
       "2.2"
+     ],
+     "sub": [
+      "SL1.5.integer-exponent-laws",
+      "SL2.2.evaluate-notation"
+     ],
+     "subPassA": [
+      "SL1.6.numerical-show-that"
+     ],
+     "subPassB": [
+      "SL1.5.integer-exponent-laws",
+      "SL2.2.evaluate-notation"
      ]
     },
     {
@@ -732,7 +1298,17 @@
       "5.2"
      ],
      "skill": "Show the derivative is positive at a point by sign reasoning",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.2.sign-at-point"
+     ],
+     "subPassA": [
+      "SL5.2.sign-at-point",
+      "SL5.8.find-stationary-points"
+     ],
+     "subPassB": [
+      "SL5.2.sign-at-point"
+     ]
     },
     {
      "label": "g(i)",
@@ -741,7 +1317,11 @@
       "5.2"
      ],
      "skill": "Use the sign change of f' around the origin to classify it as a minimum for even n",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.classify-stationary-points",
+      "SL5.2.sign-at-point"
+     ]
     },
     {
      "label": "g(ii)",
@@ -750,7 +1330,11 @@
       "5.2"
      ],
      "skill": "Use no sign change of f' to classify the origin as a stationary inflexion for odd n",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.8.points-of-inflexion",
+      "SL5.2.sign-at-point"
+     ]
     },
     {
      "label": "h",
@@ -768,6 +1352,18 @@
      "passB": [
       "2.12",
       "2.10"
+     ],
+     "sub": [
+      "AHL2.12.polynomial-graph",
+      "SL2.10.number-of-solutions"
+     ],
+     "subPassA": [
+      "SL2.10.number-of-solutions",
+      "SL5.8.classify-stationary-points"
+     ],
+     "subPassB": [
+      "SL2.10.number-of-solutions",
+      "AHL2.12.polynomial-graph"
      ]
     }
    ],
@@ -788,6 +1384,15 @@
      ],
      "passB": [
       "1.14"
+     ],
+     "sub": [
+      "AHL1.14.roots-of-unity"
+     ],
+     "subPassA": [
+      "SL1.6.identity-lhs-rhs"
+     ],
+     "subPassB": [
+      "AHL2.12.polynomial-division"
      ]
     },
     {
@@ -796,13 +1401,16 @@
       "1.14"
      ],
      "skill": "Deduce the sum of the non-real cube roots of unity using omega not equal to 1",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-of-unity"
+     ]
     },
     {
      "label": "b",
      "syllabus": [
       "1.12",
-      "3.2"
+      "1.14"
      ],
      "skill": "Find distances between cube roots of unity on an Argand diagram",
      "review": "adjudicated",
@@ -814,6 +1422,18 @@
      "passB": [
       "1.12",
       "3.2"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.12",
+       "3.2"
+      ],
+      "why": "Both reviewers independently add 1.14: the chords join vertices of the regular triangle of cube roots of unity and method 2 earns its R1 from the roots-of-unity identity omega^2+omega+1=0; 3.2 is only one of several accepted ways to get the length, so it is dropped for 1.14."
+     },
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "AHL1.14.roots-geometry"
      ]
     },
     {
@@ -823,12 +1443,17 @@
       "2.12"
      ],
      "skill": "Factorise z^4 - 1 to deduce a relation among fourth roots of unity",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-of-unity",
+      "AHL2.12.sum-product-roots"
+     ]
     },
     {
      "label": "d",
      "syllabus": [
-      "1.12"
+      "1.12",
+      "1.14"
      ],
      "skill": "Compute distances between fourth roots of unity and their product",
      "review": "adjudicated",
@@ -839,6 +1464,17 @@
      ],
      "passB": [
       "1.12"
+     ],
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.12"
+      ],
+      "why": "Moduli like |1-i| remain the main method (1.12), but the chords are between fourth roots of unity and methods 2-3 earn marks using omega^4=1 and omega^2=-1, so 1.14 is added as both reviewers found."
+     },
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "AHL1.14.roots-geometry"
      ]
     },
     {
@@ -847,7 +1483,16 @@
       "1.14"
      ],
      "skill": "Conjecture the general product of chord lengths from the pattern",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-geometry"
+     ],
+     "subPassA": [
+      "AHL1.14.roots-of-unity"
+     ],
+     "subPassB": [
+      "AHL1.14.roots-geometry"
+     ]
     },
     {
      "label": "f(i)",
@@ -863,6 +1508,9 @@
      ],
      "passB": [
       "1.12"
+     ],
+     "sub": [
+      "AHL1.12.argand-diagram"
      ]
     },
     {
@@ -878,6 +1526,9 @@
      ],
      "passB": [
       "1.12"
+     ],
+     "sub": [
+      "AHL1.12.argand-diagram"
      ]
     },
     {
@@ -887,7 +1538,11 @@
       "2.12"
      ],
      "skill": "Factorise the geometric polynomial into linear factors using the roots of unity",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-of-unity",
+      "AHL2.12.polynomial-from-roots"
+     ]
     },
     {
      "label": "g(ii)",
@@ -896,7 +1551,20 @@
       "1.12"
      ],
      "skill": "Substitute z = 1 and take moduli to prove the chord-product result",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.roots-geometry",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassA": [
+      "AHL2.12.sum-product-roots",
+      "AHL1.14.roots-of-unity",
+      "AHL1.12.modulus-argument-values"
+     ],
+     "subPassB": [
+      "AHL1.14.roots-geometry",
+      "AHL2.12.polynomial-from-roots"
+     ]
     }
    ],
    "confidence": "medium"
@@ -909,7 +1577,10 @@
       "2.8"
      ],
      "skill": "State vertical and horizontal asymptotes of a linear-over-linear function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.asymptotes"
+     ]
     },
     {
      "label": "b",
@@ -918,7 +1589,11 @@
       "2.4"
      ],
      "skill": "Find the axis intercepts of a rational function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.rational-intercepts",
+      "SL2.4.zeros-intercepts"
+     ]
     },
     {
      "label": "c",
@@ -927,7 +1602,11 @@
       "2.3"
      ],
      "skill": "Sketch a rational function showing both branches and asymptotic behaviour",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.8.sketch-rational",
+      "SL2.3.sketch-from-equation"
+     ]
     },
     {
      "label": "d",
@@ -936,7 +1615,19 @@
       "2.5"
      ],
      "skill": "Find the inverse of a rational function and use the self-inverse condition to find a parameter",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.14.self-inverse",
+      "SL2.5.find-inverse"
+     ],
+     "subPassA": [
+      "SL2.5.find-inverse",
+      "AHL2.14.self-inverse"
+     ],
+     "subPassB": [
+      "AHL2.14.self-inverse",
+      "SL2.8.rational-inverse"
+     ]
     }
    ],
    "confidence": "high"
@@ -949,7 +1640,12 @@
       "1.7"
      ],
      "skill": "Solve a log equation using change of base, power, product rules and rational indices",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.7.change-of-base",
+      "SL1.7.log-laws",
+      "SL1.7.log-equations"
+     ]
     }
    ],
    "confidence": "high"
@@ -962,7 +1658,11 @@
       "2.7"
      ],
      "skill": "Use the discriminant and solve a quadratic inequality for a parameter",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.7.discriminant-parameter",
+      "SL2.7.inequality"
+     ]
     },
     {
      "label": "b",
@@ -970,7 +1670,10 @@
       "2.7"
      ],
      "skill": "Solve a quadratic with the formula and match the surd form",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.7.solve-equation"
+     ]
     }
    ],
    "confidence": "high"
@@ -984,7 +1687,12 @@
       "5.16"
      ],
      "skill": "Solve a linear first-order differential equation with an integrating factor, using integration by parts",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.particular-solution",
+      "AHL5.16.by-parts"
+     ]
     }
    ],
    "confidence": "high"
@@ -1006,6 +1714,10 @@
      ],
      "passB": [
       "1.10"
+     ],
+     "sub": [
+      "AHL1.10.binomial-rational-index",
+      "SL2.7.solve-equation"
      ]
     },
     {
@@ -1014,7 +1726,10 @@
       "1.10"
      ],
      "skill": "State the interval of validity of a rational-index binomial expansion",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.10.validity-interval"
+     ]
     }
    ],
    "confidence": "high"
@@ -1029,7 +1744,23 @@
       "5.6"
      ],
      "skill": "Prove an nth-derivative formula by induction using the product rule",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.15.induction-derivative",
+      "AHL5.12.higher-derivatives",
+      "SL5.6.product-rule"
+     ],
+     "subPassA": [
+      "AHL1.15.induction-derivative",
+      "AHL1.15.induction-structure",
+      "AHL5.12.higher-derivatives"
+     ],
+     "subPassB": [
+      "AHL1.15.induction-derivative",
+      "AHL1.15.induction-structure",
+      "AHL5.12.higher-derivatives",
+      "SL5.6.product-rule"
+     ]
     },
     {
      "label": "b",
@@ -1037,16 +1768,39 @@
       "5.19"
      ],
      "skill": "Build a Maclaurin series from the derivative pattern or by multiplying the e^x series",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.19.derive-from-derivatives",
+      "AHL5.19.multiply-series"
+     ],
+     "subPassA": [
+      "AHL5.19.derive-from-derivatives",
+      "AHL5.19.standard-series"
+     ],
+     "subPassB": [
+      "AHL5.19.derive-from-derivatives",
+      "AHL5.19.multiply-series"
+     ]
     },
     {
      "label": "c",
      "syllabus": [
-      "5.13",
-      "5.19"
+      "5.13"
      ],
      "skill": "Evaluate a 0/0 limit using the Maclaurin series or l'Hopital's rule",
-     "review": "agreed"
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "5.13",
+       "5.19"
+      ],
+      "why": "Removed 5.19: this 'hence' part only substitutes the series built in (b) (or uses l'Hopital), and 5.13's Tag when adds 5.19 only when the series has to be built."
+     },
+     "sub": [
+      "AHL5.13.limit-by-series",
+      "AHL5.13.lhopital"
+     ]
     }
    ],
    "confidence": "high"
@@ -1060,7 +1814,22 @@
       "1.13"
      ],
      "skill": "Verify a root and find the other roots of a cubic complex equation in Euler form",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots",
+      "AHL1.14.de-moivre-power",
+      "AHL1.13.polar-to-cartesian"
+     ],
+     "subPassA": [
+      "AHL1.14.de-moivre-power",
+      "AHL1.14.nth-roots",
+      "AHL1.13.polar-to-cartesian"
+     ],
+     "subPassB": [
+      "AHL1.14.nth-roots",
+      "AHL1.14.de-moivre-power",
+      "AHL1.13.euler-trig-link"
+     ]
     },
     {
      "label": "b",
@@ -1077,6 +1846,10 @@
      ],
      "passB": [
       "1.12"
+     ],
+     "sub": [
+      "AHL1.12.argand-diagram",
+      "AHL1.13.polar-to-cartesian"
      ]
     },
     {
@@ -1085,7 +1858,11 @@
       "1.12"
      ],
      "skill": "Find the distance between two roots as the modulus of their difference",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.modulus-argument-values",
+      "AHL1.12.arithmetic"
+     ]
     },
     {
      "label": "d",
@@ -1093,7 +1870,18 @@
       "1.14"
      ],
      "skill": "Use De Moivre to show a given complex number satisfies a cubic equation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.14.nth-roots",
+      "AHL1.14.de-moivre-power"
+     ],
+     "subPassA": [
+      "AHL1.14.de-moivre-power"
+     ],
+     "subPassB": [
+      "AHL1.14.nth-roots",
+      "AHL1.14.de-moivre-power"
+     ]
     },
     {
      "label": "e",
@@ -1102,7 +1890,11 @@
       "1.13"
      ],
      "skill": "Rationalise a complex quotient using the conjugate to find its real part",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL1.12.division-conjugate",
+      "AHL1.13.polar-to-cartesian"
+     ]
     }
    ],
    "confidence": "high"
@@ -1115,7 +1907,10 @@
       "4.4"
      ],
      "skill": "Find Pearson's correlation coefficient with the GDC",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.pearson-r"
+     ]
     },
     {
      "label": "b",
@@ -1123,7 +1918,10 @@
       "4.4"
      ],
      "skill": "State the y-on-x regression line coefficients",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.regression-y-on-x"
+     ]
     },
     {
      "label": "c",
@@ -1131,7 +1929,11 @@
       "4.4"
      ],
      "skill": "Use the regression gradient to predict a change in score",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.interpret-ab",
+      "SL4.4.predict"
+     ]
     },
     {
      "label": "d",
@@ -1139,7 +1941,10 @@
       "4.4"
      ],
      "skill": "Explain that correlation does not imply causation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.describe-correlation"
+     ]
     },
     {
      "label": "e",
@@ -1147,7 +1952,10 @@
       "4.4"
      ],
      "skill": "Recognise that subtracting a constant does not change r",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL4.4.pearson-r"
+     ]
     }
    ],
    "confidence": "high"
@@ -1168,6 +1976,9 @@
      "passB": [
       "1.6",
       "1.9"
+     ],
+     "sub": [
+      "SL1.6.identity-lhs-rhs"
      ]
     },
     {
@@ -1176,7 +1987,10 @@
       "2.12"
      ],
      "skill": "Use sum and product of roots to form a new quadratic with transformed roots",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.12.sum-product-roots"
+     ]
     }
    ],
    "confidence": "high"
@@ -1189,7 +2003,10 @@
       "4.14"
      ],
      "skill": "Find the median of a continuous random variable by integrating the pdf",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.median-mode"
+     ]
     },
     {
      "label": "b",
@@ -1198,7 +2015,18 @@
       "2.16"
      ],
      "skill": "Interpret a modulus probability as an interval about the median and solve for its half-width",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL4.14.pdf-probability",
+      "AHL2.16.modulus-inequality"
+     ],
+     "subPassA": [
+      "AHL4.14.pdf-probability"
+     ],
+     "subPassB": [
+      "AHL4.14.pdf-probability",
+      "AHL2.16.modulus-inequality"
+     ]
     }
    ],
    "confidence": "medium"
@@ -1212,7 +2040,18 @@
       "5.6"
      ],
      "skill": "Differentiate an implicit relation involving a log of a product",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.14.implicit-derivative",
+      "SL5.6.product-rule"
+     ],
+     "subPassA": [
+      "AHL5.14.implicit-derivative"
+     ],
+     "subPassB": [
+      "AHL5.14.implicit-derivative",
+      "SL5.6.product-rule"
+     ]
     },
     {
      "label": "b",
@@ -1221,7 +2060,11 @@
       "5.14"
      ],
      "skill": "Use the implicit derivative to find the tangent at a given point",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.4.tangent-equation",
+      "AHL5.14.implicit-tangent-normal"
+     ]
     }
    ],
    "confidence": "high"
@@ -1234,7 +2077,16 @@
       "3.7"
      ],
      "skill": "Find the period parameter of a sinusoidal tide model",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.equation-from-graph"
+     ],
+     "subPassA": [
+      "SL3.7.read-features"
+     ],
+     "subPassB": [
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "b",
@@ -1242,7 +2094,10 @@
       "3.7"
      ],
      "skill": "Find the amplitude from maximum and minimum",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "c",
@@ -1250,7 +2105,10 @@
       "3.7"
      ],
      "skill": "Find the principal axis from maximum and minimum",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "d",
@@ -1259,7 +2117,18 @@
       "3.8"
      ],
      "skill": "Find the horizontal shift from the time of high tide",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.equation-from-graph",
+      "SL3.8.compound-angle"
+     ],
+     "subPassA": [
+      "SL3.7.equation-from-graph",
+      "SL3.7.transformations"
+     ],
+     "subPassB": [
+      "SL3.7.equation-from-graph"
+     ]
     },
     {
      "label": "e",
@@ -1267,7 +2136,10 @@
       "3.7"
      ],
      "skill": "Evaluate the sinusoidal model at a given time",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.model-context"
+     ]
     },
     {
      "label": "f",
@@ -1276,7 +2148,18 @@
       "3.7"
      ],
      "skill": "Solve a trig equation with the GDC to find time above a height",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.8.graphical",
+      "SL3.7.model-context"
+     ],
+     "subPassA": [
+      "SL3.8.graphical"
+     ],
+     "subPassB": [
+      "SL3.8.graphical",
+      "SL3.7.model-context"
+     ]
     },
     {
      "label": "g",
@@ -1285,7 +2168,11 @@
       "2.11"
      ],
      "skill": "Adjust the phase shift to model a time-shifted tide",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.7.model-context",
+      "SL2.11.translate"
+     ]
     }
    ],
    "confidence": "high"
@@ -1299,7 +2186,11 @@
       "2.7"
      ],
      "skill": "Find axis intercepts of a quadratic-over-linear function",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.intercepts",
+      "SL2.7.solve-equation"
+     ]
     },
     {
      "label": "b",
@@ -1307,7 +2198,10 @@
       "2.13"
      ],
      "skill": "State the vertical asymptote",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.vertical-asymptotes"
+     ]
     },
     {
      "label": "c",
@@ -1316,7 +2210,11 @@
       "2.12"
      ],
      "skill": "Find the oblique asymptote by polynomial division or equating coefficients",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.oblique-asymptote",
+      "AHL2.12.polynomial-division"
+     ]
     },
     {
      "label": "d",
@@ -1325,7 +2223,11 @@
       "2.3"
      ],
      "skill": "Sketch the rational function with its intercepts and asymptotes",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL2.13.sketch-rational",
+      "SL2.3.sketch-from-equation"
+     ]
     },
     {
      "label": "e",
@@ -1346,6 +2248,22 @@
       "5.15",
       "1.11",
       "1.7"
+     ],
+     "sub": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "SL1.7.log-laws"
+     ],
+     "subPassA": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "AHL1.11.cover-up-or-compare"
+     ],
+     "subPassB": [
+      "AHL5.15.partial-fraction-integral",
+      "AHL1.11.distinct-linear-factors",
+      "AHL1.11.cover-up-or-compare",
+      "SL1.7.log-laws"
      ]
     }
    ],
@@ -1361,7 +2279,23 @@
       "3.12"
      ],
      "skill": "Find displacement vectors and use a cross product to get the Cartesian plane equation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.17.plane-equation",
+      "AHL3.16.vector-product",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassA": [
+      "AHL3.17.plane-equation",
+      "AHL3.16.perpendicular-vector",
+      "AHL3.12.position-displacement"
+     ],
+     "subPassB": [
+      "AHL3.17.plane-equation",
+      "AHL3.17.normal-from-points",
+      "AHL3.12.position-displacement",
+      "AHL3.16.vector-product"
+     ]
     },
     {
      "label": "b",
@@ -1377,6 +2311,16 @@
      ],
      "passB": [
       "3.18"
+     ],
+     "sub": [
+      "AHL3.18.two-planes"
+     ],
+     "subPassA": [
+      "AHL3.18.two-planes",
+      "AHL3.17.point-in-plane"
+     ],
+     "subPassB": [
+      "AHL3.18.two-planes"
      ]
     },
     {
@@ -1385,7 +2329,10 @@
       "3.18"
      ],
      "skill": "Find where a line meets a plane",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL3.18.line-meets-plane"
+     ]
     },
     {
      "label": "d",
@@ -1404,6 +2351,10 @@
      "passB": [
       "3.18",
       "3.14"
+     ],
+     "sub": [
+      "AHL3.18.distance-point-plane",
+      "AHL3.14.line-equation"
      ]
     }
    ],
@@ -1427,16 +2378,38 @@
      "passB": [
       "5.7",
       "5.6"
+     ],
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "SL5.6.chain-rule"
+     ],
+     "subPassA": [
+      "SL5.7.find-second-derivative",
+      "SL5.6.standard-derivatives"
+     ],
+     "subPassB": [
+      "SL5.7.find-second-derivative",
+      "SL5.6.chain-rule"
      ]
     },
     {
      "label": "b",
      "syllabus": [
-      "1.6",
-      "1.7"
+      "1.6"
      ],
-     "skill": "Prove a hyperbolic-type identity using exponent laws",
-     "review": "agreed"
+     "skill": "Prove an identity in exponential functions by substituting definitions and simplifying",
+     "review": "agreed",
+     "recheck": {
+      "by": "Curriculum Author (FAL-810)",
+      "was": [
+       "1.6",
+       "1.7"
+      ],
+      "why": "Removed 1.7: the marks are for substituting the definitions and expanding squares to prove the identity, and (e^t)^2 = e^(2t) is not the rational-index or log-law work 1.7 covers."
+     },
+     "sub": [
+      "SL1.6.identity-lhs-rhs"
+     ]
     },
     {
      "label": "c(i)",
@@ -1453,6 +2426,17 @@
      "passB": [
       "1.13",
       "3.11"
+     ],
+     "sub": [
+      "AHL1.13.euler-trig-link",
+      "AHL3.11.symmetry-relations"
+     ],
+     "subPassA": [
+      "AHL1.13.euler-trig-link"
+     ],
+     "subPassB": [
+      "AHL1.13.euler-trig-link",
+      "AHL2.14.use-symmetry"
      ]
     },
     {
@@ -1469,6 +2453,9 @@
      "passB": [
       "1.13",
       "3.11"
+     ],
+     "sub": [
+      "AHL1.13.euler-trig-link"
      ]
     },
     {
@@ -1478,7 +2465,11 @@
       "1.12"
      ],
      "skill": "Combine the complex results to obtain cos 2u",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL3.6.simplify",
+      "AHL1.12.arithmetic"
+     ]
     },
     {
      "label": "e",
@@ -1487,7 +2478,18 @@
       "3.6"
      ],
      "skill": "Show both expressions equal 1 using exponent expansion and the Pythagorean identity",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL1.6.identity-lhs-rhs",
+      "SL3.6.simplify"
+     ],
+     "subPassA": [
+      "SL1.6.identity-lhs-rhs"
+     ],
+     "subPassB": [
+      "SL1.6.identity-lhs-rhs",
+      "SL3.6.simplify"
+     ]
     },
     {
      "label": "f",
@@ -1496,7 +2498,12 @@
       "2.4"
      ],
      "skill": "Sketch a hyperbola with its intercepts and asymptotes",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL2.3.sketch-from-equation",
+      "SL2.4.asymptotes",
+      "SL2.4.zeros-intercepts"
+     ]
     },
     {
      "label": "g",
@@ -1514,6 +2521,17 @@
      "passB": [
       "2.8",
       "2.11"
+     ],
+     "sub": [
+      "SL2.11.image-point",
+      "SL2.8.reciprocal"
+     ],
+     "subPassA": [
+      "SL2.3.sketch-from-info",
+      "SL3.5.exact-special"
+     ],
+     "subPassB": [
+      "NEW:SL2.11.rotation|Rotate a curve about the origin and find the image of a point"
      ]
     }
    ],
@@ -1527,7 +2545,10 @@
       "5.18"
      ],
      "skill": "Solve dy/dt = y by separating variables",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable"
+     ]
     },
     {
      "label": "a(ii)",
@@ -1535,7 +2556,10 @@
       "5.18"
      ],
      "skill": "Substitute the y solution to form a linear differential equation in x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.set-up-model"
+     ]
     },
     {
      "label": "a(iii)",
@@ -1543,7 +2567,10 @@
       "5.18"
      ],
      "skill": "Solve a linear differential equation with an integrating factor",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.integrating-factor"
+     ]
     },
     {
      "label": "b(i)",
@@ -1561,6 +2588,10 @@
      "passB": [
       "5.18",
       "5.7"
+     ],
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "AHL5.18.set-up-model"
      ]
     },
     {
@@ -1569,7 +2600,10 @@
       "5.18"
      ],
      "skill": "Substitute Y = dy/dt and solve the separable equation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.separable"
+     ]
     },
     {
      "label": "b(iii)",
@@ -1577,7 +2611,10 @@
       "5.10"
      ],
      "skill": "Integrate an exponential to find y",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.10.linear-composites"
+     ]
     },
     {
      "label": "b(iv)",
@@ -1585,7 +2622,16 @@
       "5.18"
      ],
      "skill": "Substitute back into the system to find x",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "AHL5.18.integrating-factor"
+     ],
+     "subPassA": [
+      "AHL5.18.set-up-model"
+     ],
+     "subPassB": [
+      "AHL5.18.integrating-factor"
+     ]
     },
     {
      "label": "c(i)",
@@ -1603,6 +2649,10 @@
      "passB": [
       "5.18",
       "5.7"
+     ],
+     "sub": [
+      "SL5.7.find-second-derivative",
+      "AHL5.18.set-up-model"
      ]
     },
     {
@@ -1621,6 +2671,18 @@
      "passB": [
       "5.6",
       "2.7"
+     ],
+     "sub": [
+      "SL2.7.solve-equation",
+      "SL5.6.chain-rule"
+     ],
+     "subPassA": [
+      "SL5.6.standard-derivatives",
+      "SL2.7.solve-equation"
+     ],
+     "subPassB": [
+      "SL2.7.solve-equation",
+      "SL5.6.chain-rule"
      ]
     },
     {
@@ -1630,7 +2692,19 @@
       "5.7"
      ],
      "skill": "Verify a combination of exponentials satisfies the differential equation",
-     "review": "agreed"
+     "review": "agreed",
+     "sub": [
+      "SL5.6.chain-rule",
+      "SL5.7.find-second-derivative"
+     ],
+     "subPassA": [
+      "SL5.6.standard-derivatives",
+      "SL5.7.find-second-derivative"
+     ],
+     "subPassB": [
+      "SL5.6.chain-rule",
+      "SL5.7.find-second-derivative"
+     ]
     }
    ],
    "confidence": "medium"
