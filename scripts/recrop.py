@@ -49,7 +49,7 @@ BOILERPLATE = re.compile(
     r"Answers written on this page.*|will not be marked\.?|\d+EP\d+|References:?|©.*|"
     r"Answer all questions.*|Please start each question on a new page\.?|.*answer booklet provided.*|"
     r"Question \d+.{0,6} continued\.?|continued\s*(…|\.\.\.)?|"
-    r"Section [AB]|– ?\d+ ?–|-\s?\d+\s?-)$"
+    r"Section [AB]|Blank page|– ?\d+ ?–|-\s?\d+\s?-)$"
 )
 # Dotted answer lines are text glyphs in the PDFs; they are space for working, not content.
 ANSWER_LINE = re.compile(r"^[.…�·\s]+$")
@@ -57,6 +57,7 @@ ROMAN = r"i|ii|iii|iv|v|vi|vii|viii|ix|x"
 QNUM = re.compile(r"^(\d{1,2})\s?\.(\s|$)")
 MS_QNUM = re.compile(r"^Q?(\d{1,2})\s?\.(\s|$)")   # some markschemes head questions "Q1."
 BARE_QNUM = re.compile(r"^(Q?)(\d{1,2})$")            # ...and a few drop the full stop
+GLUED_QNUM = re.compile(r"^Q?(\d{1,2}) ?\(a\)")        # ...or run the number into part (a): "1(a)"
 
 
 def load_questions():
@@ -182,13 +183,16 @@ def find_ms_ranges(doc, n):
     """[(start, end)] for questions 1..n. Starts are found backwards from the last
     question, so numbered lists in the general instructions are skipped. Each
     question ends at its last right-aligned "[x marks]" / "Total [x marks]" line."""
-    starts, bare, marks = {}, {}, []
+    starts, bare, glued, marks = {}, {}, {}, []
     left = doc.margin
     for p, ls in enumerate(doc.lines):
         for x0, y0, x1, y1, t in ls:
             m = MS_QNUM.match(t)
             if m and left <= x0 <= 90:
                 starts.setdefault(int(m.group(1)), []).append((p, y0))
+            m = GLUED_QNUM.match(t)
+            if m and left <= x0 <= 60:
+                glued.setdefault(int(m.group(1)), []).append((p, y0))
             m = BARE_QNUM.match(t)   # a lone digit must have the question's text beside it
             if m and left <= x0 <= 60 and (m.group(1) or any(abs(r[1] - y0) < 3 and r[0] > x1 for r in ls)):
                 bare.setdefault(int(m.group(2)), []).append((p, y0))
@@ -201,10 +205,16 @@ def find_ms_ranges(doc, n):
         # A heading that lost its full stop ("6  (a) ...") is taken only if a question closes
         # between the last proper "6." and it: that "6." was then in the general instructions.
         after = cands[-1] if cands else (-1, 0.0)
+        # Likewise if a higher-numbered heading sits between them: that "6." began a numbered list.
+        later = [h for j, hs in list(starts.items()) + list(bare.items()) if j > k for h in hs]
         loose = [c for c in bare.get(k, []) if after < c < limit
-                 and any(m[2] and after < m[3] < c for m in marks)]
+                 and (any(m[2] and after < m[3] < c for m in marks) or any(after < h < c for h in later))]
         if loose:
             cands = loose
+        # "1(a)" after the last "1.": that "1." was a numbered item in the general instructions
+        glue = [c for c in glued.get(k, []) if after < c < limit]
+        if glue:
+            cands = glue[:1]
         if not cands:
             return None, f"markscheme: no start found for Q{k}"
         chosen[k] = limit = cands[-1]
@@ -258,8 +268,8 @@ def segments(doc, start, end):
         if p == end["page"]:
             bottom = min(bottom, end["y"])
         body = [r for r in doc.lines[p] if r[1] >= top - 1 and r[3] <= bottom + 1]
-        refs = next((r for r in body if re.match(r"^(References:?|©)", r[4])), None)
-        if refs:   # acknowledgements block at the end of the paper, and the rule above it
+        refs = next((r for r in body if re.match(r"^(References:?|©|Disclaimer:)", r[4])), None)
+        if refs:   # acknowledgements or disclaimer block at the end of the paper, and the rule above it
             bottom = refs[1] - 2
             body = [r for r in body if r[3] <= bottom + 1]
             last_text = max((r[3] for r in body), default=top)
