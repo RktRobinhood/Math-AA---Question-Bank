@@ -731,19 +731,18 @@
     );
   }
 
-  // AA courses use the AA reference pages (with formulas); AA HL adds its AHL statements under each
-  // topic. AI courses list their statements, numbered as in the AI guide.
+  // AA courses use the AA reference pages (with formulas); AI courses list their SL statements,
+  // numbered as in the AI guide. HL courses add their AHL statements under each topic, in a card of their own.
   function syllabusItems() {
     const list = statements => `<ul class="statement-list">${statements.map(s =>
       `<li><strong>${escapeHtml(s.code)} ${escapeHtml(s.title)}</strong><br>${escapeHtml(s.content)}</li>`).join("")}</ul>`;
     const topics = Object.entries(DATA.topics || {});
-    if (course.subject !== "aa") {
-      return topics.map(([t, name]) => ({ topic: Number(t), title: `Topic ${t}: ${name}`, html: list(course.statements.filter(s => s.topic === t)) }));
-    }
-    const items = (DATA.syllabusDocs?.aa || []).map(d => ({ topic: d.topic, title: `Topic ${d.topic}: ${d.title}`, html: d.html }));
+    const items = course.subject === "aa"
+      ? (DATA.syllabusDocs?.aa || []).map(d => ({ topic: d.topic, title: `Topic ${d.topic}: ${d.title}`, html: d.html }))
+      : topics.map(([t, name]) => ({ topic: Number(t), title: `Topic ${t}: ${name}`, html: list(course.statements.filter(s => s.topic === t && !s.ahl)) }));
     if (course.level === "HL") {
       for (const [t, name] of topics) {
-        const extra = course.statements.filter(s => s.topic === t && s.id.startsWith("AHL"));
+        const extra = course.statements.filter(s => s.topic === t && s.ahl);
         if (extra.length) items.push({ topic: Number(t), title: `Topic ${t}: ${name}, additional higher level`, html: list(extra) });
       }
       items.sort((a, b) => a.topic - b.topic);
