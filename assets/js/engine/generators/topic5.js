@@ -669,4 +669,359 @@
         P(`Find the exact value of $f\\left(${xq}\\right)$.`, 3, ans.exact(v, tex), [
           `$f\\left(${xq}\\right) = ${expr([[j, "\\sin\\left(\\dfrac{\\pi}{2}\\right)"], [k, `\\left(${xq}\\right)`], [c0, ""]])}$`, `$\\sin\\left(\\dfrac{\\pi}{2}\\right) = 1$, so $f\\left(${xq}\\right) = ${tex}$`])] };
     } });
+
+  // ======================= 5.7 concavity, and matching f with its derivative =======================
+  const f2Opt = (cs, why) => ({ text: m(`f''(x) = ${poly(cs)}`), value: cs, why });
+  reg({ ...CV, unknown: "concave-interval", format: "mcq", levels: [3], skills: ["SL5.7.find-second-derivative", "SL5.7.concavity", "SL5.8.points-of-inflexion"], title: "Concavity and points of inflexion of a quartic",
+    build({ rng }) {
+      let p, q, c, d;
+      do { p = rng.int(-2, 2); q = p + rng.int(1, 3); c = rng.int(-4, 4); d = rng.int(-3, 3); } while (p * q === 0 || p + q === 0 || q > 3);
+      const S = p + q, Pq = p * q, f = (x) => x ** 4 - 2 * S * x ** 3 + 6 * Pq * x * x + c * x + d;
+      return { params: { S, Pq, c, d }, stem: `Let $f(x) = ${poly([1, -2 * S, 6 * Pq, c, d])}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P("Which expression is $f''(x)$?", 2, ans.choice(rng, f2Opt([12, -12 * S, 12 * Pq]), [
+          f2Opt([4, -6 * S, 12 * Pq, c], "This is $f'(x)$. Differentiate once more."), f2Opt([12, -6 * S, 12 * Pq], "The term in $x^{2}$ of $f'(x)$ must be multiplied by its power."),
+          f2Opt([12, -12 * S, 6 * Pq]), f2Opt([12, -12 * S, 12 * Pq + c])]), [`$f'(x) = ${poly([4, -6 * S, 12 * Pq, c])}$`, `$f''(x) = ${poly([12, -12 * S, 12 * Pq])}$`]),
+        P("The graph of $f$ is concave down for $a < x < b$. Find the value of $a$.", 2, ans.int(p), [
+          "The graph is concave down where $f''(x) < 0$.", `$f''(x) = 12\\left(${poly([1, -S, Pq])}\\right) = 12${factor(p)}${factor(q)}$`, `$f''(x) < 0$ between its zeros, so $${p} < x < ${q}$ and $a = ${p}$.`]),
+        P("Write down the value of $b$.", 1, ans.int(q), [`$b = ${q}$`]),
+        P("Find the $y$-coordinate of the left-hand point of inflexion of the graph of $f$.", 2, ans.int(f(p)), [
+          `$f''(x)$ changes sign at $x = ${p}$, so there is a point of inflexion there.`, `$f(${p}) = ${expr([[1, `${br(p)}^{4}`], [-2 * S, `${br(p)}^{3}`], [6 * Pq, `${br(p)}^{2}`], [c, br(p)], [d, ""]])} = ${f(p)}$`])] };
+    } });
+  reg({ ...CV, syllabus: ["5.7", "5.6"], unknown: "concave-exponential", format: "mcq", levels: [3], skills: ["SL5.7.find-second-derivative", "SL5.7.concavity", "SL5.6.product-rule"], title: "Concavity of a product with an exponential",
+    build({ rng }) {
+      let j, s, q;
+      do { j = rng.nonzero(-6, 6); s = rng.sign(); q = j + 2 * s; } while (q === 0);
+      const e = ek(s), d0 = s * j + 1, first = `\\left(${lin(s, d0)}\\right)${e}`;
+      return { params: { j, s }, stem: `Let $f(x) = ${factor(-j)}${e}$. The second derivative of $f$ can be written as $f''(x) = (x + q)${e}$, where $q$ is a constant.`, parts: [
+        P("Find $f'(0)$.", 2, ans.int(d0), [`By the product rule, $f'(x) = ${e} ${sg(s)} ${factor(-j)}${e} = ${first}$`, `$f'(0) = ${d0}$`]),
+        P("Find the value of $q$.", 2, ans.int(q), [`Differentiate again with the product rule: $f''(x) = ${coef(s, e)} ${sg(s)} ${first}$`, `$f''(x) = \\left(${lin(1, q)}\\right)${e}$, so $q = ${q}$.`]),
+        P("Find the $x$-coordinate of the point of inflexion of the graph of $f$.", 1, ans.int(-q), [`$f''(x) = 0$ when $x = ${-q}$, and $f''(x)$ changes sign there.`]),
+        P("For which values of $x$ is the graph of $f$ concave up?", 1, ans.choice(rng, { text: `$x > ${-q}$`, value: ["gt", -q] }, [
+          { text: `$x < ${-q}$`, value: ["lt", -q], why: "The graph is concave up where $f''(x) > 0$." }, { text: `$x > ${q}$`, value: ["gt", q], why: "Solve $x + q > 0$ carefully." }, { text: `$x < ${q}$`, value: ["lt", q] }]), [
+          `$${e} > 0$ for all $x$, so $f''(x) > 0$ when $${lin(1, q)} > 0$, that is when $x > ${-q}$.`])] };
+    } });
+  const parab = (a2, r1, r2) => ({ type: "poly", coeffs: [a2 * r1 * r2, -a2 * (r1 + r2), a2] });
+  reg({ ...CV, syllabus: ["5.7", "5.2"], unknown: "match-derivative", representation: "graph", format: "graph-pick", levels: [2], skills: ["SL5.7.sketch-match-graphs", "SL5.2.sign-from-graph"], title: "Pick the graph of the derivative",
+    build({ rng }) {
+      const d = rng.pick([1, 2]), mid = rng.int(-1, 1), s = rng.sign(), A = s * (d === 1 ? 3 : 0.75), k0 = rng.int(-1, 1);
+      const W = (fn, alt) => win([-5, 5], [-6, 6], { functions: [{ fn }], alt });
+      const right = { graph: W(parab(A, mid - d, mid + d), "A parabola crossing the x-axis twice"), value: "derivative" };
+      const wrongs = G.pickDistinct(right.graph, [
+        { graph: W(parab(-A, mid - d, mid + d), "A parabola crossing the x-axis twice"), value: "negative", why: "Where $f$ is increasing, $f'(x)$ must be positive." },
+        { graph: W(parab(A, mid, mid + 2 * d), "A parabola crossing the x-axis twice"), value: "shifted", why: "The zeros of $f'$ must be at the $x$-coordinates of the turning points of $f$." },
+        { graph: W({ type: "poly", coeffs: [-2 * A * mid, 2 * A] }, "A straight line"), value: "line", why: "The derivative of a cubic is a quadratic, so its graph is a parabola." },
+        { graph: W(parab(A, mid, mid), "A parabola touching the x-axis"), value: "touching", why: "$f$ has two turning points, so $f'$ has two zeros." }], 3);
+      const xmax = s > 0 ? mid - d : mid + d;
+      return { params: { d, mid },
+        graph: W({ type: "transform", of: { type: "poly", coeffs: [0, -d * d, 0, 1 / 3] }, a: A, h: mid, k: k0 }, "A cubic curve with a local maximum and a local minimum"),
+        stem: "The diagram shows the graph of $y = f(x)$, where $f$ is a cubic function. The turning points and the point of inflexion of the graph have integer $x$-coordinates.", parts: [
+          P("Which graph shows $y = f'(x)$?", 2, ans.graph(rng, right, wrongs), [
+            `$f$ has turning points at $x = ${mid - d}$ and $x = ${mid + d}$, so $f'(x) = 0$ there.`,
+            `Between them $f$ is ${s > 0 ? "decreasing" : "increasing"}, so $f'(x)$ is ${s > 0 ? "negative" : "positive"}; outside them $f'(x)$ is ${s > 0 ? "positive" : "negative"}.`]),
+          P("Write down the $x$-coordinate of the local maximum point of the graph of $f$.", 1, ans.int(xmax), [`The graph rises to a turning point and then falls at $x = ${xmax}$.`]),
+          P("Write down the $x$-coordinate of the point of inflexion of the graph of $f$.", 1, ans.int(mid), [`The graph changes from concave ${s > 0 ? "down" : "up"} to concave ${s > 0 ? "up" : "down"} halfway between the turning points, at $x = ${mid}$.`])] };
+    } });
+  reg({ type: "t5-derivative-graph", syllabus: ["5.7", "5.8", "5.2"], unknown: "extremum-from-derivative", representation: "graph", format: "value", levels: [2], skills: ["SL5.7.f-from-derivative-graph", "SL5.2.sign-from-graph"], title: "Turning points and inflexion of f from the graph of its derivative",
+    build({ rng }) {
+      let a, b;
+      do { a = rng.int(-4, 2); b = a + rng.pick([2, 4]); } while (b > 4);
+      const s = rng.sign(), sc = s * (b - a === 2 ? rng.pick([1, 2]) : rng.pick([0.5, 1])), xmax = s > 0 ? a : b, xmin = s > 0 ? b : a, mid = (a + b) / 2;
+      return { params: { s },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: parab(sc, a, b) }], alt: "A parabola, the graph of the derivative of f, crossing the x-axis twice" }),
+        stem: "The diagram shows the graph of $y = f'(x)$, where $f'$ is the derivative of a function $f$. The graph crosses the $x$-axis at two points with integer coordinates, and its vertex has an integer $x$-coordinate.", parts: [
+          P("Find the $x$-coordinate of the local maximum point of the graph of $f$.", 2, ans.int(xmax), [`$f$ has stationary points where $f'(x) = 0$: at $x = ${a}$ and $x = ${b}$.`,
+            `At $x = ${xmax}$, $f'(x)$ changes from positive to negative, so $f$ changes from increasing to decreasing. This is the local maximum.`]),
+          P("Write down the $x$-coordinate of the local minimum point of the graph of $f$.", 1, ans.int(xmin), [`At $x = ${xmin}$, $f'(x)$ changes from negative to positive, so this is the local minimum.`]),
+          P("Write down the $x$-coordinate of the point of inflexion of the graph of $f$.", 1, ans.int(mid), [`A point of inflexion of $f$ is where $f'$ has a turning point: the vertex of the graph shown, at $x = ${mid}$.`])] };
+    } });
+
+  // ======================= 5.8 stationary points, inflexion and optimisation: more ways to ask =======================
+  reg({ ...SP, syllabus: ["5.8"], representation: "words", format: "mcq", unknown: "nature", levels: [1], skills: ["SL5.8.find-stationary-points", "SL5.8.classify-stationary-points"], title: "A stationary point and its nature from a linear derivative",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -1, -2, -3]), h = rng.nonzero(-6, 6), mm = 2 * a, c = -2 * a * h, kind = (v) => (v > 0 ? "A local minimum" : "A local maximum");
+      return { params: { mm, c }, stem: `A function $f$ has derivative $f'(x) = ${lin(mm, c)}$. The graph of $f$ has one stationary point.`, parts: [
+        P("Write down the $x$-coordinate of the stationary point.", 1, ans.int(h), [`$f'(x) = 0$ gives $${lin(mm, c)} = 0$, so $x = ${h}$.`]),
+        P("What kind of stationary point is it?", 1, ans.choice(rng, { text: kind(a), value: Math.sign(a) }, [
+          { text: kind(-a), value: -Math.sign(a), why: "A positive second derivative means a local minimum; a negative one means a local maximum." }, { text: "A point of inflexion", value: 0, why: "At a point of inflexion the second derivative is zero and changes sign." }]), [
+          `$f''(x) = ${mm}$, which is ${a > 0 ? "positive" : "negative"}, so the point is ${a > 0 ? "a local minimum" : "a local maximum"}.`])] };
+    } });
+  reg({ ...SP, syllabus: ["5.8", "5.7"], format: "value", unknown: "inflexion-point", levels: [3], skills: ["SL5.8.points-of-inflexion", "SL5.7.find-second-derivative"], title: "Point of inflexion of a cubic",
+    build({ rng }) {
+      const a = rng.pick([1, 2, -1]), mI = rng.nonzero(-3, 3), c = rng.int(-6, 6), d = rng.int(-5, 5), b = -3 * a * mI;
+      const f = (x) => a * x ** 3 + b * x * x + c * x + d, g = 3 * a * mI * mI + 2 * b * mI + c;
+      return { params: { a, b, c, d }, stem: `Let $f(x) = ${poly([a, b, c, d])}$, for $x \\in \\mathbb{R}$. The graph of $f$ has one point of inflexion.`, parts: [
+        P("Find the $x$-coordinate of the point of inflexion.", 3, ans.int(mI), [`$f'(x) = ${poly([3 * a, 2 * b, c])}$`, `$f''(x) = ${lin(6 * a, 2 * b)}$`, `$f''(x) = 0$ when $x = ${mI}$, and $f''(x)$ changes sign there, so the point of inflexion is at $x = ${mI}$.`]),
+        P("Find the $y$-coordinate of the point of inflexion.", 2, ans.int(f(mI)), [`$f(${mI}) = ${expr([[a, `${br(mI)}^{3}`], [b, `${br(mI)}^{2}`], [c, br(mI)], [d, ""]])}$`, `$f(${mI}) = ${f(mI)}$`]),
+        P("Find the gradient of the graph of $f$ at the point of inflexion.", 2, ans.int(g), [`$f'(${mI}) = ${expr([[3 * a, `${br(mI)}^{2}`], [2 * b, br(mI)], [c, ""]])} = ${g}$`])] };
+    } });
+  const OM = { type: "t5-optimisation-modelling", syllabus: ["5.8"], representation: "words", format: "value", skills: ["SL5.8.optimisation-modelling"] };
+  reg({ ...OM, unknown: "box-best-cut", levels: [4], calculator: true, title: "Largest open box cut from a sheet of card",
+    build({ rng }) {
+      let a, b;
+      do { a = rng.pick([12, 15, 16, 18, 20, 21, 24]); b = a + rng.pick([4, 5, 6, 8, 10, 12]); } while (Number.isInteger(Math.sqrt(a * a - a * b + b * b)));
+      const root = Math.sqrt(a * a - a * b + b * b), x = (a + b - root) / 6, x2 = (a + b + root) / 6, V = (t) => t * (a - 2 * t) * (b - 2 * t), full = poly([4, -2 * (a + b), a * b, 0]);
+      return { params: { a, b }, stem: `A rectangular sheet of card measures $${unit(a, "cm")}$ by $${unit(b, "cm")}$. A square of side $x\\text{ cm}$ is cut from each corner, and the sides are folded up to make an open box with volume $V\\text{ cm}^{3}$.`, parts: [
+        P(`Show that $V = ${full}$.`, 2, ans.self(`The base measures $${a} - 2x$ by $${b} - 2x$ and the height is $x$, so $V = x(${a} - 2x)(${b} - 2x) = ${full}$.`), [
+          `Cutting out the squares leaves a base that measures $${a} - 2x$ by $${b} - 2x$, and the height of the box is $x$.`, `$V = x(${a} - 2x)(${b} - 2x) = x\\left(${poly([4, -2 * (a + b), a * b])}\\right) = ${full}$`]),
+        P("Find the value of $x$ for which the volume of the box is greatest.", 3, ans.sf(x), [`$\\dfrac{\\mathrm{d}V}{\\mathrm{d}x} = ${poly([12, -4 * (a + b), a * b])}$`,
+          `Solve $\\dfrac{\\mathrm{d}V}{\\mathrm{d}x} = 0$ on the GDC: $x \\approx ${sf(x)}$ or $x \\approx ${sf(x2)}$.`, `The squares must fit on the sheet, so $0 < x < ${num(a / 2)}$. Only $x \\approx ${sf(x)}$ is possible, and it gives the greatest volume.`]),
+        P("Find the greatest volume of the box, in cubic centimetres.", 2, ans.sf(V(x)), [`Substitute the unrounded value of $x$: $V \\approx ${sf(V(x))}$`])] };
+    } });
+  reg({ ...OM, unknown: "optimum-value", levels: [3], title: "Least surface area of a box with a fixed volume",
+    build({ rng }) {
+      const open = rng.bool(), k = open ? rng.int(1, 5) : rng.int(2, 5), V = open ? 4 * k ** 3 : k ** 3, x = open ? 2 * k : k, c2 = open ? 1 : 2, least = c2 * x * x + (4 * V) / x;
+      const sq = coef(c2, "x^{2}"), Sx = `${sq} + \\dfrac{${4 * V}}{x}`;
+      return { params: { open, V }, stem: `${open ? "An open box (with no lid)" : "A closed box"} has a square base of side $x\\text{ cm}$ and height $h\\text{ cm}$. The volume of the box is $${unit(V, "cm")}^{3}$. The total area of ${open ? "its base and four sides" : "its six faces"} is $S\\text{ cm}^{2}$.`, parts: [
+        P(`Show that $S = ${Sx}$.`, 2, ans.self(`$x^{2}h = ${V}$, so $h = \\dfrac{${V}}{x^{2}}$ and $S = ${sq} + 4xh = ${Sx}$.`), [
+          `The volume is $x^{2}h = ${V}$, so $h = \\dfrac{${V}}{x^{2}}$.`, `$S = ${sq} + 4xh = ${sq} + 4x \\times \\dfrac{${V}}{x^{2}} = ${Sx}$`]),
+        P("Find the value of $x$ for which $S$ is least.", 3, ans.int(x), [`$\\dfrac{\\mathrm{d}S}{\\mathrm{d}x} = ${coef(2 * c2, "x")} - \\dfrac{${4 * V}}{x^{2}}$`,
+          `$\\dfrac{\\mathrm{d}S}{\\mathrm{d}x} = 0$ gives $${coef(2 * c2, "x^{3}")} = ${4 * V}$, so $x^{3} = ${(4 * V) / (2 * c2)}$ and $x = ${x}$.`,
+          `$\\dfrac{\\mathrm{d}^{2}S}{\\mathrm{d}x^{2}} = ${2 * c2} + \\dfrac{${8 * V}}{x^{3}} > 0$ for $x > 0$, so this is a minimum.`]),
+        P("Find the least value of $S$.", 2, ans.int(least), [`$S = ${coef(c2, `${br(x)}^{2}`)} + \\dfrac{${4 * V}}{${x}} = ${least}$`])] };
+    } });
+  reg({ type: "t5-ext-closed-interval-extremes", syllabus: ["5.8"], unknown: "greatest-least", representation: "equation", format: "value", levels: [3], skills: ["SL5.8.closed-interval-extremes", "SL5.8.find-stationary-points"], title: "Greatest and least values on a closed interval",
+    build({ rng }) {
+      const p = rng.int(-2, 1), q = p + rng.int(1, 3), lo = p - rng.int(1, 2), hi = q + rng.int(1, 2), c = rng.int(-5, 5);
+      const f = (x) => 2 * x ** 3 - 3 * (p + q) * x * x + 6 * p * q * x + c, vals = [lo, p, q, hi].map(f), big = Math.max(...vals), small = Math.min(...vals);
+      return { params: { p, q, lo, hi, c }, stem: `Let $f(x) = ${poly([2, -3 * (p + q), 6 * p * q, c])}$, for $${lo} \\le x \\le ${hi}$.`, parts: [
+        P("Find the smaller of the $x$-coordinates of the stationary points of the graph of $f$.", 2, ans.int(p), [`$f'(x) = ${poly([6, -6 * (p + q), 6 * p * q])} = 6${factor(p)}${factor(q)}$`, `$f'(x) = 0$ when $x = ${p}$ or $x = ${q}$. The smaller is $${p}$.`]),
+        P("Write down the larger of these $x$-coordinates.", 1, ans.int(q), [`The larger is $x = ${q}$.`]),
+        P("Find the greatest value of $f$ on this interval.", 2, ans.int(big), ["The greatest and least values are at stationary points or at the ends of the interval.",
+          `$f(${lo}) = ${vals[0]}$, $f(${p}) = ${vals[1]}$, $f(${q}) = ${vals[2]}$ and $f(${hi}) = ${vals[3]}$.`, `The greatest of these is $${big}$.`]),
+        P("Find the least value of $f$ on this interval.", 2, ans.int(small), [`From the same four values, the least is $${small}$.`])] };
+    } });
+  reg({ type: "t5-ext-stationary-conditions", syllabus: ["5.8"], unknown: "k-from-stationary-x", representation: "equation", format: "value", levels: [2], skills: ["SL5.8.stationary-point-conditions", "SL5.8.find-stationary-points"], title: "Find a constant from the position of a stationary point",
+    build({ rng }) {
+      const a = rng.int(1, 2), h = rng.nonzero(-3, 3), c = rng.int(-6, 6), k = -3 * a * h * h, y = a * h ** 3 + k * h + c;
+      return { params: { a, h, c }, stem: `Let $f(x) = ${expr([[a, "x^{3}"], [1, "kx"], [c, ""]])}$, where $k$ is a constant. The graph of $f$ has a stationary point where $x = ${h}$.`, parts: [
+        P("Find the value of $k$.", 2, ans.int(k), [`$f'(x) = ${coef(3 * a, "x^{2}")} + k$`, `$f'(${h}) = 0$ gives $${3 * a}${br(h)}^{2} + k = 0$, so $k = ${k}$.`]),
+        P("Find the $y$-coordinate of this stationary point.", 1, ans.int(y), [`$f(${h}) = ${expr([[a, `${br(h)}^{3}`], [k, br(h)], [c, ""]])} = ${y}$`]),
+        P("Write down the $x$-coordinate of the other stationary point of the graph of $f$.", 1, ans.int(-h), [`$f'(x) = ${poly([3 * a, 0, k])} = 0$ gives $x^{2} = ${h * h}$, so the other stationary point is at $x = ${-h}$.`])] };
+    } });
+
+  // ======================= 5.9 distance travelled =======================
+  const KD = { type: "t5-kinematics-distance", syllabus: ["5.9", "5.11"] };
+  reg({ ...KD, unknown: "total-distance-split", representation: "equation", format: "value", levels: [3], skills: ["SL5.9.total-distance", "SL5.9.displacement-from-velocity", "SL5.9.rest-and-direction"], title: "Displacement and total distance when a particle turns round",
+    build({ rng }) {
+      const c = rng.int(1, 2), k = rng.int(1, 3), T = 2 * k + rng.int(1, 2), r = 2 * k;
+      const S = (t) => c * (t ** 3 - 3 * k * t * t), back = -S(r), fwd = S(T) - S(r), anti = poly([c, -3 * c * k, 0, 0], "t"), vI = (lo, hi) => `\\displaystyle\\int_{${lo}}^{${hi}} v(t)\\,\\mathrm{d}t`;
+      return { params: { c, k, T }, stem: `${MOVES} Its velocity, $v\\text{ m s}^{-1}$, at time $t$ seconds is $v(t) = ${poly([3 * c, -6 * c * k, 0], "t")}$, for $0 \\le t \\le ${T}$.`, parts: [
+        P("Find the value of $t$, with $t > 0$, at which the particle is instantaneously at rest.", 2, ans.int(r), [`$v(t) = 0$ gives $${3 * c}t${factor(r, "t")} = 0$`, `$t = 0$ or $t = ${r}$, so the particle is at rest when $t = ${r}$.`]),
+        P(`Find the displacement of the particle, in metres, from its starting position when $t = ${T}$.`, 2, ans.int(S(T)), [`$${vI(0, T)} = \\left[${anti}\\right]_{0}^{${T}}$`, `$= ${S(T)}$`]),
+        P(`Find the total distance, in metres, travelled by the particle for $0 \\le t \\le ${T}$.`, 3, ans.int(back + fwd), [
+          `The particle changes direction at $t = ${r}$, so work out the two parts of the motion separately.`,
+          `$${vI(0, r)} = ${-back}$ and $${vI(r, T)} = ${S(T)} - ${paren(S(r))} = ${fwd}$`, `Total distance: $${back} + ${fwd} = ${back + fwd}$`])] };
+    } });
+  reg({ ...KD, syllabus: ["5.9"], unknown: "total-distance-gdc", representation: "equation", format: "value", levels: [4], calculator: true, skills: ["SL5.9.total-distance", "SL5.9.rest-and-direction", "SL5.9.velocity-acceleration"], title: "Rest, acceleration and total distance with the GDC",
+    build({ rng }) {
+      const a = rng.int(3, 6), b = rng.pick([0.5, 0.8, 1.2, 1.5]), c = rng.int(1, 2), T = 6, t0 = rng.int(1, 3), al = Math.asin(c / a);
+      const V = (t) => -(a / b) * Math.cos(b * t) - c * t, roots = [];
+      for (let n = 0; n < 4; n++) roots.push((al + 2 * Math.PI * n) / b, (Math.PI - al + 2 * Math.PI * n) / b);
+      const cuts = [0, ...roots.filter((t) => t > 0 && t < T).sort((x, y) => x - y), T];
+      let dist = 0;
+      for (let i = 1; i < cuts.length; i++) dist += Math.abs(V(cuts[i]) - V(cuts[i - 1]));
+      const acc = a * b * Math.cos(b * t0), vt = `${a}\\sin(${num(b)}t) - ${c}`;
+      return { params: { a, b, c, T, t0 }, stem: `${MOVES} Its velocity, $v\\text{ m s}^{-1}$, at time $t$ seconds is $v(t) = ${vt}$, for $0 \\le t \\le ${T}$.`, parts: [
+        P("Find the time at which the particle is first instantaneously at rest.", 2, ans.sf(cuts[1]), ["The particle is at rest when $v(t) = 0$. With the GDC in radians, find the first zero of the graph of $v$.", `$t \\approx ${sf(cuts[1])}$`]),
+        P(`Find the acceleration of the particle, in $\\text{m s}^{-2}$, when $t = ${t0}$.`, 2, ans.sf(acc), [
+          `Acceleration is $v'(t)$. Use the numerical derivative on the GDC at $t = ${t0}$, or differentiate: $v'(t) = ${num(a * b)}\\cos(${num(b)}t)$`, `$v'(${t0}) \\approx ${sf(acc)}$`]),
+        P(`Find the total distance, in metres, travelled by the particle for $0 \\le t \\le ${T}$.`, 3, ans.sf(dist), [
+          `The velocity changes sign, so the distance is the integral of the speed: $\\displaystyle\\int_{0}^{${T}} \\left|v(t)\\right|\\,\\mathrm{d}t$`,
+          `On the GDC, $\\displaystyle\\int_{0}^{${T}} \\left|${vt}\\right|\\,\\mathrm{d}t \\approx ${sf(dist)}$`])] };
+    } });
+  reg({ ...KD, syllabus: ["5.9"], unknown: "distance-from-graph", representation: "graph", format: "value", levels: [2], skills: ["SL5.9.motion-graphs", "SL5.9.total-distance"], title: "Acceleration and distance from a velocity-time graph",
+    build({ rng }) {
+      const t1 = rng.int(1, 2), t2 = t1 + rng.int(2, 4), t3 = t2 + rng.int(1, 2), t4 = t3 + rng.int(1, 2), V = rng.pick([2, 3, 4, 6]), W = rng.int(1, 3);
+      const pts = [[0, 0], [t1, V], [t2, V], [t3, 0], [t4, -W]], acc = rat.Q(V, t1), fwd = rat.Q((t3 + t2 - t1) * V, 2), back = rat.Q((t4 - t3) * W, 2), total = rat.add(fwd, back);
+      return { params: { t1 },
+        graph: { x: [0, t4 + 1], y: [-4, 7], xStep: 1, yStep: 1, xLabel: "t", yLabel: "v", functions: [{ fn: { type: "pwl", points: pts } }], points: pts.map(([x, y]) => ({ x, y })), alt: "A velocity-time graph made of straight line segments" },
+        stem: "The diagram shows the velocity-time graph of a particle moving in a straight line, where $v$ is its velocity in metres per second and $t$ is the time in seconds. The graph is made of straight line segments joining points with integer coordinates.", parts: [
+          P(`Find the acceleration of the particle, in $\\text{m s}^{-2}$, for $0 < t < ${t1}$.`, 1, ans.frac(acc.n, acc.d), [`Acceleration is the gradient of the velocity-time graph: $\\dfrac{${V} - 0}{${t1} - 0} = ${rat.tex(acc)}$`]),
+          P("Write down the time at which the particle changes direction.", 1, ans.int(t3), [`The particle changes direction when its velocity changes sign, which is at $t = ${t3}$.`]),
+          P(`Find the total distance, in metres, travelled by the particle for $0 \\le t \\le ${t4}$.`, 2, ans.frac(total.n, total.d), [
+            "Distance is the area between the graph and the $t$-axis, with the part below the axis counted as positive.",
+            `Above the axis there is a trapezium with parallel sides $${t3}$ and $${t2 - t1}$ and height $${V}$, so its area is $${rat.tex(fwd)}$.`,
+            `Below the axis there is a triangle with base $${t4 - t3}$ and height $${W}$, so its area is $${rat.tex(back)}$.`, `Total distance: $${rat.tex(fwd)} + ${rat.tex(back)} = ${rat.tex(total)}$`])] };
+    } });
+
+  // ======================= 5.5 areas and integrals with the GDC =======================
+  reg({ type: "t5-ext-area-under-curve", syllabus: ["5.5", "5.11"], unknown: "area-gdc-limits", representation: "graph", format: "value", levels: [4], calculator: true,
+    skills: ["SL5.5.area-positive", "SL5.5.definite-integral-gdc", "SL5.5.area-expression"], title: "Area between a curve and the x-axis with the GDC",
+    build({ rng }) {
+      const a = rng.int(2, 5), b = rng.int(1, 3), f = (x) => a + b * x - Math.exp(x), F = (x) => a * x + (b * x * x) / 2 - Math.exp(x);
+      const r1 = bisect(f, -a / b - 1, 0), r2 = bisect(f, 0, 6), area = F(r2) - F(r1), top = f(Math.log(b)), fx = expr([[a, ""], [b, "x"], [-1, "\\mathrm{e}^{x}"]]);
+      return { params: { a, b },
+        graph: { x: [Math.floor(r1) - 1, Math.ceil(r2) + 1], y: [-2, Math.ceil(top) + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "sum", of: [{ type: "poly", coeffs: [a, b] }, { type: "exp", a: -1 }] }, label: "f" }],
+          points: [{ x: r1, y: 0, label: "A" }, { x: r2, y: 0, label: "B" }], alt: "A curve that rises above the x-axis between the points A and B" },
+        stem: `The diagram shows the graph of $f(x) = ${fx}$. The graph crosses the $x$-axis at the points $\\mathrm{A}$ and $\\mathrm{B}$. The region $R$ is enclosed by the graph of $f$ and the $x$-axis.`, parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(r1), ["Find the zeros of $f$ on the GDC.", `The left-hand zero is $x \\approx ${sf(r1)}$.`]),
+          P("Find the $x$-coordinate of $\\mathrm{B}$.", 1, ans.sf(r2), [`The right-hand zero is $x \\approx ${sf(r2)}$.`]),
+          P("Find the area of $R$.", 3, ans.sf(area), [
+            `Between $\\mathrm{A}$ and $\\mathrm{B}$ the graph is above the $x$-axis, so the area is $\\displaystyle\\int_{${sf(r1)}}^{${sf(r2)}} \\left(${fx}\\right)${dx}$.`, `Using the unrounded limits on the GDC, the area is approximately $${sf(area)}$.`])] };
+    } });
+  reg({ type: "t5-ext-integral-gdc", syllabus: ["5.5"], unknown: "gdc-value", representation: "equation", format: "value", levels: [1], calculator: true, skills: ["SL5.5.definite-integral-gdc"], title: "A definite integral on the GDC",
+    build({ rng }) {
+      const fam = rng.int(0, 2), k = rng.int(2, 6), lo = rng.int(0, 2), hi = lo + rng.int(1, 3);
+      const X = [{ tex: `\\sqrt{x^{3} + ${k}}`, f: (x) => Math.sqrt(x ** 3 + k) }, { tex: `\\ln\\left(x^{2} + ${k}\\right)`, f: (x) => Math.log(x * x + k) }, { tex: `${k}\\mathrm{e}^{-x^{2}}`, f: (x) => k * Math.exp(-x * x) }][fam];
+      const I = gauss(X.f, lo, hi), whole = `\\displaystyle\\int_{${lo}}^{${hi}} ${X.tex}${dx}`;
+      return { params: { fam, k, lo, hi }, stem: `Consider the integral $${whole}$.`, parts: [
+        P("Use the GDC to find the value of this integral.", 2, ans.sf(I), ["This integral cannot be found by hand with the methods of this course, so use the numerical integration function on the GDC.", `$${whole} \\approx ${sf(I)}$`])] };
+    } });
+
+  // ======================= 5.6 rules with a model and with values from a table =======================
+  const DM = { type: "t5-derivative-model-gdc", syllabus: ["5.6", "5.1"] };
+  reg({ ...DM, unknown: "greatest-rate", representation: "equation", format: "value", levels: [4], calculator: true, skills: ["SL5.6.rules-with-values", "SL5.1.interpret-derivative"], title: "Rate of growth of a logistic model",
+    build({ rng }) {
+      const L = rng.pick([40, 60, 80, 120, 150]), c = rng.pick([4, 5, 8, 9, 12, 15, 19]), k = rng.pick([0.2, 0.25, 0.3, 0.4, 0.5, 0.6]), t1 = rng.pick([2, 3, 5]);
+      const h = (t) => L / (1 + c * Math.exp(-k * t)), dh = (t) => (L * c * k * Math.exp(-k * t)) / (1 + c * Math.exp(-k * t)) ** 2, tm = Math.log(c) / k, top = (L * k) / 4;
+      return { params: { L, c, k, t1 }, stem: `The height of a sunflower, $h$ centimetres, $t$ weeks after it is planted, is modelled by $h(t) = \\dfrac{${L}}{1 + ${c}${ek(-k, "t")}}$, for $t \\ge 0$.`, parts: [
+        P("Find the height of the sunflower when it is planted.", 1, ans.sf(h(0)), [`$h(0) = \\dfrac{${L}}{1 + ${c}} \\approx ${sf(h(0))}$`]),
+        P(`Find the rate at which the sunflower is growing when $t = ${t1}$.`, 2, ans.sf(dh(t1)), [`The rate of growth is $h'(${t1})$. Use the numerical derivative on the GDC.`, `$h'(${t1}) \\approx ${sf(dh(t1))}$, in centimetres per week.`]),
+        P("Find the value of $t$ at which the sunflower is growing fastest.", 2, ans.sf(tm), ["Draw the graph of $h'(t)$ on the GDC and find its maximum point.", `The maximum of $h'(t)$ is at $t \\approx ${sf(tm)}$.`]),
+        P("Find the greatest rate of growth of the sunflower.", 2, ans.sf(top), [`The $y$-coordinate of the maximum point of the graph of $h'(t)$ is approximately $${sf(top)}$, so the greatest rate of growth is about $${sf(top)}$ centimetres per week.`])] };
+    } });
+  reg({ ...DM, syllabus: ["5.6"], unknown: "product-from-table", representation: "table", format: "value", levels: [3], skills: ["SL5.6.rules-with-values", "SL5.6.product-rule", "SL5.6.chain-rule"], title: "Product and chain rules with values from a table",
+    build({ rng }) {
+      const nz = () => rng.nonzero(-5, 6), f = [nz(), nz(), nz()], g = [rng.int(2, 3), nz(), nz()], fp = [nz(), nz(), nz()], gp = [nz(), nz(), nz()];
+      const hp = fp[1] * g[1] + f[1] * gp[1], kp = fp[g[0] - 1] * gp[0], row = (name, vs) => [name, ...vs.map((v) => `$${v}$`)];
+      return { params: { f, g, fp, gp }, stem: "The table gives values of two functions $f$ and $g$ and of their derivatives $f'$ and $g'$ at $x = 1$, $x = 2$ and $x = 3$.",
+        table: { head: ["$x$", "$1$", "$2$", "$3$"], rows: [row("$f(x)$", f), row("$g(x)$", g), row("$f'(x)$", fp), row("$g'(x)$", gp)] }, parts: [
+          P("Let $h(x) = f(x)g(x)$. Find $h'(2)$.", 3, ans.int(hp), ["By the product rule, $h'(x) = f'(x)g(x) + f(x)g'(x)$.", `$h'(2) = f'(2)g(2) + f(2)g'(2) = ${br(fp[1])}${br(g[1])} + ${br(f[1])}${br(gp[1])}$`, `$h'(2) = ${hp}$`]),
+          P("Let $k(x) = f(g(x))$. Find $k'(1)$.", 3, ans.int(kp), ["By the chain rule, $k'(x) = f'(g(x)) \\times g'(x)$.", `$k'(1) = f'(g(1)) \\times g'(1) = f'(${g[0]}) \\times ${paren(gp[0])}$`, `$k'(1) = ${br(fp[g[0] - 1])}${br(gp[0])} = ${kp}$`])] };
+    } });
+
+  // ======================= 5.10 standard integrals and a rate model =======================
+  reg({ ...II, syllabus: ["5.10"], unknown: "standard-exp-trig", format: "mcq", levels: [1], skills: ["SL5.10.standard-integrals"], title: "Integrals of sine, cosine and the exponential function",
+    build({ rng }) {
+      const a = rng.pick([2, 3, 4, 5, 6]), b = rng.pick([2, 3, 4, 5, 7]), fam = rng.int(0, 1), opt = intOpt("");
+      const X = [
+        { f: [[a, "cos", 1], [b, "exp", 1]], F: [[a, "sin", 1], [b, "exp", 1]], rule: "The integral of $\\cos x$ is $\\sin x$ and the integral of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$.",
+          w: [opt([[-a, "sin", 1], [b, "exp", 1]], "The integral of $\\cos x$ is $\\sin x$, with no change of sign."), opt([[a, "cos", 1], [b, "exp", 1]], "The term in $\\cos x$ has not been integrated."), opt([[a, "sin", 1], [-b, "exp", 1]])] },
+        { f: [[a, "sin", 1], [b, "exp", 1]], F: [[-a, "cos", 1], [b, "exp", 1]], rule: "The integral of $\\sin x$ is $-\\cos x$ and the integral of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$.",
+          w: [opt([[a, "cos", 1], [b, "exp", 1]], "The integral of $\\sin x$ is $-\\cos x$."), opt([[a, "sin", 1], [b, "exp", 1]], "The term in $\\sin x$ has not been integrated."), opt([[-a, "sin", 1], [b, "exp", 1]])] }][fam];
+      return { params: { f: X.f }, stem: `Consider $\\displaystyle\\int \\left(${termsTex(X.f)}\\right)${dx}$.`, parts: [
+        P("Which expression is equal to this integral?", 2, ans.choice(rng, opt(X.F), X.w), [X.rule, `$\\displaystyle\\int \\left(${termsTex(X.f)}\\right)${dx} = ${termsTex(X.F)} + C$`])] };
+    } });
+  reg({ ...II, syllabus: ["5.10"], unknown: "linear-trig", format: "value", levels: [2], skills: ["SL5.10.linear-composites", "SL5.10.standard-integrals"], title: "Integrate a sine or cosine and an exponential of a multiple of x",
+    build({ rng }) {
+      const a = rng.int(2, 5), k = rng.pick([1, 2, 3, 4, 6, 8, 9, 10]), isSin = rng.bool(), b = rng.pick([2, 3, 4, -2, -3]), j = rng.pick([1, 2, 3, 5, 6, 8]);
+      const A = rat.Q(isSin ? -k : k, a), B = rat.Q(j, b), f1 = isSin ? "sin" : "cos", F1 = isSin ? "cos" : "sin", da = isSin ? -a : a, e = ek(b);
+      return { params: { a, k, isSin, b, j }, stem: "This question is about integrating functions of a multiple of $x$. In each part, $C$ is a constant of integration.", parts: [
+        P(`It is given that $\\displaystyle\\int ${coef(k, `\\${f1} ${a}x`)}${dx} = A\\${F1} ${a}x + C$, where $A$ is a constant. Find the value of $A$.`, 2, ans.frac(A.n, A.d), [
+          `The derivative of $\\${F1} ${a}x$ is $${coef(da, `\\${f1} ${a}x`)}$.`, `So $A \\times ${paren(da)} = ${k}$ and $A = ${rat.tex(A)}$.`]),
+        P(`It is given that $\\displaystyle\\int ${coef(j, e)}${dx} = B${e} + C$, where $B$ is a constant. Find the value of $B$.`, 2, ans.frac(B.n, B.d), [
+          `The derivative of $${e}$ is $${coef(b, e)}$.`, `So $B \\times ${paren(b)} = ${j}$ and $B = ${rat.tex(B)}$.`])] };
+    } });
+  reg({ ...AC, syllabus: ["5.10", "5.5"], unknown: "rate-model", representation: "words", format: "value", levels: [4], calculator: true, skills: ["SL5.10.find-function-from-derivative", "SL5.5.total-change-from-rate"], title: "Amount from a rate of change and a starting value",
+    build({ rng }) {
+      const a = rng.pick([8, 10, 12, 16, 18, 20]), k = rng.pick([0.1, 0.2, 0.25, 0.4, 0.5]), V0 = rng.pick([20, 30, 50, 75]), t1 = rng.int(3, 6), cap = Math.round(a / k), lim = V0 + cap;
+      const Vt = (t) => V0 + cap * (1 - Math.exp(-k * t)), target = Math.round(V0 + rng.pick([0.5, 0.6, 0.7, 0.8]) * cap), t2 = -Math.log(1 - (target - V0) / cap) / k, R = `${a}${ek(-k, "t")}`;
+      return { params: { a, k, V0, t1, target }, stem: `Water is pumped into a tank. The rate at which water enters the tank, in litres per minute, $t$ minutes after the pump is switched on, is modelled by $R(t) = ${R}$, for $t \\ge 0$. When the pump is switched on, the tank already contains $${V0}$ litres of water.`, parts: [
+        P(`Find the volume of water in the tank, in litres, when $t = ${t1}$.`, 3, ans.sf(Vt(t1)), [
+          `The volume added is the integral of the rate: $\\displaystyle\\int_{0}^{${t1}} ${R}\\,\\mathrm{d}t \\approx ${sf(Vt(t1) - V0)}$`, `Add the starting volume: $${V0} + ${sf(Vt(t1) - V0)} \\approx ${sf(Vt(t1))}$`]),
+        P(`Find the value of $t$ at which the tank contains $${target}$ litres of water.`, 2, ans.sf(t2), [
+          `The volume at time $t$ is $${V0} + ${cap}\\left(1 - ${ek(-k, "t")}\\right)$, found by integrating $R$ and adding the starting volume.`, `Solve $${V0} + ${cap}\\left(1 - ${ek(-k, "t")}\\right) = ${target}$ on the GDC: $t \\approx ${sf(t2)}$`]),
+        P("As $t$ increases, the volume of water in the tank approaches $L$ litres. Find the value of $L$.", 2, ans.int(lim), [
+          `As $t$ increases, $${ek(-k, "t")}$ approaches $0$, so the volume approaches $${V0} + ${cap}$.`, `$L = ${lim}$`])] };
+    } });
+
+  // ======================= 5.11 definite integrals and areas: more ways to ask =======================
+  reg({ ...DI, unknown: "evaluate-linear", levels: [1], skills: ["SL5.11.evaluate-definite"], title: "Evaluate a definite integral of a linear function",
+    build({ rng }) {
+      const a = rng.int(1, 4), c = rng.int(1, 6), lo = rng.int(0, 2), hi = lo + rng.int(1, 3), F = (x) => a * x * x + c * x, v = F(hi) - F(lo), whole = `\\displaystyle\\int_{${lo}}^{${hi}} \\left(${lin(2 * a, c)}\\right)${dx}`;
+      return { params: { a, c, lo, hi }, stem: `Consider the integral $${whole}$.`, parts: [
+        P("Find the value of the integral.", 2, ans.int(v), [`$${whole} = \\left[${poly([a, c, 0])}\\right]_{${lo}}^{${hi}}$`, `$= ${F(hi)} - ${F(lo)} = ${v}$`])] };
+    } });
+  reg({ ...DI, unknown: "evaluate-trig", levels: [3], skills: ["SL5.11.evaluate-definite", "SL5.10.linear-composites"], title: "Definite integrals of sine and cosine",
+    build({ rng }) {
+      const b = rng.pick([2, 3, 4, 6]), a = rng.int(1, 9), c = rng.int(1, 6), d = rng.int(1, 4), v1 = rat.Q(a, b), cb = rat.Q(c, b), up1 = `\\frac{\\pi}{${2 * b}}`, up2 = `\\frac{\\pi}{${b}}`;
+      const f = coef(a, `\\cos ${b}x`), g = `${coef(c, `\\sin ${b}x`)} + ${d}`, tex2 = `${rat.tex(rat.Q(2 * c, b))} + ${piFrac(d, b)}`, half = "\\sin\\left(\\dfrac{\\pi}{2}\\right)";
+      return { params: { a, b, c, d }, stem: `Let $f(x) = ${f}$ and $g(x) = ${g}$.`, parts: [
+        P(`Find the exact value of $\\displaystyle\\int_{0}^{${up1}} f(x)${dx}$.`, 3, ans.frac(v1.n, v1.d), [
+          `$\\displaystyle\\int_{0}^{${up1}} ${f}${dx} = \\left[${coef(v1, `\\sin ${b}x`)}\\right]_{0}^{${up1}}$`, `$= ${coef(v1, half)} - ${coef(v1, "\\sin 0")}$`, `$= ${rat.tex(v1)}$`]),
+        P(`Find the exact value of $\\displaystyle\\int_{0}^{${up2}} g(x)${dx}$.`, 3, ans.exact((2 * c) / b + (d * Math.PI) / b, tex2), [
+          `$\\displaystyle\\int_{0}^{${up2}} \\left(${g}\\right)${dx} = \\left[${coef(rat.neg(cb), `\\cos ${b}x`)} + ${coef(d, "x")}\\right]_{0}^{${up2}}$`,
+          `$= \\left(${coef(rat.neg(cb), "\\cos \\pi")} + ${piFrac(d, b)}\\right) - \\left(${coef(rat.neg(cb), "\\cos 0")}\\right)$`,
+          `$\\cos \\pi = -1$ and $\\cos 0 = 1$, so the value is $${rat.tex(cb)} + ${piFrac(d, b)} + ${rat.tex(cb)} = ${tex2}$`])] };
+    } });
+  reg({ ...DI, unknown: "evaluate-log", levels: [3], skills: ["SL5.11.evaluate-definite", "SL5.10.standard-integrals", "SL5.10.linear-composites"], title: "Definite integrals that give logarithms",
+    build({ rng }) {
+      const k = rng.int(2, 3), a = rng.int(2, 3), c = rng.int(2, 4), p = rng.int(1, 4), N = k ** a, M = c * p + 1;
+      const I1 = `\\displaystyle\\int_{1}^{${k}} \\dfrac{${a}}{x}${dx}`, I2 = `\\displaystyle\\int_{0}^{${p}} \\dfrac{${c}}{${c}x + 1}${dx}`;
+      return { params: { k, a, c, p }, stem: "In this question, each integral can be written as the natural logarithm of an integer.", parts: [
+        P(`It is given that $${I1} = \\ln N$. Find the value of $N$.`, 3, ans.int(N), [`$${I1} = \\left[${a}\\ln x\\right]_{1}^{${k}} = ${a}\\ln ${k} - ${a}\\ln 1$`, `$\\ln 1 = 0$ and $${a}\\ln ${k} = \\ln ${k}^{${a}} = \\ln ${N}$`, `$N = ${N}$`]),
+        P(`It is given that $${I2} = \\ln M$. Find the value of $M$.`, 3, ans.int(M), [
+          `The derivative of $\\ln(${c}x + 1)$ is $\\dfrac{${c}}{${c}x + 1}$, so $${I2} = \\left[\\ln(${c}x + 1)\\right]_{0}^{${p}}$`, `$= \\ln ${M} - \\ln 1 = \\ln ${M}$`, `$M = ${M}$`])] };
+    } });
+  reg({ ...DI, unknown: "area-across-root", representation: "graph", levels: [3], skills: ["SL5.11.area-with-negative-regions", "SL5.11.evaluate-definite"], title: "Area of a region that is partly below the x-axis",
+    build({ rng }) {
+      const k = rng.int(1, 3), mU = k + rng.int(1, 2), I = rat.sub(rat.Q(mU ** 3, 3), k * k * mU), below = rat.Q(2 * k ** 3, 3), above = rat.add(I, below), area = rat.add(above, below);
+      const body = `\\left(x^{2} - ${k * k}\\right)${dx}`, J = (lo, hi) => `\\displaystyle\\int_{${lo}}^{${hi}} ${body}`;
+      return { params: { k, mU },
+        graph: { x: [-1, mU + 1], y: [-k * k - 1, mU * mU - k * k + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [-k * k, 0, 1] } }], asymptotes: [{ x: mU }], points: [{ x: k, y: 0 }], alt: "A parabola that crosses the x-axis, with a vertical dashed line to its right" },
+        stem: `The diagram shows part of the curve $y = x^{2} - ${k * k}$ and the line $x = ${mU}$. The region $R$ is bounded by the curve, the $x$-axis, the $y$-axis and the line $x = ${mU}$. Part of $R$ is below the $x$-axis and part is above it.`, parts: [
+          P(`Find $${J(0, mU)}$.`, 2, ans.frac(I.n, I.d), [`$\\left[\\dfrac{x^{3}}{3} - ${coef(k * k, "x")}\\right]_{0}^{${mU}} = ${frac(mU ** 3, 3)} - ${k * k * mU}$`, `$= ${rat.tex(I)}$`]),
+          P("Find the $x$-coordinate of the point where the curve crosses the positive $x$-axis.", 1, ans.int(k), [`$x^{2} - ${k * k} = 0$ and $x > 0$, so $x = ${k}$.`]),
+          P("Find the total area of $R$.", 3, ans.frac(area.n, area.d), [
+            `For $0 \\le x \\le ${k}$ the curve is below the axis: $${J(0, k)} = ${frac(k ** 3, 3)} - ${k ** 3} = ${rat.tex(rat.neg(below))}$, so this part has area $${rat.tex(below)}$.`,
+            `For $${k} \\le x \\le ${mU}$ the curve is above the axis: $${J(k, mU)} = ${rat.tex(I)} - ${paren(rat.neg(below))} = ${rat.tex(above)}$`, `Total area: $${rat.tex(below)} + ${rat.tex(above)} = ${rat.tex(area)}$`])] };
+    } });
+  reg({ ...DI, unknown: "area-gdc", representation: "graph", levels: [4], calculator: true, skills: ["SL5.11.evaluate-definite", "SL5.5.definite-integral-gdc", "SL5.11.unknown-limit-or-parameter"], title: "Area under a curve with the GDC, and a line that halves it",
+    build({ rng }) {
+      const a = rng.int(2, 5), k = rng.pick([0.25, 0.4, 0.5, 0.8]), qU = rng.int(4, 6), F = (x) => -(a / k) * (x + 1 / k) * Math.exp(-k * x);
+      const area = F(qU) - F(0), top = a / (k * Math.E), half = bisect((x) => F(x) - F(0) - area / 2, 0, qU), fx = `${a}x${ek(-k)}`;
+      return { params: { a, k, qU },
+        graph: { x: [0, qU + 1], y: [0, Math.ceil(top) + 1], xStep: 1, functions: [{ fn: { type: "product", of: [{ type: "poly", coeffs: [0, a] }, { type: "exp", b: Math.exp(-k) }] }, label: "f" }], asymptotes: [{ x: qU }], alt: "A curve that rises from the origin to a maximum and then falls, with a vertical dashed line" },
+        stem: `The diagram shows the graph of $f(x) = ${fx}$, for $x \\ge 0$, and the line $x = ${qU}$. The region $R$ is enclosed by the graph of $f$, the $x$-axis and the line $x = ${qU}$.`, parts: [
+          P("Find the maximum value of $f$.", 2, ans.sf(top), [`Find the maximum point of the graph of $f$ on the GDC. It is at $x = ${sf(1 / k)}$.`, `The maximum value is approximately $${sf(top)}$.`]),
+          P("Find the area of $R$.", 2, ans.sf(area), [`Area: $\\displaystyle\\int_{0}^{${qU}} ${fx}${dx}$`, `Using the GDC, the area is approximately $${sf(area)}$.`]),
+          P("The line $x = m$ divides $R$ into two regions of equal area. Find the value of $m$.", 3, ans.sf(half), [
+            `Each region has area $\\dfrac{${sf(area)}}{2} \\approx ${sf(area / 2)}$.`, `Solve $\\displaystyle\\int_{0}^{m} ${fx}${dx} = ${sf(area / 2)}$ on the GDC, keeping unrounded values.`, `$m \\approx ${sf(half)}$`])] };
+    } });
+  reg({ ...DI, unknown: "unknown-upper-limit", format: "mcq", levels: [3], skills: ["SL5.11.unknown-limit-or-parameter", "SL5.11.evaluate-definite"], title: "Find an unknown upper limit",
+    build({ rng }) {
+      let r, s;
+      do { r = rng.int(1, 6); s = rng.int(1, 7); } while (r === s);
+      const b = s - r, N = r * s, kOpt = (cs, why) => ({ text: m(poly(cs, "k")), value: cs, why }), whole = `\\displaystyle\\int_{0}^{k} \\left(${lin(2, b)}\\right)${dx}`;
+      return { params: { b, N }, stem: `It is given that $${whole} = ${N}$, where $k > 0$.`, parts: [
+        P(`Which expression is equal to $${whole}$?`, 2, ans.choice(rng, kOpt([1, b, 0]), [
+          kOpt([2, b], "This is the integrand with $x$ replaced by $k$. It has not been integrated."), kOpt([2, b, 0], "Integrating $2x$ gives $x^{2}$: divide by the new power."),
+          kOpt([1, 0, b], `Integrating the constant $${b}$ gives $${coef(b, "x")}$.`), kOpt([1, 2 * b, 0])]), [`$${whole} = \\left[${poly([1, b, 0])}\\right]_{0}^{k}$`, `$= ${poly([1, b, 0], "k")}$`]),
+        P("Find the value of $k$.", 3, ans.int(r), [`$${poly([1, b, 0], "k")} = ${N}$, so $${poly([1, b, -N], "k")} = 0$`, `$${factor(r, "k")}${factor(-s, "k")} = 0$, so $k = ${r}$ or $k = ${-s}$`, `Since $k > 0$, $k = ${r}$.`])] };
+    } });
+  reg({ type: "t5-ext-integral-properties", syllabus: ["5.11"], unknown: "linear-combination", representation: "equation", format: "value", levels: [2], skills: ["SL5.11.integral-properties"], title: "Use the properties of definite integrals",
+    build({ rng }) {
+      const p = rng.int(0, 2), q = p + rng.int(2, 4), r = q + rng.int(1, 3), A = rng.nonzero(-6, 9), B = rng.nonzero(-5, 8), c = rng.int(2, 4), d = rng.int(1, 5);
+      const I = (lo, hi, body) => `\\displaystyle\\int_{${lo}}^{${hi}} ${body}${dx}`, combo = `\\left(${c}f(x) + ${d}\\right)`, v = c * A + d * (q - p);
+      return { params: { p, q, r, A, B, c, d }, stem: `It is given that $${I(p, q, "f(x)")} = ${A}$ and $${I(q, r, "f(x)")} = ${B}$.`, parts: [
+        P(`Find $${I(p, r, "f(x)")}$.`, 1, ans.int(A + B), [`$${I(p, r, "f(x)")} = ${I(p, q, "f(x)")} + ${I(q, r, "f(x)")} = ${A} + ${paren(B)} = ${A + B}$`]),
+        P(`Find $${I(q, p, "f(x)")}$.`, 1, ans.int(-A), [`Swapping the limits changes the sign: $${I(q, p, "f(x)")} = ${-A}$`]),
+        P(`Find $${I(p, q, combo)}$.`, 2, ans.int(v), [`$${I(p, q, combo)} = ${c}${I(p, q, "f(x)")} + ${I(p, q, String(d))}$`, `$= ${c}${br(A)} + ${d}${br(q - p)} = ${v}$`])] };
+    } });
+  reg({ ...AB, unknown: "area-two-parabolas", representation: "graph", levels: [3], skills: ["SL5.11.area-between-curves"], title: "Area between two parabolas",
+    build({ rng }) {
+      let a, k;
+      do { a = rng.int(1, 2); k = rng.int(1, 3); } while (a * k * k > 9);
+      const c = rng.int(0, 3), top = 2 * a * k * k + c, area = rat.Q(8 * a * k ** 3, 3), Fk = rat.Q(4 * a * k ** 3, 3), fT = poly([a, 0, c]), gT = poly([-a, 0, top]);
+      return { params: { a, c, top },
+        graph: { x: [-k - 1, k + 1], y: [-1, top + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [c, 0, a] }, label: "f" }, { fn: { type: "poly", coeffs: [top, 0, -a] }, label: "g" }], alt: "Two parabolas, one opening upwards and one opening downwards, crossing at two points" },
+        stem: `The diagram shows the graphs of $f(x) = ${fT}$ and $g(x) = ${gT}$. The graphs intersect at two points and enclose a region $R$.`, parts: [
+          P("Find the positive value of $x$ at which the graphs intersect.", 2, ans.int(k), [`$${fT} = ${gT}$ gives $${coef(2 * a, "x^{2}")} = ${2 * a * k * k}$`, `$x^{2} = ${k * k}$, so $x = ${k}$ or $x = ${-k}$. The positive value is $${k}$.`]),
+          P("Find the exact area of $R$.", 4, ans.frac(area.n, area.d), [
+            `Between the points of intersection $g(x) \\ge f(x)$, so the area is $\\displaystyle\\int_{${-k}}^{${k}} \\left(g(x) - f(x)\\right)${dx} = \\displaystyle\\int_{${-k}}^{${k}} \\left(${poly([-2 * a, 0, 2 * a * k * k])}\\right)${dx}$`,
+            `$= \\left[${expr([[rat.Q(-2 * a, 3), "x^{3}"], [2 * a * k * k, "x"]])}\\right]_{${-k}}^{${k}}$`, `$= ${rat.tex(Fk)} - ${paren(rat.neg(Fk))}$`, `$= ${rat.tex(area)}$`])] };
+    } });
+  reg({ ...AB, unknown: "gdc-area", representation: "graph", levels: [4], calculator: true, skills: ["SL5.11.area-between-curves", "SL5.5.definite-integral-gdc"], title: "Area between two curves with the GDC",
+    build({ rng }) {
+      const a = rng.int(2, 4), b = rng.pick([0.5, 1, 1.5, 2]), d = (x) => a * Math.sin(x) - b * x * x, pX = bisect(d, 0.3, Math.PI), area = a * (1 - Math.cos(pX)) - (b * pX ** 3) / 3;
+      const xm = bisect((x) => a * Math.cos(x) - 2 * b * x, 0, pX), gap = d(xm), gx = coef(b, "x^{2}");
+      return { params: { a, b },
+        graph: { x: [0, 4], y: [-1, a + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "trig", name: "sin", a }, label: "f" }, { fn: { type: "poly", coeffs: [0, 0, b] }, label: "g" }], points: [{ x: pX, y: a * Math.sin(pX), label: "A" }], alt: "A sine curve and a parabola that cross at the origin and at the point A" },
+        stem: `The diagram shows the graphs of $f(x) = ${a}\\sin x$ and $g(x) = ${gx}$, for $x \\ge 0$. The graphs intersect at the origin and at the point $\\mathrm{A}$. The region $R$ is enclosed by the two graphs.`, parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(pX), [`With the GDC in radians, solve $${a}\\sin x = ${gx}$ and take the solution with $x > 0$.`, `$x \\approx ${sf(pX)}$`]),
+          P("Find the area of $R$.", 3, ans.sf(area), [
+            `Between the origin and $\\mathrm{A}$ the graph of $f$ is above the graph of $g$, so the area is $\\displaystyle\\int_{0}^{${sf(pX)}} \\left(${a}\\sin x - ${gx}\\right)${dx}$.`, `Using the unrounded limit on the GDC, the area is approximately $${sf(area)}$.`]),
+          P("Find the greatest vertical distance between the two graphs for values of $x$ between the origin and $\\mathrm{A}$.", 2, ans.sf(gap), [
+            `The vertical distance is $${a}\\sin x - ${gx}$. Find the maximum point of the graph of this difference on the GDC.`, `The greatest distance is approximately $${sf(gap)}$, at $x \\approx ${sf(xm)}$.`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
