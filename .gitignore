@@ -17,3 +17,6 @@ assets/vi_*.png
 # Local working files (downloaded PDFs, logs, screenshots)
 _scratch/
 __pycache__/
+
+# Development tooling (KaTeX for scripts/check-engine.mjs)
+node_modules/

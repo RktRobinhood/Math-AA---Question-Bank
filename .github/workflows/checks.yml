@@ -1,0 +1,21 @@
+name: Checks
+
+on:
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # KaTeX (devDependency) is needed by check-engine.mjs to prove every string renders.
+      - run: npm ci
+      - name: Validate the data and the question-type catalogue
+        run: node scripts/build.mjs --check
+      - name: Generated practice files are up to date
+        run: node scripts/build-practice.mjs --check
+      - name: Check every practice generator, the selection rules and storage
+        run: node scripts/check-engine.mjs
