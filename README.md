@@ -104,6 +104,28 @@ Maths is typeset with KaTeX, which is served from the site. Statement text in `d
 
 ---
 
+### Practice
+
+Practice makes its own questions, in the style of exam questions, and adapts to the student. It covers AA SL.
+
+- **What's the test on?** Tick the subtopics you have studied. A teacher can press **Copy link to this scope** and share a link such as `practice.html?scope=3.2,3.4,3.5&title=Unit%20test`, which opens Practice on exactly those subtopics.
+- **One question at a time.** Answer with a number (fractions such as `3/4` are fine), a choice, or by picking a graph. Longer written parts are marked by you against the worked solution. Paper 1 style questions say "No calculator".
+- **After each answer** you see whether it was right, the worked solution, and three buttons: **Next question**, **Another like this** (same question, new numbers) and **Ask it another way** (a different unknown or representation).
+- **Levels.** A subtopic starts at level 2. Two right in a row moves up a level; two wrong out of three moves down. After level 4 come real past-paper questions, then reviews after 3, 7 and 14 days. At level 1, two wrong out of three brings a short refresher on what the subtopic depends on. Each change is explained in a line of plain words.
+- **Subtopics without generated questions yet** use their real past-paper questions, shortest first. [docs/practice-coverage.md](docs/practice-coverage.md) lists which those are.
+- **Progress** shows where every subtopic stands and what to do next. It is saved in the browser and sent nowhere. **Export progress** and **Import progress** move it between devices.
+- **Print a worksheet** makes a fixed set of questions on your scope with an answer key of worked solutions, to print or save as a PDF. **Copy link to this worksheet** gives a link that reproduces the same set.
+
+How the engine works, and how to add a question generator: [docs/practice-engine.md](docs/practice-engine.md). `node scripts/check-engine.mjs` checks every generator over 300 seeds (answers recomputed by a second method, clean numbers, notation, KaTeX rendering, marking, graphs) and runs on every pull request.
+
+---
+
+### Formula booklet
+
+The top bar opens the official IB formula booklet for your course as a PDF in a new tab.
+
+---
+
 ## Data
 
 The site is fully static: no server, no database, no build framework. `scripts/build.mjs` generates `assets/js/data.js` and every page from the files in `data/`. Styles are one file, `assets/css/styles.css`, with every colour, size and space as a variable in its first block.

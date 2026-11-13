@@ -11,7 +11,7 @@
 //   data/shared.json           HL appearances of questions stored once under their SL id
 //
 // Writes assets/js/data.js, assets/js/courses.js, the app pages (index.html, question-bank/,
-// statistics/, syllabus/, syllabus/topic-*/), questions/*/index.html and exams/*/index.html. Validates everything first and writes nothing if any check
+// statistics/, syllabus/, syllabus/topic-*/, practice.html), questions/*/index.html and exams/*/index.html. Validates everything first and writes nothing if any check
 // fails. A question with crops but no tags yet is published with "tags pending" unless --strict.
 //
 // Usage: node scripts/build.mjs [--check] [--strict]
@@ -331,6 +331,21 @@ appPage("syllabus/topic-0/index.html", "../../", "syllabus", { topic: 0, title: 
 for (const [topic, name] of Object.entries(topics)) {
   appPage(`syllabus/topic-${topic}/index.html`, "../../", "syllabus", { topic, title: `Topic ${topic}: ${name} | IB Math Question Bank` });
 }
+
+// ---- practice (#35) -----------------------------------------------------------------
+// The engine files load in the order docs/practice-engine.md gives; every generator file in the
+// folder is included, so adding a topic file needs no change here.
+const generatorFiles = fs.readdirSync(path.join(ROOT, "assets/js/engine/generators")).filter((f) => f.endsWith(".js")).sort();
+write("practice.html", page({
+  base: "./", title: "Practice | IB Math Question Bank", nav: "practice",
+  description: "Adaptive IB Mathematics AA SL practice: generated questions with worked solutions, by subtopic.",
+  head: `\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
+  body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
+  scripts: [
+    "vendor/katex/katex.min.js", "js/question-types.js", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}`), "js/basket.js", "js/generate.js", "js/practice.js",
+  ].map((f) => `<script src="assets/${f}"></script>`),
+}));
 
 // ---- question pages ---------------------------------------------------------------
 const partLabel = (l) => `(${l.replace("(", ")(")}` + (l.includes("(") ? "" : ")");

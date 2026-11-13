@@ -536,11 +536,19 @@ table.heat { border-collapse: separate; border-spacing: 2px; font-size: 12px; }
 .opt.right { border-color: var(--good); background: var(--good-soft); }
 .opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
 .opt svg, .graph svg { background: var(--paper); border-radius: var(--r-sm); max-width: 100%; height: auto; display: block; }
-.graph { align-self: center; max-width: 100%; }
+.graph { align-self: center; max-width: 100%; color: var(--paper-ink); }
+.opt .graph, .ws-doc .graph { color: var(--paper-ink); }
+.opt { color: inherit; }
+.opt:disabled { cursor: default; opacity: 1; }
+table.qtable { width: auto; margin: 0 auto; }
+.qtable th, .qtable td { border: 1px solid var(--line); background: none; padding: 6px 14px; text-align: center; font-weight: 500; }
+.ws-doc .qtable th, .ws-doc .qtable td { border-color: var(--paper-rule); }
+.qcard .katex { font-size: 1.1em; }
+.working .katex { font-size: 1.05em; }
 .verdict { border-radius: var(--r); padding: 9px 12px; font-weight: 600; }
 .verdict.ok { background: var(--good-soft); color: var(--good); }
 .verdict.no { background: var(--bad-soft); color: var(--bad); }
-.verdict.info { background: var(--accent-soft); color: var(--accent); }
+.verdict.info { background: var(--accent-soft); color: var(--accent); font-weight: 550; }
 .working { background: var(--sunk); border-radius: var(--r); padding: var(--s3) var(--s4); }
 .working ol { margin: 6px 0 0; padding-left: 20px; line-height: 1.7; }
 .next-row { display: flex; gap: var(--s2); flex-wrap: wrap; }
