@@ -183,6 +183,7 @@ The site is fully static — no server, no database. `scripts/build.mjs` generat
 | `data/crops.json`, `data/tags.json` | AA SL questions: images, parts, marks, part positions, and per-part tags |
 | `data/crops-<course>.json`, `data/tags-<course>.json` | The same for `aa-hl`, `ai-sl` and `ai-hl` |
 | `data/shared.json` | HL appearances of questions that are stored once under their SL id |
+| `data/question-types.json` | The catalogue of question types for the practice engine: syllabus codes, skills, levels, prerequisites and the bank parts each type covers. Seeded from Wasteland Academy, with the same type and skill ids. See [docs/practice-engine.md](docs/practice-engine.md) |
 
 AA SL keeps the original file names, because Wasteland Academy's `tools/question-types.mjs` reads them.
 
