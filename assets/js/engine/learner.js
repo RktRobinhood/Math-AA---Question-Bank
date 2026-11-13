@@ -182,7 +182,9 @@
     const codeById = new Map(statements.map((s) => [s.id, s.code]));
     const typeById = new Map((cat.types || []).map((t) => [t.id, t]));
 
-    const loaded = store.load();
+    // opts.state shares a save another learner has already loaded: one learner per course over
+    // one state object, so switching course on a page never works on a stale copy.
+    const loaded = opts.state ? { state: opts.state, status: "shared" } : store.load();
     const me = { course, config: cfg, store, loadStatus: loaded.status, loadInfo: loaded, state: loaded.state };
     const cs = () => (me.state.courses[course] = me.state.courses[course] || { units: {}, seen: {}, lastType: null, sinceReview: 0, sinceSynoptic: 0 });
 
