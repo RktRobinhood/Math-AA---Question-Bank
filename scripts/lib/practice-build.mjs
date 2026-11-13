@@ -110,7 +110,8 @@ export function checkPractice({ root = ROOT, questions, subtagName, courses, sta
   }
 
   const out = { root, catalogue, E, course, courses, statementsOf, unassigned, notes, real, partCount: allParts.size };
-  console.log(`Practice: ${catalogue.types.length} question types, ${E.registry.length} generators, ${unassigned.length} of ${allParts.size} ${course} parts not assigned to a type`);
+  // --todo and --todo-sub print JSON lines for other tools: keep their output clean.
+  if (!process.argv.some((a) => a.startsWith("--todo"))) console.log(`Practice: ${catalogue.types.length} question types, ${E.registry.length} generators, ${unassigned.length} of ${allParts.size} ${course} parts not assigned to a type`);
   return out;
 }
 

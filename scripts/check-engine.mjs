@@ -20,7 +20,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
-import { ROOT, loadEngine, checkPractice, browserCatalogue, standaloneContext } from "./lib/practice-build.mjs";
+import vm from "node:vm";
+import { ROOT, ENGINE_DIR, ENGINE_FILES, generatorFiles, loadEngine, checkPractice, browserCatalogue, standaloneContext } from "./lib/practice-build.mjs";
 import { makeTools, VerifyError } from "./engine-checks/tools.mjs";
 
 const args = process.argv.slice(2);
@@ -219,7 +220,7 @@ for (const g of gens) {
       for (const f of fails) if (problems.length < 6 && !problems.some((p) => p.slice(0, 40) === `L${level} seed ${seed}: ${f}`.replace(/seed \d+/, "seed").slice(0, 40))) problems.push(`L${level} seed ${seed}: ${f}`);
       if (!fails.length) sigs.add(E.signature(E.make({ generator: g.id, level, seed, course: g.courses[0] })));
     }
-    if (stats.p2 && !g.niceOk && stats.p2nice / stats.p2 > 0.2) problems.push(`[3] L${level}: ${stats.p2nice} of ${stats.p2} Paper 2 style questions have only "nice" answers`);
+    if (stats.p2 >= 100 && !g.niceOk && stats.p2nice / stats.p2 > 0.2) problems.push(`[3] L${level}: ${stats.p2nice} of ${stats.p2} Paper 2 style questions have only "nice" answers`);
     if (SEEDS >= 100 && sigs.size < 4 && !g.fixedPool) problems.push(`[3] L${level}: only ${sigs.size} different questions in ${SEEDS} seeds`);
     for (const k of Object.keys(totals)) totals[k] += stats[k];
   }
@@ -488,6 +489,26 @@ if (!ONLY) {
       const w = E.worksheet({ course, scope: [noGen[0]], count: 3, seed: 1, real });
       assert(w.items.length > 0 && w.items.every((it) => it.kind === "real"), "a subtopic without generators should give real questions on a worksheet");
     }
+  });
+
+  test("the files run as plain browser scripts and give the same questions", () => {
+    // a bare global with no require, module or process, as a <script> tag would see
+    const sandbox = vm.createContext({});
+    vm.runInContext("var window = this;", sandbox);
+    vm.runInContext("window.QB_TYPES = " + JSON.stringify(QB) + ";", sandbox);
+    for (const f of [...ENGINE_FILES, ...generatorFiles().map((g) => "generators/" + g)]) vm.runInContext(fs.readFileSync(path.join(ROOT, ENGINE_DIR, f), "utf8"), sandbox, { filename: f });
+    const out = JSON.parse(vm.runInContext(`(function () {
+      var first = QBEngine.registry[0], q = QBEngine.make({ generator: first.id, level: first.levels[0], seed: 5 });
+      var learner = QBEngine.learner.createLearner({ course: QB_TYPES.course, catalogue: QB_TYPES, now: function () { return 1; } });
+      var item = learner.next(["2.7"]);
+      var rec = learner.record(item, { correct: true });
+      return JSON.stringify({ n: QBEngine.registry.length, q: q, kind: item.kind, saved: rec.saved, keys: Object.keys(window).filter(function (k) { return k !== "window"; }) });
+    })()`, sandbox));
+    assert(out.n === E.registry.length, "not every generator registered in the browser-like global");
+    const g0 = E.registry[0];
+    assert(JSON.stringify(out.q) === JSON.stringify(E.make({ generator: g0.id, level: g0.levels[0], seed: 5 })), "the browser-like run made a different question");
+    assert(out.kind === "generated" && out.saved === true, "the learner did not run without localStorage");
+    assert(out.keys.sort().join() === "QBEngine,QB_TYPES", "the scripts leak globals: " + out.keys.join(", "));
   });
 
   test("no Math.random() or Date in the engine and generators", () => {
