@@ -1024,4 +1024,41 @@
           P("Find the greatest vertical distance between the two graphs for values of $x$ between the origin and $\\mathrm{A}$.", 2, ans.sf(gap), [
             `The vertical distance is $${a}\\sin x - ${gx}$. Find the maximum point of the graph of this difference on the GDC.`, `The greatest distance is approximately $${sf(gap)}$, at $x \\approx ${sf(xm)}$.`])] };
     } });
+
+  // ======================= second generators for two exam types =======================
+  reg({ type: "t5-derivative-graph", syllabus: ["5.7", "5.8", "5.2"], unknown: "pick-f-from-derivative", representation: "graph", format: "graph-pick", levels: [3], skills: ["SL5.7.f-from-derivative-graph", "SL5.7.sketch-match-graphs", "SL5.7.concavity"], title: "Pick the graph of f from the graph of its derivative",
+    build({ rng }) {
+      const d = rng.pick([1, 2]), mid = rng.int(-1, 1), s = rng.sign(), A = s * (d === 1 ? 3 : 0.75), a = mid - d, b = mid + d;
+      const W = (fn, alt) => win([-5, 5], [-6, 6], { functions: [{ fn }], alt });
+      const cubic = (A2, m2, d2, k2) => ({ type: "transform", of: { type: "poly", coeffs: [0, -d2 * d2, 0, 1 / 3] }, a: A2, h: m2, k: k2 || 0 });
+      const right = { graph: W(cubic(A, mid, d), "A cubic curve with two turning points"), value: "f" };
+      const wrongs = G.pickDistinct(right.graph, [
+        { graph: W(cubic(-A, mid, d), "A cubic curve with two turning points"), value: "reflected", why: "$f$ must be increasing where $f'(x) > 0$ and decreasing where $f'(x) < 0$." },
+        { graph: W(cubic(A, mid + d, d), "A cubic curve with two turning points"), value: "shifted", why: "The turning points of $f$ must be at the zeros of $f'$." },
+        { graph: W({ type: "transform", of: { type: "poly", coeffs: [0, 0, 0, 1] }, a: s * 0.25, h: mid }, "A cubic curve with no turning points"), value: "no-turning-points", why: "$f'$ has two zeros, so $f$ has two stationary points." },
+        { graph: W(parab(-A, a, b), "A parabola"), value: "parabola", why: "$f'$ is a quadratic, so $f$ is a cubic." }], 3);
+      return { params: { mid, s },
+        graph: W(parab(A, a, b), "A parabola, the graph of the derivative of f, crossing the x-axis twice"),
+        stem: "The diagram shows the graph of $y = f'(x)$, where $f'$ is the derivative of a function $f$. The graph crosses the $x$-axis at two points with integer coordinates, and its vertex has an integer $x$-coordinate.", parts: [
+          P("Which graph could be the graph of $y = f(x)$?", 3, ans.graph(rng, right, wrongs), [
+            `$f'(x) = 0$ at $x = ${a}$ and $x = ${b}$, so $f$ has turning points there.`,
+            `Between them $f'(x)$ is ${s > 0 ? "negative" : "positive"}, so $f$ is ${s > 0 ? "decreasing" : "increasing"}; outside them $f$ is ${s > 0 ? "increasing" : "decreasing"}.`,
+            `So $f$ has a local ${s > 0 ? "maximum" : "minimum"} at $x = ${a}$ and a local ${s > 0 ? "minimum" : "maximum"} at $x = ${b}$.`]),
+          P("Write down the value of $x$ for which $f''(x) = 0$.", 1, ans.int(mid), [`$f''(x)$ is the gradient of the graph of $f'$, which is zero at the vertex: $x = ${mid}$.`]),
+          P("For which values of $x$ is the graph of $f$ concave up?", 2, ans.choice(rng, { text: `$x ${s > 0 ? ">" : "<"} ${mid}$`, value: [s > 0 ? "gt" : "lt", mid] }, [
+            { text: `$x ${s > 0 ? "<" : ">"} ${mid}$`, value: [s > 0 ? "lt" : "gt", mid], why: "The graph of $f$ is concave up where $f'$ is increasing." },
+            { text: `$${a} < x < ${b}$`, value: ["in", a, b], why: "This is where $f'(x)$ keeps one sign, which is about $f$ increasing or decreasing, not about concavity." },
+            { text: `$x < ${a}$ or $x > ${b}$`, value: ["out", a, b], why: "This is where $f'(x)$ keeps one sign, which is about $f$ increasing or decreasing, not about concavity." }]), [
+            "The graph of $f$ is concave up where $f''(x) > 0$, which is where $f'$ is increasing.", `The graph of $f'$ is rising for $x ${s > 0 ? ">" : "<"} ${mid}$.`])] };
+    } });
+  reg({ type: "t5-normal-meets-curve", syllabus: ["5.4"], unknown: "normal-y-intercept", representation: "equation", format: "value", levels: [4], calculator: true,
+    skills: ["SL5.4.tangent-meets-axes-or-curve", "SL5.4.normal-equation"], title: "Where a normal to a logarithmic curve meets the axes",
+    build({ rng }) {
+      const a = rng.pick([2, 3, 4, 5, 6]), x0 = rng.pick([2, 3, 4, 5].filter((x) => a % x !== 0)), y0 = a * Math.log(x0) + x0, mm = a / x0 + 1, nm = -1 / mm, yi = y0 + x0 / mm, xi = x0 + mm * y0;
+      return { params: { a, x0 }, stem: `The curve $C$ has equation $y = ${a}\\ln x + x$, for $x > 0$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$. The normal to $C$ at $\\mathrm{A}$ meets the $y$-axis at $\\mathrm{Q}$ and the $x$-axis at $\\mathrm{R}$.`, parts: [
+        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), [`$${D} = \\dfrac{${a}}{x} + 1$`, `At $x = ${x0}$: $${D} = \\dfrac{${a}}{${x0}} + 1 \\approx ${sf(mm)}$`]),
+        P("Find the gradient of the normal to $C$ at $\\mathrm{A}$.", 1, ans.sf(nm), [`The normal is perpendicular to the tangent, so its gradient is the negative reciprocal of the gradient of $C$: approximately $${sf(nm)}$.`]),
+        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`At $\\mathrm{A}$, $y = ${a}\\ln ${x0} + ${x0} \\approx ${sf(y0)}$.`, `The normal is $y = ${sf(nm)}(x - ${x0}) + ${sf(y0)}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
+        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the normal and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

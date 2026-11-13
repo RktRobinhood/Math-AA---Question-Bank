@@ -504,4 +504,21 @@ export default {
     T.require(Math.abs(A.x - z[0]) < 1e-6 && Math.abs(A.y - a * Math.sin(z[0])) < 1e-6, "A is drawn at the point of intersection");
     return { a: ap(T, z[0]), b: ap(T, T.integrate(gap, 0, z[0])), c: ap(T, T.extremum(gap, 0, z[0], "max", 4000).value) };
   },
+  "t5-derivative-graph/pick-f-from-derivative/graph": (q, T) => {
+    const fp = (x) => T.evalGraph(q.graph.functions[0].fn, x), z = T.roots(fp, -5.001, 5, 4000);
+    T.require(z.length === 2 && z.every((x) => Math.abs(x - Math.round(x)) < 1e-6), "the derivative has two whole-number zeros in the window");
+    const turn = T.extremum(fp, z[0], z[1], fp((z[0] + z[1]) / 2) < 0 ? "min" : "max", 4000), rising = (x) => fp(x + 1e-3) > fp(x - 1e-3);
+    const grid = T.range(-4.75, 4.75, 0.5);
+    return { a: T.optionWhere(q, "a", (v, i, opt) => [-3.5, -2, -0.5, 0.5, 2, 3.5].every((x) => Math.abs(T.deriv((t) => T.evalGraph(opt.functions[0].fn, t), x, 1e-3) - fp(x)) < 1e-4)),
+      b: T.approx(turn.x, 1e-5),
+      c: T.optionWhere(q, "c", ([kind, u, w]) => grid.every((x) => rising(x) === (kind === "gt" ? x > u : kind === "lt" ? x < u : kind === "in" ? x > u && x < w : x < u || x > w))) };
+  },
+  "t5-normal-meets-curve/normal-y-intercept/equation": (q, T) => {
+    const { a, x0 } = q.params, f = (x) => a * Math.log(x) + x, mm = T.deriv(f, x0, 1e-4);
+    // the normal's direction (1, g) is perpendicular to the tangent's direction (1, mm)
+    const g = T.bisect((s) => 1 + mm * s, -5, 5), N = (x) => f(x0) + g * (x - x0), cross = T.roots(N, -200.003, 200, 4000);
+    T.require(Math.abs(mm) > 0.5 && f(x0) > 0.5, "the normal has a gradient and A is off the axes");
+    T.require(cross.length === 1, "the normal crosses the x-axis once");
+    return { a: ap(T, mm), b: ap(T, g), c: ap(T, N(0)), d: ap(T, cross[0]) };
+  },
 };
