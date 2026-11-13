@@ -1,0 +1,68 @@
+<!doctype html><html><meta charset="utf-8"><link rel="stylesheet" href="m.css"><style>
+iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.scrim{position:absolute;inset:0;background:rgba(18,26,43,.55)}
+.dlg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1180px;height:800px;background:var(--surface);border-radius:12px;display:grid;grid-template-columns:560px 1fr;grid-template-rows:auto 1fr auto;overflow:hidden;box-shadow:0 40px 80px -20px rgba(0,0,0,.5)}
+.dt{grid-column:1/3;padding:16px 22px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:12px}
+.dt h2{margin:0;font-size:19px;font-weight:750;letter-spacing:-.01em}.dt span{color:var(--muted)}.dt .x{margin-left:auto;font-size:20px;color:var(--faint)}
+.form{padding:16px 22px;display:flex;flex-direction:column;gap:14px;overflow:hidden;border-right:1px solid var(--line)}
+.form h4{margin:0 0 8px;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);font-weight:700;display:flex;gap:8px;align-items:center}
+.sw{width:30px;height:17px;border-radius:99px;background:var(--accent);position:relative;display:inline-block}.sw::after{content:"";position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:9px 12px}.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px 12px}
+.f label{display:flex;gap:6px;align-items:center;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:3px}
+.f .in{border:1px solid var(--line);border-radius:7px;padding:7px 10px;background:var(--surface);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck{width:14px;height:14px;border-radius:3px;background:var(--accent);color:#fff;display:inline-grid;place-items:center;font-size:10px;flex:none}.ck.off{background:none;border:1px solid var(--line)}
+.line{display:flex;gap:8px;align-items:center;font-size:13.5px}.line small{color:var(--faint)}
+.ins{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--muted);line-height:1.35}.ins .ck{margin-top:2px}
+.prev{background:var(--ground);padding:18px 22px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.ph{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted)}.ph b{color:var(--ink)}
+.pg{background:#fff;color:#111;flex:1;border:1px solid var(--line);box-shadow:0 10px 24px -14px rgba(18,26,43,.4);padding:30px 38px;font:12.5px/1.45 Arial,Helvetica,sans-serif;display:flex;flex-direction:column;gap:12px;width:440px;align-self:center;overflow:hidden}
+.pg .sch{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;border-bottom:2px solid #111;padding-bottom:8px}
+.pg .logo{width:34px;height:34px;border:1.5px solid #111;border-radius:50%;display:grid;place-items:center;font-size:10px}
+.pg h3{margin:6px 0 0;font-size:18px}.pg .sub{font-size:13px}
+.pg .kv{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}
+.pg .nl{border-bottom:1px solid #111;height:22px;display:flex;align-items:flex-end;font-size:11px;padding-bottom:2px}
+.pg ul{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:3px;font-size:11.5px}
+.pg table{border-collapse:collapse;width:70%;font-size:11.5px}.pg td{border:1px solid #111;padding:5px 8px;text-align:center}
+.strip{display:flex;gap:8px;justify-content:center}
+.strip span{width:44px;height:58px;background:#fff;border:1px solid var(--line);border-radius:3px;font:600 9.5px var(--mono);color:var(--faint);display:grid;place-items:end center;padding-bottom:3px}
+.strip .on{outline:2px solid var(--accent)}
+.ft{grid-column:1/3;border-top:1px solid var(--line);padding:12px 22px;display:flex;align-items:center;gap:10px}
+.ft .m{color:var(--muted);font-size:12.5px;flex:1}.ft .btn{padding:10px 18px}
+</style><body>
+<iframe src="questions.html"></iframe><div class="scrim"></div>
+<div class="dlg">
+  <div class="dt"><h2>Set up and export</h2><span>2 questions · 32 marks</span><span class="x">×</span></div>
+  <div class="form">
+    <div><h4>Include</h4><div class="g2">
+      <div class="line"><span class="ck">✓</span>Question paper</div><div class="line"><span class="ck">✓</span>Markscheme <small>separate file</small></div>
+      <div class="line"><span class="ck">✓</span>Marks grid <small>for the teacher</small></div><div class="line">Blank pages per question <span class="in" style="border:1px solid var(--line);border-radius:6px;padding:2px 10px">0 ▾</span></div></div></div>
+    <div><h4><span class="sw"></span>Cover sheet</h4><div class="g2">
+      <div class="f"><label><span class="ck">✓</span>School name</label><div class="in">Westgate Academy</div></div>
+      <div class="f"><label><span class="ck">✓</span>Logo</label><div class="in" style="border-style:dashed;color:var(--faint)">westgate-crest.png · Replace</div></div>
+      <div class="f"><label><span class="ck">✓</span>Teacher name</label><div class="in">Mr Smith</div></div>
+      <div class="f"><label><span class="ck">✓</span>Class / code</label><div class="in">12A Math AA SL</div></div>
+      <div class="f" style="grid-column:1/3"><label>Title</label><div class="in">Mathematics: Analysis and Approaches SL — Circles and sectors test</div></div></div>
+      <div class="g3" style="margin-top:9px">
+      <div class="f"><label>Test date</label><div class="in">20 Nov 2026</div></div>
+      <div class="f"><label><span class="ck">✓</span>Time allowed (min)</label><div class="in">40 <span style="color:var(--faint)">· suggested 36</span></div></div>
+      <div class="f"><label><span class="ck">✓</span>Total marks</label><div class="in">32 <span style="color:var(--faint)">· auto</span></div></div></div>
+      <div class="g2" style="margin-top:10px"><div class="line"><span class="ck">✓</span>Student name line</div><div class="line"><span class="ck">✓</span>Date line</div></div></div>
+    <div><h4>Instructions to candidates <span style="text-transform:none;letter-spacing:0;font-weight:500">· click any line to edit</span></h4><div style="display:flex;flex-direction:column;gap:7px">
+      <div class="ins"><span class="ck">✓</span>A graphic display calculator is required for this paper.</div>
+      <div class="ins"><span class="ck">✓</span>Please write all your answers in the space provided. Answers and/or work on scrap paper will not be marked.</div>
+      <div class="ins"><span class="ck">✓</span>Unless stated otherwise give all answers as an exact value or rounded to 3 significant figures.</div></div></div>
+  </div>
+  <div class="prev">
+    <div class="ph"><span><b>Live preview</b> · page 1 of 6 · A4</span><span>updates as you type</span></div>
+    <div class="pg">
+      <div class="sch"><span>Westgate Academy</span><span class="logo">crest</span></div>
+      <div><h3>Mathematics: Analysis and Approaches SL</h3><div class="sub">Circles and sectors test</div></div>
+      <div class="kv"><span>Mr Smith · 12A Math AA SL</span><span>20 November 2026</span><span><b>Time allowed:</b> 40 minutes</span><span><b>Total marks:</b> 32</span></div>
+      <div class="kv"><div class="nl">Name</div><div class="nl">Date</div></div>
+      <div><b>Instructions to candidates</b><ul><li>A graphic display calculator is required for this paper.</li><li>Please write all your answers in the space provided. Answers and/or work on scrap paper will not be marked.</li><li>Unless stated otherwise give all answers as an exact value or rounded to 3 significant figures.</li></ul></div>
+      <table><tr><td>Question</td><td>1</td><td>2</td><td><b>Total</b></td></tr><tr><td>Maximum</td><td>15</td><td>17</td><td><b>32</b></td></tr><tr><td>Mark</td><td>&nbsp;</td><td></td><td></td></tr></table>
+    </div>
+    <div class="strip"><span class="on">Cover</span><span>Q1</span><span>Q1</span><span>Q2</span><span>Q2</span><span>Q2</span></div>
+  </div>
+  <div class="ft"><span class="m">Your school details and choices are remembered on this device for next time.</span><div class="btn ghost">Download Word</div><div class="btn">Download PDF</div></div>
+</div></body></html>

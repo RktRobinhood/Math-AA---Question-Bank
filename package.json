@@ -1,0 +1,11 @@
+{
+  "name": "ib-math-question-bank",
+  "private": true,
+  "description": "Development tooling only. The site itself is static and needs none of this.",
+  "scripts": {
+    "check": "node scripts/build.mjs --check && node scripts/check-engine.mjs"
+  },
+  "devDependencies": {
+    "katex": "0.16.11"
+  }
+}

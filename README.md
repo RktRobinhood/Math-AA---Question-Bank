@@ -7,7 +7,7 @@ A searchable, filterable exam question bank for the four **IB Mathematics** cour
 - Applications and Interpretation SL (AI SL)
 - Applications and Interpretation HL (AI HL)
 
-AA SL is complete for 2021 to 2025. The other three courses are being added a year at a time.
+All four courses are complete from 2021 to May 2026, with every question tagged part by part.
 
 ## 🔗 [Open the Question Bank](https://rktrobinhood.github.io/Math-AA---Question-Bank/)
 
@@ -17,161 +17,118 @@ AA SL is complete for 2021 to 2025. The other three courses are being added a ye
 
 ### Overview
 
-The site has five main sections accessible from the top navigation bar: **Question Bank**, **Statistics**, **Syllabus**, **Practice**, and **Formula Sheet**. Questions, markschemes, and exam papers are sourced from official IB past papers (2021–2025) across all time zones.
+Every page has the same top bar: the course switch (**AA SL**, **AA HL**, **AI SL**, **AI HL**), the four sections (**Questions**, **Statistics**, **Syllabus**, **Practice**), the formula booklet for your course, a light/dark switch and **Your paper**. On a phone the sections move to a tab bar at the bottom.
 
-### Choosing your course
+The site remembers your course and theme. Everything shows the chosen course only. A link can pick the course for the reader with `?course=aa-hl` (or `aa-sl`, `ai-sl`, `ai-hl`).
 
-The course bar under the navigation picks the course you're studying: **AA SL**, **AA HL**, **AI SL** or **AI HL**. The site remembers your choice. Everything then shows that course only: questions, filters, statistics, the syllabus, exam-year pages and topic pages. A link can pick the course for the reader with `?course=aa-hl` (or `aa-sl`, `ai-sl`, `ai-hl`).
-
-Some questions appear on both the SL and the HL paper of the same exam, usually earlier in the HL paper. The bank stores each of these once. In the HL course it shows its HL paper and number, with a badge such as "Also AA SL P1 Q7", so you can see where it sat on each paper.
+Some questions appear on both the SL and the HL paper of the same exam, usually earlier in the HL paper. The bank stores each of these once. In the HL course it shows its HL paper and number, with a note such as "also SL Q7".
 
 ---
 
-### Question Bank
+### Questions
 
-The main view. Displays the mapped exam questions for your course, with filtering and search.
+The results come first; the filters are in the sidebar (on a phone, behind the **Filters** button).
 
-**Filters (left panel)**
+- **Search** matches a question's code, its syllabus tags, and each part's skill and sub-skill text. Press `/` to jump to it. It understands `AND`, `OR`, `NOT`, `-term`, `"quoted phrases"` and brackets: `(sector OR arc) AND NOT perimeter`.
+- **Paper, Section, Sitting, Marks** are small menus. Sitting holds session, time zone and years. Only the filters that apply to your course are shown (Section is for AA papers 1 and 2).
+- **Syllabus tree.** Open a topic and set each subtopic to **AND**, **OR** or **NOT**. Pressing the active one clears it.
+  - A question matches if it has every AND subtopic, at least one OR subtopic (when any OR is set), and no NOT subtopic.
+  - "Any of topic 3" sets OR on every subtopic of that topic.
+  - The number beside each subtopic is how many of the questions still in play carry it. A subtopic at 0 is greyed: choosing it cannot refine the list. It stays clickable.
+  - The box above the tree always shows the current choice as Must have / Any of / Not.
+- **Chips** above the results show every active filter. Press one to remove it, or **Clear all**.
+- **Sort** by newest, oldest, marks or paper order; switch between a grid and a compact list. Results load 30 at a time as you scroll.
+- **The address bar holds the filters**, so a view can be bookmarked or shared, and comes back when you return from a question. Example: `?and=3.4&or=3.2,3.5&not=3.8&paper=P2&course=aa-sl`.
 
-- **Topic** — Filter by syllabus topic (1–5). Topic 1 = Numbers & Algebra, 2 = Functions, 3 = Geometry & Trigonometry, 4 = Statistics & Probability, 5 = Calculus.
-- **Session** — May or November exam sessions.
-- **Time Zone** — TZ0 (November), TZ1, TZ2, TZ3.
-- **Paper** — P1 and P2, plus P3 for HL. AA P1 is calculator-free; every other paper allows a GDC.
-- **Section** — Section A (short answer) or Section B (extended response). AA papers 1 and 2 only.
-- **Years** — Toggle individual exam years on/off. Defaults to all years.
-- **Reset all filters** — Clears every filter at once.
-
-**Syllabus topic search (AND / OR / NOT boxes)**
-
-Below the main filters are three subtopic selector boxes. Type in the search bar to filter the list of syllabus subtopics, then check items to narrow results:
-
-- **AND** — Question must cover *all* checked subtopics.
-- **OR** — Question must cover *at least one* checked subtopic.
-- **NOT** — Question must cover *none* of the checked subtopics.
-
-**Text search**
-
-The search bar at the top of the Syllabus tab (and the subtopic filter bar) supports boolean syntax:
-
-| Syntax | Meaning |
-|---|---|
-| `functions` | Contains "functions" |
-| `functions AND trig` | Contains both |
-| `functions OR calculus` | Contains either |
-| `functions NOT trig` | Contains "functions" but not "trig" |
-| `"composite functions"` | Exact phrase |
-| `-trig` | Shorthand for NOT trig |
-| `(A OR B) AND C` | Grouped logic |
-
-**Question cards**
-
-Each card shows the question title, mark count, topic badges, and the first few syllabus tags. Click a card to open the full question page.
-
-**Select multiple**
-
-Click **Select multiple** (top right of the question list) to enter bulk-select mode. Check individual cards, then click **Add to output** to add them all to the output basket at once.
+Each card shows the top of the question, its code, marks as `[6]`, what its parts ask, its subtopics in topic colours, and a **+** button that adds it to your paper.
 
 ---
 
-### Individual Question Pages
+### Question pages
 
-Clicking a question card opens a dedicated page showing:
-
-- **Question image** — Cropped directly from the official exam paper.
-- **Markscheme** — Collapsed by default; click to expand. Shows the official markscheme image(s).
-- **Metadata** — Marks, paper, time zone, session, syllabus tags.
-- **Related questions** — Questions sharing the most syllabus tags, listed in the sidebar.
-- **Add to output** button — Adds the question to the output basket.
+- One heading: exam, paper, time zone, question number, marks, section and calculator policy.
+- Tabs for **Question**, **Markscheme** and **Side by side**, with zoom and full screen (for projecting).
+- **Back to N results**, **Prev** and **Next** (or the arrow keys) walk through the list you came from, in its order.
+- **Parts**: each part's skill, marks and subtopics. Press a part to see its sub-skills and to mark where it sits on the question. Nothing is highlighted until you press.
+- **Similar questions**, with what they share and a + button.
+- **Add to paper** and **Copy link**.
 
 ---
 
-### Output Basket & Generate
+### Your paper, and Set up and export
 
-A persistent tray appears at the bottom of the screen once you add questions. It survives page navigation and browser refreshes (stored in localStorage).
+**Your paper** (top bar) lists the questions you have added, with totals, estimated minutes (80 marks in 90 minutes) and the balance of topics. It is saved in the browser.
 
-**Tray controls**
+- Drag to reorder (arrows on a phone), **×** to remove, **Shuffle** for a random order.
+- **⇄** offers similar real questions to swap in: same course, calculator policy, section and similar marks. See [docs/variants.md](docs/variants.md).
 
-- **Drag handles** — Reorder questions by dragging the ≡ handle on the left of each row.
-- **× button** — Remove a question from the basket.
-- **Clear all** — Empties the basket.
-- **Generate** — Opens the export modal.
+**Set up and export** opens the settings beside a live preview of the paper.
 
-**Generate modal**
+- **Include**: question paper, markscheme (separate file), marks grid, page numbers, blank working pages after Section B questions.
+- **Versions**: export Version A, B, C, D with the same questions in different orders, each with its markscheme.
+- **Cover sheet**: school name, logo, teacher, class, title, date, time allowed, total marks, name and date lines. Each has a tick to show or hide it.
+- **Instructions to candidates**: five lines, each editable.
+- **Download PDF** or **Download Word**.
 
-Produces a custom exam paper or markscheme from your selected questions.
-
-- **Include questions / Include markscheme** — Toggle what to export.
-- **Format** — PDF or Word document (DOCX).
-- **Cover sheet** — Toggle a formatted cover page on/off.
-
-**Cover sheet options**
-
-- School name, teacher name, class code (each can be shown/hidden individually).
-- School logo upload (PNG/JPG).
-- Student name line and date line.
-- Custom title (defaults to "Mathematics: Analysis and Approaches SL").
-- Test date, time allowed, total marks, and a marks grid.
-- Calculator and answer space instructions (text is editable).
-
-The generated file assembles the question images in your chosen order, with page breaks between questions and correct A4 sizing.
+Your school details and choices are remembered on the device.
 
 ---
 
 ### Statistics
 
-Analyses the filtered question set to surface exam patterns. Uses the same filters as the Question Bank (topic, session, paper, etc.).
+Recalculated in the browser from the questions in view, so it is up to date as soon as an exam is added.
 
-**Forecast weighting**
-
-Three modes control how exam years are weighted:
-
-- **Neutral** — All years count equally.
-- **Recency** — Recent years weighted more heavily; highlights trending topics.
-- **Primacy** — Older years weighted more heavily; reveals long-standing patterns.
-
-**Forecast — most likely topics**
-
-Ranked list of subtopics by a composite score combining weighted frequency, mark share, and sitting coverage. The "sitting %" column shows how often a subtopic has appeared across all exam sittings (May and November counted separately).
-
-**Topic spread**
-
-Bar chart showing how questions are distributed across the five syllabus topics.
-
-**Paper & section breakdown**
-
-Shows the split between P1/P2 and Section A/Section B for the current filtered set.
-
-**Coverage heatmap**
-
-Grid showing questions per subtopic per exam sitting (columns = sittings, rows = top subtopics). Darker cells = more questions in that sitting. M = May, N = November.
+- **Most examined** is a table of subtopics. Click a column to sort.
+  - **Exams**: how many exams included it. An exam is one year, session and time zone, all papers together (AA SL has 22).
+  - **Marks per exam**: the typical marks it carries on one exam. Marks are exact: each part's marks go to that part's subtopics.
+  - **Questions**, **Paper split** (how many on each paper, so you know whether to practise with a calculator) and **Last seen**.
+  - **See questions →** opens the Questions page filtered to that subtopic.
+- **Rarely examined** is the same table from the other end.
+- **Count recent years more** weights recent exams more heavily. `?mode=recency` in an old link turns it on.
+- **Not seen recently** lists subtopics absent from the last two sessions.
+- **Questions by topic** counts each question once per topic it covers.
+- **Coverage by session** is a grid of questions per subtopic per session. Each cell links to those questions.
+- **Change filters** narrows everything to a paper, section, session, time zone or years.
 
 ---
 
 ### Syllabus
 
-A searchable reference of your course's syllabus, organised by topic. AA courses get the full reference pages with formulas (rendered with KaTeX); AA HL adds its additional higher level statements under each topic. AI courses list every statement, numbered as in the AI guide.
+One topic at a time in a single reading column, with the topic list beside it (a picker on a phone).
 
-**Search** supports the same boolean syntax as the Question Bank (AND, OR, NOT, quoted phrases).
+- AA courses get the reference pages with formulas; AA HL adds its additional higher level statements to each topic. AI courses list every statement, numbered as in the AI guide.
+- **See N questions →** beside each subtopic opens the Questions page filtered to it.
+- Search covers the whole syllabus and takes the same `AND` / `OR` / `NOT` syntax.
 
-Each topic links through to a dedicated topic page listing all mapped exam questions for that topic.
+Maths is typeset with KaTeX, which is served from the site. Statement text in `data/syllabus*.json` writes maths as inline `$...$` LaTeX in IB notation (upright d, e, i and P).
 
 ---
 
 ### Practice
 
-An interactive practice mode that generates randomised questions. Separate from the main question bank — accessed via the **Practice** link in the nav bar. Practice covers AA SL.
+Practice makes its own questions, in the style of exam questions, and adapts to the student. It covers AA SL.
+
+- **What's the test on?** Tick the subtopics you have studied. A teacher can press **Copy link to this scope** and share a link such as `practice.html?scope=3.2,3.4,3.5&title=Unit%20test`, which opens Practice on exactly those subtopics.
+- **One question at a time.** Answer with a number (fractions such as `3/4` are fine), a choice, or by picking a graph. Longer written parts are marked by you against the worked solution. Paper 1 style questions say "No calculator".
+- **After each answer** you see whether it was right, the worked solution, and three buttons: **Next question**, **Another like this** (same question, new numbers) and **Ask it another way** (a different unknown or representation).
+- **Levels.** A subtopic starts at level 2. Two right in a row moves up a level; two wrong out of three moves down. After level 4 come real past-paper questions, then reviews after 3, 7 and 14 days. At level 1, two wrong out of three brings a short refresher on what the subtopic depends on. Each change is explained in a line of plain words.
+- **Subtopics without generated questions yet** use their real past-paper questions, shortest first. [docs/practice-coverage.md](docs/practice-coverage.md) lists which those are.
+- **Progress** shows where every subtopic stands and what to do next. It is saved in the browser and sent nowhere. **Export progress** and **Import progress** move it between devices.
+- **Print a worksheet** makes a fixed set of questions on your scope with an answer key of worked solutions, to print or save as a PDF. **Copy link to this worksheet** gives a link that reproduces the same set.
+
+How the engine works, and how to add a question generator: [docs/practice-engine.md](docs/practice-engine.md). `node scripts/check-engine.mjs` checks every generator over 300 seeds (answers recomputed by a second method, clean numbers, notation, KaTeX rendering, marking, graphs) and runs on every pull request.
 
 ---
 
-### Formula Sheet
+### Formula booklet
 
-Opens the official IB formula booklet for your course as a PDF in a new tab: the AA SL booklet, the full AA booklet for AA HL, or the AI booklet.
+The top bar opens the official IB formula booklet for your course as a PDF in a new tab.
 
 ---
 
 ## Data
 
-The site is fully static — no server, no database. `scripts/build.mjs` generates `assets/js/data.js` and every static page from the files in `data/`.
+The site is fully static: no server, no database, no build framework. `scripts/build.mjs` generates `assets/js/data.js` and every page from the files in `data/`. Styles are one file, `assets/css/styles.css`, with every colour, size and space as a variable in its first block.
 
 | File | Holds |
 |---|---|
@@ -183,14 +140,14 @@ The site is fully static — no server, no database. `scripts/build.mjs` generat
 | `data/crops.json`, `data/tags.json` | AA SL questions: images, parts, marks, part positions, and per-part tags |
 | `data/crops-<course>.json`, `data/tags-<course>.json` | The same for `aa-hl`, `ai-sl` and `ai-hl` |
 | `data/shared.json` | HL appearances of questions that are stored once under their SL id |
+| `data/question-types.json` | The catalogue of question types for the practice engine: syllabus codes, skills, levels, prerequisites and the bank parts each type covers. Seeded from Wasteland Academy, with the same type and skill ids. See [docs/practice-engine.md](docs/practice-engine.md) |
 
 AA SL keeps the original file names, because Wasteland Academy's `tools/question-types.mjs` reads them.
 
 | AA SL stat | Value |
 |---|---|
-| Questions | 342 |
-| Tagged parts | 973 |
-| Exam years | 2021–2025 |
+| Questions | 396 |
+| Exam years | 2021–2026 |
 | Sessions | May & November |
 | Time zones | TZ0, TZ1, TZ2, TZ3 |
 | Papers | P1 (no calc), P2 (GDC) |
@@ -216,6 +173,7 @@ Every question is tagged **per part**: (a), (b), (c)(i) and so on. Each part has
   - AA SL's sub-tags are Wasteland Academy's skill map (`curriculum/aa-sl.json`), id for id. AI statements shared with AA take AA's list.
   - `node scripts/build.mjs --todo-sub <course> [prefix]` lists tagged questions whose parts still lack sub-tags, with the sub-tags each part may use.
 - `data/crops.json` lists, for each question, its section, its images, its parts and their marks, and where each part label sits on the image (`anchor`).
+  - `end` is where the last part stops and the answer space begins, so a part's highlight does not run over the writing area. `scripts/part_ends.py` finds it from the image.
 - A question that has been cropped but not tagged yet is published with a "Tags pending" badge.
 
 ### Rebuilding
@@ -236,6 +194,9 @@ py scripts/recrop.py --pdfs <dir> --out assets --manifest data/crops-aa-hl.json 
 # Store questions common to the SL and HL papers once (run after both papers are cropped)
 py scripts/match_shared.py --sl-pdfs <sl dir> --hl-pdfs <hl dir> --sl-manifest data/crops.json \
     --hl-manifest data/crops-aa-hl.json --prefix aa-hl-2021 --apply
+
+# Record where each question's last part ends (after any re-crop)
+py scripts/part_ends.py data/crops.json data/crops-aa-hl.json data/crops-ai-sl.json data/crops-ai-hl.json
 
 py scripts/contact_sheet.py assets/exam-images sheet.png aa-sl-2024-may-tz1-p1-   # eyeball one paper's crops
 node scripts/build.mjs              # validates, then writes data.js and the static pages
