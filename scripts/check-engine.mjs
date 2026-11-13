@@ -388,6 +388,22 @@ if (!ONLY) {
     assert(lr.next([]).kind === "none" && lr.next(["99.9"]).kind === "none", "an empty or unknown scope should give nothing");
   });
 
+  test("a real-questions-only subtopic rests after two right, so it does not crowd out the scope", () => {
+    const noGen = QB.statements[course].map((s) => s.code).filter((c) => !withGens.includes(c));
+    if (!noGen.length || !withGens.length) return;
+    const { lr } = newLearner();
+    const scope = [noGen[0], withGens[0]];
+    let realServed = 0;
+    // While the other subtopic still has levels to climb, the resting one is left alone.
+    for (let i = 0; i < 30 && lr.summary([withGens[0]])[0].level !== "exam"; i++) {
+      const it = lr.next(scope);
+      if (it.unit === noGen[0]) realServed++;
+      lr.record(it, { correct: true, selfMarked: it.kind === "real" });
+    }
+    assert(realServed <= 3, `the real-only subtopic was served ${realServed} times while other work remained`);
+    assert(/Next check|Secure/.test(lr.summary([noGen[0]])[0].next), "summary does not say the real-only subtopic is resting");
+  });
+
   test("every subtopic of the course can be practised", () => {
     const { lr } = newLearner();
     for (const s of QB.statements[course]) {

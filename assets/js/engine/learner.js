@@ -40,6 +40,7 @@
       "review-complete": "Secure. No more checks planned for {title}.",
       "review-missed": "That one slipped. Back to level {to} to rebuild it.",
       "exam-down": "The exam questions are not landing yet. Back to level {to}.",
+      "real-secure": "Two past-paper questions right in a row. This one rests now and comes back for a check in {days} days.",
     },
   };
 
@@ -402,7 +403,16 @@
           }
         }
       }
-      // synoptic and real-only answers are logged and counted, and change no level.
+      else if (it.reason === "real-only") {
+        // A subtopic with no generator yet: two past-paper questions right in a row and it rests
+        // until its first review, so it does not crowd out the rest of the scope.
+        u.recent.push(ok ? 1 : 0);
+        if (u.recent.length >= cfg.upStreak && u.recent.slice(-cfg.upStreak).every(Boolean)) {
+          u.rung = "exam"; u.recent = []; u.reviewStage = 0; u.nextReview = t + cfg.reviewDays[0] * DAY;
+          ch = change(code, "real-secure", { from: "real", to: "exam", days: cfg.reviewDays[0] });
+        }
+      }
+      // synoptic answers are logged and counted, and change no level.
       if (u.recent.length > 12) u.recent.splice(0, u.recent.length - 12);
       const saved = store.save(me.state);
       return { change: ch, saved };
@@ -420,7 +430,15 @@
         const row = { code, title: titleOf(code), status: "not-started", level: null, attempts: u ? u.attempts : 0, correct: u ? u.correct : 0,
           nextReview: u ? u.nextReview : null, reviewDue: false, levels, hasReal, next: "" };
         if (!levels.length && !hasReal) { row.status = "unavailable"; row.next = "Nothing to practise here yet."; return row; }
-        if (!levels.length) { row.status = "real-only"; row.next = u && u.started ? "Keep working through the past-paper questions." : "Start with the shortest past-paper questions."; return row; }
+        if (!levels.length) {
+          row.status = "real-only";
+          row.reviewDue = Boolean(u && u.rung === "exam" && u.nextReview !== null && u.nextReview <= t);
+          row.next = !u || !u.started ? "Start with the shortest past-paper questions."
+            : u.rung !== "exam" ? "Keep working through the past-paper questions. Two right in a row and it rests."
+            : row.reviewDue ? "A review question is due."
+            : u.nextReview !== null ? `Secure for now. Next check in ${Math.max(1, Math.ceil((u.nextReview - t) / DAY))} day(s).` : "Secure.";
+          return row;
+        }
         if (!u || !u.started) { row.next = `Start at level ${levels.find((l) => l >= cfg.startLevel) || levels[levels.length - 1]}.`; return row; }
         row.level = u.rung === "exam" ? "exam" : u.level;
         if (u.refresh && u.refresh.items.length) { row.status = "refresh"; row.next = `Refresh ${u.refresh.items.map((x) => x.name).join(", then ")}, then return at level ${levels[0]}.`; }

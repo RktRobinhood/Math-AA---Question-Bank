@@ -224,7 +224,7 @@ The rules, all with their numbers in `L.CONFIG`:
 - At the lowest level, two wrong out of three queues the **prerequisites**: level-0 question types that support the subtopic's skills, then its prerequisite subtopics, both from the catalogue. Each needs two correct in a row. Then the student returns to the subtopic at its lowest level. Wrong answers on prerequisites do not descend further.
 - A subtopic on the exam rung is checked again after 3, then 7, then 14 days. A miss on a review, or two wrong out of three exam questions, drops it to its top generated level.
 - Within the scope: up to three subtopics are worked on side by side, the least recently seen first; a due review is mixed in at most once every four questions while other work remains; the same question type does not come twice in a row when there is a choice; a seed is never reused for a student, and a question the student has seen recently is skipped.
-- A subtopic with no generator is served its real questions, main questions first, short to long (`reason: "real-only"`).
+- A subtopic with no generator is served its real questions, main questions first, short to long (`reason: "real-only"`). Two right in a row and it rests until a check 3 days later (`change.kind` is `real-secure`), so it does not crowd out the rest of the scope.
 - Level 5 (synoptic) generators are mixed in once every subtopic they combine is on the exam rung.
 
 ### `learner.record(item, {correct, selfMarked, timeMs})` returns `{change, saved}`
