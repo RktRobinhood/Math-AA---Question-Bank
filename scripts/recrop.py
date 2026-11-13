@@ -57,7 +57,8 @@ ROMAN = r"i|ii|iii|iv|v|vi|vii|viii|ix|x"
 QNUM = re.compile(r"^(\d{1,2})\s?\.(\s|$)")
 MS_QNUM = re.compile(r"^Q?(\d{1,2})\s?\.(\s|$)")   # some markschemes head questions "Q1."
 BARE_QNUM = re.compile(r"^(Q?)(\d{1,2})$")            # ...and a few drop the full stop
-GLUED_QNUM = re.compile(r"^Q?(\d{1,2}) ?\(a\)")        # ...or run the number into part (a): "1(a)"
+GLUED_QNUM = re.compile(r"^Q?(\d{1,2})\s*\(a\)")       # ...or run the number into part (a): "1(a)", "1  (a)"
+PAREN_QNUM = re.compile(r"^Q?(\d{1,2})\)(\s|$)")         # ...or print "3)" for "3."
 
 
 def load_questions():
@@ -193,10 +194,15 @@ def find_ms_ranges(doc, n):
             m = GLUED_QNUM.match(t)
             if m and left <= x0 <= 60:
                 glued.setdefault(int(m.group(1)), []).append((p, y0))
-            m = BARE_QNUM.match(t)   # a lone digit must have the question's text beside it
-            if m and left <= x0 <= 60 and (m.group(1) or any(abs(r[1] - y0) < 3 and r[0] > x1 for r in ls)):
+            # A lone digit must have the question's text beside it. It can be set a little left
+            # of the margin (2026 May AI SL TZ3 P2 Q5).
+            m = BARE_QNUM.match(t)
+            if m and left - 12 <= x0 <= 60 and (m.group(1) or any(abs(r[1] - y0) < 3 and r[0] > x1 for r in ls)):
                 bare.setdefault(int(m.group(2)), []).append((p, y0))
-            m = re.search(r"(Total\s*)?\[\s*(Total:?\s*)?(\d+)\s*marks?\s*\]\s*$", t)
+            m = PAREN_QNUM.match(t)   # taken on the same terms as a bare digit
+            if m and left <= x0 <= 60:
+                bare.setdefault(int(m.group(1)), []).append((p, y0))
+            m = re.search(r"(Total\s*)?\[\s*(Total:?\s*)?(\d+)\s*[Mm]arks?\s*\]\s*$", t)
             if m and x1 > 440:
                 marks.append(((p, y1), int(m.group(3)), bool(m.group(1) or m.group(2)), (p, y0)))
     chosen, limit = {}, (len(doc.lines), 0.0)
@@ -329,9 +335,18 @@ def part_labels(doc, segs, qx, clean=False):
         if m and qx + 18 <= x0 <= qx + 40 and (m.group(1) <= "h" or (letter and ord(m.group(1)) == ord(letter) + 1)):
             letter = m.group(1)
             labels.append({"label": letter, "marks": None, "page": p, "y": y, "sub": False})
+            # "(c) (i)" printed as one line: the (i) is on its letter's line
+            m = re.match(rf"^\([a-z]\)\s*\(({ROMAN})\)(\s|$)", t)
+            if m:
+                labels.append({"label": f"{letter}({m.group(1)})", "marks": None, "page": p, "y": y, "sub": True})
             continue
         m = re.match(rf"^\(({ROMAN})\)(\s|$)", t)
         if m and qx + 46 <= x0 <= qx + 70 and letter:
+            # An (ii) with no (i) before it: the (i) was missed, e.g. padded with control
+            # characters ("\x07\t(i)"). It sits on its letter's line.
+            if m.group(1) != "i" and not labels[-1]["sub"]:
+                head = labels[-1]
+                labels.append({"label": f"{letter}(i)", "marks": None, "page": head["page"], "y": head["y"], "sub": True})
             labels.append({"label": f"{letter}({m.group(1)})", "marks": None, "page": p, "y": y, "sub": True})
             continue
         m = re.search(r"\[(\d+)\]\s*$", t)

@@ -20029,6 +20029,409 @@
    ],
    "confidence": "medium"
   },
+  "ai-hl-2026-may-tz1-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Complete a two-stage tree diagram using conditional and complementary branch probabilities",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Sum products of branch probabilities (or one minus both hits) for at most one success",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Total probability of a second-stage outcome by adding the two tree paths",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Identify a binomial model and find an exact binomial probability with the GDC",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.identify",
+      "SL4.8.exact-probability"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Find an 'at least' cumulative binomial probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.cumulative-probability"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Find the mean np and standard deviation sqrt(np(1-p)) of a binomial variable",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.mean-variance"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Find the least k with cumulative binomial probability above a threshold using a table or inverse binomial",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.cumulative-probability"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-hl-2026-may-tz1-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.12"
+     ],
+     "skill": "Evaluate a time-dependent position vector at t = 0",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL3.12.position-at-time"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.12",
+      "3.8"
+     ],
+     "skill": "Take the moving particle's distance from O as |r|, expand the squared components and use sin^2 + cos^2 = 1 to show it is a constant 5, so the motion is circular",
+     "review": "adjudicated",
+     "rationale": "The marks come from showing a time-dependent position vector traces a circle of fixed radius, which is circular motion under 3.12 (3.10 hands position in a motion context to 3.12), and the Pythagorean identity step earns its own M1 under 3.8.",
+     "passA": [
+      "3.12",
+      "3.8"
+     ],
+     "passB": [
+      "3.10",
+      "3.8"
+     ],
+     "sub": [
+      "AI-AHL3.12.interpret-path",
+      "AI-AHL3.8.pythagorean-identity"
+     ],
+     "subPassA": [
+      "AI-AHL3.12.interpret-path",
+      "AI-AHL3.8.pythagorean-identity"
+     ],
+     "subPassB": [
+      "AI-AHL3.10.magnitude",
+      "AI-AHL3.8.pythagorean-identity"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.12",
+      "5.9"
+     ],
+     "skill": "Differentiate a trigonometric position vector with the chain rule to get velocity",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL3.12.variable-velocity",
+      "AI-AHL5.9.chain-rule"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.13"
+     ],
+     "skill": "Expand the scalar product of position and velocity vectors to show it is zero",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL3.13.perpendicular-test",
+      "AI-AHL3.13.scalar-product"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-hl-2026-may-tz1-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.18"
+     ],
+     "skill": "Rewrite a second-order linear differential equation as two coupled first-order equations",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.18.convert-to-system"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Write the 2x2 coefficient matrix of the coupled linear system found in the previous part, one mark per row",
+     "review": "adjudicated",
+     "rationale": "The conversion from the second-order equation was done and credited in part (a), so this part only writes an existing coupled linear system in matrix form, which is 5.17's matrix-form sub-tag, and 5.18 earns no separate marks here.",
+     "passA": [
+      "5.17"
+     ],
+     "passB": [
+      "5.17",
+      "5.18"
+     ],
+     "sub": [
+      "AI-AHL5.17.matrix-form"
+     ],
+     "subPassA": [
+      "AI-AHL5.17.matrix-form"
+     ],
+     "subPassB": [
+      "AI-AHL5.17.matrix-form",
+      "AI-AHL5.18.convert-to-system"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Form det(A - lambda I) = 0 and solve the characteristic quadratic for the eigenvalues",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL1.15.characteristic-polynomial",
+      "AI-AHL1.15.eigenvalues"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.15"
+     ],
+     "skill": "Find an eigenvector for each eigenvalue",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL1.15.eigenvectors"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.17"
+     ],
+     "skill": "Write the general solution as a combination of exponentials in the eigenvalues",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.17.general-solution"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.17",
+      "5.18"
+     ],
+     "skill": "Use initial displacement and initial velocity as dx/dt to form and solve for the constants",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.17.particular-solution",
+      "AI-AHL5.18.interpret-velocity"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Use the GDC graph of the displacement function to find its zero and its minimum value",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.zeros-intercepts",
+      "SL2.4.max-min"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-hl-2026-may-tz1-p2-q06": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.17"
+     ],
+     "skill": "Find a 'more than' Poisson probability via the complement of the cumulative",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL4.17.poisson-probability"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.17"
+     ],
+     "skill": "Rescale the Poisson mean to a longer interval and find P(X = 0)",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL4.17.rescale-mean",
+      "AI-AHL4.17.poisson-probability"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.17"
+     ],
+     "skill": "Add independent Poisson means, rescale to the new interval and find a cumulative probability",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL4.17.sum-of-poissons",
+      "AI-AHL4.17.rescale-mean",
+      "AI-AHL4.17.poisson-probability"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Find an upper-tail normal probability with technology",
+     "review": "agreed",
+     "sub": [
+      "SL4.9.normal-probability"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.15"
+     ],
+     "skill": "Use the distribution of the sample mean N(mu, sigma^2/n) to find a probability",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL4.15.sample-mean"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.15"
+     ],
+     "skill": "Form the distribution of the difference of two independent normals and find P(difference > 0)",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL4.15.normal-combination"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-hl-2026-may-tz1-p2-q07": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.11"
+     ],
+     "skill": "Combine two fractions over a common denominator to find the partial-fraction constant",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.11.rewrite-integrand"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.14",
+      "5.11"
+     ],
+     "skill": "Separate variables, split the integrand into partial fractions and integrate to ln terms with a constant",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.14.separate-variables",
+      "AI-AHL5.11.rewrite-integrand",
+      "AI-AHL5.11.linear-composites"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Substitute the initial condition to find the constant of integration",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.14.particular-solution"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.14"
+     ],
+     "skill": "Justify dropping modulus signs because the log arguments are positive on the interval",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.14.rearrange-solution"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.14",
+      "1.9"
+     ],
+     "skill": "Merge the two log terms into one with the quotient law, exponentiate and rearrange the particular solution to make x the subject",
+     "review": "agreed",
+     "sub": [
+      "AI-AHL5.14.rearrange-solution",
+      "AI-AHL1.9.combine"
+     ],
+     "subPassA": [
+      "AI-AHL5.14.rearrange-solution",
+      "AI-AHL1.9.combine"
+     ],
+     "subPassB": [
+      "AI-AHL5.14.rearrange-solution",
+      "AI-AHL1.9.combine",
+      "AI-AHL1.9.solve-equation"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "ai-hl-2026-may-tz1-p3-q01": {
    "parts": [
     {
@@ -20942,148 +21345,6 @@
     }
    ],
    "confidence": "high"
-  },
-  "ai-hl-2026-may-tz2-p2-q02": {
-   "parts": [
-    {
-     "label": "a",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Monthly deposit as a percentage of monthly salary (percentage work)",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.find-payment"
-     ]
-    },
-    {
-     "label": "b",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Finance solver for the future value of regular monthly deposits",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.future-value-deposits"
-     ]
-    },
-    {
-     "label": "c",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Critique the savings-plan assumptions to explain higher or lower outcomes",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.compare-interpret"
-     ]
-    },
-    {
-     "label": "d",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Value after 10 years of deposits, reduce by withdrawal, recompute final value with PV and PMT, compare",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.future-value-deposits",
-      "AI-SL1.7.outstanding-balance"
-     ]
-    },
-    {
-     "label": "e",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Finance solver for the monthly deposit needed to reach a target future value",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.find-payment"
-     ]
-    }
-   ],
-   "confidence": "medium"
-  },
-  "ai-hl-2026-may-tz2-p2-q03": {
-   "parts": [
-    {
-     "label": "a",
-     "syllabus": [
-      "2.5"
-     ],
-     "skill": "Period of a sinusoidal model from a minimum and the next maximum",
-     "review": "agreed",
-     "sub": [
-      "AI-SL2.5.sinusoidal-model"
-     ]
-    },
-    {
-     "label": "b",
-     "syllabus": [
-      "2.5"
-     ],
-     "skill": "Find b from the period, the principal axis d from the mean of max and min, and a negative amplitude for a cosine model starting at a minimum.",
-     "review": "adjudicated",
-     "rationale": "The 2.5 Tag-when line puts a sinusoid's amplitude, period and principal axis (a, b and d) in 2.5, and the form a cos(bt) + d has no phase shift, so 2.6 parameter-fitting is not needed.",
-     "passA": [
-      "2.5"
-     ],
-     "passB": [
-      "2.5",
-      "2.6"
-     ],
-     "sub": [
-      "AI-SL2.5.sinusoidal-model"
-     ],
-     "subPassA": [
-      "AI-SL2.5.sinusoidal-model"
-     ],
-     "subPassB": [
-      "AI-SL2.5.sinusoidal-model",
-      "AI-SL2.6.find-parameters"
-     ]
-    },
-    {
-     "label": "c",
-     "syllabus": [
-      "2.4",
-      "2.5"
-     ],
-     "skill": "Solve model equals a given depth with the GDC for the first time",
-     "review": "agreed",
-     "sub": [
-      "SL2.4.intersection",
-      "AI-SL2.5.sinusoidal-model"
-     ]
-    },
-    {
-     "label": "d",
-     "syllabus": [
-      "2.4",
-      "2.5"
-     ],
-     "skill": "Length of time the model stays above a level within an interval",
-     "review": "agreed",
-     "sub": [
-      "SL2.4.interval-from-graph",
-      "AI-SL2.5.sinusoidal-model"
-     ]
-    },
-    {
-     "label": "e",
-     "syllabus": [
-      "2.4",
-      "2.5"
-     ],
-     "skill": "Find arrival time, then the next time the model reaches the required depth, and the wait",
-     "review": "agreed",
-     "sub": [
-      "SL2.4.intersection",
-      "AI-SL2.5.sinusoidal-model"
-     ]
-    }
-   ],
-   "confidence": "medium"
   },
   "ai-hl-2026-may-tz2-p2-q04": {
    "parts": [
@@ -22094,180 +22355,6 @@
       "SL3.2.cosine-rule-angle",
       "SL3.2.sine-rule",
       "AI-AHL1.13.geometric-interpretation"
-     ]
-    }
-   ],
-   "confidence": "medium"
-  },
-  "ai-hl-2026-may-tz3-p2-q01": {
-   "parts": [
-    {
-     "label": "a",
-     "syllabus": [
-      "1.4"
-     ],
-     "skill": "Future value of a lump sum under monthly compounding via TVM or formula",
-     "review": "agreed",
-     "sub": [
-      "SL1.4.future-value"
-     ]
-    },
-    {
-     "label": "b",
-     "syllabus": [
-      "1.7"
-     ],
-     "skill": "Finance solver with an existing balance plus regular monthly deposits to get the future value",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.7.future-value-deposits"
-     ]
-    },
-    {
-     "label": "c",
-     "syllabus": [
-      "1.2"
-     ],
-     "skill": "Write the arithmetic general term from the table, evaluate a term and comment on where the linear model breaks down",
-     "review": "agreed",
-     "sub": [
-      "SL1.2.nth-term",
-      "SL1.2.find-u1-d",
-      "SL1.2.model"
-     ]
-    },
-    {
-     "label": "d",
-     "syllabus": [
-      "1.2"
-     ],
-     "skill": "Solve for the first term of the decreasing arithmetic sequence that does not exceed the account balance, evaluate that term and subtract it from the balance.",
-     "review": "agreed",
-     "sub": [
-      "SL1.2.find-n",
-      "SL1.2.nth-term"
-     ],
-     "subPassA": [
-      "SL1.2.find-n"
-     ],
-     "subPassB": [
-      "SL1.2.find-n",
-      "SL1.2.nth-term"
-     ]
-    }
-   ],
-   "confidence": "high"
-  },
-  "ai-hl-2026-may-tz3-p2-q02": {
-   "parts": [
-    {
-     "label": "a",
-     "syllabus": [
-      "2.5"
-     ],
-     "skill": "Find b of a sinusoidal model from its 24-hour period",
-     "review": "agreed",
-     "sub": [
-      "AI-SL2.5.sinusoidal-model"
-     ]
-    },
-    {
-     "label": "b",
-     "syllabus": [
-      "2.6",
-      "1.8"
-     ],
-     "skill": "Substitute two data points to form linear equations in a and c and solve them",
-     "review": "agreed",
-     "sub": [
-      "AI-SL2.6.find-parameters",
-      "AI-SL1.8.set-up-system",
-      "AI-SL1.8.solve-system"
-     ]
-    },
-    {
-     "label": "c",
-     "syllabus": [
-      "2.5",
-      "2.6"
-     ],
-     "skill": "Evaluate the model at t = 8 and compare with the recorded reading",
-     "review": "agreed",
-     "sub": [
-      "AI-SL2.5.sinusoidal-model",
-      "AI-SL2.6.test-model"
-     ]
-    },
-    {
-     "label": "d",
-     "syllabus": [
-      "5.2"
-     ],
-     "skill": "Use the minimum and maximum of the sinusoidal model to state the two time intervals in a day on which temperature is decreasing.",
-     "review": "agreed",
-     "sub": [
-      "SL5.2.increasing-decreasing-intervals"
-     ],
-     "subPassA": [
-      "SL5.2.increasing-decreasing-intervals"
-     ],
-     "subPassB": [
-      "SL5.2.increasing-decreasing-intervals",
-      "SL5.2.sign-from-graph"
-     ]
-    }
-   ],
-   "confidence": "medium"
-  },
-  "ai-hl-2026-may-tz3-p2-q03": {
-   "parts": [
-    {
-     "label": "a",
-     "syllabus": [
-      "1.1"
-     ],
-     "skill": "Evaluate the power formula and write the result in standard form",
-     "review": "agreed",
-     "sub": [
-      "SL1.1.convert"
-     ]
-    },
-    {
-     "label": "b",
-     "syllabus": [
-      "1.6"
-     ],
-     "skill": "Use lower and upper bounds of rounded wind speeds to get least and greatest power and their difference",
-     "review": "agreed",
-     "sub": [
-      "AI-SL1.6.write-bounds",
-      "AI-SL1.6.bounds-of-calculation"
-     ]
-    },
-    {
-     "label": "c",
-     "syllabus": [
-      "5.6",
-      "5.3"
-     ],
-     "skill": "Differentiate the quartic, solve dP/dv = 0 in the domain and interpret it as the speed of maximum power",
-     "review": "agreed",
-     "sub": [
-      "AI-SL5.6.solve-gradient-zero",
-      "AI-SL5.6.turning-point",
-      "SL5.3.power-rule"
-     ]
-    },
-    {
-     "label": "d",
-     "syllabus": [
-      "2.4"
-     ],
-     "skill": "Find where the power model reaches a level and give the speed interval within the domain",
-     "review": "agreed",
-     "sub": [
-      "SL2.4.interval-from-graph",
-      "SL2.4.intersection"
      ]
     }
    ],

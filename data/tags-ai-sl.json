@@ -18737,6 +18737,411 @@
    ],
    "confidence": "high"
   },
+  "ai-sl-2026-may-tz1-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2"
+     ],
+     "skill": "Half the base edge, then the slant height of a face by tan of the base angle, then that face's triangle area",
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Total surface area of a square-based pyramid as four triangular faces plus the square base",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.surface-area"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Vertical height from slant height and half-edge, then the pyramid volume one third base times height",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.volume-solids"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Volume of a thin cylinder, then divide the pyramid volume by it and round down to a whole count",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.prism-cylinder"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-sl-2026-may-tz1-p2-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5",
+      "2.4"
+     ],
+     "skill": "Minimum value of a quadratic height model at its vertex, via the GDC or the axis of symmetry",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.quadratic-model",
+      "SL2.4.max-min"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.2"
+     ],
+     "skill": "State the interval on which the quadratic model is increasing, from the vertex to the domain end",
+     "review": "agreed",
+     "sub": [
+      "SL5.2.increasing-decreasing-intervals"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Evaluate the model at missing x-values, then apply the trapezoidal rule with unit strips to estimate the area",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.8.from-function",
+      "AI-SL5.8.from-table"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.8"
+     ],
+     "skill": "Explain that the curve is concave up so the trapezium tops lie above it, giving an overestimate",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.8.over-or-under"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Write the definite integral of the quadratic over the domain and evaluate it with technology for the exact area",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.area-expression",
+      "SL5.5.definite-integral-gdc"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Percentage error of the trapezoidal estimate relative to the exact integral value",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.percentage-error"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-sl-2026-may-tz1-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Build a two-stage tree with conditional second-stage probabilities and complementary branches",
+     "review": "agreed",
+     "sub": [
+      "SL4.6.tree"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.6"
+     ],
+     "skill": "Add the branch products from the tree for the outcomes with at most one hit",
+     "review": "adjudicated",
+     "rationale": "The marks go to the tree-diagram products (M1 for one correct product). One minus the both-hit path is only an alternative route, so 4.5 complement does not earn its own marks.",
+     "passA": [
+      "4.6"
+     ],
+     "passB": [
+      "4.6",
+      "4.5"
+     ],
+     "sub": [
+      "SL4.6.tree"
+     ],
+     "subPassA": [
+      "SL4.6.tree"
+     ],
+     "subPassB": [
+      "SL4.6.tree",
+      "SL4.5.complement"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Recognise a binomial model with n and p and find an exact-value probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.identify",
+      "SL4.8.exact-probability"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.8"
+     ],
+     "skill": "Binomial at-least probability via the cumulative distribution",
+     "review": "agreed",
+     "sub": [
+      "SL4.8.cumulative-probability"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Normal probability that a distance lies between zero and a bound",
+     "review": "agreed",
+     "sub": [
+      "SL4.9.normal-probability"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.9",
+      "1.1"
+     ],
+     "skill": "Upper-tail normal probability beyond the target radius, written in standard form",
+     "review": "agreed",
+     "sub": [
+      "SL4.9.normal-probability",
+      "SL1.1.convert"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "4.9"
+     ],
+     "skill": "Inverse normal to find the distance with a given cumulative probability",
+     "review": "agreed",
+     "sub": [
+      "SL4.9.inverse-normal"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz1-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.2",
+      "3.4"
+     ],
+     "skill": "Angle between the clock hands from the fraction of a turn, then the cosine rule for the distance between their tips",
+     "review": "agreed",
+     "sub": [
+      "SL3.2.cosine-rule-side",
+      "AI-SL3.4.angle-of-turn"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Amplitude, b from the 60-minute period, and principal axis of a degree cosine model for the hand tip height",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Evaluate the cosine height model at a given time (or right-angled trig from the centre)",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Explain that the hour hand has also turned, so the angle between the hands is now more than 120 degrees",
+     "review": "adjudicated",
+     "rationale": "The single R1 is for saying the angle between the hands has grown because the hour hand moves (a clock-hand angle of turn, 3.4); no cosine-rule calculation is needed for the mark.",
+     "passA": [
+      "3.4"
+     ],
+     "passB": [
+      "3.4",
+      "3.2"
+     ],
+     "sub": [
+      "AI-SL3.4.angle-of-turn"
+     ],
+     "subPassA": [
+      "AI-SL3.4.angle-of-turn"
+     ],
+     "subPassB": [
+      "AI-SL3.4.angle-of-turn",
+      "SL3.2.cosine-rule-side"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.2",
+      "3.4"
+     ],
+     "skill": "Angle turned by the hour hand in 20 minutes, its tip height by right-angled trig, and the height difference",
+     "review": "agreed",
+     "sub": [
+      "SL3.2.right-side",
+      "AI-SL3.4.angle-of-turn"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz1-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Use the total perimeter constraint to eliminate one variable and form a quadratic area model",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.quadratic-model"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.8"
+     ],
+     "skill": "Set the given quadratic equal to the area, solve it and keep the integer root, then back-substitute for the other tray",
+     "review": "adjudicated",
+     "rationale": "The marks are for solving a stated polynomial equation and rejecting the non-integer root (the final A1 needs integers), which is 1.8. The quadratic is a derived area formula, not a 2.5 model family, and finding y is prior-learning substitution.",
+     "passA": [
+      "1.8",
+      "2.5"
+     ],
+     "passB": [
+      "1.8"
+     ],
+     "sub": [
+      "AI-SL1.8.polynomial-equation",
+      "AI-SL1.8.select-roots"
+     ],
+     "subPassA": [
+      "AI-SL1.8.polynomial-equation",
+      "AI-SL1.8.select-roots",
+      "AI-SL2.5.quadratic-model"
+     ],
+     "subPassB": [
+      "AI-SL1.8.polynomial-equation",
+      "AI-SL1.8.select-roots"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Write the fixed-area constraint linking the two dimensions",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.form-objective"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Express the outer perimeter in one variable by substituting the area constraint",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.form-objective"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.7",
+      "5.3"
+     ],
+     "skill": "Differentiate a function with a reciprocal term, then solve derivative equals zero for the minimising width",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.optimal-input",
+      "SL5.3.negative-powers"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Other dimension at the optimum from the constraint",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.optimum-value"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Outer dimensions of the tray at the optimum by adding the border widths",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.optimum-value"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "ai-sl-2026-may-tz2-p1-q01": {
    "parts": [
     {
@@ -19357,6 +19762,393 @@
    ],
    "confidence": "medium"
   },
+  "ai-sl-2026-may-tz2-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Round a length ratio down to whole items per row, count the rows and the items, then find the area left uncovered",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.round-to-accuracy",
+      "AI-SL1.6.whole-items-in-context"
+     ],
+     "subPassA": [
+      "AI-SL1.6.round-to-accuracy"
+     ],
+     "subPassB": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts, areas or costs in a practical context"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Find how many whole small tiles fit exactly along each side of the leftover strip",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.whole-items-in-context"
+     ],
+     "subPassA": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts and quantities sensibly in a practical measurement context"
+     ],
+     "subPassB": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts, areas or costs in a practical context"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Total cost of the planned item counts at their unit prices",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.whole-items-in-context"
+     ],
+     "subPassA": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts and quantities sensibly in a practical measurement context"
+     ],
+     "subPassB": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts, areas or costs in a practical context"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Find a different arrangement of whole items that fills the strip and show it costs less, so the original plan is not the cheapest",
+     "review": "adjudicated",
+     "rationale": "The marks are for producing a cheaper feasible layout and comparing costs (R1), which shows the given plan is not the cost minimum. The 5.7 Tag when line names this ('showing that a value is or is not optimal', minimising cost by choosing quantities), and nothing is rounded or estimated, so 1.6 does not apply.",
+     "passA": [
+      "5.7"
+     ],
+     "passB": [
+      "1.6"
+     ],
+     "sub": [
+      "AI-SL5.7.test-optimality"
+     ],
+     "subPassA": [
+      "AI-SL5.7.test-optimality"
+     ],
+     "subPassB": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts, areas or costs in a practical context"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Find the rectangle's perimeter, match the units, and divide by the spacing to count items around a closed loop",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.whole-items-in-context"
+     ],
+     "subPassA": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts and quantities sensibly in a practical measurement context"
+     ],
+     "subPassB": [
+      "NEW:AI-SL1.6.estimate-in-context|Estimate counts, areas or costs in a practical context"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz2-p2-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "One unknown probability from a stated ratio, then the other from probabilities summing to one",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.find-k"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.7"
+     ],
+     "skill": "Expected prize from the distribution compared with the stake to decide the game is not fair",
+     "review": "agreed",
+     "sub": [
+      "SL4.7.expected-value",
+      "SL4.7.fair-game"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.5"
+     ],
+     "skill": "Experimental probability as a relative frequency from observed counts",
+     "review": "agreed",
+     "sub": [
+      "SL4.5.relative-frequency"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.5",
+      "4.1"
+     ],
+     "skill": "Compare experimental and theoretical probabilities, and argue sampling variation or sample reliability",
+     "review": "agreed",
+     "sub": [
+      "SL4.5.relative-frequency",
+      "SL4.1.bias-reliability"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "Chi-squared goodness-of-fit test against stated probabilities: hypotheses, expected counts, degrees of freedom, p-value and a conclusion in context",
+     "review": "agreed",
+     "sub": [
+      "AI-SL4.11.hypotheses",
+      "AI-SL4.11.expected-frequencies",
+      "AI-SL4.11.degrees-of-freedom",
+      "AI-SL4.11.goodness-of-fit",
+      "AI-SL4.11.conclusion"
+     ],
+     "subPassA": [
+      "AI-SL4.11.hypotheses",
+      "AI-SL4.11.expected-frequencies",
+      "AI-SL4.11.degrees-of-freedom",
+      "AI-SL4.11.goodness-of-fit",
+      "AI-SL4.11.conclusion"
+     ],
+     "subPassB": [
+      "AI-SL4.11.hypotheses",
+      "AI-SL4.11.expected-frequencies",
+      "AI-SL4.11.goodness-of-fit",
+      "AI-SL4.11.conclusion"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-sl-2026-may-tz2-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "5.3"
+     ],
+     "skill": "Differentiate a quadratic, evaluate the gradient at the left edge, then convert it to an angle with inverse tan",
+     "review": "agreed",
+     "sub": [
+      "SL5.3.power-rule",
+      "SL5.3.gradient-at-point"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "5.5",
+      "3.1"
+     ],
+     "skill": "Write the definite integral for the area under the parabola, evaluate it, and multiply by thickness for the slab volume",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.area-expression",
+      "SL5.5.definite-integral-gdc",
+      "SL3.1.prism-cylinder"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Convert the slab volume to cm cubed and multiply by density for the mass (largely unit conversion)",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.prism-cylinder"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.5"
+     ],
+     "skill": "Area under a second parabola by definite integral on the GDC, then the percentage reduction compared with a claim",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.definite-integral-gdc",
+      "SL5.5.area-positive"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "5.5",
+      "5.3"
+     ],
+     "skill": "Differentiate the quadratic, substitute into a given arc-length integral and evaluate with technology, then add straight sides for the perimeter",
+     "review": "agreed",
+     "sub": [
+      "SL5.5.definite-integral-gdc",
+      "SL5.3.power-rule"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz2-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Monthly deposit as a percentage of monthly salary (percentage work)",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.find-payment"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Finance solver for the future value of regular monthly deposits",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.future-value-deposits"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Critique the savings-plan assumptions to explain higher or lower outcomes",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.compare-interpret"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Value after 10 years of deposits, reduce by withdrawal, recompute final value with PV and PMT, compare",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.future-value-deposits",
+      "AI-SL1.7.outstanding-balance"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Finance solver for the monthly deposit needed to reach a target future value",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.find-payment"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz2-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Period of a sinusoidal model from a minimum and the next maximum",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Find b from the period, the principal axis d from the mean of max and min, and a negative amplitude for a cosine model starting at a minimum.",
+     "review": "adjudicated",
+     "rationale": "The 2.5 Tag-when line puts a sinusoid's amplitude, period and principal axis (a, b and d) in 2.5, and the form a cos(bt) + d has no phase shift, so 2.6 parameter-fitting is not needed.",
+     "passA": [
+      "2.5"
+     ],
+     "passB": [
+      "2.5",
+      "2.6"
+     ],
+     "sub": [
+      "AI-SL2.5.sinusoidal-model"
+     ],
+     "subPassA": [
+      "AI-SL2.5.sinusoidal-model"
+     ],
+     "subPassB": [
+      "AI-SL2.5.sinusoidal-model",
+      "AI-SL2.6.find-parameters"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.4",
+      "2.5"
+     ],
+     "skill": "Solve model equals a given depth with the GDC for the first time",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.intersection",
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4",
+      "2.5"
+     ],
+     "skill": "Length of time the model stays above a level within an interval",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.interval-from-graph",
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "2.4",
+      "2.5"
+     ],
+     "skill": "Find arrival time, then the next time the model reaches the required depth, and the wait",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.intersection",
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
   "ai-sl-2026-may-tz3-p1-q01": {
    "parts": [
     {
@@ -19909,6 +20701,327 @@
     }
    ],
    "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz3-p2-q01": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.4"
+     ],
+     "skill": "Future value of a lump sum under monthly compounding via TVM or formula",
+     "review": "agreed",
+     "sub": [
+      "SL1.4.future-value"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.7"
+     ],
+     "skill": "Finance solver with an existing balance plus regular monthly deposits to get the future value",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.7.future-value-deposits"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Write the arithmetic general term from the table, evaluate a term and comment on where the linear model breaks down",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.nth-term",
+      "SL1.2.find-u1-d",
+      "SL1.2.model"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "1.2"
+     ],
+     "skill": "Solve for the first term of the decreasing arithmetic sequence that does not exceed the account balance, evaluate that term and subtract it from the balance.",
+     "review": "agreed",
+     "sub": [
+      "SL1.2.find-n",
+      "SL1.2.nth-term"
+     ],
+     "subPassA": [
+      "SL1.2.find-n"
+     ],
+     "subPassB": [
+      "SL1.2.find-n",
+      "SL1.2.nth-term"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-sl-2026-may-tz3-p2-q02": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Mean and population standard deviation of two small data sets with technology",
+     "review": "agreed",
+     "sub": [
+      "SL4.3.mean-median-mode",
+      "SL4.3.sd-variance"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "4.3"
+     ],
+     "skill": "Compare the two groups using their means and standard deviations in context",
+     "review": "agreed",
+     "sub": [
+      "SL4.3.compare-average-spread"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "Null and one-tailed alternative hypotheses about two population means",
+     "review": "agreed",
+     "sub": [
+      "AI-SL4.11.hypotheses"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "p-value of a one-tailed pooled two-sample t-test from technology",
+     "review": "agreed",
+     "sub": [
+      "AI-SL4.11.two-sample-t-test"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "4.11"
+     ],
+     "skill": "Compare the p-value with the significance level and conclude in context",
+     "review": "agreed",
+     "sub": [
+      "AI-SL4.11.conclusion"
+     ]
+    },
+    {
+     "label": "f",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Regression line of y on x and Pearson's r with technology",
+     "review": "agreed",
+     "sub": [
+      "SL4.4.regression-y-on-x",
+      "SL4.4.pearson-r"
+     ]
+    },
+    {
+     "label": "g",
+     "syllabus": [
+      "4.4"
+     ],
+     "skill": "Predict from the regression line and recognise it is extrapolation beyond the data range",
+     "review": "agreed",
+     "sub": [
+      "SL4.4.predict"
+     ]
+    }
+   ],
+   "confidence": "high"
+  },
+  "ai-sl-2026-may-tz3-p2-q03": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "2.5"
+     ],
+     "skill": "Find b of a sinusoidal model from its 24-hour period",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.sinusoidal-model"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "2.6",
+      "1.8"
+     ],
+     "skill": "Substitute two data points to form linear equations in a and c and solve them",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.6.find-parameters",
+      "AI-SL1.8.set-up-system",
+      "AI-SL1.8.solve-system"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "2.5",
+      "2.6"
+     ],
+     "skill": "Evaluate the model at t = 8 and compare with the recorded reading",
+     "review": "agreed",
+     "sub": [
+      "AI-SL2.5.sinusoidal-model",
+      "AI-SL2.6.test-model"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.2"
+     ],
+     "skill": "Use the minimum and maximum of the sinusoidal model to state the two time intervals in a day on which temperature is decreasing.",
+     "review": "agreed",
+     "sub": [
+      "SL5.2.increasing-decreasing-intervals"
+     ],
+     "subPassA": [
+      "SL5.2.increasing-decreasing-intervals"
+     ],
+     "subPassB": [
+      "SL5.2.increasing-decreasing-intervals",
+      "SL5.2.sign-from-graph"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz3-p2-q04": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "1.1"
+     ],
+     "skill": "Evaluate the power formula and write the result in standard form",
+     "review": "agreed",
+     "sub": [
+      "SL1.1.convert"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "1.6"
+     ],
+     "skill": "Use lower and upper bounds of rounded wind speeds to get least and greatest power and their difference",
+     "review": "agreed",
+     "sub": [
+      "AI-SL1.6.write-bounds",
+      "AI-SL1.6.bounds-of-calculation"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.6",
+      "5.3"
+     ],
+     "skill": "Differentiate the quartic, solve dP/dv = 0 in the domain and interpret it as the speed of maximum power",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.6.solve-gradient-zero",
+      "AI-SL5.6.turning-point",
+      "SL5.3.power-rule"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "2.4"
+     ],
+     "skill": "Find where the power model reaches a level and give the speed interval within the domain",
+     "review": "agreed",
+     "sub": [
+      "SL2.4.interval-from-graph",
+      "SL2.4.intersection"
+     ]
+    }
+   ],
+   "confidence": "medium"
+  },
+  "ai-sl-2026-may-tz3-p2-q05": {
+   "parts": [
+    {
+     "label": "a",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Arc length of a degree sector in terms of its angle, and the remaining major arc by subtraction",
+     "review": "agreed",
+     "sub": [
+      "AI-SL3.4.arc-length"
+     ]
+    },
+    {
+     "label": "b",
+     "syllabus": [
+      "3.4"
+     ],
+     "skill": "Equate the major arc to the cone's base circumference to express the base radius in terms of the angle",
+     "review": "agreed",
+     "sub": [
+      "AI-SL3.4.sector-cone"
+     ]
+    },
+    {
+     "label": "c",
+     "syllabus": [
+      "5.7",
+      "3.1"
+     ],
+     "skill": "Height from slant height and radius, substituted into the cone volume formula to write volume in one variable",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.form-objective",
+      "SL3.1.volume-solids"
+     ]
+    },
+    {
+     "label": "d",
+     "syllabus": [
+      "5.7"
+     ],
+     "skill": "Use the GDC to find the angle that maximises the cone volume, the maximum volume and the corresponding radius",
+     "review": "agreed",
+     "sub": [
+      "AI-SL5.7.optimal-input",
+      "AI-SL5.7.optimum-value"
+     ]
+    },
+    {
+     "label": "e",
+     "syllabus": [
+      "3.1"
+     ],
+     "skill": "Hemisphere volume added to the cone volume, compared with one litre to test a claim",
+     "review": "agreed",
+     "sub": [
+      "SL3.1.volume-solids"
+     ]
+    }
+   ],
+   "confidence": "high"
   }
  }
 }
