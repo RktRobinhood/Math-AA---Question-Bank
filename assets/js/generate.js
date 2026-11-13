@@ -165,11 +165,11 @@
         <div><h4 class="cap">Include</h4><div class="g2">
           <label class="ckl">${ck('gen-questions', s.includeQuestions)}Question paper</label>
           <label class="ckl">${ck('gen-markscheme', s.includeMarkscheme)}Markscheme <small>separate file</small></label>
-          <label class="ckl">${ck('cs-show-grid', s.showMarksGrid)}Marks grid <small>for the teacher, on the cover</small></label>
+          <label class="ckl">${ck('cs-show-grid', s.showMarksGrid)}Marks grid <small>on the cover</small></label>
           <label class="ckl">${ck('gen-pagenums', s.showPageNumbers)}Page X of Y footer</label>
           <label class="ckl wide">Versions
             <select class="select" id="gen-versions">${[1, 2, 3, 4].map(n => `<option value="${n}" ${n === (s.versions || 1) ? 'selected' : ''}>${n === 1 ? '1 (just this paper)' : `${n}: ${'ABCD'.slice(0, n).split('').join(', ')}`}</option>`).join('')}</select>
-            <small>B onwards have the same questions in a different order</small></label>
+            <small>same questions, different order</small></label>
           ${hasB ? `<label class="ckl wide">Blank working pages after each Section B question
             <select class="select" id="gen-workspace-n">${[0, 1, 2, 3, 4].map(n => `<option value="${n}" ${n === wsN ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
         </div></div>
@@ -203,8 +203,8 @@
       </div>
       <div class="prev">
         <div class="ph"><span><b>Live preview</b> · <span id="aasl-pv-where"></span></span><span>updates as you type</span></div>
-        <div class="pv-stage" id="aasl-pv-stage"><div class="pv-fit" id="aasl-pv-fit"></div></div>
         <div class="strip" id="aasl-pv-strip"></div>
+        <div class="pv-stage" id="aasl-pv-stage"><div class="pv-fit" id="aasl-pv-fit"></div></div>
       </div>
       <div class="ft">
         <span class="m" id="aasl-gen-status" role="status">Your school details and choices are remembered on this device for next time.</span>
@@ -404,7 +404,10 @@
     const fit = document.getElementById('aasl-pv-fit');
     const pg = fit && fit.firstElementChild;
     if (!stage || !pg) return;
-    const scale = Math.max(0.1, Math.min(stage.clientWidth / 595, stage.clientHeight / 842, 1.4));
+    // Fill the pane: the whole page when the pane is tall enough for that to be readable,
+    // otherwise the full width (the pane scrolls), so the text can always be read.
+    const whole = Math.min(stage.clientWidth / 595, stage.clientHeight / 842);
+    const scale = Math.max(0.1, Math.min(whole >= 0.9 ? whole : (stage.clientWidth - 14) / 595, 1.5));
     fit.style.width = `${595 * scale}px`;
     fit.style.height = `${842 * scale}px`;
     pg.style.transform = `scale(${scale})`;

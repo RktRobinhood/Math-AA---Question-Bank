@@ -4,7 +4,7 @@
    - "Back to N results" with Prev / Next (and the arrow keys) when the reader came from a
      filtered list, in that list's order. The list is handed over in sessionStorage by app.js;
    - the parts table: pressing a part opens its sub-skills and marks where that part sits on
-     the question. Nothing is highlighted until a part is pressed (#31);
+     the question. Hovering a part marks it for the moment; pressing keeps it marked (#31);
    - Copy link, and "See all" similar questions.
 */
 (function () {
@@ -64,6 +64,15 @@
     if (first && getComputedStyle(view).display !== 'none') first.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
   partButtons.forEach(b => b.addEventListener('click', () => showPart(b.dataset.part)));
+  // Hovering (or tabbing to) a part marks it on the question for as long as the pointer is
+  // there; pressing it keeps it marked.
+  const hover = (i, on) => document.querySelectorAll(`.region[data-part="${i}"]`).forEach(r => r.classList.toggle('hover', on));
+  partButtons.forEach(b => {
+    b.addEventListener('mouseenter', () => hover(b.dataset.part, true));
+    b.addEventListener('mouseleave', () => hover(b.dataset.part, false));
+    b.addEventListener('focus', () => hover(b.dataset.part, true));
+    b.addEventListener('blur', () => hover(b.dataset.part, false));
+  });
 
   // ── copy link, similar ───────────────────────────────────────────────────
   $('q-copy').addEventListener('click', async e => {
