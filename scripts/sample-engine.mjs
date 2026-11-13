@@ -9,7 +9,7 @@ const seed = args.includes("--seed") ? args[args.indexOf("--seed") + 1] : 1;
 const filter = args.find((a, i) => !a.startsWith("--") && args[i - 1] !== "--seed") || "";
 for (const g of E.registry.filter((x) => x.id.includes(filter))) {
   for (const level of g.levels) {
-    const q = E.make({ generator: g.id, level, seed, course: g.courses[0] });
+    const q = E.make({ generator: g.id, level, seed, course: g.home });
     console.log(`\n=== ${g.id}  L${level}  [${q.marks} marks]  ${q.calculator ? "calculator" : "no calculator"}  ${q.syllabus.join(", ")}${g.source ? "  (from " + g.source + ")" : ""}`);
     console.log(q.stem);
     if (q.table) console.log([q.table.head, ...q.table.rows].map((r) => "  | " + r.join(" | ")).join("\n"));

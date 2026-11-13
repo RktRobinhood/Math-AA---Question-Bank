@@ -6,7 +6,7 @@
 // For every generator, every level it offers, and --seeds seeds (300 unless told otherwise):
 //   1 deterministic      the same request and seed give an identical question
 //   2 verified           each answer is recomputed by the generator's independent verifier in
-//                        scripts/engine-checks/topicN.mjs (a generator with no verifier fails)
+//                        a file of scripts/engine-checks/ (a generator with no verifier fails)
 //   3 number quality     no NaN, undefined, Infinity, -0, "+ -", "1x", unsimplified fractions;
 //                        no-calculator answers exact, calculator answers to 3 s.f. and not all "nice"
 //   4 constraints        the verifier's require() conditions hold
@@ -18,11 +18,12 @@
 //                        wrong graph options differ visibly from the correct one
 // Then: selection rules (scripted students), storage and migration, variants and worksheets.
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import vm from "node:vm";
-import { ROOT, ENGINE_DIR, ENGINE_FILES, generatorFiles, loadEngine, checkPractice, browserCatalogue, standaloneContext } from "./lib/practice-build.mjs";
+import { ROOT, ENGINE_DIR, ENGINE_FILES, generatorFiles, loadEngine, loadCatalogue, mergeFragments, checkPractice, browserCatalogue, coverageMarkdown, standaloneContext } from "./lib/practice-build.mjs";
 import { makeTools, VerifyError } from "./engine-checks/tools.mjs";
 
 const args = process.argv.slice(2);
@@ -60,7 +61,8 @@ function texError(src) {
 // ---- verifiers ---------------------------------------------------------------------
 const verifiers = {};
 const checkDir = path.join(ROOT, "scripts", "engine-checks");
-for (const f of fs.readdirSync(checkDir).filter((x) => /^topic\d+\.mjs$/.test(x)).sort()) {
+// every .mjs file of the folder except the shared tools: topicN.mjs and any file added beside them
+for (const f of fs.readdirSync(checkDir).filter((x) => x.endsWith(".mjs") && x !== "tools.mjs").sort()) {
   const mod = await import(pathToFileURL(path.join(checkDir, f)).href);
   for (const [id, fn] of Object.entries(mod.default || {})) {
     if (verifiers[id]) throw new Error(`verifier for ${id} defined twice (${f})`);
@@ -132,7 +134,7 @@ function svgProblems(graph) {
 function checkQuestion(g, level, seed, stats) {
   const fails = [];
   const fail = (n, msg) => fails.push(`[${n}] ${msg}`);
-  const req = { course: g.courses[0], generator: g.id, level, seed };
+  const req = { course: g.home, generator: g.id, level, seed };
   let q;
   try { q = E.make(req); } catch (e) { return [`[1] make() threw: ${e.message}`]; }
   // 1 deterministic
@@ -259,7 +261,7 @@ for (const g of gens) {
       const fails = checkQuestion(g, level, seed, stats);
       questions++;
       for (const f of fails) if (problems.length < 6 && !problems.some((p) => p.slice(0, 40) === `L${level} seed ${seed}: ${f}`.replace(/seed \d+/, "seed").slice(0, 40))) problems.push(`L${level} seed ${seed}: ${f}`);
-      if (!fails.length) sigs.add(E.signature(E.make({ generator: g.id, level, seed, course: g.courses[0] })));
+      if (!fails.length) sigs.add(E.signature(E.make({ generator: g.id, level, seed, course: g.home })));
     }
     if (stats.p2 >= 100 && !g.niceOk && stats.p2nice / stats.p2 > 0.2) problems.push(`[3] L${level}: ${stats.p2nice} of ${stats.p2} Paper 2 style questions have only "nice" answers`);
     if (SEEDS >= 100 && sigs.size < 4 && !g.fixedPool) problems.push(`[3] L${level}: only ${sigs.size} different questions in ${SEEDS} seeds`);
@@ -466,7 +468,8 @@ if (!ONLY) {
   test("each of the four courses: every subtopic can be practised, by a generator or its real questions", () => {
     assert(COURSES.join() === "aa-sl,aa-hl,ai-sl,ai-hl", "expected the four courses, got " + COURSES.join());
     // The one known gap: a statement with no generator and no tagged question in the bank.
-    assert(practice.empty.join() === "ai-hl 1.10", "subtopics with nothing to practise changed: " + practice.empty.join(", "));
+    // (it stops being one when a generator is written for it)
+    assert(practice.empty.every((x) => x === "ai-hl 1.10"), "subtopics with nothing to practise changed: " + practice.empty.join(", "));
     for (const c of COURSES) {
       const { lr } = learnerFor(c);
       const all = E.coverage(c), cov = Object.fromEntries(Object.keys(all).filter((k) => all[k].levels.some((l) => l >= 1 && l <= 4)).map((k) => [k, all[k]]));
@@ -487,7 +490,7 @@ if (!ONLY) {
         }
       }
       assert(gen === practice.perCourse[c].withGenerators && gen > 0, `${c}: ${gen} subtopics generated, build says ${practice.perCourse[c].withGenerators}`);
-      assert(c === "aa-sl" ? realOnly === 0 : realOnly > 0, `${c}: unexpected number of real-only subtopics (${realOnly})`);
+      assert(c !== "aa-sl" || realOnly === 0, `${c}: unexpected number of real-only subtopics (${realOnly})`);
     }
   });
 
@@ -500,11 +503,11 @@ if (!ONLY) {
         assert(d.statements && d.statements.length === g.syllabus.length, `${g.id}: statement ids not resolved`);
         const fits = d.statements.every((id) => ids.has(id));
         assert(fits === offered.has(g.id), `${g.id} ${fits ? "should" : "should not"} be offered in ${c}`);
-        assert(d.courses.includes(c) === fits && d.courses[0] === "aa-sl", `${g.id}: courses list is wrong for ${c}`);
+        assert(d.courses.includes(c) === fits && d.courses[0] === g.home && d.home === g.home, `${g.id}: courses list is wrong for ${c}`);
         if (!fits) { let threw = false; try { E.make({ course: c, generator: g.id, seed: 1 }); } catch (_) { threw = true; } assert(threw, `make() built ${g.id} for ${c}`); }
       }
     }
-    assert(E.generators({ course: "aa-hl" }).length === E.registry.length, "AA HL should be offered every AA SL generator");
+    assert(E.registry.filter((g) => g.home === "aa-sl").every((g) => E.generators({ course: "aa-hl", type: g.type }).some((d) => d.id === g.id)), "AA HL should be offered every AA SL generator");
     assert(E.generators({ course: "ai-sl" }).length < E.registry.length && E.generators({ course: "ai-sl" }).length > 50, "AI SL should be offered some generators, not all");
   });
 
@@ -561,10 +564,9 @@ if (!ONLY) {
   test("an AHL or AI-only statement falls back to that course's real questions; Paper 3 comes last", () => {
     const cases = [["aa-hl", (s) => s.id.startsWith("AHL")], ["ai-hl", (s) => s.id.startsWith("AI-AHL")], ["ai-sl", (s) => s.id.startsWith("AI-SL")], ["ai-hl", (s) => s.id.startsWith("AI-SL")]];
     for (const [c, pick] of cases) {
-      const list = QB.statements[c].filter(pick).filter((s) => (QB.real[c][s.code] || []).length);
-      assert(list.length > 0, `${c}: no such statements`);
+      // those with no generator yet (the list shrinks as generators are written for this content)
+      const list = QB.statements[c].filter(pick).filter((s) => (QB.real[c][s.code] || []).length && !E.generators({ course: c, syllabus: s.code, primary: true }).length);
       for (const s of list) {
-        assert(E.generators({ course: c, syllabus: s.code, primary: true }).length === 0, `${c} ${s.code} (${s.id}) has generators`);
         const { lr } = learnerFor(c);
         const real = QB.real[c][s.code];
         const it = lr.next([s.code]);
@@ -684,7 +686,7 @@ if (!ONLY) {
   test("worksheet in another course: its codes, generated where shared, real where not", () => {
     const c = "ai-hl", cov = E.coverage(c);
     const noGen = QB.statements[c].map((s) => s.code).find((k) => !cov[k] && (QB.real[c][k] || []).length >= 2);
-    const scope = ["1.11", "4.3", noGen];
+    const scope = ["1.11", "4.3", noGen].filter(Boolean);   // noGen: none once every subtopic has a generator
     const w = E.worksheet({ course: c, scope, count: 9, levels: { 2: 1, 3: 1 }, seed: 4, real: L.realIndex(QB, c) });
     assert(JSON.stringify(w) === JSON.stringify(E.worksheet({ course: c, scope, count: 9, levels: { 2: 1, 3: 1 }, seed: 4, real: L.realIndex(QB, c) })), "not reproducible");
     assert(w.course === c && w.items.length >= 6, `worksheet has ${w.items.length} items`);
@@ -757,7 +759,7 @@ if (!ONLY) {
     let multi = 0, same = 0;
     for (const type of types) {
       const list = E.generators({ type });
-      const q = E.make({ generator: list[0].id, seed: 11, course: list[0].courses[0] });
+      const q = E.make({ generator: list[0].id, seed: 11, course: list[0].home });
       const vs = E.variants(q);
       assert(vs.length === E.generators({ type, course: q.course }).length - 1, `variants() of ${type} is incomplete`);
       if (vs.length) multi++;
@@ -815,13 +817,157 @@ if (!ONLY) {
 
   test("no Math.random() or Date in the engine and generators", () => {
     const dir = path.join(ROOT, "assets/js/engine");
-    const files = [...fs.readdirSync(dir).filter((f) => f.endsWith(".js")).map((f) => path.join(dir, f)), ...fs.readdirSync(path.join(dir, "generators")).map((f) => path.join(dir, "generators", f))];
+    const files = [...fs.readdirSync(dir).filter((f) => f.endsWith(".js")).map((f) => path.join(dir, f)), ...generatorFiles().map((f) => path.join(dir, "generators", f))];
     for (const f of files) {
       const src = fs.readFileSync(f, "utf8").replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
       assert(!/Math\.random/.test(src), `${path.basename(f)} uses Math.random()`);
       if (!f.endsWith("learner.js")) assert(!/\bDate\b/.test(src), `${path.basename(f)} uses Date`);
       assert(!/\b(document|window)\./.test(src), `${path.basename(f)} touches the DOM`);
     }
+  });
+
+  // ---- home courses and catalogue fragments ----
+  // Throwaway generators, registered for these tests only and taken out again.
+  const THROWAWAY = ["zz-test-complex/modulus/equation", "zz-test-approx/percentage-error/words"];
+  const withThrowaways = (fn) => {
+    const build = ({ rng }) => { const k = rng.int(2, 9); return { stem: `Let $k = ${k}$.`, parts: [{ prompt: "Write down $k$.", marks: 3, answer: E.ans.int(k), working: [`$k = ${k}$`] }] }; };
+    try {
+      // one generator states its home itself; registerAll sets it once for a whole file
+      E.register({ home: "aa-hl", type: "zz-test-complex", unknown: "modulus", representation: "equation", format: "value", levels: [2], syllabus: ["1.12"], skills: ["AHL1.12.modulus-argument-values"], build });
+      E.registerAll({ home: "ai-sl", syllabus: ["1.6"], skills: ["AI-SL1.6.percentage-error"] }, [{ type: "zz-test-approx", unknown: "percentage-error", representation: "words", format: "value", levels: [2], build }]);
+      fn();
+    } finally {
+      for (const id of THROWAWAY) E.unregister(id);
+      E.useCatalogue(QB);
+    }
+  };
+  const testFragment = { file: "data/question-types/zz-test.json", data: { home: "aa-hl",
+    types: [
+      { id: "zz-test-complex", topic: 1, source: "extension", kind: "skill", name: "Test type on an AHL statement", syllabus: ["1.12"], skills: ["AHL1.12.modulus-argument-values"] },
+      { id: "zz-test-approx", home: "ai-sl", topic: 1, source: "extension", kind: "skill", name: "Test type on an AI statement", syllabus: ["1.6"], skills: ["AI-SL1.6.percentage-error"] },
+    ],
+  } };
+  // a statement no catalogue file lists yet, for the fragment's subtopics (none once all are listed)
+  const freeSub = QB.statements["aa-hl"].map((s) => s.id).find((id) => !QB.subtopics[id]);
+  const testSubtopics = freeSub ? { [freeSub]: { prereqs: ["SL1.1"], skills: [{ id: "AHL1.12.modulus-argument-values", levels: [2, 3], paper: "either" }] } } : {};
+  const checkWith = (fragments) => {
+    const errs = [];
+    const keep = console.log; console.log = () => {};
+    let out;
+    try { out = checkPractice({ ...ctx, errors: errs, fragments }); } finally { console.log = keep; E.useCatalogue(QB); }
+    return { out, errs };
+  };
+  const offeredIn = (id) => COURSES.filter((c) => E.generators({ course: c }).some((d) => d.id === id));
+  const throws = (fn) => { try { fn(); } catch (_) { return true; } return false; };
+
+  test("home: an aa-hl generator on an AHL statement is offered in AA HL only, under AA HL codes", () => {
+    assert(idOf("aa-hl", "1.12") === "AHL1.12" && idOf("ai-hl", "1.12") !== "AHL1.12", "the statements this test relies on moved");
+    const before = E.registry.length;
+    withThrowaways(() => {
+      const id = THROWAWAY[0];
+      assert(offeredIn(id).join() === "aa-hl", `offered in ${offeredIn(id).join()}`);
+      const d = E.generators({ course: "aa-hl", syllabus: "1.12", primary: true }).find((x) => x.id === id);
+      assert(d && d.home === "aa-hl" && d.courses.join() === "aa-hl" && d.statements.join() === "AHL1.12" && d.syllabus.join() === "1.12", "description is wrong: " + JSON.stringify(d));
+      assert(!E.generators({ course: "ai-hl", syllabus: "1.12" }).some((x) => x.id === id), "AI HL 1.12 (another statement with the same number) was given the generator");
+      const q = E.make({ generator: id, seed: 3 });   // no course: its home
+      assert(q.course === "aa-hl" && q.syllabus.join() === "1.12" && q.id.startsWith("aa-hl:zz-test-complex:") && q.request.course === "aa-hl", "question is not an AA HL question: " + q.id);
+      assert(JSON.stringify(E.make(q.request)) === JSON.stringify(q), "the request does not reproduce the question");
+      assert(E.make({ type: "zz-test-complex", seed: 3 }).id === q.id, "make() by type without a course did not fall back to the home course");
+      for (const c of ["aa-sl", "ai-sl", "ai-hl"]) assert(throws(() => E.make({ course: c, generator: id, seed: 3 })), `make() built it for ${c}`);
+      const cov = E.coverage("aa-hl")["1.12"];
+      assert(cov && cov.generators.includes(id) && cov.levels.includes(2), "not counted in AA HL coverage");
+      for (const c of ["aa-sl", "ai-sl", "ai-hl"]) assert(!Object.values(E.coverage(c)).some((x) => x.generators.includes(id)), `counted in ${c} coverage`);
+      // the learner, the worksheet and variants follow (other generators may share the subtopic)
+      const mine = E.generators({ course: "aa-hl", syllabus: "1.12", primary: true }).map((x) => x.id);
+      const it = learnerFor("aa-hl").lr.next(["1.12"]);
+      assert(it.kind === "generated" && mine.includes(it.question.generator) && it.unit === "1.12" && it.question.syllabus[0] === "1.12", "the AA HL learner does not serve generated questions for 1.12");
+      const ws = E.worksheet({ course: "aa-hl", scope: ["1.12"], count: 2, levels: { 2: 1 }, seed: 1 });
+      assert(ws.items.length === 2 && ws.items.every((x) => x.kind === "generated" && mine.includes(x.question.generator) && x.question.course === "aa-hl"), "the AA HL worksheet does not generate for 1.12");
+      assert(E.variants(q).length === 0, "unexpected variants");
+      // the build: its type comes from a fragment, its skill id is an AA HL sub-tag
+      const base = practice.perCourse;
+      const { out, errs } = checkWith([testFragment]);
+      assert(!errs.length, "build problems: " + errs.join("; "));
+      const grew = (c) => out.perCourse[c].generators - base[c].generators;
+      assert(grew("aa-sl") === 0 && grew("aa-hl") === 1 && grew("ai-sl") === 1 && grew("ai-hl") === 1, `generators offered grew by ${COURSES.map((c) => `${c} ${grew(c)}`).join(", ")}`);
+      assert(out.perCourse["aa-hl"].withGenerators >= base["aa-hl"].withGenerators && E.coverage("aa-hl")["1.12"].generators.includes(id), "AA HL coverage lost the subtopic");
+      const doc = coverageMarkdown(out); E.useCatalogue(QB);
+      const hl = doc.slice(doc.indexOf("## AA HL"), doc.indexOf("## AI SL"));
+      const row = /^\| 1\.12 [^|]*\|(?:[^|]*\|){3}([^|]*)\| (\d+) \|/m.exec(hl);
+      assert(row && row[1].split(", ").map(Number).includes(2) && Number(row[2]) === mine.length, "the coverage document does not count the generator under AA HL 1.12");
+      assert(!checkWith([]).errs.every((e) => !/zz-test-complex.*not in the catalogue/.test(e)), "a generator whose type is in no catalogue file should be a build error");
+      assert(checkWith([{ file: "x.json", data: { types: [{ ...testFragment.data.types[0], home: "aa-hl" }, { ...testFragment.data.types[1], home: "aa-sl", id: "zz-test-approx" }] } }]).errs.length === 0, "a type may name another home than its generators");
+      assert(checkWith([{ file: "x.json", data: { home: "aa-hl", types: [{ ...testFragment.data.types[0], skills: ["AHL1.12.no-such-skill"] }, testFragment.data.types[1]] } }]).errs.some((e) => /unknown skill AHL1.12.no-such-skill/.test(e)), "an unknown skill id passed");
+    });
+    assert(E.registry.length === before && !E.generator(THROWAWAY[0]) && offeredIn(THROWAWAY[0]).length === 0, "the throwaway generators were not taken out");
+    assert(throws(() => E.register({ home: "aa-hl", courses: ["aa-sl"], type: "zz", unknown: "u", representation: "r", format: "value", levels: [2], syllabus: ["1.12"], skills: [], build() {} })), "courses without the home course was accepted");
+  });
+
+  test("home: an ai-sl generator on an AI-only statement is offered in AI SL and AI HL, not in AA", () => {
+    assert(idOf("ai-sl", "1.6") === "AI-SL1.6" && idOf("ai-hl", "1.6") === "AI-SL1.6" && idOf("aa-sl", "1.6") === "SL1.6", "the statements this test relies on moved");
+    withThrowaways(() => {
+      const id = THROWAWAY[1];
+      assert(offeredIn(id).join() === "ai-sl,ai-hl", `offered in ${offeredIn(id).join()}`);
+      for (const c of ["ai-sl", "ai-hl"]) {
+        const code = QB.statements[c].find((s) => s.id === "AI-SL1.6").code;
+        const d = E.generators({ course: c, syllabus: code, primary: true }).find((x) => x.id === id);
+        assert(d && d.home === "ai-sl" && d.courses.join() === "ai-sl,ai-hl" && d.syllabus[0] === code, `${c}: not described under its own code`);
+        const q = E.make({ course: c, generator: id, seed: 4 });
+        assert(q.course === c && q.syllabus[0] === code && q.id.startsWith(c + ":"), `${c}: question under the wrong course or code`);
+        assert(E.coverage(c)[code].generators.includes(id), `${c}: not in coverage`);
+        const it = learnerFor(c).lr.next([code]);
+        assert(it.kind === "generated" && it.question.syllabus[0] === code && it.course === c, `${c}: the learner does not serve generated questions for ${code}`);
+      }
+      assert(E.make({ course: "ai-sl", generator: id, seed: 4 }).stem === E.make({ course: "ai-hl", generator: id, seed: 4 }).stem, "the two courses got different mathematics");
+      assert(E.make({ generator: id, seed: 4 }).course === "ai-sl", "the default course is not the home course");
+      for (const c of ["aa-sl", "aa-hl"]) {
+        assert(!E.generators({ course: c, syllabus: "1.6" }).some((x) => x.id === id), `AA 1.6 (another statement) was given the generator in ${c}`);
+        assert(throws(() => E.make({ course: c, generator: id, seed: 4 })), `make() built it for ${c}`);
+      }
+    });
+  });
+
+  test("catalogue fragments: types are merged, duplicate ids and wrong codes are build errors", () => {
+    // in memory, through the whole build check
+    const extra = { ...testFragment.data.types[0], id: "zz-test-extra" };
+    const { out, errs } = checkWith([{ file: "a.json", data: { home: "aa-hl", types: [extra], subtopics: testSubtopics } }]);
+    assert(!errs.length, "build problems: " + errs.join("; "));
+    const merged = browserCatalogue(out);
+    const t = merged.types.find((x) => x.id === "zz-test-extra");
+    assert(t && t.home === "aa-hl" && t.courses.join() === "aa-hl" && t.syllabus.join() === "1.12" && merged.types.length === QB.types.length + 1, "the fragment's type is not in the catalogue");
+    if (freeSub) assert(merged.subtopics[freeSub] && merged.subtopics[freeSub].prereqs.join() === "SL1.1" && merged.subtopics[freeSub].skills.join() === "AHL1.12.modulus-argument-values", "the fragment's subtopic is not in the catalogue");
+    assert(QB.types.every((x) => x.home) && !QB.types.some((x) => x.id.startsWith("zz-test")) && !loadCatalogue().types.some((x) => x.id.startsWith("zz-test")), "the catalogue on disk changed");
+    const dupMain = checkWith([{ file: "a.json", data: { types: [{ ...extra, id: QB.types[0].id }] } }]).errs;
+    assert(dupMain.some((e) => e.includes(`type ${QB.types[0].id} listed twice`)), "a type id already in the main file was accepted");
+    const dupFrag = checkWith([{ file: "a.json", data: { home: "aa-hl", types: [extra] } }, { file: "b.json", data: { home: "aa-hl", types: [extra] } }]).errs;
+    assert(dupFrag.some((e) => /type zz-test-extra listed twice \(a\.json and b\.json\)/.test(e)), "the same type id in two fragments was accepted");
+    assert(checkWith([{ file: "a.json", data: { types: [], subtopics: { "SL1.1": { prereqs: [] } } } }]).errs.some((e) => /subtopic SL1.1 listed twice/.test(e)), "a subtopic already in the main file was accepted");
+    // a type's codes are read in its home course's numbering
+    assert(checkWith([{ file: "a.json", data: { types: [extra] } }]).errs.some((e) => /zz-test-extra: 1\.12 is not a syllabus code of aa-sl/.test(e)), "an AHL code passed without a home course");
+    assert(checkWith([{ file: "a.json", data: { home: "aa-xl", types: [extra] } }]).errs.some((e) => /unknown home course aa-xl/.test(e)), "an unknown home course passed");
+    assert(checkWith([{ file: "a.json", data: { home: "aa-hl", typs: [] } }]).errs.some((e) => /unknown key "typs"/.test(e)), "a misspelt key passed");
+    // on disk: every .json of data/question-types/ is read, in name order
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "qb-fragments-"));
+    try {
+      fs.mkdirSync(path.join(tmp, "data", "question-types"), { recursive: true });
+      const put = (p, v) => fs.writeFileSync(path.join(tmp, "data", p), typeof v === "string" ? v : JSON.stringify(v));
+      put("question-types.json", { course: "aa-sl", subtopics: [], types: [{ id: "main-type", name: "m", skills: [] }] });
+      put("question-types/b.json", { home: "ai-sl", types: [{ id: "b-type", name: "b", skills: [] }] });
+      put("question-types/a.json", { types: [{ id: "a-type", name: "a", skills: [], home: "aa-hl" }], subtopics: { "AHL1.12": { skills: ["AHL1.12.conjugate"] } } });
+      put("question-types/README.md", "not a fragment");
+      let cat = loadCatalogue(tmp);
+      assert(cat.types.map((x) => `${x.id}:${x.home || ""}:${(x.courses || []).join()}`).join(" ") === "main-type:: a-type:aa-hl:aa-hl b-type:ai-sl:ai-sl" && !cat.problems.length, "fragments on disk were not merged: " + JSON.stringify(cat.types) + cat.problems.join());
+      assert(JSON.stringify(cat.subtopics) === JSON.stringify([{ skills: [{ id: "AHL1.12.conjugate" }], id: "AHL1.12", prereqs: [] }]), "the subtopic on disk was not merged: " + JSON.stringify(cat.subtopics));
+      put("question-types/c.json", { types: [{ id: "b-type", name: "again", skills: [] }] });
+      put("question-types/d.json", "{ not json");
+      cat = loadCatalogue(tmp);
+      assert(cat.types.length === 3 && cat.problems.length === 2 && cat.problems.some((x) => x.includes("type b-type listed twice (data/question-types/b.json and data/question-types/c.json)")) && cat.problems.some((x) => x.startsWith("data/question-types/d.json:")), "a duplicate id or a broken file on disk was not reported: " + cat.problems.join("; "));
+    } finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+    assert(mergeFragments({ course: "aa-sl", types: [], subtopics: [] }, [{ file: "f", data: [] }], []).types.length === 0, "mergeFragments accepted a list");
+    // the catalogue that ships: every fragment file in the folder is valid (checked by the build) and was read
+    const shipped = fs.existsSync(path.join(ROOT, "data/question-types")) ? fs.readdirSync(path.join(ROOT, "data/question-types")).filter((f) => f.endsWith(".json")) : [];
+    const n = shipped.reduce((sum, f) => sum + (JSON.parse(fs.readFileSync(path.join(ROOT, "data/question-types", f), "utf8")).types || []).length, 0);
+    assert(practice.catalogue.types.length === JSON.parse(fs.readFileSync(path.join(ROOT, "data/question-types.json"), "utf8")).types.length + n, "the shipped fragments are not all in the catalogue");
   });
 
   let failedTests = 0;
