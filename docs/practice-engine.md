@@ -94,7 +94,7 @@ const q = QBEngine.make({ course: "aa-sl", type: "fn-composite", unknown: "expre
   stem: "Let $f(x) = 2x - 4$ and ...",
   parts: [{ label: "a", prompt, marks, answer, working: ["...", "..."] }, ...],
   table: { head, rows },   // optional
-  graph: { ... },          // optional, see Graphs
+  graph: { ... },          // optional: a plot or a figure, see Graphs
   params: { ... }          // the generator's raw numbers, for the verifiers; not for display
 }
 ```
@@ -166,12 +166,57 @@ Function types (`fn.type`): `poly` (`coeffs`, lowest power first), `rational` (`
 
 | Call | Returns |
 |---|---|
-| `QBEngine.graph.toSVG(graph, {width, height, label})` | An SVG string. `label` puts a letter in the corner (pick-the-graph options). Strokes use `currentColor`; elements have classes `qb-graph`, `qb-graph-grid`, `qb-graph-axis`, `qb-graph-ticks`, `qb-graph-curve`, `qb-graph-asymptote`, `qb-graph-point`, `qb-graph-label`, `qb-graph-option` |
+| `QBEngine.graph.toSVG(graph, {width, height, label})` | An SVG string, for a plot or a figure. `label` puts a letter in the corner (pick-the-graph options). Strokes use `currentColor`; elements have classes `qb-graph`, `qb-graph-grid`, `qb-graph-axis`, `qb-graph-ticks`, `qb-graph-curve`, `qb-graph-asymptote`, `qb-graph-point`, `qb-graph-label`, `qb-graph-option` |
+| `QBEngine.graph.figureInfo(figure, {width, height})` | For a figure: where its labels are and any problems (see Figures) |
+| `QBEngine.graph.regionOutlines(graph)` | The outline of each shaded region, in graph coordinates |
 | `QBEngine.graph.evaluate(fn, x)` | The function's value, `NaN` outside its domain |
 | `QBEngine.graph.difference(g1, g2)`, `.distinct(g1, g2)` | How different two graphs look (0 to 1), and whether a student could tell them apart |
 | `QBEngine.graph.pickDistinct(correct, candidates, n)` | The first `n` candidates that look different from the correct graph and from each other |
 
 For a `graph` answer, draw `toSVG(option, {label: "A"})`, `"B"`, ... in the order of `options[]` and pass the chosen index to `mark()`.
+
+### Shaded regions on a plot
+
+`regions` shades the area between a curve and the x-axis, or between two curves, over an interval. `fn` and `to` are an index into `functions` or a function description; without `to` the region runs to the x-axis.
+
+```js
+{ x: [-3, 3], y: [-1, 10], functions: [{ fn: { type: "poly", coeffs: [1, 0, 1] }, label: "f" }, { fn: { type: "poly", coeffs: [9, 0, -1] }, label: "g" }],
+  regions: [{ x: [-2, 2], fn: 0, to: 1 }] }      // between f and g;  { x: [0, 2], fn: 0 } is between f and the x-axis
+```
+
+The shading is `currentColor` at low opacity (class `qb-graph-shade`), so it shows on the page's white graph background and in print. Say in the stem that the region is shaded.
+
+### Figures (geometry diagrams)
+
+A figure is a graph description with `shapes` instead of a window. A question carries it in the same `graph` field and `toSVG` draws it, so a page that shows `question.graph` needs nothing new.
+
+```js
+graph: { alt: "Triangle ABC with a height drawn",
+  shapes: [
+    { type: "polygon", points: [[0, 0], [8, 0], [3, 5]], labels: ["A", "B", "C"], sides: ["8 cm", null, "5.8 cm"] },
+    { type: "angle", at: [0, 0], from: [8, 0], to: [3, 5], label: "59°" },
+    { type: "line", from: [3, 0], to: [3, 5], dashed: true, label: "h" },
+    { type: "angle", at: [3, 0], from: [8, 0], to: [3, 5], right: true } ] }
+```
+
+Coordinates are ordinary (x to the right, y up) in any unit. The figure is scaled to fit, equally in both directions, so **give the question's real lengths and angles and the figure is to scale**. When it is not (a view of a solid, evened-out proportions), say "the diagram is not to scale" in the stem. Angles are in degrees, anticlockwise from the positive x direction. Labels are plain text, not LaTeX (`"8 cm"`, `"40°"`, `"2π/3"`, `"A"`); a single lower-case letter is set in italics.
+
+| Shape | Fields |
+|---|---|
+| `point` | `at`, `label`, `dot` (`false`: a named vertex with no dot), `dir: [dx, dy]` to force the side the label goes |
+| `line` | `from`, `to`, `dashed`, `label` (at the midpoint), `arrow` (`"end"` or `"mid"`), `side` (`1`: left of from to to, `-1`: right) to force the label's side |
+| `polygon` | `points`, `labels` (one per vertex), `sides` (`sides[i]` labels the edge from `points[i]` to the next), `fill`, `dashed` |
+| `angle` | `at`, `from`, `to`, `label`; the smaller angle between the two rays, or with `sweep: "cw"` / `"ccw"` the one turning that way from `from` to `to` (bearings: `from` north, `sweep: "cw"`); `right: true` draws the square; `radius` in pixels |
+| `arc` | `centre`, `radius`, `from`, `to` (anticlockwise), `dashed`, `label` |
+| `sector` | `centre`, `radius`, `from`, `to`, `fill`, `label` (on the arc) |
+| `segment` | `centre`, `radius`, `from`, `to`, `fill`: the region between the chord and the arc |
+| `circle` | `centre`, `radius`, `dashed`, `fill` |
+| `north` | `at`, `length` (figure units): a north arrow with the letter N |
+| `text` | `at`, `text`: free text centred at a point |
+
+`fill: true` shades a shape; `stroke: false` leaves its outline out (a shaded region on top of other shapes). Labels are placed automatically: a vertex label goes where the lines meeting there leave most room, a length goes beside the midpoint of its line on the side away from the middle of the figure, an angle label goes between its rays just outside the arc. Each is then moved until it is clear of every line and every other label. `QBEngine.graph.figureInfo(graph, {width, height})` returns `{labels: [{text, x, y, w, h, clear}], scale, problems: []}`; the checks require `problems` to be empty at 420 by 320, 320 by 240 and 260 by 200, so a generator must not produce a figure too crowded to label (reject those cases in its `do ... while` loop, as the bearings generators do with `legFigClear`).
+
+Give a figure an `alt` text. Keep the stem sufficient without the diagram: every length and angle the question needs is still in the words. Do not label the answer. Extra classes: `qb-graph-figure` (on the `svg`), `qb-graph-shape`, `qb-graph-angle`, `qb-graph-north`, `qb-graph-arrow`, `qb-graph-shade`.
 
 ## Learner and selection
 
@@ -333,6 +378,6 @@ reg({
 
 ## What `check-engine.mjs` checks
 
-For every generator, every level and 300 seeds: the same seed gives the same question; every checkable answer agrees with the independent verifier; text is clean and follows the notation standard; no-calculator answers are exact and calculator answers are to three significant figures; the verifier's constraints hold; every string renders in KaTeX (strict, errors thrown); `mark()` accepts the stored answer, a value inside the tolerance and the right option, and rejects a value outside the tolerance, nonsense and every wrong option; options are distinct; marks add up and fit the level; every graph gives SVG with finite coordinates inside the view box, and graph options look different from each other. Then: a scripted student who is always right climbs to the exam rung through every level and is served real questions there; reviews fall due after 3, 7 and 14 days and a miss drops a level; a student who is always wrong goes down to the prerequisites once, stays there, and returns after getting them right; subtopics without generators serve real questions short to long; every subtopic of each of the four courses can be practised, by a generator or its real questions; a generator is offered exactly where the syllabus holds all its statements and its questions carry that course's codes; a shared AI statement gets generated questions under its AI code; AHL and AI-only statements fall back to their own real questions, Paper 3 last; switching course does not mix learner state; fixed-level practice serves the chosen levels and moves no level; calculator wording follows the course's papers; progress survives a reload, an export and an import; old and unreadable saves are migrated or kept aside; variants and worksheets behave; and the engine files use no `Math.random()`, no `Date` (except the learner's default clock) and no DOM.
+For every generator, every level and 300 seeds: the same seed gives the same question; every checkable answer agrees with the independent verifier; text is clean and follows the notation standard; no-calculator answers are exact and calculator answers are to three significant figures; the verifier's constraints hold; every string renders in KaTeX (strict, errors thrown); `mark()` accepts the stored answer, a value inside the tolerance and the right option, and rejects a value outside the tolerance, nonsense and every wrong option; options are distinct; marks add up and fit the level; every graph and figure gives SVG with finite coordinates inside the view box, a figure's shapes are sound and its labels are all drawn clear of the lines and of each other at the three sizes the page uses, shaded regions are visible, and graph options look different from each other. Then: a scripted student who is always right climbs to the exam rung through every level and is served real questions there; reviews fall due after 3, 7 and 14 days and a miss drops a level; a student who is always wrong goes down to the prerequisites once, stays there, and returns after getting them right; subtopics without generators serve real questions short to long; every subtopic of each of the four courses can be practised, by a generator or its real questions; a generator is offered exactly where the syllabus holds all its statements and its questions carry that course's codes; a shared AI statement gets generated questions under its AI code; AHL and AI-only statements fall back to their own real questions, Paper 3 last; switching course does not mix learner state; fixed-level practice serves the chosen levels and moves no level; calculator wording follows the course's papers; progress survives a reload, an export and an import; old and unreadable saves are migrated or kept aside; variants and worksheets behave; and the engine files use no `Math.random()`, no `Date` (except the learner's default clock) and no DOM.
 
 KaTeX comes from the `katex` devDependency (`npm install`). Without it the render check is skipped with a loud warning locally and fails in CI.
