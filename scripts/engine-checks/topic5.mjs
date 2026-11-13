@@ -6,6 +6,15 @@
 const polyOption = (q, label, g, T) => T.optionWhere(q, label, (cs) => [-1.5, -0.5, 0.5, 1.2, 2.3].every((x) => Math.abs(T.poly(cs, x) - g(x)) < 1e-5));
 const intervalOption = (q, label, holds, a, b, T) => T.optionWhere(q, label, ([kind, lo, hi]) => T.range(-12, 12, 0.25).filter((x) => x !== a && x !== b)
   .every((x) => (kind === "in" ? x > lo && x < hi : kind === "out" ? x < lo || x > hi : kind === "below" ? x < lo : x > hi) === holds(x)));
+// A number with a relative tolerance (numerical derivatives, roots and integrals).
+const ap = (T, v, rel = 1e-5) => T.approx(v, rel * Math.max(1, Math.abs(v)));
+// Options whose value is a list of standard terms [[coefficient, kind, k], ...] are evaluated here.
+const cnum = (c) => (typeof c === "number" ? c : c.n / c.d);
+const termsVal = (ts, x) => ts.reduce((s, [c, kind, k = 1]) => s + cnum(c) * (kind === "pow" ? x ** k : kind === "sin" ? Math.sin(k * x) : kind === "cos" ? Math.cos(k * x) : kind === "exp" ? Math.exp(k * x) : Math.log(x)), 0);
+const XS = [0.4, 0.9, 1.3, 2.1];
+const near = (a, b) => Math.abs(a - b) < 1e-5 * Math.max(1, Math.abs(b));
+// The one option equal to g at several points; with deriv, the one option whose numerical derivative is g.
+const termsOption = (q, label, g, T, deriv) => T.optionWhere(q, label, (ts) => XS.every((x) => near(deriv ? T.deriv((t) => termsVal(ts, t), x) : termsVal(ts, x), g(x))));
 
 export default {
   "t5-increasing-decreasing/interval-from-equation/equation": (q, T) => {
@@ -104,5 +113,133 @@ export default {
     const mPow = T.range(1, 9).find((mm) => Math.abs(T.deriv((x) => A * (a * x + b) ** mm, 0.3, 1e-4) - f(0.3)) < 1e-4 * Math.max(1, Math.abs(f(0.3))));
     T.require(mPow !== undefined, "an antiderivative of the stated form exists");
     return { a: mPow, b: T.approx(A, 1e-7) };
+  },
+
+  // ---------------- 5.1 ----------------
+  "t5-derivative-meaning/limit-from-table/table": (q, T) => {
+    const { n, a, k } = q.params, f = (x) => (k * (x ** n - a ** n)) / (x - a);
+    const cell = (s) => Number(s.replace(/[$\\,]/g, ""));
+    q.table.head.slice(1).forEach((xs, i) => T.require(Math.abs(cell(q.table.rows[0][i + 1]) - f(cell(xs))) < 6e-5, "each table value is the function's value to four decimal places"));
+    const est = (f(a - 1e-4) + f(a + 1e-4)) / 2;
+    T.require(Math.abs(est - Math.round(est)) < 1e-4, "the limit is a whole number");
+    return { a: T.approx(est, 1e-4) };
+  },
+  "t5-ext-gradient-from-graph/tangent-drawn/graph": (q, T) => {
+    const [A, B] = q.graph.points, slope = (B.y - A.y) / (B.x - A.x), curve = (x) => T.evalGraph(q.graph.functions[0].fn, x), line = (x) => T.evalGraph(q.graph.functions[1].fn, x);
+    const d = T.deriv(curve, A.x);
+    T.require(Math.abs(curve(A.x) - A.y) < 1e-9 && Math.abs(line(A.x) - A.y) < 1e-9 && Math.abs(line(B.x) - B.y) < 1e-9, "A is on the curve and the line passes through A and B");
+    T.require(Math.abs(d - slope) < 1e-6, "the line drawn is the tangent at A");
+    T.require([A.x, A.y, B.x, B.y].every(Number.isInteger), "A and B have integer coordinates");
+    return { a: T.approx(d, 1e-6) };
+  },
+  "t5-ext-chord-to-tangent/chord-gradients/equation": (q, T) => {
+    const { a, b, c, x0 } = q.params, f = (x) => a * x * x + b * x + c, chord = (h) => (f(x0 + h) - f(x0)) / h;
+    return { a: T.approx(chord(1), 1e-9), b: T.approx(chord(0.1), 1e-9), c: T.approx(T.deriv(f, x0), 1e-6) };
+  },
+  "t5-ext-chord-to-tangent/chord-limit/equation": (q, T) => {
+    const { a, b, c, p, G1 } = q.params, f = (x) => a * x * x + b * x + c, chord = (h) => (f(p + h) - f(p)) / h;
+    return { b: T.approx(T.deriv(f, p), 1e-6), c: T.approx(T.bisect((h) => chord(h) - G1, -10.3, 10.7), 1e-6) };
+  },
+  "t5-derivative-meaning/interpret-value/words": (q, T) => {
+    const { c, A, k, t0 } = q.params, f = (t) => c + A * Math.exp(-k * t), d = T.deriv(f, t0);
+    return { a: ap(T, d), b: T.option(f(t0 + 1e-3) < f(t0 - 1e-3) ? "falling-rate" : "rising-rate") };
+  },
+  "t5-derivative-meaning/rate-at-time/equation": (q, T) => {
+    const { a, k, t1 } = q.params, C = (t) => a * t * Math.exp(-k * t);
+    const top = T.extremum(C, 0, 40, "max", 8000), again = T.roots((t) => C(t) - C(t1), top.x + 0.05, 200, 20000);
+    T.require(t1 < top.x - 0.1, "the first time is before the maximum");
+    T.require(again.length === 1, "the concentration returns to that value exactly once after the maximum");
+    return { a: ap(T, C(t1)), b: ap(T, T.deriv(C, t1)), c: T.approx(top.x, 1e-5), d: ap(T, again[0]) };
+  },
+
+  // ---------------- 5.2 ----------------
+  "t5-increasing-decreasing/quadratic-interval/equation": (q, T) => {
+    const { a, b, c } = q.params, f = (x) => a * x * x + b * x + c;
+    return { a: T.approx(T.extremum(f, -30, 30, a > 0 ? "min" : "max", 6000).x, 1e-5) };
+  },
+  "t5-ext-sign-at-point/sign-at-point/equation": (q, T) => {
+    const { a, b, c, k } = q.params, f = (x) => a * x ** 3 + b * x * x + c * x;
+    return { a: T.approx(T.deriv(f, k), 1e-5), b: T.option(Math.sign(f(k + 1e-4) - f(k - 1e-4))) };
+  },
+  "t5-increasing-decreasing/parameter-shift/equation": (q, T) => {
+    const { B, Cc, c } = q.params, f = (x) => x ** 3 + B * x * x + Cc * x + c, fp = (x) => T.deriv(f, x, 1e-3);
+    const zeros = T.roots(fp, -12.001, 12, 4800);
+    T.require(zeros.length === 2, "two stationary points");
+    T.require(f((zeros[0] + zeros[1]) / 2 + 0.1) < f((zeros[0] + zeros[1]) / 2 - 0.1), "f falls between them");
+    T.require([B, Cc].every(Number.isInteger), "whole-number coefficients");
+    return { a: polyOption(q, "a", fp, T), b: T.approx(zeros[0], 1e-5), c: T.approx(zeros[1], 1e-5), d: T.approx(-T.extremum(fp, -12, 12, "min", 4800).value, 1e-4) };
+  },
+  "t5-increasing-decreasing/interval-gdc/equation": (q, T) => {
+    const { b, c, d } = q.params, f = (x) => x ** 3 - b * x * x - c * x + d, fp = (x) => T.deriv(f, x, 1e-3);
+    const zeros = T.roots(fp, -12.001, 12, 4800);
+    T.require(zeros.length === 2, "two stationary points");
+    return { a: ap(T, zeros[0]), b: ap(T, zeros[1]), c: intervalOption(q, "c", (x) => f(x + 1e-3) < f(x - 1e-3), zeros[0], zeros[1], T), d: T.approx(T.extremum(fp, -12, 12, "min", 4800).value, 1e-5) };
+  },
+  "t5-increasing-decreasing/interval-from-derivative-graph/graph": (q, T) => {
+    const fp = (x) => T.evalGraph(q.graph.functions[0].fn, x), zeros = T.roots(fp, -6.001, 6, 4800).map((z) => Math.round(z * 1e6) / 1e6);
+    T.require(zeros.length === 2 && zeros.every(Number.isInteger), "the derivative has two whole-number zeros in the window");
+    const f = (x) => T.integrate(fp, 0, x, 200), rising = (x) => f(x + 1e-3) > f(x - 1e-3);
+    return { a: zeros[0], b: zeros[1], c: intervalOption(q, "c", (x) => (q.params.inc ? rising(x) : !rising(x)), zeros[0], zeros[1], T) };
+  },
+
+  // ---------------- 5.3 ----------------
+  "t5-differentiate-polynomial/derivative/equation": (q, T) => {
+    const { n, a, c } = q.params, f = (x) => a * x ** n + c, fp = (x) => T.deriv(f, x);
+    // f'(x) = p x^q: p is f'(1), and q comes from how f' grows from x = 1 to x = 2
+    return { a: T.approx(fp(1), 1e-5), b: T.approx(Math.log(fp(2) / fp(1)) / Math.log(2), 1e-6) };
+  },
+  "t5-differentiate-polynomial/derivative-from-fraction/equation": (q, T) => {
+    const { a, b, x1 } = q.params, f = (x) => a * x * x + b / x, fp = (x) => T.deriv(f, x);
+    const flat = T.roots(fp, -5, 5, 4001);
+    T.require(flat.length === 1, "the gradient is zero at exactly one point");
+    return { a: termsOption(q, "a", fp, T), b: ap(T, fp(x1)), c: T.approx(flat[0], 1e-5) };
+  },
+  "t5-ext-unknown-coefficients/k-from-gradient/equation": (q, T) => {
+    const { b, x0, g, x1 } = q.params, grad = (k, x) => T.deriv((t) => k * t ** 3 + b * t, x);
+    const k = T.bisect((kk) => grad(kk, x0) - g, -20.5, 20.3);
+    return { a: T.approx(k, 1e-5), b: T.approx(grad(Math.round(k), x1), 1e-5) };
+  },
+  "t5-ext-unknown-coefficients/two-from-gradient-and-point/equation": (q, T) => {
+    const { x0, y0, g, x2 } = q.params, hits = [];
+    // brute force over whole-number pairs
+    for (let p = -12; p <= 12; p++) for (let qq = -12; qq <= 12; qq++) {
+      const f = (x) => p * x ** 3 + qq * x;
+      if (Math.abs(f(x0) - y0) < 1e-9 && Math.abs(T.deriv(f, x0) - g) < 1e-5) hits.push([p, qq]);
+    }
+    T.require(hits.length === 1, "exactly one pair of coefficients fits");
+    const [p, qq] = hits[0];
+    return { a: p, b: qq, c: T.approx(T.deriv((x) => p * x ** 3 + qq * x, x2), 1e-5) };
+  },
+
+  // ---------------- 5.4 ----------------
+  "t5-tangent-normal-equation/read-from-tangent/equation": (q, T) => {
+    const { a, mm, c } = q.params, line = (x) => mm * x + c;
+    return { a: T.approx(T.deriv(line, a), 1e-6), b: line(a) };
+  },
+  "t5-tangent-normal-equation/tangent-at-point/equation-cubic": (q, T) => {
+    const { b, c, x0 } = q.params, f = (x) => x ** 3 + b * x * x + c, mm = T.deriv(f, x0);
+    T.require(Math.abs(mm) > 1e-6, "the tangent is not horizontal");
+    return { a: T.approx(mm, 1e-5), b: T.approx(f(x0) - mm * x0, 1e-4) };
+  },
+  "t5-tangent-condition/x-for-gradient/equation": (q, T) => {
+    const { B, Cc, d, g } = q.params, f = (x) => x ** 3 + B * x * x + Cc * x + d;
+    const z = T.roots((x) => T.deriv(f, x, 1e-3) - g, -12.001, 12, 4800);
+    T.require(z.length === 2, "two points have that gradient");
+    T.require(z.every((x) => Math.abs(x - Math.round(x)) < 1e-5), "both are whole numbers");
+    return { a: T.approx(z[0], 1e-5), b: T.approx(z[1], 1e-5) };
+  },
+  "t5-tangent-condition/coefficient-from-tangent/equation": (q, T) => {
+    const { b, mm, c } = q.params;
+    // with k = 0 the curve minus the line is least at the point of contact; k lifts that least gap to zero
+    const low = T.extremum((x) => x * x + b * x - (mm * x + c), -30, 30, "min", 6000);
+    return { a: T.approx(low.x, 1e-5), b: T.approx(mm * low.x + c, 1e-4), c: T.approx(-low.value, 1e-6) };
+  },
+  "t5-normal-meets-curve/tangent-x-intercept/equation": (q, T) => {
+    const { a, k, b, x0 } = q.params, f = (x) => a * Math.exp(k * x) + b * x, mm = T.deriv(f, x0, 1e-4), L = (x) => f(x0) + mm * (x - x0);
+    T.require(Math.abs(mm) > 0.4, "the tangent is not close to horizontal");
+    T.require(Math.abs(f(x0)) > 0.1, "A is off the x-axis");
+    const cross = T.roots(L, -100.003, 100, 2000);
+    T.require(cross.length === 1, "the tangent crosses the x-axis once");
+    return { a: ap(T, f(x0)), b: ap(T, mm), c: ap(T, L(0)), d: ap(T, cross[0]) };
   },
 };

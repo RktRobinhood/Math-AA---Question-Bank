@@ -219,4 +219,292 @@
         P("Find the value of $A$.", 3, ans.frac(A.n, A.d), [
           `Differentiate $\\left(${inner}\\right)^{${n + 1}}$ with the chain rule: $${(n + 1) * a}\\left(${inner}\\right)^{${n}}$`, `So $A \\times ${(n + 1) * a} = ${k}$`, `$A = ${rat.tex(A)}$`])] };
     } });
+
+  // ======================= helpers for the generators below =======================
+  const G = E.graph;
+  const { sf, dp, piFrac, power } = fmt;
+  const win = (x, y, extra) => Object.assign({ x, y, xStep: 1, yStep: 1 }, extra);
+  const ek = (k, v) => `\\mathrm{e}^{${coef(k, v || "x")}}`; // e^{kx}
+  const sg = (v) => (v < 0 ? "-" : "+");
+  // Bisection and 3-point Gauss-Legendre quadrature, for calculator questions with no closed form.
+  // (The verifiers use a grid root search and Simpson's rule instead.)
+  const bisect = (f, lo, hi) => { let flo = f(lo); for (let i = 0; i < 90; i++) { const mid = (lo + hi) / 2, fm = f(mid); if ((flo < 0) === (fm < 0)) { lo = mid; flo = fm; } else hi = mid; } return (lo + hi) / 2; };
+  const gauss = (f, a, b, n) => { n = n || 200; const h = (b - a) / n, r = (Math.sqrt(0.6) * h) / 2; let s = 0; for (let i = 0; i < n; i++) { const c = a + (i + 0.5) * h; s += 5 * f(c - r) + 8 * f(c) + 5 * f(c + r); } return (s * h) / 18; };
+  // A sum of standard terms [[coefficient, kind, k], ...] as LaTeX. Kinds: "pow" (x^k, k may be
+  // negative), "sin" and "cos" (of kx), "exp" (e^{kx}), "ln" (ln x). The same list is the option's
+  // machine-readable value, which the verifier evaluates numerically.
+  const tBody = (kind, k) => (kind === "sin" || kind === "cos" ? `\\${kind} ${coef(k, "x")}` : kind === "exp" ? ek(k) : kind === "ln" ? "\\ln x" : power("x", k));
+  const termsTex = (ts) => {
+    let out = "";
+    for (const [c0, kind, k0] of ts) {
+      const k = k0 === undefined ? 1 : k0, c = typeof c0 === "number" ? c0 : c0.n / c0.d;
+      if (c === 0) continue;
+      const q = typeof c0 === "number" ? (Number.isInteger(c0) ? rat.Q(Math.abs(c0)) : Math.abs(c0)) : rat.Q(Math.abs(c0.n), c0.d);
+      const tex = kind === "pow" && k < 0 ? `\\dfrac{${typeof q === "number" ? num(q) : q.n}}{${typeof q === "number" || q.d === 1 ? "" : q.d}${power("x", -k)}}` : expr([[q, tBody(kind, k)]]);
+      out += out ? ` ${sg(c)} ${tex}` : (c < 0 ? "-" : "") + tex;
+    }
+    return out || "0";
+  };
+  const termOpt = (lhs) => (ts, why) => ({ text: m(lhs + termsTex(ts)), value: ts, why });
+  const intervalOpts = (a, b, ta, tb) => {
+    ta = ta === undefined ? String(a) : ta; tb = tb === undefined ? String(b) : tb;
+    return { in: { text: `$${ta} < x < ${tb}$`, value: ["in", a, b] }, out: { text: `$x < ${ta}$ or $x > ${tb}$`, value: ["out", a, b] }, below: { text: `$x < ${ta}$`, value: ["below", a, b] }, above: { text: `$x > ${tb}$`, value: ["above", a, b] } };
+  };
+  const intervalChoice = (rng, a, b, right, ta, tb) => {
+    const o = intervalOpts(a, b, ta, tb), other = right === "in" ? "out" : "in";
+    return ans.choice(rng, o[right], [Object.assign(o[other], { why: "$f$ is increasing where $f'(x) > 0$ and decreasing where $f'(x) < 0$." }),
+      Object.assign(o.below, { why: "Check the sign of $f'(x)$ on both sides of each stationary point." }), Object.assign(o.above, { why: "Check the sign of $f'(x)$ on both sides of each stationary point." })]);
+  };
+
+  // ======================= 5.1 limits, chords and the derivative as a rate =======================
+  reg({ type: "t5-derivative-meaning", syllabus: ["5.1"], unknown: "limit-from-table", representation: "table", format: "value", levels: [1],
+    skills: ["SL5.1.estimate-limit"], title: "Estimate a limit from a table of values",
+    build({ rng }) {
+      const n = rng.pick([3, 3, 4]), a = n === 3 ? rng.nonzero(-3, 3) : rng.nonzero(-2, 2), k = rng.pick([1, 1, 2]);
+      const f = (x) => (k * (Math.pow(x, n) - Math.pow(a, n))) / (x - a), lim = k * n * Math.pow(a, n - 1);
+      const xs = [-0.1, -0.01, -0.001, 0.001, 0.01, 0.1].map((d) => a + d);
+      const top = poly([k, ...Array(n - 1).fill(0), -k * Math.pow(a, n)]);
+      return { params: { n, a, k }, stem: `The function $f$ is defined by $f(x) = \\dfrac{${top}}{${lin(1, -a)}}$, for $x \\ne ${a}$. The table shows values of $f(x)$, correct to four decimal places, for values of $x$ close to $${a}$.`,
+        table: { head: ["$x$", ...xs.map((x) => `$${num(x)}$`)], rows: [["$f(x)$", ...xs.map((x) => `$${dp(f(x), 4)}$`)]] },
+        parts: [P(`Write down the value of $\\displaystyle\\lim_{x \\to ${a}} f(x)$.`, 1, ans.int(lim), [
+          `On both sides of $x = ${a}$ the values of $f(x)$ get closer and closer to $${lim}$.`, `$\\displaystyle\\lim_{x \\to ${a}} f(x) = ${lim}$`])] };
+    } });
+  reg({ type: "t5-ext-gradient-from-graph", syllabus: ["5.1"], unknown: "tangent-drawn", representation: "graph", format: "value", levels: [1],
+    skills: ["SL5.1.gradient-from-graph"], title: "Gradient of a curve from a drawn tangent",
+    build({ rng }) {
+      let a, d, h, x0, y0, mm, xB, yB;
+      do {
+        a = rng.pick([1, -1, 0.5, -0.5]); d = Math.abs(a) === 1 ? rng.pick([-2, -1, 1, 2]) : rng.pick([-4, -2, 2, 4]);
+        x0 = rng.int(-3, 3); h = x0 - d; y0 = rng.int(-3, 3); mm = 2 * a * d;
+        const step = rng.pick([1, 2, -1, -2]); xB = x0 + step; yB = y0 + mm * step;
+      } while (Math.abs(h) > 4 || Math.abs(yB) > 7 || Math.abs(xB) > 5);
+      const k = y0 - a * d * d;
+      return { params: { a, h, k, x0 },
+        graph: win([-6, 6], [-8, 8], { functions: [{ fn: { type: "poly", coeffs: [k + a * h * h, -2 * a * h, a] }, label: "C" }, { fn: { type: "poly", coeffs: [y0 - mm * x0, mm] } }],
+          points: [{ x: x0, y: y0, label: "A" }, { x: xB, y: yB, label: "B" }], alt: "A parabola C with its tangent at the point A; the tangent also passes through the point B" }),
+        stem: "The diagram shows a curve $C$ and the tangent to $C$ at the point $\\mathrm{A}$. The tangent also passes through the point $\\mathrm{B}$. Both $\\mathrm{A}$ and $\\mathrm{B}$ have integer coordinates.",
+        parts: [P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.int(mm), [
+          "The gradient of a curve at a point is the gradient of its tangent at that point.", `$\\mathrm{A}$ is $${point(x0, y0)}$ and $\\mathrm{B}$ is $${point(xB, yB)}$.`,
+          `Gradient: $\\dfrac{${yB} - ${paren(y0)}}{${xB} - ${paren(x0)}} = ${mm}$`])] };
+    } });
+  const CHORD = { type: "t5-ext-chord-to-tangent", syllabus: ["5.1"], representation: "equation", format: "value", skills: ["SL5.1.chord-to-tangent"] };
+  reg({ ...CHORD, unknown: "chord-gradients", levels: [2], title: "Gradients of chords that approach a tangent",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -1, -2]), b = rng.int(-4, 4), c = rng.int(-3, 5), x0 = rng.pick([-1, 1, 2, 3]);
+      const f = (x) => a * x * x + b * x + c, yA = f(x0), y1 = f(x0 + 1), g1 = y1 - yA;
+      const xb = Number((x0 + 0.1).toFixed(1)), y2 = Number(f(xb).toFixed(2)), g2 = Number(((y2 - yA) / 0.1).toFixed(1)), g = 2 * a * x0 + b;
+      return { params: { a, b, c, x0 }, stem: `The curve $C$ has equation $y = ${poly([a, b, c])}$. The points $\\mathrm{A}$ and $\\mathrm{B}$ lie on $C$, and the $x$-coordinate of $\\mathrm{A}$ is $${x0}$.`, parts: [
+        P(`Find the gradient of the chord $[\\mathrm{AB}]$ when the $x$-coordinate of $\\mathrm{B}$ is $${x0 + 1}$.`, 2, ans.int(g1), [
+          `At $\\mathrm{A}$, $y = ${yA}$. When $x = ${x0 + 1}$, $y = ${y1}$.`, `Gradient of $[\\mathrm{AB}]$: $\\dfrac{${y1} - ${paren(yA)}}{${x0 + 1} - ${paren(x0)}} = ${g1}$`]),
+        P(`Find the gradient of $[\\mathrm{AB}]$ when the $x$-coordinate of $\\mathrm{B}$ is $${num(xb)}$.`, 1, ans.dec(g2), [
+          `When $x = ${num(xb)}$, $y = ${num(y2)}$.`, `Gradient of $[\\mathrm{AB}]$: $\\dfrac{${num(y2)} - ${paren(yA)}}{0.1} = ${num(g2)}$`]),
+        P("As $\\mathrm{B}$ moves along $C$ towards $\\mathrm{A}$, the gradient of $[\\mathrm{AB}]$ approaches a limiting value. Find this value.", 1, ans.int(g), [
+          "The limiting value is the gradient of the tangent to $C$ at $\\mathrm{A}$.", `$${D} = ${lin(2 * a, b)}$, and at $x = ${x0}$ this is $${g}$.`])] };
+    } });
+  reg({ ...CHORD, unknown: "chord-limit", levels: [3], title: "Gradient of a chord in terms of h, and its limit",
+    build({ rng }) {
+      let a, b, c, p, g, h0;
+      do { a = rng.pick([1, 2, 3, -1, -2]); b = rng.nonzero(-5, 5); c = rng.int(-4, 4); p = rng.pick([-2, -1, 1, 2, 3]); g = 2 * a * p + b; h0 = rng.nonzero(-3, 4); } while (g === 0);
+      const fA = a * p * p + b * p + c, G1 = g + a * h0, chord = expr([[g, ""], [a, "h"]]), bh = `\\left(${p} + h\\right)`;
+      const quot = `\\dfrac{f(${p} + h) - f(${p})}{h} = \\dfrac{${poly([a, g, 0], "h")}}{h} = ${chord}`;
+      return { params: { a, b, c, p, G1 }, stem: `Let $f(x) = ${poly([a, b, c])}$. The curve $C$ has equation $y = f(x)$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${p}$ and the point $\\mathrm{B}$ on $C$ has $x$-coordinate $${p} + h$, where $h \\ne 0$.`, parts: [
+        P(`Show that the gradient of the chord $[\\mathrm{AB}]$ is $${chord}$.`, 3, ans.self(`$${quot}$`), [
+          `$f(${p} + h) = ${expr([[a, `${bh}^{2}`], [b, bh], [c, ""]])}$`, `$f(${p} + h) = ${poly([a, g, fA], "h")}$`, `$f(${p}) = ${fA}$`, `Gradient of $[\\mathrm{AB}]$: $${quot}$`]),
+        P("Hence write down the gradient of the tangent to $C$ at $\\mathrm{A}$.", 1, ans.int(g), [`As $h$ approaches $0$, $${chord}$ approaches $${g}$, so the gradient of the tangent is $${g}$.`]),
+        P(`Find the value of $h$ for which the gradient of $[\\mathrm{AB}]$ is $${G1}$.`, 2, ans.int(h0), [`$${chord} = ${G1}$`, `$${coef(a, "h")} = ${G1 - g}$, so $h = ${h0}$.`])] };
+    } });
+  const RATE_CTX = [
+    { q: "T", open: "The temperature of a cup of tea, $T$ degrees Celsius, $t$ minutes after it is poured", is: "the temperature of the tea", u: "degrees Celsius", per: "minute", ts: "minutes", c: [18, 20, 21, 22], A: [55, 60, 64, 70], k: [0.04, 0.05, 0.06, 0.08], t0: [5, 8, 10, 12] },
+    { q: "V", open: "The volume of water in a leaking tank, $V$ litres, $t$ minutes after the leak starts", is: "the volume of water in the tank", u: "litres", per: "minute", ts: "minutes", c: [40, 50, 60], A: [250, 300, 360, 400], k: [0.02, 0.03, 0.05], t0: [10, 15, 20] },
+    { q: "V", open: "The value of a machine, $V$ thousand euros, $t$ years after it is bought", is: "the value of the machine", u: "thousand euros", per: "year", ts: "years", c: [4, 5, 6], A: [30, 36, 45], k: [0.15, 0.2, 0.25], t0: [2, 3, 4] }];
+  reg({ type: "t5-derivative-meaning", syllabus: ["5.1"], unknown: "interpret-value", representation: "words", format: "mcq", levels: [2], calculator: true,
+    skills: ["SL5.1.interpret-derivative"], title: "Find a derivative of a model and say what it means",
+    build({ rng }) {
+      const ci = rng.int(0, RATE_CTX.length - 1), X = RATE_CTX[ci], c = rng.pick(X.c), A = rng.pick(X.A), k = rng.pick(X.k), t0 = rng.pick(X.t0);
+      const r = -A * k * Math.exp(-k * t0), size = sf(-r), at = `After $${t0}$ ${X.ts}`;
+      return { params: { c, A, k, t0 }, stem: `${X.open}, is modelled by $${X.q}(t) = ${c} + ${A}${ek(-k, "t")}$, for $t \\ge 0$.`, parts: [
+        P(`Find $${X.q}'(${t0})$.`, 2, ans.sf(r), [`Use the numerical derivative on the GDC, or differentiate: $${X.q}'(t) = ${num(-A * k)}${ek(-k, "t")}$`, `$${X.q}'(${t0}) = ${num(-A * k)}\\mathrm{e}^{${num(-k * t0)}} \\approx ${sf(r)}$`]),
+        P("Which statement correctly interprets this value?", 2, ans.choice(rng, { text: `${at}, ${X.is} is falling at a rate of about $${size}$ ${X.u} per ${X.per}.`, value: "falling-rate" }, [
+          { text: `${at}, ${X.is} is about $${size}$ ${X.u}.`, value: "value", why: "A derivative is a rate of change, not the value of the quantity." },
+          { text: `In the first $${t0}$ ${X.ts}, ${X.is} falls by about $${size}$ ${X.u} in total.`, value: "total-change", why: "The derivative gives the rate at one instant, not the total change over an interval." },
+          { text: `${at}, ${X.is} is rising at a rate of about $${size}$ ${X.u} per ${X.per}.`, value: "rising-rate", why: "A negative derivative means the quantity is decreasing." }]), [
+          `$${X.q}'(${t0})$ is the rate of change of ${X.is} at the instant $t = ${t0}$.`, `It is negative, so ${X.is} is falling, at about $${size}$ ${X.u} per ${X.per}.`])] };
+    } });
+  reg({ type: "t5-derivative-meaning", syllabus: ["5.1"], unknown: "rate-at-time", representation: "equation", format: "value", levels: [4], calculator: true,
+    skills: ["SL5.1.interpret-derivative"], title: "Rates of change of a model with the GDC",
+    build({ rng }) {
+      const a = rng.int(4, 12), k = rng.pick([0.2, 0.25, 0.4, 0.5, 0.8]), t1 = k <= 0.4 ? rng.pick([1, 2]) : 1, tmax = 1 / k;
+      const C = (t) => a * t * Math.exp(-k * t), dC = (t) => a * Math.exp(-k * t) * (1 - k * t), t2 = bisect((t) => C(t) - C(t1), tmax, 80 / k);
+      return { params: { a, k, t1 }, stem: `The concentration of a medicine in a patient's blood, $C$ milligrams per litre, $t$ hours after it is taken, is modelled by $C(t) = ${a}t${ek(-k, "t")}$, for $t \\ge 0$.`, parts: [
+        P(`Find the concentration when $t = ${t1}$.`, 1, ans.sf(C(t1)), [`$C(${t1}) = ${a}${br(t1)}\\mathrm{e}^{${num(-k * t1)}} \\approx ${sf(C(t1))}$`]),
+        P(`Find the rate at which the concentration is changing when $t = ${t1}$.`, 2, ans.sf(dC(t1)), [
+          `The rate of change is $C'(${t1})$. Use the numerical derivative on the GDC at $t = ${t1}$.`, `$C'(${t1}) \\approx ${sf(dC(t1))}$, so the concentration is rising by about $${sf(dC(t1))}$ milligrams per litre per hour.`]),
+        P("Find the time at which the concentration is greatest.", 2, ans.sf(tmax), [
+          "The concentration is greatest where $C'(t) = 0$. Find the maximum point of the graph of $C$ on the GDC.", `The maximum point is at $t = ${sf(tmax)}$.`]),
+        P(`After this maximum, the concentration falls back to the value it had when $t = ${t1}$. Find the time at which this happens.`, 2, ans.sf(t2), [
+          `Solve $C(t) = C(${t1})$ on the GDC: draw the horizontal line through the point of the graph where $t = ${t1}$ and find where it meets the graph again.`, `The second intersection is at $t \\approx ${sf(t2)}$.`])] };
+    } });
+
+  // ======================= 5.2 increasing and decreasing: more ways to ask =======================
+  const INC = { type: "t5-increasing-decreasing", syllabus: ["5.2"] };
+  reg({ ...INC, unknown: "quadratic-interval", representation: "equation", format: "value", levels: [1], skills: ["SL5.2.increasing-decreasing-intervals"], title: "Where a quadratic changes from decreasing to increasing",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -1, -2]), h = rng.nonzero(-5, 5), c = rng.int(-6, 6), b = -2 * a * h, up = a > 0;
+      return { params: { a, b, c }, stem: `Let $f(x) = ${poly([a, b, c])}$, for $x \\in \\mathbb{R}$. The function $f$ is ${up ? "decreasing" : "increasing"} for $x < k$ and ${up ? "increasing" : "decreasing"} for $x > k$.`, parts: [
+        P("Find the value of $k$.", 2, ans.int(h), [`$f'(x) = ${lin(2 * a, b)}$`, `$f'(x) = 0$ when $x = ${h}$. For $x < ${h}$, $f'(x) ${up ? "<" : ">"} 0$, and for $x > ${h}$, $f'(x) ${up ? ">" : "<"} 0$, so $k = ${h}$.`])] };
+    } });
+  reg({ type: "t5-ext-sign-at-point", syllabus: ["5.2"], unknown: "sign-at-point", representation: "equation", format: "mcq", levels: [1], skills: ["SL5.2.sign-at-point"], title: "Increasing or decreasing at a point",
+    build({ rng }) {
+      let a, b, c, k, v;
+      do { a = rng.pick([1, 2, -1]); b = rng.int(-4, 4); c = rng.int(-9, 9); k = rng.pick([-2, -1, 1, 2, 3]); v = 3 * a * k * k + 2 * b * k + c; } while (v === 0 || Math.abs(v) > 30);
+      const word = (s) => `$f$ is ${s > 0 ? "increasing" : "decreasing"} at $x = ${k}$.`;
+      return { params: { a, b, c, k }, stem: `Let $f(x) = ${poly([a, b, c, 0])}$.`, parts: [
+        P(`Find $f'(${k})$.`, 1, ans.int(v), [`$f'(x) = ${poly([3 * a, 2 * b, c])}$`, `$f'(${k}) = ${expr([[3 * a, `${br(k)}^{2}`], [2 * b, br(k)], [c, ""]])} = ${v}$`]),
+        P(`What does this show about $f$ at $x = ${k}$?`, 1, ans.choice(rng, { text: word(v), value: Math.sign(v) }, [
+          { text: word(-v), value: -Math.sign(v), why: "A positive derivative means the function is increasing; a negative derivative means it is decreasing." },
+          { text: `$f$ has a stationary point at $x = ${k}$.`, value: 0, why: "A stationary point needs $f'(x) = 0$." }]), [`$f'(${k}) ${v > 0 ? ">" : "<"} 0$, so $f$ is ${v > 0 ? "increasing" : "decreasing"} at $x = ${k}$.`])] };
+    } });
+  reg({ ...INC, unknown: "parameter-shift", representation: "equation", format: "mcq", levels: [3], skills: ["SL5.2.increasing-decreasing-intervals", "SL5.2.parameter-for-monotonic", "SL5.3.power-rule"], title: "Decreasing interval of a cubic, then a constant that makes it increasing",
+    build({ rng }) {
+      let p, q, c;
+      do { p = rng.int(-5, 3); q = p + 2 * rng.int(1, 3); c = rng.nonzero(-6, 6); } while (p * q === 0 || p + q === 0);
+      const B = (-3 * (p + q)) / 2, Cc = 3 * p * q, kmin = 3 * ((q - p) / 2) ** 2, mid = (p + q) / 2;
+      return { params: { B, Cc, c }, stem: `Let $f(x) = ${poly([1, B, Cc, c])}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P("Which expression is $f'(x)$?", 2, ans.choice(rng, polyOpt([3, 2 * B, Cc]), [
+          polyOpt([3, B, Cc], "The term in $x^{2}$ must also be multiplied by its power."), polyOpt([3, 2 * B, Cc + c], "The derivative of a constant is zero."),
+          polyOpt([3, 2 * B, 0], "The term in $x$ differentiates to its coefficient."), polyOpt([1, 2 * B, Cc])]), [`$f'(x) = ${poly([3, 2 * B, Cc])}$`]),
+        P("The function $f$ is decreasing for $a < x < b$. Find the value of $a$.", 2, ans.int(p), [
+          "$f$ is decreasing where $f'(x) < 0$.", `$f'(x) = 3\\left(${poly([1, -(p + q), p * q])}\\right) = 3${factor(p)}${factor(q)}$`, `$f'(x) < 0$ between its zeros, so $${p} < x < ${q}$ and $a = ${p}$.`]),
+        P("Write down the value of $b$.", 1, ans.int(q), [`$b = ${q}$`]),
+        P("Let $g(x) = f(x) + kx$, where $k$ is a constant. Find the least value of $k$ for which $g'(x) \\ge 0$ for all values of $x$.", 2, ans.int(kmin), [
+          "$g'(x) = f'(x) + k$, so $k$ must make up for the least value of $f'(x)$.",
+          `$f'(x)$ is a quadratic, so it is least halfway between its zeros, at $x = ${mid}$: $f'(${mid}) = 3${br(mid - p)}${br(mid - q)} = ${-kmin}$`,
+          `$g'(x) \\ge 0$ for all $x$ when $k \\ge ${kmin}$, so the least value of $k$ is $${kmin}$.`])] };
+    } });
+  reg({ ...INC, unknown: "interval-gdc", representation: "equation", format: "mcq", levels: [4], calculator: true, skills: ["SL5.2.increasing-decreasing-intervals"], title: "Decreasing interval of a cubic with the GDC",
+    build({ rng }) {
+      let b, c, d, disc;
+      do { b = rng.int(1, 5); c = rng.int(1, 7); d = rng.int(-4, 6); disc = 4 * b * b + 12 * c; } while (Number.isInteger(Math.sqrt(disc)));
+      const r1 = (2 * b - Math.sqrt(disc)) / 6, r2 = (2 * b + Math.sqrt(disc)) / 6, least = -c - (b * b) / 3;
+      return { params: { b, c, d }, stem: `Let $f(x) = ${poly([1, -b, -c, d])}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P("Find the $x$-coordinate of the local maximum point of the graph of $f$.", 2, ans.sf(r1), [
+          `$f'(x) = ${poly([3, -2 * b, -c])}$`, `Solve $f'(x) = 0$ on the GDC: $x \\approx ${sf(r1)}$ or $x \\approx ${sf(r2)}$.`,
+          `A cubic with a positive coefficient of $x^{3}$ rises, falls and then rises again, so the local maximum is at $x \\approx ${sf(r1)}$.`]),
+        P("Find the $x$-coordinate of the local minimum point.", 1, ans.sf(r2), [`The other solution of $f'(x) = 0$ is the local minimum: $x \\approx ${sf(r2)}$.`]),
+        P("For which values of $x$ is $f$ decreasing?", 1, intervalChoice(rng, r1, r2, "in", sf(r1), sf(r2)), [`$f$ is decreasing where $f'(x) < 0$, which is between the two stationary points: $${sf(r1)} < x < ${sf(r2)}$.`]),
+        P("Find the least value of $f'(x)$.", 2, ans.sf(least), [
+          `$f'(x)$ is a quadratic. Find its minimum point on the GDC, or use $f''(x) = ${lin(6, -2 * b)} = 0$, which gives $x = ${frac(b, 3)}$.`, `The least value of $f'(x)$ is $f'\\left(${frac(b, 3)}\\right) \\approx ${sf(least)}$.`])] };
+    } });
+  reg({ ...INC, unknown: "interval-from-derivative-graph", representation: "graph", format: "mcq", levels: [2], skills: ["SL5.2.sign-from-graph", "SL5.2.increasing-decreasing-intervals"], title: "Increasing and decreasing from the graph of the derivative",
+    build({ rng }) {
+      let a, b;
+      do { a = rng.int(-4, 2); b = a + rng.pick([2, 4]); } while (b > 4);
+      const s = rng.sign(), sc = s * (b - a === 2 ? rng.pick([1, 2]) : rng.pick([0.5, 1])), inc = rng.bool(), right = (s > 0) === inc ? "out" : "in";
+      return { params: { inc },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "poly", coeffs: [sc * a * b, -sc * (a + b), sc] } }], alt: "A parabola, the graph of the derivative of f, crossing the x-axis twice" }),
+        stem: "The diagram shows the graph of $y = f'(x)$, where $f'$ is the derivative of a function $f$. The graph crosses the $x$-axis at two points with integer coordinates.", parts: [
+          P("The graph of $f$ has two stationary points. Write down the smaller of their $x$-coordinates.", 1, ans.int(a), [`Stationary points of $f$ are where $f'(x) = 0$, which is where the graph shown crosses the $x$-axis: $x = ${a}$ and $x = ${b}$.`]),
+          P("Write down the larger of their $x$-coordinates.", 1, ans.int(b), [`The larger is $x = ${b}$.`]),
+          P(`For which values of $x$ is $f$ ${inc ? "increasing" : "decreasing"}?`, 2, intervalChoice(rng, a, b, right), [
+            `$f$ is ${inc ? "increasing" : "decreasing"} where $f'(x) ${inc ? ">" : "<"} 0$, which is where the graph shown is ${inc ? "above" : "below"} the $x$-axis.`, `That is for ${intervalOpts(a, b)[right].text}.`])] };
+    } });
+
+  // ======================= 5.3 differentiating powers: more ways to ask =======================
+  const DP = { type: "t5-differentiate-polynomial", syllabus: ["5.3"], representation: "equation" };
+  reg({ ...DP, unknown: "derivative", format: "value", levels: [1], skills: ["SL5.3.power-rule"], title: "Derivative of a single power",
+    build({ rng }) {
+      const n = rng.int(2, 6), a = rng.pick([2, 3, 4, 5, 6, 7, -2, -3, -4]), c = rng.int(-9, 9);
+      return { params: { n, a, c }, stem: `Let $f(x) = ${poly([a, ...Array(n - 1).fill(0), c])}$. The derivative of $f$ can be written as $f'(x) = px^{q}$, where $p$ and $q$ are constants.`, parts: [
+        P("Write down the value of $p$.", 1, ans.int(a * n), [`Multiply by the power and reduce the power by one: $f'(x) = ${coef(a * n, power("x", n - 1))}$`, `$p = ${a * n}$`]),
+        P("Write down the value of $q$.", 1, ans.int(n - 1), [`The power goes down by one, so $q = ${n - 1}$.`])] };
+    } });
+  reg({ ...DP, syllabus: ["5.3", "5.8"], unknown: "derivative-from-fraction", format: "mcq", levels: [3], skills: ["SL5.3.negative-powers", "SL5.3.gradient-at-point", "SL5.3.point-with-given-gradient"], title: "Differentiate a function with a negative power",
+    build({ rng }) {
+      let a, k, x1;
+      do { a = rng.int(1, 3); k = rng.pick([-2, -1, 1, 2]); x1 = rng.pick([-2, -1, 1, 2]); } while (x1 === k);
+      const b = 2 * a * k * k * k, val = rat.sub(2 * a * x1, rat.Q(b, x1 * x1)), opt = termOpt("f'(x) = ");
+      return { params: { a, b, x1 }, stem: `Let $f(x) = ${termsTex([[a, "pow", 2], [b, "pow", -1]])}$, for $x \\ne 0$.`, parts: [
+        P("Which expression is $f'(x)$?", 2, ans.choice(rng, opt([[2 * a, "pow", 1], [-b, "pow", -2]]), [
+          opt([[2 * a, "pow", 1], [b, "pow", -2]], "The derivative of $x^{-1}$ is $-x^{-2}$, so the sign of that term changes."),
+          opt([[2 * a, "pow", 1], [-b, "pow", 0]], "Reducing the power $-1$ by one gives $-2$, not $0$."),
+          opt([[a, "pow", 1], [-b, "pow", -2]], "The term in $x^{2}$ must be multiplied by its power."), opt([[2 * a, "pow", 1], [-2 * b, "pow", -3]])]), [
+          `Write $f(x) = ${a === 1 ? "" : a}x^{2} ${sg(b)} ${Math.abs(b)}x^{-1}$ and differentiate each term.`, `$f'(x) = ${2 * a}x ${sg(-b)} ${Math.abs(b)}x^{-2} = ${termsTex([[2 * a, "pow", 1], [-b, "pow", -2]])}$`]),
+        P(`Find $f'(${x1})$.`, 2, ans.frac(val.n, val.d), [`$f'(${x1}) = ${2 * a}${br(x1)} ${sg(-b)} \\dfrac{${Math.abs(b)}}{${br(x1)}^{2}}$`, `$f'(${x1}) = ${rat.tex(val)}$`]),
+        P("Find the $x$-coordinate of the point on the graph of $f$ where the gradient is zero.", 2, ans.int(k), [
+          `$f'(x) = 0$ gives $${2 * a}x = ${termsTex([[b, "pow", -2]])}$`, `Multiply by $x^{2}$: $${2 * a}x^{3} = ${b}$, so $x^{3} = ${k * k * k}$`, `$x = ${k}$`])] };
+    } });
+  const UC = { type: "t5-ext-unknown-coefficients", syllabus: ["5.3"], representation: "equation", format: "value" };
+  reg({ ...UC, unknown: "k-from-gradient", levels: [2], skills: ["SL5.3.unknown-coefficients", "SL5.3.gradient-at-point"], title: "Find a coefficient from a gradient",
+    build({ rng }) {
+      let k, b, x0, x1;
+      do { k = rng.nonzero(-4, 4); b = rng.nonzero(-9, 9); x0 = rng.pick([1, 2, -1, -2]); x1 = rng.pick([1, 2, 3, -1]); } while (Math.abs(x1) === Math.abs(x0));
+      const g = 3 * k * x0 * x0 + b, g1 = 3 * k * x1 * x1 + b;
+      return { params: { b, x0, g, x1 }, stem: `The curve $C$ has equation $y = ${expr([[1, "kx^{3}"], [b, "x"]])}$, where $k$ is a constant. The gradient of $C$ at the point where $x = ${x0}$ is $${g}$.`, parts: [
+        P("Find the value of $k$.", 3, ans.int(k), [`$${D} = 3kx^{2} ${signed(b)}$`, `At $x = ${x0}$: $${3 * x0 * x0}k ${signed(b)} = ${g}$`, `$${3 * x0 * x0}k = ${g - b}$, so $k = ${k}$.`]),
+        P(`Find the gradient of $C$ at the point where $x = ${x1}$.`, 1, ans.int(g1), [`$${D} = ${poly([3 * k, 0, b])}$, so at $x = ${x1}$ the gradient is $${3 * k}${br(x1)}^{2} ${signed(b)} = ${g1}$.`])] };
+    } });
+  reg({ ...UC, unknown: "two-from-gradient-and-point", levels: [3], skills: ["SL5.3.unknown-coefficients", "SL5.3.gradient-at-point"], title: "Two coefficients from a point and a gradient",
+    build({ rng }) {
+      let p, q, x0, x2;
+      do { p = rng.nonzero(-3, 3); q = rng.nonzero(-6, 6); x0 = rng.pick([1, 2, -1]); x2 = rng.pick([2, 3, -2]); } while (x2 === x0 || 3 * p * x0 * x0 + q === 0);
+      const y0 = p * x0 ** 3 + q * x0, g = 3 * p * x0 * x0 + q, g2 = 3 * p * x2 * x2 + q;
+      return { params: { x0, y0, g, x2 }, stem: `The curve $C$ has equation $y = px^{3} + qx$, where $p$ and $q$ are constants. The point $\\mathrm{A}${point(x0, y0)}$ lies on $C$, and the gradient of $C$ at $\\mathrm{A}$ is $${g}$.`, parts: [
+        P("Find the value of $p$.", 4, ans.int(p), [`$${D} = 3px^{2} + q$`, `The gradient at $x = ${x0}$ is $${g}$: $${expr([[3 * x0 * x0, "p"], [1, "q"]])} = ${g}$`, `$\\mathrm{A}$ lies on $C$: $${expr([[x0 ** 3, "p"], [x0, "q"]])} = ${y0}$`,
+          x0 === 1 ? `Subtract the second equation from the first: $2p = ${g - y0}$` : x0 === -1 ? `Add the two equations: $2p = ${g + y0}$` :`Multiply the first equation by $${x0}$ and subtract the second: $${coef(2 * x0 ** 3, "p")} = ${g * x0 - y0}$`, `$p = ${p}$`]),
+        P("Find the value of $q$.", 1, ans.int(q), [`$q = ${g} - ${3 * x0 * x0}${br(p)} = ${q}$`]),
+        P(`Find the gradient of $C$ at the point where $x = ${x2}$.`, 2, ans.int(g2), [`$${D} = ${poly([3 * p, 0, q])}$`, `At $x = ${x2}$: $${3 * p}${br(x2)}^{2} ${signed(q)} = ${g2}$`])] };
+    } });
+
+  // ======================= 5.4 tangents and normals: more ways to ask =======================
+  reg({ ...TN, unknown: "read-from-tangent", levels: [1], skills: ["SL5.4.read-from-tangent"], title: "Read a value and a gradient from a given tangent",
+    build({ rng }) {
+      const a = rng.nonzero(-4, 5), mm = rng.pick([-5, -4, -3, -2, 2, 3, 4, 5, 6]), c = rng.nonzero(-9, 9);
+      return { params: { a, mm, c }, stem: `The tangent to the graph of a function $f$ at the point where $x = ${a}$ has equation $y = ${lin(mm, c)}$.`, parts: [
+        P(`Write down the value of $f'(${a})$.`, 1, ans.int(mm), [`$f'(${a})$ is the gradient of the tangent at $x = ${a}$, which is $${mm}$.`]),
+        P(`Find the value of $f(${a})$.`, 1, ans.int(mm * a + c), [`The tangent touches the graph where $x = ${a}$, so that point lies on the tangent: $f(${a}) = ${mm}${br(a)} ${signed(c)} = ${mm * a + c}$`])] };
+    } });
+  reg({ ...TN, id: "t5-tangent-normal-equation/tangent-at-point/equation-cubic", unknown: "tangent-at-point", levels: [2], skills: ["SL5.4.tangent-equation", "SL5.3.gradient-at-point"], title: "Tangent to a cubic at a point",
+    build({ rng }) {
+      let b, c, x0, mm;
+      do { b = rng.nonzero(-4, 4); c = rng.int(-5, 5); x0 = rng.pick([1, 2, -1, -2]); mm = 3 * x0 * x0 + 2 * b * x0; } while (mm === 0);
+      const y0 = x0 ** 3 + b * x0 * x0 + c, tc = y0 - mm * x0;
+      return { params: { b, c, x0 }, stem: `The curve $C$ has equation $y = ${poly([1, b, 0, c])}$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$.`, parts: [
+        P("Find the gradient of the tangent to $C$ at $\\mathrm{A}$.", 2, ans.int(mm), [`$${D} = ${poly([3, 2 * b, 0])}$`, `At $x = ${x0}$: $${expr([[3, `${br(x0)}^{2}`], [2 * b, br(x0)]])} = ${mm}$`]),
+        P("The tangent to $C$ at $\\mathrm{A}$ has equation $y = mx + c$. Find the value of $c$.", 2, ans.int(tc), [`At $x = ${x0}$, $y = ${y0}$, so $\\mathrm{A}$ is $${point(x0, y0)}$.`, `$${y0} = ${mm}${br(x0)} + c$`, `$c = ${tc}$`])] };
+    } });
+  const TC = { type: "t5-tangent-condition", representation: "equation", format: "value" };
+  reg({ ...TC, syllabus: ["5.4", "5.3"], unknown: "x-for-gradient", levels: [2], skills: ["SL5.3.point-with-given-gradient", "SL5.4.tangent-gradient"], title: "Points on a cubic with a given gradient",
+    build({ rng }) {
+      let r1, r2, g, d;
+      do { r1 = rng.int(-4, 2); r2 = r1 + 2 * rng.int(1, 3); g = rng.int(-6, 9); d = rng.int(-5, 5); } while (r2 > 5);
+      const B = (-3 * (r1 + r2)) / 2, Cc = g + 3 * r1 * r2;
+      return { params: { B, Cc, d, g }, stem: `Let $f(x) = ${poly([1, B, Cc, d])}$. There are two points on the graph of $f$ at which the gradient is $${g}$.`, parts: [
+        P("Find the $x$-coordinate of the left-hand point.", 3, ans.int(r1), [`$f'(x) = ${poly([3, 2 * B, Cc])}$`, `$f'(x) = ${g}$ gives $${poly([3, 2 * B, Cc - g])} = 0$`, `Divide by $3$: $${poly([1, -(r1 + r2), r1 * r2])} = 0$`,
+          `$${factor(r1)}${factor(r2)} = 0$, so $x = ${r1}$ or $x = ${r2}$. The left-hand point has $x = ${r1}$.`]),
+        P("Write down the $x$-coordinate of the right-hand point.", 1, ans.int(r2), [`The right-hand point has $x = ${r2}$.`])] };
+    } });
+  reg({ ...TC, syllabus: ["5.4"], unknown: "coefficient-from-tangent", levels: [3], skills: ["SL5.4.tangency-condition", "SL5.4.tangent-gradient"], title: "Find a constant so that a line is a tangent",
+    build({ rng }) {
+      let xt, b, mm, c;
+      do { xt = rng.nonzero(-3, 4); b = rng.int(-5, 5); mm = 2 * xt + b; c = rng.int(-6, 6); } while (mm === 0);
+      const yt = mm * xt + c, k = yt - xt * xt - b * xt;
+      return { params: { b, mm, c }, stem: `The line $L$ has equation $y = ${lin(mm, c)}$. The curve $C$ has equation $y = ${expr([[1, "x^{2}"], [b, "x"]])} + k$, where $k$ is a constant. The line $L$ is a tangent to $C$.`, parts: [
+        P("Find the $x$-coordinate of the point where $L$ touches $C$.", 3, ans.int(xt), [`For $C$, $${D} = ${lin(2, b)}$.`, `Where $L$ touches $C$ the two gradients are equal: $${lin(2, b)} = ${mm}$`, `$x = ${xt}$`]),
+        P("Find the $y$-coordinate of this point.", 1, ans.int(yt), [`The point lies on $L$: $y = ${mm}${br(xt)} ${signed(c)} = ${yt}$`]),
+        P("Find the value of $k$.", 2, ans.int(k), [`The point $${point(xt, yt)}$ also lies on $C$: $${yt} = ${expr([[1, `${br(xt)}^{2}`], [b, br(xt)]])} + k$`, `$k = ${k}$`])] };
+    } });
+  reg({ type: "t5-normal-meets-curve", syllabus: ["5.4"], unknown: "tangent-x-intercept", representation: "equation", format: "value", levels: [4], calculator: true,
+    skills: ["SL5.4.tangent-meets-axes-or-curve", "SL5.4.tangent-equation"], title: "Where a tangent to an exponential curve meets the axes",
+    build({ rng }) {
+      let a, k, b, x0, mm, y0, xi, yi;
+      do {
+        a = rng.int(2, 5); k = rng.pick([0.3, 0.4, 0.5, 0.6, -0.4, -0.5]); b = rng.pick([-2, -1, 1, 2]); x0 = rng.int(1, 3);
+        y0 = a * Math.exp(k * x0) + b * x0; mm = a * k * Math.exp(k * x0) + b; yi = y0 - mm * x0; xi = x0 - y0 / mm;
+      } while (Math.abs(mm) < 0.5 || Math.abs(xi) > 40 || Math.abs(yi) < 0.2 || Math.abs(xi) < 0.2 || Math.abs(y0) < 0.2);
+      return { params: { a, k, b, x0 }, stem: `The curve $C$ has equation $y = ${expr([[a, ek(k)], [b, "x"]])}$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$. The tangent to $C$ at $\\mathrm{A}$ meets the $y$-axis at $\\mathrm{Q}$ and the $x$-axis at $\\mathrm{R}$.`, parts: [
+        P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(y0), [`$y = ${expr([[a, `\\mathrm{e}^{${num(k * x0)}}`], [b, br(x0)]])} \\approx ${sf(y0)}$`]),
+        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), [`$${D} = ${expr([[a * k, ek(k)], [b, ""]])}$`, `At $x = ${x0}$: $${D} \\approx ${sf(mm)}$`]),
+        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`The tangent is $y = ${sf(mm)}(x - ${x0}) ${sg(y0)} ${sf(Math.abs(y0))}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
+        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the tangent and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
