@@ -28,7 +28,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.7274
+  }
  },
  "aa-sl-2021-may-tz1-p1-q02": {
   "id": "aa-sl-2021-may-tz1-p1-q02",
@@ -59,7 +63,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2021-may-tz1-p1-q03": {
   "id": "aa-sl-2021-may-tz1-p1-q03",
@@ -82,7 +90,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.0923
+  }
  },
  "aa-sl-2021-may-tz1-p1-q04": {
   "id": "aa-sl-2021-may-tz1-p1-q04",
@@ -113,7 +125,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3582
+  }
  },
  "aa-sl-2021-may-tz1-p1-q05": {
   "id": "aa-sl-2021-may-tz1-p1-q05",
@@ -152,7 +168,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2469
+  }
  },
  "aa-sl-2021-may-tz1-p1-q06": {
   "id": "aa-sl-2021-may-tz1-p1-q06",
@@ -183,7 +203,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2021-may-tz1-p1-q07": {
   "id": "aa-sl-2021-may-tz1-p1-q07",
@@ -231,7 +255,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9763
+  }
  },
  "aa-sl-2021-may-tz1-p1-q08": {
   "id": "aa-sl-2021-may-tz1-p1-q08",
@@ -287,7 +315,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9807
+  }
  },
  "aa-sl-2021-may-tz1-p1-q09": {
   "id": "aa-sl-2021-may-tz1-p1-q09",
@@ -344,7 +376,11 @@
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9858
+  }
  },
  "aa-sl-2021-may-tz1-p2-q01": {
   "id": "aa-sl-2021-may-tz1-p2-q01",
@@ -375,7 +411,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1496
+  }
  },
  "aa-sl-2021-may-tz1-p2-q02": {
   "id": "aa-sl-2021-may-tz1-p2-q02",
@@ -422,7 +462,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9936
+  }
  },
  "aa-sl-2021-may-tz1-p2-q03": {
   "id": "aa-sl-2021-may-tz1-p2-q03",
@@ -461,7 +505,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2402
+  }
  },
  "aa-sl-2021-may-tz1-p2-q04": {
   "id": "aa-sl-2021-may-tz1-p2-q04",
@@ -484,7 +532,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6106
+  }
  },
  "aa-sl-2021-may-tz1-p2-q05": {
   "id": "aa-sl-2021-may-tz1-p2-q05",
@@ -523,7 +575,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6394
+  }
  },
  "aa-sl-2021-may-tz1-p2-q06": {
   "id": "aa-sl-2021-may-tz1-p2-q06",
@@ -546,7 +602,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2021-may-tz1-p2-q07": {
   "id": "aa-sl-2021-may-tz1-p2-q07",
@@ -587,7 +647,11 @@
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9854
+  }
  },
  "aa-sl-2021-may-tz1-p2-q08": {
   "id": "aa-sl-2021-may-tz1-p2-q08",
@@ -644,7 +708,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9881
+  }
  },
  "aa-sl-2021-may-tz1-p2-q09": {
   "id": "aa-sl-2021-may-tz1-p2-q09",
@@ -700,7 +768,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz1-p2-q09/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9806
+  }
  },
  "aa-sl-2021-may-tz2-p1-q01": {
   "id": "aa-sl-2021-may-tz2-p1-q01",
@@ -731,7 +803,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6017
+  }
  },
  "aa-sl-2021-may-tz2-p1-q02": {
   "id": "aa-sl-2021-may-tz2-p1-q02",
@@ -754,7 +830,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2021-may-tz2-p1-q03": {
   "id": "aa-sl-2021-may-tz2-p1-q03",
@@ -786,7 +866,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q03/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q03/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.129
+  }
  },
  "aa-sl-2021-may-tz2-p1-q04": {
   "id": "aa-sl-2021-may-tz2-p1-q04",
@@ -809,7 +893,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2021-may-tz2-p1-q05": {
   "id": "aa-sl-2021-may-tz2-p1-q05",
@@ -840,7 +928,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5703
+  }
  },
  "aa-sl-2021-may-tz2-p1-q06": {
   "id": "aa-sl-2021-may-tz2-p1-q06",
@@ -864,7 +956,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4218
+  }
  },
  "aa-sl-2021-may-tz2-p1-q07": {
   "id": "aa-sl-2021-may-tz2-p1-q07",
@@ -920,7 +1016,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q07/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.985
+  }
  },
  "aa-sl-2021-may-tz2-p1-q08": {
   "id": "aa-sl-2021-may-tz2-p1-q08",
@@ -968,7 +1068,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9958
+  }
  },
  "aa-sl-2021-may-tz2-p1-q09": {
   "id": "aa-sl-2021-may-tz2-p1-q09",
@@ -1024,7 +1128,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9892
+  }
  },
  "aa-sl-2021-may-tz2-p2-q01": {
   "id": "aa-sl-2021-may-tz2-p2-q01",
@@ -1063,7 +1171,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6392
+  }
  },
  "aa-sl-2021-may-tz2-p2-q02": {
   "id": "aa-sl-2021-may-tz2-p2-q02",
@@ -1094,7 +1206,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6137
+  }
  },
  "aa-sl-2021-may-tz2-p2-q03": {
   "id": "aa-sl-2021-may-tz2-p2-q03",
@@ -1125,7 +1241,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2021-may-tz2-p2-q04": {
   "id": "aa-sl-2021-may-tz2-p2-q04",
@@ -1173,7 +1293,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3692
+  }
  },
  "aa-sl-2021-may-tz2-p2-q05": {
   "id": "aa-sl-2021-may-tz2-p2-q05",
@@ -1204,7 +1328,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1663
+  }
  },
  "aa-sl-2021-may-tz2-p2-q06": {
   "id": "aa-sl-2021-may-tz2-p2-q06",
@@ -1244,7 +1372,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4083
+  }
  },
  "aa-sl-2021-may-tz2-p2-q07": {
   "id": "aa-sl-2021-may-tz2-p2-q07",
@@ -1300,7 +1432,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.995
+  }
  },
  "aa-sl-2021-may-tz2-p2-q08": {
   "id": "aa-sl-2021-may-tz2-p2-q08",
@@ -1356,7 +1492,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9808
+  }
  },
  "aa-sl-2021-may-tz2-p2-q09": {
   "id": "aa-sl-2021-may-tz2-p2-q09",
@@ -1404,7 +1544,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-may-tz2-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9849
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q01": {
   "id": "aa-sl-2021-nov-tz0-p1-q01",
@@ -1435,7 +1579,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6295
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q02": {
   "id": "aa-sl-2021-nov-tz0-p1-q02",
@@ -1458,7 +1606,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.0984
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q03": {
   "id": "aa-sl-2021-nov-tz0-p1-q03",
@@ -1499,7 +1651,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q03/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q03/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.0706
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q04": {
   "id": "aa-sl-2021-nov-tz0-p1-q04",
@@ -1530,7 +1686,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q05": {
   "id": "aa-sl-2021-nov-tz0-p1-q05",
@@ -1577,7 +1737,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2769
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q06": {
   "id": "aa-sl-2021-nov-tz0-p1-q06",
@@ -1609,7 +1773,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1443
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q07": {
   "id": "aa-sl-2021-nov-tz0-p1-q07",
@@ -1650,7 +1818,11 @@
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.969
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q08": {
   "id": "aa-sl-2021-nov-tz0-p1-q08",
@@ -1699,7 +1871,11 @@
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9808
+  }
  },
  "aa-sl-2021-nov-tz0-p1-q09": {
   "id": "aa-sl-2021-nov-tz0-p1-q09",
@@ -1747,7 +1923,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9951
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q01": {
   "id": "aa-sl-2021-nov-tz0-p2-q01",
@@ -1786,7 +1966,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4996
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q02": {
   "id": "aa-sl-2021-nov-tz0-p2-q02",
@@ -1817,7 +2001,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1474
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q03": {
   "id": "aa-sl-2021-nov-tz0-p2-q03",
@@ -1840,7 +2028,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1144
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q04": {
   "id": "aa-sl-2021-nov-tz0-p2-q04",
@@ -1871,7 +2063,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1841
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q05": {
   "id": "aa-sl-2021-nov-tz0-p2-q05",
@@ -1902,7 +2098,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4202
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q06": {
   "id": "aa-sl-2021-nov-tz0-p2-q06",
@@ -1941,7 +2141,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1994
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q07": {
   "id": "aa-sl-2021-nov-tz0-p2-q07",
@@ -1981,7 +2185,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9947
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q08": {
   "id": "aa-sl-2021-nov-tz0-p2-q08",
@@ -2046,7 +2254,11 @@
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9947
+  }
  },
  "aa-sl-2021-nov-tz0-p2-q09": {
   "id": "aa-sl-2021-nov-tz0-p2-q09",
@@ -2094,7 +2306,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2021-nov-tz0-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9951
+  }
  },
  "aa-sl-2022-may-tz1-p1-q01": {
   "id": "aa-sl-2022-may-tz1-p1-q01",
@@ -2125,7 +2341,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.25
+  }
  },
  "aa-sl-2022-may-tz1-p1-q02": {
   "id": "aa-sl-2022-may-tz1-p1-q02",
@@ -2156,7 +2376,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1522
+  }
  },
  "aa-sl-2022-may-tz1-p1-q03": {
   "id": "aa-sl-2022-may-tz1-p1-q03",
@@ -2187,7 +2411,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4456
+  }
  },
  "aa-sl-2022-may-tz1-p1-q04": {
   "id": "aa-sl-2022-may-tz1-p1-q04",
@@ -2218,7 +2446,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1516
+  }
  },
  "aa-sl-2022-may-tz1-p1-q05": {
   "id": "aa-sl-2022-may-tz1-p1-q05",
@@ -2241,7 +2473,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2022-may-tz1-p1-q06": {
   "id": "aa-sl-2022-may-tz1-p1-q06",
@@ -2273,7 +2509,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2341
+  }
  },
  "aa-sl-2022-may-tz1-p1-q07": {
   "id": "aa-sl-2022-may-tz1-p1-q07",
@@ -2330,7 +2570,11 @@
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9938
+  }
  },
  "aa-sl-2022-may-tz1-p1-q08": {
   "id": "aa-sl-2022-may-tz1-p1-q08",
@@ -2365,7 +2609,11 @@
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q08/markscheme-04.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q08/markscheme-05.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9831
+  }
  },
  "aa-sl-2022-may-tz1-p1-q09": {
   "id": "aa-sl-2022-may-tz1-p1-q09",
@@ -2398,7 +2646,11 @@
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9705
+  }
  },
  "aa-sl-2022-may-tz1-p2-q01": {
   "id": "aa-sl-2022-may-tz1-p2-q01",
@@ -2438,7 +2690,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q01/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q01/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4187
+  }
  },
  "aa-sl-2022-may-tz1-p2-q02": {
   "id": "aa-sl-2022-may-tz1-p2-q02",
@@ -2469,7 +2725,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4468
+  }
  },
  "aa-sl-2022-may-tz1-p2-q03": {
   "id": "aa-sl-2022-may-tz1-p2-q03",
@@ -2500,7 +2760,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9936
+  }
  },
  "aa-sl-2022-may-tz1-p2-q04": {
   "id": "aa-sl-2022-may-tz1-p2-q04",
@@ -2539,7 +2803,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2665
+  }
  },
  "aa-sl-2022-may-tz1-p2-q05": {
   "id": "aa-sl-2022-may-tz1-p2-q05",
@@ -2578,7 +2846,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2022-may-tz1-p2-q06": {
   "id": "aa-sl-2022-may-tz1-p2-q06",
@@ -2610,7 +2882,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2022-may-tz1-p2-q07": {
   "id": "aa-sl-2022-may-tz1-p2-q07",
@@ -2659,7 +2935,11 @@
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9931
+  }
  },
  "aa-sl-2022-may-tz1-p2-q08": {
   "id": "aa-sl-2022-may-tz1-p2-q08",
@@ -2700,7 +2980,11 @@
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9827
+  }
  },
  "aa-sl-2022-may-tz1-p2-q09": {
   "id": "aa-sl-2022-may-tz1-p2-q09",
@@ -2748,7 +3032,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz1-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9847
+  }
  },
  "aa-sl-2022-may-tz2-p1-q01": {
   "id": "aa-sl-2022-may-tz2-p1-q01",
@@ -2787,7 +3075,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4134
+  }
  },
  "aa-sl-2022-may-tz2-p1-q02": {
   "id": "aa-sl-2022-may-tz2-p1-q02",
@@ -2826,7 +3118,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2022-may-tz2-p1-q03": {
   "id": "aa-sl-2022-may-tz2-p1-q03",
@@ -2857,7 +3153,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2022-may-tz2-p1-q04": {
   "id": "aa-sl-2022-may-tz2-p1-q04",
@@ -2897,7 +3197,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.994
+  }
  },
  "aa-sl-2022-may-tz2-p1-q05": {
   "id": "aa-sl-2022-may-tz2-p1-q05",
@@ -2920,7 +3224,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.0954
+  }
  },
  "aa-sl-2022-may-tz2-p1-q06": {
   "id": "aa-sl-2022-may-tz2-p1-q06",
@@ -2951,7 +3259,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2219
+  }
  },
  "aa-sl-2022-may-tz2-p1-q07": {
   "id": "aa-sl-2022-may-tz2-p1-q07",
@@ -3007,7 +3319,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9945
+  }
  },
  "aa-sl-2022-may-tz2-p1-q08": {
   "id": "aa-sl-2022-may-tz2-p1-q08",
@@ -3040,7 +3356,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9853
+  }
  },
  "aa-sl-2022-may-tz2-p1-q09": {
   "id": "aa-sl-2022-may-tz2-p1-q09",
@@ -3098,7 +3418,11 @@
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q09/markscheme-03.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p1-q09/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9912
+  }
  },
  "aa-sl-2022-may-tz2-p2-q01": {
   "id": "aa-sl-2022-may-tz2-p2-q01",
@@ -3130,7 +3454,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q01/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q01/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6469
+  }
  },
  "aa-sl-2022-may-tz2-p2-q02": {
   "id": "aa-sl-2022-may-tz2-p2-q02",
@@ -3153,7 +3481,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.0923
+  }
  },
  "aa-sl-2022-may-tz2-p2-q03": {
   "id": "aa-sl-2022-may-tz2-p2-q03",
@@ -3184,7 +3516,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3778
+  }
  },
  "aa-sl-2022-may-tz2-p2-q04": {
   "id": "aa-sl-2022-may-tz2-p2-q04",
@@ -3207,7 +3543,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2022-may-tz2-p2-q05": {
   "id": "aa-sl-2022-may-tz2-p2-q05",
@@ -3255,7 +3595,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9936
+  }
  },
  "aa-sl-2022-may-tz2-p2-q06": {
   "id": "aa-sl-2022-may-tz2-p2-q06",
@@ -3294,7 +3638,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2022-may-tz2-p2-q07": {
   "id": "aa-sl-2022-may-tz2-p2-q07",
@@ -3343,7 +3691,11 @@
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9947
+  }
  },
  "aa-sl-2022-may-tz2-p2-q08": {
   "id": "aa-sl-2022-may-tz2-p2-q08",
@@ -3383,7 +3735,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9827
+  }
  },
  "aa-sl-2022-may-tz2-p2-q09": {
   "id": "aa-sl-2022-may-tz2-p2-q09",
@@ -3440,7 +3796,11 @@
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-may-tz2-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9837
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q01": {
   "id": "aa-sl-2022-nov-tz0-p1-q01",
@@ -3479,7 +3839,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2733
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q02": {
   "id": "aa-sl-2022-nov-tz0-p1-q02",
@@ -3502,7 +3866,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q03": {
   "id": "aa-sl-2022-nov-tz0-p1-q03",
@@ -3533,7 +3901,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5465
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q04": {
   "id": "aa-sl-2022-nov-tz0-p1-q04",
@@ -3565,7 +3937,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2042
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q05": {
   "id": "aa-sl-2022-nov-tz0-p1-q05",
@@ -3588,7 +3964,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1222
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q06": {
   "id": "aa-sl-2022-nov-tz0-p1-q06",
@@ -3627,7 +4007,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q07": {
   "id": "aa-sl-2022-nov-tz0-p1-q07",
@@ -3668,7 +4052,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9795
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q08": {
   "id": "aa-sl-2022-nov-tz0-p1-q08",
@@ -3703,7 +4091,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q08/markscheme-04.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q08/markscheme-05.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.977
+  }
  },
  "aa-sl-2022-nov-tz0-p1-q09": {
   "id": "aa-sl-2022-nov-tz0-p1-q09",
@@ -3744,7 +4136,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.968
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q01": {
   "id": "aa-sl-2022-nov-tz0-p2-q01",
@@ -3783,7 +4179,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4988
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q02": {
   "id": "aa-sl-2022-nov-tz0-p2-q02",
@@ -3815,7 +4215,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q02/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q02/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3845
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q03": {
   "id": "aa-sl-2022-nov-tz0-p2-q03",
@@ -3854,7 +4258,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6663
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q04": {
   "id": "aa-sl-2022-nov-tz0-p2-q04",
@@ -3877,7 +4285,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q05": {
   "id": "aa-sl-2022-nov-tz0-p2-q05",
@@ -3900,7 +4312,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q06": {
   "id": "aa-sl-2022-nov-tz0-p2-q06",
@@ -3924,7 +4340,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.129
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q07": {
   "id": "aa-sl-2022-nov-tz0-p2-q07",
@@ -3981,7 +4401,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9909
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q08": {
   "id": "aa-sl-2022-nov-tz0-p2-q08",
@@ -4023,7 +4447,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9886
+  }
  },
  "aa-sl-2022-nov-tz0-p2-q09": {
   "id": "aa-sl-2022-nov-tz0-p2-q09",
@@ -4072,7 +4500,11 @@
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2022-nov-tz0-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9837
+  }
  },
  "aa-sl-2023-may-tz1-p1-q01": {
   "id": "aa-sl-2023-may-tz1-p1-q01",
@@ -4111,7 +4543,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2959
+  }
  },
  "aa-sl-2023-may-tz1-p1-q02": {
   "id": "aa-sl-2023-may-tz1-p1-q02",
@@ -4150,7 +4586,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2592
+  }
  },
  "aa-sl-2023-may-tz1-p1-q03": {
   "id": "aa-sl-2023-may-tz1-p1-q03",
@@ -4181,7 +4621,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5397
+  }
  },
  "aa-sl-2023-may-tz1-p1-q04": {
   "id": "aa-sl-2023-may-tz1-p1-q04",
@@ -4212,7 +4656,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2023-may-tz1-p1-q05": {
   "id": "aa-sl-2023-may-tz1-p1-q05",
@@ -4235,7 +4683,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2023-may-tz1-p1-q06": {
   "id": "aa-sl-2023-may-tz1-p1-q06",
@@ -4266,7 +4718,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5251
+  }
  },
  "aa-sl-2023-may-tz1-p1-q07": {
   "id": "aa-sl-2023-may-tz1-p1-q07",
@@ -4314,7 +4770,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9887
+  }
  },
  "aa-sl-2023-may-tz1-p1-q08": {
   "id": "aa-sl-2023-may-tz1-p1-q08",
@@ -4370,7 +4830,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9808
+  }
  },
  "aa-sl-2023-may-tz1-p1-q09": {
   "id": "aa-sl-2023-may-tz1-p1-q09",
@@ -4426,7 +4890,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.992
+  }
  },
  "aa-sl-2023-may-tz1-p2-q01": {
   "id": "aa-sl-2023-may-tz1-p2-q01",
@@ -4457,7 +4925,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6592
+  }
  },
  "aa-sl-2023-may-tz1-p2-q02": {
   "id": "aa-sl-2023-may-tz1-p2-q02",
@@ -4497,7 +4969,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q02/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q02/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3325
+  }
  },
  "aa-sl-2023-may-tz1-p2-q03": {
   "id": "aa-sl-2023-may-tz1-p2-q03",
@@ -4529,7 +5005,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q03/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q03/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1663
+  }
  },
  "aa-sl-2023-may-tz1-p2-q04": {
   "id": "aa-sl-2023-may-tz1-p2-q04",
@@ -4569,7 +5049,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4707
+  }
  },
  "aa-sl-2023-may-tz1-p2-q05": {
   "id": "aa-sl-2023-may-tz1-p2-q05",
@@ -4592,7 +5076,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1479
+  }
  },
  "aa-sl-2023-may-tz1-p2-q06": {
   "id": "aa-sl-2023-may-tz1-p2-q06",
@@ -4615,7 +5103,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2023-may-tz1-p2-q07": {
   "id": "aa-sl-2023-may-tz1-p2-q07",
@@ -4679,7 +5171,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9827
+  }
  },
  "aa-sl-2023-may-tz1-p2-q08": {
   "id": "aa-sl-2023-may-tz1-p2-q08",
@@ -4735,7 +5231,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.992
+  }
  },
  "aa-sl-2023-may-tz1-p2-q09": {
   "id": "aa-sl-2023-may-tz1-p2-q09",
@@ -4781,7 +5281,11 @@
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q09/markscheme-05.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q09/markscheme-06.webp",
    "assets/exam-images/aa-sl-2023-may-tz1-p2-q09/markscheme-07.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9789
+  }
  },
  "aa-sl-2023-may-tz2-p1-q01": {
   "id": "aa-sl-2023-may-tz2-p1-q01",
@@ -4820,7 +5324,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9883
+  }
  },
  "aa-sl-2023-may-tz2-p1-q02": {
   "id": "aa-sl-2023-may-tz2-p1-q02",
@@ -4851,7 +5359,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3282
+  }
  },
  "aa-sl-2023-may-tz2-p1-q03": {
   "id": "aa-sl-2023-may-tz2-p1-q03",
@@ -4892,7 +5404,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q03/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q03/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.0981
+  }
  },
  "aa-sl-2023-may-tz2-p1-q04": {
   "id": "aa-sl-2023-may-tz2-p1-q04",
@@ -4915,7 +5431,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2023-may-tz2-p1-q05": {
   "id": "aa-sl-2023-may-tz2-p1-q05",
@@ -4939,7 +5459,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4407
+  }
  },
  "aa-sl-2023-may-tz2-p1-q06": {
   "id": "aa-sl-2023-may-tz2-p1-q06",
@@ -4962,7 +5486,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2023-may-tz2-p1-q07": {
   "id": "aa-sl-2023-may-tz2-p1-q07",
@@ -5019,7 +5547,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.984
+  }
  },
  "aa-sl-2023-may-tz2-p1-q08": {
   "id": "aa-sl-2023-may-tz2-p1-q08",
@@ -5070,7 +5602,11 @@
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q08/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9832
+  }
  },
  "aa-sl-2023-may-tz2-p1-q09": {
   "id": "aa-sl-2023-may-tz2-p1-q09",
@@ -5118,7 +5654,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9909
+  }
  },
  "aa-sl-2023-may-tz2-p2-q01": {
   "id": "aa-sl-2023-may-tz2-p2-q01",
@@ -5157,7 +5697,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5227
+  }
  },
  "aa-sl-2023-may-tz2-p2-q02": {
   "id": "aa-sl-2023-may-tz2-p2-q02",
@@ -5188,7 +5732,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6198
+  }
  },
  "aa-sl-2023-may-tz2-p2-q03": {
   "id": "aa-sl-2023-may-tz2-p2-q03",
@@ -5227,7 +5775,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3142
+  }
  },
  "aa-sl-2023-may-tz2-p2-q04": {
   "id": "aa-sl-2023-may-tz2-p2-q04",
@@ -5274,7 +5826,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3509
+  }
  },
  "aa-sl-2023-may-tz2-p2-q05": {
   "id": "aa-sl-2023-may-tz2-p2-q05",
@@ -5305,7 +5861,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2952
+  }
  },
  "aa-sl-2023-may-tz2-p2-q06": {
   "id": "aa-sl-2023-may-tz2-p2-q06",
@@ -5344,7 +5904,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5428
+  }
  },
  "aa-sl-2023-may-tz2-p2-q07": {
   "id": "aa-sl-2023-may-tz2-p2-q07",
@@ -5400,7 +5964,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9761
+  }
  },
  "aa-sl-2023-may-tz2-p2-q08": {
   "id": "aa-sl-2023-may-tz2-p2-q08",
@@ -5458,7 +6026,11 @@
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9923
+  }
  },
  "aa-sl-2023-may-tz2-p2-q09": {
   "id": "aa-sl-2023-may-tz2-p2-q09",
@@ -5514,7 +6086,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-may-tz2-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9898
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q01": {
   "id": "aa-sl-2023-nov-tz1-p1-q01",
@@ -5553,7 +6129,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9921
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q02": {
   "id": "aa-sl-2023-nov-tz1-p1-q02",
@@ -5584,7 +6164,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q03": {
   "id": "aa-sl-2023-nov-tz1-p1-q03",
@@ -5615,7 +6199,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q04": {
   "id": "aa-sl-2023-nov-tz1-p1-q04",
@@ -5646,7 +6234,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q05": {
   "id": "aa-sl-2023-nov-tz1-p1-q05",
@@ -5670,7 +6262,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3337
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q06": {
   "id": "aa-sl-2023-nov-tz1-p1-q06",
@@ -5693,7 +6289,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1278
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q07": {
   "id": "aa-sl-2023-nov-tz1-p1-q07",
@@ -5751,7 +6351,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 2,
+   "y": 0.9933
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q08": {
   "id": "aa-sl-2023-nov-tz1-p1-q08",
@@ -5791,7 +6395,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9939
+  }
  },
  "aa-sl-2023-nov-tz1-p1-q09": {
   "id": "aa-sl-2023-nov-tz1-p1-q09",
@@ -5832,7 +6440,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9854
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q01": {
   "id": "aa-sl-2023-nov-tz1-p2-q01",
@@ -5871,7 +6483,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3485
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q02": {
   "id": "aa-sl-2023-nov-tz1-p2-q02",
@@ -5903,7 +6519,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q02/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q02/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4963
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q03": {
   "id": "aa-sl-2023-nov-tz1-p2-q03",
@@ -5934,7 +6554,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9945
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q04": {
   "id": "aa-sl-2023-nov-tz1-p2-q04",
@@ -5966,7 +6590,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.1562
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q05": {
   "id": "aa-sl-2023-nov-tz1-p2-q05",
@@ -5997,7 +6625,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2072
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q06": {
   "id": "aa-sl-2023-nov-tz1-p2-q06",
@@ -6020,7 +6652,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2335
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q07": {
   "id": "aa-sl-2023-nov-tz1-p2-q07",
@@ -6060,7 +6696,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9905
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q08": {
   "id": "aa-sl-2023-nov-tz1-p2-q08",
@@ -6109,7 +6749,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.993
+  }
  },
  "aa-sl-2023-nov-tz1-p2-q09": {
   "id": "aa-sl-2023-nov-tz1-p2-q09",
@@ -6158,7 +6802,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz1-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9821
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q01": {
   "id": "aa-sl-2023-nov-tz2-p1-q01",
@@ -6197,7 +6845,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9923
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q02": {
   "id": "aa-sl-2023-nov-tz2-p1-q02",
@@ -6228,7 +6880,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q03": {
   "id": "aa-sl-2023-nov-tz2-p1-q03",
@@ -6259,7 +6915,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q04": {
   "id": "aa-sl-2023-nov-tz2-p1-q04",
@@ -6290,7 +6950,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q05": {
   "id": "aa-sl-2023-nov-tz2-p1-q05",
@@ -6314,7 +6978,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3399
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q06": {
   "id": "aa-sl-2023-nov-tz2-p1-q06",
@@ -6337,7 +7005,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.129
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q07": {
   "id": "aa-sl-2023-nov-tz2-p1-q07",
@@ -6395,7 +7067,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 2,
+   "y": 0.9933
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q08": {
   "id": "aa-sl-2023-nov-tz2-p1-q08",
@@ -6436,7 +7112,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9843
+  }
  },
  "aa-sl-2023-nov-tz2-p1-q09": {
   "id": "aa-sl-2023-nov-tz2-p1-q09",
@@ -6477,7 +7157,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9854
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q01": {
   "id": "aa-sl-2023-nov-tz2-p2-q01",
@@ -6516,7 +7200,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3485
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q02": {
   "id": "aa-sl-2023-nov-tz2-p2-q02",
@@ -6547,7 +7235,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4988
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q03": {
   "id": "aa-sl-2023-nov-tz2-p2-q03",
@@ -6578,7 +7270,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9945
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q04": {
   "id": "aa-sl-2023-nov-tz2-p2-q04",
@@ -6610,7 +7306,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.1562
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q05": {
   "id": "aa-sl-2023-nov-tz2-p2-q05",
@@ -6641,7 +7341,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2084
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q06": {
   "id": "aa-sl-2023-nov-tz2-p2-q06",
@@ -6664,7 +7368,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2335
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q07": {
   "id": "aa-sl-2023-nov-tz2-p2-q07",
@@ -6704,7 +7412,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9905
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q08": {
   "id": "aa-sl-2023-nov-tz2-p2-q08",
@@ -6753,7 +7465,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.993
+  }
  },
  "aa-sl-2023-nov-tz2-p2-q09": {
   "id": "aa-sl-2023-nov-tz2-p2-q09",
@@ -6802,7 +7518,11 @@
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2023-nov-tz2-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9821
+  }
  },
  "aa-sl-2024-may-tz1-p1-q01": {
   "id": "aa-sl-2024-may-tz1-p1-q01",
@@ -6833,7 +7553,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1815
+  }
  },
  "aa-sl-2024-may-tz1-p1-q02": {
   "id": "aa-sl-2024-may-tz1-p1-q02",
@@ -6864,7 +7588,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5165
+  }
  },
  "aa-sl-2024-may-tz1-p1-q03": {
   "id": "aa-sl-2024-may-tz1-p1-q03",
@@ -6895,7 +7623,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1968
+  }
  },
  "aa-sl-2024-may-tz1-p1-q04": {
   "id": "aa-sl-2024-may-tz1-p1-q04",
@@ -6926,7 +7658,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5477
+  }
  },
  "aa-sl-2024-may-tz1-p1-q05": {
   "id": "aa-sl-2024-may-tz1-p1-q05",
@@ -6958,7 +7694,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6174
+  }
  },
  "aa-sl-2024-may-tz1-p1-q06": {
   "id": "aa-sl-2024-may-tz1-p1-q06",
@@ -6990,7 +7730,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2262
+  }
  },
  "aa-sl-2024-may-tz1-p1-q07": {
   "id": "aa-sl-2024-may-tz1-p1-q07",
@@ -7038,7 +7782,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9835
+  }
  },
  "aa-sl-2024-may-tz1-p1-q08": {
   "id": "aa-sl-2024-may-tz1-p1-q08",
@@ -7104,7 +7852,11 @@
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q08/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9844
+  }
  },
  "aa-sl-2024-may-tz1-p1-q09": {
   "id": "aa-sl-2024-may-tz1-p1-q09",
@@ -7178,7 +7930,11 @@
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9815
+  }
  },
  "aa-sl-2024-may-tz1-p2-q01": {
   "id": "aa-sl-2024-may-tz1-p2-q01",
@@ -7210,7 +7966,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.1345
+  }
  },
  "aa-sl-2024-may-tz1-p2-q02": {
   "id": "aa-sl-2024-may-tz1-p2-q02",
@@ -7250,7 +8010,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q02/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q02/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2952
+  }
  },
  "aa-sl-2024-may-tz1-p2-q03": {
   "id": "aa-sl-2024-may-tz1-p2-q03",
@@ -7281,7 +8045,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5819
+  }
  },
  "aa-sl-2024-may-tz1-p2-q04": {
   "id": "aa-sl-2024-may-tz1-p2-q04",
@@ -7312,7 +8080,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2024-may-tz1-p2-q05": {
   "id": "aa-sl-2024-may-tz1-p2-q05",
@@ -7351,7 +8123,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5715
+  }
  },
  "aa-sl-2024-may-tz1-p2-q06": {
   "id": "aa-sl-2024-may-tz1-p2-q06",
@@ -7390,7 +8166,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.994
+  }
  },
  "aa-sl-2024-may-tz1-p2-q07": {
   "id": "aa-sl-2024-may-tz1-p2-q07",
@@ -7438,7 +8218,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.994
+  }
  },
  "aa-sl-2024-may-tz1-p2-q08": {
   "id": "aa-sl-2024-may-tz1-p2-q08",
@@ -7496,7 +8280,11 @@
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9701
+  }
  },
  "aa-sl-2024-may-tz1-p2-q09": {
   "id": "aa-sl-2024-may-tz1-p2-q09",
@@ -7538,7 +8326,11 @@
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz1-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9845
+  }
  },
  "aa-sl-2024-may-tz2-p1-q01": {
   "id": "aa-sl-2024-may-tz2-p1-q01",
@@ -7569,7 +8361,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9938
+  }
  },
  "aa-sl-2024-may-tz2-p1-q02": {
   "id": "aa-sl-2024-may-tz2-p1-q02",
@@ -7592,7 +8388,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2024-may-tz2-p1-q03": {
   "id": "aa-sl-2024-may-tz2-p1-q03",
@@ -7623,7 +8423,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-may-tz2-p1-q04": {
   "id": "aa-sl-2024-may-tz2-p1-q04",
@@ -7654,7 +8458,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5446
+  }
  },
  "aa-sl-2024-may-tz2-p1-q05": {
   "id": "aa-sl-2024-may-tz2-p1-q05",
@@ -7686,7 +8494,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9951
+  }
  },
  "aa-sl-2024-may-tz2-p1-q06": {
   "id": "aa-sl-2024-may-tz2-p1-q06",
@@ -7719,7 +8531,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q06/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q06/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9945
+  }
  },
  "aa-sl-2024-may-tz2-p1-q07": {
   "id": "aa-sl-2024-may-tz2-p1-q07",
@@ -7770,7 +8586,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q07/markscheme-03.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q07/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9832
+  }
  },
  "aa-sl-2024-may-tz2-p1-q08": {
   "id": "aa-sl-2024-may-tz2-p1-q08",
@@ -7820,7 +8640,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q08/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9844
+  }
  },
  "aa-sl-2024-may-tz2-p1-q09": {
   "id": "aa-sl-2024-may-tz2-p1-q09",
@@ -7878,7 +8702,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q09/markscheme-03.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p1-q09/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9858
+  }
  },
  "aa-sl-2024-may-tz2-p2-q01": {
   "id": "aa-sl-2024-may-tz2-p2-q01",
@@ -7909,7 +8737,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.458
+  }
  },
  "aa-sl-2024-may-tz2-p2-q02": {
   "id": "aa-sl-2024-may-tz2-p2-q02",
@@ -7940,7 +8772,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2579
+  }
  },
  "aa-sl-2024-may-tz2-p2-q03": {
   "id": "aa-sl-2024-may-tz2-p2-q03",
@@ -7971,7 +8807,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3038
+  }
  },
  "aa-sl-2024-may-tz2-p2-q04": {
   "id": "aa-sl-2024-may-tz2-p2-q04",
@@ -8010,7 +8850,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3509
+  }
  },
  "aa-sl-2024-may-tz2-p2-q05": {
   "id": "aa-sl-2024-may-tz2-p2-q05",
@@ -8049,7 +8893,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2024-may-tz2-p2-q06": {
   "id": "aa-sl-2024-may-tz2-p2-q06",
@@ -8073,7 +8921,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-may-tz2-p2-q07": {
   "id": "aa-sl-2024-may-tz2-p2-q07",
@@ -8130,7 +8982,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9862
+  }
  },
  "aa-sl-2024-may-tz2-p2-q08": {
   "id": "aa-sl-2024-may-tz2-p2-q08",
@@ -8179,7 +9035,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9955
+  }
  },
  "aa-sl-2024-may-tz2-p2-q09": {
   "id": "aa-sl-2024-may-tz2-p2-q09",
@@ -8256,7 +9116,11 @@
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q09/markscheme-03.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q09/markscheme-04.webp",
    "assets/exam-images/aa-sl-2024-may-tz2-p2-q09/markscheme-05.webp"
-  ]
+  ],
+  "end": {
+   "image": 2,
+   "y": 0.968
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q01": {
   "id": "aa-sl-2024-nov-tz1-p1-q01",
@@ -8287,7 +9151,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3803
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q02": {
   "id": "aa-sl-2024-nov-tz1-p1-q02",
@@ -8318,7 +9186,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4101
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q03": {
   "id": "aa-sl-2024-nov-tz1-p1-q03",
@@ -8349,7 +9221,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q04": {
   "id": "aa-sl-2024-nov-tz1-p1-q04",
@@ -8372,7 +9248,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q05": {
   "id": "aa-sl-2024-nov-tz1-p1-q05",
@@ -8395,7 +9275,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3405
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q06": {
   "id": "aa-sl-2024-nov-tz1-p1-q06",
@@ -8418,7 +9302,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q07": {
   "id": "aa-sl-2024-nov-tz1-p1-q07",
@@ -8475,7 +9363,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9661
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q08": {
   "id": "aa-sl-2024-nov-tz1-p1-q08",
@@ -8523,7 +9415,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9772
+  }
  },
  "aa-sl-2024-nov-tz1-p1-q09": {
   "id": "aa-sl-2024-nov-tz1-p1-q09",
@@ -8580,7 +9476,11 @@
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9886
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q01": {
   "id": "aa-sl-2024-nov-tz1-p2-q01",
@@ -8620,7 +9520,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q01/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q01/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3803
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q02": {
   "id": "aa-sl-2024-nov-tz1-p2-q02",
@@ -8643,7 +9547,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q03": {
   "id": "aa-sl-2024-nov-tz1-p2-q03",
@@ -8674,7 +9582,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1516
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q04": {
   "id": "aa-sl-2024-nov-tz1-p2-q04",
@@ -8705,7 +9617,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1944
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q05": {
   "id": "aa-sl-2024-nov-tz1-p2-q05",
@@ -8738,7 +9654,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.6003
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q06": {
   "id": "aa-sl-2024-nov-tz1-p2-q06",
@@ -8761,7 +9681,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q07": {
   "id": "aa-sl-2024-nov-tz1-p2-q07",
@@ -8826,7 +9750,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9902
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q08": {
   "id": "aa-sl-2024-nov-tz1-p2-q08",
@@ -8899,7 +9827,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9789
+  }
  },
  "aa-sl-2024-nov-tz1-p2-q09": {
   "id": "aa-sl-2024-nov-tz1-p2-q09",
@@ -8963,7 +9895,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz1-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.988
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q01": {
   "id": "aa-sl-2024-nov-tz2-p1-q01",
@@ -8994,7 +9930,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3803
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q02": {
   "id": "aa-sl-2024-nov-tz2-p1-q02",
@@ -9025,7 +9965,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4621
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q03": {
   "id": "aa-sl-2024-nov-tz2-p1-q03",
@@ -9056,7 +10000,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q04": {
   "id": "aa-sl-2024-nov-tz2-p1-q04",
@@ -9079,7 +10027,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q05": {
   "id": "aa-sl-2024-nov-tz2-p1-q05",
@@ -9102,7 +10054,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4046
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q06": {
   "id": "aa-sl-2024-nov-tz2-p1-q06",
@@ -9125,7 +10081,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q07": {
   "id": "aa-sl-2024-nov-tz2-p1-q07",
@@ -9181,7 +10141,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9944
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q08": {
   "id": "aa-sl-2024-nov-tz2-p1-q08",
@@ -9229,7 +10193,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.979
+  }
  },
  "aa-sl-2024-nov-tz2-p1-q09": {
   "id": "aa-sl-2024-nov-tz2-p1-q09",
@@ -9286,7 +10254,11 @@
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9888
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q01": {
   "id": "aa-sl-2024-nov-tz2-p2-q01",
@@ -9326,7 +10298,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q01/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q01/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3958
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q02": {
   "id": "aa-sl-2024-nov-tz2-p2-q02",
@@ -9349,7 +10325,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q03": {
   "id": "aa-sl-2024-nov-tz2-p2-q03",
@@ -9380,7 +10360,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1516
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q04": {
   "id": "aa-sl-2024-nov-tz2-p2-q04",
@@ -9411,7 +10395,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1944
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q05": {
   "id": "aa-sl-2024-nov-tz2-p2-q05",
@@ -9444,7 +10432,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.6009
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q06": {
   "id": "aa-sl-2024-nov-tz2-p2-q06",
@@ -9467,7 +10459,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q07": {
   "id": "aa-sl-2024-nov-tz2-p2-q07",
@@ -9532,7 +10528,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9902
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q08": {
   "id": "aa-sl-2024-nov-tz2-p2-q08",
@@ -9605,7 +10605,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9789
+  }
  },
  "aa-sl-2024-nov-tz2-p2-q09": {
   "id": "aa-sl-2024-nov-tz2-p2-q09",
@@ -9669,7 +10673,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2024-nov-tz2-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.988
+  }
  },
  "aa-sl-2025-may-tz1-p1-q01": {
   "id": "aa-sl-2025-may-tz1-p1-q01",
@@ -9708,7 +10716,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.241
+  }
  },
  "aa-sl-2025-may-tz1-p1-q02": {
   "id": "aa-sl-2025-may-tz1-p1-q02",
@@ -9731,7 +10743,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1522
+  }
  },
  "aa-sl-2025-may-tz1-p1-q03": {
   "id": "aa-sl-2025-may-tz1-p1-q03",
@@ -9770,7 +10786,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2769
+  }
  },
  "aa-sl-2025-may-tz1-p1-q04": {
   "id": "aa-sl-2025-may-tz1-p1-q04",
@@ -9793,7 +10813,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2025-may-tz1-p1-q05": {
   "id": "aa-sl-2025-may-tz1-p1-q05",
@@ -9824,7 +10848,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1498
+  }
  },
  "aa-sl-2025-may-tz1-p1-q06": {
   "id": "aa-sl-2025-may-tz1-p1-q06",
@@ -9856,7 +10884,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4077
+  }
  },
  "aa-sl-2025-may-tz1-p1-q07": {
   "id": "aa-sl-2025-may-tz1-p1-q07",
@@ -9896,7 +10928,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9945
+  }
  },
  "aa-sl-2025-may-tz1-p1-q08": {
   "id": "aa-sl-2025-may-tz1-p1-q08",
@@ -9945,7 +10981,11 @@
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9763
+  }
  },
  "aa-sl-2025-may-tz1-p1-q09": {
   "id": "aa-sl-2025-may-tz1-p1-q09",
@@ -9993,7 +11033,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.989
+  }
  },
  "aa-sl-2025-may-tz1-p2-q01": {
   "id": "aa-sl-2025-may-tz1-p2-q01",
@@ -10024,7 +11068,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2429
+  }
  },
  "aa-sl-2025-may-tz1-p2-q02": {
   "id": "aa-sl-2025-may-tz1-p2-q02",
@@ -10055,7 +11103,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5697
+  }
  },
  "aa-sl-2025-may-tz1-p2-q03": {
   "id": "aa-sl-2025-may-tz1-p2-q03",
@@ -10086,7 +11138,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1919
+  }
  },
  "aa-sl-2025-may-tz1-p2-q04": {
   "id": "aa-sl-2025-may-tz1-p2-q04",
@@ -10109,7 +11165,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1669
+  }
  },
  "aa-sl-2025-may-tz1-p2-q05": {
   "id": "aa-sl-2025-may-tz1-p2-q05",
@@ -10148,7 +11208,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3881
+  }
  },
  "aa-sl-2025-may-tz1-p2-q06": {
   "id": "aa-sl-2025-may-tz1-p2-q06",
@@ -10179,7 +11243,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5073
+  }
  },
  "aa-sl-2025-may-tz1-p2-q07": {
   "id": "aa-sl-2025-may-tz1-p2-q07",
@@ -10236,7 +11304,11 @@
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9946
+  }
  },
  "aa-sl-2025-may-tz1-p2-q08": {
   "id": "aa-sl-2025-may-tz1-p2-q08",
@@ -10302,7 +11374,11 @@
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q08/markscheme-03.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q08/markscheme-04.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9953
+  }
  },
  "aa-sl-2025-may-tz1-p2-q09": {
   "id": "aa-sl-2025-may-tz1-p2-q09",
@@ -10359,7 +11435,11 @@
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz1-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9863
+  }
  },
  "aa-sl-2025-may-tz2-p1-q01": {
   "id": "aa-sl-2025-may-tz2-p1-q01",
@@ -10390,7 +11470,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1815
+  }
  },
  "aa-sl-2025-may-tz2-p1-q02": {
   "id": "aa-sl-2025-may-tz2-p1-q02",
@@ -10413,7 +11497,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2025-may-tz2-p1-q03": {
   "id": "aa-sl-2025-may-tz2-p1-q03",
@@ -10452,7 +11540,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5801
+  }
  },
  "aa-sl-2025-may-tz2-p1-q04": {
   "id": "aa-sl-2025-may-tz2-p1-q04",
@@ -10491,7 +11583,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5575
+  }
  },
  "aa-sl-2025-may-tz2-p1-q05": {
   "id": "aa-sl-2025-may-tz2-p1-q05",
@@ -10522,7 +11618,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1663
+  }
  },
  "aa-sl-2025-may-tz2-p1-q06": {
   "id": "aa-sl-2025-may-tz2-p1-q06",
@@ -10553,7 +11653,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1803
+  }
  },
  "aa-sl-2025-may-tz2-p1-q07": {
   "id": "aa-sl-2025-may-tz2-p1-q07",
@@ -10601,7 +11705,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9781
+  }
  },
  "aa-sl-2025-may-tz2-p1-q08": {
   "id": "aa-sl-2025-may-tz2-p1-q08",
@@ -10650,7 +11758,11 @@
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9938
+  }
  },
  "aa-sl-2025-may-tz2-p1-q09": {
   "id": "aa-sl-2025-may-tz2-p1-q09",
@@ -10699,7 +11811,11 @@
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9888
+  }
  },
  "aa-sl-2025-may-tz2-p2-q01": {
   "id": "aa-sl-2025-may-tz2-p2-q01",
@@ -10730,7 +11846,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3832
+  }
  },
  "aa-sl-2025-may-tz2-p2-q02": {
   "id": "aa-sl-2025-may-tz2-p2-q02",
@@ -10769,7 +11889,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5905
+  }
  },
  "aa-sl-2025-may-tz2-p2-q03": {
   "id": "aa-sl-2025-may-tz2-p2-q03",
@@ -10800,7 +11924,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2025-may-tz2-p2-q04": {
   "id": "aa-sl-2025-may-tz2-p2-q04",
@@ -10823,7 +11951,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2025-may-tz2-p2-q05": {
   "id": "aa-sl-2025-may-tz2-p2-q05",
@@ -10862,7 +11994,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2025-may-tz2-p2-q06": {
   "id": "aa-sl-2025-may-tz2-p2-q06",
@@ -10886,7 +12022,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4927
+  }
  },
  "aa-sl-2025-may-tz2-p2-q07": {
   "id": "aa-sl-2025-may-tz2-p2-q07",
@@ -10943,7 +12083,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.993
+  }
  },
  "aa-sl-2025-may-tz2-p2-q08": {
   "id": "aa-sl-2025-may-tz2-p2-q08",
@@ -11007,7 +12151,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9901
+  }
  },
  "aa-sl-2025-may-tz2-p2-q09": {
   "id": "aa-sl-2025-may-tz2-p2-q09",
@@ -11063,7 +12211,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz2-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9888
+  }
  },
  "aa-sl-2025-may-tz3-p1-q01": {
   "id": "aa-sl-2025-may-tz3-p1-q01",
@@ -11094,7 +12246,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4187
+  }
  },
  "aa-sl-2025-may-tz3-p1-q02": {
   "id": "aa-sl-2025-may-tz3-p1-q02",
@@ -11125,7 +12281,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2025-may-tz3-p1-q03": {
   "id": "aa-sl-2025-may-tz3-p1-q03",
@@ -11164,7 +12324,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6491
+  }
  },
  "aa-sl-2025-may-tz3-p1-q04": {
   "id": "aa-sl-2025-may-tz3-p1-q04",
@@ -11196,7 +12360,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2025-may-tz3-p1-q05": {
   "id": "aa-sl-2025-may-tz3-p1-q05",
@@ -11227,7 +12395,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2025-may-tz3-p1-q06": {
   "id": "aa-sl-2025-may-tz3-p1-q06",
@@ -11266,7 +12438,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2402
+  }
  },
  "aa-sl-2025-may-tz3-p1-q07": {
   "id": "aa-sl-2025-may-tz3-p1-q07",
@@ -11324,7 +12500,11 @@
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9684
+  }
  },
  "aa-sl-2025-may-tz3-p1-q08": {
   "id": "aa-sl-2025-may-tz3-p1-q08",
@@ -11364,7 +12544,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9881
+  }
  },
  "aa-sl-2025-may-tz3-p1-q09": {
   "id": "aa-sl-2025-may-tz3-p1-q09",
@@ -11412,7 +12596,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9872
+  }
  },
  "aa-sl-2025-may-tz3-p2-q01": {
   "id": "aa-sl-2025-may-tz3-p2-q01",
@@ -11443,7 +12631,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4811
+  }
  },
  "aa-sl-2025-may-tz3-p2-q02": {
   "id": "aa-sl-2025-may-tz3-p2-q02",
@@ -11474,7 +12666,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4181
+  }
  },
  "aa-sl-2025-may-tz3-p2-q03": {
   "id": "aa-sl-2025-may-tz3-p2-q03",
@@ -11505,7 +12701,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2025-may-tz3-p2-q04": {
   "id": "aa-sl-2025-may-tz3-p2-q04",
@@ -11544,7 +12744,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4658
+  }
  },
  "aa-sl-2025-may-tz3-p2-q05": {
   "id": "aa-sl-2025-may-tz3-p2-q05",
@@ -11569,7 +12773,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4609
+  }
  },
  "aa-sl-2025-may-tz3-p2-q06": {
   "id": "aa-sl-2025-may-tz3-p2-q06",
@@ -11600,7 +12808,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1987
+  }
  },
  "aa-sl-2025-may-tz3-p2-q07": {
   "id": "aa-sl-2025-may-tz3-p2-q07",
@@ -11665,7 +12877,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.991
+  }
  },
  "aa-sl-2025-may-tz3-p2-q08": {
   "id": "aa-sl-2025-may-tz3-p2-q08",
@@ -11729,7 +12945,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.992
+  }
  },
  "aa-sl-2025-may-tz3-p2-q09": {
   "id": "aa-sl-2025-may-tz3-p2-q09",
@@ -11777,7 +12997,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-may-tz3-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9813
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q01": {
   "id": "aa-sl-2025-nov-tz1-p1-q01",
@@ -11801,7 +13025,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9964
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q02": {
   "id": "aa-sl-2025-nov-tz1-p1-q02",
@@ -11832,7 +13060,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q03": {
   "id": "aa-sl-2025-nov-tz1-p1-q03",
@@ -11871,7 +13103,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q04": {
   "id": "aa-sl-2025-nov-tz1-p1-q04",
@@ -11903,7 +13139,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q04/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q04/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9943
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q05": {
   "id": "aa-sl-2025-nov-tz1-p1-q05",
@@ -11934,7 +13174,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1198
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q06": {
   "id": "aa-sl-2025-nov-tz1-p1-q06",
@@ -11967,7 +13211,11 @@
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q06/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q06/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3319
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q07": {
   "id": "aa-sl-2025-nov-tz1-p1-q07",
@@ -12033,7 +13281,11 @@
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q07/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q07/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.96
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q08": {
   "id": "aa-sl-2025-nov-tz1-p1-q08",
@@ -12089,7 +13341,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9913
+  }
  },
  "aa-sl-2025-nov-tz1-p1-q09": {
   "id": "aa-sl-2025-nov-tz1-p1-q09",
@@ -12137,7 +13393,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9719
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q01": {
   "id": "aa-sl-2025-nov-tz1-p2-q01",
@@ -12168,7 +13428,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9903
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q02": {
   "id": "aa-sl-2025-nov-tz1-p2-q02",
@@ -12207,7 +13471,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5061
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q03": {
   "id": "aa-sl-2025-nov-tz1-p2-q03",
@@ -12246,7 +13514,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3961
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q04": {
   "id": "aa-sl-2025-nov-tz1-p2-q04",
@@ -12269,7 +13541,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1247
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q05": {
   "id": "aa-sl-2025-nov-tz1-p2-q05",
@@ -12308,7 +13584,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9947
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q06": {
   "id": "aa-sl-2025-nov-tz1-p2-q06",
@@ -12340,7 +13620,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2769
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q07": {
   "id": "aa-sl-2025-nov-tz1-p2-q07",
@@ -12396,7 +13680,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9819
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q08": {
   "id": "aa-sl-2025-nov-tz1-p2-q08",
@@ -12468,7 +13756,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.987
+  }
  },
  "aa-sl-2025-nov-tz1-p2-q09": {
   "id": "aa-sl-2025-nov-tz1-p2-q09",
@@ -12524,7 +13816,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz1-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9888
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q01": {
   "id": "aa-sl-2025-nov-tz3-p1-q01",
@@ -12563,7 +13859,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3682
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q02": {
   "id": "aa-sl-2025-nov-tz3-p1-q02",
@@ -12586,7 +13886,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1112
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q03": {
   "id": "aa-sl-2025-nov-tz3-p1-q03",
@@ -12609,7 +13913,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1473
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q04": {
   "id": "aa-sl-2025-nov-tz3-p1-q04",
@@ -12640,7 +13948,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1498
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q05": {
   "id": "aa-sl-2025-nov-tz3-p1-q05",
@@ -12671,7 +13983,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.673
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q06": {
   "id": "aa-sl-2025-nov-tz3-p1-q06",
@@ -12694,7 +14010,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.074
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q07": {
   "id": "aa-sl-2025-nov-tz3-p1-q07",
@@ -12734,7 +14054,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9934
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q08": {
   "id": "aa-sl-2025-nov-tz3-p1-q08",
@@ -12782,7 +14106,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9919
+  }
  },
  "aa-sl-2025-nov-tz3-p1-q09": {
   "id": "aa-sl-2025-nov-tz3-p1-q09",
@@ -12831,7 +14159,11 @@
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9875
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q01": {
   "id": "aa-sl-2025-nov-tz3-p2-q01",
@@ -12871,7 +14203,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.3642
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q02": {
   "id": "aa-sl-2025-nov-tz3-p2-q02",
@@ -12902,7 +14238,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5263
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q03": {
   "id": "aa-sl-2025-nov-tz3-p2-q03",
@@ -12933,7 +14273,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q04": {
   "id": "aa-sl-2025-nov-tz3-p2-q04",
@@ -12964,7 +14308,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6601
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q05": {
   "id": "aa-sl-2025-nov-tz3-p2-q05",
@@ -12995,7 +14343,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5513
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q06": {
   "id": "aa-sl-2025-nov-tz3-p2-q06",
@@ -13026,7 +14378,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3509
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q07": {
   "id": "aa-sl-2025-nov-tz3-p2-q07",
@@ -13066,7 +14422,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9898
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q08": {
   "id": "aa-sl-2025-nov-tz3-p2-q08",
@@ -13114,7 +14474,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9943
+  }
  },
  "aa-sl-2025-nov-tz3-p2-q09": {
   "id": "aa-sl-2025-nov-tz3-p2-q09",
@@ -13172,7 +14536,11 @@
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2025-nov-tz3-p2-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9661
+  }
  },
  "aa-sl-2026-may-tz1-p1-q01": {
   "id": "aa-sl-2026-may-tz1-p1-q01",
@@ -13203,7 +14571,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1857
+  }
  },
  "aa-sl-2026-may-tz1-p1-q02": {
   "id": "aa-sl-2026-may-tz1-p1-q02",
@@ -13243,7 +14615,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q02/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q02/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2026-may-tz1-p1-q03": {
   "id": "aa-sl-2026-may-tz1-p1-q03",
@@ -13274,7 +14650,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2852
+  }
  },
  "aa-sl-2026-may-tz1-p1-q04": {
   "id": "aa-sl-2026-may-tz1-p1-q04",
@@ -13305,7 +14685,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2026-may-tz1-p1-q05": {
   "id": "aa-sl-2026-may-tz1-p1-q05",
@@ -13337,7 +14721,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q05/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q05/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1149
+  }
  },
  "aa-sl-2026-may-tz1-p1-q06": {
   "id": "aa-sl-2026-may-tz1-p1-q06",
@@ -13368,7 +14756,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2622
+  }
  },
  "aa-sl-2026-may-tz1-p1-q07": {
   "id": "aa-sl-2026-may-tz1-p1-q07",
@@ -13408,7 +14800,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9948
+  }
  },
  "aa-sl-2026-may-tz1-p1-q08": {
   "id": "aa-sl-2026-may-tz1-p1-q08",
@@ -13448,7 +14844,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9852
+  }
  },
  "aa-sl-2026-may-tz1-p1-q09": {
   "id": "aa-sl-2026-may-tz1-p1-q09",
@@ -13489,7 +14889,11 @@
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9896
+  }
  },
  "aa-sl-2026-may-tz1-p2-q01": {
   "id": "aa-sl-2026-may-tz1-p2-q01",
@@ -13528,7 +14932,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3275
+  }
  },
  "aa-sl-2026-may-tz1-p2-q02": {
   "id": "aa-sl-2026-may-tz1-p2-q02",
@@ -13560,7 +14968,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.3509
+  }
  },
  "aa-sl-2026-may-tz1-p2-q03": {
   "id": "aa-sl-2026-may-tz1-p2-q03",
@@ -13583,7 +14995,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1106
+  }
  },
  "aa-sl-2026-may-tz1-p2-q04": {
   "id": "aa-sl-2026-may-tz1-p2-q04",
@@ -13614,7 +15030,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5776
+  }
  },
  "aa-sl-2026-may-tz1-p2-q05": {
   "id": "aa-sl-2026-may-tz1-p2-q05",
@@ -13645,7 +15065,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5028
+  }
  },
  "aa-sl-2026-may-tz1-p2-q06": {
   "id": "aa-sl-2026-may-tz1-p2-q06",
@@ -13668,7 +15092,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2026-may-tz1-p2-q07": {
   "id": "aa-sl-2026-may-tz1-p2-q07",
@@ -13724,7 +15152,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9915
+  }
  },
  "aa-sl-2026-may-tz1-p2-q08": {
   "id": "aa-sl-2026-may-tz1-p2-q08",
@@ -13773,7 +15205,11 @@
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q08/markscheme-02.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q08/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9854
+  }
  },
  "aa-sl-2026-may-tz1-p2-q09": {
   "id": "aa-sl-2026-may-tz1-p2-q09",
@@ -13830,7 +15266,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz1-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9382
+  }
  },
  "aa-sl-2026-may-tz2-p1-q01": {
   "id": "aa-sl-2026-may-tz2-p1-q01",
@@ -13869,7 +15309,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9846
+  }
  },
  "aa-sl-2026-may-tz2-p1-q02": {
   "id": "aa-sl-2026-may-tz2-p1-q02",
@@ -13908,7 +15352,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1913
+  }
  },
  "aa-sl-2026-may-tz2-p1-q03": {
   "id": "aa-sl-2026-may-tz2-p1-q03",
@@ -13939,7 +15387,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.5049
+  }
  },
  "aa-sl-2026-may-tz2-p1-q04": {
   "id": "aa-sl-2026-may-tz2-p1-q04",
@@ -13970,7 +15422,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2026-may-tz2-p1-q05": {
   "id": "aa-sl-2026-may-tz2-p1-q05",
@@ -14001,7 +15457,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2512
+  }
  },
  "aa-sl-2026-may-tz2-p1-q06": {
   "id": "aa-sl-2026-may-tz2-p1-q06",
@@ -14032,7 +15492,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1956
+  }
  },
  "aa-sl-2026-may-tz2-p1-q07": {
   "id": "aa-sl-2026-may-tz2-p1-q07",
@@ -14088,7 +15552,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9789
+  }
  },
  "aa-sl-2026-may-tz2-p1-q08": {
   "id": "aa-sl-2026-may-tz2-p1-q08",
@@ -14153,7 +15621,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.9848
+  }
  },
  "aa-sl-2026-may-tz2-p1-q09": {
   "id": "aa-sl-2026-may-tz2-p1-q09",
@@ -14202,7 +15674,11 @@
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q09/markscheme-02.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p1-q09/markscheme-03.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9882
+  }
  },
  "aa-sl-2026-may-tz2-p2-q01": {
   "id": "aa-sl-2026-may-tz2-p2-q01",
@@ -14242,7 +15718,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 1,
+   "y": 0.0647
+  }
  },
  "aa-sl-2026-may-tz2-p2-q02": {
   "id": "aa-sl-2026-may-tz2-p2-q02",
@@ -14281,7 +15761,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9892
+  }
  },
  "aa-sl-2026-may-tz2-p2-q03": {
   "id": "aa-sl-2026-may-tz2-p2-q03",
@@ -14304,7 +15788,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3527
+  }
  },
  "aa-sl-2026-may-tz2-p2-q04": {
   "id": "aa-sl-2026-may-tz2-p2-q04",
@@ -14343,7 +15831,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.3392
+  }
  },
  "aa-sl-2026-may-tz2-p2-q05": {
   "id": "aa-sl-2026-may-tz2-p2-q05",
@@ -14382,7 +15874,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.209
+  }
  },
  "aa-sl-2026-may-tz2-p2-q06": {
   "id": "aa-sl-2026-may-tz2-p2-q06",
@@ -14413,7 +15909,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2026-may-tz2-p2-q07": {
   "id": "aa-sl-2026-may-tz2-p2-q07",
@@ -14461,7 +15961,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9867
+  }
  },
  "aa-sl-2026-may-tz2-p2-q08": {
   "id": "aa-sl-2026-may-tz2-p2-q08",
@@ -14501,7 +16005,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9869
+  }
  },
  "aa-sl-2026-may-tz2-p2-q09": {
   "id": "aa-sl-2026-may-tz2-p2-q09",
@@ -14557,7 +16065,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz2-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9778
+  }
  },
  "aa-sl-2026-may-tz3-p1-q01": {
   "id": "aa-sl-2026-may-tz3-p1-q01",
@@ -14604,7 +16116,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9924
+  }
  },
  "aa-sl-2026-may-tz3-p1-q02": {
   "id": "aa-sl-2026-may-tz3-p1-q02",
@@ -14635,7 +16151,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4603
+  }
  },
  "aa-sl-2026-may-tz3-p1-q03": {
   "id": "aa-sl-2026-may-tz3-p1-q03",
@@ -14666,7 +16186,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1846
+  }
  },
  "aa-sl-2026-may-tz3-p1-q04": {
   "id": "aa-sl-2026-may-tz3-p1-q04",
@@ -14697,7 +16221,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2213
+  }
  },
  "aa-sl-2026-may-tz3-p1-q05": {
   "id": "aa-sl-2026-may-tz3-p1-q05",
@@ -14728,7 +16256,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.1681
+  }
  },
  "aa-sl-2026-may-tz3-p1-q06": {
   "id": "aa-sl-2026-may-tz3-p1-q06",
@@ -14759,7 +16291,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q06/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2268
+  }
  },
  "aa-sl-2026-may-tz3-p1-q07": {
   "id": "aa-sl-2026-may-tz3-p1-q07",
@@ -14807,7 +16343,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9936
+  }
  },
  "aa-sl-2026-may-tz3-p1-q08": {
   "id": "aa-sl-2026-may-tz3-p1-q08",
@@ -14847,7 +16387,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q08/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q08/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9744
+  }
  },
  "aa-sl-2026-may-tz3-p1-q09": {
   "id": "aa-sl-2026-may-tz3-p1-q09",
@@ -14895,7 +16439,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p1-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9736
+  }
  },
  "aa-sl-2026-may-tz3-p2-q01": {
   "id": "aa-sl-2026-may-tz3-p2-q01",
@@ -14934,7 +16482,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q01/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4295
+  }
  },
  "aa-sl-2026-may-tz3-p2-q02": {
   "id": "aa-sl-2026-may-tz3-p2-q02",
@@ -14973,7 +16525,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q02/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9923
+  }
  },
  "aa-sl-2026-may-tz3-p2-q03": {
   "id": "aa-sl-2026-may-tz3-p2-q03",
@@ -15012,7 +16568,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q03/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2579
+  }
  },
  "aa-sl-2026-may-tz3-p2-q04": {
   "id": "aa-sl-2026-may-tz3-p2-q04",
@@ -15051,7 +16611,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q04/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.4762
+  }
  },
  "aa-sl-2026-may-tz3-p2-q05": {
   "id": "aa-sl-2026-may-tz3-p2-q05",
@@ -15082,7 +16646,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q05/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.6754
+  }
  },
  "aa-sl-2026-may-tz3-p2-q06": {
   "id": "aa-sl-2026-may-tz3-p2-q06",
@@ -15114,7 +16682,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q06/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q06/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.2029
+  }
  },
  "aa-sl-2026-may-tz3-p2-q07": {
   "id": "aa-sl-2026-may-tz3-p2-q07",
@@ -15162,7 +16734,11 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q07/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q07/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9939
+  }
  },
  "aa-sl-2026-may-tz3-p2-q08": {
   "id": "aa-sl-2026-may-tz3-p2-q08",
@@ -15193,7 +16769,11 @@
   ],
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q08/markscheme-01.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9862
+  }
  },
  "aa-sl-2026-may-tz3-p2-q09": {
   "id": "aa-sl-2026-may-tz3-p2-q09",
@@ -15249,6 +16829,10 @@
   "markschemeImages": [
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q09/markscheme-01.webp",
    "assets/exam-images/aa-sl-2026-may-tz3-p2-q09/markscheme-02.webp"
-  ]
+  ],
+  "end": {
+   "image": 0,
+   "y": 0.9827
+  }
  }
 }

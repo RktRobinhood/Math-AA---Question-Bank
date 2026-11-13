@@ -1,5 +1,5 @@
-/* generate.js — AASL Output Generator
-   Handles the generate modal, cover sheet editor, and PDF/DOCX export.
+/* generate.js — Set up and export
+   The export screen (settings with a live preview), the cover sheet, and PDF/DOCX export.
    Requires basket.js and masks.json (window.AASL_MASKS).
 */
 (function () {
@@ -85,50 +85,58 @@
     });
   }
 
-  // ─── Modal ────────────────────────────────────────────────────────────────
+  // ─── Set up and export ────────────────────────────────────────────────────
+  // A large dialog: settings on the left, a live preview of the paper on the right. Every setting
+  // is saved as it changes, so the school details and choices are there next time.
   let modalEl = null;
   let _logoDataUrl = null; // base64 PNG data URL of uploaded logo (set at modal open)
   let _logoW = 0, _logoH = 0; // natural pixel dims of loaded logo
+  let _page = 0;           // preview page index
+  let _fit = null;         // ResizeObserver for the preview
+
+  const basketItems = () => window.AASL_BASKET.getAll();
+  const totalMarksOf = items => items.reduce((t, q) => t + (q.marks || 0), 0);
+  const suggestedTime = marks => Math.ceil(marks / 80 * 90 / 5) * 5;
 
   function openModal() {
     if (!window.AASL_BASKET || window.AASL_BASKET.count() === 0) return;
     const s = loadSettings();
-    // Auto-set today's date if empty
     if (!s.testDate) s.testDate = new Date().toISOString().slice(0, 10);
-    // Auto-set calculator text based on basket
-    s.instrCalculatorText = calcNote();
+    s.instrCalculatorText = calcNote();   // follows the papers the questions come from
 
     if (!modalEl) {
       modalEl = document.createElement('div');
       modalEl.id = 'aasl-modal';
+      modalEl.className = 'scrim';
       document.body.appendChild(modalEl);
-      modalEl.addEventListener('click', e => {
-        if (e.target === modalEl) closeModal();
-      });
+      modalEl.addEventListener('mousedown', e => { if (e.target === modalEl) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalEl && !modalEl.hidden) closeModal(); });
     }
-    // Load logo state from settings into module vars
     _logoDataUrl = s.logoDataUrl || null;
     _logoW = s.logoW || 0;
     _logoH = s.logoH || 0;
+    _page = 0;
 
     modalEl.innerHTML = buildModalHtml(s);
-    modalEl.style.display = 'flex';
+    modalEl.hidden = false;
     document.body.style.overflow = 'hidden';
-
-    wireModal(s);
+    wireModal();
+    updatePreview();
+    modalEl.querySelector('.dt .x').focus();
   }
 
   function closeModal() {
     if (!modalEl) return;
-    modalEl.style.display = 'none';
+    modalEl.hidden = true;
     document.body.style.overflow = '';
+    if (_fit) { _fit.disconnect(); _fit = null; }
   }
 
   window.AASL_GENERATE = openModal;
 
   // ─── Calculator auto-detect ───────────────────────────────────────────────
   function calcNote() {
-    const items = window.AASL_BASKET.getAll();
+    const items = basketItems();
     const papers = new Set(items.map(q => q.paper));
     if (papers.size === 1) {
       if (papers.has('P1')) return 'You are not permitted access to any calculator for this paper.';
@@ -137,319 +145,160 @@
     return 'Check individual questions for calculator guidance (mixed P1/P2 paper).';
   }
 
-  // ─── Modal HTML ───────────────────────────────────────────────────────────
+  // ─── Dialog HTML ──────────────────────────────────────────────────────────
   function buildModalHtml(s) {
-    const items = window.AASL_BASKET.getAll();
-    const marks = items.reduce((t, q) => t + (q.marks || 0), 0);
-    const timeMin = Math.ceil(marks / 80 * 90 / 5) * 5;
-
+    const items = basketItems();
+    const marks = totalMarksOf(items);
+    const timeMin = suggestedTime(marks);
     const hasB = items.some(q => q.section === 'B');
+    const ck = (id, on) => `<input type="checkbox" id="${id}" ${on ? 'checked' : ''}>`;
+    const field = (showId, on, label, input) => `<div class="f"><label>${showId ? ck(showId, on) : ''}${label}</label>${input}</div>`;
+    const text = (id, value, on, ph) => `<input class="input" type="text" id="${id}" value="${escHtml(value)}" placeholder="${ph || ''}" ${on ? '' : 'disabled'}>`;
+    const wsN = s.workSpace ? (s.workSpacePages || 1) : 0;
 
     return `
-    <div class="aasl-modal-box">
-      <div class="aasl-modal-header">
-        <h2>Generate Output</h2>
-        <button class="aasl-modal-close" id="aasl-modal-close">×</button>
-      </div>
-      <div class="aasl-modal-scroll">
+    <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="aasl-dlg-title">
+      <div class="dt"><h2 id="aasl-dlg-title">Set up and export</h2><span>${items.length} question${items.length === 1 ? '' : 's'} · ${marks} marks</span><button type="button" class="x" id="aasl-modal-close" aria-label="Close">×</button></div>
+      <div class="form">
+        <div><h4 class="cap">Include</h4><div class="g2">
+          <label class="ckl">${ck('gen-questions', s.includeQuestions)}Question paper</label>
+          <label class="ckl">${ck('gen-markscheme', s.includeMarkscheme)}Markscheme <small>separate file</small></label>
+          <label class="ckl">${ck('cs-show-grid', s.showMarksGrid)}Marks grid <small>for the teacher, on the cover</small></label>
+          <label class="ckl">${ck('gen-pagenums', s.showPageNumbers)}Page X of Y footer</label>
+          ${hasB ? `<label class="ckl wide">Blank working pages after each Section B question
+            <select class="select" id="gen-workspace-n">${[0, 1, 2, 3, 4].map(n => `<option value="${n}" ${n === wsN ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
+        </div></div>
 
-        <!-- 1. Content -->
-        <section class="aasl-modal-section">
-          <div class="aasl-modal-section-title">Content</div>
-          <label class="aasl-check-row">
-            <input type="checkbox" id="gen-questions" ${s.includeQuestions ? 'checked' : ''}>
-            <span>Questions <span class="aasl-modal-hint">(${items.length} questions · ${marks} marks)</span></span>
-          </label>
-          <label class="aasl-check-row">
-            <input type="checkbox" id="gen-markscheme" ${s.includeMarkscheme ? 'checked' : ''}>
-            <span>Mark scheme <span class="aasl-modal-hint">(separate file)</span></span>
-          </label>
-        </section>
-
-        <!-- 2. Cover sheet -->
-        <section class="aasl-modal-section">
-          <label class="aasl-check-row aasl-check-row--bold">
-            <input type="checkbox" id="gen-cover" ${s.coverSheet ? 'checked' : ''}>
-            <span>Cover sheet</span>
-          </label>
-          <div id="gen-cover-editor" class="${s.coverSheet ? '' : 'aasl-hidden'}">
-
-            <div class="aasl-cover-grid">
-              <!-- School / branding -->
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-school" ${s.showSchoolName ? 'checked' : ''}>
-                  School name
-                </label>
-                <input type="text" id="cs-school" value="${escHtml(s.schoolName)}" placeholder="e.g. Westgate Academy" ${s.showSchoolName ? '' : 'disabled'}>
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-logo" ${s.showLogo ? 'checked' : ''}>
-                  Logo
-                </label>
-                <div id="cs-logo-wrap" style="${s.showLogo ? '' : 'opacity:0.45;pointer-events:none'}">
-                  ${s.logoDataUrl
-                    ? `<div id="cs-logo-preview" class="aasl-logo-preview">
-                         <img src="${s.logoDataUrl}" alt="Logo preview" style="max-height:40px;max-width:120px;object-fit:contain;border:1px solid #ddd;padding:2px;border-radius:3px;vertical-align:middle;">
-                         <button type="button" id="cs-logo-clear" style="margin-left:8px;font-size:11px;color:#c00;background:none;border:none;cursor:pointer;vertical-align:middle;">Remove</button>
-                       </div>`
-                    : `<label id="cs-logo-preview" style="display:inline-block;cursor:pointer;font-size:12px;color:#555;background:#f5f5f5;border:1px dashed #aaa;padding:5px 10px;border-radius:4px;">
-                         Upload logo…
-                         <input type="file" id="cs-logo-file" accept="image/*" style="display:none">
-                       </label>`
-                  }
-                </div>
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-teacher" ${s.showTeacherName ? 'checked' : ''}>
-                  Teacher name
-                </label>
-                <input type="text" id="cs-teacher" value="${escHtml(s.teacherName)}" placeholder="e.g. Mr Smith" ${s.showTeacherName ? '' : 'disabled'}>
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-class" ${s.showClassCode ? 'checked' : ''}>
-                  Class / code
-                </label>
-                <input type="text" id="cs-class" value="${escHtml(s.classCode)}" placeholder="e.g. 12A Math AA SL" ${s.showClassCode ? '' : 'disabled'}>
-              </div>
-
-              <!-- Core fields -->
-              <div class="aasl-cover-field aasl-cover-field--wide">
-                <label class="aasl-field-label">Title</label>
-                <input type="text" id="cs-title" value="${escHtml(s.title)}">
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">Test date</label>
-                <input type="date" id="cs-date" value="${s.testDate}">
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-time" ${s.showTimeAllowed ? 'checked' : ''}>
-                  Time allowed (min)
-                </label>
-                <input type="number" id="cs-time" value="${timeMin}" min="1" ${s.showTimeAllowed ? '' : 'disabled'}>
-              </div>
-
-              <div class="aasl-cover-field">
-                <label class="aasl-field-label">
-                  <input type="checkbox" id="cs-show-marks" ${s.showTotalMarks ? 'checked' : ''}>
-                  Total marks
-                </label>
-                <input type="number" id="cs-total-marks" value="${marks}" min="1" readonly ${s.showTotalMarks ? '' : 'disabled'}>
-              </div>
-
-              <!-- Name / date lines -->
-              <div class="aasl-cover-field">
-                <label class="aasl-check-row">
-                  <input type="checkbox" id="cs-show-nameline" ${s.showNameLine ? 'checked' : ''}>
-                  <span>Name line</span>
-                </label>
-              </div>
-              <div class="aasl-cover-field">
-                <label class="aasl-check-row">
-                  <input type="checkbox" id="cs-show-dateline" ${s.showDateLine ? 'checked' : ''}>
-                  <span>Date line</span>
-                </label>
-              </div>
+        <div><h4 class="cap"><label class="switch"><input type="checkbox" id="gen-cover" ${s.coverSheet ? 'checked' : ''}><i></i>Cover sheet</label></h4>
+          <div id="gen-cover-editor" ${s.coverSheet ? '' : 'hidden'}>
+            <div class="g2">
+              ${field('cs-show-school', s.showSchoolName, 'School name', text('cs-school', s.schoolName, s.showSchoolName, 'e.g. Westgate Academy'))}
+              <div class="f"><label>${ck('cs-show-logo', s.showLogo)}Logo</label><div id="cs-logo-wrap" class="logo-box${s.showLogo ? '' : ' off'}"></div></div>
+              ${field('cs-show-teacher', s.showTeacherName, 'Teacher name', text('cs-teacher', s.teacherName, s.showTeacherName, 'e.g. Mr Smith'))}
+              ${field('cs-show-class', s.showClassCode, 'Class / code', text('cs-class', s.classCode, s.showClassCode, 'e.g. 12A Math AA SL'))}
+              <div class="f wide"><label for="cs-title">Title</label>${text('cs-title', s.title, true)}</div>
             </div>
-
-            <!-- Instructions -->
-            <div class="aasl-modal-section-title" style="margin-top:14px;">Instructions to candidates</div>
+            <div class="g3" style="margin-top:9px">
+              <div class="f"><label for="cs-date">Test date</label><input class="input" type="date" id="cs-date" value="${escHtml(s.testDate)}"></div>
+              <div class="f"><label>${ck('cs-show-time', s.showTimeAllowed)}Time allowed (min)</label><input class="input" type="number" id="cs-time" value="${timeMin}" min="1" ${s.showTimeAllowed ? '' : 'disabled'}><small>suggested ${timeMin}</small></div>
+              <div class="f"><label>${ck('cs-show-marks', s.showTotalMarks)}Total marks</label><input class="input" type="number" id="cs-total-marks" value="${marks}" readonly ${s.showTotalMarks ? '' : 'disabled'}><small>from the questions</small></div>
+            </div>
+            <div class="g2" style="margin-top:6px">
+              <label class="ckl">${ck('cs-show-nameline', s.showNameLine)}Student name line</label>
+              <label class="ckl">${ck('cs-show-dateline', s.showDateLine)}Date line</label>
+            </div>
+            <h4 class="cap" style="margin-top:14px">Instructions to candidates <small>tick to include, type to edit</small></h4>
             ${instrRow('cs-instr-calc',   s.instrCalculator,  s.instrCalculatorText)}
             ${instrRow('cs-instr-ans',    s.instrAnswerSpace, s.instrAnswerSpaceText)}
             ${instrRow('cs-instr-work',   s.instrShowWork,    s.instrShowWorkText)}
             ${instrRow('cs-instr-sigfig', s.instrSigFig,      s.instrSigFigText)}
             ${instrRow('cs-instr-form',   s.instrFormula,     s.instrFormulaText)}
-
-            <!-- Marks grid -->
-            <label class="aasl-check-row" style="margin-top:10px;">
-              <input type="checkbox" id="cs-show-grid" ${s.showMarksGrid ? 'checked' : ''}>
-              <span>Marks grid <span class="aasl-modal-hint">(to be filled out by teacher)</span></span>
-            </label>
-
           </div>
-        </section>
-
-        <!-- 3. Page options -->
-        <section class="aasl-modal-section">
-          <div class="aasl-modal-section-title">Page options</div>
-          <label class="aasl-check-row">
-            <input type="checkbox" id="gen-pagenums" ${s.showPageNumbers ? 'checked' : ''}>
-            <span>Page X of Y footer</span>
-          </label>
-          ${hasB ? `
-          <label class="aasl-check-row" style="margin-top:6px;">
-            <input type="checkbox" id="gen-workspace" ${s.workSpace ? 'checked' : ''}>
-            <span>Add work space pages after Section B questions</span>
-          </label>
-          <div id="gen-workspace-count" class="aasl-workspace-row ${s.workSpace ? '' : 'aasl-hidden'}">
-            <label>Blank pages per question:
-              <input type="number" id="gen-workspace-n" value="${s.workSpacePages}" min="1" max="4" style="width:60px;">
-            </label>
-          </div>` : ''}
-        </section>
-
-        <!-- 4. Format -->
-        <section class="aasl-modal-section">
-          <div class="aasl-modal-section-title">Format</div>
-          <div class="aasl-format-row">
-            <button class="aasl-format-btn ${s.format === 'pdf' ? 'aasl-format-btn--active' : ''}" data-fmt="pdf">PDF</button>
-            <button class="aasl-format-btn ${s.format === 'docx' ? 'aasl-format-btn--active' : ''}" data-fmt="docx">Word (.docx)</button>
-          </div>
-        </section>
-
-      </div><!-- .aasl-modal-scroll -->
-
-      <div class="aasl-modal-footer">
-        <span id="aasl-gen-status" class="aasl-gen-status"></span>
-        <button class="aasl-modal-cancel" id="aasl-modal-cancel">Cancel</button>
-        <button class="aasl-modal-download" id="aasl-modal-download">⬇ Download</button>
+        </div>
+      </div>
+      <div class="prev">
+        <div class="ph"><span><b>Live preview</b> · <span id="aasl-pv-where"></span></span><span>updates as you type</span></div>
+        <div class="pv-stage" id="aasl-pv-stage"><div class="pv-fit" id="aasl-pv-fit"></div></div>
+        <div class="strip" id="aasl-pv-strip"></div>
+      </div>
+      <div class="ft">
+        <span class="m" id="aasl-gen-status" role="status">Your school details and choices are remembered on this device for next time.</span>
+        <button type="button" class="btn ghost" id="aasl-dl-docx">Download Word</button>
+        <button type="button" class="btn" id="aasl-dl-pdf">Download PDF</button>
       </div>
     </div>`;
   }
 
   function instrRow(id, checked, text) {
-    return `<div class="aasl-instr-row">
-      <input type="checkbox" id="${id}-check" ${checked ? 'checked' : ''}>
-      <input type="text" id="${id}-text" value="${escHtml(text)}" ${checked ? '' : 'disabled'} style="flex:1">
+    return `<div class="ins">
+      <input type="checkbox" id="${id}-check" ${checked ? 'checked' : ''} aria-label="Include this instruction">
+      <input class="input" type="text" id="${id}-text" value="${escHtml(text)}" ${checked ? '' : 'disabled'}>
     </div>`;
   }
 
-  // ─── Wire modal events ────────────────────────────────────────────────────
-  function wireModal(s) {
+  // ─── Wire dialog events ───────────────────────────────────────────────────
+  function wireModal() {
     const $ = id => document.getElementById(id);
-
     $('aasl-modal-close').onclick = closeModal;
-    $('aasl-modal-cancel').onclick = closeModal;
 
-    // Cover sheet toggle
-    $('gen-cover').onchange = function () {
-      $('gen-cover-editor').classList.toggle('aasl-hidden', !this.checked);
-    };
-
-    // Work space toggle
-    const wsEl = $('gen-workspace');
-    const wsCount = $('gen-workspace-count');
-    if (wsEl && wsCount) {
-      wsEl.onchange = function () {
-        wsCount.classList.toggle('aasl-hidden', !this.checked);
-      };
+    // A tick next to a field switches the field on and off.
+    const pairs = [
+      ['cs-show-school', 'cs-school'], ['cs-show-teacher', 'cs-teacher'], ['cs-show-class', 'cs-class'],
+      ['cs-show-time', 'cs-time'], ['cs-show-marks', 'cs-total-marks'],
+      ['cs-instr-calc-check', 'cs-instr-calc-text'], ['cs-instr-ans-check', 'cs-instr-ans-text'],
+      ['cs-instr-work-check', 'cs-instr-work-text'], ['cs-instr-sigfig-check', 'cs-instr-sigfig-text'],
+      ['cs-instr-form-check', 'cs-instr-form-text'],
+    ];
+    function applyToggles() {
+      pairs.forEach(([cbId, inputId]) => { const cb = $(cbId), inp = $(inputId); if (cb && inp) inp.disabled = !cb.checked; });
+      $('gen-cover-editor').hidden = !$('gen-cover').checked;
+      $('cs-logo-wrap').classList.toggle('off', !$('cs-show-logo').checked);
     }
 
-    // Logo checkbox — toggles opacity/pointer-events on the whole wrap div
-    const logoChk  = $('cs-show-logo');
-    const logoWrap = $('cs-logo-wrap');
-    if (logoChk && logoWrap) {
-      logoChk.onchange = () => {
-        logoWrap.style.opacity       = logoChk.checked ? '' : '0.45';
-        logoWrap.style.pointerEvents = logoChk.checked ? '' : 'none';
-      };
+    renderLogoBox();
+    // Any change: save it and redraw the preview.
+    const onChange = () => { applyToggles(); updatePreview(); };
+    modalEl.querySelector('.form').addEventListener('input', onChange);
+    modalEl.querySelector('.form').addEventListener('change', onChange);
+
+    $('aasl-dl-pdf').onclick = () => doGenerate('pdf');
+    $('aasl-dl-docx').onclick = () => doGenerate('docx');
+
+    if (window.ResizeObserver) {
+      _fit = new ResizeObserver(fitPreview);
+      _fit.observe($('aasl-pv-stage'));
     }
-
-    // Logo file picker + clear button (re-wired after DOM swap)
-    function wireLogoControls() {
-      const fileInput = $('cs-logo-file');
-      const clearBtn  = $('cs-logo-clear');
-      if (fileInput) {
-        fileInput.onchange = (e) => {
-          const file = e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            const img = new Image();
-            img.onload = () => {
-              const canvas = document.createElement('canvas');
-              const maxDim = 400;
-              const scale  = Math.min(1, maxDim / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
-              canvas.width  = Math.round((img.naturalWidth  || 200) * scale);
-              canvas.height = Math.round((img.naturalHeight || 100) * scale);
-              canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-              _logoDataUrl = canvas.toDataURL('image/png');
-              _logoW = canvas.width;
-              _logoH = canvas.height;
-              // Swap placeholder for preview
-              const prev = $('cs-logo-preview');
-              if (prev) {
-                prev.outerHTML = `<div id="cs-logo-preview" class="aasl-logo-preview">
-                  <img src="${_logoDataUrl}" alt="Logo preview" style="max-height:40px;max-width:120px;object-fit:contain;border:1px solid #ddd;padding:2px;border-radius:3px;vertical-align:middle;">
-                  <button type="button" id="cs-logo-clear" style="margin-left:8px;font-size:11px;color:#c00;background:none;border:none;cursor:pointer;vertical-align:middle;">Remove</button>
-                </div>`;
-                wireLogoControls();
-              }
-            };
-            img.onerror = () => alert('Could not load that image. Please try a different file.');
-            img.src = ev.target.result;
-          };
-          reader.readAsDataURL(file);
-        };
-      }
-      if (clearBtn) {
-        clearBtn.onclick = () => {
-          _logoDataUrl = null;
-          _logoW = 0;
-          _logoH = 0;
-          const prev = $('cs-logo-preview');
-          if (prev) {
-            prev.outerHTML = `<label id="cs-logo-preview" style="display:inline-block;cursor:pointer;font-size:12px;color:#555;background:#f5f5f5;border:1px dashed #aaa;padding:5px 10px;border-radius:4px;">
-              Upload logo…
-              <input type="file" id="cs-logo-file" accept="image/*" style="display:none">
-            </label>`;
-            wireLogoControls();
-          }
-        };
-      }
-    }
-    wireLogoControls();
-
-    // Enable/disable text inputs when their checkbox toggles
-    [
-      ['cs-show-school',   'cs-school'],
-      ['cs-show-teacher',  'cs-teacher'],
-      ['cs-show-class',    'cs-class'],
-      ['cs-show-time',     'cs-time'],
-      ['cs-show-marks',    'cs-total-marks'],
-      ['cs-instr-calc-check',   'cs-instr-calc-text'],
-      ['cs-instr-ans-check',    'cs-instr-ans-text'],
-      ['cs-instr-work-check',   'cs-instr-work-text'],
-      ['cs-instr-sigfig-check', 'cs-instr-sigfig-text'],
-      ['cs-instr-form-check',   'cs-instr-form-text'],
-    ].forEach(([cbId, inputId]) => {
-      const cb = $(cbId), inp = $(inputId);
-      if (cb && inp) cb.onchange = () => { inp.disabled = !cb.checked; };
-    });
-
-    // Format buttons
-    modalEl.querySelectorAll('.aasl-format-btn').forEach(btn => {
-      btn.onclick = () => {
-        modalEl.querySelectorAll('.aasl-format-btn').forEach(b => b.classList.remove('aasl-format-btn--active'));
-        btn.classList.add('aasl-format-btn--active');
-      };
-    });
-
-    // Download
-    $('aasl-modal-download').onclick = () => doGenerate();
   }
 
-  // ─── Collect settings from modal ─────────────────────────────────────────
+  function renderLogoBox() {
+    const wrap = document.getElementById('cs-logo-wrap');
+    if (!wrap) return;
+    wrap.innerHTML = _logoDataUrl
+      ? `<img src="${_logoDataUrl}" alt="Logo"><span class="sp"></span><label class="link" style="cursor:pointer">Replace<input type="file" id="cs-logo-file" accept="image/*" hidden></label><button type="button" class="link" id="cs-logo-clear">Remove</button>`
+      : `<label class="link" style="cursor:pointer">Upload a logo…<input type="file" id="cs-logo-file" accept="image/*" hidden></label><span class="muted">PNG or JPG</span>`;
+    const fileInput = document.getElementById('cs-logo-file');
+    const clearBtn = document.getElementById('cs-logo-clear');
+    fileInput.onchange = (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const maxDim = 400;
+          const scale  = Math.min(1, maxDim / Math.max(img.naturalWidth || 1, img.naturalHeight || 1));
+          canvas.width  = Math.round((img.naturalWidth  || 200) * scale);
+          canvas.height = Math.round((img.naturalHeight || 100) * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          _logoDataUrl = canvas.toDataURL('image/png');
+          _logoW = canvas.width;
+          _logoH = canvas.height;
+          renderLogoBox();
+          updatePreview();
+        };
+        img.onerror = () => alert('Could not load that image. Please try a different file.');
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    };
+    if (clearBtn) clearBtn.onclick = () => { _logoDataUrl = null; _logoW = 0; _logoH = 0; renderLogoBox(); updatePreview(); };
+  }
+
+  // ─── Collect settings from the dialog (and remember them) ────────────────
   function collectSettings() {
     const $ = id => document.getElementById(id);
     const chk = id => { const el = $(id); return el ? el.checked : false; };
     const val = id => { const el = $(id); return el ? el.value : ''; };
     const num = id => { const el = $(id); return el ? parseInt(el.value, 10) : 1; };
-    const activeFmt = modalEl.querySelector('.aasl-format-btn--active');
+    const prior = loadSettings();
+    const wsEl = $('gen-workspace-n');
+    const wsN = wsEl ? parseInt(wsEl.value, 10) || 0 : null;
 
     const s = {
       includeQuestions:  chk('gen-questions'),
       includeMarkscheme: chk('gen-markscheme'),
-      format:            activeFmt ? activeFmt.dataset.fmt : 'pdf',
+      format:            prior.format || 'pdf',
       coverSheet:        chk('gen-cover'),
       showSchoolName:    chk('cs-show-school'),   schoolName:   val('cs-school'),
       showLogo:          chk('cs-show-logo'),      logoDataUrl:  _logoDataUrl || '',
@@ -468,67 +317,144 @@
       instrShowWork:     chk('cs-instr-work-check'),   instrShowWorkText:   val('cs-instr-work-text'),
       instrSigFig:       chk('cs-instr-sigfig-check'), instrSigFigText:     val('cs-instr-sigfig-text'),
       instrFormula:      chk('cs-instr-form-check'),   instrFormulaText:    val('cs-instr-form-text'),
-      workSpace:         chk('gen-workspace'),    workSpacePages: num('gen-workspace-n') || 1,
+      // With no Section B question in the paper the control is not shown; keep the saved choice.
+      workSpace:         wsN === null ? prior.workSpace : wsN > 0,
+      workSpacePages:    wsN === null ? prior.workSpacePages : (wsN || 1),
       showPageNumbers:   chk('gen-pagenums'),
     };
     saveSettings(s);
     return s;
   }
 
-  // ─── Generate ─────────────────────────────────────────────────────────────
-  async function doGenerate() {
+  // ─── Live preview ─────────────────────────────────────────────────────────
+  // An HTML drawing of the pages the PDF will contain, laid out on the same A4 grid in points.
+  function previewPages(s, items) {
+    const type = s.includeQuestions || !s.includeMarkscheme ? 'questions' : 'markscheme';
+    const pages = [];
+    if (s.coverSheet && type === 'questions') pages.push({ kind: 'cover', label: 'Cover' });
+    let n = 0;
+    items.forEach((q, qi) => {
+      const images = (type === 'questions' ? q.paperImages : q.markschemeImages) || [];
+      images.forEach((src, ii) => pages.push({ kind: 'img', src, first: ii === 0, qi, label: `Q${qi + 1}`, n: ++n }));
+      if (type === 'questions' && s.workSpace && q.section === 'B') {
+        for (let w = 0; w < s.workSpacePages; w++) pages.push({ kind: 'ws', label: 'Work', n: ++n });
+      }
+    });
+    pages.type = type;
+    pages.numbered = n;
+    return pages;
+  }
+
+  function coverHtml(s, items, marks) {
+    const branding = [
+      s.showSchoolName && s.schoolName, s.showTeacherName && s.teacherName, s.showClassCode && s.classCode,
+    ].filter(Boolean);
+    const date = s.testDate ? new Date(s.testDate + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '';
+    const instrs = [
+      [s.instrCalculator, s.instrCalculatorText], [s.instrAnswerSpace, s.instrAnswerSpaceText], [s.instrShowWork, s.instrShowWorkText],
+      [s.instrSigFig, s.instrSigFigText], [s.instrFormula, s.instrFormulaText],
+    ].filter(([on, t]) => on && t).map(([, t]) => t);
+    const time = s.timeAllowed || suggestedTime(marks);
+    return `
+      ${s.showLogo && s.logoDataUrl ? `<img class="logo" src="${s.logoDataUrl}" alt="">` : ''}
+      ${branding.map(b => `<div class="brandline">${escHtml(b)}</div>`).join('')}
+      <h3>${escHtml(s.title || 'Mathematics: Analysis and Approaches SL')}</h3>
+      ${date ? `<div>${escHtml(date)}</div>` : ''}
+      <hr>
+      ${s.showNameLine ? '<div class="nl"><b>Name:</b><i></i></div>' : ''}
+      <div class="kv"><span>${s.showTimeAllowed ? `<b>Time Allowed:</b> ${time} minutes` : ''}</span><span>${s.showTotalMarks ? `<b>Total Marks:</b> ${marks}` : ''}</span></div>
+      <hr>
+      ${instrs.length ? `<b>Instructions to candidates:</b><ul>${instrs.map(t => `<li>${escHtml(t)}</li>`).join('')}</ul>` : ''}
+      ${s.showMarksGrid && items.length ? `<div class="gridcap">To be filled out by teacher</div>
+        <table><tr>${items.map((q, i) => `<td><b>${i + 1}</b></td>`).join('')}<td><b>Sum</b></td></tr>
+        <tr>${items.map(q => `<td>/${q.marks || 0}</td>`).join('')}<td><b>/${marks}</b></td></tr></table>` : ''}`;
+  }
+
+  function updatePreview() {
+    if (!modalEl || modalEl.hidden) return;
     const s = collectSettings();
+    const items = basketItems();
+    const marks = totalMarksOf(items);
+    const pages = previewPages(s, items);
+    _page = Math.max(0, Math.min(_page, pages.length - 1));
+    const p = pages[_page];
+    const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
+    let inner = '<div class="ws">Nothing to export: tick Question paper or Markscheme.</div>';
+    if (p && p.kind === 'cover') inner = coverHtml(s, items, marks);
+    else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg" src="${getBase() + p.src}" alt="">${foot}`;
+    else if (p && p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
+
+    document.getElementById('aasl-pv-fit').innerHTML = `<div class="pg">${inner}</div>`;
+    document.getElementById('aasl-pv-where').textContent =
+      `${pages.type === 'markscheme' ? 'markscheme · ' : ''}page ${pages.length ? _page + 1 : 0} of ${pages.length} · A4`;
+    const strip = document.getElementById('aasl-pv-strip');
+    strip.innerHTML = pages.map((pg, i) => `<button type="button" class="${i === _page ? 'on' : ''}" data-i="${i}" aria-label="Page ${i + 1}: ${pg.label}">${pg.label}</button>`).join('');
+    strip.onclick = e => { const b = e.target.closest('[data-i]'); if (b) { _page = Number(b.dataset.i); updatePreview(); } };
+    fitPreview();
+  }
+
+  function fitPreview() {
+    const stage = document.getElementById('aasl-pv-stage');
+    const fit = document.getElementById('aasl-pv-fit');
+    const pg = fit && fit.firstElementChild;
+    if (!stage || !pg) return;
+    const scale = Math.max(0.1, Math.min(stage.clientWidth / 595, stage.clientHeight / 842, 1.4));
+    fit.style.width = `${595 * scale}px`;
+    fit.style.height = `${842 * scale}px`;
+    pg.style.transform = `scale(${scale})`;
+  }
+
+  // ─── Generate ─────────────────────────────────────────────────────────────
+  async function doGenerate(format) {
+    const s = collectSettings();
+    s.format = format;
+    saveSettings(s);
+    const status = document.getElementById('aasl-gen-status');
     if (!s.includeQuestions && !s.includeMarkscheme) {
-      alert('Please select at least one content type (Questions or Mark scheme).');
+      status.textContent = 'Tick Question paper or Markscheme first.';
       return;
     }
-
-    const dlBtn = document.getElementById('aasl-modal-download');
-    const status = document.getElementById('aasl-gen-status');
-    dlBtn.disabled = true;
+    const buttons = [document.getElementById('aasl-dl-pdf'), document.getElementById('aasl-dl-docx')];
+    buttons.forEach(b => { b.disabled = true; });
     status.textContent = 'Loading libraries…';
 
     try {
-      if (s.format === 'pdf') {
+      const items = basketItems();
+      const marks = totalMarksOf(items);
+      if (format === 'pdf') {
         await loadScript(PDF_LIB_CDN);
         if (!window.PDFLib) throw new Error('pdf-lib failed to load');
-        const items = window.AASL_BASKET.getAll();
-        const marks = items.reduce((t, q) => t + (q.marks || 0), 0);
-
         if (s.includeQuestions) {
           status.textContent = 'Building questions PDF…';
           const pdfBytes = await buildPdf(items, s, 'questions', marks);
           downloadBlob(pdfBytes, 'application/pdf', pdfFilename(s, marks, 'pdf', false));
         }
         if (s.includeMarkscheme) {
-          status.textContent = 'Building mark scheme PDF…';
+          status.textContent = 'Building markscheme PDF…';
           const pdfBytes = await buildPdf(items, s, 'markscheme', marks);
           downloadBlob(pdfBytes, 'application/pdf', pdfFilename(s, marks, 'pdf', true));
         }
       } else {
         await loadScript(DOCX_CDN);
         if (!window.docx) throw new Error('docx.js failed to load');
-        const items = window.AASL_BASKET.getAll();
-        const marks = items.reduce((t, q) => t + (q.marks || 0), 0);
-
+        const mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
         if (s.includeQuestions) {
-          status.textContent = 'Building questions DOCX…';
+          status.textContent = 'Building questions Word file…';
           const blob = await buildDocx(items, s, 'questions', marks);
-          downloadBlob(await blob.arrayBuffer(), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pdfFilename(s, marks, 'docx', false));
+          downloadBlob(await blob.arrayBuffer(), mime, pdfFilename(s, marks, 'docx', false));
         }
         if (s.includeMarkscheme) {
-          status.textContent = 'Building mark scheme DOCX…';
+          status.textContent = 'Building markscheme Word file…';
           const blob = await buildDocx(items, s, 'markscheme', marks);
-          downloadBlob(await blob.arrayBuffer(), 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', pdfFilename(s, marks, 'docx', true));
+          downloadBlob(await blob.arrayBuffer(), mime, pdfFilename(s, marks, 'docx', true));
         }
       }
-      status.textContent = '✓ Done!';
-      setTimeout(() => { status.textContent = ''; dlBtn.disabled = false; }, 2500);
+      status.textContent = '✓ Downloaded.';
     } catch (err) {
-      console.error('Generate error:', err);
+      console.error('Export error:', err);
       status.textContent = '⚠ Error: ' + err.message;
-      dlBtn.disabled = false;
     }
+    buttons.forEach(b => { b.disabled = false; });
   }
 
   function pdfFilename(s, marks, ext, isMs) {
