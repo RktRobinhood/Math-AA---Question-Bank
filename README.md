@@ -65,6 +65,7 @@ Each card shows the top of the question, its code, marks as `[6]`, what its part
 **Set up and export** opens the settings beside a live preview of the paper.
 
 - **Include**: question paper, markscheme (separate file), marks grid, page numbers, blank working pages after Section B questions.
+- **Hide the original question numbers** (on by default) blanks the exam's own number on each question and markscheme, because the paper numbers them 1, 2, 3.
 - **Versions**: export Version A, B, C, D with the same questions in different orders, each with its markscheme.
 - **Cover sheet**: school name, logo, teacher, class, title, date, time allowed, total marks, name and date lines. Each has a tick to show or hide it.
 - **Instructions to candidates**: five lines, each editable.
