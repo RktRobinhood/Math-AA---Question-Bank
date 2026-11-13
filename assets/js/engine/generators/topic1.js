@@ -105,7 +105,7 @@
       const [rn, rd] = rng.pick([[1, 2], [1, 3], [3, 4], [2, 3], [1, 4], [2, 5]]), u1 = rd * rd * rng.int(1, 4), r = rat.Q(rn, rd);
       const u3 = rat.mul(u1, rat.mul(r, r)), sInf = rat.div(u1, rat.sub(1, r));
       return { params: { u1, u3: rat.num(u3) }, stem: `A geometric sequence has a positive common ratio $r$. The first term is $u_{1} = ${u1}$ and the third term is $u_{3} = ${rat.tex(u3)}$.`, parts: [
-        P("Find the value of $r$.", 2, ans.frac(r.n, r.d), [`$u_{3} = u_{1}r^{2}$, so $r^{2} = \\dfrac{${rat.tex(u3)}}{${u1}} = ${rat.tex(rat.mul(r, r))}$`, `$r > 0$, so $r = ${rat.tex(r)}$.`]),
+        P("Find the value of $r$.", 2, ans.frac(r.n, r.d), [`$u_{3} = u_{1}r^{2}$, so $r^{2} = ${[`\\dfrac{${rat.tex(u3)}}{${u1}}`, rat.tex(rat.mul(r, r))].filter((x, i, a) => a.indexOf(x) === i).join(" = ")}$`, `$r > 0$, so $r = ${rat.tex(r)}$.`]),
         P("Find the sum to infinity.", 3, ans.frac(sInf.n, sInf.d), [`$|r| < 1$, so the sum to infinity exists.`, `$S_{\\infty} = \\dfrac{u_{1}}{1 - r} = ${u1} \\div ${rat.tex(rat.sub(1, r))} = ${rat.tex(sInf)}$`])] };
     } });
 
