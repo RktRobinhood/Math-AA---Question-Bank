@@ -582,12 +582,14 @@ table.qtable { width: auto; margin: 0 auto; }
 .scope-topic > summary .tn { min-width: 0; }
 .scope-topic > summary .n.on { color: var(--accent); font-weight: 700; }
 .scope-topic > summary .whole { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; min-height: 32px; cursor: pointer; background: var(--surface); white-space: nowrap; }
+.scope-topic > summary .n { margin-left: auto; }
 .scope-topic > summary .whole:hover { border-color: var(--faint); color: var(--ink); }
 .scope-row.on { background: var(--accent-soft); }
 .scope-row.off { cursor: default; color: var(--faint); }
 .scope-row[hidden], .scope-topic[hidden] { display: none; }
 .scope-picked { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: var(--s3) var(--s4) 0; border-top: 1px solid var(--line); }
 .scope-picked[hidden] { display: none; }
+.scope-more { display: inline-flex; gap: var(--s3); align-items: center; }
 .scope-picked + .scope-go { border-top: 0; }
 .scope-go { position: sticky; bottom: 0; background: var(--surface); border-radius: 0 0 var(--r) var(--r); z-index: 2; }
 .scope-now .scope-bar:first-child { border-top: 0; }
@@ -597,6 +599,7 @@ table.qtable { width: auto; margin: 0 auto; }
 .st.pick button:hover { opacity: 1; background: color-mix(in srgb, currentColor 18%, transparent); }
 .mode-pick { display: inline-flex; align-items: center; gap: var(--s2); }
 .mode-pick .select { width: auto; min-height: 40px; }
+.way-pick { width: auto; max-width: 100%; min-width: 0; min-height: 40px; }
 
 /* ── paper panel pushes content only on wide screens ──────────────────────── */
 @media (max-width: 1279px) {
@@ -724,8 +727,13 @@ table.qtable { width: auto; margin: 0 auto; }
   .syl-sec > header { flex-direction: column; gap: 4px; }
 
   .prac { padding: var(--s3) var(--s3) var(--s6); }
+  .ws-doc { overflow-x: auto; }
+  .ws-q .pl { flex-wrap: wrap; }
   .scope-go { bottom: calc(var(--tab-h) + env(safe-area-inset-bottom, 0px)); }
-  .scope-go .btn:not(.ghost) { flex: 1 1 100%; order: -1; }
+  .scope-go { padding-top: var(--s2); padding-bottom: var(--s2); }
+  .scope-go .btn { flex: 1 1 100%; order: -1; }
+  .scope-go .mode-pick { flex: 1; }
+  .scope-go .mode-pick .select { flex: 1; }
   .scope-row { padding-left: var(--s3); padding-right: var(--s3); gap: var(--s2); }
   .scope-row .lv { white-space: normal; text-align: right; max-width: 92px; }
   .scope-tools, .scope-note { padding-left: var(--s3); padding-right: var(--s3); }

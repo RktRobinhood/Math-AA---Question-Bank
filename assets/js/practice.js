@@ -256,6 +256,7 @@
     const bar = h('div', { class: 'scope-bar scope-go' });
     const note = h('p', { class: 'scope-note' });
     const picked = h('div', { class: 'scope-picked' });
+    const more = h('span', { class: 'scope-more' });
 
     function toggle(codes, on) {
       for (const c of codes) on ? state.scope.add(c) : state.scope.delete(c);
@@ -288,18 +289,20 @@
       const text = coverageNote(n ? scopeList() : C.statements.map(s => s.code), n > 0);
       note.textContent = text || '';
       note.hidden = !text;
-      picked.replaceChildren(...(n ? [h('span', { class: 'cap', text: `Picked (${n})` }),
+      picked.replaceChildren(...(!n ? [] : [h('span', { class: 'cap', text: `Picked (${n})` }),
         ...scopeList().map(c => h('span', { class: `st c${c.split('.')[0]} pick` }, c,
-          h('button', { type: 'button', 'aria-label': `Remove ${c} ${C.byCode.get(c).title}`, title: `Remove ${c} ${C.byCode.get(c).title}`, text: '×', onclick: () => toggle([c], false) })))] : []));
+          h('button', { type: 'button', 'aria-label': `Remove ${c} ${C.byCode.get(c).title}`, title: `Remove ${c} ${C.byCode.get(c).title}`, text: '×', onclick: () => toggle([c], false) }))),
+        h('span', { class: 'sp' }), more]));
       picked.hidden = !n;
-      bar.replaceChildren(
+      bar.replaceChildren(...[
         modeSelect(v => { state.mode = v; saveScope(); }),
         h('button', { class: 'btn', type: 'button', disabled: !n,
           text: !n ? 'Tick at least one subtopic' : inSession() ? `Back to practice (${plural(n, 'subtopic')})` : n === 1 ? 'Start practice on 1 subtopic' : `Start mixed practice on ${n} subtopics`,
-          onclick: () => { state.picking = false; resume(); } }),
-        n ? h('button', { class: 'btn ghost', type: 'button', text: 'Copy link to this scope', title: 'A link that opens Practice on exactly these subtopics, to share with a class',
+          onclick: () => { state.picking = false; resume(); } })]);
+      more.replaceChildren(...[
+        n ? h('button', { class: 'btn ghost small', type: 'button', text: 'Copy link to this scope', title: 'A link that opens Practice on exactly these subtopics, to share with a class',
           onclick: e => copy(scopeLink(), e.target) }) : null,
-        n ? h('button', { class: 'link', type: 'button', text: 'Clear', onclick: () => toggle([...state.scope], false) }) : null);
+        n ? h('button', { class: 'link', type: 'button', text: 'Clear', onclick: () => toggle([...state.scope], false) }) : null].filter(Boolean));
     }
     const setAll = open => { state.closed = new Set(open ? [] : C.topics); for (const g of groups) g.node.open = open || Boolean(state.filter); };
     sync(); applyFilter();
@@ -441,7 +444,7 @@
     const variants = state.question ? E.variants(state.question) : [];
     const way = variants.length === 0 ? null : variants.length === 1
       ? h('button', { class: 'btn ghost', type: 'button', text: 'Ask it another way', title: variants[0].title, onclick: () => anotherWay(variants[0].request) })
-      : h('select', { class: 'select', style: 'width:auto;min-height:40px', 'aria-label': 'Ask it another way', onchange: e => { if (e.target.value !== '') anotherWay(variants[+e.target.value].request); } },
+      : h('select', { class: 'select way-pick', 'aria-label': 'Ask it another way', onchange: e => { if (e.target.value !== '') anotherWay(variants[+e.target.value].request); } },
         h('option', { value: '', text: 'Ask it another way…' }),
         ...variants.map((v, i) => h('option', { value: String(i), text: `${v.title}${v.sameSituation ? ' (same numbers)' : ''}` })));
     return h('div', { class: 'next-row' },
