@@ -117,15 +117,20 @@
     const out = [];
     out.push(`<svg xmlns="http://www.w3.org/2000/svg" class="qb-graph" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="${esc(graph.alt || "Graph")}" font-family="inherit" font-size="10">`);
     const grid = [], labels = [];
+    // Every grid line is drawn, but a number is printed only as often as there is room for it,
+    // so small graphs (pick-the-graph options) do not get overlapping labels.
+    const widest = Math.max(String(tick(x0)).length, String(tick(x1)).length, String(tick(x1 - xs)).length);
+    const everyX = Math.max(1, Math.ceil((widest * 6 + 8) / ((xs / (x1 - x0)) * (W - 2 * pad))));
+    const everyY = Math.max(1, Math.ceil(13 / ((ys / (y1 - y0)) * (H - 2 * pad))));
     for (let k = Math.ceil(x0 / xs - 1e-9); k * xs <= x1 + 1e-9; k++) {
       const x = k * xs;
       grid.push(`M${r2(sx(x))} ${r2(sy(y0))}V${r2(sy(y1))}`);
-      if (Math.abs(x) > 1e-9 && sx(x) > pad + 4 && sx(x) < W - pad - 4) labels.push(`<text x="${r2(sx(x))}" y="${r2(Math.min(sy(ay) + 11, H - 2))}" text-anchor="middle">${tick(x)}</text>`);
+      if (k % everyX === 0 && Math.abs(x) > 1e-9 && sx(x) > pad + 4 && sx(x) < W - pad - 4) labels.push(`<text x="${r2(sx(x))}" y="${r2(Math.min(sy(ay) + 11, H - 2))}" text-anchor="middle">${tick(x)}</text>`);
     }
     for (let k = Math.ceil(y0 / ys - 1e-9); k * ys <= y1 + 1e-9; k++) {
       const y = k * ys;
       grid.push(`M${r2(sx(x0))} ${r2(sy(y))}H${r2(sx(x1))}`);
-      if (Math.abs(y) > 1e-9 && sy(y) > pad + 4 && sy(y) < H - pad - 4) labels.push(`<text x="${r2(Math.max(sx(ax) - 4, 12))}" y="${r2(sy(y) + 3)}" text-anchor="end">${tick(y)}</text>`);
+      if (k % everyY === 0 && Math.abs(y) > 1e-9 && sy(y) > pad + 4 && sy(y) < H - pad - 4) labels.push(`<text x="${r2(Math.max(sx(ax) - 4, 12))}" y="${r2(sy(y) + 3)}" text-anchor="end">${tick(y)}</text>`);
     }
     out.push(`<path class="qb-graph-grid" d="${grid.join("")}" fill="none" stroke="currentColor" stroke-opacity="0.15" stroke-width="1"/>`);
     out.push(`<path class="qb-graph-axis" d="M${r2(sx(x0))} ${r2(sy(ay))}H${r2(sx(x1))}M${r2(sx(ax))} ${r2(sy(y0))}V${r2(sy(y1))}" fill="none" stroke="currentColor" stroke-width="1.2"/>`);
