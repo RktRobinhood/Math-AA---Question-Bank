@@ -235,6 +235,9 @@
   const bpmf = (n, p, k) => nCr(n, k) * Math.pow(p, k) * Math.pow(1 - p, n - k);
   const bcdf = (n, p, k) => { let s = 0; for (let i = 0; i <= k; i++) s += bpmf(n, p, i); return s; };
   const ORD = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"];
+  // n/d shown once when it is already in lowest terms, otherwise followed by its reduced form
+  const eqFrac = (n, d) => (fmt.gcd(n, d) === 1 ? `\\dfrac{${n}}{${d}}` : `\\dfrac{${n}}{${d}} = ${frac(n, d)}`);
+  const par = (s) => (s[0] === "-" ? `(${s})` : s);
   const cells = (xs) => xs.map((x) => m(num(x)));
   const CALC = "Using the normal distribution function on a calculator, ";
   const INV = "Using the inverse normal function on a calculator, ";
@@ -551,7 +554,7 @@
     for (let x = xs[1] + 1; x < xs[6]; x++) if (!xs.includes(x)) inside.push(x);
     const xq = inside.length ? rng.pick(inside) : xs[3] + 0.5, ymin = Math.min(...ys), ymax = Math.max(...ys);
     const yq = Math.round((ymin + (ymax - ymin) * rng.pick([0.3, 0.45, 0.6, 0.7])) * p10) / p10;
-    return { ci, xs, ys, xq, yq, xfar: xs[7] + 2 * (xs[7] - xs[0]), yfar: Math.round((ymax + 1.5 * (ymax - ymin)) * p10) / p10 };
+    return { ci, xs, ys, xq, yq, xfar: xs[7] + (xs[7] - xs[0]), yfar: Math.round((ymax + 1.5 * (ymax - ymin)) * p10) / p10 };
   }
   const regTable = (s) => ({ head: [REG_CTX[s.ci].xn].concat(cells(s.xs)), rows: [[REG_CTX[s.ci].yn].concat(cells(s.ys))] });
   const GDC_YX = "Enter the data in two lists on a calculator and find the linear regression of $y$ on $x$.";
@@ -718,10 +721,10 @@
       const hide = rng.int(0, 3), rowTot = hide < 2 ? v[0] + v[1] : v[2] + v[3], mate = v[hide ^ 1], t = rng.pick([5, 10, 20, 25]), A = v[0] + v[1], either = v[0] + v[1] + v[2];
       return { params: { v, hide, M: N * t }, table: twoWayTable(c, v, hide), stem: `A survey recorded two facts about each of $${N}$ ${c.people}. The results are shown in the table, where $k$ is a number to be found.`, parts: [
         P("Find the value of $k$.", 1, ans.int(v[hide]), [`The row that contains $k$ has a total of $${rowTot}$: $k = ${rowTot} - ${mate} = ${v[hide]}$`]),
-        P(`One ${c.one} from the survey is chosen at random. Find the probability that this ${c.one} ${c.a}.`, 1, ans.frac(A, N), [`$\\dfrac{${A}}{${N}} = ${frac(A, N)}$`]),
-        P(`Find the probability that this ${c.one} ${c.a} and ${c.b}.`, 1, ans.frac(v[0], N), [`$\\dfrac{${v[0]}}{${N}} = ${frac(v[0], N)}$`]),
+        P(`One ${c.one} from the survey is chosen at random. Find the probability that this ${c.one} ${c.a}.`, 1, ans.frac(A, N), [`$${eqFrac(A, N)}$`]),
+        P(`Find the probability that this ${c.one} ${c.a} and ${c.b}.`, 1, ans.frac(v[0], N), [`$${eqFrac(v[0], N)}$`]),
         P(`Find the probability that this ${c.one} ${c.a} or ${c.b}, or both.`, 2, ans.frac(either, N), [
-          `Count each ${c.one} once: $${v[0]} + ${v[1]} + ${v[2]} = ${either}$`, `$\\dfrac{${either}}{${N}} = ${frac(either, N)}$`]),
+          `Count each ${c.one} once: $${v[0]} + ${v[1]} + ${v[2]} = ${either}$`, `$${eqFrac(either, N)}$`]),
         P(c.est(N * t), 2, ans.int(A * t), [`Expected number $= ${frac(A, N)} \\times ${num(N * t)}$`, `Expected number $= ${num(A * t)}$`])] };
     } });
   reg({ type: "t4-probability-basic", syllabus: ["4.5"], representation: "words", format: "value", unknown: "bag-counter", levels: [1],
@@ -730,7 +733,7 @@
       const col = rng.sample(["red", "blue", "green", "yellow", "white"], 3), n = [rng.int(2, 9), rng.int(2, 9), rng.int(2, 9)], T = sum(n);
       const thing = rng.pick(["counters", "beads", "marbles"]);
       return { params: { n }, stem: `A bag contains $${n[0]}$ ${col[0]} ${thing}, $${n[1]}$ ${col[1]} ${thing} and $${n[2]}$ ${col[2]} ${thing}. One of them is taken from the bag at random.`, parts: [
-        P(`Find the probability that it is ${col[0]}.`, 1, ans.frac(n[0], T), [`There are $${T}$ ${thing} in total, and $${n[0]}$ of them are ${col[0]}: $\\dfrac{${n[0]}}{${T}} = ${frac(n[0], T)}$`]),
+        P(`Find the probability that it is ${col[0]}.`, 1, ans.frac(n[0], T), [`There are $${T}$ ${thing} in total, and $${n[0]}$ of them are ${col[0]}: $${eqFrac(n[0], T)}$`]),
         P(`Find the probability that it is not ${col[0]}.`, 1, ans.frac(T - n[0], T), [`$1 - ${frac(n[0], T)} = ${frac(T - n[0], T)}$`])] };
     } });
   reg({ type: "t4-probability-basic", syllabus: ["4.5"], representation: "table", format: "value", unknown: "rf-from-table", levels: [4], calculator: true,
@@ -793,9 +796,9 @@
           `$${N} - ${none} = ${N - none}$ do at least one of the two.`, `$${a} + ${b} - ${N - none} = ${both}$ do both.`]),
         P(`Find the number who ${c[1]} but do not ${c[2]}.`, 1, ans.int(oa), [`$${a} - ${both} = ${oa}$`]),
         P(`One ${c[5]} is chosen at random. Find the probability that this ${c[5]} does exactly one of the two.`, 2, ans.frac(oa + ob, N), [
-          `$${oa} + ${ob} = ${oa + ob}$ do exactly one.`, `$\\dfrac{${oa + ob}}{${N}} = ${frac(oa + ob, N)}$`]),
+          `$${oa} + ${ob} = ${oa + ob}$ do exactly one.`, `$${eqFrac(oa + ob, N)}$`]),
         P(`A ${c[5]} who ${c[4]} is chosen at random. Find the probability that this ${c[5]} also ${c[3]}.`, 2, ans.frac(both, b), [
-          `Only the $${b}$ who ${c[2]} can be chosen, and $${both}$ of them also ${c[1]}.`, `$\\dfrac{${both}}{${b}} = ${frac(both, b)}$`])] };
+          `Only the $${b}$ who ${c[2]} can be chosen, and $${both}$ of them also ${c[1]}.`, `$${eqFrac(both, b)}$`])] };
     } });
   reg({ type: "t4-tree-diagram", syllabus: ["4.6"], representation: "words", format: "value", unknown: "same-or-different", levels: [3],
     skills: ["SL4.6.tree", "SL4.5.complement"], title: "Two draws without replacement",
@@ -818,7 +821,7 @@
         { s: (p, a, b) => `On any school day, the probability that it rains is $${p}$. When it rains, the probability that Ana is late for school is $${a}$. When it does not rain, the probability that she is late is $${b}$.`, q1: "Find the probability that, on a given school day, it rains and Ana is late.", q2: "Find the probability that Ana is late on a given school day.", e: ["R", "L"] },
         { s: (p, a, b) => `A factory has two machines. Machine A makes a proportion $${p}$ of the items and machine B makes the rest. The probability that an item from machine A is faulty is $${a}$, and the probability that an item from machine B is faulty is $${b}$.`, q1: "An item is chosen at random. Find the probability that it was made by machine A and is faulty.", q2: "Find the probability that a randomly chosen item is faulty.", e: ["A", "F"] },
         { s: (p, a, b) => `A football team plays a proportion $${p}$ of its matches at home. The probability that it wins a home match is $${a}$, and the probability that it wins an away match is $${b}$.`, q1: "A match is chosen at random. Find the probability that it is a home match that the team wins.", q2: "Find the probability that the team wins a randomly chosen match.", e: ["H", "W"] }]);
-      const p = rng.pick([0.2, 0.3, 0.4, 0.25, 0.6]), a = rng.pick([0.3, 0.4, 0.5, 0.6]), b = rng.pick([0.05, 0.1, 0.15, 0.2]), pa = fix(p * a), qb = fix((1 - p) * b), [X, Y] = c.e;
+      const p = rng.pick([0.2, 0.3, 0.4, 0.6, 0.7]), a = rng.pick([0.3, 0.4, 0.5, 0.6]), b = rng.pick([0.05, 0.1, 0.15, 0.2]), pa = fix(p * a), qb = fix((1 - p) * b), [X, Y] = c.e;
       return { params: { p, a, b }, stem: c.s(num(p), num(a), num(b)), parts: [
         P(c.q1, 2, ans.dec(pa), [`Multiply along the branches: $\\mathrm{P}(${X} \\cap ${Y}) = ${num(p)} \\times ${num(a)}$`, `$\\mathrm{P}(${X} \\cap ${Y}) = ${num(pa)}$`]),
         P(c.q2, 2, ans.dec(fix(pa + qb)), [`The other branch that ends in $${Y}$: $\\mathrm{P}(${X}' \\cap ${Y}) = ${num(fix(1 - p))} \\times ${num(b)} = ${num(qb)}$`, `Add the two branches: $\\mathrm{P}(${Y}) = ${num(pa)} + ${num(qb)} = ${num(fix(pa + qb))}$`])] };
@@ -847,8 +850,8 @@
     build({ sit: g }) {
       const n = g.A.length * g.B.length, k = g.A.reduce((c, a) => c + g.B.filter((b) => a + b === g.s).length, 0), k2 = g.A.reduce((c, a) => c + g.B.filter((b) => a + b >= g.t).length, 0);
       return { table: gridTable(g), stem: gridStem(g), parts: [
-        P(`Find the probability that the total is $${g.s}$.`, 2, ans.frac(k, n), [`There are $${n}$ equally likely outcomes, and the total $${g.s}$ appears $${k}$ times.`, `$\\dfrac{${k}}{${n}} = ${frac(k, n)}$`]),
-        P(`Find the probability that the total is at least $${g.t}$.`, 2, ans.frac(k2, n), [`$${k2}$ of the $${n}$ outcomes have a total of $${g.t}$ or more.`, `$\\dfrac{${k2}}{${n}} = ${frac(k2, n)}$`])] };
+        P(`Find the probability that the total is $${g.s}$.`, 2, ans.frac(k, n), [`There are $${n}$ equally likely outcomes, and the total $${g.s}$ appears $${k}$ times.`, `$${eqFrac(k, n)}$`]),
+        P(`Find the probability that the total is at least $${g.t}$.`, 2, ans.frac(k2, n), [`$${k2}$ of the $${n}$ outcomes have a total of $${g.t}$ or more.`, `$${eqFrac(k2, n)}$`])] };
     } });
 
   // ======================= 4.7 discrete random variables =======================
@@ -935,7 +938,7 @@
       let n, p, mean, v;
       do {
         n = rng.pick([8, 10, 12, 15, 16, 20, 24, 25, 30, 40, 50]); p = rng.pick([0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.75, 0.8]); mean = fix(n * p); v = fix(mean * (1 - p));
-      } while (Math.abs(mean * 10 - Math.round(mean * 10)) > 1e-9 || Math.abs(v * 100 - Math.round(v * 100)) > 1e-9);
+      } while (mean === 1 || Math.abs(mean * 10 - Math.round(mean * 10)) > 1e-9 || Math.abs(v * 100 - Math.round(v * 100)) > 1e-9);
       const q = fix(1 - p), sd2 = fix(4 * v);
       return { params: { mean, v }, stem: `The random variable $X$ follows a binomial distribution, $X \\sim \\mathrm{B}(n,\\, p)$, with $\\mathrm{E}(X) = ${num(mean)}$ and $\\mathrm{Var}(X) = ${num(v)}$.`, parts: [
         P("Find the value of $p$.", 3, ans.dec(p), [
@@ -1074,9 +1077,9 @@
       const colB = v[0] + v[2], rowA = v[0] + v[1];
       return { params: { v }, table: twoWayTable(c, v, -1), stem: `A survey recorded two facts about each of $${N}$ ${c.people}. The results are shown in the table. One ${c.one} from the survey is chosen at random.`, parts: [
         P(`Given that this ${c.one} ${c.b}, find the probability that the ${c.one} ${c.a}.`, 2, ans.frac(v[0], colB), [
-          `Only the $${colB}$ in the first column can be chosen, and $${v[0]}$ of them are in the first row.`, `$\\dfrac{${v[0]}}{${colB}} = ${frac(v[0], colB)}$`]),
+          `Only the $${colB}$ in the first column can be chosen, and $${v[0]}$ of them are in the first row.`, `$${eqFrac(v[0], colB)}$`]),
         P(`Given instead that this ${c.one} ${c.a}, find the probability that the ${c.one} ${c.b}.`, 2, ans.frac(v[0], rowA), [
-          `Only the $${rowA}$ in the first row can be chosen, and $${v[0]}$ of them are in the first column.`, `$\\dfrac{${v[0]}}{${rowA}} = ${frac(v[0], rowA)}$`])] };
+          `Only the $${rowA}$ in the first row can be chosen, and $${v[0]}$ of them are in the first column.`, `$${eqFrac(v[0], rowA)}$`])] };
     } });
   reg({ ...CP, representation: "equation", unknown: "conditional-from-probabilities", levels: [2], skills: ["SL4.11.conditional-formula"], title: "Conditional probabilities from the formula",
     build({ rng }) {
@@ -1139,9 +1142,9 @@
       const Y = { text: `Yes, because $${eq}$.`, value: [true, "product"], why: "Work out the product $\\mathrm{P}(A)\\,\\mathrm{P}(B)$ and compare it with $\\mathrm{P}(A \\cap B)$." };
       const Nn = { text: `No, because $${ne}$.`, value: [false, "product"], why: "Work out the product $\\mathrm{P}(A)\\,\\mathrm{P}(B)$ and compare it with $\\mathrm{P}(A \\cap B)$." };
       return { params: { v }, table: twoWayTable(c, v, -1), stem: `A survey recorded two facts about each of $${N}$ ${c.people}. The results are shown in the table. One ${c.one} is chosen at random. Let $A$ be the event that the ${c.one} ${c.a}, and $B$ the event that the ${c.one} ${c.b}.`, parts: [
-        P("Find $\\mathrm{P}(A)$.", 1, ans.frac(ra, N), [`$\\dfrac{${ra}}{${N}} = ${frac(ra, N)}$`]),
-        P("Find $\\mathrm{P}(B)$.", 1, ans.frac(cb, N), [`$\\dfrac{${cb}}{${N}} = ${frac(cb, N)}$`]),
-        P("Find $\\mathrm{P}(A \\cap B)$.", 1, ans.frac(v[0], N), [`$\\dfrac{${v[0]}}{${N}} = ${frac(v[0], N)}$`]),
+        P("Find $\\mathrm{P}(A)$.", 1, ans.frac(ra, N), [`$${eqFrac(ra, N)}$`]),
+        P("Find $\\mathrm{P}(B)$.", 1, ans.frac(cb, N), [`$${eqFrac(cb, N)}$`]),
+        P("Find $\\mathrm{P}(A \\cap B)$.", 1, ans.frac(v[0], N), [`$${eqFrac(v[0], N)}$`]),
         P("Are the events $A$ and $B$ independent?", 2, ans.choice(rng, indep ? Y : Nn, [indep ? Nn : Y,
           { text: "No, because $\\mathrm{P}(A \\cap B) \\ne 0$.", value: [false, "exclusive"], why: "That is the test for mutually exclusive events, not for independence." },
           { text: "Yes, because $\\mathrm{P}(A \\cap B) \\ne 0$.", value: [true, "exclusive"], why: "Events that can happen together are not always independent." }]), [
@@ -1174,7 +1177,7 @@
       return { params: { sig, a, p, below }, stem: `${c[0]} are normally distributed with mean $${unit("\\mu", c[1])}$ and standard deviation $${unit(sig, c[1])}$. It is known that $${pct(pc)}$ of the ${c[4]} ${below ? "less" : "greater"} than $${unit(a, c[1])}$.`, parts: [
         P(`Find the value of $z$ for which $\\mathrm{P}(Z ${below ? "<" : ">"} z) = ${num(p)}$, where $Z \\sim \\mathrm{N}(0,\\, 1)$.`, 2, ans.sf(z), [
           below ? `The area to the left of $z$ is $${num(p)}$.` : `$\\mathrm{P}(Z < z) = 1 - ${num(p)} = ${num(fix(1 - p))}$`, `${INV}$z = ${sf(z)}$.`]),
-        P("Find the value of $\\mu$.", 3, loose(mu, sig * 0.0006), [`Standardise: $\\dfrac{${num(a)} - \\mu}{${num(sig)}} = ${sf(z, 5)}$`, `$\\mu = ${num(a)} - ${paren(Number(sf(z, 5)))} \\times ${num(sig)}$`, `$\\mu = ${sf(mu)}$`])] };
+        P("Find the value of $\\mu$.", 3, loose(mu, sig * 0.0006), [`Standardise: $\\dfrac{${num(a)} - \\mu}{${num(sig)}} = ${sf(z, 5)}$`, `$\\mu = ${num(a)} - ${par(sf(z, 5))} \\times ${num(sig)}$`, `$\\mu = ${sf(mu)}$`])] };
     } });
   reg({ ...NUP, syllabus: ["4.12", "4.9"], representation: "words", unknown: "mean-and-sd", levels: [4], calculator: true, skills: ["SL4.12.unknown-mean-and-sd", "SL4.12.standardise", "SL4.9.inverse-normal"], title: "Find both the mean and the standard deviation",
     build({ rng }) {
@@ -1187,6 +1190,23 @@
         P(`Find the value of $z_{2}$ for which $\\mathrm{P}(Z > z_{2}) = ${num(pc2 / 100)}$.`, 1, ans.sf(z2), [`$\\mathrm{P}(Z < z_{2}) = ${num(fix(1 - pc2 / 100))}$, so $z_{2} = ${sf(z2)}$.`]),
         P("Find the value of $\\sigma$.", 3, loose(sig, sig * 0.002), [
           `Standardising both values: $${num(a)} - \\mu = ${sf(z1, 5)}\\sigma$ and $${num(b)} - \\mu = ${sf(z2, 5)}\\sigma$`, `Subtracting: $${num(fix(b - a))} = ${sf(z2 - z1, 5)}\\sigma$`, `$\\sigma = ${sf(sig)}$`]),
-        P("Find the value of $\\mu$.", 2, loose(mu, Math.abs(mu) * 0.002), [`$\\mu = ${num(a)} - ${paren(Number(sf(z1, 5)))} \\times ${sf(sig, 5)}$`, `$\\mu = ${sf(mu)}$`])] };
+        P("Find the value of $\\mu$.", 2, loose(mu, Math.abs(mu) * 0.002), [`$\\mu = ${num(a)} - ${par(sf(z1, 5))} \\times ${sf(sig, 5)}$`, `$\\mu = ${sf(mu)}$`])] };
+    } });
+
+  // ======================= 4.10 recall =======================
+  reg({ type: "t4-regression-x-on-y", syllabus: ["4.10"], representation: "words", format: "mcq", unknown: "choose-line", levels: [1], fixedPool: true,
+    skills: ["SL4.10.choose-line"], title: "Choose which regression line to use",
+    build({ rng }) {
+      const c = rng.pick([
+        ["the number of hours a student revises", "the test score of the student"], ["the age of a car in years", "the value of the car"], ["the midday temperature", "the number of cold drinks a shop sells"],
+        ["the height of a tree", "the width of its trunk"], ["the time an athlete trains each week", "the race time of the athlete"]]);
+      const wantX = rng.bool(), known = wantX ? "y" : "x", want = wantX ? "x" : "y", right = wantX ? "x on y" : "y on x";
+      const line = (k) => (k === "y on x" ? "The regression line of $y$ on $x$" : "The regression line of $x$ on $y$");
+      return { params: { wantX }, stem: `For a set of paired data, $x$ is ${c[0]} and $y$ is ${c[1]}. A value of $${known}$ is known, and an estimate of the matching value of $${want}$ is needed. The known value lies inside the range of the data.`, parts: [
+        P("Which regression line should be used?", 1, ans.choice(rng, { text: `${line(right)}.`, value: right }, [
+          { text: `${line(wantX ? "y on x" : "x on y")}.`, value: wantX ? "y on x" : "x on y", why: "The line of $y$ on $x$ estimates $y$ from $x$, and the line of $x$ on $y$ estimates $x$ from $y$." },
+          { text: "Either line, because they always give the same estimate.", value: "either", why: "The two lines give different estimates unless the correlation is perfect." },
+          { text: "Neither line, because a regression line cannot be used for estimates.", value: "neither", why: "Estimating inside the range of the data is what a regression line is for." }]), [
+          "The variable being estimated must be the subject of the regression line.", `Here $${want}$ is estimated from $${known}$, so use the regression line of $${want}$ on $${known}$.`])] };
     } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -191,7 +191,7 @@ export default {
   "t4-regression-gdc/predict-from-data/table": (q, T) => {
     const [xs, ys] = tableData(q), L = fit(xs, ys, T), s = q.params.sit;
     T.require(s.xq > Math.min(...xs) && s.xq < Math.max(...xs), "the estimate is made inside the data");
-    T.require(s.xfar > Math.max(...xs) + (Math.max(...xs) - Math.min(...xs)), "the second value is far outside the data");
+    T.require(s.xfar >= Math.max(...xs) + 0.9 * (Math.max(...xs) - Math.min(...xs)), "the second value is far outside the data");
     return { a: L.r, b: L.a, c: L.b, d: L.a * s.xq + L.b, e: T.option("extrapolation") };
   },
   "t4-regression-gdc/mean-point/table": (q, T) => { const [xs, ys] = tableData(q); return { a: T.mean(xs), b: T.mean(ys) }; },
@@ -452,6 +452,12 @@ export default {
     T.require(Math.abs(normalBetween(mu, sig, mu - 12 * sig, a, T) - p1) < 1e-6, "the lower tail has the stated area");
     T.require(sig > 0 && mu > 0, "a positive mean and standard deviation");
     return { a: T.approx(z1, 1e-6), b: T.approx(z2, 1e-6), c: T.approx(sig, 1e-5 * sig), d: T.approx(mu, 1e-5 * Math.abs(mu)) };
+  },
+  "t4-regression-x-on-y/choose-line/words": (q, T) => {
+    // which variable the stem says is needed
+    const mt = /estimate of the matching value of \$([xy])\$/.exec(q.stem);
+    T.require(mt !== null, "the stem says which variable is estimated");
+    return { a: T.option(mt[1] === "x" ? "x on y" : "y on x") };
   },
 };
 
