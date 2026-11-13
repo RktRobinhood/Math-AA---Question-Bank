@@ -138,6 +138,8 @@ The site is fully static: no server, no database, no build framework. `scripts/b
 | `data/syllabus-aa-hl.json` | The 32 statements AA HL adds |
 | `data/syllabus-ai.json` | AI SL and AI HL statements, numbered as in the AI guide. `shared` lists AI statements whose content matches an AA statement |
 | `data/syllabus-docs-aa.json` | The AA syllabus reference pages, with formulas |
+| `data/syllabus-docs-aa-hl.json` | The same reference pages for the 32 statements AA HL adds |
+| `data/syllabus-docs-ai.json` | The AI syllabus reference pages, one section per AI statement; sections for statements shared with AA repeat the AA page |
 | `data/crops.json`, `data/tags.json` | AA SL questions: images, parts, marks, part positions, and per-part tags |
 | `data/crops-<course>.json`, `data/tags-<course>.json` | The same for `aa-hl`, `ai-sl` and `ai-hl` |
 | `data/shared.json` | HL appearances of questions that are stored once under their SL id |

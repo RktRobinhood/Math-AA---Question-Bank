@@ -709,36 +709,50 @@
   // ════════════════════════════════════════════════════════════════════════
   // Syllabus
   // ════════════════════════════════════════════════════════════════════════
-  // One topic at a time in a single reading column. AA courses use the AA reference pages (with
-  // formulas), cut into one section per subtopic; AI courses list their statements, numbered as
-  // in the AI guide. HL courses add their additional higher level statements to each topic.
+  // One topic at a time in a single reading column, one section per subtopic, from the reference
+  // pages (with formulas) in DATA.syllabusDocs. AA courses show the AA pages as written and AA HL
+  // adds its additional higher level statements to each topic; AI courses list their statements,
+  // numbered as in the AI guide. A statement with no reference section shows its content instead.
   function syllabusTopics() {
     const count = code => allQuestions.filter(q => q.codeSet.has(code)).length;
     const fromStatement = s => ({ code: s.code, title: s.title, ahl: s.ahl, html: `<p>${mathText(s.content)}</p>`, n: count(s.code) });
+    // A reference page cut at its "<h3>code title</h3>" headings.
+    const cut = d => {
+      const box = document.createElement("div");
+      box.innerHTML = d.html;
+      const sections = [];
+      let cur = null;
+      for (const node of [...box.children]) {
+        if (node.tagName === "H2") continue;
+        if (node.tagName === "H3") {
+          const code = node.textContent.match(/^(\d+\.\d+)\s+(.*)$/);
+          cur = code ? { code: code[1], title: code[2], html: "", n: count(code[1]) } : { code: "", title: node.textContent, html: "", n: 0 };
+          sections.push(cur);
+        } else {
+          if (!cur) { cur = { code: "", title: "Overview", html: "", n: 0 }; sections.push(cur); }
+          cur.html += node.outerHTML;
+        }
+      }
+      return sections;
+    };
+    // Statements shown one by one take the body of their reference section, by code.
+    const withDocs = pages => {
+      const body = new Map((pages || []).flatMap(d => cut(d)).filter(x => x.code && x.html).map(x => [x.code, x.html]));
+      return s => (body.has(s.code) ? { ...fromStatement(s), html: body.get(s.code) } : fromStatement(s));
+    };
     const topics = [];
     if (course.subject === "aa") {
       for (const d of DATA.syllabusDocs?.aa || []) {
-        const box = document.createElement("div");
-        box.innerHTML = d.html;
-        const sections = [];
-        let cur = null;
-        for (const node of [...box.children]) {
-          if (node.tagName === "H2") continue;
-          if (node.tagName === "H3") {
-            const code = node.textContent.match(/^(\d+\.\d+)\s+(.*)$/);
-            cur = code ? { code: code[1], title: code[2], html: "", n: count(code[1]) } : { code: "", title: node.textContent, html: "", n: 0 };
-            sections.push(cur);
-          } else {
-            if (!cur) { cur = { code: "", title: "Overview", html: "", n: 0 }; sections.push(cur); }
-            cur.html += node.outerHTML;
-          }
-        }
-        topics.push({ topic: String(d.topic), title: d.topic === 0 ? "Prior knowledge" : sentence(d.title), sections });
+        topics.push({ topic: String(d.topic), title: d.topic === 0 ? "Prior knowledge" : sentence(d.title), sections: cut(d) });
       }
-      for (const t of topics) t.sections.push(...statements.filter(s => s.ahl && s.topic === t.topic).map(fromStatement));
+      const section = withDocs(DATA.syllabusDocs?.["aa-hl"]);
+      for (const t of topics) t.sections.push(...statements.filter(s => s.ahl && s.topic === t.topic).map(section));
     } else {
+      const pages = DATA.syllabusDocs?.[course.subject] || [];
+      const section = withDocs(pages);
+      for (const d of pages.filter(d => d.topic === 0)) topics.push({ topic: "0", title: d.title, sections: cut(d) });
       for (const [t, name] of Object.entries(DATA.topics)) {
-        topics.push({ topic: t, title: sentence(name), sections: statements.filter(s => s.topic === t).map(fromStatement) });
+        topics.push({ topic: t, title: sentence(name), sections: statements.filter(s => s.topic === t).map(section) });
       }
     }
     for (const t of topics) t.n = t.topic === "0" ? 0 : allQuestions.filter(q => (q.topicNumbers || []).includes(t.topic)).length;

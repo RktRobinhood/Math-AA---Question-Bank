@@ -6,6 +6,8 @@
 //   data/syllabus-aa-hl.json   AA HL's additional statements
 //   data/syllabus-ai.json      AI SL / AI HL statements (AI guide numbering)
 //   data/syllabus-docs-aa.json AA syllabus reference pages (HTML with formulas)
+//   data/syllabus-docs-aa-hl.json  the same for AA HL's additional higher level statements
+//   data/syllabus-docs-ai.json AI syllabus reference pages
 //   data/crops*.json           per course: images, parts, part marks, anchors (scripts/recrop.py)
 //   data/tags*.json            per course: per-part syllabus codes + skill, with review provenance
 //   data/shared.json           HL appearances of questions stored once under their SL id
@@ -35,6 +37,8 @@ const todoSub = argAfter("--todo-sub");
 const { courses, topics } = readJson("data/courses.json");
 const courseById = Object.fromEntries(courses.map((c) => [c.id, c]));
 const docs = readJson("data/syllabus-docs-aa.json");
+const docsAaHl = readJson("data/syllabus-docs-aa-hl.json");
+const docsAi = readJson("data/syllabus-docs-ai.json");
 const shared = readJsonIf("data/shared.json", { appearances: {} }).appearances;
 
 // ---- syllabus statements, per subject, keyed by the code taggers use -----------
@@ -76,6 +80,22 @@ const titleOf = (m) => `${m.year} ${m.session} ${m.paper} ${m.timezone} Q${m.que
 // ---- load and validate --------------------------------------------------------
 const errors = [];
 const warnings = [];
+// Syllabus reference pages: each "<h3>code title</h3>" section must belong to a statement of the
+// page's syllabus layer, and every statement of that layer needs exactly one section.
+for (const [file, pages, table, wanted] of [
+  ["data/syllabus-docs-aa.json", docs, tables.aa, aaSl.statements],
+  ["data/syllabus-docs-aa-hl.json", docsAaHl, tables.aa, aaHl.statements],
+  ["data/syllabus-docs-ai.json", docsAi, tables.ai, [...ai.shared, ...ai.statements]],
+]) {
+  const seen = new Map();
+  for (const t of pages.topics) for (const [, code] of t.html.matchAll(/<h3>(\d+\.\d+) /g)) {
+    seen.set(code, (seen.get(code) || 0) + 1);
+    if (!table.has(code)) errors.push(`${file}: section ${code} is not a statement of the ${pages.subject.toUpperCase()} syllabus`);
+    else if (table.get(code).topic !== String(t.topic)) errors.push(`${file}: section ${code} is under topic ${t.topic}`);
+  }
+  for (const s of wanted) if (seen.get(s.code) !== 1) errors.push(`${file}: statement ${s.code} has ${seen.get(s.code) || 0} sections, needs 1`);
+  for (const code of seen.keys()) if (table.has(code) && !wanted.some((s) => s.code === code)) errors.push(`${file}: section ${code} belongs in another reference file`);
+}
 // Sub-tags (#5): the skills under each statement, ids "<statement id>.<slug>". AA SL's list is
 // Wasteland Academy's skill map; AI statements shared with AA take AA's list.
 const subtagName = new Map();
@@ -264,7 +284,7 @@ const data = {
       ahl: !s.courses.includes(`${c.subject}-sl`) })),
   })),
   topics,
-  syllabusDocs: { aa: docs.topics },
+  syllabusDocs: { aa: docs.topics, "aa-hl": docsAaHl.topics, ai: docsAi.topics },
   questions: records,
 };
 const write = (p, text) => {
