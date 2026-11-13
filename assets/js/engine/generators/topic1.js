@@ -783,4 +783,47 @@
         P(`Hence find the coefficient of $x^{${mm}}$ in the expansion of $${outer}${inner}$.`, 2, ans.int(total, { misconceptions: [{ value: cm, text: `The $${coef(kk, "x")}$ in the first bracket multiplies the term in $x^{${mm - 1}}$ to give another term in $x^{${mm}}$.` }] }), [
           `Terms in $x^{${mm}}$ come from $1 \\times ${tm(cm, mm)}$ and from $${coef(kk, "x")} \\times ${tm(c1, mm - 1)}$.`, `$${num(cm)} + ${paren(kk)} \\times ${paren(c1)} = ${num(total)}$`])] };
     } });
+  // ======================= more exam types: sums that define a sequence, a context, an unknown in a binomial =======================
+  const snSit = (rng) => { const a = rng.int(1, 5); let b; do { b = rng.nonzero(-6, 9); } while (a + b === 0); return { a, b, n0: rng.int(12, 40) }; };
+  const snTex = (s) => poly([s.a, s.b, 0], "n");
+  const SP = { type: "t1-sequence-proof", syllabus: ["1.2", "1.6"], representation: "equation", format: "value", situationKey: "sn-quadratic", situation: snSit };
+  reg({ ...SP, unknown: "difference-from-sum", levels: [2], skills: ["SL1.6.series-proof", "SL1.2.find-u1-d"], title: "First terms and the difference from a formula for the sum",
+    build({ sit: s }) {
+      const S = (n) => s.a * n * n + s.b * n, u1 = S(1), u2 = S(2) - S(1);
+      return { stem: `The sum of the first $n$ terms of an arithmetic sequence is given by $S_{n} = ${snTex(s)}$.`, parts: [
+        P("Find the first term of the sequence.", 1, ans.int(u1), [`$u_{1} = S_{1} = ${u1}$`]),
+        P("Find the second term of the sequence.", 2, ans.int(u2, { misconceptions: [{ value: S(2), text: "$S_{2}$ is the sum of the first two terms, not the second term." }] }), [`$S_{2} = ${S(2)}$`, `$u_{2} = S_{2} - S_{1} = ${S(2)} - ${paren(u1)} = ${u2}$`]),
+        P("Find the common difference.", 1, ans.int(u2 - u1), [`$d = u_{2} - u_{1} = ${u2} - ${paren(u1)} = ${u2 - u1}$`])] };
+    } });
+  reg({ ...SP, unknown: "term-from-sum", levels: [3], skills: ["SL1.6.series-proof", "SL1.2.nth-term", "SL1.2.find-n"], title: "The general term from a formula for the sum",
+    build({ sit: s }) {
+      const p = 2 * s.a, q = s.b - s.a, target = p * s.n0 + q;
+      return { stem: `The sum of the first $n$ terms of a sequence is given by $S_{n} = ${snTex(s)}$. It can be shown that the $n$th term is $u_{n} = pn + q$, where $p$ and $q$ are constants.`, parts: [
+        P("Find the value of $p$.", 3, ans.int(p), [`$u_{n} = S_{n} - S_{n-1}$`, `$S_{n-1} = ${coef(s.a, "(n - 1)^{2}")} ${s.b < 0 ? "-" : "+"} ${coef(Math.abs(s.b), "(n - 1)")} = ${poly([s.a, s.b - 2 * s.a, s.a - s.b], "n")}$`,
+          `$u_{n} = ${snTex(s)} - \\left(${poly([s.a, s.b - 2 * s.a, s.a - s.b], "n")}\\right) = ${lin(p, q, "n")}$`, `$p = ${p}$`]),
+        P("Find the value of $q$.", 1, ans.int(q), [`From $u_{n} = ${lin(p, q, "n")}$, $q = ${q}$.`]),
+        P(`Find the value of $n$ for which $u_{n} = ${target}$.`, 2, ans.int(s.n0), [`$${lin(p, q, "n")} = ${target}$`, `$${p}n = ${target - q}$, so $n = ${s.n0}$`])] };
+    } });
+  reg({ type: "t1-arithmetic-in-context", syllabus: ["1.2"], representation: "words", format: "value", unknown: "term-or-total", levels: [2],
+    skills: ["SL1.2.model", "SL1.2.nth-term", "SL1.2.sum"], title: "Weekly amounts that grow by a fixed step: one week and the total",
+    build({ rng }) {
+      const cx = rng.pick([
+        { stem: (a, d) => `Amira saves $${a}$ euros in the first week of the year. In each week after that she saves $${d}$ euros more than in the week before.`, term: (n) => `Find the amount, in euros, that she saves in week $${n}$.`, total: (n) => `Find the total amount, in euros, that she saves in the first $${n}$ weeks.` },
+        { stem: (a, d) => `A swimmer swims $${a}$ lengths in the first training session. In each session after that the swimmer swims $${d}$ lengths more than in the session before.`, term: (n) => `Find the number of lengths swum in session $${n}$.`, total: (n) => `Find the total number of lengths swum in the first $${n}$ sessions.` },
+        { stem: (a, d) => `A new shop sells $${a}$ loaves on its first day. On each day after that it sells $${d}$ loaves more than on the day before.`, term: (n) => `Find the number of loaves sold on day $${n}$.`, total: (n) => `Find the total number of loaves sold in the first $${n}$ days.` }]);
+      const a = rng.int(8, 30), d = rng.int(2, 6), n = rng.pick([10, 12, 14, 15, 16, 18, 20]), un = a + (n - 1) * d, sn = (n * (a + un)) / 2;
+      return { params: { a, d, n }, stem: cx.stem(a, d), parts: [
+        P(cx.term(n), 2, ans.int(un, { misconceptions: [{ value: a + n * d, text: `The step is added $${n - 1}$ times, because the first amount has no step added.` }] }), [
+          `The amounts form an arithmetic sequence with $u_{1} = ${a}$ and $d = ${d}$.`, `$u_{${n}} = ${a} + ${n - 1} \\times ${d} = ${un}$`]),
+        P(cx.total(n), 2, ans.int(sn), [`$S_{${n}} = \\dfrac{${n}}{2}\\left(u_{1} + u_{${n}}\\right) = \\dfrac{${n}}{2}\\left(${a} + ${un}\\right)$`, `$S_{${n}} = ${num(sn)}$`])] };
+    } });
+  reg({ type: "t1-binomial-find-unknown", syllabus: ["1.9"], representation: "equation", format: "value", unknown: "k-odd-power", levels: [2],
+    skills: ["SL1.9.find-unknown", "SL1.9.specific-term"], title: "Find a constant from the coefficient of the cubed term",
+    build({ rng }) {
+      const n = rng.int(4, 7), k = rng.sign() * rng.int(2, 4), bin = nCr(n, 3), co = bin * k * k * k;
+      return { params: { n, co }, stem: `In the expansion of $(1 + kx)^{${n}}$, where $k$ is a constant, the coefficient of $x^{3}$ is $${num(co)}$.`, parts: [
+        P(`Find the value of $\\dbinom{${n}}{3}$.`, 1, ans.int(bin), [`$\\dbinom{${n}}{3} = \\dfrac{${n} \\times ${n - 1} \\times ${n - 2}}{3 \\times 2 \\times 1} = ${bin}$`]),
+        P("Find the value of $k$.", 3, ans.int(k, { misconceptions: [{ value: -k, text: "A cube keeps the sign of the number, so the sign of $k$ is fixed by the coefficient." }] }), [
+          `The term in $x^{3}$ is $\\dbinom{${n}}{3}(kx)^{3} = ${bin}k^{3}x^{3}$.`, `$${bin}k^{3} = ${num(co)}$, so $k^{3} = ${k * k * k}$`, `$k = ${k}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -383,4 +383,29 @@ export default {
     const { a, b, n, m, kk } = q.params, cs = polyPow([a, b], n), prod = polyMul([1, kk], cs);
     return { a: cs[m], b: cs[m - 1], c: prod[m] };
   },
+  // ---- sums that define a sequence, a context, an unknown in a binomial ----
+  "t1-sequence-proof/difference-from-sum/equation": (q, T) => {
+    const { a, b } = q.params.sit, S = (n) => a * n * n + b * n, u = (n) => S(n) - S(n - 1);
+    T.require(T.range(2, 30).every((n) => u(n + 1) - u(n) === u(2) - u(1)), "the sequence is arithmetic");
+    return { a: S(1), b: u(2), c: u(3) - u(2) };
+  },
+  "t1-sequence-proof/term-from-sum/equation": (q, T) => {
+    const { a, b, n0 } = q.params.sit, S = (n) => a * n * n + b * n, u = (n) => S(n) - S(n - 1);
+    const p = u(6) - u(5), c = u(1) - p, target = Number(/u_\{n\} = (-?\d+)\$/.exec(q.parts[2].prompt)[1]);
+    T.require(T.range(1, 60).every((n) => u(n) === p * n + c), "the nth term is linear in n, from the first term on");
+    const hits = T.range(1, 400).filter((n) => u(n) === target);
+    T.require(hits.length === 1 && hits[0] === n0, "exactly one term has the given value");
+    return { a: p, b: c, c: hits[0] };
+  },
+  "t1-arithmetic-in-context/term-or-total/words": (q, T) => {
+    const { a, d, n } = q.params, xs = arith(a, d, n);
+    T.require(d > 0 && a > 0, "the amounts grow");
+    return { a: xs[n - 1], b: total(xs) };
+  },
+  "t1-binomial-find-unknown/k-odd-power/equation": (q, T) => {
+    const { n, co } = q.params;
+    const hits = T.range(-12, 12).filter((k) => polyPow([1, k], n)[3] === co);
+    T.require(hits.length === 1, "one value of k");
+    return { a: T.nCr(n, 3), b: hits[0] };
+  },
 };
