@@ -46,6 +46,8 @@
     workSpacePages:    1,
     // Pagination
     showPageNumbers:   true,
+    // Versions of the same paper with the questions in a different order (1 = just the paper)
+    versions:          1,
   };
 
   // The title and formula-booklet line follow the course chosen in the course bar, unless the
@@ -165,6 +167,9 @@
           <label class="ckl">${ck('gen-markscheme', s.includeMarkscheme)}Markscheme <small>separate file</small></label>
           <label class="ckl">${ck('cs-show-grid', s.showMarksGrid)}Marks grid <small>for the teacher, on the cover</small></label>
           <label class="ckl">${ck('gen-pagenums', s.showPageNumbers)}Page X of Y footer</label>
+          <label class="ckl wide">Versions
+            <select class="select" id="gen-versions">${[1, 2, 3, 4].map(n => `<option value="${n}" ${n === (s.versions || 1) ? 'selected' : ''}>${n === 1 ? '1 (just this paper)' : `${n}: ${'ABCD'.slice(0, n).split('').join(', ')}`}</option>`).join('')}</select>
+            <small>B onwards have the same questions in a different order</small></label>
           ${hasB ? `<label class="ckl wide">Blank working pages after each Section B question
             <select class="select" id="gen-workspace-n">${[0, 1, 2, 3, 4].map(n => `<option value="${n}" ${n === wsN ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
         </div></div>
@@ -321,6 +326,7 @@
       workSpace:         wsN === null ? prior.workSpace : wsN > 0,
       workSpacePages:    wsN === null ? prior.workSpacePages : (wsN || 1),
       showPageNumbers:   chk('gen-pagenums'),
+      versions:          Math.max(1, parseInt(val('gen-versions'), 10) || 1),
     };
     saveSettings(s);
     return s;
@@ -404,6 +410,34 @@
     pg.style.transform = `scale(${scale})`;
   }
 
+  // ─── Versions ─────────────────────────────────────────────────────────────
+  // A reordering of the paper for version B, C or D. Section A questions stay before Section B
+  // ones, as on an IB paper. The order depends only on the questions and the version, so
+  // exporting again gives the same Version B.
+  function versionOrder(items, v) {
+    let seed = 2166136261;
+    for (const ch of items.map(q => q.id).sort().join('|') + '#' + v) seed = Math.imul(seed ^ ch.charCodeAt(0), 16777619) >>> 0;
+    const rand = () => {
+      seed = (seed + 0x6D2B79F5) >>> 0;
+      let t = seed;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+    const shuffle = list => {
+      const out = list.slice();
+      for (let tries = 0; tries < 8; tries++) {
+        for (let i = out.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [out[i], out[j]] = [out[j], out[i]]; }
+        if (out.length < 2 || out.some((q, i) => q !== list[i])) break;   // not the original order
+      }
+      return out;
+    };
+    const hasBoth = items.some(q => q.section === 'A') && items.some(q => q.section === 'B');
+    if (!hasBoth) return shuffle(items);
+    return [...shuffle(items.filter(q => q.section !== 'B')), ...shuffle(items.filter(q => q.section === 'B'))];
+  }
+  window.AASL_VERSION_ORDER = versionOrder;
+
   // ─── Generate ─────────────────────────────────────────────────────────────
   async function doGenerate(format) {
     const s = collectSettings();
@@ -419,34 +453,35 @@
     status.textContent = 'Loading libraries…';
 
     try {
-      const items = basketItems();
-      const marks = totalMarksOf(items);
+      const all = basketItems();
+      const marks = totalMarksOf(all);
+      const mime = { pdf: 'application/pdf', docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' }[format];
       if (format === 'pdf') {
         await loadScript(PDF_LIB_CDN);
         if (!window.PDFLib) throw new Error('pdf-lib failed to load');
-        if (s.includeQuestions) {
-          status.textContent = 'Building questions PDF…';
-          const pdfBytes = await buildPdf(items, s, 'questions', marks);
-          downloadBlob(pdfBytes, 'application/pdf', pdfFilename(s, marks, 'pdf', false));
-        }
-        if (s.includeMarkscheme) {
-          status.textContent = 'Building markscheme PDF…';
-          const pdfBytes = await buildPdf(items, s, 'markscheme', marks);
-          downloadBlob(pdfBytes, 'application/pdf', pdfFilename(s, marks, 'pdf', true));
-        }
       } else {
         await loadScript(DOCX_CDN);
         if (!window.docx) throw new Error('docx.js failed to load');
-        const mime = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+      }
+      const build = async (items, sv, type) => (format === 'pdf'
+        ? buildPdf(items, sv, type, marks)
+        : (await buildDocx(items, sv, type, marks)).arrayBuffer());
+      for (let v = 0; v < s.versions; v++) {
+        // Version A is the paper as ordered. B onwards reorder it (same order every time for
+        // the same questions) and say which version they are in the title and file name.
+        const letter = 'ABCD'[v];
+        const many = s.versions > 1;
+        const items = v === 0 ? all : versionOrder(all, v);
+        const sv = many ? Object.assign({}, s, { title: `${s.title} (Version ${letter})` }) : s;
+        const tag = many ? `-version-${letter}` : '';
+        const name = (isMs) => pdfFilename(s, marks, format, isMs).replace(/(\.[a-z]+)$/, `${tag}$1`);
         if (s.includeQuestions) {
-          status.textContent = 'Building questions Word file…';
-          const blob = await buildDocx(items, s, 'questions', marks);
-          downloadBlob(await blob.arrayBuffer(), mime, pdfFilename(s, marks, 'docx', false));
+          status.textContent = `Building the question paper${many ? `, version ${letter}` : ''}…`;
+          downloadBlob(await build(items, sv, 'questions'), mime, name(false));
         }
         if (s.includeMarkscheme) {
-          status.textContent = 'Building markscheme Word file…';
-          const blob = await buildDocx(items, s, 'markscheme', marks);
-          downloadBlob(await blob.arrayBuffer(), mime, pdfFilename(s, marks, 'docx', true));
+          status.textContent = `Building the markscheme${many ? `, version ${letter}` : ''}…`;
+          downloadBlob(await build(items, sv, 'markscheme'), mime, name(true));
         }
       }
       status.textContent = '✓ Downloaded.';

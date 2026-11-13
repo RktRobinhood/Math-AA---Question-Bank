@@ -288,6 +288,13 @@ body.paper-open { padding-right: var(--paper-w); }
 .di .mv { display: none; flex-direction: column; }
 .di .mv button, .di .rm { color: var(--muted); font-size: 15px; width: 26px; height: 26px; display: grid; place-items: center; border-radius: var(--r-sm); }
 .di .mv button:hover, .di .rm:hover { background: var(--sunk); color: var(--ink); }
+.swap { border: 1px solid var(--accent); border-radius: var(--r); padding: var(--s2) 10px; background: var(--accent-soft); list-style: none; }
+.sw-row { display: flex; gap: var(--s2); align-items: center; padding: 6px 0; border-top: 1px solid var(--line); }
+.sw-row .tt { flex: 1; min-width: 0; color: inherit; }
+.sw-row .tt b { display: block; font: 650 12px var(--mono); }
+.sw-row .tt span { font-size: 11.5px; color: var(--muted); display: block; }
+.df .row { gap: var(--s3); }
+.df .row .muted { flex: 1; }
 .hint { border: 1.5px dashed var(--line); border-radius: var(--r); padding: var(--s4); text-align: center; color: var(--muted); font-size: var(--fs-sm); }
 .df { padding: var(--s3); border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: var(--s2); }
 .df .row { display: flex; justify-content: space-between; align-items: center; font-size: var(--fs-sm); }

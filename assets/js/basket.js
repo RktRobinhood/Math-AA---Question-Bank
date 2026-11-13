@@ -139,14 +139,60 @@
           <a class="tt" href="${base}questions/${esc(q.id)}/"><b>${esc(codeTitle(q))}</b><span>${esc((q.parts || []).map(p => p.skill).filter(Boolean).join('; ') || (q.section ? 'Section ' + q.section : ''))}</span></a>
           <span class="mk">[${q.marks || 0}]</span>
           <span class="mv"><button type="button" data-act="up" aria-label="Move up"${i === 0 ? ' disabled' : ''}>↑</button><button type="button" data-act="down" aria-label="Move down"${i === items.length - 1 ? ' disabled' : ''}>↓</button></span>
+          ${canSwap() ? `<button type="button" class="rm" data-act="swap" title="Swap for a similar question" aria-label="Swap ${esc(q.title)} for a similar question" aria-expanded="${swapFor === q.id}">⇄</button>` : ''}
           <button type="button" class="rm" data-act="remove" aria-label="Remove ${esc(q.title)}">×</button>
-        </li>`).join('')}
+        </li>${swapFor === q.id ? swapHtml(q) : ''}`).join('')}
         ${items.length ? '' : '<li class="hint">Press + on any question to add it here. Then set up the cover sheet and export a PDF or Word file.</li>'}
       </ol>
       <div class="df">
-        ${items.length ? '<div class="row"><span class="muted">Drag to reorder</span><button type="button" class="link" data-act="clear">Clear all</button></div>' : ''}
+        ${items.length ? `<div class="row"><span class="muted">Drag to reorder</span>${items.length > 1 ? '<button type="button" class="link" data-act="shuffle" title="Put the questions in a random order (Section A stays before Section B)">Shuffle</button>' : ''}<button type="button" class="link" data-act="clear">Clear all</button></div>` : ''}
         <button type="button" class="btn" data-act="export"${items.length ? '' : ' disabled'}>Set up and export →</button>
       </div>`;
+  }
+
+  // ── swap for a similar question ──────────────────────────────────────────
+  // Real questions that could stand in for one on the paper: same course, same calculator
+  // policy, same section, similar marks, ranked by how much of the same syllabus they test.
+  // The score is half shared syllabus statements and half shared sub-skills, each weighted by
+  // marks (see docs/variants.md). Available where the question data is loaded.
+  let swapFor = null;
+  const canSwap = () => typeof window.QB_ROWS === 'function';
+  function weights(q, level) {
+    const w = new Map();
+    for (const p of q.parts || []) {
+      const keys = level === 'sub' && p.sub && p.sub.length ? p.sub.map(s => s.id) : (p.syllabus || []).map(s => String(s).split(' ')[0]);
+      for (const k of keys) w.set(k, (w.get(k) || 0) + p.marks / keys.length);
+    }
+    return w;
+  }
+  function overlap(a, b) {
+    let num = 0, den = 0;
+    for (const k of new Set([...a.keys(), ...b.keys()])) { num += Math.min(a.get(k) || 0, b.get(k) || 0); den += Math.max(a.get(k) || 0, b.get(k) || 0); }
+    return den ? num / den : 0;
+  }
+  function siblings(item) {
+    const rows = window.QB_ROWS();
+    const me = rows.find(r => r.id === item.id);
+    if (!me) return [];
+    const taken = new Set(load().map(q => q.id));
+    const tol = Math.max(2, Math.round(me.marks * 0.25));
+    const mine = { code: weights(me, 'code'), sub: weights(me, 'sub') };
+    return rows
+      .filter(r => !taken.has(r.id) && r.calculator === me.calculator && r.section === me.section && Math.abs(r.marks - me.marks) <= tol && r.tagged !== false)
+      .map(r => {
+        const shared = [...weights(r, 'code').keys()].filter(k => mine.code.has(k));
+        return { r, shared, score: 0.5 * overlap(mine.code, weights(r, 'code')) + 0.5 * overlap(mine.sub, weights(r, 'sub')) };
+      })
+      .filter(x => x.score >= 0.2)
+      .sort((a, b) => b.score - a.score || b.r.year - a.r.year)
+      .slice(0, 5);
+  }
+  function swapHtml(item) {
+    const list = siblings(item);
+    if (!list.length) return '<li class="swap"><p class="note">No similar question with the same paper type, section and marks. Try the Questions page with this question\'s subtopics.</p></li>';
+    return `<li class="swap"><p class="cap">Swap for a similar question</p>${list.map(({ r, shared, score }) => `
+      <div class="sw-row"><a class="tt" href="${base}questions/${esc(r.id)}/" target="_blank" rel="noopener"><b>${esc(r.title)}</b><span>[${r.marks}] · ${score >= 0.5 ? 'close match' : 'related'} · shares ${esc(shared.join(', '))}</span></a>
+      <button type="button" class="btn small ghost" data-act="use" data-use="${esc(r.id)}">Use</button></div>`).join('')}</li>`;
   }
 
   function move(id, delta) {
@@ -166,6 +212,19 @@
     else if (act === 'remove') api.remove(id);
     else if (act === 'up') move(id, -1);
     else if (act === 'down') move(id, 1);
+    else if (act === 'swap') { swapFor = swapFor === id ? null : id; render(); }
+    else if (act === 'use') {
+      const q = lookup(e.target.closest('[data-use]').dataset.use);
+      const items = load();
+      const i = items.findIndex(x => x.id === swapFor);
+      if (q && i >= 0) { items[i] = slim(q); swapFor = null; api.reorder(items); }
+    }
+    else if (act === 'shuffle') {
+      const items = load();
+      const mix = list => { for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]]; } return list; };
+      const both = items.some(q => q.section === 'A') && items.some(q => q.section === 'B');
+      api.reorder(both ? [...mix(items.filter(q => q.section !== 'B')), ...mix(items.filter(q => q.section === 'B'))] : mix(items));
+    }
     else if (act === 'clear') { if (confirm('Remove every question from your paper?')) api.clear(); }
     else if (act === 'export' && typeof window.AASL_GENERATE === 'function') window.AASL_GENERATE();
   }

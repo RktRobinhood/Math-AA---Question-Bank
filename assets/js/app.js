@@ -461,6 +461,7 @@
       }));
     } catch (_) {}
   }
+  window.QB_ROWS = () => allQuestions;   // the chosen course's questions, for "swap for a similar question"
   window.QB_LOOKUP = id => allQuestions.find(q => q.id === id) || allRecords.find(q => q.id === id);
 
   // ════════════════════════════════════════════════════════════════════════
