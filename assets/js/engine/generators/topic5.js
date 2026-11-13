@@ -507,4 +507,166 @@
         P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`The tangent is $y = ${sf(mm)}(x - ${x0}) ${sg(y0)} ${sf(Math.abs(y0))}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
         P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the tangent and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
     } });
+
+  // ======================= 5.5 antiderivatives and a boundary condition =======================
+  const intOpt = (lhs) => (ts, why) => ({ text: m(lhs + termsTex(ts) + " + C"), value: ts, why });
+  const II = { type: "t5-indefinite-integral", representation: "equation" };
+  const AC = { type: "t5-antiderivative-condition", representation: "equation" };
+  reg({ ...II, syllabus: ["5.5"], unknown: "power-polynomial", format: "value", levels: [1], skills: ["SL5.5.antidiff-power"], title: "Integrate a single power",
+    build({ rng }) {
+      const n = rng.int(1, 5), a = rng.pick([2, 3, 4, 5, 6, 8, 9, 10, 12]), p = rat.Q(a, n + 1), raw = `\\dfrac{${a}}{${n + 1}}`;
+      return { params: { n, a }, stem: `It is given that $\\displaystyle\\int ${coef(a, power("x", n))}${dx} = px^{q} + C$, where $p$ and $q$ are constants.`, parts: [
+        P("Write down the value of $q$.", 1, ans.int(n + 1), [`Integrating raises the power by one, so $q = ${n + 1}$.`]),
+        P("Find the value of $p$.", 1, ans.frac(p.n, p.d), [`Divide the coefficient by the new power: $p = ${raw === rat.tex(p) ? raw : `${raw} = ${rat.tex(p)}`}$`])] };
+    } });
+  reg({ ...AC, syllabus: ["5.5", "5.10"], unknown: "poly-function", format: "value", levels: [2], skills: ["SL5.5.boundary-condition", "SL5.5.antidiff-power"], title: "Find a function from its derivative and a point",
+    build({ rng }) {
+      let a, b, c, x0, x1, C;
+      do { a = rng.pick([1, 2, -1]); b = rng.int(-3, 3); c = rng.int(-5, 5); x0 = rng.pick([1, 2, -1]); x1 = rng.pick([2, 3, -2]); C = rng.nonzero(-8, 8); } while (x1 === x0 || (b === 0 && c === 0));
+      const F = (x) => a * x ** 3 + b * x * x + c * x, y0 = F(x0) + C, d = poly([3 * a, 2 * b, c]);
+      return { params: { a, b, c, x0, y0, x1 }, stem: `The derivative of a function $f$ is $f'(x) = ${d}$. The graph of $f$ passes through the point $${point(x0, y0)}$.`, parts: [
+        P("Find $f(0)$.", 3, ans.int(C), [`$f(x) = \\displaystyle\\int \\left(${d}\\right)${dx} = ${poly([a, b, c, 0])} + C$`, `$f(${x0}) = ${y0}$ gives $${F(x0)} + C = ${y0}$, so $C = ${C}$.`, `$f(0) = C = ${C}$`]),
+        P(`Find $f(${x1})$.`, 1, ans.int(F(x1) + C), [`$f(${x1}) = ${expr([[a, `${br(x1)}^{3}`], [b, `${br(x1)}^{2}`], [c, br(x1)], [C, ""]])} = ${F(x1) + C}$`])] };
+    } });
+  reg({ ...AC, syllabus: ["5.5", "5.10"], unknown: "negative-power", format: "mcq", levels: [3], skills: ["SL5.5.boundary-condition", "SL5.5.antidiff-power", "SL5.10.find-function-from-derivative"], title: "Integrate a negative power and use a given value",
+    build({ rng }) {
+      let a, b, y0, C;
+      do { a = rng.pick([1, 2, 3, -1]); b = 2 * rng.nonzero(-4, 4); y0 = rng.int(-6, 9); C = y0 - a + b; } while (C === 0);
+      const opt = intOpt(""), fp = [[2 * a, "pow", 1], [b, "pow", -2]], f2 = 4 * a - b / 2 + C;
+      return { params: { a, b, y0 }, stem: `The derivative of a function $f$ is $f'(x) = ${termsTex(fp)}$, for $x > 0$. It is given that $f(1) = ${y0}$.`, parts: [
+        P("Which expression is $\\displaystyle\\int f'(x)\\,\\mathrm{d}x$?", 2, ans.choice(rng, opt([[a, "pow", 2], [-b, "pow", -1]]), [
+          opt([[a, "pow", 2], [b, "pow", -1]], "Integrating $x^{-2}$ gives $-x^{-1}$, so the sign of that term changes."),
+          opt([[2 * a, "pow", 0], [-2 * b, "pow", -3]], "This is the derivative of $f'(x)$, not its integral."),
+          opt([[2 * a, "pow", 2], [-b, "pow", -1]], "When integrating, divide by the new power."), opt([[a, "pow", 2], [-b, "pow", -3]])]), [
+          `Write $f'(x) = ${2 * a}x ${sg(b)} ${Math.abs(b)}x^{-2}$ and integrate each term: raise the power by one and divide by the new power.`,
+          `$\\displaystyle\\int f'(x)\\,\\mathrm{d}x = ${a === 1 ? "" : a === -1 ? "-" : a}x^{2} ${sg(-b)} ${Math.abs(b)}x^{-1} + C = ${termsTex([[a, "pow", 2], [-b, "pow", -1]])} + C$`]),
+        P("Find the value of the constant of integration for the function $f$.", 2, ans.int(C), [`$f(1) = ${y0}$ gives $${a} ${sg(-b)} ${Math.abs(b)} + C = ${y0}$`, `$C = ${C}$`]),
+        P("Find $f(2)$.", 2, ans.int(f2), [`$f(x) = ${termsTex([[a, "pow", 2], [-b, "pow", -1], [C, "pow", 0]])}$`, `$f(2) = ${4 * a} ${sg(-b)} ${Math.abs(b) / 2} ${signed(C)} = ${f2}$`])] };
+    } });
+
+  // ======================= 5.6 the rules of differentiation: more ways to ask =======================
+  const DR = { type: "t5-differentiation-rules", syllabus: ["5.6"], representation: "equation" };
+  reg({ ...DR, unknown: "standard-terms", format: "mcq", levels: [1], skills: ["SL5.6.standard-derivatives"], title: "Derivatives of the standard functions",
+    build({ rng }) {
+      const a = rng.pick([2, 3, 4, 5, -2, -3]), b = rng.pick([2, 3, 4, 5, 6, -4]), fam = rng.int(0, 2), opt = termOpt("f'(x) = ");
+      const X = [
+        { f: [[a, "sin", 1], [b, "exp", 1]], d: [[a, "cos", 1], [b, "exp", 1]], rule: "The derivative of $\\sin x$ is $\\cos x$ and the derivative of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$.",
+          w: [opt([[-a, "cos", 1], [b, "exp", 1]], "The derivative of $\\sin x$ is $\\cos x$, with no change of sign."), opt([[a, "cos", 1]], "The derivative of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$, not zero."), opt([[-a, "sin", 1], [b, "exp", 1]])] },
+        { f: [[a, "cos", 1], [b, "ln", 1]], d: [[-a, "sin", 1], [b, "pow", -1]], rule: "The derivative of $\\cos x$ is $-\\sin x$ and the derivative of $\\ln x$ is $\\dfrac{1}{x}$.",
+          w: [opt([[a, "sin", 1], [b, "pow", -1]], "The derivative of $\\cos x$ is $-\\sin x$."), opt([[-a, "sin", 1], [b, "ln", 1]], "The derivative of $\\ln x$ is $\\dfrac{1}{x}$."), opt([[-a, "sin", 1], [b, "pow", 0]])] },
+        { f: [[a, "exp", 1], [b, "cos", 1]], d: [[a, "exp", 1], [-b, "sin", 1]], rule: "The derivative of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$ and the derivative of $\\cos x$ is $-\\sin x$.",
+          w: [opt([[a, "exp", 1], [b, "sin", 1]], "The derivative of $\\cos x$ is $-\\sin x$."), opt([[-b, "sin", 1]], "The derivative of $\\mathrm{e}^{x}$ is $\\mathrm{e}^{x}$, not zero."), opt([[a, "exp", 1], [-b, "cos", 1]])] }][fam];
+      return { params: { f: X.f }, stem: `Let $f(x) = ${termsTex(X.f)}$${fam === 1 ? ", for $x > 0$" : ""}.`, parts: [
+        P("Which expression is $f'(x)$?", 2, ans.choice(rng, opt(X.d), X.w), [X.rule, `$f'(x) = ${termsTex(X.d)}$`])] };
+    } });
+  reg({ ...DR, unknown: "chain-function", format: "mcq", levels: [2], skills: ["SL5.6.chain-rule", "SL5.6.standard-derivatives"], title: "Chain rule with a sine and an exponential",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -2]), b = rng.int(2, 4), c = rng.pick([1, 2, 3, -1]), k = rng.pick([2, 3, -1, -2]), opt = termOpt("f'(x) = ");
+      const f = [[a, "sin", b], [c, "exp", k]], d = [[a * b, "cos", b], [c * k, "exp", k]], v = a * b + c * k;
+      return { params: { f }, stem: `Let $f(x) = ${termsTex(f)}$.`, parts: [
+        P("Which expression is $f'(x)$?", 2, ans.choice(rng, opt(d), [
+          opt([[a, "cos", b], [c, "exp", k]], "Each term must also be multiplied by the derivative of its inside function."),
+          opt([[a * b, "sin", b], [c * k, "exp", k]], "The derivative of $\\sin u$ is $\\cos u$."),
+          opt([[-a * b, "cos", b], [c * k, "exp", k]], "The derivative of $\\sin u$ is $\\cos u$, with no change of sign."), opt([[a * b, "cos", b], [c, "exp", k]])]), [
+          `By the chain rule, the derivative of $\\sin ${b}x$ is $${b}\\cos ${b}x$ and the derivative of $${ek(k)}$ is $${coef(k, ek(k))}$.`, `$f'(x) = ${termsTex(d)}$`]),
+        P("Find $f'(0)$.", 2, ans.int(v), [`$f'(0) = ${expr([[a * b, "\\cos 0"], [c * k, "\\mathrm{e}^{0}"]])}$`, `$\\cos 0 = 1$ and $\\mathrm{e}^{0} = 1$, so $f'(0) = ${v}$.`])] };
+    } });
+  reg({ ...DR, unknown: "quotient-linear", format: "value", levels: [2], skills: ["SL5.6.quotient-rule"], title: "Quotient rule for two linear expressions",
+    build({ rng }) {
+      let a, b, c, d, k, x0;
+      do { a = rng.nonzero(-4, 4); b = rng.nonzero(-5, 5); c = rng.int(1, 3); d = rng.nonzero(-4, 4); k = a * d - b * c; x0 = rng.int(-2, 3); } while (k === 0 || c * x0 + d === 0 || Math.abs(c * x0 + d) > 5);
+      const den = `\\left(${lin(c, d)}\\right)^{2}`, v = rat.Q(k, (c * x0 + d) ** 2);
+      return { params: { a, b, c, d, x0 }, stem: `Let $f(x) = \\dfrac{${lin(a, b)}}{${lin(c, d)}}$, for $x \\ne ${frac(-d, c)}$. The derivative of $f$ can be written as $f'(x) = \\dfrac{k}{${den}}$, where $k$ is a constant.`, parts: [
+        P("Find the value of $k$.", 3, ans.int(k), [`Let $u = ${lin(a, b)}$ and $v = ${lin(c, d)}$, so $u' = ${a}$ and $v' = ${c}$.`,
+          `$f'(x) = \\dfrac{u'v - uv'}{v^{2}} = \\dfrac{${coef(a, `\\left(${lin(c, d)}\\right)`)} - ${coef(c, `\\left(${lin(a, b)}\\right)`)}}{${den}}$`,
+          `The numerator is $${lin(a * c, a * d)} - \\left(${lin(a * c, b * c)}\\right) = ${k}$, so $k = ${k}$.`]),
+        P(`Find $f'(${x0})$.`, 1, ans.frac(v.n, v.d), [`$f'(${x0}) = \\dfrac{${k}}{${br(c * x0 + d)}^{2}} = ${rat.tex(v)}$`])] };
+    } });
+  reg({ ...DR, syllabus: ["5.6", "5.8"], unknown: "gradient-product", format: "value", levels: [3], skills: ["SL5.6.product-rule", "SL5.6.show-derivative-form", "SL5.8.find-stationary-points"], title: "Product rule with an exponential, then the stationary point",
+    build({ rng }) {
+      let a, b, k, p, q;
+      do { a = rng.int(1, 3); b = rng.nonzero(-4, 4); k = rng.pick([2, 3, -1, -2]); p = a * k; q = b * k + a; } while (q === 0);
+      const e = ek(k), st = rat.Q(-q, p);
+      return { params: { a, b, k }, stem: `Let $f(x) = \\left(${lin(a, b)}\\right)${e}$. The derivative of $f$ can be written as $f'(x) = (px + q)${e}$, where $p$ and $q$ are constants.`, parts: [
+        P("Find the value of $p$.", 3, ans.int(p), [`Let $u = ${lin(a, b)}$ and $v = ${e}$, so $u' = ${a}$ and $v' = ${coef(k, e)}$.`,
+          `$f'(x) = u'v + uv' = ${coef(a, e)} ${sg(k)} ${coef(Math.abs(k), `\\left(${lin(a, b)}\\right)${e}`)}$`, `$f'(x) = \\left(${lin(p, q)}\\right)${e}$, so $p = ${p}$.`]),
+        P("Write down the value of $q$.", 1, ans.int(q), [`From the same line, $q = ${q}$.`]),
+        P("Find the $x$-coordinate of the stationary point of the graph of $f$.", 2, ans.frac(st.n, st.d), [`$f'(x) = 0$ and $${e}$ is never zero, so $${lin(p, q)} = 0$.`, `$x = ${rat.tex(st)}$`])] };
+    } });
+
+  // ======================= 5.7 the second derivative: more ways to ask =======================
+  const CV = { type: "t5-concavity", syllabus: ["5.7"], representation: "equation" };
+  reg({ ...CV, unknown: "second-derivative", format: "value", levels: [1], skills: ["SL5.7.find-second-derivative"], title: "Second derivative of a cubic",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -1, -2]), b = rng.nonzero(-5, 5), c = rng.int(-6, 6), d = rng.int(-5, 5);
+      return { params: { a, b, c, d }, stem: `Let $f(x) = ${poly([a, b, c, d])}$. The second derivative of $f$ can be written as $f''(x) = px + q$, where $p$ and $q$ are constants.`, parts: [
+        P("Write down the value of $p$.", 1, ans.int(6 * a), [`$f'(x) = ${poly([3 * a, 2 * b, c])}$`, `$f''(x) = ${lin(6 * a, 2 * b)}$, so $p = ${6 * a}$.`]),
+        P("Write down the value of $q$.", 1, ans.int(2 * b), [`$q = ${2 * b}$`])] };
+    } });
+  reg({ ...CV, unknown: "second-derivative-value", format: "value", levels: [2], skills: ["SL5.7.find-second-derivative", "SL5.7.concavity"], title: "Second derivative of a cubic and where it is concave up or down",
+    build({ rng }) {
+      const a = rng.pick([1, 2, -1, -2]), k = rng.nonzero(-3, 3), c = rng.int(-6, 6), b = -3 * a * k, up = a > 0, rel = up ? ">" : "<";
+      let x1;
+      do { x1 = rng.int(-2, 3); } while (x1 === k);
+      const v = 6 * a * x1 + 2 * b;
+      return { params: { a, b, c, x1, up }, stem: `Let $f(x) = ${poly([a, b, c, 0])}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P(`Find $f''(${x1})$.`, 2, ans.int(v), [`$f'(x) = ${poly([3 * a, 2 * b, c])}$`, `$f''(x) = ${lin(6 * a, 2 * b)}$, so $f''(${x1}) = ${6 * a}${br(x1)} ${signed(2 * b)} = ${v}$`]),
+        P(`The graph of $f$ is concave ${up ? "up" : "down"} for $x > k$. Find the value of $k$.`, 2, ans.int(k), [
+          `The graph is concave ${up ? "up" : "down"} where $f''(x) ${rel} 0$: $${lin(6 * a, 2 * b)} ${rel} 0$`,
+          up ? `$${coef(6 * a, "x")} > ${-2 * b}$, so $x > ${k}$.` : `$${coef(6 * a, "x")} < ${-2 * b}$, and dividing by the negative number $${6 * a}$ reverses the inequality: $x > ${k}$.`, `$k = ${k}$`])] };
+    } });
+
+  // ======================= 5.9 kinematics: more ways to ask =======================
+  const KM = { type: "t5-kinematics-motion", syllabus: ["5.9"], representation: "equation", format: "value" };
+  const MOVES = "A particle moves in a straight line.";
+  reg({ ...KM, unknown: "velocity-expression", levels: [1], skills: ["SL5.9.velocity-acceleration"], title: "Velocity from displacement",
+    build({ rng }) {
+      const a = rng.int(1, 6), b = rng.nonzero(-9, 9);
+      return { params: { a, b }, stem: `${MOVES} Its displacement, $s$ metres, from a fixed point $\\mathrm{O}$ at time $t$ seconds is $s(t) = ${poly([a, b, 0], "t")}$, for $t \\ge 0$. Its velocity, in $\\text{m s}^{-1}$, is $v(t) = pt + q$, where $p$ and $q$ are constants.`, parts: [
+        P("Write down the value of $p$.", 1, ans.int(2 * a), [`Velocity is the rate of change of displacement: $v(t) = s'(t) = ${lin(2 * a, b, "t")}$`, `$p = ${2 * a}$`]),
+        P("Write down the value of $q$.", 1, ans.int(b), [`$q = ${b}$`])] };
+    } });
+  reg({ ...KM, unknown: "velocity-at-time", levels: [2], skills: ["SL5.9.velocity-acceleration"], title: "Velocity and acceleration from displacement",
+    build({ rng }) {
+      const a = rng.int(1, 2), b = rng.nonzero(-6, 6), c = rng.int(0, 8), t1 = rng.int(1, 4), v = 3 * a * t1 * t1 + 2 * b * t1 + c, acc = 6 * a * t1 + 2 * b;
+      return { params: { a, b, c, t1 }, stem: `${MOVES} Its displacement, $s$ metres, from a fixed point $\\mathrm{O}$ at time $t$ seconds is $s(t) = ${poly([a, b, c, 0], "t")}$, for $t \\ge 0$.`, parts: [
+        P(`Find the velocity of the particle, in $\\text{m s}^{-1}$, when $t = ${t1}$.`, 2, ans.int(v), [`$v(t) = s'(t) = ${poly([3 * a, 2 * b, c], "t")}$`, `$v(${t1}) = ${expr([[3 * a, `${br(t1)}^{2}`], [2 * b, br(t1)], [c, ""]])} = ${v}$`]),
+        P(`Find the acceleration of the particle, in $\\text{m s}^{-2}$, when $t = ${t1}$.`, 2, ans.int(acc), [`$a(t) = v'(t) = ${lin(6 * a, 2 * b, "t")}$`, `$a(${t1}) = ${6 * a}${br(t1)} ${signed(2 * b)} = ${acc}$`])] };
+    } });
+  reg({ ...KM, unknown: "first-at-rest", levels: [2], skills: ["SL5.9.rest-and-direction", "SL5.9.velocity-acceleration"], title: "When a particle is first at rest",
+    build({ rng }) {
+      const a = rng.int(1, 3), p = rng.int(1, 4), q = p + rng.int(1, 4), acc = a * (p - q);
+      return { params: { a, p, q }, stem: `${MOVES} Its velocity, $v\\text{ m s}^{-1}$, at time $t$ seconds is $v(t) = ${poly([a, -a * (p + q), a * p * q], "t")}$, for $t \\ge 0$.`, parts: [
+        P("Find the time at which the particle is first instantaneously at rest.", 2, ans.int(p), [
+          `The particle is at rest when $v(t) = 0$: $${a === 1 ? "" : a}${factor(p, "t")}${factor(q, "t")} = 0$`, `$t = ${p}$ or $t = ${q}$, so it is first at rest when $t = ${p}$.`]),
+        P("Find the acceleration of the particle, in $\\text{m s}^{-2}$, at this time.", 2, ans.int(acc), [`$a(t) = v'(t) = ${lin(2 * a, -a * (p + q), "t")}$`, `$a(${p}) = ${2 * a}${br(p)} - ${a * (p + q)} = ${acc}$`])] };
+    } });
+
+  // ======================= 5.10 integration by recognition, and trigonometric antiderivatives =======================
+  reg({ ...II, syllabus: ["5.10", "5.11"], unknown: "inspection-power", format: "value", levels: [3], skills: ["SL5.10.inspection-substitution", "SL5.10.hence-from-derivative", "SL5.11.evaluate-definite"], title: "Integrate by recognising a derivative, then evaluate",
+    build({ rng }) {
+      const n = rng.int(2, 3), c = rng.int(1, 3), A = rng.pick([rat.Q(1, 2), rat.Q(3), rat.Q(2), rat.Q(3, 2)]), k = rat.num(rat.mul(A, 2 * (n + 1))), inner = `\\left(x^{2} + ${c}\\right)`;
+      const val = rat.mul(A, (1 + c) ** (n + 1) - c ** (n + 1)), integrand = `${k}x${inner}^{${n}}`;
+      return { params: { n, c, k }, stem: `Let $g(x) = ${inner}^{${n + 1}}$.`, parts: [
+        P(`The derivative of $g$ can be written as $g'(x) = px${inner}^{${n}}$. Find the value of $p$.`, 2, ans.int(2 * (n + 1)), [
+          `By the chain rule, $g'(x) = ${n + 1}${inner}^{${n}} \\times 2x = ${2 * (n + 1)}x${inner}^{${n}}$`, `$p = ${2 * (n + 1)}$`]),
+        P(`It follows that $\\displaystyle\\int ${integrand}${dx} = A${inner}^{${n + 1}} + C$, where $A$ is a constant. Find the value of $A$.`, 2, ans.frac(A.n, A.d), [
+          `$${integrand} = ${rat.tex(A)} \\times g'(x)$, because $${rat.tex(A)} \\times ${2 * (n + 1)} = ${k}$.`, `Integrating $g'(x)$ gives $g(x)$, so $A = ${rat.tex(A)}$.`]),
+        P(`Hence find the value of $\\displaystyle\\int_{0}^{1} ${integrand}${dx}$.`, 3, ans.frac(val.n, val.d), [
+          `$\\displaystyle\\int_{0}^{1} ${integrand}${dx} = \\left[${coef(A, `${inner}^{${n + 1}}`)}\\right]_{0}^{1}$`, `$= ${coef(A, `${br(1 + c)}^{${n + 1}}`)} - ${coef(A, `${br(c)}^{${n + 1}}`)}$`, `$= ${rat.tex(val)}$`])] };
+    } });
+  reg({ ...AC, syllabus: ["5.10"], unknown: "trig-chain", format: "mcq", levels: [3], skills: ["SL5.10.find-function-from-derivative", "SL5.10.linear-composites", "SL5.10.standard-integrals"], title: "Find a function from a trigonometric derivative and a value",
+    build({ rng }) {
+      const b = rng.int(2, 4), j = rng.pick([1, 2, 3, -1, -2]), k = rng.pick([1, 2, 3, 4, 6]), c0 = rng.nonzero(-5, 5), a = b * j;
+      const fp = [[a, "cos", b], [k, "pow", 0]], right = [[j, "sin", b], [k, "pow", 1], [c0, "pow", 0]], opt = termOpt("f(x) = ");
+      const xq = piFrac(1, 2 * b), v = j + (k * Math.PI) / (2 * b) + c0, tex = `${piFrac(k, 2 * b)} ${signed(j + c0)}`.trim();
+      return { params: { fp, c0, b }, stem: `The derivative of a function $f$ is $f'(x) = ${termsTex(fp)}$. It is given that $f(0) = ${c0}$.`, parts: [
+        P("Which expression is $f(x)$?", 3, ans.choice(rng, opt(right), [
+          opt([[a, "sin", b], [k, "pow", 1], [c0, "pow", 0]], `Integrating $\\cos ${b}x$ divides by $${b}$.`),
+          opt([[-j, "sin", b], [k, "pow", 1], [c0, "pow", 0]], "The integral of $\\cos u$ is $\\sin u$, with no change of sign."),
+          opt([[j, "sin", b], [k, "pow", 1]], `A constant of integration is needed so that $f(0) = ${c0}$.`), opt([[a * b, "sin", b], [k, "pow", 1], [c0, "pow", 0]])]), [
+          `$f(x) = \\displaystyle\\int \\left(${termsTex(fp)}\\right)${dx} = ${termsTex([[j, "sin", b], [k, "pow", 1]])} + C$`, `$f(0) = ${c0}$ and $\\sin 0 = 0$, so $C = ${c0}$.`, `$f(x) = ${termsTex(right)}$`]),
+        P(`Find the exact value of $f\\left(${xq}\\right)$.`, 3, ans.exact(v, tex), [
+          `$f\\left(${xq}\\right) = ${expr([[j, "\\sin\\left(\\dfrac{\\pi}{2}\\right)"], [k, `\\left(${xq}\\right)`], [c0, ""]])}$`, `$\\sin\\left(\\dfrac{\\pi}{2}\\right) = 1$, so $f\\left(${xq}\\right) = ${tex}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -242,4 +242,85 @@ export default {
     T.require(cross.length === 1, "the tangent crosses the x-axis once");
     return { a: ap(T, f(x0)), b: ap(T, mm), c: ap(T, L(0)), d: ap(T, cross[0]) };
   },
+
+  // ---------------- 5.5 ----------------
+  "t5-indefinite-integral/power-polynomial/equation": (q, T) => {
+    const { n, a } = q.params, F = (x) => T.integrate((t) => a * t ** n, 0, x);
+    // the antiderivative through the origin is p x^q: p is its value at 1, q is how it grows from 1 to 2
+    return { a: T.approx(Math.log(F(2) / F(1)) / Math.log(2), 1e-6), b: ap(T, F(1), 1e-7) };
+  },
+  "t5-antiderivative-condition/poly-function/equation": (q, T) => {
+    const { a, b, c, x0, y0, x1 } = q.params, fp = (x) => 3 * a * x * x + 2 * b * x + c;
+    const f0 = y0 - T.integrate(fp, 0, x0);
+    T.require(Math.abs(f0) > 1e-6, "the constant of integration is not zero");
+    return { a: T.approx(f0, 1e-7), b: T.approx(y0 + T.integrate(fp, x0, x1), 1e-7) };
+  },
+  "t5-antiderivative-condition/negative-power/equation": (q, T) => {
+    const { a, b, y0 } = q.params, fp = (x) => 2 * a * x + b / (x * x);
+    const pick = termsOption(q, "a", fp, T, true), C = y0 - termsVal(q.parts[0].answer.values[pick.index], 1);
+    T.require(Math.abs(C) > 1e-9, "the constant of integration is not zero");
+    return { a: pick, b: T.approx(C, 1e-9), c: T.approx(y0 + T.integrate(fp, 1, 2), 1e-7) };
+  },
+
+  // ---------------- 5.6 ----------------
+  "t5-differentiation-rules/standard-terms/equation": (q, T) => ({ a: termsOption(q, "a", (x) => T.deriv((t) => termsVal(q.params.f, t), x), T) }),
+  "t5-differentiation-rules/chain-function/equation": (q, T) => {
+    const fp = (x) => T.deriv((t) => termsVal(q.params.f, t), x);
+    return { a: termsOption(q, "a", fp, T), b: ap(T, fp(0)) };
+  },
+  "t5-differentiation-rules/quotient-linear/equation": (q, T) => {
+    const { a, b, c, d, x0 } = q.params, f = (x) => (a * x + b) / (c * x + d), fp = (x) => T.deriv(f, x), top = (x) => fp(x) * (c * x + d) ** 2;
+    T.require(Math.abs(top(0.37) - top(1.21)) < 1e-5, "the numerator of the derivative is a constant");
+    T.require(Math.abs(top(0.37)) > 1e-3, "the quotient is not a constant");
+    return { a: T.approx(top(0.37), 1e-5), b: ap(T, fp(x0)) };
+  },
+  "t5-differentiation-rules/gradient-product/equation": (q, T) => {
+    const { a, b, k } = q.params, f = (x) => (a * x + b) * Math.exp(k * x), g = (x) => T.deriv(f, x) * Math.exp(-k * x);
+    // g is the linear factor px + q of the derivative
+    const flat = T.roots(g, -12.001, 12, 2400);
+    T.require(flat.length === 1, "one stationary point");
+    return { a: T.approx(g(1) - g(0), 1e-5), b: T.approx(g(0), 1e-5), c: T.approx(flat[0], 1e-5) };
+  },
+
+  // ---------------- 5.7 ----------------
+  "t5-concavity/second-derivative/equation": (q, T) => {
+    const { a, b, c, d } = q.params, f = (x) => a * x ** 3 + b * x * x + c * x + d, f2 = (x) => T.deriv2(f, x);
+    return { a: T.approx(f2(1) - f2(0), 1e-5), b: T.approx(f2(0), 1e-5) };
+  },
+  "t5-concavity/second-derivative-value/equation": (q, T) => {
+    const { a, b, c, x1, up } = q.params, f = (x) => a * x ** 3 + b * x * x + c * x, f2 = (x) => T.deriv2(f, x);
+    const z = T.roots(f2, -20.001, 20, 4000);
+    T.require(z.length === 1, "the second derivative has one zero");
+    T.require((f2(z[0] + 1) > 0) === up, "the graph is concave as stated to the right of k");
+    return { a: T.approx(f2(x1), 1e-5), b: T.approx(z[0], 1e-5) };
+  },
+
+  // ---------------- 5.9 ----------------
+  "t5-kinematics-motion/velocity-expression/equation": (q, T) => {
+    const { a, b } = q.params, v = (t) => T.deriv((x) => a * x * x + b * x, t);
+    return { a: T.approx(v(1) - v(0), 1e-6), b: T.approx(v(0), 1e-6) };
+  },
+  "t5-kinematics-motion/velocity-at-time/equation": (q, T) => {
+    const { a, b, c, t1 } = q.params, s = (t) => a * t ** 3 + b * t * t + c * t;
+    return { a: T.approx(T.deriv(s, t1), 1e-5), b: T.approx(T.deriv2(s, t1), 1e-5) };
+  },
+  "t5-kinematics-motion/first-at-rest/equation": (q, T) => {
+    const { a, p, q: q2 } = q.params, v = (t) => a * t * t - a * (p + q2) * t + a * p * q2;
+    const rest = T.roots(v, 0.001, 20, 8000);
+    T.require(rest.length === 2 && v(0) !== 0, "the particle starts moving and is at rest twice");
+    return { a: T.approx(rest[0], 1e-6), b: T.approx(T.deriv(v, rest[0]), 1e-5) };
+  },
+
+  // ---------------- 5.10 ----------------
+  "t5-indefinite-integral/inspection-power/equation": (q, T) => {
+    const { n, c, k } = q.params, g = (x) => (x * x + c) ** (n + 1), f = (x) => k * x * (x * x + c) ** n;
+    const A = T.integrate(f, 0.2, 0.9) / (g(0.9) - g(0.2));
+    T.require(Math.abs(T.deriv((x) => A * g(x), 0.6) - f(0.6)) < 1e-5 * f(0.6), "A g(x) differentiates back to the integrand");
+    return { a: T.approx(T.deriv(g, 1) / (1 + c) ** n, 1e-5), b: T.approx(A, 1e-7), c: ap(T, T.integrate(f, 0, 1), 1e-7) };
+  },
+  "t5-antiderivative-condition/trig-chain/equation": (q, T) => {
+    const { fp, c0, b } = q.params, d = (x) => termsVal(fp, x);
+    const pick = T.optionWhere(q, "a", (ts) => near(termsVal(ts, 0), c0) && XS.every((x) => near(T.deriv((t) => termsVal(ts, t), x), d(x))));
+    return { a: pick, b: ap(T, c0 + T.integrate(d, 0, Math.PI / (2 * b)), 1e-7) };
+  },
 };
