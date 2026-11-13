@@ -463,7 +463,7 @@
         P(`Write down the value of $f'(${a})$.`, 1, ans.int(mm), [`$f'(${a})$ is the gradient of the tangent at $x = ${a}$, which is $${mm}$.`]),
         P(`Find the value of $f(${a})$.`, 1, ans.int(mm * a + c), [`The tangent touches the graph where $x = ${a}$, so that point lies on the tangent: $f(${a}) = ${mm}${br(a)} ${signed(c)} = ${mm * a + c}$`])] };
     } });
-  reg({ ...TN, id: "t5-tangent-normal-equation/tangent-at-point/equation-cubic", unknown: "tangent-at-point", levels: [2], skills: ["SL5.4.tangent-equation", "SL5.3.gradient-at-point"], title: "Tangent to a cubic at a point",
+  reg({ ...TN, unknown: "tangent-to-cubic", levels: [2], skills: ["SL5.4.tangent-equation", "SL5.3.gradient-at-point"], title: "Tangent to a cubic at a point",
     build({ rng }) {
       let b, c, x0, mm;
       do { b = rng.nonzero(-4, 4); c = rng.int(-5, 5); x0 = rng.pick([1, 2, -1, -2]); mm = 3 * x0 * x0 + 2 * b * x0; } while (mm === 0);
@@ -502,7 +502,7 @@
         y0 = a * Math.exp(k * x0) + b * x0; mm = a * k * Math.exp(k * x0) + b; yi = y0 - mm * x0; xi = x0 - y0 / mm;
       } while (Math.abs(mm) < 0.5 || Math.abs(xi) > 40 || Math.abs(yi) < 0.2 || Math.abs(xi) < 0.2 || Math.abs(y0) < 0.2);
       return { params: { a, k, b, x0 }, stem: `The curve $C$ has equation $y = ${expr([[a, ek(k)], [b, "x"]])}$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$. The tangent to $C$ at $\\mathrm{A}$ meets the $y$-axis at $\\mathrm{Q}$ and the $x$-axis at $\\mathrm{R}$.`, parts: [
-        P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(y0), [`$y = ${expr([[a, `\\mathrm{e}^{${num(k * x0)}}`], [b, br(x0)]])} \\approx ${sf(y0)}$`]),
+        P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(y0), [`$y = ${expr([[a, `\\mathrm{e}^{${num(k * x0)}}`], [b * x0, ""]])} \\approx ${sf(y0)}$`]),
         P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), [`$${D} = ${expr([[a * k, ek(k)], [b, ""]])}$`, `At $x = ${x0}$: $${D} \\approx ${sf(mm)}$`]),
         P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`The tangent is $y = ${sf(mm)}(x - ${x0}) ${sg(y0)} ${sf(Math.abs(y0))}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
         P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the tangent and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };

@@ -216,7 +216,7 @@ export default {
     const { a, mm, c } = q.params, line = (x) => mm * x + c;
     return { a: T.approx(T.deriv(line, a), 1e-6), b: line(a) };
   },
-  "t5-tangent-normal-equation/tangent-at-point/equation-cubic": (q, T) => {
+  "t5-tangent-normal-equation/tangent-to-cubic/equation": (q, T) => {
     const { b, c, x0 } = q.params, f = (x) => x ** 3 + b * x * x + c, mm = T.deriv(f, x0);
     T.require(Math.abs(mm) > 1e-6, "the tangent is not horizontal");
     return { a: T.approx(mm, 1e-5), b: T.approx(f(x0) - mm * x0, 1e-4) };
