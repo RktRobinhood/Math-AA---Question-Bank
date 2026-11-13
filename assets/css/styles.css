@@ -570,6 +570,36 @@ table.qtable { width: auto; margin: 0 auto; }
 .ws-q .pl { display: flex; gap: 8px; margin-top: 6px; }
 .ws-q .pl .mk { margin-left: auto; }
 .ws-doc svg { max-width: 320px; height: auto; display: block; margin: 8px 0; }
+/* the scope chooser: open topics, a filter, "whole topic" against single ticks, removable chips */
+.scope-tools { display: flex; gap: var(--s3); align-items: center; flex-wrap: wrap; padding: 0 var(--s4) var(--s3); }
+.scope-tools .input { flex: 1; min-width: 200px; min-height: 40px; }
+.scope-note { padding: 0 var(--s4) var(--s3); color: var(--muted); font-size: var(--fs-sm); line-height: 1.45; }
+.scope-now .scope-note { padding-top: 0; }
+.scope-none { padding: var(--s4); color: var(--muted); border-top: 1px solid var(--line); }
+.scope-topic > summary { flex-wrap: wrap; }
+.scope-topic > summary::before { content: ""; width: 7px; height: 7px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(-45deg); transition: transform .12s; flex: none; margin: 0 4px 0 2px; }
+.scope-topic[open] > summary::before { transform: rotate(45deg); }
+.scope-topic > summary .tn { min-width: 0; }
+.scope-topic > summary .n.on { color: var(--accent); font-weight: 700; }
+.scope-topic > summary .whole { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-sm); font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 4px 9px; min-height: 32px; cursor: pointer; background: var(--surface); white-space: nowrap; }
+.scope-topic > summary .n { margin-left: auto; }
+.scope-topic > summary .whole:hover { border-color: var(--faint); color: var(--ink); }
+.scope-row.on { background: var(--accent-soft); }
+.scope-row.off { cursor: default; color: var(--faint); }
+.scope-row[hidden], .scope-topic[hidden] { display: none; }
+.scope-picked { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; padding: var(--s3) var(--s4) 0; border-top: 1px solid var(--line); }
+.scope-picked[hidden] { display: none; }
+.scope-more { display: inline-flex; gap: var(--s3); align-items: center; }
+.scope-picked + .scope-go { border-top: 0; }
+.scope-go { position: sticky; bottom: 0; background: var(--surface); border-radius: 0 0 var(--r) var(--r); z-index: 2; }
+.scope-now .scope-bar:first-child { border-top: 0; }
+.scope-now .chips { gap: 6px; }
+.st.pick { display: inline-flex; align-items: center; gap: 2px; padding-right: 0; line-height: 1.9; }
+.st.pick button { color: inherit; font-weight: 700; font-size: 14px; line-height: 1; width: 24px; height: 24px; border-radius: 0 3px 3px 0; display: grid; place-items: center; opacity: .7; }
+.st.pick button:hover { opacity: 1; background: color-mix(in srgb, currentColor 18%, transparent); }
+.mode-pick { display: inline-flex; align-items: center; gap: var(--s2); }
+.mode-pick .select { width: auto; min-height: 40px; }
+.way-pick { width: auto; max-width: 100%; min-width: 0; min-height: 40px; }
 
 /* ── paper panel pushes content only on wide screens ──────────────────────── */
 @media (max-width: 1279px) {
@@ -697,6 +727,16 @@ table.qtable { width: auto; margin: 0 auto; }
   .syl-sec > header { flex-direction: column; gap: 4px; }
 
   .prac { padding: var(--s3) var(--s3) var(--s6); }
+  .ws-doc { overflow-x: auto; }
+  .ws-q .pl { flex-wrap: wrap; }
+  .scope-go { bottom: calc(var(--tab-h) + env(safe-area-inset-bottom, 0px)); }
+  .scope-go { padding-top: var(--s2); padding-bottom: var(--s2); }
+  .scope-go .btn { flex: 1 1 100%; order: -1; }
+  .scope-go .mode-pick { flex: 1; }
+  .scope-go .mode-pick .select { flex: 1; }
+  .scope-row { padding-left: var(--s3); padding-right: var(--s3); gap: var(--s2); }
+  .scope-row .lv { white-space: normal; text-align: right; max-width: 92px; }
+  .scope-tools, .scope-note { padding-left: var(--s3); padding-right: var(--s3); }
   .qcard { padding: var(--s4) var(--s3); }
   .ans-row .input { flex: 1; width: auto; }
   .next-row .btn { flex: 1; }

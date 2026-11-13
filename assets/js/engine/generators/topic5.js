@@ -852,8 +852,8 @@
       const r1 = bisect(f, -a / b - 1, 0), r2 = bisect(f, 0, 6), area = F(r2) - F(r1), top = f(Math.log(b)), fx = expr([[a, ""], [b, "x"], [-1, "\\mathrm{e}^{x}"]]);
       return { params: { a, b },
         graph: { x: [Math.floor(r1) - 1, Math.ceil(r2) + 1], y: [-2, Math.ceil(top) + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "sum", of: [{ type: "poly", coeffs: [a, b] }, { type: "exp", a: -1 }] }, label: "f" }],
-          points: [{ x: r1, y: 0, label: "A" }, { x: r2, y: 0, label: "B" }], alt: "A curve that rises above the x-axis between the points A and B" },
-        stem: `The diagram shows the graph of $f(x) = ${fx}$. The graph crosses the $x$-axis at the points $\\mathrm{A}$ and $\\mathrm{B}$. The region $R$ is enclosed by the graph of $f$ and the $x$-axis.`, parts: [
+          points: [{ x: r1, y: 0, label: "A" }, { x: r2, y: 0, label: "B" }], regions: [{ x: [r1, r2], fn: 0 }], alt: "A curve that rises above the x-axis between the points A and B, with the region between the curve and the axis shaded" },
+        stem: `The diagram shows the graph of $f(x) = ${fx}$. The graph crosses the $x$-axis at the points $\\mathrm{A}$ and $\\mathrm{B}$. The region $R$, shaded in the diagram, is enclosed by the graph of $f$ and the $x$-axis.`, parts: [
           P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(r1), ["Find the zeros of $f$ on the GDC.", `The left-hand zero is $x \\approx ${sf(r1)}$.`]),
           P("Find the $x$-coordinate of $\\mathrm{B}$.", 1, ans.sf(r2), [`The right-hand zero is $x \\approx ${sf(r2)}$.`]),
           P("Find the area of $R$.", 3, ans.sf(area), [
@@ -958,8 +958,8 @@
       const k = rng.int(1, 3), mU = k + rng.int(1, 2), I = rat.sub(rat.Q(mU ** 3, 3), k * k * mU), below = rat.Q(2 * k ** 3, 3), above = rat.add(I, below), area = rat.add(above, below);
       const body = `\\left(x^{2} - ${k * k}\\right)${dx}`, J = (lo, hi) => `\\displaystyle\\int_{${lo}}^{${hi}} ${body}`;
       return { params: { k, mU },
-        graph: { x: [-1, mU + 1], y: [-k * k - 1, mU * mU - k * k + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [-k * k, 0, 1] } }], asymptotes: [{ x: mU }], points: [{ x: k, y: 0 }], alt: "A parabola that crosses the x-axis, with a vertical dashed line to its right" },
-        stem: `The diagram shows part of the curve $y = x^{2} - ${k * k}$ and the line $x = ${mU}$. The region $R$ is bounded by the curve, the $x$-axis, the $y$-axis and the line $x = ${mU}$. Part of $R$ is below the $x$-axis and part is above it.`, parts: [
+        graph: { x: [-1, mU + 1], y: [-k * k - 1, mU * mU - k * k + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [-k * k, 0, 1] } }], asymptotes: [{ x: mU }], points: [{ x: k, y: 0 }], regions: [{ x: [0, mU], fn: 0 }], alt: "A parabola that crosses the x-axis, with a vertical dashed line to its right and the regions between the curve and the x-axis shaded" },
+        stem: `The diagram shows part of the curve $y = x^{2} - ${k * k}$ and the line $x = ${mU}$. The region $R$, shaded in the diagram, is bounded by the curve, the $x$-axis, the $y$-axis and the line $x = ${mU}$. Part of $R$ is below the $x$-axis and part is above it.`, parts: [
           P(`Find $${J(0, mU)}$.`, 2, ans.frac(I.n, I.d), [`$\\left[\\dfrac{x^{3}}{3} - ${coef(k * k, "x")}\\right]_{0}^{${mU}} = ${frac(mU ** 3, 3)} - ${k * k * mU}$`, `$= ${rat.tex(I)}$`]),
           P("Find the $x$-coordinate of the point where the curve crosses the positive $x$-axis.", 1, ans.int(k), [`$x^{2} - ${k * k} = 0$ and $x > 0$, so $x = ${k}$.`]),
           P("Find the total area of $R$.", 3, ans.frac(area.n, area.d), [
@@ -971,8 +971,8 @@
       const a = rng.int(2, 5), k = rng.pick([0.25, 0.4, 0.5, 0.8]), qU = rng.int(4, 6), F = (x) => -(a / k) * (x + 1 / k) * Math.exp(-k * x);
       const area = F(qU) - F(0), top = a / (k * Math.E), half = bisect((x) => F(x) - F(0) - area / 2, 0, qU), fx = `${a}x${ek(-k)}`;
       return { params: { a, k, qU },
-        graph: { x: [0, qU + 1], y: [0, Math.ceil(top) + 1], xStep: 1, functions: [{ fn: { type: "product", of: [{ type: "poly", coeffs: [0, a] }, { type: "exp", b: Math.exp(-k) }] }, label: "f" }], asymptotes: [{ x: qU }], alt: "A curve that rises from the origin to a maximum and then falls, with a vertical dashed line" },
-        stem: `The diagram shows the graph of $f(x) = ${fx}$, for $x \\ge 0$, and the line $x = ${qU}$. The region $R$ is enclosed by the graph of $f$, the $x$-axis and the line $x = ${qU}$.`, parts: [
+        graph: { x: [0, qU + 1], y: [0, Math.ceil(top) + 1], xStep: 1, functions: [{ fn: { type: "product", of: [{ type: "poly", coeffs: [0, a] }, { type: "exp", b: Math.exp(-k) }] }, label: "f" }], asymptotes: [{ x: qU }], regions: [{ x: [0, qU], fn: 0 }], alt: "A curve that rises from the origin to a maximum and then falls, with a vertical dashed line and the region under the curve shaded" },
+        stem: `The diagram shows the graph of $f(x) = ${fx}$, for $x \\ge 0$, and the line $x = ${qU}$. The region $R$, shaded in the diagram, is enclosed by the graph of $f$, the $x$-axis and the line $x = ${qU}$.`, parts: [
           P("Find the maximum value of $f$.", 2, ans.sf(top), [`Find the maximum point of the graph of $f$ on the GDC. It is at $x = ${sf(1 / k)}$.`, `The maximum value is approximately $${sf(top)}$.`]),
           P("Find the area of $R$.", 2, ans.sf(area), [`Area: $\\displaystyle\\int_{0}^{${qU}} ${fx}${dx}$`, `Using the GDC, the area is approximately $${sf(area)}$.`]),
           P("The line $x = m$ divides $R$ into two regions of equal area. Find the value of $m$.", 3, ans.sf(half), [
@@ -1004,8 +1004,8 @@
       do { a = rng.int(1, 2); k = rng.int(1, 3); } while (a * k * k > 9);
       const c = rng.int(0, 3), top = 2 * a * k * k + c, area = rat.Q(8 * a * k ** 3, 3), Fk = rat.Q(4 * a * k ** 3, 3), fT = poly([a, 0, c]), gT = poly([-a, 0, top]);
       return { params: { a, c, top },
-        graph: { x: [-k - 1, k + 1], y: [-1, top + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [c, 0, a] }, label: "f" }, { fn: { type: "poly", coeffs: [top, 0, -a] }, label: "g" }], alt: "Two parabolas, one opening upwards and one opening downwards, crossing at two points" },
-        stem: `The diagram shows the graphs of $f(x) = ${fT}$ and $g(x) = ${gT}$. The graphs intersect at two points and enclose a region $R$.`, parts: [
+        graph: { x: [-k - 1, k + 1], y: [-1, top + 1], xStep: 1, functions: [{ fn: { type: "poly", coeffs: [c, 0, a] }, label: "f" }, { fn: { type: "poly", coeffs: [top, 0, -a] }, label: "g" }], regions: [{ x: [-k, k], fn: 0, to: 1 }], alt: "Two parabolas, one opening upwards and one opening downwards, crossing at two points, with the region between them shaded" },
+        stem: `The diagram shows the graphs of $f(x) = ${fT}$ and $g(x) = ${gT}$. The graphs intersect at two points and enclose a region $R$, which is shaded.`, parts: [
           P("Find the positive value of $x$ at which the graphs intersect.", 2, ans.int(k), [`$${fT} = ${gT}$ gives $${coef(2 * a, "x^{2}")} = ${2 * a * k * k}$`, `$x^{2} = ${k * k}$, so $x = ${k}$ or $x = ${-k}$. The positive value is $${k}$.`]),
           P("Find the exact area of $R$.", 4, ans.frac(area.n, area.d), [
             `Between the points of intersection $g(x) \\ge f(x)$, so the area is $\\displaystyle\\int_{${-k}}^{${k}} \\left(g(x) - f(x)\\right)${dx} = \\displaystyle\\int_{${-k}}^{${k}} \\left(${poly([-2 * a, 0, 2 * a * k * k])}\\right)${dx}$`,
@@ -1016,8 +1016,8 @@
       const a = rng.int(2, 4), b = rng.pick([0.5, 1, 1.5, 2]), d = (x) => a * Math.sin(x) - b * x * x, pX = bisect(d, 0.3, Math.PI), area = a * (1 - Math.cos(pX)) - (b * pX ** 3) / 3;
       const xm = bisect((x) => a * Math.cos(x) - 2 * b * x, 0, pX), gap = d(xm), gx = coef(b, "x^{2}");
       return { params: { a, b },
-        graph: { x: [0, 4], y: [-1, a + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "trig", name: "sin", a }, label: "f" }, { fn: { type: "poly", coeffs: [0, 0, b] }, label: "g" }], points: [{ x: pX, y: a * Math.sin(pX), label: "A" }], alt: "A sine curve and a parabola that cross at the origin and at the point A" },
-        stem: `The diagram shows the graphs of $f(x) = ${a}\\sin x$ and $g(x) = ${gx}$, for $x \\ge 0$. The graphs intersect at the origin and at the point $\\mathrm{A}$. The region $R$ is enclosed by the two graphs.`, parts: [
+        graph: { x: [0, 4], y: [-1, a + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "trig", name: "sin", a }, label: "f" }, { fn: { type: "poly", coeffs: [0, 0, b] }, label: "g" }], points: [{ x: pX, y: a * Math.sin(pX), label: "A" }], regions: [{ x: [0, pX], fn: 0, to: 1 }], alt: "A sine curve and a parabola that cross at the origin and at the point A, with the region between them shaded" },
+        stem: `The diagram shows the graphs of $f(x) = ${a}\\sin x$ and $g(x) = ${gx}$, for $x \\ge 0$. The graphs intersect at the origin and at the point $\\mathrm{A}$. The region $R$, shaded in the diagram, is enclosed by the two graphs.`, parts: [
           P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(pX), [`With the GDC in radians, solve $${a}\\sin x = ${gx}$ and take the solution with $x > 0$.`, `$x \\approx ${sf(pX)}$`]),
           P("Find the area of $R$.", 3, ans.sf(area), [
             `Between the origin and $\\mathrm{A}$ the graph of $f$ is above the graph of $g$, so the area is $\\displaystyle\\int_{0}^{${sf(pX)}} \\left(${a}\\sin x - ${gx}\\right)${dx}$.`, `Using the unrounded limit on the GDC, the area is approximately $${sf(area)}$.`]),

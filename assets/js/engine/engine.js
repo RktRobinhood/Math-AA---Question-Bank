@@ -356,38 +356,135 @@
     g.levels = g.levels.slice().sort();
     byId.set(g.id, g);
     E.registry.push(g);
+    courseIndex.clear();
     return g;
   };
   // Registers several generators that share fields: registerAll({syllabus, skills, ...}, [defs]).
   E.registerAll = function (shared, defs) { return defs.map((d) => E.register(Object.assign({}, shared, d))); };
   E.generator = (id) => byId.get(id);
+
+  // ---- courses ---------------------------------------------------------------------
+  // A generator is written once, for its home course (courses[0], "aa-sl"), and names that course's
+  // syllabus codes. Every statement also has a permanent id that is the same in every course whose
+  // syllabus contains it ("SL1.8" is 1.8 in AA and 1.11 in AI HL). With a catalogue (QB_TYPES) the
+  // engine offers a generator in every course that contains all of its statements, under that
+  // course's codes. Without one, a generator is offered in the courses it lists, codes as written.
+  const DEFAULT_COURSE = "aa-sl";
+  let catalogue = null;
+  const courseMaps = new Map();    // course -> {byCode: code -> statement id, byId: id -> code}
+  const courseIndex = new Map();   // course -> {list: [{g, codes}], byPrimary: code -> [{g, codes}]}
+  E.useCatalogue = function (cat) {
+    if (cat === catalogue) return E;
+    catalogue = cat || null;
+    courseMaps.clear();
+    courseIndex.clear();
+    for (const c of Object.keys((cat && cat.statements) || {})) {
+      const list = cat.statements[c];
+      courseMaps.set(c, { byCode: new Map(list.map((s) => [s.code, s.id])), byId: new Map(list.map((s) => [s.id, s.code])) });
+    }
+    return E;
+  };
+  function maps() {
+    if (!catalogue && root.QB_TYPES && root.QB_TYPES.statements) E.useCatalogue(root.QB_TYPES);
+    return courseMaps;
+  }
+  // The permanent statement ids of a generator, or null when no catalogue names its home course.
+  function statementIds(g) {
+    const home = maps().get(g.courses[0]);
+    if (!home) return null;
+    const ids = g.syllabus.map((code) => home.byCode.get(code));
+    return ids.every(Boolean) ? ids : null;
+  }
+  // The generator's syllabus codes as the course numbers them, or null when it is not offered there.
+  function codesIn(g, course) {
+    if ((g.notFor || []).includes(course)) return null;
+    const to = maps().get(course), ids = statementIds(g);
+    if (!to || !ids) return g.courses.includes(course) ? g.syllabus : null;
+    const codes = ids.map((id) => to.byId.get(id));
+    return codes.every(Boolean) ? codes : null;
+  }
+  function indexOf(course) {
+    maps();
+    let ix = courseIndex.get(course);
+    if (!ix) {
+      ix = { list: [], byPrimary: new Map() };
+      for (const g of E.registry) {
+        const codes = codesIn(g, course);
+        if (!codes) continue;
+        const row = { g, codes };
+        ix.list.push(row);
+        if (!ix.byPrimary.has(codes[0])) ix.byPrimary.set(codes[0], []);
+        ix.byPrimary.get(codes[0]).push(row);
+      }
+      courseIndex.set(course, ix);
+    }
+    return ix;
+  }
+  // Every course a generator is offered in, home course first.
+  function offeredIn(g) {
+    const out = g.courses.filter((c) => codesIn(g, c));
+    for (const c of maps().keys()) if (!out.includes(c) && codesIn(g, c)) out.push(c);
+    return out;
+  }
+  E.courses = () => [...maps().keys()];
+  // What the catalogue says about a course: {id, short, name, papers: [{id, name, calculator}]}.
+  E.courseInfo = function (course) {
+    maps();
+    return (catalogue && catalogue.courses && catalogue.courses[course]) || null;
+  };
+  // True when one of the course's papers bans the calculator (AA). A course the catalogue does
+  // not describe counts as one that does.
+  E.hasNoCalculatorPaper = function (course) {
+    const info = E.courseInfo(course);
+    return !info || !info.papers || info.papers.some((p) => p.calculator === false);
+  };
+  // The name of a level for a course. "Paper 1" means no calculator only where a paper bans it;
+  // in a course whose papers all allow one (AI), levels 3 and 4 are named by what they ask for.
+  E.levelName = function (level, course) {
+    const base = E.LEVELS[level] ? E.LEVELS[level].name : "";
+    if (E.hasNoCalculatorPaper(course || DEFAULT_COURSE)) return base;
+    return level === 3 ? "Exam level, exact answers" : level === 4 ? "Exam level, calculator" : base;
+  };
+  // The calculator line for a question: never "No calculator" as a rule in a course with no such paper.
+  E.calculatorLabel = function (question) {
+    if (question.calculator) return "Calculator";
+    return E.hasNoCalculatorPaper(question.course) ? "No calculator" : "Exact answer expected";
+  };
   const calcOf = (g, level) => (typeof g.calculator === "function" ? Boolean(g.calculator(level)) : Boolean(g.calculator));
   // The public description of a generator.
-  function describe(g) {
+  // With a course, syllabus is in that course's codes.
+  function describe(g, codes) {
     return { id: g.id, type: g.type, unknown: g.unknown, representation: g.representation, format: g.format, title: g.title || g.unknown,
-      courses: g.courses.slice(), levels: g.levels.slice(), syllabus: g.syllabus.slice(), skills: g.skills.slice(),
+      courses: offeredIn(g), home: g.courses[0], statements: statementIds(g), levels: g.levels.slice(), syllabus: (codes || g.syllabus).slice(), skills: g.skills.slice(),
       calculator: Object.fromEntries(g.levels.map((l) => [l, calcOf(g, l)])), source: g.source || null, situation: g.situationKey || null };
   }
-  // Generators matching a filter {course, type, unknown, representation, format, level, syllabus, skill, primary}.
-  // syllabus matches any of the generator's codes unless primary is true (then only its first).
-  function find(f) {
+  // Generators matching a filter {course, type, unknown, representation, format, level, syllabus, skill, primary},
+  // as [{g, codes}]. With a course, only generators offered in it match and syllabus is one of that
+  // course's codes; without one, syllabus is a home-course code. syllabus matches any of the
+  // generator's codes unless primary is true (then only its first).
+  function rows(f) {
     f = f || {};
-    return E.registry.filter((g) =>
-      (!f.course || g.courses.includes(f.course)) &&
+    let pool;
+    if (f.course) {
+      const ix = indexOf(f.course);
+      pool = f.syllabus && f.primary ? ix.byPrimary.get(f.syllabus) || [] : ix.list;
+    } else pool = E.registry.map((g) => ({ g, codes: g.syllabus }));
+    return pool.filter(({ g, codes }) =>
       (!f.type || g.type === f.type) &&
       (!f.unknown || g.unknown === f.unknown) &&
       (!f.representation || g.representation === f.representation) &&
       (!f.format || g.format === f.format) &&
       (f.level === undefined || f.level === null || g.levels.includes(f.level)) &&
-      (!f.syllabus || (f.primary ? g.syllabus[0] === f.syllabus : g.syllabus.includes(f.syllabus))) &&
+      (!f.syllabus || (f.primary ? codes[0] === f.syllabus : codes.includes(f.syllabus))) &&
       (!f.skill || g.skills.includes(f.skill)));
   }
-  E.generators = (f) => find(f).map(describe);
-  // Levels with at least one generator, per syllabus code (first code of each generator).
+  const find = (f) => rows(f).map((r) => r.g);
+  E.generators = (f) => rows(f).map((r) => describe(r.g, r.codes));
+  // Levels with at least one generator, per syllabus code of the course (first code of each generator).
   E.coverage = function (course) {
     const out = {};
-    for (const g of find({ course })) {
-      const c = (out[g.syllabus[0]] = out[g.syllabus[0]] || { levels: [], generators: [], types: [] });
+    for (const { g, codes } of rows({ course })) {
+      const c = (out[codes[0]] = out[codes[0]] || { levels: [], generators: [], types: [] });
       for (const l of g.levels) if (!c.levels.includes(l)) c.levels.push(l);
       c.generators.push(g.id);
       if (!c.types.includes(g.type)) c.types.push(g.type);
@@ -397,7 +494,6 @@
   };
 
   // ---- make ---------------------------------------------------------------------
-  const DEFAULT_COURSE = "aa-sl";
   E.make = function (req) {
     req = req || {};
     const course = req.course || DEFAULT_COURSE;
@@ -406,6 +502,7 @@
     if (req.generator) {
       g = byId.get(req.generator);
       if (!g) throw new Error(`no generator ${req.generator}`);
+      if (!codesIn(g, course)) throw new Error(`generator ${g.id} is not offered in ${course}`);
     } else {
       if (!req.type) throw new Error("make() needs a type");
       const found = find({ course, type: req.type, unknown: req.unknown, representation: req.representation, format: req.format, level: req.level })
@@ -429,7 +526,7 @@
     const q = {
       id: [course, g.type, g.unknown, g.representation, "L" + level, g.format, seed].join(":"),
       generator: g.id, course, type: g.type, unknown: g.unknown, representation: g.representation, format: g.format,
-      title: g.title || g.unknown, syllabus: g.syllabus.slice(), skills: g.skills.slice(), level,
+      title: g.title || g.unknown, syllabus: codesIn(g, course).slice(), skills: g.skills.slice(), level,
       calculator: built.calculator === undefined ? calcOf(g, level) : Boolean(built.calculator),
       marks: parts.reduce((s, p) => s + p.marks, 0), seed, request,
       stem: built.stem || "", parts,
@@ -460,7 +557,7 @@
   E.signature = (q) => String(E.hash(q.stem + "|" + q.parts.map((p) => p.prompt + "=" + (p.answer.display || p.answer.correct)).join("|")));
 
   // ---- worksheet ---------------------------------------------------------------------
-  // A fixed set of questions for printing. opts: {course, scope: [codes], count, levels: {2: 1, 3: 1}
+  // A fixed set of questions for printing. opts: {course, scope: [the course's codes], count, levels: {2: 1, 3: 1}
   // (relative weights), seed, real: {code: [{id, marks}]}}. Codes with no generator at any wanted
   // level give real question IDs instead (when real is passed). Same options, same worksheet.
   E.worksheet = function (opts) {

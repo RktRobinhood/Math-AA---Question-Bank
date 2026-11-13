@@ -358,7 +358,7 @@ for (const [topic, name] of Object.entries(topics)) {
 const generatorFiles = fs.readdirSync(path.join(ROOT, "assets/js/engine/generators")).filter((f) => f.endsWith(".js")).sort();
 write("practice.html", page({
   base: "./", title: "Practice | IB Math Question Bank", nav: "practice",
-  description: "Adaptive IB Mathematics AA SL practice: generated questions with worked solutions, by subtopic.",
+  description: "Adaptive IB Mathematics practice for AA and AI, SL and HL: generated questions with worked solutions, by subtopic.",
   head: `\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [

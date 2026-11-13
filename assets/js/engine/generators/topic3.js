@@ -10,6 +10,46 @@
   const reg = (def) => E.register(Object.assign({ courses: ["aa-sl"], calculator: false }, def));
   const rad = (d) => (d * Math.PI) / 180;
 
+  // ---- Diagrams: QBEngine.graph figures (see graph.js). Labels are plain text, not LaTeX. ----
+  const pol = (r, a) => [r * Math.cos(rad(a)), r * Math.sin(rad(a))];
+  const dl = (a) => `${a}°`, ul = (v, u) => `${v} ${u}`;
+  // a multiple of pi as plain text: piText(2, 3) is 2π/3
+  const piText = (n, d) => { const q = rat.Q(n, d); return `${q.n === 1 ? "" : q.n}π${q.d === 1 ? "" : "/" + q.d}`; };
+  // A triangle. names: three letters; pts: the vertices in the same order; o.sides[i] labels the side from
+  // vertex i to the next; o.angles[i] labels the angle at vertex i; o.right: the vertex with a right angle;
+  // o.dash: a side drawn dashed; o.more: further shapes.
+  function triangle(names, pts, o) {
+    const sides = o.sides || [], shapes = [];
+    if (o.dash === undefined) shapes.push({ type: "polygon", points: pts, labels: names.split(""), sides });
+    else {
+      pts.forEach((p, i) => shapes.push({ type: "line", from: p, to: pts[(i + 1) % 3], label: sides[i] || undefined, dashed: i === o.dash }));
+      pts.forEach((p, i) => shapes.push({ type: "point", at: p, label: names[i], dot: false }));
+    }
+    (o.angles || []).forEach((t, i) => { if (t) shapes.push({ type: "angle", at: pts[i], from: pts[(i + 1) % 3], to: pts[(i + 2) % 3], label: t }); });
+    if (o.right !== undefined) shapes.push({ type: "angle", at: pts[o.right], from: pts[(o.right + 1) % 3], to: pts[(o.right + 2) % 3], right: true });
+    return { shapes: shapes.concat(o.more || []), alt: o.alt || `Triangle ${names} with the given lengths and angles marked` };
+  }
+  // vertices of a triangle from two sides and the angle between them: the first side lies along the bottom
+  const sas = (c, b, A) => [[0, 0], [c, 0], pol(b, A)];
+  // A sector with centre O, drawn with its line of symmetry vertical. o.radius, o.angle and o.arc are labels;
+  // o.names: "OAB" or "O"; o.chord: draw [AB]; o.shade: shade the segment between the chord and the arc.
+  function sectorFig(r, degrees, o) {
+    const from = 90 - degrees / 2, to = 90 + degrees / 2, O = [0, 0], A = pol(r, from), B = pol(r, to), names = o.names || "";
+    const shapes = [{ type: "sector", centre: O, radius: r, from, to, label: o.arc }];
+    if (o.shade) shapes.push({ type: "segment", centre: O, radius: r, from, to, fill: true, stroke: false });
+    if (o.chord) shapes.push({ type: "line", from: A, to: B });
+    if (o.radius) shapes.push({ type: "line", from: O, to: A, label: o.radius });
+    [O, A, B].forEach((p, i) => { if (names[i]) shapes.push({ type: "point", at: p, label: names[i], dot: false }); });
+    if (o.angle) shapes.push({ type: "angle", at: O, from: A, to: B, label: o.angle });
+    return { shapes, alt: o.alt || "A sector of a circle with its radius and angle marked" };
+  }
+  // The cross-section of a cone through its vertex. Labels for the radius, the height and the slant height.
+  const coneFig = (r, h, labels) => ({ alt: "The cross-section of a cone: an isosceles triangle with its height drawn", shapes: [
+    { type: "polygon", points: [[-r, 0], [r, 0], [0, h]], sides: [null, labels.slant, null] },
+    { type: "line", from: [0, 0], to: [0, h], dashed: true, label: labels.height, side: 1 },
+    { type: "line", from: [0, 0], to: [r, 0], label: labels.radius, side: -1 },
+    { type: "angle", at: [0, 0], from: [r, 0], to: [0, h], right: true }] });
+
   // Exact values of sin, cos and tan at multiples of 30 and 45 degrees, as [value, LaTeX].
   const S3 = Math.sqrt(3), S2 = Math.SQRT2;
   const REF = {
@@ -53,7 +93,7 @@
     build({ rng }) {
       const b = rng.int(4, 12), a = rng.int(5, 13), A = rng.pick([32, 40, 47, 50, 58, 63, 70, 76, 80, 104, 115]);
       const c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(rad(A))), area = 0.5 * a * b * Math.sin(rad(A));
-      return { params: { a, b, A }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(b, "cm")}$, $\\mathrm{AC} = ${unit(a, "cm")}$ and $\\mathrm{B\\hat{A}C} = ${deg(A)}$.`, parts: [
+      return { graph: triangle("ABC", sas(b, a, A), { sides: [ul(b, "cm"), null, ul(a, "cm")], angles: [dl(A)] }), params: { a, b, A }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(b, "cm")}$, $\\mathrm{AC} = ${unit(a, "cm")}$ and $\\mathrm{B\\hat{A}C} = ${deg(A)}$.`, parts: [
         P("Find $\\mathrm{BC}$, in centimetres.", 3, ans.sf(c), [
           `$\\mathrm{BC}^{2} = ${b}^{2} + ${a}^{2} - 2${br(b)}${br(a)}\\cos ${deg(A)}$`, `$\\mathrm{BC}^{2} = ${sf(c * c, 4)}$`, `$\\mathrm{BC} = ${unit(sf(c), "cm")}$`]),
         P("Find the area of triangle $\\mathrm{ABC}$, in square centimetres.", 2, ans.sf(area), [`Area $= \\dfrac{1}{2}${br(b)}${br(a)}\\sin ${deg(A)}$`, `Area $= ${sf(area)}\\text{ cm}^{2}$`])] };
@@ -62,7 +102,7 @@
     build({ rng }) {
       const A = rng.pick([28, 35, 40, 44, 50, 57, 63]), a = rng.int(7, 12), b = rng.int(3, a - 2);
       const B = (Math.asin((b * Math.sin(rad(A))) / a) * 180) / Math.PI, C = 180 - A - B, c = (a * Math.sin(rad(C))) / Math.sin(rad(A));
-      return { params: { A, a, b }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{BC} = ${unit(a, "cm")}$ and $\\mathrm{AC} = ${unit(b, "cm")}$.`, parts: [
+      return { graph: triangle("ABC", sas(c, b, A), { sides: [null, ul(a, "cm"), ul(b, "cm")], angles: [dl(A)] }), params: { A, a, b }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{BC} = ${unit(a, "cm")}$ and $\\mathrm{AC} = ${unit(b, "cm")}$.`, parts: [
         P("Find $\\mathrm{A\\hat{B}C}$, in degrees.", 3, ans.sf(B), [
           `$\\dfrac{\\sin B}{${b}} = \\dfrac{\\sin ${deg(A)}}{${a}}$`, `$\\sin B = ${sf((b * Math.sin(rad(A))) / a, 4)}$`,
           `$\\mathrm{AC} < \\mathrm{BC}$, so $B$ is acute: $B = ${deg(sf(B))}$`]),
@@ -73,7 +113,7 @@
     build({ rng }) {
       const a = rng.pick([5, 7, 9, 12, 14]), b = rng.pick([6, 8, 10, 13, 15]), C = rng.pick([35, 50, 65, 110, 125, 98]);
       const c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(rad(C))), area = 0.5 * a * b * Math.sin(rad(C));
-      return { params: { a, b, C }, stem: `In triangle $\\mathrm{PQR}$, $\\mathrm{PQ} = ${unit(a, "cm")}$, $\\mathrm{PR} = ${unit(b, "cm")}$ and $\\mathrm{Q\\hat{P}R} = ${deg(C)}$.`, parts: [
+      return { graph: triangle("PQR", sas(a, b, C), { sides: [ul(a, "cm"), null, ul(b, "cm")], angles: [dl(C)] }), params: { a, b, C }, stem: `In triangle $\\mathrm{PQR}$, $\\mathrm{PQ} = ${unit(a, "cm")}$, $\\mathrm{PR} = ${unit(b, "cm")}$ and $\\mathrm{Q\\hat{P}R} = ${deg(C)}$.`, parts: [
         P("Find the area of triangle $\\mathrm{PQR}$, in square centimetres.", 3, ans.sf(area), [`Area $= \\dfrac{1}{2}${br(a)}${br(b)}\\sin ${deg(C)}$`, `Area $= ${sf(area)}\\text{ cm}^{2}$`]),
         P("Find $\\mathrm{QR}$, in centimetres.", 3, ans.sf(c), [`$\\mathrm{QR}^{2} = ${a}^{2} + ${b}^{2} - 2${br(a)}${br(b)}\\cos ${deg(C)}$`, `$\\mathrm{QR}^{2} = ${sf(c * c, 4)}$`, `$\\mathrm{QR} = ${unit(sf(c), "cm")}$`])] };
     } });
@@ -82,7 +122,7 @@
       const AB = rng.pick([8, 10, 12, 6.5, 9]), AC = rng.pick([11, 14, 16, 7.5, 13]), A = rng.pick([42, 58, 73, 66, 105, 37]);
       const BC = Math.sqrt(AB * AB + AC * AC - 2 * AB * AC * Math.cos(rad(A)));
       const right = "Two sides and the angle between them are known.";
-      return { params: { AB, AC, A }, stem: `Two straight paths leave a hut at $\\mathrm{A}$. One leads to a lake at $\\mathrm{B}$, $${unit(AB, "km")}$ away, and the other to a peak at $\\mathrm{C}$, $${unit(AC, "km")}$ away. The angle between the paths is $${deg(A)}$.`, parts: [
+      return { graph: triangle("ABC", sas(AB, AC, A), { sides: [ul(AB, "km"), null, ul(AC, "km")], angles: [dl(A)], dash: 1, alt: "Two paths from A, to B and to C, with the angle between them marked" }), params: { AB, AC, A }, stem: `Two straight paths leave a hut at $\\mathrm{A}$. One leads to a lake at $\\mathrm{B}$, $${unit(AB, "km")}$ away, and the other to a peak at $\\mathrm{C}$, $${unit(AC, "km")}$ away. The angle between the paths is $${deg(A)}$.`, parts: [
         P("Which statement explains why the cosine rule is the right tool for finding $\\mathrm{BC}$?", 1, ans.choice(rng, right, [
           { text: "Two angles and one side are known.", why: "Only one angle is given. Two angles and a side would suit the sine rule." },
           { text: "The triangle has a right angle.", why: "Nothing says the triangle is right-angled." },
@@ -97,7 +137,11 @@
       let A, a, b, sinB;
       do { A = rng.pick([25, 30, 35, 40, 28, 33]); a = rng.int(5, 9); b = a + rng.int(1, 4); sinB = (b * Math.sin(rad(A))) / a; } while (sinB > 0.96);
       const B1 = (Math.asin(sinB) * 180) / Math.PI, B2 = 180 - B1;
-      return { params: { A, a, b }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{BC} = ${unit(a, "cm")}$ and $\\mathrm{AC} = ${unit(b, "cm")}$. There are two possible triangles.`, parts: [
+      // the two positions of B on the line through A: the far one gives the acute angle
+      const foot = b * Math.cos(rad(A)), half = Math.sqrt(a * a - (b * Math.sin(rad(A))) ** 2);
+      const graph = triangle("ABC", [[0, 0], [foot + half, 0], pol(b, A)], { sides: [null, ul(a, "cm"), ul(b, "cm")], angles: [dl(A)],
+        more: [{ type: "line", from: pol(b, A), to: [foot - half, 0], dashed: true }], alt: "Triangle ABC, with the other possible position of the side BC drawn dashed" });
+      return { graph, params: { A, a, b }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{BC} = ${unit(a, "cm")}$ and $\\mathrm{AC} = ${unit(b, "cm")}$. There are two possible triangles. The diagram shows one of them, with the other possible position of $[\\mathrm{BC}]$ drawn dashed.`, parts: [
         P("Find the acute value of $\\mathrm{A\\hat{B}C}$, in degrees.", 3, ans.sf(B1), [`$\\dfrac{\\sin B}{${b}} = \\dfrac{\\sin ${deg(A)}}{${a}}$`, `$\\sin B = ${sf(sinB, 4)}$`, `$B = ${deg(sf(B1))}$`]),
         P("Find the obtuse value of $\\mathrm{A\\hat{B}C}$, in degrees.", 2, ans.sf(B2), [
           `$\\sin(${deg(180)} - B) = \\sin B$, so the other value is $${deg(180)} - ${deg(sf(B1, 4))}$.`, `$B = ${deg(sf(B2))}$, which is possible because $${deg(A)} + ${deg(sf(B2))} < ${deg(180)}$.`])] };
@@ -109,7 +153,7 @@
     build({ rng }) {
       const r = rng.int(3, 12), th = rng.pick([0.4, 0.5, 0.6, 0.8, 1.2, 1.5, 2, 2.5, 0.75, 1.25]);
       const arc = Number((r * th).toFixed(4)), area = Number((0.5 * r * r * th).toFixed(4));
-      return { params: { r, th }, stem: `A sector $\\mathrm{OAB}$ of a circle with centre $\\mathrm{O}$ has radius $${unit(r, "cm")}$ and angle $\\mathrm{A\\hat{O}B} = ${num(th)}$ radians.`, parts: [
+      return { graph: sectorFig(r, dgr(th), { names: "OAB", radius: ul(r, "cm"), angle: `${th} rad` }), params: { r, th }, stem: `A sector $\\mathrm{OAB}$ of a circle with centre $\\mathrm{O}$ has radius $${unit(r, "cm")}$ and angle $\\mathrm{A\\hat{O}B} = ${num(th)}$ radians.`, parts: [
         P("Find the length of the arc $\\mathrm{AB}$, in centimetres.", 2, ans.dec(arc), [`$l = r\\theta = ${r} \\times ${num(th)}$`, `$l = ${unit(arc, "cm")}$`]),
         P("Find the area of the sector, in square centimetres.", 3, ans.dec(area), [`$A = \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2} \\times ${r}^{2} \\times ${num(th)}$`, `$A = \\dfrac{1}{2} \\times ${r * r} \\times ${num(th)}$`, `$A = ${num(area)}\\text{ cm}^{2}$`])] };
     } });
@@ -270,7 +314,7 @@
   reg({ ...CONE, unknown: "cone-volume-from-slant", skills: ["SL3.1.volume-solids"], title: "Height and volume of a cone from its slant height",
     build({ sit }) {
       const { r, h, l } = sit;
-      return { stem: `A right circular cone has a base of radius $${unit(r, "cm")}$ and a slant height of $${unit(l, "cm")}$.`, parts: [
+      return { graph: coneFig(r, h, { radius: ul(r, "cm"), slant: ul(l, "cm"), height: "h" }), stem: `A right circular cone has a base of radius $${unit(r, "cm")}$ and a slant height of $${unit(l, "cm")}$. The diagram shows a vertical cross-section of the cone through its vertex.`, parts: [
         P("Find the vertical height of the cone, in centimetres.", 2, ans.int(h), [
           `The radius, the height $h$ and the slant height form a right-angled triangle: $h^{2} = ${l}^{2} - ${r}^{2} = ${l * l - r * r}$`, `$h = ${h}$`]),
         P("Find the volume of the cone, in cubic centimetres. Give your answer in terms of $\\pi$.", 2, ans.exact((Math.PI * r * r * h) / 3, piFrac(r * r * h, 3)), [
@@ -279,7 +323,7 @@
   reg({ ...CONE, unknown: "cone-total", skills: ["SL3.1.surface-area"], title: "Slant height and total surface area of a cone",
     build({ sit }) {
       const { r, h, l } = sit;
-      return { stem: `A solid right circular cone has a base of radius $${unit(r, "cm")}$ and a vertical height of $${unit(h, "cm")}$.`, parts: [
+      return { graph: coneFig(r, h, { radius: ul(r, "cm"), height: ul(h, "cm"), slant: "l" }), stem: `A solid right circular cone has a base of radius $${unit(r, "cm")}$ and a vertical height of $${unit(h, "cm")}$. The diagram shows a vertical cross-section of the cone through its vertex.`, parts: [
         P("Find the slant height of the cone, in centimetres.", 2, ans.int(l), [
           `The radius, the height and the slant height $l$ form a right-angled triangle: $l^{2} = ${r}^{2} + ${h}^{2} = ${l * l}$`, `$l = ${l}$`]),
         P("Find the total surface area of the cone, in square centimetres. Give your answer in terms of $\\pi$.", 2,
@@ -290,7 +334,7 @@
     skills: ["SL3.1.volume-solids"], title: "Volume of a sphere in terms of pi",
     build({ rng }) {
       const r = rng.int(2, 9), thing = rng.pick(["A solid sphere", "A spherical ball", "A spherical glass bead", "A spherical tank"]);
-      return { params: { r }, stem: `${thing} has a radius of $${unit(r, "cm")}$.`, parts: [
+      return { graph: { alt: "A circle with a radius drawn", shapes: [{ type: "circle", centre: [0, 0], radius: r }, { type: "point", at: [0, 0] }, { type: "line", from: [0, 0], to: pol(r, 25), label: ul(r, "cm") }] }, params: { r }, stem: `${thing} has a radius of $${unit(r, "cm")}$.`, parts: [
         P("Find its volume, in cubic centimetres. Give your answer in terms of $\\pi$.", 2, ans.exact((4 * Math.PI * r ** 3) / 3, piFrac(4 * r ** 3, 3)), [
           `$V = \\dfrac{4}{3}\\pi r^{3} = \\dfrac{4}{3}\\pi${br(r)}^{3}$`, `$V = \\dfrac{4}{3}\\pi \\times ${r ** 3} = ${piFrac(4 * r ** 3, 3)}\\text{ cm}^{3}$`])] };
     } });
@@ -300,7 +344,22 @@
       let a, b, c, AC, AG, ang;
       do { a = rng.int(16, 48) / 2; b = rng.int(10, 30) / 2; c = rng.int(8, 30) / 2; AC = Math.hypot(a, b); AG = Math.hypot(a, b, c); ang = dgr(Math.atan(c / AC)); }
       while (a <= b || ang < 12 || ang > 78 || [30, 45, 60].some((x) => Math.abs(ang - x) < 0.5) || edge(AC) || edge(AG) || edge(ang));
-      return { params: { a, b, c }, stem: `A cuboid has a horizontal rectangular base $\\mathrm{ABCD}$. The vertices $\\mathrm{E}$, $\\mathrm{F}$, $\\mathrm{G}$ and $\\mathrm{H}$ of the top face are vertically above $\\mathrm{A}$, $\\mathrm{B}$, $\\mathrm{C}$ and $\\mathrm{D}$ respectively. The lengths of the edges are $\\mathrm{AB} = ${unit(a, "cm")}$, $\\mathrm{BC} = ${unit(b, "cm")}$ and $\\mathrm{AE} = ${unit(c, "cm")}$.`, parts: [
+      // an oblique view: the edges going back are drawn shortened and at an angle
+      // (not to scale: the proportions are evened out, and the view is the one that keeps the diagonals clear of the edges)
+      const [sa, sb, sc] = [a, b, c].map(Math.sqrt), dirOf = (v) => Math.atan2(v[1], v[0]);
+      const views = [[0.55, 30], [0.55, 42], [0.7, 35], [0.7, 50]].map(([k, t]) => {
+        const view = (x, y, z) => [x + k * y * Math.cos(rad(t)), z + k * y * Math.sin(rad(t))];
+        const g = dirOf(view(sa, sb, sc)), cl = Math.min(Math.abs(g - dirOf(view(sa, 0, sc))), Math.abs(g - dirOf(view(sa, sb, 0))), Math.abs(dirOf(view(sa, sb, 0)) - dirOf(view(0, sb, 0))) / 2, dirOf(view(sa, sb, 0)));
+        return { view, cl };
+      });
+      const view = views.reduce((best, v) => (v.cl > best.cl + 1e-9 ? v : best)).view;
+      const V = { A: view(0, 0, 0), B: view(sa, 0, 0), C: view(sa, sb, 0), D: view(0, sb, 0), E: view(0, 0, sc), F: view(sa, 0, sc), G: view(sa, sb, sc), H: view(0, sb, sc) };
+      const edge3 = (pair, o) => Object.assign({ type: "line", from: V[pair[0]], to: V[pair[1]] }, o);
+      const graph = { alt: "A cuboid with base ABCD and top EFGH, with the diagonals AC and AG drawn dashed", shapes: [
+        edge3("AB", { label: ul(a, "cm") }), edge3("BC", { label: ul(b, "cm") }), edge3("AE", { label: ul(c, "cm") }),
+        ...["BF", "EF", "CG", "FG", "GH", "EH"].map((e) => edge3(e)), ...["AD", "DC", "DH", "AC", "AG"].map((e) => edge3(e, { dashed: true })),
+        ...Object.keys(V).map((n) => ({ type: "point", at: V[n], label: n, dot: false }))] };
+      return { graph, params: { a, b, c }, stem: `A cuboid has a horizontal rectangular base $\\mathrm{ABCD}$. The vertices $\\mathrm{E}$, $\\mathrm{F}$, $\\mathrm{G}$ and $\\mathrm{H}$ of the top face are vertically above $\\mathrm{A}$, $\\mathrm{B}$, $\\mathrm{C}$ and $\\mathrm{D}$ respectively. The lengths of the edges are $\\mathrm{AB} = ${unit(a, "cm")}$, $\\mathrm{BC} = ${unit(b, "cm")}$ and $\\mathrm{AE} = ${unit(c, "cm")}$. The diagram shows the cuboid and is not to scale.`, parts: [
         P("Find the length of the diagonal $[\\mathrm{AC}]$ of the base, in centimetres.", 2, ans.sf(AC), [
           `Triangle $\\mathrm{ABC}$ has a right angle at $\\mathrm{B}$: $\\mathrm{AC}^{2} = ${num(a)}^{2} + ${num(b)}^{2} = ${num(a * a + b * b)}$`, `$\\mathrm{AC} = ${unit(sf(AC), "cm")}$`]),
         P("Find the length of the diagonal $[\\mathrm{AG}]$ of the cuboid, in centimetres.", 2, ans.sf(AG), [
@@ -317,7 +376,10 @@
       do { r = rng.int(15, 60) / 10; h = rng.int(30, 140) / 10; Vc = Math.PI * r * r * h; Vh = (2 * Math.PI * r ** 3) / 3; V = Vc + Vh; S = 3 * Math.PI * r * r + 2 * Math.PI * r * h; }
       while (h <= r || edge(V) || edge(S) || Number.isInteger(r));
       const thing = rng.pick(["A grain silo", "A solid concrete bollard", "A water tank", "A solid wooden post"]);
-      return { params: { r, h }, stem: `${thing} has the shape of a cylinder of radius $${unit(r, "m")}$ and height $${unit(h, "m")}$ with a hemisphere of the same radius on top. The flat face of the hemisphere fits exactly on the top of the cylinder, and the base of the cylinder is a flat circle.`, parts: [
+      return { graph: { alt: "The cross-section of the solid: a rectangle with a semicircle on top", shapes: [
+        { type: "line", from: [-r, 0], to: [r, 0] }, { type: "line", from: [-r, 0], to: [-r, h] }, { type: "line", from: [r, 0], to: [r, h], label: ul(h, "m") },
+        { type: "line", from: [-r, h], to: [0, h], dashed: true }, { type: "line", from: [0, h], to: [r, h], dashed: true, label: ul(r, "m") },
+        { type: "arc", centre: [0, h], radius: r, from: 0, to: 180 }, { type: "point", at: [0, h] }] }, params: { r, h }, stem: `${thing} has the shape of a cylinder of radius $${unit(r, "m")}$ and height $${unit(h, "m")}$ with a hemisphere of the same radius on top. The flat face of the hemisphere fits exactly on the top of the cylinder, and the base of the cylinder is a flat circle. The diagram shows a vertical cross-section of the solid.`, parts: [
         P("Find the volume of the solid, in cubic metres.", 3, ans.sf(V), [
           `$V = \\pi r^{2}h + \\dfrac{2}{3}\\pi r^{3}$`, `$V = \\pi${br(r)}^{2}${br(h)} + \\dfrac{2}{3}\\pi${br(r)}^{3}$`, `$V = ${sf(Vc, 4)} + ${sf(Vh, 4)} = ${sf(V)}\\text{ m}^{3}$`]),
         P("Find the total area of the outside surface of the solid, including its base, in square metres.", 3,
@@ -335,7 +397,7 @@
       do { a = rng.int(5, 15); b = rng.int(4, 14); c = rng.int(4, 14); angs = triAngles(a, b, c); }
       while (!(Math.min(...angs) >= 20 && Math.max(...angs) <= 140) || a === b || b === c || a === c || edge(angs[0]) || [60, 90, 120].some((x) => Math.abs(angs[0] - x) < 1.5));
       const top = b * b + c * c - a * a, A = angs[0];
-      return { params: { a, b, c }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(c, "cm")}$, $\\mathrm{AC} = ${unit(b, "cm")}$ and $\\mathrm{BC} = ${unit(a, "cm")}$.`, parts: [
+      return { graph: triangle("ABC", sas(c, b, A), { sides: [ul(c, "cm"), ul(a, "cm"), ul(b, "cm")] }), params: { a, b, c }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(c, "cm")}$, $\\mathrm{AC} = ${unit(b, "cm")}$ and $\\mathrm{BC} = ${unit(a, "cm")}$.`, parts: [
         P("Find $\\mathrm{B\\hat{A}C}$, in degrees.", 3, ans.sf(A), [
           `The angle at $\\mathrm{A}$ is opposite $\\mathrm{BC}$: $\\cos A = \\dfrac{\\mathrm{AB}^{2} + \\mathrm{AC}^{2} - \\mathrm{BC}^{2}}{2(\\mathrm{AB})(\\mathrm{AC})}$`,
           `$\\cos A = \\dfrac{${c}^{2} + ${b}^{2} - ${a}^{2}}{2${br(c)}${br(b)}} = ${frac(top, 2 * b * c)}$`, `$A = ${deg(sf(A))}$`])] };
@@ -345,7 +407,7 @@
     build({ rng }) {
       let A, B, C, a, b;
       do { A = rng.int(25, 110); B = rng.int(25, 110); C = 180 - A - B; a = rng.int(5, 20); b = (a * Math.sin(rad(B))) / Math.sin(rad(A)); } while (C < 20 || A === B || Math.abs(A - 90) < 2 || edge(b));
-      return { params: { A, B, a }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{A\\hat{B}C} = ${deg(B)}$ and $\\mathrm{BC} = ${unit(a, "cm")}$.`, parts: [
+      return { graph: triangle("ABC", sas((a * Math.sin(rad(C))) / Math.sin(rad(A)), b, A), { sides: [null, ul(a, "cm"), null], angles: [dl(A), dl(B)] }), params: { A, B, a }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{B\\hat{A}C} = ${deg(A)}$, $\\mathrm{A\\hat{B}C} = ${deg(B)}$ and $\\mathrm{BC} = ${unit(a, "cm")}$.`, parts: [
         P("Write down $\\mathrm{A\\hat{C}B}$, in degrees.", 1, ans.int(C), [`$\\mathrm{A\\hat{C}B} = ${deg(180)} - ${deg(A)} - ${deg(B)} = ${deg(C)}$`]),
         P("Find $\\mathrm{AC}$, in centimetres.", 3, ans.sf(b, 3, { misconceptions: [{ value: (a * Math.sin(rad(A))) / Math.sin(rad(B)), text: "Each side goes with the sine of the angle opposite it: $\\mathrm{AC}$ is opposite the angle at $\\mathrm{B}$, and $\\mathrm{BC}$ is opposite the angle at $\\mathrm{A}$." }] }), [
           `$\\mathrm{AC}$ is opposite the angle at $\\mathrm{B}$ and $\\mathrm{BC}$ is opposite the angle at $\\mathrm{A}$: $\\dfrac{\\mathrm{AC}}{\\sin ${deg(B)}} = \\dfrac{${a}}{\\sin ${deg(A)}}$`,
@@ -356,7 +418,7 @@
     build({ rng }) {
       const [u, v, A, a] = rng.pick([[3, 5, 120, 7], [5, 8, 60, 7], [3, 8, 60, 7], [7, 8, 120, 13], [7, 15, 60, 13], [8, 15, 60, 13], [5, 16, 120, 19], [5, 21, 60, 19], [16, 21, 60, 19], [6, 10, 120, 14], [10, 16, 60, 14], [6, 16, 60, 14]]);
       const [c, b] = rng.bool() ? [u, v] : [v, u], cosTex = A === 60 ? "\\dfrac{1}{2}" : "-\\dfrac{1}{2}", area = surdQ(b * c, 3, 4), sinB = surdQ(b, 3, 2 * a);
-      return { params: { b, c, A }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(c, "cm")}$, $\\mathrm{AC} = ${unit(b, "cm")}$ and $\\mathrm{B\\hat{A}C} = ${deg(A)}$.`, parts: [
+      return { graph: triangle("ABC", sas(c, b, A), { sides: [ul(c, "cm"), null, ul(b, "cm")], angles: [dl(A)] }), params: { b, c, A }, stem: `In triangle $\\mathrm{ABC}$, $\\mathrm{AB} = ${unit(c, "cm")}$, $\\mathrm{AC} = ${unit(b, "cm")}$ and $\\mathrm{B\\hat{A}C} = ${deg(A)}$.`, parts: [
         P("Find $\\mathrm{BC}$, in centimetres.", 3, ans.int(a), [
           `$\\mathrm{BC}^{2} = ${c}^{2} + ${b}^{2} - 2${br(c)}${br(b)}\\cos ${deg(A)}$`,
           `$\\cos ${deg(A)} = ${cosTex}$, so $\\mathrm{BC}^{2} = ${c * c} + ${b * b} ${signed(A === 60 ? -b * c : b * c)} = ${a * a}$`, `$\\mathrm{BC} = ${a}$`]),
@@ -376,7 +438,7 @@
       let cs, th, k, v;
       do { cs = rng.pick(CASES); th = rng.int(20, 70); k = rng.int(5, 25); const t = Math[cs.f](rad(th)); v = cs.mult ? k * t : k / t; } while (Math.abs(th - 45) < 5 || edge(v));
       const ratio = cs.mult ? `\\dfrac{\\mathrm{${cs.want}}}{${k}}` : `\\dfrac{${k}}{\\mathrm{${cs.want}}}`;
-      return { params: { known: cs.known, want: cs.want, th, k }, stem: `Triangle $\\mathrm{ABC}$ has a right angle at $\\mathrm{B}$, with $\\mathrm{B\\hat{A}C} = ${deg(th)}$ and $\\mathrm{${cs.known}} = ${unit(k, "cm")}$.`, parts: [
+      return { graph: triangle("ABC", [[0, 0], [Math.cos(rad(th)), 0], [Math.cos(rad(th)), Math.sin(rad(th))]], { sides: ["AB", "BC", "AC"].map((n) => (n === cs.known ? ul(k, "cm") : null)), angles: [dl(th)], right: 1 }), params: { known: cs.known, want: cs.want, th, k }, stem: `Triangle $\\mathrm{ABC}$ has a right angle at $\\mathrm{B}$, with $\\mathrm{B\\hat{A}C} = ${deg(th)}$ and $\\mathrm{${cs.known}} = ${unit(k, "cm")}$.`, parts: [
         P(`Find $\\mathrm{${cs.want}}$, in centimetres.`, 2, ans.sf(v), [
           `$[\\mathrm{AC}]$ is the hypotenuse, $[\\mathrm{BC}]$ is opposite the angle at $\\mathrm{A}$ and $[\\mathrm{AB}]$ is adjacent to it, so $\\${cs.f} ${deg(th)} = ${ratio}$`,
           `$\\mathrm{${cs.want}} = ${cs.mult ? `${k}\\${cs.f} ${deg(th)}` : `\\dfrac{${k}}{\\${cs.f} ${deg(th)}}`} = ${unit(sf(v), "cm")}$`])] };
@@ -390,7 +452,7 @@
       const name = (v) => (v === "A" ? "\\mathrm{B\\hat{A}C}" : "\\mathrm{A\\hat{C}B}");
       const opp = (v) => (v === "A" ? [q, "BC"] : [p, "AB"]), adj = (v) => (v === "A" ? [p, "AB"] : [q, "BC"]);
       const top = f === "sin" ? opp(at) : adj(at);
-      return { params: { p, q, at, f }, stem: `Triangle $\\mathrm{ABC}$ has a right angle at $\\mathrm{B}$, with $\\mathrm{AB} = ${unit(p, "cm")}$ and $\\mathrm{BC} = ${unit(q, "cm")}$.`, parts: [
+      return { graph: triangle("ABC", p >= q ? [[0, 0], [p, 0], [p, q]] : [[0, p], [0, 0], [q, 0]], { sides: [ul(p, "cm"), ul(q, "cm"), null], right: 1 }), params: { p, q, at, f }, stem: `Triangle $\\mathrm{ABC}$ has a right angle at $\\mathrm{B}$, with $\\mathrm{AB} = ${unit(p, "cm")}$ and $\\mathrm{BC} = ${unit(q, "cm")}$.`, parts: [
         P("Find $\\mathrm{AC}$, in centimetres.", 2, ans.int(h), [`$\\mathrm{AC}^{2} = ${p}^{2} + ${q}^{2} = ${h * h}$`, `$\\mathrm{AC} = ${h}$`]),
         P(`Write down the exact value of $\\${f} ${name(at)}$.`, 1, ans.frac(top[0], h), [
           `$\\${f} ${name(at)} = \\dfrac{\\text{${f === "sin" ? "opposite" : "adjacent"}}}{\\text{hypotenuse}} = \\dfrac{\\mathrm{${top[1]}}}{\\mathrm{AC}} = ${frac(top[0], h)}$`]),
@@ -405,7 +467,9 @@
       let d, th, h;
       do { d = rng.int(12, 80); th = rng.int(15, 68); h = d * Math.tan(rad(th)); } while (edge(h) || th === 45);
       const thing = rng.pick(["flagpole", "tower", "tree", "mast", "building"]);
-      return { params: { d, th }, stem: `From a point on level ground $${unit(d, "m")}$ from the base of a vertical ${thing}, the angle of elevation of the top of the ${thing} is $${deg(th)}$.`, parts: [
+      return { graph: { alt: `A right-angled triangle: the ground, the vertical ${thing} and the line of sight to its top`, shapes: [
+        { type: "line", from: [0, 0], to: [d, 0], label: ul(d, "m") }, { type: "line", from: [d, 0], to: [d, h], label: "h" }, { type: "line", from: [0, 0], to: [d, h], dashed: true },
+        { type: "angle", at: [0, 0], from: [d, 0], to: [d, h], label: dl(th) }, { type: "angle", at: [d, 0], from: [d, h], to: [0, 0], right: true }] }, params: { d, th }, stem: `From a point on level ground $${unit(d, "m")}$ from the base of a vertical ${thing}, the angle of elevation of the top of the ${thing} is $${deg(th)}$.`, parts: [
         P(`Find the height of the ${thing}, in metres.`, 2, ans.sf(h), [
           `The height $h$ is opposite the angle and the distance along the ground is adjacent to it: $\\tan ${deg(th)} = \\dfrac{h}{${d}}$`, `$h = ${d}\\tan ${deg(th)} = ${unit(sf(h), "m")}$`])] };
     } });
@@ -414,7 +478,7 @@
       let h, d, ang, TB;
       do { h = rng.int(25, 140); d = rng.int(40, 400); ang = dgr(Math.atan(h / d)); TB = Math.hypot(h, d); } while (ang < 8 || ang > 62 || Math.abs(ang - 45) < 5 || edge(ang) || edge(TB) || Number.isInteger(TB));
       const [top, obj] = rng.pick([["a vertical cliff", "A small boat"], ["a lighthouse", "A buoy"], ["a vertical sea wall", "A swimmer"], ["an observation tower beside a lake", "A canoe"]]);
-      return { params: { h, d }, stem: `The top $\\mathrm{T}$ of ${top} is $${unit(h, "m")}$ above the water, and $\\mathrm{F}$ is the point at water level vertically below $\\mathrm{T}$. ${obj} is at the point $\\mathrm{B}$ on the water, $${unit(d, "m")}$ from $\\mathrm{F}$.`, parts: [
+      return { graph: triangle("TFB", [[0, h], [0, 0], [d, 0]], { sides: [ul(h, "m"), ul(d, "m"), null], right: 1, dash: 2, alt: "A right-angled triangle TFB with the line of sight from T to B dashed" }), params: { h, d }, stem: `The top $\\mathrm{T}$ of ${top} is $${unit(h, "m")}$ above the water, and $\\mathrm{F}$ is the point at water level vertically below $\\mathrm{T}$. ${obj} is at the point $\\mathrm{B}$ on the water, $${unit(d, "m")}$ from $\\mathrm{F}$. The diagram shows the line of sight from $\\mathrm{T}$ to $\\mathrm{B}$ as a dashed line.`, parts: [
         P("Find the angle of depression of $\\mathrm{B}$ from $\\mathrm{T}$, in degrees.", 2,
           ans.sf(ang, 3, { misconceptions: [{ value: 90 - ang, text: "This is the angle between the line of sight and the vertical. An angle of depression is measured down from the horizontal." }] }), [
             `The angle of depression is measured downwards from the horizontal through $\\mathrm{T}$. That horizontal is parallel to $[\\mathrm{FB}]$, so the angle equals $\\mathrm{T\\hat{B}F}$.`,
@@ -426,7 +490,10 @@
       let d, th, e, x;
       do { d = rng.int(8, 45); th = rng.int(20, 65); e = rng.pick([1.4, 1.5, 1.6, 1.7, 1.8]); x = d * Math.tan(rad(th)); } while (edge(x + e) || edge(x) || th === 45 || sf(Number(sf(x, 4)) + e) !== sf(x + e));
       const who = rng.pick(["Amara", "Kenji", "Leila", "Tomas", "Ines", "Ravi"]), thing = rng.pick(["tree", "statue", "street lamp", "climbing wall"]);
-      return { params: { d, th, e }, stem: `${who} stands on level ground $${unit(d, "m")}$ from the base of a vertical ${thing} and looks at its top. The angle of elevation of the top, measured from eye level, is $${deg(th)}$. ${who}'s eye level is $${unit(e, "m")}$ above the ground.`, parts: [
+      return { graph: { alt: "A person and a vertical object on level ground, with the horizontal at eye level and the line of sight to the top", shapes: [
+        { type: "line", from: [0, 0], to: [d, 0], label: ul(d, "m") }, { type: "line", from: [0, 0], to: [0, e], label: ul(e, "m") }, { type: "line", from: [d, 0], to: [d, e + x] },
+        { type: "line", from: [0, e], to: [d, e], dashed: true }, { type: "line", from: [0, e], to: [d, e + x] },
+        { type: "angle", at: [0, e], from: [d, e], to: [d, e + x], label: dl(th) }, { type: "angle", at: [d, e], from: [d, e + x], to: [0, e], right: true }] }, params: { d, th, e }, stem: `${who} stands on level ground $${unit(d, "m")}$ from the base of a vertical ${thing} and looks at its top. The angle of elevation of the top, measured from eye level, is $${deg(th)}$. ${who}'s eye level is $${unit(e, "m")}$ above the ground.`, parts: [
         P(`Find the height of the ${thing}, in metres.`, 3, ans.sf(x + e, 3, { misconceptions: [{ value: x, text: "This is the height of the top above eye level. Add the height of the eyes above the ground." }] }), [
           `Let $x$ be the height of the top above eye level: $\\tan ${deg(th)} = \\dfrac{x}{${d}}$`, `$x = ${d}\\tan ${deg(th)} = ${sf(x, 4)}$`, `Height $= ${sf(x, 4)} + ${num(e)} = ${unit(sf(x + e), "m")}$`])] };
     } });
@@ -439,10 +506,26 @@
         t1 = rng.int(20, 300); turn = rng.int(40, 140); right = rng.bool(); t2 = right ? t1 + turn : t1 - turn; d1 = rng.int(6, 30); d2 = rng.int(6, 30);
         ABC = 180 - turn; AC = Math.sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * Math.cos(rad(ABC))); BAC = dgr(Math.asin((d2 * Math.sin(rad(ABC))) / AC)); brg = right ? t1 + BAC : t1 - BAC;
       } while (t2 < 10 || t2 > 350 || Math.abs(turn - 90) < 3 || d1 === d2 || d2 >= Math.max(d1, AC) - 0.5 || BAC < 10 || brg < 10 || brg > 350 || edge(AC) || edge(brg) || t1 % 180 === 0
-        || sf(right ? t1 + Number(sf(BAC, 4)) : t1 - Number(sf(BAC, 4))) !== sf(brg));
+        || sf(right ? t1 + Number(sf(BAC, 4)) : t1 - Number(sf(BAC, 4))) !== sf(brg) || !legFigClear({ t1, t2, d1, d2 }));
       const back = t1 < 180 ? t1 + 180 : t1 - 180;
       return { t1, t2, d1, d2, right, turn, ABC, AC, BAC, brg, back };
     } };
+  // The journey A to B to C, drawn to scale with north up; bearings are marked clockwise from north.
+  const legFig = (s, withDistances) => {
+    const step = (p, dist, t) => [p[0] + dist * Math.sin(rad(t)), p[1] + dist * Math.cos(rad(t))];
+    const A = [0, 0], B = step(A, s.d1, s.t1), C = step(B, s.d2, s.t2), L = 0.3 * Math.max(s.d1, s.d2), b3 = (t) => String(t).padStart(3, "0") + "°";
+    const shapes = [{ type: "north", at: A, length: L }, { type: "north", at: B, length: L },
+      { type: "line", from: A, to: B, arrow: "mid", label: withDistances ? ul(s.d1, "km") : undefined }, { type: "line", from: B, to: C, arrow: "mid", label: withDistances ? ul(s.d2, "km") : undefined },
+      { type: "angle", at: A, from: [A[0], A[1] + L], to: B, sweep: "cw", label: b3(s.t1) }, { type: "angle", at: B, from: [B[0], B[1] + L], to: C, sweep: "cw", label: b3(s.t2) },
+      { type: "point", at: A, label: "A" }, { type: "point", at: B, label: "B" }, { type: "point", at: C, label: "C" }];
+    if (withDistances) shapes.push({ type: "line", from: A, to: C, dashed: true });
+    return { shapes, alt: "The journey from A to B to C, with north arrows at A and B and the two bearings marked" };
+  };
+  // False for the rare journey (one leg much shorter than the other, both bearings large) whose diagram
+  // has no room for all its labels; the situation is then drawn again.
+  function legFigClear(s) {
+    return [true, false].every((withDistances) => [[420, 320], [320, 240], [260, 200]].every(([width, height]) => E.graph.figureInfo(legFig(s, withDistances), { width, height }).problems.length === 0));
+  }
   const legStem = (s, withDistances) => `A ship leaves a port $\\mathrm{A}$ and sails ${withDistances ? `$${unit(s.d1, "km")}$ ` : ""}on a bearing of $${bear(s.t1)}$ to a buoy $\\mathrm{B}$. At $\\mathrm{B}$ it changes course and sails ${withDistances ? `$${unit(s.d2, "km")}$ ` : ""}on a bearing of $${bear(s.t2)}$ to a harbour $\\mathrm{C}$.`;
   const legAngleWork = (s) => {
     const diff = Math.abs(s.back - s.t2);
@@ -452,7 +535,7 @@
   };
   reg({ ...LEGS, unknown: "angle-from-bearing", levels: [2], calculator: false, title: "A back bearing and the angle between two legs",
     build({ sit: s }) {
-      return { stem: legStem(s, false), parts: [
+      return { graph: legFig(s, false), stem: legStem(s, false), parts: [
         P("Write down the bearing of $\\mathrm{A}$ from $\\mathrm{B}$.", 1, ans.int(s.back, { display: m(bear(s.back)) }), [
           `The opposite direction differs by $${deg(180)}$: $${deg(s.t1)} ${s.t1 < 180 ? "+" : "-"} ${deg(180)} = ${deg(s.back)}$${s.back < 100 ? `, written $${bear(s.back)}$` : ""}.`]),
         P("Find $\\mathrm{A\\hat{B}C}$, in degrees.", 2, ans.int(s.ABC, { display: m(deg(s.ABC)), misconceptions: [{ value: s.turn, text: "This is the angle the ship turns through at $\\mathrm{B}$. The angle inside the triangle is between the directions from $\\mathrm{B}$ to $\\mathrm{A}$ and from $\\mathrm{B}$ to $\\mathrm{C}$." }] }), legAngleWork(s))] };
@@ -460,7 +543,7 @@
   reg({ ...LEGS, unknown: "two-leg-distance", levels: [4], title: "Two legs on bearings: the distance and bearing of the end from the start",
     build({ sit: s }) {
       const shown = s.brg < 100 ? "0" + sf(s.brg) : sf(s.brg);
-      return { stem: legStem(s, true), parts: [
+      return { graph: legFig(s, true), stem: legStem(s, true), parts: [
         P("Find $\\mathrm{A\\hat{B}C}$, in degrees.", 2, ans.int(s.ABC, { display: m(deg(s.ABC)) }), [
           `The bearing of $\\mathrm{A}$ from $\\mathrm{B}$ is $${deg(s.t1)} ${s.t1 < 180 ? "+" : "-"} ${deg(180)} = ${deg(s.back)}$.`].concat(legAngleWork(s).slice(1))),
         P("Find the distance $\\mathrm{AC}$, in kilometres.", 2, ans.sf(s.AC), [
@@ -472,6 +555,14 @@
     } });
   const TWO = { type: "t3-ext-two-observations", representation: "words", format: "value" };
   const twoStem = (thing, d, al, be) => `The points $\\mathrm{A}$ and $\\mathrm{B}$ are on level ground, in a straight line with the foot $\\mathrm{F}$ of a vertical ${thing}. The point $\\mathrm{B}$ is between $\\mathrm{A}$ and $\\mathrm{F}$, and $\\mathrm{AB} = ${unit(d, "m")}$. The top of the ${thing} is $\\mathrm{T}$. The angle of elevation of $\\mathrm{T}$ is $${deg(al)}$ from $\\mathrm{A}$ and $${deg(be)}$ from $\\mathrm{B}$.`;
+  // h: the height TF; the figure is to scale
+  const twoFig = (d, al, be, h) => {
+    const A = [0, 0], B = [d, 0], F = [d + h / Math.tan(rad(be)), 0], T = [F[0], h];
+    return { alt: "Points A, B and F in a line on the ground, with T vertically above F and the lines of sight from A and from B to T", shapes: [
+      { type: "line", from: A, to: B, label: ul(d, "m") }, { type: "line", from: B, to: F }, { type: "line", from: F, to: T }, { type: "line", from: A, to: T }, { type: "line", from: B, to: T },
+      { type: "angle", at: A, from: F, to: T, label: dl(al) }, { type: "angle", at: B, from: F, to: T, label: dl(be) }, { type: "angle", at: F, from: T, to: B, right: true },
+      { type: "point", at: A, label: "A", dot: false }, { type: "point", at: B, label: "B", dot: false }, { type: "point", at: F, label: "F", dot: false }, { type: "point", at: T, label: "T", dot: false }] };
+  };
   const twoAngleWork = (al, be) => [`$\\mathrm{A\\hat{B}T} = ${deg(180)} - ${deg(be)} = ${deg(180 - be)}$`, `$\\mathrm{A\\hat{T}B} = ${deg(180)} - ${deg(al)} - ${deg(180 - be)} = ${deg(be - al)}$`];
   reg({ ...TWO, syllabus: ["3.3", "3.2"], unknown: "height-two-angles", levels: [4], calculator: true, skills: ["SL3.3.two-observations", "SL3.3.elevation-depression", "SL3.2.sine-rule"], title: "A height from two angles of elevation",
     build({ rng }) {
@@ -479,7 +570,7 @@
       do { al = rng.int(18, 42); be = al + rng.int(12, 32); d = rng.int(15, 90); BT = (d * Math.sin(rad(al))) / Math.sin(rad(be - al)); h = BT * Math.sin(rad(be)); }
       while (be > 72 || edge(BT) || edge(h) || sf(Number(sf(BT, 4)) * Math.sin(rad(be))) !== sf(h));
       const thing = rng.pick(["mast", "tower", "chimney", "wind turbine"]);
-      return { params: { al, be, d }, stem: twoStem(thing, d, al, be), parts: [
+      return { graph: twoFig(d, al, be, h), params: { al, be, d }, stem: twoStem(thing, d, al, be), parts: [
         P("Find $\\mathrm{A\\hat{T}B}$, in degrees.", 2, ans.int(be - al, { display: m(deg(be - al)) }), twoAngleWork(al, be)),
         P("Find the distance $\\mathrm{BT}$, in metres.", 3, ans.sf(BT), [
           `In triangle $\\mathrm{ABT}$, $\\mathrm{BT}$ is opposite the angle at $\\mathrm{A}$ and $\\mathrm{AB}$ is opposite the angle at $\\mathrm{T}$: $\\dfrac{\\mathrm{BT}}{\\sin ${deg(al)}} = \\dfrac{${d}}{\\sin ${deg(be - al)}}$`,
@@ -490,7 +581,7 @@
   reg({ ...TWO, syllabus: ["3.3", "3.5"], unknown: "exact-height", levels: [3], skills: ["SL3.3.two-observations", "SL3.3.elevation-depression", "SL3.5.exact-triangle"], title: "An exact height from two angles of elevation",
     build({ rng }) {
       const n = rng.int(4, 40), thing = rng.pick(["mast", "tower", "chimney", "flagpole", "tree"]), h = surdQ(n, 3, 2);
-      return { params: { al: 30, be: 60, d: n }, stem: twoStem(thing, n, 30, 60), parts: [
+      return { graph: twoFig(n, 30, 60, h.value), params: { al: 30, be: 60, d: n }, stem: twoStem(thing, n, 30, 60), parts: [
         P("Find $\\mathrm{A\\hat{T}B}$, in degrees.", 1, ans.int(30, { display: m(deg(30)) }), twoAngleWork(30, 60)),
         P("Find the distance $\\mathrm{BT}$, in metres.", 2, ans.int(n), [
           `$\\mathrm{B\\hat{A}T} = \\mathrm{A\\hat{T}B} = ${deg(30)}$, so triangle $\\mathrm{ABT}$ is isosceles.`, `$\\mathrm{BT} = \\mathrm{AB} = ${unit(n, "m")}$`]),
@@ -512,7 +603,7 @@
     skills: ["SL3.4.arc-length", "SL3.4.sector-area"], title: "The angle of a sector from its arc length, then its area",
     build({ rng }) {
       const r = rng.int(4, 12), th = rng.pick([0.5, 0.6, 0.75, 0.8, 1.2, 1.25, 1.5, 1.6, 1.75, 2, 2.4, 2.5]), l = Number((r * th).toFixed(4)), area = Number((0.5 * r * r * th).toFixed(4));
-      return { params: { r, l }, stem: `A sector of a circle has radius $${unit(r, "cm")}$ and arc length $${unit(l, "cm")}$.`, parts: [
+      return { graph: sectorFig(r, dgr(th), { radius: ul(r, "cm"), arc: ul(l, "cm"), angle: "θ", alt: "A sector of a circle with its radius and arc length marked" }), params: { r, l }, stem: `A sector of a circle has radius $${unit(r, "cm")}$ and arc length $${unit(l, "cm")}$.`, parts: [
         P("Find the angle of the sector, in radians.", 2, ans.dec(th), [`$l = r\\theta$, so $\\theta = \\dfrac{l}{r} = \\dfrac{${num(l)}}{${r}}$`, `$\\theta = ${num(th)}$`]),
         P("Find the area of the sector, in square centimetres.", 2, ans.dec(area), [`$A = \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2}${br(r)}^{2}${br(th)}$`, `$A = ${num(area)}\\text{ cm}^{2}$`])] };
     } });
@@ -521,19 +612,19 @@
     build({ rng }) {
       const r = rng.int(3, 15), [n, d] = rng.pick([[1, 6], [1, 4], [1, 3], [2, 5], [3, 4], [2, 3], [5, 6], [3, 5], [1, 5], [4, 9], [5, 12], [7, 12]]);
       const [what, edgeName] = rng.pick([["A lawn sprinkler at the point $\\mathrm{O}$ waters a region of grass", "the curved edge of the region"], ["A security light at the point $\\mathrm{O}$ lights a region of a flat yard", "the curved edge of the region"], ["A flower bed with a corner at the point $\\mathrm{O}$ covers a region of a garden", "the curved edge of the region"]]);
-      return { params: { r, n, d }, stem: `${what}. The region is a sector of a circle with centre $\\mathrm{O}$, radius $${unit(r, "m")}$ and angle $${piFrac(n, d)}$ radians.`, parts: [
+      return { graph: sectorFig(r, (180 * n) / d, { names: "O", radius: ul(r, "m"), angle: piText(n, d) }), params: { r, n, d }, stem: `${what}. The region is a sector of a circle with centre $\\mathrm{O}$, radius $${unit(r, "m")}$ and angle $${piFrac(n, d)}$ radians.`, parts: [
         P(`Find the exact length of ${edgeName}, in metres.`, 2, ans.exact((r * n * Math.PI) / d, piFrac(r * n, d)), [`$l = r\\theta = ${r} \\times ${piFrac(n, d)}$`, `$l = ${piFrac(r * n, d)}\\text{ m}$`]),
         P("Find the exact area of the region, in square metres.", 2, ans.exact((r * r * n * Math.PI) / (2 * d), piFrac(r * r * n, 2 * d)), [
           `$A = \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2} \\times ${r}^{2} \\times ${piFrac(n, d)}$`, `$A = ${piFrac(r * r * n, 2 * d)}\\text{ m}^{2}$`])] };
     } });
   const SEG = { type: "t3-composite-circular-region", syllabus: ["3.4", "3.2"], representation: "words", format: "value" };
-  const segStem = (r, thTex) => `The points $\\mathrm{A}$ and $\\mathrm{B}$ lie on a circle with centre $\\mathrm{O}$ and radius $${unit(r, "cm")}$, and $\\mathrm{A\\hat{O}B} = ${thTex}$ radians. The chord $[\\mathrm{AB}]$ divides the sector $\\mathrm{OAB}$ into the triangle $\\mathrm{OAB}$ and a segment, which lies between the chord and the arc $\\mathrm{AB}$.`;
+  const segStem = (r, thTex) => `The points $\\mathrm{A}$ and $\\mathrm{B}$ lie on a circle with centre $\\mathrm{O}$ and radius $${unit(r, "cm")}$, and $\\mathrm{A\\hat{O}B} = ${thTex}$ radians. The chord $[\\mathrm{AB}]$ divides the sector $\\mathrm{OAB}$ into the triangle $\\mathrm{OAB}$ and a segment, which lies between the chord and the arc $\\mathrm{AB}$. The segment is shaded in the diagram.`;
   reg({ ...SEG, unknown: "segment-area", levels: [4], calculator: true, skills: ["SL3.4.segment-shaded", "SL3.4.sector-area", "SL3.2.area-sine", "SL3.2.cosine-rule-side"], title: "Sector, triangle, segment and chord",
     build({ rng }) {
       let r, th, S, Tr, seg, AB;
       do { r = rng.int(30, 150) / 10; th = rng.int(60, 280) / 100; S = 0.5 * r * r * th; Tr = 0.5 * r * r * Math.sin(th); seg = S - Tr; AB = Math.sqrt(2 * r * r - 2 * r * r * Math.cos(th)); }
       while (Number.isInteger(r) || edge(S) || edge(Tr) || edge(seg) || edge(AB) || sf(Number(sf(S, 4)) - Number(sf(Tr, 4))) !== sf(seg));
-      return { params: { r, th }, stem: segStem(r, num(th)), parts: [
+      return { graph: sectorFig(r, dgr(th), { names: "OAB", radius: ul(r, "cm"), angle: `${th} rad`, chord: true, shade: true, alt: "A sector OAB of a circle with the chord AB drawn and the segment between the chord and the arc shaded" }), params: { r, th }, stem: segStem(r, num(th)), parts: [
         P("Find the area of the sector $\\mathrm{OAB}$, in square centimetres.", 2, ans.sf(S), [`$A = \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2}${br(r)}^{2}${br(th)}$`, `$A = ${sf(S)}\\text{ cm}^{2}$`]),
         P("Find the area of the triangle $\\mathrm{OAB}$, in square centimetres.", 2, ans.sf(Tr), [
           `With the calculator in radians, area $= \\dfrac{1}{2}r^{2}\\sin\\theta = \\dfrac{1}{2}${br(r)}^{2}\\sin ${num(th)}$`, `Area $= ${sf(Tr)}\\text{ cm}^{2}$`]),
@@ -546,7 +637,7 @@
       const r = rng.pick([2, 4, 6, 8, 10, 12]), dg = rng.pick([30, 60, 90, 120, 150]), thTex = piFrac(dg, 180), sec = rat.Q(r * r * dg, 360), secTex = piFrac(sec.n, sec.d);
       const tri = dg === 90 ? surdQ(r * r, 1, 2) : dg === 30 || dg === 150 ? surdQ(r * r, 1, 4) : surdQ(r * r, 3, 4);
       const sinTex = dg === 90 ? "1" : dg === 30 || dg === 150 ? "\\dfrac{1}{2}" : "\\dfrac{\\sqrt{3}}{2}", secV = (Math.PI * sec.n) / sec.d;
-      return { params: { r, dg }, stem: segStem(r, thTex), parts: [
+      return { graph: sectorFig(r, dg, { names: "OAB", radius: ul(r, "cm"), angle: piText(dg, 180), chord: true, shade: true, alt: "A sector OAB of a circle with the chord AB drawn and the segment between the chord and the arc shaded" }), params: { r, dg }, stem: segStem(r, thTex), parts: [
         P("Find the exact area of the sector $\\mathrm{OAB}$, in square centimetres.", 2, ans.exact(secV, secTex), [`$A = \\dfrac{1}{2}r^{2}\\theta = \\dfrac{1}{2} \\times ${r}^{2} \\times ${thTex}$`, `$A = ${secTex}\\text{ cm}^{2}$`]),
         P("Find the exact area of the triangle $\\mathrm{OAB}$, in square centimetres.", 2, ansRoot(tri), [
           `Area $= \\dfrac{1}{2}r^{2}\\sin\\theta = \\dfrac{1}{2} \\times ${r}^{2} \\times \\sin ${thTex}$`, `$\\sin ${thTex} = ${sinTex}$, so the area is $${tri.tex}\\text{ cm}^{2}$.`]),
