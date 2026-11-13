@@ -17,6 +17,7 @@
   let allYears = [];
   let allSubtopics = [];
   let pendingMathRender = false;
+  let renderedTab = "";
 
   function loadCourse() {
     course = courses.find(c => c.id === COURSE?.get()) || courses[0];
@@ -89,6 +90,10 @@
 
   function render() {
     const focus = captureFocus();
+    // Rebuilding the page would drop the reader back to the top of it and of each filter
+    // list (#18), so keep where they were unless they've switched tab.
+    const scroll = state.tab === renderedTab ? captureScroll() : null;
+    renderedTab = state.tab;
     app.innerHTML = "";
     app.append(renderSiteHeader());
     // The course bar is a home-page control; other pages keep the chosen course (#14).
@@ -99,6 +104,7 @@
     else if (state.tab === "statistics") app.append(renderStatistics());
     if (state.tab === "syllabus") { app.append(renderSyllabus()); renderMath(app); }
     restoreFocus(focus);
+    restoreScroll(scroll);
   }
 
   function renderMath(container) {
@@ -252,6 +258,7 @@
 
   function renderSubtopicControls() {
     const options = subtopicOptions();
+    const counts = subtopicCounter();
     return el("div", {},
       el("div", { class: "input-row", style: "margin-top:10px;" },
         el("input", {
@@ -264,14 +271,14 @@
         })
       ),
       el("div", { class: "subtopic-grid triple" },
-        renderSubtopicBox("AND", "Must have ALL of these", "and", options),
-        renderSubtopicBox("OR", "Match ANY of these", "or", options),
-        renderSubtopicBox("NOT", "Exclude ALL of these", "not", options)
+        renderSubtopicBox("AND", "Must have ALL of these", "and", options, counts),
+        renderSubtopicBox("OR", "Match ANY of these", "or", options, counts),
+        renderSubtopicBox("NOT", "Exclude ALL of these", "not", options, counts)
       )
     );
   }
 
-  function renderSubtopicBox(label, hint, key, options) {
+  function renderSubtopicBox(label, hint, key, options, counts) {
     const set = state[key];
     const otherSets = [state.and, state.or, state.not].filter(s => s !== set);
     return el("div", { class: "subtopic-box" },
@@ -279,19 +286,33 @@
         el("span", { class: `bool-badge bool-${key}`, text: label }),
         el("span", { class: "bool-hint", text: ` ${hint}` })
       ),
-      el("div", { class: "check-list" },
-        ...options.map(topic => el("label", { class: "check-row" },
-          el("input", {
-            type: "checkbox",
-            checked: set.has(topic),
-            disabled: otherSets.some(s => s.has(topic)),
-            onchange: event => {
-              event.target.checked ? set.add(topic) : set.delete(topic);
-              render();
-            }
-          }),
-          el("span", { text: topic })
-        ))
+      el("div", { class: "check-list", "data-scroll-key": `check-${key}` },
+        ...options.map(topic => {
+          const checked = set.has(topic);
+          const disabled = otherSets.some(s => s.has(topic));
+          // Greyed when toggling it would leave the matches exactly as they are (#18).
+          const count = disabled ? null : counts.toggled(key, topic);
+          const inert = count === counts.current;
+          return el("label", {
+            class: `check-row${inert ? " inert" : ""}`,
+            title: count === null ? null
+              : inert ? `${checked ? "Unticking" : "Ticking"} this doesn't change the matches`
+              : `${count} matches if ${checked ? "unticked" : "ticked"}`
+          },
+            el("input", {
+              type: "checkbox",
+              "data-focus-key": `check-${key}:${topic}`,
+              checked,
+              disabled,
+              onchange: event => {
+                event.target.checked ? set.add(topic) : set.delete(topic);
+                render();
+              }
+            }),
+            el("span", { text: topic }),
+            count === null ? null : el("span", { class: "check-count", text: String(count) })
+          );
+        })
       )
     );
   }
@@ -755,6 +776,11 @@
   }
 
   function filterQuestions() {
+    return mainFilterPool().filter(q => passesSubtopics(new Set(q.syllabus || []), state));
+  }
+
+  // Questions that pass every filter except the AND / OR / NOT boxes.
+  function mainFilterPool() {
     const matcher = buildSearchMatcher(state.query);
     return allQuestions.filter(q => {
       if (state.topic && !(q.topicNumbers || []).includes(state.topic)) return false;
@@ -763,17 +789,33 @@
       if (state.paper && q.paper !== state.paper) return false;
       if (state.section && q.section !== state.section) return false;
       if (state.years.size && !state.years.has(q.year)) return false;
-      if (!matcher(q.searchText || "")) return false;
-      const topics = new Set(q.syllabus || []);
-      for (const item of state.and) if (!topics.has(item)) return false;
-      if (state.or.size > 0) {
-        let hasAny = false;
-        for (const item of state.or) { if (topics.has(item)) { hasAny = true; break; } }
-        if (!hasAny) return false;
-      }
-      for (const item of state.not) if (topics.has(item)) return false;
-      return true;
+      return matcher(q.searchText || "");
     });
+  }
+
+  function passesSubtopics(topics, picks) {
+    for (const item of picks.and) if (!topics.has(item)) return false;
+    if (picks.or.size > 0) {
+      let hasAny = false;
+      for (const item of picks.or) { if (topics.has(item)) { hasAny = true; break; } }
+      if (!hasAny) return false;
+    }
+    for (const item of picks.not) if (topics.has(item)) return false;
+    return true;
+  }
+
+  // How many matches there are now, and how many there would be with one box option toggled.
+  function subtopicCounter() {
+    const pool = mainFilterPool().map(q => new Set(q.syllabus || []));
+    const countWith = picks => pool.reduce((n, topics) => n + (passesSubtopics(topics, picks) ? 1 : 0), 0);
+    return {
+      current: countWith(state),
+      toggled(key, topic) {
+        const picks = { and: new Set(state.and), or: new Set(state.or), not: new Set(state.not) };
+        picks[key].has(topic) ? picks[key].delete(topic) : picks[key].add(topic);
+        return countWith(picks);
+      }
+    };
   }
 
   function subtopicOptions() {
@@ -1101,11 +1143,28 @@
 
   function restoreFocus(focus) {
     if (!focus) return;
-    const target = app.querySelector(`[data-focus-key="${focus.key}"]`);
+    const target = app.querySelector(`[data-focus-key="${CSS.escape(focus.key)}"]`);
     if (!target) return;
-    target.focus();
+    target.focus({ preventScroll: true });
     if (focus.start !== null && focus.end !== null && typeof target.setSelectionRange === "function") {
       target.setSelectionRange(focus.start, focus.end);
     }
+  }
+
+  function captureScroll() {
+    return {
+      x: window.scrollX,
+      y: window.scrollY,
+      lists: [...app.querySelectorAll("[data-scroll-key]")].map(node => [node.dataset.scrollKey, node.scrollTop])
+    };
+  }
+
+  function restoreScroll(scroll) {
+    if (!scroll) return;
+    for (const [key, top] of scroll.lists) {
+      const node = app.querySelector(`[data-scroll-key="${key}"]`);
+      if (node) node.scrollTop = top;
+    }
+    window.scrollTo(scroll.x, scroll.y);
   }
 })();

@@ -596,6 +596,19 @@ a.question-card:hover {
   margin-top: 3px;
 }
 
+/* An option that wouldn't change the matches: still clickable, just quieter (#18). */
+.check-row.inert {
+  color: var(--faint);
+}
+
+.check-count {
+  margin-left: auto;
+  padding-left: 6px;
+  color: var(--faint);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
