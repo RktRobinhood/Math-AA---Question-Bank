@@ -13,7 +13,8 @@
 //   5 renders            every string passes KaTeX with errors thrown
 //   6 marking            mark() accepts the stored answer, rejects wrong ones; options distinct
 //   7 marks              part marks sum to the question's marks and fit the level's range
-//   8 graphs             every graph gives SVG with finite coordinates inside the view box;
+//   8 graphs             every graph and figure gives SVG with finite coordinates inside the view box;
+//                        figures are sound, with every label drawn clear of the lines; shaded regions show;
 //                        wrong graph options differ visibly from the correct one
 // Then: selection rules (scripted students), storage and migration, variants and worksheets.
 import fs from "node:fs";
@@ -69,6 +70,17 @@ for (const f of fs.readdirSync(checkDir).filter((x) => /^topic\d+\.mjs$/.test(x)
 
 // ---- per-question checks ---------------------------------------------------------------------
 const W = 320, H = 240;
+// the largest extent of a figure, in its own units
+function figureSpan(graph) {
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  const see = (p) => { x0 = Math.min(x0, p[0]); x1 = Math.max(x1, p[0]); y0 = Math.min(y0, p[1]); y1 = Math.max(y1, p[1]); };
+  for (const sh of graph.shapes) {
+    for (const k of ["at", "from", "to"]) if (Array.isArray(sh[k])) see(sh[k]);
+    (sh.points || []).forEach(see);
+    if (sh.centre) { see([sh.centre[0] - sh.radius, sh.centre[1] - sh.radius]); see([sh.centre[0] + sh.radius, sh.centre[1] + sh.radius]); }
+  }
+  return Math.max(x1 - x0, y1 - y0);
+}
 function svgProblems(graph) {
   const bad = [];
   let svg;
@@ -83,8 +95,37 @@ function svgProblems(graph) {
     }
   }
   for (const mt of svg.matchAll(/<(?:circle|text)[^>]*?\b(?:cx|x)="(-?[\d.]+)"[^>]*?\b(?:cy|y)="(-?[\d.]+)"/g)) check(Number(mt[1]), Number(mt[2]));
+  if (graph.shapes) {
+    // a figure: a sound description, something drawn, every label drawn and clear of the lines and
+    // of the other labels, at each size the page uses
+    if (graph.x || graph.functions) bad.push("a figure cannot also be a plot");
+    if (!graph.alt) bad.push("figure has no alt text");
+    if (!/class="qb-graph-shape"/.test(svg)) bad.push("the figure draws no shape");
+    const wanted = graph.shapes.reduce((n, sh) => n + (sh.label ? 1 : 0) + (sh.type === "north" || sh.type === "text" ? 1 : 0) + (sh.labels || []).filter(Boolean).length + (sh.sides || []).filter(Boolean).length, 0);
+    if (!wanted) bad.push("the figure has no labels");
+    for (const [w, h] of [[W, H], [420, 320], [260, 200]]) {
+      const info = E.graph.figureInfo(graph, { width: w, height: h });
+      for (const b of info.problems) bad.push(`${b} (at ${w} by ${h})`);
+      if (info.labels.length !== wanted) bad.push(`${wanted} labels described, ${info.labels.length} drawn`);
+      for (const l of info.labels) if (!(l.x - l.w / 2 >= 0 && l.x + l.w / 2 <= w && l.y - l.h / 2 >= 0 && l.y + l.h / 2 <= h)) bad.push(`label "${l.text}" is cut off (at ${w} by ${h})`);
+      if (info.scale * figureSpan(graph) < 0.3 * Math.min(w, h)) bad.push(`the figure is drawn very small (at ${w} by ${h})`);
+    }
+    if ((svg.match(/class="qb-graph-shade"/g) || []).length !== graph.shapes.filter((sh) => sh.fill).length) bad.push("a shaded shape is not drawn");
+    return bad;
+  }
   if ((graph.functions || []).length && !/class="qb-graph-curve/.test(svg)) bad.push("no curve is visible in the window");
   E.graph.pieces(graph).forEach((pieces, i) => { if (!pieces.length) bad.push(`function ${i} is not visible in the window`); });
+  // shaded regions: each is drawn and covers a visible part of the window
+  if (graph.regions) {
+    if ((svg.match(/class="qb-graph-shade"/g) || []).length !== graph.regions.length) bad.push("a shaded region is not drawn");
+    E.graph.regionOutlines(graph).forEach((pts, i) => {
+      let area = 0;
+      for (let k = 0; k < pts.length; k++) { const q = pts[(k + 1) % pts.length]; area += Math.abs(pts[k].x * q.y - q.x * pts[k].y) / 2; }
+      const r = graph.regions[i];
+      if (!(r.x[1] > r.x[0]) || r.x[0] < graph.x[0] - 1e-9 || r.x[1] > graph.x[1] + 1e-9) bad.push(`region ${i} is not inside the window`);
+      if (!(area > 0.002 * (graph.x[1] - graph.x[0]) * (graph.y[1] - graph.y[0]))) bad.push(`region ${i} is too small to see`);
+    });
+  }
   return bad;
 }
 
