@@ -426,7 +426,7 @@
       let d, th, e, x;
       do { d = rng.int(8, 45); th = rng.int(20, 65); e = rng.pick([1.4, 1.5, 1.6, 1.7, 1.8]); x = d * Math.tan(rad(th)); } while (edge(x + e) || edge(x) || th === 45 || sf(Number(sf(x, 4)) + e) !== sf(x + e));
       const who = rng.pick(["Amara", "Kenji", "Leila", "Tomas", "Ines", "Ravi"]), thing = rng.pick(["tree", "statue", "street lamp", "climbing wall"]);
-      return { params: { d, th, e }, stem: `${who} stands on level ground $${unit(d, "m")}$ from the base of a vertical ${thing} and looks at its top. The angle of elevation of the top, measured from eye level, is $${deg(th)}$. The eyes of ${who} are $${unit(e, "m")}$ above the ground.`, parts: [
+      return { params: { d, th, e }, stem: `${who} stands on level ground $${unit(d, "m")}$ from the base of a vertical ${thing} and looks at its top. The angle of elevation of the top, measured from eye level, is $${deg(th)}$. ${who}'s eye level is $${unit(e, "m")}$ above the ground.`, parts: [
         P(`Find the height of the ${thing}, in metres.`, 3, ans.sf(x + e, 3, { misconceptions: [{ value: x, text: "This is the height of the top above eye level. Add the height of the eyes above the ground." }] }), [
           `Let $x$ be the height of the top above eye level: $\\tan ${deg(th)} = \\dfrac{x}{${d}}$`, `$x = ${d}\\tan ${deg(th)} = ${sf(x, 4)}$`, `Height $= ${sf(x, 4)} + ${num(e)} = ${unit(sf(x + e), "m")}$`])] };
     } });
@@ -454,7 +454,7 @@
     build({ sit: s }) {
       return { stem: legStem(s, false), parts: [
         P("Write down the bearing of $\\mathrm{A}$ from $\\mathrm{B}$.", 1, ans.int(s.back, { display: m(bear(s.back)) }), [
-          `The opposite direction differs by $${deg(180)}$: $${deg(s.t1)} ${s.t1 < 180 ? "+" : "-"} ${deg(180)} = ${deg(s.back)}$, written $${bear(s.back)}$.`]),
+          `The opposite direction differs by $${deg(180)}$: $${deg(s.t1)} ${s.t1 < 180 ? "+" : "-"} ${deg(180)} = ${deg(s.back)}$${s.back < 100 ? `, written $${bear(s.back)}$` : ""}.`]),
         P("Find $\\mathrm{A\\hat{B}C}$, in degrees.", 2, ans.int(s.ABC, { display: m(deg(s.ABC)), misconceptions: [{ value: s.turn, text: "This is the angle the ship turns through at $\\mathrm{B}$. The angle inside the triangle is between the directions from $\\mathrm{B}$ to $\\mathrm{A}$ and from $\\mathrm{B}$ to $\\mathrm{C}$." }] }), legAngleWork(s))] };
     } });
   reg({ ...LEGS, unknown: "two-leg-distance", levels: [4], title: "Two legs on bearings: the distance and bearing of the end from the start",
@@ -719,7 +719,7 @@
         P("Find the value of $a$.", 2, ans.int(a, wheel ? { misconceptions: [{ value: R, text: "The seat starts at its lowest point, but a positive cosine curve starts at its highest point. So $a$ is negative." }] } : undefined), [
           `The amplitude is $\\dfrac{${hi} - ${lo}}{2} = ${R}$.`,
           wheel ? `At $t = 0$ the seat is at its lowest point, and $\\cos 0 = 1$, so $a$ is negative: $a = ${a}$` : `At $t = 0$ the depth is greatest, and $\\cos 0 = 1$, so $a$ is positive: $a = ${a}$`]),
-        P("Find the exact value of $b$.", 2, ans.exact((2 * Math.PI) / T, piFrac(2, T)), [`The period is $${T}$.`, `$b = \\dfrac{2\\pi}{${T}} = ${piFrac(2, T)}$`]),
+        P("Find the exact value of $b$.", 2, ans.exact((2 * Math.PI) / T, piFrac(2, T)), [`The period is $${T}$.`, `$b = \\dfrac{2\\pi}{${T}}${T % 2 ? "" : ` = ${piFrac(2, T)}`}$`]),
         P(wheel ? `Find the height of the seat above the ground, in metres, when $t = ${ts}$.` : `Find the depth of the water, in metres, when $t = ${ts}$.`, 2, ans.frac(val.n, val.d), [
           `$h(${ts}) = ${coef(a, `\\cos\\left(${piFrac(2, T)} \\times ${ts}\\right)`)} + ${d} = ${coef(a, `\\cos\\left(${piFrac(2 * ts, T)}\\right)`)} + ${d}$`,
           `$\\cos\\left(${piFrac(2 * ts, T)}\\right) = ${frac(cosv, 2)}$, so $h(${ts}) = ${rat.tex(rat.Q(a * cosv, 2))} + ${d} = ${rat.tex(val)}$`])] };
@@ -741,8 +741,8 @@
         P(`Find the ${q} when $t = ${t0}$.`, 2, ans.sf(v0), [`With the calculator in radians, $h(${t0}) = ${num(d)} - ${num(a)}\\cos(${num(b)} \\times ${t0})$`, `$h(${t0}) = ${unit(sf(v0), "m")}$`]),
         P(`Find the first value of $t$ for which the ${q} is $${unit(L, "m")}$.`, 2, ans.sf(t1), [
           `Solve $${num(d)} - ${num(a)}\\cos(${num(b)}t) = ${num(L)}$ with the calculator, for example by finding where the graph of $h$ meets the line $h = ${num(L)}$.`, `The first solution is $t = ${sf(t1)}$.`]),
-        P(tide ? `A ship can enter the harbour only when the depth of the water is more than $${unit(L, "m")}$. Find the length of time during $0 \\le t \\le ${W}$ for which the ship can enter.`
-          : `Find the length of time during $0 \\le t \\le ${W}$ for which the seat is more than $${unit(L, "m")}$ above the ground.`, 3,
+        P(tide ? `A ship can enter the harbour only when the depth of the water is more than $${unit(L, "m")}$. Find the length of time, in hours, during $0 \\le t \\le ${W}$ for which the ship can enter.`
+          : `Find the length of time, in minutes, during $0 \\le t \\le ${W}$ for which the seat is more than $${unit(L, "m")}$ above the ground.`, 3,
           ans.sf(t2 - t1, 3, { misconceptions: [{ value: t2, text: "This is the time at which the level is passed for the second time. The length of time is the difference between the two times." }] }), [
             `The second solution in the interval is $t = ${sf(t2, 4)}$.`, `The graph is above the line between the two solutions.`, `Length of time $= ${sf(t2, 4)} - ${sf(t1, 4)} = ${sf(t2 - t1)}$`])] };
     } });
