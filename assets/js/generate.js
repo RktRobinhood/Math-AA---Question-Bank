@@ -46,6 +46,8 @@
     workSpacePages:    1,
     // Pagination
     showPageNumbers:   true,
+    // Blank out each question's original exam number: the paper prints its own "Question N"
+    hideNumbers:       true,
     // Versions of the same paper with the questions in a different order (1 = just the paper)
     versions:          1,
   };
@@ -167,6 +169,7 @@
           <label class="ckl">${ck('gen-markscheme', s.includeMarkscheme)}Markscheme <small>separate file</small></label>
           <label class="ckl">${ck('cs-show-grid', s.showMarksGrid)}Marks grid <small>on the cover</small></label>
           <label class="ckl">${ck('gen-pagenums', s.showPageNumbers)}Page X of Y footer</label>
+          <label class="ckl wide">${ck('gen-hidenumbers', s.hideNumbers !== false)}Hide the original question numbers <small>the paper numbers them 1, 2, 3…</small></label>
           <label class="ckl wide">Versions
             <select class="select" id="gen-versions">${[1, 2, 3, 4].map(n => `<option value="${n}" ${n === (s.versions || 1) ? 'selected' : ''}>${n === 1 ? '1 (just this paper)' : `${n}: ${'ABCD'.slice(0, n).split('').join(', ')}`}</option>`).join('')}</select>
             <small>same questions, different order</small></label>
@@ -326,6 +329,7 @@
       workSpace:         wsN === null ? prior.workSpace : wsN > 0,
       workSpacePages:    wsN === null ? prior.workSpacePages : (wsN || 1),
       showPageNumbers:   chk('gen-pagenums'),
+      hideNumbers:       chk('gen-hidenumbers'),
       versions:          Math.max(1, parseInt(val('gen-versions'), 10) || 1),
     };
     saveSettings(s);
@@ -387,10 +391,14 @@
     const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
     let inner = '<div class="ws">Nothing to export: tick Question paper or Markscheme.</div>';
     if (p && p.kind === 'cover') inner = coverHtml(s, items, marks);
-    else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg" src="${getBase() + p.src}" alt="">${foot}`;
+    else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg" id="aasl-pv-img" src="${getBase() + p.src}" alt="">${foot}`;
     else if (p && p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
 
     document.getElementById('aasl-pv-fit').innerHTML = `<div class="pg">${inner}</div>`;
+    const pvImg = document.getElementById('aasl-pv-img');
+    if (pvImg && p.first && s.hideNumbers !== false) {
+      fetchImageAsPng(p.src, [], true).then(url => { if (document.getElementById('aasl-pv-img') === pvImg) pvImg.src = url; }).catch(() => {});
+    }
     document.getElementById('aasl-pv-where').textContent =
       `${pages.type === 'markscheme' ? 'markscheme · ' : ''}page ${pages.length ? _page + 1 : 0} of ${pages.length} · A4`;
     const strip = document.getElementById('aasl-pv-strip');
@@ -508,7 +516,22 @@
     return document.body.dataset.base || './';
   }
 
-  async function fetchImageAsPng(relSrc, maskRegions) {
+  // Where a question's original exam number sits on its first image: the bold "5." in the left
+  // margin of the first printed line (question and markscheme crops share this layout). Returns
+  // the box to blank out in image pixels, or null when the margin is empty.
+  function numberBox(ctx, width, height) {
+    const w = Math.round(width * 0.068), h = Math.min(height, Math.round(width * 0.09));
+    const px = ctx.getImageData(0, 0, w, h).data;
+    const inked = y => { for (let x = 0; x < w; x++) { const i = (y * w + x) * 4; if (px[i] + px[i + 1] + px[i + 2] < 380) return true; } return false; };
+    let top = -1, bottom = -1, gap = 0;
+    for (let y = 0; y < h; y++) {
+      if (inked(y)) { if (top < 0) top = y; bottom = y; gap = 0; }
+      else if (top >= 0 && ++gap > 4) break;      // the first line of print has ended
+    }
+    return top < 0 ? null : { x: 0, y: Math.max(0, top - 3), width: w, height: bottom - top + 7 };
+  }
+
+  async function fetchImageAsPng(relSrc, maskRegions, hideNumber) {
     const url = getBase() + relSrc;
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -520,6 +543,10 @@
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
 
+    if (hideNumber) {
+      const box = numberBox(ctx, canvas.width, canvas.height);
+      if (box) { ctx.fillStyle = '#ffffff'; ctx.fillRect(box.x, box.y, box.width, box.height); }
+    }
     // Apply white masks
     if (maskRegions && maskRegions.length) {
       ctx.fillStyle = '#ffffff';
@@ -581,7 +608,7 @@
         }
 
         try {
-          const dataUrl = await fetchImageAsPng(images[ii], maskRegions);
+          const dataUrl = await fetchImageAsPng(images[ii], maskRegions, ii === 0 && s.hideNumbers !== false);
           const base64  = dataUrl.split(',')[1];
           const pngImg  = await pdfDoc.embedPng(base64);
           const imgW = pngImg.width, imgH = pngImg.height;
@@ -877,7 +904,7 @@
       for (let ii = 0; ii < images.length; ii++) {
         const maskRegions = getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme', ii);
         try {
-          const dataUrl = await fetchImageAsPng(images[ii], maskRegions);
+          const dataUrl = await fetchImageAsPng(images[ii], maskRegions, ii === 0 && s.hideNumbers !== false);
           const base64  = dataUrl.split(',')[1];
           const binaryStr = atob(base64);
           const bytes = new Uint8Array(binaryStr.length);
