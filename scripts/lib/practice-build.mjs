@@ -109,18 +109,38 @@ export function checkPractice({ root = ROOT, questions, subtagName, courses, sta
     real[c.id] = Object.fromEntries(Object.keys(rows).sort(byCode).map((k) => [k, rows[k]]));
   }
 
-  const out = { root, catalogue, E, course, courses, statementsOf, unassigned, notes, real, partCount: allParts.size };
+  // -- every course: real codes are that course's statements, and each statement can be practised
+  const topics = readJson(root, "data/courses.json").topics || {};
+  const cat = { statements: Object.fromEntries(courses.map((c) => [c.id, statementsOf(c).map((s) => ({ code: s.code, id: s.id }))])) };
+  E.useCatalogue(cat);
+  const perCourse = {};
+  const empty = [];
+  for (const c of courses) {
+    const known = new Set(cat.statements[c.id].map((s) => s.code));
+    for (const code of Object.keys(real[c.id])) if (!known.has(code)) err(`real questions of ${c.id} are tagged ${code}, which is not in its syllabus`);
+    const cov = E.coverage(c.id);
+    for (const code of Object.keys(cov)) if (!known.has(code)) err(`generators map to ${c.id} ${code}, which is not in its syllabus`);
+    // "Has generated practice" means a generator at one of the levels a student climbs (1 to 4).
+    const practised = (code) => Boolean(cov[code] && cov[code].levels.some((l) => l >= 1 && l <= 4));
+    for (const s of cat.statements[c.id]) if (!practised(s.code) && !(real[c.id][s.code] || []).length) empty.push(`${c.id} ${s.code}`);
+    perCourse[c.id] = { generators: E.generators({ course: c.id }).length, withGenerators: cat.statements[c.id].filter((s) => practised(s.code)).length, statements: known.size };
+  }
+  for (const g of E.registry) if (!E.generators({ course: g.courses[0] }).some((d) => d.id === g.id)) err(`generator ${g.id} is not offered in its own course ${g.courses[0]}`);
+
+  const out = { root, catalogue, E, course, courses, statementsOf, unassigned, notes, real, partCount: allParts.size, topics, perCourse, empty };
   // --todo and --todo-sub print JSON lines for other tools: keep their output clean.
-  if (!process.argv.some((a) => a.startsWith("--todo"))) console.log(`Practice: ${catalogue.types.length} question types, ${E.registry.length} generators, ${unassigned.length} of ${allParts.size} ${course} parts not assigned to a type`);
+  if (!process.argv.some((a) => a.startsWith("--todo"))) console.log(`Practice: ${catalogue.types.length} question types, ${E.registry.length} generators, ${unassigned.length} of ${allParts.size} ${course} parts not assigned to a type; subtopics with generators: ${courses.map((c) => `${c.id} ${perCourse[c.id].withGenerators}/${perCourse[c.id].statements}`).join(", ")}${empty.length ? `; nothing to practise yet: ${empty.join(", ")}` : ""}`);
   return out;
 }
 
 // What a practice page needs from the catalogue: window.QB_TYPES.
-export function browserCatalogue({ catalogue, courses, statementsOf, real }) {
+export function browserCatalogue({ catalogue, courses, statementsOf, real, topics }) {
   return {
-    version: 1,
-    course: catalogue.course,
+    version: 2,
+    course: catalogue.course,   // the home course: generators and types name its syllabus codes
     levels: catalogue.levels,
+    courses: Object.fromEntries(courses.map((c) => [c.id, { id: c.id, short: c.short, name: c.name, subject: c.subject, level: c.level, papers: c.papers.map((p) => ({ id: p.id, name: p.name, calculator: p.calculator })) }])),
+    topics: topics || {},
     statements: Object.fromEntries(courses.map((c) => [c.id, statementsOf(c).map((s) => ({ code: s.code, id: s.id, topic: Number(s.topic), title: s.title }))])),
     subtopics: Object.fromEntries(catalogue.subtopics.map((s) => [s.id, { prereqs: s.prereqs, skills: s.skills.map((k) => k.id) }])),
     types: catalogue.types.map((t) => ({
@@ -133,55 +153,73 @@ export function browserCatalogue({ catalogue, courses, statementsOf, real }) {
   };
 }
 
-// docs/practice-coverage.md: one row per subtopic of the catalogue's course.
-export function coverageMarkdown({ catalogue, E, course, courses, statementsOf, unassigned, notes, real, partCount }) {
-  const statements = statementsOf(courses.find((c) => c.id === course));
-  const gens = E.registry.filter((g) => g.courses.includes(course));
+// docs/practice-coverage.md: one section per course, one row per subtopic.
+export function coverageMarkdown({ catalogue, E, course, courses, statementsOf, unassigned, notes, real, partCount, empty }) {
   const examTypes = catalogue.types.filter((t) => t.source === "exam");
-  const withGen = new Set(gens.map((g) => g.type));
-  const rows = [];
-  let minimum = 0, full = 0, realOnly = 0;
-  for (const s of statements) {
-    const mine = gens.filter((g) => g.syllabus[0] === s.code);
-    const levels = [...new Set(mine.flatMap((g) => g.levels))].sort();
-    const types = examTypes.filter((t) => t.syllabus.includes(s.code));
-    const covered = types.filter((t) => withGen.has(t.id));
-    const isMin = levels.includes(2) && (levels.includes(3) || levels.includes(4));
-    const isFull = types.length > 0 && covered.length === types.length && types.every((t) => gens.filter((g) => g.type === t.id).length >= 2);
-    const nReal = (real[course][s.code] || []).length;
-    const only = mine.length === 0;
-    if (isMin) minimum++;
-    if (isFull) full++;
-    if (only) realOnly++;
-    rows.push(`| ${s.code} ${s.title} | ${isMin ? "yes" : "no"} | ${isFull ? "yes" : "no"} | ${covered.length} of ${types.length} | ${levels.length ? levels.join(", ") : "-"} | ${mine.length} | ${nReal} | ${only ? "yes" : "no"} |`);
-  }
-  const bySitting = new Map();
-  for (const p of unassigned) {
-    const k = p.replace(/-p\d-q\d+(\..*)?$/, "");
-    bySitting.set(k, (bySitting.get(k) || 0) + 1);
-  }
-  const levelCount = (l) => gens.filter((g) => g.levels.includes(l)).length;
-  return `# Practice coverage
+  const home = statementsOf(courses.find((c) => c.id === course));
+  const homeCode = new Map(home.map((s) => [s.id, s.code]));
+  const sections = [], summary = [];
+  for (const c of courses) {
+    const statements = statementsOf(c);
+    const gens = E.generators({ course: c.id });
+    const withGen = new Set(gens.map((g) => g.type));
+    const rows = [];
+    let minimum = 0, full = 0, realOnly = 0, nothing = 0;
+    for (const s of statements) {
+      const mine = gens.filter((g) => g.syllabus[0] === s.code);
+      const levels = [...new Set(mine.flatMap((g) => g.levels))].sort();
+      // The catalogue's types name home-course codes; a statement of another course meets them through its id.
+      const types = examTypes.filter((t) => homeCode.has(s.id) && t.syllabus.includes(homeCode.get(s.id)));
+      const covered = types.filter((t) => withGen.has(t.id));
+      const isMin = levels.includes(2) && (levels.includes(3) || levels.includes(4));
+      const isFull = types.length > 0 && covered.length === types.length && types.every((t) => gens.filter((g) => g.type === t.id).length >= 2);
+      const nReal = (real[c.id][s.code] || []).length;
+      const only = !levels.some((l) => l >= 1 && l <= 4);
+      if (isMin) minimum++;
+      if (isFull) full++;
+      if (only) realOnly++;
+      if (only && !nReal) nothing++;
+      const sharedAs = c.id !== course && homeCode.has(s.id) && homeCode.get(s.id) !== s.code ? ` (${course} ${homeCode.get(s.id)})` : "";
+      rows.push(`| ${s.code} ${s.title}${sharedAs} | ${isMin ? "yes" : "no"} | ${isFull ? "yes" : "no"} | ${covered.length} of ${types.length} | ${levels.length ? levels.join(", ") : "-"} | ${mine.length} | ${nReal} | ${only ? (nReal ? "yes" : "nothing yet") : "no"} |`);
+    }
+    const levelCount = (l) => gens.filter((g) => g.levels.includes(l)).length;
+    summary.push(`| ${c.short} | ${statements.length} | ${statements.length - realOnly} | ${realOnly - nothing} | ${nothing} | ${gens.length} |`);
+    sections.push(`## ${c.short}
 
-Generated by \`node scripts/build.mjs\` from \`data/question-types.json\` and the generators in \`assets/js/engine/generators/\`. Do not edit by hand.
-
-Course: **${course}**. ${gens.length} generators over ${withGen.size} question types.
-Release minimum reached for **${minimum} of ${statements.length}** subtopics; full tier for ${full}; ${realOnly} still on real questions only.
-
-- **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
-- **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
-- **Exam types covered:** catalogue types built from exam parts that name this subtopic, and how many of them have a generator.
-- **Real only:** no generator has this subtopic as its first code, so practice serves its past-paper questions, self-marked, short to long.
+${gens.length} generators over ${withGen.size} question types are offered in ${c.short}. ${statements.length - realOnly} of ${statements.length} subtopics have generated questions; ${realOnly} use real questions only${nothing ? ` (${nothing} of them has no question in the bank yet)` : ""}.
+Release minimum reached for **${minimum} of ${statements.length}** subtopics; full tier for ${full}.
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|
 ${rows.join("\n")}
 
 Generators per level: ${[0, 1, 2, 3, 4, 5].map((l) => `level ${l}: ${levelCount(l)}`).join(", ")}.
+`);
+  }
+  const bySitting = new Map();
+  for (const p of unassigned) {
+    const k = p.replace(/-p\d-q\d+(\..*)?$/, "");
+    bySitting.set(k, (bySitting.get(k) || 0) + 1);
+  }
+  return `# Practice coverage
 
+Generated by \`node scripts/build.mjs\` from \`data/question-types.json\` and the generators in \`assets/js/engine/generators/\`. Do not edit by hand.
+
+Every generator is written for **${course}**. It is offered in each course whose syllabus contains all of its statements (matched by permanent statement id, so an AI statement shared with AA gets the same generators under its AI code). Subtopics with no generator are practised with that course's real past-paper questions.
+
+| Course | Subtopics | With generated questions | Real questions only | Nothing yet | Generators offered |
+|---|---|---|---|---|---|
+${summary.join("\n")}
+
+- **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
+- **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
+- **Exam types covered:** catalogue types built from ${course} exam parts that name this subtopic, and how many of them have a generator.
+- **Real only:** no generator at levels 1 to 4 has this subtopic as its first code, so practice serves its past-paper questions, self-marked, short to long.
+${empty && empty.length ? `- **Nothing yet:** no generator and no tagged question in the bank (${empty.join(", ")}).\n` : ""}
+${sections.join("\n")}
 ## Bank parts not assigned to a question type
 
-The catalogue was seeded from papers up to May 2025. ${unassigned.length} of ${partCount} ${course} parts are not assigned to any type yet:
+The catalogue was seeded from ${course} papers up to May 2025. ${unassigned.length} of ${partCount} ${course} parts are not assigned to any type yet:
 
 | Sitting | Parts |
 |---|---|

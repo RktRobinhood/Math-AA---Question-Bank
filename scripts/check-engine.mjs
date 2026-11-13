@@ -243,6 +243,7 @@ if (!ONLY) {
   const practice = checkPractice({ ...ctx, errors });
   console.log = quiet;
   const QB = browserCatalogue(practice);
+  E.useCatalogue(QB);
   const L = E.learner;
   const course = QB.course;
   const DAY = 86400000;
@@ -412,6 +413,247 @@ if (!ONLY) {
     }
   });
 
+  // ---- all four courses ----
+  const COURSES = Object.keys(QB.statements);
+  const learnerFor = (c, extra = {}) => {
+    const clock = { t: 1800000000000 };
+    const backend = extra.backend || L.memoryBackend();
+    return { lr: L.createLearner({ course: c, catalogue: QB, now: () => clock.t, ...extra, backend }), clock, backend };
+  };
+  const idOf = (c, code) => QB.statements[c].find((s) => s.code === code).id;
+
+  test("each of the four courses: every subtopic can be practised, by a generator or its real questions", () => {
+    assert(COURSES.join() === "aa-sl,aa-hl,ai-sl,ai-hl", "expected the four courses, got " + COURSES.join());
+    // The one known gap: a statement with no generator and no tagged question in the bank.
+    assert(practice.empty.join() === "ai-hl 1.10", "subtopics with nothing to practise changed: " + practice.empty.join(", "));
+    for (const c of COURSES) {
+      const { lr } = learnerFor(c);
+      const all = E.coverage(c), cov = Object.fromEntries(Object.keys(all).filter((k) => all[k].levels.some((l) => l >= 1 && l <= 4)).map((k) => [k, all[k]]));
+      let gen = 0, realOnly = 0;
+      for (const s of QB.statements[c]) {
+        const it = lr.next([s.code]);
+        if (practice.empty.includes(`${c} ${s.code}`)) { assert(it.kind === "none" && lr.summary([s.code])[0].status === "unavailable", `${c} ${s.code} should be unavailable`); continue; }
+        assert(it.kind === "generated" || it.kind === "real", `${c}: nothing to practise for ${s.code}`);
+        assert(it.unit === s.code && it.course === c, `${c} ${s.code}: item for the wrong subtopic`);
+        if (it.kind === "generated") {
+          gen++;
+          assert(cov[s.code], `${c} ${s.code}: generated without coverage`);
+          assert(it.question.course === c && it.question.syllabus[0] === s.code && it.question.id.startsWith(c + ":"), `${c} ${s.code}: question ${it.question.id} is not under this course's code`);
+        } else {
+          realOnly++;
+          assert(!cov[s.code] && it.reason === "real-only", `${c} ${s.code}: a real question although generators exist`);
+          assert(QB.real[c][s.code].some((r) => r[0] === it.questionId), `${c} ${s.code}: real question from another list`);
+        }
+      }
+      assert(gen === practice.perCourse[c].withGenerators && gen > 0, `${c}: ${gen} subtopics generated, build says ${practice.perCourse[c].withGenerators}`);
+      assert(c === "aa-sl" ? realOnly === 0 : realOnly > 0, `${c}: unexpected number of real-only subtopics (${realOnly})`);
+    }
+  });
+
+  test("a generator is offered exactly where the syllabus holds all its statements", () => {
+    for (const c of COURSES) {
+      const ids = new Set(QB.statements[c].map((s) => s.id));
+      const offered = new Set(E.generators({ course: c }).map((d) => d.id));
+      for (const g of E.registry) {
+        const d = E.generators({ type: g.type }).find((x) => x.id === g.id);
+        assert(d.statements && d.statements.length === g.syllabus.length, `${g.id}: statement ids not resolved`);
+        const fits = d.statements.every((id) => ids.has(id));
+        assert(fits === offered.has(g.id), `${g.id} ${fits ? "should" : "should not"} be offered in ${c}`);
+        assert(d.courses.includes(c) === fits && d.courses[0] === "aa-sl", `${g.id}: courses list is wrong for ${c}`);
+        if (!fits) { let threw = false; try { E.make({ course: c, generator: g.id, seed: 1 }); } catch (_) { threw = true; } assert(threw, `make() built ${g.id} for ${c}`); }
+      }
+    }
+    assert(E.generators({ course: "aa-hl" }).length === E.registry.length, "AA HL should be offered every AA SL generator");
+    assert(E.generators({ course: "ai-sl" }).length < E.registry.length && E.generators({ course: "ai-sl" }).length > 50, "AI SL should be offered some generators, not all");
+  });
+
+  test("a shared AI statement gets generated questions under its AI code", () => {
+    // AI HL 1.11 is the statement AA numbers 1.8 (SL1.8).
+    assert(idOf("ai-hl", "1.11") === "SL1.8" && idOf("aa-sl", "1.8") === "SL1.8", "the shared statement moved");
+    const ai = E.generators({ course: "ai-hl", syllabus: "1.11", primary: true });
+    const aa = E.generators({ course: "aa-sl", syllabus: "1.8", primary: true });
+    assert(ai.length > 0 && ai.every((d) => aa.some((x) => x.id === d.id)), "AI HL 1.11 does not get the SL1.8 generators");
+    assert(ai.every((d) => d.syllabus[0] === "1.11"), "generators are not described under the AI code");
+    assert(E.generators({ course: "ai-hl", syllabus: "1.8", primary: true }).length === 0, "AI HL 1.8 (an AI-only statement) was given AA 1.8 generators");
+    assert(E.generators({ course: "aa-hl", syllabus: "1.11", primary: true }).length === 0, "AA HL 1.11 (partial fractions) was given generators");
+    assert(E.coverage("ai-hl")["1.11"] && !E.coverage("ai-hl")["1.8"] && !E.coverage("ai-sl")["1.11"], "coverage() is not in the course's codes");
+    const { lr } = learnerFor("ai-hl");
+    const seen = new Set();
+    for (let i = 0; i < 12; i++) {
+      const it = lr.next(["1.11"]);
+      if (it.reason === "exam") break;
+      assert(it.kind === "generated" && it.unit === "1.11" && it.question.syllabus[0] === "1.11", "expected a generated question under 1.11");
+      assert(it.request.course === "ai-hl" && JSON.stringify(E.make(it.request)) === JSON.stringify(it.question), "the request does not reproduce the question");
+      // the same generator, level and seed give the same mathematics in the home course
+      const home = E.make({ ...it.request, course: "aa-sl" });
+      assert(home.stem === it.question.stem && home.syllabus[0] === "1.8" && home.id !== it.question.id, "the AA SL twin differs or shares an id");
+      seen.add(it.level);
+      lr.record(it, answer(it, true));
+    }
+    assert(seen.size > 1, "the level did not move in AI HL");
+    assert(lr.state.courses["ai-hl"].units["1.11"] && !lr.state.courses["ai-hl"].units["1.8"], "state is not keyed by the AI code");
+    // the exam rung serves AI HL questions tagged 1.11
+    for (let i = 0; i < 30 && lr.summary(["1.11"])[0].status !== "exam"; i++) { const it = lr.next(["1.11"]); lr.record(it, answer(it, true)); }
+    const ex = lr.next(["1.11"]);
+    assert(ex.kind === "real" && QB.real["ai-hl"]["1.11"].some((r) => r[0] === ex.questionId), "the exam rung of AI HL 1.11 does not serve its own real questions");
+    // variants stay inside the course
+    for (const d of E.generators({ course: "ai-sl" }).slice(0, 40)) {
+      const q = E.make({ course: "ai-sl", generator: d.id, seed: 3 });
+      for (const v of E.variants(q)) assert(v.request.course === "ai-sl" && E.make(v.request).course === "ai-sl", "a variant left the course");
+    }
+  });
+
+  test("a question made for a course carries that course's codes", () => {
+    for (const c of COURSES) {
+      const codeOf = new Map(QB.statements[c].map((s) => [s.id, s.code]));
+      for (const d of E.generators({ course: c })) {
+        const q = E.make({ course: c, generator: d.id, seed: 9 });
+        const want = d.statements.map((id) => codeOf.get(id));
+        assert(JSON.stringify(q.syllabus) === JSON.stringify(want) && JSON.stringify(d.syllabus) === JSON.stringify(want), `${d.id} in ${c}: codes ${q.syllabus} should be ${want}`);
+        assert(q.course === c && q.request.course === c && q.id.split(":")[0] === c, `${d.id}: course missing from the question made for ${c}`);
+      }
+    }
+    const moved = E.generators({ course: "ai-hl" }).filter((d) => JSON.stringify(d.syllabus) !== JSON.stringify(E.generator(d.id).syllabus));
+    assert(moved.length > 0, "no generator changes code between AA SL and AI HL, so the mapping is untested");
+  });
+
+  test("an AHL or AI-only statement falls back to that course's real questions; Paper 3 comes last", () => {
+    const cases = [["aa-hl", (s) => s.id.startsWith("AHL")], ["ai-hl", (s) => s.id.startsWith("AI-AHL")], ["ai-sl", (s) => s.id.startsWith("AI-SL")], ["ai-hl", (s) => s.id.startsWith("AI-SL")]];
+    for (const [c, pick] of cases) {
+      const list = QB.statements[c].filter(pick).filter((s) => (QB.real[c][s.code] || []).length);
+      assert(list.length > 0, `${c}: no such statements`);
+      for (const s of list) {
+        assert(E.generators({ course: c, syllabus: s.code, primary: true }).length === 0, `${c} ${s.code} (${s.id}) has generators`);
+        const { lr } = learnerFor(c);
+        const real = QB.real[c][s.code];
+        const it = lr.next([s.code]);
+        assert(it.kind === "real" && it.reason === "real-only" && it.questionId === real[0][0], `${c} ${s.code}: expected its first real question`);
+        assert(lr.summary([s.code])[0].status === "real-only", `${c} ${s.code}: summary is not real-only`);
+        const main = real.filter((r) => r[2] >= 50);
+        for (let i = 1; i < main.length; i++) assert(main[i - 1][1] <= main[i][1], `${c} ${s.code}: main real questions are not short to long`);
+        for (const r of real) assert(new RegExp(`^${c.slice(0, 2)}-[sh]l-\\d{4}`).test(r[0]), `${c} ${s.code}: ${r[0]} is from another subject`);
+      }
+      const w = E.worksheet({ course: c, scope: [list[0].code], count: 2, seed: 1, real: L.realIndex(QB, c) });
+      assert(w.items.length > 0 && w.items.every((x) => x.kind === "real"), `${c}: worksheet on ${list[0].code} should use real questions`);
+    }
+    // A Paper 3 question is long: wherever a list has a shorter main question, it is served first.
+    for (const c of ["aa-hl", "ai-hl"]) {
+      let p3 = 0;
+      for (const [code, list] of Object.entries(QB.real[c])) {
+        const main = list.filter((r) => r[2] >= 50);
+        const first = list[0];
+        if (/-p3-/.test(first[0])) assert(main.every((r) => r[1] >= first[1]), `${c} ${code}: a Paper 3 question is served before a shorter one`);
+        p3 += list.filter((r) => /-p3-/.test(r[0])).length;
+      }
+      assert(p3 > 0, `${c}: no Paper 3 question in the real lists`);
+    }
+    // A question shared by an SL and an HL paper is in both courses' lists, under the stored (SL) id.
+    for (const [sl, hl] of [["aa-sl", "aa-hl"], ["ai-sl", "ai-hl"]]) {
+      const slIds = new Set(Object.values(QB.real[sl]).flat().map((r) => r[0]));
+      const sharedInHl = Object.values(QB.real[hl]).flat().filter((r) => r[0].startsWith(sl + "-"));
+      assert(sharedInHl.length > 0 && sharedInHl.every((r) => slIds.has(r[0])), `${hl}: shared SL questions are missing or unknown`);
+      assert(!Object.values(QB.real[sl]).flat().some((r) => r[0].startsWith(hl + "-")), `${sl}: lists an HL-only question`);
+    }
+  });
+
+  test("switching course does not mix learner state", () => {
+    const backend = L.memoryBackend();
+    const clock = { t: 1800000000000 };
+    const open = (c) => L.createLearner({ course: c, catalogue: QB, backend, now: () => clock.t });
+    // "1.5" is a subtopic of every course; "2.5" is a different statement in AA and AI.
+    const scope = ["1.5", "2.5"];
+    assert(idOf("aa-sl", "2.5") !== idOf("ai-sl", "2.5"), "2.5 should be a different statement in AA and AI");
+    let aa = open("aa-sl");
+    for (let i = 0; i < 9; i++) { const it = aa.next(scope); aa.record(it, answer(it, true)); clock.t += 1000; }
+    const aaBefore = JSON.stringify(aa.summary(scope)), aaUnits = JSON.stringify(aa.state.courses["aa-sl"]);
+    let ai = open("ai-sl");
+    assert(ai.loadStatus === "loaded" && ai.summary(scope).every((r) => r.attempts === 0 && (r.status === "not-started" || r.status === "real-only")), "AI SL starts with AA SL's progress");
+    for (let i = 0; i < 7; i++) { const it = ai.next(scope); assert(it.course === "ai-sl", "item for the wrong course"); ai.record(it, { correct: false, selfMarked: it.kind === "real" }); clock.t += 1000; }
+    assert(JSON.stringify(ai.state.courses["aa-sl"]) === aaUnits, "practising AI SL changed AA SL's state");
+    aa = open("aa-sl");
+    assert(JSON.stringify(aa.summary(scope)) === aaBefore, "AA SL progress changed after practising AI SL");
+    assert(aa.state.attempts.filter((a) => a.course === "aa-sl").length === 9 && aa.state.attempts.filter((a) => a.course === "ai-sl").length === 7, "the attempt log lost a course");
+    const hl = open("aa-hl");
+    assert(hl.summary(scope).every((r) => r.attempts === 0), "AA HL starts with AA SL's progress");
+    // an export holds every course; an import brings them all back
+    const file = aa.exportJSON();
+    const fresh = learnerFor("ai-sl");
+    fresh.lr.importJSON(file);
+    assert(Object.keys(fresh.lr.state.courses).sort().join() === "aa-sl,ai-sl" && fresh.lr.summary(scope).reduce((n, r) => n + r.attempts, 0) === 7, "export and import did not keep both courses");
+    // resetting one course leaves the other alone and keeps the old save aside
+    ai = open("ai-sl");
+    const { keptAs } = ai.resetCourse();
+    assert(keptAs && backend.getItem(keptAs) && ai.summary(scope).every((r) => r.attempts === 0), "resetCourse did not clear the course or keep the old save");
+    aa = open("aa-sl");
+    assert(JSON.stringify(aa.summary(scope)) === aaBefore && !aa.state.attempts.some((a) => a.course === "ai-sl"), "resetting AI SL touched AA SL");
+  });
+
+  test("fixed-level practice: the chosen levels, mixed over the scope, and no level moves", () => {
+    for (const c of COURSES) {
+      const cov = E.coverage(c);
+      const gen = Object.keys(cov).filter((k) => [1, 2].every((l) => cov[k].levels.includes(l)) && cov[k].levels.includes(3)).slice(0, 3);
+      const realOnly = QB.statements[c].map((s) => s.code).filter((k) => !cov[k] && (QB.real[c][k] || []).length).slice(0, 1);
+      const scope = [...gen, ...realOnly];
+      assert(gen.length === 3, `${c}: not enough subtopics with levels 1 to 3`);
+      const { lr, clock } = learnerFor(c);
+      // some adaptive history first
+      for (let i = 0; i < 4; i++) { const it = lr.next([gen[0]]); lr.record(it, answer(it, true)); clock.t += 1000; }
+      const before = JSON.stringify(lr.summary(scope).map((r) => [r.code, r.status, r.level, r.nextReview]));
+      for (const [levels, right] of [[[1, 2], true], [[3, 4], false]]) {
+        const units = {}, seenLevels = new Set();
+        for (let i = 0; i < 6 * scope.length; i++) {
+          const it = lr.next(scope, { levels });
+          assert(it.reason === "fixed" && scope.includes(it.unit), "fixed practice left the scope");
+          units[it.unit] = (units[it.unit] || 0) + 1;
+          if (it.kind === "generated") { assert(levels.includes(it.level) && it.question.level === it.level, `${c}: level ${it.level} outside ${levels}`); seenLevels.add(it.level); }
+          else assert(realOnly.includes(it.unit), "a real question for a subtopic that has generators");
+          const { change } = lr.record(it, right ? answer(it, true) : { correct: false, selfMarked: it.kind === "real" });
+          assert(change === null, "fixed practice reported a level change");
+          clock.t += 1000;
+        }
+        assert(scope.every((k) => units[k] === 6), `${c}: fixed practice is not mixed evenly: ${JSON.stringify(units)}`);
+        assert(seenLevels.size >= 1 && [...seenLevels].every((l) => levels.includes(l)), "wrong levels served");
+      }
+      assert(JSON.stringify(lr.summary(scope).map((r) => [r.code, r.status, r.level, r.nextReview])) === before, `${c}: fixed practice moved a level`);
+      assert(lr.state.attempts.filter((a) => a.reason === "fixed").length === 12 * scope.length, "fixed practice was not logged");
+      assert(lr.summary(scope).every((r) => r.attempts >= 12), "fixed practice was not counted");
+      // a subtopic with none of the wanted levels gives its nearest level
+      const low = Object.keys(cov).find((k) => !cov[k].levels.includes(4) && cov[k].levels.some((l) => l >= 1 && l < 4));
+      if (low) { const it = lr.next([low], { levels: [4] }); assert(it.kind === "generated" && it.level === Math.max(...cov[low].levels.filter((l) => l <= 4)), "no nearest level for a subtopic without level 4"); }
+    }
+  });
+
+  test("calculator wording follows the course's papers", () => {
+    assert(QB.courses["aa-sl"].papers.some((p) => p.calculator === false) && QB.courses["ai-sl"].papers.every((p) => p.calculator === true), "course papers missing from the catalogue");
+    for (const c of COURSES) {
+      const strict = E.hasNoCalculatorPaper(c);
+      assert(strict === c.startsWith("aa"), `${c}: wrong calculator policy`);
+      let exact = 0;
+      for (const d of E.generators({ course: c, level: 3 }).slice(0, 60)) {
+        const q = E.make({ course: c, generator: d.id, level: 3, seed: 2 });
+        const label = E.calculatorLabel(q);
+        if (!q.calculator) exact++;
+        assert(q.calculator ? label === "Calculator" : label === (strict ? "No calculator" : "Exact answer expected"), `${c}: calculator label "${label}"`);
+      }
+      assert(exact > 0, `${c}: no level 3 question without a calculator`);
+      assert(strict ? /Paper/.test(E.levelName(3, c)) : !/Paper|No calculator/.test(E.levelName(3, c) + E.levelName(4, c)), `${c}: level names`);
+    }
+  });
+
+  test("worksheet in another course: its codes, generated where shared, real where not", () => {
+    const c = "ai-hl", cov = E.coverage(c);
+    const noGen = QB.statements[c].map((s) => s.code).find((k) => !cov[k] && (QB.real[c][k] || []).length >= 2);
+    const scope = ["1.11", "4.3", noGen];
+    const w = E.worksheet({ course: c, scope, count: 9, levels: { 2: 1, 3: 1 }, seed: 4, real: L.realIndex(QB, c) });
+    assert(JSON.stringify(w) === JSON.stringify(E.worksheet({ course: c, scope, count: 9, levels: { 2: 1, 3: 1 }, seed: 4, real: L.realIndex(QB, c) })), "not reproducible");
+    assert(w.course === c && w.items.length >= 6, `worksheet has ${w.items.length} items`);
+    for (const it of w.items) {
+      assert(scope.includes(it.code), "item outside the scope");
+      if (it.code === noGen) assert(it.kind === "real" && QB.real[c][noGen].some((r) => r[0] === it.questionId), "the AI-only subtopic should give its real questions");
+      else assert(it.kind === "generated" && it.question.course === c && it.question.syllabus[0] === it.code, "generated item is not under the AI code");
+    }
+  });
+
   test("progress survives a reload, an export and an import", () => {
     const { lr, backend, clock } = newLearner();
     const scope = withGens.slice(0, 3);
@@ -518,12 +760,15 @@ if (!ONLY) {
       var learner = QBEngine.learner.createLearner({ course: QB_TYPES.course, catalogue: QB_TYPES, now: function () { return 1; } });
       var item = learner.next(["2.7"]);
       var rec = learner.record(item, { correct: true });
-      return JSON.stringify({ n: QBEngine.registry.length, q: q, kind: item.kind, saved: rec.saved, keys: Object.keys(window).filter(function (k) { return k !== "window"; }) });
+      // with only window.QB_TYPES to go on, the engine still maps generators onto another course
+      var ai = QBEngine.make({ course: "ai-hl", generator: QBEngine.generators({ course: "ai-hl", syllabus: "1.11", primary: true })[0].id, seed: 5 });
+      return JSON.stringify({ n: QBEngine.registry.length, q: q, kind: item.kind, saved: rec.saved, ai: ai.syllabus[0], keys: Object.keys(window).filter(function (k) { return k !== "window"; }) });
     })()`, sandbox));
     assert(out.n === E.registry.length, "not every generator registered in the browser-like global");
     const g0 = E.registry[0];
     assert(JSON.stringify(out.q) === JSON.stringify(E.make({ generator: g0.id, level: g0.levels[0], seed: 5 })), "the browser-like run made a different question");
     assert(out.kind === "generated" && out.saved === true, "the learner did not run without localStorage");
+    assert(out.ai === "1.11", "the browser-like run did not map a generator onto AI HL");
     assert(out.keys.sort().join() === "QBEngine,QB_TYPES", "the scripts leak globals: " + out.keys.join(", "));
   });
 

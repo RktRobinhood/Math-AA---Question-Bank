@@ -2,7 +2,8 @@
    The storage backend and the clock are injectable, so the same code runs in the browser
    (localStorage) and under Node (a fake). Attaches to QBEngine.learner.
 
-   The unit that carries a level is the subtopic (syllabus code, "2.7"). Every attempt also logs
+   The unit that carries a level is the subtopic: a syllabus code of the learner's course ("2.7").
+   State is kept per course, so the same code in two courses never meets. Every attempt also logs
    the skills of the question it was made on, so a finer model can be built from the log later.
    See docs/practice-engine.md. */
 (function (root) {
@@ -173,6 +174,8 @@
     const now = opts.now || Date.now;
     const store = opts.store || L.createStore({ backend: opts.backend, key: cfg.storageKey, now });
     const cat = opts.catalogue || { statements: {}, subtopics: {}, types: [] };
+    // The engine maps generators onto each course's codes from the same catalogue.
+    if (opts.catalogue && opts.catalogue.statements) E.useCatalogue(opts.catalogue);
     const real = opts.real || L.realIndex(cat, course);
     const statements = (cat.statements && cat.statements[course]) || [];
     const stByCode = new Map(statements.map((s) => [s.code, s]));
@@ -275,16 +278,47 @@
       return q ? fromQuestion(code, u.started ? "progress" : "new", q) : null;
     }
 
-    // The next thing to ask within a scope (a list of syllabus codes). Returns an item:
+    // Fixed-level practice: the student chose a level range instead of "adapt to me". Subtopics
+    // take turns; each gets a question at one of the wanted levels it has generators for (the
+    // nearest level when it has none of them), or a real question when it has no generator.
+    const turns = {};
+    let turn = 0;
+    function fixed(usable, levels) {
+      const order = usable.slice().sort((a, b) => (turns[a] || 0) - (turns[b] || 0));
+      for (const code of order) {
+        const u = unit(code, true), ls = levelsOf(code);
+        let it = null;
+        if (ls.length) {
+          let want = ls.filter((l) => levels.includes(l));
+          if (!want.length) {
+            const gap = (l) => Math.min(...levels.map((w) => Math.abs(w - l)));
+            want = [ls.reduce((best, l) => (gap(l) < gap(best) ? l : best), ls[0])];
+          }
+          const level = want[(u.attempts + turn) % want.length];
+          const q = generated(gens(code, level), level);
+          if (q) it = fromQuestion(code, "fixed", q);
+        } else {
+          const r = realQuestion(code, u);
+          if (r) it = fromReal(code, "fixed", r);
+        }
+        if (it) { turns[code] = ++turn; return it; }
+      }
+      return { kind: "none", why: "nothing to practise in this scope yet" };
+    }
+
+    // The next thing to ask within a scope (a list of the course's syllabus codes). Returns an item:
     //   {kind: "generated", unit, level, reason, request, question, ...}
     //   {kind: "real", unit, level: "exam", reason, questionId, marks}
     //   {kind: "none", why}
-    // reason is one of new, progress, refresh, review, exam, synoptic, real-only.
-    me.next = function (scope) {
+    // reason is one of new, progress, refresh, review, exam, synoptic, real-only, fixed.
+    // opts.levels ([1, 2]) asks for fixed-level practice: questions at those levels, mixed over the
+    // scope, whatever the student's own level is. Those answers are logged and change no level.
+    me.next = function (scope, opts) {
       const codes = [...new Set(scope || [])];
       const c = cs(), t = now();
       const usable = codes.filter((code) => levelsOf(code).length || (real[code] || []).length);
       if (!usable.length) return { kind: "none", why: codes.length ? "nothing to practise in this scope yet" : "empty scope" };
+      if (opts && Array.isArray(opts.levels) && opts.levels.length) return fixed(usable, opts.levels);
       const st = (code) => c.units[code];
       const started = (code) => st(code) && st(code).started;
       const atExam = (code) => started(code) && st(code).rung === "exam";
@@ -356,6 +390,11 @@
       } else {
         c.lastType = null;
         if (!u.realSeen.includes(it.questionId)) u.realSeen.push(it.questionId);
+      }
+      if (it.reason === "fixed") {
+        // Fixed-level practice is logged and counted; it moves no level and starts no subtopic.
+        u.lastSeen = t; u.attempts++; if (ok) u.correct++;
+        return { change: null, saved: store.save(me.state) };
       }
       u.started = true; u.lastSeen = t; u.attempts++; if (ok) u.correct++;
       c.sinceReview = it.reason === "review" ? 0 : c.sinceReview + 1;
@@ -465,6 +504,14 @@
     me.reset = function () {
       const keptAs = store.keepAside("before_reset");
       me.state = L.newState(now());
+      store.save(me.state);
+      return { keptAs };
+    };
+    // Starts this course again and leaves the other courses alone. The old save is kept aside.
+    me.resetCourse = function () {
+      const keptAs = store.keepAside("before_reset");
+      delete me.state.courses[course];
+      me.state.attempts = me.state.attempts.filter((a) => a.course !== course);
       store.save(me.state);
       return { keptAs };
     };
