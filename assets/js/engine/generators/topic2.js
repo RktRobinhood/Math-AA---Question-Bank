@@ -246,7 +246,10 @@
   // ======================= 2.6 the quadratic function =======================
   const QF = { type: "fn-quadratic-features", syllabus: ["2.6", "2.4"] };
   const quadSit = (rng) => {
-    const a = rng.pick([1, -1, 2, -2]), p = rng.int(-5, 3), q = p + 2 * rng.int(1, 3), h = (p + q) / 2;
+    const a = rng.pick([1, -1, 2, -2]);
+    let p, q;
+    do { p = rng.int(-5, 3); q = p + 2 * rng.int(1, 3); } while (p * q === 0);
+    const h = (p + q) / 2;
     return { a, p, q, h, k: (-a * (q - p) * (q - p)) / 4, b: -a * (p + q), c: a * p * q };
   };
   const vertexForm = (s) => `${coef(s.a, `${factor(s.h)}^{2}`)} ${signed(s.k)}`;
@@ -322,7 +325,8 @@
     skills: ["SL2.7.solve-equation"], title: "Solve a quadratic by factorising",
     build({ rng, level }) {
       if (level === 1) {
-        const r1 = rng.int(-7, 4), r2 = r1 + rng.int(1, 8);
+        let r1, r2;
+        do { r1 = rng.int(-7, 4); r2 = r1 + rng.int(1, 8); } while (r1 * r2 === 0);
         return { params: { coeffs: [1, -(r1 + r2), r1 * r2] }, stem: `Consider the equation $${poly([1, -(r1 + r2), r1 * r2])} = 0$.`, parts: [
           P("Write down the smaller solution.", 1, ans.int(r1), [`$${factor(r1)}${factor(r2)} = 0$`, `$x = ${r1}$ or $x = ${r2}$; the smaller is $${r1}$.`]),
           P("Write down the larger solution.", 1, ans.int(r2), [`The larger solution is $x = ${r2}$.`])] };
@@ -404,7 +408,7 @@
         P("The graph of $f$ has a vertical asymptote $x = p$. Write down the value of $p$.", 1, ans.frac(-d, c), [`The denominator is zero when $${lin(c, d)} = 0$, so $p = ${frac(-d, c)}$.`]),
         P("The graph of $f$ has a horizontal asymptote $y = q$. Write down the value of $q$.", 1, ans.frac(a, c), [`As $x$ becomes very large, $f(x)$ approaches the ratio of the coefficients of $x$: $q = ${frac(a, c)}$.`]),
         P("Find the $x$-intercept of the graph of $f$.", 1, ans.frac(-b, a), [`$f(x) = 0$ when the numerator is zero: $${lin(a, b)} = 0$, so $x = ${frac(-b, a)}$.`]),
-        P("Find the $y$-intercept of the graph of $f$.", 1, ans.frac(b, d), [`$f(0) = \\dfrac{${b}}{${d}}${rat.Q(b, d).d === d && d > 0 ? "" : " = " + frac(b, d)}$`])] };
+        P("Find the $y$-intercept of the graph of $f$.", 1, ans.frac(b, d), [`Substitute $x = 0$: $f(0) = ${frac(b, d)}$`])] };
     } });
   reg({ ...RAT, unknown: "ha-from-equation", representation: "equation", format: "value", levels: [3],
     skills: ["SL2.8.asymptotes", "SL2.8.transformed-reciprocal", "SL2.10.solve-analytic"], title: "Asymptotes of a shifted reciprocal, then an equation", source: "rational-asymptotes",
@@ -428,11 +432,11 @@
         Object.assign(gr(-a, h, k), { why: "The branches are in the wrong corners: check the sign of the numerator." }),
         Object.assign(gr(a, k, h), { why: "The two asymptotes have been swapped." }), gr(-a, -h, k)], 3);
       const y0 = rat.sub(k, rat.Q(a, h));
-      return { params: { a, h, k }, stem: `Consider the function $f(x) = \\dfrac{${a}}{${lin(1, -h)}} ${signed(k)}$, for $x \\ne ${h}$.`, parts: [
+      return { params: { a, h, k }, stem: `Consider the function $f(x) = ${a < 0 ? "-" : ""}\\dfrac{${Math.abs(a)}}{${lin(1, -h)}} ${signed(k)}$, for $x \\ne ${h}$.`, parts: [
         P("Which graph shows $y = f(x)$?", 2, ans.graph(rng, gr(a, h, k), wrongs), [
           `The vertical asymptote is $x = ${h}$ and the horizontal asymptote is $y = ${k}$.`,
           `The numerator is ${a > 0 ? "positive, so the branches lie to the upper right and lower left of the asymptotes" : "negative, so the branches lie to the upper left and lower right of the asymptotes"}.`]),
-        P("Find the $y$-intercept of the graph of $f$.", 1, ans.frac(y0.n, y0.d), [`$f(0) = \\dfrac{${a}}{${-h}} ${signed(k)} = ${rat.tex(y0)}$`])] };
+        P("Find the $y$-intercept of the graph of $f$.", 1, ans.frac(y0.n, y0.d), [`$f(0) = ${frac(a, -h)} ${signed(k)}${rat.tex(y0) === `${frac(a, -h)} ${signed(k)}` ? "" : ` = ${rat.tex(y0)}`}$`])] };
     } });
 
   // ======================= 2.9 exponential and logarithmic functions =======================
@@ -510,7 +514,7 @@
     skills: ["SL2.10.solve-analytic", "SL2.4.intersection", "SL2.7.solve-equation"], title: "Where a parabola meets a line",
     build({ rng }) {
       let r1, r2, mm, d;
-      do { r1 = rng.int(-5, 2); r2 = r1 + rng.int(2, 6); mm = rng.nonzero(-3, 3); d = rng.int(-5, 5); } while (mm === r1 + r2);
+      do { r1 = rng.int(-5, 2); r2 = r1 + rng.int(2, 6); mm = rng.nonzero(-3, 3); d = rng.int(-5, 5); } while (mm === r1 + r2 || r1 * r2 === 0);
       const b = mm - (r1 + r2), c = d + r1 * r2;
       return { params: { b, c, mm, d }, stem: `The curve $y = ${poly([1, b, c])}$ and the line $y = ${lin(mm, d)}$ intersect at two points, $\\mathrm{A}$ and $\\mathrm{B}$, where $\\mathrm{A}$ is to the left of $\\mathrm{B}$.`, parts: [
         P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.int(r1), [`At the intersections $${poly([1, b, c])} = ${lin(mm, d)}$, so $${poly([1, b - mm, c - d])} = 0$`, `$${factor(r1)}${factor(r2)} = 0$, so $x = ${r1}$ or $x = ${r2}$. $\\mathrm{A}$ has $x = ${r1}$.`]),
@@ -540,7 +544,7 @@
           opt(A, s.k, s.h, "The two components of the translation have been swapped."),
           opt(A, -s.h, -s.k, "Both components of the translation have the wrong sign."),
           opt(A, s.h, -s.k, "The vertical component of the translation has the wrong sign.")]), [
-          `The vertical stretch gives $y = ${A}f(x)$.`, `The translation replaces $x$ by $${lin(1, -s.h)}$ and adds $${s.k}$: $g(x) = ${gRule(A, s.h, s.k)}$`]),
+          `The vertical stretch gives $y = ${A}f(x)$.`, `The translation replaces $x$ by $${lin(1, -s.h)}$ and ${s.k > 0 ? "adds" : "subtracts"} $${Math.abs(s.k)}$: $g(x) = ${gRule(A, s.h, s.k)}$`]),
         P(`The point $${point(s.p, s.q)}$ lies on the graph of $f$. Find the $y$-coordinate of its image on the graph of $g$.`, 1, ans.int(A * s.q + s.k), [`$y = ${A}${br(s.q)} ${signed(s.k)} = ${A * s.q + s.k}$`])] };
     } });
   reg({ ...TA, syllabus: ["2.11", "2.3"], unknown: "sketch-stretch-shift", representation: "graph", format: "graph-pick", levels: [3],

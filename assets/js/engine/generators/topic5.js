@@ -16,7 +16,9 @@
   reg({ type: "t5-increasing-decreasing", syllabus: ["5.2"], representation: "equation", format: "mcq", unknown: "interval-from-equation", levels: [2],
     skills: ["SL5.2.increasing-decreasing-intervals"], title: "Where a function is decreasing, from its derivative", source: "increasing-decreasing-intervals",
     build({ rng }) {
-      const a = rng.int(-5, 1), b = a + rng.int(2, 6), dec = rng.bool();
+      let a, b;
+      do { a = rng.int(-5, 2); b = a + rng.int(2, 6); } while (a * b === 0);
+      const dec = rng.bool();
       const inside = `$${a} < x < ${b}$`, outside = `$x < ${a}$ or $x > ${b}$`;
       return { params: { a, b, dec }, stem: `The derivative of a function $f$ is $f'(x) = ${factor(a)}${factor(b)}$.`, parts: [
         P("The graph of $f$ has two stationary points. Write down the smaller of their $x$-coordinates.", 1, ans.int(a), [`Stationary points have $f'(x) = 0$, so $x = ${a}$ or $x = ${b}$. The smaller is $${a}$.`]),
@@ -195,7 +197,9 @@
     } });
   reg({ ...AB, unknown: "meeting-limits", levels: [3], skills: ["SL5.11.area-between-curves", "SL5.11.composite-region-area"], title: "Area between a line and a parabola that meet at two points", source: "area-between-curves-section-b",
     build({ rng }) {
-      const r1 = rng.int(-3, 1), r2 = r1 + rng.int(2, 5), c = rng.int(0, 4), s = r1 + r2, pr = r1 * r2, area = rat.Q(Math.pow(r2 - r1, 3), 6);
+      let r1, r2;
+      do { r1 = rng.int(-3, 1); r2 = r1 + rng.int(2, 5); } while (r1 * r2 === 0);
+      const c = rng.int(0, 4), s = r1 + r2, pr = r1 * r2, area = rat.Q(Math.pow(r2 - r1, 3), 6);
       // curve y = x^2 + c and line y = s x - pr + c meet at x = r1 and x = r2
       const F = (x) => rat.sub(rat.sub(rat.Q(s * x * x, 2), pr * x), rat.Q(x * x * x, 3));
       return { params: { c, s, k: c - pr }, stem: `The curve $y = ${poly([1, 0, c])}$ and the line $y = ${lin(s, c - pr)}$ intersect at two points and enclose a finite region $R$.`, parts: [

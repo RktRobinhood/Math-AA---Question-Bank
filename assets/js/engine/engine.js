@@ -183,7 +183,7 @@
     return wrap(typeof c === "number" ? num(c) : rat.tex(c));
   }
   // (x - 3) or (x + 3): the factor with root r.
-  const factor = (r, v) => wrap(lin(1, typeof r === "number" ? -r : rat.neg(r), v));
+  const factor = (r, v) => (isZero(norm(r)) ? v || "x" : wrap(lin(1, typeof r === "number" ? -r : rat.neg(r), v)));
   const point = (x, y) => wrap(`${typeof x === "string" ? x : num(x)},\\, ${typeof y === "string" ? y : num(y)}`);
   // A quantity with its unit, inside maths: unit(12, "cm") = 12\text{ cm}; deg(40) = 40^\circ.
   const unit = (x, u) => `${typeof x === "string" ? x : num(x)}\\text{ ${u}}`;
