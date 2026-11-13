@@ -301,6 +301,11 @@
         }
       } else if (sh.type === "circle") key(T(sh.centre));
       else if (sh.type === "north") edges.push([T(sh.at), add(T(sh.at), [0, -40])]);
+      else if (sh.type === "angle" && !sh.right) {
+        // an angle mark takes up the room between its rays
+        const [start, span] = angleSpan(sh), V = T(sh.at), n = Math.ceil(span / 30);
+        for (let i = 0; i <= n; i++) { const a = ((start + (span * i) / n) * Math.PI) / 180; edges.push([V, add(V, [40 * Math.cos(a), -40 * Math.sin(a)])]); }
+      }
     }
     const C = keys.length ? mul(keys.reduce(add, [0, 0]), 1 / keys.length) : [0, 0];
     const away = (p, fallback) => { const v = sub(p, C); return len(v) < 2 ? fallback || [0, -1] : unitV(v); };
@@ -375,7 +380,7 @@
             path(pts, { cls: "angle" });
           }
           const mid = start + span / 2, u = [Math.cos((mid * Math.PI) / 180), -Math.sin((mid * Math.PI) / 180)];
-          ask(sh.label, "angle", { at: V, u, r, half: span / 2, rays: [start, start + span].map((a) => [Math.cos((a * Math.PI) / 180), -Math.sin((a * Math.PI) / 180)]) });
+          ask(sh.label, "angle", { at: V, u, r, room, half: span / 2, rays: [start, start + span].map((a) => [Math.cos((a * Math.PI) / 180), -Math.sin((a * Math.PI) / 180)]) });
           break;
         }
         case "arc": case "sector": case "segment": {
@@ -391,7 +396,7 @@
           const a = T(sh.at), b = [a[0], a[1] - Math.max(30, (sh.length || 0) * s)];
           path([a, b], { cls: "north" });
           head(b, [0, -1]);
-          ask("N", "point", { at: b, u: [0, -1], gap: 2, straight: true });
+          ask("N", "point", { at: b, u: [0, -1], gap: 2 });
           break;
         }
       }
@@ -422,18 +427,27 @@
       if (q.kind === "angle") {
         // on the bisector, outside the arc and far enough out to sit between the two rays
         let R = q.r + 3 + ext(q.u, q);
-        if (q.half < 88) for (const ray of q.rays) R = Math.max(R, (ext([-ray[1], ray[0]], q) + 2) / Math.sin((q.half * Math.PI) / 180));
-        for (let k = 0; k <= 10; k++) tries.push(add(q.at, mul(q.u, R + 3 * k)));
+        if (q.half < 88) for (const ray of q.rays) R = Math.max(R, (ext([-ray[1], ray[0]], q) + 3.5) / Math.sin((q.half * Math.PI) / 180));
+        // (only while that keeps the label near its vertex)
+        for (let k = 0; k <= 10; k++) if (R + 3 * k + q.w / 2 <= Math.max(0.85 * q.room, q.r + 3 + ext(q.u, q) + 15)) tries.push(add(q.at, mul(q.u, R + 3 * k)));
+        // no room between the rays: beside the arc, just outside one of them
+        for (const ray of q.rays) {
+          let n = [-ray[1], ray[0]];
+          if (dot(n, q.u) > 0) n = mul(n, -1);
+          for (let k = 0; k <= 3; k++) tries.push(add(add(q.at, mul(ray, q.r + q.w / 2 + 2)), mul(n, 4 + ext(n, q) + 3 * k)));
+        }
       } else if (q.kind === "point") {
-        for (const a of q.straight ? [0] : [0, 25, -25, 50, -50, 75, -75, 110, -110]) {
+        for (const a of q.straight ? [0] : [0, 25, -25, 50, -50, 75, -75, 105, -105, 140, -140, 180]) {
           const u = rot(q.u, a);
-          for (let k = 0; k <= (a ? 3 : 6); k++) tries.push(add(q.at, mul(u, q.gap + ext(u, q) + 3 * k)));
+          for (let k = 0; k <= (a ? 4 : 6); k++) tries.push(add(q.at, mul(u, q.gap + ext(u, q) + 3 * k)));
         }
       } else {
-        for (const side of q.fixed ? [1] : [1, -1]) for (const t of [0.5, 0.4, 0.6, 0.3, 0.7]) {
+        for (const side of q.fixed ? [1] : [1, -1]) for (const t of [0.5, 0.4, 0.6, 0.3, 0.7, 0.2, 0.8]) {
           const n = mul(q.n, side), mid = add(q.a, mul(sub(q.b, q.a), t));
-          for (let k = 0; k <= 2; k++) tries.push(add(mid, mul(n, 3.5 + ext(n, q) + 3 * k)));
+          for (let k = 0; k <= 4; k++) tries.push(add(mid, mul(n, 5 + ext(n, q) + 3 * k)));
         }
+        // a crowded line: further out
+        if (!q.fixed) for (const side of [1, -1]) for (let k = 5; k <= 9; k++) tries.push(add(mul(add(q.a, q.b), 0.5), mul(q.n, side * (5 + ext(q.n, q) + 3 * k))));
       }
       q.c = tries.find((t) => clear(t, q)) || tries[0];
       q.ok = clear(q.c, q);
@@ -455,7 +469,7 @@
     const shapes = graph.shapes || [], problems = figureProblems(shapes);
     if (problems.length) throw new Error(problems[0]);
     if (!shapes.length) throw new Error("the figure has no shapes");
-    const fs = W >= 300 ? 12 : 10.5, pad = 5;
+    const fs = W >= 300 ? 12 : 10.5, pad = 8;
     let s = 1, pass = figurePass(shapes, s, fs);
     const fit = () => Math.min((W - 2 * pad) / Math.max(pass.box.x1 - pass.box.x0, 1e-9), (H - 2 * pad) / Math.max(pass.box.y1 - pass.box.y0, 1e-9));
     for (let i = 0; i < 14; i++) {
@@ -495,7 +509,7 @@
     }
     for (const h of L.heads) out.push(`<path class="qb-graph-arrow" d="M${r2(h[0][0])} ${r2(h[0][1])}L${r2(h[1][0])} ${r2(h[1][1])}L${r2(h[2][0])} ${r2(h[2][1])}Z" fill="currentColor" stroke="none"/>`);
     for (const p of L.dots) out.push(`<circle class="qb-graph-point" cx="${r2(p[0])}" cy="${r2(p[1])}" r="2.6" fill="currentColor" stroke="currentColor" stroke-width="1"/>`);
-    for (const q of L.labels) out.push(`<text class="qb-graph-label" x="${r2(q.x)}" y="${r2(q.y + 0.35 * L.fs)}" text-anchor="middle" fill="currentColor"${/^[a-zα-ω]$/.test(q.text) ? ' font-style="italic"' : ""}>${esc(q.text)}</text>`);
+    for (const q of L.labels) out.push(`<text class="qb-graph-label" x="${r2(q.x)}" y="${r2(q.y + 0.35 * L.fs)}" text-anchor="middle" fill="currentColor"${/^[a-zα-ω]$/.test(q.text) ? ` font-style="italic" font-family="KaTeX_Math, 'Times New Roman', serif" font-size="${r2(L.fs * 1.15)}"` : ""}>${esc(q.text)}</text>`);
     if (opts.label) out.push(`<text class="qb-graph-option" x="${W - 6}" y="${H - 6}" text-anchor="end" font-size="13" font-weight="bold" fill="currentColor">${esc(opts.label)}</text>`);
     out.push("</svg>");
     return out.join("");
