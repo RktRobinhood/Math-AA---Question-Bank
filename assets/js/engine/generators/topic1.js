@@ -340,7 +340,7 @@
   // ======================= 1.3 geometric sequences: recall, procedure, Paper 2 =======================
   reg({ ...GS, unknown: "r-from-terms", representation: "terms", levels: [1], skills: ["SL1.3.find-r-u1", "SL1.3.nth-term"], title: "The ratio and the next term from three terms",
     build({ rng }) {
-      const [p, d] = rng.pick([[2, 1], [3, 1], [4, 1], [5, 1], [-2, 1], [-3, 1], [1, 2], [1, 3], [3, 2], [-1, 2], [2, 3], [-3, 2]]), u1 = d * d * d * rng.int(1, 4);
+      const [p, d] = rng.pick([[2, 1], [3, 1], [4, 1], [5, 1], [-2, 1], [-3, 1], [1, 2], [1, 3], [3, 2], [-1, 2], [2, 3], [-3, 2]]), u1 = d * d * d * rng.int(d === 1 ? 2 : 1, 4);
       const r = rat.Q(p, d), t = [u1, (u1 * p) / d, (u1 * p * p) / (d * d), (u1 * p * p * p) / (d * d * d)];
       return { params: { t1: t[0], t2: t[1], t3: t[2] }, stem: `The first three terms of a geometric sequence are $${t[0]}$, $${t[1]}$ and $${t[2]}$.`, parts: [
         P("Write down the common ratio.", 1, ans.frac(p, d), [`$r = \\dfrac{u_{2}}{u_{1}} = \\dfrac{${t[1]}}{${t[0]}}$`, `$r = ${rat.tex(r)}$`]),
@@ -378,7 +378,7 @@
         P("Write down the first term of the series.", 1, ans.int(u1), [`When $r = 1$ the term is $${a === 1 ? b : `${a} \\times ${b} = ${u1}`}$.`]),
         P("Write down the common ratio of the series.", 1, ans.int(b), [`Each term is $${b}$ times the one before, so the common ratio is $${b}$.`]),
         P("Find the sum of the series.", 3, ans.int(sum), [`There are $${n}$ terms, so the sum is $S_{${n}} = \\dfrac{u_{1}\\left(r^{n} - 1\\right)}{r - 1} = \\dfrac{${u1}\\left(${b}^{${n}} - 1\\right)}{${b} - 1}$`,
-          `$S_{${n}} = \\dfrac{${u1} \\times ${num(Math.pow(b, n) - 1)}}{${b - 1}}$`, `$S_{${n}} = ${num(sum)}$`])] };
+          b === 2 ? `$S_{${n}} = ${u1} \\times ${num(Math.pow(b, n) - 1)}$` : `$S_{${n}} = \\dfrac{${u1} \\times ${num(Math.pow(b, n) - 1)}}{${b - 1}}$`, `$S_{${n}} = ${num(sum)}$`])] };
     } });
   const ORD = { 4: "fourth", 5: "fifth", 6: "sixth", 7: "seventh" };
   reg({ type: "t1-geometric-in-context", syllabus: ["1.3"], representation: "words", format: "value", unknown: "rebound-height", levels: [2], calculator: true,
@@ -427,11 +427,11 @@
         for (let i = 0; i < years; i++) vals.push(Math.round(vals[i] * (100 + rate)) / 100);
       } while (vals.some((v) => !Number.isInteger(v)));
       const mult = (100 + rate) / 100, A = vals[years], word = years === 2 ? "two" : "three";
-      const steps = [`Each year the value is multiplied by $${num(mult)}$.`, `After two years: $${num(vals[1])} \\times ${num(mult)} = ${num(vals[2])}$`];
+      const steps = [`After two years: $${num(vals[1])} \\times ${num(mult)} = ${num(vals[2])}$`];
       if (years === 3) steps.push(`After three years: $${num(vals[2])} \\times ${num(mult)} = ${num(vals[3])}$`);
       return { params: { P0, rate, years }, stem: `An amount of $${num(P0)}$ euros is invested in an account that pays $${pct(rate)}$ interest per year, compounded annually.`, parts: [
-        P("Find the value of the investment, in euros, after one year.", 1, ans.int(vals[1]), [`$${num(P0)} \\times ${num(mult)} = ${num(vals[1])}$`]),
-        P(`Find the value of the investment, in euros, after ${word} years.`, 3, ans.int(A, { misconceptions: [{ value: P0 + (years * P0 * rate) / 100, text: "That adds the same interest every year. Compound interest is earned on the interest too." }] }), steps),
+        P("Find the value of the investment, in euros, after one year.", 2, ans.int(vals[1]), [`Adding $${pct(rate)}$ multiplies the value by $${num(mult)}$.`, `$${num(P0)} \\times ${num(mult)} = ${num(vals[1])}$`]),
+        P(`Find the value of the investment, in euros, after ${word} years.`, 2, ans.int(A, { misconceptions: [{ value: P0 + (years * P0 * rate) / 100, text: "That adds the same interest every year. Compound interest is earned on the interest too." }] }), steps),
         P(`Find the total interest earned, in euros, over the ${word} years.`, 1, ans.int(A - P0), [`$${num(A)} - ${num(P0)} = ${num(A - P0)}$`])] };
     } });
 
@@ -483,7 +483,7 @@
   reg({ ...LF, unknown: "solve-log-linear", representation: "equation", format: "value", levels: [2], skills: ["SL1.5.exp-log-form", "SL1.5.zero-negative"], title: "A logarithm of a reciprocal, and a logarithmic equation",
     build({ rng }) {
       let b1, n1, c, mm, p, x0, q;
-      do { b1 = rng.pick([2, 3, 4, 5, 10]); n1 = rng.int(1, 4); } while (Math.pow(b1, n1) > 1000);
+      do { b1 = rng.pick([2, 3, 4, 5, 10]); n1 = rng.int(2, 4); } while (Math.pow(b1, n1) > 1000);
       do { c = rng.pick([2, 3, 5, 10]); mm = rng.int(2, 4); p = rng.int(2, 5); x0 = rng.int(1, 9); q = Math.pow(c, mm) - p * x0; } while (Math.pow(c, mm) > 125 || q === 0);
       const N = Math.pow(b1, n1), K = Math.pow(c, mm);
       return { params: { b1, N, c, m: mm, p, q }, stem: `Consider the number $\\log_{${b1}}\\left(\\dfrac{1}{${N}}\\right)$ and the equation $\\log_{${c}}(${lin(p, q)}) = ${mm}$.`, parts: [
@@ -507,7 +507,7 @@
   reg({ ...LF, unknown: "model-time", representation: "words", format: "value", levels: [4], calculator: true, skills: ["SL1.5.log-context", "SL1.5.evaluate-tech", "SL1.5.exp-log-form"], title: "A logarithmic model: a value and a time",
     build({ rng }) {
       let A, B, t1, drop, t2, R1;
-      do { A = rng.int(70, 95); B = rng.int(12, 30); t1 = rng.int(3, 9); drop = rng.int(15, 35); t2 = Math.pow(10, drop / B) - 1; R1 = A - B * Math.log10(t1 + 1); }
+      do { A = rng.int(70, 95); B = rng.int(12, 30); t1 = rng.int(3, 8); drop = rng.int(15, 35); t2 = Math.pow(10, drop / B) - 1; R1 = A - B * Math.log10(t1 + 1); }
       while (drop % B === 0 || t2 > 80 || t2 < 1.5 || edge3(t2) || edge3(R1) || Math.abs(t2 - t1) < 0.5);
       const g = gcd2(drop, B), target = A - drop;
       return { params: { A, B, t1, target }, stem: `A student learns a list of words. The percentage of the words that the student remembers $t$ weeks later, $R$, is modelled by $R = ${A} - ${B}\\log_{10}(t + 1)$, for $t \\ge 0$.`, parts: [
@@ -598,7 +598,7 @@
     build({ rng }) {
       const [b, m1, m2, k] = rng.pick([[6, 4, 9, 2], [6, 12, 3, 2], [6, 8, 27, 3], [10, 4, 25, 2], [10, 20, 5, 2], [10, 8, 125, 3], [10, 40, 25, 3], [12, 3, 48, 2], [12, 9, 16, 2], [15, 9, 25, 2], [6, 2, 18, 2], [6, 54, 4, 3], [15, 3, 75, 2], [10, 2, 50, 2]]);
       let Q, j;
-      do { Q = rng.pick([2, 3, 4, 5, 7]); j = rng.int(1, 3); } while (Math.pow(b, j) * Q > 1000 || Q === m1 || Q === m2);
+      do { Q = rng.pick([2, 3, 4, 5, 7]); j = rng.int(1, 3); } while (Math.pow(b, j) * Q > 1000 || Q === m1 || Q === m2 || (j === 1 && b * b * Q <= 1000));
       const top = Math.pow(b, j) * Q, L = (x) => `\\log_{${b}} ${x}`;
       return { params: { b, m1, m2, top, Q }, stem: `Consider the expressions $${L(m1)} + ${L(m2)}$ and $${L(top)} - ${L(Q)}$.`, parts: [
         P("Find the value of the first expression.", 2, ans.int(k), [`$${L(m1)} + ${L(m2)} = \\log_{${b}}(${m1} \\times ${m2}) = ${L(m1 * m2)}$`, `$${m1 * m2} = ${b}^{${k}}$, so the value is $${k}$.`]),
@@ -635,7 +635,7 @@
       const ex = (mult, body) => (mult === 1 ? body : `${mult}(${body})`);
       return { params: { A, R, A2, B2, k, c, e }, stem: `Consider the equations $${A}^{x} = ${R}$ and $${A2}^{${lin(1, c)}} = ${B2}^{${lin(k, e)}}$.`, parts: [
         P("Solve the first equation.", 2, ans.frac(j, i), [`$\\left(${t}^{${i}}\\right)^{x} = ${pw(t, j)}$`, `$${i}x = ${j}$, so $x = ${frac(j, i)}$`]),
-        P("Solve the second equation.", 3, ans.frac(x2.n, x2.d), [`${same}, so $${t2}^{${ex(i2, lin(1, c))}} = ${t2}^{${ex(j2, lin(k, e))}}$`, `$${lin(i2, i2 * c)} = ${lin(j2 * k, j2 * e)}$`, `$${coef(D, "x")} = ${top}$`, `$x = ${rat.tex(x2)}$`])] };
+        P("Solve the second equation.", 3, ans.frac(x2.n, x2.d), [`${same}, so $${t2}^{${ex(i2, lin(1, c))}} = ${t2}^{${ex(j2, lin(k, e))}}$`, `$${lin(i2, i2 * c)} = ${lin(j2 * k, j2 * e)}$`].concat(D === 1 ? [] : [`$${coef(D, "x")} = ${top}$`], [`$x = ${rat.tex(x2)}$`]))] };
     } });
   const SE = { type: "t1-solve-exponential", syllabus: ["1.7"], representation: "equation", format: "value" };
   reg({ ...SE, unknown: "isolate-e-exact", levels: [2], skills: ["SL1.7.solve-with-logs"], title: "Solve an exponential equation exactly",
@@ -653,7 +653,7 @@
         [a, b] = rng.sample([2, 3, 5, 7], 2); N = rng.int(10, 99); k = rng.int(1, 2); c = rng.nonzero(-3, 3); e = rng.int(-2, 3);
         den = k * Math.log(a) - Math.log(b); x1 = Math.log(N) / Math.log(a); x2 = (e * Math.log(b) - c * Math.log(a)) / den;
       } while (Math.abs(den) < 0.25 || Math.abs(x1 - Math.round(x1)) < 1e-9 || edge3(x1) || Math.abs(x2) < 0.1 || Math.abs(x2) > 30 || edge3(x2));
-      const la = `\\ln ${a}`, lb = `\\ln ${b}`, rhsIdx = lin(1, e), rhs = expr([[e, lb], [-c, la]]), lhs = expr([[k, la], [-1, lb]]);
+      const la = `\\ln ${a}`, lb = `\\ln ${b}`, rhsIdx = lin(1, e), rhs = expr(e > 0 || c > 0 ? [[e, lb], [-c, la]] : [[-c, la], [e, lb]]), lhs = expr([[k, la], [-1, lb]]);
       return { params: { a, b, N, k, c, e }, stem: `Consider the equations $${a}^{x} = ${N}$ and $${a}^{${lin(k, c)}} = ${b}^{${rhsIdx}}$.`, parts: [
         P("Solve the first equation.", 2, ans.sf(x1), [`$x${la} = \\ln ${N}$`, `$x = \\dfrac{\\ln ${N}}{${la}} = ${sf(x1)}$ ${SF3}`]),
         P("Solve the second equation.", 4, ans.sf(x2), [`Take logarithms of both sides: $(${lin(k, c)})${la} = ${e === 0 ? "x" : `(${rhsIdx})`}${lb}$`, `$x\\left(${lhs}\\right) = ${rhs}$`, `$x = \\dfrac{${rhs}}{${lhs}}$`, `$x = ${sf(x2)}$ ${SF3}`])] };
@@ -692,7 +692,7 @@
     skills: ["SL1.8.applications", "SL1.8.sum-to-infinity"], title: "A recurring decimal as a sum to infinity",
     build({ rng }) {
       let blk;
-      do { blk = rng.int(1, 98); } while (blk % 11 === 0 || blk % 10 === 0);
+      do { blk = rng.int(12, 98); } while (blk % 11 === 0 || blk % 10 === 0);
       const s2 = String(blk).padStart(2, "0"), g = gcd2(blk, 99), p = blk / g, q = 99 / g;
       const work = [`$S_{\\infty} = \\dfrac{u_{1}}{1 - r} = \\dfrac{0.${s2}}{1 - 0.01}$`, `$\\dfrac{0.${s2}}{0.99} = \\dfrac{${blk}}{99}$`];
       work.push(g === 1 ? `This fraction is already in its lowest terms, so $p = ${p}$.` : `Dividing top and bottom by $${g}$ gives $${frac(p, q)}$, so $p = ${p}$.`);
@@ -707,8 +707,7 @@
       const A = rng.int(2, 6), k = rng.int(1, 4), c = rng.nonzero(-5, 5), r0 = rat.Q(...rng.pick([[1, 2], [-1, 2], [1, 3], [-1, 3], [1, 4], [2, 3], [-2, 3], [3, 4]]));
       const ratio = lin(k, c), lo = rat.Q(-1 - c, k), hi = rat.Q(1 - c, k), x0 = rat.div(rat.sub(r0, c), k), gap = rat.sub(1, r0), S = rat.div(A, gap);
       return { params: { A, k, c, x0: rat.num(x0) }, stem: `An infinite geometric series is given by $${A} + ${A}(${ratio}) + ${A}(${ratio})^{2} + \\ldots$`, parts: [
-        P("The series has a finite sum for $p < x < q$. Find the value of $p$.", 2, ans.frac(lo.n, lo.d), [`The common ratio is $r = ${ratio}$, and the sum exists when $-1 < r < 1$.`, `$-1 < ${ratio} < 1$`, `$${-1 - c} < ${coef(k, "x")} < ${1 - c}$`,
-          `$${rat.tex(lo)} < x < ${rat.tex(hi)}$, so $p = ${rat.tex(lo)}$`]),
+        P("The series has a finite sum for $p < x < q$. Find the value of $p$.", 2, ans.frac(lo.n, lo.d), [`The common ratio is $r = ${ratio}$, and the sum exists when $-1 < r < 1$.`, `$-1 < ${ratio} < 1$`].concat(k === 1 ? [] : [`$${-1 - c} < ${coef(k, "x")} < ${1 - c}$`], [`$${rat.tex(lo)} < x < ${rat.tex(hi)}$, so $p = ${rat.tex(lo)}$`])),
         P("Write down the value of $q$.", 1, ans.frac(hi.n, hi.d), [`From the inequality, $q = ${rat.tex(hi)}$.`]),
         P(`Find the sum of the series when $x = ${rat.tex(x0)}$.`, 3, ans.frac(S.n, S.d), [`$r = ${k === 1 ? rat.tex(x0) : `${k}${br(x0)}`} ${signed(c)} = ${rat.tex(r0)}$`, `$1 - r = ${rat.tex(gap)}$`, `$S_{\\infty} = \\dfrac{u_{1}}{1 - r} = ${A} \\div ${rat.tex(gap)} = ${rat.tex(S)}$`])] };
     } });
@@ -726,7 +725,7 @@
   reg({ ...BT, unknown: "coefficient-plain", levels: [2], skills: ["SL1.9.specific-term", "SL1.9.ncr-pascal"], title: "Number of terms and one coefficient",
     build({ rng }) {
       let n, a, mm, co;
-      do { n = rng.int(4, 7); a = rng.int(2, 4); mm = rng.int(2, n - 1); co = nCr(n, n - mm) * Math.pow(a, n - mm); } while (co > 20000);
+      do { n = rng.int(4, 7); a = rng.int(2, 4); mm = rng.int(2, n - 2); co = nCr(n, n - mm) * Math.pow(a, n - mm); } while (co > 20000);
       const facts = [`$\\dbinom{${n}}{${n - mm}} = ${nCr(n, n - mm)}$`];
       if (n - mm > 1) facts.push(`$${a}^{${n - mm}} = ${Math.pow(a, n - mm)}$`);
       return { params: { n, a, m: mm }, stem: `Consider the expansion of $(x + ${a})^{${n}}$.`, parts: [
@@ -745,7 +744,7 @@
   reg({ ...BT, unknown: "coefficient-negative", levels: [3], skills: ["SL1.9.specific-term", "SL1.9.ncr-pascal"], title: "A constant term and a coefficient with a negative term",
     build({ rng }) {
       let a, b, n, mm, co;
-      do { a = rng.int(2, 3); b = rng.int(1, 4); n = rng.int(4, 6); mm = rng.int(2, n - 1); co = nCr(n, n - mm) * Math.pow(a, mm) * Math.pow(-b, n - mm); } while (Math.abs(co) > 20000);
+      do { a = rng.int(2, 3); b = rng.int(1, 4); n = rng.int(4, 6); mm = rng.int(2, n - 1); co = nCr(n, n - mm) * Math.pow(a, mm) * Math.pow(-b, n - mm); } while (Math.abs(co) > 20000 || gcd2(a, b) !== 1);
       const r = n - mm, cst = Math.pow(-b, n), facts = [`$\\dbinom{${n}}{${r}} = ${nCr(n, r)}$`, `$(${a}x)^{${mm}} = ${Math.pow(a, mm)}x^{${mm}}$`];
       if (r > 1) facts.push(`$(${-b})^{${r}} = ${Math.pow(-b, r)}$`);
       return { params: { a, b, n, m: mm }, stem: `Consider the expansion of $(${a}x - ${b})^{${n}}$.`, parts: [
@@ -758,7 +757,7 @@
     skills: ["SL1.9.constant-term", "SL1.9.specific-term"], title: "The term independent of x",
     build({ rng }) {
       let p, s, n, k, r0, cst;
-      do { [p, s, n] = rng.pick([[1, 1, 4], [1, 1, 6], [2, 1, 3], [2, 1, 6], [1, 2, 3], [1, 2, 6], [3, 1, 4], [1, 3, 4], [1, 1, 8], [2, 1, 9], [1, 2, 9]]); k = rng.sign() * rng.int(2, 3); r0 = (p * n) / (p + s); cst = nCr(n, r0) * Math.pow(k, r0); }
+      do { [p, s, n] = rng.pick([[1, 1, 4], [1, 1, 6], [2, 1, 6], [1, 2, 6], [3, 1, 4], [1, 3, 4], [1, 1, 8], [2, 1, 9], [1, 2, 9], [3, 1, 8], [1, 3, 8]]); k = rng.sign() * rng.int(2, 3); r0 = (p * n) / (p + s); cst = nCr(n, r0) * Math.pow(k, r0); }
       while (Math.abs(cst) > 20000);
       const xp = pw("x", p), second = `${k < 0 ? "-" : ""}\\dfrac{${Math.abs(k)}}{${pw("x", s)}}`, first = p === 1 ? `x^{${n} - r}` : `\\left(${xp}\\right)^{${n} - r}`;
       const power = p === 1 ? `${n} - r - ${coef(s, "r")}` : `${p}(${n} - r) - ${coef(s, "r")}`, facts = [`$\\dbinom{${n}}{${r0}} = ${nCr(n, r0)}$`];
@@ -771,16 +770,17 @@
   reg({ type: "t1-ext-binomial-product", syllabus: ["1.9"], representation: "equation", format: "value", unknown: "product-coefficient", levels: [4], calculator: true,
     skills: ["SL1.9.product-expansion", "SL1.9.specific-term"], title: "A coefficient in a bracket times an expansion",
     build({ rng }) {
-      const a = rng.int(2, 3), b = rng.pick([-2, -1, 1, 2]), n = rng.int(7, 10), mm = rng.int(3, 5);
+      const a = rng.int(2, 3), b = rng.pick(a === 2 ? [-1, 1, -3, 3] : [-2, -1, 1, 2]), n = rng.int(7, 10), mm = rng.int(3, 5);
       let kk;
       do { kk = rng.nonzero(-4, 5); } while (Math.abs(kk) === 1);
       const cf = (j) => nCr(n, j) * Math.pow(a, n - j) * Math.pow(b, j), cm = cf(mm), c1 = cf(mm - 1), total = cm + kk * c1;
-      const inner = `(${expr([[a, ""], [b, "x"]])})^{${n}}`, outer = `(${expr([[1, ""], [kk, "x"]])})`, bx = `(${coef(b, "x")})`;
+      const inner = `(${expr([[a, ""], [b, "x"]])})^{${n}}`, outer = `(${expr([[1, ""], [kk, "x"]])})`, bx = b === 1 ? "x" : `(${coef(b, "x")})`;
+      const tm = (cc, j) => (cc < 0 ? `(${num(cc)}x^{${j}})` : `${num(cc)}x^{${j}}`);
       const line = (j) => `The term is $\\dbinom{${n}}{${j}} \\times ${a}^{${n - j}} \\times ${bx}^{${j}}$, so the coefficient is $${nCr(n, j)} \\times ${num(Math.pow(a, n - j))} \\times ${paren(Math.pow(b, j))} = ${num(cf(j))}$.`;
       return { params: { a, b, n, m: mm, kk }, stem: `Consider the expansions of $${inner}$ and $${outer}${inner}$.`, parts: [
         P(`Find the coefficient of $x^{${mm}}$ in the expansion of $${inner}$.`, 2, ans.int(cm), [line(mm)]),
         P(`Find the coefficient of $x^{${mm - 1}}$ in the expansion of $${inner}$.`, 2, ans.int(c1), [line(mm - 1)]),
         P(`Hence find the coefficient of $x^{${mm}}$ in the expansion of $${outer}${inner}$.`, 2, ans.int(total, { misconceptions: [{ value: cm, text: `The $${coef(kk, "x")}$ in the first bracket multiplies the term in $x^{${mm - 1}}$ to give another term in $x^{${mm}}$.` }] }), [
-          `Terms in $x^{${mm}}$ come from $1 \\times ${num(cm)}x^{${mm}}$ and from $${coef(kk, "x")} \\times ${num(c1)}x^{${mm - 1}}$.`, `$${num(cm)} + ${paren(kk)} \\times ${paren(c1)} = ${num(total)}$`])] };
+          `Terms in $x^{${mm}}$ come from $1 \\times ${tm(cm, mm)}$ and from $${coef(kk, "x")} \\times ${tm(c1, mm - 1)}$.`, `$${num(cm)} + ${paren(kk)} \\times ${paren(c1)} = ${num(total)}$`])] };
     } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
