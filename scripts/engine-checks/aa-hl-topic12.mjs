@@ -28,6 +28,33 @@ const perms = (n) => { const out = []; const go = (cur, left) => { if (!left.len
 // a cubic with roots p + qi, p - qi and r, evaluated without expanding it
 const cubicAt = (p, q, r) => (x) => (x - r) * ((x - p) * (x - p) + q * q);
 
+// synthetic division of a polynomial (highest power first) by x - a
+const synth = (cs, a) => { const out = []; let carry = 0; for (const c of cs) { carry = carry * a + c; out.push(carry); } return { rem: out.pop(), quo: out }; };
+// all complex roots of a polynomial by the Durand-Kerner iteration
+const dkRoots = (cs) => {
+  const n = cs.length - 1, mon = cs.map((c) => c / cs[0]);
+  let zs = Array.from({ length: n }, (_, i) => cpow([0.4, 0.9], i).map((v) => v * 1.7));
+  const at = (z) => mon.reduce((s, c) => { const t = cmul(s, z); return [t[0] + c, t[1]]; }, [0, 0]);
+  for (let it = 0; it < 400; it++) zs = zs.map((z, i) => { let den = [1, 0]; zs.forEach((w, j) => { if (j !== i) den = cmul(den, [z[0] - w[0], z[1] - w[1]]); }); const st = cdiv(at(z), den); return [z[0] - st[0], z[1] - st[1]]; });
+  return zs;
+};
+// the option whose first curve agrees with f at every test point (points near an asymptote count when both are large)
+const whichGraph = (q, label, f, T, xs = [-4.63, -3.37, -2.41, -1.57, -0.61, 0.43, 1.39, 2.53, 3.61, 4.47]) =>
+  T.optionWhere(q, label, (v, i) => {
+    const fn = q.parts.find((p) => p.label === label).answer.options[i].functions[0].fn;
+    return xs.every((x) => { const a = T.evalGraph(fn, x), b = f(x); return Math.abs(a - b) < 1e-9 * Math.max(1, Math.abs(b)); });
+  });
+const holds = (rel, v) => (rel === "ge" ? v >= 0 : rel === "le" ? v <= 0 : rel === "gt" ? v > 0 : v < 0);
+// Is the union of the intervals the set where cond holds? Tested on a grid that avoids the end points.
+const sameSet = (iv, cond, lo, hi, skip = []) => {
+  const ends = iv.flat().concat(skip);
+  for (let x = lo + 0.0137; x < hi; x += 0.0491) {
+    if (ends.some((e) => Math.abs(x - e) < 0.004)) continue;
+    if (iv.some(([a, b]) => x > a && x < b) !== cond(x)) return false;
+  }
+  return true;
+};
+
 export default {
   // ======================= 1.10 =======================
   "t1-ahl-counting/code-count/words": (q, T) => {
@@ -271,5 +298,155 @@ export default {
     return { a: T.approx(pr[0], 1e-6), b: T.approx(pr[1], 1e-6), c: T.approx(pr[2], 1e-6), d: T.approx(order[0] * pr[0] + order[1] * pr[1] + order[2] * pr[2], 1e-6) };
   },
 
-  // @@MORE@@
+  // ======================= 2.12 =======================
+  "fn-ahl-polynomial-theorems/remainder/equation": (q, T) => ({ a: synth(q.params.cs, q.params.a).rem }),
+  "fn-ahl-polynomial-theorems/factor-coefficient/equation": (q, T) => {
+    const { a, C, D, d } = q.params, k = T.bisect((kk) => T.poly([1, kk, C, D], a), -200, 200);
+    T.require(Math.abs(k - Math.round(k)) < 1e-6, "k is an integer");
+    return { a: T.approx(k, 1e-6), b: T.approx(synth([1, Math.round(k), C, D], d).rem, 1e-6) };
+  },
+  "fn-ahl-polynomial-theorems/factorise-solve/equation": (q, T) => {
+    const { a, B, D } = q.params, k = Math.round(T.bisect((kk) => T.poly([1, B, kk, D], a), -400, 400)), f = (x) => T.poly([1, B, k, D], x);
+    const rs = T.roots(f, -12.03, 12.07, 6000).filter((r) => Math.abs(r - a) > 1e-6);
+    T.require(Math.abs(f(a)) < 1e-9 && rs.length === 2, "x - a is a factor and there are two other real roots");
+    const quo = synth([1, B, k, D], a).quo;      // the quadratic factor, by synthetic division
+    return { a: k, b: quo[1], c: quo[2], d: T.approx(rs[0], 1e-6), e: T.approx(rs[1], 1e-6) };
+  },
+  "fn-ahl-polynomial-theorems/graph-multiplicity/graph": (q, T) => {
+    const { s, p, q: z } = q.params, f = (x) => s * (x - p) * (x - p) * (x - z);
+    return { a: whichGraph(q, "a", f, T), b: f(0) };
+  },
+  "fn-ahl-polynomial-theorems/remainders-and-root/equation": (q, T) => {
+    const { c, u, R1, R2 } = q.params;
+    // f(1) = R1 and f(u) = R2 are two linear equations in a and b
+    const D = 1 * u - u * u, e1 = R1 - 1 - c, e2 = R2 - u * u * u - c, a = (e1 * u - e2) / D, b = (e2 - u * u * e1) / D;
+    const f = (x) => T.poly([1, a, b, c], x), rs = T.roots(f, -40.01, 40.03, 16000);
+    T.require(rs.length === 1, "exactly one real root");
+    const quo = synth([1, a, b, c], rs[0]).quo;
+    T.require(quo[1] * quo[1] - 4 * quo[2] < 0, "the other two roots are not real");
+    return { a: T.approx(a, 1e-9), b: T.approx(b, 1e-9), c: T.approx(rs[0], 1e-7), d: T.approx(-quo[1], 1e-7) };
+  },
+  "fn-ahl-polynomial-roots/coefficients-from-sum-product/equation": (q, T) => {
+    const { n, a, c1, c2, S, Pr } = q.params, cs = (k, m) => (n === 3 ? [a, k, c1, m] : [a, k, c2, c1, m]);
+    const sumOf = (k) => dkRoots(cs(k, 1)).reduce((s, z) => s + z[0], 0);
+    const prodOf = (m) => dkRoots(cs(1, m)).reduce((s, z) => cmul(s, z), [1, 0])[0];
+    return { a: T.approx(T.bisect((k) => sumOf(k) - S, -80, 80, 60), 1e-4), b: T.approx(T.bisect((m) => prodOf(m) - Pr, -80, 80, 60), 1e-4) };
+  },
+  "fn-ahl-polynomial-roots/fourth-root/equation": (q, T) => {
+    const { cs, p, q: im, r1 } = q.params, f = (x) => T.poly(cs, x), real = T.roots(f, -9.03, 9.07, 6000);
+    T.require(real.length === 2 && real.some((r) => Math.abs(r - r1) < 1e-6), "two real roots, one of them the given one");
+    const z = [p, im], val = cs.reduce((s, c) => { const t = cmul(s, z); return [t[0] + c, t[1]]; }, [0, 0]);
+    T.require(Math.hypot(val[0], val[1]) < 1e-6, "the given complex number is a root");
+    const other = real.find((r) => Math.abs(r - r1) > 1e-6);
+    return { a: T.approx(2 * p + r1 + other, 1e-6), b: T.approx((p * p + im * im) * r1 * other, 1e-5), c: T.approx(other, 1e-6) };
+  },
+  // ======================= 2.13 =======================
+  "fn-ahl-rational-quadratic/vertical-asymptotes/equation": (q, T) => {
+    const { p, q: z, r } = q.params, rs = T.roots((x) => x * x - (p + z) * x + p * z, -12.03, 12.07, 6000);
+    T.require(rs.length === 2 && rs.every((x) => Math.abs(x - r) > 1e-6), "two asymptotes, neither cancelled by the numerator");
+    return { a: T.approx(rs[0], 1e-6), b: T.approx(rs[1], 1e-6) };
+  },
+  "fn-ahl-rational-quadratic/oblique-asymptote/equation": (q, T) => {
+    const { cs, h } = q.params, f = (x) => T.poly(cs, x) / (x - h), X = 1e6, p = (f(2 * X) - f(X)) / X;
+    T.require(Math.abs(T.poly(cs, h)) > 1e-9, "no common factor");
+    return { a: T.bisect((x) => x - h, -50, 50), b: T.approx(p, 1e-4), c: T.approx(f(X) - Math.round(p) * X, 1e-3), d: f(0) };
+  },
+  "fn-ahl-rational-quadratic/linear-over-quadratic-graph/graph": (q, T) => {
+    const { k, r, p, q: z } = q.params, f = (x) => (k * (x - r)) / ((x - p) * (x - z));
+    T.require(r !== p && r !== z, "no common factor");
+    return { a: T.approx(f(1e7), 1e-5), b: whichGraph(q, "b", f, T) };
+  },
+  "fn-ahl-rational-quadratic/quadratic-over-linear-graph/graph": (q, T) => {
+    const { cs, h } = q.params, f = (x) => T.poly(cs, x) / (x - h), X = 1e6;
+    T.require(Math.abs(T.poly(cs, h)) > 1e-9, "no common factor");
+    const pick = whichGraph(q, "d", f, T), line = q.parts[3].answer.options[pick.index].functions[1].fn;
+    T.require(Math.abs(T.evalGraph(line, X) - f(X)) < 1e-3, "the dashed line of the correct graph is the oblique asymptote");
+    return { a: T.bisect((x) => x - h, -50, 50), b: T.approx(f(X) - X, 1e-3), c: f(0), d: pick };
+  },
+  "fn-ahl-rational-quadratic/range-rational/equation": (q, T) => {
+    const { a, b, c } = q.params, f = (x) => (x - a) / (x * x + b * x + c);
+    T.require(b * b - 4 * c < 0, "the denominator has no real zeros");
+    const mx = T.extremum(f, -80, 80, "max", 40000).value, mn = T.extremum(f, -80, 80, "min", 40000).value;
+    return { a: T.approx(f(1e8), 1e-6), b: T.approx(mx, 1e-7), c: T.approx(mn, 1e-7), d: T.optionWhere(q, "d", (v) => Math.abs(v[0] - mn) < 1e-6 && Math.abs(v[1] - mx) < 1e-6) };
+  },
+  // ======================= 2.14 =======================
+  "fn-ahl-odd-even/classify/equation": (q, T) => {
+    const f = (x) => T.evalGraph(q.params.fn, x), xs = [0.3, 0.9, 1.7, 2.4, 3.1];
+    const odd = xs.every((x) => Math.abs(f(-x) + f(x)) < 1e-9), even = xs.every((x) => Math.abs(f(-x) - f(x)) < 1e-9);
+    return { a: T.option(odd ? "odd" : even ? "even" : "neither") };
+  },
+  "fn-ahl-odd-even/symmetry-coefficients/equation": (q, T) => {
+    const { even, a1, a2, e, c, d, x0 } = q.params;
+    const F = (k, m) => (x) => (even ? a1 * x ** 4 + (k - c) * x ** 3 + a2 * x * x + (m + d) * x + e : a1 * x ** 3 + (k - c) * x * x + a2 * x + (m + d));
+    // how far f is from the symmetry, at two values of x; each is linear in k and in m
+    const miss = (k, m) => [1, 2].map((x) => F(k, m)(x) - (even ? 1 : -1) * F(k, m)(-x));
+    const m0 = miss(0, 0), mk = miss(1, 0), mm = miss(0, 1);
+    const A = [[mk[0] - m0[0], mm[0] - m0[0]], [mk[1] - m0[1], mm[1] - m0[1]]], D = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+    const k = (-m0[0] * A[1][1] + A[0][1] * m0[1]) / D, m = (-A[0][0] * m0[1] + m0[0] * A[1][0]) / D;
+    return { a: T.approx(k, 1e-9), b: T.approx(m, 1e-9), c: T.approx(F(k, m)(x0), 1e-6) };
+  },
+  "fn-ahl-inverse-restricted/quadratic-inverse/equation": (q, T) => {
+    const { b, c, side, v } = q.params, f = (x) => x * x + b * x + c, vx = T.extremum(f, -30, 30, "min", 6000);
+    const h = Math.round(vx.x), sols = T.roots((x) => f(x) - v, -30.03, 30.07, 9000).filter((x) => side * (x - h) >= 0);
+    T.require(sols.length === 1, "one value in the restricted domain");
+    const pick = T.optionWhere(q, "d", ([hh, ss, kk]) => [0.5, 2, 7.3].every((dy) => { const y = vx.value + dy, x = hh + ss * Math.sqrt(y - kk); return isFinite(x) && side * (x - h) >= 0 && Math.abs(f(x) - y) < 1e-9; }));
+    return { a: T.approx(vx.x, 1e-6), b: T.approx(sols[0], 1e-6), c: T.approx(vx.value, 1e-6), d: pick };
+  },
+  "fn-ahl-inverse-restricted/self-inverse/equation": (q, T) => {
+    const { a, b, v } = q.params, f = (k) => (x) => (a * x + b) / (x - k);
+    const ks = [];
+    for (let k = -15; k <= 15; k++) if ([0.37, 1.9, -2.3, 7.1].every((x) => Math.abs(f(k)(f(k)(x)) - x) < 1e-9)) ks.push(k);
+    T.require(ks.length === 1 && a * a + b !== 0, "one value of k makes f self-inverse");
+    // the inverse value by solving f(x) = v
+    return { a: ks[0], b: T.approx(T.roots((x) => f(ks[0])(x) - v, -200.03, 200.07, 40000)[0], 1e-6) };
+  },
+  // ======================= 2.15 =======================
+  "fn-ahl-inequalities/factorised-cubic/equation": (q, T) => {
+    const { a, b, c, s, rel } = q.params, f = (x) => s * (x - a) * (x - b) * (x - c);
+    return { a: T.optionWhere(q, "a", (iv) => sameSet(iv, (x) => holds(rel, f(x)), -12, 12)) };
+  },
+  "fn-ahl-inequalities/cubic-vs-line/equation": (q, T) => {
+    const { fc, mm, n, rg, rel } = q.params, h = (x) => T.poly(fc, x) - (mm * x + n), rs = T.roots(h, -9.03, 9.07, 6000);
+    T.require(rs.length === 3 && rs.some((r) => Math.abs(r - rg) < 1e-6), "three intersections, one of them the given one");
+    const others = rs.filter((r) => Math.abs(r - rg) > 1e-6);
+    return { a: T.approx(others[0], 1e-6), b: T.approx(others[1], 1e-6), c: T.optionWhere(q, "c", (iv) => sameSet(iv, (x) => holds(rel, h(x)), -12, 12)) };
+  },
+  "fn-ahl-inequalities/rational-vs-line/equation": (q, T) => {
+    const { a, b, c, le } = q.params, h = (x) => (x + a) / (x - b) - (x + c), rs = T.roots(h, -30.013, 30.017, 24000);
+    T.require(rs.length === 2 && rs[0] < b && b < rs[1], "two intersections, one on each side of the asymptote");
+    return { a: T.approx(rs[0], 1e-7), b: T.approx(rs[1], 1e-7), c: T.optionWhere(q, "c", (iv) => sameSet(iv, (x) => holds(le ? "le" : "ge", h(x)), -14, 14, [b])) };
+  },
+  // ======================= 2.16 =======================
+  "fn-ahl-modulus-graphs/modulus-of-f/graph": (q, T) => {
+    const { p, q: z } = q.params.sit, t = q.params.t, f = (x) => Math.abs((x - p) * (x - z));
+    T.require(Math.abs(T.evalGraph(q.graph.functions[0].fn, 1.3) - (1.3 - p) * (1.3 - z)) < 1e-9, "the diagram shows f");
+    return { a: whichGraph(q, "a", f, T), b: T.roots((x) => f(x) - t, -15.03, 15.07, 12000).length };
+  },
+  "fn-ahl-modulus-graphs/f-of-modulus/graph": (q, T) => {
+    const { p, q: z } = q.params.sit, f = (x) => (Math.abs(x) - p) * (Math.abs(x) - z);
+    T.require(Math.abs(T.evalGraph(q.graph.functions[0].fn, 1.3) - (1.3 - p) * (1.3 - z)) < 1e-9, "the diagram shows f");
+    return { a: whichGraph(q, "a", f, T), b: T.roots(f, -15.03, 15.07, 12000).length };
+  },
+  "fn-ahl-modulus-graphs/reciprocal-graph/graph": (q, T) => {
+    const { A, p, q: z } = q.params, f = (x) => ((x - p) * (x - z)) / A, g = (x) => 1 / f(x), zs = T.roots(f, -12.03, 12.07, 6000);
+    T.require(Math.abs(T.evalGraph(q.graph.functions[0].fn, 1.3) - f(1.3)) < 1e-9 && zs.length === 2, "the diagram shows f, which has two zeros");
+    return { a: T.approx(zs[0], 1e-6), b: T.approx(zs[1], 1e-6), c: g(0), d: T.approx(T.extremum(g, zs[0] + 0.05, zs[1] - 0.05, "max", 4000).value, 1e-6), e: whichGraph(q, "e", g, T) };
+  },
+  "fn-ahl-modulus-equations/linear-equals-constant/equation": (q, T) => {
+    const { a, b, k } = q.params, rs = T.roots((x) => Math.abs(a * x + b) - k, -40.03, 40.07, 16000);
+    let n = 0;
+    for (let x = -200; x <= 200; x++) if (Math.abs(a * x + b) < k) n++;
+    T.require(rs.length === 2, "two solutions");
+    return { a: T.approx(rs[0], 1e-6), b: T.approx(rs[1], 1e-6), c: n };
+  },
+  "fn-ahl-modulus-equations/modulus-vs-line/equation": (q, T) => {
+    const { a, b, c, d, lt } = q.params, h = (x) => Math.abs(a * x + b) - (c * x + d), rs = T.roots(h, -60.013, 60.017, 48000);
+    T.require(rs.length === 2, "two solutions");
+    return { a: T.approx(rs[0], 1e-6), b: T.approx(rs[1], 1e-6), c: T.optionWhere(q, "c", (iv) => sameSet(iv, (x) => holds(lt ? "lt" : "gt", h(x)), -70, 70)) };
+  },
+  "fn-ahl-modulus-equations/modulus-vs-quadratic/equation": (q, T) => {
+    const { a, c } = q.params, rs = T.roots((x) => Math.abs(x * x - a) - (x + c), -12.013, 12.017, 48000);
+    T.require(rs.length >= 2, "at least two solutions");
+    return { a: rs.length, b: T.approx(rs[0], 1e-7), c: T.approx(rs[rs.length - 1], 1e-7) };
+  },
 };

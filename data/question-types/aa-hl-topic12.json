@@ -845,6 +845,676 @@
      "text": "Stopping at the parameter value without checking consistency"
     }
    ]
+  },
+  {
+   "id": "fn-ahl-polynomial-theorems",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Factor and remainder theorems, polynomial graphs",
+   "summary": "Remainders and unknown coefficients from the factor and remainder theorems, full factorisation of a cubic, and the graph of a cubic with a repeated zero.",
+   "syllabus": [
+    "2.12"
+   ],
+   "skills": [
+    "AHL2.12.remainder-theorem",
+    "AHL2.12.factor-theorem",
+    "AHL2.12.polynomial-division",
+    "AHL2.12.factorise-solve",
+    "AHL2.12.polynomial-graph",
+    "AHL2.12.sum-product-roots"
+   ],
+   "level": [
+    1,
+    4
+   ],
+   "formats": [
+    "value",
+    "graph-pick"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "graph"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "remainder",
+     "asked": "Remainder on division by a linear expression",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.remainder-theorem"
+     ]
+    },
+    {
+     "id": "factor-coefficient",
+     "asked": "A coefficient from a factor, then a remainder",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.factor-theorem",
+      "AHL2.12.remainder-theorem"
+     ]
+    },
+    {
+     "id": "factorise-solve",
+     "asked": "Find a coefficient, factorise a cubic and find all its roots",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.factor-theorem",
+      "AHL2.12.polynomial-division",
+      "AHL2.12.factorise-solve"
+     ]
+    },
+    {
+     "id": "graph-multiplicity",
+     "asked": "Pick the graph of a cubic with a repeated zero",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.12.polynomial-graph"
+     ]
+    },
+    {
+     "id": "remainders-and-root",
+     "asked": "Two remainders give two coefficients, then the real root",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.remainder-theorem",
+      "AHL2.12.sum-product-roots",
+      "AHL2.12.factorise-solve"
+     ]
+    }
+   ],
+   "constraints": [
+    "division is by a linear factor x - a, so the remainder is f(a)",
+    "a repeated zero makes the graph touch the x-axis"
+   ],
+   "misconceptions": [
+    {
+     "text": "Substituting -a instead of a for the factor x - a"
+    },
+    {
+     "text": "Drawing a repeated zero as a crossing"
+    },
+    {
+     "text": "Stopping at one factor instead of finding every root"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-polynomial-roots",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Sum and product of the roots of a polynomial",
+   "summary": "Sum -a_(n-1)/a_n and product (-1)^n a_0/a_n of the roots, used to find coefficients and a remaining root, including with a conjugate pair.",
+   "syllabus": [
+    "2.12"
+   ],
+   "skills": [
+    "AHL2.12.sum-product-roots",
+    "AHL1.14.conjugate-root"
+   ],
+   "level": [
+    2,
+    3
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "coefficients-from-sum-product",
+     "asked": "Coefficients from the sum and the product of the roots",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.sum-product-roots"
+     ]
+    },
+    {
+     "id": "fourth-root",
+     "asked": "Sum and product of the roots of a quartic, then the missing root",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.12.sum-product-roots",
+      "AHL1.14.conjugate-root"
+     ]
+    }
+   ],
+   "constraints": [
+    "the leading coefficient divides both formulas",
+    "the sign of the product depends on the degree"
+   ],
+   "misconceptions": [
+    {
+     "text": "Forgetting to divide by the leading coefficient"
+    },
+    {
+     "text": "Dropping the minus sign in the sum of the roots"
+    },
+    {
+     "text": "Using the wrong sign for the product of the roots of a cubic"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-rational-quadratic",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Rational functions with a quadratic numerator or denominator",
+   "summary": "Vertical, horizontal and oblique asymptotes, intercepts, the range from turning points, and choosing the graph.",
+   "syllabus": [
+    "2.13"
+   ],
+   "skills": [
+    "AHL2.13.vertical-asymptotes",
+    "AHL2.13.oblique-asymptote",
+    "AHL2.13.intercepts",
+    "AHL2.13.sketch-rational",
+    "AHL2.13.horizontal-asymptote",
+    "AHL2.13.range-rational"
+   ],
+   "level": [
+    1,
+    4
+   ],
+   "formats": [
+    "value",
+    "graph-pick"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "graph"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "vertical-asymptotes",
+     "asked": "Vertical asymptotes from a quadratic denominator",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.13.vertical-asymptotes"
+     ]
+    },
+    {
+     "id": "oblique-asymptote",
+     "asked": "Asymptotes and intercept of a quadratic over a linear function",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.13.oblique-asymptote",
+      "AHL2.13.vertical-asymptotes",
+      "AHL2.13.intercepts"
+     ]
+    },
+    {
+     "id": "linear-over-quadratic-graph",
+     "asked": "Pick the graph of a linear over a quadratic function",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.13.sketch-rational",
+      "AHL2.13.horizontal-asymptote",
+      "AHL2.13.vertical-asymptotes"
+     ]
+    },
+    {
+     "id": "quadratic-over-linear-graph",
+     "asked": "Asymptotes and intercepts, then the graph of a quadratic over a linear function",
+     "level": 3,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.13.sketch-rational",
+      "AHL2.13.oblique-asymptote",
+      "AHL2.13.intercepts"
+     ]
+    },
+    {
+     "id": "range-rational",
+     "asked": "Range of a linear over a quadratic function from its turning points",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.13.range-rational",
+      "AHL2.13.horizontal-asymptote"
+     ]
+    }
+   ],
+   "constraints": [
+    "numerator and denominator have no common factor",
+    "an oblique asymptote comes from dividing a quadratic by a linear expression"
+   ],
+   "misconceptions": [
+    {
+     "text": "Giving the zeros of the numerator as vertical asymptotes"
+    },
+    {
+     "text": "Missing the oblique asymptote and writing a horizontal one"
+    },
+    {
+     "text": "Sign errors in the quotient of the division"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-odd-even",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Odd and even functions",
+   "summary": "Decide whether a function is odd, even or neither, and use the symmetry to find unknown coefficients and values.",
+   "syllabus": [
+    "2.14"
+   ],
+   "skills": [
+    "AHL2.14.odd-even-test",
+    "AHL2.14.use-symmetry"
+   ],
+   "level": [
+    1,
+    2
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "classify",
+     "asked": "Decide whether a function is odd, even or neither",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.14.odd-even-test"
+     ]
+    },
+    {
+     "id": "symmetry-coefficients",
+     "asked": "Unknown coefficients of an odd or an even polynomial",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.14.odd-even-test",
+      "AHL2.14.use-symmetry"
+     ]
+    }
+   ],
+   "constraints": [
+    "an even polynomial has only even powers, an odd one only odd powers"
+   ],
+   "misconceptions": [
+    {
+     "text": "Calling a function with both odd and even powers odd or even"
+    },
+    {
+     "text": "Mixing up the two definitions"
+    },
+    {
+     "text": "Thinking a constant term is allowed in an odd function"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-inverse-restricted",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Inverses on a restricted domain and self-inverse functions",
+   "summary": "The largest domain on which a quadratic has an inverse, the inverse on that domain with its own domain, and the condition for a rational function to be its own inverse.",
+   "syllabus": [
+    "2.14"
+   ],
+   "skills": [
+    "AHL2.14.restrict-domain",
+    "AHL2.14.inverse-restricted",
+    "AHL2.14.self-inverse"
+   ],
+   "level": [
+    2,
+    3
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "quadratic-inverse",
+     "asked": "Largest domain for an inverse of a quadratic, and the inverse",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.14.restrict-domain",
+      "AHL2.14.inverse-restricted"
+     ]
+    },
+    {
+     "id": "self-inverse",
+     "asked": "A self-inverse rational function",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.14.self-inverse"
+     ]
+    }
+   ],
+   "constraints": [
+    "the domain is restricted at the vertex so that the function is one-to-one",
+    "the branch of the square root matches the restricted domain"
+   ],
+   "misconceptions": [
+    {
+     "text": "Choosing the wrong sign of the square root for the given domain"
+    },
+    {
+     "text": "Giving the domain of f as the domain of the inverse"
+    },
+    {
+     "text": "Confusing self-inverse with f(x) = 1/x only"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-inequalities",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Solving inequalities g(x) >= f(x)",
+   "summary": "Polynomial inequalities by factorising and a sign diagram, a cubic against a line, and a rational function against a line with technology.",
+   "syllabus": [
+    "2.15"
+   ],
+   "skills": [
+    "AHL2.15.polynomial-inequality",
+    "AHL2.12.factorise-solve",
+    "AHL2.15.rational-inequality",
+    "AHL2.15.graphical-inequality"
+   ],
+   "level": [
+    2,
+    4
+   ],
+   "formats": [
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "factorised-cubic",
+     "asked": "Solve a cubic inequality from its factors",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.15.polynomial-inequality"
+     ]
+    },
+    {
+     "id": "cubic-vs-line",
+     "asked": "Where a cubic lies above or below a line",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.15.polynomial-inequality",
+      "AHL2.12.factorise-solve"
+     ]
+    },
+    {
+     "id": "rational-vs-line",
+     "asked": "A rational function against a line, with technology",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.15.rational-inequality",
+      "AHL2.15.graphical-inequality"
+     ]
+    }
+   ],
+   "constraints": [
+    "the solution set is read from the zeros of the difference and, for a rational function, its asymptote",
+    "an asymptote is never included in the solution set"
+   ],
+   "misconceptions": [
+    {
+     "text": "Multiplying both sides by an expression whose sign is unknown"
+    },
+    {
+     "text": "Including the value of x at the vertical asymptote"
+    },
+    {
+     "text": "Giving only one of the two intervals"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-modulus-graphs",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Graphs of |f(x)|, f(|x|) and 1/f(x)",
+   "summary": "Choose the graph of the modulus, of f(|x|) and of the reciprocal of a given function, with the features that fix it.",
+   "syllabus": [
+    "2.16"
+   ],
+   "skills": [
+    "AHL2.16.modulus-graph",
+    "AHL2.16.modulus-equation",
+    "AHL2.16.f-of-modulus",
+    "AHL2.16.reciprocal-graph"
+   ],
+   "level": [
+    2,
+    3
+   ],
+   "formats": [
+    "graph-pick"
+   ],
+   "representations": [
+    {
+     "rep": "graph"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "modulus-of-f",
+     "asked": "Pick the graph of y = |f(x)|",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.16.modulus-graph",
+      "AHL2.16.modulus-equation"
+     ]
+    },
+    {
+     "id": "f-of-modulus",
+     "asked": "Pick the graph of y = f(|x|)",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.16.f-of-modulus"
+     ]
+    },
+    {
+     "id": "reciprocal-graph",
+     "asked": "Features and graph of y = 1/f(x) for a quadratic f",
+     "level": 3,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL2.16.reciprocal-graph"
+     ]
+    }
+   ],
+   "constraints": [
+    "|f(x)| reflects the part below the x-axis; f(|x|) reflects the part to the right of the y-axis",
+    "zeros of f become vertical asymptotes of 1/f"
+   ],
+   "misconceptions": [
+    {
+     "text": "Swapping |f(x)| and f(|x|)"
+    },
+    {
+     "text": "Reflecting the whole graph instead of only the negative part"
+    },
+    {
+     "text": "Drawing 1/f with zeros where f has zeros"
+    }
+   ]
+  },
+  {
+   "id": "fn-ahl-modulus-equations",
+   "topic": 2,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Modulus equations and inequalities",
+   "summary": "Solve |ax + b| = k, |ax + b| against a line, and a modulus of a quadratic against a line with technology.",
+   "syllabus": [
+    "2.16"
+   ],
+   "skills": [
+    "AHL2.16.modulus-equation",
+    "AHL2.16.modulus-inequality"
+   ],
+   "level": [
+    2,
+    4
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "linear-equals-constant",
+     "asked": "Solve |ax + b| = k and count integer solutions of the inequality",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.16.modulus-equation",
+      "AHL2.16.modulus-inequality"
+     ]
+    },
+    {
+     "id": "modulus-vs-line",
+     "asked": "A modulus against a line: both solutions, then the inequality",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.16.modulus-equation",
+      "AHL2.16.modulus-inequality"
+     ]
+    },
+    {
+     "id": "modulus-vs-quadratic",
+     "asked": "A modulus of a quadratic against a line, with technology",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL2.16.modulus-equation"
+     ]
+    }
+   ],
+   "constraints": [
+    "each branch of the modulus is solved and its solution checked",
+    "an inequality is solved from the critical values and the graph"
+   ],
+   "misconceptions": [
+    {
+     "text": "Finding only the solution from the positive branch"
+    },
+    {
+     "text": "Keeping a solution that does not satisfy the original equation"
+    },
+    {
+     "text": "Writing a single interval when the solution set has two parts"
+    }
+   ]
   }
  ],
  "subtopics": {
@@ -1245,14 +1915,14 @@
      "id": "AHL2.12.factor-theorem",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.12.remainder-theorem",
      "levels": [
-      2,
+      1,
       4
      ],
      "paper": "either"
@@ -1260,15 +1930,15 @@
     {
      "id": "AHL2.12.polynomial-division",
      "levels": [
-      2,
-      4
+      3,
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.12.factorise-solve",
      "levels": [
-      2,
+      3,
       4
      ],
      "paper": "either"
@@ -1285,9 +1955,9 @@
      "id": "AHL2.12.polynomial-graph",
      "levels": [
       2,
-      4
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.12.polynomial-from-roots",
@@ -1315,10 +1985,10 @@
     {
      "id": "AHL2.13.vertical-asymptotes",
      "levels": [
-      2,
-      4
+      1,
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.13.horizontal-asymptote",
@@ -1332,33 +2002,33 @@
      "id": "AHL2.13.oblique-asymptote",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.13.intercepts",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.13.sketch-rational",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.13.range-rational",
      "levels": [
-      2,
+      4,
       4
      ],
-     "paper": "either"
+     "paper": "p2"
     }
    ]
   },
@@ -1371,42 +2041,42 @@
     {
      "id": "AHL2.14.odd-even-test",
      "levels": [
-      2,
-      4
+      1,
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.14.use-symmetry",
      "levels": [
       2,
-      4
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.14.restrict-domain",
      "levels": [
-      2,
-      4
+      3,
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.14.inverse-restricted",
      "levels": [
-      2,
-      4
+      3,
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.14.self-inverse",
      "levels": [
       2,
-      4
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     }
    ]
   },
@@ -1420,25 +2090,25 @@
      "id": "AHL2.15.polynomial-inequality",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.15.graphical-inequality",
      "levels": [
-      2,
+      4,
       4
      ],
-     "paper": "either"
+     "paper": "p2"
     },
     {
      "id": "AHL2.15.rational-inequality",
      "levels": [
-      2,
+      4,
       4
      ],
-     "paper": "either"
+     "paper": "p2"
     }
    ]
   },
@@ -1452,25 +2122,25 @@
      "id": "AHL2.16.modulus-graph",
      "levels": [
       2,
-      4
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.16.f-of-modulus",
      "levels": [
       2,
-      4
+      2
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.16.reciprocal-graph",
      "levels": [
-      2,
-      4
+      3,
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     },
     {
      "id": "AHL2.16.squared-or-composite",
@@ -1492,9 +2162,9 @@
      "id": "AHL2.16.modulus-inequality",
      "levels": [
       2,
-      4
+      3
      ],
-     "paper": "either"
+     "paper": "p1"
     }
    ]
   }
