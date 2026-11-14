@@ -36,7 +36,7 @@
   reg({ ...LOG, unknown: "expand", levels: [2], calculator: false, skills: ["AI-AHL1.9.expand"], title: "Expand the logarithm of a product, quotient and power",
     build({ rng }) {
       let p, q, mm, n, v2;
-      do { p = 2 * rng.int(1, 12); q = rng.int(1, 15); mm = rng.pick([2, 3]); n = rng.pick([2, 3]); v2 = p / 2 - n * q; } while (v2 === 0 || p === q);
+      do { p = 2 * rng.int(1, 12); q = rng.int(1, 15); mm = rng.pick([2, 3]); n = rng.pick([2, 3]); v2 = p / 2 - n * q; } while (v2 === 0 || p === q || p === 10 || q === 10);
       const L = "\\log_{10}", pd = p / 10, qd = q / 10, v1 = (mm * p + q) / 10;
       return { params: { p: pd, q: qd, m: mm, n }, stem: `It is given that $${L} a = ${num(pd)}$ and $${L} b = ${num(qd)}$.`, parts: [
         P(`Find the value of $${L}\\left(a^{${mm}}b\\right)$.`, 2, ans.dec(v1), [`$${L}\\left(a^{${mm}}b\\right) = ${mm}${L} a + ${L} b$`, `$= ${mm}${br(pd)} + ${num(qd)} = ${num(v1)}$`]),
@@ -341,7 +341,7 @@
     } while (m1 === m2 || l2 <= l1 || l1 === 0 || l2 === 0 || l2 > 9 || M.flat().some((v) => v === 0 || Math.abs(v) > 12));
     return { l1, l2, m1, m2, M };
   };
-  const charWork = (M) => [`$\\det(${B("M")} - \\lambda ${B("I")}) = (${lin(-1, M[0][0], "\\lambda")})(${lin(-1, M[1][1], "\\lambda")}) - ${br(M[0][1])}${br(M[1][0])}$`,
+  const charWork = (M) => [`$\\det(${B("M")} - \\lambda ${B("I")}) = (${expr([[M[0][0], ""], [-1, "\\lambda"]])})(${expr([[M[1][1], ""], [-1, "\\lambda"]])}) - ${br(M[0][1])}${br(M[1][0])}$`,
     `$= ${poly([1, -(M[0][0] + M[1][1]), det2(M)], "\\lambda")}$`];
   reg({ ...EIG, unknown: "verify-eigenvector", levels: [1], calculator: false, skills: ["AI-AHL1.15.verify-eigenvector"], situationKey: "eig", situation: eigSit, title: "The eigenvalue of a given eigenvector",
     build({ rng, sit: s }) {
