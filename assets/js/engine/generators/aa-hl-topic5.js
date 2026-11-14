@@ -892,6 +892,344 @@
           `$d = ${sf(half)}\\text{ cm}$`])] };
     } });
 
-  // PART-C
+  // =====================================================================================
+  // 5.18 first-order differential equations
+  // =====================================================================================
+  const r10 = (v) => Number(v.toPrecision(10));
+  const eulerF = (rng) => {
+    const kind = rng.pick(["lin", "lin", "xy", "x2y"]);
+    if (kind === "lin") { const a = rng.pick([1, 2, 3, -1]), b = rng.pick([1, -1, 2, -2]); return { kind, a, b, tex: expr([[a, "x"], [b, "y"]]), f: (x, y) => a * x + b * y }; }
+    if (kind === "xy") { const a = rng.pick([1, 2, -1]); return { kind, a, b: 0, tex: coef(a, "xy"), f: (x, y) => a * x * y }; }
+    const b = rng.sign(); return { kind, a: 1, b, tex: `x^{2} ${b < 0 ? "-" : "+"} y`, f: (x, y) => x * x + b * y };
+  };
+  const EU = { type: "t5-ahl-euler-method", syllabus: ["5.18"], representation: "equation", format: "value", calculator: true, skills: ["AHL5.18.eulers-method"] };
+  const eulerStep = (i, x, y, h, fv, y1) => `$y_{${i + 1}} = y_{${i}} + h \\times f(x_{${i}},\\, y_{${i}}) = ${num(y)} + ${num(h)} \\times ${paren(fv)} = ${num(y1)}$`;
+  reg({ ...EU, unknown: "one-step", levels: [1], title: "One step of Euler's method",
+    build({ rng }) {
+      let F, x0, y0, h, fv;
+      do { F = eulerF(rng); x0 = rng.int(0, 2); y0 = rng.int(1, 4); h = rng.pick([0.1, 0.2, 0.5]); fv = F.f(x0, y0); } while (fv === 0);
+      const y1 = r10(y0 + h * fv);
+      return { params: { kind: F.kind, a: F.a, b: F.b, x0, y0, h }, stem: `Consider the differential equation $${D} = ${F.tex}$, where $y = ${y0}$ when $x = ${x0}$.`, parts: [
+        P(`Use one step of Euler's method with step length $h = ${num(h)}$ to find an approximate value of $y$ when $x = ${num(r10(x0 + h))}$.`, 2, ans.dec(y1), [
+          `Here $f(x,\\, y) = ${F.tex}$, so $f(${x0},\\, ${y0}) = ${fv}$.`, eulerStep(0, x0, y0, h, fv, y1)])] };
+    } });
+  reg({ ...EU, unknown: "two-steps", levels: [2], title: "Two steps of Euler's method",
+    build({ rng }) {
+      let F, x0, y0, h, f0, y1, f1, y2;
+      do { F = eulerF(rng); x0 = rng.int(0, 2); y0 = rng.int(1, 4); h = rng.pick([0.1, 0.2, 0.5]); f0 = F.f(x0, y0); y1 = r10(y0 + h * f0); f1 = r10(F.f(r10(x0 + h), y1)); y2 = r10(y1 + h * f1); } while (f0 === 0 || f1 === 0);
+      const x1 = r10(x0 + h), x2 = r10(x0 + 2 * h);
+      return { params: { kind: F.kind, a: F.a, b: F.b, x0, y0, h }, stem: `Consider the differential equation $${D} = ${F.tex}$, where $y = ${y0}$ when $x = ${x0}$. Euler's method with step length $h = ${num(h)}$ is used to approximate the solution.`, parts: [
+        P(`Find the approximation to $y$ when $x = ${num(x1)}$.`, 2, ans.dec(y1), [`Here $f(x,\\, y) = ${F.tex}$, so $f(${x0},\\, ${y0}) = ${f0}$.`, eulerStep(0, x0, y0, h, f0, y1)]),
+        P(`Find the approximation to $y$ when $x = ${num(x2)}$.`, 2, ans.dec(y2), [`$f(${num(x1)},\\, ${num(y1)}) = ${num(f1)}$`, eulerStep(1, x1, y1, h, f1, y2)])] };
+    } });
+  reg({ ...EU, unknown: "compare-with-exact", levels: [4], skills: ["AHL5.18.eulers-method", "AHL5.18.separable", "AHL5.18.particular-solution"], title: "Euler's method compared with the exact solution",
+    build({ rng }) {
+      const kind = rng.pick(["kxy", "kxy", "y-x"]), h = rng.pick([0.25, 0.1, 0.2]), n = 4, xe = r10(n * h);
+      let k = 1, c;
+      if (kind === "kxy") { k = rng.pick([1, 2, -1, -2, 3]); c = rng.int(1, 5); } else c = rng.pick([2, 3, 4, 0, -1]);
+      const f = kind === "kxy" ? (x, y) => k * x * y : (x, y) => y - x, tex = kind === "kxy" ? coef(k, "xy") : "y - x";
+      const rows = []; let x = 0, y = c;
+      for (let i = 0; i < n; i++) { const y1 = y + h * f(x, y); rows.push(`$x_{${i + 1}} = ${num(r10(x + h))}$, $y_{${i + 1}} = ${sf(y, 5)} + ${num(h)} \\times ${paren(Number(sf(f(x, y), 5).replace(/\\,/g, "")))} = ${sf(y1, 5)}$`); y = y1; x = r10(x + h); }
+      const exact = kind === "kxy" ? c * Math.exp(k * xe * xe / 2) : xe + 1 + (c - 1) * Math.exp(xe), err = Math.abs((y - exact) / exact) * 100;
+      const half = fmt.Q(k, 2), exTex = kind === "kxy" ? `${c === 1 ? "" : c}${E_}^{${k % 2 === 0 ? coef(k / 2, "x^{2}") : `${k < 0 ? "-" : ""}\\frac{${Math.abs(k) === 1 ? "" : Math.abs(k)}x^{2}}{2}`}}` : `x + 1 ${fmt.signed(c - 1)}${E_}^{x}`.replace(/(\+|-) 1\\mathrm/, "$1 \\mathrm");
+      return { params: { kind, k, c, h, n }, stem: `Consider the differential equation $${D} = ${tex}$, where $y = ${c}$ when $x = 0$.`, parts: [
+        P(`Use Euler's method with step length $h = ${num(h)}$ to find an approximate value of $y$ when $x = ${num(xe)}$.`, 3, ans.sf(y), [
+          `Use $x_{n+1} = x_{n} + h$ and $y_{n+1} = y_{n} + h \\times f(x_{n},\\, y_{n})$ with $f(x,\\, y) = ${tex}$, $x_{0} = 0$ and $y_{0} = ${c}$.`].concat(rows, [`$y \\approx ${sf(y)}$`])),
+        P(`Solve the differential equation and hence find the exact value of $y$ when $x = ${num(xe)}$, correct to three significant figures.`, 3, ans.sf(exact), kind === "kxy" ? [
+          `Separate the variables: $\\displaystyle\\int \\dfrac{1}{y}\\,\\mathrm{d}y = \\displaystyle\\int ${coef(k, "x")}${dx}$, so $\\ln y = ${coef(half, "x^{2}")} + C$.`,
+          `$y = ${c}$ when $x = 0$ gives $y = ${exTex}$.`,
+          `When $x = ${num(xe)}$, $y = ${sf(exact)}$.`] : [
+          `Write the equation as $${D} - y = -x$. The integrating factor is $${E_}^{-x}$, so $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\left(y${E_}^{-x}\\right) = -x${E_}^{-x}$.`,
+          `Integrating by parts: $y${E_}^{-x} = (x + 1)${E_}^{-x} + C$, so $y = x + 1 + C${E_}^{x}$.`,
+          `$y = ${c}$ when $x = 0$ gives $C = ${c - 1}$, so $y = ${exTex}$.`,
+          `When $x = ${num(xe)}$, $y = ${sf(exact)}$.`]),
+        P("Find the percentage error in the approximation from Euler's method.", 1, ans.sf(err), [
+          `Percentage error $= \\left|\\dfrac{${sf(y, 5)} - ${paren(Number(sf(exact, 5).replace(/\\,/g, "")))}}{${sf(exact, 5)}}\\right| \\times 100\\% = ${sf(err)}\\%$`])] };
+    } });
+
+  const SEPT = { type: "t5-ahl-separable", syllabus: ["5.18"], format: "value" };
+  const sepTriples = [];
+  for (let a = 1; a <= 5; a++) for (let p = 1; p <= 4; p++) for (let b = 1; b <= 7; b++) { const s = a * p * p + b * b, r = Math.round(Math.sqrt(s)); if (r * r === s) sepTriples.push([a, p, b, r]); }
+  reg({ ...SEPT, unknown: "particular-value", representation: "equation", levels: [2], skills: ["AHL5.18.separable", "AHL5.18.particular-solution"], title: "Solve a separable equation and use the initial condition",
+    build({ rng }) {
+      const [a, p, b, r] = rng.pick(sepTriples);
+      return { params: { a, p, b }, stem: `Consider the differential equation $${D} = \\dfrac{${coef(a, "x")}}{y}$, where $y > 0$ and $y = ${b}$ when $x = 0$.`, parts: [
+        P(`Find the value of $y$ when $x = ${p}$.`, 4, ans.int(r), [
+          `Separate the variables: $\\displaystyle\\int y\\,\\mathrm{d}y = \\displaystyle\\int ${coef(a, "x")}${dx}$`,
+          `$\\dfrac{1}{2}y^{2} = ${coef(fmt.Q(a, 2), "x^{2}")} + C$`,
+          `$y = ${b}$ when $x = 0$ gives $C = ${frac(b * b, 2)}$, so $y^{2} = ${coef(a, "x^{2}")} + ${b * b}$.`,
+          `When $x = ${p}$: $y^{2} = ${a * p * p + b * b}$, so $y = ${r}$ (since $y > 0$).`])] };
+    } });
+  reg({ ...SEPT, unknown: "reciprocal-solution", representation: "equation", format: "mcq", levels: [3], skills: ["AHL5.18.separable", "AHL5.18.particular-solution"], title: "Separable equation with a power of y",
+    build({ rng }) {
+      let a, c, p;
+      do { a = rng.pick([2, 4, 6, -2, -4, 1, 3, -1, -3]); c = rng.int(1, 5); p = rng.int(1, 3); } while (2 * c - a * p * p <= 0 || (2 * c - a * p * p) === 2 * c);
+      const k = fmt.Q(a, 2), ks = coef(k, "x^{2}");
+      const texK = { nr: `-\\dfrac{1}{y} = ${ks} + C`, r: `\\dfrac{1}{y} = ${ks} + C`, ln: `\\ln\\left(y^{2}\\right) = ${ks} + C`, nr2: `-\\dfrac{1}{y} = ${coef(a, "x^{2}")} + C`, y3: `\\dfrac{1}{3}y^{3} = ${ks} + C` };
+      const opt = (code, why) => ({ text: m(texK[code]), value: [code, a], why });
+      return { params: { a, c, p }, stem: `Consider the differential equation $${D} = ${coef(a, "xy^{2}")}$, where $y = ${frac(1, c)}$ when $x = 0$.`, parts: [
+        P("Which equation is the general solution, where $C$ is an arbitrary constant?", 3, ans.choice(rng, opt("nr"), [
+          opt("r", "The integral of $y^{-2}$ is $-y^{-1}$."),
+          opt("ln", "The integral of $y^{-2}$ is not a logarithm; only $y^{-1}$ integrates to one."),
+          opt("nr2", `The integral of $${coef(a, "x")}$ is $${ks}$.`),
+          opt("y3", "The variables must be separated first: divide by $y^{2}$.")]), [
+          `Separate the variables: $\\displaystyle\\int \\dfrac{1}{y^{2}}\\,\\mathrm{d}y = \\displaystyle\\int ${coef(a, "x")}${dx}$`,
+          `$${texK.nr}$`]),
+        P(`Find the value of $y$ when $x = ${p}$.`, 3, ans.frac(2, 2 * c - a * p * p), [
+          `$y = ${frac(1, c)}$ when $x = 0$ gives $C = -${c}$.`,
+          `When $x = ${p}$: $-\\dfrac{1}{y} = ${fmt.wrap(frac(a, 2))}${br(p * p)} - ${c} = ${frac(a * p * p - 2 * c, 2)}$`,
+          `$y = ${frac(2, 2 * c - a * p * p)}$`])] };
+    } });
+  reg({ ...SEPT, unknown: "exponential-form", representation: "equation", levels: [3], skills: ["AHL5.18.separable", "AHL5.18.particular-solution"], title: "Separable equation leading to a logarithm",
+    build({ rng }) {
+      const a = rng.pick([2, 4, 6, 8]), b = rng.int(0, 2), p = rng.int(1, 3), B = Math.exp(b) > 1 ? null : 1, A = a / 2, val = A * p * p;
+      const y0 = b === 0 ? "0" : b === 1 ? "\\ln 2" : "\\ln 3", K = b + 1;       // e^{y0} = K
+      return { params: { a, K, p }, stem: `Consider the differential equation $${D} = ${coef(a, `x${E_}^{-y}`)}$, where $y = ${y0}$ when $x = 0$. The solution can be written in the form $${E_}^{y} = Ax^{2} + B$, where $A$ and $B$ are constants.`, parts: [
+        P("Find the value of $A$.", 3, ans.int(A), [
+          `Separate the variables: $\\displaystyle\\int ${E_}^{y}\\,\\mathrm{d}y = \\displaystyle\\int ${coef(a, "x")}${dx}$`,
+          `$${E_}^{y} = ${coef(A, "x^{2}")} + C$, so $A = ${A}$.`]),
+        P("Find the value of $B$.", 1, ans.int(K), [`$y = ${y0}$ when $x = 0$ gives $${E_}^{${y0}} = B$, so $B = ${K}$.`.replace(`${E_}^{0}`, "1").replace(/\\mathrm\{e\}\^\{\\ln (\d)\}/, `${E_}^{\\ln $1}`)]),
+        P(`Find the exact value of $y$ when $x = ${p}$.`, 2, ans.exact(Math.log(val + K), `\\ln ${val + K}`), [
+          `When $x = ${p}$: $${E_}^{y} = ${A}${br(p)}^{2} + ${K} = ${val + K}$`, `$y = \\ln ${val + K}$`])] };
+    } });
+  reg({ ...SEPT, unknown: "cooling", representation: "words", levels: [4], calculator: true, skills: ["AHL5.18.separable", "AHL5.18.particular-solution", "AHL5.18.interpret-solution"], title: "Newton's law of cooling",
+    build({ rng }) {
+      let A, T0, t1, T1, t2, T3, k;
+      do {
+        A = rng.pick([18, 20, 21, 22, 24]); T0 = rng.pick([80, 85, 90, 95]); t1 = rng.pick([4, 5, 6, 10]);
+        T1 = Math.round(A + (T0 - A) * Math.exp(-rng.int(30, 90) / 1000 * t1)); k = Math.log((T0 - A) / (T1 - A)) / t1; t2 = t1 + rng.pick([5, 10, 15]); T3 = rng.pick([30, 35, 40, 45]);
+      } while (T3 >= A + (T0 - A) * Math.exp(-k * t2) - 2 || T1 >= T0 - 4);
+      const dg = "^\\circ\\text{C}", T2 = A + (T0 - A) * Math.exp(-k * t2), t3 = Math.log((T0 - A) / (T3 - A)) / k;
+      return { params: { A, T0, t1, T1, t2, T3 }, stem: `A cup of coffee is left to cool in a room where the temperature is $${A}${dg}$. The temperature of the coffee, $T${dg}$, at time $t$ minutes satisfies $${dd("T", "t")} = -k(T - ${A})$, where $k$ is a positive constant. Initially the temperature of the coffee is $${T0}${dg}$, and after $${t1}$ minutes it is $${T1}${dg}$.`, parts: [
+        P("Find the value of $k$.", 3, ans.sf(k), [
+          `Separate the variables: $\\displaystyle\\int \\dfrac{1}{T - ${A}}\\,\\mathrm{d}T = \\displaystyle\\int -k\\,\\mathrm{d}t$, so $\\ln(T - ${A}) = -kt + C$.`,
+          `$T = ${T0}$ when $t = 0$ gives $T = ${A} + ${T0 - A}${E_}^{-kt}$.`,
+          `$T = ${T1}$ when $t = ${t1}$: $${E_}^{-${t1}k} = \\dfrac{${T1 - A}}{${T0 - A}}$, so $k = ${sf(k)}$ (keep $${sf(k, 5)}$ for later parts).`]),
+        P(`Find the temperature of the coffee after $${t2}$ minutes.`, 2, ans.sf(T2), [`$T = ${A} + ${T0 - A}${E_}^{-${sf(k, 5)} \\times ${t2}}$`, `$T = ${sf(T2)}${dg}$`]),
+        P(`Find the time, in minutes, at which the temperature of the coffee is $${T3}${dg}$.`, 2, ans.sf(t3), [`Solve $${A} + ${T0 - A}${E_}^{-${sf(k, 5)}t} = ${T3}$.`, `$t = \\dfrac{1}{${sf(k, 5)}}\\ln\\left(\\dfrac{${T0 - A}}{${T3 - A}}\\right) = ${sf(t3)}$ minutes`])] };
+    } });
+  reg({ ...SEPT, unknown: "logistic", representation: "words", levels: [4], calculator: true, skills: ["AHL5.18.separable", "AHL5.18.particular-solution", "AHL5.18.interpret-solution"], title: "A logistic model of a population",
+    build({ rng }) {
+      const K = rng.pick([400, 500, 800, 1000, 2000]), [div, C] = rng.pick([[10, 9], [20, 19], [5, 4], [4, 3], [8, 7]]), N0 = K / div, r = rng.pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.8]), t1 = rng.pick([2, 3, 5, 6]), pc = rng.pick([80, 90, 95]);
+      const N = (t) => K / (1 + C * Math.exp(-r * t)), target = K * pc / 100, t2 = Math.log(C * pc / (100 - pc)) / r;
+      return { params: { K, N0, r, t1, target }, stem: `The number of fish in a lake, $N$, at time $t$ years after the lake was stocked is modelled by the logistic equation $${dd("N", "t")} = ${num(r)}N\\left(1 - \\dfrac{N}{${num(K)}}\\right)$. Initially there are $${N0}$ fish. The solution of this equation can be written as $N = \\dfrac{${num(K)}}{1 + C${E_}^{-${num(r)}t}}$, where $C$ is a constant.`, parts: [
+        P("Find the value of $C$.", 2, ans.int(C), [`When $t = 0$: $${N0} = \\dfrac{${num(K)}}{1 + C}$`, `$1 + C = ${div}$, so $C = ${C}$.`]),
+        P(`Find the number of fish predicted by the model after $${t1}$ years.`, 2, ans.sf(N(t1)), [`$N = \\dfrac{${num(K)}}{1 + ${C}${E_}^{-${num(r)} \\times ${t1}}}$`, `$N = ${sf(N(t1))}$`]),
+        P(`Find the value of $t$ at which the model predicts $${num(target)}$ fish.`, 2, ans.sf(t2), [
+          `Solve $\\dfrac{${num(K)}}{1 + ${C}${E_}^{-${num(r)}t}} = ${num(target)}$, which gives $${E_}^{-${num(r)}t} = ${frac(100 - pc, C * pc)}$.`, `$t = ${sf(t2)}$`])] };
+    } });
+
+  const HOM = { type: "t5-ahl-homogeneous", syllabus: ["5.18"], representation: "equation", format: "mcq" };
+  const vEq = ([xf, c0, c1, form]) => `${xf ? "x" : ""}\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${form === "inv" ? (c1 ? `${c1 === 1 ? "" : c1 === -1 ? "-" : c1}v ${c0 < 0 ? "-" : "+"} \\dfrac{${Math.abs(c0)}}{v}` : `${c0 < 0 ? "-" : ""}\\dfrac{${Math.abs(c0)}}{v}`) : expr([[c0, ""], [c1, "v"]])}`;
+  const homKind = (rng) => {
+    if (rng.bool()) { const c = rng.pick([1, 2, 3, -2, -3]), a = rng.pick([2, 3, 4, -1, -2]); return { kind: "lin", a, c, rhs: `\\dfrac{${expr([[c, "x"], [a, "y"]])}}{x}`, inV: expr([[c, ""], [a, "v"]]), right: [1, c, a - 1, "one"], wrongs: [[1, c, a, "one"], [0, c, a - 1, "one"], [1, c, a + 1, "one"]] }; }
+    const a = rng.pick([1, 2, 3, 4, -1, -2]); return { kind: "quad", a, c: 0, rhs: `\\dfrac{y^{2} ${fmt.signed(a)}x^{2}}{xy}`.replace(/(\+|-) 1x/, "$1 x"), inV: `v ${a < 0 ? "-" : "+"} \\dfrac{${Math.abs(a)}}{v}`, right: [1, a, 0, "inv"], wrongs: [[1, a, 1, "inv"], [0, a, 0, "inv"], [1, 0, a, "one"]] };
+  };
+  const homWhy = ["The product rule on $y = vx$ gives a term $v$ on the left, which must be subtracted.", "The product rule on $y = vx$ gives $v + x\\dfrac{\\mathrm{d}v}{\\mathrm{d}x}$; the factor $x$ is missing.", "Check the right-hand side after replacing $y$ by $vx$ and cancelling."];
+  reg({ ...HOM, unknown: "transform", levels: [2], skills: ["AHL5.18.homogeneous", "AHL5.18.substitution-transform"], title: "Transform a homogeneous equation with y = vx",
+    build({ rng }) {
+      const H = homKind(rng), opt = (v, why) => ({ text: m(vEq(v)), value: v, why });
+      return { params: { kind: H.kind, a: H.a, c: H.c }, stem: `Consider the differential equation $${D} = ${H.rhs}$, for $x > 0$${H.kind === "quad" ? " and $y > 0$" : ""}. The substitution $y = vx$ is used, where $v$ is a function of $x$.`, parts: [
+        P("Which equation does the substitution give?", 3, ans.choice(rng, opt(H.right), H.wrongs.map((w, i) => opt(w, homWhy[i]))), [
+          `$y = vx$ gives $${D} = v + x\\dfrac{\\mathrm{d}v}{\\mathrm{d}x}$ by the product rule.`,
+          `Replacing $y$ by $vx$ on the right-hand side and cancelling $x$ gives $${H.inV}$.`,
+          `$v + x\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${H.inV}$, so $${vEq(H.right)}$.`])] };
+    } });
+  reg({ ...HOM, unknown: "solve-homogeneous", levels: [3], skills: ["AHL5.18.homogeneous", "AHL5.18.particular-solution"], title: "Solve a homogeneous differential equation",
+    build({ rng }) {
+      const lin = rng.bool();
+      let c, y0, a, mm, rhs, inV, right, wrongs, w;
+      if (lin) {
+        do { c = rng.pick([1, 2, 3, -1, -2]); y0 = rng.int(-3, 5); } while (c + y0 === 0 || y0 === 0);
+        mm = c + y0; rhs = `\\dfrac{${expr([[c, "x"], [1, "y"]])}}{x}`; inV = expr([[c, ""], [1, "v"]]); right = [1, c, 0, "one"]; wrongs = [[1, c, 1, "one"], [0, c, 0, "one"], [1, c, 2, "one"]];
+        w = [`Separate the variables: $\\displaystyle\\int 1\\,\\mathrm{d}v = \\displaystyle\\int \\dfrac{${c}}{x}${dx}$, so $v = ${coef(c, "\\ln x")} + C$.`,
+          `When $x = 1$, $v = \\dfrac{y}{x} = ${y0}$, so $C = ${y0}$.`,
+          `$y = vx = x\\left(${coef(c, "\\ln x")} ${fmt.signed(y0)}\\right)$`,
+          `When $x = ${E_}$: $y = ${E_}\\left(${c} ${fmt.signed(y0)}\\right) = ${coef(mm, E_)}$`];
+      } else {
+        [a, y0, mm] = rng.pick([[4, 1, 3], [6, 2, 4], [8, 3, 5], [12, 1, 5], [10, 4, 6], [16, 2, 6], [20, 3, 7], [16, 7, 9], [24, 1, 7], [12, 5, 7]]);
+        rhs = `\\dfrac{y^{2} + ${a}x^{2}}{xy}`; inV = `v + \\dfrac{${a}}{v}`; right = [1, a, 0, "inv"]; wrongs = [[1, a, 1, "inv"], [0, a, 0, "inv"], [1, 0, a, "one"]];
+        w = [`Separate the variables: $\\displaystyle\\int v\\,\\mathrm{d}v = \\displaystyle\\int \\dfrac{${a}}{x}${dx}$, so $\\dfrac{1}{2}v^{2} = ${a}\\ln x + C$.`,
+          `When $x = 1$, $v = \\dfrac{y}{x} = ${y0}$, so $C = ${frac(y0 * y0, 2)}$ and $v^{2} = ${2 * a}\\ln x + ${y0 * y0}$.`,
+          `$y = vx = x\\sqrt{${2 * a}\\ln x + ${y0 * y0}}$ (taking the positive root, since $y > 0$)`,
+          `When $x = ${E_}$: $y = ${E_}\\sqrt{${2 * a + y0 * y0}} = ${mm}${E_}$`];
+      }
+      const opt = (v, why) => ({ text: m(vEq(v)), value: v, why });
+      return { params: { kind: lin ? "lin" : "quad", a: lin ? 1 : a, c: lin ? c : 0, y0 }, stem: `Consider the differential equation $${D} = ${rhs}$, for $x > 0$${lin ? "" : " and $y > 0$"}, where $y = ${y0}$ when $x = 1$. The substitution $y = vx$ is used, where $v$ is a function of $x$.`, parts: [
+        P("Which equation does the substitution give?", 2, ans.choice(rng, opt(right), wrongs.map((x, i) => opt(x, homWhy[i]))), [
+          `$y = vx$ gives $${D} = v + x\\dfrac{\\mathrm{d}v}{\\mathrm{d}x}$, and the right-hand side becomes $${inV}$.`,
+          `$v + x\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${inV}$, so $${vEq(right)}$.`]),
+        P(`Hence find the exact value of $y$ when $x = ${E_}$.`, 4, ans.exact(mm * Math.E, coef(mm, E_)), w)] };
+    } });
+
+  const IFT = { type: "t5-ahl-integrating-factor", syllabus: ["5.18"], format: "mcq" };
+  const muTex = ([name, k]) => ({ exp: `${E_}^{${coef(k, "x")}}`, lin: coef(k, "x"), const: `${E_}^{${k}}`, pow: k === 1 ? "x" : `x^{${k}}`, nlnx: coef(k, "\\ln x") }[name]);
+  reg({ ...IFT, unknown: "constant-coefficient", representation: "equation", levels: [2], skills: ["AHL5.18.integrating-factor", "AHL5.18.particular-solution", "AHL5.18.interpret-solution"], title: "Linear equation with constant coefficients",
+    build({ rng }) {
+      let a, A, c;
+      do { a = rng.int(2, 5); A = rng.nonzero(-4, 6); c = rng.int(-5, 8); } while (c === A);
+      const b = a * A, opt = (v, why) => ({ text: m(muTex(v)), value: v, why });
+      return { params: { a, b, c }, stem: `Consider the differential equation $${D} + ${a}y = ${b}$, where $y = ${c}$ when $x = 0$. The solution can be written in the form $y = A + B${E_}^{-${a}x}$, where $A$ and $B$ are constants.`, parts: [
+        P("Which expression is an integrating factor for this equation?", 1, ans.choice(rng, opt(["exp", a]), [
+          opt(["exp", -a], "The integrating factor is $\\mathrm{e}$ to the power of the integral of the coefficient of $y$, with its sign unchanged."),
+          opt(["lin", a], "The integral of the coefficient of $y$ must be put in the exponent."),
+          opt(["const", a], `The coefficient $${a}$ must be integrated with respect to $x$ first.`)]), [
+          `The integrating factor is $${E_}^{\\int ${a}${dx}} = ${E_}^{${a}x}$.`]),
+        P("Find the value of $A$.", 2, ans.int(A), [
+          `Multiply by the integrating factor: $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\left(y${E_}^{${a}x}\\right) = ${b}${E_}^{${a}x}$`,
+          `Integrating: $y${E_}^{${a}x} = ${coef(A, `${E_}^{${a}x}`)} + C$, so $y = ${A} + C${E_}^{-${a}x}$ and $A = ${A}$.`]),
+        P("Find the value of $B$.", 1, ans.int(c - A), [`$y = ${c}$ when $x = 0$: $${c} = ${A} + B$, so $B = ${c - A}$.`])] };
+    } });
+  reg({ ...IFT, unknown: "power-factor", representation: "equation", levels: [3], skills: ["AHL5.18.integrating-factor", "AHL5.18.particular-solution"], title: "Linear equation with an integrating factor that is a power of x",
+    build({ rng }) {
+      let n, mm, k, c, s, C, val;
+      do { n = rng.int(1, 3); mm = rng.int(0, 2); s = mm + n + 1; k = s * rng.nonzero(-2, 3); c = rng.int(-3, 5); C = c - k / s; val = fmt.Q(k / s * Math.pow(2, s) + C, Math.pow(2, n)); } while (C === 0 || Math.abs(val.n) > 400);
+      const opt = (v, why) => ({ text: m(muTex(v)), value: v, why }), xs = `x^{${s}}`, xn = n === 1 ? "x" : `x^{${n}}`, rhsT = coef(k, mm === 0 ? "" : pw("x", mm)) || `${k}`;
+      const rhs = mm === 0 ? `${k}` : coef(k, pw("x", mm));
+      return { params: { n, m: mm, k, c }, stem: `Consider the differential equation $${D} + \\dfrac{${n}}{x}y = ${rhs}$, for $x > 0$, where $y = ${c}$ when $x = 1$.`.replace("}y =", "}\\,y ="), parts: [
+        P("Which expression is an integrating factor for this equation?", 2, ans.choice(rng, opt(["pow", n]), [
+          opt(["exp", n], `The integral of $\\dfrac{${n}}{x}$ is $${coef(n, "\\ln x")}$, not $${coef(n, "x")}$.`),
+          opt(["nlnx", n], `The integrating factor is $\\mathrm{e}$ to the power $${coef(n, "\\ln x")}$.`),
+          opt(["pow", -n], `$${E_}^{${coef(n, "\\ln x")}} = ${xn}$, with a positive power.`)]), [
+          `The integrating factor is $${E_}^{\\int \\frac{${n}}{x}${dx}} = ${E_}^{${coef(n, "\\ln x")}} = ${xn}$.`]),
+        P("Find the value of $y$ when $x = 2$.", 4, ans.frac(val.n, val.d), [
+          `Multiply by $${xn}$: $\\dfrac{\\mathrm{d}}{\\mathrm{d}x}\\left(${xn}y\\right) = ${coef(k, pw("x", mm + n))}$`,
+          `Integrating: $${xn}y = ${coef(k / s, xs)} + C$`,
+          `$y = ${c}$ when $x = 1$: $${c} = ${k / s} + C$, so $C = ${C}$.`,
+          `When $x = 2$: $${Math.pow(2, n)}y = ${k / s}${br(Math.pow(2, s))} ${fmt.signed(C)} = ${k / s * Math.pow(2, s) + C}$, so $y = ${frac(val.n, val.d)}$.`.replace(/= 1\((\d+)\)/, "= $1").replace(/= -1\((\d+)\)/, "= -$1")])] };
+    } });
+  reg({ ...IFT, unknown: "mixing-tank", representation: "words", format: "value", levels: [4], calculator: true, skills: ["AHL5.18.integrating-factor", "AHL5.18.set-up-model", "AHL5.18.interpret-solution"], title: "A mixing problem modelled by a linear differential equation",
+    build({ rng }) {
+      let V, r, cin, Q0, t1;
+      do { V = rng.pick([100, 200, 250, 400, 500]); r = rng.pick([4, 5, 8, 10, 20]); cin = rng.pick([2, 3, 5, 6, 8]); Q0 = rng.pick([0, 0, 50, 100, 200]); t1 = rng.pick([5, 10, 15, 20, 30]); } while (Q0 === cin * V || (V * 1000 / r) % 1 !== 0);
+      const a = r * cin, b = r / V, lim = cin * V, Q1 = lim + (Q0 - lim) * Math.exp(-b * t1);
+      return { params: { V, r, cin, Q0, t1 }, stem: `A tank contains $${V}$ litres of ${Q0 ? `water in which $${Q0}$ grams of salt are dissolved` : "pure water"}. Brine containing $${cin}$ grams of salt per litre flows into the tank at $${r}$ litres per minute. The mixture is kept uniform by stirring and flows out at the same rate. The mass of salt in the tank after $t$ minutes, $Q$ grams, satisfies $${dd("Q", "t")} = a - bQ$, where $a$ and $b$ are constants.`, parts: [
+        P("Find the value of $a$.", 1, ans.int(a), [`Salt enters at $${r} \\times ${cin} = ${a}$ grams per minute, so $a = ${a}$.`]),
+        P("Find the value of $b$.", 1, ans.dec(b), [`Each litre of the mixture holds $\\dfrac{Q}{${V}}$ grams, so salt leaves at $${r} \\times \\dfrac{Q}{${V}}$ grams per minute and $b = ${num(b)}$.`]),
+        P(`Find the mass of salt in the tank after $${t1}$ minutes.`, 3, ans.sf(Q1), [
+          `$${dd("Q", "t")} + ${num(b)}Q = ${a}$ has integrating factor $${E_}^{${num(b)}t}$, so $Q${E_}^{${num(b)}t} = ${num(lim)}${E_}^{${num(b)}t} + C$.`,
+          `$Q = ${Q0}$ when $t = 0$ gives $C = ${num(Q0 - lim)}$, so $Q = ${num(lim)} ${fmt.signed(Q0 - lim)}${E_}^{-${num(b)}t}$.`.replace(/(\d)\\mathrm/, "$1\\,\\mathrm"),
+          `When $t = ${t1}$: $Q = ${sf(Q1)}$ grams`]),
+        P("Find the mass of salt that the tank approaches in the long run.", 1, ans.int(lim), [`As $t \\to \\infty$, $${E_}^{-${num(b)}t} \\to 0$, so $Q \\to ${num(lim)}$ grams.`])] };
+    } });
+
+  // =====================================================================================
+  // 5.19 Maclaurin series
+  // =====================================================================================
+  const MAC = { type: "t5-ahl-maclaurin", syllabus: ["5.19"], representation: "equation", format: "value" };
+  const facts = [1, 1, 2, 6, 24, 120, 720];
+  const pwx = (a, n) => (a === 1 ? `x^{${n}}` : `(${coef(a, "x")})^{${n}}`);
+  const one = (s) => s.replace(/(\+|-) 1x/g, "$1 x");
+  const STD = { exp: `${E_}^{x} = 1 + x + \\dfrac{x^{2}}{2!} + \\dfrac{x^{3}}{3!} + \\dots`, sin: "\\sin x = x - \\dfrac{x^{3}}{3!} + \\dfrac{x^{5}}{5!} - \\dots", cos: "\\cos x = 1 - \\dfrac{x^{2}}{2!} + \\dfrac{x^{4}}{4!} - \\dots",
+    ln: "\\ln(1 + x) = x - \\dfrac{x^{2}}{2} + \\dfrac{x^{3}}{3} - \\dots", bin: "(1 + x)^{p} = 1 + px + \\dfrac{p(p - 1)}{2!}x^{2} + \\dfrac{p(p - 1)(p - 2)}{3!}x^{3} + \\dots" };
+  reg({ ...MAC, unknown: "standard-coefficient", levels: [1], skills: ["AHL5.19.standard-series", "AHL5.19.substitute-series"], title: "A coefficient in a standard Maclaurin series",
+    build({ rng }) {
+      const kind = rng.pick(["exp", "sin", "cos", "ln"]);
+      let a, n;
+      do { a = rng.int(2, 5) * (kind === "exp" || kind === "ln" ? rng.sign() : 1); n = kind === "sin" ? rng.pick([3, 5]) : kind === "cos" ? rng.pick([2, 4]) : rng.int(2, 4); } while (Math.pow(Math.abs(a), n) > 700);
+      const sgn = kind === "sin" ? (n === 3 ? -1 : 1) : kind === "cos" ? (n === 2 ? -1 : 1) : kind === "ln" ? (n % 2 ? 1 : -1) : 1, den = kind === "ln" ? n : facts[n];
+      const q = fmt.Q(sgn * Math.pow(a, n), den), f = kind === "exp" ? ex(a) : kind === "ln" ? one(`\\ln(1 ${fmt.signed(a)}x)`) : tr(kind, a);
+      return { params: { kind, a, n }, stem: `Consider the Maclaurin series of $f(x) = ${f}$.`, parts: [
+        P(`Find the coefficient of $x^{${n}}$ in this series.`, 2, ans.frac(q.n, q.d), [
+          `From the formula booklet, $${STD[kind]}$`,
+          `Replacing $x$ by $${coef(a, "x")}$, the term in $x^{${n}}$ is $${sgn < 0 ? "-" : ""}\\dfrac{${pwx(a, n)}}{${kind === "ln" ? n : `${n}!`}} = ${coef(q, `x^{${n}}`)}$, so the coefficient is $${frac(q.n, q.d)}$.`])] };
+    } });
+  reg({ ...MAC, unknown: "substitution-terms", levels: [2], skills: ["AHL5.19.substitute-series", "AHL5.19.standard-series"], title: "Two coefficients of a series found by substitution",
+    build({ rng }) {
+      const kind = rng.pick(["exp2", "ln2", "cos", "sqrt", "inv2"]), a = rng.int(2, 4) * (kind === "cos" ? 1 : rng.sign()), a2 = a * a, a3 = a2 * a;
+      const ax2 = coef(a, "x^{2}"), l = (v) => one(`1 ${fmt.signed(a)}${v}`);
+      const d = {
+        exp2: { f: `${E_}^{${ax2}}`, p: [2, 4], c: [fmt.Q(a, 1), fmt.Q(a2, 2)], std: STD.exp, w: `Replacing $x$ by $${ax2}$: $${E_}^{${ax2}} = 1 ${fmt.signed(a)}x^{2} + \\dfrac{(${ax2})^{2}}{2!} + \\dots$` },
+        ln2: { f: `\\ln\\left(${l("x^{2}")}\\right)`, p: [2, 4], c: [fmt.Q(a, 1), fmt.Q(-a2, 2)], std: STD.ln, w: `Replacing $x$ by $${ax2}$: $\\ln\\left(${l("x^{2}")}\\right) = ${ax2} - \\dfrac{(${ax2})^{2}}{2} + \\dots$` },
+        cos: { f: tr("cos", a), p: [2, 4], c: [fmt.Q(-a2, 2), fmt.Q(a2 * a2, 24)], std: STD.cos, w: `Replacing $x$ by $${coef(a, "x")}$: $${tr("cos", a)} = 1 - \\dfrac{${pwx(a, 2)}}{2!} + \\dfrac{${pwx(a, 4)}}{4!} - \\dots$` },
+        sqrt: { f: `\\sqrt{${l("x")}}`, p: [2, 3], c: [fmt.Q(-a2, 8), fmt.Q(a3, 16)], std: STD.bin, w: `With $p = \\dfrac{1}{2}$ and $x$ replaced by $${coef(a, "x")}$: $\\left(${l("x")}\\right)^{\\frac{1}{2}} = 1 + \\dfrac{1}{2}(${coef(a, "x")}) - \\dfrac{1}{8}${pwx(a, 2)} + \\dfrac{1}{16}${pwx(a, 3)} + \\dots$` },
+        inv2: { f: `\\dfrac{1}{\\left(${l("x")}\\right)^{2}}`, p: [2, 3], c: [fmt.Q(3 * a2, 1), fmt.Q(-4 * a3, 1)], std: STD.bin, w: `With $p = -2$ and $x$ replaced by $${coef(a, "x")}$: $\\left(${l("x")}\\right)^{-2} = 1 - 2(${coef(a, "x")}) + 3${pwx(a, 2)} - 4${pwx(a, 3)} + \\dots$` } }[kind];
+      return { params: { kind, a }, stem: `Consider the Maclaurin series of $f(x) = ${d.f}$.`, parts: [
+        P(`Find the coefficient of $x^{${d.p[0]}}$.`, 2, ans.frac(d.c[0].n, d.c[0].d), [`From the formula booklet, $${d.std}$`, d.w.replace(/\$1 (\+|-) 1x/, "$1 $1 x"), `The coefficient of $x^{${d.p[0]}}$ is $${frac(d.c[0].n, d.c[0].d)}$.`]),
+        P(`Find the coefficient of $x^{${d.p[1]}}$.`, 2, ans.frac(d.c[1].n, d.c[1].d), [`From the same expansion, the term in $x^{${d.p[1]}}$ is $${coef(d.c[1], `x^{${d.p[1]}}`)}$, so the coefficient is $${frac(d.c[1].n, d.c[1].d)}$.`])] };
+    } });
+  reg({ ...MAC, unknown: "product-series", levels: [3], skills: ["AHL5.19.multiply-series", "AHL5.19.substitute-series"], title: "Maclaurin series of a product",
+    build({ rng }) {
+      const kind = rng.pick(["sin", "cos", "ln"]);
+      let a, b, c2, c3;
+      do {
+        a = rng.nonzero(-3, 3); b = rng.int(1, 3);
+        [c2, c3] = kind === "sin" ? [fmt.Q(a * b, 1), fmt.Q(3 * a * a * b - b * b * b, 6)] : kind === "cos" ? [fmt.Q(a * a - b * b, 2), fmt.Q(a * a * a - 3 * a * b * b, 6)] : [fmt.Q(2 * a * b - b * b, 2), fmt.Q(2 * b * b * b - 3 * a * b * b + 3 * a * a * b, 6)];
+      } while (c2.n === 0 || c3.n === 0);
+      const g = kind === "ln" ? `\\ln(1 + ${coef(b, "x")})` : tr(kind, b);
+      const s1 = one(`1 ${fmt.signed(a)}x + ${frac(a * a, 2)}x^{2} ${fmt.signed(fmt.Q(a * a * a, 6))}x^{3} + \\dots`).replace("+ 1x^{2}", "+ x^{2}");
+      const s2 = kind === "sin" ? `${coef(b, "x")} - ${coef(fmt.Q(b * b * b, 6), "x^{3}")} + \\dots` : kind === "cos" ? `1 - ${coef(fmt.Q(b * b, 2), "x^{2}")} + \\dots` : `${coef(b, "x")} - ${coef(fmt.Q(b * b, 2), "x^{2}")} + ${coef(fmt.Q(b * b * b, 3), "x^{3}")} - \\dots`;
+      const t2 = kind === "sin" ? `${fmt.wrap(`${a}`)}${br(b)}` : kind === "cos" ? `${frac(a * a, 2)} - ${frac(b * b, 2)}` : `${fmt.wrap(`${a}`)}${br(b)} - ${frac(b * b, 2)}`;
+      const t3 = kind === "sin" ? `${fmt.wrap(frac(a * a, 2))}${br(b)} - ${frac(b * b * b, 6)}` : kind === "cos" ? `${frac(a * a * a, 6)} - ${fmt.wrap(`${a}`)}${fmt.wrap(frac(b * b, 2))}` : `${frac(b * b * b, 3)} - ${fmt.wrap(`${a}`)}${fmt.wrap(frac(b * b, 2))} + ${fmt.wrap(frac(a * a, 2))}${br(b)}`;
+      return { params: { kind, a, b }, stem: `Let $f(x) = ${ex(a)}${kind === "ln" ? "\\," : ""}${g}$. The Maclaurin series of $f$ is found by multiplying the series for $${ex(a)}$ and $${g}$.`, parts: [
+        P("Find the coefficient of $x^{2}$ in the Maclaurin series of $f$.", 3, ans.frac(c2.n, c2.d), [
+          `$${ex(a)} = ${s1}$`, `$${g} = ${s2}$`,
+          `Collecting the products that give $x^{2}$: the coefficient is $${t2} = ${frac(c2.n, c2.d)}$.`]),
+        P("Find the coefficient of $x^{3}$ in the Maclaurin series of $f$.", 3, ans.frac(c3.n, c3.d), [
+          `Collecting the products that give $x^{3}$: the coefficient is $${t3} = ${frac(c3.n, c3.d)}$.`])] };
+    } });
+  reg({ ...MAC, unknown: "from-derivatives", levels: [3], skills: ["AHL5.19.derive-from-derivatives"], title: "Build a Maclaurin series from successive derivatives",
+    build({ rng }) {
+      const kind = rng.pick(["tan", "lnsin", "arctan"]), a = rng.int(1, 4), ax = coef(a, "x"), a2 = a * a, a3 = a2 * a, A = (v) => (v === 1 ? "" : `${v}`);
+      const d = {
+        tan: { f: `\\tan ${ax}`, v: [a, 0, 2 * a3], w: [`$f'(x) = ${A(a)}\\sec^{2} ${ax}$, so $f'(0) = ${a}$.`, `$f''(x) = ${2 * a2}\\sec^{2} ${ax}\\tan ${ax}$, so $f''(0) = 0$.`,
+          `By the product rule, $f^{(3)}(x) = ${4 * a3}\\sec^{2} ${ax}\\tan^{2} ${ax} + ${2 * a3}\\sec^{4} ${ax}$, so $f^{(3)}(0) = ${2 * a3}$.`] },
+        lnsin: { f: `\\ln(1 + \\sin ${ax})`, v: [a, -a2, a3], w: [`$f'(x) = \\dfrac{${A(a)}\\cos ${ax}}{1 + \\sin ${ax}}$, so $f'(0) = ${a}$.`,
+          `By the quotient rule, $f''(x) = \\dfrac{-${A(a2)}\\sin ${ax}(1 + \\sin ${ax}) - ${A(a2)}\\cos^{2} ${ax}}{(1 + \\sin ${ax})^{2}} = -\\dfrac{${a2}}{1 + \\sin ${ax}}$, so $f''(0) = ${-a2}$.`,
+          `$f^{(3)}(x) = \\dfrac{${A(a3)}\\cos ${ax}}{(1 + \\sin ${ax})^{2}}$, so $f^{(3)}(0) = ${a3}$.`] },
+        arctan: { f: `\\arctan ${ax}`, v: [a, 0, -2 * a3], w: [`$f'(x) = \\dfrac{${a}}{1 + ${A(a2)}x^{2}}$, so $f'(0) = ${a}$.`, `$f''(x) = -\\dfrac{${2 * a3}x}{\\left(1 + ${A(a2)}x^{2}\\right)^{2}}$, so $f''(0) = 0$.`,
+          `By the quotient rule, $f^{(3)}(x) = \\dfrac{-${2 * a3}\\left(1 + ${A(a2)}x^{2}\\right) + ${8 * a3 * a2}x^{2}}{\\left(1 + ${A(a2)}x^{2}\\right)^{3}}$, so $f^{(3)}(0) = ${-2 * a3}$.`] } }[kind];
+      const c3 = fmt.Q(d.v[2], 6);
+      return { params: { kind, a }, stem: `Let $f(x) = ${d.f}$. The Maclaurin series of $f$ is $f(0) + f'(0)x + \\dfrac{f''(0)}{2!}x^{2} + \\dfrac{f^{(3)}(0)}{3!}x^{3} + \\dots$`, parts: [
+        P("Find $f'(0)$.", 1, ans.int(d.v[0]), [d.w[0]]),
+        P("Find $f''(0)$.", 2, ans.int(d.v[1]), [d.w[1]]),
+        P("Find $f^{(3)}(0)$.", 2, ans.int(d.v[2]), [d.w[2]]),
+        P("Hence find the coefficient of $x^{3}$ in the Maclaurin series of $f$.", 1, ans.frac(c3.n, c3.d), [`The coefficient of $x^{3}$ is $\\dfrac{f^{(3)}(0)}{3!} = ${fr2(d.v[2], 6)}$.`])] };
+    } });
+  reg({ ...MAC, unknown: "integral-approximation", levels: [3], skills: ["AHL5.19.series-approximation", "AHL5.19.substitute-series", "AHL5.19.differentiate-integrate-series"], title: "Approximate an integral with a Maclaurin series",
+    build({ rng }) {
+      const kind = rng.pick(["exp", "exp", "exp", "sin"]), half = kind === "exp" && rng.int(0, 3) > 0, a = rng.pick(kind === "sin" ? [1, 2] : half ? [1, -1, 2, -2, 3, -3] : [1, -1]), up = half ? "\\frac{1}{2}" : "1";
+      const ax2 = coef(a, "x^{2}");
+      if (kind === "exp") {
+        const pn = half ? 2 : 1, v = fmt.rat.add(fmt.rat.add(fmt.Q(1, pn), fmt.Q(a, 3 * pn ** 3)), fmt.Q(a * a, 10 * pn ** 5));
+        return { params: { kind, a, up: 1 / pn }, stem: `Let $f(x) = ${E_}^{${ax2}}$.`, parts: [
+          P("Find the coefficient of $x^{4}$ in the Maclaurin series of $f$.", 2, ans.frac(a * a, 2), [
+            `From the formula booklet, $${STD.exp}$`, `Replacing $x$ by $${ax2}$: $f(x) = 1 ${fmt.signed(a)}x^{2} + ${frac(a * a, 2)}x^{4} + \\dots$`.replace(/(\+|-) 1x/, "$1 x")]),
+          P(`Use the terms of this series up to and including the term in $x^{4}$ to find an approximate value of $${INT(0, up, "f(x)")}$. Give your answer as a fraction.`, 4, ans.frac(v.n, v.d), [
+            `$${INT(0, up, "f(x)")} \\approx ${INT(0, up, `\\left(1 ${fmt.signed(a)}x^{2} + ${frac(a * a, 2)}x^{4}\\right)`)}$`.replace(/(\+|-) 1x/, "$1 x"),
+            `$= \\left[${expr([[1, "x"], [fmt.Q(a, 3), "x^{3}"], [fmt.Q(a * a, 10), "x^{5}"]])}\\right]_{0}^{${up}}$`,
+            `$= ${expr([[fmt.Q(1, pn), ""], [fmt.Q(a, 3 * pn ** 3), ""], [fmt.Q(a * a, 10 * pn ** 5), ""]])}$`,
+            `$= ${frac(v.n, v.d)}$`])] };
+      }
+      const v = fmt.rat.sub(fmt.Q(a, 3), fmt.Q(a * a * a, 42));
+      return { params: { kind, a, up: 1 }, stem: `Let $f(x) = \\sin\\left(${ax2}\\right)$.`.replace("\\left(x^{2}\\right)", "\\left(x^{2}\\right)"), parts: [
+        P("Find the coefficient of $x^{6}$ in the Maclaurin series of $f$.", 2, ans.frac(-a * a * a, 6), [
+          `From the formula booklet, $${STD.sin}$`, `Replacing $x$ by $${ax2}$: $f(x) = ${ax2} - ${coef(fmt.Q(a * a * a, 6), "x^{6}")} + \\dots$`]),
+        P(`Use the first two non-zero terms of this series to find an approximate value of $${INT(0, 1, "f(x)")}$. Give your answer as a fraction.`, 4, ans.frac(v.n, v.d), [
+          `$${INT(0, 1, "f(x)")} \\approx ${INT(0, 1, `\\left(${ax2} - ${coef(fmt.Q(a * a * a, 6), "x^{6}")}\\right)`)}$`,
+          `$= \\left[${coef(fmt.Q(a, 3), "x^{3}")} - ${coef(fmt.Q(a * a * a, 42), "x^{7}")}\\right]_{0}^{1}$`,
+          `$= ${frac(a, 3)} - ${frac(a * a * a, 42)} = ${frac(v.n, v.d)}$`])] };
+    } });
+  reg({ ...MAC, syllabus: ["5.19", "5.18"], unknown: "series-from-de", levels: [4], calculator: true, niceOk: true, skills: ["AHL5.19.series-from-de", "AHL5.19.series-approximation", "AHL5.14.implicit-second-derivative"], title: "Maclaurin series from a differential equation",
+    build({ rng }) {
+      let a, b, c, x0;
+      let y1, y2, y3;
+      // the next term of the series must be small, so the cubic is a sensible approximation
+      do { a = rng.pick([1, -1, 2]); b = rng.pick([1, 2, 3, -1]); c = rng.pick([1, 2, -1]); x0 = rng.pick([0.1, 0.2]); y1 = a * c * c; y2 = 2 * a * c * y1 + b; y3 = 2 * a * (y1 * y1 + c * y2); }
+      while (Math.abs(2 * a * (3 * y1 * y2 + c * y3)) * x0 ** 4 / 24 > 0.004);
+      const approx = c + y1 * x0 + y2 * x0 * x0 / 2 + y3 * x0 ** 3 / 6;
+      const ay2 = coef(a, "y^{2}"), rhs = `${ay2} ${fmt.signed(b)}x`.replace(/(\+|-) 1x/, "$1 x"), A2 = coef(2 * a, "y"), d1 = D, d2 = "\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}", d3 = "\\dfrac{\\mathrm{d}^{3}y}{\\mathrm{d}x^{3}}";
+      return { params: { a, b, c, x0 }, stem: `The function $y = f(x)$ satisfies the differential equation $${D} = ${rhs}$, with $y = ${c}$ when $x = 0$.`, parts: [
+        P(`Find the value of $${d2}$ when $x = 0$.`, 3, ans.int(y2), [
+          `When $x = 0$: $${d1} = ${coef(a, `${br(c)}^{2}`)} = ${y1}$`.replace(/= 1\(/, "= ("),
+          `Differentiate the equation with respect to $x$: $${d2} = ${A2}${d1} ${fmt.signed(b)}$`,
+          `When $x = 0$: $${d2} = ${2 * a}${br(c)}${br(y1)} ${fmt.signed(b)} = ${y2}$`]),
+        P(`Find the value of $${d3}$ when $x = 0$.`, 2, ans.int(y3), [
+          `Differentiate again, using the product rule: $${d3} = ${coef(2 * a, `\\left(${d1}\\right)^{2}`)} ${a < 0 ? "-" : "+"} ${coef(2 * Math.abs(a), "y")}${d2}$`,
+          `When $x = 0$: $${d3} = ${2 * a}${br(y1)}^{2} ${a < 0 ? "-" : "+"} ${2 * Math.abs(a)}${br(c)}${br(y2)} = ${y3}$`]),
+        P(`Use the Maclaurin series of $f$ up to and including the term in $x^{3}$ to find an approximate value of $y$ when $x = ${num(x0)}$.`, 2, ans.sf(approx), [
+          `$f(x) \\approx ${expr([[c, ""], [y1, "x"], [fmt.Q(y2, 2), "x^{2}"], [fmt.Q(y3, 6), "x^{3}"]])}$`,
+          `$f(${num(x0)}) \\approx ${sf(approx)}$`])] };
+    } });
 
 })(typeof window !== "undefined" ? window : globalThis);

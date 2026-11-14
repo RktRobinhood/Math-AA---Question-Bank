@@ -46,7 +46,27 @@ function onCurve(G, x, y0) {
 }
 const slopeOn = (G, x, y0, h = 1e-4) => (onCurve(G, x + h, y0) - onCurve(G, x - h, y0)) / (2 * h);
 
-const onceFn = ({ kind, a, b, c }) => ({
+// Euler's polygon: n steps of length h from (x0, y0).
+function polygon(F, x0, y0, h, n) { let x = x0, y = y0; for (let i = 0; i < n; i++) { y += h * F(x, y); x += h; } return y; }
+const eulerFn = ({ kind, a, b }) => (kind === "lin" ? (x, y) => a * x + b * y : kind === "xy" ? (x, y) => a * x * y : (x, y) => x * x + b * y);
+const homFn = ({ kind, a, c }) => (kind === "lin" ? (x, y) => (c * x + a * y) / x : (x, y) => (y * y + a * x * x) / (x * y));
+// The option [uses x, c0, c1, form] that v = y/x satisfies along a numerical solution through (1, y0).
+function homOption(q, T, label, y0) {
+  const F = homFn(q.params), v = (x) => rk4(F, 1, y0, x, 600) / x;
+  return T.optionWhere(q, label, ([xf, c0, c1, form]) => [1.4, 1.9, 2.3].every((x) => { const dv = (v(x + 1e-3) - v(x - 1e-3)) / 2e-3, vv = v(x); return near((xf ? x : 1) * dv, c0 * (form === "inv" ? 1 / vv : 1) + c1 * vv, 1e-5); }));
+}
+// The option [name, k] whose logarithmic derivative is the coefficient of y: that is what makes it an integrating factor.
+function muOption(q, T, label, coefOfY) {
+  const mu = ([name, k]) => (x) => (name === "exp" ? Math.exp(k * x) : name === "lin" ? k * x : name === "const" ? Math.exp(k) : name === "pow" ? x ** k : k * Math.log(x));
+  return T.optionWhere(q, label, (v) => [1.3, 2.1].every((x) => near(T.deriv(mu(v), x, 1e-4) / mu(v)(x), coefOfY(x), 1e-6)));
+}
+// Partial sums of the fitted series get closer to the function as terms are added.
+function partialSumsConverge(f, cs, x) {
+  const err = (n) => Math.abs(f(x) - cs.slice(0, n + 1).reduce((s, c, i) => s + c * x ** i, 0));
+  return err(6) <= err(2) + 1e-12 && err(6) < 1e-6 * Math.max(1, Math.abs(f(x)));
+}
+
+const onceFn =({ kind, a, b, c }) => ({
   "exp-sin": [(x) => (Math.exp(a * x) - 1) / Math.sin(b * x), 0], "ln-lin": [(x) => Math.log(1 + a * x) / (b * x), 0],
   "exp-exp": [(x) => (Math.exp(a * x) - Math.exp(c * x)) / (b * x), 0], "pow-pow": [(x) => (x ** a - 1) / (x ** b - 1), 1],
   "pow-ln": [(x) => (x ** a - 1) / Math.log(x), 1], "tan-exp": [(x) => Math.tan(a * x) / (Math.exp(b * x) - 1), 0] }[kind]);
@@ -305,5 +325,116 @@ export default {
     const V = vol(h);
     return { a: ap(T, radius(h), 1e-7), b: ap(T, V, 1e-6), c: ap(T, T.bisect((d) => vol(d) - V / 2, 0.01, h, 60), 1e-6) };
   },
-  // PART-C
+  // ---------------------------------------------------------------- 5.18
+  "t5-ahl-euler-method/one-step/equation": (q, T) => {
+    const { x0, y0, h } = q.params, F = eulerFn(q.params);
+    return { a: ap(T, polygon(F, x0, y0, h, 1), 1e-9) };
+  },
+  "t5-ahl-euler-method/two-steps/equation": (q, T) => {
+    const { x0, y0, h } = q.params, F = eulerFn(q.params);
+    return { a: ap(T, polygon(F, x0, y0, h, 1), 1e-9), b: ap(T, polygon(F, x0, y0, h, 2), 1e-9) };
+  },
+  "t5-ahl-euler-method/compare-with-exact/equation": (q, T) => {
+    const { kind, k, c, h, n } = q.params, F = kind === "kxy" ? (x, y) => k * x * y : (x, y) => y - x;
+    const approx = polygon(F, 0, c, h, n), exact = rk4(F, 0, c, n * h, 4000);
+    // a much finer Euler polygon must be closer to the true solution than the one asked for
+    T.require(Math.abs(polygon(F, 0, c, h / 64, n * 64) - exact) < Math.abs(approx - exact), "the Euler error shrinks with the step");
+    return { a: ap(T, approx, 1e-9), b: ap(T, exact, 1e-8), c: ap(T, Math.abs((approx - exact) / exact) * 100, 1e-6) };
+  },
+  "t5-ahl-separable/particular-value/equation": (q, T) => {
+    const { a, p, b } = q.params;
+    return { a: ap(T, rk4((x, y) => (a * x) / y, 0, b, p), 1e-8) };
+  },
+  "t5-ahl-separable/reciprocal-solution/equation": (q, T) => {
+    const { a, c, p } = q.params, F = (x, y) => a * x * y * y, y = (x) => rk4(F, 0, 1 / c, x, 4000);
+    // the general solution is the relation that stays constant along the numerical solution
+    const G = { nr: (x, v) => -1 / v - (a / 2) * x * x, r: (x, v) => 1 / v - (a / 2) * x * x, ln: (x, v) => Math.log(v * v) - (a / 2) * x * x, nr2: (x, v) => -1 / v - a * x * x, y3: (x, v) => v ** 3 / 3 - (a / 2) * x * x };
+    const xs = [0, p / 3, (2 * p) / 3, p];
+    return { a: T.optionWhere(q, "a", ([code]) => xs.every((x) => near(G[code](x, y(x)), G[code](0, 1 / c), 1e-7))), b: ap(T, y(p), 1e-7) };
+  },
+  "t5-ahl-separable/exponential-form/equation": (q, T) => {
+    const { a, K, p } = q.params, y = (x) => rk4((s, v) => a * s * Math.exp(-v), 0, Math.log(K), x, 2000);
+    // e^y = A x^2 + B fitted to the numerical solution at two points
+    const B = Math.exp(y(0)), A = (Math.exp(y(1.5)) - B) / 2.25;
+    T.require(near(Math.exp(y(0.7)), A * 0.49 + B, 1e-7), "the solution has the stated form");
+    return { a: ap(T, A, 1e-7), b: ap(T, B, 1e-7), c: ap(T, y(p), 1e-7) };
+  },
+  "t5-ahl-separable/cooling/words": (q, T) => {
+    const { A, T0, t1, T1, t2, T3 } = q.params, temp = (k, t) => rk4((s, v) => -k * (v - A), 0, T0, t, 600);
+    const k = T.bisect((kk) => temp(kk, t1) - T1, 1e-4, 2, 60);
+    T.require(T1 < T0 && T1 > A && T3 > A && T3 < T1, "the temperatures fall towards the room temperature in order");
+    return { a: ap(T, k, 1e-6), b: ap(T, temp(k, t2), 1e-6), c: ap(T, T.bisect((t) => temp(k, t) - T3, 0.01, 2000, 60), 1e-6) };
+  },
+  "t5-ahl-separable/logistic/words": (q, T) => {
+    const { K, N0, r, t1, target } = q.params, N = (t) => rk4((s, v) => r * v * (1 - v / K), 0, N0, t, 800);
+    // C from the stated form fitted at one later time, then checked at another
+    const C = (K / N(2) - 1) * Math.exp(2 * r);
+    T.require(near(K / (1 + C * Math.exp(-r * 5)), N(5), 1e-7) && target < K && target > N0, "the stated form fits and the target is reached");
+    return { a: ap(T, C, 1e-6), b: ap(T, N(t1), 1e-7), c: ap(T, T.bisect((t) => N(t) - target, 0, 200, 60), 1e-6) };
+  },
+  "t5-ahl-homogeneous/transform/equation": (q, T) => {
+    // start away from a solution with constant v, where every option would hold trivially
+    const { kind, a, c } = q.params, y0 = kind === "lin" && Math.abs(c + (a - 1) * 2) < 0.5 ? 3.3 : 2;
+    return { a: homOption(q, T, "a", y0) };
+  },
+  "t5-ahl-homogeneous/solve-homogeneous/equation": (q, T) => {
+    const F = homFn(q.params);
+    return { a: homOption(q, T, "a", q.params.y0), b: ap(T, rk4(F, 1, q.params.y0, Math.E, 4000), 1e-7) };
+  },
+  "t5-ahl-integrating-factor/constant-coefficient/equation": (q, T) => {
+    const { a, b, c } = q.params, y = (x) => rk4((s, v) => b - a * v, 0, c, x, 4000);
+    const A = y(12), B = (y(0.5) - A) * Math.exp(a * 0.5);
+    return { a: muOption(q, T, "a", () => a), b: ap(T, A, 1e-6), c: ap(T, B, 1e-5) };
+  },
+  "t5-ahl-integrating-factor/power-factor/equation": (q, T) => {
+    const { n, m, k, c } = q.params;
+    return { a: muOption(q, T, "a", (x) => n / x), b: ap(T, rk4((x, y) => k * x ** m - (n / x) * y, 1, c, 2, 4000), 1e-7) };
+  },
+  "t5-ahl-integrating-factor/mixing-tank/words": (q, T) => {
+    const { V, r, cin, Q0, t1 } = q.params;
+    // mass balance over a short time: salt in minus salt out
+    const rate = (Q) => { const dt = 1e-6; return (r * dt * cin - r * dt * (Q / V)) / dt; };
+    const a = rate(0), b = (a - rate(100)) / 100, Qt = (t) => rk4((s, Q) => rate(Q), 0, Q0, t, 4000);
+    return { a: ap(T, a, 1e-7), b: ap(T, b, 1e-7), c: ap(T, Qt(t1), 1e-7), d: ap(T, Qt(40 * V / r), 1e-6) };
+  },
+  // ---------------------------------------------------------------- 5.19
+  "t5-ahl-maclaurin/standard-coefficient/equation": (q, T) => {
+    const { kind, a, n } = q.params, f = kind === "exp" ? (x) => Math.exp(a * x) : kind === "sin" ? (x) => Math.sin(a * x) : kind === "cos" ? (x) => Math.cos(a * x) : (x) => Math.log(1 + a * x);
+    const cs = taylor(f, 0, 0.1 / Math.abs(a));
+    T.require(partialSumsConverge(f, cs, 0.05 / Math.abs(a)), "the partial sums approach the function");
+    return { a: ap(T, cs[n], 1e-5) };
+  },
+  "t5-ahl-maclaurin/substitution-terms/equation": (q, T) => {
+    const { kind, a } = q.params;
+    const [f, p1, p2, r] = { exp2: [(x) => Math.exp(a * x * x), 2, 4, 0.2], ln2: [(x) => Math.log(1 + a * x * x), 2, 4, 0.1 / Math.sqrt(Math.abs(a))], cos: [(x) => Math.cos(a * x), 2, 4, 0.1 / a],
+      sqrt: [(x) => Math.sqrt(1 + a * x), 2, 3, 0.1 / Math.abs(a)], inv2: [(x) => 1 / (1 + a * x) ** 2, 2, 3, 0.1 / Math.abs(a)] }[kind];
+    const cs = taylor(f, 0, r);
+    T.require(partialSumsConverge(f, cs, r / 2), "the partial sums approach the function");
+    return { a: ap(T, cs[p1], 1e-5), b: ap(T, cs[p2], 1e-5) };
+  },
+  "t5-ahl-maclaurin/product-series/equation": (q, T) => {
+    const { kind, a, b } = q.params, g = kind === "sin" ? (x) => Math.sin(b * x) : kind === "cos" ? (x) => Math.cos(b * x) : (x) => Math.log(1 + b * x);
+    const f = (x) => Math.exp(a * x) * g(x), cs = taylor(f, 0, 0.1 / b);
+    T.require(partialSumsConverge(f, cs, 0.05 / b), "the partial sums approach the function");
+    return { a: ap(T, cs[2], 1e-5), b: ap(T, cs[3], 1e-5) };
+  },
+  "t5-ahl-maclaurin/from-derivatives/equation": (q, T) => {
+    const { kind, a } = q.params, f = kind === "tan" ? (x) => Math.tan(a * x) : kind === "lnsin" ? (x) => Math.log(1 + Math.sin(a * x)) : (x) => Math.atan(a * x);
+    const cs = taylor(f, 0, 0.1 / a);
+    return { a: ap(T, T.deriv(f, 0, 1e-4), 1e-6), b: ap(T, T.deriv2(f, 0, 1e-3), 1e-4), c: ap(T, 6 * cs[3], 1e-5), d: ap(T, cs[3], 1e-5) };
+  },
+  "t5-ahl-maclaurin/integral-approximation/equation": (q, T) => {
+    const { kind, a, up } = q.params, f = kind === "exp" ? (x) => Math.exp(a * x * x) : (x) => Math.sin(a * x * x), cs = taylor(f, 0, 0.2, 14);
+    const top = kind === "exp" ? 4 : 6, P = (x) => cs.slice(0, top + 1).reduce((s, c, i) => s + c * x ** i, 0);
+    // the truncated series integrated numerically; it must also be a fair approximation to the true integral
+    const approx = T.integrate(P, 0, up), exact = T.integrate(f, 0, up);
+    T.require(Math.abs(approx - exact) < 0.1 * Math.abs(exact), "the series gives a usable approximation");
+    return { a: ap(T, cs[top], 1e-5), b: ap(T, approx, 1e-5) };
+  },
+  "t5-ahl-maclaurin/series-from-de/equation": (q, T) => {
+    const { a, b, c, x0 } = q.params, F = (x, y) => a * y * y + b * x, y = (x) => (x === 0 ? c : rk4(F, 0, c, x, 200));
+    const cs = taylor(y, 0, 0.02), approx = cs[0] + cs[1] * x0 + cs[2] * x0 ** 2 + cs[3] * x0 ** 3;
+    T.require(Math.abs(approx - y(x0)) < 0.05 * Math.max(1, Math.abs(y(x0))), "the cubic is close to the true solution");
+    return { a: ap(T, 2 * cs[2], 1e-4), b: ap(T, 6 * cs[3], 1e-3), c: ap(T, approx, 1e-5) };
+  },
 };
