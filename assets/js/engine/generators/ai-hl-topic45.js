@@ -434,5 +434,385 @@
           `The total $T$ is approximately normal with mean $${n}${br(mu)} = ${num(n * mu)}$ and variance $${n}${br(sd)}^{2} = ${num(Number((n * sd * sd).toPrecision(10)))}$.`, `$\\mathrm{P}(T > ${num(tot)}) = ${sf(pT)}$`])] };
     } });
 
+    // ======================= 4.16 confidence intervals for a mean =======================
+  const CI_CTX = [
+    { x: "the length of a leaf of a certain plant", unit: "cm", mu: [62, 98], sd: [8, 16], item: "leaves" },
+    { x: "the time taken to assemble a toy", unit: "minutes", mu: [120, 260], sd: [15, 40], item: "assembly times" },
+    { x: "the mass of an adult hamster", unit: "g", mu: [280, 420], sd: [30, 60], item: "hamsters" },
+    { x: "the daily screen time of a student", unit: "hours", mu: [35, 62], sd: [8, 15], item: "students" }];
+  function sitCI(rng) {
+    const c = rng.pick(CI_CTX), mu = rng.int(c.mu[0], c.mu[1]) / 10, sd = rng.int(c.sd[0], c.sd[1]) / 10, n = rng.int(8, 30), level = rng.pick([90, 95, 99]);
+    return { c, sd, n, level, xbar: r2(mu + (rng.next() - 0.5) * sd * 0.8), s: r2(sd * (0.8 + 0.4 * rng.next())) };
+  }
+  const ciStem = (s, known) => `${cap(s.c.x)} is normally distributed. ` + (known ? `The population standard deviation is known to be $${unit(s.sd, s.c.unit)}$. A random sample of $${s.n}$ ${s.c.item} has mean $${unit(s.xbar, s.c.unit)}$.`
+    : `The population standard deviation is not known. A random sample of $${s.n}$ ${s.c.item} has mean $${unit(s.xbar, s.c.unit)}$ and gives the unbiased estimate $s_{n-1} = ${unit(s.s, s.c.unit)}$ of the population standard deviation.`);
+  const ciParts = (s, lo, hi, how) => [
+    P(`Find the lower bound of the $${pct(s.level)}$ confidence interval for the population mean.`, 2, ans.sf(lo), how.concat([`Lower bound $= ${sf(lo)}$`])),
+    P("Find the upper bound of this confidence interval.", 1, ans.sf(hi), [`Upper bound $= ${sf(hi)}$, so the interval is $${sf(lo)} < \\mu < ${sf(hi)}$.`])];
+  reg({ type: "t4-ai-confidence-interval", unknown: "z-interval", representation: "words", format: "value", levels: [2], syllabus: ["4.16"], skills: ["AI-AHL4.16.find-interval"],
+    title: "A confidence interval when the standard deviation is known", situationKey: "ci", situation: sitCI,
+    build({ sit: s }) {
+      const z = invPhi(0.5 + s.level / 200), h = (z * s.sd) / Math.sqrt(s.n);
+      return { params: {}, stem: ciStem(s, true), parts: ciParts(s, s.xbar - h, s.xbar + h, [
+        "The population standard deviation is known, so use the normal distribution (a $z$-interval on the GDC).", `$\\bar{x} \\pm z\\dfrac{\\sigma}{\\sqrt{n}}$ with $z = ${sf(z, 4)}$ gives $${num(s.xbar)} \\pm ${sf(h, 4)}$.`]) };
+    } });
+  reg({ type: "t4-ai-confidence-interval", unknown: "t-interval-summary", representation: "words", format: "value", levels: [2], syllabus: ["4.16"], skills: ["AI-AHL4.16.find-interval", "AI-AHL4.16.interval-conditions"],
+    title: "A confidence interval when the standard deviation is unknown", situationKey: "ci", situation: sitCI,
+    build({ sit: s }) {
+      const t = tInv(0.5 + s.level / 200, s.n - 1), h = (t * s.s) / Math.sqrt(s.n);
+      return { params: {}, stem: ciStem(s, false), parts: ciParts(s, s.xbar - h, s.xbar + h, [
+        `The population standard deviation is not known, so use the $t$-distribution with $${s.n} - 1 = ${s.n - 1}$ degrees of freedom (a $t$-interval on the GDC).`, `$\\bar{x} \\pm t\\dfrac{s_{n-1}}{\\sqrt{n}}$ with $t = ${sf(t, 4)}$ gives $${num(s.xbar)} \\pm ${sf(h, 4)}$.`]) };
+    } });
+  reg({ type: "t4-ai-confidence-interval", unknown: "choose-distribution", representation: "words", format: "mcq", levels: [1], syllabus: ["4.16"], skills: ["AI-AHL4.16.interval-conditions"],
+    title: "Choose the distribution for a confidence interval",
+    build({ rng }) {
+      const c = rng.pick(CI_CTX), known = rng.bool(), n = rng.pick([6, 9, 12, 15, 20, 36, 50]), sd = rng.int(c.sd[0], c.sd[1]) / 10;
+      const N = "The normal distribution", Tn = `The $t$-distribution with $${n - 1}$ degrees of freedom`;
+      return { params: { known, n }, stem: `${cap(c.x)} is normally distributed. A confidence interval for the population mean is to be found from a random sample of $${n}$ ${c.item}. ` +
+        (known ? `The population standard deviation is known to be $${unit(sd, c.unit)}$.` : `The population standard deviation is not known, and the sample gives $s_{n-1} = ${unit(sd, c.unit)}$.`), parts: [
+        P("Which distribution should be used to find the interval?", 1, ans.choice(rng, { text: known ? N : Tn, value: known ? "z" : "t" }, [
+          { text: known ? Tn : N, value: known ? "t" : "z", why: "Use the normal distribution when the population standard deviation is known and the $t$-distribution when it is estimated from the sample, whatever the sample size." },
+          { text: `The $t$-distribution with $${n}$ degrees of freedom`, value: "t-n", why: "The degrees of freedom are one fewer than the sample size, and the $t$-distribution is only for an unknown standard deviation." },
+          { text: `The binomial distribution with $${n}$ trials`, value: "bin", why: "The variable is continuous; nothing is being counted." }]), [
+          known ? "The population standard deviation is known, so the normal distribution is used, whatever the sample size." : `The population standard deviation is estimated from the sample, so the $t$-distribution with $n - 1 = ${n - 1}$ degrees of freedom is used, whatever the sample size.`])] };
+    } });
+  reg({ type: "t4-ai-confidence-interval", unknown: "t-interval", representation: "table", format: "value", levels: [4], syllabus: ["4.16"], skills: ["AI-AHL4.16.find-interval", "AI-AHL4.16.interpret-interval"],
+    title: "A confidence interval from data, and a claim about the mean",
+    build({ rng }) {
+      const c = rng.pick(CI_CTX), level = rng.pick([90, 95, 99]), n = rng.int(8, 10);
+      let data, lo, hi, claim, inside;
+      do {
+        data = sample(rng, n, rng.int(c.mu[0], c.mu[1]) / 10, rng.int(c.sd[0], c.sd[1]) / 10, 1);
+        const h = (tInv(0.5 + level / 200, n - 1) * Math.sqrt(varS(data))) / Math.sqrt(n);
+        lo = mean(data) - h; hi = mean(data) + h; inside = rng.bool();
+        claim = r1(mean(data) + rng.sign() * h * (inside ? 0.2 + 0.6 * rng.next() : 1.25 + 0.8 * rng.next()));
+        inside = claim > lo && claim < hi;
+        if (Math.min(Math.abs(claim - lo), Math.abs(claim - hi)) < 0.12 * h) data = [0];
+      } while (data.some((x) => x <= 0.5) || new Set(data).size < n - 1 || claim <= 0);
+      const yes = `The claim is plausible, because $${num(claim)}$ lies inside the interval.`, no = `The claim is not supported, because $${num(claim)}$ lies outside the interval.`;
+      return { params: { data, level, claim }, stem: `${cap(c.x)} is normally distributed. The table shows the values, in ${c.unit}, for a random sample of $${n}$ ${c.item}. It has been claimed that the population mean is $${unit(claim, c.unit)}$.`,
+        table: { head: ["Value"].concat(data.map((x) => m(num(x)))), rows: [] }, parts: [
+          P("Find the mean of the sample.", 1, ans.sf(mean(data)), [`From the GDC, $\\bar{x} = ${sf(mean(data))}$.`]),
+          P(`Find the lower bound of the $${pct(level)}$ confidence interval for the population mean.`, 2, ans.sf(lo), [
+            `The population standard deviation is not known, so use a $t$-interval with $${n - 1}$ degrees of freedom on the GDC ($s_{n-1} = ${sf(Math.sqrt(varS(data)), 4)}$).`, `Lower bound $= ${sf(lo)}$`]),
+          P("Find the upper bound of this confidence interval.", 1, ans.sf(hi), [`Upper bound $= ${sf(hi)}$`]),
+          P("What does the interval say about the claim?", 2, ans.choice(rng, { text: inside ? yes : no, value: inside ? "inside" : "outside" }, [
+            { text: inside ? no : yes, value: inside ? "outside" : "inside", why: "Compare the claimed mean with the two bounds." },
+            { text: "The claim is not supported, because the sample mean is not equal to the claimed mean.", value: "equal", why: "A sample mean is almost never exactly equal to the population mean." },
+            { text: "Nothing, because the interval only describes the sample.", value: "none", why: "The interval is a range of plausible values for the population mean." }]), [
+            `The interval is $${sf(lo)} < \\mu < ${sf(hi)}$.`, inside ? yes : no])] };
+    } });
+  reg({ type: "t4-ai-confidence-interval", unknown: "sample-size", representation: "words", format: "value", levels: [4], syllabus: ["4.16"], skills: ["AI-AHL4.16.find-interval", "AI-AHL4.16.interpret-interval"],
+    title: "A confidence interval and the sample size for a given width", situationKey: "ci", situation: sitCI,
+    build({ rng, sit: s }) {
+      const z = invPhi(0.5 + s.level / 200), h = (z * s.sd) / Math.sqrt(s.n);
+      let w, need;
+      do { w = Number((2 * h * (0.35 + 0.4 * rng.next())).toPrecision(2)); need = Math.pow((2 * z * s.sd) / w, 2); } while (Math.abs(need - Math.round(need)) < 0.04 || need < s.n + 3);
+      const nMin = Math.floor(need) + 1;
+      return { params: { w }, stem: ciStem(s, true), parts: ciParts(s, s.xbar - h, s.xbar + h, [
+        "The population standard deviation is known, so use a $z$-interval on the GDC.", `$\\bar{x} \\pm z\\dfrac{\\sigma}{\\sqrt{n}}$ with $z = ${sf(z, 4)}$ gives $${num(s.xbar)} \\pm ${sf(h, 4)}$.`]).concat([
+        P(`Find the least sample size for which the width of a $${pct(s.level)}$ confidence interval would be less than $${unit(w, s.c.unit)}$.`, 3, ans.int(nMin), [
+          `The width is $2z\\dfrac{\\sigma}{\\sqrt{n}}$, so $2 \\times ${sf(z, 4)} \\times \\dfrac{${num(s.sd)}}{\\sqrt{n}} < ${num(w)}$.`, `$\\sqrt{n} > ${sf(Math.sqrt(need), 4)}$, so $n > ${sf(need, 4)}$.`, `The least sample size is $${nMin}$.`])]) };
+    } });
+
+  // ======================= 4.17 the Poisson distribution =======================
+  const POIS_CTX = [{ ev: "calls", intro: "A helpline receives calls", per: "hour" }, { ev: "cars", intro: "Cars pass a checkpoint on a quiet road", per: "minute" }, { ev: "emails", intro: "An office receives emails", per: "hour" },
+    { ev: "orders", intro: "An online shop receives orders", per: "hour" }, { ev: "breakdowns", intro: "A fleet of delivery vans has breakdowns", per: "week" }];
+  function sitPois(rng) {
+    const c = rng.pick(POIS_CTX), lam = rng.int(12, 65) / 10, t = rng.int(2, 5);
+    return { c, lam, t, k: Math.max(1, Math.round(lam) + rng.int(-1, 1)), k2: Math.round(lam) + rng.int(1, 3), m: Math.round(lam * t) + rng.int(-2, 3), lam2: rng.int(8, 40) / 10, dj: rng.int(-2, 1), n: rng.int(5, 10), r: rng.int(1, 3) };
+  }
+  const poisStem = (s) => `${s.c.intro} at an average rate of $${num(s.lam)}$ per ${s.c.per}. The number of ${s.c.ev} in a given period is modelled by a Poisson distribution.`;
+  const Po = (l) => `\\mathrm{Po}(${num(l)})`;
+  reg({ type: "t4-ai-poisson", unknown: "mean-variance", representation: "words", format: "value", levels: [1], syllabus: ["4.17"], skills: ["AI-AHL4.17.rescale-mean"], niceOk: true,
+    title: "Mean and variance of a Poisson distribution", situationKey: "poisson", situation: sitPois,
+    build({ sit: s }) {
+      return { params: {}, stem: poisStem(s), parts: [
+        P(`Write down the variance of the number of ${s.c.ev} in one ${s.c.per}.`, 1, ans.dec(s.lam), [`For a Poisson distribution the variance equals the mean: $${num(s.lam)}$.`]),
+        P(`Find the mean number of ${s.c.ev} in $${s.t}$ ${s.c.per}s.`, 1, ans.dec(r1(s.lam * s.t)), [`$${s.t} \\times ${num(s.lam)} = ${num(r1(s.lam * s.t))}$`])] };
+    } });
+  reg({ type: "t4-ai-poisson", unknown: "probability", representation: "words", format: "value", levels: [2], syllabus: ["4.17"], skills: ["AI-AHL4.17.poisson-probability"],
+    title: "Poisson probabilities", situationKey: "poisson", situation: sitPois,
+    build({ sit: s }) {
+      const pa = poisPmf(s.lam, s.k), pb = 1 - poisCdf(s.lam, s.k2 - 1);
+      return { params: {}, stem: poisStem(s), parts: [
+        P(`Find the probability that there are exactly $${s.k}$ ${s.c.ev} in one ${s.c.per}.`, 2, ans.sf(pa), [`Let $X$ be the number of ${s.c.ev} in one ${s.c.per}: $X \\sim ${Po(s.lam)}$.`, `$\\mathrm{P}(X = ${s.k}) = ${sf(pa)}$`]),
+        P(`Find the probability that there are at least $${s.k2}$ ${s.c.ev} in one ${s.c.per}.`, 2, ans.sf(pb, 3, { misconceptions: [{ value: 1 - poisCdf(s.lam, s.k2), text: `At least $${s.k2}$ includes $${s.k2}$ itself: subtract $\\mathrm{P}(X \\le ${s.k2 - 1})$.` }] }), [
+          `$\\mathrm{P}(X \\ge ${s.k2}) = 1 - \\mathrm{P}(X \\le ${s.k2 - 1})$`, `$= ${sf(pb)}$`])] };
+    } });
+  reg({ type: "t4-ai-poisson", unknown: "rescale-and-sum", representation: "words", format: "value", levels: [4], syllabus: ["4.17"], skills: ["AI-AHL4.17.poisson-probability", "AI-AHL4.17.rescale-mean", "AI-AHL4.17.sum-of-poissons"],
+    title: "Poisson probabilities over longer periods and for sums", situationKey: "poisson", situation: sitPois,
+    build({ sit: s }) {
+      const lt = r1(s.lam * s.t), ls = r1(s.lam + s.lam2), j = Math.max(1, Math.round(ls) + s.dj), M = Math.ceil(s.lam);
+      const pa = poisPmf(s.lam, s.k), pb = 1 - poisCdf(lt, s.m), pc = poisCdf(ls, j), busy = 1 - poisCdf(s.lam, M), pd = binPmf(s.n, busy, s.r);
+      return { params: { j, M }, stem: poisStem(s), parts: [
+        P(`Find the probability that there are exactly $${s.k}$ ${s.c.ev} in one ${s.c.per}.`, 1, ans.sf(pa), [`$X \\sim ${Po(s.lam)}$, so $\\mathrm{P}(X = ${s.k}) = ${sf(pa)}$.`]),
+        P(`Find the probability that there are more than $${s.m}$ ${s.c.ev} in a period of $${s.t}$ ${s.c.per}s.`, 2, ans.sf(pb), [
+          `Over $${s.t}$ ${s.c.per}s the mean is $${s.t} \\times ${num(s.lam)} = ${num(lt)}$, so $Y \\sim ${Po(lt)}$.`, `$\\mathrm{P}(Y > ${s.m}) = 1 - \\mathrm{P}(Y \\le ${s.m}) = ${sf(pb)}$`]),
+        P(`Independently, a second stream of ${s.c.ev} arrives at an average rate of $${num(s.lam2)}$ per ${s.c.per}, also following a Poisson distribution. Find the probability that the total number of ${s.c.ev} in the two streams in one ${s.c.per} is at most $${j}$.`, 2, ans.sf(pc), [
+          `The sum of independent Poisson variables is Poisson: the total is $${Po(ls)}$.`, `$\\mathrm{P}(\\text{total} \\le ${j}) = ${sf(pc)}$`]),
+        P(`A ${s.c.per} is called busy if it has more than $${M}$ ${s.c.ev} from the first stream. Find the probability that exactly $${s.r}$ of $${s.n}$ randomly chosen ${s.c.per}s are busy.`, 2, ans.sf(pd), [
+          `$\\mathrm{P}(\\text{busy}) = \\mathrm{P}(X > ${M}) = ${sf(busy, 4)}$`, `The number of busy ${s.c.per}s is $\\mathrm{B}(${s.n},\\, ${sf(busy, 4)})$, so the probability is $${sf(pd)}$.`])] };
+    } });
+  reg({ type: "t4-ai-poisson", unknown: "find-parameter", representation: "words", format: "value", levels: [4], syllabus: ["4.17"], skills: ["AI-AHL4.17.find-parameter", "AI-AHL4.17.poisson-probability", "AI-AHL4.17.rescale-mean"],
+    title: "Find the Poisson mean from a probability",
+    build({ rng }) {
+      const c = rng.pick(POIS_CTX), p0 = rng.int(30, 450) / 1000, lam = -Math.log(p0), k = Math.max(1, Math.round(lam) + rng.int(0, 1));
+      const pb = 1 - poisCdf(lam, k), pc = 1 - Math.sqrt(p0);
+      return { params: { p0, k }, stem: `${c.intro} at a constant average rate. The number of ${c.ev} in one ${c.per}, $X$, follows a Poisson distribution with mean $\\lambda$. The probability that there are no ${c.ev} in a given ${c.per} is $${num(p0)}$.`, parts: [
+        P("Find the value of $\\lambda$.", 2, ans.sf(lam), [`$\\mathrm{P}(X = 0) = \\mathrm{e}^{-\\lambda} = ${num(p0)}$`, `$\\lambda = -\\ln ${num(p0)} = ${sf(lam)}$`]),
+        P(`Find $\\mathrm{P}(X > ${k})$.`, 2, ans.sf(pb), [`$\\mathrm{P}(X > ${k}) = 1 - \\mathrm{P}(X \\le ${k})$ with $\\lambda = ${sf(lam, 4)}$`, `$= ${sf(pb)}$`]),
+        P(`Find the probability that there is at least one of these ${c.ev} in half ${/^[aeiou]/.test(c.per) || c.per === "hour" ? "an" : "a"} ${c.per}.`, 2, ans.sf(pc), [
+          `For half the time the mean is $\\dfrac{\\lambda}{2} = ${sf(lam / 2, 4)}$.`, `$1 - \\mathrm{e}^{-${sf(lam / 2, 4)}} = ${sf(pc)}$`])] };
+    } });
+  const MODELS = [
+    { id: 0, kind: "poisson", text: "The number of typing errors on a page of a long report, where errors occur independently at a constant average rate." },
+    { id: 1, kind: "binomial", text: "The number of faulty bulbs in a box of twenty, where each bulb is faulty independently with the same probability." },
+    { id: 2, kind: "normal", text: "The height of a randomly chosen adult woman in a large city." },
+    { id: 3, kind: "poisson", text: "The number of meteors seen in an hour on a clear night, where meteors appear independently at a constant average rate." },
+    { id: 4, kind: "binomial", text: "The number of heads when a biased coin is flipped fifteen times." },
+    { id: 5, kind: "normal", text: "The mass of a randomly chosen apple from a large orchard." },
+    { id: 6, kind: "poisson", text: "The number of customers who arrive at a small post office in a ten-minute period, arriving independently at a constant average rate." },
+    { id: 7, kind: "binomial", text: "The number of people, out of thirty chosen at random, who are left-handed." }];
+  const MODEL_NAME = { poisson: "A Poisson distribution", binomial: "A binomial distribution", normal: "A normal distribution" };
+  const MODEL_WHY = { poisson: "Events are counted in a fixed interval, occurring independently at a constant average rate, with no fixed number of trials.", binomial: "There is a fixed number of independent trials, each with the same probability of success.", normal: "The variable is continuous, and values are spread symmetrically about the mean." };
+  reg({ type: "t4-ai-poisson-model", unknown: "choose-model", representation: "words", format: "mcq", levels: [1], fixedPool: true, syllabus: ["4.17"], skills: ["AI-AHL4.17.justify-model"],
+    title: "Choose between a Poisson, a binomial and a normal model",
+    build({ rng }) {
+      const c = rng.pick(MODELS), others = Object.keys(MODEL_NAME).filter((k) => k !== c.kind);
+      return { params: { id: c.id }, stem: `A random variable is described as follows. ${c.text}`, parts: [
+        P("Which distribution is the most suitable model?", 1, ans.choice(rng, { text: MODEL_NAME[c.kind], value: c.kind }, others.map((k) => ({ text: MODEL_NAME[k], value: k, why: `That model needs this: ${MODEL_WHY[k].charAt(0).toLowerCase() + MODEL_WHY[k].slice(1)}` }))), [MODEL_WHY[c.kind]]),
+        P("Which statement justifies this choice?", 1, ans.choice(rng, { text: MODEL_WHY[c.kind], value: c.kind }, others.map((k) => ({ text: MODEL_WHY[k], value: k, why: "This does not describe the situation." }))), [MODEL_WHY[c.kind]])] };
+    } });
+
+  // ======================= 4.18 tests, critical regions and errors =======================
+  const tail = (less) => (less ? "<" : ">");
+  reg({ type: "t4-ai-test-mean", unknown: "z-test", representation: "words", format: "value", levels: [2], syllabus: ["4.18"], skills: ["AI-AHL4.18.mean-test"],
+    title: "A test for a mean when the standard deviation is known",
+    build({ rng }) {
+      const c = rng.pick(CI_CTX), mu0 = rng.int(c.mu[0], c.mu[1]) / 10, sd = rng.int(c.sd[0], c.sd[1]) / 10, n = rng.int(10, 40), less = rng.bool(), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]), se = sd / Math.sqrt(n);
+      let xbar, p;
+      do { xbar = r2(mu0 + (less ? -1 : 1) * (0.7 + 2.3 * rng.next()) * se); const z = (xbar - mu0) / se; p = less ? phi(z) : 1 - phi(z); } while (p < 0.0005 || (p > 0.75 * alpha && p < 1.3 * alpha));
+      const alt = `the mean is ${less ? "less" : "greater"} than $${unit(mu0, c.unit)}$`;
+      return { params: { mu0, sd, n, less, alpha, xbar }, stem: `${cap(c.x)} is normally distributed with standard deviation $${unit(sd, c.unit)}$. It is claimed that the mean is $${unit(mu0, c.unit)}$, but a researcher believes that ${alt}. ` +
+        `A random sample of $${n}$ ${c.item} has mean $${unit(xbar, c.unit)}$. The hypotheses $${H0}: \\mu = ${num(mu0)}$ and $${H1}: \\mu ${tail(less)} ${num(mu0)}$ are tested at the $${pct(alpha * 100)}$ significance level.`, parts: [
+        P("Find the $p$-value for the test.", 2, ans.sf(p), ["The population standard deviation is known, so use a $z$-test on the GDC.", `Under $${H0}$, $\\bar{X} \\sim \\mathrm{N}\\left(${num(mu0)},\\, \\dfrac{${num(sd)}^{2}}{${n}}\\right)$, and $p = \\mathrm{P}(\\bar{X} ${tail(less)} ${num(xbar)}) = ${sf(p)}$.`]),
+        P("State the conclusion of the test.", 2, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`])] };
+    } });
+  reg({ type: "t4-ai-test-mean", unknown: "t-test", representation: "table", format: "value", levels: [4], syllabus: ["4.18"], skills: ["AI-AHL4.18.mean-test"],
+    title: "A t-test for a mean from data",
+    build({ rng }) {
+      const c = rng.pick(CI_CTX), mu0 = rng.int(c.mu[0], c.mu[1]) / 10, sd = rng.int(c.sd[0], c.sd[1]) / 10, n = rng.int(8, 10), less = rng.bool(), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let data, p;
+      do {
+        data = sample(rng, n, mu0 + (less ? -1 : 1) * (0.2 + 1.1 * rng.next()) * sd, sd, 1);
+        const t = (mean(data) - mu0) / Math.sqrt(varS(data) / n);
+        p = less ? tCdf(t, n - 1) : 1 - tCdf(t, n - 1);
+      } while (p < 0.0005 || p > 0.4 || (p > 0.75 * alpha && p < 1.3 * alpha) || data.some((x) => x <= 0.5) || new Set(data).size < n - 1);
+      const alt = `the mean is ${less ? "less" : "greater"} than $${unit(mu0, c.unit)}$`, h1 = (rel) => `$${H1}: ${rel} ${num(mu0)}$`;
+      return { params: { data, mu0, less, alpha }, stem: `${cap(c.x)} is normally distributed. It is claimed that the mean is $${unit(mu0, c.unit)}$, but a researcher believes that ${alt}. The table shows the values, in ${c.unit}, for a random sample of $${n}$ ${c.item}. ` +
+        `A test of $${H0}: \\mu = ${num(mu0)}$ is carried out at the $${pct(alpha * 100)}$ significance level.`, table: { head: ["Value"].concat(data.map((x) => m(num(x)))), rows: [] }, parts: [
+        P("Find the mean of the sample.", 1, ans.sf(mean(data)), [`From the GDC, $\\bar{x} = ${sf(mean(data))}$.`]),
+        P("Which is the correct alternative hypothesis?", 1, ans.choice(rng, { text: h1(`\\mu ${tail(less)}`), value: less ? "less" : "greater" }, [
+          { text: h1(`\\mu ${tail(!less)}`), value: less ? "greater" : "less", why: "The alternative hypothesis states what the researcher believes." }, { text: h1("\\mu \\ne"), value: "two", why: "The researcher's belief has a direction, so the test is one-tailed." },
+          { text: h1(`\\bar{x} ${tail(less)}`), value: "sample", why: "Hypotheses are statements about the population mean, not the sample mean." }]), [`The researcher believes that ${alt}, so $${H1}: \\mu ${tail(less)} ${num(mu0)}$.`]),
+        P("Find the $p$-value for the test.", 3, ans.sf(p), [`The population standard deviation is not known, so use a one-tailed $t$-test with $${n - 1}$ degrees of freedom on the GDC.`, `$s_{n-1} = ${sf(Math.sqrt(varS(data)), 4)}$ and $t = ${sf((mean(data) - mu0) / Math.sqrt(varS(data) / n), 4)}$`, `$p = ${sf(p)}$`]),
+        P("State the conclusion of the test.", 1, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`])] };
+    } });
+  const PAIR_CTX = [
+    { who: "runners", label: "Runner", x: "time, in seconds, to run a lap", event: "a training programme", up: false, base: [62, 80], sd: 6, eff: 2.2, noise: 2.2 },
+    { who: "typists", label: "Typist", x: "typing speed, in words per minute,", event: "a typing course", up: true, base: [38, 60], sd: 8, eff: 3, noise: 3 },
+    { who: "patients", label: "Patient", x: "resting pulse, in beats per minute,", event: "a month of daily exercise", up: false, base: [66, 84], sd: 7, eff: 2.5, noise: 3 },
+    { who: "students", label: "Student", x: "score in a vocabulary test", event: "using a revision app", up: true, base: [40, 65], sd: 9, eff: 3, noise: 3.5 }];
+  reg({ type: "t4-ai-test-mean", unknown: "paired-test", representation: "table", format: "value", levels: [4], syllabus: ["4.18"], skills: ["AI-AHL4.18.paired-test"],
+    title: "A paired-sample t-test",
+    build({ rng }) {
+      const c = rng.pick(PAIR_CTX), n = 8, alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let before, after, d, p, t;
+      do {
+        const base = rng.int(c.base[0], c.base[1]);
+        before = sample(rng, n, base, c.sd, 0);
+        after = before.map((b) => Math.round(b + (c.up ? 1 : -1) * c.eff * (0.2 + rng.next()) + c.noise * gauss(rng)));
+        d = after.map((a, i) => a - before[i]);
+        t = mean(d) / Math.sqrt(varS(d) / n);
+        p = c.up ? 1 - tCdf(t, n - 1) : tCdf(t, n - 1);
+      } while (!(varS(d) > 0.5) || p < 0.0005 || p > 0.4 || (p > 0.75 * alpha && p < 1.3 * alpha));
+      const alt = `the mean ${c.x.replace(/,? in [a-z ]+,?| to run a lap/, "").trim()} is ${c.up ? "higher" : "lower"} after ${c.event}`;
+      return { params: { before, after, up: c.up, alpha }, stem: `The ${c.x} of eight ${c.who} is measured before and after ${c.event}. The results are shown in the table. Let $d$ be the value after minus the value before, and let $\\mu_{d}$ be the population mean of $d$. ` +
+        `A test of $${H0}: \\mu_{d} = 0$ against $${H1}: \\mu_{d} ${tail(!c.up)} 0$ is carried out at the $${pct(alpha * 100)}$ significance level.`,
+        table: { head: [c.label].concat("ABCDEFGH".split("")), rows: [["Before"].concat(before.map((x) => m(num(x)))), ["After"].concat(after.map((x) => m(num(x))))] }, parts: [
+          P("Find the mean of the eight differences $d$.", 1, ans.sf(mean(d)), [`The differences are $${listTex(d)}$.`, `$\\bar{d} = ${sf(mean(d))}$`]),
+          P("Find the $p$-value for the test.", 3, ans.sf(p), ["The two samples are matched pairs, so carry out a one-sample $t$-test on the differences.", `With $7$ degrees of freedom, $s_{n-1} = ${sf(Math.sqrt(varS(d)), 4)}$ and $t = ${sf(t, 4)}$.`, `$p = ${sf(p)}$`]),
+          P("State the conclusion of the test.", 1, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`]),
+          P("Which assumption is needed for this test to be valid?", 1, ans.choice(rng, { text: "The differences are normally distributed.", value: "normal-d" }, [
+            { text: "The values before and the values after are independent of each other.", value: "indep", why: "The pairs are matched, so the two values for one person are not independent." },
+            { text: "The sample contains more than thirty people.", value: "large", why: "A $t$-test is designed for small samples from a normal population." },
+            { text: "The values before and the values after have the same mean.", value: "same", why: "That is the hypothesis being tested, not an assumption." }]), ["A $t$-test on the differences needs the differences to come from a normal distribution."])] };
+    } });
+  const PROP_CTX = [{ claim: "of the seeds of a certain plant germinate", item: "seeds", did: "germinate" }, { claim: "of its customers pay by card", item: "customers", did: "pay by card", org: "A shop claims that" },
+    { claim: "of the voters in a town support a new road", item: "voters", did: "support the road" }, { claim: "of the patients given a treatment recover within a week", item: "patients", did: "recover within a week" }];
+  reg({ type: "t4-ai-test-proportion", unknown: "p-value", representation: "words", format: "value", levels: [2], syllabus: ["4.18"], skills: ["AI-AHL4.18.proportion-test"],
+    title: "A one-tailed binomial test for a proportion",
+    build({ rng }) {
+      const c = rng.pick(PROP_CTX), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let n, p0, up, x, p;
+      do {
+        n = rng.int(20, 60); p0 = rng.pick([0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6]); up = rng.bool();
+        x = Math.round(n * p0 + (up ? 1 : -1) * (0.8 + 1.8 * rng.next()) * Math.sqrt(n * p0 * (1 - p0)));
+        p = x < 0 || x > n ? 0 : up ? 1 - binCdf(n, p0, x - 1) : binCdf(n, p0, x);
+      } while (p < 0.0005 || p > 0.35 || (p > 0.75 * alpha && p < 1.3 * alpha) || p - binPmf(n, p0, x) < 0.05 * p);
+      const alt = `the proportion is ${up ? "greater" : "less"} than $${num(p0)}$`;
+      return { params: { n, p0, up, x, alpha }, stem: `${c.org || "It is claimed that"} $${pct(Math.round(p0 * 100))}$ ${c.claim}. A researcher believes that ${alt}. In a random sample of $${n}$ ${c.item}, $${x}$ ${c.did}. ` +
+        `The hypotheses $${H0}: p = ${num(p0)}$ and $${H1}: p ${tail(!up)} ${num(p0)}$ are tested at the $${pct(alpha * 100)}$ significance level.`, parts: [
+        P("Find the $p$-value for the test.", 2, ans.sf(p, 3, { misconceptions: [{ value: binPmf(n, p0, x), text: "The p-value is the probability of this result or a more extreme one, not of this result alone." }] }), [
+          `Under $${H0}$ the number in the sample is $X \\sim \\mathrm{B}(${n},\\, ${num(p0)})$.`, up ? `$p = \\mathrm{P}(X \\ge ${x}) = 1 - \\mathrm{P}(X \\le ${x - 1}) = ${sf(p)}$` : `$p = \\mathrm{P}(X \\le ${x}) = ${sf(p)}$`]),
+        P("State the conclusion of the test.", 2, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`])] };
+    } });
+  const COR_CTX = [{ x: "daily hours of sunshine", y: "number of ice creams sold, in tens", rows: ["Sunshine, $x$", "Sales, $y$"], pos: true, unit: "days" }, { x: "age of a used car, in years", y: "its price, in thousands of euros", rows: ["Age, $x$", "Price, $y$"], pos: false, unit: "cars" },
+    { x: "number of hours of revision", y: "score in a test", rows: ["Revision, $x$", "Score, $y$"], pos: true, unit: "students" }, { x: "height above sea level, in hundreds of metres", y: "noon temperature, in degrees Celsius", rows: ["Height, $x$", "Temperature, $y$"], pos: false, unit: "weather stations" }];
+  reg({ type: "t4-ai-test-correlation", unknown: "rho-test", representation: "table", format: "value", levels: [4], syllabus: ["4.18"], skills: ["AI-AHL4.18.correlation-test"],
+    title: "Test whether two variables are correlated",
+    build({ rng }) {
+      const c = rng.pick(COR_CTX), n = 8, alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let xs, ys, r, p;
+      do {
+        xs = rng.sample([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], n).sort((a, b) => a - b);
+        const b = (c.pos ? 1 : -1) * (0.6 + rng.next() * 1.2), a = c.pos ? rng.int(5, 15) : rng.int(28, 40), noise = 2 + 4 * rng.next();
+        ys = xs.map((x) => Math.round(a + b * x + noise * gauss(rng)));
+        const mx = mean(xs), my = mean(ys), sxy = sum(xs.map((x, i) => (x - mx) * (ys[i] - my))), sxx = sum(xs.map((x) => (x - mx) * (x - mx))), syy = sum(ys.map((y) => (y - my) * (y - my)));
+        r = syy > 0 ? sxy / Math.sqrt(sxx * syy) : 0;
+        const t = r * Math.sqrt((n - 2) / (1 - r * r));
+        p = c.pos ? 1 - tCdf(t, n - 2) : tCdf(t, n - 2);
+      } while (!(Math.abs(r) < 0.97) || ys.some((y) => y <= 0) || p < 0.0005 || p > 0.4 || (p > 0.75 * alpha && p < 1.3 * alpha));
+      const alt = `there is a ${c.pos ? "positive" : "negative"} correlation between the two variables`;
+      return { params: { xs, ys, pos: c.pos, alpha }, stem: `The table shows the ${c.x}, $x$, and the ${c.y}, $y$, for eight randomly chosen ${c.unit}. Both variables are assumed to be normally distributed, and $\\rho$ is the population product moment correlation coefficient. ` +
+        `The hypotheses $${H0}: \\rho = 0$ and $${H1}: \\rho ${tail(!c.pos)} 0$ are tested at the $${pct(alpha * 100)}$ significance level.`,
+        table: { head: [c.rows[0]].concat(xs.map((x) => m(num(x)))), rows: [[c.rows[1]].concat(ys.map((y) => m(num(y))))] }, parts: [
+          P("Find the value of the sample correlation coefficient, $r$.", 2, ans.sf(r), ["Enter the data in the GDC and run the linear regression $t$-test.", `$r = ${sf(r)}$`]),
+          P("Find the $p$-value for the test.", 2, ans.sf(p), [`The one-tailed test of $\\rho = 0$ on the GDC gives $p = ${sf(p)}$.`]),
+          P("State the conclusion of the test.", 1, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`])] };
+    } });
+  const CR_SK = ["AI-AHL4.18.critical-region", "AI-AHL4.18.error-probability"];
+  reg({ type: "t4-ai-critical-region", unknown: "binomial", representation: "words", format: "value", levels: [4], syllabus: ["4.18"], skills: CR_SK.concat(["AI-AHL4.18.proportion-test"]),
+    title: "Critical region and error probabilities for a binomial test",
+    build({ rng }) {
+      const c = rng.pick(PROP_CTX), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let n, p0, up, crit, size, p1, t2;
+      do {
+        n = rng.int(20, 50); p0 = rng.pick([0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5]); up = rng.bool(); crit = -1;
+        if (up) { for (let k = 0; k <= n; k++) if (1 - binCdf(n, p0, k - 1) < alpha) { crit = k; break; } size = 1 - binCdf(n, p0, crit - 1); p1 = r2(p0 + rng.pick([0.1, 0.15, 0.2, 0.25])); t2 = binCdf(n, p1, crit - 1); }
+        else { for (let k = n; k >= 0; k--) if (binCdf(n, p0, k) < alpha) { crit = k; break; } size = crit < 0 ? 0 : binCdf(n, p0, crit); p1 = r2(p0 - rng.pick([0.05, 0.1, 0.15, 0.2])); t2 = crit < 0 || p1 < 0.04 ? 0 : 1 - binCdf(n, p1, crit); }
+      } while (crit < 0 || p1 > 0.95 || t2 < 0.02 || t2 > 0.95 || size < 0.0005 || alpha - size < 0.03 * alpha);
+      const near = up ? 1 - binCdf(n, p0, crit - 2) : binCdf(n, p0, crit + 1);
+      return { params: { n, p0, up, alpha, p1 }, stem: `${c.org || "It is claimed that"} $${pct(Math.round(p0 * 100))}$ ${c.claim}. To test this claim against the alternative that the proportion is ${up ? "greater" : "less"}, a random sample of $${n}$ ${c.item} is taken, and $X$ is the number of them that ${c.did}. ` +
+        `The hypotheses are $${H0}: p = ${num(p0)}$ and $${H1}: p ${tail(!up)} ${num(p0)}$, and the significance level is $${pct(alpha * 100)}$.`, parts: [
+        P(`The critical region is $X ${up ? "\\ge" : "\\le"} c$, and it is as large as possible. Find the value of $c$.`, 3, ans.int(crit, { misconceptions: [{ value: up ? crit - 1 : crit + 1, text: "The probability of the critical region must be below the significance level." }] }), [
+          `Under $${H0}$, $X \\sim \\mathrm{B}(${n},\\, ${num(p0)})$.`, up ? `$\\mathrm{P}(X \\ge ${crit - 1}) = ${sf(near)}$, which is not below $${num(alpha)}$, and $\\mathrm{P}(X \\ge ${crit}) = ${sf(size)}$, which is.` : `$\\mathrm{P}(X \\le ${crit + 1}) = ${sf(near)}$, which is not below $${num(alpha)}$, and $\\mathrm{P}(X \\le ${crit}) = ${sf(size)}$, which is.`, `$c = ${crit}$`]),
+        P("Find the probability of a Type I error.", 2, ans.sf(size, 3, { misconceptions: [{ value: alpha, text: "For a discrete test the probability of a Type I error is the actual probability of the critical region, which is below the significance level." }] }), [
+          `A Type I error is rejecting $${H0}$ when it is true: $\\mathrm{P}(X ${up ? "\\ge" : "\\le"} ${crit} \\mid p = ${num(p0)}) = ${sf(size)}$.`]),
+        P(`The true proportion is in fact $${num(p1)}$. Find the probability of a Type II error.`, 2, ans.sf(t2), [
+          `A Type II error is not rejecting $${H0}$ when it is false: $X$ is outside the critical region while $X \\sim \\mathrm{B}(${n},\\, ${num(p1)})$.`, up ? `$\\mathrm{P}(X \\le ${crit - 1}) = ${sf(t2)}$` : `$\\mathrm{P}(X \\ge ${crit + 1}) = ${sf(t2)}$`])] };
+    } });
+  reg({ type: "t4-ai-critical-region", unknown: "poisson", representation: "words", format: "value", levels: [4], syllabus: ["4.18"], skills: CR_SK.concat(["AI-AHL4.18.poisson-test"]),
+    title: "Critical region and error probabilities for a Poisson test",
+    build({ rng }) {
+      const c = rng.pick(POIS_CTX), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]);
+      let r0, d, l0, up, crit, size, r1v, l1, t2;
+      do {
+        r0 = rng.int(5, 30) / 10; d = rng.int(2, 8); l0 = r1(r0 * d); up = rng.bool(); crit = -1;
+        if (up) { for (let k = 0; k < 80; k++) if (1 - poisCdf(l0, k - 1) < alpha) { crit = k; break; } size = 1 - poisCdf(l0, crit - 1); r1v = r1(r0 * (1.3 + 0.7 * rng.next())); l1 = r1(r1v * d); t2 = poisCdf(l1, crit - 1); }
+        else { for (let k = 80; k >= 0; k--) if (poisCdf(l0, k) < alpha) { crit = k; break; } size = crit < 0 ? 0 : poisCdf(l0, crit); r1v = r1(r0 * (0.3 + 0.4 * rng.next())); l1 = r1(r1v * d); t2 = crit < 0 || l1 <= 0 ? 0 : 1 - poisCdf(l1, crit); }
+      } while (l0 < 3 || l0 > 18 || crit < 0 || r1v === r0 || t2 < 0.02 || t2 > 0.95 || size < 0.0005 || alpha - size < 0.03 * alpha);
+      const near = up ? 1 - poisCdf(l0, crit - 2) : poisCdf(l0, crit + 1);
+      return { params: { r0, d, up, alpha, r1: r1v }, stem: `${c.intro} at an average rate of $${num(r0)}$ per ${c.per}, following a Poisson distribution. A manager believes that the rate has ${up ? "increased" : "decreased"}. To test this, the number of ${c.ev}, $X$, in a period of $${d}$ ${c.per}s is recorded. ` +
+        `With $\\lambda$ the mean number in $${d}$ ${c.per}s, the hypotheses are $${H0}: \\lambda = ${num(l0)}$ and $${H1}: \\lambda ${tail(!up)} ${num(l0)}$, and the significance level is $${pct(alpha * 100)}$.`, parts: [
+        P(`The critical region is $X ${up ? "\\ge" : "\\le"} c$, and it is as large as possible. Find the value of $c$.`, 3, ans.int(crit, { misconceptions: [{ value: up ? crit - 1 : crit + 1, text: "The probability of the critical region must be below the significance level." }] }), [
+          `Under $${H0}$, $X \\sim ${Po(l0)}$.`, up ? `$\\mathrm{P}(X \\ge ${crit - 1}) = ${sf(near)}$, which is not below $${num(alpha)}$, and $\\mathrm{P}(X \\ge ${crit}) = ${sf(size)}$, which is.` : `$\\mathrm{P}(X \\le ${crit + 1}) = ${sf(near)}$, which is not below $${num(alpha)}$, and $\\mathrm{P}(X \\le ${crit}) = ${sf(size)}$, which is.`, `$c = ${crit}$`]),
+        P("Find the probability of a Type I error.", 2, ans.sf(size, 3, { misconceptions: [{ value: alpha, text: "For a discrete test the probability of a Type I error is the actual probability of the critical region, which is below the significance level." }] }), [
+          `$\\mathrm{P}(X ${up ? "\\ge" : "\\le"} ${crit} \\mid \\lambda = ${num(l0)}) = ${sf(size)}$`]),
+        P(`The rate is in fact $${num(r1v)}$ per ${c.per}. Find the probability of a Type II error.`, 2, ans.sf(t2), [
+          `The mean in $${d}$ ${c.per}s is now $${d} \\times ${num(r1v)} = ${num(l1)}$, so $X \\sim ${Po(l1)}$.`, `A Type II error is $X$ falling outside the critical region: ${up ? `$\\mathrm{P}(X \\le ${crit - 1}) = ${sf(t2)}$` : `$\\mathrm{P}(X \\ge ${crit + 1}) = ${sf(t2)}$`}.`])] };
+    } });
+  reg({ type: "t4-ai-critical-region", unknown: "normal", representation: "words", format: "value", levels: [4], syllabus: ["4.18"], skills: CR_SK.concat(["AI-AHL4.18.mean-test"]),
+    title: "Critical region and error probabilities for a test of a mean",
+    build({ rng }) {
+      const c = rng.pick(CI_CTX), mu0 = rng.int(c.mu[0], c.mu[1]) / 10, sd = rng.int(c.sd[0], c.sd[1]) / 10, n = rng.pick([9, 12, 16, 20, 25, 30, 36]), up = rng.bool(), alpha = rng.pick([0.05, 0.05, 0.01, 0.1]), se = sd / Math.sqrt(n);
+      const z = invPhi(1 - alpha), crit = mu0 + (up ? 1 : -1) * z * se, mu1 = r1(mu0 + (up ? 1 : -1) * Math.max(0.1, (0.5 + 1.3 * rng.next()) * z * se));
+      const t2 = up ? phi((crit - mu1) / se) : 1 - phi((crit - mu1) / se);
+      return { params: { mu0, sd, n, up, alpha, mu1 }, stem: `${cap(c.x)} is normally distributed with standard deviation $${unit(sd, c.unit)}$. A test of $${H0}: \\mu = ${num(mu0)}$ against $${H1}: \\mu ${tail(!up)} ${num(mu0)}$ is carried out at the $${pct(alpha * 100)}$ significance level, using the mean $\\bar{X}$ of a random sample of $${n}$ ${c.item}.`, parts: [
+        P(`The critical region is $\\bar{X} ${tail(!up)} c$. Find the value of $c$.`, 3, ans.sf(crit), [
+          `Under $${H0}$, $\\bar{X} \\sim \\mathrm{N}\\left(${num(mu0)},\\, \\dfrac{${num(sd)}^{2}}{${n}}\\right)$.`, `$c$ satisfies $\\mathrm{P}(\\bar{X} ${tail(!up)} c) = ${num(alpha)}$; use the inverse normal function.`, `$c = ${sf(crit, 5)}$, which is $${sf(crit)}$ to three significant figures.`]),
+        P("Write down the probability of a Type I error.", 1, ans.dec(alpha), [`For a continuous test statistic this is the significance level, $${num(alpha)}$.`]),
+        P(`The true mean is in fact $${unit(mu1, c.unit)}$. Find the probability of a Type II error.`, 3, ans.sf(t2), [
+          `Now $\\bar{X} \\sim \\mathrm{N}\\left(${num(mu1)},\\, \\dfrac{${num(sd)}^{2}}{${n}}\\right)$.`, `A Type II error is $\\bar{X}$ falling outside the critical region: $\\mathrm{P}(\\bar{X} ${tail(up)} ${sf(crit, 5)})$.`, `$= ${sf(t2)}$`])] };
+    } });
+  const TE = [
+    { id: 0, h0: "a new medicine is no better than the existing one", h1: "the new medicine is better" }, { id: 1, h0: "a coin is fair", h1: "the coin is biased towards heads" },
+    { id: 2, h0: "the mean mass of the bags filled by a machine is as stated on the label", h1: "the mean mass is less than stated" }, { id: 3, h0: "the pollution in a river is within the legal limit", h1: "the pollution is above the legal limit" },
+    { id: 4, h0: "a new fertiliser does not change the mean yield of a crop", h1: "the fertiliser increases the mean yield" }];
+  reg({ type: "t4-ai-type-errors", unknown: "identify", representation: "words", format: "mcq", levels: [1], fixedPool: true, syllabus: ["4.18"], skills: ["AI-AHL4.18.errors-in-context"],
+    title: "Type I and Type II errors in context",
+    build({ rng }) {
+      const c = rng.pick(TE);
+      const o = { I: `Concluding that ${c.h1} when in fact ${c.h0}.`, II: `Not rejecting the claim that ${c.h0} when in fact ${c.h1}.`, ok1: `Concluding that ${c.h1} when in fact ${c.h1}.`, ok0: `Not rejecting the claim that ${c.h0} when in fact ${c.h0}.` };
+      const why = { I: "This is a Type I error: a true hypothesis is rejected.", II: "This is a Type II error: a false hypothesis is not rejected.", ok1: "This is a correct decision.", ok0: "This is a correct decision." };
+      const ch = (k) => ans.choice(rng, { text: o[k], value: k }, Object.keys(o).filter((x) => x !== k).map((x) => ({ text: o[x], value: x, why: why[x] })));
+      return { params: { id: c.id }, stem: `A hypothesis test is carried out with $${H0}$: ${c.h0}, and $${H1}$: ${c.h1}.`, parts: [
+        P("Which of the following describes a Type I error?", 1, ch("I"), [`A Type I error is rejecting $${H0}$ when $${H0}$ is true.`, o.I]),
+        P("Which of the following describes a Type II error?", 1, ch("II"), [`A Type II error is not rejecting $${H0}$ when $${H0}$ is false.`, o.II])] };
+    } });
+
+  // ======================= 4.19 Markov chains =======================
+  const MK2 = [
+    { A: "Alpha", B: "Beta", unit: "month", intro: "The customers of two phone companies, Alpha and Beta, may switch company each month.", who: "a customer", verb: "is with", pl: "are with" },
+    { A: "the bus", B: "the train", unit: "week", intro: "The commuters of a city travel by bus or by train, and may change each week.", who: "a commuter", verb: "uses", pl: "use" },
+    { A: "the gym", B: "the pool", unit: "day", intro: "Each day, every member of a sports club chooses either the gym or the pool.", who: "a member", verb: "chooses", pl: "choose" }];
+  function sitMk2(rng) { let p, q; do { p = rng.int(1, 6); q = rng.int(1, 6); } while (p === q); return { c: rng.pick(MK2), p, q }; }
+  const mkStem = (s) => `${s.c.intro} Of those who ${s.c.pl} ${s.c.A} in one ${s.c.unit}, $${pct(s.p * 10)}$ change to ${s.c.B} in the next ${s.c.unit}. Of those who ${s.c.pl} ${s.c.B}, $${pct(s.q * 10)}$ change to ${s.c.A}. The rest do not change.`;
+  reg({ type: "t4-ai-markov", unknown: "matrix-entry", representation: "words", format: "value", levels: [1], syllabus: ["4.19"], skills: ["AI-AHL4.19.transition-matrix"], niceOk: true,
+    title: "Entries of a transition matrix", situationKey: "markov-two", situation: sitMk2,
+    build({ sit: s }) {
+      const p = s.p / 10, q = s.q / 10;
+      return { params: {}, stem: mkStem(s) + ` The transition matrix is $\\boldsymbol{T}$, where $T_{ij}$ is the probability of moving to state $i$ from state $j$. State $1$ is ${s.c.A} and state $2$ is ${s.c.B}.`, parts: [
+        P("Write down $T_{11}$.", 1, ans.dec(r1(1 - p)), [`$T_{11}$ is the probability of staying with ${s.c.A}: $1 - ${num(p)} = ${num(r1(1 - p))}$.`]),
+        P("Write down $T_{12}$.", 1, ans.dec(q, { misconceptions: [{ value: p, text: "$T_{12}$ is the probability of moving to state $1$ from state $2$: the column is where you start." }] }), [`$T_{12}$ is the probability of moving to ${s.c.A} from ${s.c.B}: $${num(q)}$.`, `$\\boldsymbol{T} = ${mat([[num(r1(1 - p)), num(q)], [num(p), num(r1(1 - q))]])}$`])] };
+    } });
+  reg({ type: "t4-ai-markov", unknown: "n-step", representation: "words", format: "value", levels: [2], syllabus: ["4.19"], skills: ["AI-AHL4.19.n-step", "AI-AHL4.19.transition-matrix"],
+    title: "Probabilities after two and three steps", situationKey: "markov-two", situation: sitMk2,
+    build({ sit: s }) {
+      const p = s.p / 10, q = s.q / 10, step = (v) => [(1 - p) * v[0] + q * v[1], p * v[0] + (1 - q) * v[1]], v2 = step(step([1, 0])), v3 = step(v2);
+      const T = mat([[num(r1(1 - p)), num(q)], [num(p), num(r1(1 - q))]]);
+      return { params: {}, stem: mkStem(s) + ` At present ${s.c.who} ${s.c.verb} ${s.c.A}.`, parts: [
+        P(`Find the probability that this person ${s.c.verb} ${s.c.A} two ${s.c.unit}s from now.`, 2, ans.sf(v2[0]), [`With the columns as the present state, $\\boldsymbol{T} = ${T}$.`, `The first entry of $\\boldsymbol{T}^{2}\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$ is $${num(r1(1 - p))}^{2} + ${num(q)}${br(p)} = ${sf(v2[0])}$.`]),
+        P(`Find the probability that this person ${s.c.verb} ${s.c.A} three ${s.c.unit}s from now.`, 2, ans.sf(v3[0]), [`The first entry of $\\boldsymbol{T}^{3}\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix}$ is $${sf(v3[0])}$.`])] };
+    } });
+  reg({ type: "t4-ai-markov", unknown: "steady-state-exact", representation: "words", format: "value", levels: [3], syllabus: ["4.19"], skills: ["AI-AHL4.19.steady-state", "AI-AHL4.19.n-step"],
+    title: "A two-step probability and the steady state, exactly", situationKey: "markov-two", situation: sitMk2,
+    build({ sit: s }) {
+      const p = s.p / 10, q = s.q / 10, two = ((10 - s.p) * (10 - s.p) + s.p * s.q) / 100;
+      return { params: {}, stem: mkStem(s) + ` At present ${s.c.who} ${s.c.verb} ${s.c.A}.`, parts: [
+        P(`Find the probability that this person ${s.c.verb} ${s.c.A} two ${s.c.unit}s from now.`, 2, ans.dec(two), [`Either stay twice, or change and change back: $${num(r1(1 - p))}^{2} + ${num(p)}${br(q)}$.`, `$= ${num(two)}$`]),
+        P(`Find the proportion of people who ${s.c.pl} ${s.c.A} in the long term.`, 3, ans.frac(s.q, s.p + s.q), [
+          `In the steady state the proportion $a$ with ${s.c.A} does not change: $a = ${num(r1(1 - p))}a + ${num(q)}(1 - a)$.`, `$${coef(r1(p + q), "a")} = ${num(q)}$`, `$a = ${frac(s.q, s.p + s.q)}$`])] };
+    } });
+  const MK3 = [{ intro: "A city has three bike stations, A, B and C. Each day every bike is ridden once and left at one of the stations.", thing: "bikes", unit: "day", at: "at station" },
+    { intro: "Three supermarkets, A, B and C, share the shoppers of a town. Each week every shopper uses one of them.", thing: "shoppers", unit: "week", at: "using supermarket" },
+    { intro: "Three mobile networks, A, B and C, share the customers of a region. Each year every customer chooses one network.", thing: "customers", unit: "year", at: "with network" }];
+  reg({ type: "t4-ai-markov", unknown: "three-state", representation: "equation", format: "value", levels: [4], syllabus: ["4.19"], skills: ["AI-AHL4.19.n-step", "AI-AHL4.19.steady-state", "AI-AHL4.19.interpret-model"],
+    title: "A three-state Markov chain: after n steps and in the long term",
+    build({ rng }) {
+      const c = rng.pick(MK3), cols = [0, 1, 2].map((j) => { const stay = rng.int(10, 16), a = rng.int(1, 19 - stay), col = [0, 0, 0]; col[j] = stay; col[(j + 1) % 3] = a; col[(j + 2) % 3] = 20 - stay - a; return col; });
+      const T = [0, 1, 2].map((i) => cols.map((col) => col[i] / 20)), init = [0, 1, 2].map(() => 100 * rng.int(1, 5)), n = rng.int(3, 6), total = sum(init);
+      const step = (v) => T.map((row) => row[0] * v[0] + row[1] * v[1] + row[2] * v[2]);
+      let v = init.slice(), one, vn;
+      for (let k = 1; k <= 600; k++) { v = step(v); if (k === 1) one = v.slice(); if (k === n) vn = v.slice(); }
+      return { params: { T, init, n }, stem: `${c.intro} The movement from one ${c.unit} to the next is described by the transition matrix $\\boldsymbol{T} = ${mat(T.map((row) => row.map((x) => num(x))))}$, where the columns give the present state and the rows the next state, each in the order A, B, C. ` +
+        `At the start there are $${init[0]}$ ${c.thing} ${c.at} A, $${init[1]}$ ${c.at} B and $${init[2]}$ ${c.at} C.`, parts: [
+        P(`Find the number of ${c.thing} ${c.at} A after one ${c.unit}.`, 2, ans.int(Math.round(one[0])), [`Multiply the first row of $\\boldsymbol{T}$ by the starting numbers: $${num(T[0][0])}${br(init[0])} + ${num(T[0][1])}${br(init[1])} + ${num(T[0][2])}${br(init[2])} = ${num(Math.round(one[0]))}$.`]),
+        P(`Find the expected number of ${c.thing} ${c.at} B after $${n}$ ${c.unit}s.`, 2, ans.sf(vn[1]), [`$\\boldsymbol{s}_{${n}} = \\boldsymbol{T}^{${n}}\\boldsymbol{s}_{0}$, found on the GDC.`, `The second entry is $${sf(vn[1])}$.`]),
+        P(`Find the expected number of ${c.thing} ${c.at} C in the long term.`, 3, ans.sf(v[2]), [
+          "Raise $\\boldsymbol{T}$ to a high power: every column tends to the steady-state probabilities.", `The steady-state probabilities are $${sf(v[0] / total)}$, $${sf(v[1] / total)}$ and $${sf(v[2] / total)}$.`, `$${sf(v[2] / total, 5)} \\times ${num(total)} = ${sf(v[2])}$`])] };
+    } });
+
   /*NEXT*/
 })(typeof globalThis !== "undefined" ? globalThis : this);

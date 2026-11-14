@@ -71,6 +71,15 @@ function solve(A, b) { // Gaussian elimination with pivoting
   }
   return M.map((r, i) => r[n] / r[i]);
 }
+// A two-state transition matrix (columns: from) built from the switching percentages of the situation
+const markov2 = (s) => [[1 - s.p / 10, s.q / 10], [s.p / 10, 1 - s.q / 10]];
+// Probability of being in state `to` after `steps` steps from state `from`, by adding up every path
+function paths(M, from, to, steps) {
+  if (steps === 0) return from === to ? 1 : 0;
+  let p = 0;
+  for (let mid = 0; mid < M.length; mid++) p += M[mid][from] * paths(M, mid, to, steps - 1);
+  return p;
+}
 
 export default {
   "t4-ai-reliability-validity/identify/words": (q, T) => {
@@ -137,4 +146,116 @@ export default {
     const between = T.integrate((x) => T.normalPdf((x - mu) / se) / se, lo, hi, 4000), sdT = sd * Math.sqrt(n);
     return { a: T.option("clt"), b: T.approx(between, 1e-6), c: T.approx(T.integrate((x) => T.normalPdf((x - n * mu) / sdT) / sdT, tot, n * mu + 12 * sdT, 20000), 1e-6) };
   },
+    "t4-ai-confidence-interval/z-interval/words": (q, T) => { const s = q.params.sit, h = (T.invNorm(0.5 + s.level / 200) * s.sd) / Math.sqrt(s.n); return { a: s.xbar - h, b: s.xbar + h }; },
+  "t4-ai-confidence-interval/t-interval-summary/words": (q, T) => { const s = q.params.sit, h = (tInv(0.5 + s.level / 200, s.n - 1, T) * s.s) / Math.sqrt(s.n); return { a: s.xbar - h, b: s.xbar + h }; },
+  "t4-ai-confidence-interval/choose-distribution/words": (q, T) => {
+    T.require(/is not known/.test(q.stem) !== q.params.known, "the stem says whether the standard deviation is known");
+    return { a: T.optionWhere(q, "a", (v, i, text) => (q.params.known ? /normal/.test(text) : text.includes(`$${q.params.n - 1}$ degrees`))) };
+  },
+  "t4-ai-confidence-interval/t-interval/table": (q, T) => {
+    const { data, level, claim } = q.params, n = data.length, mu = mean(data), s = Math.sqrt(sum(data.map((x) => (x - mu) ** 2)) / (n - 1)), h = (tInv(0.5 + level / 200, n - 1, T) * s) / Math.sqrt(n);
+    // the interval covers the stated share of the t-distribution
+    T.require(Math.abs(tCdf(h / (s / Math.sqrt(n)), n - 1, T) - tCdf(-h / (s / Math.sqrt(n)), n - 1, T) - level / 100) < 1e-7, "the interval has the stated confidence level");
+    T.require(Math.min(Math.abs(claim - mu + h), Math.abs(claim - mu - h)) > 0.1 * h, "the claim is clearly inside or outside");
+    return { a: mu, b: mu - h, c: mu + h, d: T.option(claim > mu - h && claim < mu + h ? "inside" : "outside") };
+  },
+  "t4-ai-confidence-interval/sample-size/words": (q, T) => {
+    const s = q.params.sit, z = T.invNorm(0.5 + s.level / 200), h = (z * s.sd) / Math.sqrt(s.n);
+    let n = 2;
+    while ((2 * z * s.sd) / Math.sqrt(n) >= q.params.w) n++;
+    T.require(n > s.n, "more data is needed than the first sample had");
+    return { a: s.xbar - h, b: s.xbar + h, c: n };
+  },
+  "t4-ai-poisson/mean-variance/words": (q) => {
+    const s = q.params.sit, one = poisList(s.lam, 120), many = poisList(s.lam * s.t, 250), mu = sum(one.map((p, k) => k * p));
+    return { a: sum(one.map((p, k) => (k - mu) ** 2 * p)), b: sum(many.map((p, k) => k * p)) };
+  },
+  "t4-ai-poisson/probability/words": (q) => { const s = q.params.sit; return { a: poisList(s.lam, s.k)[s.k], b: 1 - poisCdf(s.lam, s.k2 - 1) }; },
+  "t4-ai-poisson/rescale-and-sum/words": (q, T) => {
+    const s = q.params.sit, { j, M } = q.params, p1 = poisList(s.lam, j), p2 = poisList(s.lam2, j);
+    // the t-period count as a sum of t independent one-period counts (convolution), and the two sources likewise
+    let conv = [1];
+    for (let i = 0; i < s.t; i++) { const one = poisList(s.lam, s.m), next = Array(s.m + 1).fill(0); conv.forEach((a, x) => one.forEach((b, y) => { if (x + y <= s.m) next[x + y] += a * b; })); conv = next; }
+    let both = 0;
+    for (let x = 0; x <= j; x++) for (let y = 0; x + y <= j; y++) both += p1[x] * p2[y];
+    const busy = 1 - poisCdf(s.lam, M);
+    T.require(busy > 0.02 && busy < 0.98, "a busy period is neither certain nor impossible");
+    return { a: poisList(s.lam, s.k)[s.k], b: 1 - sum(conv), c: both, d: T.nCr(s.n, s.r) * busy ** s.r * (1 - busy) ** (s.n - s.r) };
+  },
+  "t4-ai-poisson/find-parameter/words": (q, T) => {
+    const { p0, k } = q.params, lam = T.bisect((l) => Math.exp(-l) - p0, 0, 20);
+    return { a: lam, b: 1 - poisCdf(lam, k), c: 1 - poisList(lam / 2, 0)[0] };
+  },
+  "t4-ai-poisson-model/choose-model/words": (q, T) => { const k = ["poisson", "binomial", "normal", "poisson", "binomial", "normal", "poisson", "binomial"][q.params.id]; return { a: T.option(k), b: T.option(k) }; },
+  "t4-ai-test-mean/z-test/words": (q, T) => {
+    const { mu0, sd, n, less, alpha, xbar } = q.params, below = normBelow(xbar, mu0, sd / Math.sqrt(n), T), p = less ? below : 1 - below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: T.approx(p, 1e-7), b: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-mean/t-test/table": (q, T) => {
+    const { data, mu0, less, alpha } = q.params, n = data.length, mu = mean(data), s2 = sum(data.map((x) => (x - mu) ** 2)) / (n - 1), below = tCdf((mu - mu0) / Math.sqrt(s2 / n), n - 1, T), p = less ? below : 1 - below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: mu, b: T.option(less ? "less" : "greater"), c: T.approx(p, 1e-7), d: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-mean/paired-test/table": (q, T) => {
+    const { before, after, up, alpha } = q.params, d = after.map((a, i) => a - before[i]), n = d.length, mu = mean(after) - mean(before), s2 = sum(d.map((x) => (x - mu) ** 2)) / (n - 1);
+    const below = tCdf(mu / Math.sqrt(s2 / n), n - 1, T), p = up ? 1 - below : below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: mu, b: T.approx(p, 1e-7), c: T.option(decide(p, alpha)), d: T.option("normal-d") };
+  },
+  "t4-ai-test-proportion/p-value/words": (q, T) => {
+    const { n, p0, up, x, alpha } = q.params;
+    let p = 0;
+    for (let k = 0; k <= n; k++) if (up ? k >= x : k <= x) p += T.binomPmf(n, p0, k);
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: T.approx(p, 1e-7), b: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-correlation/rho-test/table": (q, T) => {
+    const { xs, ys, pos, alpha } = q.params, n = xs.length;
+    // r as the mean product of standard scores
+    const z = (v) => { const mu = mean(v), sd = Math.sqrt(mean(v.map((x) => (x - mu) ** 2))); return v.map((x) => (x - mu) / sd); };
+    const zx = z(xs), zy = z(ys), r = mean(zx.map((v, i) => v * zy[i])), below = tCdf(r * Math.sqrt((n - 2) / (1 - r * r)), n - 2, T), p = pos ? 1 - below : below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: r, b: T.approx(p, 1e-7), c: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-critical-region/binomial/words": (q, T) => {
+    const { n, p0, up, alpha, p1 } = q.params, pmf = (p) => Array.from({ length: n + 1 }, (_, k) => T.binomPmf(n, p, k)), f0 = pmf(p0), f1 = pmf(p1);
+    const inRegion = (c) => (k) => (up ? k >= c : k <= c), prob = (f, test) => sum(f.filter((_, k) => test(k)));
+    // the largest region whose probability under H0 is below the significance level
+    const cs = Array.from({ length: n + 1 }, (_, k) => k).filter((c) => prob(f0, inRegion(c)) < alpha), c = up ? Math.min(...cs) : Math.max(...cs);
+    T.require(cs.length > 0, "a critical region exists");
+    return { a: c, b: prob(f0, inRegion(c)), c: 1 - prob(f1, inRegion(c)) };
+  },
+  "t4-ai-critical-region/poisson/words": (q, T) => {
+    const { r0, d, up, alpha, r1 } = q.params, f0 = poisList(r0 * d, 150), f1 = poisList(r1 * d, 150);
+    const inRegion = (c) => (k) => (up ? k >= c : k <= c), prob = (f, test) => sum(f.filter((_, k) => test(k)));
+    const cs = Array.from({ length: 100 }, (_, k) => k).filter((c) => prob(f0, inRegion(c)) < alpha), c = up ? Math.min(...cs) : Math.max(...cs);
+    T.require(cs.length > 0, "a critical region exists");
+    return { a: c, b: prob(f0, inRegion(c)), c: 1 - prob(f1, inRegion(c)) };
+  },
+  "t4-ai-critical-region/normal/words": (q, T) => {
+    const { mu0, sd, n, up, alpha, mu1 } = q.params, se = sd / Math.sqrt(n), c = up ? mu0 + T.invNorm(1 - alpha) * se : mu0 + T.invNorm(alpha) * se;
+    const below = normBelow(c, mu1, se, T);
+    T.require(up ? mu1 > mu0 : mu1 < mu0, "the true mean lies on the side of the alternative hypothesis");
+    return { a: c, b: alpha, c: T.approx(up ? below : 1 - below, 1e-7) };
+  },
+  "t4-ai-type-errors/identify/words": (q, T) => ({ a: T.optionWhere(q, "a", (v, i, text) => /^Concluding/.test(text) && v === "I"), b: T.optionWhere(q, "b", (v, i, text) => /^Not rejecting/.test(text) && v === "II") }),
+  "t4-ai-markov/matrix-entry/words": (q) => { const s = q.params.sit, T2 = markov2(s); return { a: T2[0][0], b: T2[0][1] }; },
+  "t4-ai-markov/n-step/words": (q) => { const T2 = markov2(q.params.sit); return { a: paths(T2, 0, 0, 2), b: paths(T2, 0, 0, 3) }; },
+  "t4-ai-markov/steady-state-exact/words": (q) => {
+    const T2 = markov2(q.params.sit);
+    let v = [1, 0];
+    for (let i = 0; i < 3000; i++) v = [T2[0][0] * v[0] + T2[0][1] * v[1], T2[1][0] * v[0] + T2[1][1] * v[1]];
+    return { a: paths(T2, 0, 0, 2), b: v[0] };
+  },
+  "t4-ai-markov/three-state/equation": (q, T) => {
+    const { T: M, init, n } = q.params, total = sum(init);
+    for (let j = 0; j < 3; j++) T.require(Math.abs(M[0][j] + M[1][j] + M[2][j] - 1) < 1e-12 && M.every((row) => row[j] > 0), "each column is a set of positive probabilities adding to one");
+    const after = (to, steps) => sum(init.map((x, from) => x * paths(M, from, to, steps)));
+    // steady state: (T - I)s = 0 with the entries adding to one
+    const st = solve([[M[0][0] - 1, M[0][1], M[0][2]], [M[1][0], M[1][1] - 1, M[1][2]], [1, 1, 1]], [0, 0, 1]);
+    return { a: after(0, 1), b: after(1, n), c: st[2] * total };
+  },
+
+  /*NEXTV*/
 };
