@@ -508,8 +508,7 @@
           placeholder: a.exact ? 'exact value or 3 s.f.' : a.sigfigs ? 'to 3 s.f.' : 'your answer', 'aria-label': `Answer to part ${p.label}`,
           oninput: e => { state.responses[p.label] = e.target.value; },
           onkeydown: e => { if (e.key === 'Enter' && !done) check(); } }),
-        a.unit ? mx(a.unit) : null,
-        h('span', { class: 'muted', text: 'Fractions such as 3/4 are fine.' }));
+        a.unit ? mx(a.unit) : null);
     } else if (a.kind === 'choice' || a.kind === 'graph') {
       input = h('div', { class: 'opts', role: 'radiogroup' }, ...a.options.map((o, k) => {
         const cls = ['opt', state.responses[p.label] === k ? 'sel' : '', done && res && k === res.expectedIndex ? 'right' : '', done && res && !res.correct && state.responses[p.label] === k ? 'wrong' : ''].join(' ');
@@ -580,7 +579,17 @@
       state.hint ? h('div', { class: 'verdict info', text: state.hint }) : null,
       !state.results ? h('div', { class: 'next-row' },
         h('button', { class: 'btn', type: 'button', text: q.parts.every(p => p.answer.kind === 'self') ? 'Show the worked solution' : 'Check', onclick: check }),
-        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion })) : null,
+        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion }),
+        q.parts.some(p => p.answer.kind === 'number') ? h('button', { class: 'info-btn', type: 'button', text: 'i', title: 'How to type answers', 'aria-label': 'How to type answers', 'aria-expanded': String(Boolean(state.help)),
+          onclick: () => { state.help = !state.help; render(); } }) : null) : null,
+      !state.results && state.help && q.parts.some(p => p.answer.kind === 'number') ? h('div', { class: 'verdict info typing-help' },
+        h('b', { text: 'Typing answers' }),
+        h('ul', null,
+          h('li', { text: 'Whole numbers, decimals and negatives: 12, 0.75, -3.' }),
+          h('li', { text: 'Fractions: type 3/4 or -7/2. An exact fraction is always accepted.' }),
+          h('li', { text: 'When the box says "to 3 s.f.", round to three significant figures, for example 2.47.' }),
+          h('li', { text: 'Leave out units: they are shown beside the box.' }),
+          h('li', { text: 'Press Enter to check.' }))) : null,
       settled && state.change && state.change.text ? h('div', { class: 'verdict info' }, mx(state.change.text)) : null,
       settled && state.change && state.change.saved === false ? h('div', { class: 'verdict no', text: 'This browser would not save your progress (private window or full storage).' }) : null,
       settled ? afterBar() : null);
@@ -609,7 +618,17 @@
         h('div', { class: 'real-q' }, ...q.markschemeImages.map((src, i) => h('img', { src: base + src, alt: `Markscheme, page ${i + 1}` })))) : null,
       q && !state.showMs ? h('div', { class: 'next-row' },
         h('button', { class: 'btn', type: 'button', text: 'Show the markscheme', onclick: () => { state.showMs = true; render(); } }),
-        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion })) : null,
+        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion }),
+        q.parts.some(p => p.answer.kind === 'number') ? h('button', { class: 'info-btn', type: 'button', text: 'i', title: 'How to type answers', 'aria-label': 'How to type answers', 'aria-expanded': String(Boolean(state.help)),
+          onclick: () => { state.help = !state.help; render(); } }) : null) : null,
+      !state.results && state.help && q.parts.some(p => p.answer.kind === 'number') ? h('div', { class: 'verdict info typing-help' },
+        h('b', { text: 'Typing answers' }),
+        h('ul', null,
+          h('li', { text: 'Whole numbers, decimals and negatives: 12, 0.75, -3.' }),
+          h('li', { text: 'Fractions: type 3/4 or -7/2. An exact fraction is always accepted.' }),
+          h('li', { text: 'When the box says "to 3 s.f.", round to three significant figures, for example 2.47.' }),
+          h('li', { text: 'Leave out units: they are shown beside the box.' }),
+          h('li', { text: 'Press Enter to check.' }))) : null,
       q === false ? h('div', { class: 'next-row' }, h('button', { class: 'btn', type: 'button', text: 'Next question →', onclick: nextQuestion })) : null,
       state.showMs && !answered ? h('div', { class: 'next-row' },
         h('span', { class: 'muted', style: 'align-self:center', text: 'Mark your work:' }),
