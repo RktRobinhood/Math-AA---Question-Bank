@@ -1,0 +1,458 @@
+{
+ "about": "AI HL additional higher level content, topics 4 and 5 (generators in assets/js/engine/generators/ai-hl-topic45.js).",
+ "home": "ai-hl",
+ "types": [
+  {
+   "id": "t4-ai-reliability-validity",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Reliability and validity of a measurement",
+   "syllabus": [
+    "4.12"
+   ],
+   "skills": [
+    "AI-AHL4.12.reliability",
+    "AI-AHL4.12.validity"
+   ],
+   "unknowns": [
+    {
+     "id": "identify",
+     "asked": "Name the kind of reliability or validity being checked",
+     "level": 1
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-survey-design",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Designing questionnaire questions",
+   "syllabus": [
+    "4.12"
+   ],
+   "skills": [
+    "AI-AHL4.12.design-collection"
+   ],
+   "unknowns": [
+    {
+     "id": "flawed-question",
+     "asked": "Criticise and improve a questionnaire question",
+     "level": 2
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-chi-grouping",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Combining categories and degrees of freedom for a goodness of fit test",
+   "syllabus": [
+    "4.12"
+   ],
+   "skills": [
+    "AI-AHL4.12.combine-categories",
+    "AI-AHL4.12.reduce-df"
+   ],
+   "unknowns": [
+    {
+     "id": "degrees-of-freedom",
+     "asked": "Combine categories and count the degrees of freedom",
+     "level": 2
+    },
+    {
+     "id": "test-statistic",
+     "asked": "Goodness of fit after combining categories",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-regression-residuals",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Residuals and the sum of square residuals",
+   "syllabus": [
+    "4.13"
+   ],
+   "skills": [
+    "AI-AHL4.13.ssres",
+    "AI-AHL4.13.compare-models",
+    "AI-AHL4.13.minimise-ssres"
+   ],
+   "unknowns": [
+    {
+     "id": "ss-res",
+     "asked": "The sum of square residuals for a given model",
+     "level": 2
+    },
+    {
+     "id": "compare-models",
+     "asked": "Compare two models by their sums of square residuals",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-regression-fit",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Non-linear regression with technology and the coefficient of determination",
+   "syllabus": [
+    "4.13"
+   ],
+   "skills": [
+    "AI-AHL4.13.fit-curve",
+    "AI-AHL4.13.r-squared"
+   ],
+   "unknowns": [
+    {
+     "id": "quadratic-fit",
+     "asked": "Fit a quadratic regression model with technology",
+     "level": 4
+    },
+    {
+     "id": "r-squared-meaning",
+     "asked": "What the coefficient of determination says",
+     "level": 1
+    }
+   ],
+   "representations": [
+    {
+     "rep": "table"
+    },
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-linear-combination",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Expectation and variance of linear combinations",
+   "syllabus": [
+    "4.14"
+   ],
+   "skills": [
+    "AI-AHL4.14.linear-transformation",
+    "AI-AHL4.14.linear-combination"
+   ],
+   "unknowns": [
+    {
+     "id": "transformation",
+     "asked": "Expectation and variance of a linear transformation",
+     "level": 1
+    },
+    {
+     "id": "total",
+     "asked": "Mean and standard deviation of a total",
+     "level": 2
+    },
+    {
+     "id": "find-constants",
+     "asked": "Find the constants of a transformation, then combine variables",
+     "level": 3
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-unbiased-estimates",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Unbiased estimates of the mean and variance",
+   "syllabus": [
+    "4.14"
+   ],
+   "skills": [
+    "AI-AHL4.14.unbiased-mean",
+    "AI-AHL4.14.unbiased-variance",
+    "AI-AHL4.14.linear-transformation"
+   ],
+   "unknowns": [
+    {
+     "id": "from-summary",
+     "asked": "Unbiased estimates from summary statistics",
+     "level": 2
+    },
+    {
+     "id": "from-data",
+     "asked": "Unbiased estimates from data, then for a transformed variable",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    },
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-normal-combination",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Linear combinations of independent normal variables",
+   "syllabus": [
+    "4.15"
+   ],
+   "skills": [
+    "AI-AHL4.15.normal-combination"
+   ],
+   "unknowns": [
+    {
+     "id": "total-probability",
+     "asked": "Probabilities for sums and differences of normal variables",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-sample-mean",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "The distribution of a sample mean and the central limit theorem",
+   "syllabus": [
+    "4.15"
+   ],
+   "skills": [
+    "AI-AHL4.15.sample-mean",
+    "AI-AHL4.15.central-limit-theorem"
+   ],
+   "unknowns": [
+    {
+     "id": "standard-error",
+     "asked": "The distribution of a sample mean",
+     "level": 1
+    },
+    {
+     "id": "probability",
+     "asked": "A probability for the mean of a sample from a normal population",
+     "level": 2
+    },
+    {
+     "id": "central-limit-theorem",
+     "asked": "The central limit theorem for a mean and a total",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  }
+ ],
+ "subtopics": {
+  "AI-AHL4.12": {
+   "prereqs": [
+    "SL4.1",
+    "AI-SL4.11"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.12.design-collection",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.12.reliability",
+     "levels": [
+      1,
+      1
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.12.validity",
+     "levels": [
+      1,
+      1
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.12.combine-categories",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.12.reduce-df",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.13": {
+   "prereqs": [
+    "SL4.4"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.13.fit-curve",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.13.ssres",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.13.minimise-ssres",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.13.r-squared",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.13.compare-models",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.14": {
+   "prereqs": [
+    "SL4.7",
+    "SL4.3"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.14.linear-transformation",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.14.linear-combination",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.14.unbiased-mean",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.14.unbiased-variance",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.15": {
+   "prereqs": [
+    "SL4.9",
+    "AI-AHL4.14"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.15.normal-combination",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.15.sample-mean",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.15.central-limit-theorem",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  }
+ }
+}
