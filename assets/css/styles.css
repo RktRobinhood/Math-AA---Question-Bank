@@ -597,6 +597,22 @@ table.qtable { width: auto; margin: 0 auto; }
 .st.pick { display: inline-flex; align-items: center; gap: 2px; padding-right: 0; line-height: 1.9; }
 .st.pick button { color: inherit; font-weight: 700; font-size: 14px; line-height: 1; width: 24px; height: 24px; border-radius: 0 3px 3px 0; display: grid; place-items: center; opacity: .7; }
 .st.pick button:hover { opacity: 1; background: color-mix(in srgb, currentColor 18%, transparent); }
+/* question types below a subtopic */
+.scope-row { cursor: default; }
+.scope-main { display: flex; align-items: center; gap: var(--s3); flex: 1; min-width: 0; min-height: 28px; cursor: pointer; }
+.scope-row.off .scope-main { cursor: default; }
+.scope-exp { display: inline-flex; align-items: center; gap: 6px; flex: none; font-size: 12px; font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 3px 8px; min-height: 28px; background: var(--surface); white-space: nowrap; }
+.scope-exp::after { content: ""; width: 5px; height: 5px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translate(-1px, -1px); transition: transform .12s; }
+.scope-exp[aria-expanded="true"]::after { transform: rotate(-135deg) translate(-1px, -1px); }
+.scope-exp:hover { border-color: var(--faint); color: var(--ink); }
+.scope-exp.on { color: var(--accent); border-color: var(--accent); }
+.scope-types { background: var(--sunk); padding: 0 var(--s4) var(--s2) 62px; }
+.scope-types.on { background: var(--accent-soft); }
+.scope-types[hidden] { display: none; }
+.type-row { display: flex; align-items: center; gap: var(--s3); padding: 6px 0; border-top: 1px dashed var(--line); min-height: 36px; cursor: pointer; font-size: var(--fs-sm); }
+.type-row .t { flex: 1; min-width: 0; line-height: 1.3; }
+.type-row .lv { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.type-note { font-size: 12px; color: var(--muted); padding: 4px 0 2px; line-height: 1.4; }
 .mode-pick { display: inline-flex; align-items: center; gap: var(--s2); }
 .mode-pick .select { width: auto; min-height: 40px; }
 .way-pick { width: auto; max-width: 100%; min-width: 0; min-height: 40px; }
@@ -736,6 +752,14 @@ table.qtable { width: auto; margin: 0 auto; }
   .scope-go .mode-pick .select { flex: 1; }
   .scope-row { padding-left: var(--s3); padding-right: var(--s3); gap: var(--s2); }
   .scope-row .lv { white-space: normal; text-align: right; max-width: 92px; }
+  .scope-row { flex-wrap: wrap; row-gap: 4px; }
+  .scope-main { gap: var(--s2); flex: 1 1 100%; }
+  .scope-exp { margin-left: 26px; }
+  .scope-row .scope-exp + .lv { max-width: none; }
+  .scope-types { padding-left: var(--s5); padding-right: var(--s3); }
+  .type-row { gap: 2px var(--s2); flex-wrap: wrap; }
+  .type-row .t { flex: 1 1 calc(100% - 40px); }
+  .type-row .lv { flex: 1 1 100%; padding-left: 26px; white-space: normal; }
   .scope-tools, .scope-note { padding-left: var(--s3); padding-right: var(--s3); }
   .qcard { padding: var(--s4) var(--s3); }
   .ans-row .input { flex: 1; width: auto; }

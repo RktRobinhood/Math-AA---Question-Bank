@@ -1,0 +1,2037 @@
+{
+ "about": "AA HL topic 5 (calculus), the additional higher level statements 5.12 to 5.19. Types for the generators in assets/js/engine/generators/aa-hl-topic5.js.",
+ "home": "aa-hl",
+ "types": [
+  {
+   "id": "t5-ahl-first-principles",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Differentiation from first principles",
+   "summary": "Simplify the difference quotient of a polynomial and take the limit as h tends to zero.",
+   "syllabus": [
+    "5.12"
+   ],
+   "skills": [
+    "AHL5.12.first-principles"
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "quotient-at-point",
+     "asked": "simplify the difference quotient of a quadratic at a point",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.first-principles"
+     ]
+    },
+    {
+     "id": "derivative-cubic",
+     "asked": "differentiate a cubic from first principles",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.first-principles"
+     ]
+    }
+   ],
+   "constraints": [
+    "polynomials only, as in the syllabus",
+    "the derivative at the chosen point is not zero"
+   ],
+   "misconceptions": [
+    {
+     "text": "Leaving out the cross terms when expanding (x + h)² or (x + h)³",
+     "as": "distractor"
+    },
+    {
+     "text": "Dropping the term in h² before the limit is taken",
+     "as": "distractor"
+    },
+    {
+     "text": "Using the wrong binomial coefficients",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-limit-reasoning",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Limits of rational functions",
+   "summary": "Find the limit of a rational function at infinity, or at a point where the numerator and the denominator share a factor.",
+   "syllabus": [
+    "5.12"
+   ],
+   "skills": [
+    "AHL5.12.limit-reasoning"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "rational-at-infinity",
+     "asked": "limit of a rational function as x tends to infinity",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.limit-reasoning"
+     ]
+    },
+    {
+     "id": "removable-point",
+     "asked": "limit of a rational function where it is not defined",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.limit-reasoning"
+     ]
+    }
+   ],
+   "constraints": [
+    "the limit at infinity is a ratio of leading coefficients in lowest terms",
+    "the removable point has a limit that is not a whole number"
+   ],
+   "misconceptions": [
+    {
+     "text": "Substituting directly and stopping at 0/0",
+     "as": "distractor"
+    },
+    {
+     "text": "Taking the ratio of the constant terms as the limit at infinity",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-continuity",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Continuity and differentiability where two pieces join",
+   "summary": "Find the constants that make a piecewise function continuous, or continuous and differentiable, at the join.",
+   "syllabus": [
+    "5.12"
+   ],
+   "skills": [
+    "AHL5.12.continuity",
+    "AHL5.12.differentiability"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "continuity-constant",
+     "asked": "find a constant that makes a piecewise function continuous",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.continuity"
+     ]
+    },
+    {
+     "id": "differentiable-join",
+     "asked": "find two constants that make a piecewise function differentiable",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.differentiability",
+      "AHL5.12.continuity"
+     ]
+    }
+   ],
+   "constraints": [
+    "whole-number constants",
+    "the join is not at the origin"
+   ],
+   "misconceptions": [
+    {
+     "text": "Matching the gradients but not the values",
+     "as": "distractor"
+    },
+    {
+     "text": "Using the value of the function where the gradient is needed",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-higher-derivatives",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Higher derivatives and nth-derivative patterns",
+   "summary": "Find second and third derivatives at a point, or the pattern in the nth derivative of a product.",
+   "syllabus": [
+    "5.12"
+   ],
+   "skills": [
+    "AHL5.12.higher-derivatives"
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "values-at-zero",
+     "asked": "second and third derivatives at zero",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.higher-derivatives"
+     ]
+    },
+    {
+     "id": "nth-pattern",
+     "asked": "find the pattern in the derivatives of a product",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.12.higher-derivatives"
+     ]
+    }
+   ],
+   "constraints": [
+    "values at zero are whole numbers",
+    "the pattern is checked for n = 1, 2 and 3"
+   ],
+   "misconceptions": [
+    {
+     "text": "An index of n where n − 1 is needed",
+     "as": "distractor"
+    },
+    {
+     "text": "Letting the factor n multiply the whole bracket",
+     "as": "distractor"
+    },
+    {
+     "text": "Sign errors when differentiating sin and cos repeatedly",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-lhopital",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Limits by l'Hôpital's rule or Maclaurin series",
+   "summary": "Evaluate 0/0 and ∞/∞ limits with l'Hôpital's rule (once or repeatedly) or with series, including finding a constant that makes a limit finite.",
+   "syllabus": [
+    "5.13"
+   ],
+   "skills": [
+    "AHL5.13.standard-limit",
+    "AHL5.13.lhopital",
+    "AHL5.13.lhopital-repeated",
+    "AHL5.13.indeterminate-form-condition",
+    "AHL5.13.limit-by-series",
+    "AHL5.19.standard-series"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "standard-limit",
+     "asked": "use the standard limit of sin x over x",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.standard-limit"
+     ]
+    },
+    {
+     "id": "once",
+     "asked": "find a limit with one use of l'Hôpital's rule",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.lhopital"
+     ]
+    },
+    {
+     "id": "infinity-form",
+     "asked": "find a limit of the form infinity over infinity",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.lhopital"
+     ]
+    },
+    {
+     "id": "twice",
+     "asked": "find a limit with repeated use of l'Hôpital's rule",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.lhopital-repeated",
+      "AHL5.13.lhopital"
+     ]
+    },
+    {
+     "id": "unknown-constant",
+     "asked": "find a constant for which a limit is finite, then the limit",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.indeterminate-form-condition",
+      "AHL5.13.lhopital-repeated"
+     ]
+    },
+    {
+     "id": "by-series",
+     "asked": "find a limit by substituting Maclaurin series",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.13.limit-by-series",
+      "AHL5.19.standard-series"
+     ]
+    }
+   ],
+   "constraints": [
+    "every limit is of an indeterminate form at the stated point",
+    "answers are fractions in lowest terms"
+   ],
+   "misconceptions": [
+    {
+     "text": "Differentiating the quotient with the quotient rule instead of numerator and denominator separately",
+     "as": "distractor"
+    },
+    {
+     "text": "Stopping after one application when the form is still 0/0",
+     "as": "distractor"
+    },
+    {
+     "text": "Forgetting the chain-rule factor",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-implicit",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Implicit differentiation",
+   "summary": "Find dy/dx for a relation in x and y, its value at a point, and the tangent there.",
+   "syllabus": [
+    "5.14"
+   ],
+   "skills": [
+    "AHL5.14.implicit-derivative",
+    "AHL5.14.implicit-tangent-normal"
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "conic-gradient",
+     "asked": "gradient of a conic at a point by implicit differentiation",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.14.implicit-derivative"
+     ]
+    },
+    {
+     "id": "gradient-at-point",
+     "asked": "gradient of an implicit curve with a product term",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.14.implicit-derivative"
+     ]
+    },
+    {
+     "id": "tangent-intercept",
+     "asked": "implicit derivative and the tangent at a point",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.14.implicit-tangent-normal",
+      "AHL5.14.implicit-derivative"
+     ]
+    }
+   ],
+   "constraints": [
+    "the given point lies on the curve",
+    "the gradient at the point is defined and not zero"
+   ],
+   "misconceptions": [
+    {
+     "text": "Treating the product xy as if only one factor varied",
+     "as": "distractor"
+    },
+    {
+     "text": "Leaving out dy/dx when differentiating a power of y",
+     "as": "distractor"
+    },
+    {
+     "text": "Sign errors when collecting the terms in dy/dx",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-related-rates",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Related rates of change",
+   "summary": "Link rates of change with the chain rule: areas, volumes, a sliding rod and a cone being filled.",
+   "syllabus": [
+    "5.14"
+   ],
+   "skills": [
+    "AHL5.14.related-rates"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    },
+    {
+     "rep": "diagram"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "rate-of-measure",
+     "asked": "rate of change of an area or volume from the rate of a radius",
+     "level": 2,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.14.related-rates"
+     ]
+    },
+    {
+     "id": "radius-rate-from-volume",
+     "asked": "rate of change of a radius from the rate of a volume",
+     "level": 3,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.14.related-rates"
+     ]
+    },
+    {
+     "id": "sliding-rod",
+     "asked": "a rod sliding down a wall",
+     "level": 3,
+     "reps": [
+      "diagram"
+     ],
+     "skills": [
+      "AHL5.14.related-rates"
+     ]
+    },
+    {
+     "id": "cone-filling",
+     "asked": "water poured into a conical container",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.14.related-rates"
+     ]
+    }
+   ],
+   "constraints": [
+    "exact answers as multiples or fractions of π on Paper 1",
+    "the rod's lengths form a right-angled triangle with whole-number sides"
+   ],
+   "misconceptions": [
+    {
+     "text": "Substituting the instant's values before differentiating",
+     "as": "distractor"
+    },
+    {
+     "text": "Using dV/dr where dr/dV is needed",
+     "as": "distractor"
+    },
+    {
+     "text": "Leaving out the negative sign for a decreasing length",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-endpoint-optimisation",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Optimisation on a restricted domain",
+   "summary": "Find the least and greatest values of a model when the stationary point may lie outside the allowed domain.",
+   "syllabus": [
+    "5.14"
+   ],
+   "skills": [
+    "AHL5.14.endpoint-optimisation"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "cost-on-domain",
+     "asked": "least and greatest cost on a restricted domain",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.14.endpoint-optimisation"
+     ]
+    }
+   ],
+   "constraints": [
+    "the stationary point is clearly inside or clearly outside the domain",
+    "the two endpoint values differ"
+   ],
+   "misconceptions": [
+    {
+     "text": "Giving the value at the stationary point when it is outside the domain",
+     "as": "distractor"
+    },
+    {
+     "text": "Not checking the endpoints for the greatest value",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-standard-derivatives",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Further standard derivatives",
+   "summary": "Differentiate tan, sec, cosec, cot, a^x, log_a x and the inverse trigonometric functions, with linear composites, and use the results for gradients, tangents and stationary points.",
+   "syllabus": [
+    "5.15"
+   ],
+   "skills": [
+    "AHL5.15.linear-composites",
+    "AHL5.15.trig-derivatives",
+    "AHL5.15.exp-log-base-derivatives",
+    "AHL5.15.inverse-trig-derivatives"
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "identify-derivative",
+     "asked": "recognise a further standard derivative",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.linear-composites",
+      "AHL5.15.trig-derivatives",
+      "AHL5.15.exp-log-base-derivatives",
+      "AHL5.15.inverse-trig-derivatives"
+     ]
+    },
+    {
+     "id": "gradient-inverse-trig",
+     "asked": "gradient of an inverse trigonometric function at a point",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.inverse-trig-derivatives",
+      "AHL5.15.linear-composites"
+     ]
+    },
+    {
+     "id": "tangent-exponential-base",
+     "asked": "tangent to an exponential or logarithmic curve with another base",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.exp-log-base-derivatives"
+     ]
+    },
+    {
+     "id": "stationary-tan-cot",
+     "asked": "stationary point of a sum of tan and cot",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.trig-derivatives"
+     ]
+    }
+   ],
+   "constraints": [
+    "exact answers",
+    "arguments of arcsin and arccos stay inside the domain"
+   ],
+   "misconceptions": [
+    {
+     "text": "Leaving out the chain-rule factor",
+     "as": "distractor"
+    },
+    {
+     "text": "Mixing up the derivatives of tan and sec, or of arcsin and arctan",
+     "as": "distractor"
+    },
+    {
+     "text": "Differentiating a^x as a power of x",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-standard-integrals",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Further standard integrals and partial fractions",
+   "summary": "Evaluate definite integrals that lead to arctan, arcsin or tan, and integrals of rational functions after splitting into partial fractions.",
+   "syllabus": [
+    "5.15"
+   ],
+   "skills": [
+    "AHL5.15.standard-integrals",
+    "AHL5.15.linear-composites",
+    "AHL5.15.partial-fraction-integral"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "inverse-trig-definite",
+     "asked": "a definite integral from the further standard results",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.standard-integrals",
+      "AHL5.15.linear-composites"
+     ]
+    },
+    {
+     "id": "partial-fractions-definite",
+     "asked": "integrate with partial fractions and give a single logarithm",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.15.partial-fraction-integral"
+     ]
+    }
+   ],
+   "constraints": [
+    "two distinct linear factors",
+    "the interval of integration avoids the discontinuities",
+    "the answer is a single logarithm of a rational number"
+   ],
+   "misconceptions": [
+    {
+     "text": "Leaving out the factor 1/a in the arctan result",
+     "as": "distractor"
+    },
+    {
+     "text": "Combining the logarithms with the wrong law",
+     "as": "distractor"
+    },
+    {
+     "text": "Finding A and B with the factors swapped",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-substitution",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Integration by substitution",
+   "summary": "Use a given substitution: change the limits, rewrite the integrand and evaluate, including square-root and trigonometric substitutions.",
+   "syllabus": [
+    "5.16"
+   ],
+   "skills": [
+    "AHL5.16.change-limits",
+    "AHL5.16.given-substitution"
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "new-limits",
+     "asked": "change the limits of an integral under a substitution",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.change-limits"
+     ]
+    },
+    {
+     "id": "linear-substitution",
+     "asked": "integrate a product with a linear substitution",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.given-substitution",
+      "AHL5.16.change-limits"
+     ]
+    },
+    {
+     "id": "root-substitution",
+     "asked": "definite integral with a square-root substitution",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.given-substitution",
+      "AHL5.16.change-limits"
+     ]
+    },
+    {
+     "id": "trig-substitution",
+     "asked": "definite integral with a trigonometric substitution",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.given-substitution",
+      "AHL5.16.change-limits"
+     ]
+    }
+   ],
+   "constraints": [
+    "the substitution is always given",
+    "limits become whole numbers or standard angles"
+   ],
+   "misconceptions": [
+    {
+     "text": "Keeping the old limits",
+     "as": "distractor"
+    },
+    {
+     "text": "Not replacing dx",
+     "as": "distractor"
+    },
+    {
+     "text": "Leaving a factor of x in the new integrand",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-by-parts",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Integration by parts",
+   "summary": "Integrate products by parts: once, twice, with a logarithm, and the cyclic case with an exponential and a trigonometric function.",
+   "syllabus": [
+    "5.16"
+   ],
+   "skills": [
+    "AHL5.16.by-parts",
+    "AHL5.16.repeated-parts",
+    "AHL5.16.cyclic-parts"
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "indefinite-once",
+     "asked": "integrate x times a standard function by parts",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.by-parts"
+     ]
+    },
+    {
+     "id": "log-definite",
+     "asked": "integrate a power of x times ln x by parts",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.by-parts"
+     ]
+    },
+    {
+     "id": "repeated",
+     "asked": "integration by parts used twice",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.repeated-parts",
+      "AHL5.16.by-parts"
+     ]
+    },
+    {
+     "id": "cyclic",
+     "asked": "a cyclic integration by parts",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.16.cyclic-parts"
+     ]
+    }
+   ],
+   "constraints": [
+    "exact answers with e or π",
+    "the cyclic integral is given in a form with two constants to find"
+   ],
+   "misconceptions": [
+    {
+     "text": "Adding the second integral instead of subtracting it",
+     "as": "distractor"
+    },
+    {
+     "text": "Forgetting to divide by the coefficient of x a second time",
+     "as": "distractor"
+    },
+    {
+     "text": "Differentiating the wrong factor",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-area-y-axis",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Area between a curve and the y-axis",
+   "summary": "Rewrite a curve as x in terms of y and integrate with respect to y to find an area against the y-axis.",
+   "syllabus": [
+    "5.17"
+   ],
+   "skills": [
+    "AHL5.17.area-y-axis",
+    "AHL5.17.rearrange-for-x",
+    "AHL5.16.by-parts"
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "graph"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "parabola-region",
+     "asked": "area between a parabola and the y-axis",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.area-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    },
+    {
+     "id": "exponential-region",
+     "asked": "area between an exponential curve and the y-axis",
+     "level": 3,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.area-y-axis",
+      "AHL5.17.rearrange-for-x",
+      "AHL5.16.by-parts"
+     ]
+    }
+   ],
+   "constraints": [
+    "the region is shaded on the graph",
+    "the curve is increasing, so x is a function of y"
+   ],
+   "misconceptions": [
+    {
+     "text": "Integrating y with respect to x, which gives the area against the x-axis",
+     "as": "distractor"
+    },
+    {
+     "text": "Using x-values as the limits of an integral in y",
+     "as": "distractor"
+    },
+    {
+     "text": "Rearranging for x incorrectly",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-volume-revolution",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Volumes of revolution",
+   "summary": "Find volumes of solids formed by rotating a region about the x-axis or the y-axis, including a region between two curves and a modelling context.",
+   "syllabus": [
+    "5.17"
+   ],
+   "skills": [
+    "AHL5.17.volume-x-axis",
+    "AHL5.17.volume-y-axis",
+    "AHL5.17.rearrange-for-x",
+    "AHL5.17.volume-between-curves"
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "graph"
+    },
+    {
+     "rep": "words"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "identify-integral",
+     "asked": "choose the integral for a volume of revolution",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.17.volume-x-axis"
+     ]
+    },
+    {
+     "id": "power-curve-x-axis",
+     "asked": "volume of revolution of a simple curve about the x-axis",
+     "level": 2,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.volume-x-axis"
+     ]
+    },
+    {
+     "id": "exact-x-axis",
+     "asked": "exact volume of revolution about the x-axis",
+     "level": 3,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.volume-x-axis"
+     ]
+    },
+    {
+     "id": "parabola-y-axis",
+     "asked": "volume of revolution about the y-axis",
+     "level": 3,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    },
+    {
+     "id": "between-curves",
+     "asked": "volume of revolution of a region between two curves",
+     "level": 4,
+     "reps": [
+      "graph"
+     ],
+     "skills": [
+      "AHL5.17.volume-between-curves",
+      "AHL5.17.volume-x-axis"
+     ]
+    },
+    {
+     "id": "vase-y-axis",
+     "asked": "volume of a vase modelled by a rotation about the y-axis",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.17.volume-y-axis",
+      "AHL5.17.rearrange-for-x"
+     ]
+    }
+   ],
+   "constraints": [
+    "Paper 1 answers are exact multiples of π or π²",
+    "Paper 2 answers are to three significant figures",
+    "the region is shaded on the graph"
+   ],
+   "misconceptions": [
+    {
+     "text": "Leaving out π",
+     "as": "distractor"
+    },
+    {
+     "text": "Integrating y instead of y²",
+     "as": "distractor"
+    },
+    {
+     "text": "Squaring the difference of two curves instead of taking the difference of the squares",
+     "as": "distractor"
+    },
+    {
+     "text": "Rotating about the wrong axis",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-euler-method",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Euler's method",
+   "summary": "Approximate the solution of a first-order differential equation with Euler's method, and compare it with the exact solution.",
+   "syllabus": [
+    "5.18"
+   ],
+   "skills": [
+    "AHL5.18.eulers-method",
+    "AHL5.18.separable",
+    "AHL5.18.particular-solution"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "one-step",
+     "asked": "one step of Euler's method",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.eulers-method"
+     ]
+    },
+    {
+     "id": "two-steps",
+     "asked": "two steps of Euler's method",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.eulers-method"
+     ]
+    },
+    {
+     "id": "compare-with-exact",
+     "asked": "euler's method compared with the exact solution",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.eulers-method",
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ]
+    }
+   ],
+   "constraints": [
+    "constant step length",
+    "step values are terminating decimals"
+   ],
+   "misconceptions": [
+    {
+     "text": "Using the new x with the old y",
+     "as": "distractor"
+    },
+    {
+     "text": "Adding f(x, y) without multiplying by the step",
+     "as": "distractor"
+    },
+    {
+     "text": "One step too many or too few",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-separable",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Separable differential equations",
+   "summary": "Separate the variables, integrate, use the initial condition, and apply the method to cooling and logistic models.",
+   "syllabus": [
+    "5.18"
+   ],
+   "skills": [
+    "AHL5.18.separable",
+    "AHL5.18.particular-solution",
+    "AHL5.18.interpret-solution"
+   ],
+   "formats": [
+    "value",
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "particular-value",
+     "asked": "solve a separable equation and use the initial condition",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ]
+    },
+    {
+     "id": "reciprocal-solution",
+     "asked": "separable equation with a power of y",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ]
+    },
+    {
+     "id": "exponential-form",
+     "asked": "separable equation leading to a logarithm",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution"
+     ]
+    },
+    {
+     "id": "cooling",
+     "asked": "newton's law of cooling",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "AHL5.18.interpret-solution"
+     ]
+    },
+    {
+     "id": "logistic",
+     "asked": "a logistic model of a population",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.18.separable",
+      "AHL5.18.particular-solution",
+      "AHL5.18.interpret-solution"
+     ]
+    }
+   ],
+   "constraints": [
+    "the particular solution is defined on the whole interval used",
+    "contexts use realistic values"
+   ],
+   "misconceptions": [
+    {
+     "text": "Leaving out the constant of integration or adding it after rearranging",
+     "as": "distractor"
+    },
+    {
+     "text": "Integrating 1/y² as a logarithm",
+     "as": "distractor"
+    },
+    {
+     "text": "Not separating the variables before integrating",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-homogeneous",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Homogeneous differential equations",
+   "summary": "Use y = vx to turn a homogeneous equation into a separable one, then solve it.",
+   "syllabus": [
+    "5.18"
+   ],
+   "skills": [
+    "AHL5.18.homogeneous",
+    "AHL5.18.substitution-transform",
+    "AHL5.18.particular-solution"
+   ],
+   "formats": [
+    "mcq"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "transform",
+     "asked": "transform a homogeneous equation with y = vx",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.homogeneous",
+      "AHL5.18.substitution-transform"
+     ]
+    },
+    {
+     "id": "solve-homogeneous",
+     "asked": "solve a homogeneous differential equation",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.homogeneous",
+      "AHL5.18.particular-solution"
+     ]
+    }
+   ],
+   "constraints": [
+    "x > 0 throughout",
+    "the answer at x = e is a whole-number multiple of e"
+   ],
+   "misconceptions": [
+    {
+     "text": "Replacing dy/dx by x dv/dx only, without the term v",
+     "as": "distractor"
+    },
+    {
+     "text": "Losing the factor x",
+     "as": "distractor"
+    },
+    {
+     "text": "Forgetting to change back from v to y",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-integrating-factor",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Linear differential equations with an integrating factor",
+   "summary": "Find the integrating factor of a linear first-order equation, solve it with an initial condition, and model a mixing problem.",
+   "syllabus": [
+    "5.18"
+   ],
+   "skills": [
+    "AHL5.18.integrating-factor",
+    "AHL5.18.particular-solution",
+    "AHL5.18.interpret-solution",
+    "AHL5.18.set-up-model"
+   ],
+   "formats": [
+    "mcq",
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "constant-coefficient",
+     "asked": "linear equation with constant coefficients",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.particular-solution",
+      "AHL5.18.interpret-solution"
+     ]
+    },
+    {
+     "id": "power-factor",
+     "asked": "linear equation with an integrating factor that is a power of x",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.particular-solution"
+     ]
+    },
+    {
+     "id": "mixing-tank",
+     "asked": "a mixing problem modelled by a linear differential equation",
+     "level": 4,
+     "reps": [
+      "words"
+     ],
+     "skills": [
+      "AHL5.18.integrating-factor",
+      "AHL5.18.set-up-model",
+      "AHL5.18.interpret-solution"
+     ]
+    }
+   ],
+   "constraints": [
+    "the equation is given in the form y′ + P(x)y = Q(x)",
+    "whole-number or simple fractional answers on Paper 1"
+   ],
+   "misconceptions": [
+    {
+     "text": "Using the negative of the exponent",
+     "as": "distractor"
+    },
+    {
+     "text": "Not multiplying the right-hand side by the integrating factor",
+     "as": "distractor"
+    },
+    {
+     "text": "Leaving ln x in the exponent unsimplified",
+     "as": "distractor"
+    }
+   ]
+  },
+  {
+   "id": "t5-ahl-maclaurin",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Maclaurin series",
+   "summary": "Use and build Maclaurin series: standard series, substitution, products, successive derivatives, a series from a differential equation, and approximating an integral.",
+   "syllabus": [
+    "5.19"
+   ],
+   "skills": [
+    "AHL5.19.standard-series",
+    "AHL5.19.substitute-series",
+    "AHL5.19.multiply-series",
+    "AHL5.19.derive-from-derivatives",
+    "AHL5.19.series-approximation",
+    "AHL5.19.differentiate-integrate-series",
+    "AHL5.19.series-from-de",
+    "AHL5.14.implicit-second-derivative"
+   ],
+   "formats": [
+    "value"
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ],
+   "unknowns": [
+    {
+     "id": "standard-coefficient",
+     "asked": "a coefficient in a standard Maclaurin series",
+     "level": 1,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.standard-series",
+      "AHL5.19.substitute-series"
+     ]
+    },
+    {
+     "id": "substitution-terms",
+     "asked": "two coefficients of a series found by substitution",
+     "level": 2,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.substitute-series",
+      "AHL5.19.standard-series"
+     ]
+    },
+    {
+     "id": "product-series",
+     "asked": "maclaurin series of a product",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.multiply-series",
+      "AHL5.19.substitute-series"
+     ]
+    },
+    {
+     "id": "from-derivatives",
+     "asked": "build a Maclaurin series from successive derivatives",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.derive-from-derivatives"
+     ]
+    },
+    {
+     "id": "integral-approximation",
+     "asked": "approximate an integral with a Maclaurin series",
+     "level": 3,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.series-approximation",
+      "AHL5.19.substitute-series",
+      "AHL5.19.differentiate-integrate-series"
+     ]
+    },
+    {
+     "id": "series-from-de",
+     "asked": "maclaurin series from a differential equation",
+     "level": 4,
+     "reps": [
+      "equation"
+     ],
+     "skills": [
+      "AHL5.19.series-from-de",
+      "AHL5.19.series-approximation",
+      "AHL5.14.implicit-second-derivative"
+     ]
+    }
+   ],
+   "constraints": [
+    "coefficients are fractions in lowest terms",
+    "approximations are made where the series converges quickly"
+   ],
+   "misconceptions": [
+    {
+     "text": "Forgetting to raise the coefficient to the power when substituting",
+     "as": "distractor"
+    },
+    {
+     "text": "Leaving out the factorial",
+     "as": "distractor"
+    },
+    {
+     "text": "Missing one of the products that gives a power of x",
+     "as": "distractor"
+    }
+   ]
+  }
+ ],
+ "subtopics": {
+  "AHL5.12": {
+   "prereqs": [
+    "SL5.1",
+    "SL5.3"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.12.first-principles",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.12.continuity",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.12.differentiability",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.12.limit-reasoning",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.12.higher-derivatives",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    }
+   ]
+  },
+  "AHL5.13": {
+   "prereqs": [
+    "AHL5.12",
+    "SL5.6"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.13.lhopital",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.13.lhopital-repeated",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.13.limit-by-series",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.13.standard-limit",
+     "levels": [
+      1,
+      1
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.13.indeterminate-form-condition",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    }
+   ]
+  },
+  "AHL5.14": {
+   "prereqs": [
+    "SL5.6",
+    "SL5.8"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.14.implicit-derivative",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.14.implicit-tangent-normal",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.14.related-rates",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.14.endpoint-optimisation",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "p2"
+    },
+    {
+     "id": "AHL5.14.implicit-second-derivative",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "p2"
+    }
+   ]
+  },
+  "AHL5.15": {
+   "prereqs": [
+    "SL5.6",
+    "SL5.10"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.15.trig-derivatives",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.15.exp-log-base-derivatives",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.15.inverse-trig-derivatives",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.15.standard-integrals",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.15.partial-fraction-integral",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.15.linear-composites",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "p1"
+    }
+   ]
+  },
+  "AHL5.16": {
+   "prereqs": [
+    "SL5.10",
+    "AHL5.15"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.16.given-substitution",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.16.change-limits",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.16.by-parts",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.16.repeated-parts",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.16.cyclic-parts",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.16.reduction-formula",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AHL5.17": {
+   "prereqs": [
+    "SL5.11",
+    "SL5.5"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.17.area-y-axis",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.17.volume-x-axis",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.17.volume-y-axis",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.17.volume-between-curves",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "p2"
+    },
+    {
+     "id": "AHL5.17.rearrange-for-x",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AHL5.18": {
+   "prereqs": [
+    "SL5.10",
+    "AHL5.16"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.18.eulers-method",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "p2"
+    },
+    {
+     "id": "AHL5.18.separable",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.18.homogeneous",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.18.integrating-factor",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.18.particular-solution",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.18.set-up-model",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "p2"
+    },
+    {
+     "id": "AHL5.18.interpret-solution",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AHL5.18.substitution-transform",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "p1"
+    }
+   ]
+  },
+  "AHL5.19": {
+   "prereqs": [
+    "AHL5.12",
+    "SL1.9"
+   ],
+   "skills": [
+    {
+     "id": "AHL5.19.standard-series",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.19.derive-from-derivatives",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.19.substitute-series",
+     "levels": [
+      1,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.19.multiply-series",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.19.differentiate-integrate-series",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "p1"
+    },
+    {
+     "id": "AHL5.19.series-from-de",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "p2"
+    },
+    {
+     "id": "AHL5.19.series-approximation",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  }
+ }
+}

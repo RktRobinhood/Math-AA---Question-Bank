@@ -1,0 +1,491 @@
+// Independent answer verifiers for the AI HL Topic 4 and Topic 5 generators (ai-hl-topic45.js), keyed by generator id.
+// Distributions are recomputed by numerical integration of the density (normal, t, chi-squared) or by direct
+// summation (Poisson, binomial); variances of combinations by enumerating two-point variables; regression by
+// elimination on centred data; Euler tables by re-running the recurrence; differential equations by
+// Runge-Kutta integration or numerical substitution; eigenvalues from the trace and determinant.
+
+const sum = (xs) => xs.reduce((s, x) => s + x, 0);
+const mean = (xs) => sum(xs) / xs.length;
+// Gamma at integers and half-integers by the recurrence from Gamma(1) = 1 and Gamma(1/2) = sqrt(pi)
+const gammaHalf = (twice) => { let g = twice % 2 ? Math.sqrt(Math.PI) : 1; for (let x = twice % 2 ? 0.5 : 1; x < twice / 2 - 1e-9; x += 1) g *= x; return g; };
+const tPdf = (t, v) => (gammaHalf(v + 1) / (Math.sqrt(v * Math.PI) * gammaHalf(v))) * Math.pow(1 + (t * t) / v, -(v + 1) / 2);
+const tCdf = (t, v, T) => 0.5 + T.integrate((u) => tPdf(u, v), 0, t, 2000);
+const tInv = (p, v, T) => T.bisect((t) => tCdf(t, v, T) - p, -60, 60, 60);
+const chiPdf = (x, k) => (Math.pow(x, k / 2 - 1) * Math.exp(-x / 2)) / (Math.pow(2, k / 2) * gammaHalf(k));
+const chiSf = (x, k, T) => T.integrate((u) => chiPdf(u, k), x, x + 150, 20000);
+const normBelow = (x, mu, sd, T) => T.normalCdf((x - mu) / sd);
+// Poisson probabilities by the recurrence p(k) = p(k - 1) * lambda / k
+const poisList = (lam, upTo) => { const out = [Math.exp(-lam)]; for (let k = 1; k <= upTo; k++) out.push((out[k - 1] * lam) / k); return out; };
+const poisCdf = (lam, k) => (k < 0 ? 0 : sum(poisList(lam, k)));
+const binCdf = (n, p, k, T) => { let s = 0; for (let i = 0; i <= k; i++) s += T.binomPmf(n, p, i); return s; };
+// Mean and variance of a sum of independent variables, each replaced by a two-point variable mu +/- sd
+function twoPoint(parts) { // parts: [[coefficient, mu, sd], ...]
+  const n = parts.length, totals = [];
+  for (let mask = 0; mask < 1 << n; mask++) totals.push(sum(parts.map(([c, mu, sd], i) => c * (mu + ((mask >> i) & 1 ? sd : -sd)))));
+  const mu = mean(totals);
+  return { mean: mu, variance: mean(totals.map((t) => (t - mu) * (t - mu))) };
+}
+const decide = (p, alpha) => (p < alpha ? "reject" : "keep");
+function rk4(f, t0, y0, t1, n = 4000) { // y is an array
+  const h = (t1 - t0) / n;
+  let t = t0, y = y0.slice();
+  const add = (a, b, k) => a.map((v, i) => v + k * b[i]);
+  for (let i = 0; i < n; i++) {
+    const k1 = f(t, y), k2 = f(t + h / 2, add(y, k1, h / 2)), k3 = f(t + h / 2, add(y, k2, h / 2)), k4 = f(t + h, add(y, k3, h));
+    y = y.map((v, j) => v + (h / 6) * (k1[j] + 2 * k2[j] + 2 * k3[j] + k4[j]));
+    t += h;
+  }
+  return y;
+}
+
+const RV_KIND = ["test-retest", "parallel", "content", "criterion", "test-retest", "criterion", "content", "parallel"];
+const SURVEY_FLAW = ["leading", "double", "vague", "overlap", "negative"];
+function chi(q, T) {
+  const s = q.params.sit, o = s.obs.slice(), e = s.exp.slice();
+  T.require(Math.abs(sum(o) - s.n) < 1e-9 && Math.abs(sum(e) - s.n) < 0.011, "frequencies add up to the sample size");
+  // merge from whichever end is too small until none is
+  for (;;) {
+    if (e[e.length - 1] <= 5) { e.splice(-2, 2, e[e.length - 2] + e[e.length - 1]); o.splice(-2, 2, o[o.length - 2] + o[o.length - 1]); }
+    else if (e[0] <= 5) { e.splice(0, 2, e[0] + e[1]); o.splice(0, 2, o[0] + o[1]); }
+    else break;
+  }
+  T.require(e.every((v) => v > 5.2), "every combined expected frequency is clearly above 5");
+  T.require(e.length < s.exp.length, "some categories had to be combined");
+  const df = e.length - 1 - (s.est ? 1 : 0), stat = sum(e.map((v, i) => ((o[i] - v) ** 2) / v));
+  T.require(df >= 1, "at least one degree of freedom");
+  return { cats: e.length, df, stat, p: chiSf(stat, df, T) };
+}
+function ss(q) {
+  const s = q.params.sit, y = s.ys.map((v) => v / 10);
+  const quad = (x) => (s.q[0] * x * x + s.q[1] * x + s.q[2]) / 10, line = (x) => (s.l[0] * x + s.l[1]) / 10;
+  const of = (f) => sum(s.xs.map((x, i) => (y[i] - f(x)) ** 2));
+  return { s, quad, line, ssQ: of(quad), ssL: of(line) };
+}
+function solve(A, b) { // Gaussian elimination with pivoting
+  const n = b.length, M = A.map((r, i) => r.concat(b[i]));
+  for (let c = 0; c < n; c++) {
+    let p = c;
+    for (let r = c + 1; r < n; r++) if (Math.abs(M[r][c]) > Math.abs(M[p][c])) p = r;
+    [M[c], M[p]] = [M[p], M[c]];
+    for (let r = 0; r < n; r++) if (r !== c) { const f = M[r][c] / M[c][c]; for (let k = c; k <= n; k++) M[r][k] -= f * M[c][k]; }
+  }
+  return M.map((r, i) => r[n] / r[i]);
+}
+// A two-state transition matrix (columns: from) built from the switching percentages of the situation
+const markov2 = (s) => [[1 - s.p / 10, s.q / 10], [s.p / 10, 1 - s.q / 10]];
+// Probability of being in state `to` after `steps` steps from state `from`, by adding up every path
+function paths(M, from, to, steps) {
+  if (steps === 0) return from === to ? 1 : 0;
+  let p = 0;
+  for (let mid = 0; mid < M.length; mid++) p += M[mid][from] * paths(M, mid, to, steps - 1);
+  return p;
+}
+// The functions of the differentiation questions, written out again from their parameters
+const chainF = (s) => ({ exp: (x) => s.a * Math.exp(s.b * x), sin: (x) => s.a * Math.sin(s.b * x), cos: (x) => s.a * Math.cos(s.b * x), ln: (x) => s.a * Math.log(s.b * x + s.c),
+  pow: (x) => (s.b * x + s.c) ** s.n, tan: (x) => s.a * Math.tan(s.b * x), expquad: (x) => Math.exp(s.b * x * x) })[s.fam];
+const prodF = (p) => ({ xexp: (x) => x * Math.exp(p.k * x), x2exp: (x) => x * x * Math.exp(p.k * x), lnx: (x) => Math.log(x) / x ** p.n, xover: (x) => x / (x * x + p.c), xlnx: (x) => x * Math.log(x) })[p.fam];
+// The right-hand sides f(x, y) of the slope field and Euler questions, by id
+const fieldF = (id) => ({ "x+y": (x, y) => x + y, "x-y": (x, y) => x - y, "y-x": (x, y) => y - x, "-x-y": (x, y) => -(x + y), "y/2": (x, y) => 0.5 * y, "x/2": (x) => 0.5 * x, "-y/2": (x, y) => -0.5 * y, "-x/2": (x) => -0.5 * x,
+  "xy/2": (x, y) => 0.5 * x * y, "-xy/2": (x, y) => -0.5 * x * y, xy: (x, y) => x * y, "y-x2": (x, y) => y - x ** 2, "2x-y": (x, y) => x + x - y, "x2+y": (x, y) => x ** 2 + y, "x/y": (x, y) => x / y, "-2xy": (x, y) => -2 * x * y, ycosx: (x, y) => y * Math.cos(x) })[id];
+// Euler's method written out step by step: every row [values...] from the start, all components updated from the previous row
+function euler(f, t0, start, h, steps) {
+  const rows = [start.slice()];
+  for (let i = 0; i < steps; i++) { const prev = rows[i], slope = f(t0 + i * h, prev); rows.push(prev.map((v, j) => v + h * slope[j])); }
+  return rows;
+}
+// The kind of equilibrium at the origin from the trace and determinant of the matrix
+function portrait(M) {
+  const tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0], disc = tr * tr - 4 * det;
+  if (det < 0) return "saddle";
+  if (disc > 0) return tr < 0 ? "sink" : "source";
+  return tr === 0 ? "centre" : tr < 0 ? "spiralIn" : "spiralOut";
+}
+
+  /*HELPERS*/
+
+export default {
+  "t4-ai-reliability-validity/identify/words": (q, T) => {
+    const k = RV_KIND[q.params.id];
+    return { a: T.option(k === "content" || k === "criterion" ? "validity" : "reliability"), b: T.option(k) };
+  },
+  "t4-ai-survey-design/flawed-question/words": (q, T) => ({ a: T.option(SURVEY_FLAW[q.params.id]), b: T.option("good") }),
+  "t4-ai-chi-grouping/degrees-of-freedom/table": (q, T) => { const c = chi(q, T); return { a: c.cats, b: c.df }; },
+  "t4-ai-chi-grouping/test-statistic/table": (q, T) => {
+    const c = chi(q, T);
+    T.require(Math.abs(c.p - 0.05) > 0.008, "the p-value is not on the boundary");
+    return { a: c.df, b: c.stat, c: T.approx(c.p, 1e-5), d: T.option(decide(c.p, 0.05)) };
+  },
+  "t4-ai-regression-residuals/ss-res/table": (q) => { const r = ss(q); return { a: r.quad(r.s.xs[r.s.k]), b: r.ssQ }; },
+  "t4-ai-regression-residuals/compare-models/table": (q, T) => {
+    const r = ss(q), first = r.s.quadFirst;
+    T.require(r.ssQ < r.ssL, "the quadratic model is the better one");
+    return { a: first ? r.ssQ : r.ssL, b: first ? r.ssL : r.ssQ, c: T.option(first ? "A" : "B"), d: r.quad(r.s.xp) };
+  },
+  "t4-ai-regression-fit/quadratic-fit/table": (q, T) => {
+    const { xs, ys, xp } = q.params, mx = mean(xs), u = xs.map((x) => x - mx);
+    // fit y = A u^2 + B u + C on centred x by elimination, then expand
+    const S = (p, f = () => 1) => sum(u.map((v, i) => v ** p * f(i)));
+    const [A, B, C] = solve([[S(4), S(3), S(2)], [S(3), S(2), S(1)], [S(2), S(1), u.length]], [S(2, (i) => ys[i]), S(1, (i) => ys[i]), S(0, (i) => ys[i])]);
+    const a = A, b = B - 2 * A * mx, c = C - B * mx + A * mx * mx;
+    const res = (a2, b2, c2) => sum(xs.map((x, i) => (ys[i] - (a2 * x * x + b2 * x + c2)) ** 2)), best = res(a, b, c);
+    for (const d of [-0.01, 0.01]) T.require(res(a + d, b, c) > best && res(a, b + d, c) > best && res(a, b, c + d) > best, "the fitted curve minimises the sum of square residuals");
+    const my = mean(ys);
+    return { a, b, c: 1 - best / sum(ys.map((y) => (y - my) ** 2)), d: a * xp * xp + b * xp + c };
+  },
+  "t4-ai-regression-fit/r-squared-meaning/words": (q) => ({ a: q.params.R, b: q.params.r * q.params.r }),
+  "t4-ai-linear-combination/transformation/equation": (q) => { const { mu, v, a, b } = q.params, ys = [mu - Math.sqrt(v), mu + Math.sqrt(v)].map((x) => a * x + b); return { a: mean(ys), b: ((ys[1] - ys[0]) / 2) ** 2 }; },
+  "t4-ai-linear-combination/total/words": (q) => {
+    const s = q.params.sit, t = twoPoint(Array(s.n).fill([1, s.m1, s.s1]).concat(Array(s.k).fill([1, s.m2, s.s2])));
+    return { a: t.mean, b: Math.sqrt(t.variance) };
+  },
+  "t4-ai-linear-combination/find-constants/equation": (q, T) => {
+    const { mu, v, a, b, mw, vw, c1, c2 } = q.params;
+    // search for the positive a and the b that give the stated mean and variance of Y
+    const stated = /E\}\(Y\) = (-?\d+)\$ and \$\\mathrm\{Var\}\(Y\) = (\d+)/.exec(q.stem).slice(1).map(Number);
+    const hits = [];
+    for (let A = 1; A <= 12; A++) for (let B = -40; B <= 40; B++) { const t = twoPoint([[A, mu, Math.sqrt(v)]]); if (T.close(t.mean + B, stated[0]) && T.close(t.variance, stated[1])) hits.push([A, B]); }
+    T.require(hits.length === 1 && hits[0][0] === a && hits[0][1] === b, "one pair of constants fits");
+    return { a: hits[0][0], b: hits[0][1], c: twoPoint([[c1, mu, Math.sqrt(v)], [-c2, mw, Math.sqrt(vw)]]).variance };
+  },
+  "t4-ai-unbiased-estimates/from-summary/words": (q) => { const d = q.params.data, mu = mean(d); return { a: mu, b: sum(d.map((x) => (x - mu) ** 2)) / (d.length - 1) }; },
+  "t4-ai-unbiased-estimates/from-data/table": (q) => {
+    const d = q.params.data, y = d.map((x) => q.params.a * x + q.params.b), est = (xs) => { const mu = mean(xs); return [mu, sum(xs.map((x) => (x - mu) ** 2)) / (xs.length - 1)]; };
+    return { a: est(d)[0], b: est(d)[1], c: est(y)[0], d: est(y)[1] };
+  },
+  "t4-ai-normal-combination/total-probability/words": (q, T) => {
+    const s = q.params.sit, t = twoPoint(Array(s.n).fill([1, s.m1, s.s1]).concat(Array(s.k).fill([1, s.m2, s.s2]))), d = twoPoint([[1, s.m1, s.s1], [-1, s.m2, s.s2]]);
+    return { a: t.mean, b: t.variance, c: T.approx(1 - normBelow(q.params.lim, t.mean, Math.sqrt(t.variance), T), 1e-6), d: T.approx(1 - normBelow(q.params.d, d.mean, Math.sqrt(d.variance), T), 1e-6) };
+  },
+  "t4-ai-sample-mean/standard-error/words": (q) => { const s = q.params.sit, k = Math.min(s.n, 10), t = twoPoint(Array(k).fill([1 / k, s.mu, s.sd])); return { a: t.mean, b: (t.variance * k) / s.n }; },
+  "t4-ai-sample-mean/probability/words": (q, T) => {
+    const s = q.params.sit, k = Math.min(s.n, 10), t = twoPoint(Array(k).fill([1 / k, s.mu, s.sd])), se = Math.sqrt((t.variance * k) / s.n);
+    const below = normBelow(s.cut, s.mu, se, T);
+    return { a: se, b: T.approx(s.below ? below : 1 - below, 1e-6) };
+  },
+  "t4-ai-sample-mean/central-limit-theorem/words": (q, T) => {
+    const { mu, sd, n, lo, hi, tot } = q.params, se = sd / Math.sqrt(n);
+    T.require(n > 30, "the sample is large enough for the central limit theorem");
+    const between = T.integrate((x) => T.normalPdf((x - mu) / se) / se, lo, hi, 4000), sdT = sd * Math.sqrt(n);
+    return { a: T.option("clt"), b: T.approx(between, 1e-6), c: T.approx(T.integrate((x) => T.normalPdf((x - n * mu) / sdT) / sdT, tot, n * mu + 12 * sdT, 20000), 1e-6) };
+  },
+    "t4-ai-confidence-interval/z-interval/words": (q, T) => { const s = q.params.sit, h = (T.invNorm(0.5 + s.level / 200) * s.sd) / Math.sqrt(s.n); return { a: s.xbar - h, b: s.xbar + h }; },
+  "t4-ai-confidence-interval/t-interval-summary/words": (q, T) => { const s = q.params.sit, h = (tInv(0.5 + s.level / 200, s.n - 1, T) * s.s) / Math.sqrt(s.n); return { a: s.xbar - h, b: s.xbar + h }; },
+  "t4-ai-confidence-interval/choose-distribution/words": (q, T) => {
+    T.require(/is not known/.test(q.stem) !== q.params.known, "the stem says whether the standard deviation is known");
+    return { a: T.optionWhere(q, "a", (v, i, text) => (q.params.known ? /normal/.test(text) : text.includes(`$${q.params.n - 1}$ degrees`))) };
+  },
+  "t4-ai-confidence-interval/t-interval/table": (q, T) => {
+    const { data, level, claim } = q.params, n = data.length, mu = mean(data), s = Math.sqrt(sum(data.map((x) => (x - mu) ** 2)) / (n - 1)), h = (tInv(0.5 + level / 200, n - 1, T) * s) / Math.sqrt(n);
+    // the interval covers the stated share of the t-distribution
+    T.require(Math.abs(tCdf(h / (s / Math.sqrt(n)), n - 1, T) - tCdf(-h / (s / Math.sqrt(n)), n - 1, T) - level / 100) < 1e-7, "the interval has the stated confidence level");
+    T.require(Math.min(Math.abs(claim - mu + h), Math.abs(claim - mu - h)) > 0.1 * h, "the claim is clearly inside or outside");
+    return { a: mu, b: mu - h, c: mu + h, d: T.option(claim > mu - h && claim < mu + h ? "inside" : "outside") };
+  },
+  "t4-ai-confidence-interval/sample-size/words": (q, T) => {
+    const s = q.params.sit, z = T.invNorm(0.5 + s.level / 200), h = (z * s.sd) / Math.sqrt(s.n);
+    let n = 2;
+    while ((2 * z * s.sd) / Math.sqrt(n) >= q.params.w) n++;
+    T.require(n > s.n, "more data is needed than the first sample had");
+    return { a: s.xbar - h, b: s.xbar + h, c: n };
+  },
+  "t4-ai-poisson/mean-variance/words": (q) => {
+    const s = q.params.sit, one = poisList(s.lam, 120), many = poisList(s.lam * s.t, 250), mu = sum(one.map((p, k) => k * p));
+    return { a: sum(one.map((p, k) => (k - mu) ** 2 * p)), b: sum(many.map((p, k) => k * p)) };
+  },
+  "t4-ai-poisson/probability/words": (q) => { const s = q.params.sit; return { a: poisList(s.lam, s.k)[s.k], b: 1 - poisCdf(s.lam, s.k2 - 1) }; },
+  "t4-ai-poisson/rescale-and-sum/words": (q, T) => {
+    const s = q.params.sit, { j, M } = q.params, p1 = poisList(s.lam, j), p2 = poisList(s.lam2, j);
+    // the t-period count as a sum of t independent one-period counts (convolution), and the two sources likewise
+    let conv = [1];
+    for (let i = 0; i < s.t; i++) { const one = poisList(s.lam, s.m), next = Array(s.m + 1).fill(0); conv.forEach((a, x) => one.forEach((b, y) => { if (x + y <= s.m) next[x + y] += a * b; })); conv = next; }
+    let both = 0;
+    for (let x = 0; x <= j; x++) for (let y = 0; x + y <= j; y++) both += p1[x] * p2[y];
+    const busy = 1 - poisCdf(s.lam, M);
+    T.require(busy > 0.02 && busy < 0.98, "a busy period is neither certain nor impossible");
+    return { a: poisList(s.lam, s.k)[s.k], b: 1 - sum(conv), c: both, d: T.nCr(s.n, s.r) * busy ** s.r * (1 - busy) ** (s.n - s.r) };
+  },
+  "t4-ai-poisson/find-parameter/words": (q, T) => {
+    const { p0, k } = q.params, lam = T.bisect((l) => Math.exp(-l) - p0, 0, 20);
+    return { a: lam, b: 1 - poisCdf(lam, k), c: 1 - poisList(lam / 2, 0)[0] };
+  },
+  "t4-ai-poisson-model/choose-model/words": (q, T) => { const k = ["poisson", "binomial", "normal", "poisson", "binomial", "normal", "poisson", "binomial"][q.params.id]; return { a: T.option(k), b: T.option(k) }; },
+  "t4-ai-test-mean/z-test/words": (q, T) => {
+    const { mu0, sd, n, less, alpha, xbar } = q.params, below = normBelow(xbar, mu0, sd / Math.sqrt(n), T), p = less ? below : 1 - below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: T.approx(p, 1e-7), b: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-mean/t-test/table": (q, T) => {
+    const { data, mu0, less, alpha } = q.params, n = data.length, mu = mean(data), s2 = sum(data.map((x) => (x - mu) ** 2)) / (n - 1), below = tCdf((mu - mu0) / Math.sqrt(s2 / n), n - 1, T), p = less ? below : 1 - below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: mu, b: T.option(less ? "less" : "greater"), c: T.approx(p, 1e-7), d: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-mean/paired-test/table": (q, T) => {
+    const { before, after, up, alpha } = q.params, d = after.map((a, i) => a - before[i]), n = d.length, mu = mean(after) - mean(before), s2 = sum(d.map((x) => (x - mu) ** 2)) / (n - 1);
+    const below = tCdf(mu / Math.sqrt(s2 / n), n - 1, T), p = up ? 1 - below : below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: mu, b: T.approx(p, 1e-7), c: T.option(decide(p, alpha)), d: T.option("normal-d") };
+  },
+  "t4-ai-test-proportion/p-value/words": (q, T) => {
+    const { n, p0, up, x, alpha } = q.params;
+    let p = 0;
+    for (let k = 0; k <= n; k++) if (up ? k >= x : k <= x) p += T.binomPmf(n, p0, k);
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: T.approx(p, 1e-7), b: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-test-correlation/rho-test/table": (q, T) => {
+    const { xs, ys, pos, alpha } = q.params, n = xs.length;
+    // r as the mean product of standard scores
+    const z = (v) => { const mu = mean(v), sd = Math.sqrt(mean(v.map((x) => (x - mu) ** 2))); return v.map((x) => (x - mu) / sd); };
+    const zx = z(xs), zy = z(ys), r = mean(zx.map((v, i) => v * zy[i])), below = tCdf(r * Math.sqrt((n - 2) / (1 - r * r)), n - 2, T), p = pos ? 1 - below : below;
+    T.require(Math.abs(p - alpha) > 0.2 * alpha, "the p-value is not on the boundary");
+    return { a: r, b: T.approx(p, 1e-7), c: T.option(decide(p, alpha)) };
+  },
+  "t4-ai-critical-region/binomial/words": (q, T) => {
+    const { n, p0, up, alpha, p1 } = q.params, pmf = (p) => Array.from({ length: n + 1 }, (_, k) => T.binomPmf(n, p, k)), f0 = pmf(p0), f1 = pmf(p1);
+    const inRegion = (c) => (k) => (up ? k >= c : k <= c), prob = (f, test) => sum(f.filter((_, k) => test(k)));
+    // the largest region whose probability under H0 is below the significance level
+    const cs = Array.from({ length: n + 1 }, (_, k) => k).filter((c) => prob(f0, inRegion(c)) < alpha), c = up ? Math.min(...cs) : Math.max(...cs);
+    T.require(cs.length > 0, "a critical region exists");
+    return { a: c, b: prob(f0, inRegion(c)), c: 1 - prob(f1, inRegion(c)) };
+  },
+  "t4-ai-critical-region/poisson/words": (q, T) => {
+    const { r0, d, up, alpha, r1 } = q.params, f0 = poisList(r0 * d, 150), f1 = poisList(r1 * d, 150);
+    const inRegion = (c) => (k) => (up ? k >= c : k <= c), prob = (f, test) => sum(f.filter((_, k) => test(k)));
+    const cs = Array.from({ length: 100 }, (_, k) => k).filter((c) => prob(f0, inRegion(c)) < alpha), c = up ? Math.min(...cs) : Math.max(...cs);
+    T.require(cs.length > 0, "a critical region exists");
+    return { a: c, b: prob(f0, inRegion(c)), c: 1 - prob(f1, inRegion(c)) };
+  },
+  "t4-ai-critical-region/normal/words": (q, T) => {
+    const { mu0, sd, n, up, alpha, mu1 } = q.params, se = sd / Math.sqrt(n), c = up ? mu0 + T.invNorm(1 - alpha) * se : mu0 + T.invNorm(alpha) * se;
+    const below = normBelow(c, mu1, se, T);
+    T.require(up ? mu1 > mu0 : mu1 < mu0, "the true mean lies on the side of the alternative hypothesis");
+    return { a: c, b: alpha, c: T.approx(up ? below : 1 - below, 1e-7) };
+  },
+  "t4-ai-type-errors/identify/words": (q, T) => ({ a: T.optionWhere(q, "a", (v, i, text) => /^Concluding/.test(text) && v === "I"), b: T.optionWhere(q, "b", (v, i, text) => /^Not rejecting/.test(text) && v === "II") }),
+  "t4-ai-markov/matrix-entry/words": (q) => { const s = q.params.sit, T2 = markov2(s); return { a: T2[0][0], b: T2[0][1] }; },
+  "t4-ai-markov/n-step/words": (q) => { const T2 = markov2(q.params.sit); return { a: paths(T2, 0, 0, 2), b: paths(T2, 0, 0, 3) }; },
+  "t4-ai-markov/steady-state-exact/words": (q) => {
+    const T2 = markov2(q.params.sit);
+    let v = [1, 0];
+    for (let i = 0; i < 3000; i++) v = [T2[0][0] * v[0] + T2[0][1] * v[1], T2[1][0] * v[0] + T2[1][1] * v[1]];
+    return { a: paths(T2, 0, 0, 2), b: v[0] };
+  },
+  "t4-ai-markov/three-state/equation": (q, T) => {
+    const { T: M, init, n } = q.params, total = sum(init);
+    for (let j = 0; j < 3; j++) T.require(Math.abs(M[0][j] + M[1][j] + M[2][j] - 1) < 1e-12 && M.every((row) => row[j] > 0), "each column is a set of positive probabilities adding to one");
+    const after = (to, steps) => sum(init.map((x, from) => x * paths(M, from, to, steps)));
+    // steady state: (T - I)s = 0 with the entries adding to one
+    const st = solve([[M[0][0] - 1, M[0][1], M[0][2]], [M[1][0], M[1][1] - 1, M[1][2]], [1, 1, 1]], [0, 0, 1]);
+    return { a: after(0, 1), b: after(1, n), c: st[2] * total };
+  },
+
+    "t5-ai-derivative-rules/chain-rule/equation": (q, T) => {
+    const { s, x0 } = q.params, g = T.deriv(chainF(s), x0);
+    return { a: T.option(g), b: T.approx(g, 1e-6 * Math.max(1, Math.abs(g))) };
+  },
+  "t5-ai-derivative-rules/product-quotient/equation": (q, T) => {
+    const { fam, tp } = q.params, f = prodF(q.params), d = (x) => T.deriv(f, x), logs = fam === "lnx" || fam === "xlnx";
+    const roots = T.roots(d, logs ? 0.05 : -5, logs ? 6 : 5, 3000).filter((r) => Math.abs(r) > 1e-3 && (fam !== "xover" || r > 0));
+    T.require(roots.length === 1, "one stationary point of the kind asked for");
+    return { a: T.option(d(tp)), b: T.approx(roots[0], 1e-6) };
+  },
+  "t5-ai-related-rates/direct-rate/words": (q, T) => {
+    const { id, v, R } = q.params, f = { circle: (r) => Math.PI * r * r, sphere: (r) => (4 / 3) * Math.PI * r ** 3, cube: (r) => r ** 3 }[id];
+    const dq = T.deriv(f, R), rate = T.deriv((t) => f(R + v * t), 0);
+    return { a: T.approx(dq, 1e-6 * dq), b: T.approx(Math.abs(rate), 1e-6 * Math.abs(rate)) };
+  },
+  "t5-ai-related-rates/inverse-rate/words": (q, T) => {
+    const p = q.params, ap = (v) => T.approx(v, 1e-6 * Math.max(1, Math.abs(v)));
+    if (p.kind === "sphere") {
+      const V = (r) => (4 / 3) * Math.PI * r ** 3, r = (t) => Math.cbrt((3 * (V(p.R) + p.Q * t)) / (4 * Math.PI));
+      return { a: ap(T.deriv(V, p.R)), b: ap(T.deriv(r, 0, 1e-4)), c: ap(T.deriv((t) => 4 * Math.PI * r(t) ** 2, 0, 1e-4)) };
+    }
+    if (p.kind === "cone") {
+      const V = (h) => (Math.PI * (p.k * h) ** 2 * h) / 3, h = (t) => Math.cbrt((3 * (V(p.R) + p.Q * t)) / (Math.PI * p.k * p.k));
+      return { a: V(1) / Math.PI, b: ap(T.deriv(h, 0, 1e-4)), c: ap(T.deriv((t) => p.k * h(t), 0, 1e-4)) };
+    }
+    const y = (t) => Math.sqrt(p.L ** 2 - (p.x0 + p.v * t) ** 2);
+    T.require(p.x0 < p.L, "the foot of the ladder is closer to the wall than the ladder is long");
+    return { a: y(0), b: ap(-T.deriv(y, 0, 1e-4)), c: ap(T.deriv((t) => ((p.x0 + p.v * t) * y(t)) / 2, 0, 1e-4)) };
+  },
+  "t5-ai-second-derivative/value-and-concavity/equation": (q, T) => {
+    const { fam, a, b, c, x0 } = q.params;
+    const f = { cubic: (x) => a * x ** 3 + b * x * x + c * x, quartic: (x) => a * x ** 4 + b * x * x + c * x, expquad: (x) => a * Math.exp(c * x) + b * x * x, lnquad: (x) => a * Math.log(x) + b * x * x }[fam];
+    const v = T.deriv2(f, x0);
+    T.require(Math.abs(v) > 0.5, "the second derivative is not zero");
+    // concave up: the curve on both sides lies above the point's own height plus the tangent, so the two neighbours average higher
+    const above = f(x0 + 0.01) + f(x0 - 0.01) > 2 * f(x0);
+    return { a: T.approx(v, 1e-4 * Math.max(1, Math.abs(v))), b: T.option(above ? "up" : "down") };
+  },
+  "t5-ai-second-derivative/inflexion/equation": (q, T) => {
+    const { cs, p, q: q2, which } = q.params, f = (x) => T.poly(cs, x);
+    T.require(Math.abs(T.deriv(f, p)) < 1e-6 && Math.abs(T.deriv(f, q2)) < 1e-6, "the stated stationary points are stationary");
+    const isMax = f(which) > f(which + 0.01) && f(which) > f(which - 0.01), r = T.roots((x) => T.deriv2(f, x), -10, 10.37, 500);
+    T.require(r.length === 1, "one point of inflexion");
+    return { a: T.approx(T.deriv2(f, which), 1e-4), b: T.option(isMax ? "max" : "min"), c: T.approx(r[0], 1e-5), d: T.approx(f(r[0]), 1e-3) };
+  },
+  "t5-ai-second-derivative/greatest-rate/words": (q, T) => {
+    const p = q.params, ap = (v) => T.approx(v, 2e-5 * Math.max(1, Math.abs(v)));
+    if (p.kind === "logistic") {
+      // where the growth rate peaks: search the numerical derivative, then refine on the second derivative
+      const N = (t) => p.L / (1 + p.C * Math.exp(-p.k * t)), near = T.extremum((t) => T.deriv(N, t), 0, 60, "max").x, r = T.bisect((t) => T.deriv2(N, t), near - 0.5, near + 0.5, 60);
+      T.require(near > 0.6, "the fastest growth comes after the start");
+      return { a: N(0), b: T.approx(N(400), 1e-3), c: ap(r), d: ap(T.deriv(N, r)) };
+    }
+    const C = (t) => p.A * t * Math.exp(-p.k * t), top0 = T.extremum(C, 0, 60, "max").x, top = T.bisect((t) => T.deriv(C, t), top0 * 0.7, top0 * 1.3, 60);
+    const in0 = T.extremum((t) => T.deriv(C, t), top, 60, "min").x, infl = T.bisect((t) => T.deriv2(C, t), in0 * 0.85, in0 * 1.15, 60);
+    T.require(infl > top, "the concentration falls fastest after its peak");
+    return { a: ap(top), b: ap(C(top)), c: ap(infl), d: ap(-T.deriv(C, infl)) };
+  },
+  "t5-ai-integration/linear-composite/equation": (q, T) => {
+    const { s, lo, hi } = q.params, { a, b, c, n } = s;
+    const f = { cos: (x) => a * Math.cos(b * x + c), sin: (x) => a * Math.sin(b * x + c), exp: (x) => a * Math.exp(b * x), recip: (x) => a / (b * x + c), pow: (x) => (b * x + c) ** n }[s.fam], I = T.integrate(f, lo, hi, 4000);
+    return { a: T.option(I), b: I };
+  },
+  "t5-ai-integration/substitution/equation": (q, T) => {
+    const { fam, n, k, c, a, b } = q.params;
+    const f = { poly: (x) => k * x * (x * x + c) ** n, exp: (x) => 2 * k * x * Math.exp(x * x), trig: (x) => k * Math.cos(x) * Math.sin(x) ** n, log: (x) => (2 * k * x) / (x * x + c), lnpow: (x) => (k * Math.log(x) ** n) / x }[fam], I = T.integrate(f, a, b, 6000);
+    return { a: T.option(I), b: I };
+  },
+  "t5-ai-integration/find-function/equation": (q, T) => {
+    const { fam, a, b, d, x1 } = q.params;
+    const fd = { exp: (x) => a * Math.exp(b * x), sin: (x) => a * Math.sin(b * x), recipsq: (x) => a / (b * x + 1) ** 2 }[fam], F0 = { exp: (x) => (a / b) * Math.exp(b * x), sin: (x) => (-a / b) * Math.cos(b * x), recipsq: (x) => -a / (b * (b * x + 1)) }[fam];
+    for (const x of [0.2, 0.9, 1.7]) T.require(T.close(T.deriv(F0, x), fd(x), 1e-6), "the stated form differentiates to the given derivative");
+    return { a: d - F0(0), b: d + T.integrate(fd, 0, x1, 4000) };
+  },
+  "t5-ai-area-volume/area-below-axis/graph": (q, T) => {
+    const { a, b } = q.params, f = (x) => T.evalGraph(q.graph.functions[0].fn, x), cuts = [a, ...T.roots(f, a + 1e-9, b - 1e-9, 2000), b];
+    T.require(cuts.length === 3, "the curve crosses the axis once inside the interval");
+    const pieces = cuts.slice(1).map((c, i) => T.integrate(f, cuts[i], c));
+    return { a: sum(pieces), b: sum(pieces.map(Math.abs)) };
+  },
+  "t5-ai-area-volume/volume-x-axis/graph": (q, T) => {
+    const { lo, hi, rad } = q.params, f = (x) => T.evalGraph(q.graph.functions[0].fn, x), N = 100000, h = (hi - lo) / N;
+    let area = 0, vol = 0, low = Infinity;
+    for (let i = 0; i < N; i++) { const y = f(lo + (i + 0.5) * h); area += y * h; vol += Math.PI * y * y * h; low = Math.min(low, y); }   // thin discs
+    T.require(low > rad, "the hole is narrower than the solid everywhere");
+    return { a: T.approx(area, 1e-6 * area), b: T.approx(vol, 1e-6 * vol), c: T.approx(vol - Math.PI * rad * rad * (hi - lo), 1e-6 * vol) };
+  },
+  "t5-ai-area-volume/volume-y-axis/equation": (q, T) => {
+    const { fam, a, c, lo, hi, yt } = q.params, curve = { shift: (x) => x * x + c, scale: (x) => a * x * x, exp: (x) => Math.exp(x), root: (x) => a * Math.sqrt(x) }[fam];
+    const xAt = (y) => T.bisect((x) => curve(x) - y, 0, 200, 70), N = 4000, h = (hi - lo) / N;
+    let area = 0, vol = 0;
+    for (let i = 0; i < N; i++) { const x = xAt(lo + (i + 0.5) * h); area += x * h; vol += Math.PI * x * x * h; }   // thin horizontal discs
+    T.require(curve(0) <= lo + 1e-9, "the region starts on or above the lowest point of the curve");
+    return { a: T.option(xAt(yt) ** 2), b: T.approx(vol, 2e-4 * vol), c: T.approx(area, 2e-4 * area) };
+  },
+  "t5-ai-area-volume/volume-exact/equation": (q, T) => {
+    const { fam, a, b, h } = q.params, y = { sqrtlin: (x) => Math.sqrt(a * x + b), line: (x) => a * x, para: (x) => a * x * x }[fam], N = 40000, dx = h / N;
+    let vol = 0;
+    for (let i = 0; i < N; i++) vol += Math.PI * y((i + 0.5) * dx) ** 2 * dx;
+    return { a: T.optionWhere(q, "a", (v) => Math.abs(v - vol) < 1e-5 * vol), b: T.approx(vol, 1e-6 * vol) };
+  },
+
+    "t5-ai-diff-eq/separable-exact/equation": (q, T) => {
+    const { fam, k, y0, x1 } = q.params, rhs = { kxy: (x, y) => k * x * y, xovery: (x, y) => (k * x) / y, ky2: (x, y) => -k * y * y }[fam];
+    // an option is the general solution if, for an arbitrary constant, it satisfies the equation at several points
+    const fits = (v) => [0.3, 0.7, 1.1].every((x) => { const y = (u) => ({ Aexp: 2.3 * Math.exp(v.c * u ** (v.p || 1)), poly: v.c * u ** v.p + 2.3, sqrt: Math.sqrt(v.c * u * u + 2.3), recip: 1 / (v.c * u + 2.3) })[v.form]; return Math.abs(T.deriv(y, x) - rhs(x, y(x))) < 1e-6 * Math.max(1, Math.abs(rhs(x, y(x)))); });
+    return { a: T.optionWhere(q, "a", fits), b: T.approx(rk4((x, y) => [rhs(x, y[0])], 0, [y0], x1, 4000)[0], 1e-7 * Math.max(1, y0 * Math.exp(Math.abs(k) * x1 * x1))) };
+  },
+  "t5-ai-diff-eq/exponential-model/words": (q, T) => {
+    const { n0, k, t1, target } = q.params, at = (t) => rk4((u, y) => [k * y[0]], 0, [n0], t, 2000)[0];
+    return { a: T.approx(at(t1), 1e-7 * n0 * Math.exp(Math.abs(k) * t1)), b: T.approx(T.bisect((t) => at(t) - target, 0.001, 400, 60), 1e-6) };
+  },
+  "t5-ai-diff-eq/cooling/words": (q, T) => {
+    const { room, T0, t1, T1, t2, T3 } = q.params, at = (k, t) => rk4((u, y) => [-k * (y[0] - room)], 0, [T0], t, 2000)[0];
+    const k = T.bisect((kk) => at(kk, t1) - T1, 0.0005, 3, 60);
+    T.require(k > 0.001 && k < 2.9, "a positive cooling constant fits the data");
+    return { a: T.approx(k, 1e-6), b: T.approx(at(k, t2), 1e-5), c: T.approx(T.bisect((t) => at(k, t) - T3, 0.001, 600, 60), 1e-4) };
+  },
+  "t5-ai-diff-eq/set-up/words": (q, T) => {
+    // the right-hand side as a function, from the description: check the correct option's sign and what it depends on
+    const want = [["N", "kN"], ["M", "-kM"], ["T", "-k(T - R)"], ["V", "\\dfrac{k}{V}"], ["h", "-k\\sqrt{h}"], ["N", "kN(M - N)"]][q.params.id];
+    return { a: T.optionWhere(q, "a", (v, i, text) => text.endsWith(`= ${want[1]}$`) && text.includes(`\\mathrm{d}${want[0]}`)) };
+  },
+  "t5-ai-slope-field/gradient-at-point/equation": (q) => { const f = fieldF(q.params.id); return { a: f(...q.params.p1), b: f(...q.params.p2) }; },
+  "t5-ai-slope-field/match-field/graph": (q, T) => {
+    // read the segments back from the diagram and keep the one equation whose gradients agree at every grid point
+    const segs = q.graph.functions.map((s) => { const x = (s.domain[0] + s.domain[1]) / 2; return { x, y: T.evalGraph(s.fn, x), g: s.fn.coeffs[1] }; });
+    T.require(segs.length === 49 && segs.every((s) => Math.abs(s.x - Math.round(s.x)) < 1e-6 && Math.abs(s.y - Math.round(s.y)) < 1e-4), "one segment through each grid point");
+    const hit = T.optionWhere(q, "a", (v) => segs.every((s) => Math.abs(fieldF(v)(Math.round(s.x), Math.round(s.y)) - s.g) < 1e-5));
+    const id = q.parts[0].answer.values[hit.index];
+    return { a: hit, b: fieldF(id)(...q.params.pt) };
+  },
+  "t5-ai-slope-field/linear-solution/graph": (q, T) => {
+    const { p, qq, r, x0, y0 } = q.params, f = (x, y) => p * x - qq * y + r;
+    // y = mx + b solves the equation when m = f(x, mx + b) at two values of x: two linear equations for m and b
+    const [mm, b] = solve([[1 + qq * 0, qq], [1 + qq * 1, qq]], [p * 0 + r, p * 1 + r]);
+    const end = rk4((x, y) => [f(x, y[0])], 0, [b], 2, 4000)[0];
+    T.require(Math.abs(end - (mm * 2 + b)) < 1e-7, "the solution through the intercept stays on the straight line");
+    return { a: f(x0, y0), b: T.bisect((y) => f(0, y), -50, 50, 80), c: mm, d: b };
+  },
+  "t5-ai-slope-field/equilibrium/graph": (q, T) => {
+    const { a, b, k, y0 } = q.params, f = (y) => k * (y - a) * (b - y), zeros = T.roots(f, a - 2.03, b + 2.07, 2000);
+    T.require(zeros.length === 2 && y0 > a && y0 < b, "two equilibrium values with the starting point between them");
+    return { a: f(y0), b: T.approx(zeros[0], 1e-6), c: T.approx(zeros[1], 1e-6), d: T.approx(rk4((x, y) => [f(y[0])], 0, [y0], 150, 6000)[0], 1e-4), e: T.approx(T.extremum(f, a, b, "max").x, 1e-5) };
+  },
+  "t5-ai-euler/first-steps/equation": (q) => {
+    const { id, x0, y0, h } = q.params, f = fieldF(id), out = euler((x, y) => [f(x, y[0])], x0, [y0], h, 2);
+    return q.parts.length === 2 ? { a: out[1][0], b: out[2][0] } : { a: out[1][0] };
+  },
+  "t5-ai-euler/approximate-and-error/equation": (q, T) => {
+    const { id, y0, h, n } = q.params, f = fieldF(id), out = euler((x, y) => [f(x, y[0])], 0, [y0], h, n), exact = rk4((x, y) => [f(x, y[0])], 0, [y0], n * h, 4000)[0];
+    return { a: out[1][0], b: out[n][0], c: T.approx((100 * Math.abs(out[n][0] - exact)) / exact, 1e-5) };
+  },
+  "t5-ai-euler/coupled-system/words": (q) => {
+    const { a, b, c, d, x0, y0, h, n } = q.params, out = euler((t, v) => [v[0] * (a - b * v[1]), v[1] * (-c + d * v[0])], 0, [x0, y0], h, n);
+    return { a: out[1][0], b: out[1][1], c: out[n][0], d: out[n][1] };
+  },
+  "t5-ai-phase-portrait/classify/equation": (q, T) => {
+    const { M, real, eig } = q.params, k = portrait(M), tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    if (real) for (const l of eig) T.require(Math.abs(l * l - tr * l + det) < 1e-9, "each stated eigenvalue satisfies the characteristic equation");
+    else T.require(Math.abs(2 * eig[0] - tr) < 1e-9 && Math.abs(eig[0] ** 2 + eig[1] ** 2 - det) < 1e-9, "the stated complex eigenvalues have the right sum and product");
+    const long = { sink: "in", spiralIn: "in", centre: "loop" }[k] || "out", out = { a: T.option(k) };
+    if (q.parts.length === 2) {
+      // follow a trajectory numerically and see whether it ends nearer to or further from the origin
+      const end = rk4((t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]], 0, [0.13, 0.07], 12, 24000), ratio = Math.hypot(...end) / Math.hypot(0.13, 0.07);
+      T.require(long === "in" ? ratio < 0.01 : long === "out" ? ratio > 100 : ratio > 0.05 && ratio < 20, "a numerical trajectory behaves as classified");
+      out.b = T.option(long);
+    }
+    return out;
+  },
+  "t5-ai-phase-portrait/eigenvalues-exact/equation": (q, T) => {
+    const { M, pt } = q.params, r = T.roots((l) => (M[0][0] - l) * (M[1][1] - l) - M[0][1] * M[1][0], -12.3, 12.7, 5000);
+    T.require(r.length === 2, "two distinct real eigenvalues");
+    const step = rk4((t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]], 0, pt, 1e-6, 4);
+    return { a: T.approx(r[0], 1e-6), b: T.approx(r[1], 1e-6), c: T.option(portrait(M)), d: T.approx((step[1] - pt[1]) / (step[0] - pt[0]), 1e-4 * Math.max(1, Math.abs((step[1] - pt[1]) / (step[0] - pt[0])))) };
+  },
+  "t5-ai-phase-portrait/complex-eigenvalues/equation": (q, T) => {
+    const M = q.params.M, tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    // Newton's method in the complex plane on the characteristic polynomial, from a start above the real axis
+    let re = 0.3, im = 1;
+    for (let i = 0; i < 200; i++) {
+      const fr = re * re - im * im - tr * re + det, fi = 2 * re * im - tr * im, dr = 2 * re - tr, di = 2 * im, den = dr * dr + di * di;
+      re -= (fr * dr + fi * di) / den; im -= (fi * dr - fr * di) / den;
+    }
+    T.require(im > 1e-6, "the eigenvalues are not real");
+    const turn = [[1, 0], [0, 1], [-1, 2], [2, -3]].map(([x, y]) => x * (M[1][0] * x + M[1][1] * y) - y * (M[0][0] * x + M[0][1] * y));
+    T.require(turn.every((v) => v > 0) || turn.every((v) => v < 0), "the motion turns the same way everywhere");
+    return { a: T.approx(re, 1e-9), b: T.approx(im, 1e-9), c: T.option(portrait(M)), d: T.option(turn[0] > 0 ? "anti" : "clock") };
+  },
+  "t5-ai-phase-portrait/particular-solution/equation": (q, T) => {
+    const { M, l1, l2, v1, v2, x0, y0, t1 } = q.params, f = (t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]];
+    for (const [l, v] of [[l1, v1], [l2, v2]]) T.require(Math.abs(f(0, v)[0] - l * v[0]) < 1e-9 && Math.abs(f(0, v)[1] - l * v[1]) < 1e-9, "each stated eigenvector belongs to its eigenvalue");
+    T.require(l2 > l1, "the second eigenvalue is the larger");
+    const [A, B] = solve([[v1[0], v2[0]], [v1[1], v2[1]]], [x0, y0]), far = rk4(f, 0, [x0, y0], 30 / (l2 - l1), 8000);
+    return { a: A, b: B, c: T.approx(rk4(f, 0, [x0, y0], t1, 8000)[0], 1e-7 * Math.max(1, Math.abs(x0) + Math.abs(y0)) * 20), d: T.approx(far[1] / far[0], 1e-5) };
+  },
+  "t5-ai-second-order/convert-to-system/equation": (q, T) => {
+    const s = q.params.sit;
+    // an option is right when its dy/dt, used as the second derivative, satisfies the original equation for any x and y
+    const fits = (v) => [[1.3, -0.7], [-2.1, 0.4], [0.5, 2.2]].every(([x, y]) => Math.abs(v[0] * x + v[1] * y + v[2] + s.a * y + s.b * x - s.g) < 1e-9);
+    const hit = T.optionWhere(q, "a", fits), v = q.parts[0].answer.values[hit.index];
+    return { a: hit, b: v[0] * s.x0 + v[1] * s.v0 + v[2] };
+  },
+  "t5-ai-second-order/euler-system/equation": (q) => {
+    const s = q.params.sit, out = euler((t, v) => [v[1], -s.a * v[1] - s.b * v[0] + s.g], 0, [s.x0, s.v0], q.params.h, s.n);
+    return { a: out[1][0], b: out[1][1], c: out[s.n][0], d: out[s.n][1] };
+  },
+
+  /*NEXTV*/
+};

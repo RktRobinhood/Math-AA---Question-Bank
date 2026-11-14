@@ -344,12 +344,18 @@
   // ---- registry ---------------------------------------------------------------------
   E.registry = E.registry || [];
   const byId = (E._byId = E._byId || new Map());
+  const DEFAULT_COURSE = "aa-sl";
   const REQUIRED = ["type", "unknown", "representation", "format", "levels", "syllabus", "skills", "build"];
   // Registers one generator. See docs/practice-engine.md for the fields.
   E.register = function (def) {
     for (const k of REQUIRED) if (def[k] === undefined) throw new Error(`generator ${def.id || def.type}: missing ${k}`);
-    const g = Object.assign({ courses: ["aa-sl"], calculator: false }, def);
+    // home: the course whose syllabus codes the generator names ("aa-sl" unless it says otherwise).
+    const home = def.home || (def.courses && def.courses[0]) || DEFAULT_COURSE;
+    const g = Object.assign({ courses: [home], calculator: false }, def);
+    g.home = home;
     g.id = def.id || `${g.type}/${g.unknown}/${g.representation}`;
+    if (!g.courses.includes(home)) throw new Error(`generator ${g.id}: courses does not include its home course ${home} (leave courses out)`);
+    g.courses = [home].concat(g.courses.filter((c) => c !== home));
     if (byId.has(g.id)) throw new Error(`generator ${g.id} is registered twice`);
     if (!Array.isArray(g.levels) || !g.levels.length || g.levels.some((l) => !E.LEVELS[l])) throw new Error(`generator ${g.id}: bad levels`);
     if (!g.syllabus.length) throw new Error(`generator ${g.id}: needs a syllabus code`);
@@ -359,17 +365,27 @@
     courseIndex.clear();
     return g;
   };
-  // Registers several generators that share fields: registerAll({syllabus, skills, ...}, [defs]).
+  // Registers several generators that share fields: registerAll({home, syllabus, skills, ...}, [defs]).
   E.registerAll = function (shared, defs) { return defs.map((d) => E.register(Object.assign({}, shared, d))); };
   E.generator = (id) => byId.get(id);
+  // Takes a generator out again. For tests that register throwaway generators.
+  E.unregister = function (id) {
+    const g = byId.get(id);
+    if (!g) return false;
+    byId.delete(id);
+    E.registry.splice(E.registry.indexOf(g), 1);
+    courseIndex.clear();
+    return true;
+  };
 
   // ---- courses ---------------------------------------------------------------------
-  // A generator is written once, for its home course (courses[0], "aa-sl"), and names that course's
-  // syllabus codes. Every statement also has a permanent id that is the same in every course whose
-  // syllabus contains it ("SL1.8" is 1.8 in AA and 1.11 in AI HL). With a catalogue (QB_TYPES) the
-  // engine offers a generator in every course that contains all of its statements, under that
-  // course's codes. Without one, a generator is offered in the courses it lists, codes as written.
-  const DEFAULT_COURSE = "aa-sl";
+  // A generator is written once, for its home course (its home field, "aa-sl" unless it says
+  // otherwise), and names that course's syllabus codes. Every statement also has a permanent id
+  // that is the same in every course whose syllabus contains it ("SL1.8" is 1.8 in AA and 1.11 in
+  // AI HL). With a catalogue (QB_TYPES) the engine offers a generator in every course that contains
+  // all of its statements, under that course's codes: an "aa-hl" generator on an AHL statement is
+  // offered in AA HL only, an "ai-sl" generator on an AI SL statement in AI SL and AI HL. Without a
+  // catalogue, a generator is offered in the courses it lists (its home), codes as written.
   let catalogue = null;
   const courseMaps = new Map();    // course -> {byCode: code -> statement id, byId: id -> code}
   const courseIndex = new Map();   // course -> {list: [{g, codes}], byPrimary: code -> [{g, codes}]}
@@ -390,7 +406,7 @@
   }
   // The permanent statement ids of a generator, or null when no catalogue names its home course.
   function statementIds(g) {
-    const home = maps().get(g.courses[0]);
+    const home = maps().get(g.home);
     if (!home) return null;
     const ids = g.syllabus.map((code) => home.byCode.get(code));
     return ids.every(Boolean) ? ids : null;
@@ -422,7 +438,7 @@
   }
   // Every course a generator is offered in, home course first.
   function offeredIn(g) {
-    const out = g.courses.filter((c) => codesIn(g, c));
+    const out = g.courses.filter((c) => codesIn(g, c));   // courses[0] is the home course
     for (const c of maps().keys()) if (!out.includes(c) && codesIn(g, c)) out.push(c);
     return out;
   }
@@ -455,7 +471,7 @@
   // With a course, syllabus is in that course's codes.
   function describe(g, codes) {
     return { id: g.id, type: g.type, unknown: g.unknown, representation: g.representation, format: g.format, title: g.title || g.unknown,
-      courses: offeredIn(g), home: g.courses[0], statements: statementIds(g), levels: g.levels.slice(), syllabus: (codes || g.syllabus).slice(), skills: g.skills.slice(),
+      courses: offeredIn(g), home: g.home, statements: statementIds(g), levels: g.levels.slice(), syllabus: (codes || g.syllabus).slice(), skills: g.skills.slice(),
       calculator: Object.fromEntries(g.levels.map((l) => [l, calcOf(g, l)])), source: g.source || null, situation: g.situationKey || null };
   }
   // Generators matching a filter {course, type, unknown, representation, format, level, syllabus, skill, primary},
@@ -496,19 +512,25 @@
   // ---- make ---------------------------------------------------------------------
   E.make = function (req) {
     req = req || {};
-    const course = req.course || DEFAULT_COURSE;
+    // With no course in the request: the generator's home course. For a type, "aa-sl", or the
+    // chosen generator's home when the type has nothing there (a type of AA HL or AI content).
+    let course = req.course;
     const seed = req.seed === undefined || req.seed === null ? 0 : req.seed;
     let g;
     if (req.generator) {
       g = byId.get(req.generator);
       if (!g) throw new Error(`no generator ${req.generator}`);
+      course = course || g.home;
       if (!codesIn(g, course)) throw new Error(`generator ${g.id} is not offered in ${course}`);
     } else {
       if (!req.type) throw new Error("make() needs a type");
-      const found = find({ course, type: req.type, unknown: req.unknown, representation: req.representation, format: req.format, level: req.level })
-        .sort((x, y) => (x.id < y.id ? -1 : 1));
-      if (!found.length) throw new Error(`no generator for ${JSON.stringify({ course, type: req.type, unknown: req.unknown, representation: req.representation, level: req.level, format: req.format })}`);
+      const want = { type: req.type, unknown: req.unknown, representation: req.representation, format: req.format, level: req.level };
+      let found = find(Object.assign({ course: course || DEFAULT_COURSE }, want));
+      if (!found.length && !course) found = find(want);
+      if (!found.length) throw new Error(`no generator for ${JSON.stringify({ course: course || DEFAULT_COURSE, type: req.type, unknown: req.unknown, representation: req.representation, level: req.level, format: req.format })}`);
+      found.sort((x, y) => (x.id < y.id ? -1 : 1));
       g = found[E.hash(`pick|${req.type}|${seed}`) % found.length];
+      course = course || (codesIn(g, DEFAULT_COURSE) ? DEFAULT_COURSE : g.home);
     }
     let level = req.level;
     if (level === undefined || level === null) level = g.levels[E.hash(`level|${g.id}|${seed}`) % g.levels.length];
@@ -560,6 +582,10 @@
   // A fixed set of questions for printing. opts: {course, scope: [the course's codes], count, levels: {2: 1, 3: 1}
   // (relative weights), seed, real: {code: [{id, marks}]}}. Codes with no generator at any wanted
   // level give real question IDs instead (when real is passed). Same options, same worksheet.
+  // types ({"2.7": ["fn-discriminant", ...]}) narrows a subtopic to some of its question types: its
+  // questions come from those types only, at the wanted levels or, when those types have none of
+  // them, at the nearest level they have. A list naming none or all of the subtopic's types does
+  // nothing. Within a subtopic the generators are worked through before one is used again.
   E.worksheet = function (opts) {
     const course = opts.course || DEFAULT_COURSE;
     const r = rng(`worksheet|${opts.seed === undefined ? 0 : opts.seed}`);
@@ -569,10 +595,31 @@
     const items = [];
     const seen = new Set();
     const realUsed = {};
+    const used = new Map();
+    const pools = new Map();
+    // The generators of a subtopic for this sheet, with the levels each may be asked at.
+    const poolOf = (code) => {
+      if (pools.has(code)) return pools.get(code);
+      let all = find({ course, syllabus: code, primary: true });
+      let fallback = false;
+      const practised = all.filter((g) => g.levels.some((l) => l >= 1 && l <= 4));
+      const want = new Set((opts.types && opts.types[code]) || []);
+      const chosen = practised.filter((g) => want.has(g.type));
+      if (chosen.length && new Set(chosen.map((g) => g.type)).size < new Set(practised.map((g) => g.type)).size) { all = chosen; fallback = true; }
+      let pool = all.filter((g) => g.levels.some((l) => wanted.includes(l))).map((g) => ({ g, levels: g.levels.filter((l) => wanted.includes(l)) }));
+      if (!pool.length && fallback) {
+        // the chosen types have none of the wanted levels: their nearest level instead
+        const gap = (l) => Math.min(...wanted.map((w) => Math.abs(w - l)));
+        const near = [...new Set(all.flatMap((g) => g.levels.filter((l) => l >= 1 && l <= 4)))].sort().reduce((best, l) => (best === null || gap(l) < gap(best) ? l : best), null);
+        pool = all.filter((g) => g.levels.includes(near)).map((g) => ({ g, levels: [near] }));
+      }
+      pools.set(code, pool);
+      return pool;
+    };
     let lastType = null;
     for (let i = 0, guard = 0; items.length < count && guard < count * 20; i++, guard++) {
       const code = opts.scope[i % opts.scope.length];
-      const pool = find({ course, syllabus: code, primary: true }).filter((g) => g.levels.some((l) => wanted.includes(l)));
+      const pool = poolOf(code);
       if (!pool.length) {
         const list2 = (opts.real && opts.real[code]) || [];
         const k = (realUsed[code] = (realUsed[code] || 0) + 1) - 1;
@@ -580,13 +627,15 @@
         else if (opts.scope.every((c) => !find({ course, syllabus: c, primary: true }).length && (realUsed[c] || 0) >= ((opts.real && opts.real[c]) || []).length)) break;
         continue;
       }
-      let cands = pool.filter((g) => g.type !== lastType);
+      let cands = pool.filter((x) => x.g.type !== lastType);
       if (!cands.length) cands = pool;
-      const g = r.pick(cands);
-      const levels = g.levels.filter((l) => wanted.includes(l));
-      const total = levels.reduce((s, l) => s + weights[l], 0);
+      // the generators used least on this sheet first, so the ways of asking are worked through
+      const fewest = Math.min(...cands.map((x) => used.get(x.g.id) || 0));
+      const { g, levels } = r.pick(cands.filter((x) => (used.get(x.g.id) || 0) === fewest));
+      used.set(g.id, (used.get(g.id) || 0) + 1);
+      const total = levels.reduce((s, l) => s + (weights[l] || 1), 0);
       let roll = r.next() * total, level = levels[0];
-      for (const l of levels) { roll -= weights[l]; if (roll < 0) { level = l; break; } }
+      for (const l of levels) { roll -= weights[l] || 1; if (roll < 0) { level = l; break; } }
       let q = null;
       for (let t = 0; t < 8 && !q; t++) {
         const cand = E.make({ course, generator: g.id, level, seed: `ws-${opts.seed === undefined ? 0 : opts.seed}-${i}-${t}` });

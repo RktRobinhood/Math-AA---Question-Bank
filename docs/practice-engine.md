@@ -12,28 +12,26 @@ The engine is plain JavaScript with no DOM access, no `Math.random()` and no net
 <script src="assets/js/engine/graph.js"></script>             <!-- QBEngine.graph -->
 <script src="assets/js/engine/learner.js"></script>           <!-- QBEngine.learner (needs engine.js) -->
 <script src="assets/js/engine/generators/topic1.js"></script> <!-- generators register themselves -->
-<script src="assets/js/engine/generators/topic2.js"></script>
-<script src="assets/js/engine/generators/topic3.js"></script>
-<script src="assets/js/engine/generators/topic4.js"></script>
-<script src="assets/js/engine/generators/topic5.js"></script>
+<!-- ... then every other file in generators/ (topic2.js ... topic5.js and any file added beside them) -->
 ```
 
-`engine.js` first, `graph.js` before any generator file, generator files in any order. `question-types.js` gives the engine each course's syllabus (see Courses) and the learner its prerequisites, titles and real-question lists. `assets/js/data.js` is not needed.
+`engine.js` first, `graph.js` before any generator file, then **every file in `generators/`**, in any order. The build, the checks and `practice.html` pick up every `.js` file of that folder by themselves; a new file needs no entry anywhere. `question-types.js` gives the engine each course's syllabus (see Courses) and the learner its prerequisites, titles and real-question lists. `assets/js/data.js` is not needed.
 
 | File | Holds |
 |---|---|
+| `data/question-types/*.json` | Catalogue fragments: more question types (and subtopic prerequisites), merged into the catalogue at build time. New content goes here, one file per batch, so nobody edits the big file. See its README and "Writing generators for AA HL, AI SL and AI HL content". |
 | `data/question-types.json` | The catalogue: question types, their syllabus codes, skills, levels, unknowns, representations, constraints, misconceptions, bank part IDs, and the subtopic prerequisites. Seeded from wasteland-academy; type IDs and skill IDs are identical to it. Maintained here. |
 | `assets/js/question-types.js` | Generated. What a page needs from the catalogue, plus the real past-paper questions per course and subtopic. |
-| `docs/practice-coverage.md` | Generated. One row per subtopic. |
+| `docs/practice-coverage.md` | Generated. One row per subtopic, with the number of question types and of ways of asking, and the thinnest subtopics of each course. |
 | `scripts/lib/practice-build.mjs` | Validation and the two generated files. Called by `scripts/build.mjs`; `node scripts/build-practice.mjs` regenerates just these two files. |
-| `scripts/check-engine.mjs` | Every automated check. `scripts/engine-checks/topicN.mjs` hold the independent answer verifiers. |
+| `scripts/check-engine.mjs` | Every automated check. The independent answer verifiers are in `scripts/engine-checks/`: every `.mjs` file there except `tools.mjs` is loaded (`topicN.mjs` and any file added beside them). |
 | `scripts/sample-engine.mjs` | Prints sample questions: `node scripts/sample-engine.mjs fn-composite --seed 3`. |
 
 ## Courses
 
-The bank serves four courses: `aa-sl`, `aa-hl`, `ai-sl`, `ai-hl`. Generators are written once, for the **home course** (`aa-sl`), and name its syllabus codes. Every syllabus statement also has a permanent id (`SL1.8`), the same in every course that contains it, while its code differs: `SL1.8` is 1.8 in AA and 1.11 in AI HL. `data/syllabus-ai.json` lists under `shared` the AI statements that are an AA statement; that list is the judgement the engine trusts.
+The bank serves four courses: `aa-sl`, `aa-hl`, `ai-sl`, `ai-hl`. Generators are written once, for a **home course**, and name its syllabus codes. The home course is `aa-sl` unless the generator says otherwise with `home: "aa-hl"`, `"ai-sl"` or `"ai-hl"` (content that AA SL does not have). Every syllabus statement also has a permanent id (`SL1.8`), the same in every course that contains it, while its code differs: `SL1.8` is 1.8 in AA and 1.11 in AI HL. `data/syllabus-ai.json` lists under `shared` the AI statements that are an AA statement; that list is the judgement the engine trusts.
 
-- A generator is offered in a course when that course's syllabus contains **every** statement the generator names (home code to id, id to the course's code). So AA HL gets all of them, and AI gets those built only on shared statements. A generator can opt out of a course with `notFor: ["ai-sl"]`.
+- A generator is offered in a course when that course's syllabus contains **every** statement the generator names (home code to id, id to the course's code). So AA HL gets every AA SL generator, AI gets those built only on shared statements, an `aa-hl` generator on an AHL statement is offered in AA HL only, and an `ai-sl` generator on an AI SL statement is offered in AI SL and AI HL. A generator can opt out of a course with `notFor: ["ai-sl"]`.
 - Everywhere a course is given, codes are that course's: `generators({course: "ai-hl", syllabus: "1.11", primary: true})`, `coverage("ai-hl")`, `make({course: "ai-hl", ...}).syllabus`, the worksheet's `scope`, and the learner's units. A question id starts with its course, and the same generator, level and seed give the same mathematics in every course.
 - The mapping comes from `QB_TYPES.statements`. The engine reads `window.QB_TYPES` by itself when it is there; elsewhere call `QBEngine.useCatalogue(QB_TYPES)` (creating a learner with a `catalogue` does it too). With no catalogue a generator is offered only in the courses it lists, codes as written.
 - A subtopic with no generator at levels 1 to 4 in a course (the AHL statements, the AI-only statements) is practised with that course's real questions, as below. `docs/practice-coverage.md` has one section per course. A statement with neither a generator nor a tagged question is `unavailable` (today only AI HL 1.10).
@@ -81,7 +79,7 @@ The line $L$ has equation $y = 4x + 3$. Find $f^{-1}(5)$.
 const q = QBEngine.make({ course: "aa-sl", type: "fn-composite", unknown: "expression", representation: "equation", level: 2, format: "mcq", seed: 17 });
 ```
 
-`type` is required (or `generator`, a generator id, which skips the lookup). `course` defaults to `"aa-sl"`, `seed` to `0`. `syllabus` in the result is in the course's codes, and `make()` throws for a generator that is not offered in the course. `unknown`, `representation`, `format` and `level` narrow the choice; whatever is left open is settled from the seed, so the same request and seed always give the same question. It throws when no generator matches.
+`type` is required (or `generator`, a generator id, which skips the lookup). `course` defaults to the generator's home course when `generator` is given, and otherwise to `"aa-sl"` (or, for a type with no generator there, to the chosen generator's home); `seed` defaults to `0`. `syllabus` in the result is in the course's codes, and `make()` throws for a generator that is not offered in the course. `unknown`, `representation`, `format` and `level` narrow the choice; whatever is left open is settled from the seed, so the same request and seed always give the same question. It throws when no generator matches.
 
 ```js
 {
@@ -135,7 +133,7 @@ const sheet = QBEngine.worksheet({ course: "aa-sl", scope: ["2.6", "2.7"], count
 // { course, scope, seed, marks, items: [{kind: "generated", code, question} | {kind: "real", code, questionId, marks}] }
 ```
 
-`scope` is in the course's codes and `levels` are relative weights. Subtopics are taken in turn, the same type is not used twice running, and no question repeats. A subtopic with no generator at the wanted levels gives real question IDs when `real` is passed. The same options give the same worksheet, so a seed in a link reproduces it. The answer key is each question's `parts[].answer.display` and `parts[].working`.
+`scope` is in the course's codes and `levels` are relative weights. Subtopics are taken in turn, the same type is not used twice running, a subtopic's generators are worked through before one is used again, and no question repeats. `types: {"2.7": ["fn-solve-quadratic", "fn-quadratic-inequality"]}` narrows a subtopic to some of its question types (see Question types below the subtopic): its questions come from those types only, at the wanted levels or, when the chosen types have none of them, at the nearest level they have. A subtopic with no generator at the wanted levels gives real question IDs when `real` is passed. The same options give the same worksheet, so a seed in a link reproduces it. The answer key is each question's `parts[].answer.display` and `parts[].working`.
 
 ### Looking things up
 
@@ -274,6 +272,17 @@ Returns one of:
 
 `reason` is `new`, `progress`, `refresh` (a prerequisite question; `refreshFor` is the subtopic it serves and `refreshItem` names the prerequisite), `review`, `exam`, `synoptic`, `real-only` or `fixed`.
 
+**Question types below the subtopic.** A subtopic bundles several question types (2.7: solving a quadratic, the discriminant, quadratic inequalities ...). `learner.typesOf(code)` lists those a subtopic has generators for at levels 1 to 4 in the learner's course, easiest first: `[{id, name, generators, levels}]`, where `name` is the catalogue type's name and `generators` is the number of ways it can be asked. It is empty for a subtopic with real questions only. `learner.next(scope, {types: {"2.7": ["fn-solve-quadratic", "fn-quadratic-inequality"]}})` narrows a subtopic to the listed types; it combines with `levels`. The narrowing is done where a generator is picked, so nothing has to be filtered afterwards:
+
+- The scope stays a list of subtopic codes. `types` is optional and holds only the narrowed subtopics. `learner.narrowing(types)` returns it cleaned: ids the subtopic has no generator for are dropped, and a list that names none or all of a subtopic's types is no narrowing at all.
+- A narrowed subtopic is served generated questions of the chosen types only, never another type. The level is the student's own when the chosen types have a generator there, otherwise the nearest level they have (the lower one on a tie), and the student's level is set to it. From there the student moves along the levels the chosen types have: two right at their top level reaches the exam rung, and at their lowest level two wrong out of three queues the prerequisites as usual.
+- An item of a narrowed subtopic carries `types` (the cleaned list), which is how `record()` knows the levels to move along. Pass the item to `record()` unchanged.
+- **Progress stays per subtopic.** There is one level, one review date and one row in `summary()` per subtopic, whatever was ticked; widening or changing the types later keeps them.
+- Real questions are not narrowed: a subtopic without generators, the exam rung and reviews serve the subtopic's past-paper questions as before. The page says so ("exam questions cover the whole subtopic").
+- "Another like this" (`make({...item.request, seed})`) and "Ask it another way" (`variants()`) stay within the question's own type, so they respect the choice by themselves.
+
+The Practice page keeps the choice in `state.types` (`Map(code, Set(typeId))`, narrowed subtopics only), saves it per course under the `localStorage` key `qb-practice-types` as `{course: {code: [typeIds]}}` beside `qb-practice-scope`, and carries it in the link as `types=2.7:fn-solve-quadratic+fn-quadratic-inequality;3.4:t3-arc-sector` (subtopics separated by `;`, type ids by `+`). A link or a save without it means every type, so older links and saves work unchanged.
+
 **Fixed-level practice.** `learner.next(scope, {levels: [1, 2]})` is for a student who wants a chosen difficulty instead of "adapt to me". The subtopics of the scope take turns; each gives a question at one of the wanted levels it has generators for (its nearest level when it has none of them), and a subtopic with no generator gives its next real question. The item has `reason: "fixed"`. `record()` logs the attempt, counts it in the subtopic's `attempts` and `correct`, remembers the question as seen, and returns `change: null`: **fixed-level answers never move a level, start a subtopic, queue a refresher or touch a review date.** The choice was made because a student revising at a fixed level is not asking to be re-placed, and a run of easy questions should not push them to the exam rung. The page offers levels 1–2, 2–3 and 3–4.
 
 The rules, all with their numbers in `L.CONFIG`:
@@ -284,6 +293,7 @@ The rules, all with their numbers in `L.CONFIG`:
 - At the lowest level, two wrong out of three queues the **prerequisites**: level-0 question types that support the subtopic's skills, then its prerequisite subtopics, both from the catalogue. Each needs two correct in a row. Then the student returns to the subtopic at its lowest level. Wrong answers on prerequisites do not descend further.
 - A subtopic on the exam rung is checked again after 3, then 7, then 14 days. A miss on a review, or two wrong out of three exam questions, drops it to its top generated level.
 - Within the scope: up to three subtopics are worked on side by side, the least recently seen first; a due review is mixed in at most once every four questions while other work remains; the same question type does not come twice in a row when there is a choice; a seed is never reused for a student, and a question the student has seen recently is skipped.
+- **Rotation.** Among the generators a subtopic has at the level in hand (every question type, and every unknown and representation of each), the one served least recently comes next, so all of them are asked before one repeats. Generators never served come first, in an order fixed by the student's salt, so two students do not meet them in the same order. The type rule above is kept: when the generator next in line has the type just asked, the next one of another type is taken instead. That can bring a generator back early, but never for a third time while another is still waiting for its first: a generator is passed over while it has been served two times more than the least served of the pool. A question the student has seen is skipped by trying new seeds, then the next generator in line. The choice depends only on the saved state: no random number and no clock is involved. The same rotation serves fixed-level practice, prerequisites and synoptic questions.
 - A subtopic with no generator is served its real questions, main questions first, short to long (`reason: "real-only"`). Two right in a row and it rests until a check 3 days later (`change.kind` is `real-secure`), so it does not crowd out the rest of the scope.
 - Level 5 (synoptic) generators are mixed in once every subtopic they combine is on the exam rung.
 
@@ -303,6 +313,7 @@ The rules, all with their numbers in `L.CONFIG`:
 
 - One `localStorage` key, `qb_practice_v1`, holding `{app, version, createdAt, updatedAt, salt, nextSeed, courses: {course: {units, seen, lastType, ...}}, attempts: [...]}`.
 - Per subtopic: `level`, `rung`, `recent` results, `lastSeen`, `nextReview`, `reviewStage`, `refresh` queue, `realSeen`, `attempts`, `correct`.
+- Per course, for the rotation: `rot: {generatorId: [times served, tick of the last time]}` and `tick`, a counter of generated questions handed out by `next()`. Both are optional and created on first use, so a save from before the rotation loads as it is (every generator counts as never served) and no migration step was needed; older code ignores them. A question is counted when `next()` returns it, answered or skipped; one that was built and not handed out is not.
 - The attempt log keeps `t`, `course`, `unit`, `skills`, `type`, `generator`, `level`, `request`, `seed`, `correct`, `self`, `ms`, `reason`, `real`; the most recent 5,000.
 - `L.VERSION` is the format version. **Every format change adds a step to `L.MIGRATIONS`** (`MIGRATIONS[n]` turns version `n` into `n + 1`) and a case to the storage test in `check-engine.mjs`. A save is never wiped: one that cannot be read (broken JSON, a newer version, another app's data) is copied to `qb_practice_v1_unreadable_<time>` and a fresh state is used. `learner.loadStatus` is `new`, `loaded`, `migrated` or `unreadable`.
 - `importJSON` and `reset()` copy the save they replace to `qb_practice_v1_before_import_<time>` / `_before_reset_<time>` and return `{keptAs}`. Both act on every course; `resetCourse()` clears only the learner's course (its units and its attempts) and keeps the old save aside the same way.
@@ -314,12 +325,12 @@ Lower-level pieces, if the screen needs them: `L.createStore({backend, key, now}
 ### `window.QB_TYPES`
 
 ```js
-{ version, course, levels,          // course: the home course, whose codes generators and types name
+{ version, course, levels,          // course: the default home course; a type's syllabus codes are in its own home's numbering
   courses: { "aa-sl": { id, short, name, subject, level, papers: [{id, name, calculator}] }, ... },
   topics: { "1": "Numbers and Algebra", ... },
   statements: { "aa-sl": [{code, id, topic, title}], "aa-hl": [...], ... },
   subtopics: { "SL2.7": { prereqs: ["SL2.6"], skills: ["SL2.7.solve-equation", ...] } },
-  types: [{ id, name, topic, kind, courses, syllabus, skills, supports, levels, parts, unknowns: [{id, asked, level}], representations }],
+  types: [{ id, name, topic, kind, courses, home, syllabus, skills, supports, levels, parts, unknowns: [{id, asked, level}], representations }],
   real: { "aa-sl": { "2.7": [[questionId, marks, sharePercent], ...] } } }
 ```
 
@@ -327,7 +338,7 @@ Lower-level pieces, if the screen needs them: `L.createStore({backend, key, now}
 
 ## Adding a generator and its verifier
 
-Each syllabus topic has one generator file, `assets/js/engine/generators/topicN.js`, and one verifier file, `scripts/engine-checks/topicN.mjs`. Work only in your topic's two files; nothing shared needs editing. A generator may be listed under any type in `data/question-types.json`; its first syllabus code decides which subtopic it counts for. Write AA SL codes: the engine carries the generator to the other courses (see Courses), so every code you list narrows where it is offered. List a second code only when the question really needs that statement.
+Each AA SL syllabus topic has one generator file, `assets/js/engine/generators/topicN.js`, and one verifier file, `scripts/engine-checks/topicN.mjs`. Work only in your topic's two files; nothing shared needs editing. (Content of the other courses has its own files: see the next section.) A generator may be listed under any type in `data/question-types.json`; its first syllabus code decides which subtopic it counts for. Write AA SL codes: the engine carries the generator to the other courses (see Courses), so every code you list narrows where it is offered. List a second code only when the question really needs that statement.
 
 1. Pick the catalogue type (`data/question-types.json`, `types[].id`) and one of its `unknowns[].id` and `representations[].rep`. Read the type's `constraints`, `randomise` and `misconceptions`: they say what the numbers must satisfy and which wrong answers are worth offering.
 2. Register the generator in the topic file:
@@ -376,8 +387,44 @@ reg({
 4. Run `node scripts/sample-engine.mjs <id>` and read the output as a student would, for several seeds. The checks cannot tell whether a worked solution reads well.
 5. Run `node scripts/build-practice.mjs` (updates `question-types.js` and the coverage table), then `node scripts/build.mjs --check` and `node scripts/check-engine.mjs`. All must pass before a generator ships. `--only <text>` and `--seeds <n>` shorten a run while working.
 
+## Writing generators for AA HL, AI SL and AI HL content
+
+Content that AA SL does not have (AA's AHL statements, the AI-only statements, AI's AHL statements) is written exactly as above, with three differences: the generator says which course's codes it uses, and it lives in three new files of its own, so several people can work at once without touching a shared file.
+
+**`home`.** A generator's `syllabus` codes are read in the numbering of its home course. Give `home` once for the whole file through `registerAll`:
+
+```js
+const reg = (def) => E.registerAll({ home: "aa-hl", calculator: false }, [def])[0];
+reg({ type: "t1-ahl-complex-cartesian", unknown: "product", representation: "equation", format: "value",
+  levels: [2], syllabus: ["1.12"], skills: ["AHL1.12.arithmetic"], title: "Multiply two complex numbers", build(ctx) { ... } });
+```
+
+- Pick the smallest course that has the statement: `aa-hl` for AA's AHL statements (ids `AHL...`), `ai-sl` for AI SL statements that AA lacks (ids `AI-SL...`), `ai-hl` for AI's AHL statements (ids `AI-AHL...`). Leave `home` out for anything AA SL has. Do not set `courses`.
+- The engine still places the generator by permanent statement id: `ai-sl` code 1.6 (`AI-SL1.6`) is offered in AI SL and AI HL under each course's own code; `aa-hl` code 1.12 (`AHL1.12`) only in AA HL. The same code in another course is another statement (AA 1.6 is not AI 1.6), which is why the home matters.
+- A generator may mix an SL statement with an AHL one: write both codes as the home course numbers them (`home: "ai-hl"`, `syllabus: ["1.11"]` is `SL1.8`). It is offered where every statement exists.
+- `make({generator})` with no course makes the question in the home course. Question ids, `question.syllabus`, `coverage()`, `variants()`, worksheets and the learner all use the codes of the course asked for.
+- Codes and ids per course are in `data/syllabus-aa-hl.json` and `data/syllabus-ai.json` (`statements[].code`, `.id`, `.courses`, `.subtags`), or `QB_TYPES.statements[course]`.
+
+**Where the files go.** Choose one name for the batch, such as `aa-hl-topic1`, and create:
+
+| File | Holds |
+|---|---|
+| `assets/js/engine/generators/<name>.js` | The generators. Copy the header of a `topicN.js` (the wrapper function and the `fmt`/`ans` shorthands). Loaded automatically. |
+| `scripts/engine-checks/<name>.mjs` | The verifiers, `export default { "<generator id>": (q, T) => ({ a: ... }) }`. Loaded automatically. |
+| `data/question-types/<name>.json` | The catalogue fragment: `{ "home": "aa-hl", "types": [...], "subtopics": {...} }`. Merged automatically. |
+
+A fragment's `types` have the format of the main file's; `id`, `name` and `skills` are required, and `topic`, `source: "extension"`, `kind` (`skill`, `concept`, `link`), `syllabus`, `unknowns: [{id, asked, level}]`, `representations: [{rep}]`, `constraints` and `misconceptions` are worth filling in. Its `home` says which course's numbering the types' `syllabus` codes use (a type may set its own `home`); it mirrors the generator field. Its optional `subtopics` gives `{ "<statement id>": { "prereqs": ["SL1.5"], "skills": [{ "id", "levels", "paper" }] } }` for statements the main file does not list; the prerequisites are statement ids and are what a struggling student is sent back to. An id used twice, in any two catalogue files, fails the build.
+
+**Naming.** Wasteland Academy's catalogue has no types for this content, so new ids are yours to choose, in the existing style:
+
+- Type ids: lower-case words with hyphens, the topic prefix the main file uses (`t1-`, `fn-`, `t3-`, `t4-`, `t5-`; look at the neighbours in `data/question-types.json`), then `ahl-` or `ai-` so the id cannot meet an AA SL one: `t1-ahl-complex-cartesian`, `t4-ai-chi-squared`. Unknown ids say what is asked (`modulus`, `product`); representations are `equation`, `words`, `graph`, `table`, `diagram`.
+- Skill ids are **not** invented: they are the sub-tag ids of the statement in `data/syllabus-aa-hl.json` or `data/syllabus-ai.json` (`AHL1.12.arithmetic`, `AI-SL1.6.percentage-error`). The build rejects an id that is not there. If a skill is missing from the syllabus file, use the closest one and say so in your report; do not edit the syllabus files in a generator batch.
+- Generator ids stay `type/unknown/representation`.
+
+**Unchanged.** Levels and marks are as for AA SL: levels 0 and 1 carry 1 to 2 marks, level 2 carries 3 to 4, levels 3 and 4 carry 5 to 7, level 5 carries 8 or more; level 3 is set without a calculator and has exact answers, level 4 is calculator work with `ans.sf`. AI has no no-calculator paper, so an AI generator will mostly offer levels 1, 2 and 4, with level 3 only where an exact answer by hand is natural; the page words the calculator line per course by itself. A subtopic counts as having generated practice once it has a generator at one of levels 1 to 4, and reaches the release minimum with one at level 2 and one at level 3 or 4. The notation standard, the independent verifier, 300 clean seeds and the three commands of step 5 apply as they are.
+
 ## What `check-engine.mjs` checks
 
-For every generator, every level and 300 seeds: the same seed gives the same question; every checkable answer agrees with the independent verifier; text is clean and follows the notation standard; no-calculator answers are exact and calculator answers are to three significant figures; the verifier's constraints hold; every string renders in KaTeX (strict, errors thrown); `mark()` accepts the stored answer, a value inside the tolerance and the right option, and rejects a value outside the tolerance, nonsense and every wrong option; options are distinct; marks add up and fit the level; every graph and figure gives SVG with finite coordinates inside the view box, a figure's shapes are sound and its labels are all drawn clear of the lines and of each other at the three sizes the page uses, shaded regions are visible, and graph options look different from each other. Then: a scripted student who is always right climbs to the exam rung through every level and is served real questions there; reviews fall due after 3, 7 and 14 days and a miss drops a level; a student who is always wrong goes down to the prerequisites once, stays there, and returns after getting them right; subtopics without generators serve real questions short to long; every subtopic of each of the four courses can be practised, by a generator or its real questions; a generator is offered exactly where the syllabus holds all its statements and its questions carry that course's codes; a shared AI statement gets generated questions under its AI code; AHL and AI-only statements fall back to their own real questions, Paper 3 last; switching course does not mix learner state; fixed-level practice serves the chosen levels and moves no level; calculator wording follows the course's papers; progress survives a reload, an export and an import; old and unreadable saves are migrated or kept aside; variants and worksheets behave; and the engine files use no `Math.random()`, no `Date` (except the learner's default clock) and no DOM.
+For every generator, every level and 300 seeds: the same seed gives the same question; every checkable answer agrees with the independent verifier; text is clean and follows the notation standard; no-calculator answers are exact and calculator answers are to three significant figures; the verifier's constraints hold; every string renders in KaTeX (strict, errors thrown); `mark()` accepts the stored answer, a value inside the tolerance and the right option, and rejects a value outside the tolerance, nonsense and every wrong option; options are distinct; marks add up and fit the level; every graph and figure gives SVG with finite coordinates inside the view box, a figure's shapes are sound and its labels are all drawn clear of the lines and of each other at the three sizes the page uses, shaded regions are visible, and graph options look different from each other. Then: a scripted student who is always right climbs to the exam rung through every level and is served real questions there; reviews fall due after 3, 7 and 14 days and a miss drops a level; a student who is always wrong goes down to the prerequisites once, stays there, and returns after getting them right; subtopics without generators serve real questions short to long; every subtopic of each of the four courses can be practised, by a generator or its real questions; a generator is offered exactly where the syllabus holds all its statements and its questions carry that course's codes; a shared AI statement gets generated questions under its AI code; AHL and AI-only statements fall back to their own real questions, Paper 3 last; switching course does not mix learner state; a generator with another home course is offered where its statements are, under each course's codes; catalogue fragments are merged and a duplicate id is refused; fixed-level practice serves the chosen levels and moves no level; over 30 draws at one level of every subtopic that has five generators there, fixed-level and adaptive, every generator is served before one comes a third time, no seed repeats and the same state gives the same order; a subtopic narrowed to some question types is served those types only, at the nearest level they have, in adaptive and fixed-level practice and on a worksheet, while its progress stays per subtopic; calculator wording follows the course's papers; progress survives a reload, an export and an import; old and unreadable saves are migrated or kept aside; variants and worksheets behave; and the engine files use no `Math.random()`, no `Date` (except the learner's default clock) and no DOM.
 
 KaTeX comes from the `katex` devDependency (`npm install`). Without it the render check is skipped with a loud warning locally and fails in CI.
