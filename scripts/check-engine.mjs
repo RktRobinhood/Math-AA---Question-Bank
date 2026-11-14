@@ -276,7 +276,7 @@ console.log(`Generators: ${gens.length - failedGens > 0 ? gens.length - failedGe
 
 // ---- selection, storage, variants, worksheet ---------------------------------------------------------------------
 const tests = [];
-const test = (name, fn) => { try { fn(); tests.push([name, null]); } catch (e) { tests.push([name, e.message || String(e)]); } };
+const test = (name, fn) => { try { fn(); tests.push([name, null]); } catch (e) { if (process.env.QB_TRACE) console.error(e); tests.push([name, e.message || String(e)]); } };
 const assert = (cond, msg) => { if (!cond) throw new Error(msg); };
 
 if (!ONLY) {
@@ -969,6 +969,153 @@ if (!ONLY) {
     const shipped = fs.existsSync(path.join(ROOT, "data/question-types")) ? fs.readdirSync(path.join(ROOT, "data/question-types")).filter((f) => f.endsWith(".json")) : [];
     const n = shipped.reduce((sum, f) => sum + (JSON.parse(fs.readFileSync(path.join(ROOT, "data/question-types", f), "utf8")).types || []).length, 0);
     assert(practice.catalogue.types.length === JSON.parse(fs.readFileSync(path.join(ROOT, "data/question-types.json"), "utf8")).types.length + n, "the shipped fragments are not all in the catalogue");
+  });
+
+  test("rotation: every way of asking a subtopic at a level is served before one comes a third time", () => {
+    // subtopics with at least five generators at one level
+    const cases = [];
+    for (const code of withGens) for (const l of [1, 2, 3, 4]) {
+      const pool = E.generators({ course, syllabus: code, primary: true, level: l }).map((g) => g.id);
+      if (pool.length >= 5) cases.push([code, l, pool]);
+    }
+    assert(cases.length >= 3, `only ${cases.length} subtopic levels have five generators`);
+    const run = (code, l, pool, mode) => {
+      const { lr, clock } = newLearner();
+      // adaptive: hold the student at this level (always right, then the level is put back)
+      const hold = () => { lr.state.courses[course] = lr.state.courses[course] || { units: {}, seen: {}, lastType: null, sinceReview: 0, sinceSynoptic: 0 };
+        lr.state.courses[course].units[code] = Object.assign(lr.state.courses[course].units[code] || { lastSeen: 0, realSeen: [], attempts: 0, correct: 0 },
+          { level: l, rung: "generated", recent: [], nextReview: null, reviewStage: 0, refresh: null, started: true }); };
+      const n = Object.fromEntries(pool.map((id) => [id, 0])), order = [], seeds = new Set();
+      for (let i = 0; i < 30; i++) {
+        if (mode === "adaptive") hold();
+        const it = mode === "fixed" ? lr.next([code], { levels: [l] }) : lr.next([code]);
+        const id = it.question && it.question.generator;
+        assert(it.kind === "generated" && it.level === l && pool.includes(id), `${code} L${l} ${mode}: draw ${i} is not a level ${l} question of the subtopic`);
+        assert(!seeds.has(it.question.seed), `${code} L${l} ${mode}: a seed was used twice`);
+        seeds.add(it.question.seed);
+        n[id]++; order.push(id);
+        if (n[id] >= 3) assert(pool.every((g) => n[g] >= 1), `${code} L${l} ${mode}: ${id} came a third time at draw ${i + 1} while ${pool.filter((g) => !n[g]).join(", ")} had not been asked`);
+        if (i + 1 >= 2 * pool.length) assert(pool.every((g) => n[g] >= 1), `${code} L${l} ${mode}: after ${i + 1} draws ${pool.filter((g) => !n[g]).join(", ")} had not been asked`);
+        lr.record(it, answer(it, true));
+        clock.t += 1000;
+      }
+      // spread evenly: no generator far ahead of another
+      const counts = Object.values(n);
+      if (pool.length <= 15) assert(Math.max(...counts) - Math.min(...counts) <= 2, `${code} L${l} ${mode}: uneven rotation ${JSON.stringify(n)}`);
+      return order.join();
+    };
+    for (const [code, l, pool] of cases) for (const mode of ["fixed", "adaptive"]) {
+      assert(run(code, l, pool, mode) === run(code, l, pool, mode), `${code} L${l} ${mode}: the same state gave two different orders`);
+    }
+    // a question that was built for next() and not handed out does not count, and a skipped one does
+    const [code, l, pool] = cases[0];
+    const { lr } = newLearner();
+    const skipped = new Set();
+    for (let i = 0; i < pool.length; i++) skipped.add(lr.next([code], { levels: [l] }).question.generator);   // never recorded
+    assert(skipped.size === pool.length, `skipping through ${code} L${l} showed ${skipped.size} of its ${pool.length} generators`);
+  });
+
+  test("question types: a narrowed subtopic is practised with the chosen types only, at the nearest level they have", () => {
+    const real = L.realIndex(QB, course);
+    const probe = newLearner().lr;
+    const names = new Map(QB.types.map((t) => [t.id, t.name]));
+    for (const c of withGens) {
+      const ts = probe.typesOf(c), pool = E.generators({ course, syllabus: c, primary: true }).filter((g) => g.levels.some((l) => l >= 1 && l <= 4));
+      assert(ts.length === new Set(pool.map((g) => g.type)).size && ts.reduce((sum, t) => sum + t.generators, 0) === pool.length, `typesOf(${c}) does not match its generators`);
+      assert(ts.every((t) => t.name === names.get(t.id) && t.levels.length && t.levels.every((l) => probe.levelsOf(c).includes(l))), `typesOf(${c}): a name or a level is wrong`);
+    }
+    const noGen = QB.statements[course].map((x) => x.code).find((c) => !withGens.includes(c));
+    if (noGen) assert(probe.typesOf(noGen).length === 0, "a subtopic with real questions only lists question types");
+    const code = withGens.find((c) => probe.typesOf(c).length >= 4);
+    const other = withGens.find((c) => c.split(".")[0] !== code.split(".")[0] && probe.typesOf(c).length >= 2);
+    assert(code && other, "no subtopic with four question types");
+    const all = probe.typesOf(code).map((t) => t.id), two = all.slice(1, 3);
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    assert(same(probe.narrowing({ [code]: [two[1], "no-such-type", two[0]] }), { [code]: two }), "narrowing() did not clean the list");
+    assert(same(probe.narrowing({ [code]: all, [other]: [], zz: ["x"] }), {}) && same(probe.narrowing({ [code]: ["no-such-type"] }), {}) && same(probe.narrowing(null), {}), "a list of all, none or unknown types should not narrow");
+
+    // adaptive, mixed with a whole subtopic: always right, to the exam rung
+    const types = { [code]: two };
+    const allowed = new Set(probe.typesOf(code).filter((t) => two.includes(t.id)).flatMap((t) => t.levels));
+    {
+      const { lr, clock } = newLearner();
+      let mine = 0, others = new Set(), exam = false;
+      for (let i = 0; i < 60; i++) {
+        const it = lr.next([code, other], { types });
+        if (it.unit === code && it.kind === "generated") {
+          mine++;
+          assert(two.includes(it.type) && two.includes(it.question.type), `${code}: served ${it.type}, which was not chosen`);
+          assert(allowed.has(it.level), `${code}: level ${it.level} is not a level of the chosen types`);
+          assert(same(it.types, two), "the item does not carry the chosen types");
+        } else if (it.unit === code) { exam = true; assert(it.kind === "real" && ["exam", "review"].includes(it.reason), "unexpected item for the narrowed subtopic"); }
+        else { assert(it.types === undefined, "the whole subtopic carries a type choice"); if (it.kind === "generated") others.add(it.type); }
+        lr.record(it, answer(it, true));
+        clock.t += 1000;
+      }
+      assert(mine >= 2 * allowed.size && exam, `${code}: ${mine} narrowed questions, exam rung ${exam}`);
+      assert(others.size >= 2, "the other subtopic was narrowed too");
+      assert(lr.summary([code])[0].level === "exam", "progress of a narrowed subtopic is not kept per subtopic");
+    }
+
+    // chosen types that lack levels the subtopic has: the nearest level, up and down the levels they have
+    let found = null;
+    for (const c of withGens) {
+      const ls = probe.levelsOf(c), ts = probe.typesOf(c);
+      const t = ts.length >= 2 && ts.find((x) => x.levels.length < ls.length && !x.levels.includes(2));
+      if (t) { found = [c, t, ls]; break; }
+    }
+    assert(found, "no question type that lacks level 2 in a subtopic that has it");
+    const [c2, t2, ls2] = found;
+    const sel = { [c2]: [t2.id] };
+    const near = (want) => t2.levels.reduce((best, l) => (Math.abs(l - want) < Math.abs(best - want) ? l : best), t2.levels[0]);
+    {
+      const { lr, clock } = newLearner();
+      const first = lr.next([c2], { types: sel });
+      assert(first.kind === "generated" && first.type === t2.id && first.level === near(2), `${c2} narrowed to ${t2.id}: started at level ${first.level}, nearest to 2 is ${near(2)}`);
+      const levels = [];
+      for (let i = 0, it = first; i < 4 * t2.levels.length + 2; i++, it = lr.next([c2], { types: sel })) {
+        if (it.kind !== "generated") break;
+        assert(it.type === t2.id && t2.levels.includes(it.level), `${c2}: served ${it.type} at level ${it.level}`);
+        levels.push(it.level);
+        const { change } = lr.record(it, answer(it, true));
+        if (change && change.kind === "up") assert(t2.levels.includes(change.to), `moved up to level ${change.to}, which ${t2.id} does not have`);
+        clock.t += 1000;
+      }
+      const from = t2.levels.filter((l) => l >= near(2));
+      assert(same([...new Set(levels)], from) && levels.length === 2 * from.length, `${c2}: levels served ${levels.join()}, expected two each of ${from.join()}`);
+      assert(lr.summary([c2])[0].level === "exam", "two right at the top level of the chosen types should reach the exam rung");
+      // always wrong: down the chosen types' levels only
+      const w = newLearner();
+      for (let i = 0; i < 12; i++) {
+        const it = w.lr.next([c2], { types: sel });
+        if (it.reason === "refresh") break;
+        assert(it.kind === "generated" && it.type === t2.id && t2.levels.includes(it.level), `${c2}: a wrong answer led to ${it.type} level ${it.level}`);
+        w.lr.record(it, answer(it, false));
+        w.clock.t += 1000;
+      }
+      // fixed level, asked for levels the chosen type does not have
+      const missing = ls2.filter((l) => !t2.levels.includes(l));
+      const f = newLearner();
+      for (let i = 0; i < 6; i++) {
+        const it = f.lr.next([c2, other], { levels: [missing[0]], types: sel });
+        if (it.unit === c2) assert(it.kind === "generated" && it.type === t2.id && it.level === t2.levels.reduce((best, l) => (Math.abs(l - missing[0]) < Math.abs(best - missing[0]) ? l : best), t2.levels[0]), `fixed level ${missing[0]} on ${c2}: got ${it.type} level ${it.level}`);
+        assert(f.lr.record(it, answer(it, true)).change === null, "fixed practice moved a level");
+      }
+      // the worksheet
+      const ws = E.worksheet({ course, scope: [c2], count: 4, levels: { [missing[0]]: 1 }, seed: 2, real, types: sel });
+      assert(ws.items.length === 4 && ws.items.every((x) => x.kind === "generated" && x.question.type === t2.id && t2.levels.includes(x.question.level)), `worksheet on ${c2} narrowed to ${t2.id}: ${ws.items.map((x) => (x.question ? x.question.type + " L" + x.question.level : "real")).join(", ")}`);
+    }
+    const opts = { course, scope: [code, other], count: 12, levels: { 2: 1, 3: 1 }, seed: 3, real };
+    const sheet = E.worksheet({ ...opts, types });
+    assert(same(sheet, E.worksheet({ ...opts, types })), "a narrowed worksheet is not reproducible");
+    assert(sheet.items.length === 12 && sheet.items.filter((x) => x.code === code).length === 6, "a narrowed worksheet lost questions");
+    assert(sheet.items.every((x) => x.code !== code || (x.kind === "generated" && two.includes(x.question.type))), "the worksheet used a type that was not chosen");
+    assert(same(E.worksheet({ ...opts, types: { [code]: ["no-such-type"], [other]: [] } }), E.worksheet(opts)) && same(E.worksheet({ ...opts, types: { [code]: all } }), E.worksheet(opts)), "a list of all or unknown types changed the worksheet");
+    // a worksheet works through a subtopic's generators before using one again
+    const big = withGens.map((c) => [c, E.generators({ course, syllabus: c, primary: true }).filter((g) => g.levels.includes(2)).length]).sort((x, y) => y[1] - x[1])[0];
+    assert(big[1] >= 4, "no subtopic with four generators at level 2");
+    const one = E.worksheet({ course, scope: [big[0]], count: big[1], levels: { 2: 1 }, seed: 1, real });
+    assert(new Set(one.items.map((x) => x.question.generator)).size === big[1], `${big[1]} questions on ${big[0]} used ${new Set(one.items.map((x) => x.question.generator)).size} generators of ${big[1]}`);
   });
 
   let failedTests = 0;
