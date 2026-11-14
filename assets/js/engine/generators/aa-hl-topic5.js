@@ -988,9 +988,9 @@
         P("Find the value of $A$.", 3, ans.int(A), [
           `Separate the variables: $\\displaystyle\\int ${E_}^{y}\\,\\mathrm{d}y = \\displaystyle\\int ${coef(a, "x")}${dx}$`,
           `$${E_}^{y} = ${coef(A, "x^{2}")} + C$, so $A = ${A}$.`]),
-        P("Find the value of $B$.", 1, ans.int(K), [`$y = ${y0}$ when $x = 0$ gives $${E_}^{${y0}} = B$, so $B = ${K}$.`.replace(`${E_}^{0}`, "1").replace(/\\mathrm\{e\}\^\{\\ln (\d)\}/, `${E_}^{\\ln $1}`)]),
+        P("Find the value of $B$.", 1, ans.int(K), [`$y = ${y0}$ when $x = 0$ gives $${E_}^{${y0}} = B$, so $B = ${K}$.`]),
         P(`Find the exact value of $y$ when $x = ${p}$.`, 2, ans.exact(Math.log(val + K), `\\ln ${val + K}`), [
-          `When $x = ${p}$: $${E_}^{y} = ${A}${br(p)}^{2} + ${K} = ${val + K}$`, `$y = \\ln ${val + K}$`])] };
+          `When $x = ${p}$: $${E_}^{y} = ${A === 1 ? "" : A}${br(p)}^{2} + ${K} = ${val + K}$`, `$y = \\ln ${val + K}$`])] };
     } });
   reg({ ...SEPT, unknown: "cooling", representation: "words", levels: [4], calculator: true, skills: ["AHL5.18.separable", "AHL5.18.particular-solution", "AHL5.18.interpret-solution"], title: "Newton's law of cooling",
     build({ rng }) {
@@ -1216,7 +1216,7 @@
       let y1, y2, y3;
       // the next term of the series must be small, so the cubic is a sensible approximation
       do { a = rng.pick([1, -1, 2]); b = rng.pick([1, 2, 3, -1]); c = rng.pick([1, 2, -1]); x0 = rng.pick([0.1, 0.2]); y1 = a * c * c; y2 = 2 * a * c * y1 + b; y3 = 2 * a * (y1 * y1 + c * y2); }
-      while (Math.abs(2 * a * (3 * y1 * y2 + c * y3)) * x0 ** 4 / 24 > 0.004);
+      while (y2 === 0 || y3 === 0 || Math.abs(2 * a * (3 * y1 * y2 + c * y3)) * x0 ** 4 / 24 > 0.004);
       const approx = c + y1 * x0 + y2 * x0 * x0 / 2 + y3 * x0 ** 3 / 6;
       const ay2 = coef(a, "y^{2}"), rhs = `${ay2} ${fmt.signed(b)}x`.replace(/(\+|-) 1x/, "$1 x"), A2 = coef(2 * a, "y"), d1 = D, d2 = "\\dfrac{\\mathrm{d}^{2}y}{\\mathrm{d}x^{2}}", d3 = "\\dfrac{\\mathrm{d}^{3}y}{\\mathrm{d}x^{3}}";
       return { params: { a, b, c, x0 }, stem: `The function $y = f(x)$ satisfies the differential equation $${D} = ${rhs}$, with $y = ${c}$ when $x = 0$.`, parts: [
