@@ -752,10 +752,14 @@ table.qtable { width: auto; margin: 0 auto; }
   .scope-go .mode-pick .select { flex: 1; }
   .scope-row { padding-left: var(--s3); padding-right: var(--s3); gap: var(--s2); }
   .scope-row .lv { white-space: normal; text-align: right; max-width: 92px; }
-  .scope-main { gap: var(--s2); }
+  .scope-row { flex-wrap: wrap; row-gap: 4px; }
+  .scope-main { gap: var(--s2); flex: 1 1 100%; }
+  .scope-exp { margin-left: 26px; }
+  .scope-row .scope-exp + .lv { max-width: none; }
   .scope-types { padding-left: var(--s5); padding-right: var(--s3); }
-  .type-row { gap: var(--s2); }
-  .type-row .lv { white-space: normal; text-align: right; max-width: 110px; }
+  .type-row { gap: 2px var(--s2); flex-wrap: wrap; }
+  .type-row .t { flex: 1 1 calc(100% - 40px); }
+  .type-row .lv { flex: 1 1 100%; padding-left: 26px; white-space: normal; }
   .scope-tools, .scope-note { padding-left: var(--s3); padding-right: var(--s3); }
   .qcard { padding: var(--s4) var(--s3); }
   .ans-row .input { flex: 1; width: auto; }
