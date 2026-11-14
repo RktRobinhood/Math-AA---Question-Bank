@@ -64,7 +64,7 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 - Drag to reorder (arrows on a phone), **×** to remove, **Shuffle** for a random order.
 - **⇄** offers similar real questions to swap in: same course, calculator policy, section and similar marks. See [docs/variants.md](docs/variants.md).
 
-**Set up and export** opens the settings beside a live preview of the paper.
+**Set up and export** opens the settings beside a live preview of the paper. The preview is the whole document: scroll through it, and use −, +, **Fit** and **Width** to zoom.
 
 - **Include**: question paper, markscheme (separate file), marks grid, page numbers, blank working pages after Section B questions.
 - **Hide the original question numbers** (on by default) blanks the exam's own number on each question and markscheme, because the paper numbers them 1, 2, 3.

@@ -95,7 +95,7 @@
   let modalEl = null;
   let _logoDataUrl = null; // base64 PNG data URL of uploaded logo (set at modal open)
   let _logoW = 0, _logoH = 0; // natural pixel dims of loaded logo
-  let _page = 0;           // preview page index
+  let _zoom = null;        // preview zoom: null fits whole pages to the pane, else a scale
   let _fit = null;         // ResizeObserver for the preview
 
   const basketItems = () => window.AASL_BASKET.getAll();
@@ -119,7 +119,7 @@
     _logoDataUrl = s.logoDataUrl || null;
     _logoW = s.logoW || 0;
     _logoH = s.logoH || 0;
-    _page = 0;
+    _zoom = null;
 
     modalEl.innerHTML = buildModalHtml(s);
     modalEl.hidden = false;
@@ -205,9 +205,9 @@
         </div>
       </div>
       <div class="prev">
-        <div class="ph"><span><b>Live preview</b> · <span id="aasl-pv-where"></span></span><span>updates as you type</span></div>
-        <div class="strip" id="aasl-pv-strip"></div>
-        <div class="pv-stage" id="aasl-pv-stage"><div class="pv-fit" id="aasl-pv-fit"></div></div>
+        <div class="ph"><span><b>Live preview</b> · <span id="aasl-pv-where"></span></span>
+          <span class="pv-zoom"><button type="button" id="aasl-pv-out" aria-label="Zoom out" title="Zoom out">−</button><span id="aasl-pv-pct"></span><button type="button" id="aasl-pv-in" aria-label="Zoom in" title="Zoom in">+</button><button type="button" id="aasl-pv-fitbtn" title="Fit whole pages in the window">Fit</button><button type="button" id="aasl-pv-width" title="Fit the page width">Width</button></span></div>
+        <div class="pv-stage" id="aasl-pv-stage"><div class="pv-pages" id="aasl-pv-fit"></div></div>
       </div>
       <div class="ft">
         <span class="m" id="aasl-gen-status" role="status">Your school details and choices are remembered on this device for next time.</span>
@@ -255,6 +255,10 @@
     if (window.ResizeObserver) {
       _fit = new ResizeObserver(fitPreview);
       _fit.observe($('aasl-pv-stage'));
+      $('aasl-pv-in').onclick = () => zoomPreview(1.2);
+      $('aasl-pv-out').onclick = () => zoomPreview(1 / 1.2);
+      $('aasl-pv-fitbtn').onclick = () => zoomPreview('fit');
+      $('aasl-pv-width').onclick = () => zoomPreview('width');
     }
   }
 
@@ -386,49 +390,66 @@
     const items = basketItems();
     const marks = totalMarksOf(items);
     const pages = previewPages(s, items);
-    _page = Math.max(0, Math.min(_page, pages.length - 1));
     const pageHtml = p => {
       const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
-      let inner = '<div class="ws">Nothing to export: tick Question paper or Markscheme.</div>';
-      if (p && p.kind === 'cover') inner = coverHtml(s, items, marks);
-      else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg"${p.first && s.hideNumbers !== false ? ` data-mask="${escHtml(p.src)}"` : ''} src="${getBase() + p.src}" alt="">${foot}`;
-      else if (p && p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
-      return `<div class="pg">${inner}</div>`;
+      let inner = '';
+      if (p.kind === 'cover') inner = coverHtml(s, items, marks);
+      else if (p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg"${p.first && s.hideNumbers !== false ? ` data-mask="${escHtml(p.src)}"` : ''} src="${getBase() + p.src}" alt="">${foot}`;
+      else if (p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
+      return `<div class="pv-fit"><div class="pg">${inner}</div></div>`;
     };
-    // Show the next page beside this one when the pane is wide enough for two readable pages.
-    const stage = document.getElementById('aasl-pv-stage');
-    const two = pages.length > 1 && stage && Math.min((stage.clientWidth - PV_GAP) / (2 * 595), stage.clientHeight / 842) >= 0.7;
-    if (two && _page === pages.length - 1) _page--;
+    // The whole document, in order, in a pane that scrolls: as many pages across as fit.
     const fitEl = document.getElementById('aasl-pv-fit');
-    fitEl.innerHTML = pageHtml(pages[_page]) + (two ? pageHtml(pages[_page + 1]) : '');
-    fitEl.querySelectorAll('img[data-mask]').forEach(img => {
-      const src = img.dataset.mask;
-      fetchImageAsPng(src, [], true).then(url => { if (img.isConnected) img.src = url; }).catch(() => {});
-    });
+    fitEl.innerHTML = pages.length ? pages.map(pageHtml).join('')
+      : '<div class="pv-fit"><div class="pg"><div class="ws">Nothing to export: tick Question paper or Markscheme.</div></div></div>';
+    // Blank the original question number only on pages that scroll into view.
+    if (_mask) _mask.disconnect();
+    _mask = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      const img = e.target; _mask.unobserve(img);
+      fetchImageAsPng(img.dataset.mask, [], true).then(url => { if (img.isConnected) img.src = url; }).catch(() => {});
+    }), { root: document.getElementById('aasl-pv-stage'), rootMargin: '300px' });
+    fitEl.querySelectorAll('img[data-mask]').forEach(img => _mask.observe(img));
     document.getElementById('aasl-pv-where').textContent =
-      `${pages.type === 'markscheme' ? 'markscheme · ' : ''}${two ? `pages ${_page + 1}–${_page + 2}` : `page ${pages.length ? _page + 1 : 0}`} of ${pages.length} · A4`;
-    const strip = document.getElementById('aasl-pv-strip');
-    strip.innerHTML = pages.map((pg, i) => `<button type="button" class="${i === _page || (two && i === _page + 1) ? 'on' : ''}" data-i="${i}" aria-label="Page ${i + 1}: ${pg.label}">${pg.label}</button>`).join('');
-    strip.onclick = e => { const b = e.target.closest('[data-i]'); if (b) { _page = Number(b.dataset.i); updatePreview(); } };
+      `${pages.type === 'markscheme' ? 'markscheme · ' : ''}${pages.length} page${pages.length === 1 ? '' : 's'} · A4`;
     fitPreview();
+  }
+
+  const PV_GAP = 16;
+  let _mask = null;
+
+  // Scale that shows whole pages: as large as the pane's height allows, unless that would be
+  // too small to read, in which case the page fills the width and the pane scrolls.
+  function fitScale(stage, mode, n) {
+    const w = (stage.clientWidth - 14) / 595, h = (stage.clientHeight - 4) / 842;
+    if (mode === 'width') return Math.min(w, 2);
+    // Two pages across when there are two and both stay readable: no empty margins on a wide screen.
+    const two = Math.min((stage.clientWidth - 14 - PV_GAP) / (2 * 595), h);
+    if (n > 1 && two >= 0.7) return two;
+    return Math.min(h >= 0.6 ? h : w, w, 2);
   }
 
   function fitPreview() {
     const stage = document.getElementById('aasl-pv-stage');
     const fit = document.getElementById('aasl-pv-fit');
-    const pgs = fit ? [...fit.children] : [];
-    if (!stage || !pgs.length) return;
-    // Fill the pane: whole pages when the pane is tall enough for that to be readable,
-    // otherwise the full width (the pane scrolls), so the text can always be read.
-    const n = pgs.length, gaps = (n - 1) * PV_GAP;
-    const whole = Math.min((stage.clientWidth - gaps) / (n * 595), stage.clientHeight / 842);
-    const scale = Math.max(0.1, Math.min(n > 1 || whole >= 0.9 ? whole : (stage.clientWidth - 14) / 595, 1.5));
-    fit.style.width = `${n * 595 * scale + gaps}px`;
-    fit.style.height = `${842 * scale}px`;
-    pgs.forEach((pg, k) => { pg.style.transform = `scale(${scale})`; pg.style.left = `${k * (595 * scale + PV_GAP)}px`; });
+    if (!stage || !fit) return;
+    const scale = Math.max(0.2, typeof _zoom === 'number' ? _zoom : fitScale(stage, _zoom, fit.children.length));
+    for (const box of fit.children) {
+      box.style.width = `${595 * scale}px`;
+      box.style.height = `${842 * scale}px`;
+      box.firstElementChild.style.transform = `scale(${scale})`;
+    }
+    fit.style.gap = `${PV_GAP}px`;
+    const pct = document.getElementById('aasl-pv-pct');
+    if (pct) pct.textContent = `${Math.round(scale * 100)}%`;
+    fit.dataset.scale = scale;
   }
 
-  const PV_GAP = 16;
+  function zoomPreview(by) {
+    const now = Number(document.getElementById('aasl-pv-fit').dataset.scale) || 1;
+    _zoom = by === 'fit' ? null : by === 'width' ? 'width' : Math.max(0.2, Math.min(2.5, Math.round(now * by * 20) / 20));
+    fitPreview();
+  }
 
   // ─── Versions ─────────────────────────────────────────────────────────────
   // A reordering of the paper for version B, C or D. Section A questions stay before Section B
