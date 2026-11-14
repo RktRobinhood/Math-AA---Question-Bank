@@ -768,7 +768,7 @@
     { A: "the bus", B: "the train", unit: "week", intro: "The commuters of a city travel by bus or by train, and may change each week.", who: "a commuter", verb: "uses", pl: "use" },
     { A: "the gym", B: "the pool", unit: "day", intro: "Each day, every member of a sports club chooses either the gym or the pool.", who: "a member", verb: "chooses", pl: "choose" }];
   function sitMk2(rng) { let p, q; do { p = rng.int(1, 6); q = rng.int(1, 6); } while (p === q); return { c: rng.pick(MK2), p, q }; }
-  const mkStem = (s) => `${s.c.intro} Of those who ${s.c.pl} ${s.c.A} in one ${s.c.unit}, $${pct(s.p * 10)}$ change to ${s.c.B} in the next ${s.c.unit}. Of those who ${s.c.pl} ${s.c.B}, $${pct(s.q * 10)}$ change to ${s.c.A}. The rest do not change.`;
+  const mkStem = (s) => `${s.c.intro} Of those who ${s.c.pl} ${s.c.A} one ${s.c.unit}, $${pct(s.p * 10)}$ change to ${s.c.B} the next ${s.c.unit}. Of those who ${s.c.pl} ${s.c.B}, $${pct(s.q * 10)}$ change to ${s.c.A}. The rest do not change.`;
   reg({ type: "t4-ai-markov", unknown: "matrix-entry", representation: "words", format: "value", levels: [1], syllabus: ["4.19"], skills: ["AI-AHL4.19.transition-matrix"], niceOk: true,
     title: "Entries of a transition matrix", situationKey: "markov-two", situation: sitMk2,
     build({ sit: s }) {
@@ -812,6 +812,303 @@
         P(`Find the expected number of ${c.thing} ${c.at} B after $${n}$ ${c.unit}s.`, 2, ans.sf(vn[1]), [`$\\boldsymbol{s}_{${n}} = \\boldsymbol{T}^{${n}}\\boldsymbol{s}_{0}$, found on the GDC.`, `The second entry is $${sf(vn[1])}$.`]),
         P(`Find the expected number of ${c.thing} ${c.at} C in the long term.`, 3, ans.sf(v[2]), [
           "Raise $\\boldsymbol{T}$ to a high power: every column tends to the steady-state probabilities.", `The steady-state probabilities are $${sf(v[0] / total)}$, $${sf(v[1] / total)}$ and $${sf(v[2] / total)}$.`, `$${sf(v[2] / total, 5)} \\times ${num(total)} = ${sf(v[2])}$`])] };
+    } });
+
+    // ======================= 5.9 further differentiation =======================
+  const Dy = "\\dfrac{\\mathrm{d}y}{\\mathrm{d}x}";
+  const Q = fmt.Q;
+  const ex = (b, v) => `\\mathrm{e}^{${coef(b, v || "x")}}`;
+  const opt = (rng, list, x) => ans.choice(rng, { text: m(list[0][0]), value: list[0][1](x) }, list.slice(1).map((o) => ({ text: m(o[0]), value: o[1](x), why: o[2] })));
+  const distinct = (vals) => vals.every((v, i) => isFinite(v) && vals.every((w, j) => i === j || Math.abs(v - w) > 1e-3 * Math.max(1, Math.abs(v), Math.abs(w))));
+  // A composite function and candidate derivatives: the right one first, then common wrong ones. Each is [tex, function, why wrong].
+  function chainFamily(s) {
+    const { a, b, c, n } = s, u = lin(b, c), bx = coef(b, "x");
+    switch (s.fam) {
+      case "exp": return { y: coef(a, ex(b)), opts: [[coef(a * b, ex(b)), (x) => a * b * Math.exp(b * x)], [coef(a, ex(b)), (x) => a * Math.exp(b * x), "Multiply by the derivative of the exponent."],
+        [coef(a * b, "x" + ex(b)), (x) => a * b * x * Math.exp(b * x), "The derivative of the exponent is a constant; no extra factor of $x$ appears."], [coef(Q(a, b), ex(b)), (x) => (a / b) * Math.exp(b * x), "Dividing by the coefficient is integration, not differentiation."]] };
+      case "sin": return { y: coef(a, `\\sin(${bx})`), opts: [[coef(a * b, `\\cos(${bx})`), (x) => a * b * Math.cos(b * x)], [coef(a, `\\cos(${bx})`), (x) => a * Math.cos(b * x), "Multiply by the derivative of the inside function."],
+        [coef(-a * b, `\\cos(${bx})`), (x) => -a * b * Math.cos(b * x), "The derivative of sine is cosine, with no change of sign."], [coef(a * b, `\\sin(${bx})`), (x) => a * b * Math.sin(b * x), "The sine must change to a cosine."]] };
+      case "cos": return { y: coef(a, `\\cos(${bx})`), opts: [[coef(-a * b, `\\sin(${bx})`), (x) => -a * b * Math.sin(b * x)], [coef(a * b, `\\sin(${bx})`), (x) => a * b * Math.sin(b * x), "The derivative of cosine is minus sine."],
+        [coef(-a, `\\sin(${bx})`), (x) => -a * Math.sin(b * x), "Multiply by the derivative of the inside function."], [coef(-a * b, `\\cos(${bx})`), (x) => -a * b * Math.cos(b * x), "The cosine must change to a sine."]] };
+      case "ln": return { y: coef(a, `\\ln(${u})`), opts: [[`\\dfrac{${a * b}}{${u}}`, (x) => (a * b) / (b * x + c)], [`\\dfrac{${a}}{${u}}`, (x) => a / (b * x + c), "Multiply by the derivative of the inside function."],
+        [`\\dfrac{${a * b}}{x}`, (x) => (a * b) / x, "The inside function stays in the denominator."], [`\\dfrac{${a}}{${bx}}`, (x) => a / (b * x), "The whole inside function goes in the denominator, and its derivative multiplies the top."]] };
+      case "pow": return { y: `(${u})^{${n}}`, opts: [[`${n * b}(${u})^{${n - 1}}`, (x) => n * b * Math.pow(b * x + c, n - 1)], [`${n}(${u})^{${n - 1}}`, (x) => n * Math.pow(b * x + c, n - 1), "Multiply by the derivative of the bracket."],
+        [`${n * b}(${u})^{${n}}`, (x) => n * b * Math.pow(b * x + c, n), "The power goes down by one."], [`${n * b}x^{${n - 1}}`, (x) => n * b * Math.pow(x, n - 1), "The bracket stays as it is; only its power changes."]] };
+      case "tan": return { y: coef(a, `\\tan(${bx})`), opts: [[`\\dfrac{${a * b}}{\\cos^{2}(${bx})}`, (x) => (a * b) / Math.pow(Math.cos(b * x), 2)], [`\\dfrac{${a}}{\\cos^{2}(${bx})}`, (x) => a / Math.pow(Math.cos(b * x), 2), "Multiply by the derivative of the inside function."],
+        [`-\\dfrac{${a * b}}{\\sin^{2}(${bx})}`, (x) => (-a * b) / Math.pow(Math.sin(b * x), 2), "The derivative of the tangent is one over cosine squared."], [coef(a * b, `\\tan(${bx})`), (x) => a * b * Math.tan(b * x), "The tangent does not stay a tangent."]] };
+      default: { const e2 = ex(b, "x^{2}"); return { y: e2, opts: [[coef(2 * b, "x" + e2), (x) => 2 * b * x * Math.exp(b * x * x)], [e2, (x) => Math.exp(b * x * x), "Multiply by the derivative of the exponent."],
+        [coef(2 * b, e2), (x) => 2 * b * Math.exp(b * x * x), "The derivative of the exponent still contains $x$."], [coef(b, "x^{2}" + e2), (x) => b * x * x * Math.exp(b * x * x), "Multiply by the derivative of the exponent, not by the exponent."]] }; }
+    }
+  }
+  reg({ type: "t5-ai-derivative-rules", unknown: "chain-rule", representation: "equation", format: "mcq", levels: [1, 2], syllabus: ["5.9"], skills: ["AI-AHL5.9.standard-derivatives", "AI-AHL5.9.chain-rule"],
+    title: "Differentiate a composite function and find a gradient",
+    build({ rng, level }) {
+      let s, F, x0;
+      do {
+        const fam = level === 1 ? rng.pick(["exp", "sin", "cos"]) : rng.pick(["ln", "pow", "tan", "expquad"]);
+        s = { fam, a: rng.int(2, 6), b: fam === "exp" ? rng.sign() * rng.int(2, 4) : fam === "expquad" ? rng.pick([-1, 2, -2, 3]) : rng.int(2, fam === "pow" || fam === "tan" ? 3 : 5), c: fam === "pow" ? rng.nonzero(-4, 4) : rng.int(1, 5), n: rng.int(3, 5) };
+        F = chainFamily(s);
+        x0 = rng.pick(fam === "exp" || fam === "expquad" ? [0.2, 0.5, 1] : [0.5, 1, 1.5, 2]);
+      } while (!distinct(F.opts.map((o) => o[1](x0))) || Math.abs(F.opts[0][1](x0)) < 0.01 || Math.abs(F.opts[0][1](x0)) > 5000 || (s.fam === "tan" && Math.abs(Math.cos(s.b * x0)) < 0.3));
+      const g = F.opts[0][1](x0), big = level === 2 ? 2 : 1;
+      return { params: { s, x0 }, stem: `Consider the curve $y = ${F.y}$${s.fam === "ln" ? ", for $x > 0$" : ""}.`, parts: [
+        P(`Which of the following is $${Dy}$?`, big, opt(rng, F.opts, x0), ["Use the chain rule: differentiate the outside function, then multiply by the derivative of the inside function.", `$${Dy} = ${F.opts[0][0]}$`]),
+        P(`Find the gradient of the curve at the point where $x = ${num(x0)}$.`, big, ans.sf(g), [`Substitute $x = ${num(x0)}$ into $${Dy} = ${F.opts[0][0]}$.`, `The gradient is $${sf(g)}$.`])] };
+    } });
+  function productFamily(rng) {
+    const k = rng.sign() * rng.int(2, 4), n = rng.int(1, 3), c = rng.pick([1, 2, 3, 4, 5, 9]);
+    return rng.pick([
+      { fam: "xexp", k, y: `x${ex(k)}`, dom: "", ask: "Find the $x$-coordinate of the stationary point of the curve.", x: [-1, k], xt: frac(-1, k), solve: `$1 ${signed(k)}x = 0$`,
+        opts: [[`(${expr([[1, ""], [k, "x"]])})${ex(k)}`, (x) => (1 + k * x) * Math.exp(k * x)], [coef(k, ex(k)), (x) => k * Math.exp(k * x), "The product rule has two terms: differentiate each factor in turn and add."],
+          [`(1 + x)${ex(k)}`, (x) => (1 + x) * Math.exp(k * x), `The derivative of $${ex(k)}$ is $${coef(k, ex(k))}$.`], [`(${lin(1, k)})${ex(k)}`, (x) => (x + k) * Math.exp(k * x), "The factor from the chain rule multiplies $x$, not the constant."]] },
+      { fam: "x2exp", k, y: `x^{2}${ex(k)}`, dom: "", ask: "The curve has a stationary point at the origin. Find the $x$-coordinate of its other stationary point.", x: [-2, k], xt: frac(-2, k), solve: `$x(2 ${signed(k)}x) = 0$ and $x \\ne 0$`,
+        opts: [[`(${expr([[2, "x"], [k, "x^{2}"]])})${ex(k)}`, (x) => (2 * x + k * x * x) * Math.exp(k * x)], [coef(2 * k, "x" + ex(k)), (x) => 2 * k * x * Math.exp(k * x), "The product rule has two terms: differentiate each factor in turn and add."],
+          [`(2x + x^{2})${ex(k)}`, (x) => (2 * x + x * x) * Math.exp(k * x), `The derivative of $${ex(k)}$ is $${coef(k, ex(k))}$.`], [`(${lin(2, k)})${ex(k)}`, (x) => (2 * x + k) * Math.exp(k * x), "The second term keeps the factor $x^{2}$."]] },
+      { fam: "lnx", n, y: `\\dfrac{\\ln x}{${n === 1 ? "x" : `x^{${n}}`}}`, dom: ", for $x > 0$", ask: "Find the $x$-coordinate of the stationary point of the curve.", xv: Math.exp(1 / n), xt: n === 1 ? "\\mathrm{e}" : n === 2 ? "\\sqrt{\\mathrm{e}}" : "\\mathrm{e}^{\\frac{1}{3}}", solve: `$${coef(n, "\\ln x")} = 1$, so $\\ln x = ${frac(1, n)}$`,
+        opts: [[`\\dfrac{1 - ${coef(n, "\\ln x")}}{x^{${n + 1}}}`, (x) => (1 - n * Math.log(x)) / Math.pow(x, n + 1)], [`\\dfrac{1 + ${coef(n, "\\ln x")}}{x^{${n + 1}}}`, (x) => (1 + n * Math.log(x)) / Math.pow(x, n + 1), "The quotient rule subtracts the second product."],
+          [`\\dfrac{${coef(n, "\\ln x")} - 1}{x^{${n + 1}}}`, (x) => (n * Math.log(x) - 1) / Math.pow(x, n + 1), "The order of the subtraction on top matters."], [`\\dfrac{1}{${coef(n, fmt.power("x", n))}}`, (x) => 1 / (n * Math.pow(x, n)), "A quotient is not differentiated by dividing the two derivatives."]] },
+      { fam: "xover", c, y: `\\dfrac{x}{x^{2} + ${c}}`, dom: "", ask: "Find the $x$-coordinate of the stationary point for which $x > 0$.", xv: Math.sqrt(c), xt: surd(c), solve: `$${c} - x^{2} = 0$ and $x > 0$`,
+        opts: [[`\\dfrac{${c} - x^{2}}{(x^{2} + ${c})^{2}}`, (x) => (c - x * x) / Math.pow(x * x + c, 2)], [`\\dfrac{x^{2} - ${c}}{(x^{2} + ${c})^{2}}`, (x) => (x * x - c) / Math.pow(x * x + c, 2), "The order of the subtraction on top matters."],
+          [`\\dfrac{3x^{2} + ${c}}{(x^{2} + ${c})^{2}}`, (x) => (3 * x * x + c) / Math.pow(x * x + c, 2), "The quotient rule subtracts the second product."], ["\\dfrac{1}{2x}", (x) => 1 / (2 * x), "A quotient is not differentiated by dividing the two derivatives."]] },
+      { fam: "xlnx", y: "x\\ln x", dom: ", for $x > 0$", ask: "Find the $x$-coordinate of the stationary point of the curve.", xv: Math.exp(-1), xt: "\\dfrac{1}{\\mathrm{e}}", solve: "$\\ln x = -1$",
+        opts: [["\\ln x + 1", (x) => Math.log(x) + 1], ["\\dfrac{1}{x}", (x) => 1 / x, "The product rule has two terms: differentiate each factor in turn and add."], ["\\ln x + x", (x) => Math.log(x) + x, "$x$ times the derivative of $\\ln x$ is $1$."], ["\\ln x", (x) => Math.log(x), "The second term of the product rule is missing."]] }]);
+  }
+  reg({ type: "t5-ai-derivative-rules", unknown: "product-quotient", representation: "equation", format: "mcq", levels: [3], syllabus: ["5.9"], skills: ["AI-AHL5.9.product-rule", "AI-AHL5.9.quotient-rule", "AI-AHL5.9.chain-rule"],
+    title: "Product or quotient rule, then a stationary point",
+    build({ rng }) {
+      const F = productFamily(rng), tp = 1.3, quotient = F.fam === "lnx" || F.fam === "xover";
+      return { params: { fam: F.fam, k: F.k, n: F.n, c: F.c, tp }, stem: `Consider the curve $y = ${F.y}$${F.dom}.`, parts: [
+        P(`Which of the following is $${Dy}$?`, 3, opt(rng, F.opts, tp), [quotient ? "Use the quotient rule: $\\dfrac{vu' - uv'}{v^{2}}$ for $y = \\dfrac{u}{v}$." : "Use the product rule: $uv' + vu'$ for $y = uv$.", `$${Dy} = ${F.opts[0][0]}$`]),
+        P(F.ask, 2, F.x ? ans.frac(F.x[0], F.x[1]) : Number.isInteger(F.xv) ? ans.int(F.xv) : ans.exact(F.xv, F.xt), [`At a stationary point $${Dy} = 0$.`, `${F.solve}.`, `$x = ${F.xt}$`])] };
+    } });
+  const RR_DIRECT = [
+    { id: "circle", stem: (v) => `The radius, $r\\text{ m}$, of a circular oil slick is increasing at a constant rate of $${num(v)}\\text{ m}$ per minute.`, q: "A", name: "area", f: "A = \\pi r^{2}", dtex: "2\\pi r", d: (r) => 2 * Math.PI * r, unit: "\\text{m}^{2}\\text{ per minute}" },
+    { id: "sphere", stem: (v) => `The radius, $r\\text{ cm}$, of a spherical balloon is increasing at a constant rate of $${num(v)}\\text{ cm}$ per second.`, q: "V", name: "volume", f: "V = \\dfrac{4}{3}\\pi r^{3}", dtex: "4\\pi r^{2}", d: (r) => 4 * Math.PI * r * r, unit: "\\text{cm}^{3}\\text{ per second}" },
+    { id: "cube", stem: (v) => `The side, $r\\text{ cm}$, of an ice cube is decreasing at a constant rate of $${num(-v)}\\text{ cm}$ per minute.`, neg: true, q: "V", name: "volume", f: "V = r^{3}", dtex: "3r^{2}", d: (r) => 3 * r * r, unit: "\\text{cm}^{3}\\text{ per minute}" }];
+  reg({ type: "t5-ai-related-rates", unknown: "direct-rate", representation: "words", format: "value", levels: [2], syllabus: ["5.9"], skills: ["AI-AHL5.9.related-rates"],
+    title: "A related rate of change from the chain rule",
+    build({ rng }) {
+      const c = rng.pick(RR_DIRECT), v = (c.neg ? -1 : 1) * rng.int(2, 9) / 10, R = rng.int(2, 12) / (c.neg ? 2 : 1), dq = c.d(R), rate = dq * v;
+      return { params: { id: c.id, v, R }, stem: `${c.stem(v)} Its ${c.name} is $${c.f}$.`, parts: [
+        P(`Find the value of $\\dfrac{\\mathrm{d}${c.q}}{\\mathrm{d}r}$ when $r = ${num(R)}$.`, 1, ans.sf(dq), [`$\\dfrac{\\mathrm{d}${c.q}}{\\mathrm{d}r} = ${c.dtex}$, which is $${sf(dq)}$ when $r = ${num(R)}$.`]),
+        P(`Find the rate at which the ${c.name} is ${c.neg ? "decreasing" : "increasing"} when $r = ${num(R)}$.`, 2, ans.sf(Math.abs(rate)), [
+          `$\\dfrac{\\mathrm{d}${c.q}}{\\mathrm{d}t} = \\dfrac{\\mathrm{d}${c.q}}{\\mathrm{d}r} \\times \\dfrac{\\mathrm{d}r}{\\mathrm{d}t} = ${sf(dq, 4)} \\times ${paren(v)}$`, `The ${c.name} is ${c.neg ? "decreasing" : "increasing"} at $${sf(Math.abs(rate))}\\ ${c.unit}$.`])] };
+    } });
+  reg({ type: "t5-ai-related-rates", unknown: "inverse-rate", representation: "words", format: "value", levels: [4], syllabus: ["5.9"], skills: ["AI-AHL5.9.related-rates", "AI-AHL5.9.chain-rule"],
+    title: "Related rates in context",
+    build({ rng }) {
+      const kind = rng.pick(["sphere", "cone", "ladder"]);
+      if (kind === "sphere") {
+        const Qr = rng.int(20, 90), R = rng.int(4, 15), dV = 4 * Math.PI * R * R, dr = Qr / dV, dS = 8 * Math.PI * R * dr;
+        return { params: { kind, Q: Qr, R }, stem: `Air is pumped into a spherical balloon at a constant rate of $${Qr}\\text{ cm}^{3}$ per second. The balloon has radius $r\\text{ cm}$, volume $V = \\dfrac{4}{3}\\pi r^{3}$ and surface area $S = 4\\pi r^{2}$.`, parts: [
+          P(`Find the value of $\\dfrac{\\mathrm{d}V}{\\mathrm{d}r}$ when $r = ${R}$.`, 2, ans.sf(dV), ["$\\dfrac{\\mathrm{d}V}{\\mathrm{d}r} = 4\\pi r^{2}$", `When $r = ${R}$ this is $${sf(dV)}$.`]),
+          P(`Find the rate at which the radius is increasing when $r = ${R}$, in centimetres per second.`, 3, ans.sf(dr), ["$\\dfrac{\\mathrm{d}V}{\\mathrm{d}t} = \\dfrac{\\mathrm{d}V}{\\mathrm{d}r} \\times \\dfrac{\\mathrm{d}r}{\\mathrm{d}t}$", `$${Qr} = ${sf(dV, 5)} \\times \\dfrac{\\mathrm{d}r}{\\mathrm{d}t}$`, `$\\dfrac{\\mathrm{d}r}{\\mathrm{d}t} = ${sf(dr)}$`]),
+          P(`Find the rate at which the surface area is increasing when $r = ${R}$, in square centimetres per second.`, 2, ans.sf(dS), [`$\\dfrac{\\mathrm{d}S}{\\mathrm{d}t} = 8\\pi r \\times \\dfrac{\\mathrm{d}r}{\\mathrm{d}t} = 8\\pi${br(R)} \\times ${sf(dr, 4)}$`, `$= ${sf(dS)}$`])] };
+      }
+      if (kind === "cone") {
+        const k = rng.pick([[1, 2], [1, 3], [2, 3], [1, 4], [3, 4]]), Qr = rng.int(15, 80), H = rng.int(4, 12), kk = k[0] / k[1], dVdh = Math.PI * kk * kk * H * H, dh = Qr / dVdh;
+        return { params: { kind, Q: Qr, R: H, k: kk }, stem: `A container has the shape of a cone with its vertex at the bottom. Water is poured in at a constant rate of $${Qr}\\text{ cm}^{3}$ per second. When the depth of the water is $h\\text{ cm}$, the radius of its surface is $r = ${coef(Q(k[0], k[1]), "h")}$, and the volume of water is $V = \\dfrac{1}{3}\\pi r^{2}h$.`, parts: [
+          P("The volume can be written as $V = c\\pi h^{3}$. Find the value of $c$.", 2, ans.frac(k[0] * k[0], 3 * k[1] * k[1]), [`$V = \\dfrac{1}{3}\\pi \\left(${coef(Q(k[0], k[1]), "h")}\\right)^{2} h = ${frac(k[0] * k[0], 3 * k[1] * k[1])}\\pi h^{3}$`]),
+          P(`Find the rate at which the depth is increasing when $h = ${H}$, in centimetres per second.`, 3, ans.sf(dh), [`$\\dfrac{\\mathrm{d}V}{\\mathrm{d}h} = ${frac(k[0] * k[0], k[1] * k[1])}\\pi h^{2}$, which is $${sf(dVdh, 5)}$ when $h = ${H}$.`, `$${Qr} = ${sf(dVdh, 5)} \\times \\dfrac{\\mathrm{d}h}{\\mathrm{d}t}$`, `$\\dfrac{\\mathrm{d}h}{\\mathrm{d}t} = ${sf(dh)}$`]),
+          P("Find the rate at which the radius of the water surface is increasing at that moment, in centimetres per second.", 2, ans.sf(kk * dh), [`$\\dfrac{\\mathrm{d}r}{\\mathrm{d}t} = ${frac(k[0], k[1])} \\times \\dfrac{\\mathrm{d}h}{\\mathrm{d}t} = ${frac(k[0], k[1])} \\times ${sf(dh, 4)}$`, `$= ${sf(kk * dh)}$`])] };
+      }
+      let L, x0;
+      do { L = rng.int(4, 9); x0 = rng.int(1, L - 1); } while (Number.isInteger(Math.sqrt(L * L - x0 * x0)) || x0 > 0.85 * L);
+      const v = rng.int(2, 8) / 10, y0 = Math.sqrt(L * L - x0 * x0), dy = (-x0 * v) / y0, dA = (v * y0 + x0 * dy) / 2;
+      return { params: { kind, L, x0, v }, stem: `A ladder of length $${L}\\text{ m}$ leans against a vertical wall, with its foot on horizontal ground. The foot of the ladder is $x\\text{ m}$ from the wall and the top is $y\\text{ m}$ above the ground, so $x^{2} + y^{2} = ${L * L}$. The foot slides away from the wall at a constant speed of $${num(v)}\\text{ m s}^{-1}$.`, parts: [
+        P(`Find the value of $y$ when $x = ${x0}$.`, 2, ans.sf(y0), [`$y = \\sqrt{${L * L} - ${x0}^{2}} = ${sf(y0)}$`]),
+        P(`Find the speed at which the top of the ladder is sliding down the wall when $x = ${x0}$, in metres per second.`, 3, ans.sf(-dy), ["Differentiate $x^{2} + y^{2} = " + L * L + "$ with respect to time: $2x\\dfrac{\\mathrm{d}x}{\\mathrm{d}t} + 2y\\dfrac{\\mathrm{d}y}{\\mathrm{d}t} = 0$.",
+          `$\\dfrac{\\mathrm{d}y}{\\mathrm{d}t} = -\\dfrac{${x0} \\times ${num(v)}}{${sf(y0, 5)}} = ${sf(dy)}$`, `The top slides down at $${sf(-dy)}\\text{ m s}^{-1}$.`]),
+        P(`The area of the triangle between the ladder, the wall and the ground is $A = \\dfrac{1}{2}xy$. Find the value of $\\dfrac{\\mathrm{d}A}{\\mathrm{d}t}$ when $x = ${x0}$.`, 2, ans.sf(dA), [
+          "By the product rule, $\\dfrac{\\mathrm{d}A}{\\mathrm{d}t} = \\dfrac{1}{2}\\left(y\\dfrac{\\mathrm{d}x}{\\mathrm{d}t} + x\\dfrac{\\mathrm{d}y}{\\mathrm{d}t}\\right)$.", `$= \\dfrac{1}{2}\\left(${sf(y0, 4)} \\times ${num(v)} + ${x0} \\times ${paren(Number(dy.toPrecision(4)))}\\right) = ${sf(dA)}$`])] };
+    } });
+
+  // ======================= 5.10 the second derivative =======================
+  reg({ type: "t5-ai-second-derivative", unknown: "value-and-concavity", representation: "equation", format: "value", levels: [2], syllabus: ["5.10"], skills: ["AI-AHL5.10.find-second-derivative", "AI-AHL5.10.concavity"], niceOk: true,
+    title: "The second derivative at a point and the concavity there",
+    build({ rng }) {
+      let fam, a, b, c, x0, ftex, d1, d2, v;
+      do {
+        fam = rng.pick(["cubic", "quartic", "expquad", "lnquad"]); a = rng.nonzero(-3, 4); b = rng.nonzero(-5, 5); c = rng.int(-6, 6);
+        if (fam === "cubic") { x0 = rng.int(-2, 3); ftex = poly([a, b, c, rng.int(-5, 5)]); d1 = poly([3 * a, 2 * b, c]); d2 = poly([6 * a, 2 * b]); v = 6 * a * x0 + 2 * b; }
+        else if (fam === "quartic") { x0 = rng.nonzero(-2, 2); ftex = poly([a, 0, b, c, 0]); d1 = poly([4 * a, 0, 2 * b, c]); d2 = poly([12 * a, 0, 2 * b]); v = 12 * a * x0 * x0 + 2 * b; }
+        else if (fam === "expquad") { c = rng.pick([-2, 2, 3]); x0 = 0; ftex = expr([[a, ex(c)], [b, "x^{2}"]]); d1 = expr([[a * c, ex(c)], [2 * b, "x"]]); d2 = expr([[a * c * c, ex(c)], [2 * b, ""]]); v = a * c * c + 2 * b; }
+        else { x0 = rng.pick([1, 2]); a = 4 * rng.nonzero(-3, 3); ftex = expr([[a, "\\ln x"], [b, "x^{2}"]]); d1 = `${a < 0 ? "-" : ""}\\dfrac{${Math.abs(a)}}{x} ${signed(2 * b)}x`; d2 = `${a < 0 ? "" : "-"}\\dfrac{${Math.abs(a)}}{x^{2}} ${signed(2 * b)}`; v = -a / (x0 * x0) + 2 * b; }
+      } while (v === 0);
+      const up = v > 0;
+      return { params: { fam, a, b, c, x0 }, stem: `Consider the function $f(x) = ${ftex}$${fam === "lnquad" ? ", for $x > 0$" : ""}.`, parts: [
+        P(`Find $f''(${x0})$.`, 2, ans.int(v), [`$f'(x) = ${d1}$`, `$f''(x) = ${d2}$`, `$f''(${x0}) = ${v}$`]),
+        P(`Which statement describes the graph of $f$ at $x = ${x0}$?`, 1, ans.choice(rng, { text: up ? "It is concave up." : "It is concave down.", value: up ? "up" : "down" }, [
+          { text: up ? "It is concave down." : "It is concave up.", value: up ? "down" : "up", why: "A positive second derivative means concave up; a negative one means concave down." },
+          { text: "It has a point of inflexion.", value: "inflexion", why: "At a point of inflexion the second derivative is zero and changes sign." }, { text: "It is a straight line there.", value: "line", why: "The second derivative is not zero." }]), [
+          `$f''(${x0}) = ${v} ${up ? ">" : "<"} 0$, so the graph is concave ${up ? "up" : "down"} there.`])] };
+    } });
+  reg({ type: "t5-ai-second-derivative", unknown: "inflexion", representation: "equation", format: "value", levels: [3], syllabus: ["5.10"], skills: ["AI-AHL5.10.find-second-derivative", "AI-AHL5.10.points-of-inflexion", "AI-AHL5.10.concavity"],
+    title: "The second derivative test and a point of inflexion",
+    build({ rng }) {
+      const p = rng.int(-4, 2), q = p + 2 * rng.int(1, 3), d = rng.int(-6, 6), cs = [1, (-3 * (p + q)) / 2, 3 * p * q, d], which = rng.bool() ? p : q, xi = (p + q) / 2;
+      const f2 = 6 * which - 3 * (p + q), isMax = f2 < 0, yi = xi * xi * xi + cs[1] * xi * xi + cs[2] * xi + d;
+      return { params: { cs, p, q, which }, stem: `Consider the function $f(x) = ${poly(cs)}$. The graph of $f$ has stationary points at $x = ${p}$ and $x = ${q}$.`, parts: [
+        P(`Find $f''(${which})$.`, 2, ans.int(f2), [`$f'(x) = ${poly([3, -3 * (p + q), 3 * p * q])}$`, `$f''(x) = ${poly([6, -3 * (p + q)])}$`, `$f''(${which}) = ${f2}$`]),
+        P(`What does this show about the stationary point at $x = ${which}$?`, 1, ans.choice(rng, { text: isMax ? "It is a local maximum." : "It is a local minimum.", value: isMax ? "max" : "min" }, [
+          { text: isMax ? "It is a local minimum." : "It is a local maximum.", value: isMax ? "min" : "max", why: "A negative second derivative at a stationary point gives a maximum; a positive one gives a minimum." },
+          { text: "It is a point of inflexion.", value: "inflexion", why: "The second derivative is not zero there." }]), [`$f''(${which}) ${isMax ? "<" : ">"} 0$ at a stationary point, so it is a local ${isMax ? "maximum" : "minimum"}.`]),
+        P("Find the $x$-coordinate of the point of inflexion of the graph of $f$.", 2, ans.int(xi), [`$f''(x) = 0$ gives $${poly([6, -3 * (p + q)])} = 0$, so $x = ${xi}$.`, "$f''$ changes sign there, so the concavity changes."]),
+        P("Find the $y$-coordinate of the point of inflexion.", 1, ans.int(yi), [`$f(${xi}) = ${yi}$`])] };
+    } });
+  reg({ type: "t5-ai-second-derivative", unknown: "greatest-rate", representation: "words", format: "value", levels: [4], syllabus: ["5.10"], skills: ["AI-AHL5.10.greatest-rate-of-change", "AI-AHL5.10.points-of-inflexion"],
+    title: "When a quantity is changing fastest",
+    build({ rng }) {
+      if (rng.bool()) {
+        const L = 100 * rng.int(5, 60), C = rng.pick([9, 14, 19, 24, 39, 49]), k = rng.int(15, 90) / 100, c = rng.pick([["fish in a lake", "months"], ["rabbits on an island", "months"], ["people who have heard a rumour", "days"], ["users of a new app", "weeks"]]);
+        const t = Math.log(C) / k, rate = (k * L) / 4;
+        return { params: { kind: "logistic", L, C, k }, stem: `The number of ${c[0]} after $t$ ${c[1]} is modelled by $N(t) = \\dfrac{${num(L)}}{1 + ${C}\\mathrm{e}^{${coef(-k, "t")}}}$, for $t \\ge 0$.`, parts: [
+          P("Find $N(0)$.", 1, ans.sf(L / (1 + C)), [`$N(0) = \\dfrac{${num(L)}}{1 + ${C}} = ${sf(L / (1 + C))}$`]),
+          P("Write down the value that $N$ approaches as $t$ becomes large.", 1, ans.int(L), [`As $t$ grows, $\\mathrm{e}^{${coef(-k, "t")}}$ tends to zero, so $N$ tends to $${num(L)}$.`]),
+          P(`Find the value of $t$ at which $N$ is increasing most rapidly.`, 3, ans.sf(t), ["The rate of increase $N'(t)$ is greatest where $N''(t) = 0$, at the point of inflexion.", "Graph $N'(t)$ on the GDC and find its maximum (or solve $N''(t) = 0$).", `$t = ${sf(t)}$`]),
+          P("Find this greatest rate of increase.", 2, ans.sf(rate), [`The maximum value of $N'(t)$ is $${sf(rate)}$ per ${c[1].replace(/s$/, "")}.`])] };
+      }
+      const A = rng.int(8, 40), k = rng.int(2, 9) / 10, tm = 1 / k, cm = (A / k) * Math.exp(-1), ti = 2 / k, rate = A * Math.exp(-2);
+      return { params: { kind: "drug", A, k }, stem: `The concentration of a medicine in the blood, $C$ milligrams per litre, $t$ hours after it is taken is modelled by $C(t) = ${A}t\\mathrm{e}^{${coef(-k, "t")}}$, for $t \\ge 0$.`, parts: [
+        P("Find the value of $t$ at which the concentration is greatest.", 2, ans.sf(tm), [`$C'(t) = ${A}\\mathrm{e}^{${coef(-k, "t")}}(1 - ${num(k)}t) = 0$`, `$t = ${sf(tm)}$`]),
+        P("Find the greatest concentration.", 1, ans.sf(cm), [`$C(${sf(tm)}) = ${sf(cm)}$`]),
+        P("Find the value of $t$ at which the concentration is decreasing most rapidly.", 3, ans.sf(ti), ["$C'(t)$ is most negative where $C''(t) = 0$, at the point of inflexion.", "Graph $C'(t)$ on the GDC and find its minimum (or solve $C''(t) = 0$).", `$t = ${sf(ti)}$`]),
+        P("Find the rate at which the concentration is decreasing at that time, in milligrams per litre per hour.", 1, ans.sf(rate), [`$C'(${sf(ti)}) = ${sf(-rate)}$, so the concentration is decreasing at $${sf(rate)}$.`])] };
+    } });
+
+  // ======================= 5.11 further integration =======================
+  const intg = (lo, hi, body, v) => `\\displaystyle\\int_{${lo}}^{${hi}} ${body}\\,\\mathrm{d}${v || "x"}`;
+  function antiFamily(s) {
+    const { a, b, c, n } = s, u = lin(b, c), q = Q(a, b);
+    switch (s.fam) {
+      case "cos": return { y: coef(a, `\\cos(${u})`), f: (x) => a * Math.cos(b * x + c), opts: [[coef(q, `\\sin(${u})`), (x) => (a / b) * Math.sin(b * x + c)], [coef(a, `\\sin(${u})`), (x) => a * Math.sin(b * x + c), "Divide by the coefficient of $x$."],
+        [coef(a * b, `\\sin(${u})`), (x) => a * b * Math.sin(b * x + c), "Multiplying by the coefficient of $x$ is differentiation."], [coef(Q(-a, b), `\\sin(${u})`), (x) => (-a / b) * Math.sin(b * x + c), "The integral of cosine is sine, with no change of sign."]] };
+      case "sin": return { y: coef(a, `\\sin(${u})`), f: (x) => a * Math.sin(b * x + c), opts: [[coef(Q(-a, b), `\\cos(${u})`), (x) => (-a / b) * Math.cos(b * x + c)], [coef(-a, `\\cos(${u})`), (x) => -a * Math.cos(b * x + c), "Divide by the coefficient of $x$."],
+        [coef(q, `\\cos(${u})`), (x) => (a / b) * Math.cos(b * x + c), "The integral of sine is minus cosine."], [coef(-a * b, `\\cos(${u})`), (x) => -a * b * Math.cos(b * x + c), "Multiplying by the coefficient of $x$ is differentiation."]] };
+      case "exp": return { y: coef(a, ex(b)), f: (x) => a * Math.exp(b * x), opts: [[coef(q, ex(b)), (x) => (a / b) * Math.exp(b * x)], [coef(a, ex(b)), (x) => a * Math.exp(b * x), "Divide by the coefficient of $x$."],
+        [coef(a * b, ex(b)), (x) => a * b * Math.exp(b * x), "Multiplying by the coefficient of $x$ is differentiation."], [coef(Q(a, b + 1), `\\mathrm{e}^{${lin(b, 1)}}`), (x) => (a / (b + 1)) * Math.exp(b * x + 1), "The power rule does not apply to an exponential."]] };
+      case "recip": return { y: `\\dfrac{${a}}{${u}}`, f: (x) => a / (b * x + c), opts: [[coef(q, `\\ln(${u})`), (x) => (a / b) * Math.log(b * x + c)], [coef(a, `\\ln(${u})`), (x) => a * Math.log(b * x + c), "Divide by the coefficient of $x$."],
+        [coef(a * b, `\\ln(${u})`), (x) => a * b * Math.log(b * x + c), "Multiplying by the coefficient of $x$ is differentiation."], [`-\\dfrac{${a}}{(${u})^{2}}`, (x) => -a / Math.pow(b * x + c, 2), "This is closer to the derivative; the integral of a reciprocal is a logarithm."]] };
+      default: return { y: `(${u})^{${n}}`, f: (x) => Math.pow(b * x + c, n), opts: [[coef(Q(1, b * (n + 1)), `(${u})^{${n + 1}}`), (x) => Math.pow(b * x + c, n + 1) / (b * (n + 1))], [coef(Q(1, n + 1), `(${u})^{${n + 1}}`), (x) => Math.pow(b * x + c, n + 1) / (n + 1), "Divide by the coefficient of $x$ as well."],
+        [coef(Q(b, n + 1), `(${u})^{${n + 1}}`), (x) => (b * Math.pow(b * x + c, n + 1)) / (n + 1), "Divide by the coefficient of $x$; do not multiply by it."], [`${n * b}${fmt.power(`(${u})`, n - 1)}`, (x) => n * b * Math.pow(b * x + c, n - 1), "This is the derivative."]] };
+    }
+  }
+  reg({ type: "t5-ai-integration", unknown: "linear-composite", representation: "equation", format: "mcq", levels: [2], syllabus: ["5.11"], skills: ["AI-AHL5.11.linear-composites", "AI-AHL5.11.standard-integrals"],
+    title: "Integrate a function of a linear expression",
+    build({ rng }) {
+      let s, F, lo, hi;
+      do {
+        const fam = rng.pick(["cos", "sin", "exp", "recip", "pow"]);
+        s = { fam, a: rng.int(2, 9), b: fam === "exp" ? rng.pick([-3, -2, 2, 3]) : rng.int(2, 4), c: fam === "pow" ? rng.nonzero(-3, 3) : rng.int(1, 4), n: rng.int(2, 4) };
+        F = antiFamily(s); lo = rng.int(0, 1); hi = lo + rng.pick(fam === "exp" || fam === "pow" ? [0.5, 1] : [1, 2]);
+      } while (!distinct(F.opts.map((o) => o[1](hi) - o[1](lo))) || Math.abs(F.opts[0][1](hi) - F.opts[0][1](lo)) < 0.01);
+      const val = F.opts[0][1](hi) - F.opts[0][1](lo);
+      const ch = ans.choice(rng, { text: m(F.opts[0][0] + " + C"), value: val }, F.opts.slice(1).map((o) => ({ text: m(o[0] + " + C"), value: o[1](hi) - o[1](lo), why: o[2] })));
+      return { params: { s, lo, hi }, stem: `Let $f(x) = ${F.y}$${s.fam === "recip" ? ", for $x \\ge 0$" : ""}.`, parts: [
+        P(`Which of the following is $\\displaystyle\\int f(x)\\,\\mathrm{d}x$?`, 2, ch, ["The inside function is linear, so integrate the outside function and divide by the coefficient of $x$.", `$\\displaystyle\\int f(x)\\,\\mathrm{d}x = ${F.opts[0][0]} + C$`]),
+        P(`Find the value of $${intg(num(lo), num(hi), "f(x)")}$.`, 2, ans.sf(val), [`$\\left[${F.opts[0][0]}\\right]_{${num(lo)}}^{${num(hi)}} = ${sf(val)}$`])] };
+    } });
+  function subFamily(rng) {
+    const n = rng.int(2, 3), j = rng.int(1, 3), b = rng.int(1, 2), c = rng.int(1, 3), pw = (u) => (n === 1 ? u : `${u}^{${n}}`);
+    const o = (lo, hi, body, val, why) => [intg(lo, hi, body, "u"), val, why];
+    return rng.pick([
+      (() => { const k = 2 * (n + 1) * j, top = b * b + c, I = (hi, lo, co, p) => (co * (Math.pow(hi, p + 1) - Math.pow(lo, p + 1))) / (p + 1);
+        return { fam: "poly", n, k, b, c, body: `${k}x(x^{2} + ${c})^{${n}}`, lo: "0", hi: `${b}`, u: `x^{2} + ${c}`, du: "2x", f: (x) => k * x * Math.pow(x * x + c, n), a: 0, bb: b, value: I(top, c, k / 2, n), vtex: num(I(top, c, k / 2, n)),
+          opts: [o(c, top, `${k / 2}u^{${n}}`, I(top, c, k / 2, n)), o(c, top, `${k}u^{${n}}`, I(top, c, k, n), "$\\mathrm{d}u = 2x\\,\\mathrm{d}x$, so $x\\,\\mathrm{d}x$ is half of $\\mathrm{d}u$."), o(0, b, `${k / 2}u^{${n}}`, I(b, 0, k / 2, n), "The limits must be changed to values of $u$."), o(c, top, `${k / 2}u^{${n + 1}}`, I(top, c, k / 2, n + 1), "The power of the bracket does not change in the substitution.")] }; })(),
+      (() => { const k = j + 1, top = b * b, v = k * (Math.exp(top) - 1);
+        return { fam: "exp", k, b, body: `${2 * k}x\\mathrm{e}^{x^{2}}`, lo: "0", hi: `${b}`, u: "x^{2}", du: "2x", f: (x) => 2 * k * x * Math.exp(x * x), a: 0, bb: b, value: v, vtex: `${k}(\\mathrm{e}${top === 1 ? "" : `^{${top}}`} - 1)`,
+          opts: [o(0, top, `${k}\\mathrm{e}^{u}`, v), o(0, top, `${2 * k}\\mathrm{e}^{u}`, 2 * v, "$\\mathrm{d}u = 2x\\,\\mathrm{d}x$ already uses the factor $2x$."), o(0, top, `${k}u\\mathrm{e}^{u}`, k * (Math.exp(top) * (top - 1) + 1), "The factor $x$ is part of $\\mathrm{d}u$ and does not stay in the integrand."), o(0, top + 1, `${k}\\mathrm{e}^{u}`, k * (Math.exp(top + 1) - 1), "The upper limit is the value of $u$ when $x$ is at its upper limit.")] }; })(),
+      (() => { const k = (n + 1) * j + rng.int(0, 1);
+        return { fam: "trig", n, k, body: `${k}\\cos x\\sin^{${n}}x`, lo: "0", hi: "\\frac{\\pi}{2}", u: "\\sin x", du: "\\cos x", f: (x) => k * Math.cos(x) * Math.pow(Math.sin(x), n), a: 0, bb: Math.PI / 2, value: k / (n + 1), frac: [k, n + 1], vtex: frac(k, n + 1),
+          opts: [o(0, 1, `${k}u^{${n}}`, k / (n + 1)), o(0, "\\frac{\\pi}{2}", `${k}u^{${n}}`, (k * Math.pow(Math.PI / 2, n + 1)) / (n + 1), "The limits must be changed to values of $u$."), o(0, 1, `${k}u^{${n + 1}}`, k / (n + 2), "$\\cos x\\,\\mathrm{d}x$ becomes $\\mathrm{d}u$; the power of $u$ stays the same."), o(0, 1, `-${k}u^{${n}}`, -k / (n + 1), "The derivative of sine is cosine, with no change of sign.")] }; })(),
+      (() => { const k = j + 1, top = b * b + c, g = fmt.gcd(top, c), rt = g === c ? `${top / c}` : `\\left(${frac(top, c)}\\right)`, v = k * Math.log(top / c);
+        return { fam: "log", k, b, c, body: `\\dfrac{${2 * k}x}{x^{2} + ${c}}`, lo: "0", hi: `${b}`, u: `x^{2} + ${c}`, du: "2x", f: (x) => (2 * k * x) / (x * x + c), a: 0, bb: b, value: v, vtex: `${k}\\ln ${rt}`,
+          opts: [o(c, top, `\\dfrac{${k}}{u}`, v), o(c, top, `\\dfrac{${2 * k}}{u}`, 2 * v, "$\\mathrm{d}u = 2x\\,\\mathrm{d}x$ already uses the factor $2x$."), o(c, top + c, `\\dfrac{${k}}{u}`, k * Math.log((top + c) / c), "The upper limit is the value of $u$ when $x$ is at its upper limit."), o(c, top, `\\dfrac{${k}}{u^{2}}`, k * (1 / c - 1 / top), "The denominator is $u$ itself, not its square.")] }; })(),
+      (() => { const k = (n + 1) * j + rng.int(0, 1);
+        return { fam: "lnpow", n, k, body: `\\dfrac{${k}(\\ln x)^{${n}}}{x}`, lo: "1", hi: "\\mathrm{e}", u: "\\ln x", du: "\\dfrac{1}{x}", f: (x) => (k * Math.pow(Math.log(x), n)) / x, a: 1, bb: Math.E, value: k / (n + 1), frac: [k, n + 1], vtex: frac(k, n + 1),
+          opts: [o(0, 1, `${k}u^{${n}}`, k / (n + 1)), o(1, "\\mathrm{e}", `${k}u^{${n}}`, (k * (Math.pow(Math.E, n + 1) - 1)) / (n + 1), "The limits must be changed to values of $u$."), o(0, 1, `${k}u^{${n - 1}}`.replace("^{1}", ""), k / n, "$\\dfrac{1}{x}\\,\\mathrm{d}x$ becomes $\\mathrm{d}u$; the power of $u$ stays the same."), o(0, 1, `${k}u^{${n + 1}}`, k / (n + 2), "The power of $u$ stays the same.")] }; })()]);
+  }
+  reg({ type: "t5-ai-integration", unknown: "substitution", representation: "equation", format: "mcq", levels: [3], syllabus: ["5.11"], skills: ["AI-AHL5.11.inspection-substitution", "AI-AHL5.11.exact-definite-integral"],
+    title: "A definite integral by substitution, exactly",
+    build({ rng }) {
+      let F;
+      do { F = subFamily(rng); } while (!distinct(F.opts.map((x) => x[1])));
+      const I = intg(F.lo, F.hi, F.body);
+      return { params: { fam: F.fam, n: F.n, k: F.k, c: F.c, a: F.a, b: F.bb }, stem: `Consider the integral $I = ${I}$. The substitution $u = ${F.u}$ is used.`, parts: [
+        P("Which of the following is equal to $I$?", 2, ans.choice(rng, { text: m(F.opts[0][0]), value: F.opts[0][1] }, F.opts.slice(1).map((x) => ({ text: m(x[0]), value: x[1], why: x[2] }))), [
+          `$\\dfrac{\\mathrm{d}u}{\\mathrm{d}x} = ${F.du}$, and the limits $x = ${F.lo.replace("\\frac", "\\dfrac")}$ and $x = ${F.hi.replace("\\frac", "\\dfrac")}$ become values of $u$.`, `$I = ${F.opts[0][0]}$`]),
+        P("Find the exact value of $I$.", 3, F.frac ? ans.frac(F.frac[0], F.frac[1]) : Number.isInteger(F.value) ? ans.int(F.value) : ans.exact(F.value, F.vtex), ["Integrate with respect to $u$ and substitute the limits for $u$.", `$I = ${F.vtex}$`])] };
+    } });
+  reg({ type: "t5-ai-integration", unknown: "find-function", representation: "equation", format: "value", levels: [2], syllabus: ["5.11"], skills: ["AI-AHL5.11.constant-of-integration", "AI-AHL5.11.linear-composites"],
+    title: "Find a function from its derivative and one value",
+    build({ rng }) {
+      const fam = rng.pick(["exp", "sin", "recipsq"]), a = 2 * rng.int(1, 6), b = fam === "exp" ? rng.pick([-4, -3, -2, 2, 3]) : rng.int(2, 4), d = rng.int(-5, 9), x1 = rng.pick([0.5, 1, 1.5, 2]);
+      const S = fam === "exp" ? { d: coef(a, ex(b)), F: coef(Q(a, b), ex(b)), C: Q(d * b - a, b), F0: (x) => (a / b) * Math.exp(b * x) }
+        : fam === "sin" ? { d: coef(a, `\\sin(${coef(b, "x")})`), F: coef(Q(-a, b), `\\cos(${coef(b, "x")})`), C: Q(d * b + a, b), F0: (x) => (-a / b) * Math.cos(b * x) }
+          : { d: `\\dfrac{${a}}{(${lin(b, 1)})^{2}}`, F: `-\\dfrac{${a / fmt.gcd(a, b)}}{${b / fmt.gcd(a, b) === 1 ? "" : b / fmt.gcd(a, b)}(${lin(b, 1)})}`, C: Q(d * b + a, b), F0: (x) => -a / (b * (b * x + 1)) };
+      const Cv = S.C.n / S.C.d, v = S.F0(x1) + Cv;
+      return { params: { fam, a, b, d, x1 }, stem: `The derivative of a function $f$ is $f'(x) = ${S.d}$${fam === "recipsq" ? ", for $x \\ge 0$" : ""}, and $f(0) = ${d}$. The function can be written as $f(x) = ${S.F} + C$.`, parts: [
+        P("Find the value of $C$.", 2, ans.frac(S.C.n, S.C.d), [`Substitute $x = 0$: $f(0) = ${frac(fam === "exp" ? a : -a, b)} + C = ${d}$.`, `$C = ${frac(S.C.n, S.C.d)}$`]),
+        P(`Find $f(${num(x1)})$.`, 2, ans.sf(v), [`$f(${num(x1)}) = ${sf(S.F0(x1), 4)} ${signed(Number(Cv.toPrecision(4)))}$`, `$= ${sf(v)}$`])] };
+    } });
+
+  // ======================= 5.12 areas and volumes of revolution =======================
+  const simpson = (f, a, b) => { const n = 2000, h = (b - a) / n; let s = f(a) + f(b); for (let i = 1; i < n; i++) s += f(a + i * h) * (i % 2 ? 4 : 2); return (s * h) / 3; };
+  reg({ type: "t5-ai-area-volume", unknown: "area-below-axis", representation: "graph", format: "value", levels: [2], syllabus: ["5.12"], skills: ["AI-AHL5.12.area-below-axis"],
+    title: "The area of a region that is partly below the axis",
+    build({ rng }) {
+      const p = rng.int(1, 3), q = p + rng.int(3, 4), k = rng.pick([1, -1, 0.5, -0.5]), a = p - rng.int(1, Math.min(2, p)), b = p + rng.int(1, 2), cs = [k * p * q, -k * (p + q), k], f = (x) => k * (x - p) * (x - q);
+      const I1 = simpson(f, a, p), I2 = simpson(f, p, b), ys = [a - 0.5, (p + q) / 2, q + 0.5, a, b].map(f);
+      return { params: { cs, a, b }, stem: `The diagram shows part of the graph of $f(x) = ${poly([k, -k * (p + q), k * p * q])}$. The region between the graph and the $x$-axis from $x = ${a}$ to $x = ${b}$ is shaded.`,
+        graph: { x: [a - 1, q + 1], y: [Math.floor(Math.min(...ys, 0) - 0.5), Math.ceil(Math.max(...ys, 0) + 0.5)], xStep: 1, functions: [{ fn: { type: "poly", coeffs: cs }, label: "f" }], regions: [{ x: [a, p], fn: 0 }, { x: [p, b], fn: 0 }], alt: "A parabola crossing the x-axis, with the region between the curve and the axis shaded on both sides of the crossing" }, parts: [
+          P(`Find the value of $${intg(a, b, "f(x)")}$.`, 1, ans.sf(I1 + I2), [`From the GDC, $${intg(a, b, "f(x)")} = ${sf(I1 + I2)}$.`]),
+          P("Find the total area of the shaded region.", 3, ans.sf(Math.abs(I1) + Math.abs(I2), 3, { misconceptions: [{ value: Math.abs(I1 + I2), text: "The part below the axis counts as negative in the integral; add the two areas separately." }] }), [
+            `The graph crosses the axis at $x = ${p}$, so part of the region is below the axis.`, `Area $= ${intg(a, b, "\\left|f(x)\\right|")} = ${sf(Math.abs(I1), 4)} + ${sf(Math.abs(I2), 4)}$`, `$= ${sf(Math.abs(I1) + Math.abs(I2))}$`])] };
+    } });
+  const VOL = [
+    () => ({ fn: (a, b) => ({ type: "sqrt", a, h: 0, k: b }), tex: (a, b) => `${coef(a, "\\sqrt{x}")} + ${b}`, a: [1, 3], b: [1, 3], lo: [1, 2], w: [3, 4] }),
+    () => ({ fn: (a, b) => ({ type: "poly", coeffs: [b, 0, a / 10] }), tex: (a, b) => `${coef(a / 10, "x^{2}")} + ${b}`, a: [1, 5], b: [1, 3], lo: [0, 1], w: [2, 3] }),
+    () => ({ fn: (a, b) => ({ type: "trig", name: "sin", a, b: 1, c: 0, d: a + b }), tex: (a, b) => `${a + b} + ${coef(a, "\\sin x")}`, a: [1, 2], b: [1, 2], lo: [0, 1], w: [3, 5] })];
+  reg({ type: "t5-ai-area-volume", unknown: "volume-x-axis", representation: "graph", format: "value", levels: [4], syllabus: ["5.12"], skills: ["AI-AHL5.12.volume-x-axis", "AI-AHL5.12.composite-volume"],
+    title: "Area and volume of revolution about the x-axis",
+    build({ rng }) {
+      const F = rng.pick(VOL.slice(0, 3))(), a = rng.int(F.a[0], F.a[1]), b = rng.int(F.b[0], F.b[1]), lo = rng.int(F.lo[0], F.lo[1]), hi = lo + rng.int(F.w[0], F.w[1]), fn = F.fn(a, b), f = (x) => E.graph.evaluate(fn, x);
+      const area = simpson(f, lo, hi), vol = Math.PI * simpson((x) => f(x) * f(x), lo, hi), rad = rng.pick([0.5, 1]), rest = vol - Math.PI * rad * rad * (hi - lo), top = Math.max(f(lo), f(hi), f((lo + hi) / 2), f(lo + 1.57));
+      return { params: { lo, hi, rad }, stem: `The diagram shows the graph of $y = ${F.tex(a, b)}$. The shaded region $R$ is bounded by the curve, the $x$-axis and the lines $x = ${lo}$ and $x = ${hi}$.`,
+        graph: { x: [-0.5, hi + 1], y: [-1, Math.ceil(top + 1)], xStep: 1, functions: [{ fn, domain: [0, hi + 1] }], regions: [{ x: [lo, hi], fn: 0 }], alt: "A curve above the x-axis with the region under it between two vertical lines shaded" }, parts: [
+          P("Find the area of $R$.", 2, ans.sf(area), [`Area $= ${intg(lo, hi, "y")} = ${sf(area)}$`]),
+          P("The region $R$ is rotated through $2\\pi$ about the $x$-axis to form a solid. Find the volume of the solid.", 3, ans.sf(vol, 3, { misconceptions: [{ value: vol / Math.PI, text: "Multiply the integral of $y^{2}$ by $\\pi$." }, { value: Math.PI * area, text: "The integrand is $y^{2}$, not $y$." }] }), [
+            `$V = ${intg(lo, hi, "\\pi y^{2}")}$`, `$= \\pi${intg(lo, hi, `\\left(${F.tex(a, b)}\\right)^{2}`)}$`, `$= ${sf(vol)}$`]),
+          P(`A cylindrical hole of radius $${num(rad)}$ is drilled through the solid along the $x$-axis. Find the volume that remains.`, 2, ans.sf(rest), [`The cylinder removed has volume $\\pi${br(rad)}^{2}${br(hi - lo)} = ${sf(Math.PI * rad * rad * (hi - lo), 4)}$.`, `$${sf(vol, 5)} - ${sf(Math.PI * rad * rad * (hi - lo), 4)} = ${sf(rest)}$`])] };
+    } });
+  reg({ type: "t5-ai-area-volume", unknown: "volume-y-axis", representation: "equation", format: "value", levels: [4], syllabus: ["5.12"], skills: ["AI-AHL5.12.volume-y-axis", "AI-AHL5.12.rearrange-for-x", "AI-AHL5.12.area-y-axis"],
+    title: "Area against the y-axis and volume of revolution about the y-axis",
+    build({ rng }) {
+      const fam = rng.pick(["shift", "scale", "exp", "root"]), a = rng.int(2, 4), c = rng.int(1, 4);
+      const S = fam === "shift" ? { y: `x^{2} + ${c}`, lo: c + rng.int(0, 1), w: [2, 5], x2: (y) => y - c, opts: [[`y - ${c}`, (y) => y - c], [`y + ${c}`, (y) => y + c, "Subtract the constant from both sides."], [`\\sqrt{y - ${c}}`, (y) => Math.sqrt(Math.abs(y - c)), "This is $x$, not $x^{2}$."], [`(y - ${c})^{2}`, (y) => (y - c) * (y - c), "$x^{2}$ is already the subject after subtracting; do not square again."]] }
+        : fam === "scale" ? { y: `${a}x^{2}`, lo: rng.int(0, 2), w: [2, 6], x2: (y) => y / a, opts: [[`\\dfrac{y}{${a}}`, (y) => y / a], [`${a}y`, (y) => a * y, "Divide by the coefficient."], [`\\sqrt{\\dfrac{y}{${a}}}`, (y) => Math.sqrt(y / a), "This is $x$, not $x^{2}$."], [`\\dfrac{y^{2}}{${a * a}}`, (y) => (y * y) / (a * a), "$x^{2}$ is already the subject after dividing; do not square again."]] }
+          : fam === "exp" ? { y: "\\mathrm{e}^{x}", lo: 1, w: [2, 5], x2: (y) => Math.log(y) * Math.log(y), opts: [["(\\ln y)^{2}", (y) => Math.log(y) * Math.log(y)], ["\\ln y", (y) => Math.log(y), "This is $x$, not $x^{2}$."], ["\\ln(y^{2})", (y) => Math.log(y * y), "The square of a logarithm is not the logarithm of a square."], ["\\mathrm{e}^{2y}", (y) => Math.exp(2 * y), "The inverse of the exponential is the logarithm."]] }
+            : { y: `${a}\\sqrt{x}`, lo: rng.int(0, 2), w: [2, 4], x2: (y) => Math.pow(y / a, 4), opts: [[`\\dfrac{y^{4}}{${a ** 4}}`, (y) => Math.pow(y / a, 4)], [`\\dfrac{y^{2}}{${a * a}}`, (y) => (y * y) / (a * a), "This is $x$, not $x^{2}$."], [`\\dfrac{y^{4}}{${a}}`, (y) => Math.pow(y, 4) / a, "The coefficient is raised to the power as well."], [`${a * a}y^{2}`, (y) => a * a * y * y, "Divide by the coefficient before squaring."]] };
+      const lo = S.lo, hi = lo + rng.int(S.w[0], S.w[1]), yt = lo + 1.37, vol = Math.PI * simpson(S.x2, lo, hi), area = simpson((y) => Math.sqrt(Math.max(0, S.x2(y))), lo, hi);
+      if (!distinct(S.opts.map((o) => o[1](yt)))) return this.build({ rng });
+      return { params: { fam, a, c, lo, hi, yt }, stem: `Consider the curve $y = ${S.y}$, for $x \\ge 0$. The region $R$ is bounded by the curve, the $y$-axis and the lines $y = ${lo}$ and $y = ${hi}$.`, parts: [
+        P("Which of the following is an expression for $x^{2}$ in terms of $y$?", 2, opt(rng, S.opts, yt), ["Rearrange the equation of the curve to make $x$, and then $x^{2}$, the subject.", `$x^{2} = ${S.opts[0][0]}$`]),
+        P("The region $R$ is rotated through $2\\pi$ about the $y$-axis. Find the volume of the solid formed.", 3, ans.sf(vol), [`$V = ${intg(lo, hi, "\\pi x^{2}", "y")}$`, `$= \\pi${intg(lo, hi, `\\left(${S.opts[0][0]}\\right)`, "y")}$`, `$= ${sf(vol)}$`]),
+        P("Find the area of $R$.", 2, ans.sf(area), [`Area $= ${intg(lo, hi, "x", "y")}$, with $x$ written in terms of $y$.`, `$= ${sf(area)}$`])] };
+    } });
+  reg({ type: "t5-ai-area-volume", unknown: "volume-exact", representation: "equation", format: "value", levels: [3], syllabus: ["5.12"], skills: ["AI-AHL5.12.volume-x-axis"],
+    title: "An exact volume of revolution",
+    build({ rng }) {
+      const fam = rng.pick(["sqrtlin", "line", "para"]), a = rng.int(1, 4), b = rng.int(1, 5), h = rng.int(1, 4);
+      const S = fam === "sqrtlin" ? { y: `\\sqrt{${lin(a, b)}}`, y2: lin(a, b), V: Q(a * h * h + 2 * b * h, 2), A: `\\left[${expr([[Q(a, 2), "x^{2}"], [b, "x"]])}\\right]`, sq: (x) => a * x + b }
+        : fam === "line" ? { y: coef(a, "x"), y2: coef(a * a, "x^{2}"), V: Q(a * a * h * h * h, 3), A: `\\left[${coef(Q(a * a, 3), "x^{3}")}\\right]`, sq: (x) => a * a * x * x }
+          : { y: coef(a, "x^{2}"), y2: coef(a * a, "x^{4}"), V: Q(a * a * Math.pow(h, 5), 5), A: `\\left[${coef(Q(a * a, 5), "x^{5}")}\\right]`, sq: (x) => a * a * Math.pow(x, 4) };
+      const I2 = S.V.n / S.V.d, I1 = simpson((x) => Math.sqrt(S.sq(x)), 0, h), o = (pre, body, val, why) => [`${pre}${intg(0, h, body)}`, val, why];
+      const opts = [o("\\pi", `(${S.y2})`, Math.PI * I2), o("", `(${S.y2})`, I2, "The cross-sections are circles, so the integral is multiplied by $\\pi$."), o("\\pi", S.y, Math.PI * I1, "The radius must be squared: the integrand is $y^{2}$."), o("2\\pi", `(${S.y2})`, 2 * Math.PI * I2, "The formula is $\\pi$ times the integral of $y^{2}$, even for a full turn.")];
+      if (!distinct(opts.map((x) => x[1])) || S.V.n > 9999) return this.build({ rng });
+      return { params: { fam, a, b, h }, stem: `The region bounded by the curve $y = ${S.y}$, the $x$-axis${fam === "sqrtlin" ? ", the $y$-axis" : ""} and the line $x = ${h}$ is rotated through $2\\pi$ about the $x$-axis.`, parts: [
+        P("Which of the following gives the volume of the solid formed?", 2, ans.choice(rng, { text: m(opts[0][0]), value: opts[0][1] }, opts.slice(1).map((x) => ({ text: m(x[0]), value: x[1], why: x[2] }))), [`$V = \\pi${intg(0, h, "y^{2}")}$ and $y^{2} = ${S.y2}$.`]),
+        P("Find the exact volume of the solid.", 3, ans.exact(Math.PI * I2, piFrac(S.V.n, S.V.d)), [`$V = \\pi${S.A}_{0}^{${h}}$`, `$= ${piFrac(S.V.n, S.V.d)}$`])] };
     } });
 
   /*NEXT*/

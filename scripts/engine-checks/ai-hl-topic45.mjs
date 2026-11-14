@@ -80,6 +80,11 @@ function paths(M, from, to, steps) {
   for (let mid = 0; mid < M.length; mid++) p += M[mid][from] * paths(M, mid, to, steps - 1);
   return p;
 }
+// The functions of the differentiation questions, written out again from their parameters
+const chainF = (s) => ({ exp: (x) => s.a * Math.exp(s.b * x), sin: (x) => s.a * Math.sin(s.b * x), cos: (x) => s.a * Math.cos(s.b * x), ln: (x) => s.a * Math.log(s.b * x + s.c),
+  pow: (x) => (s.b * x + s.c) ** s.n, tan: (x) => s.a * Math.tan(s.b * x), expquad: (x) => Math.exp(s.b * x * x) })[s.fam];
+const prodF = (p) => ({ xexp: (x) => x * Math.exp(p.k * x), x2exp: (x) => x * x * Math.exp(p.k * x), lnx: (x) => Math.log(x) / x ** p.n, xover: (x) => x / (x * x + p.c), xlnx: (x) => x * Math.log(x) })[p.fam];
+/*HELPERS*/
 
 export default {
   "t4-ai-reliability-validity/identify/words": (q, T) => {
@@ -255,6 +260,108 @@ export default {
     // steady state: (T - I)s = 0 with the entries adding to one
     const st = solve([[M[0][0] - 1, M[0][1], M[0][2]], [M[1][0], M[1][1] - 1, M[1][2]], [1, 1, 1]], [0, 0, 1]);
     return { a: after(0, 1), b: after(1, n), c: st[2] * total };
+  },
+
+    "t5-ai-derivative-rules/chain-rule/equation": (q, T) => {
+    const { s, x0 } = q.params, g = T.deriv(chainF(s), x0);
+    return { a: T.option(g), b: T.approx(g, 1e-6 * Math.max(1, Math.abs(g))) };
+  },
+  "t5-ai-derivative-rules/product-quotient/equation": (q, T) => {
+    const { fam, tp } = q.params, f = prodF(q.params), d = (x) => T.deriv(f, x), logs = fam === "lnx" || fam === "xlnx";
+    const roots = T.roots(d, logs ? 0.05 : -5, logs ? 6 : 5, 3000).filter((r) => Math.abs(r) > 1e-3 && (fam !== "xover" || r > 0));
+    T.require(roots.length === 1, "one stationary point of the kind asked for");
+    return { a: T.option(d(tp)), b: T.approx(roots[0], 1e-6) };
+  },
+  "t5-ai-related-rates/direct-rate/words": (q, T) => {
+    const { id, v, R } = q.params, f = { circle: (r) => Math.PI * r * r, sphere: (r) => (4 / 3) * Math.PI * r ** 3, cube: (r) => r ** 3 }[id];
+    const dq = T.deriv(f, R), rate = T.deriv((t) => f(R + v * t), 0);
+    return { a: T.approx(dq, 1e-6 * dq), b: T.approx(Math.abs(rate), 1e-6 * Math.abs(rate)) };
+  },
+  "t5-ai-related-rates/inverse-rate/words": (q, T) => {
+    const p = q.params, ap = (v) => T.approx(v, 1e-6 * Math.max(1, Math.abs(v)));
+    if (p.kind === "sphere") {
+      const V = (r) => (4 / 3) * Math.PI * r ** 3, r = (t) => Math.cbrt((3 * (V(p.R) + p.Q * t)) / (4 * Math.PI));
+      return { a: ap(T.deriv(V, p.R)), b: ap(T.deriv(r, 0, 1e-4)), c: ap(T.deriv((t) => 4 * Math.PI * r(t) ** 2, 0, 1e-4)) };
+    }
+    if (p.kind === "cone") {
+      const V = (h) => (Math.PI * (p.k * h) ** 2 * h) / 3, h = (t) => Math.cbrt((3 * (V(p.R) + p.Q * t)) / (Math.PI * p.k * p.k));
+      return { a: V(1) / Math.PI, b: ap(T.deriv(h, 0, 1e-4)), c: ap(T.deriv((t) => p.k * h(t), 0, 1e-4)) };
+    }
+    const y = (t) => Math.sqrt(p.L ** 2 - (p.x0 + p.v * t) ** 2);
+    T.require(p.x0 < p.L, "the foot of the ladder is closer to the wall than the ladder is long");
+    return { a: y(0), b: ap(-T.deriv(y, 0, 1e-4)), c: ap(T.deriv((t) => ((p.x0 + p.v * t) * y(t)) / 2, 0, 1e-4)) };
+  },
+  "t5-ai-second-derivative/value-and-concavity/equation": (q, T) => {
+    const { fam, a, b, c, x0 } = q.params;
+    const f = { cubic: (x) => a * x ** 3 + b * x * x + c * x, quartic: (x) => a * x ** 4 + b * x * x + c * x, expquad: (x) => a * Math.exp(c * x) + b * x * x, lnquad: (x) => a * Math.log(x) + b * x * x }[fam];
+    const v = T.deriv2(f, x0);
+    T.require(Math.abs(v) > 0.5, "the second derivative is not zero");
+    // concave up: the curve on both sides lies above the point's own height plus the tangent, so the two neighbours average higher
+    const above = f(x0 + 0.01) + f(x0 - 0.01) > 2 * f(x0);
+    return { a: T.approx(v, 1e-4 * Math.max(1, Math.abs(v))), b: T.option(above ? "up" : "down") };
+  },
+  "t5-ai-second-derivative/inflexion/equation": (q, T) => {
+    const { cs, p, q: q2, which } = q.params, f = (x) => T.poly(cs, x);
+    T.require(Math.abs(T.deriv(f, p)) < 1e-6 && Math.abs(T.deriv(f, q2)) < 1e-6, "the stated stationary points are stationary");
+    const isMax = f(which) > f(which + 0.01) && f(which) > f(which - 0.01), r = T.roots((x) => T.deriv2(f, x), -10, 10.37, 500);
+    T.require(r.length === 1, "one point of inflexion");
+    return { a: T.approx(T.deriv2(f, which), 1e-4), b: T.option(isMax ? "max" : "min"), c: T.approx(r[0], 1e-5), d: T.approx(f(r[0]), 1e-3) };
+  },
+  "t5-ai-second-derivative/greatest-rate/words": (q, T) => {
+    const p = q.params, ap = (v) => T.approx(v, 2e-5 * Math.max(1, Math.abs(v)));
+    if (p.kind === "logistic") {
+      // where the growth rate peaks: search the numerical derivative, then refine on the second derivative
+      const N = (t) => p.L / (1 + p.C * Math.exp(-p.k * t)), near = T.extremum((t) => T.deriv(N, t), 0, 60, "max").x, r = T.bisect((t) => T.deriv2(N, t), near - 0.5, near + 0.5, 60);
+      T.require(near > 0.6, "the fastest growth comes after the start");
+      return { a: N(0), b: T.approx(N(400), 1e-3), c: ap(r), d: ap(T.deriv(N, r)) };
+    }
+    const C = (t) => p.A * t * Math.exp(-p.k * t), top0 = T.extremum(C, 0, 60, "max").x, top = T.bisect((t) => T.deriv(C, t), top0 * 0.7, top0 * 1.3, 60);
+    const in0 = T.extremum((t) => T.deriv(C, t), top, 60, "min").x, infl = T.bisect((t) => T.deriv2(C, t), in0 * 0.85, in0 * 1.15, 60);
+    T.require(infl > top, "the concentration falls fastest after its peak");
+    return { a: ap(top), b: ap(C(top)), c: ap(infl), d: ap(-T.deriv(C, infl)) };
+  },
+  "t5-ai-integration/linear-composite/equation": (q, T) => {
+    const { s, lo, hi } = q.params, { a, b, c, n } = s;
+    const f = { cos: (x) => a * Math.cos(b * x + c), sin: (x) => a * Math.sin(b * x + c), exp: (x) => a * Math.exp(b * x), recip: (x) => a / (b * x + c), pow: (x) => (b * x + c) ** n }[s.fam], I = T.integrate(f, lo, hi, 4000);
+    return { a: T.option(I), b: I };
+  },
+  "t5-ai-integration/substitution/equation": (q, T) => {
+    const { fam, n, k, c, a, b } = q.params;
+    const f = { poly: (x) => k * x * (x * x + c) ** n, exp: (x) => 2 * k * x * Math.exp(x * x), trig: (x) => k * Math.cos(x) * Math.sin(x) ** n, log: (x) => (2 * k * x) / (x * x + c), lnpow: (x) => (k * Math.log(x) ** n) / x }[fam], I = T.integrate(f, a, b, 6000);
+    return { a: T.option(I), b: I };
+  },
+  "t5-ai-integration/find-function/equation": (q, T) => {
+    const { fam, a, b, d, x1 } = q.params;
+    const fd = { exp: (x) => a * Math.exp(b * x), sin: (x) => a * Math.sin(b * x), recipsq: (x) => a / (b * x + 1) ** 2 }[fam], F0 = { exp: (x) => (a / b) * Math.exp(b * x), sin: (x) => (-a / b) * Math.cos(b * x), recipsq: (x) => -a / (b * (b * x + 1)) }[fam];
+    for (const x of [0.2, 0.9, 1.7]) T.require(T.close(T.deriv(F0, x), fd(x), 1e-6), "the stated form differentiates to the given derivative");
+    return { a: d - F0(0), b: d + T.integrate(fd, 0, x1, 4000) };
+  },
+  "t5-ai-area-volume/area-below-axis/graph": (q, T) => {
+    const { a, b } = q.params, f = (x) => T.evalGraph(q.graph.functions[0].fn, x), cuts = [a, ...T.roots(f, a + 1e-9, b - 1e-9, 2000), b];
+    T.require(cuts.length === 3, "the curve crosses the axis once inside the interval");
+    const pieces = cuts.slice(1).map((c, i) => T.integrate(f, cuts[i], c));
+    return { a: sum(pieces), b: sum(pieces.map(Math.abs)) };
+  },
+  "t5-ai-area-volume/volume-x-axis/graph": (q, T) => {
+    const { lo, hi, rad } = q.params, f = (x) => T.evalGraph(q.graph.functions[0].fn, x), N = 100000, h = (hi - lo) / N;
+    let area = 0, vol = 0, low = Infinity;
+    for (let i = 0; i < N; i++) { const y = f(lo + (i + 0.5) * h); area += y * h; vol += Math.PI * y * y * h; low = Math.min(low, y); }   // thin discs
+    T.require(low > rad, "the hole is narrower than the solid everywhere");
+    return { a: T.approx(area, 1e-6 * area), b: T.approx(vol, 1e-6 * vol), c: T.approx(vol - Math.PI * rad * rad * (hi - lo), 1e-6 * vol) };
+  },
+  "t5-ai-area-volume/volume-y-axis/equation": (q, T) => {
+    const { fam, a, c, lo, hi, yt } = q.params, curve = { shift: (x) => x * x + c, scale: (x) => a * x * x, exp: (x) => Math.exp(x), root: (x) => a * Math.sqrt(x) }[fam];
+    const xAt = (y) => T.bisect((x) => curve(x) - y, 0, 200, 70), N = 4000, h = (hi - lo) / N;
+    let area = 0, vol = 0;
+    for (let i = 0; i < N; i++) { const x = xAt(lo + (i + 0.5) * h); area += x * h; vol += Math.PI * x * x * h; }   // thin horizontal discs
+    T.require(curve(0) <= lo + 1e-9, "the region starts on or above the lowest point of the curve");
+    return { a: T.option(xAt(yt) ** 2), b: T.approx(vol, 2e-4 * vol), c: T.approx(area, 2e-4 * area) };
+  },
+  "t5-ai-area-volume/volume-exact/equation": (q, T) => {
+    const { fam, a, b, h } = q.params, y = { sqrtlin: (x) => Math.sqrt(a * x + b), line: (x) => a * x, para: (x) => a * x * x }[fam], N = 40000, dx = h / N;
+    let vol = 0;
+    for (let i = 0; i < N; i++) vol += Math.PI * y((i + 0.5) * dx) ** 2 * dx;
+    return { a: T.optionWhere(q, "a", (v) => Math.abs(v - vol) < 1e-5 * vol), b: T.approx(vol, 1e-6 * vol) };
   },
 
   /*NEXTV*/
