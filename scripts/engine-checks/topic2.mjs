@@ -469,4 +469,79 @@ export default {
     T.require(s > 0, "the stretch keeps a maximum a maximum");
     return { a: T.approx(A.x, 1e-5), b: A.value, c: T.approx(B.x, 1e-5), d: B.value };
   },
+  "fn-sketch-from-features/sketch-from-conditions/words": (q, T) => {
+    const { a, p, q: r } = q.params;
+    // the option that has the stated zeros, y-intercept and kind of turning point
+    const hit = T.optionWhere(q, "a", (v, i) => {
+      const g = (x) => T.evalGraph(q.parts[0].answer.options[i].functions[0].fn, x);
+      return Math.abs(g(p)) < 1e-9 && Math.abs(g(r)) < 1e-9 && Math.abs(g(0) - a * p * r) < 1e-9 && (T.deriv2(g, 0) > 0) === (a > 0);
+    });
+    const f = (x) => a * (x - p) * (x - r);
+    return { a: hit, b: T.approx(T.extremum(f, -10, 10, a > 0 ? "min" : "max", 40000).x, 1e-5) };
+  },
+  "fn-sketch-from-features/sketch-quadratic/equation": (q, T) => {
+    const { a, h, k } = q.params, f = (x) => a * (x - h) ** 2 + k;
+    T.require(Math.abs(k) <= 6 && Math.abs(h) <= 3, "the vertex is inside the window");
+    return { a: whichGraph(q, "a", f, T), b: f(0) };
+  },
+  "fn-gdc-optimise-combined/max-difference/equation": (q, T) => {
+    const { a, b } = q.params, f = (x) => a * Math.log(x + 1), g = (x) => (x * x) / b;
+    const r = T.roots((x) => f(x) - g(x), 0.01, 200, 80000);
+    T.require(r.length === 1, "one crossing besides the origin");
+    T.require([0.5, 2].every((x) => Math.abs(T.evalGraph(graphFn(q), x) - f(x)) < 1e-9 && Math.abs(T.evalGraph(graphFn(q, 1), x) - g(x)) < 1e-9) && T.close(q.graph.regions[0].x[1], r[0]), "the graph shows f, g and the region between them");
+    const ex = T.extremum((x) => f(x) - g(x), 0, r[0], "max", 40000);
+    return { a: r[0], b: T.approx(ex.x, 1e-5), c: ex.value };
+  },
+  "fn-log-of-quadratic/domain-from-inequality/equation": (q, T) => {
+    const s = q.params.sit, arg = (x) => -x * x + 2 * s.h * x + s.w * s.w - s.h * s.h, f = (x) => Math.log(arg(x)) / Math.log(s.b);
+    const z = T.roots(arg, -30, 30, 6000);
+    T.require(z.length === 2 && arg((z[0] + z[1]) / 2) > 0, "the bracket is positive between two zeros");
+    const sol = T.roots((x) => f(x) - s.mm, z[0] + 1e-6, z[1] - 1e-6, 20000);
+    T.require(sol.length === 2, "two solutions inside the domain");
+    return { a: z[0], b: z[1], c: sol[0], d: sol[1] };
+  },
+  "fn-log-of-quadratic/asymptotes/equation": (q, T) => {
+    const s = q.params.sit, arg = (x) => -x * x + 2 * s.h * x + s.w * s.w - s.h * s.h;
+    const z = T.roots(arg, -30, 30, 6000);
+    T.require(z.length === 2, "two asymptotes");
+    return { a: z[0], b: z[1], c: T.approx(T.extremum(arg, -30, 30, "max", 60000).x, 1e-5) };
+  },
+  "fn-quadratic-from-conditions/a-from-vertex-and-point/words": (q, T) => {
+    const { h, k, x1, y1 } = q.params;
+    const a = T.bisect((t) => t * (x1 - h) ** 2 + k - y1, -50, 50), f = (x) => a * (x - h) ** 2 + k;
+    const z = T.roots(f, -40, 40, 16000);
+    T.require(z.length === 2 && Math.abs(f(x1)) > 1e-9, "two zeros, and the given point is not one of them");
+    return { a, b: f(0), c: z[1] };
+  },
+  "fn-rational-sketch/equation-from-sketch/graph": (q, T) => {
+    const f = (x) => T.evalGraph(graphFn(q), x), A = q.graph.points[0];
+    const poles = T.range(-5, 5).filter((x) => !(Math.abs(f(x + 1e-7)) < 1e5));
+    T.require(poles.length === 1 && Math.abs(f(A.x) - A.y) < 1e-9 && Number.isInteger(A.y) && Math.abs(A.y) <= 5, "one vertical asymptote, and A is on the curve inside the window");
+    const h = poles[0], k = f(1e9), zeros = T.roots(f, -60, 60, 48000);
+    T.require(zeros.length === 1, "one x-intercept");
+    return { a: h, b: T.approx(k, 1e-6), c: T.approx((f(h + 2.5) - k) * 2.5, 1e-6), d: zeros[0] };
+  },
+  "fn-gdc-features/zeros-gdc/equation": (q, T) => {
+    const { a, b } = q.params, f = (x) => x ** 3 - a * x * x + b;
+    const r = T.roots(f, -10, 12, 44000);
+    T.require(r.length === 3, "three zeros");
+    return { a: r[0], b: r[2], c: T.extremum(f, 0.5, a + 0.5, "min", 40000).value };
+  },
+  "fn-gdc-intersection/solve-f-equals-g/equation": (q, T) => {
+    const { c, b } = q.params, f = (x) => T.evalGraph(graphFn(q), x), g = (x) => T.evalGraph(graphFn(q, 1), x);
+    T.require(f(1.5) === c - 2.25 && Math.abs(g(1.5) - b ** 1.5) < 1e-9, "the graph shows the two functions");
+    const r = T.roots((x) => f(x) - g(x), -20, 20, 40000);
+    T.require(r.length === 2, "two intersections");
+    return { a: r[0], b: r[1], c: f(r[1]) };
+  },
+  "fn-gdc-solve-equation/count-roots/equation": (q, T) => {
+    const { a, k0 } = q.params, f = (x) => x ** 3 - a * x;
+    const count = (k) => T.roots((x) => f(x) - k, -12, 12, 4800).length;
+    const r = T.roots((x) => f(x) - k0, -12, 12, 48000);
+    T.require(r.length === 3, "three solutions for the given k");
+    // the largest k with three solutions, by bisection on the number of solutions
+    const m = T.bisect((k) => (count(k) === 3 ? -1 : 1), 0.0137, 60, 40);
+    T.require(count(-m + 0.01) === 3 && count(-m - 0.01) === 1, "the interval is symmetric");
+    return { a: r[0], b: r[2], c: T.approx(m, 1e-4) };
+  },
 };

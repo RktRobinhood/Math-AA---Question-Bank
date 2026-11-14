@@ -1006,4 +1006,136 @@
           P("Find the $x$-coordinate of $\\mathrm{B}$.", 1, ans.sf(xm + h), [`Replacing $x$ by $${lin(1, -h)}$ moves the graph $${num(Math.abs(h))}$ units to the ${h > 0 ? "right" : "left"}: $x = ${more(xm)} ${signed(h)} = ${sf(xm + h)}$`]),
           P("Find the $y$-coordinate of $\\mathrm{B}$.", 2, ans.sf(s * ym + k), [`The $y$-coordinate is multiplied by $${num(s)}$ and then $${num(Math.abs(k))}$ is ${k > 0 ? "added" : "subtracted"}.`, `$y = ${num(s)}(${more(ym)}) ${signed(k)} = ${sf(s * ym + k)}$`])] };
     } });
+
+  // ---------------- exam types that had no generator, and second ways of asking ----------------
+  const SFF = { type: "fn-sketch-from-features" };
+  const parab = (a, p, q) => ({ value: [a, p, q], graph: win([-6, 6], [-10, 10], { yStep: 2, functions: [{ fn: { type: "poly", coeffs: [a * p * q, -a * (p + q), a] } }], alt: "A parabola" }) });
+  reg({ ...SFF, syllabus: ["2.3", "2.4"], unknown: "sketch-from-conditions", representation: "words", format: "graph-pick", levels: [2],
+    skills: ["SL2.3.sketch-from-info", "SL2.4.zeros-intercepts", "SL2.4.symmetry"], title: "Pick the graph that has the stated features",
+    build({ rng }) {
+      let p, q, a;
+      do { p = rng.int(-4, 2); q = p + 2 * rng.int(1, 2); a = rng.sign(); } while (p + q === 0 || q > 4 || p * q === 0);
+      const wrongs = G.pickDistinct(parab(a, p, q).graph, [
+        Object.assign(parab(-a, p, q), { why: `This graph has a ${a > 0 ? "maximum" : "minimum"} point, not a ${a > 0 ? "minimum" : "maximum"} point.` }),
+        Object.assign(parab(a, -q, -p), { why: "The zeros have the wrong signs." }),
+        Object.assign(parab(-a, -q, -p), { why: "The zeros have the wrong signs and the turning point is the wrong kind." }),
+        parab(a, p + 1, q + 1), parab(a, p - 1, q - 1)], 3);
+      return { params: { a, p, q }, stem: `A function $f$ has zeros at $x = ${p}$ and $x = ${q}$. Its graph has a ${a > 0 ? "minimum" : "maximum"} point and crosses the $y$-axis at $${point(0, a * p * q)}$.`,
+        parts: [
+          P("Which graph could be the graph of $f$?", 2, ans.graph(rng, parab(a, p, q), wrongs), [
+            `The graph crosses the $x$-axis at $${p}$ and $${q}$ and the $y$-axis at $${a * p * q}$.`, `It has a ${a > 0 ? "minimum point, so it opens upwards" : "maximum point, so it opens downwards"}.`]),
+          P("The graph is symmetric about the line $x = h$. Find the value of $h$.", 1, ans.int((p + q) / 2), [`The line of symmetry is midway between the zeros: $h = \\dfrac{${p} + ${paren(q)}}{2} = ${(p + q) / 2}$`])] };
+    } });
+  reg({ ...SFF, syllabus: ["2.6", "2.3"], unknown: "sketch-quadratic", representation: "equation", format: "graph-pick", levels: [2],
+    skills: ["SL2.6.sketch", "SL2.6.vertex", "SL2.3.sketch-from-info"], title: "Pick the graph of a quadratic in vertex form",
+    build({ rng }) {
+      let a, h, k;
+      do { a = rng.pick([1, -1, 2, -2]); h = rng.nonzero(-3, 3); k = rng.nonzero(-6, 6); } while (h === k || Math.abs(a * h * h + k) > 30);
+      const gr = (a2, h2, k2) => ({ value: [a2, h2, k2], graph: win([-6, 6], [-10, 10], { yStep: 2, functions: [{ fn: { type: "poly", coeffs: [a2 * h2 * h2 + k2, -2 * a2 * h2, a2] } }], alt: "A parabola" }) });
+      const wrongs = G.pickDistinct(gr(a, h, k).graph, [
+        Object.assign(gr(a, -h, k), { why: "The vertex is on the wrong side of the $y$-axis: $(x - h)^{2}$ puts the vertex at $x = h$." }),
+        Object.assign(gr(-a, h, k), { why: "The parabola opens the wrong way: check the sign of the coefficient of the bracket." }),
+        Object.assign(gr(a, h, -k), { why: "The $y$-coordinate of the vertex has the wrong sign." }),
+        Object.assign(gr(a, k, h), { why: "The coordinates of the vertex have been swapped." }), gr(-a, -h, k)], 3);
+      return { params: { a, h, k }, stem: `Consider the function $f(x) = ${coef(a, `${factor(h)}^{2}`)} ${signed(k)}$.`, parts: [
+        P("Which graph shows $y = f(x)$?", 2, ans.graph(rng, gr(a, h, k), wrongs), [`The vertex is $${point(h, k)}$.`, `The coefficient of the bracket is ${a > 0 ? "positive, so the parabola opens upwards" : "negative, so the parabola opens downwards"}.`]),
+        P("Find the $y$-intercept of the graph of $f$.", 1, ans.int(a * h * h + k), [`$f(0) = ${coef(a, `${br(-h)}^{2}`)} ${signed(k)} = ${a * h * h} ${signed(k)} = ${a * h * h + k}$`])] };
+    } });
+  reg({ ...CALC, type: "fn-gdc-optimise-combined", syllabus: ["2.3", "2.4"], unknown: "max-difference", representation: "equation", format: "value", levels: [4],
+    skills: ["SL2.3.sum-difference", "SL2.4.max-min", "SL2.4.intersection"], title: "Greatest vertical distance between two graphs",
+    build({ rng }) {
+      const a = rng.pick([3, 4, 5, 6]), b = rng.pick([4, 5, 6, 8]);
+      const dd = (x) => a * Math.log(x + 1) - (x * x) / b, xm = (-1 + Math.sqrt(1 + 2 * a * b)) / 2, xr = solve(dd, xm, 60);
+      return { params: { a, b },
+        graph: { x: [-1, Math.ceil(xr) + 2], y: [-2, Math.ceil(a * Math.log(xr + 1)) + 3], functions: [{ fn: { type: "log", a, h: -1 }, domain: [0, Math.ceil(xr) + 2], label: "f" }, { fn: { type: "poly", coeffs: [0, 0, 1 / b] }, domain: [0, Math.ceil(xr) + 2], label: "g" }],
+          regions: [{ x: [0, xr], fn: 0, to: 1 }], points: [{ x: xr, y: (xr * xr) / b, label: "A" }], alt: "A logarithmic curve f and a parabola g that meet at the origin and at A, with the region between them shaded" },
+        stem: `Let $f(x) = ${a}\\ln(x + 1)$ and $g(x) = \\dfrac{x^{2}}{${b}}$, for $x \\ge 0$. The graphs of $f$ and $g$ meet at the origin and at the point $\\mathrm{A}$. The region enclosed by the two graphs is shaded in the diagram.`,
+        parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(xr), ["Graph both functions on a calculator and use its intersection tool.", `$x = ${sf(xr)}$`]),
+          P("Between the origin and $\\mathrm{A}$, the vertical distance between the graphs is $d(x) = f(x) - g(x)$. Find the value of $x$ at which $d$ is greatest.", 2, ans.sf(xm), [`Graph $d(x) = ${a}\\ln(x + 1) - \\dfrac{x^{2}}{${b}}$ and use the maximum tool.`, `$x = ${sf(xm)}$`]),
+          P("Find the greatest vertical distance between the two graphs in the shaded region.", 2, ans.sf(dd(xm)), [`The maximum tool gives $d = ${more(dd(xm))}\\ldots$`, `The greatest distance is $${sf(dd(xm))}$.`])] };
+    } });
+  const LQ = { type: "fn-log-of-quadratic", syllabus: ["2.9", "2.7"] };
+  const lqSit = (rng) => { const [b, w, u, mm] = rng.pick([[2, 3, 1, 3], [2, 5, 3, 4], [2, 6, 2, 5], [3, 5, 4, 2], [3, 6, 3, 3]]); let h; do { h = rng.nonzero(-5, 5); } while (Math.abs(h) === w); return { b, w, u, mm, h }; };
+  const lqStem = (s) => `The function $f$ is defined by $f(x) = \\log_{${s.b}}\\left(${poly([-1, 2 * s.h, s.w * s.w - s.h * s.h])}\\right)$, for the values of $x$ that make the bracket positive.`;
+  const lqFactor = (s) => `$${poly([-1, 2 * s.h, s.w * s.w - s.h * s.h])} = -${factor(s.h - s.w)}${factor(s.h + s.w)}$`;
+  reg({ ...LQ, syllabus: ["2.7", "2.9"], unknown: "domain-from-inequality", representation: "equation", format: "value", levels: [3],
+    skills: ["SL2.7.inequality", "SL2.9.log-graph", "SL1.5.exp-log-form"], title: "Domain of a log of a quadratic, then an equation", situationKey: "log-quadratic", situation: lqSit,
+    build({ sit: s }) {
+      const p = s.h - s.w, q = s.h + s.w, t = Math.pow(s.b, s.mm), c = s.w * s.w - s.h * s.h;
+      return { stem: lqStem(s) + " The domain of $f$ is $p < x < q$.", parts: [
+        P("Find the value of $p$.", 2, ans.int(p), [lqFactor(s), `The bracket is positive between its zeros, $x = ${p}$ and $x = ${q}$, because the coefficient of $x^{2}$ is negative. So $p = ${p}$.`]),
+        P("Write down the value of $q$.", 1, ans.int(q), [`The larger zero is $q = ${q}$.`]),
+        P(`Find the smaller solution of $f(x) = ${s.mm}$.`, 2, ans.int(s.h - s.u), [`$${poly([-1, 2 * s.h, c])} = ${s.b}^{${s.mm}} = ${t}$, so $${poly([1, -2 * s.h, t - c])} = 0$`, `$${factor(s.h - s.u)}${factor(s.h + s.u)} = 0$, so $x = ${s.h - s.u}$ or $x = ${s.h + s.u}$; the smaller is $${s.h - s.u}$.`]),
+        P("Write down the larger solution.", 1, ans.int(s.h + s.u), [`The larger solution is $x = ${s.h + s.u}$. Both solutions lie in the domain.`])] };
+    } });
+  reg({ ...LQ, unknown: "asymptotes", representation: "equation", format: "value", levels: [2],
+    skills: ["SL2.9.log-graph", "SL2.4.asymptotes", "SL2.6.axis-symmetry"], title: "Asymptotes and axis of symmetry of a log of a quadratic", situationKey: "log-quadratic", situation: lqSit,
+    build({ sit: s }) {
+      const p = s.h - s.w, q = s.h + s.w;
+      return { stem: lqStem(s) + " The graph of $f$ has two vertical asymptotes.", parts: [
+        P("The left-hand asymptote is $x = p$. Find the value of $p$.", 2, ans.int(p), [lqFactor(s), `The graph has a vertical asymptote where the bracket is zero: $x = ${p}$ and $x = ${q}$. So $p = ${p}$.`]),
+        P("Write down the equation of the other asymptote in the form $x = q$, giving the value of $q$.", 1, ans.int(q), [`$q = ${q}$`]),
+        P("The graph of $f$ is symmetric about the line $x = h$. Find the value of $h$.", 1, ans.int(s.h), [`The line of symmetry is midway between the asymptotes: $h = \\dfrac{${p} + ${paren(q)}}{2} = ${s.h}$`])] };
+    } });
+  reg({ type: "fn-quadratic-from-conditions", syllabus: ["2.6"], unknown: "a-from-vertex-and-point", representation: "words", format: "value", levels: [3],
+    skills: ["SL2.6.find-equation", "SL2.6.vertex", "SL2.7.solve-equation"], title: "Quadratic from its vertex and a point, then its intercepts",
+    build({ rng }) {
+      let a, h, s0, dx;
+      do { a = rat.Q(rng.sign() * rng.pick([1, 2, 1, 3]), rng.pick([1, 1, 2])); h = rng.nonzero(-4, 4); s0 = rng.int(1, 4); dx = rng.pick([-4, -2, 2, 4, 6]); }
+      while (Math.abs(dx) === s0 || h + dx === 0 || !Number.isInteger(rat.num(a) * s0 * s0) || !Number.isInteger(rat.num(a) * h * h));
+      const av = rat.num(a), k = -av * s0 * s0, x1 = h + dx, y1 = k + av * dx * dx, yi = av * h * h + k;
+      return { params: { h, k, x1, y1 }, stem: `The graph of a quadratic function $f$ has its vertex at $${point(h, k)}$ and passes through the point $${point(x1, y1)}$. The function can be written as $f(x) = a(x - h)^{2} + k$.`, parts: [
+        P("Find the value of $a$.", 3, ans.frac(a.n, a.d), [`The vertex gives $f(x) = a${factor(h)}^{2} ${signed(k)}$.`, `Substitute $${point(x1, y1)}$: $${y1} = a${br(dx)}^{2} ${signed(k)}$, so $${dx * dx}a = ${y1 - k}$`, `$a = ${rat.tex(a)}$`]),
+        P("Find the $y$-intercept of the graph of $f$.", 1, ans.int(yi), [`$f(0) = ${coef(a, `${br(-h)}^{2}`)} ${signed(k)} = ${yi}$`]),
+        P("Find the larger zero of $f$.", 2, ans.int(h + s0), [`$${coef(a, `${factor(h)}^{2}`)} = ${-k}$, so $${factor(h)}^{2} = ${s0 * s0}$`,`$x = ${h} \\pm ${s0}$; the larger zero is $x = ${h + s0}$.`])] };
+    } });
+  reg({ type: "fn-rational-sketch", syllabus: ["2.8"], unknown: "equation-from-sketch", representation: "graph", format: "value", levels: [3],
+    skills: ["SL2.8.transformed-reciprocal", "SL2.8.asymptotes", "SL2.8.sketch-rational"], title: "Equation of a shifted reciprocal from its graph",
+    build({ rng }) {
+      let a, h, k;
+      do { a = rng.pick([1, 2, 3, 4, -1, -2, -3, -4]); h = rng.nonzero(-3, 3); k = rng.nonzero(-3, 3); } while (Math.abs(k + a) > 5 || k + a === 0 || a === h * k);
+      const x0 = rat.sub(h, rat.Q(a, k));
+      return { params: { h, k },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "rational", num: [a - k * h, k], den: [-h, 1] }, label: "f" }], asymptotes: [{ x: h }, { y: k }], points: [{ x: h + 1, y: k + a, label: "A" }], alt: "A curve in two branches with a vertical and a horizontal dashed asymptote and a marked point A" }),
+        stem: "The graph of $f(x) = \\dfrac{a}{x - h} + k$ is shown, with its asymptotes dashed. The asymptotes cross the axes at integers, and the marked point $\\mathrm{A}$ on the graph has integer coordinates.",
+        parts: [
+          P("Write down the value of $h$.", 1, ans.int(h), [`The vertical asymptote is $x = ${h}$, so $h = ${h}$.`]),
+          P("Write down the value of $k$.", 1, ans.int(k), [`The horizontal asymptote is $y = ${k}$, so $k = ${k}$.`]),
+          P("Find the value of $a$.", 2, ans.int(a), [`$\\mathrm{A}$ is the point $${point(h + 1, k + a)}$: $${k + a} = \\dfrac{a}{${h + 1} - ${paren(h)}} ${signed(k)}$`, `$a = ${k + a} - ${paren(k)} = ${a}$`]),
+          P("Find the $x$-intercept of the graph of $f$.", 2, ans.frac(x0.n, x0.d), [`$\\dfrac{${a}}{${lin(1, -h)}} ${signed(k)} = 0$, so $${lin(1, -h)} = ${frac(a, -k)}$`, `$x = ${rat.tex(x0)}$`])] };
+    } });
+  reg({ ...CALC, type: "fn-gdc-features", syllabus: ["2.4"], unknown: "zeros-gdc", representation: "equation", format: "value", levels: [2],
+    skills: ["SL2.4.zeros-intercepts", "SL2.4.max-min"], title: "Zeros and a minimum of a cubic with technology",
+    build({ rng }) {
+      const a = rng.pick([3, 4, 5]), b = rng.pick([1, 2, 3]), f = (x) => x * x * x - a * x * x + b;
+      const z1 = solve(f, -3, 0), z3 = solve(f, (2 * a) / 3, a + 1), low = f((2 * a) / 3);
+      return { params: { a, b }, stem: `The function $f$ is defined by $f(x) = ${poly([1, -a, 0, b])}$, for $x \\in \\mathbb{R}$. The graph of $f$ crosses the $x$-axis three times.`, parts: [
+        P("Find the smallest zero of $f$.", 2, ans.sf(z1), ["Graph $f$ on a calculator and use its zero (root) tool.", `The left-hand zero is $x = ${sf(z1)}$.`]),
+        P("Find the largest zero of $f$.", 1, ans.sf(z3), [`The right-hand zero is $x = ${sf(z3)}$.`]),
+        P("Find the $y$-coordinate of the local minimum point of the graph.", 1, ans.sf(low), [`The minimum tool gives the point $${point(sf((2 * a) / 3), sf(low))}$, so $y = ${sf(low)}$.`])] };
+    } });
+  reg({ ...CALC, type: "fn-gdc-intersection", syllabus: ["2.4"], unknown: "solve-f-equals-g", representation: "equation", format: "value", levels: [2],
+    skills: ["SL2.4.intersection"], title: "Where a parabola meets an exponential curve",
+    build({ rng }) {
+      const c = rng.int(3, 8), b = rng.pick([2, 3]), dd = (x) => c - x * x - Math.pow(b, x);
+      const x1 = solve(dd, -4, 0), x2 = solve(dd, 0, 4);
+      return { params: { c, b },
+        graph: win([-4, 4], [-2, 10], { functions: [{ fn: { type: "poly", coeffs: [c, 0, -1] }, label: "f" }, { fn: { type: "exp", b }, label: "g" }], alt: "A parabola f opening downwards and an exponential curve g that cross twice" }),
+        stem: `Let $f(x) = ${poly([-1, 0, c])}$ and $g(x) = ${b}^{x}$. The graphs of $f$ and $g$ intersect at two points.`, parts: [
+          P("Find the $x$-coordinate of the left-hand point of intersection.", 2, ans.sf(x1), ["Graph both functions on a calculator and use its intersection tool.", `$x = ${sf(x1)}$`]),
+          P("Find the $x$-coordinate of the right-hand point of intersection.", 1, ans.sf(x2), [`The second intersection is at $x = ${sf(x2)}$.`]),
+          P("Find the $y$-coordinate of the right-hand point of intersection.", 1, ans.sf(Math.pow(b, x2)), [`The intersection tool gives $y = ${sf(Math.pow(b, x2))}$.`])] };
+    } });
+  reg({ ...CALC, type: "fn-gdc-solve-equation", syllabus: ["2.10"], unknown: "count-roots", representation: "equation", format: "value", levels: [4],
+    skills: ["SL2.10.solve-gdc", "SL2.10.number-of-solutions"], title: "Solutions of a cubic equation, and when there are three",
+    build({ rng }) {
+      const a = rng.pick([4, 5, 7, 8, 10]), k0 = rng.int(1, 3), f = (x) => x * x * x - a * x - k0, t = Math.sqrt(a / 3), top = 2 * t * t * t;
+      const s1 = solve(f, -6, -t), s3 = solve(f, t, 6);
+      return { params: { a, k0 }, stem: `Consider the equation $${poly([1, 0, -a, 0])} = k$, where $k$ is a constant.`, parts: [
+        P(`For $k = ${k0}$, find the smallest solution of the equation.`, 2, ans.sf(s1), [`Graph $y = ${poly([1, 0, -a, 0])}$ and $y = ${k0}$ on a calculator and find their intersections.`, `The smallest solution is $x = ${sf(s1)}$.`]),
+        P(`For $k = ${k0}$, find the largest solution.`, 1, ans.sf(s3), [`The largest solution is $x = ${sf(s3)}$.`]),
+        P("The equation has three distinct solutions when $-m < k < m$. Find the value of $m$.", 3, ans.sf(top), [`A horizontal line $y = k$ crosses the graph of $y = ${poly([1, 0, -a, 0])}$ three times when it lies between the local minimum and the local maximum.`,
+          `The maximum tool gives the local maximum point $${point(sf(-t), sf(top))}$, and by symmetry the local minimum value is $${sf(-top)}$.`, `$m = ${sf(top)}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
