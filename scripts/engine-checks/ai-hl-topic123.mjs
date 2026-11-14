@@ -56,6 +56,41 @@ function ambiguous(q, T) {
   return ts.map((t) => { const C = [t * dir[0], t * dir[1]], u = [-C[0], -C[1]], w = [Bp[0] - C[0], Bp[1] - C[1]]; return { AC: t, C: T.deg(Math.acos((u[0] * w[0] + u[1] * w[1]) / (Math.hypot(...u) * Math.hypot(...w)))), area: shoelace([[0, 0], Bp, C]) }; });
 }
 
+// ---- graph theory: everything is read back from the drawing or the table the student sees ----
+function readNet(q, T) {
+  const pts = q.graph.shapes.filter((s) => s.type === "point"), lines = q.graph.shapes.filter((s) => s.type === "line");
+  const idx = (p) => pts.findIndex((s) => s.at[0] === p[0] && s.at[1] === p[1]);
+  const edges = lines.map((l) => [idx(l.from), idx(l.to)]), n = pts.length, directed = lines.some((l) => l.arrow);
+  T.require(pts.every((s, i) => s.label === "ABCDEF"[i]) && edges.every((e) => e[0] >= 0 && e[1] >= 0 && e[0] !== e[1]), "the drawing has labelled vertices and proper edges");
+  T.require(new Set(edges.map((e) => [...e].sort().join())).size === edges.length, "no edge is drawn twice");
+  const nb = [...Array(n)].map(() => []);
+  edges.forEach(([a, b]) => { nb[a].push(b); if (!directed) nb[b].push(a); });
+  return { n, edges, nb, directed, w: lines.map((l) => (l.label === undefined ? null : Number(l.label))) };
+}
+function readTable(q, T) {
+  const D = q.table.rows.map((r) => r.slice(1).map((c) => (c === "–" ? 0 : Number(c.replace(/\$/g, "")))));
+  T.require(D.every((r, i) => r.every((v, j) => v === D[j][i] && (i === j ? v === 0 : v > 0))), "the table is symmetric");
+  return D;
+}
+function connected(n, edges) {
+  const seen = new Set([0]), todo = [0];
+  while (todo.length) { const u = todo.pop(); for (const [a, b] of edges) { const v = a === u ? b : b === u ? a : -1; if (v >= 0 && !seen.has(v)) { seen.add(v); todo.push(v); } } }
+  return seen.size === n;
+}
+// Number of walks of a given length, by following every one.
+const walks = (nb, from, to, k) => (k === 0 ? (from === to ? 1 : 0) : nb[from].reduce((s, v) => s + walks(nb, v, to, k - 1), 0));
+// The lightest spanning tree, by trying every set of n - 1 edges.
+function bestTree(n, edges, w, T) {
+  let best = null;
+  const pick = (start, chosen) => {
+    if (chosen.length === n - 1) { if (connected(n, chosen.map((i) => edges[i]))) { const total = chosen.reduce((s, i) => s + w[i], 0); if (!best || total < best.total) best = { total, weights: chosen.map((i) => w[i]) }; } return; }
+    for (let i = start; i < edges.length; i++) pick(i + 1, [...chosen, i]);
+  };
+  pick(0, []);
+  T.require(best !== null, "a spanning tree exists");
+  return best;
+}
+
 export default {
   // ---------------- 1.9 ----------------
   "t1-ai-log-laws/combine/equation": (q, T) => { const { a, b, c } = q.params; return { a: ap(T, Math.exp(Math.log(a) + Math.log(b) - Math.log(c))) }; },
@@ -430,5 +465,92 @@ export default {
     const { A, B, C } = q.params, c = dist3(A, B), b = dist3(A, C), a = dist3(B, C), cosA = (b * b + c * c - a * a) / (2 * b * c);
     return { a: ap(T, b * c * cosA), b: ap(T, T.deg(Math.acos(cosA))), c: ap(T, heron(a, b, c)) };
   },
-  // @@GRAPHS@@
+  // ---------------- 3.14 ----------------
+  "t3-ai-graph-basics/vertex-degree/diagram": (q, T) => { const g = readNet(q, T); return { a: g.edges.filter((e) => e.includes(q.params.x)).length, b: g.edges.length }; },
+  "t3-ai-graph-basics/degree-sum/diagram": (q, T) => {
+    const g = readNet(q, T), deg = g.nb.map((l) => l.length);
+    let missing = 0;
+    for (let i = 0; i < g.n; i++) for (let j = i + 1; j < g.n; j++) if (!g.nb[i].includes(j)) missing++;
+    return { a: T.sum(deg), b: deg.filter((d) => d % 2).length, c: missing };
+  },
+  "t3-ai-graph-basics/complete-and-tree/words": (q, T) => {
+    const n = q.params.n, edges = [];
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) edges.push([i, j]);
+    // strip edges one at a time while the graph stays in one piece
+    let kept = edges.slice(), removed = 0;
+    for (const e of edges) { const rest = kept.filter((x) => x !== e); if (connected(n, rest)) { kept = rest; removed++; } }
+    return { a: edges.filter((e) => e.includes(0)).length, b: edges.length, c: removed };
+  },
+  "t3-ai-graph-basics/directed-degrees/diagram": (q, T) => {
+    const g = readNet(q, T), { x, y } = q.params, n = g.n;
+    T.require(g.directed, "the diagram has arrows");
+    // Warshall's closure of the reachability relation
+    const R = [...Array(n)].map((_, i) => [...Array(n)].map((_, j) => g.edges.some((e) => e[0] === i && e[1] === j)));
+    for (let k = 0; k < n; k++) for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (R[i][k] && R[k][j]) R[i][j] = true;
+    const strong = R.every((r, i) => r.every((v, j) => v || i === j));
+    T.require(connected(n, g.edges), "the graph is connected when the arrows are ignored");
+    return { a: g.edges.filter((e) => e[1] === x).length, b: g.edges.filter((e) => e[0] === y).length, c: R[x].filter((v, j) => v && j !== x).length, d: T.option(strong ? "strong" : "weak") };
+  },
+  // ---------------- 3.15 ----------------
+  "t3-ai-adjacency-walks/matrix-sums/diagram": (q, T) => { const g = readNet(q, T); return { a: g.nb[q.params.x].length, b: T.sum(g.nb, (l) => l.length) }; },
+  "t3-ai-adjacency-walks/count-walks/diagram": (q, T) => { const g = readNet(q, T), { x, y } = q.params; return { a: walks(g.nb, x, y, 2), b: walks(g.nb, x, y, 3) }; },
+  "t3-ai-adjacency-walks/walks-from-matrix/equation": (q, T) => {
+    const { M, x, y, p, q: qq } = q.params, nb = M.map((r) => r.flatMap((v, j) => Array(v).fill(j)));
+    return { a: walks(nb, x, y, 4), b: walks(nb, p, qq, 1) + walks(nb, p, qq, 2) + walks(nb, p, qq, 3), c: T.sum(M, (_, i) => walks(nb, i, i, 3)) };
+  },
+  "t3-ai-adjacency-walks/random-walk/diagram": (q, T) => {
+    const g = readNet(q, T), { x, y, z, w } = q.params, n = g.n;
+    T.require(g.nb[x].includes(w), "the first move asked about is along an edge");
+    // every three-move route from x to y, with its probability
+    let p3 = 0;
+    for (const a of g.nb[x]) for (const b of g.nb[a]) for (const c of g.nb[b]) if (c === y) p3 += 1 / (g.nb[x].length * g.nb[a].length * g.nb[b].length);
+    // long-run share of time: iterate a walk that stays put half the time (same steady state, no oscillation)
+    let v = Array(n).fill(0); v[x] = 1;
+    for (let t = 0; t < 4000; t++) { const u = v.map((s) => s / 2); for (let i = 0; i < n; i++) for (const j of g.nb[i]) u[j] += v[i] / (2 * g.nb[i].length); v = u; }
+    return { a: ap(T, 1 / g.nb[x].length), b: ap(T, p3), c: T.approx(v[z], 1e-7) };
+  },
+  // ---------------- 3.16 ----------------
+  "t3-ai-graph-algorithms/eulerian/diagram": (q, T) => {
+    const g = readNet(q, T), m = g.edges.length;
+    // search for a walk that uses every edge exactly once
+    const search = (at, used, left, start, closed) => { if (!left) return !closed || at === start; for (let i = 0; i < m; i++) { if (used[i]) continue; const [a, b] = g.edges[i]; if (a !== at && b !== at) continue; used[i] = true; const ok = search(a === at ? b : a, used, left - 1, start, closed); used[i] = false; if (ok) return true; } return false; };
+    const any = (closed) => [...Array(g.n).keys()].some((s) => search(s, Array(m).fill(false), m, s, closed));
+    const circuit = any(true), trail = circuit || any(false);
+    return { a: g.nb.filter((l) => l.length % 2).length, b: T.option(circuit ? "circuit" : trail ? "trail" : "neither") };
+  },
+  "t3-ai-graph-algorithms/kruskal/diagram": (q, T) => {
+    const g = readNet(q, T), best = bestTree(g.n, g.edges, g.w, T);
+    T.require(new Set(g.w).size === g.w.length, "the weights are all different");
+    return { a: best.weights.sort((a, b) => a - b)[2], b: best.total };
+  },
+  "t3-ai-graph-algorithms/prim-table/table": (q, T) => {
+    const D = readTable(q, T), n = D.length, edges = [], w = [];
+    for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) { edges.push([i, j]); w.push(D[i][j]); }
+    return { a: Math.min(...D[0].filter((_, j) => j !== 0)), b: bestTree(n, edges, w, T).total };
+  },
+  "t3-ai-graph-algorithms/chinese-postman/diagram": (q, T) => {
+    const g = readNet(q, T), odd = g.nb.map((l, i) => (l.length % 2 ? i : -1)).filter((i) => i >= 0), total = T.sum(g.w);
+    T.require(odd.length === 2 || odd.length === 4, "two or four odd vertices");
+    // shortest route between two vertices by trying every path that does not repeat a vertex
+    const shortest = (from, to) => { let best = Infinity; const go = (at, seen, len) => { if (len >= best) return; if (at === to) { best = len; return; } g.edges.forEach(([a, b], i) => { const nx = a === at ? b : b === at ? a : -1; if (nx >= 0 && !seen.includes(nx)) go(nx, [...seen, nx], len + g.w[i]); }); }; go(from, [from], 0); return best; };
+    const pairings = odd.length === 2 ? [[[odd[0], odd[1]]]] : [1, 2, 3].map((k) => { const rest = [1, 2, 3].filter((j) => j !== k); return [[odd[0], odd[k]], [odd[rest[0]], odd[rest[1]]]]; });
+    const extra = Math.min(...pairings.map((pr) => T.sum(pr, ([a, b]) => shortest(a, b))));
+    return { a: total, b: odd.length, c: total + extra };
+  },
+  "t3-ai-graph-algorithms/tsp-bounds/table": (q, T) => {
+    const D = readTable(q, T), n = D.length;
+    T.require(new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size === (n * (n - 1)) / 2, "all the distances are different, so the nearest neighbour is never tied");
+    let at = 0, upper = 0; const left = new Set([...Array(n).keys()].slice(1));
+    while (left.size) { let nxt = null; for (const j of left) if (nxt === null || D[at][j] < D[at][nxt]) nxt = j; upper += D[at][nxt]; left.delete(nxt); at = nxt; }
+    upper += D[at][0];
+    const edges = [], w = [];
+    for (let i = 1; i < n; i++) for (let j = i + 1; j < n; j++) { edges.push([i - 1, j - 1]); w.push(D[i][j]); }
+    const mst = bestTree(n - 1, edges, w, T).total, two = D[0].slice(1).sort((a, b) => a - b), lower = mst + two[0] + two[1];
+    // the true shortest tour, by trying every order, must lie between the bounds
+    let opt = Infinity;
+    const perm = (rest, route, len) => { if (!rest.length) { opt = Math.min(opt, len + D[route[route.length - 1]][0]); return; } rest.forEach((v, i) => perm(rest.filter((_, k) => k !== i), [...route, v], len + D[route[route.length - 1]][v])); };
+    perm([...Array(n).keys()].slice(1), [0], 0);
+    T.require(lower <= opt && opt <= upper, "lower bound <= shortest tour <= upper bound");
+    return { a: upper, b: mst, c: lower };
+  },
 };

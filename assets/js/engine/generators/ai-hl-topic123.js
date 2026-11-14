@@ -936,5 +936,185 @@
         P("Find the area of the sail.", 3, ans.sf(area), [`$${AB} \\times ${AC} = ${col(...cr)}$`, `Area $= \\dfrac{1}{2}|${AB} \\times ${AC}| = \\dfrac{1}{2}\\sqrt{${num(dot(cr, cr))}}$`, `$= ${sf(area)}\\text{ m}^{2}$`])] };
     } });
 
-  // @@GRAPHS@@
+  // ======================= graph theory: drawing and shared helpers =======================
+  const VN = "ABCDEF";
+  const GRID = [[0, 2.6], [3.4, 2.6], [6.8, 2.6], [0, 0], [3.4, 0], [6.8, 0]];
+  // Planar layouts: vertex positions and the edges that may be drawn without crossing.
+  const LAYS = [{ pos: GRID, cand: [[0, 1], [1, 2], [3, 4], [4, 5], [0, 3], [1, 4], [2, 5], [0, 4], [1, 5]] }, { pos: GRID, cand: [[0, 1], [1, 2], [3, 4], [4, 5], [0, 3], [1, 4], [2, 5], [1, 3], [2, 4]] },
+    { pos: [[1.2, 3.6], [5, 3.9], [6.4, 1.4], [3.4, 0], [0, 1.2]], cand: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0], [0, 3], [1, 3]] },
+    { pos: [[1.5, 3.6], [4.8, 3.6], [6.4, 1.8], [4.8, 0], [1.5, 0], [0, 1.8]], cand: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5], [5, 0], [0, 4], [1, 4], [1, 3]] }];
+  const isConn = (n, edges) => { const p = [...Array(n).keys()], f = (x) => (p[x] === x ? x : (p[x] = f(p[x]))); edges.forEach(([a, b]) => { p[f(a)] = f(b); }); return new Set(p.map((_, i) => f(i))).size === 1; };
+  const degOf = (n, edges) => { const d = Array(n).fill(0); edges.forEach(([a, b]) => { d[a]++; d[b]++; }); return d; };
+  const eN = ([a, b]) => VN[Math.min(a, b)] + VN[Math.max(a, b)], vx = (i) => `$\\mathrm{${VN[i]}}$`, ed = (e) => `$\\mathrm{${eN(e)}}$`;
+  const names = (n) => fmt.list([...Array(n).keys()].map(vx));
+  const netFig = (L, edges, w, directed) => ({ alt: `A ${directed ? "directed " : ""}${w ? "weighted " : ""}graph with vertices ${VN.slice(0, L.pos.length).split("").join(", ")} and edges ${edges.map((e, i) => (directed ? `${VN[e[0]]} to ${VN[e[1]]}` : eN(e)) + (w ? ` (${w[i]})` : "")).join(", ")}`,
+    shapes: [...edges.map(([a, b], i) => ({ type: "line", from: L.pos[a], to: L.pos[b], label: w ? String(w[i]) : undefined, arrow: directed ? "mid" : undefined })), ...L.pos.map((p, i) => ({ type: "point", at: p, label: VN[i] }))] });
+  const net = (rng, keep, ok) => { let li, L, edges, tries = 0; do { li = rng.int(0, LAYS.length - 1); L = LAYS[li]; edges = L.cand.filter(() => rng.int(1, 10) <= keep); tries++; } while (!isConn(L.pos.length, edges) || edges.length < L.pos.length || (ok && tries < 400 && !ok(L.pos.length, edges))); return { li, L, n: L.pos.length, edges }; };
+  const adjM = (n, edges, directed) => { const M = [...Array(n)].map(() => Array(n).fill(0)); edges.forEach(([a, b]) => { M[a][b]++; if (!directed) M[b][a]++; }); return M; };
+  const mulN = (X, Y) => X.map((r) => Y[0].map((_, j) => r.reduce((s, v, k) => s + v * Y[k][j], 0)));
+  const powN = (M, k) => { let R = M; for (let i = 1; i < k; i++) R = mulN(R, M); return R; };
+
+  // ======================= 3.14 graphs: vertices, edges, degrees =======================
+  const GB = { type: "t3-ai-graph-basics", syllabus: ["3.14"], representation: "diagram", format: "value", calculator: false };
+  const plainSit = (rng) => net(rng, 7);
+  reg({ ...GB, unknown: "vertex-degree", levels: [1], skills: ["AI-AHL3.14.vertex-degree"], situationKey: "plain", situation: plainSit, title: "Degree of a vertex and number of edges",
+    build({ rng, sit: s }) {
+      const d = degOf(s.n, s.edges), x = rng.int(0, s.n - 1);
+      return { params: { x }, graph: netFig(s.L, s.edges), stem: `The diagram shows a graph with vertices ${names(s.n)}.`, parts: [
+        P(`Write down the degree of vertex ${vx(x)}.`, 1, ans.int(d[x]), [`The degree is the number of edges that meet at the vertex. At ${vx(x)} these are ${fmt.list(s.edges.filter((e) => e.includes(x)).map(ed))}, so the degree is $${d[x]}$.`]),
+        P("Write down the number of edges of the graph.", 1, ans.int(s.edges.length), [`The edges are ${fmt.list(s.edges.map(ed))}: $${s.edges.length}$ edges.`])] };
+    } });
+  reg({ ...GB, unknown: "degree-sum", levels: [2], skills: ["AI-AHL3.14.vertex-degree", "AI-AHL3.14.classify-graph"], situationKey: "plain", situation: plainSit, title: "Degrees, odd vertices and the complete graph",
+    build({ sit: s }) {
+      const d = degOf(s.n, s.edges), odd = d.filter((v) => v % 2).length, full = (s.n * (s.n - 1)) / 2;
+      return { params: {}, graph: netFig(s.L, s.edges), stem: `The diagram shows a graph $G$ with vertices ${names(s.n)}.`, parts: [
+        P("Find the sum of the degrees of the vertices of $G$.", 1, ans.int(2 * s.edges.length), [`The degrees of ${names(s.n)} are $${d.join(",\\, ")}$, with sum $${2 * s.edges.length}$ (twice the number of edges).`]),
+        P("Write down the number of vertices of odd degree.", 1, ans.int(odd), [odd ? `The vertices of odd degree are ${fmt.list(d.map((v, i) => (v % 2 ? vx(i) : null)).filter(Boolean))}: $${odd}$ of them.` : `Every degree is even, so the number is $0$.`]),
+        P("Find the number of edges that must be added to $G$ to make it a complete graph.", 2, ans.int(full - s.edges.length), [`In a complete graph every pair of the $${s.n}$ vertices is joined: $\\dfrac{${s.n} \\times ${s.n - 1}}{2} = ${full}$ edges.`, `$G$ has $${s.edges.length}$ edges, so $${full} - ${s.edges.length} = ${full - s.edges.length}$ more are needed.`])] };
+    } });
+  reg({ ...GB, unknown: "complete-and-tree", representation: "words", levels: [2], skills: ["AI-AHL3.14.model-as-graph", "AI-AHL3.14.classify-graph", "AI-AHL3.14.vertex-degree"], title: "Complete graphs and spanning trees of a network",
+    build({ rng }) {
+      const n = rng.int(5, 12), full = (n * (n - 1)) / 2, S = rng.pick([{ a: "offices", b: "cable" }, { a: "islands", b: "ferry route" }, { a: "villages", b: "footpath" }]);
+      return { params: { n }, stem: `A network joins $${n}$ ${S.a}. Each pair of ${S.a} is joined directly by one ${S.b}. The network is represented by a graph in which the ${S.a} are the vertices and each ${S.b} is an edge.`, parts: [
+        P("Write down the degree of each vertex.", 1, ans.int(n - 1), [`Each vertex is joined to every one of the other $${n - 1}$ vertices, so its degree is $${n - 1}$.`]),
+        P("Find the number of edges of the graph.", 1, ans.int(full), [`The sum of the degrees is $${n} \\times ${n - 1} = ${n * (n - 1)}$, which is twice the number of edges: $${full}$ edges.`]),
+        P(`Edges are removed until the graph is a tree that still joins all $${n}$ vertices. Find the number of edges that are removed.`, 2, ans.int(full - (n - 1)), [`A tree with $${n}$ vertices has $${n} - 1 = ${n - 1}$ edges.`, `$${full} - ${n - 1} = ${full - n + 1}$ edges are removed.`])] };
+    } });
+  const reach = (n, arcs, from) => { const seen = new Set([from]), todo = [from]; while (todo.length) { const u = todo.pop(); for (const [a, b] of arcs) if (a === u && !seen.has(b)) { seen.add(b); todo.push(b); } } return seen; };
+  reg({ ...GB, unknown: "directed-degrees", levels: [4], calculator: true, niceOk: true, skills: ["AI-AHL3.14.vertex-degree", "AI-AHL3.14.classify-graph", "AI-AHL3.14.model-as-graph"], title: "A directed graph: degrees, reachability and strong connection",
+    build({ rng }) {
+      const want = rng.bool();
+      let s, arcs, strong, x, y, r, tries = 0;
+      do { s = net(rng, 8); arcs = s.edges.map(([a, b]) => (rng.bool() ? [a, b] : [b, a])); strong = [...Array(s.n).keys()].every((v) => reach(s.n, arcs, v).size === s.n); x = rng.int(0, s.n - 1); y = rng.int(0, s.n - 1); r = reach(s.n, arcs, x).size - 1; tries++; }
+      while (x === y || (strong !== want && tries < 300) || (!strong && (r === 0 || r === s.n - 1)));
+      const inn = arcs.filter((e) => e[1] === x), out = arcs.filter((e) => e[0] === y), got = [...reach(s.n, arcs, x)].filter((v) => v !== x).sort();
+      const arc = ([a, b]) => `$\\mathrm{${VN[a]}}$ to $\\mathrm{${VN[b]}}$`;
+      return { params: { x, y }, graph: netFig(s.L, arcs, null, true), stem: `The diagram shows the one-way streets that join ${s.n === 5 ? "five" : "six"} junctions, ${names(s.n)}, as a directed graph.`, parts: [
+        P(`Write down the in-degree of ${vx(x)}.`, 1, ans.int(inn.length), [inn.length ? `The edges that arrive at ${vx(x)} are ${fmt.list(inn.map(arc))}, so the in-degree is $${inn.length}$.` : `No edge arrives at ${vx(x)}, so the in-degree is $0$.`]),
+        P(`Write down the out-degree of ${vx(y)}.`, 1, ans.int(out.length), [out.length ? `The edges that leave ${vx(y)} are ${fmt.list(out.map(arc))}, so the out-degree is $${out.length}$.` : `No edge leaves ${vx(y)}, so the out-degree is $0$.`]),
+        P(`Find the number of other junctions that can be reached from ${vx(x)} by following the arrows.`, 2, ans.int(r), [`Follow the arrows from ${vx(x)}, one street after another, noting each new junction reached.`, r ? `The junctions reached are ${fmt.list(got.map(vx))}: $${r}$ of them.` : `No junction can be reached.`]),
+        P("Which statement about the directed graph is true?", 2, ans.choice(rng, { text: strong ? "It is strongly connected" : "It is connected but not strongly connected", value: strong ? "strong" : "weak" }, [
+          { text: strong ? "It is connected but not strongly connected" : "It is strongly connected", value: strong ? "weak" : "strong", why: "A directed graph is strongly connected only when every vertex can be reached from every other vertex along the arrows." },
+          { text: "It is not connected", value: "none", why: "Ignoring the arrows, every vertex is joined to the rest, so the graph is connected." }]), [
+          `Ignoring the arrows, the graph is in one piece, so it is connected.`, strong ? `Every junction can be reached from every other junction along the arrows, so it is strongly connected.` : `It is not strongly connected: for example, not every junction can be reached from ${vx(x)}.`])] };
+    } });
+
+  // ======================= 3.15 adjacency matrices and walks =======================
+  const AW = { type: "t3-ai-adjacency-walks", syllabus: ["3.15"], representation: "diagram", format: "value" };
+  const order = (n) => `in the order ${names(n)}`;
+  reg({ ...AW, unknown: "matrix-sums", levels: [1], calculator: false, skills: ["AI-AHL3.15.write-adjacency-matrix"], situationKey: "plain", situation: plainSit, title: "Row sums of an adjacency matrix",
+    build({ rng, sit: s }) {
+      const d = degOf(s.n, s.edges), x = rng.int(0, s.n - 1), M = adjM(s.n, s.edges);
+      return { params: { x }, graph: netFig(s.L, s.edges), stem: `The diagram shows a graph with vertices ${names(s.n)}. Its adjacency matrix $${B("M")}$ has its rows and columns ${order(s.n)}.`, parts: [
+        P(`Find the sum of the entries in the row of $${B("M")}$ for vertex ${vx(x)}.`, 1, ans.int(d[x]), [`The row has a $1$ for each vertex joined to ${vx(x)}: $${M[x].join(" + ")} = ${d[x]}$, the degree of ${vx(x)}.`]),
+        P(`Find the sum of all the entries of $${B("M")}$.`, 1, ans.int(2 * s.edges.length), [`Each of the $${s.edges.length}$ edges gives two entries of $1$, so the sum is $${2 * s.edges.length}$.`])] };
+    } });
+  reg({ ...AW, unknown: "count-walks", levels: [2], niceOk: true, skills: ["AI-AHL3.15.write-adjacency-matrix", "AI-AHL3.15.count-walks"], title: "Count walks with powers of the adjacency matrix",
+    build({ rng }) {
+      let s, M, M2, M3, x, y;
+      do { s = net(rng, 7); M = adjM(s.n, s.edges); M2 = mulN(M, M); M3 = mulN(M2, M); x = rng.int(0, s.n - 1); y = rng.int(0, s.n - 1); } while (x === y || M2[x][y] === 0 || M3[x][y] < 2);
+      return { params: { x, y }, graph: netFig(s.L, s.edges), stem: `The diagram shows a graph with vertices ${names(s.n)}. Its adjacency matrix is $${B("M")}$, with rows and columns ${order(s.n)}.`, parts: [
+        P(`Find the number of walks of length $2$ from ${vx(x)} to ${vx(y)}.`, 2, ans.int(M2[x][y]), [`$${B("M")} = ${mat(M)}$`, `The number of walks of length $2$ is the entry of $${B("M")}^{2}$ in the row of ${vx(x)} and the column of ${vx(y)}: $${M2[x][y]}$.`]),
+        P(`Find the number of walks of length $3$ from ${vx(x)} to ${vx(y)}.`, 2, ans.int(M3[x][y]), [`With technology, find $${B("M")}^{3}$.`, `The entry in the row of ${vx(x)} and the column of ${vx(y)} is $${M3[x][y]}$.`])] };
+    } });
+  reg({ ...AW, unknown: "walks-from-matrix", representation: "equation", levels: [4], niceOk: true, skills: ["AI-AHL3.15.read-adjacency-matrix", "AI-AHL3.15.count-walks", "AI-AHL3.15.walks-up-to-k"], title: "Walks in a directed graph from its adjacency matrix",
+    build({ rng }) {
+      let M, P4, x, y, p, q, upto, tr, Ps;
+      do { M = [0, 1, 2, 3, 4].map((i) => [0, 1, 2, 3, 4].map((j) => (i !== j && rng.int(1, 10) <= 4 ? 1 : 0))); Ps = [M, mulN(M, M)]; Ps.push(mulN(Ps[1], M)); P4 = mulN(Ps[2], M);
+        x = rng.int(0, 4); y = rng.int(0, 4); p = rng.int(0, 4); q = rng.int(0, 4); upto = Ps[0][p][q] + Ps[1][p][q] + Ps[2][p][q]; tr = Ps[2].reduce((t, r, i) => t + r[i], 0); }
+      while (x === y || p === q || (p === x && q === y) || P4[x][y] < 2 || upto < 2 || tr === 0 || M.some((r) => r.every((v) => v === 0)) || M.flat().reduce((a, b) => a + b, 0) > 10);
+      return { params: { M, x, y, p, q }, stem: `A directed graph has vertices ${names(5)}. Its adjacency matrix, with rows and columns ${order(5)}, is $${B("M")} = ${mat(M)}$, where each entry is the number of edges from the vertex of its row to the vertex of its column.`, parts: [
+        P(`Find the number of walks of length $4$ from ${vx(x)} to ${vx(y)}.`, 2, ans.int(P4[x][y]), [`With technology, find $${B("M")}^{4} = ${mat(P4)}$.`, `The entry in the row of ${vx(x)} and the column of ${vx(y)} is $${P4[x][y]}$.`]),
+        P(`Find the number of walks of length at most $3$ from ${vx(p)} to ${vx(q)}.`, 3, ans.int(upto), [`Add the entries of $${B("M")}$, $${B("M")}^{2}$ and $${B("M")}^{3}$ in the row of ${vx(p)} and the column of ${vx(q)}.`, `$${B("M")} + ${B("M")}^{2} + ${B("M")}^{3} = ${mat(Ps[0].map((r, i) => r.map((v, j) => v + Ps[1][i][j] + Ps[2][i][j])))}$`, `$${Ps[0][p][q]} + ${Ps[1][p][q]} + ${Ps[2][p][q]} = ${upto}$`]),
+        P("Find the total number of walks of length $3$ that end at the vertex where they start.", 2, ans.int(tr), [`These are counted by the entries on the leading diagonal of $${B("M")}^{3}$.`, `$${Ps[2].map((r, i) => r[i]).join(" + ")} = ${tr}$`])] };
+    } });
+  reg({ ...AW, unknown: "random-walk", levels: [4], skills: ["AI-AHL3.15.graph-transition-matrix", "AI-AHL3.15.random-walk-probability"], title: "A random walk on a graph and its transition matrix",
+    build({ rng }) {
+      const S = rng.pick([{ who: "A security guard", where: "rooms of a building", moves: "walks", place: "room" }, { who: "A robot cleaner", where: "zones of a warehouse", moves: "moves", place: "zone" }, { who: "A visitor", where: "galleries of a museum", moves: "walks", place: "gallery" }]);
+      let s, d, x, y, z, T3, p3, lim, Tm;
+      do { s = net(rng, 7); d = degOf(s.n, s.edges); const M = adjM(s.n, s.edges); Tm = M.map((r) => r.map((v, j) => v / d[j])); T3 = powN(Tm, 3); x = rng.int(0, s.n - 1); y = rng.int(0, s.n - 1); z = rng.int(0, s.n - 1); p3 = T3[y][x]; lim = d[z] / (2 * s.edges.length); }
+      while (x === y || z === x || d[x] < 2 || p3 === 0 || edge(p3) || edge(lim) || Math.abs(p3 - Number(p3.toPrecision(2))) < 1e-9);
+      const nb = s.edges.find((e) => e.includes(x)), w = nb[0] === x ? nb[1] : nb[0];
+      return { params: { x, y, z, w }, graph: netFig(s.L, s.edges), stem: `The diagram shows the ${S.where}, ${names(s.n)}, as the vertices of a graph; an edge joins two ${S.place}s that have a door between them. ${S.who} ${S.moves} at random: from each ${S.place}, each of the doors is equally likely to be chosen for the next move.`, parts: [
+        P(`Find the probability that a move from ${vx(x)} goes to ${vx(w)}.`, 1, ans.frac(1, d[x]), [`${vx(x)} has degree $${d[x]}$ and each edge is equally likely, so the probability is $${frac(1, d[x])}$.`]),
+        P(`The walk starts at ${vx(x)}. Find the probability that it is at ${vx(y)} after exactly three moves.`, 3, ans.sf(p3), [`The transition matrix $${B("T")}$ has, in the column of each vertex, the probability $\\dfrac{1}{\\text{degree}}$ in the row of each neighbour and $0$ elsewhere.`,
+          `With technology, find $${B("T")}^{3}$ and read the entry in the column of ${vx(x)} and the row of ${vx(y)}.`, `The probability is $${sf(p3)}$.`]),
+        P(`Find the proportion of the moves that end at ${vx(z)} in the long term.`, 3, ans.sf(lim), [`The long-term proportions form the steady state vector, which satisfies $${B("T")}${B("v")} = ${B("v")}$ with entries that add to $1$.`,
+          `Solving with technology (or noting that the steady state is in proportion to the degrees $${d.join(",\\, ")}$) gives $\\dfrac{${d[z]}}{${2 * s.edges.length}}$ for ${vx(z)}.`, `The proportion is $${sf(lim)}$.`])] };
+    } });
+
+  // ======================= 3.16 graph algorithms =======================
+  const GA = { type: "t3-ai-graph-algorithms", syllabus: ["3.16"], representation: "diagram", format: "value", niceOk: true };
+  reg({ ...GA, unknown: "eulerian", format: "mcq", levels: [1], calculator: false, skills: ["AI-AHL3.16.eulerian"], title: "Does a graph have an Eulerian trail or circuit?",
+    build({ rng }) {
+      const want = rng.pick([0, 2, 2, 4]), s = net(rng, 8, (n, e) => degOf(n, e).filter((v) => v % 2).length === want), d = degOf(s.n, s.edges), odd = d.map((v, i) => (v % 2 ? i : -1)).filter((i) => i >= 0);
+      const kind = odd.length === 0 ? "circuit" : odd.length === 2 ? "trail" : "neither";
+      const T = { circuit: "It has an Eulerian circuit", trail: "It has an Eulerian trail but no Eulerian circuit", neither: "It has neither an Eulerian trail nor an Eulerian circuit" };
+      const why = { circuit: "An Eulerian circuit needs every vertex to have even degree.", trail: "An Eulerian trail that is not a circuit needs exactly two vertices of odd degree.", neither: "With no odd vertices there is a circuit; with exactly two there is a trail." };
+      return { params: {}, graph: netFig(s.L, s.edges), stem: `The diagram shows a connected graph with vertices ${names(s.n)}.`, parts: [
+        P("Write down the number of vertices of odd degree.", 1, ans.int(odd.length), [`The degrees of ${names(s.n)} are $${d.join(",\\, ")}$.`, odd.length ? `The odd vertices are ${fmt.list(odd.map(vx))}: $${odd.length}$ of them.` : `All the degrees are even, so the number is $0$.`]),
+        P("Which statement about the graph is true?", 1, ans.choice(rng, { text: T[kind], value: kind }, ["circuit", "trail", "neither"].filter((k) => k !== kind).map((k) => ({ text: T[k], value: k, why: why[k] }))), [
+          kind === "circuit" ? "The graph is connected and every vertex has even degree, so it has an Eulerian circuit." : kind === "trail" ? `Exactly two vertices have odd degree, so there is an Eulerian trail from one of them to the other, but no Eulerian circuit.` : `More than two vertices have odd degree, so no walk can use every edge exactly once.`])] };
+    } });
+  const wSit = (rng) => { const s = net(rng, 8); return { ...s, w: rng.sample([...Array(27).keys()].map((i) => i + 3), s.edges.length) }; };
+  const kruskal = (n, edges, w) => { const p = [...Array(n).keys()], f = (x) => (p[x] === x ? x : (p[x] = f(p[x]))), steps = []; let count = 0;
+    for (const i of edges.map((_, k) => k).sort((a, b) => w[a] - w[b])) { if (count === n - 1) break; const [a, b] = edges[i]; if (f(a) !== f(b)) { p[f(a)] = f(b); steps.push({ i, add: true }); count++; } else steps.push({ i, add: false }); } return steps; };
+  reg({ ...GA, unknown: "kruskal", levels: [2], skills: ["AI-AHL3.16.kruskal"], title: "Minimum spanning tree by Kruskal's algorithm",
+    build({ rng }) {
+      const s = wSit(rng), steps = kruskal(s.n, s.edges, s.w), added = steps.filter((t) => t.add), total = added.reduce((t, a) => t + s.w[a.i], 0);
+      const S = rng.pick(["The weights are the costs, in thousands of euros, of laying a cable along each edge.", "The weights are the lengths, in kilometres, of the paths between campsites.", "The weights are the times, in minutes, to clear snow from each road."]);
+      return { params: {}, graph: netFig(s.L, s.edges, s.w), stem: `The diagram shows a weighted graph with vertices ${names(s.n)}. ${S} Kruskal's algorithm is used to find the minimum spanning tree.`, parts: [
+        P("Write down the weight of the third edge that is added to the tree.", 1, ans.int(s.w[added[2].i]), [`Kruskal's algorithm takes the edges in order of weight, leaving out any edge that would make a cycle.`, `The first three edges added are ${fmt.list(added.slice(0, 3).map((a) => `${ed(s.edges[a.i])} ($${s.w[a.i]}$)`))}, so the third has weight $${s.w[added[2].i]}$.`]),
+        P("Find the total weight of the minimum spanning tree.", 3, ans.int(total), [...steps.map((t) => (t.add ? `Add ${ed(s.edges[t.i])}, weight $${s.w[t.i]}$.` : `Reject ${ed(s.edges[t.i])}, weight $${s.w[t.i]}$: it would make a cycle.`)),
+          `The tree now has $${s.n - 1}$ edges. Total weight $= ${added.map((a) => s.w[a.i]).join(" + ")} = ${total}$`])] };
+    } });
+  // A table of distinct distances between five places, from points on a map.
+  const tableSit = (rng) => {
+    let pts, D;
+    do { pts = [0, 1, 2, 3, 4].map(() => [rng.int(0, 40), rng.int(0, 40)]); D = pts.map((p) => pts.map((q) => Math.round(Math.hypot(p[0] - q[0], p[1] - q[1])))); }
+    while (new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size < 10 || D.some((r, i) => r.some((v, j) => i !== j && v < 4)));
+    return { D };
+  };
+  const distTable = (D) => ({ head: ["Vertex", ...D.map((_, i) => vx(i))], rows: D.map((r, i) => [vx(i), ...r.map((v, j) => (i === j ? "–" : `$${v}$`))]) });
+  const prim = (D, verts, start) => { const inT = [start], order = []; while (inT.length < verts.length) { let best = null; for (const a of inT) for (const b of verts) if (!inT.includes(b) && (!best || D[a][b] < D[best[0]][best[1]])) best = [a, b]; inT.push(best[1]); order.push(best); } return order; };
+  reg({ ...GA, unknown: "prim-table", representation: "table", levels: [2], skills: ["AI-AHL3.16.prim"], situationKey: "table", situation: tableSit, title: "Minimum spanning tree by Prim's algorithm on a table",
+    build({ sit: { D } }) {
+      const order = prim(D, [0, 1, 2, 3, 4], 0), total = order.reduce((t, [a, b]) => t + D[a][b], 0);
+      return { params: {}, table: distTable(D), stem: `The table shows the lengths, in metres, of the pipes that could be laid between five pumps, ${names(5)}. Prim's algorithm, starting at ${vx(0)}, is used to find the minimum spanning tree.`, parts: [
+        P("Write down the weight of the first edge that is added.", 1, ans.int(D[order[0][0]][order[0][1]]), [`The smallest entry in the row of ${vx(0)} is $${D[order[0][0]][order[0][1]]}$, so the first edge is ${ed(order[0])}.`]),
+        P("Find the total weight of the minimum spanning tree.", 3, ans.int(total), [...order.map(([a, b], i) => `${i ? "Then the" : "The"} shortest edge from a vertex in the tree to a vertex not yet in it is ${ed([a, b])}, weight $${D[a][b]}$.`), `Total weight $= ${order.map(([a, b]) => D[a][b]).join(" + ")} = ${total}$`])] };
+    } });
+  reg({ ...GA, unknown: "chinese-postman", levels: [4], calculator: true, skills: ["AI-AHL3.16.chinese-postman", "AI-AHL3.16.eulerian"], title: "The Chinese postman problem",
+    build({ rng }) {
+      const want = rng.pick([2, 4, 4]);
+      let s, odd;
+      do { s = wSit(rng); odd = degOf(s.n, s.edges).map((v, i) => (v % 2 ? i : -1)).filter((i) => i >= 0); } while (odd.length !== want);
+      const n = s.n, INF = 1e9, d = [...Array(n)].map((_, i) => [...Array(n)].map((_, j) => (i === j ? 0 : INF))), nx = [...Array(n)].map(() => Array(n).fill(-1));
+      s.edges.forEach(([a, b], i) => { d[a][b] = d[b][a] = s.w[i]; nx[a][b] = b; nx[b][a] = a; });
+      for (let k = 0; k < n; k++) for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) if (d[i][k] + d[k][j] < d[i][j]) { d[i][j] = d[i][k] + d[k][j]; nx[i][j] = nx[i][k]; }
+      const path = (a, b) => { let t = VN[a]; while (a !== b) { a = nx[a][b]; t += VN[a]; } return `$\\mathrm{${t}}$`; };
+      const sum = s.w.reduce((a, b) => a + b, 0), pairs = odd.length === 2 ? [[[odd[0], odd[1]]]] : [[[odd[0], odd[1]], [odd[2], odd[3]]], [[odd[0], odd[2]], [odd[1], odd[3]]], [[odd[0], odd[3]], [odd[1], odd[2]]]];
+      const cost = (pr) => pr.reduce((t, [a, b]) => t + d[a][b], 0), best = pairs.reduce((m, pr) => (cost(pr) < cost(m) ? pr : m));
+      const S = rng.pick([{ who: "A postal worker", does: "walk along every street", u: "minutes", w: "times, in minutes, to walk along the streets" }, { who: "A gritting lorry", does: "drive along every road", u: "kilometres", w: "lengths, in kilometres, of the roads" }, { who: "An inspector", does: "check every pipeline", u: "kilometres", w: "lengths, in kilometres, of the pipelines" }]);
+      const work = [`The vertices of odd degree are ${fmt.list(odd.map(vx))}, so some edges must be used twice.`];
+      if (odd.length === 2) work.push(`The shortest route between them is ${path(odd[0], odd[1])}, of weight $${d[odd[0]][odd[1]]}$; its edges are repeated.`);
+      else { for (const pr of pairs) work.push(`Pair ${pr.map(([a, b]) => `${vx(a)} with ${vx(b)} (shortest route ${path(a, b)}, $${d[a][b]}$)`).join(" and ")}: total $${cost(pr)}$.`); work.push(`The least total is $${cost(best)}$, so those routes are repeated.`); }
+      work.push(`Least total $= ${sum} + ${cost(best)} = ${sum + cost(best)}$ ${S.u}.`);
+      return { params: {}, graph: netFig(s.L, s.edges, s.w), stem: `The diagram shows a weighted graph with vertices ${names(n)}. The weights are the ${S.w}. ${S.who} must ${S.does} at least once, starting and finishing at ${vx(0)}.`, parts: [
+        P("Find the sum of the weights of all the edges.", 1, ans.int(sum), [`$${s.w.join(" + ")} = ${sum}$`]),
+        P("Write down the number of vertices of odd degree.", 1, ans.int(odd.length), [`The degrees of ${names(n)} are $${degOf(n, s.edges).join(",\\, ")}$, so $${odd.length}$ vertices have odd degree.`]),
+        P("Find the least possible total weight of the route.", 4, ans.int(sum + cost(best)), work)] };
+    } });
+  reg({ ...GA, unknown: "tsp-bounds", representation: "table", levels: [4], calculator: true, skills: ["AI-AHL3.16.tsp-upper-bound", "AI-AHL3.16.tsp-lower-bound", "AI-AHL3.16.prim"], situationKey: "table", situation: tableSit, title: "Upper and lower bounds for the travelling salesman problem",
+    build({ rng, sit: { D } }) {
+      const route = [0]; while (route.length < 5) { const at = route[route.length - 1]; let b = -1; for (let j = 0; j < 5; j++) if (!route.includes(j) && (b < 0 || D[at][j] < D[at][b])) b = j; route.push(b); }
+      const legs = route.map((v, i) => D[v][route[(i + 1) % 5]]), upper = legs.reduce((a, b) => a + b, 0);
+      const order = prim(D, [1, 2, 3, 4], 1), mst = order.reduce((t, [a, b]) => t + D[a][b], 0), two = [1, 2, 3, 4].map((j) => D[0][j]).sort((a, b) => a - b).slice(0, 2), lower = mst + two[0] + two[1];
+      const S = rng.pick(["A courier must visit each of five depots", "A technician must visit each of five masts", "A tour guide must visit each of five villages"]);
+      return { params: {}, table: distTable(D), stem: `${S}, ${names(5)}, and return to the start. The table shows the least distances, in kilometres, between them.`, parts: [
+        P(`Use the nearest neighbour algorithm, starting at ${vx(0)}, to find an upper bound for the length of the shortest tour.`, 3, ans.int(upper), [`From each place go to the nearest place not yet visited, and return to ${vx(0)} at the end.`,
+          `The tour is $${route.concat(0).map((v) => `\\mathrm{${VN[v]}}`).join(" \\to ")}$.`, `Upper bound $= ${legs.join(" + ")} = ${upper}\\text{ km}$`]),
+        P(`Vertex ${vx(0)} is deleted. Find the weight of the minimum spanning tree of the remaining graph.`, 2, ans.int(mst), [`Using Prim's algorithm from ${vx(1)}, the edges are ${fmt.list(order.map((e) => `${ed(e)} ($${D[e[0]][e[1]]}$)`))}.`, `Weight $= ${order.map(([a, b]) => D[a][b]).join(" + ")} = ${mst}$`]),
+        P("Hence find a lower bound for the length of the shortest tour.", 2, ans.int(lower), [`Add the two shortest edges from ${vx(0)}: $${two[0]}$ and $${two[1]}$.`, `Lower bound $= ${mst} + ${two[0]} + ${two[1]} = ${lower}\\text{ km}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
