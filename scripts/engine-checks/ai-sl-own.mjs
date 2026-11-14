@@ -70,6 +70,32 @@ function equidistant(sites, W, H) {
   }
   return [cx, cy];
 }
+// ---- statistics ----
+// Rank 1 for the largest: one more than the number of larger values, plus half the number of other equal values.
+const countRanks = (xs) => xs.map((x) => 1 + xs.filter((y) => y > x).length + (xs.filter((y) => y === x).length - 1) / 2);
+// Correlation from deviations about the means.
+function covCorr(T, xs, ys) {
+  const mx = T.mean(xs), my = T.mean(ys);
+  return T.sum(xs, (x, i) => (x - mx) * (ys[i] - my)) / Math.sqrt(T.sum(xs, (x) => (x - mx) ** 2) * T.sum(ys, (y) => (y - my) ** 2));
+}
+// The chi-squared statistic of a contingency table from N (sum of O^2 / (row total x column total) - 1).
+function chiSquare(T, O) {
+  const rows = O.map((r) => T.sum(r)), cols = O[0].map((v, j) => T.sum(O, (r) => r[j])), N = T.sum(rows);
+  const expected = O.map((r, i) => r.map((v, j) => rows[i] / N * cols[j]));
+  return { stat: N * (T.sum(O, (r, i) => T.sum(r, (v, j) => v * v / (rows[i] * cols[j]))) - 1), df: (rows.length - 1) * (cols.length - 1), expected, minExpected: Math.min(...expected.flat()) };
+}
+// Gamma at a whole or half-whole number, by the recurrence from Gamma(1) = 1 and Gamma(1/2) = sqrt(pi).
+function gammaHalf(x) { let g = Number.isInteger(x) ? 1 : Math.sqrt(Math.PI), v = Number.isInteger(x) ? 1 : 0.5; while (v < x - 1e-9) { g *= v; v += 1; } return g; }
+// Upper tail of the chi-squared distribution: the density integrated numerically (substituting x = u^2 to remove the singularity at 0).
+function chiTail(T, stat, df) {
+  const k = df / 2, c = 1 / (2 ** k * gammaHalf(k)), f = (u) => 2 * u ** (df - 1) * Math.exp(-u * u / 2) * c;
+  return 1 - T.integrate(f, 0, Math.sqrt(stat), 4000);
+}
+// Upper tail of Student's t distribution by numerical integration of its density from 0 to t.
+function tTail(T, t, df) {
+  const c = gammaHalf((df + 1) / 2) / (Math.sqrt(df * Math.PI) * gammaHalf(df / 2)), f = (x) => c * (1 + x * x / df) ** (-(df + 1) / 2);
+  return 0.5 - T.integrate(f, 0, t, 4000);
+}
 // Does the point satisfy an equation written as "3x - 2y = 7"?
 function lineHolds(tex, V) {
   const [left, right] = tex.replace(/\s+/g, "").split("=");
@@ -384,5 +410,70 @@ export default {
     T.require(Math.abs(near[0] - near[1]) > 0.1, "the two distances differ clearly");
     const best = near[0] > near[1] ? 0 : 1;
     return { a: ap(T, near[0]), b: ap(T, near[1]), c: T.option([best, "far"]) };
+  },
+  // ---------------- 4.10 ----------------
+  "t4-ai-spearman/ranks-with-a-tie/table": (q, T) => {
+    const { scores, ti, single } = q.params, r = countRanks(scores);
+    T.require(scores.filter((s) => s === scores[ti]).length === 2 && scores.filter((s) => s === scores[single]).length === 1, "one tied pair, and the other gymnast is not tied");
+    return { a: r[single], b: r[ti] };
+  },
+  "t4-ai-spearman/coefficient-and-interpretation/table": (q, T) => {
+    const { xs, ys, who } = q.params, rx = countRanks(xs), ry = countRanks(ys), n = xs.length;
+    T.require(new Set(xs).size === n && new Set(ys).size === n, "no tied values");
+    const rs = 1 - 6 * T.sum(rx, (r, i) => (r - ry[i]) ** 2) / (n * (n * n - 1));   // the no-ties formula
+    T.require(Math.abs(rs) > 0.7 || Math.abs(rs) < 0.35, "the association is clearly strong or clearly weak");
+    T.require(Math.abs(rs) < 0.999, "not a perfect association");
+    return { a: ry[who], b: ap(T, rs), c: T.option(rs > 0.7 ? "strong-positive" : rs < -0.7 ? "strong-negative" : "weak") };
+  },
+  "t4-ai-spearman/tied-ranks-and-significance/table": (q, T) => {
+    const { xs, ys, ti, crit } = q.params, rx = countRanks(xs), ry = countRanks(ys), rs = covCorr(T, rx, ry);
+    T.require(ys.filter((y) => y === ys[ti]).length === 2 && new Set(ys).size === ys.length - 1 && new Set(xs).size === xs.length, "exactly one tied pair");
+    T.require(Math.abs(rs - crit) > 0.03, "not close to the critical value");
+    T.require(Math.abs(crit - { 7: 0.714, 8: 0.643, 9: 0.6, 10: 0.564 }[xs.length]) < 1e-9, "the tabulated one-tailed critical value");
+    // correcting the largest x to a still larger value: recompute and compare
+    const xs2 = xs.slice(); xs2[xs.indexOf(Math.max(...xs))] = Math.max(...xs) * 1.6;
+    const rs2 = covCorr(T, countRanks(xs2), ry);
+    return { a: ry[ti], b: ap(T, rs), c: T.option(rs > crit ? "yes" : "no"), d: T.option(Math.abs(rs2 - rs) < 1e-12 ? "same" : rs2 > rs ? "up" : "down") };
+  },
+  // ---------------- 4.11 ----------------
+  "t4-ai-chi-squared/degrees-of-freedom-and-hypothesis/words": (q, T) => {
+    const { nr, nc } = q.params;
+    // free cells: fill a table cell by cell, counting those not fixed by the row and column totals
+    let free = 0; for (let i = 0; i < nr; i++) for (let j = 0; j < nc; j++) if (i < nr - 1 && j < nc - 1) free++;
+    return { a: free, b: T.option("indep") };
+  },
+  "t4-ai-chi-squared/expected-frequency/table": (q, T) => {
+    const { O, cell } = q.params, c = chiSquare(T, O);
+    T.require(c.minExpected > 5, "expected frequencies greater than five");
+    return { a: T.option("indep"), b: ap(T, c.expected[cell[0]][cell[1]]), c: c.df };
+  },
+  "t4-ai-chi-squared/test-for-independence/table": (q, T) => {
+    const { O, alpha } = q.params, c = chiSquare(T, O), p = chiTail(T, c.stat, c.df);
+    T.require(c.minExpected > 5, "expected frequencies greater than five");
+    T.require(Math.abs(p - alpha) / alpha > 0.1 && p > 0.001, "the p-value is not close to the significance level");
+    T.require(q.table.rows.length === O.length + 1 && q.table.rows.every((r, i) => i === O.length || O[i].every((v, j) => r[j + 1] === `$${v}$`)), "the table shows the observed frequencies");
+    return { a: c.df, b: ap(T, c.stat, 1e-6), c: T.approx(p, 2e-5 * Math.max(p, 0.01)), d: T.option(p < alpha ? "reject-alt" : "keep-insufficient") };
+  },
+  "t4-ai-goodness-of-fit/goodness-of-fit-test/table": (q, T) => {
+    const { O, w, alpha, k } = q.params, N = T.sum(O), sw = T.sum(w), E = w.map((v) => v / sw * N);
+    const stat = T.sum(O, (o, i) => o * o / E[i]) - N, df = O.length - 1, p = chiTail(T, stat, df);
+    T.require(Math.min(...E) > 5, "expected frequencies greater than five");
+    T.require(Math.abs(p - alpha) / alpha > 0.1 && p > 0.001, "the p-value is not close to the significance level");
+    return { a: ap(T, E[k]), b: df, c: ap(T, stat, 1e-6), d: T.approx(p, 2e-5 * Math.max(p, 0.01)), e: T.option(p < alpha ? "reject-alt" : "keep-insufficient") };
+  },
+  "t4-ai-t-test/pooled-two-sample-test/table": (q, T) => {
+    const { a, b, alpha } = q.params, n = a.length + b.length;
+    // the pooled t-statistic is the t-statistic of the slope when the values are regressed on a 0/1 group indicator
+    const xs = a.map(() => 1).concat(b.map(() => 0)), ys = a.concat(b), mx = T.mean(xs), my = T.mean(ys);
+    const sxx = T.sum(xs, (x) => (x - mx) ** 2), slope = T.sum(xs, (x, i) => (x - mx) * (ys[i] - my)) / sxx, icpt = my - slope * mx;
+    const rss = T.sum(xs, (x, i) => (ys[i] - icpt - slope * x) ** 2), t = slope / Math.sqrt(rss / (n - 2) / sxx), p = tTail(T, t, n - 2);
+    T.require(t > 0 && Math.abs(p - alpha) / alpha > 0.1 && p > 0.001, "a positive statistic and a p-value that is not close to the significance level");
+    return { a: T.option("gt"), b: ap(T, t, 1e-6), c: T.approx(p, 2e-5 * Math.max(p, 0.01)), d: T.option(p < alpha ? "reject-alt" : "keep-insufficient") };
+  },
+  "t4-ai-t-test/conclusion-from-p-value/words": (q, T) => {
+    const { p, alpha } = q.params;
+    T.require(Math.abs(p - alpha) / alpha > 0.1, "the p-value is not close to the significance level");
+    T.require(q.stem.includes(`$${p}$`), "the p-value in the stem is the one used");
+    return { a: T.option("eq"), b: T.option("gt"), c: T.option(p < alpha ? "reject-alt" : "keep-insufficient") };
   },
 };

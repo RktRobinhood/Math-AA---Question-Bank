@@ -900,4 +900,238 @@
             { text: optText(1 - best, true), value: [1 - best, "far"], why: "Compare the two distances again." }, { text: optText(best, false), value: [best, "near"], why: "Compare the two distances again." }]), [
             `$${sf(vs[best].r)} > ${sf(vs[1 - best].r)}$, so $\\mathrm{${names[best]}}$ is farther from its nearest sites. Build it at $\\mathrm{${names[best]}}$.`])] };
     } });
+
+  // =====================================================================================
+  // 4.10 Spearman's rank correlation coefficient
+  // =====================================================================================
+  // Ranks with 1 for the largest value; tied values share the mean of their ranks.
+  function ranksOf(xs) {
+    const order = xs.map((x, i) => i).sort((p, q) => xs[q] - xs[p]), out = new Array(xs.length);
+    for (let i = 0; i < order.length;) { let j = i; while (j + 1 < order.length && xs[order[j + 1]] === xs[order[i]]) j++; for (let k = i; k <= j; k++) out[order[k]] = (i + j) / 2 + 1; i = j + 1; }
+    return out;
+  }
+  function pearson(xs, ys) {
+    const n = xs.length, sx = sum(xs), sy = sum(ys), sxy = sum(xs.map((x, i) => x * ys[i])), sxx = sum(xs.map((x) => x * x)), syy = sum(ys.map((y) => y * y));
+    return (n * sxy - sx * sy) / Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy));
+  }
+  const spearman = (xs, ys) => pearson(ranksOf(xs), ranksOf(ys));
+  const distinctInts = (rng, n, lo, hi) => rng.sample(Array.from({ length: hi - lo + 1 }, (v, i) => lo + i), n);
+  // y-values whose order is the order of the x-values after a few swaps of neighbours (or the reverse order)
+  function monotoneData(rng, n, swaps, reverse, xr, yr) {
+    const xs = distinctInts(rng, n, xr[0], xr[1]), ysSorted = distinctInts(rng, n, yr[0], yr[1]).sort((p, q) => p - q), perm = Array.from({ length: n }, (v, i) => i);
+    for (let s = 0; s < swaps; s++) { const i = rng.int(0, n - 2); [perm[i], perm[i + 1]] = [perm[i + 1], perm[i]]; }
+    if (reverse) perm.reverse();
+    const byX = xs.map((x, i) => i).sort((p, q) => xs[p] - xs[q]), ys = new Array(n);
+    byX.forEach((idx, pos) => { ys[idx] = ysSorted[perm[pos]]; });
+    return { xs, ys };
+  }
+  const SPEAR = [{ who: "students", x: "Hours of revision", y: "Test score", xs: [2, 30], ys: [35, 98], sx: "revision time", sy: "test score" },
+    { who: "houses", x: "Distance from the city centre (km)", y: "Price (thousands of euros)", xs: [1, 40], ys: [150, 620], sx: "distance from the city centre", sy: "price", neg: true },
+    { who: "cafés", x: "Number of tables", y: "Daily takings (euros)", xs: [6, 40], ys: [300, 1900], sx: "number of tables", sy: "daily takings" },
+    { who: "runners", x: "Training distance per week (km)", y: "Race time (minutes)", xs: [10, 90], ys: [38, 75], sx: "training distance", sy: "race time", neg: true }];
+  const LET = "ABCDEFGHJK";
+  const dataTable = (c, xs, ys) => ({ head: [cap(c.who).replace(/s$/, "")].concat(xs.map((x, i) => `$\\mathrm{${LET[i]}}$`)), rows: [[c.x].concat(xs.map((x) => m(num(x)))), [c.y].concat(ys.map((y) => m(num(y))))] });
+  const rankLine = (name, r) => `Ranks of the ${name}: $${r.map(num).join(",\\ ")}$`;
+  reg({ type: "t4-ai-spearman", unknown: "ranks-with-a-tie", representation: "table", format: "value", levels: [1], calculator: false,
+    syllabus: ["4.10"], skills: ["AI-SL4.10.rank-data"], title: "Rank data, sharing ranks between tied values",
+    build({ rng }) {
+      const n = 6, sc = distinctInts(rng, n - 1, 51, 95), tie = rng.int(0, n - 2);
+      let scores, r, ti, single;
+      do { scores = rng.shuffle(sc.concat([sc[tie]])); r = ranksOf(scores); ti = scores.indexOf(sc[tie]); single = rng.int(0, n - 1); } while (scores[single] === sc[tie] || r[single] === 1);
+      const sorted = scores.slice().sort((p, q) => q - p), pos = sorted.indexOf(sc[tie]) + 1;
+      return { params: { scores, ti, single }, stem: "Six gymnasts are given scores by a judge. The gymnasts are ranked, with rank $1$ for the highest score.",
+        table: { head: ["Gymnast"].concat(scores.map((s, i) => `$\\mathrm{${LET[i]}}$`)), rows: [["Score"].concat(scores.map((s) => m(s)))] },
+        parts: [
+          P(`Write down the rank of gymnast $\\mathrm{${LET[single]}}$.`, 1, ans.int(r[single]), [`In order from the highest, the scores are $${sorted.join(",\\ ")}$.`, `The score $${scores[single]}$ is in position $${r[single]}$, so its rank is $${r[single]}$.`]),
+          P(`Write down the rank of gymnast $\\mathrm{${LET[ti]}}$.`, 1, ans.dec(r[ti]), [`Two gymnasts have the score $${sc[tie]}$. They take up positions $${pos}$ and $${pos + 1}$.`, `Tied values share the mean of their positions: $\\dfrac{${pos} + ${pos + 1}}{2} = ${num(r[ti])}$`])] };
+    } });
+  const assoc = (rs) => (rs > 0.7 ? "strong-positive" : rs < -0.7 ? "strong-negative" : Math.abs(rs) < 0.35 ? "weak" : null);
+  reg({ type: "t4-ai-spearman", unknown: "coefficient-and-interpretation", representation: "table", format: "value", levels: [2],
+    syllabus: ["4.10"], skills: ["AI-SL4.10.rank-data", "AI-SL4.10.calculate-rs", "AI-SL4.10.interpret-rs"], title: "Find and interpret Spearman's rank correlation coefficient",
+    build({ rng }) {
+      const c = rng.pick(SPEAR), n = 6;
+      let d, rs, kind, who;
+      do { const weak = rng.bool(0.25); d = weak ? (() => { const xs = distinctInts(rng, n, c.xs[0], c.xs[1]), ys = distinctInts(rng, n, c.ys[0], c.ys[1]); return { xs, ys }; })() : monotoneData(rng, n, rng.int(1, 2), Boolean(c.neg), c.xs, c.ys);
+        rs = spearman(d.xs, d.ys); kind = assoc(rs); who = rng.int(0, n - 1); } while (!kind || Math.abs(rs) > 0.999 || Math.abs(rs) < 0.01);
+      const rx = ranksOf(d.xs), ry = ranksOf(d.ys);
+      const texts = { "strong-positive": `There is a strong positive association: as the ${c.sx} increases, the ${c.sy} tends to increase.`, "strong-negative": `There is a strong negative association: as the ${c.sx} increases, the ${c.sy} tends to decrease.`,
+        weak: `There is little or no association between the ${c.sx} and the ${c.sy}.`, perfect: `Every increase in the ${c.sx} goes with an increase in the ${c.sy}.` };
+      return { params: { xs: d.xs, ys: d.ys, who }, stem: `The table shows data for six ${c.who}. Each variable is ranked, with rank $1$ for the largest value.`, table: dataTable(c, d.xs, d.ys), parts: [
+        P(`Write down the rank of ${c.who.replace(/s$/, "")} $\\mathrm{${LET[who]}}$ for the variable in the last row of the table.`, 1, ans.int(ry[who]), [rankLine(c.sy, ry), `The value $${num(d.ys[who])}$ has rank $${ry[who]}$.`]),
+        P("Find Spearman's rank correlation coefficient, $r_{s}$.", 2, ans.sf(rs), [rankLine(c.sx, rx), `Enter the two lists of ranks in the GDC and find the correlation coefficient: $r_{s} = ${sf(rs)}$`]),
+        P("Which statement interprets this value?", 1, ans.choice(rng, { text: texts[kind], value: kind }, ["strong-positive", "strong-negative", "weak", "perfect"].filter((k) => k !== kind).map((k) => ({ text: texts[k], value: k,
+          why: k === "perfect" ? "That would need a coefficient of exactly one." : "Look at the sign of the coefficient and at how close it is to one or minus one." }))), [
+          `$r_{s} = ${sf(rs)}$ is ${kind === "weak" ? "close to $0$" : kind === "strong-positive" ? "close to $1$" : "close to $-1$"}, so ${texts[kind].charAt(0).toLowerCase()}${texts[kind].slice(1)}`])] };
+    } });
+  const RS_CRIT = { 7: 0.714, 8: 0.643, 9: 0.6, 10: 0.564 };
+  reg({ type: "t4-ai-spearman", unknown: "tied-ranks-and-significance", representation: "table", format: "value", levels: [4],
+    syllabus: ["4.10"], skills: ["AI-SL4.10.calculate-rs", "AI-SL4.10.rank-data", "AI-SL4.10.rs-test", "AI-SL4.10.compare-with-r"], title: "Spearman's coefficient with tied ranks, and what it shows",
+    build({ rng }) {
+      const c = rng.pick(SPEAR.filter((k) => !k.neg)), n = rng.int(7, 9), crit = RS_CRIT[n];
+      let d, rs, ti, top;
+      do { d = rng.bool(0.3) ? { xs: distinctInts(rng, n, c.xs[0], c.xs[1]), ys: distinctInts(rng, n, c.ys[0], c.ys[1]) } : monotoneData(rng, n, rng.int(2, 6), false, c.xs, c.ys);
+        const order = d.ys.map((y, i) => i).sort((p, q) => d.ys[p] - d.ys[q]), k = rng.int(1, n - 3); d.ys[order[k]] = d.ys[order[k + 1]]; ti = order[k];   // make one tie, away from the largest value
+        rs = spearman(d.xs, d.ys); top = d.xs.indexOf(Math.max(...d.xs)); } while (Math.abs(rs - crit) < 0.04 || rs < 0.05 || rs > 0.995);
+      const rx = ranksOf(d.xs), ry = ranksOf(d.ys), sig = rs > crit, bigger = Math.round(Math.max(...d.xs) * 1.6);
+      const one = c.who.replace(/s$/, "");
+      const concl = { yes: `$r_{s}$ is greater than the critical value, so there is significant evidence of a positive association.`, no: `$r_{s}$ is less than the critical value, so there is not significant evidence of a positive association.`,
+        yesWrong: `$r_{s}$ is less than the critical value, so there is significant evidence of a positive association.`, noWrong: `$r_{s}$ is greater than the critical value, so there is not significant evidence of a positive association.` };
+      const right = sig ? "yes" : "no";
+      return { params: { xs: d.xs, ys: d.ys, ti, crit }, stem: `The table shows data for $${n}$ ${c.who}. Each variable is ranked, with rank $1$ for the largest value.`, table: dataTable(c, d.xs, d.ys), parts: [
+        P(`Two ${c.who} have the same ${c.sy}. Write down the rank given to each of them for this variable.`, 1, ans.dec(ry[ti]), [`The value $${num(d.ys[ti])}$ appears twice, in positions $${ry[ti] - 0.5}$ and $${ry[ti] + 0.5}$ from the largest.`, `Each gets the mean of these positions: $${num(ry[ti])}$`]),
+        P("Find Spearman's rank correlation coefficient, $r_{s}$.", 2, ans.sf(rs), [rankLine(c.sx, rx), rankLine(c.sy, ry), `Enter the two lists of ranks in the GDC and find the correlation coefficient: $r_{s} = ${sf(rs)}$`]),
+        P(`For $${n}$ pairs of data, the critical value of $r_{s}$ for a test at the $5\\%$ level for a positive association is $${num(crit)}$. Which conclusion is correct?`, 2, ans.choice(rng, { text: concl[right], value: right }, ["yes", "no", "yesWrong", "noWrong"].filter((k) => k !== right).map((k) => ({ text: concl[k], value: k,
+          why: "The association is significant only when the coefficient is greater than the critical value." }))), [`$${sf(rs)} ${sig ? ">" : "<"} ${num(crit)}$`, concl[right]]),
+        P(`The ${c.sx} for ${one} $\\mathrm{${LET[top]}}$ was recorded wrongly: it should be $${num(bigger)}$, not $${num(d.xs[top])}$. What happens to $r_{s}$ when this is corrected?`, 1, ans.choice(rng, { text: "It does not change.", value: "same" }, [
+          { text: "It increases.", value: "up", why: "Only the ranks matter. The largest value is still the largest." }, { text: "It decreases.", value: "down", why: "Only the ranks matter. The largest value is still the largest." },
+          { text: "It becomes $1$.", value: "one", why: "The ranks do not change, so the coefficient does not change." }]), [`$${num(d.xs[top])}$ was already the largest value, and $${num(bigger)}$ is still the largest, so every rank stays the same and $r_{s}$ does not change.`])] };
+    } });
+
+  // =====================================================================================
+  // 4.11 chi-squared tests and the t-test
+  // =====================================================================================
+  function lgamma(x) {   // Lanczos approximation
+    const g = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+    let y = x, t = x + 5.5, s = 1.000000000190015; t -= (x + 0.5) * Math.log(t);
+    for (const c of g) s += c / ++y;
+    return -t + Math.log(2.5066282746310005 * s / x);
+  }
+  function gammaP(a, x) {   // regularised lower incomplete gamma function
+    if (x <= 0) return 0;
+    if (x < a + 1) { let ap = a, del = 1 / a, s = del; for (let i = 0; i < 500; i++) { ap++; del *= x / ap; s += del; if (Math.abs(del) < Math.abs(s) * 1e-15) break; } return s * Math.exp(-x + a * Math.log(x) - lgamma(a)); }
+    let b = x + 1 - a, c = 1e300, d = 1 / b, h = d;
+    for (let i = 1; i < 500; i++) { const an = -i * (i - a); b += 2; d = an * d + b; if (Math.abs(d) < 1e-300) d = 1e-300; c = b + an / c; if (Math.abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < 1e-15) break; }
+    return 1 - Math.exp(-x + a * Math.log(x) - lgamma(a)) * h;
+  }
+  const chiUpper = (stat, df) => 1 - gammaP(df / 2, stat / 2);
+  function betaI(x, a, b) {   // regularised incomplete beta function (continued fraction)
+    if (x <= 0) return 0; if (x >= 1) return 1;
+    const front = Math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+    const cf = (xx, aa, bb) => { let c = 1, d = 1 - (aa + bb) * xx / (aa + 1); if (Math.abs(d) < 1e-300) d = 1e-300; d = 1 / d; let h = d;
+      for (let k = 1; k < 500; k++) { const k2 = 2 * k; let an = k * (bb - k) * xx / ((aa + k2 - 1) * (aa + k2)); d = 1 + an * d; if (Math.abs(d) < 1e-300) d = 1e-300; c = 1 + an / c; if (Math.abs(c) < 1e-300) c = 1e-300; d = 1 / d; h *= d * c;
+        an = -(aa + k) * (aa + bb + k) * xx / ((aa + k2) * (aa + k2 + 1)); d = 1 + an * d; if (Math.abs(d) < 1e-300) d = 1e-300; c = 1 + an / c; if (Math.abs(c) < 1e-300) c = 1e-300; d = 1 / d; const del = d * c; h *= del; if (Math.abs(del - 1) < 1e-15) break; }
+      return h; };
+    return x < (a + 1) / (a + b + 2) ? front * cf(x, a, b) / a : 1 - front * cf(1 - x, b, a) / b;
+  }
+  const tUpper = (t, df) => { const p = 0.5 * betaI(df / (df + t * t), df / 2, 0.5); return t > 0 ? p : 1 - p; };
+  const H0 = "H_{0}", H1 = "H_{1}";
+  const pClear = (p, alpha) => p > 0.0015 && p < 0.75 && Math.abs(p - alpha) / alpha > 0.15;
+  // The four standard conclusions: {reject, keep} x {the right meaning, the wrong meaning}.
+  function conclusion(rng, p, alpha, alt, nul) {
+    const lvl = `$${pct(alpha * 100)}$`;
+    const texts = { "reject-alt": `Reject $${H0}$: there is evidence at the ${lvl} level that ${alt}.`, "keep-insufficient": `Do not reject $${H0}$: there is not enough evidence at the ${lvl} level that ${alt}.`,
+      "reject-null": `Reject $${H0}$: there is evidence at the ${lvl} level that ${nul}.`, "keep-alt": `Do not reject $${H0}$: there is evidence at the ${lvl} level that ${alt}.` };
+    const right = p < alpha ? "reject-alt" : "keep-insufficient";
+    const why = { "reject-alt": "Reject $H_{0}$ only when the $p$-value is less than the significance level.", "keep-insufficient": "A $p$-value less than the significance level means that $H_{0}$ is rejected.",
+      "reject-null": "Rejecting $H_{0}$ gives evidence for the alternative hypothesis, not for $H_{0}$.", "keep-alt": "If $H_{0}$ is not rejected there is no evidence for the alternative hypothesis." };
+    return { answer: ans.choice(rng, { text: texts[right], value: right }, Object.keys(texts).filter((k) => k !== right).map((k) => ({ text: texts[k], value: k, why: why[k] }))),
+      working: [`$p = ${sf(p)} ${p < alpha ? "<" : ">"} ${num(alpha)}$`, texts[right]] };
+  }
+  const CHI = [{ who: "A museum asks a random sample of visitors which gallery they liked best", group: "Age group", rows: ["Children", "Adults", "Seniors"], cols: ["Dinosaurs", "Space", "Art"], a: "age group", b: "favourite gallery" },
+    { who: "A school asks a random sample of students which sport they would choose", group: "Year group", rows: ["Juniors", "Seniors"], cols: ["Football", "Tennis", "Swimming"], a: "year group", b: "choice of sport" },
+    { who: "A café records the drink ordered by a random sample of customers at different times of day", group: "Time of day", rows: ["Morning", "Afternoon", "Evening"], cols: ["Tea", "Coffee", "Juice"], a: "time of day", b: "drink ordered" },
+    { who: "A council asks a random sample of workers how they travel to work", group: "Home", rows: ["City", "Suburb"], cols: ["Car", "Bus", "Bicycle", "Train"], a: "where a person lives", b: "how they travel to work" }];
+  function chiSit(rng) {
+    let c, O, rowT, colT, N, Ex, stat, df, p, alpha;
+    do { c = rng.pick(CHI); const nr = c.rows.length, nc = c.cols.length, base = c.cols.map(() => rng.int(6, 14)), dep = rng.pick([0.05, 0.15, 0.3, 0.45]);
+      O = c.rows.map(() => { const tot = rng.int(45, 110), w = base.map((b) => b * (1 + dep * (rng.next() * 2 - 1))), sw = sum(w); return w.map((v) => Math.round(tot * v / sw)); });
+      rowT = O.map(sum); colT = c.cols.map((v, j) => sum(O.map((r) => r[j]))); N = sum(rowT); Ex = O.map((r, i) => r.map((v, j) => rowT[i] * colT[j] / N));
+      stat = sum(O.map((r, i) => sum(r.map((v, j) => (v - Ex[i][j]) ** 2 / Ex[i][j])))); df = (nr - 1) * (nc - 1); p = chiUpper(stat, df); alpha = rng.pick([0.01, 0.05, 0.1]); }
+    while (Ex.some((r) => r.some((v) => v < 6)) || !pClear(p, alpha) || O.some((r) => r.some((v) => v < 3)));
+    const i = rng.int(0, c.rows.length - 1), j = rng.int(0, c.cols.length - 1);
+    return { ci: CHI.indexOf(c), O, rowT, colT, N, Ex, stat, df, p, alpha, cell: [i, j] };
+  }
+  const chiTable = (c, s) => ({ head: [c.group].concat(c.cols).concat(["Total"]), rows: s.O.map((r, i) => [c.rows[i]].concat(r.map((v) => m(v))).concat([m(s.rowT[i])])).concat([["Total"].concat(s.colT.map((v) => m(v))).concat([m(s.N)])]) });
+  const chiStem = (c, s) => `${c.who}. The results are shown in the table. A $\\chi^{2}$ test for independence is carried out at the $${pct(s.alpha * 100)}$ significance level.`;
+  const h0Choice = (rng, c) => { const t = { indep: `$${H0}$: ${c.a} and ${c.b} are independent.`, dep: `$${H0}$: ${c.a} and ${c.b} are not independent.`, corr: `$${H0}$: there is a positive correlation between ${c.a} and ${c.b}.`, same: `$${H0}$: every cell of the table has the same frequency.` };
+    return ans.choice(rng, { text: t.indep, value: "indep" }, [{ text: t.dep, value: "dep", why: "In this test $H_{0}$ is always independence. Dependence is the alternative hypothesis." },
+      { text: t.corr, value: "corr", why: "This test is about independence of two categorical variables, not correlation." }, { text: t.same, value: "same", why: "Independence does not mean equal frequencies." }]); };
+  const CHIQ = { type: "t4-ai-chi-squared", syllabus: ["4.11"], situationKey: "ai-chi", situation: chiSit };
+  reg({ type: "t4-ai-chi-squared", unknown: "degrees-of-freedom-and-hypothesis", representation: "words", format: "value", levels: [1], calculator: false,
+    syllabus: ["4.11"], skills: ["AI-SL4.11.degrees-of-freedom", "AI-SL4.11.hypotheses"], title: "Degrees of freedom and the null hypothesis of a test for independence",
+    build({ rng }) {
+      const c = rng.pick(CHI), nr = rng.int(2, 4), nc = rng.int(nr === 2 ? 3 : 2, 4);
+      return { params: { nr, nc }, stem: `A $\\chi^{2}$ test is used to decide whether ${c.a} and ${c.b} are independent. The observed frequencies are in a table with $${nr}$ rows and $${nc}$ columns (not counting the totals).`, parts: [
+        P("Write down the number of degrees of freedom.", 1, ans.int((nr - 1) * (nc - 1)), [`$(\\text{rows} - 1)(\\text{columns} - 1) = (${nr} - 1)(${nc} - 1) = ${(nr - 1) * (nc - 1)}$`]),
+        P("Which statement is $H_{0}$ for this test?", 1, h0Choice(rng, c), [`In a test for independence, $H_{0}$ states that the two variables are independent.`])] };
+    } });
+  reg({ ...CHIQ, unknown: "expected-frequency", representation: "table", format: "value", levels: [2], skills: ["AI-SL4.11.expected-frequencies", "AI-SL4.11.degrees-of-freedom", "AI-SL4.11.hypotheses"], title: "Expected frequency and degrees of freedom from a contingency table",
+    build({ rng, sit: s }) {
+      const c = CHI[s.ci], [i, j] = s.cell, e = s.Ex[i][j];
+      return { params: { O: s.O, cell: s.cell }, stem: chiStem(c, s), table: chiTable(c, s), parts: [
+        P("Which statement is $H_{0}$ for this test?", 1, h0Choice(rng, c), [`In a test for independence, $H_{0}$ states that the two variables are independent.`]),
+        P(`Find the expected frequency for the cell in the row ${c.rows[i]} and the column ${c.cols[j]}.`, 2, ans.sf(e), [`Expected frequency $= \\dfrac{\\text{row total} \\times \\text{column total}}{\\text{overall total}} = \\dfrac{${s.rowT[i]} \\times ${s.colT[j]}}{${s.N}}$`, `Expected frequency $= ${sf(e)}$`]),
+        P("Write down the number of degrees of freedom.", 1, ans.int(s.df), [`$(${c.rows.length} - 1)(${c.cols.length} - 1) = ${s.df}$`])] };
+    } });
+  reg({ ...CHIQ, unknown: "test-for-independence", representation: "table", format: "value", levels: [4], skills: ["AI-SL4.11.chi-squared-independence", "AI-SL4.11.degrees-of-freedom", "AI-SL4.11.conclusion"], title: "Carry out a chi-squared test for independence",
+    build({ rng, sit: s }) {
+      const c = CHI[s.ci], con = conclusion(rng, s.p, s.alpha, `${c.a} and ${c.b} are not independent`, `${c.a} and ${c.b} are independent`);
+      return { params: { O: s.O, alpha: s.alpha }, stem: `${chiStem(c, s)} The hypothesis $${H0}$ is that ${c.a} and ${c.b} are independent.`, table: chiTable(c, s), parts: [
+        P("Write down the number of degrees of freedom.", 1, ans.int(s.df), [`$(${c.rows.length} - 1)(${c.cols.length} - 1) = ${s.df}$`]),
+        P("Find the $\\chi^{2}$ test statistic.", 2, ans.sf(s.stat), [`Enter the observed frequencies (without the totals) as a matrix in the GDC and run the $\\chi^{2}$ test for independence.`, `$\\chi^{2}_{\\text{calc}} = ${sf(s.stat)}$`]),
+        P("Find the $p$-value.", 2, ans.sf(s.p), [`The same test gives $p = ${sf(s.p)}$.`]),
+        P("Which conclusion is correct?", 1, con.answer, con.working)] };
+    } });
+
+  const GOF = [{ stem: (N) => `A die is rolled $${N}$ times to test whether it is fair`, head: "Score", cats: ["$1$", "$2$", "$3$", "$4$", "$5$", "$6$"], w: [1, 1, 1, 1, 1, 1], mult: 6, n: [10, 30], alt: "the die is not fair", nul: "the die is fair", h0: "each score is equally likely" },
+    { stem: (N) => `A school records the day of the week of $${N}$ absences to test whether absences are equally likely on each day`, head: "Day", cats: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], w: [1, 1, 1, 1, 1], mult: 5, n: [12, 40], alt: "absences are not equally likely on each day", nul: "absences are equally likely on each day", h0: "absences are equally likely on each day" },
+    { stem: (N) => `A company claims that its sweets are red, yellow, green and orange in the proportions $30\\%$, $25\\%$, $25\\%$ and $20\\%$. A sample of $${N}$ sweets is checked`, head: "Colour", cats: ["Red", "Yellow", "Green", "Orange"], w: [30, 25, 25, 20], mult: 20, n: [4, 15], alt: "the colours do not follow the claimed proportions", nul: "the colours follow the claimed proportions", h0: "the colours follow the claimed proportions" },
+    { stem: (N) => `A garden centre expects the flowers grown from a packet of seeds to be white, pink and purple in the ratio $1 : 2 : 1$. A sample of $${N}$ flowers is checked`, head: "Colour", cats: ["White", "Pink", "Purple"], w: [1, 2, 1], mult: 4, n: [15, 50], alt: "the colours do not follow the expected ratio", nul: "the colours follow the expected ratio", h0: "the colours follow the expected ratio" }];
+  reg({ type: "t4-ai-goodness-of-fit", unknown: "goodness-of-fit-test", representation: "table", format: "value", levels: [4],
+    syllabus: ["4.11"], skills: ["AI-SL4.11.goodness-of-fit", "AI-SL4.11.expected-frequencies", "AI-SL4.11.degrees-of-freedom", "AI-SL4.11.conclusion"], title: "Carry out a chi-squared goodness of fit test",
+    build({ rng }) {
+      let c, N, Ex, O, stat, p, alpha, df;
+      do { c = rng.pick(GOF); N = c.mult * rng.int(c.n[0], c.n[1]); const sw = sum(c.w); Ex = c.w.map((w) => N * w / sw); const dev = rng.pick([0.08, 0.15, 0.25, 0.35]);
+        O = Ex.map((e) => Math.round(e * (1 + dev * (rng.next() * 2 - 1)))); O[O.length - 1] += N - sum(O); stat = sum(O.map((o, i) => (o - Ex[i]) ** 2 / Ex[i])); df = O.length - 1; p = chiUpper(stat, df); alpha = rng.pick([0.01, 0.05, 0.1]); }
+      while (Ex.some((e) => e < 6) || O.some((o) => o < 1) || !pClear(p, alpha) || O.every((o, i) => o === Ex[i]));
+      const k = rng.int(0, O.length - 1), con = conclusion(rng, p, alpha, c.alt, c.nul), sw = sum(c.w);
+      return { params: { O, w: c.w, alpha, k }, stem: `${c.stem(N)}. The results are shown in the table. A $\\chi^{2}$ goodness of fit test is carried out at the $${pct(alpha * 100)}$ significance level, with $${H0}$: ${c.h0}.`,
+        table: { head: [c.head].concat(c.cats), rows: [["Observed frequency"].concat(O.map((o) => m(o)))] }, parts: [
+          P(`Find the expected frequency for ${c.head === "Score" ? "a score of " : ""}${c.cats[k]}.`, 1, ans.dec(Ex[k]), [`$${frac(c.w[k], sw)} \\times ${N} = ${num(Ex[k])}$`]),
+          P("Write down the number of degrees of freedom.", 1, ans.int(df), [`There are $${O.length}$ categories, so there are $${O.length} - 1 = ${df}$ degrees of freedom.`]),
+          P("Find the $\\chi^{2}$ test statistic.", 2, ans.sf(stat), [`Expected frequencies: $${Ex.map(num).join(",\\ ")}$`, `Enter the observed and expected lists in the GDC and run the goodness of fit test: $\\chi^{2}_{\\text{calc}} = ${sf(stat)}$`]),
+          P("Find the $p$-value.", 2, ans.sf(p), [`The same test gives $p = ${sf(p)}$.`]),
+          P("Which conclusion is correct?", 1, con.answer, con.working)] };
+    } });
+
+  const TT = [{ stem: "A gardener grows plants with two fertilisers and measures their heights, in centimetres, after six weeks. The gardener believes that fertiliser $\\mathrm{A}$ gives taller plants than fertiliser $\\mathrm{B}$", row: "Fertiliser", vals: "Heights (cm)", mu: [22, 34], sd: [2, 4], q: "the mean height with fertiliser $\\mathrm{A}$ is greater than the mean height with fertiliser $\\mathrm{B}$", dpn: 1 },
+    { stem: "A consumer group measures how long batteries of two brands last, in hours. The group believes that brand $\\mathrm{A}$ lasts longer than brand $\\mathrm{B}$", row: "Brand", vals: "Life (hours)", mu: [38, 62], sd: [3, 6], q: "the mean life of brand $\\mathrm{A}$ is greater than that of brand $\\mathrm{B}$", dpn: 1 },
+    { stem: "A farmer weighs apples, in grams, from two orchards. The farmer believes that the apples from orchard $\\mathrm{A}$ are heavier than those from orchard $\\mathrm{B}$", row: "Orchard", vals: "Masses (g)", mu: [140, 190], sd: [9, 16], q: "the mean mass in orchard $\\mathrm{A}$ is greater than that in orchard $\\mathrm{B}$", dpn: 0 },
+    { stem: "A coach times swimmers from two squads over the same distance, in seconds. The coach believes that squad $\\mathrm{A}$ takes longer than squad $\\mathrm{B}$", row: "Squad", vals: "Times (s)", mu: [58, 75], sd: [2, 4], q: "the mean time of squad $\\mathrm{A}$ is greater than that of squad $\\mathrm{B}$", dpn: 1 }];
+  const mean = (a) => sum(a) / a.length, svar = (a) => { const mu = mean(a); return sum(a.map((x) => (x - mu) ** 2)) / (a.length - 1); };
+  function pooledT(a, b) { const sp2 = ((a.length - 1) * svar(a) + (b.length - 1) * svar(b)) / (a.length + b.length - 2), t = (mean(a) - mean(b)) / Math.sqrt(sp2 * (1 / a.length + 1 / b.length)); return { t, df: a.length + b.length - 2, p: tUpper(t, a.length + b.length - 2) }; }
+  const hyp = (rng, right) => { const t = { gt: `$${H1}: \\mu_{A} > \\mu_{B}$`, lt: `$${H1}: \\mu_{A} < \\mu_{B}$`, ne: `$${H1}: \\mu_{A} \\ne \\mu_{B}$`, eq: `$${H1}: \\mu_{A} = \\mu_{B}$` };
+    const why = { lt: "The belief is that the mean for $\\mathrm{A}$ is the greater one.", ne: "The belief has a direction, so the test is one-tailed.", eq: "Equal means is the hypothesis $H_{0}$.", gt: "Read the direction of the belief again." };
+    return ans.choice(rng, { text: t[right], value: right }, Object.keys(t).filter((k) => k !== right).map((k) => ({ text: t[k], value: k, why: why[k] }))); };
+  reg({ type: "t4-ai-t-test", unknown: "pooled-two-sample-test", representation: "table", format: "value", levels: [4],
+    syllabus: ["4.11"], skills: ["AI-SL4.11.two-sample-t-test", "AI-SL4.11.hypotheses", "AI-SL4.11.conclusion"], title: "Carry out a pooled two-sample t-test",
+    build({ rng }) {
+      let c, a, b, r, alpha;
+      const draw = (mu, sd, n, dpn) => Array.from({ length: n }, () => Number((mu + sd * (rng.next() + rng.next() + rng.next() + rng.next() - 2) * 1.73).toFixed(dpn)));
+      do { c = rng.pick(TT); const n = rng.int(6, 8), mu = rng.int(c.mu[0], c.mu[1]), sd = c.sd[0] + (c.sd[1] - c.sd[0]) * rng.next(), eff = rng.pick([0.3, 0.8, 1.2, 1.6]);
+        a = draw(mu + eff * sd, sd, n, c.dpn); b = draw(mu, sd, n, c.dpn); r = pooledT(a, b); alpha = rng.pick([0.01, 0.05, 0.1]); }
+      while (!(r.t > 0.25) || !pClear(r.p, alpha) || new Set(a).size < a.length - 1 || new Set(b).size < b.length - 1);
+      const con = conclusion(rng, r.p, alpha, c.q, c.q.replace("is greater than", "is equal to")), cells = (arr) => m(arr.map((v) => (c.dpn ? dp(v, c.dpn) : num(v))).join(",\\ "));
+      return { params: { a, b, alpha }, stem: `${c.stem}. The data are shown in the table. Both populations are assumed to be normally distributed with the same variance, and a pooled two-sample $t$-test is carried out at the $${pct(alpha * 100)}$ significance level. The hypothesis $${H0}$ is $\\mu_{A} = \\mu_{B}$, where $\\mu_{A}$ and $\\mu_{B}$ are the population means.`,
+        table: { head: [c.row, c.vals], rows: [["$\\mathrm{A}$", cells(a)], ["$\\mathrm{B}$", cells(b)]] }, parts: [
+          P("Which is the alternative hypothesis?", 1, hyp(rng, "gt"), [`The belief is that the mean for $\\mathrm{A}$ is greater, so the test is one-tailed: $${H1}: \\mu_{A} > \\mu_{B}$.`]),
+          P("Find the $t$-statistic.", 2, ans.sf(r.t), [`Enter the two lists in the GDC and run a two-sample $t$-test with the alternative $\\mu_{A} > \\mu_{B}$ and the pooled option switched on.`, `$t = ${sf(r.t)}$`]),
+          P("Find the $p$-value.", 2, ans.sf(r.p), [`The same test gives $p = ${sf(r.p)}$.`]),
+          P("Which conclusion is correct?", 1, con.answer, con.working)] };
+    } });
+  reg({ type: "t4-ai-t-test", unknown: "conclusion-from-p-value", representation: "words", format: "mcq", levels: [2], calculator: false,
+    syllabus: ["4.11"], skills: ["AI-SL4.11.conclusion", "AI-SL4.11.hypotheses"], title: "Hypotheses and conclusion of a t-test from its p-value",
+    build({ rng }) {
+      const c = rng.pick(TT), alpha = rng.pick([0.01, 0.05, 0.1]);
+      let p;
+      do { p = Number((alpha * rng.pick([0.2, 0.45, 0.7, 1.4, 2.2, 3.5])).toPrecision(2)) + rng.int(1, 9) / 10000; } while (!pClear(p, alpha));
+      p = Number(p.toPrecision(3));
+      const con = conclusion(rng, p, alpha, c.q, c.q.replace("is greater than", "is equal to"));
+      const n0 = { eq: `$${H0}: \\mu_{A} = \\mu_{B}$`, gt: `$${H0}: \\mu_{A} > \\mu_{B}$`, ne: `$${H0}: \\mu_{A} \\ne \\mu_{B}$`, xbar: `$${H0}: \\bar{x}_{A} = \\bar{x}_{B}$` };
+      return { params: { p, alpha }, stem: `${c.stem}. A pooled two-sample $t$-test is carried out at the $${pct(alpha * 100)}$ significance level, where $\\mu_{A}$ and $\\mu_{B}$ are the population means. The $p$-value is $${num(p)}$.`, parts: [
+        P("Which is $H_{0}$ for this test?", 1, ans.choice(rng, { text: n0.eq, value: "eq" }, [{ text: n0.gt, value: "gt", why: "This is the alternative hypothesis. $H_{0}$ says that the means are equal." }, { text: n0.ne, value: "ne", why: "$H_{0}$ says that the population means are equal." },
+          { text: n0.xbar, value: "xbar", why: "Hypotheses are about the population means, not the sample means." }]), [`$${H0}$ states that the two population means are equal: $${H0}: \\mu_{A} = \\mu_{B}$.`]),
+        P("Which is the alternative hypothesis?", 1, hyp(rng, "gt"), [`The belief is that the mean for $\\mathrm{A}$ is greater: $${H1}: \\mu_{A} > \\mu_{B}$.`]),
+        P("Which conclusion is correct?", 1, con.answer, con.working)] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
