@@ -20,6 +20,12 @@ const zero = (a, tol = 1e-9) => a.every((x) => Math.abs(x) < tol);
 const same = (a, b) => zero(sub(a, b));
 // The angle between two vectors from the triangle they make (cosine rule on the three side lengths), in degrees.
 const angleDeg = (a, b) => { const A = len(a), B = len(b), C = len(sub(a, b)); return (Math.acos(Math.max(-1, Math.min(1, (A * A + B * B - C * C) / (2 * A * B)))) * 180) / Math.PI; };
+// A test for "v is a x b": perpendicular to both, of the right length (Lagrange's identity), and right-handed.
+const isCross = (a, b) => (v) => Math.abs(dot(v, a)) < 1e-9 && Math.abs(dot(v, b)) < 1e-9 && Math.abs(dot(v, v) - (dot(a, a) * dot(b, b) - dot(a, b) ** 2)) < 1e-9 && det3(a, b, v) > 0;
+// Area of a triangle from its three side lengths.
+const heron = (A, B, C) => { const x = len(sub(B, A)), y = len(sub(C, B)), z = len(sub(A, C)), s = (x + y + z) / 2; return Math.sqrt(Math.max(0, s * (s - x) * (s - y) * (s - z))); };
+// The angle between a line (direction d) and a plane (normal n): the angle between d and its projection onto the plane, in degrees.
+const linePlaneAngle = (d, n) => { const proj = sub(d, mul(dot(d, n) / dot(n, n), n)); return angleDeg(d, proj); };
 // The parameters of the closest points of two non-parallel lines a + s d and b + t e, by minimising the squared distance
 // (least squares: the two normal equations, solved exactly; then a check that no nearby parameters do better).
 function closest(T, a, d, b, e) {
@@ -252,6 +258,169 @@ export default {
     const { a, d, b, e } = q.params, c = closest(T, a, d, b, e);
     T.require(c.dist > 0.3 && !zero(cross(d, e)), "the lines are skew");
     return { a: T.optionWhere(q, "a", (v) => Math.abs(dot(v, d)) < 1e-9 && Math.abs(dot(v, e)) < 1e-9 && !zero(v)), b: T.approx(c.dist, 1e-6) };
+  },
+
+  // ======================= 3.16 =======================
+  "t3-ahl-vector-product/compute/equation": (q, T) => ({ a: T.optionWhere(q, "a", isCross(q.params.a, q.params.b)) }),
+  "t3-ahl-vector-product/triangle-area/equation": (q, T) => {
+    const { A, B, C } = q.params, u = sub(B, A), w = sub(C, A);
+    const out = { a: T.optionWhere(q, "a", isCross(u, w)), b: heron(A, B, C) };
+    // distance from C to the line AB by minimisation along the line
+    if (q.level === 4) out.c = T.approx(T.extremum((t) => len(sub(add(A, mul(t, u)), C)), -30, 30, "min", 6000).value, 1e-6);
+    return out;
+  },
+  "t3-ahl-vector-product/exact-area-normal/equation": (q, T) => {
+    const { A, B, C, vz } = q.params, u = sub(B, A), w = sub(C, A), hits = [];
+    // the vector (p, q, vz) perpendicular to both: search whole numbers
+    for (let p = -60; p <= 60; p++) for (let r = -60; r <= 60; r++) if (dot([p, r, vz], u) === 0 && dot([p, r, vz], w) === 0) hits.push(p);
+    T.require(hits.length === 1, "one perpendicular vector has the given third component");
+    return { a: T.optionWhere(q, "a", isCross(u, w)), b: T.approx(heron(A, B, C), 1e-7), c: hits[0] };
+  },
+  "t3-ahl-vector-product/magnitude-algebra/equation": (q, T) => {
+    const { p, q: qq, D } = q.params, c = D / (p * qq);
+    T.require(Math.abs(c) < 1, "the scalar product fits the magnitudes");
+    // concrete vectors with these magnitudes and this scalar product
+    const th = T.bisect((x) => Math.cos(x) - c, 0, Math.PI), a = [p, 0, 0], b = [qq * Math.cos(th), qq * Math.sin(th), 0], x = len(cross(a, b));
+    return { a: T.approx(c, 1e-9), b: T.approx(x, 1e-7), c: T.approx(heron([0, 0, 0], a, b), 1e-7), d: T.approx(len(cross(add(a, b), sub(a, b))), 1e-7) };
+  },
+
+  // ======================= 3.17 =======================
+  "t3-ahl-plane/point-constant/equation": (q, T) => {
+    const { n, D, Q } = q.params, g = (k) => dot(n, Q.map((x) => (x === null ? k : x))) - D;
+    return { a: T.bisect(g, -200, 200) };
+  },
+  "t3-ahl-plane/normal-point/equation": (q, T) => {
+    const { n, A, y, z } = q.params;
+    // (k, y, z) is in the plane when the vector from A to it is perpendicular to n
+    return { a: dot(n, A), b: T.bisect((k) => dot(sub([k, y, z], A), n), -500, 500) };
+  },
+  "t3-ahl-plane/three-points/equation": (q, T) => {
+    const { A, B, C } = q.params, u = sub(B, A), w = sub(C, A);
+    T.require(!zero(cross(u, w)), "the three points are not collinear");
+    const on = (o, p) => Math.abs(dot(o.n, p) - o.d) < 1e-9;
+    // the point of the z-axis in the plane: the scalar triple product of (X - A), AB and AC is zero
+    return { a: T.optionWhere(q, "a", isCross(u, w)), b: T.optionWhere(q, "b", (o) => !zero(o.n) && on(o, A) && on(o, B) && on(o, C)), c: T.bisect((k) => det3(sub([0, 0, k], A), u, w), -1000, 1000) };
+  },
+  "t3-ahl-plane/vector-form/equation": (q, T) => {
+    const { a, b, c, Q } = q.params;
+    T.require(!zero(cross(b, c)), "the two direction vectors are not parallel");
+    return { a: T.optionWhere(q, "a", (v) => !zero(v) && Math.abs(dot(v, b)) < 1e-9 && Math.abs(dot(v, c)) < 1e-9), b: T.bisect((k) => det3(sub([Q[0], Q[1], k], a), b, c), -1000, 1000) };
+  },
+
+  // ======================= 3.18 =======================
+  "t3-ahl-line-plane/meet-point/equation": (q, T) => {
+    const { a, d, n, D } = q.params, lam = T.bisect((l) => dot(n, add(a, mul(l, d))) - D, -500, 500), Q = add(a, mul(lam, d));
+    T.require(Math.abs(dot(n, d)) > 1e-9, "the line is not parallel to the plane");
+    return { a: lam, b: T.optionWhere(q, "b", (p) => len(sub(p, Q)) < 1e-6) };
+  },
+  "t3-ahl-line-plane/angle-line-plane/equation": (q, T) => {
+    const { d, n } = q.params;
+    return { a: (dot(add(d, n), add(d, n)) - dot(sub(d, n), sub(d, n))) / 4, b: linePlaneAngle(d, n) };
+  },
+  "t3-ahl-line-plane/distance-reflection/equation": (q, T) => {
+    const { n, D, A } = q.params, lam = T.bisect((l) => dot(n, add(A, mul(l, n))) - D, -500, 500), Fp = add(A, mul(lam, n));
+    // the reflection: the same distance from every point of the plane as A, and not A itself
+    const inPlane = [Fp, add(Fp, cross(n, [1, 0, 0])), add(Fp, cross(n, [0, 1, 0])), add(Fp, cross(n, [0, 0, 1]))];
+    return { a: lam, b: Math.abs(dot(n, A) - D) / len(n), c: T.optionWhere(q, "c", (p) => !same(p, A) && inPlane.every((x) => Math.abs(len(sub(x, p)) - len(sub(x, A))) < 1e-9)) };
+  },
+  "t3-ahl-line-plane/two-planes-line/equation": (q, T) => {
+    const { n1, n2, d1, d2 } = q.params, D = n1[0] * n2[1] - n1[1] * n2[0];
+    T.require(Math.abs(D) > 1e-9, "the line is not parallel to the plane z = 0");
+    // z = 0: two equations in x and y, by Cramer's rule
+    return { a: T.optionWhere(q, "a", (v) => !zero(v) && Math.abs(dot(v, n1)) < 1e-9 && Math.abs(dot(v, n2)) < 1e-9), b: (d1 * n2[1] - n1[1] * d2) / D, c: (n1[0] * d2 - d1 * n2[0]) / D };
+  },
+  "t3-ahl-line-plane/angle-two-planes/equation": (q, T) => {
+    const { n1, n2 } = q.params, th = angleDeg(n1, n2);
+    return { a: (dot(add(n1, n2), add(n1, n2)) - dot(sub(n1, n2), sub(n1, n2))) / 4, b: Math.min(th, 180 - th) };
+  },
+  "t3-ahl-line-plane/line-plane-chain/equation": (q, T) => {
+    const { a, d, n, D } = q.params, lam = T.bisect((l) => dot(n, add(a, mul(l, d))) - D, -500, 500), phi = linePlaneAngle(d, n);
+    // distance from A to the plane: along the line to the meeting point, then the component perpendicular to the plane
+    return { a: lam, b: phi, c: Math.abs(lam) * len(d) * Math.sin(T.rad(phi)) };
+  },
+  "t3-ahl-line-plane/three-planes/equation": (q, T) => {
+    const { n1, n2, n3xy, d1, d2, d3 } = q.params, n3 = (k) => [n3xy[0], n3xy[1], k];
+    const k = T.bisect((x) => det3(n1, n2, n3(x)), -500, 500);
+    T.require(Math.abs(det3(n1, n2, n3(k + 1))) > 1e-9, "the determinant depends on k");
+    // two points of the line where the first two planes meet; the third plane contains both or neither
+    const dir = cross(n1, n2), D = n1[0] * n2[1] - n1[1] * n2[0], p0 = [(d1 * n2[1] - n1[1] * d2) / D, (n1[0] * d2 - d1 * n2[0]) / D, 0], p1 = add(p0, dir);
+    const on = (p) => Math.abs(dot(n3(k), p) - d3) < 1e-6;
+    T.require(on(p0) === on(p1), "the third plane contains the whole line or none of it");
+    return { a: k, b: T.option(on(p0) ? "line" : "none") };
+  },
+
+  // ======================= 4.13 =======================
+  "t4-ahl-bayes/formula/equation": (q, T) => {
+    const { pA, pBA, pB } = q.params, N = 1e6, both = N * pA * pBA;
+    T.require(both < N * pB && N * pB - both <= N * (1 - pA) + 1e-6, "the three probabilities fit one sample space");
+    return { a: both / (N * pB) };                                          // of the outcomes in B, the share that are also in A
+  },
+  "t4-ahl-bayes/two-branch/words": (q, T) => {
+    const { pA, pBA, pBnA } = q.params, N = 1e8, inA = N * pA, hitA = inA * pBA, hitN = (N - inA) * pBnA;
+    T.require([pA, pBA, pBnA].every((p) => p > 0 && p < 1), "probabilities between 0 and 1");
+    return { a: (hitA + hitN) / N, b: hitA / (hitA + hitN) };
+  },
+  "t4-ahl-bayes/three-branch/words": (q, T) => {
+    const { s, r, w, o } = q.params, N = 1e9, from = s.map((x) => (N * x) / 100), bad = from.map((x, i) => (x * r[i]) / 100), tot = T.sum(bad);
+    T.require(T.sum(s) === 100 && r.every((x) => x > 0 && x < 100), "the shares add up to 100 per cent");
+    const out = { a: T.approx(tot / N, 1e-9), b: T.approx(bad[w] / tot, 1e-9) };
+    if (q.level === 4) out.c = T.approx((from[o] - bad[o]) / (N - tot), 1e-9);
+    return out;
+  },
+  "t4-ahl-bayes/unknown-prior/words": (q, T) => {
+    const { s, f, p0, T: target } = q.params, post = (p) => { const N = 1e8, d = N * p; return (d * s) / (d * s + (N - d) * f); };
+    T.require(post(1e-6) < target && post(1 - 1e-6) > target, "the stated probability can be reached");
+    return { a: post(p0), b: T.bisect((p) => post(p) - target, 1e-6, 1 - 1e-6) };
+  },
+
+  // ======================= 4.14 =======================
+  "t4-ahl-rv-variance/linear-transform/equation": (q, T) => {
+    const { mu, v, a, b } = q.params, sd = Math.sqrt(v);
+    // a two-point distribution with this mean and variance, transformed value by value
+    const ys = [mu - sd, mu + sd].map((x) => a * x + b), m = T.mean(ys);
+    return { a: T.approx(m, 1e-9), b: T.approx(T.mean(ys.map((y) => (y - m) ** 2)), 1e-9) };
+  },
+  "t4-ahl-rv-variance/discrete-variance/table": (q, T) => {
+    const { xs, w } = q.params, p = w.map((k) => k / 10), m = T.sum(xs, (x, i) => x * p[i]);
+    T.require(Math.abs(T.sum(p) - 1) < 1e-12 && q.table.head.length === 5 && q.table.rows[0].length === 5, "the probabilities add up to 1 and the table has one column per value");
+    return { a: T.approx(m, 1e-9), b: T.approx(T.sum(xs, (x, i) => x * x * p[i]), 1e-9), c: T.approx(T.sum(xs, (x, i) => (x - m) ** 2 * p[i]), 1e-9) };
+  },
+  "t4-ahl-rv-variance/discrete-unknown/table": (q, T) => {
+    const { xs, w, i, j, c, a, b } = q.params;
+    const k = T.bisect((x) => T.sum(w, (v, t) => (t === i ? x : t === j ? c * x : v)) - 1, 0, 1), p = w.map((v, t) => (t === i ? k : t === j ? c * k : v));
+    T.require(p.every((x) => x > 0 && x < 1), "every probability is between 0 and 1");
+    const m = T.sum(xs, (x, t) => x * p[t]), vr = T.sum(xs, (x, t) => (x - m) ** 2 * p[t]), ys = xs.map((x) => a * x + b), my = T.sum(ys, (y, t) => y * p[t]);
+    return { a: T.approx(k, 1e-9), b: T.approx(m, 1e-9), c: T.approx(vr, 1e-9), d: T.approx(T.sum(ys, (y, t) => (y - my) ** 2 * p[t]), 1e-7) };
+  },
+  "t4-ahl-continuous-rv/normalise-probability/equation": (q, T) => {
+    const { c, lo, hi, cut, below } = q.params, g = (x) => c.reduce((s, ci, i) => s + ci * x ** i, 0), I = T.integrate(g, lo, hi);
+    T.require(T.range(lo, hi, (hi - lo) / 200).every((x) => g(x) >= -1e-12), "the density is never negative");
+    return { a: T.approx(1 / I, 1e-8), b: T.approx((below ? T.integrate(g, lo, cut) : T.integrate(g, cut, hi)) / I, 1e-8) };
+  },
+  "t4-ahl-continuous-rv/mean-variance/equation": (q, T) => {
+    const { c, lo, hi } = q.params, g = (x) => c.reduce((s, ci, i) => s + ci * x ** i, 0), I = T.integrate(g, lo, hi);
+    T.require(T.range(lo, hi, (hi - lo) / 200).every((x) => g(x) >= -1e-12), "the density is never negative");
+    const m = T.integrate((x) => x * g(x), lo, hi) / I;
+    return { a: T.approx(1 / I, 1e-8), b: T.approx(m, 1e-8), c: T.approx(T.integrate((x) => (x - m) ** 2 * g(x), lo, hi) / I, 1e-8) };
+  },
+  "t4-ahl-continuous-rv/median-mode/equation": (q, T) => {
+    const { fam, lo, hi, s } = q.params, g = fam === "lin" ? (x) => x + s : (x) => 1 / (x * x), I = T.integrate(g, lo, hi, 4000);
+    const med = T.bisect((m) => T.integrate(g, lo, m, 4000) / I - 0.5, lo, hi, 60);
+    return { a: T.approx(1 / I, 1e-7), b: T.approx(med, 1e-6), c: T.approx(T.extremum(g, lo, hi, "max").x, 1e-6) };
+  },
+  "t4-ahl-continuous-rv/technology/equation": (q, T) => {
+    const { fam, a, r } = q.params, g = { sqrt: (x) => Math.sqrt(x), exp: (x) => Math.exp(-r * x), recip: (x) => 1 / (x + 1), xexp: (x) => x * Math.exp(-x) }[fam];
+    // integrate with x = u^2, which is smooth for every one of these functions
+    const area = (h, top) => T.integrate((u) => h(u * u) * 2 * u, 0, Math.sqrt(top), 2000), I = area(g, a);
+    const med = T.bisect((m) => area(g, m) / I - 0.5, 0, a, 60);
+    return { a: T.approx(1 / I, 1e-7), b: T.approx(area((x) => x * g(x), a) / I, 1e-7), c: T.approx(med, 1e-6) };
+  },
+  "t4-ahl-continuous-rv/triangular-graph/graph": (q, T) => {
+    const { b, c, m } = q.params, fn = q.graph.functions[0].fn, f = (x) => T.evalGraph(fn, x);
+    // integrate the drawn function piece by piece (each piece is a straight line, so Simpson's rule is exact)
+    const area = (lo, hi) => (lo < c && hi > c ? T.integrate(f, lo, c, 20) + T.integrate(f, c, hi, 20) : T.integrate(f, lo, hi, 20));
+    T.require(Math.abs(area(0, b) - 1) < 1e-9, "the area under the graph is 1");
+    return { a: T.approx(T.extremum(f, 0, b, "max", 4000).x, 1e-3), b: T.approx(area(0, c), 1e-9), c: T.approx(area(m, b), 1e-9) };
   },
   // ==END==
 };

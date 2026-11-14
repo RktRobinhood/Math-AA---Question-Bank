@@ -82,7 +82,68 @@
         { "id": "skew-distance", "asked": "a common perpendicular direction and the shortest distance between two skew lines", "level": 4 } ],
       "representations": [ { "rep": "equation" } ],
       "constraints": ["the first two component equations always have one solution", "skew lines are clearly apart"],
-      "misconceptions": [ { "text": "Using the same parameter for both lines" }, { "text": "Not checking the third component" }, { "text": "Calling lines skew when they are parallel" } ] }
+      "misconceptions": [ { "text": "Using the same parameter for both lines" }, { "text": "Not checking the third component" }, { "text": "Calling lines skew when they are parallel" } ] },
+    { "id": "t3-ahl-vector-product", "topic": 3, "source": "extension", "kind": "skill", "name": "The vector product and areas", "syllabus": ["3.16"],
+      "skills": ["AHL3.16.vector-product", "AHL3.16.area-triangle-parallelogram", "AHL3.16.perpendicular-vector", "AHL3.16.vector-product-algebra"],
+      "unknowns": [
+        { "id": "compute", "asked": "the vector product of two vectors", "level": 1 },
+        { "id": "triangle-area", "asked": "a vector product, the area of a triangle and a perpendicular height", "level": 2 },
+        { "id": "exact-area-normal", "asked": "a vector product, an exact area and a component of a perpendicular vector", "level": 3 },
+        { "id": "magnitude-algebra", "asked": "the magnitude of a vector product from magnitudes and a scalar product, and of a product of combinations", "level": 3 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Reversing the order of the product" }, { "text": "A sign error in the middle component" }, { "text": "Multiplying matching components" }, { "text": "Forgetting the half in the area of a triangle" } ] },
+    { "id": "t3-ahl-plane", "topic": 3, "source": "extension", "kind": "skill", "name": "Equations of a plane", "syllabus": ["3.17"],
+      "skills": ["AHL3.17.plane-equation", "AHL3.17.normal-from-points", "AHL3.17.point-in-plane", "AHL3.17.convert-plane-forms"],
+      "unknowns": [
+        { "id": "point-constant", "asked": "an unknown coordinate of a point in a plane", "level": 1 },
+        { "id": "normal-point", "asked": "the constant of a plane's Cartesian equation from a normal and a point, and an unknown coordinate", "level": 2 },
+        { "id": "vector-form", "asked": "a normal vector and an unknown coordinate for a plane given in vector form", "level": 2 },
+        { "id": "three-points", "asked": "the Cartesian equation of the plane through three points and an axis intercept", "level": 3 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Using a vector in the plane as its normal" }, { "text": "A sign error in the constant" } ] },
+    { "id": "t3-ahl-line-plane", "topic": 3, "source": "extension", "kind": "skill", "name": "Intersections and angles of lines and planes", "syllabus": ["3.18"],
+      "skills": ["AHL3.18.line-meets-plane", "AHL3.18.two-planes", "AHL3.18.three-planes", "AHL3.18.angle-line-plane", "AHL3.18.angle-two-planes", "AHL3.18.distance-point-plane"],
+      "unknowns": [
+        { "id": "meet-point", "asked": "the parameter and the coordinates of the point where a line meets a plane", "level": 2 },
+        { "id": "angle-line-plane", "asked": "the acute angle between a line and a plane", "level": 2 },
+        { "id": "angle-two-planes", "asked": "the acute angle between two planes", "level": 2 },
+        { "id": "distance-reflection", "asked": "the foot of the perpendicular, the distance from a point to a plane and the reflection of the point", "level": 3 },
+        { "id": "two-planes-line", "asked": "a direction vector and a point of the line where two planes meet", "level": 3 },
+        { "id": "three-planes", "asked": "the parameter value with no unique common point, and how the three planes then lie", "level": 3 },
+        { "id": "line-plane-chain", "asked": "where a line meets a plane, the angle between them and a distance to the plane", "level": 4 } ],
+      "representations": [ { "rep": "equation" } ],
+      "situation": "line-plane",
+      "misconceptions": [ { "text": "Giving the angle between the line and the normal as the angle with the plane" }, { "text": "Stopping at the foot of the perpendicular for a reflection" }, { "text": "Giving the obtuse angle between two planes" } ] },
+    { "id": "t4-ahl-bayes", "topic": 4, "source": "extension", "kind": "skill", "name": "Bayes' theorem", "syllabus": ["4.13"],
+      "skills": ["AHL4.13.bayes-tree", "AHL4.13.bayes-formula", "AHL4.13.total-probability"],
+      "unknowns": [
+        { "id": "formula", "asked": "a reversed conditional probability from three given probabilities", "level": 1 },
+        { "id": "two-branch", "asked": "a total probability and a reversed conditional probability with two cases", "level": 2 },
+        { "id": "three-branch", "asked": "a total probability and reversed conditional probabilities with three cases", "level": 3 },
+        { "id": "unknown-prior", "asked": "a reversed conditional probability, and the prior probability that gives a stated result", "level": 4 } ],
+      "representations": [ { "rep": "equation" }, { "rep": "words" } ],
+      "constraints": ["at most three events in the partition", "level 3 answers are an exact decimal and an exact fraction"],
+      "misconceptions": [ { "text": "Giving P(B | A) when P(A | B) is asked" }, { "text": "Dividing by the wrong total" }, { "text": "Leaving one branch out of the total probability" } ] },
+    { "id": "t4-ahl-rv-variance", "topic": 4, "source": "extension", "kind": "skill", "name": "Variance of a discrete random variable and linear transformations", "syllabus": ["4.14"],
+      "skills": ["AHL4.14.discrete-variance", "AHL4.14.linear-transformation"],
+      "unknowns": [
+        { "id": "linear-transform", "asked": "the mean and variance of aX + b", "level": 1 },
+        { "id": "discrete-variance", "asked": "E(X), E(X squared) and Var(X) from a distribution table", "level": 2 },
+        { "id": "discrete-unknown", "asked": "an unknown probability, the mean and variance, and the variance of aX + b", "level": 3 } ],
+      "representations": [ { "rep": "equation" }, { "rep": "table" } ],
+      "misconceptions": [ { "text": "Multiplying the variance by a instead of a squared" }, { "text": "Adding b to the variance" }, { "text": "Giving E(X squared) as the variance" } ] },
+    { "id": "t4-ahl-continuous-rv", "topic": 4, "source": "extension", "kind": "skill", "name": "Continuous random variables and probability density functions", "syllabus": ["4.14"],
+      "skills": ["AHL4.14.pdf-normalise", "AHL4.14.pdf-probability", "AHL4.14.continuous-mean", "AHL4.14.continuous-variance", "AHL4.14.median-mode"],
+      "unknowns": [
+        { "id": "normalise-probability", "asked": "the constant of a density function and a probability", "level": 2 },
+        { "id": "triangular-graph", "asked": "the mode and two probabilities from the graph of a triangular density function", "level": 2 },
+        { "id": "mean-variance", "asked": "the constant, the mean and the variance", "level": 3 },
+        { "id": "median-mode", "asked": "the constant, the median and the mode", "level": 3 },
+        { "id": "technology", "asked": "the constant, the mean and the median, with technology", "level": 4 } ],
+      "representations": [ { "rep": "equation" }, { "rep": "graph" } ],
+      "situation": "poly-pdf",
+      "constraints": ["the density is never negative on its interval", "exact questions use polynomial densities or densities with a rational median"],
+      "misconceptions": [ { "text": "Forgetting to multiply by x for the mean" }, { "text": "Giving E(X squared) as the variance" }, { "text": "Giving the mean as the median" } ] }
   ],
   "subtopics": {
     "AHL3.9": { "prereqs": ["SL3.5", "SL3.6"], "skills": [
@@ -108,6 +169,24 @@
       { "id": "AHL3.14.foot-of-perpendicular", "levels": [3, 4], "paper": "either" }, { "id": "AHL3.14.vector-kinematics", "levels": [2, 4], "paper": "either" } ] },
     "AHL3.15": { "prereqs": ["AHL3.14"], "skills": [
       { "id": "AHL3.15.classify-lines", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.15.intersection-point", "levels": [2, 3], "paper": "either" },
-      { "id": "AHL3.15.skew-distance", "levels": [4, 4], "paper": "either" } ] }
+      { "id": "AHL3.15.skew-distance", "levels": [4, 4], "paper": "either" } ] },
+    "AHL3.16": { "prereqs": ["AHL3.13", "AHL3.12"], "skills": [
+      { "id": "AHL3.16.vector-product", "levels": [1, 4], "paper": "either" }, { "id": "AHL3.16.area-triangle-parallelogram", "levels": [2, 4], "paper": "either" },
+      { "id": "AHL3.16.perpendicular-vector", "levels": [3, 4], "paper": "either" }, { "id": "AHL3.16.vector-product-algebra", "levels": [3, 3], "paper": "either" } ] },
+    "AHL3.17": { "prereqs": ["AHL3.16", "AHL3.14"], "skills": [
+      { "id": "AHL3.17.plane-equation", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.17.normal-from-points", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL3.17.point-in-plane", "levels": [1, 2], "paper": "either" }, { "id": "AHL3.17.convert-plane-forms", "levels": [2, 2], "paper": "either" } ] },
+    "AHL3.18": { "prereqs": ["AHL3.17", "AHL3.15"], "skills": [
+      { "id": "AHL3.18.line-meets-plane", "levels": [2, 4], "paper": "either" }, { "id": "AHL3.18.two-planes", "levels": [3, 3], "paper": "either" },
+      { "id": "AHL3.18.three-planes", "levels": [3, 3], "paper": "either" }, { "id": "AHL3.18.angle-line-plane", "levels": [2, 4], "paper": "either" },
+      { "id": "AHL3.18.angle-two-planes", "levels": [2, 2], "paper": "either" }, { "id": "AHL3.18.distance-point-plane", "levels": [3, 4], "paper": "either" } ] },
+    "AHL4.13": { "prereqs": ["SL4.11", "SL4.6"], "skills": [
+      { "id": "AHL4.13.bayes-tree", "levels": [2, 4], "paper": "either" }, { "id": "AHL4.13.bayes-formula", "levels": [1, 4], "paper": "either" },
+      { "id": "AHL4.13.total-probability", "levels": [2, 4], "paper": "either" } ] },
+    "AHL4.14": { "prereqs": ["SL4.7", "SL5.5"], "skills": [
+      { "id": "AHL4.14.pdf-normalise", "levels": [2, 4], "paper": "either" }, { "id": "AHL4.14.pdf-probability", "levels": [2, 2], "paper": "either" },
+      { "id": "AHL4.14.continuous-mean", "levels": [3, 4], "paper": "either" }, { "id": "AHL4.14.continuous-variance", "levels": [3, 3], "paper": "either" },
+      { "id": "AHL4.14.median-mode", "levels": [2, 4], "paper": "either" }, { "id": "AHL4.14.discrete-variance", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL4.14.linear-transformation", "levels": [1, 3], "paper": "either" } ] }
   }
 }
