@@ -229,11 +229,11 @@
         el("span", { class: "sp" }),
         refs.filtersBtn = el("button", { class: "btn ghost filters-btn", type: "button", onclick: () => document.body.classList.add("sheet-open") }),
         el("label", { class: "ctl" }, "Sort",
-          el("select", { class: "select", onchange: e => { state.sort = e.target.value; changed(); } },
+          refs.sortSel = el("select", { class: "select", onchange: e => { state.sort = e.target.value; changed(); } },
             ...SORTS.map(([v, t]) => el("option", { value: v, text: t, selected: state.sort === v })))),
         refs.vt = el("div", { class: "vt", role: "group", "aria-label": "Layout" },
-          el("button", { type: "button", "data-view": "grid", text: "▦", title: "Grid", "aria-label": "Grid", onclick: () => setView("grid") }),
-          el("button", { type: "button", "data-view": "list", text: "☰", title: "Compact list", "aria-label": "Compact list", onclick: () => setView("list") }))),
+          el("button", { type: "button", "data-view": "grid", text: "▦", title: "Cards", "aria-label": "Cards", onclick: () => setView("grid") }),
+          el("button", { type: "button", "data-view": "list", text: "☰", title: "List: one line per question", "aria-label": "List", onclick: () => setView("list") }))),
       refs.active = el("div", { class: "active" }),
       refs.grid = el("div", { class: "grid" }),
       refs.more = el("div", { class: "more" }));
@@ -427,7 +427,8 @@
     const href = q.url || `questions/${q.id}/`;
     return el("div", { class: `card${window.AASL_BASKET?.has(q.id) ? " in" : ""}`, "data-id": q.id },
       el("a", { href, onclick: () => saveListContext() },
-        el("div", { class: "thumb" }, el("img", { src: q.paperImages[0], alt: "", loading: "lazy", decoding: "async" })),
+        el("div", { class: "thumb" }, el("img", { src: q.paperImages[0], alt: "", loading: "lazy", decoding: "async" }),
+          skills ? el("div", { class: "hov", text: skills }) : null),
         el("div", { class: "cb" },
           el("div", { class: "code" }, el("span", { text: codeTitle(q) }), el("span", { class: "mk", text: `[${q.marks}]` })),
           el("div", { class: "skill", text: q.tagged === false ? "Tags pending" : skills, title: skills }),
@@ -438,11 +439,53 @@
         el("button", { class: "add", type: "button", "data-add": q.id })));
   }
 
+  // The list view: one line per question, like a file list, with a preview of the hovered one.
+  const LIST_COLS = [["Question", "new", "old"], ["Marks", "marks", "marks"], ["Paper", "paper", "paper"], ["Section", "", ""], ["Subtopics", "", ""], ["What it asks", "", ""]];
+  function listRow(q) {
+    const skills = (q.parts || []).map(p => p.skill).filter(Boolean).join("; ");
+    const also = (q.alsoIn || []).map(a => `also ${courseShort(a.course)} ${a.paper} Q${a.question}`).join(" · ");
+    const tr = el("tr", { class: window.AASL_BASKET?.has(q.id) ? "card in" : "card", "data-id": q.id,
+      onmouseenter: () => showPeek(q), onmouseleave: () => showPeek(null) },
+      el("td", { class: "mono qcode" }, el("a", { href: q.url || `questions/${q.id}/`, text: codeTitle(q), onclick: () => saveListContext() })),
+      el("td", { class: "num", text: `[${q.marks}]` }),
+      el("td", { text: `${q.paper}${paperInfo(q.paper)?.calculator ? "" : " · no calc"}` }),
+      el("td", { text: q.section || "", title: also }),
+      el("td", { class: "qcodes" }, ...(q.tagged === false ? [el("span", { class: "pending", text: "Tags pending" })] : q.codes.map(chip))),
+      el("td", { class: "asks", text: skills, title: [skills, also].filter(Boolean).join("\n") }),
+      el("td", {}, el("button", { class: "add", type: "button", "data-add": q.id })));
+    return tr;
+  }
+  function showPeek(q) {
+    if (!refs.peek) { refs.peek = el("div", { class: "peek", hidden: true }, el("img", { alt: "" })); document.body.append(refs.peek); }
+    refs.peek.hidden = !q;
+    if (q) refs.peek.firstChild.src = q.paperImages[0];
+  }
+  const wideScreen = () => window.matchMedia("(min-width: 861px)").matches;
+
   function renderCards(append) {
-    refs.grid.className = `grid${state.view === "list" ? " list" : ""}`;
+    const asList = state.view === "list" && wideScreen();
+    refs.grid.className = asList ? "qlist" : "grid";
+    showPeek(null);
     if (!results.length) {
       refs.grid.replaceChildren();
       refs.more.textContent = "No questions match these filters.";
+      return;
+    }
+    if (asList) {
+      let body = append ? refs.grid.querySelector("tbody") : null;
+      if (!body) {
+        const arrow = k => (state.sort === k ? (k === "old" ? " ▴" : " ▾") : "");
+        body = el("tbody", {});
+        refs.grid.replaceChildren(el("table", { class: "tbl qtbl" },
+          el("thead", {}, el("tr", {}, ...LIST_COLS.map(([label, a, b]) => el("th", { class: "cap" },
+            a ? el("button", { type: "button", title: `Sort by ${label.toLowerCase()}`, text: label + arrow(a) + (b !== a ? arrow(b) : ""),
+              onclick: () => { state.sort = state.sort === a ? b : a; refs.sortSel.value = state.sort; changed(); } }) : label)),
+            el("th", {}))),
+          body));
+      }
+      body.append(...results.slice(body.children.length, state.shown).map(listRow));
+      refs.more.textContent = state.shown < results.length ? `Showing ${Math.min(state.shown, results.length)} of ${results.length}. Scroll for more.` : "";
+      window.AASL_BASKET?.refresh?.();
       return;
     }
     const from = append ? refs.grid.children.length : 0;
