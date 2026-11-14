@@ -425,6 +425,473 @@
           `$C(${lo}) = ${sf(C(lo))}$ and $C(${hi}) = ${sf(C(hi))}$, so the greatest cost is $${sf(C(worst))}$ euros per hour.`])] };
     } });
 
-  // PART-B
+  // =====================================================================================
+  // 5.15 further standard derivatives and integrals
+  // =====================================================================================
+  const CSC = "\\operatorname{cosec}";
+  const INT = (lo, hi, body, v) => `\\displaystyle\\int_{${lo}}^{${hi}} ${body}\\,\\mathrm{d}${v || "x"}`;
+  // (n/d) sym with the symbol on top of the fraction: \dfrac{3\pi}{4}, \dfrac{\sqrt{3}}{2}, 2\ln 3
+  const symQ = (n, d, sym) => { const q = fmt.Q(n, d); if (q.n === 0) return "0"; const top = (Math.abs(q.n) === 1 ? "" : Math.abs(q.n)) + sym; return (q.n < 0 ? "-" : "") + (q.d === 1 ? top : `\\dfrac{${top}}{${q.d}}`); };
+  const SDV = { type: "t5-ahl-standard-derivatives", syllabus: ["5.15"], representation: "equation" };
+  const sdTex = (c, f, k) => {
+    const kx = coef(k, "x"), k2 = k * k;
+    const body = { sec2: `\\sec^{2} ${kx}`, sectan: `\\sec ${kx}\\tan ${kx}`, csc2: `${CSC}^{2} ${kx}`, csccot: `${CSC} ${kx}\\cot ${kx}`, axln: `${k}^{x}\\ln ${k}`, xax1: `x \\times ${k}^{x - 1}`, ax: `${k}^{x}`, axdivln: `\\dfrac{${k}^{x}}{\\ln ${k}}`,
+      "1/xln": `\\dfrac{1}{x\\ln ${k}}`, "1/x": "\\dfrac{1}{x}", "ln/x": `\\dfrac{\\ln ${k}}{x}`, "k/x": `\\dfrac{${k}}{x}` }[f];
+    if (body) return coef(c, body);
+    const den = { atan: `1 + ${k2}x^{2}`, atanbad: `1 + ${k}x^{2}`, asin: `\\sqrt{1 - ${k2}x^{2}}` }[f];
+    return `${c < 0 ? "-" : ""}\\dfrac{${Math.abs(c)}}{${den}}`;
+  };
+  reg({ ...SDV, unknown: "identify-derivative", format: "mcq", levels: [1], skills: ["AHL5.15.linear-composites", "AHL5.15.trig-derivatives", "AHL5.15.exp-log-base-derivatives", "AHL5.15.inverse-trig-derivatives"], title: "Recognise a further standard derivative",
+    build({ rng }) {
+      const kind = rng.pick(["tan", "sec", "cot", "cosec", "exp", "log", "arctan", "arcsin", "arccos"]), k = rng.int(2, 7), kx = coef(k, "x");
+      const t = { tan: [`\\tan ${kx}`, [k, "sec2"], [[1, "sec2"], [k, "sectan"], [-k, "csc2"]], "\\tan x", "\\sec^{2} x"],
+        sec: [`\\sec ${kx}`, [k, "sectan"], [[1, "sectan"], [k, "sec2"], [-k, "sectan"]], "\\sec x", "\\sec x\\tan x"],
+        cot: [`\\cot ${kx}`, [-k, "csc2"], [[-1, "csc2"], [k, "csc2"], [-k, "csccot"]], "\\cot x", `-${CSC}^{2} x`],
+        cosec: [`${CSC} ${kx}`, [-k, "csccot"], [[-1, "csccot"], [k, "csccot"], [-k, "csc2"]], `${CSC} x`, `-${CSC} x\\cot x`],
+        exp: [`${k}^{x}`, [1, "axln"], [[1, "xax1"], [1, "ax"], [1, "axdivln"]], "a^{x}", "a^{x}\\ln a"],
+        log: [`\\log_{${k}} x`, [1, "1/xln"], [[1, "1/x"], [1, "ln/x"], [1, "k/x"]], "\\log_{a} x", "\\dfrac{1}{x\\ln a}"],
+        arctan: [`\\arctan ${kx}`, [k, "atan"], [[1, "atan"], [k, "atanbad"], [k, "asin"]], "\\arctan x", "\\dfrac{1}{1 + x^{2}}"],
+        arcsin: [`\\arcsin ${kx}`, [k, "asin"], [[1, "asin"], [k, "atan"], [-k, "asin"]], "\\arcsin x", "\\dfrac{1}{\\sqrt{1 - x^{2}}}"],
+        arccos: [`\\arccos ${kx}`, [-k, "asin"], [[-1, "asin"], [k, "asin"], [-k, "atan"]], "\\arccos x", "-\\dfrac{1}{\\sqrt{1 - x^{2}}}"] }[kind];
+      const simple = kind === "exp" || kind === "log";
+      const opt = ([c, f], why) => ({ text: m(`f'(x) = ${sdTex(c, f, k)}`), value: [c, f, k], why });
+      return { params: { kind, k }, stem: `Let $f(x) = ${t[0]}$.`, parts: [
+        P("Which expression is $f'(x)$?", simple ? 1 : 2, ans.choice(rng, opt(t[1]), [
+          opt(t[2][0], simple ? "This treats the function as a power of $x$." : `By the chain rule the derivative is also multiplied by $${k}$, the derivative of $${kx}$.`),
+          opt(t[2][1], `The derivative of $${t[3]}$ is $${t[4]}$.`), opt(t[2][2], `The derivative of $${t[3]}$ is $${t[4]}$.`)]), simple ? [
+          `The derivative of $${t[3]}$ is $${t[4]}$.`, `With $a = ${k}$: $f'(x) = ${sdTex(t[1][0], t[1][1], k)}$`] : [
+          `The derivative of $${t[3]}$ is $${t[4]}$.`, `By the chain rule, replace $x$ by $${kx}$ and multiply by $${k}$: $f'(x) = ${sdTex(t[1][0], t[1][1], k)}$`])] };
+    } });
+  reg({ ...SDV, unknown: "gradient-inverse-trig", format: "value", levels: [2], skills: ["AHL5.15.inverse-trig-derivatives", "AHL5.15.linear-composites"], title: "Gradient of an inverse trigonometric function at a point",
+    build({ rng }) {
+      const kind = rng.pick(["arctan", "arctan", "arcsin", "arccos"]);
+      if (kind === "arctan") {
+        let c, k, p;
+        do { c = rng.nonzero(-5, 6); k = rng.int(1, 4); p = rng.nonzero(-3, 3); } while (Math.abs(c) === 1 && k === 1);
+        const den = 1 + k * k * p * p;
+        return { params: { kind, c, k, p }, stem: `Let $f(x) = ${coef(c, `\\arctan ${coef(k, "x")}`)}$.`, parts: [
+          P(`Find $f'(${p})$.`, 3, ans.frac(c * k, den), [
+            `The derivative of $\\arctan x$ is $\\dfrac{1}{1 + x^{2}}$.`,
+            `By the chain rule, $f'(x) = ${c * k < 0 ? "-" : ""}\\dfrac{${Math.abs(c * k)}}{1 + ${k === 1 ? "" : k * k}x^{2}}$`,
+            `$f'(${p}) = ${c * k < 0 ? "-" : ""}\\dfrac{${Math.abs(c * k)}}{1 + ${k === 1 ? "" : k * k}${br(p)}^{2}} = ${frac(c * k, den)}$`])] };
+      }
+      const [p0, r, a] = rng.pick([[3, 4, 5], [4, 3, 5], [5, 12, 13], [12, 5, 13], [6, 8, 10], [8, 6, 10], [8, 15, 17], [15, 8, 17]]), p = p0 * rng.sign(), s = kind === "arcsin" ? 1 : -1;
+      return { params: { kind, a, p }, stem: `Let $f(x) = \\${kind}\\left(\\dfrac{x}{${a}}\\right)$, for $-${a} < x < ${a}$.`, parts: [
+        P(`Find $f'(${p})$.`, 3, ans.frac(s, r), [
+          `The derivative of $\\${kind} x$ is $${s < 0 ? "-" : ""}\\dfrac{1}{\\sqrt{1 - x^{2}}}$.`,
+          `By the chain rule, $f'(x) = ${s < 0 ? "-" : ""}\\dfrac{1}{${a}} \\times \\left(1 - \\dfrac{x^{2}}{${a * a}}\\right)^{-\\frac{1}{2}} = ${s < 0 ? "-" : ""}\\dfrac{1}{\\sqrt{${a * a} - x^{2}}}$`,
+          `$f'(${p}) = ${s < 0 ? "-" : ""}\\dfrac{1}{\\sqrt{${a * a} - ${p * p}}} = ${frac(s, r)}$`])] };
+    } });
+  reg({ ...SDV, syllabus: ["5.15", "5.4"], unknown: "tangent-exponential-base", format: "value", levels: [3], skills: ["AHL5.15.exp-log-base-derivatives"], title: "Tangent to an exponential or logarithmic curve with another base",
+    build({ rng }) {
+      const kind = rng.pick(["exp", "log"]), a = rng.pick([2, 3, 5, 6, 7]), p = rng.pick(a > 3 ? [1, 2] : [1, 2, 3]), ap = Math.pow(a, p), L = Math.log(a);
+      const ic = `${p} - \\dfrac{1}{\\ln ${a}}`;
+      if (kind === "exp") return { params: { kind, a, p }, stem: `The curve $C$ has equation $y = ${a}^{x}$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${p}$.`, parts: [
+        P("Find the exact gradient of $C$ at $\\mathrm{A}$.", 2, ans.exact(ap * L, `${ap}\\ln ${a}`), [`$${D} = ${a}^{x}\\ln ${a}$`, `At $x = ${p}$ the gradient is $${pw(a, p)}\\ln ${a}${p === 1 ? "" : ` = ${ap}\\ln ${a}`}$.`]),
+        P("The tangent to $C$ at $\\mathrm{A}$ meets the $x$-axis at the point $(k,\\, 0)$. Find the exact value of $k$.", 3, ans.exact(p - 1 / L, ic), [
+          `$\\mathrm{A}$ is $${point(p, ap)}$, so the tangent is $y - ${ap} = ${ap}\\ln ${a}\\,(x - ${p})$.`,
+          `At $y = 0$: $x - ${p} = -\\dfrac{${ap}}{${ap}\\ln ${a}} = -\\dfrac{1}{\\ln ${a}}$`,
+          `$k = ${ic}$`])] };
+      return { params: { kind, a, p }, stem: `The curve $C$ has equation $y = \\log_{${a}} x$, for $x > 0$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${ap}$.`, parts: [
+        P("Find the exact gradient of $C$ at $\\mathrm{A}$.", 2, ans.exact(1 / (ap * L), `\\dfrac{1}{${ap}\\ln ${a}}`), [`$${D} = \\dfrac{1}{x\\ln ${a}}$`, `At $x = ${ap}$ the gradient is $\\dfrac{1}{${ap}\\ln ${a}}$.`]),
+        P("The tangent to $C$ at $\\mathrm{A}$ meets the $y$-axis at the point $(0,\\, k)$. Find the exact value of $k$.", 3, ans.exact(p - 1 / L, ic), [
+          `At $x = ${ap}$, $y = \\log_{${a}} ${ap} = ${p}$, so the tangent is $y - ${p} = \\dfrac{1}{${ap}\\ln ${a}}(x - ${ap})$.`,
+          `At $x = 0$: $y - ${p} = -\\dfrac{${ap}}{${ap}\\ln ${a}} = -\\dfrac{1}{\\ln ${a}}$`,
+          `$k = ${ic}$`])] };
+    } });
+  reg({ ...SDV, unknown: "stationary-tan-cot", format: "value", levels: [3], skills: ["AHL5.15.trig-derivatives"], title: "Stationary point of a sum of tan and cot",
+    build({ rng }) {
+      const c = rng.int(1, 6), ratio = rng.pick([1, 3, 13]);            // b/a = 1, 3 or 1/3
+      const a = ratio === 13 ? 3 * c : c, b = ratio === 3 ? 3 * c : c;
+      const [xn, xd, tanTex, t2] = ratio === 1 ? [1, 4, "1", "1"] : ratio === 3 ? [1, 3, "\\sqrt{3}", "3"] : [1, 6, "\\dfrac{1}{\\sqrt{3}}", "\\dfrac{1}{3}"];
+      const minTex = ratio === 1 ? `${2 * c}` : `${2 * c}\\sqrt{3}`, minV = 2 * Math.sqrt(a * b);
+      const sub = ratio === 1 ? `${a} + ${b}` : ratio === 3 ? `${a}\\sqrt{3} + \\dfrac{${b}}{\\sqrt{3}} = ${a}\\sqrt{3} + ${c}\\sqrt{3}` : `\\dfrac{${a}}{\\sqrt{3}} + ${b}\\sqrt{3} = ${c}\\sqrt{3} + ${b}\\sqrt{3}`;
+      return { params: { a, b }, stem: `Let $f(x) = ${coef(a, "\\tan x")} + ${coef(b, "\\cot x")}$, for $0 < x < \\dfrac{\\pi}{2}$. The graph of $f$ has exactly one stationary point, which is a minimum.`, parts: [
+        P("Find the exact value of $x$ at the stationary point.", 4, ans.exact(Math.PI * xn / xd, piFrac(xn, xd)), [
+          `$f'(x) = ${coef(a, "\\sec^{2} x")} - ${coef(b, `${CSC}^{2} x`)}$`,
+          `$f'(x) = 0$ gives $\\dfrac{${a}}{\\cos^{2} x} = \\dfrac{${b}}{\\sin^{2} x}$, so $\\tan^{2} x = ${t2}$.`,
+          `In the interval $\\tan x > 0$, so $\\tan x = ${tanTex}$.`,
+          `$x = ${piFrac(xn, xd)}$`]),
+        P("Find the exact minimum value of $f$.", 2, ans.exact(minV, minTex), [
+          `With $\\tan x = ${tanTex}$: $f(x) = ${sub}$`.replace(/\{1\\sqrt/g, "{\\sqrt").replace(/([= ])1\\sqrt/g, "$1\\sqrt"),
+          `The minimum value is $${minTex}$.`])] };
+    } });
+
+  const SIN = { type: "t5-ahl-standard-integrals", syllabus: ["5.15"], representation: "equation", format: "value" };
+  reg({ ...SIN, unknown: "inverse-trig-definite", levels: [2], skills: ["AHL5.15.standard-integrals", "AHL5.15.linear-composites"], title: "A definite integral from the further standard results",
+    build({ rng }) {
+      const kind = rng.pick(["atan", "asin", "sec2", "atan3"]), c = rng.int(1, 6);
+      if (kind === "atan" || kind === "atan3") {
+        const a = rng.int(2, 6), up = kind === "atan" ? `${a}` : `${a}\\sqrt{3}`, [n, d] = kind === "atan" ? [c, 4 * a] : [c, 3 * a];
+        return { params: { kind, c, a }, stem: `Consider the integral $${INT("0", up, `\\dfrac{${c}}{${a * a} + x^{2}}`)}$.`, parts: [
+          P("Find the exact value of this integral.", 3, ans.exact(Math.PI * n / d, piFrac(n, d)), [
+            `$\\displaystyle\\int \\dfrac{1}{a^{2} + x^{2}}${dx} = \\dfrac{1}{a}\\arctan\\left(\\dfrac{x}{a}\\right) + C$, here with $a = ${a}$.`,
+            `The integral is $\\left[${frac(c, a)}\\arctan\\left(\\dfrac{x}{${a}}\\right)\\right]_{0}^{${up}} = ${frac(c, a)}\\left(\\arctan ${kind === "atan" ? "1" : "\\sqrt{3}"} - \\arctan 0\\right)$`.replace(/\[1\\arctan/, "[\\arctan").replace(/= 1\\left/, "= \\left"),
+            `$= ${frac(c, a)} \\times ${kind === "atan" ? "\\dfrac{\\pi}{4}" : "\\dfrac{\\pi}{3}"} = ${piFrac(n, d)}$`])] };
+      }
+      if (kind === "asin") {
+        const a = rng.pick([2, 4, 6, 8, 10]);
+        return { params: { kind, c, a }, stem: `Consider the integral $${INT("0", a / 2, `\\dfrac{${c}}{\\sqrt{${a * a} - x^{2}}}`)}$.`, parts: [
+          P("Find the exact value of this integral.", 3, ans.exact(Math.PI * c / 6, piFrac(c, 6)), [
+            `$\\displaystyle\\int \\dfrac{1}{\\sqrt{a^{2} - x^{2}}}${dx} = \\arcsin\\left(\\dfrac{x}{a}\\right) + C$, here with $a = ${a}$.`,
+            `The integral is $\\left[${coef(c, `\\arcsin\\left(\\dfrac{x}{${a}}\\right)`)}\\right]_{0}^{${a / 2}} = ${c === 1 ? "" : c}\\left(\\arcsin \\dfrac{1}{2} - \\arcsin 0\\right)$`,
+            `$= ${c === 1 ? "" : `${c} \\times `}\\dfrac{\\pi}{6}${c === 1 ? "" : ` = ${piFrac(c, 6)}`}$`])] };
+      }
+      const k = rng.int(2, 6);
+      return { params: { kind, c, a: k }, stem: `Consider the integral $${INT("0", piFrac(1, 4 * k), coef(c, `\\sec^{2} ${coef(k, "x")}`))}$.`, parts: [
+        P("Find the exact value of this integral.", 3, ans.frac(c, k), [
+          `The derivative of $\\tan ${coef(k, "x")}$ is $${k}\\sec^{2} ${coef(k, "x")}$, so $\\displaystyle\\int \\sec^{2} ${coef(k, "x")}${dx} = \\dfrac{1}{${k}}\\tan ${coef(k, "x")} + C$.`,
+          `The integral is $\\left[${frac(c, k)}\\tan ${coef(k, "x")}\\right]_{0}^{${piFrac(1, 4 * k)}} = ${frac(c, k)}\\left(\\tan \\dfrac{\\pi}{4} - \\tan 0\\right)$`.replace(/\[1\\tan/, "[\\tan").replace(/= 1\\left/, "= \\left"),
+          `$= ${frac(c, k)}$`])] };
+    } });
+  reg({ ...SIN, syllabus: ["5.15", "1.11"], unknown: "partial-fractions-definite", levels: [3], skills: ["AHL5.15.partial-fraction-integral"], title: "Integrate with partial fractions and give a single logarithm",
+    build({ rng }) {
+      let r1, r2, A, B, p, q, Kn, Kd;
+      const pwI = (b, e) => Math.pow(b, Math.abs(e));
+      do {
+        r1 = rng.int(-4, 2); r2 = r1 + rng.int(1, 4); A = rng.nonzero(-3, 3); B = rng.nonzero(-3, 3); p = r2 + rng.int(1, 3); q = p + rng.int(1, 4);
+        Kn = 1; Kd = 1;
+        for (const [e, hi, lo] of [[A, q - r1, p - r1], [B, q - r2, p - r2]]) { if (e > 0) { Kn *= pwI(hi, e); Kd *= pwI(lo, e); } else { Kn *= pwI(lo, e); Kd *= pwI(hi, e); } }
+        const g = gcd(Kn, Kd); Kn /= g; Kd /= g;
+      } while (A + B === 0 || Kn === Kd || Kn > 600 || Kd > 600 || (Math.abs(A) === 1 && Math.abs(B) === 1));
+      const al = A + B, be = -A * r2 - B * r1, f1 = fmt.factor(r1), f2 = fmt.factor(r2);
+      const L = (v) => `\\ln ${v}`;
+      return { params: { r1, r2, al, be, p, q }, stem: `Let $f(x) = \\dfrac{${lin(al, be)}}{${f1}${f2}}$. It is given that $f(x) = \\dfrac{A}{${lin(1, -r1)}} + \\dfrac{B}{${lin(1, -r2)}}$, where $A$ and $B$ are constants.`, parts: [
+        P("Find the value of $A$.", 2, ans.int(A), [
+          `Multiply through by $${f1}${f2}$: $${lin(al, be)} = A${f2} + B${f1}$`,
+          `Let $x = ${r1}$: $${al * r1 + be} = ${coef(r1 - r2, "A")}$, so $A = ${A}$.`]),
+        P("Find the value of $B$.", 1, ans.int(B), [`Let $x = ${r2}$: $${al * r2 + be} = ${coef(r2 - r1, "B")}$, so $B = ${B}$.`]),
+        P(`It is given that $${INT(p, q, "f(x)")} = \\ln k$. Find the value of $k$.`, 3, ans.frac(Kn, Kd), [
+          `$${INT(p, q, "f(x)")} = \\left[${expr([[A, `\\ln|${lin(1, -r1)}|`], [B, `\\ln|${lin(1, -r2)}|`]])}\\right]_{${p}}^{${q}}$`,
+          `$= ${expr([[A, L(q - r1)], [B, L(q - r2)], [-A, L(p - r1)], [-B, L(p - r2)]])}$`,
+          `Using the laws of logarithms this is $\\ln ${fmt.wrap(frac(Kn, Kd))}$, so $k = ${frac(Kn, Kd)}$.`.replace(/\\ln \((\d+)\)/, "\\ln $1")])] };
+    } });
+
+  // =====================================================================================
+  // 5.16 integration by substitution and by parts
+  // =====================================================================================
+  const SUB = { type: "t5-ahl-substitution", syllabus: ["5.16"], representation: "equation" };
+  reg({ ...SUB, unknown: "new-limits", format: "value", levels: [1], skills: ["AHL5.16.change-limits"], title: "Change the limits of an integral under a substitution",
+    build({ rng }) {
+      const kind = rng.pick(["sqrt", "lin", "sq"]);
+      let p, q, lo, hi, u, body, w;
+      if (kind === "sqrt") { lo = rng.int(1, 3); hi = lo + rng.int(1, 3); p = lo * lo; q = hi * hi; const c = rng.int(1, 5); u = "\\sqrt{x}"; body = `\\dfrac{1}{${c} + \\sqrt{x}}`; w = (x, v) => `$u = \\sqrt{${x}} = ${v}$`; }
+      else if (kind === "lin") { const a = rng.int(2, 5), b = rng.nonzero(-6, 6), n = rng.int(3, 6); p = rng.int(-2, 2); q = p + rng.int(1, 3); lo = a * p + b; hi = a * q + b; u = lin(a, b); body = `x\\left(${u}\\right)^{${n}}`; w = (x, v) => `$u = ${a}${br(x)} ${fmt.signed(b)} = ${v}$`; var a1 = a, b1 = b; }
+      else { const c = rng.int(1, 9); p = rng.int(0, 2); q = p + rng.int(1, 3); lo = p * p + c; hi = q * q + c; u = `x^{2} + ${c}`; body = `x^{3}\\sqrt{x^{2} + ${c}}`; w = (x, v) => `$u = ${br(x)}^{2} + ${c} = ${v}$`; var c1 = c; }
+      return { params: { kind, p, q, a: a1, b: b1, c: c1 }, stem: `The substitution $u = ${u}$ is used to write $${INT(p, q, body)}$ as an integral with respect to $u$.`, parts: [
+        P("Write down the lower limit of the new integral.", 1, ans.int(lo), [`The new limits are the values of $u$ at the old limits. When $x = ${p}$: ${w(p, lo)}`]),
+        P("Write down the upper limit of the new integral.", 1, ans.int(hi), [`When $x = ${q}$: ${w(q, hi)}`])] };
+    } });
+  reg({ ...SUB, unknown: "linear-substitution", format: "mcq", levels: [2], skills: ["AHL5.16.given-substitution", "AHL5.16.change-limits"], title: "Integrate a product with a linear substitution",
+    build({ rng }) {
+      const b = rng.nonzero(-3, 3), n = rng.int(2, 4), U = rng.pick([1, 2]), lo = -b, hi = U - b;
+      const I = (l, h, s) => INT(l, h, `${fmt.factor(-s, "u")}u^{${n}}`, "u"), opt = (v, why) => ({ text: m(I(v[0], v[1], v[2])), value: v, why });
+      const val = fmt.rat.sub(fmt.Q(Math.pow(U, n + 2), n + 2), fmt.Q(b * Math.pow(U, n + 1), n + 1));
+      return { params: { b, n, U }, stem: `The integral $I = ${INT(lo, hi, `x${fmt.factor(-b)}^{${n}}`)}$ is to be found using the substitution $u = ${lin(1, b)}$.`, parts: [
+        P("Which integral is equal to $I$?", 2, ans.choice(rng, opt([0, U, -b]), [
+          opt([lo, hi, -b], "The limits must be changed to values of $u$."),
+          opt([0, U, b], `Rearranging $u = ${lin(1, b)}$ gives $x = ${lin(1, -b, "u")}$.`),
+          opt([0, U, 0], `The factor $x$ must also be written in terms of $u$: $x = ${lin(1, -b, "u")}$.`)]), [
+          `$u = ${lin(1, b)}$ gives $x = ${lin(1, -b, "u")}$ and $\\mathrm{d}x = \\mathrm{d}u$.`,
+          `When $x = ${lo}$, $u = 0$; when $x = ${hi}$, $u = ${U}$.`,
+          `$I = ${I(0, U, -b)}$`]),
+        P("Find the value of $I$.", 2, ans.frac(val.n, val.d), [
+          `$I = ${INT(0, U, `\\left(${expr([[1, `u^{${n + 1}}`], [-b, `u^{${n}}`]])}\\right)`, "u")} = \\left[${expr([[fmt.Q(1, n + 2), `u^{${n + 2}}`], [fmt.Q(-b, n + 1), `u^{${n + 1}}`]])}\\right]_{0}^{${U}}$`,
+          `$I = ${expr([[fmt.Q(Math.pow(U, n + 2), n + 2), ""], [fmt.Q(-b * Math.pow(U, n + 1), n + 1), ""]])}${val.d === 1 || true ? ` = ${frac(val.n, val.d)}` : ""}$`])] };
+    } });
+  reg({ ...SUB, unknown: "root-substitution", format: "mcq", levels: [3], skills: ["AHL5.16.given-substitution", "AHL5.16.change-limits"], title: "Definite integral with a square-root substitution",
+    build({ rng }) {
+      let c, s, t;
+      do { c = rng.nonzero(-4, 6); s = rng.int(1, 2); t = s + rng.int(1, 2); } while (c + s * s < -3);
+      const p = c + s * s, q = c + t * t, rootTex = `\\sqrt{${lin(1, -c)}}`, uc = `u^{2} ${fmt.signed(c)}`;
+      const texK = { 2: `2\\left(${uc}\\right)`, "1/u": `\\dfrac{${uc}}{u}`, "2u": `2u\\left(${uc}\\right)`, 1: `\\left(${uc}\\right)` };
+      const opt = (v, why) => ({ text: m(INT(v[0], v[1], texK[v[2]], "u")), value: v, why });
+      const n = 2 * (t * t * t - s * s * s) + 6 * c * (t - s);
+      return { params: { c, s, t }, stem: `The integral $I = ${INT(p, q, `\\dfrac{x}{${rootTex}}`)}$ is to be found using the substitution $u = ${rootTex}$.`, parts: [
+        P("Which integral is equal to $I$?", 3, ans.choice(rng, opt([s, t, "2"]), [
+          opt([s, t, "1/u"], "$\\mathrm{d}x$ must be replaced as well: $\\mathrm{d}x = 2u\\,\\mathrm{d}u$."),
+          opt([p, q, "2"], "The limits must be changed to values of $u$."),
+          opt([s, t, "2u"], "The factor $u$ from $\\mathrm{d}x = 2u\\,\\mathrm{d}u$ cancels with the $u$ in the denominator."),
+          opt([s, t, "1"], "$\\mathrm{d}x = 2u\\,\\mathrm{d}u$, so a factor of $2$ remains.")]), [
+          `$u^{2} = ${lin(1, -c)}$, so $x = ${uc}$ and $\\mathrm{d}x = 2u\\,\\mathrm{d}u$.`,
+          `When $x = ${p}$, $u = ${s}$; when $x = ${q}$, $u = ${t}$.`,
+          `$I = ${INT(s, t, `\\dfrac{${uc}}{u} \\times 2u`, "u")} = ${INT(s, t, texK[2], "u")}$`]),
+        P("Find the value of $I$.", 3, ans.frac(n, 3), [
+          `$I = \\left[${expr([[fmt.Q(2, 3), "u^{3}"], [2 * c, "u"]])}\\right]_{${s}}^{${t}}$`,
+          `$I = \\left(${expr([[fmt.Q(2 * t * t * t, 3), ""], [2 * c * t, ""]])}\\right) - \\left(${expr([[fmt.Q(2 * s * s * s, 3), ""], [2 * c * s, ""]])}\\right)$`,
+          `$I = ${frac(n, 3)}$`])] };
+    } });
+  reg({ ...SUB, unknown: "trig-substitution", format: "value", levels: [3], skills: ["AHL5.16.given-substitution", "AHL5.16.change-limits"], title: "Definite integral with a trigonometric substitution",
+    build({ rng }) {
+      const kind = rng.pick(["circle", "circle", "tan", "sin2"]), a = kind === "circle" ? rng.int(1, 9) : kind === "tan" ? rng.int(1, 4) : rng.pick([2, 4, 6, 8]), a2 = a * a, a3 = a2 * a;
+      const th = "\\theta", dth = "\\,\\mathrm{d}\\theta", ca = (body) => (a === 1 ? body : `${a}${body}`);
+      const d = {
+        circle: { sub: ca(`\\sin ${th}`), I: INT(0, a, `\\sqrt{${a2} - x^{2}}`), up: [1, 2], v: Math.PI * a2 / 4, tex: symQ(a2, 4, "\\pi"), w: [
+          `$\\mathrm{d}x = ${ca(`\\cos ${th}`)}${dth}$ and $\\sqrt{${a2} - x^{2}} = \\sqrt{${a2}\\cos^{2} ${th}} = ${ca(`\\cos ${th}`)}$.`.replace(/\{1\\cos/, "{\\cos"),
+          `The integral becomes $${INT(0, "\\frac{\\pi}{2}", `${a2 === 1 ? "" : a2}\\cos^{2} ${th}`, th)} = ${INT(0, "\\frac{\\pi}{2}", `${frac(a2, 2)}\\left(1 + \\cos 2${th}\\right)`, th)}$`,
+          `$= ${frac(a2, 2)}\\left[${th} + \\dfrac{1}{2}\\sin 2${th}\\right]_{0}^{\\frac{\\pi}{2}} = ${frac(a2, 2)} \\times \\dfrac{\\pi}{2}$`,
+          `$= ${symQ(a2, 4, "\\pi")}$`] },
+        tan: { sub: ca(`\\tan ${th}`), I: INT(0, a, `\\dfrac{1}{\\left(${a2} + x^{2}\\right)^{2}}`), up: [1, 4], v: (Math.PI + 2) / (8 * a3), tex: `\\dfrac{\\pi + 2}{${8 * a3}}`, w: [
+          `$\\mathrm{d}x = ${ca(`\\sec^{2} ${th}`)}${dth}$ and $${a2} + x^{2} = ${a2 === 1 ? "" : a2}\\sec^{2} ${th}$.`,
+          `The integral becomes $${INT(0, "\\frac{\\pi}{4}", `\\dfrac{${ca(`\\sec^{2} ${th}`)}}{${a2 * a2 === 1 ? "" : a2 * a2}\\sec^{4} ${th}}`, th)} = ${INT(0, "\\frac{\\pi}{4}", `${a3 === 1 ? "" : `\\dfrac{1}{${a3}}`}\\cos^{2} ${th}`, th)}$`,
+          `$= \\dfrac{1}{${2 * a3}}\\left[${th} + \\dfrac{1}{2}\\sin 2${th}\\right]_{0}^{\\frac{\\pi}{4}} = \\dfrac{1}{${2 * a3}}\\left(\\dfrac{\\pi}{4} + \\dfrac{1}{2}\\right)$`,
+          `$= \\dfrac{\\pi + 2}{${8 * a3}}$`] },
+        sin2: { sub: ca(`\\sin ${th}`), I: INT(0, a / 2, `\\dfrac{x^{2}}{\\sqrt{${a2} - x^{2}}}`), up: [1, 6], v: a2 * (Math.PI / 12 - Math.sqrt(3) / 8), tex: `${symQ(a2, 12, "\\pi")} - ${symQ(a2, 8, "\\sqrt{3}")}`, w: [
+          `$\\mathrm{d}x = ${ca(`\\cos ${th}`)}${dth}$, $x^{2} = ${a2}\\sin^{2} ${th}$ and $\\sqrt{${a2} - x^{2}} = ${ca(`\\cos ${th}`)}$.`,
+          `The integral becomes $${INT(0, "\\frac{\\pi}{6}", `${a2}\\sin^{2} ${th}`, th)} = ${INT(0, "\\frac{\\pi}{6}", `${frac(a2, 2)}\\left(1 - \\cos 2${th}\\right)`, th)}$`,
+          `$= ${frac(a2, 2)}\\left[${th} - \\dfrac{1}{2}\\sin 2${th}\\right]_{0}^{\\frac{\\pi}{6}} = ${frac(a2, 2)}\\left(\\dfrac{\\pi}{6} - \\dfrac{\\sqrt{3}}{4}\\right)$`,
+          `$= ${symQ(a2, 12, "\\pi")} - ${symQ(a2, 8, "\\sqrt{3}")}$`] } }[kind];
+      const fix = (s) => s.replace(/([=\[ ])1\\left/g, "$1\\left").replace(/= 1 \\times /g, "= ").replace(/\}1\\left/g, "}\\left");
+      const upTex = piFrac(d.up[0], d.up[1]), xUp = kind === "sin2" ? a / 2 : a;
+      return { params: { kind, a }, stem: `The substitution $x = ${d.sub}$ is used to find the exact value of $${d.I}$.`, parts: [
+        P(`The lower limit $x = 0$ becomes $${th} = 0$. Find the value of $${th}$, with $0 < ${th} \\le \\dfrac{\\pi}{2}$, that the upper limit becomes.`, 2, ans.exact(Math.PI * d.up[0] / d.up[1], upTex), [
+          `At the upper limit $${d.sub} = ${xUp}$, so $${kind === "tan" ? "\\tan" : "\\sin"} ${th} = ${frac(xUp, a)}$.`, `$${th} = ${upTex}$`]),
+        P("Find the exact value of the integral.", 4, ans.exact(d.v, d.tex), d.w.map(fix))] };
+    } });
+
+  const BP = { type: "t5-ahl-by-parts", syllabus: ["5.16"], representation: "equation" };
+  reg({ ...BP, unknown: "indefinite-once", format: "mcq", levels: [2], skills: ["AHL5.16.by-parts"], title: "Integrate x times a standard function by parts",
+    build({ rng }) {
+      const kind = rng.pick(["exp", "cos", "sin"]), k = rng.int(2, 5) * (kind === "exp" ? rng.sign() : 1), kx = coef(k, "x");
+      const g = kind === "exp" ? ex(k) : tr(kind, k);
+      const [G1, G2, s1, s2] = kind === "exp" ? [ex(k), ex(k), 1, -1] : kind === "cos" ? [`\\sin ${kx}`, `\\cos ${kx}`, 1, 1] : [`\\cos ${kx}`, `\\sin ${kx}`, -1, 1];
+      const c1 = fmt.Q(s1, k), c2 = fmt.Q(s2, k * k);
+      const tex = (a, b) => `${expr([[a, `x${G1}`], [b, G2]])} + C`, opt = (a, b, why) => ({ text: m(tex(a, b)), value: [fmt.rat.num(a), fmt.rat.num(b)], why });
+      const vTex = kind === "exp" ? `${frac(1, k)}${ex(k)}` : kind === "cos" ? `${frac(1, k)}\\sin ${kx}` : `-${frac(1, k)}\\cos ${kx}`;
+      return { params: { kind, k }, stem: `Consider the integral $\\displaystyle\\int x${g}${dx}$.`, parts: [
+        P("Which expression is equal to this integral?", 3, ans.choice(rng, opt(c1, c2), [
+          opt(c1, fmt.rat.neg(c2), "Check the sign of the second term: the integral of $v$ times the derivative of $u$ is subtracted."),
+          opt(c1, fmt.Q(s2, k), `The second integration also divides by $${k}$.`),
+          opt(fmt.Q(s1 * k, 1), fmt.Q(s2 * k * k, 1), `Integrating $${g}$ divides by $${k}$; it does not multiply by it.`)]), [
+          `Let $u = x$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${g}$, so $\\dfrac{\\mathrm{d}u}{\\mathrm{d}x} = 1$ and $v = ${vTex}$.`,
+          `$\\displaystyle\\int x${g}${dx} = uv - \\displaystyle\\int v\\,\\dfrac{\\mathrm{d}u}{\\mathrm{d}x}${dx} = ${coef(c1, `x${G1}`)} - \\displaystyle\\int ${fmt.wrap(vTex)}${dx}$`,
+          `$= ${tex(c1, c2)}$`])] };
+    } });
+  reg({ ...BP, unknown: "log-definite", format: "value", levels: [3], skills: ["AHL5.16.by-parts"], title: "Integrate a power of x times ln x by parts",
+    build({ rng }) {
+      const n = rng.int(1, 4), c = rng.pick([1, 2, 3, 4, 6, n + 1, (n + 1) * (n + 1)]), N = n + 1;
+      const A = fmt.Q(c, N), B = fmt.Q(-c, N * N), g = gcd(c, N * N), cn = c / g, dn = N * N / g;
+      const top = `${coef(cn * n, `${E_}^{${N}}`)} + ${cn}`, tex = dn === 1 ? top : `\\dfrac{${top}}{${dn}}`;
+      const f = coef(c, `x${n === 1 ? "" : `^{${n}}`}\\ln x`), xN = `x^{${N}}`;
+      return { params: { n, c }, stem: `It is given that $\\displaystyle\\int ${f}${dx} = A${xN}\\ln x + B${xN} + C$, where $A$ and $B$ are constants and $C$ is the constant of integration.`, parts: [
+        P("Find the value of $A$.", 2, ans.frac(A.n, A.d), [
+          `Let $u = \\ln x$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${coef(c, pw("x", n))}$, so $\\dfrac{\\mathrm{d}u}{\\mathrm{d}x} = \\dfrac{1}{x}$ and $v = ${coef(A, xN)}$.`,
+          `The term $uv$ is $${coef(A, xN)}\\ln x$, so $A = ${frac(A.n, A.d)}$.`]),
+        P("Find the value of $B$.", 2, ans.frac(B.n, B.d), [
+          `The remaining integral is $-\\displaystyle\\int ${coef(A, xN)} \\times \\dfrac{1}{x}${dx} = -\\displaystyle\\int ${coef(A, pw("x", n))}${dx}$.`,
+          `$= ${coef(B, xN)}$, so $B = ${frac(B.n, B.d)}$.`]),
+        P(`Hence find the exact value of $${INT(1, E_, f)}$.`, 2, ans.exact(c * (n * Math.exp(N) + 1) / (N * N), tex), [
+          `$\\left[${coef(A, xN)}\\ln x ${fmt.signed(B)}${xN}\\right]_{1}^{${E_}} = \\left(${coef(A, `${E_}^{${N}}`)} ${fmt.signed(B)}${E_}^{${N}}\\right) - \\left(0 ${fmt.signed(B)}\\right)$`.replace(/(\+|-) 1(x|\\mathrm)/g, "$1 $2"),
+          `$= ${tex}$`])] };
+    } });
+  reg({ ...BP, unknown: "repeated", format: "mcq", levels: [3], skills: ["AHL5.16.repeated-parts", "AHL5.16.by-parts"], title: "Integration by parts used twice",
+    build({ rng }) {
+      const kind = rng.pick(["exp", "sin", "cos"]), a = rng.pick([-3, -1, 1, 2, 3, 4]);
+      const u = `x^{2} ${fmt.signed(a)}x`.replace(/(\+|-) 1x/, "$1 x"), du = lin(2, a);
+      const d = { exp: { g: ex(1), V: ex(1), lo: "0", hi: "1", sB: 1, sI: -1, v: Math.E - 2 + a, tex: a === 2 ? E_ : `${E_} ${fmt.signed(a - 2)}`,
+          w2: [`A second use of integration by parts gives $${INT(0, 1, `\\left(${du}\\right)${ex(1)}`)} = \\left[\\left(${du}\\right)${ex(1)}\\right]_{0}^{1} - ${INT(0, 1, `2${ex(1)}`)} = ${coef(2 + a, E_)} ${fmt.signed(-a)} - \\left(2${E_} - 2\\right) = ${expr([[a, E_], [2 - a, ""]])}$`,
+            `The first term is $\\left[\\left(${u}\\right)${ex(1)}\\right]_{0}^{1} = ${coef(1 + a, E_)}$.`,
+            `The integral is $${coef(1 + a, E_)} - \\left(${expr([[a, E_], [2 - a, ""]])}\\right) = ${a === 2 ? E_ : `${E_} ${fmt.signed(a - 2)}`}$.`] },
+        sin: { g: "\\sin x", V: "\\cos x", lo: "0", hi: "\\pi", sB: -1, sI: 1, v: Math.PI * Math.PI - 4 + a * Math.PI, tex: `\\pi^{2} ${fmt.signed(a)}\\pi - 4`.replace(/(\+|-) 1\\pi/, "$1 \\pi"),
+          w2: [`A second use of integration by parts gives $${INT(0, "\\pi", `\\left(${du}\\right)\\cos x`)} = \\left[\\left(${du}\\right)\\sin x\\right]_{0}^{\\pi} - ${INT(0, "\\pi", "2\\sin x")} = 0 - 4 = -4$`,
+            `The first term is $\\left[-\\left(${u}\\right)\\cos x\\right]_{0}^{\\pi} = \\pi^{2} ${fmt.signed(a)}\\pi$.`.replace(/(\+|-) 1\\pi/, "$1 \\pi"),
+            `The integral is $\\pi^{2} ${fmt.signed(a)}\\pi - 4$.`.replace(/(\+|-) 1\\pi/, "$1 \\pi")] },
+        cos: { g: "\\cos x", V: "\\sin x", lo: "0", hi: "\\frac{\\pi}{2}", sB: 1, sI: -1, v: Math.PI * Math.PI / 4 + a * Math.PI / 2 - 2 - a, tex: `\\dfrac{\\pi^{2}}{4} ${a < 0 ? "-" : "+"} ${symQ(Math.abs(a), 2, "\\pi")} ${fmt.signed(-2 - a)}`,
+          w2: [`A second use of integration by parts gives $${INT(0, "\\frac{\\pi}{2}", `\\left(${du}\\right)\\sin x`)} = \\left[-\\left(${du}\\right)\\cos x\\right]_{0}^{\\frac{\\pi}{2}} + ${INT(0, "\\frac{\\pi}{2}", "2\\cos x")} = ${a} + 2 = ${a + 2}$`,
+            `The first term is $\\left[\\left(${u}\\right)\\sin x\\right]_{0}^{\\frac{\\pi}{2}} = \\dfrac{\\pi^{2}}{4} ${a < 0 ? "-" : "+"} ${symQ(Math.abs(a), 2, "\\pi")}$.`,
+            `The integral is $\\dfrac{\\pi^{2}}{4} ${a < 0 ? "-" : "+"} ${symQ(Math.abs(a), 2, "\\pi")} ${fmt.signed(-2 - a)}$.`] } }[kind];
+      // da = 0: the derivative of u taken as 2x; da = 2: the second factor not integrated
+      const optTex = (sB, sI, da) => `${sB < 0 ? "-" : ""}\\left[\\left(${u}\\right)${d.V}\\right]_{${d.lo}}^{${d.hi}} ${sI < 0 ? "-" : "+"} ${INT(d.lo, d.hi, `${da ? `\\left(${du}\\right)` : "2x"}${da === 2 ? d.g : d.V}`)}`;
+      const opt = (sB, sI, da, why) => ({ text: m(optTex(sB, sI, da)), value: [sB, sI, da], why });
+      const third = kind === "sin" ? opt(d.sB, d.sI, 2, `The remaining integral contains $v$, the integral of $${d.g}$, not $${d.g}$ itself.`) : opt(d.sB, d.sI, 0, `The derivative of $${u}$ is $${du}$.`);
+      return { params: { kind, a }, stem: `Let $I = ${INT(d.lo, d.hi, `\\left(${u}\\right)${d.g}`)}$.`, parts: [
+        P("Which expression is obtained for $I$ after integrating by parts once?", 3, ans.choice(rng, opt(d.sB, d.sI, 1), [
+          opt(d.sB, -d.sI, 1, "Integration by parts gives $uv$ minus the integral of $v$ times the derivative of $u$; check the signs."),
+          third,
+          opt(-d.sB, -d.sI, 1, `Check the sign of the integral of $${d.g}$.`)]), [
+          `Let $u = ${u}$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${d.g}$, so $\\dfrac{\\mathrm{d}u}{\\mathrm{d}x} = ${du}$ and $v = ${kind === "sin" ? "-" : ""}${d.V}$.`,
+          `$I = ${optTex(d.sB, d.sI, 1)}$`]),
+        P("Find the exact value of $I$.", 3, ans.exact(d.v, d.tex), d.w2.map((s) => s.replace(/= 1\\mathrm\{e\}/g, `= ${E_}`).replace(/\$1\\mathrm\{e\}/g, `$${E_}`).replace(/= 0\\mathrm\{e\} /, "= ")))] };
+    } });
+  reg({ ...BP, unknown: "cyclic", format: "value", levels: [3], skills: ["AHL5.16.cyclic-parts"], title: "A cyclic integration by parts",
+    build({ rng }) {
+      let a, b; const kind = rng.pick(["sin", "cos"]), oth = kind === "sin" ? "cos" : "sin";
+      do { a = rng.nonzero(-3, 4); b = rng.int(1, 4); } while (a === 1 && b === 1);
+      const s = a * a + b * b, pq = fmt.Q(a, s), qq = fmt.Q(kind === "sin" ? -b : b, s), e = ex(a), bx = coef(b, "x"), I = `\\displaystyle\\int ${e}\\${kind} ${bx}${dx}`, J = `\\displaystyle\\int ${e}\\${oth} ${bx}${dx}`;
+      const sg = kind === "sin" ? "-" : "+", sg2 = kind === "sin" ? "+" : "-";
+      return { params: { kind, a, b }, stem: `It is given that $${I} = ${e}\\left(p\\${kind} ${bx} + q\\${oth} ${bx}\\right) + C$, where $p$ and $q$ are constants and $C$ is the constant of integration.`, parts: [
+        P("Find the value of $p$.", 3, ans.frac(pq.n, pq.d), [
+          `Let $I = ${I}$. Integrating by parts with $u = \\${kind} ${bx}$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${e}$: $I = ${expr([[fmt.Q(1, a), `${e}\\${kind} ${bx}`], [fmt.Q(kind === "sin" ? -b : b, a), J]])}$`,
+          `Integrating by parts again: $${J} = ${expr([[fmt.Q(1, a), `${e}\\${oth} ${bx}`], [fmt.Q(kind === "sin" ? b : -b, a), "I"]])}$`,
+          `Substituting and collecting the terms in $I$: $\\left(1 + ${frac(b * b, a * a)}\\right)I = ${expr([[fmt.Q(1, a), `${e}\\${kind} ${bx}`], [fmt.Q(kind === "sin" ? -b : b, a * a), `${e}\\${oth} ${bx}`]])}$`,
+          `Multiplying by $${frac(a * a, s)}$: $I = ${e}\\left(${frac(pq.n, pq.d)}\\${kind} ${bx} ${fmt.signed(qq)}\\${oth} ${bx}\\right) + C$, so $p = ${frac(pq.n, pq.d)}$.`]),
+        P("Find the value of $q$.", 2, ans.frac(qq.n, qq.d), [
+          `From the result above, the coefficient of $${e}\\${oth} ${bx}$ is $q = ${frac(qq.n, qq.d)}$.`,
+          `Check by differentiating: the derivative of $${e}\\left(p\\${kind} ${bx} + q\\${oth} ${bx}\\right)$ must equal $${e}\\${kind} ${bx}$.`])] };
+    } });
+
+  // =====================================================================================
+  // 5.17 areas against the y-axis and volumes of revolution
+  // =====================================================================================
+  const AY = { type: "t5-ahl-area-y-axis", syllabus: ["5.17"], representation: "graph" };
+  reg({ ...AY, unknown: "parabola-region", format: "mcq", levels: [2], skills: ["AHL5.17.area-y-axis", "AHL5.17.rearrange-for-x"], title: "Area between a parabola and the y-axis",
+    build({ rng }) {
+      let c, k;
+      do { c = rng.int(1, 5); k = rng.int(2, 4); } while (3 * c === k * k);
+      const q = c + k * k;
+      const texK = { "sqrt-": `\\sqrt{y - ${c}}`, "sqrt+": `\\sqrt{y + ${c}}`, y2: `\\left(y^{2} + ${c}\\right)`, x: `\\left(x^{2} + ${c}\\right)` };
+      const opt = (v, why) => ({ text: m(INT(v[0], v[1], texK[v[2]], v[2] === "x" ? "x" : "y")), value: v, why });
+      return { params: { c, k }, stem: `The diagram shows the curve $y = x^{2} + ${c}$ for $x \\ge 0$ and the line $y = ${q}$. The shaded region $R$ is bounded by the curve, the $y$-axis and the line.`,
+        graph: { x: [-1, k + 1], y: [0, q + 2], xStep: 1, yStep: q > 12 ? 4 : 2, functions: [{ fn: { type: "poly", coeffs: [c, 0, 1] }, domain: [0, k + 0.6] }, { fn: { type: "poly", coeffs: [q] } }], regions: [{ x: [0, k], fn: 0, to: 1 }], alt: "A curve rising from the y-axis to meet a horizontal line, with the region between the curve, the y-axis and the line shaded" },
+        parts: [
+          P("Which integral gives the area of $R$?", 2, ans.choice(rng, opt([c, q, "sqrt-"]), [
+            opt([0, k, "x"], "This is the area between the curve and the $x$-axis."),
+            opt([c, q, "sqrt+"], `Rearranging $y = x^{2} + ${c}$ gives $x^{2} = y - ${c}$.`),
+            opt([c, q, "y2"], "The integrand must be $x$ written in terms of $y$.")]), [
+            `The area between a curve and the $y$-axis is $\\displaystyle\\int x\\,\\mathrm{d}y$.`,
+            `$y = x^{2} + ${c}$ with $x \\ge 0$ gives $x = \\sqrt{y - ${c}}$. The curve meets the $y$-axis at $y = ${c}$.`,
+            `Area $= ${INT(c, q, texK["sqrt-"], "y")}$`]),
+          P("Find the area of $R$.", 2, ans.frac(2 * k * k * k, 3), [
+            `$${INT(c, q, `(y - ${c})^{\\frac{1}{2}}`, "y")} = \\left[\\dfrac{2}{3}(y - ${c})^{\\frac{3}{2}}\\right]_{${c}}^{${q}}$`,
+            `$= \\dfrac{2}{3}${br(k * k)}^{\\frac{3}{2}} = ${frac(2 * k * k * k, 3)}$`])] };
+    } });
+  reg({ ...AY, syllabus: ["5.17", "5.16"], unknown: "exponential-region", format: "value", levels: [3], skills: ["AHL5.17.area-y-axis", "AHL5.17.rearrange-for-x", "AHL5.16.by-parts"], title: "Area between an exponential curve and the y-axis",
+    build({ rng }) {
+      const a = rng.int(1, 4), T = rng.int(2, 6), xe = a === 1 ? "x" : `\\frac{x}{${a}}`;
+      const tex = `${a * T}\\ln ${T} - ${a * (T - 1)}`, v = a * (T * Math.log(T) - T + 1);
+      return { params: { a, T }, stem: `The diagram shows the curve $y = ${E_}^{${xe}}$ and the line $y = ${T}$, which meet at the point $\\mathrm{A}$. The shaded region $R$ is bounded by the curve, the $y$-axis and the line.`,
+        graph: { x: [-1, Math.ceil(a * Math.log(T)) + 1], y: [0, T + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "exp", a: 1, b: Math.exp(1 / a) } }, { fn: { type: "poly", coeffs: [T] } }], points: [{ x: a * Math.log(T), y: T, label: "A" }], regions: [{ x: [0, a * Math.log(T)], fn: 0, to: 1 }], alt: "An exponential curve crossing the y-axis and rising to meet a horizontal line at the point A, with the region between the curve, the y-axis and the line shaded" },
+        parts: [
+          P("Find the exact $x$-coordinate of $\\mathrm{A}$.", 1, ans.exact(a * Math.log(T), coef(a, `\\ln ${T}`)), [`$${E_}^{${xe}} = ${T}$ gives ${a === 1 ? "" : `$\\dfrac{x}{${a}} = \\ln ${T}$, so `}$x = ${coef(a, `\\ln ${T}`)}$.`]),
+          P("By integrating with respect to $y$, find the exact area of $R$.", 5, ans.exact(v, tex), [
+            `$y = ${E_}^{${xe}}$ gives $x = ${coef(a, "\\ln y")}$. The curve meets the $y$-axis at $y = 1$.`,
+            `Area $= ${INT(1, T, coef(a, "\\ln y"), "y")}$`,
+            `By parts with $u = \\ln y$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}y} = 1$: $\\displaystyle\\int \\ln y\\,\\mathrm{d}y = y\\ln y - \\displaystyle\\int 1\\,\\mathrm{d}y = y\\ln y - y + C$`,
+            `Area $= ${a === 1 ? "" : a}\\left[y\\ln y - y\\right]_{1}^{${T}} = ${a === 1 ? "" : a}\\left(${T}\\ln ${T} - ${T} + 1\\right)$`,
+            `Area $= ${tex}$`])] };
+    } });
+
+  const VR = { type: "t5-ahl-volume-revolution", syllabus: ["5.17"] };
+  reg({ ...VR, unknown: "identify-integral", representation: "equation", format: "mcq", levels: [1], skills: ["AHL5.17.volume-x-axis"], title: "Choose the integral for a volume of revolution",
+    build({ rng }) {
+      const kind = rng.pick(["sqrt", "exp", "quad", "recip"]), c = rng.int(1, 6), p = rng.int(0, 2) + (kind === "recip" ? 1 : 0), q = p + rng.int(1, 3);
+      const [y, y2] = { sqrt: [`\\sqrt{x + ${c}}`, `\\left(x + ${c}\\right)`], exp: [`${c === 1 ? "" : c}${E_}^{x}`, `${c * c === 1 ? "" : c * c}${E_}^{2x}`], quad: [`x^{2} + ${c}`, `\\left(x^{2} + ${c}\\right)^{2}`], recip: [`\\dfrac{${c}}{x}`, `\\dfrac{${c * c}}{x^{2}}`] }[kind];
+      const opt = (code, text, why) => ({ text: m(text), value: code, why });
+      return { params: { kind, c, p, q }, stem: `The region bounded by the curve $y = ${y}$, the $x$-axis and the lines $x = ${p}$ and $x = ${q}$ is rotated through $2\\pi$ about the $x$-axis to form a solid.`, parts: [
+        P("Which expression gives the volume of the solid?", 2, ans.choice(rng, opt("pi-sq", `\\pi${INT(p, q, y2)}`), [
+          opt("pi-lin", `\\pi${INT(p, q, kind === "quad" ? `\\left(${y}\\right)` : y)}`, "Each thin disc has radius $y$, so its area is $\\pi y^{2}$."),
+          opt("sq", INT(p, q, y2), "Each thin disc has area $\\pi y^{2}$; the factor $\\pi$ is missing."),
+          opt("2pi-sq", `2\\pi${INT(p, q, y2)}`, "The formula is $V = \\pi\\displaystyle\\int y^{2}\\,\\mathrm{d}x$; rotating through $2\\pi$ does not double it.")]), [
+          `A rotation about the $x$-axis gives $V = \\pi\\displaystyle\\int_{a}^{b} y^{2}${dx}$.`,
+          `Here $y^{2} = ${y2.replace(/^\\left\((.*)\\right\)$/, "$1")}$, so $V = \\pi${INT(p, q, y2)}$.`])] };
+    } });
+  reg({ ...VR, unknown: "power-curve-x-axis", representation: "graph", format: "value", levels: [2], skills: ["AHL5.17.volume-x-axis"], title: "Volume of revolution of a simple curve about the x-axis",
+    build({ rng }) {
+      const kind = rng.pick(["sqrt", "line", "quad"]);
+      let a, p, q;
+      do { a = rng.int(1, kind === "quad" ? 2 : 4); p = rng.int(0, 2); q = p + rng.int(1, kind === "quad" ? 2 : 4); } while ((kind === "line" && a * q > 12) || (kind === "quad" && a * q * q > 12) || (p === 0 && rng.bool()));
+      const mm = kind === "sqrt" ? 2 : kind === "line" ? 3 : 5, n = a * a * (Math.pow(q, mm) - Math.pow(p, mm));
+      const y = kind === "sqrt" ? coef(a, "\\sqrt{x}") : kind === "line" ? coef(a, "x") : coef(a, "x^{2}"), y2 = coef(a * a, pw("x", mm - 1));
+      const fn = kind === "sqrt" ? { type: "sqrt", a } : { type: "poly", coeffs: kind === "line" ? [0, a] : [0, 0, a] }, top = kind === "sqrt" ? a * Math.sqrt(q) : kind === "line" ? a * q : a * q * q;
+      return { params: { kind, a, p, q }, stem: `The diagram shows the curve $y = ${y}$${kind === "sqrt" ? "" : " for $x \\ge 0$"}. The shaded region is bounded by the curve, the $x$-axis and the line${p ? "s" : ""} ${p ? `$x = ${p}$ and ` : ""}$x = ${q}$. This region is rotated through $2\\pi$ about the $x$-axis.`,
+        graph: { x: [-1, q + 1], y: [-1, Math.ceil(top) + 1], xStep: 1, yStep: top > 8 ? 2 : 1, functions: [{ fn, domain: [0, q + 0.7] }], asymptotes: p ? [{ x: p }, { x: q }] : [{ x: q }], regions: [{ x: [p, q], fn: 0 }], alt: "A curve rising from the origin, with the region under it shaded as far as a vertical dashed line" },
+        parts: [
+          P("Find the exact volume of the solid formed.", 3, ans.exact(Math.PI * n / mm, symQ(n, mm, "\\pi")), [
+            `$V = \\pi${INT(p, q, "y^{2}")} = \\pi${INT(p, q, y2)}$`,
+            `$V = \\pi\\left[${coef(fmt.Q(a * a, mm), pw("x", mm))}\\right]_{${p}}^{${q}}$`,
+            `$V = ${symQ(n, mm, "\\pi")}$`])] };
+    } });
+  reg({ ...VR, unknown: "exact-x-axis", representation: "graph", format: "value", levels: [3], skills: ["AHL5.17.volume-x-axis"], title: "Exact volume of revolution about the x-axis",
+    build({ rng }) {
+      const kind = rng.pick(["sin", "cos", "exp", "recip", "sec", "xexp"]), a = rng.int(1, kind === "exp" ? 3 : 5), a2 = a * a, k = rng.int(2, 3);
+      const A = a === 1 ? "" : `${a}`, A2 = a2 === 1 ? "" : `${a2}`;
+      const d = {
+        sin: { y: `${A}\\sin x`, lo: "0", hi: "\\pi", hiV: Math.PI, fn: { type: "trig", name: "sin", a }, top: a, v: a2 * Math.PI * Math.PI / 2, tex: symQ(a2, 2, "\\pi^{2}"), ends: "the $x$-axis between $x = 0$ and $x = \\pi$", w: [
+          `$V = \\pi${INT(0, "\\pi", `${A2}\\sin^{2} x`)} = \\pi${INT(0, "\\pi", `${frac(a2, 2)}\\left(1 - \\cos 2x\\right)`)}$`,
+          `$V = ${symQ(a2, 2, "\\pi")}\\left[x - \\dfrac{1}{2}\\sin 2x\\right]_{0}^{\\pi} = ${symQ(a2, 2, "\\pi")} \\times \\pi$`, `$V = ${symQ(a2, 2, "\\pi^{2}")}$`] },
+        cos: { y: `${A}\\cos x`, lo: "0", hi: "\\frac{\\pi}{2}", hiV: Math.PI / 2, fn: { type: "trig", name: "cos", a }, top: a, v: a2 * Math.PI * Math.PI / 4, tex: symQ(a2, 4, "\\pi^{2}"), ends: "the $x$-axis and the $y$-axis", w: [
+          `$V = \\pi${INT(0, "\\frac{\\pi}{2}", `${A2}\\cos^{2} x`)} = \\pi${INT(0, "\\frac{\\pi}{2}", `${frac(a2, 2)}\\left(1 + \\cos 2x\\right)`)}$`,
+          `$V = ${symQ(a2, 2, "\\pi")}\\left[x + \\dfrac{1}{2}\\sin 2x\\right]_{0}^{\\frac{\\pi}{2}} = ${symQ(a2, 2, "\\pi")} \\times \\dfrac{\\pi}{2}$`, `$V = ${symQ(a2, 4, "\\pi^{2}")}$`] },
+        exp: { y: `${A}${E_}^{x}`, lo: "0", hi: `\\ln ${k}`, hiV: Math.log(k), fn: { type: "exp", a }, top: a * k, v: Math.PI * a2 * (k * k - 1) / 2, tex: symQ(a2 * (k * k - 1), 2, "\\pi"), ends: `the $x$-axis, the $y$-axis and the line $x = \\ln ${k}$`, w: [
+          `$V = \\pi${INT(0, `\\ln ${k}`, `${A2}${E_}^{2x}`)} = \\pi\\left[${frac(a2, 2)}${E_}^{2x}\\right]_{0}^{\\ln ${k}}$`,
+          `$${E_}^{2\\ln ${k}} = ${k * k}$, so $V = ${symQ(a2, 2, "\\pi")}\\left(${k * k} - 1\\right)$`, `$V = ${symQ(a2 * (k * k - 1), 2, "\\pi")}$`] },
+        recip: { y: `\\dfrac{${a}}{\\sqrt{1 + x^{2}}}`, lo: "0", hi: "1", hiV: 1, fn: null, top: a, v: a2 * Math.PI * Math.PI / 4, tex: symQ(a2, 4, "\\pi^{2}"), ends: "the $x$-axis, the $y$-axis and the line $x = 1$", w: [
+          `$V = \\pi${INT(0, 1, `\\dfrac{${a2}}{1 + x^{2}}`)} = ${a2 === 1 ? "" : a2}\\pi\\left[\\arctan x\\right]_{0}^{1}$`,
+          `$V = ${a2 === 1 ? "" : a2}\\pi \\times \\dfrac{\\pi}{4}$`, `$V = ${symQ(a2, 4, "\\pi^{2}")}$`] },
+        sec: { y: `${A}\\sec x`, lo: "0", hi: "\\frac{\\pi}{4}", hiV: Math.PI / 4, fn: null, top: a * Math.SQRT2, v: a2 * Math.PI, tex: symQ(a2, 1, "\\pi"), ends: "the $x$-axis, the $y$-axis and the line $x = \\dfrac{\\pi}{4}$", w: [
+          `$V = \\pi${INT(0, "\\frac{\\pi}{4}", `${A2}\\sec^{2} x`)} = ${A2}\\pi\\left[\\tan x\\right]_{0}^{\\frac{\\pi}{4}}$`,
+          `$V = ${A2}\\pi\\left(1 - 0\\right)$`, `$V = ${symQ(a2, 1, "\\pi")}$`] },
+        xexp: { y: `${A}\\sqrt{x}\\,${E_}^{x}`, lo: "0", hi: "1", hiV: 1, fn: null, top: a * Math.E, v: a2 * Math.PI * (Math.E * Math.E + 1) / 4, tex: a2 % 4 === 0 ? `${a2 === 4 ? "" : a2 / 4}\\pi\\left(${E_}^{2} + 1\\right)` : `\\dfrac{${A2}\\pi\\left(${E_}^{2} + 1\\right)}{4}`, ends: "the $x$-axis and the line $x = 1$", w: [
+          `$V = \\pi${INT(0, 1, `${A2}x${E_}^{2x}`)}$`,
+          `By parts with $u = x$ and $\\dfrac{\\mathrm{d}v}{\\mathrm{d}x} = ${E_}^{2x}$: $${INT(0, 1, `x${E_}^{2x}`)} = \\left[\\dfrac{1}{2}x${E_}^{2x}\\right]_{0}^{1} - ${INT(0, 1, `\\dfrac{1}{2}${E_}^{2x}`)}$`,
+          `$= \\dfrac{1}{2}${E_}^{2} - \\left[\\dfrac{1}{4}${E_}^{2x}\\right]_{0}^{1} = \\dfrac{1}{2}${E_}^{2} - \\dfrac{1}{4}${E_}^{2} + \\dfrac{1}{4} = \\dfrac{${E_}^{2} + 1}{4}$`,
+          `$V = ${a2 % 4 === 0 ? `${a2 === 4 ? "" : a2 / 4}\\pi\\left(${E_}^{2} + 1\\right)` : `\\dfrac{${A2}\\pi\\left(${E_}^{2} + 1\\right)}{4}`}$`] } }[kind];
+      const fn = d.fn || (kind === "recip" ? { type: "pwl", points: Array.from({ length: 41 }, (_, i) => [-0.5 + i * 0.05, a / Math.sqrt(1 + (-0.5 + i * 0.05) ** 2)]) } : kind === "sec" ? { type: "pwl", points: Array.from({ length: 41 }, (_, i) => [-0.5 + i * 0.04, a / Math.cos(-0.5 + i * 0.04)]) } : { type: "pwl", points: Array.from({ length: 49 }, (_, i) => [i * 0.025, a * Math.sqrt(i * 0.025) * Math.exp(i * 0.025)]) });
+      const xr = kind === "sin" ? [-0.5, 3.5] : kind === "cos" ? [-0.5, 2] : kind === "exp" ? [-0.5, Math.log(k) + 0.4] : [-0.5, 1.5];
+      const vert = kind === "sin" || kind === "cos" ? [] : [{ x: d.hiV }];
+      const fix = (s) => s.replace(/([= ])1\\left/g, "$1\\left").replace(/\[1\\mathrm/, `[${E_}`).replace(/= 1 \\times /, "= ").replace(/= 1\\pi/, "= \\pi");
+      return { params: { kind, a, k }, stem: `The diagram shows the curve $y = ${d.y}$. The shaded region is bounded by the curve, ${d.ends}. This region is rotated through $2\\pi$ about the $x$-axis.`,
+        graph: { x: xr, y: [-0.5, Math.ceil(d.top + 0.5)], xStep: 0.5, yStep: d.top > 6 ? 2 : 1, functions: [{ fn, domain: kind === "sin" ? [0, Math.PI] : kind === "cos" ? [-0.5, Math.PI / 2] : kind === "xexp" ? [0, 1.2] : undefined }], asymptotes: vert, regions: [{ x: [0, d.hiV], fn: 0 }], alt: "A curve above the x-axis with the region between the curve and the axis shaded" },
+        parts: [P("Find the exact volume of the solid formed.", kind === "xexp" ? 6 : 5, ans.exact(d.v, d.tex), [`A rotation about the $x$-axis gives $V = \\pi\\displaystyle\\int y^{2}${dx}$.`].concat(d.w.map(fix)))] };
+    } });
+  reg({ ...VR, unknown: "parabola-y-axis", representation: "graph", format: "mcq", levels: [3], skills: ["AHL5.17.volume-y-axis", "AHL5.17.rearrange-for-x"], title: "Volume of revolution about the y-axis",
+    build({ rng }) {
+      let a, c, s, t;
+      do { a = rng.int(1, 3); c = rng.int(0, 4); s = rng.int(0, 2); t = s + rng.int(1, 2); } while (a * t * t + c > 20 || (s === 0 && c === 0 && rng.bool()));
+      const p = a * s * s + c, q = a * t * t + c, n = (q - c) * (q - c) - (p - c) * (p - c), yc = c ? `y - ${c}` : "y";
+      const curve = `${coef(a, "x^{2}")}${c ? ` + ${c}` : ""}`;
+      const x2 = { ok: a === 1 ? yc : `\\dfrac{${yc}}{${a}}`, plus: a === 1 ? `y + ${c || 1}` : `\\dfrac{y + ${c || 1}}{${a}}`, mult: a === 1 ? `\\sqrt{${yc}}` : `${a}\\left(${yc}\\right)`, sq: a === 1 ? `\\left(${yc}\\right)^{2}` : `\\dfrac{y}{${a}}${c ? ` - ${c}` : " - 1"}` };
+      const opt = (code, why) => ({ text: m(`x^{2} = ${x2[code]}`), value: code, why });
+      const regions = s === 0 ? [{ x: [0, t], fn: 0, to: 1 }] : [{ x: [0, s], fn: 2, to: 1 }, { x: [s, t], fn: 0, to: 1 }];
+      return { params: { a, c, s, t }, stem: `The diagram shows the curve $y = ${curve}$ for $x \\ge 0$. The shaded region is bounded by the curve, the $y$-axis and the line${s ? "s" : ""} ${s ? `$y = ${p}$ and ` : ""}$y = ${q}$. This region is rotated through $2\\pi$ about the $y$-axis.`,
+        graph: { x: [-1, t + 1], y: [0, q + 2], xStep: 1, yStep: q > 10 ? 2 : 1, functions: [{ fn: { type: "poly", coeffs: [c, 0, a] }, domain: [0, t + 0.5] }, { fn: { type: "poly", coeffs: [q] } }].concat(s ? [{ fn: { type: "poly", coeffs: [p] } }] : []), regions, alt: "A curve rising from the y-axis, with the region between the curve, the y-axis and one or two horizontal lines shaded" },
+        parts: [
+          P("Which equation gives $x^{2}$ in terms of $y$ for points on the curve?", 2, ans.choice(rng, opt("ok"), [
+            opt("plus", `Subtract $${c || 0}$ from both sides before dividing.`.replace("Subtract $0$ from both sides before dividing.", "Divide both sides by the coefficient of $x^{2}$ only.")),
+            opt("mult", a === 1 ? "The question asks for $x^{2}$, not $x$." : `Divide by $${a}$; do not multiply.`),
+            opt("sq", a === 1 ? "Rearranging does not square the other side." : "Subtract the constant before dividing.")]), [
+            c ? `$y = ${curve}$ gives $${coef(a, "x^{2}")} = ${yc}$.` : `$y = ${curve}$`, `$x^{2} = ${x2.ok}$`]),
+          P("Find the exact volume of the solid formed.", 4, ans.exact(Math.PI * n / (2 * a), symQ(n, 2 * a, "\\pi")), [
+            `A rotation about the $y$-axis gives $V = \\pi\\displaystyle\\int x^{2}\\,\\mathrm{d}y$.`,
+            `$V = \\pi${INT(p, q, x2.ok, "y")}$`,
+            `$V = \\pi\\left[${a === 1 && !c ? "\\dfrac{y^{2}}{2}" : `\\dfrac{\\left(${yc}\\right)^{2}}{${2 * a}}`}\\right]_{${p}}^{${q}} = \\pi\\left(\\dfrac{${(q - c) * (q - c)}}{${2 * a}} - \\dfrac{${(p - c) * (p - c)}}{${2 * a}}\\right)$`,
+            `$V = ${symQ(n, 2 * a, "\\pi")}$`])] };
+    } });
+  reg({ ...VR, unknown: "between-curves", representation: "graph", format: "value", levels: [4], calculator: true, skills: ["AHL5.17.volume-between-curves", "AHL5.17.volume-x-axis"], title: "Volume of revolution of a region between two curves",
+    build({ rng }) {
+      const a = rng.int(3, 7), b = rng.pick([0.25, 0.5, 1]), k = rng.pick([0.5, 1]);
+      const f = (x) => a - b * x * x, g = (x) => Math.exp(k * x);
+      let lo = 0, hi = 6;
+      for (let i = 0; i < 80; i++) { const mid = (lo + hi) / 2; if (f(mid) > g(mid)) lo = mid; else hi = mid; }
+      const p = lo, N = 4000, h = p / N;
+      let V = 0;
+      for (let i = 0; i < N; i++) { const x = (i + 0.5) * h; V += (f(x) * f(x) - g(x) * g(x)) * h; }
+      V *= Math.PI;
+      const ft = `${a} - ${b === 1 ? "" : num(b)}x^{2}`, gt = `${E_}^{${k === 1 ? "x" : "0.5x"}}`;
+      return { params: { a, b, k }, stem: `The diagram shows the curves $y = ${ft}$ and $y = ${gt}$ for $x \\ge 0$. The curves meet at the point $\\mathrm{A}$. The shaded region $R$ is bounded by the two curves and the $y$-axis.`,
+        graph: { x: [-0.5, Math.ceil(p) + 1], y: [0, a + 1], xStep: 1, yStep: 1, functions: [{ fn: { type: "poly", coeffs: [a, 0, -b] }, domain: [0, Math.ceil(p) + 0.5] }, { fn: { type: "exp", a: 1, b: Math.exp(k) }, domain: [0, Math.ceil(p) + 0.5] }], points: [{ x: p, y: f(p), label: "A" }], regions: [{ x: [0, p], fn: 1, to: 0 }], alt: "A falling parabola and a rising exponential curve that meet at the point A, with the region between them and the y-axis shaded" },
+        parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(p), [`Solve $${ft} = ${gt}$ with the graphing calculator.`, `$x = ${sf(p)}$ (the value $${sf(p, 5)}$ is kept for the next part).`]),
+          P("The region $R$ is rotated through $2\\pi$ about the $x$-axis. Find the volume of the solid formed.", 4, ans.sf(V), [
+            `The solid is the one formed by the upper curve with the one formed by the lower curve removed.`,
+            `$V = \\pi${INT(0, sf(p, 5), `\\left(\\left(${ft}\\right)^{2} - \\left(${gt}\\right)^{2}\\right)`)}$`,
+            `With the graphing calculator, $V = ${sf(V)}$.`])] };
+    } });
+  reg({ ...VR, unknown: "vase-y-axis", representation: "words", format: "value", levels: [4], calculator: true, skills: ["AHL5.17.volume-y-axis", "AHL5.17.rearrange-for-x"], title: "Volume of a vase modelled by a rotation about the y-axis",
+    build({ rng }) {
+      const a = rng.int(4, 9), h = rng.int(Math.ceil(0.8 * a), Math.floor(1.6 * a)), top = Math.exp(h / a);
+      const Vof = (d) => Math.PI * a / 2 * (Math.exp(2 * d / a) - 1), V = Vof(h), half = a / 2 * Math.log(1 + V / (Math.PI * a));
+      return { params: { a, h }, stem: `The inside of a vase is modelled by rotating the part of the curve $y = ${a}\\ln x$ between $y = 0$ and $y = ${h}$ through $2\\pi$ about the $y$-axis, where $x$ and $y$ are measured in centimetres.`, parts: [
+        P("Find the radius of the opening at the top of the vase.", 1, ans.sf(top), [`At the top $${a}\\ln x = ${h}$, so $x = ${E_}^{\\frac{${h}}{${a}}} = ${sf(top)}\\text{ cm}$.`.replace(/\\frac\{(\d+)\}\{\1\}/, "1").replace(/\^\{1\}/, "")]),
+        P("Find the volume of the vase, in $\\text{cm}^{3}$.", 4, ans.sf(V), [
+          `$y = ${a}\\ln x$ gives $x = ${E_}^{\\frac{y}{${a}}}$, so $x^{2} = ${E_}^{\\frac{2y}{${a}}}$.`,
+          `$V = \\pi\\displaystyle\\int x^{2}\\,\\mathrm{d}y = \\pi${INT(0, h, `${E_}^{\\frac{2y}{${a}}}`, "y")}$`,
+          `$V = ${sf(V)}\\text{ cm}^{3}$`]),
+        P("Water is poured into the empty vase until it is half full. Find the depth of the water.", 2, ans.sf(half), [
+          `Solve $\\pi${INT(0, "d", `${E_}^{\\frac{2y}{${a}}}`, "y")} = ${sf(V / 2, 4)}$ for the depth $d$.`,
+          `$d = ${sf(half)}\\text{ cm}$`])] };
+    } });
+
+  // PART-C
 
 })(typeof window !== "undefined" ? window : globalThis);

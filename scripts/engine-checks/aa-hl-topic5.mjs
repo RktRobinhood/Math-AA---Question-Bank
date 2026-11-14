@@ -170,5 +170,140 @@ export default {
     T.require(z.length === 1, "one stationary point");
     return { a: ap(T, z[0]), b: ap(T, T.extremum(C, lo, hi, "min").value), c: ap(T, T.extremum(C, lo, hi, "max").value) };
   },
-  // PART-B
+  // ---------------------------------------------------------------- 5.15
+  "t5-ahl-standard-derivatives/identify-derivative/equation": (q, T) => {
+    const { kind, k } = q.params;
+    const f = { tan: (x) => Math.tan(k * x), sec: (x) => 1 / Math.cos(k * x), cot: (x) => 1 / Math.tan(k * x), cosec: (x) => 1 / Math.sin(k * x), exp: (x) => k ** x,
+      log: (x) => Math.log(x) / Math.log(k), arctan: (x) => Math.atan(k * x), arcsin: (x) => Math.asin(k * x), arccos: (x) => Math.acos(k * x) }[kind];
+    const cand = ([c, name, kk], x) => ({ sec2: c / Math.cos(kk * x) ** 2, sectan: (c * Math.tan(kk * x)) / Math.cos(kk * x), csc2: c / Math.sin(kk * x) ** 2, csccot: (c * Math.cos(kk * x)) / Math.sin(kk * x) ** 2,
+      axln: kk ** x * Math.log(kk), xax1: x * kk ** (x - 1), ax: kk ** x, axdivln: kk ** x / Math.log(kk), "1/xln": 1 / (x * Math.log(kk)), "1/x": 1 / x, "ln/x": Math.log(kk) / x, "k/x": kk / x,
+      atan: c / (1 + kk * kk * x * x), atanbad: c / (1 + kk * x * x), asin: c / Math.sqrt(1 - kk * kk * x * x) }[name]);
+    return { a: T.optionWhere(q, "a", (v) => [0.03, 0.07, 0.11].every((x) => near(cand(v, x), T.deriv(f, x, 1e-5), 1e-5))) };
+  },
+  "t5-ahl-standard-derivatives/gradient-inverse-trig/equation": (q, T) => {
+    const { kind, c, k, a, p } = q.params;
+    const f = kind === "arctan" ? (x) => c * Math.atan(k * x) : kind === "arcsin" ? (x) => Math.asin(x / a) : (x) => Math.acos(x / a);
+    return { a: ap(T, T.deriv(f, p, 1e-4)) };
+  },
+  "t5-ahl-standard-derivatives/tangent-exponential-base/equation": (q, T) => {
+    const { kind, a, p } = q.params;
+    if (kind === "exp") { const f = (x) => a ** x, mm = T.deriv(f, p, 1e-4); return { a: ap(T, mm), b: ap(T, p - f(p) / mm) }; }
+    const f = (x) => Math.log(x) / Math.log(a), x0 = a ** p, mm = T.deriv(f, x0, 1e-4);
+    return { a: ap(T, mm), b: ap(T, f(x0) - mm * x0) };
+  },
+  "t5-ahl-standard-derivatives/stationary-tan-cot/equation": (q, T) => {
+    const { a, b } = q.params, f = (x) => a * Math.tan(x) + b / Math.tan(x);
+    const z = T.roots((x) => T.deriv(f, x, 1e-5), 0.05, 1.52, 3000);
+    T.require(z.length === 1, "one stationary point in the interval");
+    return { a: ap(T, z[0]), b: ap(T, T.extremum(f, 0.05, 1.52, "min").value) };
+  },
+  "t5-ahl-standard-integrals/inverse-trig-definite/equation": (q, T) => {
+    const { kind, c, a } = q.params;
+    const v = kind === "atan" ? T.integrate((x) => c / (a * a + x * x), 0, a) : kind === "atan3" ? T.integrate((x) => c / (a * a + x * x), 0, a * Math.sqrt(3))
+      : kind === "asin" ? T.integrate((x) => c / Math.sqrt(a * a - x * x), 0, a / 2) : T.integrate((x) => c / Math.cos(a * x) ** 2, 0, Math.PI / (4 * a));
+    return { a: ap(T, v) };
+  },
+  "t5-ahl-standard-integrals/partial-fractions-definite/equation": (q, T) => {
+    const { r1, r2, al, be, p, q: hi } = q.params, f = (x) => (al * x + be) / ((x - r1) * (x - r2));
+    T.require(p > r2 && r2 > r1, "the interval is to the right of both discontinuities");
+    return { a: ap(T, limAt((x) => (x - r1) * f(x), r1, 1e-3)), b: ap(T, limAt((x) => (x - r2) * f(x), r2, 1e-3)), c: ap(T, Math.exp(T.integrate(f, p, hi, 4000)), 1e-6) };
+  },
+  // ---------------------------------------------------------------- 5.16
+  "t5-ahl-substitution/new-limits/equation": (q, T) => {
+    const { kind, p, q: hi, a, b, c } = q.params;
+    // the value of u that maps back to each limit of x, found by search on the inverse substitution
+    const back = kind === "sqrt" ? (u) => u * u : kind === "lin" ? (u) => (u - b) / a : (u) => Math.sign(u - c) * Math.sqrt(Math.abs(u - c));
+    const find = (x) => T.bisect((u) => back(u) - x, kind === "sqrt" ? 0 : -200, 200);
+    return { a: ap(T, find(p), 1e-7), b: ap(T, find(hi), 1e-7) };
+  },
+  "t5-ahl-substitution/linear-substitution/equation": (q, T) => {
+    const { b, n, U } = q.params, I = T.integrate((x) => x * (x + b) ** n, -b, U - b);
+    return { a: T.optionWhere(q, "a", ([l, h, s]) => l === 0 && h === U && near(T.integrate((u) => (u + s) * u ** n, l, h), I, 1e-7)), b: ap(T, I, 1e-7) };
+  },
+  "t5-ahl-substitution/root-substitution/equation": (q, T) => {
+    const { c, s, t } = q.params, I = T.integrate((x) => x / Math.sqrt(x - c), c + s * s, c + t * t, 4000);
+    const g = { 2: (u) => 2 * (u * u + c), "1/u": (u) => (u * u + c) / u, "2u": (u) => 2 * u * (u * u + c), 1: (u) => u * u + c };
+    T.require(s >= 1, "the integrand is defined on the whole interval");
+    return { a: T.optionWhere(q, "a", ([l, h, kind]) => l === s && h === t && near(T.integrate(g[kind], l, h), I, 1e-7)), b: ap(T, I, 1e-7) };
+  },
+  "t5-ahl-substitution/trig-substitution/equation": (q, T) => {
+    const { kind, a } = q.params;
+    const [sub, xUp, f, n] = kind === "circle" ? [(t) => a * Math.sin(t), a, (x) => Math.sqrt(Math.max(0, a * a - x * x)), 400000]
+      : kind === "tan" ? [(t) => a * Math.tan(t), a, (x) => 1 / (a * a + x * x) ** 2, 2000] : [(t) => a * Math.sin(t), a / 2, (x) => (x * x) / Math.sqrt(a * a - x * x), 2000];
+    return { a: ap(T, T.bisect((t) => sub(t) - xUp, 0, Math.PI / 2), 1e-7), b: ap(T, T.integrate(f, 0, xUp, n), 1e-6) };
+  },
+  "t5-ahl-by-parts/indefinite-once/equation": (q, T) => {
+    const { kind, k } = q.params, g = kind === "exp" ? Math.exp : kind === "cos" ? Math.cos : Math.sin;
+    const F = ([c1, c2]) => (x) => (kind === "exp" ? c1 * x * Math.exp(k * x) + c2 * Math.exp(k * x) : kind === "cos" ? c1 * x * Math.sin(k * x) + c2 * Math.cos(k * x) : c1 * x * Math.cos(k * x) + c2 * Math.sin(k * x));
+    return { a: T.optionWhere(q, "a", (v) => [0.2, 0.5, 0.9].every((x) => near(T.deriv(F(v), x, 1e-4), x * g(k * x), 1e-5))) };
+  },
+  "t5-ahl-by-parts/log-definite/equation": (q, T) => {
+    const { n, c } = q.params, N = n + 1, f = (x) => c * x ** n * Math.log(x);
+    const b1 = (x) => x ** N * Math.log(x), b2 = (x) => x ** N, xs = [1.5, 2.5];
+    const [A, B] = solve(xs.map((x) => [T.deriv(b1, x, 1e-4), T.deriv(b2, x, 1e-4)]), xs.map(f));
+    return { a: ap(T, A), b: ap(T, B), c: ap(T, T.integrate(f, 1, Math.E), 1e-7) };
+  },
+  "t5-ahl-by-parts/repeated/equation": (q, T) => {
+    const { kind, a } = q.params, u = (x) => x * x + a * x;
+    const [g, V, lo, hi] = kind === "exp" ? [Math.exp, Math.exp, 0, 1] : kind === "sin" ? [Math.sin, Math.cos, 0, Math.PI] : [Math.cos, Math.sin, 0, Math.PI / 2];
+    // each option is tested as an identity on shorter intervals too, so equal values by accident do not pass
+    const ok = ([sB, sI, da]) => [hi, 1, 0.6].every((X) => near(sB * (u(X) * V(X) - u(lo) * V(lo)) + sI * T.integrate((x) => (2 * x + (da ? a : 0)) * (da === 2 ? g(x) : V(x)), lo, X), T.integrate((x) => u(x) * g(x), lo, X), 1e-7));
+    return { a: T.optionWhere(q, "a", ok), b: ap(T, T.integrate((x) => u(x) * g(x), lo, hi), 1e-7) };
+  },
+  "t5-ahl-by-parts/cyclic/equation": (q, T) => {
+    const { kind, a, b } = q.params, g = kind === "sin" ? Math.sin : Math.cos, o = kind === "sin" ? Math.cos : Math.sin;
+    const b1 = (x) => Math.exp(a * x) * g(b * x), b2 = (x) => Math.exp(a * x) * o(b * x), xs = [0.3, 0.9];
+    const [p, qq] = solve(xs.map((x) => [T.deriv(b1, x, 1e-4), T.deriv(b2, x, 1e-4)]), xs.map(b1));
+    return { a: ap(T, p), b: ap(T, qq) };
+  },
+  // ---------------------------------------------------------------- 5.17
+  "t5-ahl-area-y-axis/parabola-region/graph": (q, T) => {
+    const { c, k } = q.params, top = c + k * k, area = T.integrate((x) => top - (x * x + c), 0, k);   // the same region, cut into vertical strips
+    const g = { "sqrt-": (y) => Math.sqrt(Math.max(0, y - c)), "sqrt+": (y) => Math.sqrt(y + c), y2: (y) => y * y + c, x: (x) => x * x + c };
+    return { a: T.optionWhere(q, "a", ([l, h, kind]) => near(T.integrate(g[kind], l, h, 400000), area, 1e-5)), b: ap(T, area, 1e-7) };
+  },
+  "t5-ahl-area-y-axis/exponential-region/graph": (q, T) => {
+    const { a, T: top } = q.params, f = (x) => Math.exp(x / a), xa = T.bisect((x) => f(x) - top, 0, 50);
+    return { a: ap(T, xa, 1e-7), b: ap(T, T.integrate((x) => top - f(x), 0, xa), 1e-7) };
+  },
+  "t5-ahl-volume-revolution/identify-integral/equation": (q, T) => {
+    const { kind, c, p, q: hi } = q.params, f = kind === "sqrt" ? (x) => Math.sqrt(x + c) : kind === "exp" ? (x) => c * Math.exp(x) : kind === "quad" ? (x) => x * x + c : (x) => c / x;
+    // the solid as a stack of thin discs
+    const n = 20000, h = (hi - p) / n; let V = 0;
+    for (let i = 0; i < n; i++) V += Math.PI * f(p + (i + 0.5) * h) ** 2 * h;
+    const I1 = T.integrate(f, p, hi), I2 = T.integrate((x) => f(x) ** 2, p, hi), val = { "pi-sq": Math.PI * I2, "pi-lin": Math.PI * I1, sq: I2, "2pi-sq": 2 * Math.PI * I2 };
+    return { a: T.optionWhere(q, "a", (code) => near(val[code], V, 1e-6)) };
+  },
+  "t5-ahl-volume-revolution/power-curve-x-axis/graph": (q, T) => {
+    const { kind, a, p, q: hi } = q.params, f = kind === "sqrt" ? (x) => a * Math.sqrt(x) : kind === "line" ? (x) => a * x : (x) => a * x * x;
+    T.require(T.evalGraph(q.graph.functions[0].fn, (p + hi) / 2) === f((p + hi) / 2), "the graph shows the curve of the question");
+    return { a: ap(T, T.integrate((x) => Math.PI * f(x) ** 2, p, hi), 1e-7) };
+  },
+  "t5-ahl-volume-revolution/exact-x-axis/graph": (q, T) => {
+    const { kind, a, k } = q.params;
+    const [f, hi] = { sin: [(x) => a * Math.sin(x), Math.PI], cos: [(x) => a * Math.cos(x), Math.PI / 2], exp: [(x) => a * Math.exp(x), Math.log(k)], recip: [(x) => a / Math.sqrt(1 + x * x), 1],
+      sec: [(x) => a / Math.cos(x), Math.PI / 4], xexp: [(x) => a * Math.sqrt(x) * Math.exp(x), 1] }[kind];
+    T.require(near(T.evalGraph(q.graph.functions[0].fn, hi / 2), f(hi / 2), 2e-3), "the graph shows the curve of the question");
+    return { a: ap(T, T.integrate((x) => Math.PI * f(x) ** 2, 0, hi), 1e-7) };
+  },
+  "t5-ahl-volume-revolution/parabola-y-axis/graph": (q, T) => {
+    const { a, c, s, t } = q.params, f = (x) => a * x * x + c, p = f(s), top = f(t);
+    const cand = { ok: (y) => (y - c) / a, plus: (y) => (y + (c || 1)) / a, mult: (y) => (a === 1 ? Math.sqrt(y - c) : a * (y - c)), sq: (y) => (a === 1 ? (y - c) ** 2 : y / a - (c || 1)) };
+    // the solid as nested cylindrical shells about the y-axis
+    const V = T.integrate((x) => 2 * Math.PI * x * (top - Math.max(p, f(x))), 0, t, 40000);
+    return { a: T.optionWhere(q, "a", (code) => [1.3, 2.2, 0.7].every((x) => near(cand[code](f(x)), x * x, 1e-9))), b: ap(T, V, 1e-6) };
+  },
+  "t5-ahl-volume-revolution/between-curves/graph": (q, T) => {
+    const { a, b, k } = q.params, f = (x) => a - b * x * x, g = (x) => Math.exp(k * x), z = T.roots((x) => f(x) - g(x), 0, 8, 4000);
+    T.require(z.length === 1 && f(0) > g(0), "the curves meet once and the parabola starts above");
+    return { a: ap(T, z[0], 1e-7), b: ap(T, T.integrate((x) => Math.PI * (f(x) ** 2 - g(x) ** 2), 0, z[0]), 1e-6) };
+  },
+  "t5-ahl-volume-revolution/vase-y-axis/words": (q, T) => {
+    const { a, h } = q.params, radius = (d) => T.bisect((x) => a * Math.log(x) - d, 1, 1e4, 80);
+    // shells about the y-axis: full height inside radius 1, then from the curve up to the water level
+    const vol = (d) => Math.PI * d + T.integrate((r) => 2 * Math.PI * r * (d - a * Math.log(r)), 1, radius(d), 400);
+    const V = vol(h);
+    return { a: ap(T, radius(h), 1e-7), b: ap(T, V, 1e-6), c: ap(T, T.bisect((d) => vol(d) - V / 2, 0.01, h, 60), 1e-6) };
+  },
+  // PART-C
 };
