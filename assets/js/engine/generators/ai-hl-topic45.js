@@ -1324,7 +1324,7 @@
       do {
         kind = rng.pick(["sink", "source", "saddle"]); eig = realPair(rng, kind); M = conjugate([[eig[0], 0], [0, eig[1]]], rng.int(-2, 2), rng.int(-2, 2));
         pt = [rng.nonzero(-3, 3), rng.nonzero(-3, 3)]; vx = M[0][0] * pt[0] + M[0][1] * pt[1]; vy = M[1][0] * pt[0] + M[1][1] * pt[1];
-      } while (vx === 0 || vy === 0 || (M[0][1] === 0 && M[1][0] === 0));
+      } while (vx === 0 || vy === 0 || (M[0][1] === 0 && M[1][0] === 0) || M.some((row) => row.some((v) => Math.abs(v) > 12)));
       const tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0], eTex = `${eig[0]}$ and $${eig[1]}`;
       return { params: { M, pt }, stem: `Consider the system ${sysTex(M)}.`, parts: [
         P("Find the smaller eigenvalue of the matrix of coefficients.", 2, ans.int(eig[0]), [`The matrix is $${mat(M)}$, with characteristic equation $${poly([1, -tr, det], "\\lambda")} = 0$.`, `$${fmt.factor(eig[0], "\\lambda")}${fmt.factor(eig[1], "\\lambda")} = 0$, so the smaller eigenvalue is $${eig[0]}$.`]),

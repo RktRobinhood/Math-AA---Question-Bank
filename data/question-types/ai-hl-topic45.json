@@ -284,6 +284,728 @@
      "rep": "words"
     }
    ]
+  },
+  {
+   "id": "t4-ai-confidence-interval",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Confidence intervals for a mean",
+   "syllabus": [
+    "4.16"
+   ],
+   "skills": [
+    "AI-AHL4.16.find-interval",
+    "AI-AHL4.16.interval-conditions",
+    "AI-AHL4.16.interpret-interval"
+   ],
+   "unknowns": [
+    {
+     "id": "z-interval",
+     "asked": "A confidence interval when the standard deviation is known",
+     "level": 2
+    },
+    {
+     "id": "t-interval-summary",
+     "asked": "A confidence interval when the standard deviation is unknown",
+     "level": 2
+    },
+    {
+     "id": "choose-distribution",
+     "asked": "Choose the distribution for a confidence interval",
+     "level": 1
+    },
+    {
+     "id": "t-interval",
+     "asked": "A confidence interval from data, and a claim about the mean",
+     "level": 4
+    },
+    {
+     "id": "sample-size",
+     "asked": "A confidence interval and the sample size for a given width",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    },
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-poisson",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "The Poisson distribution",
+   "syllabus": [
+    "4.17"
+   ],
+   "skills": [
+    "AI-AHL4.17.rescale-mean",
+    "AI-AHL4.17.poisson-probability",
+    "AI-AHL4.17.sum-of-poissons",
+    "AI-AHL4.17.find-parameter"
+   ],
+   "unknowns": [
+    {
+     "id": "mean-variance",
+     "asked": "Mean and variance of a Poisson distribution",
+     "level": 1
+    },
+    {
+     "id": "probability",
+     "asked": "Poisson probabilities",
+     "level": 2
+    },
+    {
+     "id": "rescale-and-sum",
+     "asked": "Poisson probabilities over longer periods and for sums",
+     "level": 4
+    },
+    {
+     "id": "find-parameter",
+     "asked": "Find the Poisson mean from a probability",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-poisson-model",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Choosing a Poisson, binomial or normal model",
+   "syllabus": [
+    "4.17"
+   ],
+   "skills": [
+    "AI-AHL4.17.justify-model"
+   ],
+   "unknowns": [
+    {
+     "id": "choose-model",
+     "asked": "Choose between a Poisson, a binomial and a normal model",
+     "level": 1
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-test-mean",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Tests for a population mean",
+   "syllabus": [
+    "4.18"
+   ],
+   "skills": [
+    "AI-AHL4.18.mean-test",
+    "AI-AHL4.18.paired-test"
+   ],
+   "unknowns": [
+    {
+     "id": "z-test",
+     "asked": "A test for a mean when the standard deviation is known",
+     "level": 2
+    },
+    {
+     "id": "t-test",
+     "asked": "A t-test for a mean from data",
+     "level": 4
+    },
+    {
+     "id": "paired-test",
+     "asked": "A paired-sample t-test",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    },
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-test-proportion",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "A binomial test for a proportion",
+   "syllabus": [
+    "4.18"
+   ],
+   "skills": [
+    "AI-AHL4.18.proportion-test"
+   ],
+   "unknowns": [
+    {
+     "id": "p-value",
+     "asked": "A one-tailed binomial test for a proportion",
+     "level": 2
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-test-correlation",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Testing the population correlation coefficient",
+   "syllabus": [
+    "4.18"
+   ],
+   "skills": [
+    "AI-AHL4.18.correlation-test"
+   ],
+   "unknowns": [
+    {
+     "id": "rho-test",
+     "asked": "Test whether two variables are correlated",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "table"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-critical-region",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Critical regions and the probabilities of type I and type II errors",
+   "syllabus": [
+    "4.18"
+   ],
+   "skills": [
+    "AI-AHL4.18.critical-region",
+    "AI-AHL4.18.error-probability",
+    "AI-AHL4.18.proportion-test",
+    "AI-AHL4.18.poisson-test",
+    "AI-AHL4.18.mean-test"
+   ],
+   "unknowns": [
+    {
+     "id": "binomial",
+     "asked": "Critical region and error probabilities for a binomial test",
+     "level": 4
+    },
+    {
+     "id": "poisson",
+     "asked": "Critical region and error probabilities for a Poisson test",
+     "level": 4
+    },
+    {
+     "id": "normal",
+     "asked": "Critical region and error probabilities for a test of a mean",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-type-errors",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Type I and type II errors in context",
+   "syllabus": [
+    "4.18"
+   ],
+   "skills": [
+    "AI-AHL4.18.errors-in-context"
+   ],
+   "unknowns": [
+    {
+     "id": "identify",
+     "asked": "Type I and Type II errors in context",
+     "level": 1
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t4-ai-markov",
+   "topic": 4,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Transition matrices and Markov chains",
+   "syllabus": [
+    "4.19"
+   ],
+   "skills": [
+    "AI-AHL4.19.transition-matrix",
+    "AI-AHL4.19.n-step",
+    "AI-AHL4.19.steady-state",
+    "AI-AHL4.19.interpret-model"
+   ],
+   "unknowns": [
+    {
+     "id": "matrix-entry",
+     "asked": "Entries of a transition matrix",
+     "level": 1
+    },
+    {
+     "id": "n-step",
+     "asked": "Probabilities after two and three steps",
+     "level": 2
+    },
+    {
+     "id": "steady-state-exact",
+     "asked": "A two-step probability and the steady state, exactly",
+     "level": 3
+    },
+    {
+     "id": "three-state",
+     "asked": "A three-state Markov chain: after n steps and in the long term",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    },
+    {
+     "rep": "equation"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-derivative-rules",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Chain, product and quotient rules",
+   "syllabus": [
+    "5.9"
+   ],
+   "skills": [
+    "AI-AHL5.9.standard-derivatives",
+    "AI-AHL5.9.chain-rule",
+    "AI-AHL5.9.product-rule",
+    "AI-AHL5.9.quotient-rule"
+   ],
+   "unknowns": [
+    {
+     "id": "chain-rule",
+     "asked": "Differentiate a composite function and find a gradient",
+     "level": 2
+    },
+    {
+     "id": "product-quotient",
+     "asked": "Product or quotient rule, then a stationary point",
+     "level": 3
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-related-rates",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Related rates of change",
+   "syllabus": [
+    "5.9"
+   ],
+   "skills": [
+    "AI-AHL5.9.related-rates",
+    "AI-AHL5.9.chain-rule"
+   ],
+   "unknowns": [
+    {
+     "id": "direct-rate",
+     "asked": "A related rate of change from the chain rule",
+     "level": 2
+    },
+    {
+     "id": "inverse-rate",
+     "asked": "Related rates in context",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-second-derivative",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "The second derivative, concavity and points of inflexion",
+   "syllabus": [
+    "5.10"
+   ],
+   "skills": [
+    "AI-AHL5.10.find-second-derivative",
+    "AI-AHL5.10.concavity",
+    "AI-AHL5.10.points-of-inflexion",
+    "AI-AHL5.10.greatest-rate-of-change"
+   ],
+   "unknowns": [
+    {
+     "id": "value-and-concavity",
+     "asked": "The second derivative at a point and the concavity there",
+     "level": 2
+    },
+    {
+     "id": "inflexion",
+     "asked": "The second derivative test and a point of inflexion",
+     "level": 3
+    },
+    {
+     "id": "greatest-rate",
+     "asked": "When a quantity is changing fastest",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-integration",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Integration by inspection and substitution",
+   "syllabus": [
+    "5.11"
+   ],
+   "skills": [
+    "AI-AHL5.11.linear-composites",
+    "AI-AHL5.11.standard-integrals",
+    "AI-AHL5.11.inspection-substitution",
+    "AI-AHL5.11.exact-definite-integral",
+    "AI-AHL5.11.constant-of-integration"
+   ],
+   "unknowns": [
+    {
+     "id": "linear-composite",
+     "asked": "Integrate a function of a linear expression",
+     "level": 2
+    },
+    {
+     "id": "substitution",
+     "asked": "A definite integral by substitution, exactly",
+     "level": 3
+    },
+    {
+     "id": "find-function",
+     "asked": "Find a function from its derivative and one value",
+     "level": 2
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-area-volume",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Areas against an axis and volumes of revolution",
+   "syllabus": [
+    "5.12"
+   ],
+   "skills": [
+    "AI-AHL5.12.area-below-axis",
+    "AI-AHL5.12.volume-x-axis",
+    "AI-AHL5.12.composite-volume",
+    "AI-AHL5.12.volume-y-axis",
+    "AI-AHL5.12.rearrange-for-x",
+    "AI-AHL5.12.area-y-axis"
+   ],
+   "unknowns": [
+    {
+     "id": "area-below-axis",
+     "asked": "The area of a region that is partly below the axis",
+     "level": 2
+    },
+    {
+     "id": "volume-x-axis",
+     "asked": "Area and volume of revolution about the x-axis",
+     "level": 4
+    },
+    {
+     "id": "volume-y-axis",
+     "asked": "Area against the y-axis and volume of revolution about the y-axis",
+     "level": 4
+    },
+    {
+     "id": "volume-exact",
+     "asked": "An exact volume of revolution",
+     "level": 3
+    }
+   ],
+   "representations": [
+    {
+     "rep": "graph"
+    },
+    {
+     "rep": "equation"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-diff-eq",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Setting up and solving separable differential equations",
+   "syllabus": [
+    "5.14"
+   ],
+   "skills": [
+    "AI-AHL5.14.separate-variables",
+    "AI-AHL5.14.particular-solution",
+    "AI-AHL5.14.interpret-model",
+    "AI-AHL5.14.set-up",
+    "AI-AHL5.14.limiting-value"
+   ],
+   "unknowns": [
+    {
+     "id": "separable-exact",
+     "asked": "Solve a separable differential equation exactly",
+     "level": 3
+    },
+    {
+     "id": "exponential-model",
+     "asked": "A rate proportional to the amount present",
+     "level": 2
+    },
+    {
+     "id": "cooling",
+     "asked": "Newton's law of cooling",
+     "level": 4
+    },
+    {
+     "id": "set-up",
+     "asked": "Write a differential equation from a description",
+     "level": 1
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-slope-field",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Slope fields",
+   "syllabus": [
+    "5.15"
+   ],
+   "skills": [
+    "AI-AHL5.15.gradient-at-point",
+    "AI-AHL5.15.match-field",
+    "AI-AHL5.15.zero-gradient-curve",
+    "AI-AHL5.15.sketch-solution"
+   ],
+   "unknowns": [
+    {
+     "id": "gradient-at-point",
+     "asked": "The gradient of a slope field at a point",
+     "level": 1
+    },
+    {
+     "id": "match-field",
+     "asked": "Match a slope field to its differential equation",
+     "level": 2
+    },
+    {
+     "id": "linear-solution",
+     "asked": "Zero gradients and a straight-line solution of a slope field",
+     "level": 3
+    },
+    {
+     "id": "equilibrium",
+     "asked": "Equilibrium solutions and long-term behaviour from a slope field",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "graph"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-euler",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Euler's method",
+   "syllabus": [
+    "5.16"
+   ],
+   "skills": [
+    "AI-AHL5.16.single-equation",
+    "AI-AHL5.16.accuracy",
+    "AI-AHL5.16.compare-values",
+    "AI-AHL5.16.coupled-system",
+    "AI-AHL5.16.use-output"
+   ],
+   "unknowns": [
+    {
+     "id": "first-steps",
+     "asked": "The first steps of Euler's method",
+     "level": 2
+    },
+    {
+     "id": "approximate-and-error",
+     "asked": "Euler's method over several steps and its error",
+     "level": 4
+    },
+    {
+     "id": "coupled-system",
+     "asked": "Euler's method for a predator and prey model",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    },
+    {
+     "rep": "words"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-phase-portrait",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Phase portraits of coupled linear systems",
+   "syllabus": [
+    "5.17"
+   ],
+   "skills": [
+    "AI-AHL5.17.classify-equilibrium",
+    "AI-AHL5.17.long-term",
+    "AI-AHL5.17.gradient-direction",
+    "AI-AHL5.17.matrix-form",
+    "AI-AHL5.17.sketch-portrait",
+    "AI-AHL5.17.general-solution",
+    "AI-AHL5.17.particular-solution"
+   ],
+   "unknowns": [
+    {
+     "id": "classify",
+     "asked": "Classify the equilibrium point from the eigenvalues",
+     "level": 2
+    },
+    {
+     "id": "eigenvalues-exact",
+     "asked": "Find the eigenvalues, classify the origin and find a direction",
+     "level": 3
+    },
+    {
+     "id": "complex-eigenvalues",
+     "asked": "Complex eigenvalues: spirals and the direction of rotation",
+     "level": 4
+    },
+    {
+     "id": "particular-solution",
+     "asked": "A particular solution of a coupled system and its long-term direction",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ]
+  },
+  {
+   "id": "t5-ai-second-order",
+   "topic": 5,
+   "source": "extension",
+   "kind": "skill",
+   "name": "Second-order differential equations as coupled systems",
+   "syllabus": [
+    "5.18"
+   ],
+   "skills": [
+    "AI-AHL5.18.convert-to-system",
+    "AI-AHL5.18.interpret-velocity",
+    "AI-AHL5.18.euler-system"
+   ],
+   "unknowns": [
+    {
+     "id": "convert-to-system",
+     "asked": "Rewrite a second-order equation as a coupled system",
+     "level": 2
+    },
+    {
+     "id": "euler-system",
+     "asked": "Euler's method for a second-order differential equation",
+     "level": 4
+    }
+   ],
+   "representations": [
+    {
+     "rep": "equation"
+    }
+   ]
   }
  ],
  "subtopics": {
@@ -448,6 +1170,723 @@
      "id": "AI-AHL4.15.central-limit-theorem",
      "levels": [
       4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.16": {
+   "prereqs": [
+    "AI-AHL4.15"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.16.find-interval",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.16.interpret-interval",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.16.interval-conditions",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.17": {
+   "prereqs": [
+    "SL4.8"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.17.poisson-probability",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.17.rescale-mean",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.17.sum-of-poissons",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.17.find-parameter",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.17.justify-model",
+     "levels": [
+      1,
+      1
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.18": {
+   "prereqs": [
+    "AI-SL4.11",
+    "AI-AHL4.17"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.18.mean-test",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.paired-test",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.proportion-test",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.poisson-test",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.correlation-test",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.critical-region",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.error-probability",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.errors-in-context",
+     "levels": [
+      1,
+      1
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.18.unfamiliar-test",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL4.19": {
+   "prereqs": [
+    "SL4.6"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL4.19.transition-diagram",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.19.transition-matrix",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.19.n-step",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.19.sequence-probability",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.19.steady-state",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL4.19.interpret-model",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.9": {
+   "prereqs": [
+    "SL5.3"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.9.standard-derivatives",
+     "levels": [
+      1,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.9.chain-rule",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.9.product-rule",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.9.quotient-rule",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.9.related-rates",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.9.show-derivative-result",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.10": {
+   "prereqs": [
+    "AI-AHL5.9"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.10.find-second-derivative",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.10.concavity",
+     "levels": [
+      2,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.10.points-of-inflexion",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.10.greatest-rate-of-change",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.11": {
+   "prereqs": [
+    "SL5.5"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.11.standard-integrals",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.11.linear-composites",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.11.inspection-substitution",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.11.rewrite-integrand",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.11.constant-of-integration",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.11.exact-definite-integral",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.12": {
+   "prereqs": [
+    "AI-AHL5.11"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.12.area-below-axis",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.area-y-axis",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.volume-x-axis",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.volume-y-axis",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.rearrange-for-x",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.composite-volume",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.12.variable-limit",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.14": {
+   "prereqs": [
+    "AI-AHL5.11"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.14.set-up",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.separate-variables",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.particular-solution",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.rearrange-solution",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.verify-solution",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.interpret-model",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.14.limiting-value",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.15": {
+   "prereqs": [
+    "AI-AHL5.14"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.15.gradient-at-point",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.15.match-field",
+     "levels": [
+      2,
+      2
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.15.sketch-solution",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.15.zero-gradient-curve",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.16": {
+   "prereqs": [
+    "AI-AHL5.15"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.16.single-equation",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.16.coupled-system",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.16.use-output",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.16.plot-trajectory",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.16.accuracy",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.16.compare-values",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.17": {
+   "prereqs": [
+    "AI-AHL5.16"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.17.general-solution",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.particular-solution",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.classify-equilibrium",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.equilibrium-points",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.gradient-direction",
+     "levels": [
+      3,
+      3
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.sketch-portrait",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.long-term",
+     "levels": [
+      1,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.match-portrait",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.trajectory-equation",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.linearise",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.17.matrix-form",
+     "levels": [
+      3,
+      4
+     ],
+     "paper": "either"
+    }
+   ]
+  },
+  "AI-AHL5.18": {
+   "prereqs": [
+    "AI-AHL5.16",
+    "AI-AHL5.17"
+   ],
+   "skills": [
+    {
+     "id": "AI-AHL5.18.convert-to-system",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.18.euler-system",
+     "levels": [
+      4,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.18.interpret-velocity",
+     "levels": [
+      2,
+      4
+     ],
+     "paper": "either"
+    },
+    {
+     "id": "AI-AHL5.18.motion-graph",
+     "levels": [
+      2,
       4
      ],
      "paper": "either"
