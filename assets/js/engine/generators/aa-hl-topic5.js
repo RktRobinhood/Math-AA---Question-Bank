@@ -537,11 +537,11 @@
             `The integral is $\\left[${coef(c, `\\arcsin\\left(\\dfrac{x}{${a}}\\right)`)}\\right]_{0}^{${a / 2}} = ${c === 1 ? "" : c}\\left(\\arcsin \\dfrac{1}{2} - \\arcsin 0\\right)$`,
             `$= ${c === 1 ? "" : `${c} \\times `}\\dfrac{\\pi}{6}${c === 1 ? "" : ` = ${piFrac(c, 6)}`}$`])] };
       }
-      const k = rng.int(2, 6);
-      return { params: { kind, c, a: k }, stem: `Consider the integral $${INT("0", piFrac(1, 4 * k), coef(c, `\\sec^{2} ${coef(k, "x")}`))}$.`, parts: [
+      const k = rng.int(2, 6), upS = `\\frac{\\pi}{${4 * k}}`;
+      return { params: { kind, c, a: k }, stem: `Consider the integral $${INT("0", upS, coef(c, `\\sec^{2} ${coef(k, "x")}`))}$.`, parts: [
         P("Find the exact value of this integral.", 3, ans.frac(c, k), [
           `The derivative of $\\tan ${coef(k, "x")}$ is $${k}\\sec^{2} ${coef(k, "x")}$, so $\\displaystyle\\int \\sec^{2} ${coef(k, "x")}${dx} = \\dfrac{1}{${k}}\\tan ${coef(k, "x")} + C$.`,
-          `The integral is $\\left[${frac(c, k)}\\tan ${coef(k, "x")}\\right]_{0}^{${piFrac(1, 4 * k)}} = ${frac(c, k)}\\left(\\tan \\dfrac{\\pi}{4} - \\tan 0\\right)$`.replace(/\[1\\tan/, "[\\tan").replace(/= 1\\left/, "= \\left"),
+          `The integral is $\\left[${frac(c, k)}\\tan ${coef(k, "x")}\\right]_{0}^{${upS}} = ${frac(c, k)}\\left(\\tan \\dfrac{\\pi}{4} - \\tan 0\\right)$`.replace(/\[1\\tan/, "[\\tan").replace(/= 1\\left/, "= \\left"),
           `$= ${frac(c, k)}$`])] };
     } });
   reg({ ...SIN, syllabus: ["5.15", "1.11"], unknown: "partial-fractions-definite", levels: [3], skills: ["AHL5.15.partial-fraction-integral"], title: "Integrate with partial fractions and give a single logarithm",
@@ -585,7 +585,7 @@
   reg({ ...SUB, unknown: "linear-substitution", format: "mcq", levels: [2], skills: ["AHL5.16.given-substitution", "AHL5.16.change-limits"], title: "Integrate a product with a linear substitution",
     build({ rng }) {
       const b = rng.nonzero(-3, 3), n = rng.int(2, 4), U = rng.pick([1, 2]), lo = -b, hi = U - b;
-      const I = (l, h, s) => INT(l, h, `${fmt.factor(-s, "u")}u^{${n}}`, "u"), opt = (v, why) => ({ text: m(I(v[0], v[1], v[2])), value: v, why });
+      const I = (l, h, s) => INT(l, h, s === 0 ? `u^{${n + 1}}` : `${fmt.factor(-s, "u")}u^{${n}}`, "u"), opt = (v, why) => ({ text: m(I(v[0], v[1], v[2])), value: v, why });
       const val = fmt.rat.sub(fmt.Q(Math.pow(U, n + 2), n + 2), fmt.Q(b * Math.pow(U, n + 1), n + 1));
       return { params: { b, n, U }, stem: `The integral $I = ${INT(lo, hi, `x${fmt.factor(-b)}^{${n}}`)}$ is to be found using the substitution $u = ${lin(1, b)}$.`, parts: [
         P("Which integral is equal to $I$?", 2, ans.choice(rng, opt([0, U, -b]), [
@@ -837,7 +837,7 @@
   reg({ ...VR, unknown: "parabola-y-axis", representation: "graph", format: "mcq", levels: [3], skills: ["AHL5.17.volume-y-axis", "AHL5.17.rearrange-for-x"], title: "Volume of revolution about the y-axis",
     build({ rng }) {
       let a, c, s, t;
-      do { a = rng.int(1, 3); c = rng.int(0, 4); s = rng.int(0, 2); t = s + rng.int(1, 2); } while (a * t * t + c > 20 || (s === 0 && c === 0 && rng.bool()));
+      do { a = rng.int(1, 3); c = rng.int(0, 4); s = rng.int(0, 2); t = s + rng.int(1, 2); } while (a * t * t + c > 20 || (a === 1 && c === 0) || (s === 0 && c === 0 && rng.bool()));
       const p = a * s * s + c, q = a * t * t + c, n = (q - c) * (q - c) - (p - c) * (p - c), yc = c ? `y - ${c}` : "y";
       const curve = `${coef(a, "x^{2}")}${c ? ` + ${c}` : ""}`;
       const x2 = { ok: a === 1 ? yc : `\\dfrac{${yc}}{${a}}`, plus: a === 1 ? `y + ${c || 1}` : `\\dfrac{y + ${c || 1}}{${a}}`, mult: a === 1 ? `\\sqrt{${yc}}` : `${a}\\left(${yc}\\right)`, sq: a === 1 ? `\\left(${yc}\\right)^{2}` : `\\dfrac{y}{${a}}${c ? ` - ${c}` : " - 1"}` };
@@ -850,10 +850,10 @@
             opt("plus", `Subtract $${c || 0}$ from both sides before dividing.`.replace("Subtract $0$ from both sides before dividing.", "Divide both sides by the coefficient of $x^{2}$ only.")),
             opt("mult", a === 1 ? "The question asks for $x^{2}$, not $x$." : `Divide by $${a}$; do not multiply.`),
             opt("sq", a === 1 ? "Rearranging does not square the other side." : "Subtract the constant before dividing.")]), [
-            c ? `$y = ${curve}$ gives $${coef(a, "x^{2}")} = ${yc}$.` : `$y = ${curve}$`, `$x^{2} = ${x2.ok}$`]),
+            c && a > 1 ? `$y = ${curve}$ gives $${coef(a, "x^{2}")} = ${yc}$.` : `The curve is $y = ${curve}$.`, `Making $x^{2}$ the subject: $x^{2} = ${x2.ok}$`]),
           P("Find the exact volume of the solid formed.", 4, ans.exact(Math.PI * n / (2 * a), symQ(n, 2 * a, "\\pi")), [
             `A rotation about the $y$-axis gives $V = \\pi\\displaystyle\\int x^{2}\\,\\mathrm{d}y$.`,
-            `$V = \\pi${INT(p, q, x2.ok, "y")}$`,
+            `$V = \\pi${INT(p, q, a === 1 && c ? `\\left(${yc}\\right)` : x2.ok, "y")}$`,
             `$V = \\pi\\left[${a === 1 && !c ? "\\dfrac{y^{2}}{2}" : `\\dfrac{\\left(${yc}\\right)^{2}}{${2 * a}}`}\\right]_{${p}}^{${q}} = \\pi\\left(\\dfrac{${(q - c) * (q - c)}}{${2 * a}} - \\dfrac{${(p - c) * (p - c)}}{${2 * a}}\\right)$`,
             `$V = ${symQ(n, 2 * a, "\\pi")}$`])] };
     } });
@@ -882,7 +882,7 @@
       const a = rng.int(4, 9), h = rng.int(Math.ceil(0.8 * a), Math.floor(1.6 * a)), top = Math.exp(h / a);
       const Vof = (d) => Math.PI * a / 2 * (Math.exp(2 * d / a) - 1), V = Vof(h), half = a / 2 * Math.log(1 + V / (Math.PI * a));
       return { params: { a, h }, stem: `The inside of a vase is modelled by rotating the part of the curve $y = ${a}\\ln x$ between $y = 0$ and $y = ${h}$ through $2\\pi$ about the $y$-axis, where $x$ and $y$ are measured in centimetres.`, parts: [
-        P("Find the radius of the opening at the top of the vase.", 1, ans.sf(top), [`At the top $${a}\\ln x = ${h}$, so $x = ${E_}^{\\frac{${h}}{${a}}} = ${sf(top)}\\text{ cm}$.`.replace(/\\frac\{(\d+)\}\{\1\}/, "1").replace(/\^\{1\}/, "")]),
+        P("Find the radius of the opening at the top of the vase.", 1, ans.sf(top), [`At the top $${a}\\ln x = ${h}$, so $x = ${E_}^{${h % a === 0 ? h / a : `\\frac{${h / gcd(h, a)}}{${a / gcd(h, a)}}`}} = ${sf(top)}\\text{ cm}$.`.replace(/\^\{1\}/, "")]),
         P("Find the volume of the vase, in $\\text{cm}^{3}$.", 4, ans.sf(V), [
           `$y = ${a}\\ln x$ gives $x = ${E_}^{\\frac{y}{${a}}}$, so $x^{2} = ${E_}^{\\frac{2y}{${a}}}$.`,
           `$V = \\pi\\displaystyle\\int x^{2}\\,\\mathrm{d}y = \\pi${INT(0, h, `${E_}^{\\frac{2y}{${a}}}`, "y")}$`,
