@@ -1,0 +1,55 @@
+{
+  "about": "AA HL additional higher level content of topics 3 and 4: statements 3.9 to 3.18, 4.13 and 4.14. Generators in assets/js/engine/generators/aa-hl-topic34.js.",
+  "home": "aa-hl",
+  "types": [
+    { "id": "t3-ahl-reciprocal-trig", "topic": 3, "source": "extension", "kind": "skill", "name": "Reciprocal trigonometric ratios and their identities", "syllabus": ["3.9"],
+      "skills": ["AHL3.9.reciprocal-ratios", "AHL3.9.pythagorean-identities", "AHL3.9.solve-reciprocal-equation"],
+      "unknowns": [
+        { "id": "exact-value", "asked": "the exact value of sec, cosec or cot at a standard angle", "level": 1 },
+        { "id": "other-ratios", "asked": "two other ratios, from one of sec, cosec and cot and the quadrant", "level": 2 },
+        { "id": "solve-quadratic", "asked": "the solutions of a quadratic in sec or cosec written with tan squared or cot squared", "level": 3 },
+        { "id": "solve-calculator", "asked": "the solutions of an equation in sec squared and tan, to three significant figures", "level": 4 } ],
+      "representations": [ { "rep": "equation" } ],
+      "constraints": ["angles are multiples of 30 or 45 degrees that are not on an axis", "ratios come from Pythagorean triples", "a root with |sec x| < 1 or |cosec x| < 1 gives no solution"],
+      "misconceptions": [ { "text": "Giving the ratio itself instead of its reciprocal" }, { "text": "Replacing tan squared by sec squared and losing the 1" }, { "text": "Taking the positive root without looking at the quadrant" } ] },
+    { "id": "t3-ahl-inverse-trig", "topic": 3, "source": "extension", "kind": "skill", "name": "Inverse trigonometric functions", "syllabus": ["3.9"],
+      "skills": ["AHL3.9.inverse-trig-values", "AHL3.9.inverse-trig-graphs", "AHL3.9.express-with-inverse-trig"],
+      "unknowns": [
+        { "id": "principal-value", "asked": "the exact value of arcsin, arccos or arctan", "level": 1 },
+        { "id": "composite", "asked": "the exact value of a trigonometric function of an inverse function, and of an inverse function of a trigonometric function", "level": 2 },
+        { "id": "domain-range", "asked": "the largest domain and the greatest value of a function built from arcsin or arccos", "level": 2 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Giving an angle with the right ratio that is outside the principal range" } ] },
+    { "id": "t3-ahl-compound-angle", "topic": 3, "source": "extension", "kind": "skill", "name": "Compound angle identities", "syllabus": ["3.10"],
+      "skills": ["AHL3.10.compound-angle", "AHL3.10.tan-double-angle", "AHL3.10.exact-value", "AHL3.10.solve-equation"],
+      "unknowns": [
+        { "id": "recognise", "asked": "the single ratio equal to an expanded compound angle expression", "level": 1 },
+        { "id": "from-ratios", "asked": "sin(A + B) and cos(A - B) from given ratios of A and B", "level": 2 },
+        { "id": "exact-surd", "asked": "the exact value of a ratio of 15, 75, 105 or 165 degrees", "level": 2 },
+        { "id": "tan-double", "asked": "tan of the double angle and of the angle plus a quarter of pi", "level": 2 },
+        { "id": "tan-compound", "asked": "tan(A + B), the exact angle A + B and tan 2A", "level": 3 },
+        { "id": "solve-equation", "asked": "tan x and the solutions of an equation with a compound angle", "level": 3 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Using the same sign in the expansion of cos(A + B) as in the angle" }, { "text": "Writing sin(A + B) as sin A + sin B" } ] },
+    { "id": "t3-ahl-trig-symmetry", "topic": 3, "source": "extension", "kind": "skill", "name": "Symmetry relations of the trigonometric functions", "syllabus": ["3.11"],
+      "skills": ["AHL3.11.symmetry-relations", "AHL3.11.simplify-expression", "AHL3.11.related-values"],
+      "unknowns": [
+        { "id": "equivalent", "asked": "the ratio of theta equal to a ratio of pi - theta, pi + theta, -theta, pi/2 - theta, pi/2 + theta or 2 pi - theta", "level": 1 },
+        { "id": "related-values", "asked": "four related values from the sine and cosine of an angle", "level": 2 },
+        { "id": "simplify-evaluate", "asked": "the simplified form of a sum of two related ratios and its exact value", "level": 3 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Getting the sign wrong" }, { "text": "Changing the function when the relation keeps it, or keeping it when the relation changes it" } ] }
+  ],
+  "subtopics": {
+    "AHL3.9": { "prereqs": ["SL3.5", "SL3.6"], "skills": [
+      { "id": "AHL3.9.reciprocal-ratios", "levels": [1, 2], "paper": "either" }, { "id": "AHL3.9.pythagorean-identities", "levels": [2, 4], "paper": "either" },
+      { "id": "AHL3.9.solve-reciprocal-equation", "levels": [3, 4], "paper": "either" }, { "id": "AHL3.9.inverse-trig-values", "levels": [1, 2], "paper": "either" },
+      { "id": "AHL3.9.inverse-trig-graphs", "levels": [2, 2], "paper": "either" }, { "id": "AHL3.9.express-with-inverse-trig", "levels": [2, 4], "paper": "either" } ] },
+    "AHL3.10": { "prereqs": ["SL3.6", "SL3.5"], "skills": [
+      { "id": "AHL3.10.compound-angle", "levels": [1, 3], "paper": "either" }, { "id": "AHL3.10.tan-double-angle", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL3.10.exact-value", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.10.solve-equation", "levels": [3, 3], "paper": "either" } ] },
+    "AHL3.11": { "prereqs": ["SL3.5", "SL3.7"], "skills": [
+      { "id": "AHL3.11.symmetry-relations", "levels": [1, 3], "paper": "either" }, { "id": "AHL3.11.simplify-expression", "levels": [3, 3], "paper": "either" },
+      { "id": "AHL3.11.related-values", "levels": [2, 3], "paper": "either" } ] }
+  }
+}
