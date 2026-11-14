@@ -894,7 +894,8 @@ if (!ONLY) {
       assert(out.perCourse["aa-hl"].withGenerators >= base["aa-hl"].withGenerators && E.coverage("aa-hl")["1.12"].generators.includes(id), "AA HL coverage lost the subtopic");
       const doc = coverageMarkdown(out); E.useCatalogue(QB);
       const hl = doc.slice(doc.indexOf("## AA HL"), doc.indexOf("## AI SL"));
-      const row = /^\| 1\.12 [^|]*\|(?:[^|]*\|){3}([^|]*)\| (\d+) \|/m.exec(hl);
+      // columns: subtopic, release minimum, full, exam types, levels, question types, ways of asking, generators
+      const row = /^\| 1\.12 [^|]*\|(?:[^|]*\|){3}([^|]*)\|(?:[^|]*\|){2} (\d+) \|/m.exec(hl);
       assert(row && row[1].split(", ").map(Number).includes(2) && Number(row[2]) === mine.length, "the coverage document does not count the generator under AA HL 1.12");
       assert(!checkWith([]).errs.every((e) => !/zz-test-complex.*not in the catalogue/.test(e)), "a generator whose type is in no catalogue file should be a build error");
       assert(checkWith([{ file: "x.json", data: { types: [{ ...testFragment.data.types[0], home: "aa-hl" }, { ...testFragment.data.types[1], home: "aa-sl", id: "zz-test-approx" }] } }]).errs.length === 0, "a type may name another home than its generators");
@@ -1052,7 +1053,8 @@ if (!ONLY) {
         lr.record(it, answer(it, true));
         clock.t += 1000;
       }
-      assert(mine >= 2 * allowed.size && exam, `${code}: ${mine} narrowed questions, exam rung ${exam}`);
+      // A student starts in the middle, so not every level of the chosen types need be visited.
+      assert(mine >= 2 && exam, `${code}: ${mine} narrowed questions, exam rung ${exam}`);
       assert(others.size >= 2, "the other subtopic was narrowed too");
       assert(lr.summary([code])[0].level === "exam", "progress of a narrowed subtopic is not kept per subtopic");
     }
