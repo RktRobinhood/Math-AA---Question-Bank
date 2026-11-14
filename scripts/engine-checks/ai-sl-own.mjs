@@ -24,6 +24,59 @@ const levelPayment = (T, pv, rate, n) => T.bisect((x) => -run(pv, rate, x, n), 0
 function paymentsToClear(pv, rate, pay) { let b = pv, n = 0; while (b > 1e-9 && n < 5000) { b = b * (1 + rate / 1200) - pay; n++; } return { n, last: b }; }
 const mcValue = (T, q, label, test) => T.optionWhere(q, label, test);
 
+// ---- geometry ----
+// An arc measured as a chain of many short chords.
+function arcByChords(r, th, n = 20000) {
+  let s = 0, px = r, py = 0;
+  for (let i = 1; i <= n; i++) { const t = (th * Math.PI / 180) * i / n, x = r * Math.cos(t), y = r * Math.sin(t); s += Math.hypot(x - px, y - py); px = x; py = y; }
+  return s;
+}
+// A sector as a stack of thin rings: each ring at distance x from the centre has length x times the angle.
+const sectorByRings = (T, r, th) => T.integrate((x) => x * (th * Math.PI / 180), 0, r, 200);
+const slopeBySearch = (T, A, B) => T.bisect((m) => (B[1] - A[1]) - m * (B[0] - A[0]), -1000, 1000, 100) * 1 || 0;
+// The perpendicular bisector as a locus: on each vertical line, the point that is as far from A as from B.
+function bisectorLine(T, A, B) {
+  const yAt = (x) => T.bisect((y) => (x - A[0]) ** 2 + (y - A[1]) ** 2 - (x - B[0]) ** 2 - (y - B[1]) ** 2, -1e5, 1e5, 200);
+  const c = yAt(0);
+  return { m: yAt(1) - c, c };
+}
+const distTo = (sites, X) => sites.map((s) => Math.hypot(s[0] - X[0], s[1] - X[1]));
+const nearest = (sites, X) => { const d = distTo(sites, X); return d.indexOf(Math.min(...d)); };
+const gap = (sites, X) => { const d = distTo(sites, X).sort((a, b) => a - b); return d[1] - d[0]; };
+// Every drawn edge is made of points equidistant from their two nearest sites, and every boundary between cells is drawn.
+function voronoiChecks(q, T, sites) {
+  const [x0, x1] = q.graph.x, [y0, y1] = q.graph.y;
+  T.require(new Set(sites.map((s) => s[1])).size === sites.length, "no two sites share a y-coordinate");
+  const segs = q.graph.functions.map((f) => f.fn.points);
+  for (const [p, r] of segs) for (const w of [0.02, 0.3, 0.5, 0.77, 0.98]) {
+    const X = [p[0] + w * (r[0] - p[0]), p[1] + w * (r[1] - p[1])];
+    T.require(gap(sites, X) < 1e-6, "a drawn edge is equidistant from its two nearest sites");
+    T.require(X[0] >= x0 - 1e-9 && X[0] <= x1 + 1e-9 && X[1] >= y0 - 1e-9 && X[1] <= y1 + 1e-9, "edges stay inside the window");
+  }
+  // walk along horizontal lines: wherever the nearest site changes, a drawn edge must pass through
+  const onSeg = (X) => segs.some(([p, r]) => { const dx = r[0] - p[0], dy = r[1] - p[1], t = ((X[0] - p[0]) * dx + (X[1] - p[1]) * dy) / (dx * dx + dy * dy); return t > -0.01 && t < 1.01 && Math.hypot(p[0] + t * dx - X[0], p[1] + t * dy - X[1]) < 0.03; });
+  for (let y = y0 + 0.37; y < y1; y += 0.9) for (let x = x0 + 0.01; x < x1 - 0.02; x += 0.01) {
+    if (nearest(sites, [x, y]) !== nearest(sites, [x + 0.01, y])) T.require(onSeg([x + 0.005, y]), "every boundary between two cells is drawn");
+  }
+}
+// The point of the window equidistant from three sites, by repeated grid search on the spread of the distances.
+function equidistant(sites, W, H) {
+  let cx = W / 2, cy = H / 2, half = Math.max(W, H) / 2;
+  const spread = (X) => { const d = distTo(sites, X); return Math.max(...d) - Math.min(...d); };
+  for (let round = 0; round < 40; round++) {
+    let best = [cx, cy], bv = spread(best);
+    for (let i = -10; i <= 10; i++) for (let j = -10; j <= 10; j++) { const X = [cx + half * i / 10, cy + half * j / 10], v = spread(X); if (v < bv) { bv = v; best = X; } }
+    [cx, cy] = best; half *= 0.6;
+  }
+  return [cx, cy];
+}
+// Does the point satisfy an equation written as "3x - 2y = 7"?
+function lineHolds(tex, V) {
+  const [left, right] = tex.replace(/\s+/g, "").split("=");
+  const co = (v) => { const mt = new RegExp("([+-]?\\d*)" + v).exec(left); if (!mt) return 0; return mt[1] === "" || mt[1] === "+" ? 1 : mt[1] === "-" ? -1 : Number(mt[1]); };
+  return Math.abs(co("x") * V[0] + co("y") * V[1] - Number(right)) < 1e-6;
+}
+
 export default {
   // ---------------- 1.6 ----------------
   "t1-ai-approx-bounds/bounds-of-measurement/words": (q, T) => {
@@ -247,5 +300,89 @@ export default {
     const { a, d, L } = q.params, h = (t) => a * Math.sin(T.rad(30 * t)) + d, r = T.roots((t) => h(t) - L, 0, 12, 24000);
     T.require(r.length === 2 && h((r[0] + r[1]) / 2) > L, "above the level between two crossings");
     return { a: ap(T, r[0], 1e-5), b: ap(T, r[1], 1e-5), c: ap(T, r[1] - r[0], 1e-5) };
+  },
+  // ---------------- 3.4 ----------------
+  "t3-ai-sector-degrees/arc-length/diagram": (q, T) => ({ a: ap(T, arcByChords(q.params.r, q.params.th), 1e-6) }),
+  "t3-ai-sector-degrees/area-and-perimeter/diagram": (q, T) => {
+    const { r, th } = q.params;
+    T.require(th > 0 && th < 360, "an angle less than a full turn");
+    return { a: ap(T, sectorByRings(T, r, th), 1e-6), b: ap(T, arcByChords(r, th) + 2 * r, 1e-6) };
+  },
+  "t3-ai-sector-degrees/exact-arc-area-perimeter/diagram": (q, T) => {
+    const { r, th } = q.params, arc = arcByChords(r, th);
+    return { a: ap(T, arc, 1e-6), b: ap(T, sectorByRings(T, r, th), 1e-6), c: ap(T, arc + 2 * r, 1e-6) };
+  },
+  "t3-ai-sector-degrees/segment-area-and-perimeter/diagram": (q, T) => {
+    const { r, th } = q.params, A = [r, 0], B = [r * Math.cos(T.rad(th)), r * Math.sin(T.rad(th))];
+    const tri = Math.abs(A[0] * B[1] - A[1] * B[0]) / 2, sec = sectorByRings(T, r, th), chord = Math.hypot(A[0] - B[0], A[1] - B[1]);
+    T.require(th < 180, "a minor segment");
+    return { a: ap(T, sec, 1e-6), b: ap(T, tri), c: ap(T, sec - tri, 1e-5), d: ap(T, arcByChords(r, th) + chord, 1e-6) };
+  },
+  "t3-ai-sector-degrees/area-swept-by-a-wiper/words": (q, T) => {
+    const { R, r, th } = q.params;
+    T.require(r > 0 && r < R, "an inner radius smaller than the outer one");
+    return { a: ap(T, T.integrate((x) => x * T.rad(th), r, R, 200), 1e-6), b: ap(T, arcByChords(R, th), 1e-6) };
+  },
+  "t3-ai-sector-degrees/angle-from-arc-length/words": (q, T) => {
+    const { r, l } = q.params, th = T.bisect((t) => arcByChords(r, t, 4000) - l, 1, 359, 60);
+    T.require(th > 10 && th < 180, "a sensible angle");
+    return { a: ap(T, th, 1e-5), b: ap(T, sectorByRings(T, r, th), 1e-5) };
+  },
+  // ---------------- 3.5 ----------------
+  "t3-ai-perpendicular-bisector/bisector-by-inspection/words": (q, T) => {
+    const { A, B } = q.params, dist = (p, s) => Math.hypot(p[0] - s[0], p[1] - s[1]);
+    // the right line is the one whose points are all the same distance from A and B
+    return { a: T.optionWhere(q, "a", ([v, k]) => [-7.3, 0.4, 5.9].every((t) => { const p = v === "x" ? [k, t] : [t, k]; return Math.abs(dist(p, A) - dist(p, B)) < 1e-9; })) };
+  },
+  "t3-ai-perpendicular-bisector/gradient-and-intercept/words": (q, T) => {
+    const { A, B } = q.params, bis = bisectorLine(T, A, B);
+    return { a: ap(T, slopeBySearch(T, A, B)), b: ap(T, bis.m), c: ap(T, bis.c) };
+  },
+  "t3-ai-perpendicular-bisector/bisector-and-nearer-point/words": (q, T) => {
+    const { A, B, C } = q.params, bis = bisectorLine(T, A, B), dA = Math.hypot(C[0] - A[0], C[1] - A[1]), dB = Math.hypot(C[0] - B[0], C[1] - B[1]);
+    const mid = [0.5, 0.5].map((w, i) => w * A[i] + (1 - w) * B[i]);
+    T.require(Math.abs(bis.m * mid[0] + bis.c - mid[1]) < 1e-6, "the bisector passes through the midpoint");
+    return { a: ap(T, mid[0]), b: ap(T, mid[1]), c: ap(T, bis.m), d: ap(T, bis.c), e: T.option(Math.abs(dA - dB) < 1e-9 ? "same" : dA < dB ? "A" : "B") };
+  },
+  "t3-ai-perpendicular-bisector/from-line-and-midpoint/equation": (q, T) => {
+    const { p, q: qq, a, b } = q.params, m = p / qq;
+    // two points of the line either side of M, then the locus of points equidistant from them
+    const bis = bisectorLine(T, [a - 2, b - 2 * m], [a + 2, b + 2 * m]);
+    return { a: ap(T, bis.m), b: ap(T, bis.c) };
+  },
+  // ---------------- 3.6 ----------------
+  "t3-ai-voronoi/nearest-site/graph": (q, T) => {
+    const { sites, X } = q.params, i = nearest(sites, X);
+    voronoiChecks(q, T, sites);
+    T.require(gap(sites, X) > 0.4, "the point is clearly inside one cell");
+    return { a: T.option(i) };
+  },
+  "t3-ai-voronoi/nearest-neighbour-interpolation/graph": (q, T) => {
+    const { sites, X, vals } = q.params, i = nearest(sites, X);
+    voronoiChecks(q, T, sites);
+    T.require(gap(sites, X) > 0.4 && new Set(vals).size === 4, "the point is clearly inside one cell, and the values differ");
+    return { a: T.option(i), b: vals[i], c: ap(T, Math.hypot(sites[i][0] - X[0], sites[i][1] - X[1])) };
+  },
+  "t3-ai-voronoi/vertex-equidistant-from-three-sites/graph": (q, T) => {
+    const { sites } = q.params, V = equidistant(sites, 12, 9);
+    voronoiChecks(q, T, sites);
+    const ds = sites.map((s) => Math.hypot(s[0] - V[0], s[1] - V[1]));
+    T.require(Math.max(...ds) - Math.min(...ds) < 1e-7, "a point equidistant from the three sites exists in the window");
+    // V is inside the triangle: it is on the same side of each side as the opposite corner
+    const side = (a, b, p) => (b[0] - a[0]) * (p[1] - a[1]) - (b[1] - a[1]) * (p[0] - a[0]);
+    T.require([0, 1, 2].every((i) => side(sites[i], sites[(i + 1) % 3], V) * side(sites[i], sites[(i + 1) % 3], sites[(i + 2) % 3]) > 0), "V is inside the triangle of the sites");
+    // the equations quoted in the stem are satisfied by that point
+    const eqs = [...q.stem.matchAll(/equation \$([^$]*)\$/g)].map((mt) => mt[1]);
+    T.require(eqs.length === 2 && eqs.every((e) => lineHolds(e, V)), "V lies on both quoted edges");
+    return { a: ap(T, V[0], 1e-6), b: ap(T, V[1], 1e-6), c: ap(T, ds[0], 1e-6), d: T.option("vertex") };
+  },
+  "t3-ai-voronoi/compare-two-vertices/graph": (q, T) => {
+    const { sites, verts } = q.params, near = verts.map((v) => Math.min(...sites.map((s) => Math.hypot(s[0] - v[0], s[1] - v[1]))));
+    voronoiChecks(q, T, sites);
+    // each is a vertex: three sites at the same (smallest) distance
+    for (const [i, v] of verts.entries()) T.require(sites.filter((s) => Math.abs(Math.hypot(s[0] - v[0], s[1] - v[1]) - near[i]) < 1e-9).length === 3, "three sites are equally near the vertex");
+    T.require(Math.abs(near[0] - near[1]) > 0.1, "the two distances differ clearly");
+    const best = near[0] > near[1] ? 0 : 1;
+    return { a: ap(T, near[0]), b: ap(T, near[1]), c: T.option([best, "far"]) };
   },
 };

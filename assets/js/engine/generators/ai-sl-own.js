@@ -641,4 +641,263 @@
         P(`Find the second value of $t$ at which $h(t) = ${num(L)}$.`, 2, ans.sf(t2), [`The second intersection is at $t = ${sf(t2)}$.`]),
         P(`Find the length of time, in hours, for which ${c.ask} during these $12$ hours.`, 1, ans.sf(t2 - t1), [`The graph is above the line between the two intersections: $${dp(t2, 3)} - ${dp(t1, 3)} = ${sf(t2 - t1)}$ hours.`])] };
     } });
+
+  // =====================================================================================
+  // 3.4 arc length and sector area (degrees)
+  // =====================================================================================
+  const pol = (r, t) => [r * Math.cos(t * Math.PI / 180), r * Math.sin(t * Math.PI / 180)];
+  const figOk = (g) => [[420, 320], [320, 240], [260, 200]].every(([w, h]) => E.graph.figureInfo(g, { width: w, height: h }).problems.length === 0);
+  // A sector OAB with its line of symmetry vertical. o.chord draws [AB], o.shade shades the segment, o.inner draws a second arc of that radius.
+  function sectorFig(r, th, o) {
+    o = o || {};
+    const from = 90 - th / 2, to = 90 + th / 2, O = [0, 0], A = pol(r, from), B = pol(r, to);
+    const shapes = [{ type: "sector", centre: O, radius: r, from, to }];
+    if (o.shade) shapes.push({ type: "segment", centre: O, radius: r, from, to, fill: true, stroke: false });
+    if (o.chord) shapes.push({ type: "line", from: A, to: B });
+    shapes.push({ type: "line", from: O, to: A, label: o.radius });
+    [O, A, B].forEach((p, i) => shapes.push({ type: "point", at: p, label: "OAB"[i], dot: false }));
+    shapes.push({ type: "angle", at: O, from: A, to: B, label: `${th}°` });
+    return { shapes, alt: o.alt || "A sector of a circle with centre O, with its radius and angle marked" };
+  }
+  function sectorSit(rng) {
+    let r, th, g;
+    do { r = rng.int(4, 18); th = 5 * rng.int(6, 30); g = sectorFig(r, th, { radius: `${r} cm` }); } while (!figOk(g));
+    return { r, th };
+  }
+  const SEC = { type: "t3-ai-sector-degrees", representation: "diagram", format: "value", syllabus: ["3.4"] };
+  const secStem = (s) => `The diagram shows a sector $\\mathrm{OAB}$ of a circle with centre $\\mathrm{O}$ and radius $${s.r}\\text{ cm}$. The angle $\\mathrm{A\\hat{O}B}$ is $${deg(s.th)}$.`;
+  const arcOf = (s) => s.th / 360 * 2 * Math.PI * s.r, areaOf = (s) => s.th / 360 * Math.PI * s.r * s.r;
+  reg({ ...SEC, unknown: "arc-length", levels: [1], skills: ["AI-SL3.4.arc-length"], title: "Arc length of a sector", situationKey: "ai-sector", situation: sectorSit,
+    build({ sit: s }) {
+      return { params: { r: s.r, th: s.th }, stem: secStem(s), graph: sectorFig(s.r, s.th, { radius: `${s.r} cm` }), parts: [
+        P("Find the length of the arc $\\mathrm{AB}$, in centimetres.", 2, ans.sf(arcOf(s)), [`Arc length $= \\dfrac{\\theta}{360} \\times 2\\pi r = \\dfrac{${s.th}}{360} \\times 2\\pi${br(s.r)}$`, `Arc length $= ${sf(arcOf(s))}$`])] };
+    } });
+  reg({ ...SEC, unknown: "area-and-perimeter", levels: [2], skills: ["AI-SL3.4.sector-area", "AI-SL3.4.arc-length"], title: "Area and perimeter of a sector", situationKey: "ai-sector", situation: sectorSit,
+    build({ sit: s }) {
+      const arc = arcOf(s);
+      return { params: { r: s.r, th: s.th }, stem: secStem(s), graph: sectorFig(s.r, s.th, { radius: `${s.r} cm` }), parts: [
+        P("Find the area of the sector, in $\\text{cm}^{2}$.", 2, ans.sf(areaOf(s)), [`Area $= \\dfrac{\\theta}{360} \\times \\pi r^{2} = \\dfrac{${s.th}}{360} \\times \\pi${br(s.r)}^{2}$`, `Area $= ${sf(areaOf(s))}$`]),
+        P("Find the perimeter of the sector, in centimetres.", 2, ans.sf(arc + 2 * s.r), [`Arc length $= \\dfrac{${s.th}}{360} \\times 2\\pi${br(s.r)} = ${sf(arc, 4)}$`, `The perimeter is the arc and two radii: $${sf(arc, 4)} + 2${br(s.r)} = ${sf(arc + 2 * s.r)}$`])] };
+    } });
+  reg({ ...SEC, unknown: "exact-arc-area-perimeter", levels: [3], calculator: false, skills: ["AI-SL3.4.arc-length", "AI-SL3.4.sector-area"], title: "Exact arc length, area and perimeter of a sector",
+    build({ rng }) {
+      let r, th, g;
+      do { th = rng.pick([30, 40, 45, 60, 72, 90, 120, 135, 150]); r = rng.pick([2, 3, 4, 5, 6, 8, 9, 10, 12]); g = sectorFig(r, th, { radius: `${r} cm` }); } while ((r * th) % 90 !== 0 || (r * r * th) % 180 !== 0 || !figOk(g));
+      const s = { r, th }, arcT = fmt.piFrac(r * th, 180), areaT = fmt.piFrac(r * r * th, 360), fr = frac(th, 360);
+      return { params: { r, th }, stem: `${secStem(s)} Give each answer as an exact multiple of $\\pi$, or in terms of $\\pi$.`, graph: g, parts: [
+        P("Find the length of the arc $\\mathrm{AB}$, in centimetres.", 2, ans.exact(arcOf(s), arcT), [`The sector is $\\dfrac{${th}}{360} = ${fr}$ of the circle.`, `Arc length $= ${fr} \\times 2\\pi${br(r)} = ${arcT}$`]),
+        P("Find the area of the sector, in $\\text{cm}^{2}$.", 2, ans.exact(areaOf(s), areaT), [`Area $= ${fr} \\times \\pi${br(r)}^{2}$`, `Area $= ${areaT}$`]),
+        P("Find the perimeter of the sector, in centimetres.", 1, ans.exact(arcOf(s) + 2 * r, `${2 * r} + ${arcT}`), [`Add the two radii to the arc: $${2 * r} + ${arcT}$`])] };
+    } });
+  reg({ ...SEC, unknown: "segment-area-and-perimeter", levels: [4], skills: ["AI-SL3.4.composite-region", "AI-SL3.4.sector-area", "AI-SL3.4.arc-length"], title: "A segment: sector minus triangle, and its perimeter",
+    build({ rng }) {
+      let r, th, g;
+      do { r = rng.int(5, 18); th = rng.int(40, 150); g = sectorFig(r, th, { radius: `${r} cm`, chord: true, shade: true, alt: "A sector of a circle with centre O. The chord AB is drawn and the region between the chord and the arc is shaded." }); } while (!figOk(g) || th % 10 === 0);
+      const s = { r, th }, sec = areaOf(s), tri = 0.5 * r * r * Math.sin(th * Math.PI / 180), chord = 2 * r * Math.sin(th * Math.PI / 360), arc = arcOf(s);
+      return { params: { r, th }, stem: `${secStem(s)} The chord $[\\mathrm{AB}]$ is drawn, and the region between the chord and the arc is shaded.`, graph: g, parts: [
+        P("Find the area of the sector $\\mathrm{OAB}$, in $\\text{cm}^{2}$.", 2, ans.sf(sec), [`Area $= \\dfrac{${th}}{360} \\times \\pi${br(r)}^{2}$`, `Area $= ${sf(sec)}$`]),
+        P("Find the area of triangle $\\mathrm{OAB}$, in $\\text{cm}^{2}$.", 2, ans.sf(tri), [`Area $= \\dfrac{1}{2}ab\\sin C = \\dfrac{1}{2}${br(r)}${br(r)}\\sin ${deg(th)}$`, `Area $= ${sf(tri)}$`]),
+        P("Find the area of the shaded region, in $\\text{cm}^{2}$.", 1, ans.sf(sec - tri), [`Shaded area $=$ sector $-$ triangle $= ${sf(sec, 5)} - ${sf(tri, 5)} = ${sf(sec - tri)}$`]),
+        P("Find the perimeter of the shaded region, in centimetres.", 2, ans.sf(arc + chord), [
+          `Arc: $\\dfrac{${th}}{360} \\times 2\\pi${br(r)} = ${sf(arc, 4)}$`, `Chord, by the cosine rule: $\\mathrm{AB} = \\sqrt{${r}^{2} + ${r}^{2} - 2${br(r)}${br(r)}\\cos ${deg(th)}} = ${sf(chord, 4)}$`, `Perimeter $= ${sf(arc, 4)} + ${sf(chord, 4)} = ${sf(arc + chord)}$`])] };
+    } });
+  reg({ ...SEC, unknown: "area-swept-by-a-wiper", representation: "words", levels: [4], skills: ["AI-SL3.4.composite-region", "AI-SL3.4.sector-area", "AI-SL3.4.arc-length"], title: "The region between two arcs",
+    build({ rng }) {
+      const c = rng.pick([{ stem: (R, b, th) => `A windscreen wiper has an arm $${R}\\text{ cm}$ long. A rubber blade covers the outer $${b}\\text{ cm}$ of the arm. The arm turns through an angle of $${deg(th)}$`, a: "Find the area of glass cleaned by the blade", u: "cm", tip: "the tip of the arm", R: [38, 62], b: [24, 40] },
+        { stem: (R, b, th) => `A garden sprinkler turns through an angle of $${deg(th)}$. It waters the ground between $${R - b}\\text{ m}$ and $${R}\\text{ m}$ from the sprinkler`, a: "Find the area of ground that is watered", u: "m", tip: "the outer edge of the watered region", R: [9, 20], b: [4, 8], arcq: true }]);
+      const R = rng.int(c.R[0], c.R[1]), b = rng.int(c.b[0], Math.min(c.b[1], R - 2)), th = rng.int(70, 165), r = R - b;
+      const big = th / 360 * Math.PI * R * R, small = th / 360 * Math.PI * r * r, arc = th / 360 * 2 * Math.PI * R;
+      return { params: { R, r, th }, stem: `${c.stem(R, b, th)}.`, parts: [
+        P(`${c.a}, in $\\text{${c.u}}^{2}$.`, 3, ans.sf(big - small), [`The region lies between a sector of radius $${R}$ and a sector of radius $${R} - ${b} = ${r}$.`,
+          `Large sector: $\\dfrac{${th}}{360} \\times \\pi${br(R)}^{2} = ${sf(big, 5)}$ and small sector: $\\dfrac{${th}}{360} \\times \\pi${br(r)}^{2} = ${sf(small, 5)}$`, `Area $= ${sf(big, 5)} - ${sf(small, 5)} = ${sf(big - small)}$`]),
+        P(c.arcq ? `Find the length of the outer curved edge of the watered region, in metres.` : `Find the distance moved by ${c.tip} in one sweep, in centimetres.`, 2, ans.sf(arc), [`It is an arc of radius $${R}$: $\\dfrac{${th}}{360} \\times 2\\pi${br(R)}$`, `Length $= ${sf(arc)}$`])] };
+    } });
+  reg({ ...SEC, unknown: "angle-from-arc-length", representation: "words", levels: [2], skills: ["AI-SL3.4.angle-of-turn", "AI-SL3.4.arc-length", "AI-SL3.4.sector-area"], title: "Find the angle of a sector from its arc length",
+    build({ rng }) {
+      const c = rng.pick([{ stem: (r, l) => `A pendulum is $${r}\\text{ cm}$ long. In one swing its end moves along an arc of length $${l}\\text{ cm}$`, ang: "Find the angle through which the pendulum turns in one swing, in degrees.", area: "Find the area swept out by the pendulum in one swing, in $\\text{cm}^{2}$.", r: [40, 120] },
+        { stem: (r, l) => `A gate $${r}\\text{ cm}$ wide is pushed open. Its free end moves along an arc of length $${l}\\text{ cm}$`, ang: "Find the angle through which the gate turns, in degrees.", area: "Find the area of ground the gate passes over, in $\\text{cm}^{2}$.", r: [80, 150] }]);
+      const r = rng.int(c.r[0], c.r[1]), l = Math.round(r * rng.int(40, 190) / 100), th = l / (2 * Math.PI * r) * 360, area = th / 360 * Math.PI * r * r;
+      return { params: { r, l }, stem: `${c.stem(r, l)}.`, parts: [
+        P(c.ang, 2, ans.sf(th), [`$\\dfrac{\\theta}{360} \\times 2\\pi${br(r)} = ${l}$`, `$\\theta = \\dfrac{${l} \\times 360}{2\\pi${br(r)}} = ${sf(th)}$`]),
+        P(c.area, 1, ans.sf(area), [`Area $= \\dfrac{${sf(th, 5)}}{360} \\times \\pi${br(r)}^{2} = ${sf(area)}$`])] };
+    } });
+
+  // =====================================================================================
+  // 3.5 perpendicular bisectors
+  // =====================================================================================
+  const PB = { type: "t3-ai-perpendicular-bisector", format: "value", syllabus: ["3.5"], calculator: false };
+  const pt = (name, p) => `$\\mathrm{${name}}${point(p[0], p[1])}$`;
+  reg({ ...PB, unknown: "bisector-by-inspection", representation: "words", format: "mcq", levels: [1], skills: ["AI-SL3.5.by-inspection"], title: "A perpendicular bisector by inspection",
+    build({ rng }) {
+      let a, b1, b2;
+      do { a = rng.int(-6, 9); b1 = rng.int(-8, 8); b2 = b1 + 2 * rng.int(1, 6); } while ((b1 + b2) / 2 === a || (b2 - b1) / 2 === (b1 + b2) / 2 || (b1 + b2) / 2 === 0 && a === 0);
+      const vert = rng.bool(), mid = (b1 + b2) / 2, A = vert ? [a, b1] : [b1, a], B = vert ? [a, b2] : [b2, a], v = vert ? "y" : "x", w = vert ? "x" : "y";
+      const o = (letter, val, value, why) => ({ text: `$${letter} = ${val}$`, value, why });
+      return { params: { A, B }, stem: `Two wells are at the points ${pt("A", A)} and ${pt("B", B)}.`, parts: [
+        P("Which is the equation of the perpendicular bisector of $[\\mathrm{AB}]$?", 1, ans.choice(rng, o(v, mid, [v, mid]), [
+          o(w, mid, [w, mid], `The points have the same $${w}$-coordinate, so $[\\mathrm{AB}]$ is ${vert ? "vertical" : "horizontal"} and its bisector is ${vert ? "horizontal" : "vertical"}.`),
+          o(w, a, [w, a], "This is the line through the two points, not their perpendicular bisector."),
+          o(v, (b2 - b1) / 2, [v, (b2 - b1) / 2], "Use the midpoint: half the sum of the coordinates, not half their difference.")]), [
+          `The points have the same $${w}$-coordinate, so $[\\mathrm{AB}]$ is ${vert ? "vertical" : "horizontal"} and its perpendicular bisector is ${vert ? "horizontal" : "vertical"}.`,
+          `It passes through the midpoint $${vert ? point(a, mid) : point(mid, a)}$, so its equation is $${v} = ${mid}$.`])] };
+    } });
+  function pbSit(rng) {
+    let A, B, dx, dy;
+    do { A = [rng.int(-6, 6), rng.int(-6, 6)]; dx = 2 * rng.nonzero(-4, 4); dy = 2 * rng.nonzero(-4, 4); B = [A[0] + dx, A[1] + dy]; } while (Math.abs(dx) === Math.abs(dy) || Math.abs(B[0]) > 9 || Math.abs(B[1]) > 9);
+    return { A, B };
+  }
+  reg({ ...PB, unknown: "gradient-and-intercept", representation: "words", levels: [2], skills: ["AI-SL3.5.bisector-gradient", "AI-SL3.5.bisector-equation"], title: "Gradient and equation of a perpendicular bisector", situationKey: "ai-pb", situation: pbSit,
+    build({ sit: { A, B } }) {
+      const dx = B[0] - A[0], dy = B[1] - A[1], M = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], mAB = fmt.Q(dy, dx), mp = fmt.Q(-dx, dy), c = fmt.rat.sub(M[1], fmt.rat.mul(mp, M[0]));
+      return { params: { A, B }, stem: `Consider the points ${pt("A", A)} and ${pt("B", B)}.`, parts: [
+        P("Find the gradient of the line $(\\mathrm{AB})$.", 1, ans.frac(mAB.n, mAB.d), [`$m = \\dfrac{${B[1]} - ${paren(A[1])}}{${B[0]} - ${paren(A[0])}} = ${frac(dy, dx)}$`]),
+        P("Find the gradient of the perpendicular bisector of $[\\mathrm{AB}]$.", 1, ans.frac(mp.n, mp.d), [`Perpendicular gradients multiply to $-1$, so the gradient is the negative reciprocal of $${frac(dy, dx)}$: $${frac(-dx, dy)}$.`]),
+        P("The perpendicular bisector has equation $y = mx + c$. Find the value of $c$.", 2, ans.frac(c.n, c.d), [
+          `The bisector passes through the midpoint of $[\\mathrm{AB}]$: $\\left(\\dfrac{${A[0]} + ${paren(B[0])}}{2},\\, \\dfrac{${A[1]} + ${paren(B[1])}}{2}\\right) = ${point(M[0], M[1])}$`,
+          `$${M[1]} = ${frac(-dx, dy)} \\times ${paren(M[0])} + c$`, `$c = ${fmt.rat.tex(c)}$`])] };
+    } });
+  reg({ ...PB, unknown: "bisector-and-nearer-point", representation: "words", levels: [3], skills: ["AI-SL3.5.bisector-equation", "AI-SL3.5.bisector-gradient"], title: "A perpendicular bisector as the boundary between two sites",
+    build({ rng }) {
+      const c = rng.pick([{ a: "two fire stations", one: "station", who: "A house", verb: "is at" }, { a: "two mobile phone masts", one: "mast", who: "A hiker", verb: "is standing at" }, { a: "two water pumps in a village", one: "pump", who: "A farm", verb: "is at" }]);
+      let A, B, C, dx, dy, dA, dB;
+      do { A = [rng.int(0, 8), rng.int(0, 8)]; dx = rng.nonzero(-7, 7); dy = rng.nonzero(-7, 7); B = [A[0] + dx, A[1] + dy]; C = [rng.int(0, 12), rng.int(0, 12)];
+        dA = (C[0] - A[0]) ** 2 + (C[1] - A[1]) ** 2; dB = (C[0] - B[0]) ** 2 + (C[1] - B[1]) ** 2; }
+      while (Math.abs(dx) === Math.abs(dy) || B[0] < 0 || B[1] < 0 || B[0] > 12 || B[1] > 12 || Math.abs(dA - dB) > 12 || dA === 0 || dB === 0 || (dx % 2 === 0 && dy % 2 === 0));
+      const M = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], mp = fmt.Q(-dx, dy), cc = fmt.rat.sub(fmt.Q(A[1] + B[1], 2), fmt.rat.mul(mp, fmt.Q(A[0] + B[0], 2)));
+      const yOn = fmt.rat.add(fmt.rat.mul(mp, C[0]), cc), res = dA < dB ? "A" : dA > dB ? "B" : "same";
+      const texts = { A: `$\\mathrm{A}$ is closer.`, B: `$\\mathrm{B}$ is closer.`, same: `$\\mathrm{A}$ and $\\mathrm{B}$ are the same distance from $\\mathrm{C}$.`, none: "It cannot be decided without the equation of the line through both points." };
+      return { params: { A, B, C }, stem: `A map shows ${c.a} at the points ${pt("A", A)} and ${pt("B", B)}. The perpendicular bisector of $[\\mathrm{AB}]$ is the boundary between the places that are closer to $\\mathrm{A}$ and those that are closer to $\\mathrm{B}$.`, parts: [
+        P("Find the $x$-coordinate of the midpoint of $[\\mathrm{AB}]$.", 1, ans.dec(M[0]), [`$\\dfrac{${A[0]} + ${B[0]}}{2} = ${num(M[0])}$`]),
+        P("Find the $y$-coordinate of the midpoint of $[\\mathrm{AB}]$.", 1, ans.dec(M[1]), [`$\\dfrac{${A[1]} + ${B[1]}}{2} = ${num(M[1])}$`]),
+        P("Find the gradient of the perpendicular bisector of $[\\mathrm{AB}]$.", 1, ans.frac(mp.n, mp.d), [`The gradient of $(\\mathrm{AB})$ is $\\dfrac{${B[1]} - ${A[1]}}{${B[0]} - ${A[0]}} = ${frac(dy, dx)}$.`, `The perpendicular gradient is its negative reciprocal: $${frac(-dx, dy)}$.`]),
+        P("The perpendicular bisector has equation $y = mx + c$. Find the value of $c$.", 2, ans.frac(cc.n, cc.d), [
+          `It passes through the midpoint $${point(M[0], M[1])}$: $${num(M[1])} = ${frac(-dx, dy)} \\times ${num(M[0])} + c$`, `$c = ${fmt.rat.tex(cc)}$`]),
+        P(`${c.who} ${c.verb} the point ${pt("C", C)}. Which ${c.one} is closer to $\\mathrm{C}$?`, 1, ans.choice(rng, { text: texts[res], value: res }, ["A", "B", "same", "none"].filter((k) => k !== res).map((k) => ({ text: texts[k], value: k,
+          why: k === "none" ? "Compare the distances, or see which side of the bisector the point is on." : "Compare $\\mathrm{AC}^{2}$ with $\\mathrm{BC}^{2}$." }))), [
+          `$\\mathrm{AC}^{2} = ${paren(C[0] - A[0])}^{2} + ${paren(C[1] - A[1])}^{2} = ${dA}$ and $\\mathrm{BC}^{2} = ${paren(C[0] - B[0])}^{2} + ${paren(C[1] - B[1])}^{2} = ${dB}$`,
+          res === "same" ? `The distances are equal, so $\\mathrm{C}$ is on the bisector: at $x = ${C[0]}$ the bisector has $y = ${fmt.rat.tex(yOn)}$.` : `$${Math.min(dA, dB)} < ${Math.max(dA, dB)}$, so $\\mathrm{C}$ is closer to $\\mathrm{${res}}$.`])] };
+    } });
+  reg({ ...PB, unknown: "from-line-and-midpoint", representation: "equation", levels: [2], skills: ["AI-SL3.5.bisector-gradient", "AI-SL3.5.bisector-equation"], title: "A perpendicular bisector from the line and the midpoint",
+    build({ rng }) {
+      let p, q, a, b, k;
+      do { p = rng.nonzero(-5, 5); q = rng.pick([1, 2, 3, 4, 5]); a = q * rng.int(-3, 3); b = rng.int(-7, 9); k = b - p * a / q; } while (fmt.gcd(p, q) !== 1 || a === 0);
+      const mp = fmt.Q(-q, p), c = fmt.rat.sub(b, fmt.rat.mul(mp, a)), mt = frac(p, q);
+      return { params: { p, q, a, b }, stem: `The points $\\mathrm{A}$ and $\\mathrm{B}$ lie on the line $y = ${expr([[fmt.Q(p, q), "x"], [k, ""]])}$. The midpoint of $[\\mathrm{AB}]$ is $\\mathrm{M}${point(a, b)}$.`, parts: [
+        P("Write down the gradient of the perpendicular bisector of $[\\mathrm{AB}]$.", 1, ans.frac(mp.n, mp.d), [`The line has gradient $${mt}$. The perpendicular gradient is its negative reciprocal: $${frac(-q, p)}$.`]),
+        P("The perpendicular bisector has equation $y = mx + c$. Find the value of $c$.", 2, ans.frac(c.n, c.d), [`The bisector passes through $\\mathrm{M}$: $${b} = ${frac(-q, p)} \\times ${paren(a)} + c$`, `$c = ${fmt.rat.tex(c)}$`])] };
+    } });
+
+  // =====================================================================================
+  // 3.6 Voronoi diagrams
+  // =====================================================================================
+  const VW = 12, VH = 9, d2 = (p, q) => (p[0] - q[0]) ** 2 + (p[1] - q[1]) ** 2;
+  // The edges of the Voronoi diagram of the sites inside the window: for each pair, the part of their bisector that no other site is closer to.
+  function voronoiEdges(sites) {
+    const edges = [];
+    for (let i = 0; i < sites.length; i++) for (let j = i + 1; j < sites.length; j++) {
+      const A = sites[i], B = sites[j], mid = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2], dir = [-(B[1] - A[1]), B[0] - A[0]];
+      let lo = -1e9, hi = 1e9;
+      const clip = (a, b) => { if (Math.abs(a) < 1e-12) { if (b < -1e-12) { lo = 1; hi = 0; } } else if (a > 0) hi = Math.min(hi, b / a); else lo = Math.max(lo, b / a); };   // a t <= b
+      clip(dir[0], VW - mid[0]); clip(-dir[0], mid[0]); clip(dir[1], VH - mid[1]); clip(-dir[1], mid[1]);
+      sites.forEach((K, k) => { if (k !== i && k !== j) { const n = [K[0] - A[0], K[1] - A[1]]; clip(2 * (dir[0] * n[0] + dir[1] * n[1]), d2(K, [0, 0]) - d2(A, [0, 0]) - 2 * (mid[0] * n[0] + mid[1] * n[1])); } });
+      if (hi - lo > 1e-6) edges.push({ i, j, p: [mid[0] + lo * dir[0], mid[1] + lo * dir[1]], q: [mid[0] + hi * dir[0], mid[1] + hi * dir[1]] });
+    }
+    return edges;
+  }
+  // The points equidistant from three sites that no other site is closer to (the vertices of the diagram).
+  function voronoiVertices(sites) {
+    const out = [];
+    for (let i = 0; i < sites.length; i++) for (let j = i + 1; j < sites.length; j++) for (let k = j + 1; k < sites.length; k++) {
+      const [A, B, C] = [sites[i], sites[j], sites[k]], D = 2 * (A[0] * (B[1] - C[1]) + B[0] * (C[1] - A[1]) + C[0] * (A[1] - B[1]));
+      if (D === 0) continue;
+      const a2 = d2(A, [0, 0]), b2 = d2(B, [0, 0]), c2 = d2(C, [0, 0]);
+      const V = [(a2 * (B[1] - C[1]) + b2 * (C[1] - A[1]) + c2 * (A[1] - B[1])) / D, (a2 * (C[0] - B[0]) + b2 * (A[0] - C[0]) + c2 * (B[0] - A[0])) / D], rr = d2(V, A);
+      if (sites.every((S) => d2(V, S) >= rr - 1e-9)) out.push({ at: V, sites: [i, j, k], r: Math.sqrt(rr) });
+    }
+    return out;
+  }
+  const inWin = (p, pad) => p[0] > pad && p[0] < VW - pad && p[1] > pad && p[1] < VH - pad;
+  function voronoiGraph(sites, extra) {
+    const functions = voronoiEdges(sites).map((e) => { const pts = [e.p, e.q].sort((u, v) => u[0] - v[0]); return { fn: { type: "pwl", points: pts }, domain: [pts[0][0], pts[1][0]] }; });
+    return { x: [0, VW], y: [0, VH], xStep: 1, yStep: 1, functions, points: sites.map((s, i) => ({ x: s[0], y: s[1], label: "ABCDE"[i] })).concat(extra || []),
+      alt: `A Voronoi diagram with ${sites.length} sites on a coordinate grid` };
+  }
+  // Sites on grid points, no two with the same y-coordinate (so no edge is vertical), well apart, every cell reaching the window.
+  function voronoiSites(rng, n) {
+    let sites;
+    do { sites = []; for (let i = 0; i < n; i++) sites.push([rng.int(1, VW - 1), rng.int(1, VH - 1)]); }
+    while (sites.some((s, i) => sites.some((t, j) => j > i && (s[1] === t[1] || d2(s, t) < 10))) || voronoiEdges(sites).some((e) => Math.abs(e.p[0] - e.q[0]) < 0.25 || d2(e.p, e.q) < 1));
+    return sites.sort((u, v) => u[0] - v[0] || u[1] - v[1]);
+  }
+  const VOR = [{ sites: "hospitals", one: "hospital", what: "An accident happens at the point", x: "X", q: "Which hospital is closest to the accident?" },
+    { sites: "fire stations", one: "fire station", what: "A fire is reported at the point", x: "X", q: "Which fire station is closest to the fire?" },
+    { sites: "supermarkets", one: "supermarket", what: "A family lives at the point", x: "X", q: "Which supermarket is closest to the family's home?" }];
+  const siteList = (sites) => fmt.list(sites.map((s, i) => pt("ABCDE"[i], s)));
+  function nearSit(rng) {
+    let sites, X, ds, order;
+    do { sites = voronoiSites(rng, 4); X = [rng.int(1, VW - 1), rng.int(1, VH - 1)]; ds = sites.map((s) => Math.sqrt(d2(s, X))); order = ds.map((d, i) => i).sort((u, v) => ds[u] - ds[v]); }
+    while (ds[order[0]] < 1.2 || ds[order[1]] - ds[order[0]] < 0.5 || ds[order[1]] - ds[order[0]] > 2.2 || sites.some((s) => Math.abs(s[0] - X[0]) + Math.abs(s[1] - X[1]) < 2));
+    return { sites, X, vals: rng.shuffle([rng.int(12, 19), rng.int(20, 27), rng.int(28, 36), rng.int(37, 48)]) };
+  }
+  const nearOptions = (rng, sites, X, why) => { const ds = sites.map((s) => d2(s, X)), best = ds.indexOf(Math.min(...ds)), o = (i) => ({ text: `$\\mathrm{${"ABCD"[i]}}$`, value: i, why: i === best ? undefined : why });
+    return ans.choice(rng, o(best), [0, 1, 2, 3].filter((i) => i !== best).map(o)); };
+  const V36 = { type: "t3-ai-voronoi", representation: "graph", syllabus: ["3.6"] };
+  reg({ ...V36, unknown: "nearest-site", format: "mcq", levels: [1], calculator: false, skills: ["AI-SL3.6.nearest-site"], title: "Use a Voronoi diagram to find the nearest site", situationKey: "ai-vor-near", situation: nearSit,
+    build({ rng, sit: { sites, X } }) {
+      const c = rng.pick(VOR), ds = sites.map((s) => d2(s, X)), best = ds.indexOf(Math.min(...ds)), L = "ABCD"[best];
+      return { params: { sites, X }, stem: `The Voronoi diagram shows four ${c.sites} at ${siteList(sites)}. ${c.what} $\\mathrm{X}${point(X[0], X[1])}$, which is marked on the diagram.`,
+        graph: voronoiGraph(sites, [{ x: X[0], y: X[1], label: "X", open: true }]), parts: [
+          P(c.q, 1, nearOptions(rng, sites, X, "Every point inside a cell is closer to that cell's site than to any other site. Find the cell that contains the point."), [
+            `$\\mathrm{X}$ lies inside the cell that contains $\\mathrm{${L}}$, and every point of a cell is closest to the site of that cell.`, `So the closest ${c.one} is $\\mathrm{${L}}$.`])] };
+    } });
+  reg({ ...V36, unknown: "nearest-neighbour-interpolation", format: "value", levels: [2], skills: ["AI-SL3.6.nearest-site", "AI-SL3.6.interpolation"], title: "Nearest neighbour interpolation on a Voronoi diagram", situationKey: "ai-vor-near", situation: nearSit,
+    build({ rng, sit: { sites, X, vals } }) {
+      const ds = sites.map((s) => d2(s, X)), best = ds.indexOf(Math.min(...ds)), L = "ABCD"[best], dist = Math.sqrt(ds[best]);
+      return { params: { sites, X, vals }, stem: `The Voronoi diagram shows four weather stations at ${siteList(sites)}, where one unit represents one kilometre. The table shows the rainfall recorded at each station on one day. A farm is at the point $\\mathrm{X}${point(X[0], X[1])}$, which is marked on the diagram.`,
+        table: { head: ["Station", "$\\mathrm{A}$", "$\\mathrm{B}$", "$\\mathrm{C}$", "$\\mathrm{D}$"], rows: [["Rainfall (mm)"].concat(vals.map((v) => m(v)))] },
+        graph: voronoiGraph(sites, [{ x: X[0], y: X[1], label: "X", open: true }]), parts: [
+          P("Which weather station is closest to the farm?", 1, nearOptions(rng, sites, X, "Find the cell that contains the farm: every point of a cell is closest to that cell's site."), [`$\\mathrm{X}$ lies inside the cell of $\\mathrm{${L}}$, so the closest station is $\\mathrm{${L}}$.`]),
+          P("Use nearest neighbour interpolation to estimate the rainfall at the farm, in millimetres.", 1, ans.int(vals[best]), [`Nearest neighbour interpolation gives every point in a cell the value at its site: $${vals[best]}\\text{ mm}$, the rainfall at $\\mathrm{${L}}$.`]),
+          P("Find the distance from the farm to this station, in kilometres.", 1, ans.sf(dist), [`$\\sqrt{${paren(X[0] - sites[best][0])}^{2} + ${paren(X[1] - sites[best][1])}^{2}} = \\sqrt{${ds[best]}} = ${sf(dist)}$`])] };
+    } });
+  // every angle of the triangle is clearly less than a right angle, so the circumcentre is well inside it
+  const acute = (t) => [0, 1, 2].every((i) => { const a = t[i], b = t[(i + 1) % 3], c = t[(i + 2) % 3], u = [b[0] - a[0], b[1] - a[1]], v = [c[0] - a[0], c[1] - a[1]];
+    return (u[0] * v[0] + u[1] * v[1]) / Math.sqrt(d2(a, b) * d2(a, c)) > 0.2; });
+  const edgeEq = (A, B) => { let a = 2 * (B[0] - A[0]), b = 2 * (B[1] - A[1]), c = d2(B, [0, 0]) - d2(A, [0, 0]); const g = fmt.gcd(fmt.gcd(a, b), c) * (a < 0 || (a === 0 && b < 0) ? -1 : 1); a /= g; b /= g; c /= g; return { a, b, c, tex: `${expr([[a, "x"], [b, "y"]])} = ${c}` }; };
+  reg({ ...V36, unknown: "vertex-equidistant-from-three-sites", format: "value", levels: [4], skills: ["AI-SL3.6.vertex", "AI-SL3.6.toxic-waste-dump"], title: "The vertex of a Voronoi diagram: equidistant from three sites",
+    build({ rng }) {
+      let sites, vs, V;
+      do { sites = voronoiSites(rng, 3); vs = voronoiVertices(sites); V = vs.length === 1 ? vs[0] : null; }
+      while (!V || !inWin(V.at, 1) || V.r < 2.5 || !acute(sites) || voronoiEdges(sites).length !== 3 || V.at.some((v) => Math.abs(v * 10 - Math.round(v * 10)) < 1e-6));
+      const e1 = edgeEq(sites[0], sites[1]), e2 = edgeEq(sites[1], sites[2]);
+      const c = rng.pick([{ a: "three towns", thing: "A waste incinerator", must: "as far as possible from all three towns" }, { a: "three villages", thing: "A wind turbine", must: "as far as possible from all three villages" }, { a: "three schools", thing: "A recycling plant", must: "as far as possible from all three schools" }]);
+      const texts = { vertex: "It is the same distance from all three sites, and any move away from it brings it closer to at least one of them.", edge: "It lies on an edge, so it is the same distance from exactly two sites.", centre: "It is the mean of the coordinates of the three sites.", cell: "It lies inside the largest cell." };
+      return { params: { sites }, stem: `The Voronoi diagram shows ${c.a} at ${siteList(sites)}, where one unit represents one kilometre. The edge between the cells of $\\mathrm{A}$ and $\\mathrm{B}$ has equation $${e1.tex}$, and the edge between the cells of $\\mathrm{B}$ and $\\mathrm{C}$ has equation $${e2.tex}$. ${c.thing} is to be built inside the triangle $\\mathrm{ABC}$, ${c.must}. It will be placed at the vertex $\\mathrm{V}$ where the three edges meet.`,
+        graph: voronoiGraph(sites), parts: [
+          P("Find the $x$-coordinate of $\\mathrm{V}$.", 2, ans.sf(V.at[0]), [`$\\mathrm{V}$ lies on both edges, so solve $${e1.tex}$ and $${e2.tex}$ simultaneously with the GDC.`, `$x = ${sf(V.at[0])}$ and $y = ${sf(V.at[1])}$`]),
+          P("Find the $y$-coordinate of $\\mathrm{V}$.", 1, ans.sf(V.at[1]), [`From the same solution, $y = ${sf(V.at[1])}$.`]),
+          P("Find the distance from $\\mathrm{V}$ to each of the three sites, in kilometres.", 2, ans.sf(V.r), [
+            `Use the distance from $\\mathrm{V}$ to $\\mathrm{A}${point(sites[0][0], sites[0][1])}$ with the unrounded coordinates of $\\mathrm{V}$.`, `$\\sqrt{(${sf(V.at[0], 5)} - ${sites[0][0]})^{2} + (${sf(V.at[1], 5)} - ${sites[0][1]})^{2}} = ${sf(V.r)}$`]),
+          P("Why is $\\mathrm{V}$ the best position?", 1, ans.choice(rng, { text: texts.vertex, value: "vertex" }, [
+            { text: texts.edge, value: "edge", why: "Three edges meet at a vertex, so it is equidistant from three sites, not two." }, { text: texts.centre, value: "centre", why: "The vertex is where the perpendicular bisectors meet. It is not the mean of the coordinates." },
+            { text: texts.cell, value: "cell", why: "A vertex is on the boundary of three cells, not inside one." }]), [`A vertex of a Voronoi diagram is equidistant from the three nearest sites. Moving away from it in any direction brings the point closer to one of them.`])] };
+    } });
+  reg({ ...V36, unknown: "compare-two-vertices", format: "value", levels: [4], skills: ["AI-SL3.6.toxic-waste-dump", "AI-SL3.6.vertex", "AI-SL3.6.interpret-model"], title: "The toxic waste dump problem: compare the vertices",
+    build({ rng }) {
+      let sites, vs, tries = 0;
+      const lattice = (v) => v.at.every((t) => Math.abs(t * 2 - Math.round(t * 2)) < 1e-9);
+      do { sites = voronoiSites(rng, 4); vs = voronoiVertices(sites).filter((v) => inWin(v.at, 0.4)); tries++; }
+      while (vs.length !== 2 || !vs.every(lattice) || Math.abs(vs[0].r - vs[1].r) < 0.15 || vs.some((v) => v.r < 1.8) || d2(vs[0].at, vs[1].at) < 2.2 || vs.some((v) => sites.some((s) => Math.abs(s[0] - v.at[0]) < 0.9 && Math.abs(s[1] - v.at[1]) < 0.9)));
+      vs.sort((u, v) => u.at[0] - v.at[0] || u.at[1] - v.at[1]);
+      const names = ["V", "W"], best = vs[0].r > vs[1].r ? 0 : 1, c = rng.pick([{ a: "four towns", thing: "A landfill site" }, { a: "four villages", thing: "A noisy factory" }, { a: "four holiday resorts", thing: "A waste treatment plant" }]);
+      const three = (v) => v.sites.map((i) => `\\mathrm{${"ABCD"[i]}}`).join(",\\ "), dist = (v, k) => { const s = sites[v.sites[0]]; return `$\\sqrt{${br(v.at[0] - s[0])}^{2} + ${br(v.at[1] - s[1])}^{2}} = ${sf(v.r)}$`; };
+      const optText = (i, far) => `At $\\mathrm{${names[i]}}$, because its nearest ${far ? "sites are farther away than those of" : "sites are closer than those of"} $\\mathrm{${names[1 - i]}}$.`;
+      return { params: { sites, verts: vs.map((v) => v.at) }, stem: `The Voronoi diagram shows ${c.a} at ${siteList(sites)}, where one unit represents one kilometre. Two vertices of the diagram are $\\mathrm{V}${point(vs[0].at[0], vs[0].at[1])}$ and $\\mathrm{W}${point(vs[1].at[0], vs[1].at[1])}$. ${c.thing} is to be built at one of these two vertices, as far as possible from the nearest site.`,
+        graph: voronoiGraph(sites, vs.map((v, i) => ({ x: v.at[0], y: v.at[1], label: names[i], open: true }))), parts: [
+          P("Find the distance from $\\mathrm{V}$ to its nearest sites, in kilometres.", 2, ans.sf(vs[0].r), [`$\\mathrm{V}$ is the same distance from $${three(vs[0])}$. Use $\\mathrm{${"ABCD"[vs[0].sites[0]]}}$:`, dist(vs[0])]),
+          P("Find the distance from $\\mathrm{W}$ to its nearest sites, in kilometres.", 2, ans.sf(vs[1].r), [`$\\mathrm{W}$ is the same distance from $${three(vs[1])}$. Use $\\mathrm{${"ABCD"[vs[1].sites[0]]}}$:`, dist(vs[1])]),
+          P("Where should it be built?", 1, ans.choice(rng, { text: optText(best, true), value: [best, "far"] }, [{ text: optText(1 - best, false), value: [1 - best, "near"], why: "The aim is to be as far as possible from the nearest site, so choose the larger distance." },
+            { text: optText(1 - best, true), value: [1 - best, "far"], why: "Compare the two distances again." }, { text: optText(best, false), value: [best, "near"], why: "Compare the two distances again." }]), [
+            `$${sf(vs[best].r)} > ${sf(vs[1 - best].r)}$, so $\\mathrm{${names[best]}}$ is farther from its nearest sites. Build it at $\\mathrm{${names[best]}}$.`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
