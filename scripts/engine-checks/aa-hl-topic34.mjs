@@ -21,15 +21,13 @@ const same = (a, b) => zero(sub(a, b));
 // The angle between two vectors from the triangle they make (cosine rule on the three side lengths), in degrees.
 const angleDeg = (a, b) => { const A = len(a), B = len(b), C = len(sub(a, b)); return (Math.acos(Math.max(-1, Math.min(1, (A * A + B * B - C * C) / (2 * A * B)))) * 180) / Math.PI; };
 // The parameters of the closest points of two non-parallel lines a + s d and b + t e, by minimising the squared distance
-// (a grid search refined by coordinate descent, no formula).
+// (least squares: the two normal equations, solved exactly; then a check that no nearby parameters do better).
 function closest(T, a, d, b, e) {
   const f = (s, t) => { const v = sub(add(a, mul(s, d)), add(b, mul(t, e))); return dot(v, v); };
-  let s = 0, t = 0;
-  for (let i = 0; i < 400; i++) {
-    s = T.extremum((x) => f(x, t), s - 60, s + 60, "min", 600).x;
-    t = T.extremum((x) => f(s, x), t - 60, t + 60, "min", 600).x;
-  }
-  return { s, t, dist: Math.sqrt(f(s, t)) };
+  const r = sub(b, a), m11 = dot(d, d), m12 = -dot(d, e), m22 = dot(e, e), r1 = dot(d, r), r2 = -dot(e, r), D = m11 * m22 - m12 * m12;
+  const s = (r1 * m22 - m12 * r2) / D, t = (m11 * r2 - m12 * r1) / D, best = f(s, t);
+  for (const [ds, dt] of [[0.01, 0], [-0.01, 0], [0, 0.01], [0, -0.01], [0.01, 0.01], [-0.01, 0.01]]) T.require(f(s + ds, t + dt) >= best - 1e-12, "the closest points are a minimum of the distance");
+  return { s, t, dist: Math.sqrt(best) };
 }
 
 export default {
@@ -123,6 +121,137 @@ export default {
     const Ev = (t) => p * F[t1[0]](ARGS[t1[1]](t)) + qq * F[t2[0]](ARGS[t2[1]](t));
     const th = angleWith(T, F[given], gv, lo, hi), t0 = 0.29;
     return { a: T.optionWhere(q, "a", (o) => Math.abs(o[0] * F[o[1]](t0) - Ev(t0)) < 1e-9), b: Ev(th) };
+  },
+
+  // ======================= 3.12 =======================
+  "t3-ahl-vector-basics/displacement/equation": (q, T) => {
+    const { A, B } = q.params;
+    return { a: T.optionWhere(q, "a", (v) => same(add(A, v), B)) };          // going from A by the vector arrives at B
+  },
+  "t3-ahl-vector-basics/magnitude/equation": (q, T) => ({ a: Math.hypot(...q.params.v) }),
+  "t3-ahl-vector-basics/distance-unit/equation": (q, T) => {
+    const { A, B, k } = q.params, d = Math.hypot(...sub(B, A));
+    // C is on the line AB, at k times the distance, on the side given by the sign of k
+    return { a: d, b: T.option("unit"), c: T.optionWhere(q, "c", (C) => Math.abs(len(sub(C, A)) - Math.abs(k) * d) < 1e-9 && Math.abs(len(sub(C, B)) - Math.abs(k - 1) * d) < 1e-9) };
+  },
+  "t3-ahl-vector-basics/parallel-unknown/equation": (q, T) => {
+    const { a, b } = q.params, hits = [];
+    for (let p = -80; p <= 80; p++) for (let r = -80; r <= 80; r++) if (zero(cross(a.map((x) => (x === null ? p : x)), b.map((x) => (x === null ? r : x))))) hits.push([p, r]);
+    T.require(hits.length === 1, "exactly one pair of values makes the vectors parallel");
+    return { a: hits[0][0], b: hits[0][1] };
+  },
+  "t3-ahl-vector-basics/collinear/equation": (q, T) => {
+    const { A, B, C, v } = q.params, AB = sub(B, A), hits = [];
+    for (let k = -90; k <= 90; k++) for (let m = -90; m <= 90; m++) { const rest = [k, m], c = C.map((x) => (x === null ? rest.shift() : x)); if (zero(cross(sub(c, A), AB))) hits.push(c); }
+    T.require(hits.length === 1 && AB[v] !== 0, "exactly one point with the given coordinate is on the line");
+    const c = hits[0], AC = sub(c, A), un = c.filter((x, i) => i !== v);
+    return { a: len(AB), b: dot(AC, AB) / dot(AB, AB), c: un[0], d: un[1], e: len(AC) };
+  },
+  "t3-ahl-vector-basics/triangle-lengths/equation": (q, T) => {
+    const { A, B, C } = q.params, M = mul(0.5, add(B, C));
+    // D is the point for which the diagonals of ABCD share a midpoint: search the lattice near A + C - B
+    const mid = mul(0.5, add(A, C)), D = sub(mul(2, mid), B);
+    T.require(same(sub(B, A), sub(C, D)) && !zero(cross(sub(B, A), sub(C, A))), "ABCD is a parallelogram and ABC is a triangle");
+    return { a: Math.hypot(...sub(B, A)), b: Math.hypot(...sub(M, A)), c: Math.hypot(...sub(D, B)) };
+  },
+
+  // ======================= 3.13 =======================
+  "t3-ahl-scalar-product/dot-value/equation": (q, T) => {
+    const { a, b } = q.params;
+    // from the lengths: a.b = (|a + b|^2 - |a - b|^2) / 4
+    return { a: (dot(add(a, b), add(a, b)) - dot(sub(a, b), sub(a, b))) / 4 };
+  },
+  "t3-ahl-scalar-product/perpendicular-unknown/equation": (q, T) => {
+    const { a, b, c } = q.params, g = (k) => dot(a.map((x) => (x === null ? k : x)), b.map((x) => (x === null ? c * k : x)));
+    T.require(g(-100) * g(100) < 0, "the scalar product changes sign");
+    return { a: T.bisect(g, -100, 100) };
+  },
+  "t3-ahl-scalar-product/angle/equation": (q, T) => {
+    const { a, b } = q.params, th = angleDeg(a, b);
+    T.require(th > 10 && th < 170, "the angle is not close to 0 or 180 degrees");
+    return { a: (dot(add(a, b), add(a, b)) - dot(sub(a, b), sub(a, b))) / 4, b: th };
+  },
+  "t3-ahl-scalar-product/exact-angle/equation": (q, T) => {
+    const { A, B, C } = q.params, u = sub(B, A), w = sub(C, A), g = (k) => dot(add(u, mul(k, w)), u);
+    return { a: dot(u, w), b: T.approx(angleDeg(u, w), 1e-6), c: T.bisect(g, -200, 200) };
+  },
+  "t3-ahl-scalar-product/magnitude-algebra/equation": (q, T) => {
+    const { p, q: qq, deg, s, c } = q.params;
+    // concrete vectors with these magnitudes and this angle
+    const a = [p, 0, 0], b = [qq * Math.cos(T.rad(deg)), qq * Math.sin(T.rad(deg)), 0], w = add(a, mul(s, b));
+    return { a: T.approx(dot(a, b), 1e-9), b: T.approx(dot(w, w), 1e-9), c: T.approx(dot(add(mul(c[0], a), mul(c[1], b)), add(mul(c[2], a), mul(c[3], b))), 1e-9) };
+  },
+
+  // ======================= 3.14 =======================
+  "t3-ahl-line/parameter-of-point/equation": (q, T) => {
+    const { a, d, Q } = q.params, hits = T.range(-10, 10, 0.5).filter((l) => same(add(a, mul(l, d)), Q));
+    T.require(hits.length === 1, "the point is on the line");
+    return { a: hits[0] };
+  },
+  "t3-ahl-line/through-two-points/equation": (q, T) => {
+    const { A, B, C } = q.params, AB = sub(B, A);
+    const hits = T.range(-80, 80).filter((k) => zero(cross(sub(C.map((x) => (x === null ? k : x)), A), AB)));
+    T.require(hits.length === 1, "one value puts C on the line");
+    return { a: T.optionWhere(q, "a", (o) => zero(cross(sub(o.p, A), AB)) && zero(cross(o.d, AB)) && !zero(o.d)), b: hits[0] };
+  },
+  "t3-ahl-line/cartesian-form/equation": (q, T) => {
+    const { a, d } = q.params, onL = (p) => { const r = p.map((x, i) => (x - a[i]) / d[i]); return Math.abs(r[0] - r[1]) < 1e-9 && Math.abs(r[1] - r[2]) < 1e-9; };
+    // the point of the line with z = 0, by bisection along the line
+    const t = T.bisect((s) => a[2] + s * d[2], -100, 100);
+    return { a: T.optionWhere(q, "a", (o) => onL(o.p) && onL(add(o.p, o.d)) && !zero(o.d)), b: a[0] + t * d[0] };
+  },
+  "t3-ahl-line/angle-between/equation": (q, T) => {
+    const { d, e } = q.params, th = angleDeg(d, e);
+    return { a: (dot(add(d, e), add(d, e)) - dot(sub(d, e), sub(d, e))) / 4, b: Math.min(th, 180 - th) };
+  },
+  "t3-ahl-line/foot-of-perpendicular/equation": (q, T) => {
+    const { a, d, A } = q.params, dist = (l) => len(sub(add(a, mul(l, d)), A));
+    const best = T.extremum(dist, -30, 30, "min", 6000);                    // numerical minimisation along the line
+    return { a: T.approx(best.x, 1e-5), b: T.optionWhere(q, "b", (F) => Math.abs(len(sub(F, A)) - best.value) < 1e-6 && zero(cross(sub(F, a), d))), c: T.approx(best.value, 1e-6) };
+  },
+  "t3-ahl-line/kinematics-closest/words": (q, T) => {
+    const { a, b, v, w, t0 } = q.params, D = (t) => len(sub(add(a, mul(t, v)), add(b, mul(t, w))));
+    const best = T.extremum(D, 0, 60, "min", 6000);
+    T.require(best.x > 1 && best.x < 59 && best.value > 1, "the closest approach is after the start and is not a collision");
+    // speed: distance travelled in one second
+    return { a: len(sub(add(a, v), a)), b: D(t0), c: T.approx(best.x, 1e-4), d: T.approx(best.value, 1e-6) };
+  },
+  "t3-ahl-line/kinematics-ship/words": (q, T) => {
+    const { r0, v } = q.params, pos = (t) => [r0[0] + t * v[0], r0[1] + t * v[1]];
+    const t = T.bisect((s) => pos(s)[0], 0, 100);
+    T.require(pos(t)[1] > 0, "the ship is north of O, not south, when it is level with O");
+    return { a: Math.hypot(pos(1)[0] - pos(0)[0], pos(1)[1] - pos(0)[1]), b: t, c: Math.hypot(...pos(t)) };
+  },
+
+  // ======================= 3.15 =======================
+  "t3-ahl-two-lines/intersection-point/equation": (q, T) => {
+    const { a, d, b, e } = q.params, c = closest(T, a, d, b, e);
+    T.require(c.dist < 1e-6 && !zero(cross(d, e)), "the lines meet at one point");
+    const Q = add(a, mul(c.s, d));
+    return { a: T.approx(c.s, 1e-5), b: T.approx(c.t, 1e-5), c: T.optionWhere(q, "c", (p) => len(sub(p, Q)) < 1e-4) };
+  },
+  "t3-ahl-two-lines/classify-parallel/equation": (q, T) => {
+    const { a, d, b, e } = q.params;
+    T.require(zero(cross(d, e)), "the direction vectors are parallel");
+    const k = T.range(-6, 6, 0.5).filter((x) => same(mul(x, d), e));
+    // distance from the point of L2 to L1, by minimisation along L1
+    const gap = T.extremum((l) => len(sub(add(a, mul(l, d)), b)), -40, 40, "min", 4000).value;
+    T.require(gap < 1e-6 || gap > 0.05, "clearly on the line or clearly off it");
+    return { a: k[0], b: T.option(gap < 1e-6 ? "coincident" : "parallel") };
+  },
+  "t3-ahl-two-lines/skew-or-meet/equation": (q, T) => {
+    const { a, d, b, e } = q.params;
+    // Cramer's rule on the first two component equations: lambda d - mu e = b - a
+    const D = d[0] * -e[1] - -e[0] * d[1], r = sub(b, a);
+    T.require(Math.abs(D) > 1e-9 && !zero(cross(d, e)), "the first two equations have one solution and the lines are not parallel");
+    const lam = (r[0] * -e[1] - -e[0] * r[1]) / D, mu = (d[0] * r[1] - r[0] * d[1]) / D, gap = closest(T, a, d, b, e).dist;
+    T.require(gap < 1e-6 || gap > 0.05, "clearly meeting or clearly apart");
+    return { a: lam, b: mu, c: T.option(gap < 1e-6 ? "intersect" : "skew") };
+  },
+  "t3-ahl-two-lines/skew-distance/equation": (q, T) => {
+    const { a, d, b, e } = q.params, c = closest(T, a, d, b, e);
+    T.require(c.dist > 0.3 && !zero(cross(d, e)), "the lines are skew");
+    return { a: T.optionWhere(q, "a", (v) => Math.abs(dot(v, d)) < 1e-9 && Math.abs(dot(v, e)) < 1e-9 && !zero(v)), b: T.approx(c.dist, 1e-6) };
   },
   // ==END==
 };

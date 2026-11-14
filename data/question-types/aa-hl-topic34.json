@@ -38,7 +38,51 @@
         { "id": "related-values", "asked": "four related values from the sine and cosine of an angle", "level": 2 },
         { "id": "simplify-evaluate", "asked": "the simplified form of a sum of two related ratios and its exact value", "level": 3 } ],
       "representations": [ { "rep": "equation" } ],
-      "misconceptions": [ { "text": "Getting the sign wrong" }, { "text": "Changing the function when the relation keeps it, or keeping it when the relation changes it" } ] }
+      "misconceptions": [ { "text": "Getting the sign wrong" }, { "text": "Changing the function when the relation keeps it, or keeping it when the relation changes it" } ] },
+    { "id": "t3-ahl-vector-basics", "topic": 3, "source": "extension", "kind": "skill", "name": "Vectors: displacement, magnitude and parallel vectors", "syllabus": ["3.12"],
+      "skills": ["AHL3.12.position-displacement", "AHL3.12.vector-algebra", "AHL3.12.magnitude-unit", "AHL3.12.parallel-vectors", "AHL3.12.distance-between-points"],
+      "unknowns": [
+        { "id": "displacement", "asked": "the displacement vector between two points", "level": 1 },
+        { "id": "magnitude", "asked": "the magnitude of a vector", "level": 1 },
+        { "id": "distance-unit", "asked": "a distance, a unit vector and a point from a vector relation", "level": 2 },
+        { "id": "parallel-unknown", "asked": "the unknown components of two parallel vectors", "level": 2 },
+        { "id": "collinear", "asked": "the scalar multiple, the unknown coordinates and a distance for three collinear points", "level": 3 },
+        { "id": "triangle-lengths", "asked": "a side, a median and a parallelogram's diagonal from position vectors", "level": 4 } ],
+      "representations": [ { "rep": "equation" } ],
+      "constraints": ["exact questions use vectors with whole-number length", "points are not collinear unless the question says so"],
+      "misconceptions": [ { "text": "Subtracting in the wrong order: a - b for the vector from A to B" }, { "text": "Adding position vectors to get a displacement" }, { "text": "Dividing by the square of the magnitude for a unit vector" } ] },
+    { "id": "t3-ahl-scalar-product", "topic": 3, "source": "extension", "kind": "skill", "name": "The scalar product and the angle between vectors", "syllabus": ["3.13"],
+      "skills": ["AHL3.13.scalar-product", "AHL3.13.angle-between-vectors", "AHL3.13.perpendicular-test", "AHL3.13.scalar-product-algebra"],
+      "unknowns": [
+        { "id": "dot-value", "asked": "the scalar product of two vectors", "level": 1 },
+        { "id": "perpendicular-unknown", "asked": "the constant that makes two vectors perpendicular", "level": 2 },
+        { "id": "angle", "asked": "the angle between two vectors, in degrees", "level": 2 },
+        { "id": "exact-angle", "asked": "a scalar product, an exact angle of a triangle and a perpendicularity constant", "level": 3 },
+        { "id": "magnitude-algebra", "asked": "scalar products of combinations of two vectors from their magnitudes and angle", "level": 3 } ],
+      "representations": [ { "rep": "equation" } ],
+      "misconceptions": [ { "text": "Losing the sign of the scalar product and giving the acute angle" }, { "text": "Expanding |a + b| squared as |a| squared plus |b| squared" } ] },
+    { "id": "t3-ahl-line", "topic": 3, "source": "extension", "kind": "skill", "name": "Vector equation of a line", "syllabus": ["3.14"],
+      "skills": ["AHL3.14.line-equation", "AHL3.14.point-on-line", "AHL3.14.convert-forms", "AHL3.14.angle-between-lines", "AHL3.14.foot-of-perpendicular", "AHL3.14.vector-kinematics"],
+      "unknowns": [
+        { "id": "parameter-of-point", "asked": "the parameter of a given point on a line", "level": 1 },
+        { "id": "through-two-points", "asked": "the equation of the line through two points and an unknown coordinate of a third point on it", "level": 2 },
+        { "id": "cartesian-form", "asked": "the vector equation of a line given in Cartesian form and where it crosses a coordinate plane", "level": 2 },
+        { "id": "angle-between", "asked": "the acute angle between two lines", "level": 2 },
+        { "id": "kinematics-ship", "asked": "the speed of an object with constant velocity and when it is due north of a point", "level": 2 },
+        { "id": "foot-of-perpendicular", "asked": "the closest point of a line to a given point and the shortest distance", "level": 3 },
+        { "id": "kinematics-closest", "asked": "a speed, the distance apart at a given time and the closest approach of two moving objects", "level": 4 } ],
+      "representations": [ { "rep": "equation" }, { "rep": "words" } ],
+      "misconceptions": [ { "text": "Using a position vector as the direction of a line" }, { "text": "Reversing the signs of the point when reading a Cartesian equation" }, { "text": "Giving the obtuse angle between two lines" } ] },
+    { "id": "t3-ahl-two-lines", "topic": 3, "source": "extension", "kind": "skill", "name": "Pairs of lines: intersecting, parallel, coincident and skew", "syllabus": ["3.15"],
+      "skills": ["AHL3.15.classify-lines", "AHL3.15.intersection-point", "AHL3.15.skew-distance"],
+      "unknowns": [
+        { "id": "intersection-point", "asked": "the parameters and the coordinates of the point where two lines meet", "level": 3 },
+        { "id": "classify-parallel", "asked": "whether two parallel lines are distinct or the same line", "level": 2 },
+        { "id": "skew-or-meet", "asked": "whether two lines that are not parallel intersect or are skew", "level": 3 },
+        { "id": "skew-distance", "asked": "a common perpendicular direction and the shortest distance between two skew lines", "level": 4 } ],
+      "representations": [ { "rep": "equation" } ],
+      "constraints": ["the first two component equations always have one solution", "skew lines are clearly apart"],
+      "misconceptions": [ { "text": "Using the same parameter for both lines" }, { "text": "Not checking the third component" }, { "text": "Calling lines skew when they are parallel" } ] }
   ],
   "subtopics": {
     "AHL3.9": { "prereqs": ["SL3.5", "SL3.6"], "skills": [
@@ -50,6 +94,20 @@
       { "id": "AHL3.10.exact-value", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.10.solve-equation", "levels": [3, 3], "paper": "either" } ] },
     "AHL3.11": { "prereqs": ["SL3.5", "SL3.7"], "skills": [
       { "id": "AHL3.11.symmetry-relations", "levels": [1, 3], "paper": "either" }, { "id": "AHL3.11.simplify-expression", "levels": [3, 3], "paper": "either" },
-      { "id": "AHL3.11.related-values", "levels": [2, 3], "paper": "either" } ] }
+      { "id": "AHL3.11.related-values", "levels": [2, 3], "paper": "either" } ] },
+    "AHL3.12": { "prereqs": ["SL3.1"], "skills": [
+      { "id": "AHL3.12.position-displacement", "levels": [1, 4], "paper": "either" }, { "id": "AHL3.12.vector-algebra", "levels": [2, 4], "paper": "either" },
+      { "id": "AHL3.12.magnitude-unit", "levels": [1, 2], "paper": "either" }, { "id": "AHL3.12.parallel-vectors", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL3.12.distance-between-points", "levels": [2, 4], "paper": "either" } ] },
+    "AHL3.13": { "prereqs": ["AHL3.12", "SL3.2"], "skills": [
+      { "id": "AHL3.13.scalar-product", "levels": [1, 3], "paper": "either" }, { "id": "AHL3.13.angle-between-vectors", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL3.13.perpendicular-test", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.13.scalar-product-algebra", "levels": [3, 3], "paper": "either" } ] },
+    "AHL3.14": { "prereqs": ["AHL3.12", "AHL3.13"], "skills": [
+      { "id": "AHL3.14.line-equation", "levels": [2, 2], "paper": "either" }, { "id": "AHL3.14.point-on-line", "levels": [1, 2], "paper": "either" },
+      { "id": "AHL3.14.convert-forms", "levels": [2, 2], "paper": "either" }, { "id": "AHL3.14.angle-between-lines", "levels": [2, 2], "paper": "either" },
+      { "id": "AHL3.14.foot-of-perpendicular", "levels": [3, 4], "paper": "either" }, { "id": "AHL3.14.vector-kinematics", "levels": [2, 4], "paper": "either" } ] },
+    "AHL3.15": { "prereqs": ["AHL3.14"], "skills": [
+      { "id": "AHL3.15.classify-lines", "levels": [2, 3], "paper": "either" }, { "id": "AHL3.15.intersection-point", "levels": [2, 3], "paper": "either" },
+      { "id": "AHL3.15.skew-distance", "levels": [4, 4], "paper": "either" } ] }
   }
 }
