@@ -1138,4 +1138,103 @@
         P("The equation has three distinct solutions when $-m < k < m$. Find the value of $m$.", 3, ans.sf(top), [`A horizontal line $y = k$ crosses the graph of $y = ${poly([1, 0, -a, 0])}$ three times when it lies between the local minimum and the local maximum.`,
           `The maximum tool gives the local maximum point $${point(sf(-t), sf(top))}$, and by symmetry the local minimum value is $${sf(-top)}$.`, `$m = ${sf(top)}$`])] };
     } });
+
+  // ---------------- more pick-the-graph questions ----------------
+  reg({ ...TA, unknown: "sketch-reflection", representation: "graph", format: "graph-pick", levels: [2],
+    skills: ["SL2.11.reflect", "SL2.11.sketch-transformed", "SL2.11.image-point"], title: "Pick the reflected graph",
+    build({ rng }) {
+      const ys = [0, 0, 0, 0];
+      do { ys[0] = rng.int(-3, 3); ys[1] = rng.int(-4, 4); ys[2] = rng.int(-4, 4); ys[3] = rng.int(-3, 3); }
+      while (ys[1] === ys[0] || ys[2] === ys[1] || ys[3] === ys[2] || (ys[1] - ys[0]) * (ys[2] - ys[1]) > 0 || Math.abs(ys[0] - ys[3]) < 2 || Math.abs(ys[1] + ys[2]) < 2 || ys.filter((v) => v === 0).length > 1);
+      const pts = [-4, -1, 1, 3].map((x, i) => [x, ys[i]]), base = { type: "pwl", points: pts }, inY = rng.bool();
+      const gr = (a2, q2, name) => ({ value: name, graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "transform", of: base, a: a2, q: q2 } }], alt: "A graph made of three straight segments" }) });
+      const right = inY ? gr(1, -1, "f(-x)") : gr(-1, 1, "-f(x)");
+      const wrongs = G.pickDistinct(right.graph, [
+        Object.assign(inY ? gr(-1, 1, "-f(x)") : gr(1, -1, "f(-x)"), { why: inY ? "This is the reflection in the $x$-axis, the graph of $y = -f(x)$." : "This is the reflection in the $y$-axis, the graph of $y = f(-x)$." }),
+        Object.assign(gr(-1, -1, "-f(-x)"), { why: "This graph has been reflected in both axes." }),
+        Object.assign(gr(1, 1, "f(x)"), { why: "This is the graph of $f$ itself." })], 3);
+      const i = rng.pick([0, 1, 2, 3].filter((j) => ys[j] !== 0)), [px, py] = pts[i];
+      return { params: { pts, inY, i },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: base, label: "f" }], points: pts.map(([x, y]) => ({ x, y })), alt: "The graph of f: three straight segments joining four marked points" }),
+        stem: `The graph of $y = f(x)$, for $-4 \\le x \\le 3$, is shown. It consists of straight line segments joining points with integer coordinates. The function $g$ is defined by $g(x) = ${inY ? "f(-x)" : "-f(x)"}$.`,
+        parts: [
+          P("Which graph shows $y = g(x)$?", 2, ans.graph(rng, right, wrongs), [inY ? "Replacing $x$ by $-x$ reflects the graph in the $y$-axis." : "Multiplying $f(x)$ by $-1$ reflects the graph in the $x$-axis.",
+            inY ? "Every point $(a,\\, b)$ moves to $(-a,\\, b)$, so the graph now runs from $x = -3$ to $x = 4$." : "Every point $(a,\\, b)$ moves to $(a,\\, -b)$, so the domain stays the same and the graph is turned upside down."]),
+          P(`The point $${point(px, py)}$ on the graph of $f$ is mapped to a point on the graph of $g$. Write down the $x$-coordinate of this image.`, 1, ans.int(inY ? -px : px), [inY ? `The $x$-coordinate changes sign: $x = ${-px}$` : `A reflection in the $x$-axis leaves the $x$-coordinate unchanged: $x = ${px}$`]),
+          P("Write down the $y$-coordinate of this image.", 1, ans.int(inY ? py : -py), [inY ? `A reflection in the $y$-axis leaves the $y$-coordinate unchanged: $y = ${py}$` : `The $y$-coordinate changes sign: $y = ${-py}$`])] };
+    } });
+  reg({ type: "fn-ext-exp-graph", syllabus: ["2.9"], unknown: "pick-graph", representation: "graph", format: "graph-pick", levels: [2],
+    skills: ["SL2.9.exp-graph", "SL2.4.asymptotes"], title: "Pick the graph of an exponential function",
+    build({ rng }) {
+      const a = rng.sign(), dir = rng.sign(), b = rng.pick([2, 3]), k = rng.nonzero(-3, 3);
+      const gr = (a2, d2, k2) => ({ value: [a2, d2, k2], graph: win([-5, 5], [-7, 7], { functions: [{ fn: { type: "exp", a: a2, b: d2 > 0 ? b : 1 / b, k: k2 } }], asymptotes: [{ y: k2 }], alt: "An exponential curve with a horizontal dashed asymptote" }) });
+      const wrongs = G.pickDistinct(gr(a, dir, k).graph, [
+        Object.assign(gr(a, -dir, k), { why: `This is the reflection in the $y$-axis: it shows ${dir > 0 ? "decay" : "growth"} where the function has ${dir > 0 ? "growth" : "decay"}.` }),
+        Object.assign(gr(-a, dir, k), { why: "The curve is on the wrong side of its asymptote: check the sign in front of the power." }),
+        Object.assign(gr(a, dir, -k), { why: "The horizontal asymptote has the wrong sign." }), gr(-a, -dir, k)], 3);
+      return { params: { a, dir, b, k }, stem: `Consider the function $f(x) = ${a < 0 ? "-" : ""}${b}^{${dir > 0 ? "x" : "-x"}} ${signed(k)}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P("Which graph shows $y = f(x)$?", 2, ans.graph(rng, gr(a, dir, k), wrongs), [
+          `As $x$ becomes very ${dir > 0 ? "negative" : "large"}, $${b}^{${dir > 0 ? "x" : "-x"}}$ approaches $0$, so the graph approaches the asymptote $y = ${k}$ on the ${dir > 0 ? "left" : "right"}.`,
+          `The power is ${a > 0 ? "added, so the curve lies above the asymptote" : "subtracted, so the curve lies below the asymptote"}, and $f(0) = ${a + k}$.`]),
+        P("The graph of $f$ has a horizontal asymptote $y = c$. Write down the value of $c$.", 1, ans.int(k), [`The power approaches $0$ but never reaches it, so $c = ${k}$.`]),
+        P("Find the $y$-intercept of the graph of $f$.", 1, ans.int(a + k), [`$f(0) = ${a < 0 ? "-" : ""}${b}^{0} ${signed(k)} = ${a} ${signed(k)} = ${a + k}$`])] };
+    } });
+
+  // ---------------- Topic 2 skills inside trigonometric question types ----------------
+  const wave = (A, a2, d2, dash) => ({ fn: { type: "trig", name: "sin", a: A * a2, b: Math.PI / 2, c: 0, d: d2 }, domain: [0, 8], dashed: Boolean(dash) });
+  reg({ id: "t3-trig-sketch/sketch-reflected/transformed-wave", type: "t3-trig-sketch", syllabus: ["2.11", "3.7"], unknown: "sketch-reflected", representation: "graph", format: "graph-pick", levels: [2],
+    skills: ["SL2.11.reflect", "SL2.11.sketch-transformed", "SL3.7.sketch"], title: "Pick the reflected and translated wave",
+    build({ rng }) {
+      const A = rng.int(1, 3), d = rng.pick([-3, -2, 2, 3]);
+      const gr = (a2, d2) => ({ value: [a2, d2], graph: { x: [0, 8], y: [-7, 7], xStep: 1, yStep: 1, functions: [wave(A, a2, d2)], alt: "A wave" } });
+      const wrongs = G.pickDistinct(gr(-1, d).graph, [
+        Object.assign(gr(1, d), { why: "The graph has been translated but not reflected." }),
+        Object.assign(gr(-1, -d), { why: "The translation is in the wrong direction." }),
+        Object.assign(gr(-1, 0), { why: "The graph has been reflected but not translated." }),
+        Object.assign(gr(1, -d), { why: "The graph has not been reflected and the translation is in the wrong direction." })], 3);
+      return { params: { A, d },
+        graph: { x: [0, 8], y: [-7, 7], xStep: 1, yStep: 1, functions: [Object.assign(wave(A, 1, 0), { label: "f" })], alt: "A sine wave f starting at the origin and rising first" },
+        stem: `The graph of $y = f(x)$, a sine curve, is shown for $0 \\le x \\le 8$. The function $g$ is defined by $g(x) = -f(x) ${signed(d)}$.`,
+        parts: [
+          P("Which graph shows $y = g(x)$?", 2, ans.graph(rng, gr(-1, d), wrongs), ["Multiplying by $-1$ reflects the graph in the $x$-axis, so $g$ falls first where $f$ rises first.",
+            `${d > 0 ? "Adding" : "Subtracting"} $${Math.abs(d)}$ then moves the graph $${Math.abs(d)}$ units ${d > 0 ? "up" : "down"}, so it starts at $${point(0, d)}$.`]),
+          P("Write down the greatest value of $g(x)$.", 1, ans.int(A + d), [`The least value of $f$ is $${-A}$, which the reflection sends to $${A}$. The translation gives $${A} ${signed(d)} = ${A + d}$.`])] };
+    } });
+  reg({ id: "t3-trig-model-parameters/describe-transformations/stretch-shift", type: "t3-trig-model-parameters", syllabus: ["2.11", "3.7"], unknown: "describe-transformations", representation: "equation", format: "value", levels: [2],
+    skills: ["SL2.11.describe", "SL2.11.stretch", "SL2.11.translate", "SL3.7.transformations"], title: "Stretch and translation that turn one wave into another",
+    build({ rng }) {
+      const a = rng.int(2, 6), d = rng.nonzero(-7, 7);
+      return { params: { a, d }, stem: `Let $f(x) = \\sin x$ and $g(x) = ${a}\\sin x ${signed(d)}$. The graph of $g$ is obtained from the graph of $f$ by a vertical stretch with scale factor $p$, followed by a translation of $q$ units in the $y$-direction.`, parts: [
+        P("Write down the value of $p$.", 1, ans.int(a), [`$g(x) = ${a}f(x) ${signed(d)}$, and multiplying $f(x)$ by $${a}$ is a vertical stretch with scale factor $${a}$.`]),
+        P("Write down the value of $q$.", 1, ans.int(d), [`${d > 0 ? "Adding" : "Subtracting"} $${Math.abs(d)}$ translates the graph $${Math.abs(d)}$ ${units(d)} ${d > 0 ? "up" : "down"}, so $q = ${d}$.`]),
+        P("Find the greatest value of $g(x)$.", 1, ans.int(a + d), [`The greatest value of $\\sin x$ is $1$, so the greatest value of $g$ is $${a}(1) ${signed(d)} = ${a + d}$.`]),
+        P("Find the least value of $g(x)$.", 1, ans.int(d - a), [`The least value of $\\sin x$ is $-1$, so the least value of $g$ is $${a}(-1) ${signed(d)} = ${d - a}$.`])] };
+    } });
+  reg({ ...CALC, id: "t3-trig-model-equation/times-in-window/tide", type: "t3-trig-model-equation", syllabus: ["2.10", "3.8"], unknown: "times-in-window", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.10.context-apply", "SL2.10.solve-gdc", "SL3.8.graphical"], title: "Tide model: when the water is deep enough",
+    build({ rng }) {
+      const A = rng.pick([1.4, 1.8, 2.3, 2.6]), D = rng.pick([4.2, 5.1, 5.5, 6.3]), L = Math.round((D + A * rng.pick([0.3, 0.45, 0.6])) * 10) / 10, t0 = rng.pick([1.5, 2, 4.5, 7, 8.5]);
+      const t1 = (6 / Math.PI) * Math.asin((L - D) / A), t2 = 6 - t1, d0 = A * Math.sin((Math.PI * t0) / 6) + D;
+      return { params: { A, D, L, t0 },
+        graph: { x: [0, 12], y: [0, Math.ceil(D + A) + 1], xStep: 1, yStep: 1, xLabel: "t", yLabel: "d", functions: [{ fn: { type: "trig", name: "sin", a: A, b: Math.PI / 6, c: 0, d: D }, domain: [0, 12] }, { fn: { type: "poly", coeffs: [L] }, dashed: true }], alt: "One full wave, with a dashed horizontal line crossing its upper part twice" },
+        stem: `The depth of water in a harbour, in metres, is modelled by $d(t) = ${num(A)}\\sin\\left(\\dfrac{\\pi t}{6}\\right) + ${num(D)}$, for $0 \\le t \\le 12$, where $t$ is the time in hours after midnight. A ship can enter the harbour when the depth is at least $${unit(L, "m")}$. The graph shows $d$ and the line $d = ${num(L)}$.`,
+        parts: [
+          P(`Find the depth of the water, in metres, when $t = ${num(t0)}$.`, 2, ans.sf(d0), [`With the calculator in radians, $d(${num(t0)}) = ${num(A)}\\sin\\left(\\dfrac{${num(t0)}\\pi}{6}\\right) + ${num(D)}$`, `$d(${num(t0)}) = ${sf(d0)}$`]),
+          P("Find the first value of $t$ at which the ship can enter the harbour.", 2, ans.sf(t1), [`Graph $y = d(t)$ and $y = ${num(L)}$ on a calculator and find where they cross.`, `The first crossing is at $t = ${sf(t1)}$.`]),
+          P("Find the value of $t$ after which the ship can no longer enter.", 1, ans.sf(t2), [`The second crossing is at $t = ${sf(t2)}$.`]),
+          P("Find the length of time, in hours, for which the ship can enter the harbour.", 1, ans.sf(t2 - t1), [`$${more(t2)} - ${more(t1)} = ${sf(t2 - t1)}$`])] };
+    } });
+  reg({ id: "t3-trig-quadratic/values-of-u/hidden-quadratic", type: "t3-trig-quadratic", syllabus: ["2.7", "3.8"], unknown: "values-of-u", representation: "equation", format: "value", levels: [3],
+    skills: ["SL2.7.hidden-quadratic", "SL2.7.solve-equation", "SL3.8.quadratic-in-trig"], title: "A quadratic in disguise (sine)",
+    build({ rng }) {
+      const s = rng.sign(), k = rng.pick([-3, -2, 2, 3]), cs = [2, -(2 * k + s), s * k];
+      const lo = Math.min(s / 2, k), hi = Math.max(s / 2, k), x1 = s > 0 ? [1, 6] : [7, 6];
+      return { params: { cs }, stem: `Consider the equation $${expr([[cs[0], "\\sin^{2} x"], [cs[1], "\\sin x"], [cs[2], ""]])} = 0$, for $0 \\le x \\le 2\\pi$.`, parts: [
+        P("Let $u = \\sin x$. The equation becomes a quadratic in $u$. Find the smaller solution for $u$.", 2, lo === k ? ans.int(k) : ans.frac(s, 2), [
+          `$${poly(cs, "u")} = 0$ factorises as $(${lin(2, -s, "u")})${factor(k, "u")} = 0$.`, `$u = ${frac(s, 2)}$ or $u = ${k}$; the smaller is $${lo === k ? k : frac(s, 2)}$.`]),
+        P("Write down the larger solution for $u$.", 1, hi === k ? ans.int(k) : ans.frac(s, 2), [`The larger solution is $u = ${hi === k ? k : frac(s, 2)}$.`]),
+        P("Hence find the smallest value of $x$ that satisfies the original equation.", 3, ans.exact((x1[0] * Math.PI) / x1[1], fmt.piFrac(x1[0], x1[1])), [
+          `$\\sin x = ${k}$ has no solution, because $-1 \\le \\sin x \\le 1$.`, `$\\sin x = ${frac(s, 2)}$ gives $x = ${s > 0 ? `${fmt.piFrac(1, 6)}$ or $x = ${fmt.piFrac(5, 6)}` : `${fmt.piFrac(7, 6)}$ or $x = ${fmt.piFrac(11, 6)}`}$ in the interval.`,
+          `The smallest is $x = ${fmt.piFrac(x1[0], x1[1])}$.`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

@@ -544,4 +544,43 @@ export default {
     T.require(count(-m + 0.01) === 3 && count(-m - 0.01) === 1, "the interval is symmetric");
     return { a: r[0], b: r[2], c: T.approx(m, 1e-4) };
   },
+  "fn-transform-apply/sketch-reflection/graph": (q, T) => {
+    const { pts, inY, i } = q.params, f = (x) => T.evalGraph(graphFn(q), x);
+    T.require(pts.every(([x, y]) => f(x) === y), "the listed points are on the drawn graph of f");
+    const g = (x) => (inY ? f(-x) : -f(x));
+    // follow the chosen point: it lands where g takes the reflected value
+    const [px, py] = pts[i], X = inY ? -px : px;
+    return { a: whichGraph(q, "a", g, T, [-5.5, -4, -3.5, -2, -1, 0, 1, 2, 3, 3.5, 4, 5.5]), b: X, c: g(X) };
+  },
+  "fn-ext-exp-graph/pick-graph/graph": (q, T) => {
+    const { a, dir, b, k } = q.params, f = (x) => a * b ** (dir * x) + k;
+    const hit = whichGraph(q, "a", f, T, [-3, -2, -1, -0.5, 0, 0.5, 1, 2, 3]);
+    T.require(q.parts[0].answer.options[hit.index].asymptotes[0].y === k, "the correct graph shows the right asymptote");
+    return { a: hit, b: T.approx(f(-dir * 60), 1e-6), c: f(0) };
+  },
+  "t3-trig-sketch/sketch-reflected/transformed-wave": (q, T) => {
+    const { A, d } = q.params, f = (x) => T.evalGraph(graphFn(q), x), g = (x) => -f(x) + d;
+    T.require(Math.abs(f(1) - A) < 1e-9 && Math.abs(f(0)) < 1e-9, "f is a sine wave of the stated size");
+    return { a: whichGraph(q, "a", g, T, [0.3, 1, 1.7, 2.5, 3, 4.4, 5, 6.2, 7, 7.6]), b: T.extremum(g, 0, 8, "max", 16000).value };
+  },
+  "t3-trig-model-parameters/describe-transformations/stretch-shift": (q, T) => {
+    const { a, d } = q.params, g = (x) => a * Math.sin(x) + d;
+    const hi = T.extremum(g, 0, 2 * Math.PI, "max", 20000).value, lo = T.extremum(g, 0, 2 * Math.PI, "min", 20000).value;
+    // amplitude and mid-line of g against those of sin x (1 and 0)
+    return { a: T.approx((hi - lo) / 2, 1e-6), b: T.approx((hi + lo) / 2, 1e-6), c: T.approx(hi, 1e-6), d: T.approx(lo, 1e-6) };
+  },
+  "t3-trig-model-equation/times-in-window/tide": (q, T) => {
+    const { A, D, L, t0 } = q.params, d = (t) => A * Math.sin((Math.PI * t) / 6) + D;
+    const r = T.roots((t) => d(t) - L, 0, 12, 48000);
+    T.require(r.length === 2 && d(3) > L, "the level is passed twice, with deep water in between");
+    T.require(Math.abs(T.evalGraph(graphFn(q), 2.2) - d(2.2)) < 1e-9 && T.evalGraph(graphFn(q, 1), 5) === L, "the graph shows the model and the level");
+    return { a: d(t0), b: r[0], c: r[1], d: r[1] - r[0] };
+  },
+  "t3-trig-quadratic/values-of-u/hidden-quadratic": (q, T) => {
+    const { cs } = q.params, u = quad(cs, T);
+    T.require(u.length === 2 && u.filter((v) => Math.abs(v) <= 1).length === 1, "two values of u, one of them a possible sine");
+    const xs = T.roots((x) => T.poly(cs, Math.sin(x)), 0, 2 * Math.PI, 40000);
+    T.require(xs.length === 2, "two solutions in the interval");
+    return { a: u[0], b: u[1], c: xs[0] };
+  },
 };
