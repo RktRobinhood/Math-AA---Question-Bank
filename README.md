@@ -37,10 +37,12 @@ The results come first; the filters are in the sidebar (on a phone, behind the *
   - The number beside each subtopic is how many of the questions still in play carry it. A subtopic at 0 is greyed: choosing it cannot refine the list. It stays clickable.
   - The box above the tree always shows the current choice as Must have / Any of / Not.
 - **Chips** above the results show every active filter. Press one to remove it, or **Clear all**.
-- **Sort** by newest, oldest, marks or paper order; switch between a grid and a compact list. Results load 30 at a time as you scroll.
+- **Sort** by newest, oldest, marks or paper order; switch between cards and a list. Results load 30 at a time as you scroll.
 - **The address bar holds the filters**, so a view can be bookmarked or shared, and comes back when you return from a question. Example: `?and=3.4&or=3.2,3.5&not=3.8&paper=P2&course=aa-sl`.
 
-Each card shows the top of the question, its code, marks as `[6]`, what its parts ask, its subtopics in topic colours, and a **+** button that adds it to your paper.
+Each card shows the question itself, its code, marks as `[6]`, its subtopics in topic colours, and a **+** button that adds it to your paper. Hover over a card to see what its parts ask.
+
+The **list** view (the ☰ button beside Sort) shows one line per question, like a file list: code, marks, paper, section, subtopics and what it asks. Click a column heading to sort, and hover over a line to preview the question.
 
 ---
 
