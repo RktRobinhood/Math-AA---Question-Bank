@@ -387,22 +387,28 @@
     const marks = totalMarksOf(items);
     const pages = previewPages(s, items);
     _page = Math.max(0, Math.min(_page, pages.length - 1));
-    const p = pages[_page];
-    const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
-    let inner = '<div class="ws">Nothing to export: tick Question paper or Markscheme.</div>';
-    if (p && p.kind === 'cover') inner = coverHtml(s, items, marks);
-    else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg" id="aasl-pv-img" src="${getBase() + p.src}" alt="">${foot}`;
-    else if (p && p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
-
-    document.getElementById('aasl-pv-fit').innerHTML = `<div class="pg">${inner}</div>`;
-    const pvImg = document.getElementById('aasl-pv-img');
-    if (pvImg && p.first && s.hideNumbers !== false) {
-      fetchImageAsPng(p.src, [], true).then(url => { if (document.getElementById('aasl-pv-img') === pvImg) pvImg.src = url; }).catch(() => {});
-    }
+    const pageHtml = p => {
+      const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
+      let inner = '<div class="ws">Nothing to export: tick Question paper or Markscheme.</div>';
+      if (p && p.kind === 'cover') inner = coverHtml(s, items, marks);
+      else if (p && p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg"${p.first && s.hideNumbers !== false ? ` data-mask="${escHtml(p.src)}"` : ''} src="${getBase() + p.src}" alt="">${foot}`;
+      else if (p && p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
+      return `<div class="pg">${inner}</div>`;
+    };
+    // Show the next page beside this one when the pane is wide enough for two readable pages.
+    const stage = document.getElementById('aasl-pv-stage');
+    const two = pages.length > 1 && stage && Math.min((stage.clientWidth - PV_GAP) / (2 * 595), stage.clientHeight / 842) >= 0.7;
+    if (two && _page === pages.length - 1) _page--;
+    const fitEl = document.getElementById('aasl-pv-fit');
+    fitEl.innerHTML = pageHtml(pages[_page]) + (two ? pageHtml(pages[_page + 1]) : '');
+    fitEl.querySelectorAll('img[data-mask]').forEach(img => {
+      const src = img.dataset.mask;
+      fetchImageAsPng(src, [], true).then(url => { if (img.isConnected) img.src = url; }).catch(() => {});
+    });
     document.getElementById('aasl-pv-where').textContent =
-      `${pages.type === 'markscheme' ? 'markscheme · ' : ''}page ${pages.length ? _page + 1 : 0} of ${pages.length} · A4`;
+      `${pages.type === 'markscheme' ? 'markscheme · ' : ''}${two ? `pages ${_page + 1}–${_page + 2}` : `page ${pages.length ? _page + 1 : 0}`} of ${pages.length} · A4`;
     const strip = document.getElementById('aasl-pv-strip');
-    strip.innerHTML = pages.map((pg, i) => `<button type="button" class="${i === _page ? 'on' : ''}" data-i="${i}" aria-label="Page ${i + 1}: ${pg.label}">${pg.label}</button>`).join('');
+    strip.innerHTML = pages.map((pg, i) => `<button type="button" class="${i === _page || (two && i === _page + 1) ? 'on' : ''}" data-i="${i}" aria-label="Page ${i + 1}: ${pg.label}">${pg.label}</button>`).join('');
     strip.onclick = e => { const b = e.target.closest('[data-i]'); if (b) { _page = Number(b.dataset.i); updatePreview(); } };
     fitPreview();
   }
@@ -410,16 +416,19 @@
   function fitPreview() {
     const stage = document.getElementById('aasl-pv-stage');
     const fit = document.getElementById('aasl-pv-fit');
-    const pg = fit && fit.firstElementChild;
-    if (!stage || !pg) return;
-    // Fill the pane: the whole page when the pane is tall enough for that to be readable,
+    const pgs = fit ? [...fit.children] : [];
+    if (!stage || !pgs.length) return;
+    // Fill the pane: whole pages when the pane is tall enough for that to be readable,
     // otherwise the full width (the pane scrolls), so the text can always be read.
-    const whole = Math.min(stage.clientWidth / 595, stage.clientHeight / 842);
-    const scale = Math.max(0.1, Math.min(whole >= 0.9 ? whole : (stage.clientWidth - 14) / 595, 1.5));
-    fit.style.width = `${595 * scale}px`;
+    const n = pgs.length, gaps = (n - 1) * PV_GAP;
+    const whole = Math.min((stage.clientWidth - gaps) / (n * 595), stage.clientHeight / 842);
+    const scale = Math.max(0.1, Math.min(n > 1 || whole >= 0.9 ? whole : (stage.clientWidth - 14) / 595, 1.5));
+    fit.style.width = `${n * 595 * scale + gaps}px`;
     fit.style.height = `${842 * scale}px`;
-    pg.style.transform = `scale(${scale})`;
+    pgs.forEach((pg, k) => { pg.style.transform = `scale(${scale})`; pg.style.left = `${k * (595 * scale + PV_GAP)}px`; });
   }
+
+  const PV_GAP = 16;
 
   // ─── Versions ─────────────────────────────────────────────────────────────
   // A reordering of the paper for version B, C or D. Section A questions stay before Section B
