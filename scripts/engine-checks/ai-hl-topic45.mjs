@@ -84,7 +84,24 @@ function paths(M, from, to, steps) {
 const chainF = (s) => ({ exp: (x) => s.a * Math.exp(s.b * x), sin: (x) => s.a * Math.sin(s.b * x), cos: (x) => s.a * Math.cos(s.b * x), ln: (x) => s.a * Math.log(s.b * x + s.c),
   pow: (x) => (s.b * x + s.c) ** s.n, tan: (x) => s.a * Math.tan(s.b * x), expquad: (x) => Math.exp(s.b * x * x) })[s.fam];
 const prodF = (p) => ({ xexp: (x) => x * Math.exp(p.k * x), x2exp: (x) => x * x * Math.exp(p.k * x), lnx: (x) => Math.log(x) / x ** p.n, xover: (x) => x / (x * x + p.c), xlnx: (x) => x * Math.log(x) })[p.fam];
-/*HELPERS*/
+// The right-hand sides f(x, y) of the slope field and Euler questions, by id
+const fieldF = (id) => ({ "x+y": (x, y) => x + y, "x-y": (x, y) => x - y, "y-x": (x, y) => y - x, "-x-y": (x, y) => -(x + y), "y/2": (x, y) => 0.5 * y, "x/2": (x) => 0.5 * x, "-y/2": (x, y) => -0.5 * y, "-x/2": (x) => -0.5 * x,
+  "xy/2": (x, y) => 0.5 * x * y, "-xy/2": (x, y) => -0.5 * x * y, xy: (x, y) => x * y, "y-x2": (x, y) => y - x ** 2, "2x-y": (x, y) => x + x - y, "x2+y": (x, y) => x ** 2 + y, "x/y": (x, y) => x / y, "-2xy": (x, y) => -2 * x * y, ycosx: (x, y) => y * Math.cos(x) })[id];
+// Euler's method written out step by step: every row [values...] from the start, all components updated from the previous row
+function euler(f, t0, start, h, steps) {
+  const rows = [start.slice()];
+  for (let i = 0; i < steps; i++) { const prev = rows[i], slope = f(t0 + i * h, prev); rows.push(prev.map((v, j) => v + h * slope[j])); }
+  return rows;
+}
+// The kind of equilibrium at the origin from the trace and determinant of the matrix
+function portrait(M) {
+  const tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0], disc = tr * tr - 4 * det;
+  if (det < 0) return "saddle";
+  if (disc > 0) return tr < 0 ? "sink" : "source";
+  return tr === 0 ? "centre" : tr < 0 ? "spiralIn" : "spiralOut";
+}
+
+  /*HELPERS*/
 
 export default {
   "t4-ai-reliability-validity/identify/words": (q, T) => {
@@ -362,6 +379,112 @@ export default {
     let vol = 0;
     for (let i = 0; i < N; i++) vol += Math.PI * y((i + 0.5) * dx) ** 2 * dx;
     return { a: T.optionWhere(q, "a", (v) => Math.abs(v - vol) < 1e-5 * vol), b: T.approx(vol, 1e-6 * vol) };
+  },
+
+    "t5-ai-diff-eq/separable-exact/equation": (q, T) => {
+    const { fam, k, y0, x1 } = q.params, rhs = { kxy: (x, y) => k * x * y, xovery: (x, y) => (k * x) / y, ky2: (x, y) => -k * y * y }[fam];
+    // an option is the general solution if, for an arbitrary constant, it satisfies the equation at several points
+    const fits = (v) => [0.3, 0.7, 1.1].every((x) => { const y = (u) => ({ Aexp: 2.3 * Math.exp(v.c * u ** (v.p || 1)), poly: v.c * u ** v.p + 2.3, sqrt: Math.sqrt(v.c * u * u + 2.3), recip: 1 / (v.c * u + 2.3) })[v.form]; return Math.abs(T.deriv(y, x) - rhs(x, y(x))) < 1e-6 * Math.max(1, Math.abs(rhs(x, y(x)))); });
+    return { a: T.optionWhere(q, "a", fits), b: T.approx(rk4((x, y) => [rhs(x, y[0])], 0, [y0], x1, 4000)[0], 1e-7 * Math.max(1, y0 * Math.exp(Math.abs(k) * x1 * x1))) };
+  },
+  "t5-ai-diff-eq/exponential-model/words": (q, T) => {
+    const { n0, k, t1, target } = q.params, at = (t) => rk4((u, y) => [k * y[0]], 0, [n0], t, 2000)[0];
+    return { a: T.approx(at(t1), 1e-7 * n0 * Math.exp(Math.abs(k) * t1)), b: T.approx(T.bisect((t) => at(t) - target, 0.001, 400, 60), 1e-6) };
+  },
+  "t5-ai-diff-eq/cooling/words": (q, T) => {
+    const { room, T0, t1, T1, t2, T3 } = q.params, at = (k, t) => rk4((u, y) => [-k * (y[0] - room)], 0, [T0], t, 2000)[0];
+    const k = T.bisect((kk) => at(kk, t1) - T1, 0.0005, 3, 60);
+    T.require(k > 0.001 && k < 2.9, "a positive cooling constant fits the data");
+    return { a: T.approx(k, 1e-6), b: T.approx(at(k, t2), 1e-5), c: T.approx(T.bisect((t) => at(k, t) - T3, 0.001, 600, 60), 1e-4) };
+  },
+  "t5-ai-diff-eq/set-up/words": (q, T) => {
+    // the right-hand side as a function, from the description: check the correct option's sign and what it depends on
+    const want = [["N", "kN"], ["M", "-kM"], ["T", "-k(T - R)"], ["V", "\\dfrac{k}{V}"], ["h", "-k\\sqrt{h}"], ["N", "kN(M - N)"]][q.params.id];
+    return { a: T.optionWhere(q, "a", (v, i, text) => text.endsWith(`= ${want[1]}$`) && text.includes(`\\mathrm{d}${want[0]}`)) };
+  },
+  "t5-ai-slope-field/gradient-at-point/equation": (q) => { const f = fieldF(q.params.id); return { a: f(...q.params.p1), b: f(...q.params.p2) }; },
+  "t5-ai-slope-field/match-field/graph": (q, T) => {
+    // read the segments back from the diagram and keep the one equation whose gradients agree at every grid point
+    const segs = q.graph.functions.map((s) => { const x = (s.domain[0] + s.domain[1]) / 2; return { x, y: T.evalGraph(s.fn, x), g: s.fn.coeffs[1] }; });
+    T.require(segs.length === 49 && segs.every((s) => Math.abs(s.x - Math.round(s.x)) < 1e-6 && Math.abs(s.y - Math.round(s.y)) < 1e-4), "one segment through each grid point");
+    const hit = T.optionWhere(q, "a", (v) => segs.every((s) => Math.abs(fieldF(v)(Math.round(s.x), Math.round(s.y)) - s.g) < 1e-5));
+    const id = q.parts[0].answer.values[hit.index];
+    return { a: hit, b: fieldF(id)(...q.params.pt) };
+  },
+  "t5-ai-slope-field/linear-solution/graph": (q, T) => {
+    const { p, qq, r, x0, y0 } = q.params, f = (x, y) => p * x - qq * y + r;
+    // y = mx + b solves the equation when m = f(x, mx + b) at two values of x: two linear equations for m and b
+    const [mm, b] = solve([[1 + qq * 0, qq], [1 + qq * 1, qq]], [p * 0 + r, p * 1 + r]);
+    const end = rk4((x, y) => [f(x, y[0])], 0, [b], 2, 4000)[0];
+    T.require(Math.abs(end - (mm * 2 + b)) < 1e-7, "the solution through the intercept stays on the straight line");
+    return { a: f(x0, y0), b: T.bisect((y) => f(0, y), -50, 50, 80), c: mm, d: b };
+  },
+  "t5-ai-slope-field/equilibrium/graph": (q, T) => {
+    const { a, b, k, y0 } = q.params, f = (y) => k * (y - a) * (b - y), zeros = T.roots(f, a - 2.03, b + 2.07, 2000);
+    T.require(zeros.length === 2 && y0 > a && y0 < b, "two equilibrium values with the starting point between them");
+    return { a: f(y0), b: T.approx(zeros[0], 1e-6), c: T.approx(zeros[1], 1e-6), d: T.approx(rk4((x, y) => [f(y[0])], 0, [y0], 150, 6000)[0], 1e-4), e: T.approx(T.extremum(f, a, b, "max").x, 1e-5) };
+  },
+  "t5-ai-euler/first-steps/equation": (q) => {
+    const { id, x0, y0, h } = q.params, f = fieldF(id), out = euler((x, y) => [f(x, y[0])], x0, [y0], h, 2);
+    return q.parts.length === 2 ? { a: out[1][0], b: out[2][0] } : { a: out[1][0] };
+  },
+  "t5-ai-euler/approximate-and-error/equation": (q, T) => {
+    const { id, y0, h, n } = q.params, f = fieldF(id), out = euler((x, y) => [f(x, y[0])], 0, [y0], h, n), exact = rk4((x, y) => [f(x, y[0])], 0, [y0], n * h, 4000)[0];
+    return { a: out[1][0], b: out[n][0], c: T.approx((100 * Math.abs(out[n][0] - exact)) / exact, 1e-5) };
+  },
+  "t5-ai-euler/coupled-system/words": (q) => {
+    const { a, b, c, d, x0, y0, h, n } = q.params, out = euler((t, v) => [v[0] * (a - b * v[1]), v[1] * (-c + d * v[0])], 0, [x0, y0], h, n);
+    return { a: out[1][0], b: out[1][1], c: out[n][0], d: out[n][1] };
+  },
+  "t5-ai-phase-portrait/classify/equation": (q, T) => {
+    const { M, real, eig } = q.params, k = portrait(M), tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    if (real) for (const l of eig) T.require(Math.abs(l * l - tr * l + det) < 1e-9, "each stated eigenvalue satisfies the characteristic equation");
+    else T.require(Math.abs(2 * eig[0] - tr) < 1e-9 && Math.abs(eig[0] ** 2 + eig[1] ** 2 - det) < 1e-9, "the stated complex eigenvalues have the right sum and product");
+    const long = { sink: "in", spiralIn: "in", centre: "loop" }[k] || "out", out = { a: T.option(k) };
+    if (q.parts.length === 2) {
+      // follow a trajectory numerically and see whether it ends nearer to or further from the origin
+      const end = rk4((t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]], 0, [0.13, 0.07], 12, 24000), ratio = Math.hypot(...end) / Math.hypot(0.13, 0.07);
+      T.require(long === "in" ? ratio < 0.01 : long === "out" ? ratio > 100 : ratio > 0.05 && ratio < 20, "a numerical trajectory behaves as classified");
+      out.b = T.option(long);
+    }
+    return out;
+  },
+  "t5-ai-phase-portrait/eigenvalues-exact/equation": (q, T) => {
+    const { M, pt } = q.params, r = T.roots((l) => (M[0][0] - l) * (M[1][1] - l) - M[0][1] * M[1][0], -12.3, 12.7, 5000);
+    T.require(r.length === 2, "two distinct real eigenvalues");
+    const step = rk4((t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]], 0, pt, 1e-6, 4);
+    return { a: T.approx(r[0], 1e-6), b: T.approx(r[1], 1e-6), c: T.option(portrait(M)), d: T.approx((step[1] - pt[1]) / (step[0] - pt[0]), 1e-4 * Math.max(1, Math.abs((step[1] - pt[1]) / (step[0] - pt[0])))) };
+  },
+  "t5-ai-phase-portrait/complex-eigenvalues/equation": (q, T) => {
+    const M = q.params.M, tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    // Newton's method in the complex plane on the characteristic polynomial, from a start above the real axis
+    let re = 0.3, im = 1;
+    for (let i = 0; i < 200; i++) {
+      const fr = re * re - im * im - tr * re + det, fi = 2 * re * im - tr * im, dr = 2 * re - tr, di = 2 * im, den = dr * dr + di * di;
+      re -= (fr * dr + fi * di) / den; im -= (fi * dr - fr * di) / den;
+    }
+    T.require(im > 1e-6, "the eigenvalues are not real");
+    const turn = [[1, 0], [0, 1], [-1, 2], [2, -3]].map(([x, y]) => x * (M[1][0] * x + M[1][1] * y) - y * (M[0][0] * x + M[0][1] * y));
+    T.require(turn.every((v) => v > 0) || turn.every((v) => v < 0), "the motion turns the same way everywhere");
+    return { a: T.approx(re, 1e-9), b: T.approx(im, 1e-9), c: T.option(portrait(M)), d: T.option(turn[0] > 0 ? "anti" : "clock") };
+  },
+  "t5-ai-phase-portrait/particular-solution/equation": (q, T) => {
+    const { M, l1, l2, v1, v2, x0, y0, t1 } = q.params, f = (t, v) => [M[0][0] * v[0] + M[0][1] * v[1], M[1][0] * v[0] + M[1][1] * v[1]];
+    for (const [l, v] of [[l1, v1], [l2, v2]]) T.require(Math.abs(f(0, v)[0] - l * v[0]) < 1e-9 && Math.abs(f(0, v)[1] - l * v[1]) < 1e-9, "each stated eigenvector belongs to its eigenvalue");
+    T.require(l2 > l1, "the second eigenvalue is the larger");
+    const [A, B] = solve([[v1[0], v2[0]], [v1[1], v2[1]]], [x0, y0]), far = rk4(f, 0, [x0, y0], 30 / (l2 - l1), 8000);
+    return { a: A, b: B, c: T.approx(rk4(f, 0, [x0, y0], t1, 8000)[0], 1e-7 * Math.max(1, Math.abs(x0) + Math.abs(y0)) * 20), d: T.approx(far[1] / far[0], 1e-5) };
+  },
+  "t5-ai-second-order/convert-to-system/equation": (q, T) => {
+    const s = q.params.sit;
+    // an option is right when its dy/dt, used as the second derivative, satisfies the original equation for any x and y
+    const fits = (v) => [[1.3, -0.7], [-2.1, 0.4], [0.5, 2.2]].every(([x, y]) => Math.abs(v[0] * x + v[1] * y + v[2] + s.a * y + s.b * x - s.g) < 1e-9);
+    const hit = T.optionWhere(q, "a", fits), v = q.parts[0].answer.values[hit.index];
+    return { a: hit, b: v[0] * s.x0 + v[1] * s.v0 + v[2] };
+  },
+  "t5-ai-second-order/euler-system/equation": (q) => {
+    const s = q.params.sit, out = euler((t, v) => [v[1], -s.a * v[1] - s.b * v[0] + s.g], 0, [s.x0, s.v0], q.params.h, s.n);
+    return { a: out[1][0], b: out[1][1], c: out[s.n][0], d: out[s.n][1] };
   },
 
   /*NEXTV*/

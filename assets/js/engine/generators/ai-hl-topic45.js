@@ -1111,5 +1111,286 @@
         P("Find the exact volume of the solid.", 3, ans.exact(Math.PI * I2, piFrac(S.V.n, S.V.d)), [`$V = \\pi${S.A}_{0}^{${h}}$`, `$= ${piFrac(S.V.n, S.V.d)}$`])] };
     } });
 
+    // ======================= 5.14 differential equations: setting up and separating variables =======================
+  const DE = (y, x) => `\\dfrac{\\mathrm{d}${y}}{\\mathrm{d}${x}}`;
+  const epow = (k) => (k === 1 ? "\\mathrm{e}" : `\\mathrm{e}^{${num(k)}}`);
+  const formOpt = (rng, list) => ans.choice(rng, { text: m(list[0][0]), value: list[0][1] }, list.slice(1).map((o) => ({ text: m(o[0]), value: o[1], why: o[2] })));
+  reg({ type: "t5-ai-diff-eq", unknown: "separable-exact", representation: "equation", format: "mcq", levels: [3], syllabus: ["5.14"], skills: ["AI-AHL5.14.separate-variables", "AI-AHL5.14.particular-solution"],
+    title: "Solve a separable differential equation exactly",
+    build({ rng }) {
+      const fam = rng.pick(["kxy", "xovery", "ky2"]), y0 = rng.int(1, 5);
+      let k, x1, rhs, opts, answer, work, dom = "";
+      if (fam === "kxy") {
+        k = rng.pick([2, 4, -2, -4, 6]); const h = k / 2; x1 = Math.abs(h) > 2 ? 1 : rng.int(1, 2); rhs = coef(k, "xy"); dom = ", where $y > 0$";
+        opts = [[`y = A${ex(h, "x^{2}")}`, { form: "Aexp", c: h, p: 2 }], [`y = A${ex(k, "x^{2}")}`, { form: "Aexp", c: k, p: 2 }, `The integral of $${coef(k, "x")}$ is $${coef(h, "x^{2}")}$.`],
+          [`y = A${ex(k)}`, { form: "Aexp", c: k, p: 1 }, "The factor $x$ must be integrated too."], [`y = ${coef(h, "x^{2}")} + C`, { form: "poly", c: h, p: 2 }, "Divide by $y$ before integrating: the left side becomes $\\ln y$."]];
+        const e = h * x1 * x1;
+        answer = ans.exact(y0 * Math.exp(e), coef(y0, epow(e)));
+        work = [`Separate the variables: $\\displaystyle\\int \\dfrac{1}{y}\\,\\mathrm{d}y = \\displaystyle\\int ${coef(k, "x")}\\,\\mathrm{d}x$.`, `$\\ln y = ${coef(h, "x^{2}")} + c$, so $y = A${ex(h, "x^{2}")}$.`, `$y = ${y0}$ when $x = 0$ gives $A = ${y0}$.`, `When $x = ${x1}$, $y = ${coef(y0, epow(e))}$.`];
+      } else if (fam === "xovery") {
+        k = rng.pick([2, 4, 6, 8]); x1 = rng.int(1, 3); rhs = `\\dfrac{${coef(k, "x")}}{y}`; dom = ", where $y > 0$";
+        opts = [[`y = \\sqrt{${coef(k, "x^{2}")} + C}`, { form: "sqrt", c: k }], [`y = \\sqrt{${coef(2 * k, "x^{2}")} + C}`, { form: "sqrt", c: 2 * k }, `Integrating gives $\\dfrac{y^{2}}{2} = ${coef(k / 2, "x^{2}")} + c$; doubling both sides gives $${coef(k, "x^{2}")}$.`],
+          [`y = ${coef(k / 2, "x^{2}")} + C`, { form: "poly", c: k / 2, p: 2 }, "Multiply by $y$ before integrating: the left side becomes $\\dfrac{y^{2}}{2}$."], [`y = A${ex(k / 2, "x^{2}")}`, { form: "Aexp", c: k / 2, p: 2 }, "The $y$ is in the denominator, so the left side is the integral of $y$, not of its reciprocal."]];
+        const v = k * x1 * x1 + y0 * y0;
+        answer = Number.isInteger(Math.sqrt(v)) ? ans.int(Math.sqrt(v)) : ans.exact(Math.sqrt(v), surd(v));
+        work = [`Separate the variables: $\\displaystyle\\int y\\,\\mathrm{d}y = \\displaystyle\\int ${coef(k, "x")}\\,\\mathrm{d}x$.`, `$\\dfrac{y^{2}}{2} = ${coef(k / 2, "x^{2}")} + c$, so $y^{2} = ${coef(k, "x^{2}")} + C$.`, `$y = ${y0}$ when $x = 0$ gives $C = ${y0 * y0}$.`, `When $x = ${x1}$, $y^{2} = ${v}$, so $y = ${surd(v)}$.`];
+      } else {
+        k = rng.int(1, 3); x1 = rng.int(1, 3); rhs = coef(-k, "y^{2}"); dom = ", where $y > 0$";
+        opts = [[`y = \\dfrac{1}{${coef(k, "x")} + C}`, { form: "recip", c: k }], [`y = \\dfrac{1}{C - ${coef(k, "x")}}`, { form: "recip", c: -k }, "The integral of $\\dfrac{1}{y^{2}}$ is $-\\dfrac{1}{y}$, which changes the sign."],
+          [`y = A${ex(-k)}`, { form: "Aexp", c: -k, p: 1 }, "That solves an equation with $y$, not $y^{2}$, on the right."], [`y = \\dfrac{1}{${coef(2 * k, "x")} + C}`, { form: "recip", c: 2 * k }, "The integral of $\\dfrac{1}{y^{2}}$ is $-\\dfrac{1}{y}$, with no factor of two."]];
+        answer = ans.frac(y0, 1 + k * y0 * x1);
+        work = [`Separate the variables: $\\displaystyle\\int \\dfrac{1}{y^{2}}\\,\\mathrm{d}y = \\displaystyle\\int ${-k}\\,\\mathrm{d}x$.`, `$-\\dfrac{1}{y} = ${coef(-k, "x")} - C$, so $y = \\dfrac{1}{${coef(k, "x")} + C}$.`, `$y = ${y0}$ when $x = 0$ gives $C = ${frac(1, y0)}$.`, `When $x = ${x1}$, $y = ${frac(y0, 1 + k * y0 * x1)}$.`];
+      }
+      return { params: { fam, k, y0, x1 }, stem: `Consider the differential equation $${DE("y", "x")} = ${rhs}$${dom}. When $x = 0$, $y = ${y0}$.`, parts: [
+        P("Which of the following is the general solution?", 3, formOpt(rng, opts), work.slice(0, 2)), P(`Find the exact value of $y$ when $x = ${x1}$.`, 3, answer, work.slice(2))] };
+    } });
+  const EXP_CTX = [{ v: "N", what: "The number of bacteria in a culture", t: "hours", grow: true, n0: [4, 18], sc: 50, k: [15, 60] }, { v: "M", what: "The mass, in grams, of a radioactive substance", t: "days", grow: false, n0: [5, 40], sc: 10, k: [2, 20] },
+    { v: "A", what: "The amount, in milligrams, of a medicine in the blood", t: "hours", grow: false, n0: [4, 20], sc: 25, k: [10, 40] }, { v: "V", what: "The value, in euros, of a painting", t: "years", grow: true, n0: [8, 40], sc: 500, k: [3, 12] }];
+  reg({ type: "t5-ai-diff-eq", unknown: "exponential-model", representation: "words", format: "value", levels: [2], syllabus: ["5.14"], skills: ["AI-AHL5.14.particular-solution", "AI-AHL5.14.interpret-model"],
+    title: "A rate proportional to the amount present",
+    build({ rng }) {
+      const c = rng.pick(EXP_CTX), n0 = c.sc * rng.int(c.n0[0], c.n0[1]), k = ((c.grow ? 1 : -1) * rng.int(c.k[0], c.k[1])) / 100, t1 = rng.int(2, 9), mult = c.grow ? rng.pick([2, 3, 5]) : rng.pick([0.5, 0.25, 0.1]);
+      const v1 = n0 * Math.exp(k * t1), tt = Math.log(mult) / k, target = n0 * mult;
+      return { params: { n0, k, t1, target }, stem: `${c.what}, $${c.v}$, after $t$ ${c.t} satisfies the differential equation $${DE(c.v, "t")} = ${coef(k, c.v)}$. When $t = 0$, $${c.v} = ${num(n0)}$.`, parts: [
+        P(`Find the value of $${c.v}$ when $t = ${t1}$.`, 2, ans.sf(v1), [`The solution of $${DE(c.v, "t")} = k${c.v}$ is $${c.v} = ${c.v}_{0}\\mathrm{e}^{kt}$, so $${c.v} = ${num(n0)}\\mathrm{e}^{${coef(k, "t")}}$.`, `When $t = ${t1}$, $${c.v} = ${sf(v1)}$.`]),
+        P(`Find the value of $t$ at which $${c.v} = ${num(target)}$.`, 2, ans.sf(tt), [`$${num(n0)}\\mathrm{e}^{${coef(k, "t")}} = ${num(target)}$, so $\\mathrm{e}^{${coef(k, "t")}} = ${num(mult)}$.`, `$t = \\dfrac{\\ln ${num(mult)}}{${num(k)}} = ${sf(tt)}$`])] };
+    } });
+  reg({ type: "t5-ai-diff-eq", unknown: "cooling", representation: "words", format: "value", levels: [4], syllabus: ["5.14"], skills: ["AI-AHL5.14.set-up", "AI-AHL5.14.separate-variables", "AI-AHL5.14.particular-solution", "AI-AHL5.14.limiting-value"],
+    title: "Newton's law of cooling",
+    build({ rng }) {
+      const warm = rng.bool(0.3), room = rng.int(18, 26), T0 = warm ? rng.int(2, 8) : rng.int(70, 95), t1 = rng.int(2, 6), kTrue = rng.int(4, 20) / 100;
+      const T1 = Math.round(room + (T0 - room) * Math.exp(-kTrue * t1)), k = Math.log((T0 - room) / (T1 - room)) / t1, t2 = t1 + rng.int(3, 10), T2 = room + (T0 - room) * Math.exp(-k * t2);
+      const T3 = warm ? rng.int(T1 + 2, room - 2) : rng.int(room + 3, T1 - 3), t3 = Math.log((T0 - room) / (T3 - room)) / k, obj = warm ? "A cold drink is taken out of a fridge and left in a room" : "A cup of soup is left to cool in a room";
+      if (!(T3 > Math.min(T1, room) && T3 < Math.max(T1, room)) || Math.abs(T1 - room) < 4) return this.build({ rng });
+      return { params: { room, T0, t1, T1, t2, T3 }, stem: `${obj} where the temperature is $${room}^\\circ\\text{C}$. Its temperature, $T^\\circ\\text{C}$, after $t$ minutes satisfies $${DE("T", "t")} = -k(T - ${room})$, where $k$ is a positive constant. Initially $T = ${T0}$, and after $${t1}$ minutes $T = ${T1}$.`, parts: [
+        P("Find the value of $k$.", 3, ans.sf(k), [`Separating the variables gives $\\ln\\left|T - ${room}\\right| = -kt + c$, so $T = ${room} ${signed(T0 - room)}\\mathrm{e}^{-kt}$.`, `$${T1} = ${room} ${signed(T0 - room)}\\mathrm{e}^{-${t1}k}$, so $\\mathrm{e}^{-${t1}k} = ${frac(T1 - room, T0 - room)}$.`, `$k = ${sf(k)}$`]),
+        P(`Find the temperature after $${t2}$ minutes.`, 2, ans.sf(T2), [`$T = ${room} ${signed(T0 - room)}\\mathrm{e}^{-${sf(k, 4)} \\times ${t2}}$`, `$= ${sf(T2)}$`]),
+        P(`Find the time at which the temperature is $${T3}^\\circ\\text{C}$.`, 2, ans.sf(t3), [`$${room} ${signed(T0 - room)}\\mathrm{e}^{-${sf(k, 4)}t} = ${T3}$`, `$t = ${sf(t3)}$`])] };
+    } });
+  const SETUP = [
+    { id: 0, text: "The rate of increase of a population $N$ at time $t$ is proportional to $N$.", ok: `${DE("N", "t")} = kN`, bad: [`${DE("N", "t")} = kt`, `${DE("N", "t")} = \\dfrac{k}{N}`, `${DE("N", "t")} = -kN`] },
+    { id: 1, text: "The mass $M$ of a radioactive substance at time $t$ decreases at a rate proportional to $M$.", ok: `${DE("M", "t")} = -kM`, bad: [`${DE("M", "t")} = kM`, `${DE("M", "t")} = -kt`, `${DE("M", "t")} = -\\dfrac{k}{M}`] },
+    { id: 2, text: "The temperature $T$ of a hot drink at time $t$ falls at a rate proportional to the difference between $T$ and the room temperature $R$.", ok: `${DE("T", "t")} = -k(T - R)`, bad: [`${DE("T", "t")} = -kT`, `${DE("T", "t")} = k(T - R)`, `${DE("T", "t")} = -k(T - R)t`] },
+    { id: 3, text: "The volume $V$ of a balloon at time $t$ increases at a rate inversely proportional to $V$.", ok: `${DE("V", "t")} = \\dfrac{k}{V}`, bad: [`${DE("V", "t")} = kV`, `${DE("V", "t")} = -\\dfrac{k}{V}`, `${DE("V", "t")} = \\dfrac{k}{t}`] },
+    { id: 4, text: "The depth $h$ of water in a leaking tank at time $t$ decreases at a rate proportional to the square root of $h$.", ok: `${DE("h", "t")} = -k\\sqrt{h}`, bad: [`${DE("h", "t")} = k\\sqrt{h}`, `${DE("h", "t")} = -kh^{2}`, `${DE("h", "t")} = -k\\sqrt{t}`] },
+    { id: 5, text: "In a town of $M$ people, the number $N$ who have heard a rumour at time $t$ increases at a rate proportional to the product of $N$ and the number who have not heard it.", ok: `${DE("N", "t")} = kN(M - N)`, bad: [`${DE("N", "t")} = kN`, `${DE("N", "t")} = k(M - N)`, `${DE("N", "t")} = k(N - M)`] }];
+  reg({ type: "t5-ai-diff-eq", unknown: "set-up", representation: "words", format: "mcq", levels: [1], fixedPool: true, syllabus: ["5.14"], skills: ["AI-AHL5.14.set-up"],
+    title: "Write a differential equation from a description",
+    build({ rng }) {
+      const c = rng.pick(SETUP);
+      return { params: { id: c.id }, stem: `${c.text} The constant $k$ is positive.`, parts: [
+        P("Which differential equation models this situation?", 1, ans.choice(rng, { text: m(c.ok), value: "ok" }, c.bad.map((b, i) => ({ text: m(b), value: "bad" + i, why: "Check which variable the rate is proportional to, and whether the quantity is increasing or decreasing." }))), [
+          "A rate of change is a derivative with respect to time; proportional to means a constant multiple of.", `$${c.ok}$`])] };
+    } });
+
+  // ======================= 5.15 slope fields =======================
+  // A slope field as a plot: one short straight piece through each grid point.
+  function slopeField(f, xr, yr, alt) {
+    const fns = [];
+    for (let x = xr[0]; x <= xr[1]; x++) for (let y = yr[0]; y <= yr[1]; y++) {
+      const g = Number(f(x, y).toFixed(6)), half = Number((0.32 / Math.sqrt(1 + g * g)).toFixed(4));
+      fns.push({ fn: { type: "poly", coeffs: [Number((y - g * x).toFixed(6)), g] }, domain: [Number((x - half).toFixed(4)), Number((x + half).toFixed(4))] });
+    }
+    return { x: [xr[0] - 0.8, xr[1] + 0.8], y: [yr[0] - 0.8, yr[1] + 0.8], xStep: 1, yStep: 1, functions: fns, alt };
+  }
+  const SF = [
+    { id: "x+y", tex: "x + y", f: (x, y) => x + y }, { id: "x-y", tex: "x - y", f: (x, y) => x - y }, { id: "y-x", tex: "y - x", f: (x, y) => y - x }, { id: "-x-y", tex: "-x - y", f: (x, y) => -x - y },
+    { id: "y/2", tex: "\\dfrac{y}{2}", f: (x, y) => y / 2 }, { id: "x/2", tex: "\\dfrac{x}{2}", f: (x, y) => x / 2 }, { id: "-y/2", tex: "-\\dfrac{y}{2}", f: (x, y) => -y / 2 }, { id: "-x/2", tex: "-\\dfrac{x}{2}", f: (x, y) => -x / 2 },
+    { id: "xy/2", tex: "\\dfrac{xy}{2}", f: (x, y) => (x * y) / 2 }, { id: "-xy/2", tex: "-\\dfrac{xy}{2}", f: (x, y) => (-x * y) / 2 }];
+  const EUL = [{ id: "x+y", tex: "x + y", f: (x, y) => x + y }, { id: "x-y", tex: "x - y", f: (x, y) => x - y }, { id: "xy", tex: "xy", f: (x, y) => x * y }, { id: "y-x2", tex: "y - x^{2}", f: (x, y) => y - x * x },
+    { id: "2x-y", tex: "2x - y", f: (x, y) => 2 * x - y }, { id: "x2+y", tex: "x^{2} + y", f: (x, y) => x * x + y }, { id: "x/y", tex: "\\dfrac{x}{y}", f: (x, y) => x / y }];
+  reg({ type: "t5-ai-slope-field", unknown: "gradient-at-point", representation: "equation", format: "value", levels: [1], syllabus: ["5.15"], skills: ["AI-AHL5.15.gradient-at-point"], niceOk: true,
+    title: "The gradient of a slope field at a point",
+    build({ rng }) {
+      const F = rng.pick(EUL.slice(0, 6)), p1 = [rng.int(-3, 3), rng.int(-3, 3)];
+      let p2;
+      do { p2 = [rng.int(-3, 3), rng.int(-3, 3)]; } while (F.f(p2[0], p2[1]) === F.f(p1[0], p1[1]));
+      const part = (p) => P(`Find the gradient of the slope field at the point $${fmt.point(p[0], p[1])}$.`, 1, ans.int(F.f(p[0], p[1])), [`Substitute $x = ${p[0]}$ and $y = ${p[1]}$: $${DE("y", "x")} = ${F.f(p[0], p[1])}$.`]);
+      return { params: { id: F.id, p1, p2 }, stem: `A slope field is drawn for the differential equation $${DE("y", "x")} = ${F.tex}$.`, parts: [part(p1), part(p2)] };
+    } });
+  reg({ type: "t5-ai-slope-field", unknown: "match-field", representation: "graph", format: "mcq", levels: [2], syllabus: ["5.15"], skills: ["AI-AHL5.15.match-field", "AI-AHL5.15.gradient-at-point"],
+    title: "Match a slope field to its differential equation",
+    build({ rng }) {
+      const pick = rng.sample(SF, 4), F = pick[0], pt = [rng.int(-3, 2) + 0.5, rng.int(-3, 2) + 0.5];
+      return { params: { pt }, stem: `The diagram shows the slope field of a differential equation of the form $${DE("y", "x")} = f(x, y)$, drawn at the points with whole-number coordinates.`,
+        graph: slopeField(F.f, [-3, 3], [-3, 3], "A slope field: short line segments at the points with whole-number coordinates"), parts: [
+          P("Which differential equation has this slope field?", 2, ans.choice(rng, { text: m(`${DE("y", "x")} = ${F.tex}`), value: F.id }, pick.slice(1).map((o) => ({ text: m(`${DE("y", "x")} = ${o.tex}`), value: o.id, why: "Test this equation at a few points of the diagram: its gradients do not match the segments drawn there." }))), [
+            "Look at where the segments are horizontal, and at the sign of the gradient in each quadrant.", `Only $${DE("y", "x")} = ${F.tex}$ gives the gradients shown, for example $${num(F.f(1, 2))}$ at $(1,\\, 2)$ and $${num(F.f(-2, 1))}$ at $(-2,\\, 1)$.`]),
+          P(`For this differential equation, find the gradient at the point $${fmt.point(pt[0], pt[1])}$.`, 1, ans.dec(F.f(pt[0], pt[1])), [`Substitute $x = ${num(pt[0])}$ and $y = ${num(pt[1])}$ into $${F.tex}$: the gradient is $${num(F.f(pt[0], pt[1]))}$.`])] };
+    } });
+  reg({ type: "t5-ai-slope-field", unknown: "linear-solution", representation: "graph", format: "value", levels: [3], syllabus: ["5.15"], skills: ["AI-AHL5.15.gradient-at-point", "AI-AHL5.15.zero-gradient-curve", "AI-AHL5.15.sketch-solution"],
+    title: "Zero gradients and a straight-line solution of a slope field",
+    build({ rng }) {
+      const qq = rng.int(1, 2), p = rng.nonzero(-2, 2), r = rng.nonzero(-3, 3), x0 = rng.int(-2, 2), y0 = rng.int(-2, 2), rhs = expr([[p, "x"], [-qq, "y"], [r, ""]]);
+      const mQ = Q(p, qq), bQ = Q(r * qq - p, qq * qq), f = (x, y) => p * x - qq * y + r;
+      return { params: { p, qq, r, x0, y0 }, stem: `The diagram shows the slope field of the differential equation $${DE("y", "x")} = ${rhs}$.`, graph: slopeField((x, y) => Math.max(-9, Math.min(9, f(x, y))), [-3, 3], [-3, 3], "A slope field whose horizontal segments lie along a straight line"), parts: [
+        P(`Find the gradient at the point $${fmt.point(x0, y0)}$.`, 1, ans.int(f(x0, y0)), [`Substitute $x = ${x0}$ and $y = ${y0}$ into $${rhs}$: the gradient is $${f(x0, y0)}$.`]),
+        P("The points at which the gradient is zero lie on a straight line. Find the $y$-intercept of this line.", 2, ans.frac(r, qq), [`$${rhs} = 0$ gives $y = ${expr([[Q(p, qq), "x"], [Q(r, qq), ""]])}$.`, `Its $y$-intercept is $${frac(r, qq)}$.`]),
+        P("One solution curve is a straight line, $y = mx + b$. Find the value of $m$.", 2, ans.frac(mQ.n, mQ.d), [`Substitute $y = mx + b$, for which $${DE("y", "x")} = m$: $m = ${coef(p, "x")} - ${qq === 1 ? "" : qq}(mx + b) ${signed(r)}$ for every $x$.`, `The terms in $x$ must cancel: $${p} - ${coef(qq, "m")} = 0$, so $m = ${frac(mQ.n, mQ.d)}$.`]),
+        P("Find the value of $b$.", 2, ans.frac(bQ.n, bQ.d), [`The constant terms give $m = ${coef(-qq, "b")} ${signed(r)}$.`, `$b = ${frac(bQ.n, bQ.d)}$`])] };
+    } });
+  reg({ type: "t5-ai-slope-field", unknown: "equilibrium", representation: "graph", format: "value", levels: [4], syllabus: ["5.15"], skills: ["AI-AHL5.15.gradient-at-point", "AI-AHL5.15.sketch-solution", "AI-AHL5.15.zero-gradient-curve"], niceOk: true,
+    title: "Equilibrium solutions and long-term behaviour from a slope field",
+    build({ rng }) {
+      const a = rng.int(0, 2), b = a + rng.int(3, 5), k = rng.int(1, 5) / 10, f = (y) => k * (y - a) * (b - y);
+      let y0;
+      do { y0 = a + rng.int(1, 2 * (b - a) - 1) / 2; } while (y0 === (a + b) / 2);
+      const rhs = `${num(k)}${fmt.factor(a, "y")}(${b} - y)`;
+      return { params: { a, b, k, y0 }, stem: `The diagram shows the slope field of the differential equation $${DE("y", "x")} = ${rhs}$. A solution curve passes through the point $${fmt.point(0, y0)}$.`,
+        graph: slopeField((x, y) => f(y), [0, 7], [a - 1, b + 1], "A slope field whose segments depend only on the height, horizontal along two levels"), parts: [
+          P(`Find the gradient of the solution curve at $${fmt.point(0, y0)}$.`, 1, ans.dec(Number(f(y0).toFixed(6))), [`$${num(k)}${br(Number((y0 - a).toFixed(2)))}${br(Number((b - y0).toFixed(2)))} = ${num(Number(f(y0).toFixed(6)))}$`]),
+          P("The differential equation has two constant solutions, $y = c$. Write down the smaller value of $c$.", 1, ans.int(a), [`The gradient is zero for every $x$ when $y = ${a}$ or $y = ${b}$. The smaller is $${a}$.`]),
+          P("Write down the larger value of $c$.", 1, ans.int(b), [`The larger is $${b}$.`]),
+          P(`Write down the value that $y$ approaches as $x$ becomes large, for the solution through $${fmt.point(0, y0)}$.`, 1, ans.int(b), [`Between $y = ${a}$ and $y = ${b}$ every gradient is positive, so the curve rises and levels off towards $y = ${b}$.`]),
+          P("Find the value of $y$ at which this solution curve is steepest.", 2, ans.dec((a + b) / 2), [`The gradient $${rhs}$ is a quadratic in $y$ with zeros at $${a}$ and $${b}$.`, `It is greatest midway between them, at $y = ${num((a + b) / 2)}$.`])] };
+    } });
+
+  // ======================= 5.16 Euler's method =======================
+  const v5 = (x) => num(Number(x.toPrecision(5)));
+  reg({ type: "t5-ai-euler", unknown: "first-steps", representation: "equation", format: "value", levels: [1, 2], syllabus: ["5.16"], skills: ["AI-AHL5.16.single-equation"],
+    title: "The first steps of Euler's method",
+    build({ rng, level }) {
+      const F = rng.pick(EUL), x0 = rng.int(0, 2), y0 = rng.int(1, 4), h = rng.pick([0.1, 0.2, 0.25, 0.5]), g0 = F.f(x0, y0), y1 = y0 + h * g0, x1 = Number((x0 + h).toFixed(2)), g1 = F.f(x1, y1), y2 = y1 + h * g1;
+      const parts = [P(`Find the approximate value of $y$ when $x = ${num(x1)}$.`, 2, ans.sf(y1), [`$y_{n+1} = y_{n} + h \\times f(x_{n},\\, y_{n})$, with $f(${x0},\\, ${y0}) = ${v5(g0)}$.`, `$y_{1} = ${y0} + ${num(h)} \\times ${paren(Number(g0.toPrecision(5)))} = ${sf(y1)}$`])];
+      if (level === 2) parts.push(P(`Find the approximate value of $y$ when $x = ${num(Number((x0 + 2 * h).toFixed(2)))}$.`, 2, ans.sf(y2), [`$f(${num(x1)},\\, ${v5(y1)}) = ${v5(g1)}$`, `$y_{2} = ${v5(y1)} + ${num(h)} \\times ${paren(Number(g1.toPrecision(5)))} = ${sf(y2)}$`]));
+      return { params: { id: F.id, x0, y0, h }, stem: `Consider the differential equation $${DE("y", "x")} = ${F.tex}$, with $y = ${y0}$ when $x = ${x0}$. Euler's method is used with step size $${num(h)}$.`, parts };
+    } });
+  const EULX = [
+    { id: "x+y", tex: "x + y", f: (x, y) => x + y, sol: (y0) => `y = ${coef(y0 + 1, "\\mathrm{e}^{x}")} - x - 1`, val: (y0, x) => (y0 + 1) * Math.exp(x) - x - 1 },
+    { id: "x-y", tex: "x - y", f: (x, y) => x - y, sol: (y0) => `y = x - 1 + ${coef(y0 + 1, "\\mathrm{e}^{-x}")}`, val: (y0, x) => x - 1 + (y0 + 1) * Math.exp(-x) },
+    { id: "-2xy", tex: "-2xy", f: (x, y) => -2 * x * y, sol: (y0) => `y = ${coef(y0, "\\mathrm{e}^{-x^{2}}")}`, val: (y0, x) => y0 * Math.exp(-x * x) },
+    { id: "ycosx", tex: "y\\cos x", f: (x, y) => y * Math.cos(x), sol: (y0) => `y = ${coef(y0, "\\mathrm{e}^{\\sin x}")}`, val: (y0, x) => y0 * Math.exp(Math.sin(x)) }];
+  reg({ type: "t5-ai-euler", unknown: "approximate-and-error", representation: "equation", format: "value", levels: [4], syllabus: ["5.16"], skills: ["AI-AHL5.16.single-equation", "AI-AHL5.16.accuracy", "AI-AHL5.16.compare-values"],
+    title: "Euler's method over several steps and its error",
+    build({ rng }) {
+      const F = rng.pick(EULX), y0 = rng.int(1, 5), h = rng.pick([0.1, 0.2]), n = h === 0.2 ? 5 : rng.pick([5, 10]), X = Number((n * h).toFixed(1)), ys = [y0];
+      for (let i = 0; i < n; i++) ys.push(ys[i] + h * F.f(i * h, ys[i]));
+      const exact = F.val(y0, X), err = (100 * Math.abs(ys[n] - exact)) / exact;
+      return { params: { id: F.id, y0, h, n }, stem: `Consider the differential equation $${DE("y", "x")} = ${F.tex}$, with $y = ${y0}$ when $x = 0$. Euler's method with step size $${num(h)}$ is used to approximate $y$ when $x = ${num(X)}$.`, parts: [
+        P(`Find the approximate value of $y$ when $x = ${num(h)}$.`, 2, ans.sf(ys[1]), ["$x_{n+1} = x_{n} + h$ and $y_{n+1} = y_{n} + h \\times f(x_{n},\\, y_{n})$", `$y_{1} = ${y0} + ${num(h)} \\times ${paren(Number(F.f(0, y0).toPrecision(5)))} = ${sf(ys[1])}$`]),
+        P(`Find the approximate value of $y$ when $x = ${num(X)}$.`, 3, ans.sf(ys[n]), ["Set up the recurrence on the GDC or in a spreadsheet and iterate.", `The successive values of $y$ are $${ys.slice(1).map(v5).join(",\\ ")}$.`, `After $${n}$ steps, $y \\approx ${sf(ys[n])}$.`]),
+        P(`The exact solution is $${F.sol(y0)}$. Find the percentage error in the approximation when $x = ${num(X)}$.`, 2, ans.sf(err), [`The exact value is $${sf(exact, 5)}$.`, `Percentage error $= \\dfrac{\\left|${sf(ys[n], 5)} - ${sf(exact, 5)}\\right|}{${sf(exact, 5)}} \\times 100\\% = ${pct(sf(err))}$`])] };
+    } });
+  reg({ type: "t5-ai-euler", unknown: "coupled-system", representation: "words", format: "value", levels: [4], syllabus: ["5.16"], skills: ["AI-AHL5.16.coupled-system", "AI-AHL5.16.use-output"],
+    title: "Euler's method for a predator and prey model",
+    build({ rng }) {
+      const c = rng.pick([["rabbits", "foxes"], ["small fish", "sharks"], ["aphids", "ladybirds"], ["voles", "owls"]]), a = rng.int(6, 14) / 10, b = rng.int(2, 6) / 10, cc = rng.int(3, 9) / 10, d = rng.int(1, 3) / 10, x0 = rng.int(2, 8), y0 = rng.int(1, 4), h = 0.1, n = rng.pick([5, 10]);
+      const fx = (x, y) => x * (a - b * y), fy = (x, y) => y * (-cc + d * x), xs = [x0], ys = [y0];
+      for (let i = 0; i < n; i++) { xs.push(xs[i] + h * fx(xs[i], ys[i])); ys.push(ys[i] + h * fy(xs[i], ys[i])); }
+      return { params: { a, b, c: cc, d, x0, y0, h, n }, stem: `The populations of ${c[0]}, $x$ hundred, and ${c[1]}, $y$ hundred, on an island after $t$ years are modelled by $${DE("x", "t")} = x(${num(a)} - ${num(b)}y)$ and $${DE("y", "t")} = y(-${num(cc)} + ${num(d)}x)$. When $t = 0$, $x = ${x0}$ and $y = ${y0}$. Euler's method is used with step size $${num(h)}$.`, parts: [
+        P(`Find the approximate value of $x$ when $t = ${num(h)}$.`, 2, ans.sf(xs[1]), [`$x_{n+1} = x_{n} + ${num(h)}x_{n}(${num(a)} - ${num(b)}y_{n})$`, `$x_{1} = ${x0} + ${num(h)}${br(x0)}(${num(a)} - ${num(b)} \\times ${y0}) = ${sf(xs[1])}$`]),
+        P(`Find the approximate value of $y$ when $t = ${num(h)}$.`, 2, ans.sf(ys[1]), [`$y_{n+1} = y_{n} + ${num(h)}y_{n}(-${num(cc)} + ${num(d)}x_{n})$`, `$y_{1} = ${y0} + ${num(h)}${br(y0)}(-${num(cc)} + ${num(d)} \\times ${x0}) = ${sf(ys[1])}$`]),
+        P(`Find the approximate value of $x$ when $t = ${num(n * h)}$.`, 2, ans.sf(xs[n]), ["Both recurrences are iterated together, each step using the values of $x$ and $y$ from the step before.", `The successive values of $x$ are $${xs.slice(1).map(v5).join(",\\ ")}$.`, `$x \\approx ${sf(xs[n])}$`]),
+        P(`Find the approximate value of $y$ when $t = ${num(n * h)}$.`, 1, ans.sf(ys[n]), [`The successive values of $y$ are $${ys.slice(1).map(v5).join(",\\ ")}$, so $y \\approx ${sf(ys[n])}$.`])] };
+    } });
+
+  // ======================= 5.17 phase portraits =======================
+  const PPN = { sink: "A stable node: every trajectory moves towards the origin.", source: "An unstable node: every trajectory moves away from the origin.", saddle: "A saddle point: trajectories approach along one direction and leave along another.",
+    spiralIn: "A stable spiral: trajectories spiral in towards the origin.", spiralOut: "An unstable spiral: trajectories spiral away from the origin.", centre: "A centre: trajectories are closed curves around the origin." };
+  const PPW = { sink: "A stable node needs two negative real eigenvalues.", source: "An unstable node needs two positive real eigenvalues.", saddle: "A saddle point needs real eigenvalues of opposite signs.",
+    spiralIn: "A stable spiral needs complex eigenvalues with a negative real part.", spiralOut: "An unstable spiral needs complex eigenvalues with a positive real part.", centre: "A centre needs purely imaginary eigenvalues." };
+  const ppChoice = (rng, kind) => ans.choice(rng, { text: PPN[kind], value: kind }, rng.shuffle(Object.keys(PPN).filter((k) => k !== kind)).map((k) => ({ text: PPN[k], value: k, why: PPW[k] })));
+  const ppReason = (kind, e) => ({ sink: `Both eigenvalues, $${e}$, are real and negative`, source: `Both eigenvalues, $${e}$, are real and positive`, saddle: `The eigenvalues, $${e}$, are real with opposite signs`,
+    spiralIn: `The eigenvalues, $${e}$, are complex with a negative real part`, spiralOut: `The eigenvalues, $${e}$, are complex with a positive real part`, centre: `The eigenvalues, $${e}$, are purely imaginary` })[kind] + ", so the origin is " + PPN[kind].split(":")[0].replace(/^A/, "a") + ".";
+  function conjugate(D, s, t) { // P D P^{-1} with P = [[1, s], [t, 1 + st]], which has determinant 1
+    const mul = (A, B) => A.map((r) => [r[0] * B[0][0] + r[1] * B[1][0], r[0] * B[0][1] + r[1] * B[1][1]]);
+    return mul(mul([[1, s], [t, 1 + s * t]], D), [[1 + s * t, -s], [-t, 1]]);
+  }
+  const sysTex = (M) => `$${DE("x", "t")} = ${expr([[M[0][0], "x"], [M[0][1], "y"]])}$ and $${DE("y", "t")} = ${expr([[M[1][0], "x"], [M[1][1], "y"]])}$`;
+  function realPair(rng, kind) {
+    const a = rng.int(1, 4);
+    let b;
+    do { b = rng.int(1, 5); } while (b === a);
+    return kind === "sink" ? [-Math.max(a, b), -Math.min(a, b)] : kind === "source" ? [Math.min(a, b), Math.max(a, b)] : [-a, b];
+  }
+  reg({ type: "t5-ai-phase-portrait", unknown: "classify", representation: "equation", format: "mcq", levels: [1, 2], syllabus: ["5.17"], skills: ["AI-AHL5.17.classify-equilibrium", "AI-AHL5.17.long-term"],
+    title: "Classify the equilibrium point from the eigenvalues",
+    build({ rng, level }) {
+      const kind = rng.pick(Object.keys(PPN)), real = ["sink", "source", "saddle"].includes(kind), s = rng.int(-1, 1), t = rng.int(-1, 1);
+      let M, eTex, eig;
+      if (real) { eig = realPair(rng, kind); M = conjugate([[eig[0], 0], [0, eig[1]]], s, t); eTex = `${eig[0]}$ and $${eig[1]}`; }
+      else { const re = kind === "centre" ? 0 : (kind === "spiralIn" ? -1 : 1) * rng.int(1, 3), im = rng.int(1, 3); eig = [re, im]; M = conjugate([[re, -im], [im, re]], s, t); eTex = `${re === 0 ? "" : re + " "}\\pm ${im === 1 ? "" : im}\\mathrm{i}`; }
+      const long = { sink: "in", spiralIn: "in", source: "out", spiralOut: "out", saddle: "out", centre: "loop" }[kind];
+      const LT = { in: "It approaches the origin.", out: "It moves further and further away from the origin.", loop: "It keeps going round the origin on a closed curve.", rest: "It stays at the point where it started." };
+      const parts = [P("Which of the following describes the equilibrium point at the origin?", 2, ppChoice(rng, kind), [ppReason(kind, eTex)])];
+      if (level === 2) parts.push(P("What happens in the long term to a typical trajectory that starts close to the origin?", 2, ans.choice(rng, { text: LT[long], value: long }, Object.keys(LT).filter((k) => k !== long).map((k) => ({ text: LT[k], value: k, why: "Use the signs of the real parts of the eigenvalues." }))), [
+        long === "in" ? "The real parts of both eigenvalues are negative, so every solution decays towards the origin." : long === "loop" ? "The real parts are zero, so solutions neither grow nor decay: they circle the origin." : "An eigenvalue has a positive real part, so a typical solution grows without bound."]));
+      return { params: { M, real, eig }, stem: `Consider the system ${sysTex(M)}. The matrix of coefficients has eigenvalues $${eTex}$.`, parts };
+    } });
+  reg({ type: "t5-ai-phase-portrait", unknown: "eigenvalues-exact", representation: "equation", format: "value", levels: [3], syllabus: ["5.17"], skills: ["AI-AHL5.17.classify-equilibrium", "AI-AHL5.17.gradient-direction", "AI-AHL5.17.matrix-form"],
+    title: "Find the eigenvalues, classify the origin and find a direction",
+    build({ rng }) {
+      let M, eig, kind, pt, vx, vy;
+      do {
+        kind = rng.pick(["sink", "source", "saddle"]); eig = realPair(rng, kind); M = conjugate([[eig[0], 0], [0, eig[1]]], rng.int(-2, 2), rng.int(-2, 2));
+        pt = [rng.nonzero(-3, 3), rng.nonzero(-3, 3)]; vx = M[0][0] * pt[0] + M[0][1] * pt[1]; vy = M[1][0] * pt[0] + M[1][1] * pt[1];
+      } while (vx === 0 || vy === 0 || (M[0][1] === 0 && M[1][0] === 0));
+      const tr = M[0][0] + M[1][1], det = M[0][0] * M[1][1] - M[0][1] * M[1][0], eTex = `${eig[0]}$ and $${eig[1]}`;
+      return { params: { M, pt }, stem: `Consider the system ${sysTex(M)}.`, parts: [
+        P("Find the smaller eigenvalue of the matrix of coefficients.", 2, ans.int(eig[0]), [`The matrix is $${mat(M)}$, with characteristic equation $${poly([1, -tr, det], "\\lambda")} = 0$.`, `$${fmt.factor(eig[0], "\\lambda")}${fmt.factor(eig[1], "\\lambda")} = 0$, so the smaller eigenvalue is $${eig[0]}$.`]),
+        P("Find the larger eigenvalue.", 2, ans.int(eig[1]), [`The larger eigenvalue is $${eig[1]}$.`]),
+        P("Which of the following describes the equilibrium point at the origin?", 1, ppChoice(rng, kind), [ppReason(kind, eTex)]),
+        P(`A trajectory passes through the point $${fmt.point(pt[0], pt[1])}$. Find the value of $${DE("y", "x")}$ there.`, 2, ans.frac(vy, vx), [`At $${fmt.point(pt[0], pt[1])}$, $${DE("x", "t")} = ${vx}$ and $${DE("y", "t")} = ${vy}$.`, `$${DE("y", "x")} = \\dfrac{${vy}}{${vx}}${fmt.gcd(vy, vx) > 1 || vx < 0 ? ` = ${frac(vy, vx)}` : ""}$`])] };
+    } });
+  reg({ type: "t5-ai-phase-portrait", unknown: "complex-eigenvalues", representation: "equation", format: "value", levels: [4], syllabus: ["5.17"], skills: ["AI-AHL5.17.classify-equilibrium", "AI-AHL5.17.sketch-portrait", "AI-AHL5.17.matrix-form"],
+    title: "Complex eigenvalues: spirals and the direction of rotation",
+    build({ rng }) {
+      let M, tr, det;
+      do { M = [[rng.int(-4, 4), rng.nonzero(-5, 5)], [rng.nonzero(-5, 5), rng.int(-4, 4)]]; tr = M[0][0] + M[1][1]; det = M[0][0] * M[1][1] - M[0][1] * M[1][0]; } while (tr * tr - 4 * det >= 0);
+      const re = tr / 2, im = Math.sqrt(4 * det - tr * tr) / 2, kind = tr === 0 ? "centre" : tr < 0 ? "spiralIn" : "spiralOut", anti = M[1][0] > 0;
+      const eTex = `${re === 0 ? "" : num(re) + " "}\\pm ${sf(im)}\\mathrm{i}`;
+      return { params: { M }, stem: `Consider the system ${sysTex(M)}. The eigenvalues of the matrix of coefficients are complex, of the form $a \\pm b\\mathrm{i}$ with $b > 0$.`, parts: [
+        P("Find the value of $a$.", 2, ans.dec(re), [`The matrix is $${mat(M)}$, with characteristic equation $${poly([1, -tr, det], "\\lambda")} = 0$.`, `The GDC (or the quadratic formula) gives $\\lambda = ${eTex}$, so $a = ${num(re)}$.`]),
+        P("Find the value of $b$.", 2, ans.sf(im), [`$b = \\dfrac{\\sqrt{${4 * det - tr * tr}}}{2} = ${sf(im)}$`]),
+        P("Which of the following describes the equilibrium point at the origin?", 1, ppChoice(rng, kind), [ppReason(kind, eTex)]),
+        P("In which direction do the trajectories turn around the origin?", 2, ans.choice(rng, { text: anti ? "Anticlockwise" : "Clockwise", value: anti ? "anti" : "clock" }, [
+          { text: anti ? "Clockwise" : "Anticlockwise", value: anti ? "clock" : "anti", why: "Find the direction of motion at a point on the positive $x$-axis." }, { text: "They do not turn: they move along straight lines", value: "straight", why: "Complex eigenvalues always give rotation." }]), [
+          `At the point $(1,\\, 0)$, $${DE("y", "t")} = ${M[1][0]}$, which is ${anti ? "positive" : "negative"}.`, `A point on the positive $x$-axis is moving ${anti ? "up" : "down"}, so the trajectories turn ${anti ? "anticlockwise" : "clockwise"}.`])] };
+    } });
+  const vec = (a, b) => `\\begin{pmatrix} ${a} \\\\ ${b} \\end{pmatrix}`;
+  reg({ type: "t5-ai-phase-portrait", unknown: "particular-solution", representation: "equation", format: "value", levels: [4], syllabus: ["5.17"], skills: ["AI-AHL5.17.general-solution", "AI-AHL5.17.particular-solution", "AI-AHL5.17.long-term"],
+    title: "A particular solution of a coupled system and its long-term direction",
+    build({ rng }) {
+      let l1, l2, s, t, M, A, B;
+      do { l1 = rng.nonzero(-3, 1); l2 = rng.nonzero(-2, 2); s = rng.nonzero(-2, 2); t = rng.int(-2, 2); A = rng.nonzero(-3, 4); B = rng.nonzero(-3, 4); M = conjugate([[l1, 0], [0, l2]], s, t); } while (l1 >= l2 || (M[0][1] === 0 && M[1][0] === 0));
+      const v1 = [1, t], v2 = [s, 1 + s * t], x0 = A + B * s, y0 = A * t + B * (1 + s * t), t1 = rng.pick([0.2, 0.5, 0.8, 1]), xt = A * Math.exp(l1 * t1) + B * s * Math.exp(l2 * t1);
+      const e = (l) => `\\mathrm{e}^{${coef(l, "t")}}`;
+      return { params: { M, l1, l2, v1, v2, x0, y0, t1 }, stem: `Consider the system ${sysTex(M)}. The matrix of coefficients has eigenvalues $${l1}$ and $${l2}$, with eigenvectors $${vec(v1[0], v1[1])}$ and $${vec(v2[0], v2[1])}$ respectively, ` +
+        `so the general solution is $\\begin{pmatrix} x \\\\ y \\end{pmatrix} = A${e(l1)}${vec(v1[0], v1[1])} + B${e(l2)}${vec(v2[0], v2[1])}$. When $t = 0$, $x = ${x0}$ and $y = ${y0}$.`, parts: [
+        P("Find the value of $A$.", 2, ans.int(A), [`At $t = 0$: $${expr([[1, "A"], [s, "B"]])} = ${x0}$ and $${expr([[t, "A"], [1 + s * t, "B"]])} = ${y0}$.`, `Solving the two equations gives $A = ${A}$ and $B = ${B}$.`]),
+        P("Find the value of $B$.", 2, ans.int(B), [`From the same pair of equations, $B = ${B}$.`]),
+        P(`Find the value of $x$ when $t = ${num(t1)}$.`, 2, ans.sf(xt), [`$x = ${expr([[A, e(l1)], [B * s, e(l2)]])}$`, `When $t = ${num(t1)}$, $x = ${sf(xt)}$.`]),
+        P("Find the value that $\\dfrac{y}{x}$ approaches as $t$ becomes large.", 1, ans.frac(v2[1], v2[0]), [`For large $t$ the term with the larger eigenvalue, $${l2}$, dominates, so the trajectory follows the direction of $${vec(v2[0], v2[1])}$.`, `$\\dfrac{y}{x}$ approaches $${frac(v2[1], v2[0])}$.`])] };
+    } });
+
+  // ======================= 5.18 second-order differential equations =======================
+  const D2 = "\\dfrac{\\mathrm{d}^{2}x}{\\mathrm{d}t^{2}}";
+  function sitSecond(rng) { return { a: rng.pick([0, 0.5, 1, 1.5, 2, 3]), b: rng.int(1, 6), g: rng.pick([0, 0, 0, 2, 4, 6]), x0: rng.nonzero(-2, 4), v0: rng.int(-2, 2), n: rng.int(3, 6), ctx: rng.pick(["a mass on a spring", "a pendulum bob", "a floating buoy", "the tip of a vibrating rod"]) }; }
+  const secondStem = (s) => `The displacement, $x$ metres, of ${s.ctx} from a fixed point at time $t$ seconds satisfies $${expr([[1, D2], [s.a, DE("x", "t")], [s.b, "x"]])} = ${s.g}$. When $t = 0$, $x = ${s.x0}$ and $${DE("x", "t")} = ${s.v0}$.`;
+  const secondRhs = (p, q, g, v1, v2) => expr([[p, v1 || "x"], [q, v2 || "y"], [g, ""]]);
+  reg({ type: "t5-ai-second-order", unknown: "convert-to-system", representation: "equation", format: "mcq", levels: [2], syllabus: ["5.18"], skills: ["AI-AHL5.18.convert-to-system", "AI-AHL5.18.interpret-velocity"], niceOk: true,
+    title: "Rewrite a second-order equation as a coupled system", situationKey: "second-order", situation: sitSecond,
+    build({ rng, sit: s }) {
+      const sys = (p, q, g) => `${DE("x", "t")} = y,\\ ${DE("y", "t")} = ${secondRhs(p, q, g)}`, acc = -s.a * s.v0 - s.b * s.x0 + s.g;
+      return { params: {}, stem: secondStem(s) + ` Let $y = ${DE("x", "t")}$.`, parts: [
+        P("Which coupled system is equivalent to the differential equation?", 2, ans.choice(rng, { text: m(sys(-s.b, -s.a, s.g)), value: [-s.b, -s.a, s.g] }, [
+          { text: m(sys(s.b, s.a, s.g)), value: [s.b, s.a, s.g], why: "The terms move to the other side of the equation, so their signs change." }, { text: m(sys(-s.a, -s.b, s.g)), value: [-s.a, -s.b, s.g], why: "$y$ replaces the first derivative, so its coefficient is the one in front of the first derivative." },
+          { text: m(sys(-s.b, -s.a, -s.g)), value: [-s.b, -s.a, -s.g], why: "The constant is already on the right-hand side and keeps its sign." }, { text: m(sys(-s.b, s.a, s.g)), value: [-s.b, s.a, s.g], why: "Both terms move to the other side, so both signs change." }]), [
+          `Since $y = ${DE("x", "t")}$, $${DE("y", "t")} = ${D2}$.`, `Rearranging the equation gives $${DE("y", "t")} = ${secondRhs(-s.b, -s.a, s.g)}$.`]),
+        P(`Find the value of $${D2}$ when $t = 0$.`, 2, ans.dec(acc), [`$${DE("y", "t")} = ${secondRhs(-s.b, -s.a, s.g)}$ with $x = ${s.x0}$ and $y = ${s.v0}$.`, `$${D2} = ${num(acc)}$`])] };
+    } });
+  reg({ type: "t5-ai-second-order", unknown: "euler-system", representation: "equation", format: "value", levels: [4], syllabus: ["5.18"], skills: ["AI-AHL5.18.euler-system", "AI-AHL5.18.interpret-velocity", "AI-AHL5.18.convert-to-system"],
+    title: "Euler's method for a second-order differential equation", situationKey: "second-order", situation: sitSecond,
+    build({ sit: s }) {
+      const h = 0.1, xs = [s.x0], ys = [s.v0], f = (x, y) => -s.a * y - s.b * x + s.g;
+      for (let i = 0; i < s.n; i++) { xs.push(xs[i] + h * ys[i]); ys.push(ys[i] + h * f(xs[i], ys[i])); }
+      const T = num(Number((s.n * h).toFixed(1)));
+      return { params: { h }, stem: secondStem(s) + ` The equation is written as the coupled system $${DE("x", "t")} = y$, $${DE("y", "t")} = ${secondRhs(-s.b, -s.a, s.g)}$, and Euler's method is used with step size $0.1$.`, parts: [
+        P("Find the approximate value of $x$ when $t = 0.1$.", 1, ans.sf(xs[1]), [`$x_{1} = x_{0} + 0.1y_{0} = ${s.x0} + 0.1${br(s.v0)} = ${sf(xs[1])}$`]),
+        P("Find the approximate value of $y$ when $t = 0.1$.", 2, ans.sf(ys[1]), [`$y_{n+1} = y_{n} + 0.1(${secondRhs(-s.b, -s.a, s.g, "x_{n}", "y_{n}")})$`, `$y_{1} = ${s.v0} + 0.1 \\times ${paren(Number(f(s.x0, s.v0).toPrecision(6)))} = ${sf(ys[1])}$`]),
+        P(`Find the approximate displacement when $t = ${T}$.`, 3, ans.sf(xs[s.n]), ["Iterate both recurrences together, each step using the values of $x$ and $y$ from the step before.", `The successive values of $x$ are $${xs.slice(1).map(v5).join(",\\ ")}$.`, `The displacement is approximately $${sf(xs[s.n])}\\text{ m}$.`]),
+        P(`Find the approximate velocity when $t = ${T}$.`, 1, ans.sf(ys[s.n]), [`The velocity is $y$. Its successive values are $${ys.slice(1).map(v5).join(",\\ ")}$, so the velocity is approximately $${sf(ys[s.n])}\\text{ m s}^{-1}$.`])] };
+    } });
+
   /*NEXT*/
 })(typeof globalThis !== "undefined" ? globalThis : this);
