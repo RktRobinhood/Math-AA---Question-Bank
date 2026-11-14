@@ -309,4 +309,164 @@ export default {
     const { up, r } = q.params;
     return { a: (100 + (up ? r : -r)) / 100 };
   },
+
+  // ---- depth: recall, Paper 1 and Paper 2 levels, further exam types ----
+  "fn-line-from-conditions/triangle-area/equation": (q, T) => {
+    const { m1, c1, m2, c2 } = q.params, L1 = (x) => m1 * x + c1, L2 = (x) => m2 * x + c2;
+    const xA = T.bisect((x) => L1(x) - L2(x), -100, 100), a1 = T.bisect(L1, -100, 100), a2 = T.bisect(L2, -100, 100);
+    T.require(a1 < xA && xA < a2 && L1(xA) > 0, "A is above the x-axis, between the two x-intercepts");
+    const [s1, s2] = q.graph.regions;
+    T.require(T.close(s1.x[0], a1) && T.close(s1.x[1], xA) && T.close(s2.x[1], a2), "the shaded region is the triangle");
+    // shoelace formula on the vertices (a1, 0), (a2, 0), (xA, yA)
+    const V = [[a1, 0], [a2, 0], [xA, L1(xA)]];
+    const area = Math.abs(V.reduce((s, [x, y], i) => s + x * V[(i + 1) % 3][1] - V[(i + 1) % 3][0] * y, 0)) / 2;
+    return { a: xA, b: L2(xA), c: area };
+  },
+  "fn-evaluate-function/time-for-target/words": (q, T) => {
+    const { A, B, L, t0 } = q.params, C = (t) => (A * t) / (t * t + B);
+    const r = T.roots((t) => C(t) - L, 1e-6, 80, 80000);
+    T.require(r.length === 2, "the level is reached exactly twice");
+    T.require(Math.abs(T.evalGraph(graphFn(q), 1.7) - C(1.7)) < 1e-9 && T.evalGraph(graphFn(q, 1), 3) === L, "the graph shows the model and the level");
+    return { a: C(t0), b: r[0], c: r[1], d: r[1] - r[0] };
+  },
+  "fn-inverse-reflection/image-point/words": (q, T) => {
+    const { a, b } = q.params, f = (x) => b + 2 * (x - a); // a concrete one-to-one f through the point
+    T.require(a !== b, "the point is not on the mirror line");
+    const t = (a + b) / 2; // foot of the perpendicular from (a, b) to y = x is (t, t)
+    return { a: 2 * t - a, b: T.bisect((x) => f(x) - b, -100, 100) };
+  },
+  "fn-inverse-reflection/sketch-inverse/graph": (q, T) => {
+    const { pts, c } = q.params, f = (x) => T.evalGraph(graphFn(q), x), ys = pts.map((p) => p[1]);
+    T.require(ys.every((y, i) => i === 0 || y > ys[i - 1]), "f is increasing, so it has an inverse");
+    // the inverse g has domain = range of f and satisfies f(g(y)) = y
+    const hit = T.optionWhere(q, "a", (v, i) => {
+      const g = q.parts[0].answer.options[i].functions[0].fn;
+      return T.range(-5.5, 5.5, 0.5).every((y) => { const x = T.evalGraph(g, y); return y < ys[0] - 1e-9 || y > ys[ys.length - 1] + 1e-9 ? !isFinite(x) : isFinite(x) && Math.abs(f(x) - y) < 1e-9; });
+    });
+    const sol = T.roots((x) => f(x) - c, -4, 4, 800);
+    T.require(sol.length === 1, "one input gives the value");
+    return { a: hit, b: sol[0] };
+  },
+  "fn-graph-table-composite-inverse/read-value/graph": (q, T) => {
+    const f = (x) => T.evalGraph(graphFn(q), x), { a, c } = q.params;
+    const sol = T.roots((x) => f(x) - c, -3, 3, 600);
+    T.require(sol.length === 1, "f(x) = c has exactly one solution");
+    return { a: f(a), b: sol[0] };
+  },
+  "fn-sketch-gdc/sketch-on-domain/equation": (q, T) => {
+    const { c, d } = q.params.sit, f = (x) => 0.2 * x ** 3 - c * x + d;
+    const hit = whichGraph(q, "a", f, T, [-3.9, -3, -2.2, -1.1, -0.4, 0.6, 1.3, 2.1, 3.2, 3.9]);
+    T.require(q.parts[0].answer.options.every((o) => o.functions[0].domain[0] === -4 && o.functions[0].domain[1] === 4), "every option is drawn on the stated domain");
+    const ex = T.extremum(f, -4, 0, "max", 40000);
+    T.require(ex.x > -3.9 && ex.x < -0.1, "the local maximum is inside the domain");
+    return { a: hit, b: T.approx(ex.x, 1e-5), c: ex.value, d: T.extremum(f, -4, 4, "max", 80000).value };
+  },
+  "fn-sketch-gdc/label-zeros/equation": (q, T) => {
+    const { c, d } = q.params.sit, f = (x) => 0.2 * x ** 3 - c * x + d;
+    const r = T.roots(f, -4, 4, 16000);
+    T.require(r.length === 3, "three zeros on the domain");
+    T.require([-3, 0.5, 2.5].every((x) => Math.abs(T.evalGraph(graphFn(q), x) - f(x)) < 1e-9), "the drawn graph is f");
+    return { a: f(0), b: r[0], c: r[2] };
+  },
+  "fn-rational-asymptotes-intercepts/features-from-graph/graph": (q, T) => {
+    const f = (x) => T.evalGraph(graphFn(q), x);
+    const poles = T.range(-5, 5).filter((x) => !(Math.abs(f(x + 1e-7)) < 1e5));
+    T.require(poles.length === 1, "one vertical asymptote at an integer");
+    const far = f(1e9);
+    T.require(q.graph.asymptotes.some((s) => s.x === poles[0]) && q.graph.asymptotes.some((s) => s.y !== undefined && Math.abs(s.y - far) < 1e-6), "both asymptotes are drawn");
+    return { a: poles[0], b: T.approx(far, 1e-6) };
+  },
+  "fn-ext-match-graph/equation-from-graph/graph": (q, T) => {
+    const f = (x) => T.evalGraph(graphFn(q), x);
+    const z = T.roots(f, -6, 6, 2400);
+    T.require(z.length === 3, "three distinct zeros");
+    T.require(q.graph.points.every((pt) => Math.abs(f(pt.x) - pt.y) < 1e-9 && Number.isInteger(pt.y)) && f(0) !== 0, "marked points are on the curve, with integer coordinates");
+    // leading coefficient from a third finite difference
+    return { a: z[0], b: z[1], c: z[2], d: (f(3) - 3 * f(2) + 3 * f(1) - f(0)) / 6 };
+  },
+  "fn-inverse-algebraic/inverse-linear/equation": (q, T) => {
+    const { a, b } = q.params, f = (x) => a * x + b;
+    return { a: T.optionWhere(q, "a", (v) => Array.isArray(v) && [-3, 0, 2, 7].every((y) => Math.abs(f((v[0] * y + v[1]) / v[2]) - y) < 1e-9)) };
+  },
+  "fn-inverse-algebraic/inverse-rational/equation": (q, T) => {
+    const { a, b, c, mv } = q.params, f = (x) => (a * x + b) / (x - c);
+    T.require(a * c + b !== 0 && a !== c, "f is not constant and is not its own inverse");
+    const hit = T.optionWhere(q, "a", (v) => Array.isArray(v) && [-7.3, -2.6, 0.4, 3.7, 9.1].every((y) => Math.abs(f((v[0] * y + v[1]) / (y + v[2])) - y) < 1e-9));
+    const sol = T.roots((x) => f(x) - mv, -300, 300, 120000);
+    T.require(sol.length === 1, "one input gives the value");
+    return { a: hit, b: T.approx(f(1e10), 1e-6), c: sol[0] };
+  },
+  "fn-composite/build-from-words/words": (q, T) => {
+    const { p, q: q0, t0, R, S } = q.params, r = (t) => p * Math.sqrt(t) + q0;
+    // area of a disc as an integral of ring circumferences
+    const area = (t) => T.integrate((u) => 2 * Math.PI * u, 0, r(t), 400);
+    return { a: area(t0), b: T.bisect((t) => r(t) - R, 0, 500), c: T.bisect((t) => area(t) - S, 0, 500) };
+  },
+  "fn-ext-quadratic-model/second-time-at-height/words": (q, T) => {
+    const { v, h0, H } = q.params, h = (t) => -4.9 * t * t + v * t + h0;
+    const ex = T.extremum(h, 0, 10, "max", 40000), land = T.roots(h, 0.01, 12, 24000), at = T.roots((t) => h(t) - H, 0, 12, 24000);
+    T.require(land.length === 1 && at.length === 2 && H < ex.value && H > h0, "one landing time, and the height is passed twice");
+    return { a: ex.value, b: land[0], c: at[1] - at[0] };
+  },
+  "fn-solve-quadratic/solve-in-context/words": (q, T) => {
+    const { d, A } = q.params, r = T.roots((w) => w * (w + d) - A, -200, 200, 80000);
+    T.require(r.length === 2 && r[0] < 0 && r[1] > 0, "one positive width");
+    const [, len, wid] = q.graph.shapes[0].points;
+    T.require(T.close(len[0], r[1] + d) && T.close(wid[1], r[1]), "the diagram is to scale");
+    return { a: (r[1] - r[0]) ** 2, b: r[1], c: Math.hypot(r[1], r[1] + d) };
+  },
+  "fn-quadratic-inequality/largest-integer/equation": (q, T) => {
+    const { b, c } = q.params, f = (x) => x * x - b * x + c, r = quad([1, -b, c], T);
+    T.require(r.length === 2 && !Number.isInteger(r[0]) && !Number.isInteger(r[1]), "two roots that are not integers");
+    const ints = T.range(-100, 100).filter((x) => f(x) < 0);
+    T.require(ints.length >= 1 && T.close(q.graph.regions[0].x[0], r[0]) && T.close(q.graph.regions[0].x[1], r[1]), "the shaded region runs between the roots");
+    return { a: r[0], b: r[1], c: ints.length, d: Math.max(...ints) };
+  },
+  "fn-rational-asymptotes-intercepts/va-from-equation/equation": (q, T) => {
+    const { a, h, k } = q.params, f = (x) => a / (x - h) + k;
+    const poles = T.range(-10, 10).filter((x) => !(Math.abs(f(x + 1e-7)) < 1e5));
+    T.require(poles.length === 1, "one vertical asymptote");
+    return { a: poles[0], b: T.approx(f(1e10), 1e-6) };
+  },
+  "fn-ext-rational-model/least-n-for-target/words": (q, T) => {
+    const { v, F, n0, T: target } = q.params, C = (n) => v + F / n;
+    let n = 1;
+    while (!(C(n) < target)) n++; // brute force
+    T.require(n > 1 && Math.abs(F / (target - v) - Math.round(F / (target - v))) > 1e-6, "the boundary is not a whole number");
+    return { a: C(n0), b: T.approx(C(1e12), 1e-6), c: n };
+  },
+  "fn-exp-log-inverse-composite/evaluate-log-function/equation": (q, T) => {
+    const { b, x, mm } = q.params;
+    let v = 1;
+    for (let i = 0; i < mm; i++) v *= b;
+    return { a: T.bisect((y) => b ** y - x, 0, 30), b: v };
+  },
+  "fn-curve-intersection-quadratic/meeting-x/graph": (q, T) => {
+    const f = (x) => T.evalGraph(graphFn(q), x), g = (x) => T.evalGraph(graphFn(q, 1), x);
+    const r = T.roots((x) => f(x) - g(x), -20, 20, 8000);
+    T.require(r.length === 2, "the graphs cross twice");
+    T.require(q.graph.points.every((pt) => Math.abs(f(pt.x) - pt.y) < 1e-9 && Math.abs(g(pt.x) - pt.y) < 1e-9 && Number.isInteger(pt.y) && Math.abs(pt.y) <= 8 && Math.abs(pt.x) <= 6), "the marked points are the crossings, inside the window");
+    return { a: r[0], b: r[1] };
+  },
+  "fn-gdc-optimise-combined/first-whole-day/words": (q, T) => {
+    const { a, b, c, d } = q.params, A = (t) => a * b ** t, B = (t) => c + d * t;
+    const r = T.roots((t) => A(t) - B(t), 0.001, 400, 80000);
+    T.require(r.length === 1 && A(0) < B(0), "B starts ahead and A overtakes once");
+    let n = 1;
+    while (!(A(n) > B(n))) n++;
+    T.require([1.5, 7].every((t) => Math.abs(T.evalGraph(graphFn(q), t) - A(t)) < 1e-9 && Math.abs(T.evalGraph(graphFn(q, 1), t) - B(t)) < 1e-9), "the graph shows the two models");
+    return { a: r[0], b: n, c: T.extremum((t) => B(t) - A(t), 0, r[0], "max", 40000).value };
+  },
+  "fn-transform-describe/describe-translation/equation": (q, T) => {
+    const { h, k } = q.params, f = (x) => x * x, g = (x) => f(x - h) + k;
+    // the vertex (0, 0) of f moves to the vertex of g
+    const ex = T.extremum(g, -30, 30, "min", 60000);
+    return { a: T.approx(ex.x, 1e-5), b: T.approx(ex.value, 1e-6) };
+  },
+  "fn-transform-apply/image-point/equation": (q, T) => {
+    const { a, s, h, k } = q.params, f = (x) => x ** 3 - a * x, g = (x) => s * f(x - h) + k;
+    const A = T.extremum(f, -6, 0, "max", 60000), B = T.extremum(g, -6 + h, h, "max", 60000);
+    T.require(s > 0, "the stretch keeps a maximum a maximum");
+    return { a: T.approx(A.x, 1e-5), b: A.value, c: T.approx(B.x, 1e-5), d: B.value };
+  },
 };

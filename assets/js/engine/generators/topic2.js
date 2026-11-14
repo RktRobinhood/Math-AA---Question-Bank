@@ -632,4 +632,378 @@
       return { params: { up, r }, stem: `A quantity ${up ? "increases" : "decreases"} by $${pct(r)}$.`, parts: [
         P("Write down the number the quantity is multiplied by.", 1, ans.dec(mult), [`${up ? "An increase" : "A decrease"} of $${pct(r)}$ leaves $100\\% ${up ? "+" : "-"} ${pct(r)} = ${pct(up ? 100 + r : 100 - r)}$ of the quantity.`, `The multiplier is $${num(mult)}$.`])] };
     } });
+
+  // =====================================================================================
+  // Depth: a recall level, a Paper 1 and a Paper 2 level for every subtopic, the exam types that
+  // had no generator, and a second way of asking each type. Generators that name only 2.1 to 2.4
+  // are also offered in the AI courses.
+  // =====================================================================================
+  const more = (v) => num(Number(v.toPrecision(5)));                 // an unrounded calculator value in working
+  const solve = (f, lo, hi) => { let flo = f(lo); for (let i = 0; i < 90; i++) { const mid = (lo + hi) / 2, fm = f(mid); if ((flo < 0) === (fm < 0)) { lo = mid; flo = fm; } else hi = mid; } return (lo + hi) / 2; };
+  const units = (n) => (Math.abs(n) === 1 ? "unit" : "units");
+  const CALC = { calculator: true };
+
+  // ---------------- 2.1 ----------------
+  reg({ ...LINE, ...CALC, unknown: "triangle-area", representation: "equation", format: "value", levels: [4],
+    skills: ["SL2.1.intersection-lines", "SL2.1.intercepts", "SL2.1.equation-of-line"], title: "Two lines and the triangle they make with the x-axis",
+    build({ rng }) {
+      let m1, c1, m2, c2, xA, yA, a1, a2;
+      do {
+        m1 = rng.pick([0.4, 0.6, 0.8, 1.2, 1.5, 1.6, 2.5]); c1 = rng.pick([0.9, 1.3, 1.7, 2.2, 2.6, 3.1]);
+        m2 = -rng.pick([0.5, 0.7, 0.9, 1.1, 1.4, 1.8]); c2 = rng.pick([5.2, 6.4, 7.1, 7.9, 8.6, 9.3]);
+        xA = (c2 - c1) / (m1 - m2); yA = m1 * xA + c1; a1 = -c1 / m1; a2 = -c2 / m2;
+      } while (a2 - a1 > 16 || yA > 9 || yA < 3);
+      const area = 0.5 * (a2 - a1) * yA;
+      return { params: { m1, c1, m2, c2 },
+        graph: { x: [Math.floor(a1) - 1, Math.ceil(a2) + 1], y: [-2, Math.ceil(yA) + 2], xStep: 1, yStep: 1,
+          functions: [{ fn: { type: "poly", coeffs: [c1, m1] }, label: "L₁" }, { fn: { type: "poly", coeffs: [c2, m2] }, label: "L₂" }],
+          regions: [{ x: [a1, xA], fn: 0 }, { x: [xA, a2], fn: 1 }], points: [{ x: xA, y: yA, label: "A" }], alt: "Two straight lines crossing at A above the x-axis, with the triangle between them and the x-axis shaded" },
+        stem: `The line $L_{1}$ has equation $y = ${lin(m1, c1)}$ and the line $L_{2}$ has equation $y = ${lin(m2, c2)}$. The lines intersect at the point $\\mathrm{A}$. The triangle enclosed by $L_{1}$, $L_{2}$ and the $x$-axis is shaded in the diagram.`,
+        parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(xA), [`At $\\mathrm{A}$, $${lin(m1, c1)} = ${lin(m2, c2)}$, so $${num(m1 - m2)}x = ${num(c2 - c1)}$.`, `$x = ${more(xA)}\\ldots = ${sf(xA)}$ (to three significant figures)`]),
+          P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(yA), [`$y = ${num(m1)}(${more(xA)}) + ${num(c1)} = ${sf(yA)}$`]),
+          P("Find the area of the shaded triangle.", 3, ans.sf(area), [
+            `$L_{1}$ meets the $x$-axis where $${lin(m1, c1)} = 0$, so $x = ${more(a1)}$. $L_{2}$ meets it where $${lin(m2, c2)} = 0$, so $x = ${more(a2)}$.`,
+            `The base of the triangle is $${more(a2)} - (${more(a1)}) = ${more(a2 - a1)}$ and its height is the $y$-coordinate of $\\mathrm{A}$.`,
+            `Area $= \\dfrac{1}{2} \\times ${more(a2 - a1)} \\times ${more(yA)} = ${sf(area)}$`])] };
+    } });
+
+  // ---------------- 2.2 ----------------
+  reg({ ...CALC, type: "fn-evaluate-function", syllabus: ["2.2"], unknown: "time-for-target", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.2.function-model", "SL2.2.evaluate-notation"], title: "A model: a value, and the inputs that give a stated output",
+    build({ rng }) {
+      let A, B, top, L, t1, t2;
+      const t0 = rng.pick([0.5, 1.5, 2.5, 3.5]);
+      do {
+        A = rng.pick([12, 15, 18, 24, 30]); B = rng.pick([3, 4, 5, 6, 8]); top = A / (2 * Math.sqrt(B));
+        L = Math.round(top * rng.pick([5, 6, 7])) / 10;
+        const disc = A * A - 4 * L * L * B;
+        t1 = disc > 0 ? (A - Math.sqrt(disc)) / (2 * L) : 0; t2 = disc > 0 ? (A + Math.sqrt(disc)) / (2 * L) : 0;
+      } while (!(L > 0.5 && L < 0.85 * top && t2 < 14 && t1 > 0.3));
+      const C = (t) => (A * t) / (t * t + B);
+      return { params: { A, B, L, t0 },
+        graph: { x: [0, Math.ceil(t2) + 2], y: [0, Math.ceil(top) + 1], xLabel: "t", yLabel: "C",
+          functions: [{ fn: { type: "rational", num: [0, A], den: [B, 0, 1] }, domain: [0, Math.ceil(t2) + 2] }, { fn: { type: "poly", coeffs: [L] }, dashed: true }], alt: "A curve that rises quickly to a maximum and then falls slowly, with a dashed horizontal line crossing it twice" },
+        stem: `The concentration of a medicine in a patient's blood, in milligrams per litre, is modelled by $C(t) = \\dfrac{${A}t}{t^{2} + ${B}}$, for $t \\ge 0$, where $t$ is the time in hours after the medicine is taken. The medicine is effective while $C(t) \\ge ${num(L)}$. The graph shows $C$ and the line $C = ${num(L)}$.`,
+        parts: [
+          P(`Find $C(${num(t0)})$.`, 2, ans.sf(C(t0)), [`$C(${num(t0)}) = \\dfrac{${A}(${num(t0)})}{(${num(t0)})^{2} + ${B}} = \\dfrac{${num(A * t0)}}{${num(t0 * t0 + B)}}$`, `$C(${num(t0)}) = ${sf(C(t0))}$ (to three significant figures)`]),
+          P("Find the time, in hours, at which the medicine first becomes effective.", 2, ans.sf(t1), [`Solve $C(t) = ${num(L)}$: graph $y = C(t)$ and $y = ${num(L)}$ on a calculator and find where they cross.`, `The first crossing is at $t = ${sf(t1)}$.`]),
+          P("Find the time, in hours, at which the medicine stops being effective.", 1, ans.sf(t2), [`The second crossing is at $t = ${sf(t2)}$.`]),
+          P("Find the length of time, in hours, for which the medicine is effective.", 1, ans.sf(t2 - t1), [`$${more(t2)} - ${more(t1)} = ${sf(t2 - t1)}$`])] };
+    } });
+  const INVR = { type: "fn-inverse-reflection", syllabus: ["2.2"] };
+  reg({ ...INVR, unknown: "image-point", representation: "words", format: "value", levels: [1],
+    skills: ["SL2.2.inverse-undo"], title: "A point on the graph of an inverse function",
+    build({ rng }) {
+      let a, b;
+      do { a = rng.int(-6, 8); b = rng.int(-6, 8); } while (a === b);
+      return { params: { a, b }, stem: `The function $f$ has an inverse, $f^{-1}$. The point $${point(a, b)}$ lies on the graph of $f$.`, parts: [
+        P("The corresponding point on the graph of $f^{-1}$ is the reflection of this point in the line $y = x$. Write down its $x$-coordinate.", 1, ans.int(b), [`Reflecting in $y = x$ swaps the coordinates, so the point is $${point(b, a)}$ and its $x$-coordinate is $${b}$.`]),
+        P(`Write down the value of $f^{-1}(${b})$.`, 1, ans.int(a), [`$f(${a}) = ${b}$, so $f^{-1}(${b}) = ${a}$.`])] };
+    } });
+  reg({ ...INVR, unknown: "sketch-inverse", representation: "graph", format: "graph-pick", levels: [2],
+    skills: ["SL2.2.inverse-undo", "SL2.4.symmetry"], title: "Pick the graph of the inverse function",
+    build({ rng }) {
+      const steps = rng.shuffle(rng.pick([[1, 1, 3, 4], [1, 2, 2, 4], [1, 1, 2, 5]])), xs = [-4, -2, 0, 2, 4];
+      let y = rng.pick([-5, -4]);
+      const pts = [[xs[0], y]];
+      steps.forEach((s, i) => { y += s; pts.push([xs[i + 1], y]); });
+      const yEqX = { fn: { type: "poly", coeffs: [0, 1] }, dashed: true };
+      const gr = (map, name) => { const p = pts.map(map).sort((u, v) => u[0] - v[0]); return { value: name, graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "pwl", points: p } }, yEqX], alt: "A graph made of straight segments, with the line y equals x dashed" }) }; };
+      const right = gr(([x, yy]) => [yy, x], "inverse");
+      const wrongs = G.pickDistinct(right.graph, [
+        Object.assign(gr(([x, yy]) => [x, -yy], "x-axis"), { why: "This is the reflection in the $x$-axis, which is the graph of $y = -f(x)$." }),
+        Object.assign(gr(([x, yy]) => [-x, yy], "y-axis"), { why: "This is the reflection in the $y$-axis, which is the graph of $y = f(-x)$." }),
+        Object.assign(gr(([x, yy]) => [-yy, -x], "other diagonal"), { why: "This is the reflection in the line $y = -x$, not in $y = x$." }),
+        gr(([x, yy]) => [-x, -yy], "rotation")], 3);
+      const i = rng.int(1, 3), ex = pts.slice(1).sort((u, v) => Math.abs(v[0] - v[1]) - Math.abs(u[0] - u[1]))[0];
+      return { params: { pts, c: pts[i][1] },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "pwl", points: pts }, label: "f" }, yEqX], points: pts.map(([x, yy]) => ({ x, y: yy })), alt: "The graph of f, made of straight segments joining marked points, with the line y equals x dashed" }),
+        stem: "The graph of the function $f$ is shown for $-4 \\le x \\le 4$. It consists of straight line segments joining points with integer coordinates. The line $y = x$ is dashed.",
+        parts: [
+          P("Which graph shows $y = f^{-1}(x)$?", 2, ans.graph(rng, right, wrongs), [
+            "The graph of $f^{-1}$ is the reflection of the graph of $f$ in the line $y = x$.",
+            `Every point $(a,\\, b)$ on $f$ becomes $(b,\\, a)$: for example $${point(pts[0][0], pts[0][1])}$ becomes $${point(pts[0][1], pts[0][0])}$ and $${point(ex[0], ex[1])}$ becomes $${point(ex[1], ex[0])}$.`]),
+          P(`Write down the value of $f^{-1}(${pts[i][1]})$.`, 1, ans.int(pts[i][0]), [`From the graph, $f(${pts[i][0]}) = ${pts[i][1]}$, so $f^{-1}(${pts[i][1]}) = ${pts[i][0]}$.`])] };
+    } });
+
+  // ---------------- 2.3 ----------------
+  reg({ type: "fn-graph-table-composite-inverse", syllabus: ["2.3"], unknown: "read-value", representation: "graph", format: "value", levels: [1],
+    skills: ["SL2.3.read-graph"], title: "Read a value and an input from a graph",
+    build({ rng }) {
+      const xs = [-3, -2, -1, 0, 1, 2, 3], steps = rng.shuffle([1, 1, 1, 2, 2, 2]), dir = rng.sign();
+      let y = rng.pick([-5, -4]);
+      const ys = [y];
+      for (const s of steps) { y += s; ys.push(y); }
+      const pts = xs.map((x, i) => [x, dir * ys[i]]);
+      const [a, c0] = rng.sample(xs, 2);
+      return { params: { a, c: pts[c0 + 3][1] },
+        graph: win([-4, 4], [-6, 6], { functions: [{ fn: { type: "pwl", points: pts }, label: "f" }], points: pts.map(([x, yy]) => ({ x, y: yy })), alt: "The graph of f, made of straight segments between marked points" }),
+        stem: "The graph of the function $f$ is shown for $-3 \\le x \\le 3$. It consists of straight line segments joining points with integer coordinates.",
+        parts: [
+          P(`Write down the value of $f(${a})$.`, 1, ans.int(pts[a + 3][1]), [`Go up or down from $x = ${a}$ to the graph and read across: $f(${a}) = ${pts[a + 3][1]}$.`]),
+          P(`Write down the value of $x$ for which $f(x) = ${pts[c0 + 3][1]}$.`, 1, ans.int(c0), [`Go across from $y = ${pts[c0 + 3][1]}$ to the graph and read down: $x = ${c0}$.`])] };
+    } });
+  const SKG = { type: "fn-sketch-gdc", syllabus: ["2.3", "2.4"], ...CALC };
+  const cubicSit = (rng) => {
+    let c, d;
+    do { c = rng.pick([1.5, 1.8, 2.1, 2.2, 2.6, 2.7]); d = rng.pick([-1.5, -1, 1, 1.5]); } while (Math.abs(d) > 0.8 * ((2 * c) / 3) * Math.sqrt(c / 0.6) || Math.abs(12.8 - 4 * c - ((2 * c) / 3) * Math.sqrt(c / 0.6)) < 0.3);
+    return { c, d };
+  };
+  const cubicFn = (s) => (x) => 0.2 * x * x * x - s.c * x + s.d;
+  const cubicStem = (s) => `The function $f$ is defined by $f(x) = ${poly([0.2, 0, -s.c, s.d])}$, for $-4 \\le x \\le 4$.`;
+  const cubicGraph = (cs, extra) => win([-5, 5], [-10, 10], Object.assign({ yStep: 2, functions: [{ fn: { type: "poly", coeffs: cs }, domain: [-4, 4] }], alt: "A cubic curve drawn between two end points" }, extra));
+  reg({ ...SKG, unknown: "sketch-on-domain", representation: "equation", format: "graph-pick", levels: [4],
+    skills: ["SL2.3.sketch-from-equation", "SL2.4.max-min"], title: "Graph of a cubic on a domain, its local maximum and greatest value", situationKey: "cubic-on-domain", situation: cubicSit,
+    build({ rng, sit: s }) {
+      const f = cubicFn(s), xm = -Math.sqrt(s.c / 0.6), ym = f(xm), end = f(4), top = Math.max(ym, end);
+      const gr = (cs, name) => ({ value: name, graph: cubicGraph(cs) });
+      const right = gr([s.d, -s.c, 0, 0.2], "f");
+      const wrongs = G.pickDistinct(right.graph, [
+        Object.assign(gr([-s.d, s.c, 0, -0.2], "-f"), { why: "This is the reflection in the $x$-axis: check the sign of $f(4)$." }),
+        Object.assign(gr([s.d, s.c, 0, -0.2], "f(-x)"), { why: "This is the reflection in the $y$-axis: check the value of $f(4)$." }),
+        Object.assign(gr([-s.d, -s.c, 0, 0.2], "wrong intercept"), { why: "The $y$-intercept has the wrong sign: $f(0)$ is the constant term." }),
+        Object.assign(gr([s.d, s.c, 0, 0.2], "no turning points"), { why: "This graph has no turning points: the sign of the term in $x$ is wrong." })], 3);
+      return { stem: cubicStem(s), parts: [
+        P("Which graph shows $y = f(x)$?", 2, ans.graph(rng, right, wrongs), ["Graph $f$ on a calculator with the window $-4 \\le x \\le 4$.",
+          `The $y$-intercept is $f(0) = ${num(s.d)}$, the end points are $${point(-4, more(f(-4)))}$ and $${point(4, more(end))}$, and there is a local maximum to the left of the $y$-axis and a local minimum to the right.`]),
+        P("Find the $x$-coordinate of the local maximum point.", 1, ans.sf(xm), [`The maximum tool gives $x = ${sf(xm)}$.`]),
+        P("Find the $y$-coordinate of the local maximum point.", 2, ans.sf(ym), [`The maximum tool gives $y = ${more(ym)}\\ldots$`, `$y = ${sf(ym)}$ (to three significant figures)`]),
+        P("Find the greatest value of $f(x)$ on its domain.", 2, ans.sf(top), [`Compare the local maximum, $${sf(ym)}$, with the value at the right-hand end point, $f(4) = ${more(end)}$.`,
+          `The ${end > ym ? "end point is higher" : "local maximum is higher"}, so the greatest value is $${sf(top)}$.`])] };
+    } });
+  reg({ ...SKG, unknown: "label-zeros", representation: "equation", format: "value", levels: [2],
+    skills: ["SL2.4.zeros-intercepts", "SL2.3.sketch-from-equation"], title: "Intercept and zeros of a cubic with technology", situationKey: "cubic-on-domain", situation: cubicSit,
+    build({ sit: s }) {
+      const f = cubicFn(s), xm = Math.sqrt(s.c / 0.6), z1 = solve(f, -4, -xm), z3 = solve(f, xm, 4);
+      return { graph: cubicGraph([s.d, -s.c, 0, 0.2], { functions: [{ fn: { type: "poly", coeffs: [s.d, -s.c, 0, 0.2] }, domain: [-4, 4], label: "f" }] }),
+        stem: cubicStem(s) + " The graph of $f$ is shown.", parts: [
+          P("Write down the $y$-intercept of the graph of $f$.", 1, ans.dec(s.d), [`$f(0) = ${num(s.d)}$`]),
+          P("Find the smallest zero of $f$.", 2, ans.sf(z1), ["Graph $f$ on a calculator and use its zero (root) tool.", `The left-hand zero is $x = ${sf(z1)}$.`]),
+          P("Find the largest zero of $f$.", 1, ans.sf(z3), [`The right-hand zero is $x = ${sf(z3)}$.`])] };
+    } });
+
+  // ---------------- 2.4 ----------------
+  reg({ type: "fn-rational-asymptotes-intercepts", syllabus: ["2.4"], unknown: "features-from-graph", representation: "graph", format: "value", levels: [1],
+    skills: ["SL2.4.asymptotes"], title: "Asymptotes read from a graph",
+    build({ rng }) {
+      const a = rng.pick([1, 2, 3, -1, -2, -3]), h = rng.nonzero(-3, 3), k = rng.nonzero(-3, 3);
+      return { params: { h, k },
+        graph: win([-6, 6], [-6, 6], { functions: [{ fn: { type: "rational", num: [a - k * h, k], den: [-h, 1] }, label: "f" }], asymptotes: [{ x: h }, { y: k }], alt: "A curve in two branches, with a vertical and a horizontal dashed asymptote" }),
+        stem: "The graph of a function $f$ is shown. Its two asymptotes are drawn as dashed lines, and each one crosses an axis at an integer.",
+        parts: [
+          P("The vertical asymptote has equation $x = p$. Write down the value of $p$.", 1, ans.int(h), [`The vertical dashed line crosses the $x$-axis at $${h}$, so $p = ${h}$.`]),
+          P("The horizontal asymptote has equation $y = q$. Write down the value of $q$.", 1, ans.int(k), [`The horizontal dashed line crosses the $y$-axis at $${k}$, so $q = ${k}$.`])] };
+    } });
+  reg({ type: "fn-ext-match-graph", syllabus: ["2.4", "2.3"], unknown: "equation-from-graph", representation: "graph", format: "value", levels: [3],
+    skills: ["SL2.4.zeros-intercepts", "SL2.3.read-graph", "SL2.3.match-graph"], title: "Equation of a cubic from the zeros and the y-intercept of its graph",
+    build({ rng }) {
+      let p, q, r, a, peak;
+      do {
+        [p, q, r] = rng.sample([-4, -3, -2, -1, 1, 2, 3, 4], 3).sort((u, v) => u - v); a = rat.Q(rng.sign(), rng.pick([1, 2, 4]));
+        peak = 0;
+        for (let x = p; x <= r; x += 0.05) peak = Math.max(peak, Math.abs(rat.num(a) * (x - p) * (x - q) * (x - r)));
+      } while (!Number.isInteger(rat.num(a) * p * q * r) || peak > 10 || peak < 1.5 || Math.abs(rat.num(a) * p * q * r) > 10);
+      const av = rat.num(a), yi = -av * p * q * r;
+      const cs = [yi, av * (p * q + p * r + q * r), -av * (p + q + r), av];
+      return { params: { p, q, r },
+        graph: win([-6, 6], [-12, 12], { yStep: 2, functions: [{ fn: { type: "poly", coeffs: cs }, label: "f" }], points: [{ x: p, y: 0 }, { x: q, y: 0 }, { x: r, y: 0 }, { x: 0, y: yi }], alt: "A cubic curve with its three x-intercepts and its y-intercept marked" }),
+        stem: "The graph of the function $f(x) = a(x - p)(x - q)(x - r)$, where $p < q < r$, is shown. The marked points, where the graph meets the axes, have integer coordinates.",
+        parts: [
+          P("Write down the value of $p$.", 1, ans.int(p), [`The zeros of $f$ are the $x$-intercepts: $${p}$, $${q}$ and $${r}$. The smallest is $p = ${p}$.`]),
+          P("Write down the value of $q$.", 1, ans.int(q), [`The middle zero is $q = ${q}$.`]),
+          P("Write down the value of $r$.", 1, ans.int(r), [`The largest zero is $r = ${r}$.`]),
+          P("Find the value of $a$.", 3, ans.frac(a.n, a.d), [`$f(x) = a${factor(p)}${factor(q)}${factor(r)}$`,
+            `The graph passes through $${point(0, yi)}$: $${yi} = a${br(-p)}${br(-q)}${br(-r)} = ${coef(-p * q * r, "a")}$`, `$a = ${rat.tex(a)}$`])] };
+    } });
+
+  // ---------------- 2.5 ----------------
+  const INVA = { type: "fn-inverse-algebraic" };
+  reg({ ...INVA, syllabus: ["2.5"], unknown: "inverse-linear", representation: "equation", format: "mcq", levels: [1],
+    skills: ["SL2.5.find-inverse"], title: "Inverse of a linear function",
+    build({ rng }) {
+      const a = rng.int(2, 6), b = rng.nonzero(-7, 7);
+      const opt = (text, value, why) => ({ text: m(text), value, why });
+      return { params: { a, b }, stem: `The function $f$ is defined by $f(x) = ${lin(a, b)}$, for $x \\in \\mathbb{R}$.`, parts: [
+        P("Which expression is equal to $f^{-1}(x)$?", 2, ans.choice(rng, opt(`\\dfrac{${lin(1, -b)}}{${a}}`, [1, -b, a]), [
+          opt(`\\dfrac{${lin(1, b)}}{${a}}`, [1, b, a], "To undo adding a number, subtract it (and to undo subtracting, add)."),
+          opt(`\\dfrac{x}{${a}} ${signed(-b)}`, [1, -b * a, a], "The constant must be undone before dividing, so it is divided as well."),
+          opt(`\\dfrac{1}{${lin(a, b)}}`, "reciprocal", "This is the reciprocal of $f(x)$, not the inverse function."),
+          opt(lin(a, -b), [a * a, -b * a, a], "Changing the sign of the constant does not undo the multiplication.")]), [
+          `Write $y = ${lin(a, b)}$ and make $x$ the subject: $y ${signed(-b)} = ${a}x$`, `$x = \\dfrac{y ${signed(-b)}}{${a}}$, so $f^{-1}(x) = \\dfrac{${lin(1, -b)}}{${a}}$.`])] };
+    } });
+  reg({ ...INVA, syllabus: ["2.5", "2.8"], unknown: "inverse-rational", representation: "equation", format: "mcq", levels: [3],
+    skills: ["SL2.5.find-inverse", "SL2.8.rational-inverse", "SL2.5.inverse-domain-range"], title: "Inverse of a rational function, its domain and a value",
+    build({ rng }) {
+      let a, b, c, dl;
+      do { a = rng.nonzero(-4, 5); b = rng.nonzero(-6, 6); c = rng.nonzero(-5, 5); dl = rng.pick([-2, -1, 1, 2, 3]); } while (a === c || b === -a * c || a === -c || c * (a + dl) + b === 0);
+      const R = (n1, n0, d0) => `\\dfrac{${lin(n1, n0)}}{${lin(1, d0)}}`, opt = (n1, n0, d0, why) => ({ text: m(R(n1, n0, d0)), value: [n1, n0, d0], why });
+      const mv = a + dl, v = rat.Q(c * mv + b, dl);
+      return { params: { a, b, c, mv }, stem: `The function $f$ is defined by $f(x) = ${R(a, b, -c)}$, for $x \\ne ${c}$.`, parts: [
+        P("Which expression is equal to $f^{-1}(x)$?", 3, ans.choice(rng, opt(c, b, -a), [
+          opt(c, -b, -a, "A sign has been lost when the terms in $x$ were collected on one side."),
+          opt(c, b, a, "A sign has been lost: collecting the terms in $x$ gives $x(y - a)$ on one side."),
+          { text: m(`\\dfrac{${lin(1, -c)}}{${lin(a, b)}}`), value: "reciprocal", why: "This is the reciprocal of $f(x)$, not the inverse function." },
+          opt(a, b, c, "Only the sign in the denominator has been changed; $x$ has not been made the subject.")]), [
+          `Write $y = ${R(a, b, -c)}$, so $y(${lin(1, -c)}) = ${lin(a, b)}$.`, `$${expr([[1, "xy"], [-c, "y"]])} = ${lin(a, b)}$, so $${expr([[1, "xy"], [-a, "x"]])} = ${expr([[c, "y"], [b, ""]])}$`,
+          `$x(${lin(1, -a, "y")}) = ${expr([[c, "y"], [b, ""]])}$, so $x = \\dfrac{${expr([[c, "y"], [b, ""]])}}{${lin(1, -a, "y")}}$ and $f^{-1}(x) = ${R(c, b, -a)}$.`]),
+        P("The domain of $f^{-1}$ is $x \\ne k$. Write down the value of $k$.", 1, ans.int(a), [`The denominator of $f^{-1}(x)$ is zero when $x = ${a}$, so $k = ${a}$. (This is the horizontal asymptote of $f$, $y = ${a}$.)`]),
+        P(`Find $f^{-1}(${mv})$.`, 2, ans.frac(v.n, v.d), [`$f^{-1}(${mv}) = \\dfrac{${paren(c)} \\times ${paren(mv)} ${signed(b)}}{${mv} ${signed(-a)}}$`, `$f^{-1}(${mv}) = ${v.d === Math.abs(dl) && dl > 0 ? "" : `\\dfrac{${c * mv + b}}{${dl}} = `}${rat.tex(v)}$`])] };
+    } });
+  reg({ ...COMP, ...CALC, unknown: "build-from-words", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.5.composite-value", "SL2.5.composite-expression", "SL2.5.find-inverse"], title: "A composite model: area of a growing circle",
+    build({ rng }) {
+      const p = rng.pick([1.2, 1.4, 1.6, 1.8, 2.2, 2.5]), q = rng.pick([0.4, 0.6, 0.8, 1.5]), t0 = rng.pick([3, 5, 7, 8, 10]), R = rng.pick([5, 6, 7.5, 8, 9]), S = rng.pick([100, 150, 200, 250, 300]);
+      const r0 = p * Math.sqrt(t0) + q, area = Math.PI * r0 * r0, tR = Math.pow((R - q) / p, 2), rS = Math.sqrt(S / Math.PI), tS = Math.pow((rS - q) / p, 2);
+      return { params: { p, q, t0, R, S },
+        stem: `An oil patch on a lake is circular. Its radius, in metres, is modelled by $r(t) = ${num(p)}\\sqrt{t} + ${num(q)}$, for $t \\ge 0$, where $t$ is the time in minutes after a spill. The area of a circle of radius $r$ is $A(r) = \\pi r^{2}$.`,
+        parts: [
+          P(`Find $(A \\circ r)(${t0})$, the area of the patch in square metres when $t = ${t0}$.`, 2, ans.sf(area), [`$r(${t0}) = ${num(p)}\\sqrt{${t0}} + ${num(q)} = ${more(r0)}$`, `$(A \\circ r)(${t0}) = \\pi(${more(r0)})^{2} = ${sf(area)}$`]),
+          P(`Find the value of $t$ at which the radius of the patch is $${unit(R, "m")}$.`, 2, ans.sf(tR), [`$${num(p)}\\sqrt{t} + ${num(q)} = ${num(R)}$, so $\\sqrt{t} = \\dfrac{${num(R - q)}}{${num(p)}} = ${more((R - q) / p)}$`, `$t = (${more((R - q) / p)})^{2} = ${sf(tR)}$`]),
+          P(`Find the value of $t$ at which the area of the patch is $${S}$ square metres.`, 3, ans.sf(tS), [`$(A \\circ r)(t) = \\pi\\left(${num(p)}\\sqrt{t} + ${num(q)}\\right)^{2} = ${S}$`,
+            `Solve on a calculator, or work back: $r = \\sqrt{\\dfrac{${S}}{\\pi}} = ${more(rS)}$`, `$\\sqrt{t} = \\dfrac{${more(rS)} - ${num(q)}}{${num(p)}}$, so $t = ${sf(tS)}$`])] };
+    } });
+
+  // ---------------- 2.6 ----------------
+  reg({ ...QM, ...CALC, unknown: "second-time-at-height", representation: "words", format: "value", levels: [4], title: "Projectile model: maximum, landing and time above a height",
+    build({ rng }) {
+      const v = rng.pick([12.5, 14, 15.5, 17, 18.5, 21]), h0 = rng.pick([1.2, 1.5, 1.8, 2.4, 3]);
+      const tM = v / 9.8, hM = h0 + (v * v) / 19.6, land = (v + Math.sqrt(v * v + 19.6 * h0)) / 9.8, H = Math.round(hM * rng.pick([0.5, 0.6, 0.7]));
+      const half = Math.sqrt((hM - H) / 4.9), dur = 2 * half;
+      return { params: { v, h0, H },
+        graph: { x: [0, Math.ceil(land) + 1], y: [0, Math.ceil(hM / 5) * 5 + 5], xLabel: "t", yLabel: "h",
+          functions: [{ fn: { type: "poly", coeffs: [h0, v, -4.9] }, domain: [0, land] }, { fn: { type: "poly", coeffs: [H] }, dashed: true }], alt: "A parabola opening downwards from launch to landing, with a dashed horizontal line crossing it twice" },
+        stem: `A ball is thrown upwards. Its height above the ground, in metres, is modelled by $h(t) = ${poly([-4.9, v, h0], "t")}$, where $t$ is the time in seconds after it is thrown, until it lands. The graph shows $h$ and the line $h = ${H}$.`,
+        parts: [
+          P("Find the maximum height of the ball, in metres.", 2, ans.sf(hM), [`The vertex is at $t = -\\dfrac{b}{2a} = \\dfrac{${num(v)}}{9.8} = ${more(tM)}$ (or use the maximum tool on a calculator).`, `$h(${more(tM)}) = ${sf(hM)}$`]),
+          P("Find the time, in seconds, at which the ball lands.", 2, ans.sf(land), [`Solve $${poly([-4.9, v, h0], "t")} = 0$ with the quadratic formula or a calculator.`, `$t = ${sf(land)}$ (the other solution is negative)`]),
+          P(`Find the length of time, in seconds, for which the ball is more than $${unit(H, "m")}$ above the ground.`, 3, ans.sf(dur), [`Solve $h(t) = ${H}$: $t = ${more(tM - half)}$ or $t = ${more(tM + half)}$`, `The ball is above $${unit(H, "m")}$ between these times.`, `$${more(tM + half)} - ${more(tM - half)} = ${sf(dur)}$`])] };
+    } });
+
+  // ---------------- 2.7 ----------------
+  reg({ ...SQ, ...CALC, unknown: "solve-in-context", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.7.solve-equation", "SL2.7.discriminant"], title: "A rectangle whose sides satisfy a quadratic equation",
+    build({ rng }) {
+      const d = rng.pick([1.5, 2.5, 3.5, 4.5, 6.5]), A = rng.pick([40, 55, 72, 86, 95, 120]);
+      const disc = d * d + 4 * A, w = (-d + Math.sqrt(disc)) / 2, len = w + d, diag = Math.hypot(w, len);
+      return { params: { d, A },
+        graph: { alt: "A rectangle with its width and length labelled", shapes: [{ type: "polygon", points: [[0, 0], [len, 0], [len, w], [0, w]], sides: [`w + ${d}`, "w", null, null] }] },
+        stem: `A rectangular garden has width $w$ metres. Its length is $${num(d)}$ metres more than its width, and its area is $${A}$ square metres, so $w$ satisfies the equation $${poly([1, d, -A], "w")} = 0$.`,
+        parts: [
+          P("Find the discriminant of this equation.", 2, ans.dec(disc), [`$\\Delta = b^{2} - 4ac = ${num(d)}^{2} - 4(1)(${-A})$`, `$\\Delta = ${num(d * d)} + ${4 * A} = ${num(disc)}$`]),
+          P("Find the width of the garden, in metres.", 2, ans.sf(w), [`$w = \\dfrac{-${num(d)} \\pm \\sqrt{${num(disc)}}}{2}$, so $w = ${more(w)}$ or $w = ${more((-d - Math.sqrt(disc)) / 2)}$`, `A width is positive, so $w = ${sf(w)}$.`]),
+          P("Find the length of a diagonal of the garden, in metres.", 2, ans.sf(diag), [`The length is $${more(w)} + ${num(d)} = ${more(len)}$.`, `By Pythagoras, the diagonal is $\\sqrt{${more(w)}^{2} + ${more(len)}^{2}} = ${sf(diag)}$`])] };
+    } });
+  reg({ ...CALC, type: "fn-quadratic-inequality", syllabus: ["2.7"], unknown: "largest-integer", representation: "equation", format: "value", levels: [4],
+    skills: ["SL2.7.inequality", "SL2.7.solve-equation"], title: "Integers that satisfy a quadratic inequality",
+    build({ rng }) {
+      let b, c, disc;
+      do { b = rng.int(-9, 11); c = rng.int(-12, 14); disc = b * b - 4 * c; } while (disc < 12 || Number.isInteger(Math.sqrt(disc)) || b === 0 || c === 0 || disc > 110);
+      const r1 = (b - Math.sqrt(disc)) / 2, r2 = (b + Math.sqrt(disc)) / 2, lo = Math.ceil(r1), hi = Math.floor(r2), bottom = c - (b * b) / 4;
+      return { params: { b, c },
+        graph: { x: [Math.floor(r1) - 2, Math.ceil(r2) + 2], y: [Math.floor(bottom) - 1, Math.max(4, Math.ceil(-bottom / 3))], xStep: 1,
+          functions: [{ fn: { type: "poly", coeffs: [c, -b, 1] }, label: "f" }], regions: [{ x: [r1, r2], fn: 0 }], alt: "A parabola opening upwards, with the region between the curve and the x-axis shaded" },
+        stem: `Consider the function $f(x) = ${poly([1, -b, c])}$. The region where the graph of $f$ lies below the $x$-axis is shaded in the diagram.`,
+        parts: [
+          P("Find the smaller solution of $f(x) = 0$.", 2, ans.sf(r1), [`$x = \\dfrac{${b} \\pm \\sqrt{${disc}}}{2}$ (or use a calculator)`, `The smaller solution is $x = ${sf(r1)}$.`]),
+          P("Find the larger solution of $f(x) = 0$.", 1, ans.sf(r2), [`The larger solution is $x = ${sf(r2)}$.`]),
+          P("Find the number of integers $x$ for which $f(x) < 0$.", 2, ans.int(hi - lo + 1), [`The graph is below the $x$-axis between the roots: $${sf(r1)} < x < ${sf(r2)}$.`, `The integers in this interval run from $${lo}$ to $${hi}$, so there are $${hi - lo + 1}$ of them.`]),
+          P("Write down the largest integer $x$ for which $f(x) < 0$.", 1, ans.int(hi), [`The largest integer less than $${sf(r2)}$ is $${hi}$.`])] };
+    } });
+
+  // ---------------- 2.8 ----------------
+  reg({ type: "fn-rational-asymptotes-intercepts", syllabus: ["2.8"], unknown: "va-from-equation", representation: "equation", format: "value", levels: [1],
+    skills: ["SL2.8.asymptotes", "SL2.8.transformed-reciprocal"], title: "Asymptotes of a shifted reciprocal",
+    build({ rng }) {
+      const a = rng.int(1, 9), h = rng.nonzero(-8, 8), k = rng.nonzero(-8, 8);
+      return { params: { a, h, k }, stem: `The function $f$ is defined by $f(x) = \\dfrac{${a}}{${lin(1, -h)}} ${signed(k)}$, for $x \\ne ${h}$.`, parts: [
+        P("The graph of $f$ has a vertical asymptote $x = p$. Write down the value of $p$.", 1, ans.int(h), [`The denominator is zero when $x = ${h}$, so $p = ${h}$.`]),
+        P("The graph of $f$ has a horizontal asymptote $y = q$. Write down the value of $q$.", 1, ans.int(k), [`As $x$ becomes very large the fraction approaches $0$, so $f(x)$ approaches $${k}$ and $q = ${k}$.`])] };
+    } });
+  reg({ ...CALC, type: "fn-ext-rational-model", syllabus: ["2.8"], unknown: "least-n-for-target", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.8.rational-model", "SL2.8.asymptotes"], title: "Average cost model: a value, the long-run value and a least number",
+    build({ rng }) {
+      let v, F, n0, T, nMin;
+      do { v = rng.pick([1.8, 2.4, 3.6, 4.5]); F = rng.pick([650, 850, 1200, 1500, 2300]); n0 = rng.pick([75, 120, 250, 400]); T = v + rng.pick([0.35, 0.6, 0.85, 1.25]); nMin = Math.floor(F / (T - v) + 1e-9) + 1; }
+      while (Math.abs(F / (T - v) - Math.round(F / (T - v))) < 1e-6);
+      const C0 = v + F / n0;
+      return { params: { v, F, n0, T }, stem: `A workshop makes $n$ chairs in a month. The average cost of making one chair, in euros, is modelled by $C(n) = ${num(v)} + \\dfrac{${num(F)}}{n}$, for $n \\ge 1$.`,
+        parts: [
+          P(`Find $C(${n0})$.`, 2, ans.sf(C0), [`$C(${n0}) = ${num(v)} + \\dfrac{${num(F)}}{${n0}} = ${num(v)} + ${more(F / n0)}$`, `$C(${n0}) = ${sf(C0)}$ (to three significant figures)`]),
+          P("As $n$ becomes very large, $C(n)$ approaches the value $q$. Write down the value of $q$.", 1, ans.dec(v), [`As $n$ becomes very large, $\\dfrac{${num(F)}}{n}$ approaches $0$, so $q = ${num(v)}$ (the horizontal asymptote).`]),
+          P(`Find the least number of chairs for which the average cost is less than $${num(T)}$ euros.`, 3, ans.int(nMin), [`$${num(v)} + \\dfrac{${num(F)}}{n} < ${num(T)}$, so $\\dfrac{${num(F)}}{n} < ${num(T - v)}$`, `$n > \\dfrac{${num(F)}}{${num(T - v)}} = ${more(F / (T - v))}$`, `$n$ is a whole number, so the least value is $${num(nMin)}$.`])] };
+    } });
+
+  // ---------------- 2.9 ----------------
+  reg({ type: "fn-exp-log-inverse-composite", syllabus: ["2.9"], unknown: "evaluate-log-function", representation: "equation", format: "value", levels: [1],
+    skills: ["SL2.9.exp-log-inverse", "SL2.9.log-graph"], title: "A value of a log function and of its inverse",
+    build({ rng }) {
+      const b = rng.pick([2, 3, 5, 10]), n = rng.int(2, b === 2 ? 6 : b === 3 ? 4 : 3), mm = rng.int(2, b === 2 ? 5 : 3);
+      return { params: { b, x: Math.pow(b, n), mm }, stem: `The function $f$ is defined by $f(x) = \\log_{${b}} x$, for $x > 0$.`, parts: [
+        P(`Find $f(${num(Math.pow(b, n))})$.`, 1, ans.int(n), [`$${num(Math.pow(b, n))} = ${b}^{${n}}$, so $f(${num(Math.pow(b, n))}) = ${n}$.`]),
+        P(`Find $f^{-1}(${mm})$.`, 1, ans.int(Math.pow(b, mm)), [`The inverse of $\\log_{${b}} x$ is $${b}^{x}$, so $f^{-1}(${mm}) = ${b}^{${mm}} = ${num(Math.pow(b, mm))}$.`])] };
+    } });
+
+  // ---------------- 2.10 ----------------
+  reg({ type: "fn-curve-intersection-quadratic", syllabus: ["2.10"], unknown: "meeting-x", representation: "graph", format: "value", levels: [1],
+    skills: ["SL2.10.number-of-solutions", "SL2.10.solve-gdc"], title: "Solutions of an equation read from two graphs",
+    build({ rng }) {
+      let r1, r2, mm, d, a, ok;
+      const mk = () => { const f = (x) => a * (x - r1) * (x - r2) + mm * x + d; return { f, vx: (r1 + r2) / 2 - mm / (2 * a) }; };
+      do {
+        a = rng.sign(); r1 = rng.int(-4, 1); r2 = r1 + rng.int(2, 5); mm = rng.pick([-2, -1, 1, 2, 0.5, -0.5]); d = rng.int(-3, 3);
+        const { f, vx } = mk();
+        ok = r2 <= 4 && Math.abs(mm * r1 + d) <= 6 && Math.abs(mm * r2 + d) <= 6 && Math.abs(f(vx)) <= 7 && Number.isInteger(mm * r1 + d) && Number.isInteger(mm * r2 + d);
+      } while (!ok);
+      const y1 = mm * r1 + d, y2 = mm * r2 + d;
+      return { params: { r1, r2 },
+        graph: win([-6, 6], [-8, 8], { functions: [{ fn: { type: "poly", coeffs: [a * r1 * r2 + d, mm - a * (r1 + r2), a] }, label: "f" }, { fn: { type: "poly", coeffs: [d, mm] }, label: "g" }],
+          points: [{ x: r1, y: y1 }, { x: r2, y: y2 }], alt: "A parabola f and a straight line g crossing at two marked points" }),
+        stem: "The graphs of a quadratic function $f$ and a linear function $g$ are shown. They cross at two marked points, which have integer coordinates.",
+        parts: [
+          P("Write down the smaller solution of the equation $f(x) = g(x)$.", 1, ans.int(r1), [`The solutions of $f(x) = g(x)$ are the $x$-coordinates of the points where the graphs cross: $${point(r1, y1)}$ and $${point(r2, y2)}$.`, `The smaller solution is $x = ${r1}$.`]),
+          P("Write down the larger solution.", 1, ans.int(r2), [`The larger solution is $x = ${r2}$.`])] };
+    } });
+  reg({ ...CALC, type: "fn-gdc-optimise-combined", syllabus: ["2.10"], unknown: "first-whole-day", representation: "words", format: "value", levels: [4],
+    skills: ["SL2.10.context-apply", "SL2.10.solve-gdc", "SL2.4.max-min"], title: "When one model overtakes another, and the greatest gap",
+    build({ rng }) {
+      let a, b, c, d, tc, tg;
+      const gap = (t) => c + d * t - a * Math.pow(b, t);
+      do {
+        a = rng.pick([8, 10, 12, 15]); b = rng.pick([1.06, 1.08, 1.09, 1.12]); c = rng.pick([25, 30, 36, 40]); d = rng.pick([1.5, 2, 2.5, 3]);
+        tg = Math.log(d / (a * Math.log(b))) / Math.log(b); tc = tg > 1 ? solve(gap, tg, 400) : 0;
+      } while (!(tg > 2 && tc < 60 && Math.abs(tc - Math.round(tc)) > 0.02));
+      return { params: { a, b, c, d },
+        graph: { x: [0, Math.ceil(tc / 10) * 10 + 10], y: [0, Math.ceil((c + d * tc) / 20) * 20 + 40], xLabel: "t",
+          functions: [{ fn: { type: "exp", a, b }, label: "A" }, { fn: { type: "poly", coeffs: [c, d] }, label: "B" }], alt: "An exponential curve A that starts below a straight line B and later crosses above it" },
+        stem: `Two streaming services are launched at the same time. After $t$ months, the numbers of subscribers, in thousands, are modelled by $A(t) = ${a} \\times ${num(b)}^{t}$ and $B(t) = ${lin(d, c, "t")}$, for $t \\ge 0$.`,
+        parts: [
+          P("Find the value of $t$ for which the two services have the same number of subscribers.", 3, ans.sf(tc), ["Graph $y = A(t)$ and $y = B(t)$ on a calculator.", "Use the intersection tool to find where the graphs cross.", `$t = ${sf(tc)}$`]),
+          P("Write down the first whole number of months after which service A has more subscribers than service B.", 1, ans.int(Math.ceil(tc)), [`$A(t) > B(t)$ for $t > ${sf(tc)}$, so the first whole number of months is $${Math.ceil(tc)}$.`]),
+          P("Find the greatest number of subscribers, in thousands, by which service B is ahead of service A.", 3, ans.sf(gap(tg)), [`The lead of B is $D(t) = B(t) - A(t) = ${lin(d, c, "t")} - ${a} \\times ${num(b)}^{t}$.`, `Graph $D$ and use the maximum tool: the maximum is at $t = ${sf(tg)}$.`, `The greatest lead is $${sf(gap(tg))}$ thousand.`])] };
+    } });
+
+  // ---------------- 2.11 ----------------
+  const TD = { type: "fn-transform-describe", syllabus: ["2.11"] };
+  reg({ ...TD, unknown: "describe-translation", representation: "equation", format: "value", levels: [1],
+    skills: ["SL2.11.translate", "SL2.11.describe"], title: "Translation vector from a rule",
+    build({ rng }) {
+      const h = rng.nonzero(-8, 8), k = rng.nonzero(-8, 8);
+      return { params: { h, k }, stem: `The function $g$ is defined by $g(x) = f(${lin(1, -h)}) ${signed(k)}$. The graph of $g$ is obtained from the graph of $f$ by a translation by the vector $\\begin{pmatrix} p \\\\ q \\end{pmatrix}$.`, parts: [
+        P("Write down the value of $p$.", 1, ans.int(h), [`Replacing $x$ by $${lin(1, -h)}$ moves the graph $${Math.abs(h)}$ ${units(h)} to the ${h > 0 ? "right" : "left"}, so $p = ${h}$.`]),
+        P("Write down the value of $q$.", 1, ans.int(k), [`${k > 0 ? "Adding" : "Subtracting"} $${Math.abs(k)}$ moves the graph $${Math.abs(k)}$ ${units(k)} ${k > 0 ? "up" : "down"}, so $q = ${k}$.`])] };
+    } });
+  reg({ ...TA, ...CALC, syllabus: ["2.11", "2.4"], unknown: "image-point", representation: "equation", format: "value", levels: [4],
+    skills: ["SL2.11.image-point", "SL2.11.composite-transform", "SL2.4.max-min"], title: "A maximum point found with technology, and its image",
+    build({ rng }) {
+      const a = rng.pick([2, 4, 5, 7, 8]), s = rng.pick([2, 3, 0.5, 1.5]), h = rng.pick([-2.5, -1.5, 0.8, 1.5, 2.5]), k = rng.pick([-3, -1.2, 0.7, 2, 4.5]);
+      const xm = -Math.sqrt(a / 3), ym = xm * xm * xm - a * xm;
+      return { params: { a, s, h, k },
+        stem: `The function $f$ is defined by $f(x) = ${poly([1, 0, -a, 0])}$, for $x \\in \\mathbb{R}$. The graph of $f$ has a local maximum point at $\\mathrm{A}$. The function $g$ is defined by $g(x) = ${gRule(s, h, k)}$, and $\\mathrm{A}$ is mapped to the point $\\mathrm{B}$ on the graph of $g$.`,
+        parts: [
+          P("Find the $x$-coordinate of $\\mathrm{A}$.", 2, ans.sf(xm), ["Graph $f$ on a calculator and use its maximum tool.", `$x = ${sf(xm)}$`]),
+          P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(ym), [`The maximum tool gives $y = ${sf(ym)}$.`]),
+          P("Find the $x$-coordinate of $\\mathrm{B}$.", 1, ans.sf(xm + h), [`Replacing $x$ by $${lin(1, -h)}$ moves the graph $${num(Math.abs(h))}$ units to the ${h > 0 ? "right" : "left"}: $x = ${more(xm)} ${signed(h)} = ${sf(xm + h)}$`]),
+          P("Find the $y$-coordinate of $\\mathrm{B}$.", 2, ans.sf(s * ym + k), [`The $y$-coordinate is multiplied by $${num(s)}$ and then $${num(Math.abs(k))}$ is ${k > 0 ? "added" : "subtracted"}.`, `$y = ${num(s)}(${more(ym)}) ${signed(k)} = ${sf(s * ym + k)}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
