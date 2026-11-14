@@ -1134,4 +1134,212 @@
         P("Which is the alternative hypothesis?", 1, hyp(rng, "gt"), [`The belief is that the mean for $\\mathrm{A}$ is greater: $${H1}: \\mu_{A} > \\mu_{B}$.`]),
         P("Which conclusion is correct?", 1, con.answer, con.working)] };
     } });
+
+  // =====================================================================================
+  // 5.6 stationary points
+  // =====================================================================================
+  const dOpt = (name, cs, why, v) => ({ text: `$${name} = ${poly(cs, v)}$`, value: cs, why });
+  const polyAt = (cs, x) => cs.reduce((s, c) => s * x + c, 0);
+  const ST = { type: "t5-ai-stationary-points", representation: "equation", syllabus: ["5.6"] };
+  reg({ ...ST, unknown: "stationary-point-from-derivative", format: "value", levels: [1], calculator: false, skills: ["AI-SL5.6.solve-gradient-zero", "AI-SL5.6.classify-from-derivative"], title: "Find and classify a stationary point from the derivative",
+    build({ rng }) {
+      let a, b;
+      a = rng.nonzero(-6, 6); b = rng.nonzero(-18, 18);
+      const x0 = fmt.Q(-b, a), kind = a > 0 ? "min" : "max", t = { min: "A local minimum", max: "A local maximum", neither: "Neither a maximum nor a minimum", cannot: "It cannot be decided from the derivative" };
+      return { params: { a, b }, stem: `The derivative of a function $f$ is $f'(x) = ${lin(a, b)}$.`, parts: [
+        P("Find the $x$-coordinate of the stationary point of the graph of $f$.", 1, ans.frac(x0.n, x0.d), [`At a stationary point $f'(x) = 0$: $${lin(a, b)} = 0$`, `$x = ${fmt.rat.tex(x0)}$`]),
+        P("What kind of stationary point is it?", 1, ans.choice(rng, { text: t[kind], value: kind }, ["min", "max", "neither", "cannot"].filter((k) => k !== kind).map((k) => ({ text: t[k], value: k, why: "Look at the sign of $f'(x)$ just before and just after the stationary point." }))), [
+          `For $x$ less than $${fmt.rat.tex(x0)}$, $f'(x)$ is ${a > 0 ? "negative" : "positive"}; for $x$ greater than it, $f'(x)$ is ${a > 0 ? "positive" : "negative"}.`,
+          `The graph goes ${a > 0 ? "down and then up" : "up and then down"}, so the point is a local ${a > 0 ? "minimum" : "maximum"}.`])] };
+    } });
+  function cubicSit(rng) {
+    let p, q, c, s, cs, vals;
+    do { p = rng.int(-4, 2); q = p + rng.int(1, 4); s = rng.sign(); c = rng.int(-9, 9); cs = [2 * s, -3 * s * (p + q), 6 * s * p * q, c]; vals = [polyAt(cs, p), polyAt(cs, q)]; } while (p * q === 0 && p + q === 0 || vals.some((v) => Math.abs(v) > 150));
+    return { p, q, s, cs, vals };
+  }
+  reg({ ...ST, unknown: "turning-points-of-a-cubic", format: "value", levels: [2], calculator: false, skills: ["AI-SL5.6.solve-gradient-zero", "AI-SL5.6.turning-point", "AI-SL5.6.classify-from-derivative"], title: "Local maximum and minimum of a cubic", situationKey: "ai-cubic-st", situation: cubicSit,
+    build({ rng, sit: { p, q, s, cs, vals } }) {
+      const d = [3 * cs[0], 2 * cs[1], cs[2]], xmax = s > 0 ? p : q, xmin = s > 0 ? q : p, ymax = s > 0 ? vals[0] : vals[1];
+      return { params: { cs }, stem: `Consider the function $f(x) = ${poly(cs)}$.`, parts: [
+        P("Which expression is $f'(x)$?", 1, ans.choice(rng, dOpt("f'(x)", d), [dOpt("f'(x)", [cs[0], cs[1], cs[2]], "Each term must also be multiplied by its power."), dOpt("f'(x)", [d[0], d[1], d[2], 0], "The powers have not been reduced by one."),
+          dOpt("f'(x)", [d[0], d[1], d[2] + cs[3]], "The derivative of the constant term is zero."), dOpt("f'(x)", [d[0], cs[1], cs[2]])]), [`Differentiate term by term: $f'(x) = ${poly(d)}$`]),
+        P("Find the $x$-coordinate of the local maximum point.", 1, ans.int(xmax), [`$f'(x) = 0$: $${poly(d)} = 0$, so $x = ${p}$ or $x = ${q}$ (GDC, or factorise: $${6 * s}${fmt.factor(p)}${fmt.factor(q)} = 0$).`,
+          `The coefficient of $x^{3}$ is ${s > 0 ? "positive" : "negative"}, so the graph ${s > 0 ? "rises to a maximum first and then falls to a minimum" : "falls to a minimum first and then rises to a maximum"}. The maximum is at $x = ${xmax}$.`]),
+        P("Find the $x$-coordinate of the local minimum point.", 1, ans.int(xmin), [`The other stationary point is the local minimum: $x = ${xmin}$.`]),
+        P("Find the $y$-coordinate of the local maximum point.", 1, ans.int(ymax), [`$f(${xmax}) = ${expr([[cs[0], `${br(xmax)}^{3}`], [cs[1], `${br(xmax)}^{2}`], [cs[2], br(xmax)], [cs[3], ""]])} = ${ymax}$`])] };
+    } });
+  reg({ ...ST, unknown: "greatest-value-on-a-domain", format: "value", levels: [3], calculator: false, skills: ["AI-SL5.6.turning-point", "AI-SL5.6.solve-gradient-zero", "AI-SL5.6.classify-from-derivative"], title: "Local maximum and minimum, and the greatest value on a domain",
+    build({ rng }) {
+      let m0, d, c, cs, p, q, lo, hi, f, gmax;
+      do { m0 = rng.int(-2, 3); d = rng.int(1, 2); c = rng.int(-12, 12); p = m0 - d; q = m0 + d; cs = [1, -3 * m0, 3 * p * q, c]; f = (x) => polyAt(cs, x); lo = p - rng.int(1, 2); hi = q + rng.int(1, 3); gmax = Math.max(f(lo), f(hi), f(p)); }
+      while ([f(p), f(q), f(lo), f(hi)].some((v) => Math.abs(v) > 120) || f(hi) === f(p) || p * q === 0);
+      const dcs = [3, -6 * m0, 3 * p * q], endWins = f(hi) > f(p);
+      return { params: { cs, lo, hi }, stem: `Consider the function $f(x) = ${poly(cs)}$ for $${lo} \\le x \\le ${hi}$. The graph of $f$ has a local maximum point and a local minimum point.`, parts: [
+        P("Find the $x$-coordinate of the local maximum point.", 2, ans.int(p), [`$f'(x) = ${poly(dcs)}$`, `$f'(x) = 0$ gives $3${fmt.factor(p)}${fmt.factor(q)} = 0$, so $x = ${p}$ or $x = ${q}$.`, `$f'(x)$ changes from positive to negative at $x = ${p}$, so the local maximum is at $x = ${p}$.`]),
+        P("Find the local maximum value of $f$.", 1, ans.int(f(p)), [`$f(${p}) = ${expr([[1, `${br(p)}^{3}`], [cs[1], `${br(p)}^{2}`], [cs[2], br(p)], [cs[3], ""]])} = ${f(p)}$`]),
+        P("Find the local minimum value of $f$.", 1, ans.int(f(q)), [`The local minimum is at $x = ${q}$: $f(${q}) = ${f(q)}$`]),
+        P(`Find the greatest value of $f$ for $${lo} \\le x \\le ${hi}$.`, 2, ans.int(gmax), [`Compare the local maximum value with the values at the ends of the domain: $f(${lo}) = ${f(lo)}$ and $f(${hi}) = ${f(hi)}$.`,
+          endWins ? `$f(${hi}) = ${f(hi)}$ is greater than the local maximum value $${f(p)}$, so the greatest value is $${gmax}$. A local maximum need not be the greatest value.` : `The local maximum value $${f(p)}$ is the largest of these, so the greatest value is $${gmax}$.`])] };
+    } });
+  const termOpt = (name, terms, why) => ({ text: `$${name} = ${terms.map((t, i) => { const mag = Math.abs(t[0]), body = t[1] === 0 ? num(mag) : t[1] > 0 ? `${mag === 1 ? "" : num(mag)}${fmt.power("x", t[1])}` : `\\dfrac{${num(mag)}}{${fmt.power("x", -t[1])}}`; return (i === 0 ? (t[0] < 0 ? "-" : "") : t[0] < 0 ? " - " : " + ") + body; }).join("")}$`, value: terms, why });
+  reg({ ...ST, unknown: "minimum-with-a-reciprocal-term", format: "value", levels: [4], skills: ["AI-SL5.6.solve-gradient-zero", "AI-SL5.6.turning-point"], title: "Differentiate, solve f'(x) = 0 and find a minimum value",
+    build({ rng }) {
+      let a, b, n, x0;
+      do { n = rng.pick([1, 2]); a = rng.int(1, 6); b = rng.int(8, 120); x0 = Math.pow(b / (n * a), 1 / (n + 1)); } while (Math.abs(x0 * 10 - Math.round(x0 * 10)) < 1e-6 || x0 < 0.8 || x0 > 9);
+      const f = (x) => a * Math.pow(x, n) + b / x, fx = [[a, n], [b, -1]], right = [[n * a, n - 1], [-b, -2]];
+      const fTex = termOpt("f(x)", fx).text.slice(1, -1);
+      return { params: { a, b, n }, stem: `Consider the function $${fTex}$, for $x > 0$.`, parts: [
+        P("Which expression is $f'(x)$?", 2, ans.choice(rng, termOpt("f'(x)", right), [termOpt("f'(x)", [[n * a, n - 1], [b, -2]], "The derivative of $x^{-1}$ is $-x^{-2}$: the sign changes."), termOpt("f'(x)", [[n * a, n - 1], [-b, -1]], "The power of the second term must go down by one, from $-1$ to $-2$."),
+          termOpt("f'(x)", [[n * a, n - 1], [b, -1]], "The second term has not been differentiated. Write it as a multiple of $x^{-1}$ first."), termOpt("f'(x)", [[a, n - 1 || 1], [-b, -2]])]), [
+          `Write $f(x) = ${a === 1 ? "" : a}${fmt.power("x", n)} + ${b}x^{-1}$.`, `$f'(x) = ${n * a === 1 ? "" : n * a}${n === 1 ? "" : "x"}${n * a === 1 && n === 1 ? "1" : ""} - ${b}x^{-2}$, which is the same as ${termOpt("f'(x)", right).text}.`]),
+        P("Find the value of $x$ at which $f$ has a local minimum.", 2, ans.sf(x0), [`Solve $f'(x) = 0$ with the GDC, or find the minimum point of the graph of $f$.`, `$x = ${sf(x0)}$`]),
+        P("Find the minimum value of $f$.", 2, ans.sf(f(x0)), [`Substitute the unrounded value of $x$ into $f$, or read the $y$-coordinate of the minimum point from the GDC.`, `$f(${sf(x0)}) = ${sf(f(x0))}$`])] };
+    } });
+  reg({ ...ST, unknown: "coefficients-from-stationary-points", format: "value", levels: [3], calculator: false, skills: ["AI-SL5.6.conditions-for-unknowns", "AI-SL5.6.solve-gradient-zero"], title: "Find unknown coefficients from the stationary points",
+    build({ rng }) {
+      let p, q, c;
+      do { p = rng.int(-5, 3); q = p + 2 * rng.int(1, 3); c = rng.int(-9, 9); } while (p * q === 0 || p + q === 0);
+      const a = -3 * (p + q) / 2, b = 3 * p * q;
+      return { params: { p, q, c }, stem: `The function $f(x) = x^{3} + ax^{2} + bx ${signed(c)}$ has stationary points at $x = ${p}$ and $x = ${q}$.`.replace("  ", " "), parts: [
+        P("Which expression is $f'(x)$?", 1, ans.choice(rng, { text: "$f'(x) = 3x^{2} + 2ax + b$", value: [3, 2, 1] }, [{ text: "$f'(x) = 3x^{2} + ax + b$", value: [3, 1, 1], why: "The derivative of $ax^{2}$ is $2ax$." },
+          { text: "$f'(x) = x^{2} + 2ax + b$", value: [1, 2, 1], why: "The derivative of $x^{3}$ is $3x^{2}$." }, { text: `$f'(x) = 3x^{2} + 2ax + b ${signed(c)}$`, value: [3, 2, 1, c], why: "The derivative of the constant term is zero." }]), [`Differentiate term by term: $f'(x) = 3x^{2} + 2ax + b$`]),
+        P("Find the value of $a$.", 2, ans.int(a), [`$f'(${p}) = 0$ and $f'(${q}) = 0$: $${3 * p * p} ${signed(2 * p)}a + b = 0$ and $${3 * q * q} ${signed(2 * q)}a + b = 0$`, `Subtract the equations: $${3 * q * q - 3 * p * p} ${signed(2 * q - 2 * p)}a = 0$, so $a = ${a}$.`]),
+        P("Find the value of $b$.", 2, ans.int(b), [`Substitute $a = ${a}$ into the first equation: $${3 * p * p} ${signed(2 * p * a)} + b = 0$`, `$b = ${b}$`])] };
+    } });
+
+  // =====================================================================================
+  // 5.7 optimisation
+  // =====================================================================================
+  const OPT = { type: "t5-ai-optimisation", representation: "words", syllabus: ["5.7"] };
+  const PROFIT = [{ who: "A company makes $x$ hundred bicycles each month", unit: "thousand euros" }, { who: "A bakery sells $x$ hundred loaves each week", unit: "hundred euros" }, { who: "A farm grows $x$ tonnes of strawberries", unit: "thousand euros" }, { who: "A theatre sells tickets at $x$ euros each", unit: "hundred euros" }];
+  function profitSit(rng) {
+    let a, xs, c, pm;
+    do { a = rng.pick([0.5, 0.25, 0.2, 1, 2, 3, 4]); xs = rng.int(4, 30); c = rng.int(5, 90); pm = a * xs * xs - c; } while (pm <= 2 || !Number.isInteger(2 * a * xs) || pm > 900 || Math.abs(pm * 100 - Math.round(pm * 100)) > 1e-9);
+    return { a, b: 2 * a * xs, c, xs, pm, ci: rng.int(0, PROFIT.length - 1) };
+  }
+  const profitStem = (s, withD) => `${PROFIT[s.ci].who}. The profit, $p$ ${PROFIT[s.ci].unit}, is modelled by $p(x) = ${poly([-s.a, s.b, -s.c])}$${withD ? `, so that $p'(x) = ${poly([-2 * s.a, s.b])}$` : ""}.`;
+  reg({ ...OPT, unknown: "maximise-from-given-derivative", format: "value", levels: [1], calculator: false, skills: ["AI-SL5.7.optimal-input", "AI-SL5.7.optimum-value"], title: "Use a given derivative to maximise profit", situationKey: "ai-profit", situation: profitSit,
+    build({ sit: s }) {
+      return { params: { a: s.a, b: s.b, c: s.c }, stem: profitStem(s, true), parts: [
+        P("Find the value of $x$ that gives the maximum profit.", 1, ans.int(s.xs), [`The profit is greatest when $p'(x) = 0$: $${poly([-2 * s.a, s.b])} = 0$, so $x = ${s.xs}$.`]),
+        P("Find the maximum profit.", 1, ans.dec(s.pm), [`$p(${s.xs}) = ${expr([[-s.a, `${br(s.xs)}^{2}`], [s.b, br(s.xs)], [-s.c, ""]])} = ${num(s.pm)}$`])] };
+    } });
+  reg({ ...OPT, unknown: "maximum-profit", format: "value", levels: [2], calculator: false, skills: ["AI-SL5.7.optimal-input", "AI-SL5.7.optimum-value"], title: "Maximise a quadratic profit with calculus", situationKey: "ai-profit", situation: profitSit,
+    build({ rng, sit: s }) {
+      const d = [-2 * s.a, s.b];
+      return { params: { a: s.a, b: s.b, c: s.c }, stem: profitStem(s, false), parts: [
+        P("Which expression is $p'(x)$?", 1, ans.choice(rng, dOpt("p'(x)", d), [dOpt("p'(x)", [-s.a, s.b], "The term in $x^{2}$ must be multiplied by its power."), dOpt("p'(x)", [-2 * s.a, s.b, 0], "The powers have not been reduced by one."), dOpt("p'(x)", [-2 * s.a, s.b - s.c], "The derivative of the constant term is zero.")]), [
+          `Differentiate term by term: $p'(x) = ${poly(d)}$`]),
+        P("Find the value of $x$ that gives the maximum profit.", 1, ans.int(s.xs), [`Solve $p'(x) = 0$: $${poly(d)} = 0$, so $x = ${s.xs}$.`]),
+        P("Find the maximum profit.", 2, ans.dec(s.pm), [`$p(${s.xs}) = ${expr([[-s.a, `${br(s.xs)}^{2}`], [s.b, br(s.xs)], [-s.c, ""]])}$`, `$p(${s.xs}) = ${num(s.pm)}$, in ${PROFIT[s.ci].unit}.`])] };
+    } });
+  reg({ ...OPT, unknown: "largest-enclosure", format: "value", levels: [3], calculator: false, skills: ["AI-SL5.7.form-objective", "AI-SL5.7.optimal-input", "AI-SL5.7.optimum-value"], title: "Set up and maximise the area of an enclosure",
+    build({ rng }) {
+      const c = rng.pick([{ k: 2, stem: (L) => `A farmer has $${L}\\text{ m}$ of fencing to make a rectangular enclosure against a long straight wall. The wall forms one side, so fencing is needed for only three sides. The two sides at right angles to the wall each have length $x\\text{ m}$` },
+        { k: 3, stem: (L) => `A farmer has $${L}\\text{ m}$ of fencing to make a rectangular enclosure against a long straight wall, divided into two pens by a fence at right angles to the wall. The wall forms one side, so fencing is needed for three lengths of $x\\text{ m}$ at right angles to the wall and one length parallel to it` },
+        { k: 4, stem: (L) => `A farmer has $${L}\\text{ m}$ of fencing to make a rectangular enclosure against a long straight wall, divided into three pens by two fences at right angles to the wall. The wall forms one side, so fencing is needed for four lengths of $x\\text{ m}$ at right angles to the wall and one length parallel to it` }]);
+      const k = c.k, L = 2 * k * rng.int(3, 14) / (rng.bool(0.3) ? 2 : 1), xs = L / (2 * k), area = xs * (L - k * xs);
+      const o = (cs, why) => ({ text: `$A = ${poly(cs)}$`, value: cs, why });
+      return { params: { L, k }, stem: `${c.stem(L)}. The total area of the enclosure is $A\\text{ m}^{2}$.`, parts: [
+        P("Which expression gives $A$ in terms of $x$?", 2, ans.choice(rng, o([-k, L, 0]), [o([-1, L, 0], `The side parallel to the wall is what is left of the fencing after $${k}$ lengths of $x$.`), o([-k, L / 2, 0], "Only one side parallel to the wall needs fencing."), o([k, L, 0], "The lengths at right angles to the wall are taken away from the fencing, not added.")]), [
+          `The side parallel to the wall has length $${L} - ${k}x$.`, `$A = x(${L} - ${k}x) = ${poly([-k, L, 0])}$`]),
+        P("Find the value of $x$ that gives the largest area.", 2, ans.dec(xs), [`$\\dfrac{\\mathrm{d}A}{\\mathrm{d}x} = ${poly([-2 * k, L])}$`, `Set this equal to $0$: $x = \\dfrac{${L}}{${2 * k}} = ${num(xs)}$`]),
+        P("Find the largest possible area, in $\\text{m}^{2}$.", 1, ans.dec(area), [`$A = ${num(xs)}(${L} - ${k} \\times ${num(xs)}) = ${num(area)}$`])] };
+    } });
+  reg({ ...OPT, unknown: "open-box-greatest-volume", format: "value", levels: [4], skills: ["AI-SL5.7.optimal-input", "AI-SL5.7.optimum-value", "AI-SL5.7.form-objective"], title: "The open box of greatest volume",
+    build({ rng }) {
+      let a, b, xs;
+      do { a = rng.int(12, 40); b = a + rng.int(0, 20); xs = (a + b - Math.sqrt(a * a - a * b + b * b)) / 6; } while (Math.abs(xs * 10 - Math.round(xs * 10)) < 1e-6);
+      const cs = [4, -2 * (a + b), a * b, 0], d = [12, -4 * (a + b), a * b], vm = xs * (a - 2 * xs) * (b - 2 * xs), other = (a + b + Math.sqrt(a * a - a * b + b * b)) / 6;
+      return { params: { a, b }, stem: `An open box is made from a rectangular sheet of metal $${b}\\text{ cm}$ by $${a}\\text{ cm}$ by cutting a square of side $x\\text{ cm}$ from each corner and folding up the sides. The volume of the box is $V\\text{ cm}^{3}$, where $V = ${poly(cs)}$ and $0 < x < ${num(a / 2)}$.`, parts: [
+        P("Which expression is $\\dfrac{\\mathrm{d}V}{\\mathrm{d}x}$?", 1, ans.choice(rng, { text: `$${poly(d)}$`, value: d }, [{ text: `$${poly([4, -2 * (a + b), a * b])}$`, value: [4, -2 * (a + b), a * b], why: "Each term must be multiplied by its power." },
+          { text: `$${poly([12, -4 * (a + b), a * b, 0])}$`, value: [12, -4 * (a + b), a * b, 0], why: "The powers have not been reduced by one." }, { text: `$${poly([12, -4 * (a + b), 0])}$`, value: [12, -4 * (a + b), 0], why: "The derivative of the term in $x$ is its coefficient, not zero." }]), [
+          `Differentiate term by term: $\\dfrac{\\mathrm{d}V}{\\mathrm{d}x} = ${poly(d)}$`]),
+        P("Find the value of $x$ that gives the greatest volume.", 3, ans.sf(xs), [`Solve $${poly(d)} = 0$ with the GDC: $x = ${sf(xs)}$ or $x = ${sf(other)}$.`, `Only $x = ${sf(xs)}$ is in the domain $0 < x < ${num(a / 2)}$.`, `The graph of $V$ has a maximum there, so $x = ${sf(xs)}$.`]),
+        P("Find the greatest possible volume of the box, in $\\text{cm}^{3}$.", 2, ans.sf(vm), [`Substitute the unrounded value of $x$ into $V$, or read the maximum point of the graph of $V$ from the GDC.`, `$V = ${sf(vm)}$`])] };
+    } });
+  reg({ ...OPT, unknown: "least-material-for-a-cylinder", format: "value", levels: [4], skills: ["AI-SL5.7.form-objective", "AI-SL5.7.optimal-input", "AI-SL5.7.optimum-value"], title: "The cylinder of least surface area for a fixed volume",
+    build({ rng }) {
+      const closed = rng.bool(), V = rng.pick([250, 330, 400, 500, 750, 850, 1000, 1500, 2000]), k = closed ? 2 : 1;
+      const what = closed ? rng.pick(["A closed cylindrical can", "A closed cylindrical drum"]) : rng.pick(["A cylindrical beaker with no lid", "An open cylindrical water tank"]), unitL = V >= 1000 && !closed ? "cm" : "cm";
+      const r0 = Math.pow(2 * V / (2 * k * Math.PI), 1 / 3), A = (r) => k * Math.PI * r * r + 2 * V / r, h0 = V / (Math.PI * r0 * r0);
+      const aTex = (kk, c) => `$A = ${kk === 1 ? "" : kk}\\pi r^{2} + \\dfrac{${c}}{r}$`, dTex = (kk, c, sign, pw) => `$\\dfrac{\\mathrm{d}A}{\\mathrm{d}r} = ${kk === 1 ? "" : kk}\\pi r ${sign} \\dfrac{${c}}{r${pw === 1 ? "" : "^{2}"}}$`;
+      return { params: { V, closed }, stem: `${what} has radius $r\\text{ ${unitL}}$, height $h\\text{ ${unitL}}$ and volume $${num(V)}\\text{ cm}^{3}$. It is made from thin sheet metal, and its ${closed ? "total" : "outer"} surface area${closed ? "" : " (the base and the curved surface)"} is $A\\text{ cm}^{2}$.`, parts: [
+        P("Which expression gives $h$ in terms of $r$?", 1, ans.choice(rng, { text: `$h = \\dfrac{${V}}{\\pi r^{2}}$`, value: [V / Math.PI, -2] }, [{ text: `$h = \\dfrac{${V}}{2\\pi r}$`, value: [V / (2 * Math.PI), -1], why: "The volume of a cylinder is $\\pi r^{2}h$." },
+          { text: `$h = ${V}\\pi r^{2}$`, value: [V * Math.PI, 2], why: "Divide the volume by the area of the base." }, { text: `$h = \\dfrac{\\pi r^{2}}{${V}}$`, value: [Math.PI / V, 2], why: "Divide the volume by the area of the base, not the other way round." }]), [`$\\pi r^{2}h = ${V}$, so $h = \\dfrac{${V}}{\\pi r^{2}}$`]),
+        P("Which expression gives $A$ in terms of $r$?", 1, ans.choice(rng, { text: aTex(k, 2 * V), value: [k, 2 * V] }, [{ text: aTex(k, V), value: [k, V], why: "The curved surface is $2\\pi rh$: the factor of two stays." },
+          { text: aTex(3 - k, 2 * V), value: [3 - k, 2 * V], why: closed ? "A closed cylinder has two circular ends." : "With no lid there is only one circular end." }, { text: aTex(k, 2 * V).replace("}{r}", "}{r^{2}}"), value: [k, 2 * V, 2], why: "Substituting for $h$ in $2\\pi rh$ cancels one $r$ only." }]), [
+          `$A = ${k === 1 ? "" : k}\\pi r^{2} + 2\\pi rh$, and $2\\pi r \\times \\dfrac{${V}}{\\pi r^{2}} = \\dfrac{${2 * V}}{r}$`, `So ${aTex(k, 2 * V)}.`]),
+        P("Find the value of $r$ for which $A$ is as small as possible.", 2, ans.sf(r0), [`${dTex(2 * k, 2 * V, "-", 2)}`, `Solve $\\dfrac{\\mathrm{d}A}{\\mathrm{d}r} = 0$ with the GDC, or find the minimum point of the graph of $A$: $r = ${sf(r0)}$`]),
+        P("Find the least possible surface area, in $\\text{cm}^{2}$.", 2, ans.sf(A(r0)), [`Substitute the unrounded value of $r$ into $A$, or read it from the minimum point on the GDC.`, `$A = ${sf(A(r0))}$`]),
+        P("Find the height of this cylinder, in centimetres.", 1, ans.sf(h0), [`$h = \\dfrac{${V}}{\\pi${br(roundSf(r0, 5))}^{2}} = ${sf(h0)}$`])] };
+    } });
+
+  // =====================================================================================
+  // 5.8 the trapezoidal rule
+  // =====================================================================================
+  const TR = { type: "t5-ai-trapezoidal", syllabus: ["5.8"] };
+  const trap = (ys, h) => h / 2 * (ys[0] + ys[ys.length - 1] + 2 * sum(ys.slice(1, -1)));
+  const trapLine = (ys, h) => `$\\dfrac{${num(h)}}{2}\\left(${num(ys[0])} + ${num(ys[ys.length - 1])} + 2(${ys.slice(1, -1).map(num).join(" + ")})\\right)$`;
+  reg({ ...TR, unknown: "interval-width", representation: "words", format: "value", levels: [1], calculator: false, skills: ["AI-SL5.8.interval-width"], title: "The width of the intervals in the trapezoidal rule",
+    build({ rng }) {
+      const n = rng.pick([4, 5, 6, 8, 10]), h = rng.pick([0.2, 0.25, 0.5, 1, 1.5, 2, 3]), a = rng.int(0, 6), b = Number((a + n * h).toFixed(2));
+      return { params: { a, b, n }, stem: `The trapezoidal rule with $${n}$ intervals of equal width is used to estimate the area under a curve between $x = ${a}$ and $x = ${num(b)}$.`, parts: [
+        P("Find the width of each interval.", 1, ans.dec(h), [`$h = \\dfrac{b - a}{n} = \\dfrac{${num(b)} - ${a}}{${n}} = ${num(h)}$`]),
+        P("Write down the number of values of $y$ that are needed.", 1, ans.int(n + 1), [`There is one value at each end of every interval: $${n} + 1 = ${n + 1}$ values.`])] };
+    } });
+  const TRT = [{ stem: (h) => `The width of a lake, $w$ metres, is measured at points $${h}\\text{ m}$ apart along a straight path beside it`, x: "Distance along the path (m)", y: "Width (m)", lo: 12, hi: 60, zeroEnds: true, q: "the area of the lake, in $\\text{m}^{2}$", hs: [10, 20, 25, 50] },
+    { stem: (h) => `The height of a hill, $y$ metres, above a level road is measured at points $${h}\\text{ m}$ apart, to estimate the area of its cross-section`, x: "Horizontal distance (m)", y: "Height (m)", lo: 4, hi: 30, zeroEnds: true, q: "the area of the cross-section, in $\\text{m}^{2}$", hs: [5, 10, 20] },
+    { stem: (h) => `The speed of a cyclist, $v$ metres per second, is recorded every $${h}$ seconds. The area under the graph of speed against time gives the distance travelled`, x: "Time (s)", y: "Speed (m/s)", lo: 3, hi: 14, zeroEnds: false, q: "the distance travelled, in metres", hs: [2, 5, 10] }];
+  reg({ ...TR, unknown: "area-from-a-table", representation: "table", format: "value", levels: [2], skills: ["AI-SL5.8.from-table"], title: "Trapezoidal rule from a table of measurements",
+    build({ rng }) {
+      const c = rng.pick(TRT), n = rng.int(4, 6), h = rng.pick(c.hs);
+      const ys = Array.from({ length: n + 1 }, (v, i) => (c.zeroEnds && (i === 0 || i === n) ? 0 : rng.int(c.lo * 2, c.hi * 2) / 2)), est = trap(ys, h);
+      return { params: { ys, h }, stem: `${c.stem(h)}. The results are shown in the table.`,
+        table: { head: [c.x].concat(ys.map((y, i) => m(i * h))), rows: [[c.y].concat(ys.map((y) => m(num(y))))] }, parts: [
+          P(`Use the trapezoidal rule with all the values in the table to estimate ${c.q}.`, 3, ans.sf(est), [`There are $${n}$ intervals of width $h = ${h}$.`, `Area $\\approx \\dfrac{h}{2}\\left(y_{0} + y_{n} + 2(y_{1} + \\dots + y_{n-1})\\right) = ${trapLine(ys, h).slice(1, -1)}$`, `Area $\\approx ${sf(est)}$`])] };
+    } });
+  // a curve that is positive and bends one way only on [a, b], with values that are short decimals at the points used
+  function curveSit(rng) {
+    let a, n, h, cs, ys, xs, down;
+    do { down = rng.bool(0.6); n = rng.pick([4, 5, 6]); h = rng.pick([0.5, 1, 1, 2]); a = rng.int(0, 3); const A = (down ? -1 : 1) * rng.pick([0.5, 0.25, 1, 0.2]), B = rng.int(-4, 12) / 2, C = rng.int(2, 24) / 2; cs = [A, B, C];
+      xs = Array.from({ length: n + 1 }, (v, i) => Number((a + i * h).toFixed(2))); ys = xs.map((x) => Number(polyAt(cs, x).toFixed(6))); }
+    while (ys.some((y) => y < 0.5 || y > 40 || Math.abs(y * 100 - Math.round(y * 100)) > 1e-9) || cs[1] === 0 || (!down && polyAt(cs, -cs[1] / (2 * cs[0])) < 0.5));
+    return { a, n, h, cs, xs, ys, down };
+  }
+  const exactArea = (cs, a, b) => { const F = (x) => cs[0] * x * x * x / 3 + cs[1] * x * x / 2 + cs[2] * x; return F(b) - F(a); };
+  reg({ ...TR, unknown: "estimate-from-a-function", representation: "equation", format: "value", levels: [2], skills: ["AI-SL5.8.from-function", "AI-SL5.8.interval-width"], title: "Trapezoidal rule from a function: complete the table, then estimate", situationKey: "ai-trap-curve", situation: curveSit,
+    build({ rng, sit: s }) {
+      const k = rng.int(1, s.n - 1), b = s.xs[s.n], est = trap(s.ys, s.h);
+      return { params: { cs: s.cs, a: s.a, n: s.n, h: s.h, k }, stem: `The area between the curve $y = ${poly(s.cs)}$ and the $x$-axis from $x = ${s.a}$ to $x = ${num(b)}$ is estimated with the trapezoidal rule, using $${s.n}$ intervals of equal width. The table shows the values of $y$ that are needed.`,
+        table: { head: ["$x$"].concat(s.xs.map((x) => m(num(x)))), rows: [["$y$"].concat(s.ys.map((y, i) => (i === k ? "$p$" : m(num(y)))))] }, parts: [
+          P("Find the value of $p$.", 1, ans.dec(s.ys[k]), [`$p = ${expr([[s.cs[0], `${br(s.xs[k])}^{2}`], [s.cs[1], br(s.xs[k])], [s.cs[2], ""]])} = ${num(s.ys[k])}$`]),
+          P("Use the trapezoidal rule to estimate the area.", 3, ans.sf(est), [`$h = \\dfrac{${num(b)} - ${s.a}}{${s.n}} = ${num(s.h)}$`, `Area $\\approx ${trapLine(s.ys, s.h).slice(1, -1)}$`, `Area $\\approx ${sf(est)}$`])] };
+    } });
+  reg({ ...TR, unknown: "estimate-error-and-over-or-under", representation: "graph", format: "value", levels: [4], skills: ["AI-SL5.8.from-function", "AI-SL5.8.over-or-under", "AI-SL5.8.interval-width"], title: "Trapezoidal estimate, its percentage error, and over- or underestimate", situationKey: "ai-trap-curve", situation: curveSit,
+    build({ rng, sit: s }) {
+      const b = s.xs[s.n], est = trap(s.ys, s.h), exact = exactArea(s.cs, s.a, b), pe = Math.abs(est - exact) / exact * 100, top = Math.max(...s.ys, polyAt(s.cs, -s.cs[1] / (2 * s.cs[0])) * (s.down ? 1 : 0));
+      const yStep = top > 20 ? 5 : top > 8 ? 2 : 1, yMax = Math.ceil((top + 0.5) / yStep) * yStep, right = s.down ? "under-down" : "over-up";
+      const t = { "under-down": "An underestimate, because the curve bends downwards (it is concave down), so every trapezoid lies below the curve.", "over-up": "An overestimate, because the curve bends upwards (it is concave up), so every trapezoid reaches above the curve.",
+        "over-down": "An overestimate, because the curve bends downwards (it is concave down), so every trapezoid reaches above the curve.", "under-up": "An underestimate, because the curve bends upwards (it is concave up), so every trapezoid lies below the curve." };
+      return { params: { cs: s.cs, a: s.a, n: s.n, h: s.h }, stem: `The diagram shows the curve $y = ${poly(s.cs)}$. The region between the curve and the $x$-axis from $x = ${s.a}$ to $x = ${num(b)}$ is shaded.`,
+        graph: { x: [Math.min(-1, s.a - 1), Math.ceil(b) + 1], y: [-yStep, yMax], xStep: 1, yStep, functions: [{ fn: { type: "poly", coeffs: s.cs.slice().reverse() } }], regions: [{ x: [s.a, b], fn: 0 }], alt: "A curve above the x-axis with the region under it shaded between two vertical lines" },
+        parts: [
+          P(`Use the trapezoidal rule with $${s.n}$ intervals to estimate the area of the shaded region.`, 3, ans.sf(est), [`$h = \\dfrac{${num(b)} - ${s.a}}{${s.n}} = ${num(s.h)}$, and the values of $y$ at $x = ${s.xs.map(num).join(",\\ ")}$ are $${s.ys.map(num).join(",\\ ")}$.`,
+            `Area $\\approx ${trapLine(s.ys, s.h).slice(1, -1)}$`, `Area $\\approx ${sf(est)}$`]),
+          P("Use the GDC to find the area of the shaded region.", 1, ans.sf(exact), [`$\\displaystyle\\int_{${s.a}}^{${num(b)}} \\left(${poly(s.cs)}\\right)\\,\\mathrm{d}x = ${sf(exact)}$`]),
+          P("Find the percentage error of the estimate.", 2, ans.sf(pe), [`$\\left|\\dfrac{${sf(est, 5)} - ${sf(exact, 5)}}{${sf(exact, 5)}}\\right| \\times 100\\%$`, `Percentage error $= ${sf(pe)}\\%$`]),
+          P("Is the estimate an overestimate or an underestimate, and why?", 1, ans.choice(rng, { text: t[right], value: right }, Object.keys(t).filter((k) => k !== right).map((k) => ({ text: t[k], value: k, why: "Sketch one trapezoid: its top is a chord of the curve. See whether the chord is above or below the curve." }))), [
+            `${t[right]} Here $${sf(est, 5)} ${s.down ? "<" : ">"} ${sf(exact, 5)}$.`])] };
+    } });
+  reg({ ...TR, unknown: "river-cross-section-and-flow", representation: "table", format: "value", levels: [4], skills: ["AI-SL5.8.from-table", "AI-SL5.8.accumulated-quantity"], title: "Trapezoidal rule for a cross-section, then a rate of flow",
+    build({ rng }) {
+      const n = rng.int(4, 6), h = rng.pick([0.5, 1.5, 2, 2.5, 4]), peak = rng.int(12, 45) / 10, mid = rng.int(1, n - 1);
+      const ys = Array.from({ length: n + 1 }, (v, i) => (i === 0 || i === n ? 0 : Math.round(peak * (1 - Math.abs(i - mid) / (n + 1)) * rng.int(70, 100)) / 100)), area = trap(ys, h), v = rng.int(3, 18) / 10, vol = area * v * 60;
+      const c = rng.pick([{ a: "river", b: "from one bank to the other" }, { a: "canal", b: "from one side to the other" }, { a: "drainage channel", b: "from one edge to the other" }]);
+      return { params: { ys, h, v }, stem: `The depth of a ${c.a}, $d$ metres, is measured at points $${num(h)}\\text{ m}$ apart ${c.b}. The results are shown in the table.`,
+        table: { head: ["Distance from the bank (m)"].concat(ys.map((y, i) => m(num(Number((i * h).toFixed(2)))))), rows: [["Depth (m)"].concat(ys.map((y) => m(num(y))))] }, parts: [
+          P(`Use the trapezoidal rule to estimate the area of the cross-section of the ${c.a}, in $\\text{m}^{2}$.`, 3, ans.sf(area), [`There are $${n}$ intervals of width $h = ${num(h)}$.`, `Area $\\approx ${trapLine(ys, h).slice(1, -1)}$`, `Area $\\approx ${sf(area)}$`]),
+          P(`The water flows at $${num(v)}$ metres per second. Estimate the volume of water, in $\\text{m}^{3}$, that passes this cross-section in one minute.`, 2, ans.sf(vol), [`In one second a length of $${num(v)}\\text{ m}$ of water passes: $${sf(area, 5)} \\times ${num(v)} = ${sf(area * v, 5)}\\text{ m}^{3}$`, `In one minute: $${sf(area * v, 5)} \\times 60 = ${sf(vol)}$`])] };
+    } });
 })(typeof globalThis !== "undefined" ? globalThis : this);

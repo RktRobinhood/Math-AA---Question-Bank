@@ -70,6 +70,15 @@ function equidistant(sites, W, H) {
   }
   return [cx, cy];
 }
+// ---- calculus ----
+// The option whose polynomial (highest power first) equals the numerical derivative of f at several points.
+const derivOption = (q, label, f, T) => T.optionWhere(q, label, (cs) => [-1.5, 0.5, 1.2, 2.3].every((x) => Math.abs(T.poly(cs, x) - T.deriv(f, x, 1e-3)) < 1e-4 * Math.max(1, Math.abs(T.deriv(f, x, 1e-3)))));
+// The area under the polygon through equally spaced points, integrated piece by piece.
+function polygonArea(T, ys, h) {
+  let s = 0;
+  for (let i = 1; i < ys.length; i++) s += T.integrate((x) => ys[i - 1] + (ys[i] - ys[i - 1]) * x / h, 0, h, 4);
+  return s;
+}
 // ---- statistics ----
 // Rank 1 for the largest: one more than the number of larger values, plus half the number of other equal values.
 const countRanks = (xs) => xs.map((x) => 1 + xs.filter((y) => y > x).length + (xs.filter((y) => y === x).length - 1) / 2);
@@ -475,5 +484,86 @@ export default {
     T.require(Math.abs(p - alpha) / alpha > 0.1, "the p-value is not close to the significance level");
     T.require(q.stem.includes(`$${p}$`), "the p-value in the stem is the one used");
     return { a: T.option("eq"), b: T.option("gt"), c: T.option(p < alpha ? "reject-alt" : "keep-insufficient") };
+  },
+  // ---------------- 5.6 ----------------
+  "t5-ai-stationary-points/stationary-point-from-derivative/equation": (q, T) => {
+    const { a, b } = q.params, fp = (x) => a * x + b, f = (x) => T.integrate(fp, 0, x, 20), x0 = T.roots(fp, -40, 40, 16001)[0];
+    const kind = f(x0 - 0.5) > f(x0) && f(x0 + 0.5) > f(x0) ? "min" : f(x0 - 0.5) < f(x0) && f(x0 + 0.5) < f(x0) ? "max" : "neither";
+    return { a: ap(T, x0), b: T.option(kind) };
+  },
+  "t5-ai-stationary-points/turning-points-of-a-cubic/equation": (q, T) => {
+    const f = (x) => T.poly(q.params.cs, x), st = T.roots((x) => T.deriv(f, x), -12, 12, 9601);
+    T.require(st.length === 2, "two stationary points");
+    const mx = st.find((x) => f(x) > f(x - 0.3) && f(x) > f(x + 0.3)), mn = st.find((x) => x !== mx);
+    return { a: derivOption(q, "a", f, T), b: T.approx(mx, 1e-6), c: T.approx(mn, 1e-6), d: T.approx(f(Math.round(mx)), 1e-6) };
+  },
+  "t5-ai-stationary-points/greatest-value-on-a-domain/equation": (q, T) => {
+    const { cs, lo, hi } = q.params, f = (x) => T.poly(cs, x), st = T.roots((x) => T.deriv(f, x), lo, hi, 9600);
+    T.require(st.length === 2 && st[0] > lo && st[1] < hi, "both stationary points are inside the domain");
+    const mx = Math.round(st.find((x) => f(x) > f(x - 0.3) && f(x) > f(x + 0.3))), mn = Math.round(st.find((x) => f(x) < f(x - 0.3)  && f(x) < f(x + 0.3)));
+    return { a: mx, b: f(mx), c: f(mn), d: T.approx(T.extremum(f, lo, hi, "max", 4000).value, 1e-6) };
+  },
+  "t5-ai-stationary-points/minimum-with-a-reciprocal-term/equation": (q, T) => {
+    const { a, b, n } = q.params, f = (x) => a * x ** n + b / x, m = T.extremum(f, 0.05, 40, "min", 8000);
+    const pick = T.optionWhere(q, "a", (terms) => [0.7, 1.3, 2.9].every((x) => Math.abs(T.sum(terms, (t) => t[0] * x ** t[1]) - T.deriv(f, x, 1e-4)) < 1e-5 * Math.max(1, Math.abs(T.deriv(f, x, 1e-4)))));
+    T.require(m.x > 0.5 && m.x < 12, "the minimum is inside the search interval");
+    return { a: pick, b: T.approx(m.x, 1e-5), c: ap(T, m.value) };
+  },
+  "t5-ai-stationary-points/coefficients-from-stationary-points/equation": (q, T) => {
+    const { p, q: qq, c } = q.params, s = solve([[2 * p, 1], [2 * qq, 1]], [-3 * p * p, -3 * qq * qq]), f = (x) => x ** 3 + s[0] * x * x + s[1] * x + c;
+    T.require(Math.abs(T.deriv(f, p)) < 1e-6 && Math.abs(T.deriv(f, qq)) < 1e-6, "the function found is stationary at both points");
+    return { a: T.option([3, 2, 1]), b: ap(T, s[0]), c: ap(T, s[1]) };
+  },
+  // ---------------- 5.7 ----------------
+  "t5-ai-optimisation/maximise-from-given-derivative/words": (q, T) => {
+    const { a, b, c } = q.params, P = (x) => -a * x * x + b * x - c, m = T.extremum(P, 0, 200, "max", 20000);
+    T.require(q.stem.includes("p'(x)") && m.value > 0, "the derivative is given and the maximum profit is positive");
+    return { a: T.approx(m.x, 1e-5), b: ap(T, m.value) };
+  },
+  "t5-ai-optimisation/maximum-profit/words": (q, T) => {
+    const { a, b, c } = q.params, P = (x) => -a * x * x + b * x - c, m = T.extremum(P, 0, 200, "max", 20000);
+    return { a: derivOption(q, "a", P, T), b: T.approx(m.x, 1e-5), c: ap(T, m.value) };
+  },
+  "t5-ai-optimisation/largest-enclosure/words": (q, T) => {
+    const { L, k } = q.params, A = (x) => x * (L - k * x), m = T.extremum(A, 0, L / k, "max", 20000);
+    return { a: T.optionWhere(q, "a", (cs) => [1.3, 2.7, 4.1].every((x) => Math.abs(T.poly(cs, x) - A(x)) < 1e-9)), b: T.approx(m.x, 1e-5), c: ap(T, m.value) };
+  },
+  "t5-ai-optimisation/open-box-greatest-volume/words": (q, T) => {
+    const { a, b } = q.params, V = (x) => x * (a - 2 * x) * (b - 2 * x), m = T.extremum(V, 0, a / 2, "max", 20000);
+    T.require(q.stem.includes(`$0 < x < ${a / 2}$`), "the domain in the stem is half the shorter side");
+    return { a: derivOption(q, "a", V, T), b: T.approx(m.x, 1e-5), c: ap(T, m.value) };
+  },
+  "t5-ai-optimisation/least-material-for-a-cylinder/words": (q, T) => {
+    const { V, closed } = q.params, h = (r) => V / (Math.PI * r * r), A = (r) => (closed ? 2 : 1) * Math.PI * r * r + 2 * Math.PI * r * h(r), m = T.extremum(A, 0.5, 40, "min", 20000);
+    return { a: T.optionWhere(q, "a", ([c, e]) => Math.abs(Math.PI * 1.7 ** 2 * (c * 1.7 ** e) - V) < 1e-6), b: T.optionWhere(q, "b", (v) => [1.1, 2.3, 3.9].every((r) => Math.abs(v[0] * Math.PI * r * r + v[1] / r ** (v[2] || 1) - A(r)) < 1e-6)),
+      c: T.approx(m.x, 1e-5), d: ap(T, m.value), e: T.approx(h(m.x), 1e-4) };
+  },
+  // ---------------- 5.8 ----------------
+  "t5-ai-trapezoidal/interval-width/words": (q, T) => {
+    const { a, b, n } = q.params;
+    // step along from a in n equal steps: the step that lands on b
+    const h = T.bisect((w) => { let x = a; for (let i = 0; i < n; i++) x += w; return x - b; }, 0, b - a + 1);
+    let count = 0; for (let i = 0; i <= n; i++) count++;
+    return { a: ap(T, h), b: count };
+  },
+  "t5-ai-trapezoidal/area-from-a-table/table": (q, T) => ({ a: ap(T, polygonArea(T, q.params.ys, q.params.h)) }),
+  "t5-ai-trapezoidal/estimate-from-a-function/equation": (q, T) => {
+    const { cs, a, n, h, k } = q.params, f = (x) => T.poly(cs, x), ys = Array.from({ length: n + 1 }, (v, i) => f(a + i * h));
+    T.require(ys.every((y) => y > 0), "the curve is above the axis at the points used");
+    T.require(q.table.rows[0].filter((c) => c === "$p$").length === 1, "one value is missing from the table");
+    return { a: ap(T, ys[k]), b: ap(T, polygonArea(T, ys, h)) };
+  },
+  "t5-ai-trapezoidal/estimate-error-and-over-or-under/graph": (q, T) => {
+    const { cs, a, n, h } = q.params, f = (x) => T.poly(cs, x), b = a + n * h, ys = Array.from({ length: n + 1 }, (v, i) => f(a + i * h));
+    const est = polygonArea(T, ys, h), exact = T.integrate(f, a, b, 2000);
+    T.require(T.extremum(f, a, b, "min").value > 0, "the curve is above the axis over the whole interval");
+    const bends = T.deriv2(f, (a + b) / 2) < 0 ? "down" : "up";
+    return { a: ap(T, est), b: ap(T, exact), c: ap(T, Math.abs(est - exact) / exact * 100, 1e-5), d: T.option(`${est < exact ? "under" : "over"}-${bends}`) };
+  },
+  "t5-ai-trapezoidal/river-cross-section-and-flow/table": (q, T) => {
+    const { ys, h, v } = q.params, area = polygonArea(T, ys, h);
+    T.require(ys[0] === 0 && ys[ys.length - 1] === 0 && ys.slice(1, -1).every((y) => y > 0), "the depth is zero at the banks only");
+    let vol = 0; for (let sec = 0; sec < 60; sec++) vol += area * v;
+    return { a: ap(T, area), b: ap(T, vol) };
   },
 };
