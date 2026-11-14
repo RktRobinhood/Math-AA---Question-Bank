@@ -518,9 +518,9 @@ if (!ONLY) {
     const aa = E.generators({ course: "aa-sl", syllabus: "1.8", primary: true });
     assert(ai.length > 0 && ai.every((d) => aa.some((x) => x.id === d.id)), "AI HL 1.11 does not get the SL1.8 generators");
     assert(ai.every((d) => d.syllabus[0] === "1.11"), "generators are not described under the AI code");
-    assert(E.generators({ course: "ai-hl", syllabus: "1.8", primary: true }).length === 0, "AI HL 1.8 (an AI-only statement) was given AA 1.8 generators");
-    assert(E.generators({ course: "aa-hl", syllabus: "1.11", primary: true }).length === 0, "AA HL 1.11 (partial fractions) was given generators");
-    assert(E.coverage("ai-hl")["1.11"] && !E.coverage("ai-hl")["1.8"] && !E.coverage("ai-sl")["1.11"], "coverage() is not in the course's codes");
+    assert(E.generators({ course: "ai-hl", syllabus: "1.8", primary: true }).every((d) => d.home !== "aa-sl" && d.home !== "aa-hl"), "AI HL 1.8 (an AI-only statement) was given AA 1.8 generators");
+    assert(E.generators({ course: "aa-hl", syllabus: "1.11", primary: true }).every((d) => !aa.some((x) => x.id === d.id)), "AA HL 1.11 (partial fractions) was given the AA 1.8 generators");
+    assert(E.coverage("ai-hl")["1.11"] && !E.coverage("ai-sl")["1.11"], "coverage() is not in the course's codes");
     const { lr } = learnerFor("ai-hl");
     const seen = new Set();
     for (let i = 0; i < 12; i++) {
@@ -576,6 +576,7 @@ if (!ONLY) {
         for (let i = 1; i < main.length; i++) assert(main[i - 1][1] <= main[i][1], `${c} ${s.code}: main real questions are not short to long`);
         for (const r of real) assert(new RegExp(`^${c.slice(0, 2)}-[sh]l-\\d{4}`).test(r[0]), `${c} ${s.code}: ${r[0]} is from another subject`);
       }
+      if (!list.length) continue;   // every such statement in this course now has generators
       const w = E.worksheet({ course: c, scope: [list[0].code], count: 2, seed: 1, real: L.realIndex(QB, c) });
       assert(w.items.length > 0 && w.items.every((x) => x.kind === "real"), `${c}: worksheet on ${list[0].code} should use real questions`);
     }

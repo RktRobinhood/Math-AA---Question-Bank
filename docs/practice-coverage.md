@@ -6,10 +6,10 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 
 | Course | Subtopics | With generated questions | Real questions only | Nothing yet | Generators offered |
 |---|---|---|---|---|---|
-| AA SL | 51 | 51 | 0 | 0 | 370 |
-| AA HL | 83 | 51 | 32 | 0 | 370 |
-| AI SL | 39 | 26 | 13 | 0 | 164 |
-| AI HL | 78 | 29 | 48 | 1 | 184 |
+| AA SL | 51 | 51 | 0 | 0 | 377 |
+| AA HL | 83 | 83 | 0 | 0 | 572 |
+| AI SL | 39 | 39 | 0 | 0 | 236 |
+| AI HL | 78 | 42 | 35 | 1 | 256 |
 
 - **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
 - **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
@@ -19,7 +19,7 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 
 ## AA SL
 
-370 generators over 133 question types are offered in AA SL. 51 of 51 subtopics have generated questions; 0 use real questions only.
+377 generators over 137 question types are offered in AA SL. 51 of 51 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **51 of 51** subtopics; full tier for 45.
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
@@ -35,8 +35,8 @@ Release minimum reached for **51 of 51** subtopics; full tier for 45.
 | 1.9 Binomial theorem | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 16 | no |
 | 2.1 Equations of straight lines, parallel and perpendicular | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 7 | 12 | no |
 | 2.2 Functions, notation, domain, range and inverse as reflection | yes | yes | 8 of 8 | 0, 1, 2, 3, 4 | 7 | 25 | no |
-| 2.3 Graphs of functions | yes | yes | 7 of 7 | 1, 2, 3, 4 | 7 | 23 | no |
-| 2.4 Key features of graphs | yes | yes | 12 of 12 | 0, 1, 2, 3, 4 | 7 | 42 | no |
+| 2.3 Graphs of functions | yes | yes | 7 of 7 | 1, 2, 3, 4 | 10 | 23 | no |
+| 2.4 Key features of graphs | yes | yes | 12 of 12 | 0, 1, 2, 3, 4 | 11 | 42 | no |
 | 2.5 Composite functions, identity and finding inverse | yes | yes | 5 of 5 | 1, 2, 3, 4 | 8 | 27 | no |
 | 2.6 Quadratic function | yes | yes | 5 of 5 | 0, 1, 2, 3, 4 | 11 | 19 | no |
 | 2.7 Solutions of quadratic equations and inequalities, discriminant and nature of roots | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 11 | 51 | no |
@@ -76,12 +76,12 @@ Release minimum reached for **51 of 51** subtopics; full tier for 45.
 | 5.10 Indefinite integration, reverse chain and substitution | yes | yes | 3 of 3 | 1, 2, 3, 4 | 6 | 26 | no |
 | 5.11 Definite integrals, areas under curve onto x-axis and areas between curves | yes | yes | 3 of 3 | 1, 2, 3, 4 | 14 | 35 | no |
 
-Generators per level: level 0: 8, level 1: 65, level 2: 124, level 3: 109, level 4: 65, level 5: 0.
+Generators per level: level 0: 8, level 1: 67, level 2: 126, level 3: 109, level 4: 68, level 5: 0.
 
 ## AA HL
 
-370 generators over 133 question types are offered in AA HL. 51 of 83 subtopics have generated questions; 32 use real questions only.
-Release minimum reached for **51 of 83** subtopics; full tier for 45.
+572 generators over 188 question types are offered in AA HL. 83 of 83 subtopics have generated questions; 0 use real questions only.
+Release minimum reached for **83 of 83** subtopics; full tier for 45.
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|
@@ -94,17 +94,17 @@ Release minimum reached for **51 of 83** subtopics; full tier for 45.
 | 1.7 Laws of exponents and logarithms | yes | yes | 7 of 7 | 1, 2, 3, 4 | 9 | 40 | no |
 | 1.8 Sum of infinite geometric sequences | yes | yes | 1 of 1 | 1, 2, 3, 4 | 7 | 10 | no |
 | 1.9 Binomial theorem | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 17 | no |
-| 1.10 Counting principles and the binomial theorem for rational indices | no | no | 0 of 0 | - | 0 | 28 | yes |
-| 1.11 Partial fractions | no | no | 0 of 0 | - | 0 | 11 | yes |
-| 1.12 Complex numbers in Cartesian form and the complex plane | no | no | 0 of 0 | - | 0 | 29 | yes |
-| 1.13 Modulus-argument and Euler forms of complex numbers | no | no | 0 of 0 | - | 0 | 18 | yes |
-| 1.14 Conjugate roots, De Moivre's theorem, powers and roots of complex numbers | no | no | 0 of 0 | - | 0 | 24 | yes |
-| 1.15 Proof by induction, by contradiction and by counterexample | no | no | 0 of 0 | - | 0 | 24 | yes |
-| 1.16 Systems of linear equations in up to three unknowns | no | no | 0 of 0 | - | 0 | 8 | yes |
+| 1.10 Counting principles and the binomial theorem for rational indices | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 28 | no |
+| 1.11 Partial fractions | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 11 | no |
+| 1.12 Complex numbers in Cartesian form and the complex plane | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 29 | no |
+| 1.13 Modulus-argument and Euler forms of complex numbers | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 18 | no |
+| 1.14 Conjugate roots, De Moivre's theorem, powers and roots of complex numbers | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 24 | no |
+| 1.15 Proof by induction, by contradiction and by counterexample | yes | no | 0 of 0 | 1, 2, 3 | 6 | 24 | no |
+| 1.16 Systems of linear equations in up to three unknowns | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 8 | no |
 | 2.1 Equations of straight lines, parallel and perpendicular | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 7 | 9 | no |
 | 2.2 Functions, notation, domain, range and inverse as reflection | yes | yes | 8 of 8 | 0, 1, 2, 3, 4 | 7 | 34 | no |
-| 2.3 Graphs of functions | yes | yes | 7 of 7 | 1, 2, 3, 4 | 7 | 29 | no |
-| 2.4 Key features of graphs | yes | yes | 12 of 12 | 0, 1, 2, 3, 4 | 7 | 47 | no |
+| 2.3 Graphs of functions | yes | yes | 7 of 7 | 1, 2, 3, 4 | 10 | 29 | no |
+| 2.4 Key features of graphs | yes | yes | 12 of 12 | 0, 1, 2, 3, 4 | 11 | 47 | no |
 | 2.5 Composite functions, identity and finding inverse | yes | yes | 5 of 5 | 1, 2, 3, 4 | 8 | 21 | no |
 | 2.6 Quadratic function | yes | yes | 5 of 5 | 0, 1, 2, 3, 4 | 11 | 10 | no |
 | 2.7 Solutions of quadratic equations and inequalities, discriminant and nature of roots | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 11 | 68 | no |
@@ -112,11 +112,11 @@ Release minimum reached for **51 of 83** subtopics; full tier for 45.
 | 2.9 Exponential and logarithmic functions | yes | yes | 5 of 5 | 0, 1, 2, 3, 4 | 9 | 9 | no |
 | 2.10 Solving equations graphically and analytically | yes | yes | 7 of 7 | 1, 2, 3, 4 | 6 | 39 | no |
 | 2.11 Transformations of graphs | yes | yes | 7 of 7 | 1, 2, 3, 4 | 9 | 18 | no |
-| 2.12 Polynomial functions: factor and remainder theorems, sum and product of roots | no | no | 0 of 0 | - | 0 | 33 | yes |
-| 2.13 Rational functions with a quadratic numerator or denominator | no | no | 0 of 0 | - | 0 | 11 | yes |
-| 2.14 Odd and even functions, inverses with a restricted domain, self-inverse functions | no | no | 0 of 0 | - | 0 | 15 | yes |
-| 2.15 Solving inequalities g(x) ≥ f(x) graphically and analytically | no | no | 0 of 0 | - | 0 | 9 | yes |
-| 2.16 Graphs of |f(x)|, f(|x|), 1/f(x), f(ax + b) and [f(x)]²; modulus equations and inequalities | no | no | 0 of 0 | - | 0 | 10 | yes |
+| 2.12 Polynomial functions: factor and remainder theorems, sum and product of roots | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 33 | no |
+| 2.13 Rational functions with a quadratic numerator or denominator | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 11 | no |
+| 2.14 Odd and even functions, inverses with a restricted domain, self-inverse functions | yes | no | 0 of 0 | 1, 2, 3 | 4 | 15 | no |
+| 2.15 Solving inequalities g(x) ≥ f(x) graphically and analytically | yes | no | 0 of 0 | 2, 3, 4 | 3 | 9 | no |
+| 2.16 Graphs of |f(x)|, f(|x|), 1/f(x), f(ax + b) and [f(x)]²; modulus equations and inequalities | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 10 | no |
 | 3.1 3D space, volume, angles, distance and midpoints | yes | no | 4 of 4 | 1, 2, 3, 4 | 8 | 19 | no |
 | 3.2 2D and 3D trigonometry, sine rule, cosine rule and area | yes | no | 6 of 6 | 1, 2, 3, 4 | 9 | 42 | no |
 | 3.3 Applications of trigonometry | yes | yes | 2 of 2 | 1, 2, 3, 4 | 7 | 8 | no |
@@ -125,16 +125,16 @@ Release minimum reached for **51 of 83** subtopics; full tier for 45.
 | 3.6 Pythagorean identity and double angles | yes | no | 2 of 2 | 1, 2, 3 | 5 | 35 | no |
 | 3.7 Circular functions: graphs, composites and transformations | yes | yes | 5 of 5 | 1, 2, 3, 4 | 7 | 20 | no |
 | 3.8 Solving trigonometric equations | yes | yes | 3 of 3 | 1, 2, 3, 4 | 6 | 32 | no |
-| 3.9 Reciprocal trigonometric ratios, Pythagorean identities and inverse trigonometric functions | no | no | 0 of 0 | - | 0 | 24 | yes |
-| 3.10 Compound angle identities | no | no | 0 of 0 | - | 0 | 8 | yes |
-| 3.11 Relationships between trigonometric functions and the symmetry of their graphs | no | no | 0 of 0 | - | 0 | 4 | yes |
-| 3.12 Vectors: concepts, components and algebra | no | no | 0 of 0 | - | 0 | 20 | yes |
-| 3.13 The scalar product and the angle between vectors | no | no | 0 of 0 | - | 0 | 24 | yes |
-| 3.14 Vector equation of a line in two and three dimensions | no | no | 0 of 0 | - | 0 | 20 | yes |
-| 3.15 Coincident, parallel, intersecting and skew lines | no | no | 0 of 0 | - | 0 | 11 | yes |
-| 3.16 The vector product | no | no | 0 of 0 | - | 0 | 19 | yes |
-| 3.17 Vector and Cartesian equations of a plane | no | no | 0 of 0 | - | 0 | 16 | yes |
-| 3.18 Intersections and angles between lines and planes | no | no | 0 of 0 | - | 0 | 17 | yes |
+| 3.9 Reciprocal trigonometric ratios, Pythagorean identities and inverse trigonometric functions | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 24 | no |
+| 3.10 Compound angle identities | yes | no | 0 of 0 | 1, 2, 3 | 6 | 8 | no |
+| 3.11 Relationships between trigonometric functions and the symmetry of their graphs | yes | no | 0 of 0 | 1, 2, 3 | 3 | 4 | no |
+| 3.12 Vectors: concepts, components and algebra | yes | no | 0 of 0 | 1, 2, 3, 4 | 6 | 20 | no |
+| 3.13 The scalar product and the angle between vectors | yes | no | 0 of 0 | 1, 2, 3 | 5 | 24 | no |
+| 3.14 Vector equation of a line in two and three dimensions | yes | no | 0 of 0 | 1, 2, 3, 4 | 7 | 20 | no |
+| 3.15 Coincident, parallel, intersecting and skew lines | yes | no | 0 of 0 | 2, 3, 4 | 4 | 11 | no |
+| 3.16 The vector product | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 19 | no |
+| 3.17 Vector and Cartesian equations of a plane | yes | no | 0 of 0 | 1, 2, 3 | 4 | 16 | no |
+| 3.18 Intersections and angles between lines and planes | yes | no | 0 of 0 | 2, 3, 4 | 7 | 17 | no |
 | 4.1 Concepts, reliability and sampling techniques | yes | yes | 2 of 2 | 1, 2, 3 | 4 | 2 | no |
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3 | 8 | 7 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 8 | 17 | no |
@@ -147,8 +147,8 @@ Release minimum reached for **51 of 83** subtopics; full tier for 45.
 | 4.10 Regression line of x on y | yes | yes | 1 of 1 | 1, 2, 3, 4 | 5 | 5 | no |
 | 4.11 Formal conditional probability and independence | yes | yes | 2 of 2 | 1, 2, 3, 4 | 7 | 29 | no |
 | 4.12 Standardization of normal variables | yes | yes | 1 of 1 | 1, 2, 4 | 5 | 12 | no |
-| 4.13 Bayes' theorem | no | no | 0 of 0 | - | 0 | 4 | yes |
-| 4.14 Discrete and continuous random variables: pdfs, mean, variance, median and mode | no | no | 0 of 0 | - | 0 | 23 | yes |
+| 4.13 Bayes' theorem | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 4 | no |
+| 4.14 Discrete and continuous random variables: pdfs, mean, variance, median and mode | yes | no | 0 of 0 | 1, 2, 3, 4 | 8 | 23 | no |
 | 5.1 Introduction to calculus | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 9 | no |
 | 5.2 Increasing and decreasing functions | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 8 | no |
 | 5.3 Differentiating polynomials, n in Z | yes | yes | 1 of 1 | 1, 2, 3 | 5 | 14 | no |
@@ -160,21 +160,21 @@ Release minimum reached for **51 of 83** subtopics; full tier for 45.
 | 5.9 Kinematics problems | yes | yes | 2 of 2 | 1, 2, 3, 4 | 7 | 18 | no |
 | 5.10 Indefinite integration, reverse chain and substitution | yes | yes | 3 of 3 | 1, 2, 3, 4 | 6 | 31 | no |
 | 5.11 Definite integrals, areas under curve onto x-axis and areas between curves | yes | yes | 3 of 3 | 1, 2, 3, 4 | 14 | 33 | no |
-| 5.12 Continuity, differentiability, limits and differentiation from first principles | no | no | 0 of 0 | - | 0 | 14 | yes |
-| 5.13 Limits by l'Hôpital's rule or Maclaurin series | no | no | 0 of 0 | - | 0 | 19 | yes |
-| 5.14 Implicit differentiation, related rates of change and optimisation | no | no | 0 of 0 | - | 0 | 26 | yes |
-| 5.15 Further standard derivatives and integrals | no | no | 0 of 0 | - | 0 | 30 | yes |
-| 5.16 Integration by substitution and by parts | no | no | 0 of 0 | - | 0 | 12 | yes |
-| 5.17 Areas against the y-axis and volumes of revolution | no | no | 0 of 0 | - | 0 | 17 | yes |
-| 5.18 First-order differential equations | no | no | 0 of 0 | - | 0 | 27 | yes |
-| 5.19 Maclaurin series | no | no | 0 of 0 | - | 0 | 17 | yes |
+| 5.12 Continuity, differentiability, limits and differentiation from first principles | yes | no | 0 of 0 | 1, 2, 3 | 8 | 14 | no |
+| 5.13 Limits by l'Hôpital's rule or Maclaurin series | yes | no | 0 of 0 | 1, 2, 3 | 6 | 19 | no |
+| 5.14 Implicit differentiation, related rates of change and optimisation | yes | no | 0 of 0 | 1, 2, 3, 4 | 8 | 26 | no |
+| 5.15 Further standard derivatives and integrals | yes | no | 0 of 0 | 1, 2, 3 | 6 | 30 | no |
+| 5.16 Integration by substitution and by parts | yes | no | 0 of 0 | 1, 2, 3 | 8 | 12 | no |
+| 5.17 Areas against the y-axis and volumes of revolution | yes | no | 0 of 0 | 1, 2, 3, 4 | 8 | 17 | no |
+| 5.18 First-order differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 13 | 27 | no |
+| 5.19 Maclaurin series | yes | no | 0 of 0 | 1, 2, 3, 4 | 6 | 17 | no |
 
-Generators per level: level 0: 8, level 1: 65, level 2: 124, level 3: 109, level 4: 65, level 5: 0.
+Generators per level: level 0: 8, level 1: 99, level 2: 194, level 3: 178, level 4: 97, level 5: 0.
 
 ## AI SL
 
-164 generators over 65 question types are offered in AI SL. 26 of 39 subtopics have generated questions; 13 use real questions only.
-Release minimum reached for **25 of 39** subtopics; full tier for 13.
+236 generators over 93 question types are offered in AI SL. 39 of 39 subtopics have generated questions; 0 use real questions only.
+Release minimum reached for **38 of 39** subtopics; full tier for 13.
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|
@@ -183,21 +183,21 @@ Release minimum reached for **25 of 39** subtopics; full tier for 13.
 | 1.3 Geometric sequences and series | yes | no | 2 of 3 | 1, 2, 3, 4 | 7 | 18 | no |
 | 1.4 Financial applications of geometric sequences and series | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 11 | no |
 | 1.5 Laws of exponents with integer exponents and introduction to logarithms | yes | no | 1 of 5 | 0, 1, 2, 3, 4 | 8 | 9 | no |
-| 1.6 Approximation, bounds, percentage error and estimation | no | no | 0 of 0 | - | 0 | 33 | yes |
-| 1.7 Amortization and annuities using technology | no | no | 0 of 0 | - | 0 | 19 | yes |
-| 1.8 Solving linear systems and polynomial equations with technology | no | no | 0 of 0 | - | 0 | 17 | yes |
+| 1.6 Approximation, bounds, percentage error and estimation | yes | no | 0 of 0 | 1, 2, 4 | 4 | 33 | no |
+| 1.7 Amortization and annuities using technology | yes | no | 0 of 0 | 1, 2, 4 | 6 | 19 | no |
+| 1.8 Solving linear systems and polynomial equations with technology | yes | no | 0 of 0 | 1, 2, 4 | 5 | 17 | no |
 | 2.1 Equations of straight lines, parallel and perpendicular | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 7 | 24 | no |
 | 2.2 Functions, notation, domain, range and inverse as reflection | yes | no | 4 of 8 | 0, 1, 2, 4 | 5 | 25 | no |
-| 2.3 Graphs of functions | yes | no | 4 of 7 | 1, 2, 4 | 5 | 11 | no |
-| 2.4 Key features of graphs | yes | no | 8 of 12 | 0, 1, 2, 3 | 5 | 54 | no |
-| 2.5 Modelling with linear, quadratic, exponential, power, cubic and sinusoidal functions | no | no | 0 of 0 | - | 0 | 61 | yes |
-| 2.6 The modelling process: choose, fit, test and use a model | no | no | 0 of 0 | - | 0 | 36 | yes |
+| 2.3 Graphs of functions | yes | no | 4 of 7 | 1, 2, 4 | 8 | 11 | no |
+| 2.4 Key features of graphs | yes | no | 8 of 12 | 0, 1, 2, 3, 4 | 9 | 54 | no |
+| 2.5 Modelling with linear, quadratic, exponential, power, cubic and sinusoidal functions | yes | no | 0 of 0 | 1, 2, 4 | 7 | 61 | no |
+| 2.6 The modelling process: choose, fit, test and use a model | yes | no | 0 of 0 | 1, 2, 4 | 5 | 36 | no |
 | 3.1 3D space, volume, angles, distance and midpoints | yes | no | 3 of 4 | 1, 2, 3, 4 | 8 | 42 | no |
 | 3.2 2D and 3D trigonometry, sine rule, cosine rule and area | yes | no | 4 of 6 | 1, 2, 4 | 8 | 45 | no |
 | 3.3 Applications of trigonometry | yes | yes | 2 of 2 | 1, 2, 4 | 6 | 16 | no |
-| 3.4 Arc length and sector area in degrees | no | no | 0 of 0 | - | 0 | 21 | yes |
-| 3.5 Equations of perpendicular bisectors | no | no | 0 of 0 | - | 0 | 17 | yes |
-| 3.6 Voronoi diagrams | no | no | 0 of 0 | - | 0 | 16 | yes |
+| 3.4 Arc length and sector area in degrees | yes | no | 0 of 0 | 1, 2, 3, 4 | 6 | 21 | no |
+| 3.5 Equations of perpendicular bisectors | yes | no | 0 of 0 | 1, 2, 3 | 4 | 17 | no |
+| 3.6 Voronoi diagrams | yes | no | 0 of 0 | 1, 2, 4 | 4 | 16 | no |
 | 4.1 Concepts, reliability and sampling techniques | yes | yes | 2 of 2 | 1, 2, 3 | 4 | 9 | no |
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3 | 8 | 19 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 8 | 24 | no |
@@ -207,23 +207,23 @@ Release minimum reached for **25 of 39** subtopics; full tier for 13.
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3 | 6 | 13 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 7 | 21 | no |
 | 4.9 Normal distribution and calculations | yes | yes | 3 of 3 | 1, 2, 3, 4 | 8 | 21 | no |
-| 4.10 Spearman's rank correlation coefficient | no | no | 0 of 0 | - | 0 | 11 | yes |
-| 4.11 Hypothesis testing: χ² tests and the t-test | no | no | 0 of 0 | - | 0 | 35 | yes |
+| 4.10 Spearman's rank correlation coefficient | yes | no | 0 of 0 | 1, 2, 4 | 3 | 11 | no |
+| 4.11 Hypothesis testing: χ² tests and the t-test | yes | no | 0 of 0 | 1, 2, 4 | 6 | 35 | no |
 | 5.1 Introduction to calculus | yes | no | 1 of 2 | 1, 2, 3, 4 | 6 | 3 | no |
 | 5.2 Increasing and decreasing functions | yes | no | 1 of 2 | 1, 2, 3, 4 | 6 | 11 | no |
 | 5.3 Differentiating polynomials, n in Z | yes | yes | 1 of 1 | 1, 2, 3 | 4 | 37 | no |
 | 5.4 Tangents and normals | yes | no | 3 of 5 | 1, 2, 3, 4 | 7 | 13 | no |
 | 5.5 Integration introduction, areas between curve and x-axis | no | no | 1 of 3 | 1 | 2 | 28 | no |
-| 5.6 Stationary points: local maxima and minima | no | no | 0 of 0 | - | 0 | 6 | yes |
-| 5.7 Optimisation in context | no | no | 0 of 0 | - | 0 | 22 | yes |
-| 5.8 Approximating areas with the trapezoidal rule | no | no | 0 of 0 | - | 0 | 15 | yes |
+| 5.6 Stationary points: local maxima and minima | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 6 | no |
+| 5.7 Optimisation in context | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 22 | no |
+| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 4 | 5 | 15 | no |
 
-Generators per level: level 0: 4, level 1: 37, level 2: 57, level 3: 33, level 4: 33, level 5: 0.
+Generators per level: level 0: 4, level 1: 52, level 2: 84, level 3: 38, level 4: 59, level 5: 0.
 
 ## AI HL
 
-184 generators over 70 question types are offered in AI HL. 29 of 78 subtopics have generated questions; 49 use real questions only (1 of them has no question in the bank yet).
-Release minimum reached for **28 of 78** subtopics; full tier for 15.
+256 generators over 98 question types are offered in AI HL. 42 of 78 subtopics have generated questions; 36 use real questions only (1 of them has no question in the bank yet).
+Release minimum reached for **41 of 78** subtopics; full tier for 15.
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|
@@ -232,9 +232,9 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 1.3 Geometric sequences and series | yes | no | 2 of 3 | 1, 2, 3, 4 | 8 | 16 | no |
 | 1.4 Financial applications of geometric sequences and series | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 8 | no |
 | 1.5 Laws of exponents with integer exponents and introduction to logarithms | yes | no | 1 of 5 | 0, 1, 2, 3, 4 | 8 | 6 | no |
-| 1.6 Approximation, bounds, percentage error and estimation | no | no | 0 of 0 | - | 0 | 15 | yes |
-| 1.7 Amortization and annuities using technology | no | no | 0 of 0 | - | 0 | 15 | yes |
-| 1.8 Solving linear systems and polynomial equations with technology | no | no | 0 of 0 | - | 0 | 14 | yes |
+| 1.6 Approximation, bounds, percentage error and estimation | yes | no | 0 of 0 | 1, 2, 4 | 4 | 15 | no |
+| 1.7 Amortization and annuities using technology | yes | no | 0 of 0 | 1, 2, 4 | 6 | 15 | no |
+| 1.8 Solving linear systems and polynomial equations with technology | yes | no | 0 of 0 | 1, 2, 4 | 5 | 14 | no |
 | 1.9 Laws of logarithms | no | no | 0 of 0 | - | 0 | 10 | yes |
 | 1.10 Simplifying expressions with rational exponents | no | no | 0 of 0 | - | 0 | 0 | nothing yet |
 | 1.11 Sum of infinite geometric sequences (aa-sl 1.8) | yes | yes | 1 of 1 | 1, 2, 3, 4 | 7 | 10 | no |
@@ -244,10 +244,10 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 1.15 Eigenvalues, eigenvectors and diagonalisation of 2 × 2 matrices | no | no | 0 of 0 | - | 0 | 24 | yes |
 | 2.1 Equations of straight lines, parallel and perpendicular | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 7 | 20 | no |
 | 2.2 Functions, notation, domain, range and inverse as reflection | yes | no | 5 of 8 | 0, 1, 2, 4 | 5 | 13 | no |
-| 2.3 Graphs of functions | yes | no | 5 of 7 | 1, 2, 4 | 5 | 18 | no |
-| 2.4 Key features of graphs | yes | no | 8 of 12 | 0, 1, 2, 3 | 5 | 54 | no |
-| 2.5 Modelling with linear, quadratic, exponential, power, cubic and sinusoidal functions | no | no | 0 of 0 | - | 0 | 45 | yes |
-| 2.6 The modelling process: choose, fit, test and use a model | no | no | 0 of 0 | - | 0 | 43 | yes |
+| 2.3 Graphs of functions | yes | no | 5 of 7 | 1, 2, 4 | 8 | 18 | no |
+| 2.4 Key features of graphs | yes | no | 8 of 12 | 0, 1, 2, 3, 4 | 9 | 54 | no |
+| 2.5 Modelling with linear, quadratic, exponential, power, cubic and sinusoidal functions | yes | no | 0 of 0 | 1, 2, 4 | 7 | 45 | no |
+| 2.6 The modelling process: choose, fit, test and use a model | yes | no | 0 of 0 | 1, 2, 4 | 5 | 43 | no |
 | 2.7 Composite and inverse functions in context | no | no | 0 of 0 | - | 0 | 11 | yes |
 | 2.8 Transformations of graphs (aa-sl 2.11) | yes | no | 2 of 7 | 1, 2, 3, 4 | 6 | 12 | no |
 | 2.9 Further models: half-life, logarithmic, sinusoidal, logistic and piecewise | no | no | 0 of 0 | - | 0 | 16 | yes |
@@ -255,9 +255,9 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 3.1 3D space, volume, angles, distance and midpoints | yes | no | 3 of 4 | 1, 2, 3, 4 | 8 | 25 | no |
 | 3.2 2D and 3D trigonometry, sine rule, cosine rule and area | yes | no | 4 of 6 | 1, 2, 4 | 8 | 41 | no |
 | 3.3 Applications of trigonometry | yes | yes | 2 of 2 | 1, 2, 4 | 6 | 13 | no |
-| 3.4 Arc length and sector area in degrees | no | no | 0 of 0 | - | 0 | 12 | yes |
-| 3.5 Equations of perpendicular bisectors | no | no | 0 of 0 | - | 0 | 12 | yes |
-| 3.6 Voronoi diagrams | no | no | 0 of 0 | - | 0 | 13 | yes |
+| 3.4 Arc length and sector area in degrees | yes | no | 0 of 0 | 1, 2, 3, 4 | 6 | 12 | no |
+| 3.5 Equations of perpendicular bisectors | yes | no | 0 of 0 | 1, 2, 3 | 4 | 12 | no |
+| 3.6 Voronoi diagrams | yes | no | 0 of 0 | 1, 2, 4 | 4 | 13 | no |
 | 3.7 Radian measure | no | no | 0 of 0 | - | 0 | 4 | yes |
 | 3.8 The unit circle, the Pythagorean identity, the ambiguous case and graphical trigonometric equations | no | no | 0 of 0 | - | 0 | 9 | yes |
 | 3.9 Matrix transformations of the plane | no | no | 0 of 0 | - | 0 | 14 | yes |
@@ -277,8 +277,8 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3 | 6 | 11 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 7 | 23 | no |
 | 4.9 Normal distribution and calculations | yes | yes | 3 of 3 | 1, 2, 3, 4 | 8 | 21 | no |
-| 4.10 Spearman's rank correlation coefficient | no | no | 0 of 0 | - | 0 | 8 | yes |
-| 4.11 Hypothesis testing: χ² tests and the t-test | no | no | 0 of 0 | - | 0 | 28 | yes |
+| 4.10 Spearman's rank correlation coefficient | yes | no | 0 of 0 | 1, 2, 4 | 3 | 8 | no |
+| 4.11 Hypothesis testing: χ² tests and the t-test | yes | no | 0 of 0 | 1, 2, 4 | 6 | 28 | no |
 | 4.12 Designing data collection; reliability and validity | no | no | 0 of 0 | - | 0 | 9 | yes |
 | 4.13 Non-linear regression and the coefficient of determination | no | no | 0 of 0 | - | 0 | 15 | yes |
 | 4.14 Linear combinations of random variables and unbiased estimates | no | no | 0 of 0 | - | 0 | 18 | yes |
@@ -292,9 +292,9 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 5.3 Differentiating polynomials, n in Z | yes | yes | 1 of 1 | 1, 2, 3 | 4 | 21 | no |
 | 5.4 Tangents and normals | yes | no | 3 of 5 | 1, 2, 3, 4 | 7 | 9 | no |
 | 5.5 Integration introduction, areas between curve and x-axis | no | no | 2 of 3 | 1 | 2 | 17 | no |
-| 5.6 Stationary points: local maxima and minima | no | no | 0 of 0 | - | 0 | 8 | yes |
-| 5.7 Optimisation in context | no | no | 0 of 0 | - | 0 | 17 | yes |
-| 5.8 Approximating areas with the trapezoidal rule | no | no | 0 of 0 | - | 0 | 10 | yes |
+| 5.6 Stationary points: local maxima and minima | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 8 | no |
+| 5.7 Optimisation in context | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 17 | no |
+| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 4 | 5 | 10 | no |
 | 5.9 Further differentiation: standard derivatives, chain, product and quotient rules, related rates | no | no | 0 of 0 | - | 0 | 37 | yes |
 | 5.10 The second derivative and the second derivative test | no | no | 0 of 0 | - | 0 | 10 | yes |
 | 5.11 Further integration: standard integrals, inspection and substitution | no | no | 0 of 0 | - | 0 | 15 | yes |
@@ -306,7 +306,7 @@ Release minimum reached for **28 of 78** subtopics; full tier for 15.
 | 5.17 Phase portraits for coupled linear differential equations | no | no | 0 of 0 | - | 0 | 18 | yes |
 | 5.18 Second-order differential equations by Euler's method | no | no | 0 of 0 | - | 0 | 9 | yes |
 
-Generators per level: level 0: 4, level 1: 40, level 2: 65, level 3: 39, level 4: 36, level 5: 0.
+Generators per level: level 0: 4, level 1: 55, level 2: 92, level 3: 44, level 4: 62, level 5: 0.
 
 ## Bank parts not assigned to a question type
 
