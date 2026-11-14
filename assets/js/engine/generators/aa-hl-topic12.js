@@ -429,6 +429,15 @@
         P("For this value of $n$, find $z^{n}$.", 2, ans.sf(val), [`$z^{${n}} = ${num(r)}^{${n}}\\left(\\cos ${piFrac(turns, 1)} + ${I}\\sin ${piFrac(turns, 1)}\\right) = ${turns % 2 === 0 ? "" : "-"}${num(r)}^{${n}}$`, `$\\approx ${sf(val)}$`])] };
     } });
   const CR = { type: "t1-ahl-conjugate-roots", syllabus: ["1.14"], representation: "equation", format: "value" };
+  reg({ ...CR, unknown: "write-conjugate-root", levels: [1], skills: ["AHL1.14.conjugate-root"], title: "Write down the other root of a real quadratic",
+    build({ rng }) {
+      const p = rng.nonzero(-6, 6), q = rng.nonzero(-6, 6);
+      return { params: { p, q },
+        stem: `The equation $z^{2} + bz + c = 0$, where $b, c \\in \\mathbb{R}$, has a root $z = ${cx(p, q)}$.`,
+        parts: [
+          P("Write down the real part of the other root.", 1, ans.int(p, { misconceptions: [{ value: -p, text: "The conjugate keeps the real part and changes the sign of the imaginary part." }] }), [`The coefficients are real, so the roots are a conjugate pair. The other root is $${cx(p, -q)}$, with real part $${p}$.`]),
+          P("Write down the imaginary part of the other root.", 1, ans.int(-q), [`The other root is $${cx(p, -q)}$, with imaginary part $${-q}$.`])] };
+    } });
   reg({ ...CR, unknown: "cubic-coefficients", levels: [2], skills: ["AHL1.14.conjugate-root"], title: "Conjugate root of a real cubic, then two coefficients",
     build({ rng }) {
       const p = rng.nonzero(-4, 4), q = rng.int(1, 4), r = rng.nonzero(-5, 5), N = p * p + q * q;
@@ -1041,6 +1050,13 @@
             `$\\dfrac{1}{f(x)}$ has the same sign as $f(x)$: positive outside the asymptotes and negative between them, with a local maximum at $y = ${rat.tex(yMax)}$.`])] };
     } });
   const ME = { type: "fn-ahl-modulus-equations", syllabus: ["2.16"], representation: "equation", format: "value" };
+  reg({ ...ME, unknown: "shifted-modulus", levels: [1], skills: ["AHL2.16.modulus-equation"], title: "Solve |x - a| = k",
+    build({ rng }) {
+      const a = rng.nonzero(-8, 8), k = rng.int(1, 9);
+      return { params: { a, k }, stem: `Consider the equation $|${lin(1, -a)}| = ${k}$.`, parts: [
+        P("Write down the smaller solution of the equation.", 1, ans.int(a - k), [`$${lin(1, -a)} = ${k}$ or $${lin(1, -a)} = ${-k}$, so $x = ${a + k}$ or $x = ${a - k}$. The smaller is $${a - k}$.`]),
+        P("Write down the larger solution of the equation.", 1, ans.int(a + k), [`The larger solution is $x = ${a + k}$. Both solutions are $${k}$ units from $${a}$ on the number line.`])] };
+    } });
   reg({ ...ME, unknown: "linear-equals-constant", levels: [2], skills: ["AHL2.16.modulus-equation", "AHL2.16.modulus-inequality"], title: "Solve |ax + b| = k and count integer solutions of the inequality",
     build({ rng }) {
       const a = rng.int(1, 4), b = rng.nonzero(-7, 7), k = rng.int(1, 9), x1 = rat.Q(-b - k, a), x2 = rat.Q(-b + k, a), ints = [];

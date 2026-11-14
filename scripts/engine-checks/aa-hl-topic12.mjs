@@ -212,6 +212,17 @@ export default {
     const m = cpow(z, mm);
     return { a: Math.hypot(m[0], m[1]), b: n, c: w[0] };
   },
+  "t1-ahl-conjugate-roots/write-conjugate-root/equation": (q, T) => {
+    const { p, q: im } = q.params;
+    // the other root x + yi makes the sum and the product of the two roots real
+    const y = T.bisect((v) => im + v, -50, 50), x = T.bisect((v) => cmul([p, im], [v, y])[1], -50, 50);
+    return { a: T.approx(x, 1e-6), b: T.approx(y, 1e-6) };
+  },
+  "fn-ahl-modulus-equations/shifted-modulus/equation": (q, T) => {
+    const { a, k } = q.params, rs = T.roots((x) => Math.abs(x - a) - k, -40.03, 40.07, 16000);
+    T.require(rs.length === 2, "two solutions");
+    return { a: T.approx(rs[0], 1e-6), b: T.approx(rs[1], 1e-6) };
+  },
   "t1-ahl-conjugate-roots/cubic-coefficients/equation": (q, T) => {
     const { p, q: im, r } = q.params, f = cubicAt(p, im, r), c = f(0);
     // the third root: the y for which (z1)(p + yi) is real, as it must be for real coefficients
