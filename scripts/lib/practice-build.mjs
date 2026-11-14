@@ -222,7 +222,7 @@ export function coverageMarkdown({ catalogue, E, course, courses, statementsOf, 
     const statements = statementsOf(c);
     const gens = E.generators({ course: c.id });
     const withGen = new Set(gens.map((g) => g.type));
-    const rows = [];
+    const rows = [], variety = [];
     let minimum = 0, full = 0, realOnly = 0, nothing = 0;
     for (const s of statements) {
       const mine = gens.filter((g) => g.syllabus[0] === s.code);
@@ -238,18 +238,29 @@ export function coverageMarkdown({ catalogue, E, course, courses, statementsOf, 
       if (isFull) full++;
       if (only) realOnly++;
       if (only && !nReal) nothing++;
+      // Variety: what a student can be asked at the levels they climb (1 to 4), as the Practice page counts it.
+      const ways = mine.filter((g) => g.levels.some((l) => l >= 1 && l <= 4));
+      const nTypes = new Set(ways.map((g) => g.type)).size;
+      if (ways.length) variety.push({ code: s.code, title: s.title, ways: ways.length, types: nTypes });
       const sharedAs = c.id !== course && homeCode.has(s.id) && homeCode.get(s.id) !== s.code ? ` (${course} ${homeCode.get(s.id)})` : "";
-      rows.push(`| ${s.code} ${s.title}${sharedAs} | ${isMin ? "yes" : "no"} | ${isFull ? "yes" : "no"} | ${covered.length} of ${types.length} | ${levels.length ? levels.join(", ") : "-"} | ${mine.length} | ${nReal} | ${only ? (nReal ? "yes" : "nothing yet") : "no"} |`);
+      rows.push(`| ${s.code} ${s.title}${sharedAs} | ${isMin ? "yes" : "no"} | ${isFull ? "yes" : "no"} | ${covered.length} of ${types.length} | ${levels.length ? levels.join(", ") : "-"} | ${nTypes || "-"} | ${ways.length || "-"} | ${mine.length} | ${nReal} | ${only ? (nReal ? "yes" : "nothing yet") : "no"} |`);
     }
     const levelCount = (l) => gens.filter((g) => g.levels.includes(l)).length;
+    // The thinnest subtopics: fewest ways of asking, then fewest question types.
+    variety.sort((a, b) => a.ways - b.ways || a.types - b.types || byCode(a.code, b.code));
+    const count = (n, word) => `${n} ${word}${n === 1 ? "" : "s"}`;
+    const middle = variety.length ? variety[Math.floor((variety.length - 1) / 2)].ways : 0;
+    const thin = variety.length
+      ? `**Thinnest subtopics** (fewest ways of asking among the ${variety.length} with generated questions; the middle one has ${middle}): ${variety.slice(0, 8).map((v) => `${v.code} ${v.title} (${count(v.ways, "way")}, ${count(v.types, "type")})`).join("; ")}.\n`
+      : "";
     summary.push(`| ${c.short} | ${statements.length} | ${statements.length - realOnly} | ${realOnly - nothing} | ${nothing} | ${gens.length} |`);
     sections.push(`## ${c.short}
 
 ${gens.length} generators over ${withGen.size} question types are offered in ${c.short}. ${statements.length - realOnly} of ${statements.length} subtopics have generated questions; ${realOnly} use real questions only${nothing ? ` (${nothing} of them has no question in the bank yet)` : ""}.
 Release minimum reached for **${minimum} of ${statements.length}** subtopics; full tier for ${full}.
 
-| Subtopic | Release minimum | Full | Exam types covered | Levels | Generators | Real questions | Real only |
-|---|---|---|---|---|---|---|---|
+${thin}${thin ? "\n" : ""}| Subtopic | Release minimum | Full | Exam types covered | Levels | Question types | Ways of asking | Generators | Real questions | Real only |
+|---|---|---|---|---|---|---|---|---|---|
 ${rows.join("\n")}
 
 Generators per level: ${[0, 1, 2, 3, 4, 5].map((l) => `level ${l}: ${levelCount(l)}`).join(", ")}.
@@ -273,6 +284,7 @@ ${summary.join("\n")}
 - **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
 - **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
 - **Exam types covered:** catalogue types built from exam parts that name this subtopic, and how many of them have a generator.
+- **Question types** and **Ways of asking:** the variety a student meets at levels 1 to 4. Question types are the distinct catalogue types with a generator for the subtopic, which is what the Practice page lets a student tick below a subtopic; ways of asking are those generators (each is one unknown and representation of a type). Practice works through all of them before repeating one. **Generators** also counts level 0 and level 5 ones.
 - **Real only:** no generator at levels 1 to 4 has this subtopic as its first code, so practice serves its past-paper questions, self-marked, short to long.
 ${empty && empty.length ? `- **Nothing yet:** no generator and no tagged question in the bank (${empty.join(", ")}).\n` : ""}
 ${sections.join("\n")}
