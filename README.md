@@ -66,7 +66,7 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 
 **Set up and export** opens the settings beside a live preview of the paper. The preview is the whole document: scroll through it, and use −, +, **Fit** and **Width** to zoom.
 
-- **Include**: question paper, markscheme (separate file), marks grid, page numbers, blank working pages after Section B questions.
+- **Include**: question paper, markscheme (separate file), marks grid, page numbers, and working pages (blank or lined, up to 4) after each Section B question or after every question.
 - **Hide the original question numbers** (on by default) blanks the exam's own number on each question and markscheme, because the paper numbers them 1, 2, 3.
 - **Versions**: export Version A, B, C, D with the same questions in different orders, each with its markscheme.
 - **Cover sheet**: school name, logo, teacher, class, title, date, time allowed, total marks, name and date lines. Each has a tick to show or hide it.

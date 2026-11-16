@@ -13,8 +13,6 @@
   const A4_W = 595.28, A4_H = 841.89;
   const MARGIN = 45;
   const CONTENT_W = A4_W - MARGIN * 2;
-  // Image source dimensions (pixels)
-  const IMG_PX_W = 993;
 
   // ─── Settings ─────────────────────────────────────────────────────────────
   const DEFAULT_SETTINGS = {
@@ -44,6 +42,8 @@
     // Work space
     workSpace:         false,
     workSpacePages:    1,
+    workSpaceStyle:    'blank',   // 'blank' or 'lined'
+    workSpaceFor:      'B',       // 'B': after each Section B question; 'all': after every question
     // Pagination
     showPageNumbers:   true,
     // Blank out each question's original exam number: the paper prints its own "Question N"
@@ -159,6 +159,7 @@
     const field = (showId, on, label, input) => `<div class="f"><label>${showId ? ck(showId, on) : ''}${label}</label>${input}</div>`;
     const text = (id, value, on, ph) => `<input class="input" type="text" id="${id}" value="${escHtml(value)}" placeholder="${ph || ''}" ${on ? '' : 'disabled'}>`;
     const wsN = s.workSpace ? (s.workSpacePages || 1) : 0;
+    const opt = (value, label, current) => `<option value="${value}" ${value === current ? 'selected' : ''}>${label}</option>`;
 
     return `
     <div class="dlg" role="dialog" aria-modal="true" aria-labelledby="aasl-dlg-title">
@@ -173,8 +174,11 @@
           <label class="ckl wide">Versions
             <select class="select" id="gen-versions">${[1, 2, 3, 4].map(n => `<option value="${n}" ${n === (s.versions || 1) ? 'selected' : ''}>${n === 1 ? '1 (just this paper)' : `${n}: ${'ABCD'.slice(0, n).split('').join(', ')}`}</option>`).join('')}</select>
             <small>same questions, different order</small></label>
-          ${hasB ? `<label class="ckl wide">Blank working pages after each Section B question
-            <select class="select" id="gen-workspace-n">${[0, 1, 2, 3, 4].map(n => `<option value="${n}" ${n === wsN ? 'selected' : ''}>${n}</option>`).join('')}</select></label>` : ''}
+          <div class="ckl wide">Working pages
+            <select class="select" id="gen-workspace-n" aria-label="Number of working pages">${[0, 1, 2, 3, 4].map(n => `<option value="${n}" ${n === wsN ? 'selected' : ''}>${n}</option>`).join('')}</select>
+            <select class="select" id="gen-workspace-style" aria-label="Working page style">${opt('blank', 'blank', s.workSpaceStyle)}${opt('lined', 'lined', s.workSpaceStyle)}</select>
+            <select class="select" id="gen-workspace-for" aria-label="Where to add working pages">${opt('B', 'after each Section B question', s.workSpaceFor)}${opt('all', 'after every question', s.workSpaceFor)}</select>
+            ${hasB ? '' : '<small id="gen-workspace-note">this paper has no Section B question</small>'}</div>
         </div></div>
 
         <div><h4 class="cap"><label class="switch"><input type="checkbox" id="gen-cover" ${s.coverSheet ? 'checked' : ''}><i></i>Cover sheet</label></h4>
@@ -303,14 +307,12 @@
     const chk = id => { const el = $(id); return el ? el.checked : false; };
     const val = id => { const el = $(id); return el ? el.value : ''; };
     const num = id => { const el = $(id); return el ? parseInt(el.value, 10) : 1; };
-    const prior = loadSettings();
-    const wsEl = $('gen-workspace-n');
-    const wsN = wsEl ? parseInt(wsEl.value, 10) || 0 : null;
+    const wsN = parseInt(val('gen-workspace-n'), 10) || 0;
 
     const s = {
       includeQuestions:  chk('gen-questions'),
       includeMarkscheme: chk('gen-markscheme'),
-      format:            prior.format || 'pdf',
+      format:            loadSettings().format || 'pdf',
       coverSheet:        chk('gen-cover'),
       showSchoolName:    chk('cs-show-school'),   schoolName:   val('cs-school'),
       showLogo:          chk('cs-show-logo'),      logoDataUrl:  _logoDataUrl || '',
@@ -329,9 +331,10 @@
       instrShowWork:     chk('cs-instr-work-check'),   instrShowWorkText:   val('cs-instr-work-text'),
       instrSigFig:       chk('cs-instr-sigfig-check'), instrSigFigText:     val('cs-instr-sigfig-text'),
       instrFormula:      chk('cs-instr-form-check'),   instrFormulaText:    val('cs-instr-form-text'),
-      // With no Section B question in the paper the control is not shown; keep the saved choice.
-      workSpace:         wsN === null ? prior.workSpace : wsN > 0,
-      workSpacePages:    wsN === null ? prior.workSpacePages : (wsN || 1),
+      workSpace:         wsN > 0,
+      workSpacePages:    wsN || 1,
+      workSpaceStyle:    val('gen-workspace-style') === 'lined' ? 'lined' : 'blank',
+      workSpaceFor:      val('gen-workspace-for') === 'all' ? 'all' : 'B',
       showPageNumbers:   chk('gen-pagenums'),
       hideNumbers:       chk('gen-hidenumbers'),
       versions:          Math.max(1, parseInt(val('gen-versions'), 10) || 1),
@@ -340,18 +343,63 @@
     return s;
   }
 
-  // ─── Live preview ─────────────────────────────────────────────────────────
-  // An HTML drawing of the pages the PDF will contain, laid out on the same A4 grid in points.
-  function previewPages(s, items) {
-    const type = s.includeQuestions || !s.includeMarkscheme ? 'questions' : 'markscheme';
+  // ─── Page layout ──────────────────────────────────────────────────────────
+  // One layout, in A4 points measured from the top of the page, drawn by both the preview and
+  // the PDF. Every image keeps its own proportions. Each question starts a new page; its further
+  // images follow on the same page while they fit.
+  const BANNER_H = 28, IMG_GAP = 8;
+  const FALLBACK_SIZE = { w: 1233, h: 1324, missing: true };
+  const _sizes = new Map();   // image path -> Promise of { w, h }
+
+  function imageSize(src) {
+    if (!_sizes.has(src)) {
+      _sizes.set(src, new Promise(res => {
+        const img = new Image();
+        img.onload = () => res(img.naturalWidth && img.naturalHeight ? { w: img.naturalWidth, h: img.naturalHeight } : FALLBACK_SIZE);
+        img.onerror = () => { _sizes.delete(src); res(FALLBACK_SIZE); };
+        img.src = getBase() + src;
+      }));
+    }
+    return _sizes.get(src);
+  }
+
+  const imagesOf = (q, type) => (type === 'questions' ? q.paperImages : q.markschemeImages) || [];
+
+  async function loadSizes(items, type) {
+    const srcs = items.flatMap(q => imagesOf(q, type));
+    const sizes = await Promise.all(srcs.map(imageSize));
+    return new Map(srcs.map((src, i) => [src, sizes[i]]));
+  }
+
+  const wantsWork = (q, s, type) => type === 'questions' && s.workSpace && s.workSpacePages > 0
+    && (s.workSpaceFor === 'all' || q.section === 'B');
+
+  function layoutPaper(items, s, type, sizes) {
     const pages = [];
-    if (s.coverSheet && type === 'questions') pages.push({ kind: 'cover', label: 'Cover' });
+    if (s.coverSheet && type === 'questions') pages.push({ kind: 'cover' });
+    const bottom = A4_H - MARGIN;
     let n = 0;
     items.forEach((q, qi) => {
-      const images = (type === 'questions' ? q.paperImages : q.markschemeImages) || [];
-      images.forEach((src, ii) => pages.push({ kind: 'img', src, first: ii === 0, qi, label: `Q${qi + 1}`, n: ++n }));
-      if (type === 'questions' && s.workSpace && q.section === 'B') {
-        for (let w = 0; w < s.workSpacePages; w++) pages.push({ kind: 'ws', label: 'Work', n: ++n });
+      const images = imagesOf(q, type);
+      if (!images.length) return;
+      let page = null, y = 0;
+      const newPage = () => { page = { kind: 'q', n: ++n, qi, parts: [] }; pages.push(page); y = MARGIN; };
+      images.forEach((src, ii) => {
+        const size = sizes.get(src) || FALLBACK_SIZE;
+        let w = CONTENT_W, h = w * size.h / size.w;
+        if (!page) {
+          newPage();
+          page.parts.push({ t: 'banner', text: `Question ${qi + 1}`, y });
+          y += BANNER_H;
+        } else if (y + IMG_GAP + h > bottom) newPage();
+        else y += IMG_GAP;
+        // Taller than the room on an empty page: shrink it, keeping its proportions.
+        if (h > bottom - y) { w *= (bottom - y) / h; h = bottom - y; }
+        page.parts.push({ t: 'img', src, qid: q.id, ii, missing: !!size.missing, x: MARGIN + (CONTENT_W - w) / 2, y, w, h });
+        y += h;
+      });
+      if (wantsWork(q, s, type)) {
+        for (let w = 0; w < s.workSpacePages; w++) pages.push({ kind: 'ws', n: ++n, qi });
       }
     });
     pages.type = type;
@@ -359,6 +407,24 @@
     return pages;
   }
 
+  // ─── Marks grid ───────────────────────────────────────────────────────────
+  // At most 8 questions to a row, in rows of even length; the Sum box ends the last row.
+  const GRID_MAX = 8, GRID_CELL_W = CONTENT_W / (GRID_MAX + 1), GRID_HEAD_H = 20, GRID_MARK_H = 34, GRID_ROW_GAP = 10;
+
+  function gridRows(items) {
+    const rowCount = Math.ceil(items.length / GRID_MAX);
+    const per = Math.ceil(items.length / rowCount);
+    const rows = [];
+    for (let i = 0; i < items.length; i += per) {
+      rows.push(items.slice(i, i + per).map((q, k) => ({ label: String(i + k + 1), marks: q.marks || 0 })));
+    }
+    return rows;
+  }
+
+  const workLabel = qi => `Working space · Question ${qi + 1}`;
+
+  // ─── Live preview ─────────────────────────────────────────────────────────
+  // An HTML drawing of the pages the PDF will contain, from the same layout.
   function coverHtml(s, items, marks) {
     const branding = [
       s.showSchoolName && s.schoolName, s.showTeacherName && s.teacherName, s.showClassCode && s.classCode,
@@ -369,6 +435,9 @@
       [s.instrSigFig, s.instrSigFigText], [s.instrFormula, s.instrFormulaText],
     ].filter(([on, t]) => on && t).map(([, t]) => t);
     const time = s.timeAllowed || suggestedTime(marks);
+    const rows = gridRows(items);
+    const gridTable = (row, last) => `<table class="mgrid"><tr>${row.map(c => `<th>${c.label}</th>`).join('')}${last ? '<th>Sum</th>' : ''}</tr>
+        <tr>${row.map(c => `<td>/${c.marks}</td>`).join('')}${last ? `<td><b>/${marks}</b></td>` : ''}</tr></table>`;
     return `
       ${s.showLogo && s.logoDataUrl ? `<img class="logo" src="${s.logoDataUrl}" alt="">` : ''}
       ${branding.map(b => `<div class="brandline">${escHtml(b)}</div>`).join('')}
@@ -380,22 +449,31 @@
       <hr>
       ${instrs.length ? `<b>Instructions to candidates:</b><ul>${instrs.map(t => `<li>${escHtml(t)}</li>`).join('')}</ul>` : ''}
       ${s.showMarksGrid && items.length ? `<div class="gridcap">To be filled out by teacher</div>
-        <table><tr>${items.map((q, i) => `<td><b>${i + 1}</b></td>`).join('')}<td><b>Sum</b></td></tr>
-        <tr>${items.map(q => `<td>/${q.marks || 0}</td>`).join('')}<td><b>/${marks}</b></td></tr></table>` : ''}`;
+        ${rows.map((row, i) => gridTable(row, i === rows.length - 1)).join('')}` : ''}`;
   }
 
-  function updatePreview() {
+  let _pvRun = 0;
+
+  async function updatePreview() {
     if (!modalEl || modalEl.hidden) return;
     const s = collectSettings();
     const items = basketItems();
     const marks = totalMarksOf(items);
-    const pages = previewPages(s, items);
+    const type = s.includeQuestions || !s.includeMarkscheme ? 'questions' : 'markscheme';
+    const run = ++_pvRun;
+    const sizes = await loadSizes(items, type);
+    if (run !== _pvRun || !modalEl || modalEl.hidden) return;   // a newer change is already drawing
+    const pages = layoutPaper(items, s, type, sizes);
+    const px = v => `${Math.round(v * 100) / 100}px`;
+    const partHtml = p => p.t === 'banner'
+      ? `<div class="qn" style="top:${px(p.y + 3)}">${escHtml(p.text)}</div>`
+      : `<img class="qimg"${p.ii === 0 && s.hideNumbers !== false ? ` data-mask="${escHtml(p.src)}"` : ''} style="left:${px(p.x)};top:${px(p.y)};width:${px(p.w)};height:${px(p.h)}" src="${getBase() + p.src}" alt="">`;
     const pageHtml = p => {
-      const foot = p && p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
+      const foot = p.n && s.showPageNumbers ? `<div class="foot">Page ${p.n} of ${pages.numbered}</div>` : '';
       let inner = '';
       if (p.kind === 'cover') inner = coverHtml(s, items, marks);
-      else if (p.kind === 'img') inner = `${p.first ? `<div class="qn">Question ${p.qi + 1}</div>` : ''}<img class="qimg"${p.first && s.hideNumbers !== false ? ` data-mask="${escHtml(p.src)}"` : ''} src="${getBase() + p.src}" alt="">${foot}`;
-      else if (p.kind === 'ws') inner = `<div class="ws">Working space</div><div class="ws-lines"></div>${foot}`;
+      else if (p.kind === 'q') inner = p.parts.map(partHtml).join('') + foot;
+      else if (p.kind === 'ws') inner = `<div class="ws">${escHtml(workLabel(p.qi))}</div>${s.workSpaceStyle === 'lined' ? '<div class="ws-lines"></div>' : ''}${foot}`;
       return `<div class="pv-fit"><div class="pg">${inner}</div></div>`;
     };
     // The whole document, in order, in a pane that scrolls: as many pages across as fit.
@@ -568,8 +646,8 @@
     await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = url; });
 
     const canvas = document.createElement('canvas');
-    canvas.width  = img.naturalWidth  || IMG_PX_W;
-    canvas.height = img.naturalHeight || 1324;
+    canvas.width  = img.naturalWidth  || FALLBACK_SIZE.w;
+    canvas.height = img.naturalHeight || FALLBACK_SIZE.h;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
 
@@ -601,121 +679,59 @@
 
   // ─── PDF Generation ───────────────────────────────────────────────────────
   async function buildPdf(items, s, type, totalMarks) {
-    const { PDFDocument, StandardFonts, rgb, PageSizes } = window.PDFLib;
+    const { PDFDocument, StandardFonts, rgb } = window.PDFLib;
     const pdfDoc = await PDFDocument.create();
     const fontReg  = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-    const totalPages = countTotalPages(items, s, type);
-    let pageNum = 0;
+    const pages = layoutPaper(items, s, type, await loadSizes(items, type));
+    const grey = rgb(0.5, 0.5, 0.5);
 
-    // Cover sheet
-    if (s.coverSheet && type === 'questions') {
+    for (const p of pages) {
       const page = pdfDoc.addPage([A4_W, A4_H]);
-      await drawCoverSheet(page, s, totalMarks, fontReg, fontBold, rgb);
-    }
+      if (p.kind === 'cover') { await drawCoverSheet(page, s, totalMarks, fontReg, fontBold, rgb, items); continue; }
 
-    // Questions
-    for (let qi = 0; qi < items.length; qi++) {
-      const q = items[qi];
-      const images = type === 'questions' ? q.paperImages : q.markschemeImages;
-      if (!images || !images.length) continue;
-
-      for (let ii = 0; ii < images.length; ii++) {
-        pageNum++;
-        const page = pdfDoc.addPage([A4_W, A4_H]);
-        const maskRegions = getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme', ii);
-
-        // Banner on first image of each question
-        let yOffset = A4_H - MARGIN;
-        if (ii === 0) {
-          fontBold.encodeText(`Question ${qi + 1}`); // warm up
-          page.drawText(`Question ${qi + 1}`, {
-            x: MARGIN, y: yOffset - 14,
-            size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1)
-          });
-          yOffset -= 28;
+      if (p.kind === 'ws') drawWorkSpacePage(page, fontBold, rgb, workLabel(p.qi), s.workSpaceStyle === 'lined');
+      for (const part of p.kind === 'q' ? p.parts : []) {
+        if (part.t === 'banner') {
+          page.drawText(part.text, { x: MARGIN, y: A4_H - part.y - 14, size: 12, font: fontBold, color: rgb(0.1, 0.1, 0.1) });
+          continue;
         }
-
         try {
-          const dataUrl = await fetchImageAsPng(images[ii], maskRegions, ii === 0 && s.hideNumbers !== false);
-          const base64  = dataUrl.split(',')[1];
-          const pngImg  = await pdfDoc.embedPng(base64);
-          const imgW = pngImg.width, imgH = pngImg.height;
-          const scale  = CONTENT_W / imgW;
-          const drawH  = imgH * scale;
-          const availH = yOffset - MARGIN - (s.showPageNumbers ? 18 : 0);
-          const finalScale = drawH > availH ? availH / (imgH) : scale;
-          const finalW = imgW * finalScale;
-          const finalH = imgH * finalScale;
-
-          page.drawImage(pngImg, {
-            x: MARGIN,
-            y: yOffset - finalH,
-            width: finalW,
-            height: finalH
-          });
+          if (part.missing) throw new Error('missing');
+          const maskRegions = getMaskRegions(part.qid, type === 'questions' ? 'paper' : 'markscheme', part.ii);
+          const dataUrl = await fetchImageAsPng(part.src, maskRegions, part.ii === 0 && s.hideNumbers !== false);
+          const pngImg  = await pdfDoc.embedPng(dataUrl.split(',')[1]);
+          page.drawImage(pngImg, { x: part.x, y: A4_H - part.y - part.h, width: part.w, height: part.h });
         } catch (e) {
-          page.drawText(`[Image unavailable: ${images[ii]}]`, {
-            x: MARGIN, y: yOffset - 20, size: 9, font: fontReg, color: rgb(0.6, 0.1, 0.1)
-          });
-        }
-
-        // Page footer
-        if (s.showPageNumbers) {
-          page.drawText(`Page ${pageNum} of ${totalPages}`, {
-            x: A4_W / 2 - 30, y: MARGIN - 20, size: 8, font: fontReg, color: rgb(0.5, 0.5, 0.5)
+          page.drawText(`[Image unavailable: ${part.src}]`, {
+            x: MARGIN, y: A4_H - part.y - 20, size: 9, font: fontReg, color: rgb(0.6, 0.1, 0.1)
           });
         }
       }
 
-      // Work space pages (Section B, questions mode only)
-      if (type === 'questions' && s.workSpace && q.section === 'B') {
-        for (let w = 0; w < s.workSpacePages; w++) {
-          pageNum++;
-          const page = pdfDoc.addPage([A4_W, A4_H]);
-          drawWorkSpacePage(page, fontReg, fontBold, rgb, s.showPageNumbers, pageNum, totalPages);
-        }
+      if (s.showPageNumbers) {
+        const label = `Page ${p.n} of ${pages.numbered}`;
+        page.drawText(label, { x: (A4_W - fontReg.widthOfTextAtSize(label, 8)) / 2, y: MARGIN - 20, size: 8, font: fontReg, color: grey });
       }
     }
 
     return await pdfDoc.save();
   }
 
-  function countTotalPages(items, s, type) {
-    let count = 0;
-    items.forEach(q => {
-      const imgs = type === 'questions' ? q.paperImages : q.markschemeImages;
-      count += (imgs || []).length;
-      if (type === 'questions' && s.workSpace && q.section === 'B') count += s.workSpacePages;
-    });
-    return count;
-  }
-
-  function drawWorkSpacePage(page, fontReg, fontBold, rgb, showNums, pageNum, totalPages) {
+  function drawWorkSpacePage(page, fontBold, rgb, label, lined) {
     const lineSpacing = 28;
-    const startY = A4_H - MARGIN - 20;
-    page.drawText('Working space', {
-      x: MARGIN, y: startY, size: 9, font: fontBold, color: rgb(0.7, 0.7, 0.7)
-    });
-    for (let y = startY - lineSpacing; y > MARGIN + (showNums ? 20 : 0); y -= lineSpacing) {
-      page.drawLine({
-        start: { x: MARGIN, y },
-        end:   { x: A4_W - MARGIN, y },
-        thickness: 0.4,
-        color: rgb(0.82, 0.82, 0.82)
-      });
-    }
-    if (showNums) {
-      page.drawText(`Page ${pageNum} of ${totalPages}`, {
-        x: A4_W / 2 - 30, y: MARGIN - 20, size: 8, font: fontReg, color: rgb(0.5, 0.5, 0.5)
-      });
+    const startY = A4_H - MARGIN - 12;
+    // "·" is outside the standard PDF font's reach on some viewers; use a plain dash.
+    page.drawText(label.replace('·', '-'), { x: MARGIN, y: startY, size: 9, font: fontBold, color: rgb(0.7, 0.7, 0.7) });
+    if (!lined) return;
+    for (let y = startY - lineSpacing; y > MARGIN; y -= lineSpacing) {
+      page.drawLine({ start: { x: MARGIN, y }, end: { x: A4_W - MARGIN, y }, thickness: 0.4, color: rgb(0.82, 0.82, 0.82) });
     }
   }
 
   // ─── Cover sheet rendering (pdf-lib) ──────────────────────────────────────
-  async function drawCoverSheet(page, s, totalMarks, fontReg, fontBold, rgb) {
-    const items = window.AASL_BASKET.getAll();
+  async function drawCoverSheet(page, s, totalMarks, fontReg, fontBold, rgb, items) {
     let y = A4_H - MARGIN;
     const lh = (size, gap = 1.4) => size * gap;
 
@@ -854,40 +870,23 @@
       page.drawLine({ start: { x: labelX + lw + lineGap, y: lineY2 }, end: { x: MARGIN + CONTENT_W, y: lineY2 }, thickness: 0.5, color: rgb(0.75, 0.75, 0.75) });
       y -= 18;
 
-      const cellW  = Math.min(46, (CONTENT_W) / (items.length + 1));
-      const cellH  = 22;
-      const startX = MARGIN;
-
-      // Draw grid: 2 rows (number row + marks row)
-      // Header row
-      let cx = startX;
-      items.forEach((q, i) => {
-        page.drawRectangle({ x: cx, y: y - cellH, width: cellW, height: cellH, borderColor: rgb(0.6, 0.6, 0.6), borderWidth: 0.5 });
-        const label = String(i + 1);
-        const lw2 = fontBold.widthOfTextAtSize(label, 8);
-        txt(label, cx + (cellW - lw2) / 2, y - cellH + 7, 8, fontBold);
-        cx += cellW;
+      // Rows of at most 8 boxes, each with room to write a mark in.
+      const rows = gridRows(items);
+      const room = y - MARGIN - (rows.length - 1) * GRID_ROW_GAP;
+      const markH = Math.max(16, Math.min(GRID_MARK_H, room / rows.length - GRID_HEAD_H));
+      const border = { borderColor: rgb(0.45, 0.45, 0.45), borderWidth: 0.7 };
+      const cell = (cx, label, marksLabel, bold) => {
+        page.drawRectangle({ x: cx, y: y - GRID_HEAD_H, width: GRID_CELL_W, height: GRID_HEAD_H, color: rgb(0.94, 0.94, 0.94), ...border });
+        txt(label, cx + (GRID_CELL_W - fontBold.widthOfTextAtSize(label, 10)) / 2, y - GRID_HEAD_H + 6, 10, fontBold);
+        page.drawRectangle({ x: cx, y: y - GRID_HEAD_H - markH, width: GRID_CELL_W, height: markH, ...border });
+        const font = bold ? fontBold : fontReg;
+        txt(marksLabel, cx + GRID_CELL_W - 6 - font.widthOfTextAtSize(marksLabel, 10), y - GRID_HEAD_H - markH + 6, 10, font, rgb(0.3, 0.3, 0.3));
+      };
+      rows.forEach((row, ri) => {
+        row.forEach((c, i) => cell(MARGIN + i * GRID_CELL_W, c.label, `/${c.marks}`, false));
+        if (ri === rows.length - 1) cell(MARGIN + row.length * GRID_CELL_W, 'Sum', `/${totalMarks}`, true);
+        y -= GRID_HEAD_H + markH + GRID_ROW_GAP;
       });
-      // Sum header cell
-      page.drawRectangle({ x: cx, y: y - cellH, width: cellW, height: cellH, borderColor: rgb(0.6, 0.6, 0.6), borderWidth: 0.5 });
-      const sumLbl = 'Sum';
-      txt(sumLbl, cx + (cellW - fontBold.widthOfTextAtSize(sumLbl, 8)) / 2, y - cellH + 7, 8, fontBold);
-
-      y -= cellH;
-      cx = startX;
-
-      // Marks row
-      items.forEach(q => {
-        page.drawRectangle({ x: cx, y: y - cellH, width: cellW, height: cellH, borderColor: rgb(0.6, 0.6, 0.6), borderWidth: 0.5 });
-        const mLabel = `/${q.marks || 0}`;
-        const mw = fontReg.widthOfTextAtSize(mLabel, 8);
-        txt(mLabel, cx + (cellW - mw) / 2, y - cellH + 7, 8, fontReg, rgb(0.4, 0.4, 0.4));
-        cx += cellW;
-      });
-      // Sum cell
-      page.drawRectangle({ x: cx, y: y - cellH, width: cellW, height: cellH, borderColor: rgb(0.6, 0.6, 0.6), borderWidth: 0.5 });
-      const totalLbl = `/${totalMarks}`;
-      txt(totalLbl, cx + (cellW - fontBold.widthOfTextAtSize(totalLbl, 8)) / 2, y - cellH + 7, 8, fontBold);
     }
   }
 
@@ -895,8 +894,8 @@
   async function buildDocx(items, s, type, totalMarks) {
     const {
       Document, Packer, Paragraph, TextRun, ImageRun,
-      HeadingLevel, AlignmentType, WidthType, TableRow, TableCell, Table,
-      BorderStyle, ShadingType, PageSize
+      AlignmentType, WidthType, TableRow, TableCell, Table,
+      BorderStyle, HeightRule, VerticalAlign
     } = window.docx;
 
     // A4 page dimensions in twips (1 inch = 1440 twips)
@@ -907,13 +906,15 @@
     // Image width in pixels (docx ImageRun uses px at 96 DPI)
     // Usable width = (8.268 - 2×0.787) in = 6.694 in = 643 px
     const IMG_PX      = 643;
-    const IMG_PX_H    = Math.round(IMG_PX * 1324 / IMG_PX_W);
+    // Tallest an image may be and still share a page with the "Question N" line (usable height 971 px)
+    const IMG_MAX_H   = 900;
+    const sizes = await loadSizes(items, type);
 
     const sections = [];
 
     // Cover sheet
     if (s.coverSheet && type === 'questions') {
-      const children = buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle });
+      const children = buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle, HeightRule, VerticalAlign });
       sections.push({ children });
     }
 
@@ -934,16 +935,21 @@
       for (let ii = 0; ii < images.length; ii++) {
         const maskRegions = getMaskRegions(q.id, type === 'questions' ? 'paper' : 'markscheme', ii);
         try {
+          const size = sizes.get(images[ii]);
+          if (!size || size.missing) throw new Error('missing');
           const dataUrl = await fetchImageAsPng(images[ii], maskRegions, ii === 0 && s.hideNumbers !== false);
           const base64  = dataUrl.split(',')[1];
           const binaryStr = atob(base64);
           const bytes = new Uint8Array(binaryStr.length);
           for (let b = 0; b < binaryStr.length; b++) bytes[b] = binaryStr.charCodeAt(b);
 
+          // Full width at the image's own proportions; a very tall one shrinks to fit the page.
+          const fit = Math.min(1, IMG_MAX_H / (IMG_PX * size.h / size.w));
           children.push(new Paragraph({
+            alignment: AlignmentType.CENTER,
             children: [new ImageRun({
               data: bytes,
-              transformation: { width: IMG_PX, height: IMG_PX_H }
+              transformation: { width: Math.round(IMG_PX * fit), height: Math.round(IMG_PX * fit * size.h / size.w) }
             })]
           }));
         } catch (_) {
@@ -952,9 +958,15 @@
       }
 
       // Work space
-      if (type === 'questions' && s.workSpace && q.section === 'B') {
+      if (wantsWork(q, s, type)) {
+        // Word joins neighbouring paragraphs with identical borders into one box, so the
+        // rules alternate between two near-identical greys to keep a line under each.
+        const rule = l => ({ bottom: { style: BorderStyle.SINGLE, size: 4, color: l % 2 ? 'CCCCCC' : 'CDCDCD', space: 1 } });
         for (let w = 0; w < s.workSpacePages; w++) {
-          children.push(new Paragraph({ children: [new TextRun({ text: 'Working space', color: 'AAAAAA', size: 18 })], pageBreakBefore: w === 0 }));
+          children.push(new Paragraph({ children: [new TextRun({ text: workLabel(qi), bold: true, color: 'AAAAAA', size: 18 })], pageBreakBefore: true }));
+          if (s.workSpaceStyle === 'lined') {
+            for (let l = 0; l < 22; l++) children.push(new Paragraph({ children: [new TextRun({ text: '', size: 20 })], border: rule(l), spacing: { before: 320 } }));
+          }
         }
       }
 
@@ -978,7 +990,7 @@
     return await Packer.toBlob(doc);
   }
 
-  function buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle }) {
+  function buildDocxCover(s, totalMarks, items, { Paragraph, TextRun, ImageRun, Table, TableRow, TableCell, AlignmentType, WidthType, BorderStyle, HeightRule, VerticalAlign }) {
     const paras = [];
 
     // Logo (right-aligned, above branding)
@@ -1051,31 +1063,35 @@
     if (s.showMarksGrid && items.length > 0) {
       paras.push(new Paragraph({ children: [new TextRun({ text: '─── To be filled out by teacher ───', size: 18, color: '888888' })], alignment: AlignmentType.CENTER, spacing: { before: 240, after: 120 } }));
 
-      const noBorder = { style: BorderStyle.SINGLE, size: 4, color: '999999' };
-      const allBorders = { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder };
+      const edge = { style: BorderStyle.SINGLE, size: 6, color: '777777' };
+      const borders = { top: edge, bottom: edge, left: edge, right: edge };
+      const CELL_W = 1070;   // twips: nine boxes across the page
+      const cellOf = (text, o) => new TableCell({
+        children: [new Paragraph({ children: [new TextRun({ text, bold: o.bold, size: 22, color: o.color })], alignment: o.align })],
+        borders, verticalAlign: o.valign, width: { size: CELL_W, type: WidthType.DXA },
+        shading: o.fill ? { fill: o.fill } : undefined,
+        margins: { top: 40, bottom: 40, left: 80, right: 100 },
+      });
+      const head = text => cellOf(text, { bold: true, align: AlignmentType.CENTER, valign: VerticalAlign.CENTER, fill: 'F0F0F0' });
+      const mark = (text, bold) => cellOf(text, { bold, align: AlignmentType.RIGHT, valign: VerticalAlign.BOTTOM, color: '444444' });
 
-      const headerCells = items.map((q, i) => new TableCell({
-        children: [new Paragraph({ children: [new TextRun({ text: String(i + 1), bold: true, size: 18 })], alignment: AlignmentType.CENTER })],
-        borders: allBorders
-      }));
-      headerCells.push(new TableCell({
-        children: [new Paragraph({ children: [new TextRun({ text: 'Sum', bold: true, size: 18 })], alignment: AlignmentType.CENTER })],
-        borders: allBorders
-      }));
-
-      const marksCells = items.map(q => new TableCell({
-        children: [new Paragraph({ children: [new TextRun({ text: `/${q.marks || 0}`, size: 18 })], alignment: AlignmentType.CENTER })],
-        borders: allBorders
-      }));
-      marksCells.push(new TableCell({
-        children: [new Paragraph({ children: [new TextRun({ text: `/${totalMarks}`, bold: true, size: 18 })], alignment: AlignmentType.CENTER })],
-        borders: allBorders
-      }));
-
-      paras.push(new Table({
-        rows: [new TableRow({ children: headerCells }), new TableRow({ children: marksCells })],
-        width: { size: 100, type: WidthType.PERCENTAGE }
-      }));
+      // Rows of at most 8 boxes, each with room to write a mark in.
+      const rows = gridRows(items);
+      rows.forEach((row, ri) => {
+        const last = ri === rows.length - 1;
+        const heads = row.map(c => head(c.label));
+        const marks = row.map(c => mark(`/${c.marks}`, false));
+        if (last) { heads.push(head('Sum')); marks.push(mark(`/${totalMarks}`, true)); }
+        if (ri) paras.push(new Paragraph({ children: [], spacing: { after: 60 } }));
+        paras.push(new Table({
+          rows: [
+            new TableRow({ children: heads, height: { value: 400, rule: HeightRule.ATLEAST } }),
+            new TableRow({ children: marks, height: { value: 680, rule: HeightRule.ATLEAST } }),
+          ],
+          columnWidths: heads.map(() => CELL_W),
+          width: { size: CELL_W * heads.length, type: WidthType.DXA },
+        }));
+      });
     }
 
     return paras;

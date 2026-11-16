@@ -370,12 +370,14 @@ input[type="checkbox"] { accent-color: var(--accent); width: 15px; height: 15px;
 .pg li { margin-bottom: 8px; }
 .pg .gridcap { text-align: center; color: var(--paper-faint); font-size: 8px; margin: 12px 0 8px; display: flex; align-items: center; gap: 8px; }
 .pg .gridcap::before, .pg .gridcap::after { content: ""; flex: 1; border-top: 1px solid var(--paper-rule); }
-.pg table { border-collapse: collapse; font-size: 8px; }
-.pg td { border: 1px solid var(--paper-rule); width: 46px; height: 22px; text-align: center; padding: 0; }
-.pg .qn { font-weight: 700; font-size: 12px; margin-bottom: 12px; }
-.pg .qimg { width: 100%; display: block; }
+.pg .mgrid { border-collapse: collapse; font-size: 10px; margin-bottom: 10px; table-layout: fixed; }
+.pg .mgrid th, .pg .mgrid td { border: 1px solid var(--paper-faint); width: 56.1px; padding: 0; box-sizing: border-box; }
+.pg .mgrid th { height: 20px; text-align: center; font-weight: 700; background: rgba(0, 0, 0, .06); }
+.pg .mgrid td { height: 34px; text-align: right; vertical-align: bottom; padding: 0 6px 4px 0; }
+.pg .qn { position: absolute; left: 45px; font-weight: 700; font-size: 12px; line-height: 14px; }
+.pg .qimg { position: absolute; display: block; }
 .pg .ws { color: var(--paper-rule); font-weight: 700; font-size: 9px; }
-.pg .ws-lines { height: 700px; margin-top: 10px; background: repeating-linear-gradient(to bottom, transparent 0 27px, var(--paper-rule) 27px 28px); opacity: .5; }
+.pg .ws-lines { height: 728px; margin-top: 10px; background: repeating-linear-gradient(to bottom, transparent 0 27px, var(--paper-rule) 27px 28px); opacity: .5; }
 .pg .foot { position: absolute; left: 0; right: 0; bottom: 20px; text-align: center; font-size: 8px; color: var(--paper-faint); }
 .ft { grid-column: 1 / -1; border-top: 1px solid var(--line); padding: var(--s3) var(--s5); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .ft .m { color: var(--muted); font-size: var(--fs-sm); flex: 1; min-width: 180px; }
