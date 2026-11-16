@@ -49,6 +49,7 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 ### Question pages
 
 - One heading: exam, paper, time zone, question number, marks, section and calculator policy.
+- The course switch is locked to the question's own course here. A question shared by the SL and HL papers lets you switch between those two, which changes the paper and number in the heading. Your chosen course is kept for the other pages.
 - Tabs for **Question**, **Markscheme** and **Side by side**, with zoom and full screen (for projecting).
 - **Back to N results**, **Prev** and **Next** (or the arrow keys) walk through the list you came from, in its order.
 - **Parts**: each part's skill, marks and subtopics. Press a part to see its sub-skills and to mark where it sits on the question. Nothing is highlighted until you press.
@@ -66,11 +67,12 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 
 **Set up and export** opens the settings beside a live preview of the paper. The preview is the whole document: scroll through it, and use −, +, **Fit** and **Width** to zoom.
 
-- **Include**: question paper, markscheme (separate file), marks grid, page numbers, blank working pages after Section B questions.
+- **Include**: question paper, markscheme (separate file), marks grid, page numbers, and working pages (blank or lined, up to 4) after each Section B question or after every question.
 - **Hide the original question numbers** (on by default) blanks the exam's own number on each question and markscheme, because the paper numbers them 1, 2, 3.
 - **Versions**: export Version A, B, C, D with the same questions in different orders, each with its markscheme.
 - **Cover sheet**: school name, logo, teacher, class, title, date, time allowed, total marks, name and date lines. Each has a tick to show or hide it.
-- **Instructions to candidates**: five lines, each editable.
+- **Instructions to candidates**: five preset lines, each editable, plus any lines of your own. **Reset the preset lines** puts the originals back.
+- **Your own text**: a free block printed on the cover under the instructions.
 - **Download PDF** or **Download Word**.
 
 Your school details and choices are remembered on the device.
