@@ -49,6 +49,7 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 ### Question pages
 
 - One heading: exam, paper, time zone, question number, marks, section and calculator policy.
+- The course switch is locked to the question's own course here. A question shared by the SL and HL papers lets you switch between those two, which changes the paper and number in the heading. Your chosen course is kept for the other pages.
 - Tabs for **Question**, **Markscheme** and **Side by side**, with zoom and full screen (for projecting).
 - **Back to N results**, **Prev** and **Next** (or the arrow keys) walk through the list you came from, in its order.
 - **Parts**: each part's skill, marks and subtopics. Press a part to see its sub-skills and to mark where it sits on the question. Nothing is highlighted until you press.

@@ -6,6 +6,9 @@
    - On static pages, shows only elements whose data-course lists the current course
      (space-separated ids), and shows [data-course-empty] when nothing matched.
    - The search app re-renders through QB_COURSE.onChange.
+   - A question page belongs to the course (or the two courses) whose paper the question is on.
+     There the switch is locked to those: the page shows the question's own course without
+     changing the reader's remembered choice, and the other courses cannot be picked.
 */
 (function () {
   'use strict';
@@ -30,14 +33,19 @@
     return DEFAULT;
   }
 
+  // On a question page: the courses that question is in. Elsewhere: null, any course.
+  const Q = window.AASL_Q;
+  const allowed = Q && Array.isArray(Q.courses) && Q.courses.some(id => ids.includes(id)) ? Q.courses.filter(id => ids.includes(id)) : null;
+
   let current = initial();
+  if (allowed && !allowed.includes(current)) current = allowed.includes(Q.course) ? Q.course : allowed[0];
 
   const api = {
     list: COURSES,
     get: () => current,
     info: (id) => COURSES.find(c => c.id === (id || current)),
     set(id) {
-      if (!ids.includes(id) || id === current) return;
+      if (!ids.includes(id) || id === current || (allowed && !allowed.includes(id))) return;
       current = id;
       store(id);
       const url = new URL(location.href);
@@ -49,6 +57,9 @@
       listeners.forEach(fn => fn(id));
     },
     onChange: (fn) => listeners.push(fn),
+    // Whether the reader may switch to this course on this page.
+    allows: (id) => !allowed || allowed.includes(id),
+    locked: () => !!allowed,
     matches: (el) => (el.dataset.course || '').split(/\s+/).includes(current)
   };
   window.QB_COURSE = api;

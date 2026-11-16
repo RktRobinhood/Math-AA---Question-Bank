@@ -95,9 +95,32 @@
     });
     const pick = document.querySelector('.course-pick');
     if (pick) pick.value = id;
+    lockCourse();
     const booklet = document.querySelector('.top [data-formula-booklet]');
     const href = COURSE.info() && COURSE.info().formulaBooklet;
     if (booklet) { booklet.hidden = !href; if (href) booklet.href = base + href; }
+  }
+
+  // On a question page the switch only offers the courses that question is in; with one course
+  // there is nothing to switch, so the whole control is locked and says why.
+  function lockCourse() {
+    if (!COURSE.locked || !COURSE.locked()) return;
+    const open = COURSE.list.filter(c => COURSE.allows(c.id));
+    const why = `This question is from the ${open.map(c => c.short).join(' and ')} paper${open.length > 1 ? 's' : ''}. Choose a course on the Questions page.`;
+    const fixed = open.length < 2;
+    document.querySelectorAll('.course-seg [data-course-id]').forEach(b => {
+      const off = !COURSE.allows(b.dataset.courseId);
+      b.disabled = off || fixed;
+      b.title = off || fixed ? why : b.title;
+    });
+    const seg = document.querySelector('.course-seg');
+    if (seg) { seg.classList.add('locked'); seg.title = why; }
+    const pick = document.querySelector('.course-pick');
+    if (pick) {
+      [...pick.options].forEach(o => { o.disabled = !COURSE.allows(o.value); });
+      pick.disabled = fixed;
+      pick.title = why;
+    }
   }
 
   build();
