@@ -39,6 +39,9 @@
     instrShowWork:     true,  instrShowWorkText:    'Show all appropriate work/steps taken.',
     instrSigFig:       true,  instrSigFigText:      'Unless stated otherwise give all answers as an exact value or rounded to 3 significant figures.',
     instrFormula:      true,  instrFormulaText:     'A clean copy of the mathematics: analysis and approaches formula booklet is required.',
+    // The teacher's own instruction lines ({ on, text }) and a free block of text under them
+    extraInstrs:       [],
+    showCustomText:    false,     customText: '',
     // Work space
     workSpace:         false,
     workSpacePages:    1,
@@ -106,7 +109,8 @@
     if (!window.AASL_BASKET || window.AASL_BASKET.count() === 0) return;
     const s = loadSettings();
     if (!s.testDate) s.testDate = new Date().toISOString().slice(0, 10);
-    s.instrCalculatorText = calcNote();   // follows the papers the questions come from
+    // The calculator line follows the papers the questions come from, unless the teacher rewrote it.
+    if (!s.instrCalculatorText || CALC_NOTES.includes(s.instrCalculatorText)) s.instrCalculatorText = calcNote();
 
     if (!modalEl) {
       modalEl = document.createElement('div');
@@ -139,15 +143,31 @@
   window.AASL_GENERATE = openModal;
 
   // ─── Calculator auto-detect ───────────────────────────────────────────────
+  const CALC_NOTES = [
+    'You are not permitted access to any calculator for this paper.',
+    'A graphic display calculator is required for this paper.',
+    'Check individual questions for calculator guidance (mixed P1/P2 paper).',
+  ];
   function calcNote() {
     const items = basketItems();
     const papers = new Set(items.map(q => q.paper));
     if (papers.size === 1) {
-      if (papers.has('P1')) return 'You are not permitted access to any calculator for this paper.';
-      if (papers.has('P2')) return 'A graphic display calculator is required for this paper.';
+      if (papers.has('P1')) return CALC_NOTES[0];
+      if (papers.has('P2')) return CALC_NOTES[1];
     }
-    return 'Check individual questions for calculator guidance (mixed P1/P2 paper).';
+    return CALC_NOTES[2];
   }
+
+  // The instruction lines the cover prints, in order: the ticked presets, then the teacher's own.
+  function instructionsOf(s) {
+    return [
+      [s.instrCalculator, s.instrCalculatorText], [s.instrAnswerSpace, s.instrAnswerSpaceText], [s.instrShowWork, s.instrShowWorkText],
+      [s.instrSigFig, s.instrSigFigText], [s.instrFormula, s.instrFormulaText],
+      ...(s.extraInstrs || []).map(x => [x.on, x.text]),
+    ].filter(([on, t]) => on && t && t.trim()).map(([, t]) => t.trim());
+  }
+  // The free text block as lines; an empty line is kept as a paragraph gap.
+  const customLines = s => (s.showCustomText && s.customText && s.customText.trim() ? s.customText.trim().split(/\r?\n/) : []);
 
   // ─── Dialog HTML ──────────────────────────────────────────────────────────
   function buildModalHtml(s) {
@@ -205,6 +225,10 @@
             ${instrRow('cs-instr-work',   s.instrShowWork,    s.instrShowWorkText)}
             ${instrRow('cs-instr-sigfig', s.instrSigFig,      s.instrSigFigText)}
             ${instrRow('cs-instr-form',   s.instrFormula,     s.instrFormulaText)}
+            <div id="cs-instr-extra">${(s.extraInstrs || []).map(x => extraRow(x.on, x.text)).join('')}</div>
+            <div class="ins-acts"><button type="button" class="link" id="cs-instr-add">+ Add your own line</button><button type="button" class="link" id="cs-instr-reset">Reset the preset lines</button></div>
+            <h4 class="cap" style="margin-top:14px"><label>${ck('cs-show-custom', s.showCustomText)} Your own text <small>printed under the instructions</small></label></h4>
+            <textarea class="input" id="cs-custom" rows="3" placeholder="e.g. Section A: answer on the paper. Section B: answer in the booklet." ${s.showCustomText ? '' : 'disabled'}>${escHtml(s.customText)}</textarea>
           </div>
         </div>
       </div>
@@ -228,6 +252,14 @@
     </div>`;
   }
 
+  function extraRow(checked, text) {
+    return `<div class="ins extra">
+      <input type="checkbox" ${checked ? 'checked' : ''} aria-label="Include this instruction">
+      <input class="input" type="text" value="${escHtml(text)}" placeholder="Your instruction" ${checked ? '' : 'disabled'}>
+      <button type="button" class="x" aria-label="Remove this line" title="Remove this line">×</button>
+    </div>`;
+  }
+
   // ─── Wire dialog events ───────────────────────────────────────────────────
   function wireModal() {
     const $ = id => document.getElementById(id);
@@ -239,10 +271,11 @@
       ['cs-show-time', 'cs-time'], ['cs-show-marks', 'cs-total-marks'],
       ['cs-instr-calc-check', 'cs-instr-calc-text'], ['cs-instr-ans-check', 'cs-instr-ans-text'],
       ['cs-instr-work-check', 'cs-instr-work-text'], ['cs-instr-sigfig-check', 'cs-instr-sigfig-text'],
-      ['cs-instr-form-check', 'cs-instr-form-text'],
+      ['cs-instr-form-check', 'cs-instr-form-text'], ['cs-show-custom', 'cs-custom'],
     ];
     function applyToggles() {
       pairs.forEach(([cbId, inputId]) => { const cb = $(cbId), inp = $(inputId); if (cb && inp) inp.disabled = !cb.checked; });
+      modalEl.querySelectorAll('.ins.extra').forEach(row => { row.querySelector('.input').disabled = !row.querySelector('input[type="checkbox"]').checked; });
       $('gen-cover-editor').hidden = !$('gen-cover').checked;
       $('cs-logo-wrap').classList.toggle('off', !$('cs-show-logo').checked);
     }
@@ -252,6 +285,22 @@
     const onChange = () => { applyToggles(); updatePreview(); };
     modalEl.querySelector('.form').addEventListener('input', onChange);
     modalEl.querySelector('.form').addEventListener('change', onChange);
+
+    // The teacher's own instruction lines, and putting the presets back as they came.
+    $('cs-instr-add').onclick = () => {
+      $('cs-instr-extra').insertAdjacentHTML('beforeend', extraRow(true, ''));
+      $('cs-instr-extra').lastElementChild.querySelector('.input').focus();
+      onChange();
+    };
+    $('cs-instr-extra').addEventListener('click', e => {
+      if (e.target.closest('button.x')) { e.target.closest('.ins').remove(); onChange(); }
+    });
+    $('cs-instr-reset').onclick = () => {
+      const d = applyCourseDefaults(Object.assign({}, DEFAULT_SETTINGS), {});
+      [['calc', calcNote()], ['ans', d.instrAnswerSpaceText], ['work', d.instrShowWorkText], ['sigfig', d.instrSigFigText], ['form', d.instrFormulaText]]
+        .forEach(([k, text]) => { $(`cs-instr-${k}-text`).value = text; $(`cs-instr-${k}-check`).checked = true; });
+      onChange();
+    };
 
     $('aasl-dl-pdf').onclick = () => doGenerate('pdf');
     $('aasl-dl-docx').onclick = () => doGenerate('docx');
@@ -331,6 +380,10 @@
       instrShowWork:     chk('cs-instr-work-check'),   instrShowWorkText:   val('cs-instr-work-text'),
       instrSigFig:       chk('cs-instr-sigfig-check'), instrSigFigText:     val('cs-instr-sigfig-text'),
       instrFormula:      chk('cs-instr-form-check'),   instrFormulaText:    val('cs-instr-form-text'),
+      extraInstrs:       [...modalEl.querySelectorAll('.ins.extra')].map(row => ({
+        on: row.querySelector('input[type="checkbox"]').checked, text: row.querySelector('.input').value,
+      })),
+      showCustomText:    chk('cs-show-custom'),        customText:          val('cs-custom'),
       workSpace:         wsN > 0,
       workSpacePages:    wsN || 1,
       workSpaceStyle:    val('gen-workspace-style') === 'lined' ? 'lined' : 'blank',
@@ -430,10 +483,8 @@
       s.showSchoolName && s.schoolName, s.showTeacherName && s.teacherName, s.showClassCode && s.classCode,
     ].filter(Boolean);
     const date = s.testDate ? new Date(s.testDate + 'T12:00:00').toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '';
-    const instrs = [
-      [s.instrCalculator, s.instrCalculatorText], [s.instrAnswerSpace, s.instrAnswerSpaceText], [s.instrShowWork, s.instrShowWorkText],
-      [s.instrSigFig, s.instrSigFigText], [s.instrFormula, s.instrFormulaText],
-    ].filter(([on, t]) => on && t).map(([, t]) => t);
+    const instrs = instructionsOf(s);
+    const custom = customLines(s);
     const time = s.timeAllowed || suggestedTime(marks);
     const rows = gridRows(items);
     const gridTable = (row, last) => `<table class="mgrid"><tr>${row.map(c => `<th>${c.label}</th>`).join('')}${last ? '<th>Sum</th>' : ''}</tr>
@@ -448,6 +499,7 @@
       <div class="kv"><span>${s.showTimeAllowed ? `<b>Time Allowed:</b> ${time} minutes` : ''}</span><span>${s.showTotalMarks ? `<b>Total Marks:</b> ${marks}` : ''}</span></div>
       <hr>
       ${instrs.length ? `<b>Instructions to candidates:</b><ul>${instrs.map(t => `<li>${escHtml(t)}</li>`).join('')}</ul>` : ''}
+      ${custom.length ? `<div class="ctext">${custom.map(l => `<p>${escHtml(l) || '&nbsp;'}</p>`).join('')}</div>` : ''}
       ${s.showMarksGrid && items.length ? `<div class="gridcap">To be filled out by teacher</div>
         ${rows.map((row, i) => gridTable(row, i === rows.length - 1)).join('')}` : ''}`;
   }
@@ -735,7 +787,19 @@
     let y = A4_H - MARGIN;
     const lh = (size, gap = 1.4) => size * gap;
 
+    // The standard PDF fonts cannot print every character; one they lack becomes "?".
+    const safe = (text, font) => { const ok = new Set(font.getCharacterSet()); return [...String(text)].map(ch => (ok.has(ch.codePointAt(0)) ? ch : '?')).join(''); };
+    const wrap = (text, font, size, maxW) => {
+      const lines = []; let cur = '';
+      for (const word of safe(text, font).split(/\s+/).filter(Boolean)) {
+        const test = cur ? cur + ' ' + word : word;
+        if (cur && font.widthOfTextAtSize(test, size) > maxW) { lines.push(cur); cur = word; } else cur = test;
+      }
+      lines.push(cur);
+      return lines;
+    };
     function txt(text, x, cy, size, font, color) {
+      text = safe(text, font);
       page.drawText(String(text), { x, y: cy, size, font, color: color || rgb(0.1, 0.1, 0.1) });
     }
     function line(y1, indent = 0) {
@@ -820,38 +884,24 @@
     y -= 18;
 
     // Instructions
-    const instrs = [
-      [s.instrCalculator,   s.instrCalculatorText],
-      [s.instrAnswerSpace,  s.instrAnswerSpaceText],
-      [s.instrShowWork,     s.instrShowWorkText],
-      [s.instrSigFig,       s.instrSigFigText],
-      [s.instrFormula,      s.instrFormulaText],
-    ].filter(([on]) => on).map(([, t]) => t).filter(Boolean);
-
+    const instrs = instructionsOf(s);
     if (instrs.length) {
       txt('Instructions to candidates:', MARGIN, y - 12, 10, fontBold);
       y -= lh(10, 2);
       instrs.forEach(instr => {
         txt('•', MARGIN + 4, y - 10, 9, fontReg);
-        // Wrap long instructions
-        const words = instr.split(' ');
-        let line_ = '';
-        const maxW = CONTENT_W - 22;
-        let lineY = y - 10;
-        for (const word of words) {
-          const test = line_ ? line_ + ' ' + word : word;
-          const testW = fontReg.widthOfTextAtSize(test, 9);
-          if (testW > maxW && line_) {
-            txt(line_, MARGIN + 16, lineY, 9, fontReg);
-            lineY -= 13;
-            line_ = word;
-          } else {
-            line_ = test;
-          }
-        }
-        if (line_) txt(line_, MARGIN + 16, lineY, 9, fontReg);
+        let lineY = y - 10 + 13;
+        wrap(instr, fontReg, 9, CONTENT_W - 22).forEach(l => { lineY -= 13; txt(l, MARGIN + 16, lineY, 9, fontReg); });
         y = lineY - 10;
       });
+    }
+
+    // The teacher's own text
+    const custom = customLines(s);
+    if (custom.length) {
+      y -= 6;
+      custom.forEach(para => wrap(para, fontReg, 10, CONTENT_W).forEach(l => { y -= 14; if (l) txt(l, MARGIN, y, 10, fontReg); }));
+      y -= 8;
     }
 
     // Marks grid
@@ -1042,13 +1092,7 @@
     if (metaLine.length) paras.push(new Paragraph({ children: metaLine, spacing: { after: 160 } }));
 
     // Instructions
-    const instrs = [
-      [s.instrCalculator,  s.instrCalculatorText],
-      [s.instrAnswerSpace, s.instrAnswerSpaceText],
-      [s.instrShowWork,    s.instrShowWorkText],
-      [s.instrSigFig,      s.instrSigFigText],
-      [s.instrFormula,     s.instrFormulaText],
-    ].filter(([on]) => on).map(([, t]) => t).filter(Boolean);
+    const instrs = instructionsOf(s);
 
     if (instrs.length) {
       paras.push(new Paragraph({ children: [new TextRun({ text: 'Instructions to candidates:', bold: true, size: 22 })], spacing: { before: 160, after: 80 } }));
@@ -1058,6 +1102,9 @@
         spacing: { after: 60 }
       })));
     }
+
+    // The teacher's own text
+    customLines(s).forEach((l, i) => paras.push(new Paragraph({ children: [new TextRun({ text: l, size: 22 })], spacing: { before: i ? 0 : 160, after: 40 } })));
 
     // Marks grid
     if (s.showMarksGrid && items.length > 0) {

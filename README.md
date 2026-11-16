@@ -70,7 +70,8 @@ The **list** view (the ☰ button beside Sort) shows one line per question, like
 - **Hide the original question numbers** (on by default) blanks the exam's own number on each question and markscheme, because the paper numbers them 1, 2, 3.
 - **Versions**: export Version A, B, C, D with the same questions in different orders, each with its markscheme.
 - **Cover sheet**: school name, logo, teacher, class, title, date, time allowed, total marks, name and date lines. Each has a tick to show or hide it.
-- **Instructions to candidates**: five lines, each editable.
+- **Instructions to candidates**: five preset lines, each editable, plus any lines of your own. **Reset the preset lines** puts the originals back.
+- **Your own text**: a free block printed on the cover under the instructions.
 - **Download PDF** or **Download Word**.
 
 Your school details and choices are remembered on the device.
