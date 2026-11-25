@@ -138,7 +138,7 @@
     {
       "id": "w2-t5-trapezoid-unknown-sample-time",
       "home": "ai-sl",
-      "name": "Recover a sampling time from two unequal trapezoids",
+      "name": "Audit a constant sensor bias in equal-width trapezoids",
       "topic": 5,
       "kind": "skill",
       "source": "extension",
@@ -152,7 +152,7 @@
       "unknowns": [
         {
           "id": "sample-time",
-          "asked": "Recover a sampling time from two unequal trapezoids",
+          "asked": "Audit a constant sensor bias in equal-width trapezoids",
           "level": 3
         }
       ],

@@ -49,13 +49,20 @@ reg("area-vertically-translated-density","equation","level-shift",3,i,["5.5"],"S
  P("Find $k$.",3,A.int(k),R`The constant adds a rectangle of area $${n}k$. Subtract the quadratic contribution and divide by $${n}$: $k=${k}$. The curve stays above the axis.`));
 });
 
-reg("trapezoid-unknown-sample-time","table","sample-time",3,i,["5.8"],"AI-SL5.8.interval-width AI-SL5.8.from-table","Recover a sampling time from two unequal trapezoids",({rng:r})=>{
- const L=2*r.int(5,12),t=r.int(2,L-2),a0=2*r.int(2,8),c0=a0+2*r.int(2,9),b0=2*r.int(4,12);
- const u=(a0+b0)/2,v=(b0+c0)/2,total=u*t+v*(L-t);
- const q=Q(R`A logger sampled flow rate. The estimate from one trapezoid per adjacent pair is $${total}$ litres. Time is in minutes and flow rate in litres per minute.`,{L,t,a0,c0,b0,total},
- P("Calculate the missing sampling time $t$, showing how both widths enter.",4,A.int(t),R`The widths are $t$ and $${L}-t$. The average heights are $${u}$ and $${v}$. Hence $${u}t+${v}(${L}-t)=${total}$, giving $t=${t}$.`),
- P("With the same measured flow rates, how much smaller would the estimate be if the middle time were one minute later?",2,A.int(v-u),R`One minute moves from the second trapezoid to the first. Their average heights differ by $${v-u}$ litres per minute, so the estimate would be $${v-u}$ litres smaller.`));
- return {...q,table:{head:["Time",m(0),m("t"),m(L)],rows:[["Flow rate",m(a0),m(b0),m(c0)]]}};
+// Stable type ID retained for existing student scope links and progress.
+reg("trapezoid-unknown-sample-time","table","sample-time",3,i,["5.8"],"AI-SL5.8.interval-width AI-SL5.8.from-table","Audit a constant sensor bias in equal-width trapezoids",({rng:r})=>{
+ const n=r.int(4,6),w=2*r.int(1,4),bias=r.int(1,5),time=Array.from({length:n+1},(_,j)=>w*j);
+ const y=[bias+r.int(5,12),bias+r.int(13,24),...Array.from({length:n-1},()=>bias+r.int(5,24))];
+ const interior=y.slice(1,-1).reduce((s,v)=>s+v,0),estimate=w*(y[0]+2*interior+y[n])/2,correction=n*w*bias;
+ const method=A.choice(r,{value:"duration",text:"Subtract the bias multiplied by the total elapsed time."},[
+  {value:"readings",text:"Subtract the bias times one full interval for every reading.",why:"There is one more reading than there are intervals. Each endpoint is shared or used only once, not one full interval per reading."},
+  {value:"single",text:"Subtract the bias times the width of one interval only.",why:"That removes the bias from one strip. The same bias affects every strip."}
+ ],3);
+ const q=Q(R`A water-flow sensor took readings at equal time intervals. Each recorded flow rate is too high by $${bias}$ litres per minute. Use the trapezoidal rule on the displayed readings.`,{time,y,bias},
+ P("Find the estimate before correcting for the bias, in litres.",3,A.int(estimate),R`Each width is $${w}$ minutes. Count the first and last readings once, and interior readings twice. The estimate is $@dfrac{${w}}{2}(${y[0]}+2@times${interior}+${y[n]})=${estimate}$ litres.`),
+ P("Which method correctly removes the bias from that estimate?",1,method,R`Every equal-width strip loses $${bias}@times${w}$ litres when both of its ends are lowered. With $${n}$ strips, the total correction is $${bias}@times${n*w}=${correction}$ litres. There are $${n+1}$ readings, not $${n+1}$ full strips.`),
+ P("Find the corrected estimate, in litres.",2,A.int(estimate-correction),R`Subtract the correction: $${estimate}-${correction}=${estimate-correction}$ litres. Equivalently, subtract the bias from each reading before forming the trapezoids.`));
+ return {...q,table:{head:["Time (minutes)","Recorded flow (litres per minute)"],rows:time.map((v,j)=>[m(v),m(y[j])])}};
 });
 
 reg("coupled-euler-substep","equation","refinement",3,h,["5.16"],"AI-AHL5.16.coupled-system AI-AHL5.16.compare-values","Compare one Euler step with two half-steps for a coupled system",({rng:r})=>{

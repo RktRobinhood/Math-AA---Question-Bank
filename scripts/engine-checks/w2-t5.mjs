@@ -26,16 +26,15 @@ const cases={
   T.require(total>A,"positive shift required");
   return {a:Math.round(A),b:Math.round((total-A)/n)};
  },
- "trapezoid-unknown-sample-time/sample-time/table":({L,a0,c0,b0,total},T)=>{
-  const fits=[];
-  for(let t=1;t<L;t++){
-   const f=x=>x<t?a0+(b0-a0)*x/t:b0+(c0-b0)*(x-t)/(L-t);
-   if(Math.abs(T.integrate(f,0,t,30)+T.integrate(f,t,L,30)-total)<1e-8)fits.push(t);
-  }
-  T.require(fits.length===1,"one feasible interior time");
-  const t=fits[0]+1;
-  const g=x=>x<t?a0+(b0-a0)*x/t:b0+(c0-b0)*(x-t)/(L-t);
-  return {a:fits[0],b:Math.round(total-T.integrate(g,0,t,30)-T.integrate(g,t,L,30))};
+ "trapezoid-unknown-sample-time/sample-time/table":({time,y,bias},T)=>{
+  const pairs=time.slice(1).map((x,j)=>[j,x-time[j]]);
+  T.require(pairs.length>=4&&pairs.every(([,w])=>w===pairs[0][1]&&w>0),"all strips have the same positive width");
+  T.require(time.length===y.length&&y.every(v=>v>bias)&&new Set(y).size>1,"positive nonconstant corrected readings");
+  const integrate=offset=>pairs.reduce((total,[j,w])=>total+T.integrate(x=>y[j]-offset+(y[j+1]-y[j])*x/w,0,w,20),0);
+  const raw=integrate(0),corrected=integrate(bias);
+  T.require(T.close(raw-corrected,bias*(time.at(-1)-time[0]),1e-10),"correction affects elapsed time, not number of readings");
+  T.require(Math.abs(raw-corrected-bias*pairs[0][1]*time.length)>1e-8,"wrong method is numerically distinct");
+  return {a:Math.round(raw),b:T.option("duration"),c:Math.round(corrected)};
  },
  "coupled-euler-substep/refinement/equation":({x,y,c,d,den},T)=>{
   const run=k=>{let v=[x,y];for(let j=0;j<k;j++)v=[v[0]+c*v[1]/(k*den),v[1]+d*v[0]/(k*den)];return v[0];};
