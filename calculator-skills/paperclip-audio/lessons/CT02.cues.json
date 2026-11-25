@@ -7,291 +7,150 @@
   "status": "draft-from-original-watch",
   "scriptSource": {
     "type": "speech-copy-of-original-watch-captions",
-    "file": "angle-modes/index.html"
+    "file": "angle-modes/key-tape.js"
   },
   "script": "lessons/CT02.txt",
   "spokenCues": [
     {
       "id": "watch-01",
-      "text": "Given that the sine of theta is zero point six, find the principal angle in degrees. Check the angle mode first.",
+      "text": "Find the principal angle for sine theta equals zero point six, in degrees. Check the top-right rad or deg label.",
       "watchCueId": "watch-01"
     },
     {
       "id": "watch-02",
-      "text": "Press Home, then five: Settings and two: Document Settings.",
+      "text": "Use the touchpad to move the pointer to rad. Click the touchpad centre. Rad changes to deg.",
       "watchCueId": "watch-02"
     },
     {
       "id": "watch-03",
-      "text": "Tab to Angle, press Right, select Degree, then tab to OK and confirm.",
+      "text": "Press trig. Move down to inverse sine and press Enter. The minus one means inverse, not reciprocal.",
       "watchCueId": "watch-03"
     },
     {
       "id": "watch-04",
-      "text": "Return to the current document. Press Trig and choose inverse sine, not sine.",
+      "text": "Type zero point six and press Enter. Inverse sine takes a ratio and gives an angle.",
       "watchCueId": "watch-04"
     },
     {
       "id": "watch-05",
-      "text": "Enter zero point six and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.",
+      "text": "About thirty-six point eight seven degrees. That is one principal angle. If asked for all solutions, check the whole interval.",
       "watchCueId": "watch-05"
-    },
-    {
-      "id": "watch-06",
-      "text": "The display is in degrees. The calculator gives one principal angle; check the range for other solutions.",
-      "watchCueId": "watch-06"
     }
   ],
   "watch": {
-    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "timingBasis": "Authored CT02Tape on-screen events only. These are not recording timestamps; measure the final spoken and physical/LCD cues after rendering.",
     "sliderEndAtExtractionMs": 31800,
     "captionCues": [
       {
         "id": "watch-01",
         "startMs": 0,
-        "text": "Given sin θ = 0.6, find the principal angle in degrees. Check the angle mode first.",
+        "text": "Find the principal angle for sin θ = 0.6 in degrees. Check the top-right RAD or DEG label.",
         "endMs": 3400
       },
       {
         "id": "watch-02",
         "startMs": 3400,
-        "text": "Press Home, then 5: Settings and 2: Document Settings.",
-        "endMs": 7100
+        "text": "Use the touchpad to move the pointer to RAD. Click the touchpad centre. RAD changes to DEG.",
+        "endMs": 8600
       },
       {
         "id": "watch-03",
-        "startMs": 7100,
-        "text": "Tab to Angle, press Right, select Degree, then tab to OK and confirm.",
-        "endMs": 13100
+        "startMs": 8600,
+        "text": "Press trig. Move down to sin⁻¹ and press Enter. The superscript −1 means inverse, not reciprocal.",
+        "endMs": 14300
       },
       {
         "id": "watch-04",
-        "startMs": 13100,
-        "text": "Return to the current document. Press trig and choose sin⁻¹, not sin.",
-        "endMs": 18500
+        "startMs": 14300,
+        "text": "Type 0.6 and press Enter. Inverse sine takes a ratio and gives an angle.",
+        "endMs": 21700
       },
       {
         "id": "watch-05",
-        "startMs": 18500,
-        "text": "Enter 0.6 and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.",
-        "endMs": 25000
-      },
-      {
-        "id": "watch-06",
-        "startMs": 25000,
-        "text": "The display is in degrees. The calculator gives one principal angle; check the range for other solutions.",
+        "startMs": 21700,
+        "text": "About 36.87°. That’s one principal angle. If asked for all solutions, check the whole interval.",
         "endMs": 31800
       }
     ],
     "displayKeyStateChanges": [
       {
-        "timeMs": 3650,
+        "timeMs": 6050,
         "keys": [
-          "home"
+          "select"
         ]
       },
       {
-        "timeMs": 3895,
+        "timeMs": 6370,
         "keys": []
       },
       {
-        "timeMs": 4580,
-        "keys": [
-          "5"
-        ]
-      },
-      {
-        "timeMs": 4825,
-        "keys": []
-      },
-      {
-        "timeMs": 5600,
-        "keys": [
-          "2"
-        ]
-      },
-      {
-        "timeMs": 5845,
-        "keys": []
-      },
-      {
-        "timeMs": 7340,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 7585,
-        "keys": []
-      },
-      {
-        "timeMs": 8100,
-        "keys": [
-          "right"
-        ]
-      },
-      {
-        "timeMs": 8345,
-        "keys": []
-      },
-      {
-        "timeMs": 8770,
-        "keys": [
-          "down"
-        ]
-      },
-      {
-        "timeMs": 9015,
-        "keys": []
-      },
-      {
-        "timeMs": 9450,
-        "keys": [
-          "enter"
-        ]
-      },
-      {
-        "timeMs": 9695,
-        "keys": []
-      },
-      {
-        "timeMs": 10060,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 10305,
-        "keys": []
-      },
-      {
-        "timeMs": 10370,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 10615,
-        "keys": []
-      },
-      {
-        "timeMs": 10680,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 10925,
-        "keys": []
-      },
-      {
-        "timeMs": 10990,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 11235,
-        "keys": []
-      },
-      {
-        "timeMs": 11310,
-        "keys": [
-          "tab"
-        ]
-      },
-      {
-        "timeMs": 11555,
-        "keys": []
-      },
-      {
-        "timeMs": 11940,
-        "keys": [
-          "enter"
-        ]
-      },
-      {
-        "timeMs": 12185,
-        "keys": []
-      },
-      {
-        "timeMs": 13420,
-        "keys": [
-          "4"
-        ]
-      },
-      {
-        "timeMs": 13665,
-        "keys": []
-      },
-      {
-        "timeMs": 14300,
+        "timeMs": 9300,
         "keys": [
           "trig"
         ]
       },
       {
-        "timeMs": 14545,
+        "timeMs": 9620,
         "keys": []
       },
       {
-        "timeMs": 15780,
+        "timeMs": 10950,
         "keys": [
           "down"
         ]
       },
       {
-        "timeMs": 16025,
+        "timeMs": 11270,
         "keys": []
       },
       {
-        "timeMs": 16650,
+        "timeMs": 12020,
         "keys": [
           "enter"
         ]
       },
       {
-        "timeMs": 16895,
+        "timeMs": 12340,
         "keys": []
       },
       {
-        "timeMs": 18860,
+        "timeMs": 15000,
         "keys": [
           "0"
         ]
       },
       {
-        "timeMs": 19105,
+        "timeMs": 15320,
         "keys": []
       },
       {
-        "timeMs": 19270,
+        "timeMs": 15460,
         "keys": [
           "dot"
         ]
       },
       {
-        "timeMs": 19515,
+        "timeMs": 15780,
         "keys": []
       },
       {
-        "timeMs": 19680,
+        "timeMs": 15950,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 19925,
+        "timeMs": 16270,
         "keys": []
       },
       {
-        "timeMs": 20540,
+        "timeMs": 17250,
         "keys": [
           "enter"
         ]
       },
       {
-        "timeMs": 20785,
+        "timeMs": 17570,
         "keys": []
       }
     ],
@@ -300,90 +159,56 @@
         "global": "CT02Tape",
         "keys": [
           {
-            "timeMs": 3650,
-            "key": "home"
+            "timeMs": 6050,
+            "key": "select"
           },
           {
-            "timeMs": 4580,
-            "key": "5"
-          },
-          {
-            "timeMs": 5600,
-            "key": "2"
-          },
-          {
-            "timeMs": 7340,
-            "key": "tab"
-          },
-          {
-            "timeMs": 8100,
-            "key": "right"
-          },
-          {
-            "timeMs": 8770,
-            "key": "down"
-          },
-          {
-            "timeMs": 9450,
-            "key": "enter"
-          },
-          {
-            "timeMs": 10060,
-            "key": "tab"
-          },
-          {
-            "timeMs": 10370,
-            "key": "tab"
-          },
-          {
-            "timeMs": 10680,
-            "key": "tab"
-          },
-          {
-            "timeMs": 10990,
-            "key": "tab"
-          },
-          {
-            "timeMs": 11310,
-            "key": "tab"
-          },
-          {
-            "timeMs": 11940,
-            "key": "enter"
-          },
-          {
-            "timeMs": 13420,
-            "key": "4"
-          },
-          {
-            "timeMs": 14300,
+            "timeMs": 9300,
             "key": "trig"
           },
           {
-            "timeMs": 15780,
+            "timeMs": 10950,
             "key": "down"
           },
           {
-            "timeMs": 16650,
+            "timeMs": 12020,
             "key": "enter"
           },
           {
-            "timeMs": 18860,
+            "timeMs": 15000,
             "key": "0"
           },
           {
-            "timeMs": 19270,
+            "timeMs": 15460,
             "key": "dot"
           },
           {
-            "timeMs": 19680,
+            "timeMs": 15950,
             "key": "6"
           },
           {
-            "timeMs": 20540,
+            "timeMs": 17250,
             "key": "enter"
           }
         ]
+      }
+    ],
+    "pointerStateChanges": [
+      {
+        "timeMs": 4200,
+        "state": "start-moving-to-status-RAD"
+      },
+      {
+        "timeMs": 5680,
+        "state": "pointer-at-status-RAD"
+      },
+      {
+        "timeMs": 6050,
+        "state": "touchpad-centre-click-and-status-switch-to-DEG"
+      },
+      {
+        "timeMs": 7900,
+        "state": "hide-pointer"
       }
     ]
   },

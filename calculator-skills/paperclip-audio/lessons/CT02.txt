@@ -1,6 +1,5 @@
-Given that the sine of theta is zero point six, find the principal angle in degrees. Check the angle mode first.
-Press Home, then five: Settings and two: Document Settings.
-Tab to Angle, press Right, select Degree, then tab to OK and confirm.
-Return to the current document. Press Trig and choose inverse sine, not sine.
-Enter zero point six and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.
-The display is in degrees. The calculator gives one principal angle; check the range for other solutions.
+Find the principal angle for sine theta equals zero point six, in degrees. Check the top-right rad or deg label.
+Use the touchpad to move the pointer to rad. Click the touchpad centre. Rad changes to deg.
+Press trig. Move down to inverse sine and press Enter. The minus one means inverse, not reciprocal.
+Type zero point six and press Enter. Inverse sine takes a ratio and gives an angle.
+About thirty-six point eight seven degrees. That is one principal angle. If asked for all solutions, check the whole interval.

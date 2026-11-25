@@ -48,6 +48,11 @@
   }catch{return {task:AUTO,linked:false,error:'The linked inputs are invalid. The original Try task is ready.'};}
  }
  const create=(prefill='')=>({view:'calc',mode:'rad',draft:'rad',field:0,dropdown:false,choice:0,choiceTrig:0,sel:null,raw:'',prefill,result:null,error:''});
+ function toggleAngle(s){
+  if((s.view!=='calc'&&s.view!=='palette')||s.mode==='grad')return s;
+  const unit=s.mode==='rad'?'deg':'rad';
+  return {...s,mode:unit,draft:unit,result:null,error:''};
+ }
  const modeOrder=['rad','deg','grad'];
  function begin(s,choice){
   const sel=palette[choice];
@@ -111,10 +116,10 @@
  const selectField=(s,i)=>s.view==='settings'?{...s,field:i}:s;
  const match=(seen,task)=>{
   if(!seen)return 'Calculate an angle first.';
-  if(seen.mode!==task.unit)return 'Check the angle units in Document Settings.';
+  if(seen.mode!==task.unit)return 'Check RAD or DEG at the top of the screen.';
   if(!seen.inverse||seen.fn!==task.fn)return 'Choose the matching inverse function from the trig palette.';
   if(Math.abs(seen.input-parseRatio(task.ratio).value)>1e-10*Math.max(1,Math.abs(seen.input)))return 'Use the ratio in the task.';
   return '';
  };
- host.CT02Model=Object.freeze({units,unitLabels,palette,fields,AUTO,WORKED,parseRatio,inverse,calc,form,displayResult,request,create,press,selectField,begin,save,match});
+ host.CT02Model=Object.freeze({units,unitLabels,palette,fields,AUTO,WORKED,parseRatio,inverse,calc,form,displayResult,request,create,press,selectField,begin,save,toggleAngle,match});
 })(typeof window==='undefined'?globalThis:window);

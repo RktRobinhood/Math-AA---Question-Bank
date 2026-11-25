@@ -13,30 +13,29 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=bank-shell-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js?v=bank-shell-1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<link rel="stylesheet" href="lesson.css?v=angle-player-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="player.css?v=angle-player-1">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js?v=angle-player-1" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="lesson.js?v=angle-player-1" defer></script>
+</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page ct02-page"><main class="qb-calculator-lesson">
 <header class="head">
-<div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav>
+<div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT02</nav>
 <h1>Angle modes and inverse trig</h1></div>
 
 </header>
 <div class="calc-tabs" role="tablist" aria-label="Lesson mode">
 <button type="button" id="watch-tab" role="tab" aria-controls="watch-work" aria-selected="true">Watch</button><button type="button" id="try-tab" role="tab" aria-controls="try-work" aria-selected="false" tabindex="-1">Try</button></div>
-<section id="stage" class="stage" data-mode="watch" aria-label="Handheld lesson" tabindex="0">
-<div id="watch-message"><p id="caption"></p></div>
-<div id="try-header" hidden><p id="task" class="task"></p><div class="try-nav"><button id="resume" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><button id="edit-jump" class="retro-jump" type="button">Edit task</button><button id="new-try" type="button" hidden>Open Try</button></div></div>
-<div class="stage-grid">
+<section id="stage" class="stage ct02-shared" data-mode="watch" aria-label="Handheld lesson" tabindex="0">
+<div id="try-header" hidden><p id="task" class="task"></p><div class="try-nav"><button id="resume" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><button id="edit-jump" class="retro-jump" type="button">Edit task</button></div></div>
+<div class="stage-grid" id="workspace">
 <div id="handheld-host"><div id="lcd" class="lcd" aria-label="Recreated TI-Nspire CX II-T display">
 <div id="lcd-status" class="lcd-status"><span id="lcd-name">1.1 Calculator</span><strong id="lcd-mode">RAD</strong><button id="angle-toggle" type="button" hidden>RAD</button><span class="battery" aria-hidden="true"></span></div>
 <div class="lcd-body" id="lcd-body"></div>
-<button type="button" id="stage-play" class="stage-play" aria-label="Play caption rehearsal" title="Play caption rehearsal"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
+<svg id="lcd-cursor" aria-hidden="true" viewBox="0 0 18 24" hidden><path d="M2 1v18l4.8-4.6 3 7.2 2.8-1.2-3-6.9 7.15-.05Z"/></svg>
 </div></div>
 <div class="calc-side">
 <div id="watch-work" role="tabpanel" aria-labelledby="watch-tab">
-<p class="eyebrow">Worked example · CT02</p>
+<p class="eyebrow">Worked example</p>
 <h2>Find an angle in degrees</h2><p class="mathline">sin θ = 0.6</p>
-<ol id="chapters"></ol>
+<p id="beat"></p>
 </div>
 <div id="try-work" role="tabpanel" aria-labelledby="try-tab" hidden>
 <p id="link-error" class="muted" hidden></p>
@@ -50,13 +49,23 @@
 <button type="submit">Load task</button>
 </form></details>
 </div>
-</div></div>
-<div id="watch-player" class="player" aria-label="Playback controls">
-<div class="transport">
-<button type="button" class="primary" id="play">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from the start">↺</button><button type="button" id="focus" aria-label="Focused view" aria-pressed="false">⛶</button><button type="button" id="takeover">Take over</button><button type="button" class="primary" id="open-try" hidden>Open Try</button>
 </div>
-<div class="timeline"><span id="clock" aria-hidden="true"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div>
+<div id="key-strip" hidden><span>Last key</span> <kbd id="active-key">—</kbd></div>
+<span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
+</div>
+<div id="caption-band"><p id="caption" class="caption"></p></div>
+<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
+<div id="view-pick" role="group" aria-label="Calculator framing">
+ <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
+ <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
+</div>
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="31.8" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:31</span>
+<button id="cc" type="button" aria-label="Hide captions" title="Captions" aria-pressed="true">CC</button>
+<label class="ct02-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+<button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
 </div>
 </section>
-<details class="notes"><summary>Calculator notes</summary><p>In Try, click or tap RAD or DEG at the top of the calculator screen to switch units. Watch also demonstrates the Document Settings path. Choose the unit requested in the question. Inverse trig takes a ratio and returns one principal angle. The superscript −1 means inverse, not reciprocal. If the question asks for all solutions, check its full interval.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_hh_gs/gsc_the_hh_screen.HTML">TI handbook: angle-mode indicator</a> · <a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_confighh/hc_customizing_document_settings.HTML">TI handbook: Document Settings</a> · <a href="https://education.ti.com/en/bulletinboard/2018/september/transitioning_to_the_ti-nspire">TI guide: trig palette</a></p></details>
+<details class="notes"><summary>Calculator notes</summary><p>On the handheld, use the touchpad pointer to click RAD or DEG on the Calculator page. In Try, click or tap the same spot. To choose Gradian or change defaults, use Home → 5: Settings → 2: Document Settings → Angle. Choose the unit requested in the question. Inverse trig takes a ratio and returns one principal angle. The superscript −1 means inverse, not reciprocal. If the question asks for all solutions, check its full interval.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_hh_gs/gsc_the_hh_screen.HTML">TI handbook: angle-mode indicator</a> · <a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_confighh/hc_customizing_document_settings.HTML">TI handbook: Document Settings</a> · <a href="https://education.ti.com/en/bulletinboard/2018/september/transitioning_to_the_ti-nspire">TI guide: trig palette</a></p></details>
+<details class="notes"><summary>Caption transcript</summary><p id="transcript"></p><p>This lesson has captions and no recorded narration.</p></details>
 </main></body></html>

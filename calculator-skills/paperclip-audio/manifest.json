@@ -32,8 +32,8 @@
       "transcript": "lessons/CT02.txt",
       "cueMap": "lessons/CT02.cues.json",
       "status": "draft-from-original-watch",
-      "transcriptSha256": "9ebffb32fe3c369819751883d439f9d1529b59c8c97e2c30ffcdc16c58f0f068",
-      "cueMapSha256": "34c744b786f9cd3d0a1983471802d907463e1695bc9fc7ed347a09cb1589c662",
+      "transcriptSha256": "b02dd83ecdfa33ac55409abbc4e8f83f8510dc96ff648c285d5ed72067db8f8b",
+      "cueMapSha256": "0c06d77657d590152a4e3cdc630c3509d084e395aa170bde41049dd2f956808b",
       "integrationStatus": "requires-player-hook",
       "existingAudio": null
     },

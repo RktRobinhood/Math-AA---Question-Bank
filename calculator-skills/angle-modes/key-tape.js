@@ -1,22 +1,27 @@
-/* Caption rehearsal: times are authored beats, not speech timings. State comes from the same physical events as Try. */
+/* Caption-led replay. The status indicator on a CX II toggles RAD/DEG on a touchpad click.
+   Times are illustration cues, not voice timings. */
 (function(host){
  'use strict';
  const duration=31.8;
  const chapters=[
-  [0,'Choose from the requested units','Given sin θ = 0.6, find the principal angle in degrees. Check the angle mode first.'],
-  [3.4,'Open Document Settings','Press Home, then 5: Settings and 2: Document Settings.'],
-  [7.1,'Apply Degree mode','Tab to Angle, press Right, select Degree, then tab to OK and confirm.'],
-  [13.1,'Select inverse sine','Return to the current document. Press trig and choose sin⁻¹, not sin.'],
-  [18.5,'Enter the ratio','Enter 0.6 and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.'],
-  [25,'Read the principal angle','The display is in degrees. The calculator gives one principal angle; check the range for other solutions.'],
+  [0,'Choose the units','Find the principal angle for sin θ = 0.6 in degrees. Check the top-right RAD or DEG label.'],
+  [3.4,'Click RAD','Use the touchpad to move the pointer to RAD. Click the touchpad centre. RAD changes to DEG.'],
+  [8.6,'Choose inverse sine','Press trig. Move down to sin⁻¹ and press Enter. The superscript −1 means inverse, not reciprocal.'],
+  [14.3,'Enter the ratio','Type 0.6 and press Enter. Inverse sine takes a ratio and gives an angle.'],
+  [21.7,'Read the principal angle','About 36.87°. That’s one principal angle. If asked for all solutions, check the whole interval.'],
  ];
- const keys=[[3.65,'home'],[4.58,'5'],[5.6,'2'],[7.34,'tab'],[8.10,'right'],[8.77,'down'],[9.45,'enter'],
- [10.06,'tab'],[10.37,'tab'],[10.68,'tab'],[10.99,'tab'],[11.31,'tab'],[11.94,'enter'],
- [13.42,'4'],[14.3,'trig'],[15.78,'down'],[16.65,'enter'],[18.86,'0'],[19.27,'dot'],[19.68,'6'],[20.54,'enter']];
+ const keys=[[6.05,'angle'],[9.30,'trig'],[10.95,'down'],[12.02,'enter'],[15.0,'0'],[15.46,'dot'],[15.95,'6'],[17.25,'enter']];
  function snapshot(time){
-  let state=host.CT02Model.create(),key='';
-  for(const [at,code] of keys){if(at>time)break;state=host.CT02Model.press(state,code);if(time<at+.245)key=code;else key='';}
-  return{state,key,chapter:chapters.findLastIndex(c=>c[0]<=time)};
+  let state=host.CT02Model.create(),key='',last='';
+  for(const [at,code] of keys){if(at>time)break;
+   state=code==='angle'?host.CT02Model.toggleAngle(state):host.CT02Model.press(state,code);
+   key=time<at+.32?code:'';last=code;
+  }
+  return{state,key,last,chapter:chapters.findLastIndex(c=>c[0]<=time)};
  }
- host.CT02Tape=Object.freeze({duration,chapters,keys,snapshot});
+ function pointer(time){
+  if(time<4.2||time>=7.9)return null;
+  return {progress:Math.min(1,(time-4.2)/1.52),at:time>=5.68,clicked:time>=6.05};
+ }
+ host.CT02Tape=Object.freeze({duration,chapters,keys,snapshot,pointer});
 })(typeof window==='undefined'?globalThis:window);
