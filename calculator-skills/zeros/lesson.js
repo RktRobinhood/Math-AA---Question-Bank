@@ -262,8 +262,5 @@
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?"Correct. That x-coordinate gives a zero output.":"Not yet. Check that you chose the requested crossing and reported its x-coordinate.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- const updateTheme=()=>{document.documentElement.dataset.theme=theme.value;};updateTheme();
- theme.addEventListener("change",()=>{updateTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  modeTo(params.get("mode")==="try"?"try":"watch");
 })();

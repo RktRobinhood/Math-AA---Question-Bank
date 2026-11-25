@@ -24,7 +24,7 @@ function cell(s,c,r,interactive){
  const col=s.cols[c],active=s.c===c&&s.row===r,edited=active&&s.buf!==null;
  const value=edited?s.buf:r===-2?col.name:r===-1?"":col.v[r];
  const h=node(interactive?"button":"span",r===-2?"entrycell":"cell-face");
- h.classList.toggle("active",active);if(r===-2)h.append(node("b","","AB"[c]));
+ h.classList.toggle("calc-active",active);if(r===-2)h.append(node("b","","AB"[c]));
  h.append(node("span",value===null?"blank":"",value??"_"));
  if(interactive){
   h.type="button";h.dataset.cell=M.label(c,r).replace(" ","-");h.setAttribute("aria-label",M.label(c,r)+": "+(value===""||value===null?"blank":value));h.setAttribute("aria-pressed",String(active));
@@ -37,7 +37,7 @@ function lcd(s,interactive=false){
  if(s.page==="home"||s.page==="new"){
   const home=s.page==="home", options=home?["1 New Document","2 Browse","3 Recent","4 Current","5 Settings"]:["1: Add Calculator","2: Add Graphs","3: Add Geometry","4: Add Lists & Spreadsheet","5: Add Data & Statistics","6: Add Notes"];
   title.textContent=home?"Home":"New Document";
-  const list=node("ul","home-keys");options.forEach((x,i)=>{const row=node("li",i===(home?0:3)?"active":"",x);list.append(row);});d.append(list);
+  const list=node("ul","home-keys");options.forEach((x,i)=>{const row=node("li",i===(home?0:3)?"calc-active":"",x);list.append(row);});d.append(list);
   rich.textContent=home?"Home. Choose 1: New Document.":"New Document. Choose 4: Add Lists & Spreadsheet.";return;
  }
  title.textContent="1.1  Lists & Spreadsheet";
@@ -97,9 +97,10 @@ $("typed").addEventListener("submit",e=>{
  if(!state.err){field.value="";}else{field.select();}
  paintTry();
 });
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
 function size(){
  if(mode!=="watch")return;
- const avail=(window.visualViewport?.height||innerHeight)-(focusOn?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
 }
@@ -151,6 +152,7 @@ $("take").addEventListener("click",()=>{switchTo("try",true);stage.focus({preven
 $("return").addEventListener("click",()=>{switchTo("watch");play.focus({preventScroll:true});});
 $("reset").addEventListener("click",()=>{reset();paintTry();stage.focus({preventScroll:true});});
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus();return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"&&!el.closest("button")&&!e.repeat){
@@ -160,8 +162,5 @@ document.addEventListener("keydown",e=>{
  const keys={Home:"home",Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down","-":"neg",".":"dot","+":"plus"};
  const k=keys[e.key]||(/^[a-z0-9]$/i.test(e.key)?e.key.toLowerCase():"");if(k){e.preventDefault();press(k);}
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-const apply=()=>{document.documentElement.dataset.theme=theme.value;};apply();
-theme.addEventListener("change",()=>{apply();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
 switchTo(params.get("mode")==="try"?"try":"watch");
 })();

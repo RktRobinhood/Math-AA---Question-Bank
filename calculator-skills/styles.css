@@ -1,8 +1,8 @@
-:root{color-scheme:light;--base:#f3f3ef;--bg:#fff;--ink:#17201d;--soft:#4e5c57;--border:#c9cfca;--accent:#115c49;--accent-on:#fff;--tab:#dcebe3;--stage:#252d2b;--stage-ink:#f3f6ee;--stage-soft:#c1cfca;--stage-line:#56645e;--lcd:#f5f5f3;--focus:#aa430a}
-:root[data-theme="dark"]{color-scheme:dark;--base:#1d2220;--bg:#252d29;--ink:#edf4ec;--soft:#bbc9c1;--border:#536058;--accent:#a5e2c4;--accent-on:#17251e;--tab:#394e43;--stage:#131a17;--stage-ink:#f3f6ee;--stage-soft:#c7d2ce;--stage-line:#4f5b55;--focus:#ffbb84}
-*,*::before,*::after{box-sizing:border-box}body{margin:0;background:var(--base);color:var(--ink);font:16px/1.5 system-ui,-apple-system,sans-serif}
+:where(body.calculator-bank-lesson > main){color-scheme:light;--base:#f3f3ef;--bg:#fff;--ink:#17201d;--soft:#4e5c57;--border:#c9cfca;--accent:#115c49;--accent-on:#fff;--tab:#dcebe3;--stage:#252d2b;--stage-ink:#f3f6ee;--stage-soft:#c1cfca;--stage-line:#56645e;--lcd:#f5f5f3;--focus:#aa430a}
+html[data-theme=dark] :where(body.calculator-bank-lesson > main){color-scheme:dark;--base:#1d2220;--bg:#252d29;--ink:#edf4ec;--soft:#bbc9c1;--border:#536058;--accent:#a5e2c4;--accent-on:#17251e;--tab:#394e43;--stage:#131a17;--stage-ink:#f3f6ee;--stage-soft:#c7d2ce;--stage-line:#4f5b55;--focus:#ffbb84}
+*,*::before,*::after{box-sizing:border-box}main{color:var(--ink);font:16px/1.5 system-ui,-apple-system,sans-serif}
 [hidden]{display:none!important}button,input,select{font:inherit}button,select,summary{cursor:pointer}a{color:var(--accent)}p,h1{margin:0}
-:focus-visible{outline:3px solid var(--focus);outline-offset:3px}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:where(body.calculator-bank-lesson > main) :focus-visible{outline:3px solid var(--focus);outline-offset:3px}:where(body.calculator-bank-lesson > main) .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .wrap{width:min(calc(100% - 2rem),59rem);margin-inline:auto}.mast{border-bottom:1px solid var(--border)}.mast-inner{display:flex;align-items:center;gap:.8rem;min-height:64px}
 .wordmark{display:inline-flex;align-items:center;gap:.6rem;font-weight:750;color:var(--accent)}.model{color:var(--soft);font-size:.83rem}.theme{margin-left:auto}.theme select{border:1px solid var(--border);color:var(--ink);background:var(--bg);padding:0 .5rem;border-radius:6px;min-height:44px;font-size:.82rem}
 .title{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;margin-block:clamp(1.05rem,3vw,2.25rem) 1rem}.title h1{font:400 clamp(2rem,5vw,3.4rem)/1.03 Georgia,serif;letter-spacing:-.043em}.title p{color:var(--soft);margin-top:.35rem;font-size:.96rem}.title .context{font-weight:700;font-size:.78rem;color:var(--accent);overflow-wrap:anywhere}
@@ -16,5 +16,7 @@
 @media(max-width:675px){.mast-inner{min-height:54px}.model{display:none}.scene{grid-template-columns:1fr;gap:.75rem;padding:.7rem}.device-label{margin-bottom:.25rem}.lcd{border-width:4px}.title{align-items:flex-start;gap:.5rem}.title p{font-size:.86rem}.modes{margin-top:.1rem}.mode{padding:.25rem .53rem;font-size:.86rem}.beat{grid-template-columns:auto minmax(0,1fr);gap:.4rem .6rem;align-items:start}.beat-no{padding-top:.2rem;font-size:.96rem}.beat-title{font-size:1.03rem}.beat-tip{font-size:.84rem;min-height:0;margin-top:.16rem}.keypress{margin:0;min-height:0;border-top:0;padding-top:0;grid-column:2}.key{font-size:.74rem;padding:.27rem .35rem}.transport{gap:.35rem;padding:.16rem .35rem}.time{font-size:.71rem}.caption{padding:.5rem .7rem}.wordmark{font-size:.95rem}.wordmark svg{width:26px;height:26px}.resource-bar{padding-top:.4rem}}
 @media(max-width:380px){.wrap{width:calc(100% - 1rem)}.title h1{font-size:1.75rem}.mode{padding:.18rem .41rem}.theme select{min-height:42px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
-
 .catalog{font-size:.83rem;font-weight:650;white-space:nowrap}@media(max-width:380px){.mast-inner{gap:.5rem}.catalog{font-size:.76rem}}
+
+/* Shared navigation is behind the lesson when its existing Focus player opens. */
+body.calculator-bank-lesson:has(.cx-focused) > :is(.top,.tabbar){visibility:hidden}

@@ -114,15 +114,12 @@
  // caption/readout envelope also prevents the end-frame from pushing controls below it.
  function fitWatch(){
   if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight;
-  const top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+  const nav=focused?0:document.querySelector(".tabbar").getBoundingClientRect().height;
+  const h=(window.visualViewport?.height||innerHeight)-nav;
+  const top=focused?0:Math.max(0,stage.getBoundingClientRect().top+window.scrollY);
   const occupied=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
   const w=Math.max(82,Math.min(focused?338:304,Math.floor((h-top-occupied-24)*558/1168)));
   stage.style.setProperty("--watch-fit-width",w+"px");
- }
- function fitAtEntry(){
-  fitWatch();
-  if(mode==="watch"&&!focused&&!focusConsidered&&shell.body.getBoundingClientRect().width<156)focus(true);
  }
  const fitObserver=new ResizeObserver(fitWatch);
  for(const item of [$("watch-message"),$("watch-player"),document.querySelector(".header")])fitObserver.observe(item);
@@ -249,9 +246,6 @@
   const k=keys[e.key]||(/^[0-9xXaAuUtToO]$/.test(e.key)?e.key.toLowerCase():"");
   if(k){e.preventDefault();press(k);}
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- function updateTheme(){document.documentElement.dataset.theme=theme.value;}
- updateTheme();theme.addEventListener("change",()=>{updateTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  modeTo(params.get("mode")==="try"?"try":"watch");
- fitAtEntry();
+ fitWatch();
 })();

@@ -287,8 +287,18 @@
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?(atThree.every(Boolean)?"Correct. Both functions have that y-value at your x.":"Correct. Round to three significant figures in your written answer if requested."):hits[0]?"The x-coordinate is right. Check the common y-value.":"Check that your bounds isolated the requested crossing.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- const updateTheme=()=>{document.documentElement.dataset.theme=theme.value;};updateTheme();
- theme.addEventListener("change",()=>{updateTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  modeTo(params.get("mode")==="try"?"try":"watch");
+
+// Reserve the bank's fixed bottom tabs in in-page Watch. The existing Focus view owns the viewport.
+function fitBankWatch(){
+ if(!matchMedia("(max-width:700px)").matches||stage.dataset.mode!=="watch"||focused)return;
+ const nav=document.querySelector(".tabbar").getBoundingClientRect().height;
+ const box=stage.getBoundingClientRect(),shellHeight=shell.body.getBoundingClientRect().height;
+ const room=innerHeight-nav-box.top-window.scrollY-(box.height-shellHeight)-8;
+ stage.style.setProperty("--bank-watch-fit",Math.floor(Math.max(145,Math.min(275,room*558/1168)))+"px");
+}
+const bankWatchSizing=new ResizeObserver(fitBankWatch);
+bankWatchSizing.observe(stage);
+window.addEventListener("resize",fitBankWatch);
+fitBankWatch();
 })();

@@ -11,7 +11,7 @@ const tt=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0"),pretty
 const elt=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n};
 function label(text,action,active,watch,cls){
  const b=elt("button",text,cls);b.type="button";
- if(active)b.classList.add("active");
+ if(active)b.classList.add("calc-active");
  if(watch)b.disabled=true;else if(action)b.addEventListener("click",action);
  return b;
 }
@@ -19,7 +19,7 @@ function matrix(rows,{snapshot=null,interactive=false,fixed=false,toDisplay=v=>p
  const m=elt("span",undefined,"matrix");m.style.setProperty("--m-columns",rows[0].length);m.dataset.matrix=JSON.stringify(rows);
  rows.forEach((row,i)=>row.forEach((v,j)=>{
   const idx=i*row.length+j,active=snapshot?.cell===idx,symbol=v===""?" ":toDisplay(v);
-  const a=interactive?label(symbol,()=>{s={...s,cell:idx};render(s,false);stage.focus({preventScroll:true});},active,false,"matrix-cell"):elt("span",symbol,"matrix-cell"+(active?" active":""));
+  const a=interactive?label(symbol,()=>{s={...s,cell:idx};render(s,false);stage.focus({preventScroll:true});},active,false,"matrix-cell"):elt("span",symbol,"matrix-cell"+(active?" calc-active":""));
   if(snapshot){ a.classList.toggle("placeholder",v==="");a.setAttribute("aria-label","Row "+(i+1)+", column "+(j+1)+(v===""?", empty":": "+v)); a.dataset.cell=idx; }
   if(stack&&typeof v==="string"&&v.includes("/")){
    const [n,d]=v.split("/");a.classList.add("fraction");a.setAttribute("aria-label",pretty(n)+" over "+d);
@@ -158,18 +158,21 @@ function labelPlay(){
 function go(at){t=bounded(at);origin=performance.now()-t*1000;draw();labelPlay();}
 function pause(){if(playing)t=bounded((performance.now()-origin)/1000);playing=false;cancelAnimationFrame(frame);draw();labelPlay();}
 function loop(now){if(!playing||mode!=="watch")return;t=bounded((now-origin)/1000);if(t>=duration){pause();return;}draw();frame=requestAnimationFrame(loop);}
+function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
 function fitFocused(){
  if(!focus)return;
- const avail=innerHeight-$("watch-message").offsetHeight-$("watch-player").offsetHeight-25;
- stage.style.setProperty("--fit-handset",Math.max(162,Math.min(322,Math.floor(avail*.4777)))+"px");
+ const avail=stage.getBoundingClientRect().height-$("watch-message").offsetHeight-$("watch-player").offsetHeight-25;
+ stage.style.setProperty("--fit-handset",Math.max(120,Math.min(322,Math.floor(avail*.4777)))+"px");
 }
 window.addEventListener("resize",fitFocused);
+const nativeFitObserver=new ResizeObserver(fitFocused);
+[$("watch-message"),$("watch-player")].forEach(n=>nativeFitObserver.observe(n));
 function setFocus(next){
  focus=next;stage.classList.toggle("focused",focus);document.body.classList.toggle("has-focus",focus);
- document.querySelectorAll("main > header, main > .tabs, main > .reference").forEach(n=>n.inert=focus);
+ document.querySelectorAll("main > header, main > .calc-tabs, main > .reference").forEach(n=>n.inert=focus);
  $("focus").setAttribute("aria-pressed",String(focus));$("focus").setAttribute("aria-label",focus?"Exit Focus":"Focus");$("focus").textContent=focus?"Exit":"⛶";if(focus){fitFocused();stage.scrollTop=0;}
 }
-function ensureFit(){if(mode==="watch"&&!focus&&$("watch-player").getBoundingClientRect().bottom>innerHeight+1)setFocus(true);}
+function ensureFit(){if(mode==="watch"&&!focus&&$("watch-player").getBoundingClientRect().bottom>nativeBottom()+1)setFocus(true);}
 function toggle(){
  if(mode!=="watch")return;
  if(playing){pause();return;}
@@ -240,6 +243,7 @@ $("edit-form").onsubmit=e=>{
  }catch(error){msg.textContent=error.message;msg.hidden=false;}
 };
 document.addEventListener("keydown",e=>{
+ if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(e.key==="Escape"&&focus){e.preventDefault();setFocus(false);$("focus").focus({preventScroll:true});return;}
  if(e.altKey||e.ctrlKey||e.metaKey||e.isComposing||e.target.closest("input,select,a,summary,textarea,[contenteditable]"))return;
  const b=e.target.closest("button");
@@ -260,10 +264,6 @@ document.addEventListener("keydown",e=>{
  }
  if(key){e.preventDefault();if(e.target===document.body)stage.focus({preventScroll:true});physical(key);}
 });
-const theme=$("theme");
-try{const pref=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(pref))theme.value=pref;}catch{}
-document.documentElement.dataset.theme=theme.value;
-theme.onchange=()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}};
 stage.dataset.mode="watch";draw();labelPlay();if(params.get("mode")==="try"||request.linked)change("try",false,true);
 requestAnimationFrame(ensureFit);
 })();

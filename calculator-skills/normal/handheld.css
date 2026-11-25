@@ -142,7 +142,7 @@ main{padding-top:clamp(14px,2.1vw,28px)}
  .viewer.cx-focused .player-top button:not(.primary){padding-inline:3px}
 }
 @media(max-width:700px){
- #watch-host{--handheld-width:clamp(167px,var(--ct39-fit-page,210px),272px)}
+ #watch-host{--handheld-width:clamp(145px,var(--ct39-fit-page,210px),272px)}
 }
 /* Transport belongs below the LCD/keypad; short landscape retains a side rail. */
 .viewer .player.transport{border-top:1px solid var(--line);border-bottom:0}

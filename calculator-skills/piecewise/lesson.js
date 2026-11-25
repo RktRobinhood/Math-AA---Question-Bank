@@ -1,6 +1,7 @@
 "use strict";
 (function(){
- const $=id=>document.getElementById(id),M=CT15Math,S=CT15Screen,T=CT15Tape,E=CT15Editor;
+ function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
+const $=id=>document.getElementById(id),M=CT15Math,S=CT15Screen,T=CT15Tape,E=CT15Editor;
  const stage=$("stage"),play=$("play"),seek=$("seek"),overlay=$("stage-play"),lcd=$("lcd"),canvas=$("drawing"),hot=$("hotspots"),steps=$("steps");
  const screen=S.screen(canvas),inputs=["f","c1","g","c2"].map($),exact=$("point-input"),feedback=$("feedback"),mark=$("mark-endpoints");
  const defaults=["x+1","-3<x<=0","x^2+2","0<x<=2"],params=new URLSearchParams(location.search);
@@ -69,7 +70,7 @@
  }
  function fit(){
   if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight,top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+  const h=lessonEnd(),top=Math.max(0,stage.getBoundingClientRect().top);
   const reserved=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
   const cap=innerWidth<=700?(focused?320:270):(focused?360:304);
   stage.style.setProperty("--watch-fit",Math.max(106,Math.min(cap,Math.floor((h-top-reserved)*.4777)))+"px");
@@ -84,7 +85,7 @@
   fit();
  }
  function ensureVisible(){
-  const height=window.visualViewport?.height||innerHeight;
+  const height=lessonEnd();
   if(!focused&&($("watch-player").getBoundingClientRect().bottom>height+1||shell.body.getBoundingClientRect().width<155)){focusChecked=true;focus(true);}
  }
  function toggle(){
@@ -120,7 +121,7 @@
  }
  function message(msg="",error=false){
   $("keypad-result").textContent=msg;$("keypad-result").hidden=!msg;
-  $("keypad-result").className="feedback "+(error?"is-wrong":"is-right");
+  $("keypad-result").className="feedback"+(error?"is-wrong":"is-right");
  }
  function freshTry(){
   if(mode!=="try")return;
@@ -201,7 +202,7 @@
  });
  $("take-over").addEventListener("click",()=>{change("try",true);stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
- document.addEventListener("keydown",e=>{
+ document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
   if(e.target.closest("input,textarea,select,a,summary,[contenteditable]")||e.altKey)return;
   if(mode==="try"&&(e.ctrlKey||e.metaKey)&&e.key==="="){e.preventDefault();press("relation");return;}
@@ -226,12 +227,9 @@
   e.preventDefault();if(mode!=="try"||!inExercise())return;edited=true;
   const a=$("answer-y").value.trim().replace("−","-"),num=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(a)?Number(a):NaN;
   const accept=target?Number.isFinite(num)&&[target.y,Number(target.y.toPrecision(7)),Number(target.y.toPrecision(3))].some(x=>Math.abs(x-num)<=Math.abs(x)*1e-10):/^(undefined|undef|no value)$/i.test(a);
-  feedback.className="feedback "+(accept?"is-right":"is-wrong");
+  feedback.className="feedback"+(accept?"is-right":"is-wrong");
   feedback.textContent=accept?"Correct. The condition tells you which expression, if any, applies.":"Check which condition includes this x before choosing an expression.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- document.documentElement.dataset.theme=theme.value;
- theme.addEventListener("change",()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  seek.max=T.duration;sync(task.slots);
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
 })();

@@ -75,13 +75,6 @@ html[data-theme=dark] body.neutral-frame{color:#e7f2eb}
 /* Larger keys on roomy screens; the original short-viewport fit remains in force. */
 body.neutral-frame{--neutral-handheld-width:min(258px,max(126px,calc((100dvh - 47px) * .4777)))}
 
-body.neutral-standalone{padding:0 .75rem .5rem;background:#f2f4ef;--neutral-handheld-width:min(335px,max(151px,calc((100dvh - 84px) * .4777)))}
-html[data-theme=dark] body.neutral-standalone{background:#171e1b}
-@media(prefers-color-scheme:dark){html[data-theme=system] body.neutral-standalone{background:#171e1b}}
-.neutral-standalone-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.25rem 1rem;max-width:42rem;margin:0 auto .3rem;min-height:38px;padding:.2rem 0;border-bottom:1px solid color-mix(in srgb,currentColor 26%,transparent)}
-.neutral-standalone-bar a{color:inherit;font-weight:700;min-height:32px;display:inline-flex;align-items:center}
-.neutral-standalone-bar p{margin:0;font-size:.8rem}
-
 /* Only the embedded Practice handset; standalone Calculator Skills is unchanged. */
 body.neutral-embedded{
   padding:7px 12px;

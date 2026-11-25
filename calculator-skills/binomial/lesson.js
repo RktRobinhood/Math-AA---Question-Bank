@@ -298,10 +298,6 @@
   else if(e.key==="j"){e.preventDefault();go(time-10)}else if(e.key==="l"){e.preventDefault();go(time+10)}
  });
 
- const theme=$("theme"),themes=["system","light","dark"];
- try{const v=localStorage.getItem("ti-lab-theme");if(themes.includes(v))theme.value=v}catch{}
- document.documentElement.dataset.theme=theme.value;
- theme.addEventListener("change",()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value)}catch{}});
 
  function typedPrefill(){
   const raw={n:params.get("n")??params.get("trials"),p:params.get("p")??params.get("chance"),event:params.get("event"),k:params.get("k")??params.get("lower"),upper:params.get("upper")};
@@ -365,5 +361,18 @@
   feedback.textContent=valid?(linked?"Correct. You used the counts the event includes.":"Correct. Fewer than three includes 0, 1 and 2."):Math.abs(v-correct)<=Math.max(Number.MIN_VALUE,Math.abs(correct)*.00055)?"The probability is right. Now round it to three significant figures.":linked?"Not yet. Check the first and last included counts.":"Not yet. Check that your upper bound excludes a count of 3.";
  });
  onMode(params.get("mode")==="try"?"try":"watch");
+
+// Reserve the bank's fixed bottom tabs in in-page Watch. The existing Focus view owns the viewport.
+function fitBankWatch(){
+ if(!matchMedia("(max-width:700px)").matches||stage.dataset.mode!=="watch"||focusView)return;
+ const nav=document.querySelector(".tabbar").getBoundingClientRect().height;
+ const box=stage.getBoundingClientRect(),shellHeight=shell.body.getBoundingClientRect().height;
+ const room=innerHeight-nav-box.top-window.scrollY-(box.height-shellHeight)-8;
+ stage.style.setProperty("--bank-watch-fit",Math.floor(Math.max(145,Math.min(275,room*558/1168)))+"px");
+}
+const bankWatchSizing=new ResizeObserver(fitBankWatch);
+bankWatchSizing.observe(stage);
+window.addEventListener("resize",fitBankWatch);
+fitBankWatch();
 })();
 

@@ -1,13 +1,23 @@
 <!doctype html>
-<html lang="en" data-theme="system"><head>
+<html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Frequency histograms · Calculator Coach</title>
-<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
-<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><script defer src="lesson.js"></script>
-</head><body><main>
-<header><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / AI SL &amp; HL</p><h1>Frequency histograms</h1><p class="subtitle">Set equal bins. Read the edges. Count below a cutoff.</p></div>
-<label><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
-<nav class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></nav>
+<title>Frequency histograms · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<script src="../../assets/js/courses.js" defer></script>
+<script src="../../assets/js/course.js" defer></script>
+<script src="../../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/basket.js" defer></script>
+<script src="../../assets/js/generate.js" defer></script>
+
+<link rel="stylesheet" href="lesson.css?v=native-bank-1"><link rel="stylesheet" href="../handheld/shell.css">
+<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><script defer src="lesson.js?v=native-bank-1"></script>
+</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<header><div><p class="trail"><a href="../skills.html">Calculator Skills</a> / AI SL &amp; HL</p><h1>Frequency histograms</h1><p class="subtitle">Set equal bins. Read the edges. Count below a cutoff.</p></div>
+</header>
+<nav class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></nav>
 <section id="stage" class="stage" data-mode="watch" tabindex="0" aria-label="Interactive TI-Nspire CX II-T calculator">
  <div id="watch-message"><p id="caption" class="caption"></p><p id="takeaway" hidden></p></div>
  <div class="stage-grid">
@@ -16,7 +26,7 @@
    <div id="try-player"><button id="return-watch" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><p id="lane" role="status"></p></div>
   </div>
   <div id="host"><div id="lcd" class="screen"><div class="status"><span>1.2</span><span>Data &amp; Statistics · RAD</span><span aria-hidden="true">▰</span></div><div id="screen"></div><p id="screen-text" class="sr" aria-live="polite"></p><button id="stage-play" aria-label="Play captioned walkthrough" title="Play captioned walkthrough" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4v16l13-8z"/></svg></button></div></div>
-  <div class="side">
+  <div class="calc-side">
    <aside id="watch-side"><h2>From list to class counts</h2><p>Already entered in <code>reading</code>:</p><p id="worked-list" class="list-strip"></p><ol id="steps"></ol></aside>
    <aside id="try-side" hidden>
     <p id="instruction">Select the horizontal variable, then open Menu.</p><p id="error" class="feedback" role="status"></p>

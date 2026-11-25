@@ -12,8 +12,8 @@
   ['ctrl','ctrl','',16.5,'ctrl'],['shift','⇧ shift','CAPS',35.55,''],['var','var','sto→',64.25,''],['del','del','clear',83.3,'']
  ];
  const rows=[
-  [['eq','=','≠'],['trig','trig','∠'],['7','7'],['8','8'],['9','9'],['templates','▤',':='],['catalog','▣','']],
-  [['power','^','√'],['square','x²',''],['4','4'],['5','5'],['6','6'],['mul','×',''],['div','÷','']],
+  [['eq','=','≠'],['trig','trig',''],['7','7'],['8','8'],['9','9'],['templates','▤',':='],['catalog','▣','']],
+  [['power','^',''],['square','x²','√'],['4','4'],['5','5'],['6','6'],['mul','×',''],['div','÷','fraction']],
   [['exp','eˣ','ln'],['tenpow','10ˣ','log'],['1','1'],['2','2'],['3','3'],['plus','+',''],['minus','−','']],
   [['lparen','(','['],['rparen',')',']'],['0','0',''],['dot','.','capture'],['neg','(−)','ans'],['enter','enter','≈']]
  ];
@@ -29,7 +29,7 @@
    up:'Up',right:'Right',down:'Down',left:'Left',select:'Centre click',
    ctrl:'Control',shift:'Shift',var:'Variable',del:'Delete',eq:'Equals',trig:'Trigonometry',
    power:'Power',square:'Square',exp:'e to a power',tenpow:'Ten to a power',lparen:'Left parenthesis',
-   rparen:'Right parenthesis',templates:'Math templates',catalog:'Catalog',mul:'Multiply',div:'Divide',
+   rparen:'Right parenthesis',templates:'Math templates',catalog:'Catalog',mul:'Multiply',div:'Divide · Control: fraction template',
    plus:'Plus',minus:'Subtract',enter:'Enter',neg:'Negative sign',dot:'Decimal point',ee:'Scientific notation',
    pi:'Pi',comma:'Comma',symbols:'Symbols',flag:'Flag',return:'Return',space:'Space'
  };
@@ -94,7 +94,7 @@
          if(typeof onKey==='function')onKey(id,e);
       });
       holder.append(b);keyMap.set(id,b);
-      if(secondary){const el=create('span','hh-secondary');el.textContent=secondary;el.setAttribute('aria-hidden','true');holder.append(el);}
+      if(secondary){const el=create('span','hh-secondary');if(secondary==='fraction'){el.classList.add('hh-fraction-mark');el.append(create('i'),create('i'));}else el.textContent=secondary;el.setAttribute('aria-hidden','true');holder.append(el);}
       panel.append(holder);
    }
    nav.forEach(([id,t,s,x,y])=>key(id,t,s,x,y,11.7,3.28,'nav'));

@@ -1,5 +1,7 @@
 (function(){
 "use strict";
+function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
+
 const M=FreqHistogram,T=HistTape,$=id=>document.getElementById(id), q=new URLSearchParams(location.search);
 const stage=$("stage"),seek=$("seek"),lcd=$("lcd"),screen=$("screen"),play=$("play");
 const tabs=[$("watch-tab"),$("try-tab")], controls=["data","width","alignment","bin","cutoff"], base=M.readCase(T.practice), work=M.readCase(T.demo);
@@ -141,7 +143,7 @@ screen.addEventListener("click",e=>{
  }else return;
  stage.focus({preventScroll:true});
 });
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(mode!=="try"||e.altKey||e.ctrlKey||e.metaKey||e.repeat||![document.body,stage].includes(e.target))return;
  const k=e.key==="Tab"?e.shiftKey?"backtab":"tab":e.key.toLowerCase()==="m"?"menu":HandheldShell.normalizeKey(e.key);
  if((k==="tab"||k==="backtab")&&state.menu!=="dialog"&&!(k==="tab"&&e.target===stage&&state.plot==="unbound"&&!state.menu))return;
@@ -234,7 +236,7 @@ function start(){
 }
 function fitTry(){
  if(mode!=="try")return;
- const p=$("host").getBoundingClientRect(), h=window.visualViewport?.height||document.documentElement.clientHeight;
+ const p=$("host").getBoundingClientRect(), h=lessonEnd();
  const mobile=matchMedia("(max-width:700px)").matches;
  const width=Math.floor(Math.max(mobile?163:162,Math.min(290,(h-(p.top+window.scrollY)-(mobile&&h>=700?90:12))*558/1168)));
  stage.style.setProperty("--try-fit",width+"px");
@@ -242,16 +244,16 @@ function fitTry(){
 }
 function fit(){
  if(mode!=="watch"){fitTry();return;}
- const host=$("host").getBoundingClientRect(), h=window.visualViewport?.height||document.documentElement.clientHeight;
+ const host=$("host").getBoundingClientRect(), h=lessonEnd();
  if(!host.width)return;
- const phone=matchMedia("(max-width:700px)").matches,short=focused&&!phone&&h<=650;
+ const phone=matchMedia("(max-width:700px)").matches,short=focused&&!phone&&stage.clientHeight<=650;
  const top=focused?host.top:host.top+window.scrollY;
  const strip=$("watch-player").getBoundingClientRect().height;
  const reserve=short?12:strip+8;
  stage.style.setProperty("--fit",Math.floor(Math.max(140,Math.min(focused?342:300,(h-top-reserve)*558/1168)))+"px");
  revealMenu(false);
 }
-const covered=[document.querySelector("main>header"),document.querySelector("main>.tabs"),document.querySelector("main>.notes")];
+const covered=[document.querySelector("main>header"),document.querySelector("main>.calc-tabs"),document.querySelector("main>.notes")];
 function focus(v){
  focused=mode==="watch"&&Boolean(v);
  stage.classList.toggle("focused",focused);document.body.classList.toggle("focus-open",focused);
@@ -268,7 +270,7 @@ play.addEventListener("click",()=>running?pause():start());
 seek.addEventListener("input",()=>go(seek.value));
 $("back").addEventListener("click",()=>go(now-10));$("next").addEventListener("click",()=>go(now+10));$("replay").addEventListener("click",()=>{pause();go(0);start();});
 $("focus-view").addEventListener("click",()=>focus(!focused));
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(mode!=="watch"||e.repeat||e.ctrlKey||e.metaKey||e.altKey)return;
  if(e.key==="Escape"&&focused){focus(false);return;}
  if(e.target!==stage&&e.target!==document.body)return;
@@ -314,10 +316,6 @@ $("reset").addEventListener("click",()=>{
  if(fork!==null){openTry();return;}
  practice=scene(problem);state=practice;$("feedback").textContent="";renderTry();stage.focus({preventScroll:true});
 });
-const theme=$("theme");
-try{theme.value=["light","dark"].includes(localStorage.getItem("ti-lab-theme"))?localStorage.getItem("ti-lab-theme"):"system";}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value);}catch{}}
-theme.addEventListener("change",setTheme);setTheme();
 fields();
 if(q.get("mode")==="try")openTry(false,false);else switchTab("watch",false);
 })();

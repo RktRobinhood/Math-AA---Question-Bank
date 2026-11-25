@@ -4,26 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Calculator skills · TI-Nspire CX II</title>
-<link rel="stylesheet" href="styles.css">
-<script>try{let p=localStorage.getItem('ti-lab-theme')||'auto';document.documentElement.dataset.theme=p==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p}catch{}</script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("qb-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../assets/css/calculator-integration.css?v=beta-fit-2">
+<script src="../assets/js/courses.js" defer></script>
+<script src="../assets/js/course.js" defer></script>
+<script src="../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../assets/js/basket.js" defer></script>
+<script src="../assets/js/generate.js" defer></script>
+
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="styles.css?v=bank-banner-1">
 <link rel="stylesheet" href="handheld/shell.css">
 <link rel="stylesheet" href="handheld/integration.css">
 <script src="handheld/shell.js" defer></script>
 <script src="handheld/key-cues.js" defer></script>
 <script src="handheld/transport.js" defer></script>
 <script src="handheld/graph-general.js" defer></script>
-<script src="app.js" defer></script>
+<script src="app.js?v=bank-banner-1" defer></script>
 </head>
-<body>
-<header class="mast"><div class="wrap mast-inner">
-  <div class="wordmark"><svg aria-hidden="true" width="31" height="31" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor"/><path d="M7 24h18M9 26V6m1 3c2 8 4 12 7 12s5-4 7-12" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="21" r="2" fill="currentColor"/></svg><span>Calculator skills</span></div>
-  <span class="model">TI-Nspire CX II-T · non-CAS</span><a class="catalog" href="skills.html">Skill library</a>
-  <a class="cx-tool-link" href="scratchpad/index.html">Calculator</a>
-  <label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="auto">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-</div></header>
+<body class="calculator-bank-lesson" data-base="../" data-nav="calculator-skills">
 <main class="wrap">
   <header class="title">
-    <div><p class="context" id="context" hidden></p><h1 id="lesson-title">Find a graph minimum</h1><p id="lesson-intro">Use two bounds to find the lowest point on a curve.</p></div>
+    <div><p class="context"><a href="skills.html">Calculator Skills</a> · <a href="scratchpad/index.html">Open calculator</a></p><p class="context" id="context" hidden></p><h1 id="lesson-title">Find a graph minimum</h1><p id="lesson-intro">Use two bounds to find the lowest point on a curve.</p></div>
     <div class="modes" aria-label="Lesson mode"><button class="mode active" data-mode="watch" aria-pressed="true">Watch</button><button class="mode" data-mode="try" aria-pressed="false">Try</button></div>
   </header>
   <section aria-label="Calculator walkthrough">

@@ -3,7 +3,7 @@ const M=window.CT32,T=window.CT32Tape,$=id=>document.getElementById(id),stage=$(
 const params=new URLSearchParams(location.search),request=M.request(params),tabs=[$("watch-tab"),$("try-tab")];
 const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T quadratic regression handheld",onKey:k=>physical(k)});
 const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
-const btn=(text,active,click)=>{const b=node("button",text,active?"active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
+const btn=(text,active,click)=>{const b=node("button",text,active?"calc-active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
 const format=v=>v===null?"":M.display(v), timed=t=>"0:"+String(Math.floor(t)).padStart(2,"0");
 let mode="watch",clock=0,playing=false,frame=0,origin=0,stamped="",started=false,focusOn=false,preferFocus=false,considered=false,firstWatch=true,hasOwnTry=false,taken=false,light=0,state=M.init(request.data);
 seek.max=T.duration;
@@ -16,7 +16,7 @@ function dataSheet(s,watch){
  for(let i=start;i<Math.min(start+5,rows);i++){
   const row=body.insertRow();row.append(node("th",String(i+1)));
   [s.x,s.y].forEach((a,j)=>{
-   const active=i===s.row&&j===s.col&&s.page==="sheet",td=node("td",(active&&s.edit!==null?s.edit:format(a[i]))||" ",active?"active":"");
+   const active=i===s.row&&j===s.col&&s.page==="sheet",td=node("td",(active&&s.edit!==null?s.edit:format(a[i]))||" ",active?"calc-active":"");
    if(!watch&&s.page==="sheet"){
     td.dataset.cell=i+":"+j;td.title=(j?"yval":"xval")+", row "+(i+1);
     td.addEventListener("click",()=>{let q=state.edit===null?state:M.press(state,"enter");update(q.error?q:{...q,row:i,col:j});stage.focus({preventScroll:true});});
@@ -136,9 +136,10 @@ $("answer").addEventListener("submit",e=>{
  status("assess-feedback",msg||"Correct. The fitted maximum comes from the curve; the observed maximum comes from the data.",Boolean(msg));
 });
 $("answer").addEventListener("input",()=>status("assess-feedback",""));
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
 function size(){
  if(mode!=="watch")return;
- const avail=(window.visualViewport?.height||innerHeight)-(focusOn?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
 }
@@ -189,6 +190,7 @@ $("return").onclick=()=>{switchMode("watch");play.focus({preventScroll:true});};
 $("reset").onclick=()=>{reset();paintTry();stage.focus({preventScroll:true});};
 $("back-to-data").onclick=()=>{update({...state,page:state.page==="sheet"&&state.run?"result":"sheet",dropdown:null,error:"",edit:null});stage.focus({preventScroll:true});};
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus({preventScroll:true});return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"){if(el.closest("button")||e.repeat)return;const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();seekTo(clock+(k==="j"?-10:10));}return;}
@@ -197,8 +199,5 @@ document.addEventListener("keydown",e=>{
  const keys={m:"menu",M:"menu",Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down","-":"neg",".":"dot"};
  const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");if(k){e.preventDefault();physical(k);}
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;}
-setTheme();theme.onchange=()=>{setTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}};
 switchMode(params.get("mode")==="try"?"try":"watch");
 })();

@@ -12,7 +12,7 @@ const currency=n=>num(n,{minimumFractionDigits:2,maximumFractionDigits:2});
 const elt=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n};
 function label(text,action,active,watch,cls){
  const b=elt("button",text,cls);b.type="button";
- if(active)b.classList.add("active");
+ if(active)b.classList.add("calc-active");
  if(watch)b.disabled=true;else if(action)b.addEventListener("click",action);
  return b;
 }
@@ -98,10 +98,11 @@ function labelPlay(){
 function go(at){t=bounded(at);origin=performance.now()-t*1000;draw();labelPlay();}
 function pause(){if(playing)t=bounded((performance.now()-origin)/1000);playing=false;cancelAnimationFrame(frame);draw();labelPlay();}
 function loop(now){if(!playing||mode!=="watch")return;t=bounded((now-origin)/1000);if(t>=duration){pause();return;}draw();frame=requestAnimationFrame(loop);}
+function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
 function fitFocused(){
  if(!focus)return;
- const avail=innerHeight-$("watch-message").offsetHeight-$("watch-player").offsetHeight-25;
- stage.style.setProperty("--fit-handset",Math.max(162,Math.min(322,Math.floor(avail*.4777)))+"px");
+ const avail=stage.getBoundingClientRect().height-$("watch-message").offsetHeight-$("watch-player").offsetHeight-25;
+ stage.style.setProperty("--fit-handset",Math.max(120,Math.min(322,Math.floor(avail*.4777)))+"px");
 }
 function fitTry(){
  if(mode!=="try"||innerWidth>700||innerHeight>700)return;
@@ -113,7 +114,7 @@ function setFocus(next){
  focus=next;stage.classList.toggle("focused",focus);document.body.classList.toggle("has-focus",focus);
  $("focus").setAttribute("aria-pressed",String(focus));$("focus").setAttribute("aria-label",focus?"Exit Focus":"Focus");$("focus").textContent=focus?"Exit":"⛶";if(focus){fitFocused();stage.scrollTop=0;}
 }
-function ensureFit(){if(mode==="watch"&&!focus&&$("watch-player").getBoundingClientRect().bottom>innerHeight+1)setFocus(true);}
+function ensureFit(){if(mode==="watch"&&!focus&&$("watch-player").getBoundingClientRect().bottom>nativeBottom()+1)setFocus(true);}
 function toggle(){
  if(mode!=="watch")return;
  if(playing){pause();return;}
@@ -164,6 +165,7 @@ $("reset").onclick=()=>{
  taskMode();render(s,false);stage.focus({preventScroll:true});
 };
 document.addEventListener("keydown",e=>{
+ if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(e.key==="Escape"&&focus){e.preventDefault();setFocus(false);$("focus").focus({preventScroll:true});return;}
  if(e.altKey||e.ctrlKey||e.metaKey||e.isComposing||e.target.closest("input,select,a,summary,textarea,[contenteditable]"))return;
  const b=e.target.closest("button");
@@ -179,10 +181,6 @@ document.addEventListener("keydown",e=>{
  if(e.key==="Tab"&&s.page==="solver")key=e.shiftKey?"backtab":"tab";
  if(key){e.preventDefault();if(e.target===document.body)stage.focus({preventScroll:true});physical(key);}
 });
-const theme=$("theme");
-try{const pref=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(pref))theme.value=pref;}catch{}
-document.documentElement.dataset.theme=theme.value;
-theme.onchange=()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}};
 stage.dataset.mode="watch";draw();labelPlay();if(params.get("mode")==="try"||request.linked)change("try",false,true);
 requestAnimationFrame(ensureFit);
 })();

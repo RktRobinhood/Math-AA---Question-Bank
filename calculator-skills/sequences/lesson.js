@@ -18,11 +18,6 @@ if(isTyped)try{
  if(allKeys.some(k=>params.getAll(k).length!==1))throw Error("Incomplete link");
  problem=Object.fromEntries(allKeys.map(k=>[k,params.get(k)]));M.calculate(problem,problem.task);
 }catch{problem={...fresh};badLink=true;}
-let persistedTheme;try{persistedTheme=localStorage.getItem("calculator-coach-theme");}catch{}
-const theme=$("theme");
-if(["system","light","dark"].includes(persistedTheme))theme.value=persistedTheme;
-function applyTheme(){document.documentElement.dataset.theme=theme.value;}applyTheme();
-theme.addEventListener("change",()=>{applyTheme();try{localStorage.setItem("calculator-coach-theme",theme.value);}catch{}});
 function make(){
  return {setup:"calc",menu:"",selected:0,style:"plain",parts:["","","",""],active:0,raw:"",prior:"",out:"",error:"",loaded:false,shift:false};
 }
@@ -235,10 +230,11 @@ function start(){
  maybeFocus();
  playing=true;origin=performance.now()-clock*1000;label();renderWatch();tickId=requestAnimationFrame(tick);
 }
+function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
 function fit(){
  if(mode!=="watch")return;
- const Ht=window.visualViewport?.height||innerHeight;
- const top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+ const Ht=nativeBottom();
+ const top=Math.max(0,stage.getBoundingClientRect().top);
  const reserved=$("watch-pane").offsetHeight+$("player").offsetHeight+22;
  const w=Math.max(120,Math.min(300,Math.floor((Ht-top-reserved)*558/1168)));
  stage.style.setProperty("--watch-width",w+"px");
@@ -251,10 +247,10 @@ function focus(on){
 function maybeFocus(){
  fit();
  if(mode==="watch"&&!focused&&focusPreference!==false&&
-    (focusPreference===true||shell.body.getBoundingClientRect().width<173||$("player").getBoundingClientRect().bottom>innerHeight+1))
+    (focusPreference===true||shell.body.getBoundingClientRect().width<173||$("player").getBoundingClientRect().bottom>nativeBottom()+1))
   focus(true);
 }
-const resize=new ResizeObserver(fit);for(const e of [$("watch-pane"),$("player"),document.querySelector("header")])resize.observe(e);
+const resize=new ResizeObserver(fit);for(const e of [$("watch-pane"),$("player"),document.querySelector(".qb-calculator-lesson > header")])resize.observe(e);
 window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
 const toggle=()=>playing?pause():start();
 play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);
@@ -352,6 +348,7 @@ tabs.forEach((b,i)=>b.addEventListener("keydown",e=>{
  e.preventDefault();const n=e.key==="Home"?0:e.key==="End"?1:1-i;tabs[n].click();tabs[n].focus();
 }));
 document.addEventListener("keydown",e=>{
+ if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(e.key==="Escape"&&focused){focusPreference=false;focus(false);$("focus").focus({preventScroll:true});return;}
  if(e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target.closest("input,textarea,select,button,a,summary,[contenteditable]"))return;
  if(mode==="watch"){if(e.repeat)return;if(e.key===" "||e.key==="k")toggle();else if(e.key==="j")jump(clock-10);else if(e.key==="l")jump(clock+10);else return;e.preventDefault();return;}

@@ -28,7 +28,7 @@
       if(num){
         const value=Number(num[0]);
         if(!Number.isFinite(value))throw new CalcError('The number is too large.');
-        out.push({type:'num',value});i+=num[0].length;
+        out.push({type:'num',value,literal:num[0]});i+=num[0].length;
       }else if(/[a-z]/.test(ch)){
         const name=s.slice(i).match(/^[a-z]+/)[0];
         if(!fnNames.has(name)&&!constants.has(name))throw new CalcError('Unknown function or symbol: '+name+'.');
@@ -161,6 +161,61 @@
     }
     return finite(v);
   }
+  // Bounded exact rational arithmetic for integer inputs only. Decimal/scientific
+  // literals, functions and oversized operations retain the numeric evaluator.
+  function rational(input,ans){
+    const limit=1n<<384n, abs=n=>n<0n?-n:n, bad=()=>{throw new Error('not a bounded rational');};
+    try{
+      const tokens=scan(input);let i=0, depth=0;
+      const peek=()=>tokens[i], take=t=>peek().type===t?tokens[i++]:null;
+      const nested=f=>{if(++depth>MAX_DEPTH)bad();const v=f();depth--;return v;};
+      function rat(n,d=1n){
+        if(!d||abs(n)>limit||abs(d)>limit)bad();
+        let x=abs(n),y=abs(d);
+        while(y){const r=x%y;x=y;y=r;}
+        return d<0n?{n:-n/x,d:-d/x}:{n:n/x,d:d/x};
+      }
+      function atom(){
+        const token=take('num');
+        if(token){if(!/^\d+$/.test(token.literal)||token.literal.length>100)bad();return rat(BigInt(token.literal));}
+        const constant=take('name');
+        if(constant){if(constant.value!=='ans'||!ans)bad();return ans;}
+        if(!take('('))bad();
+        const v=nested(sum);
+        if(!take(')'))bad();
+        return v;
+      }
+      function power(){
+        const a=atom();
+        if(!take('^'))return a;
+        const k=nested(unary);
+        if(k.d!==1n||abs(k.n)>32n||(!a.n&&k.n===0n))bad();
+        const n=a.n**abs(k.n),d=a.d**abs(k.n);
+        return k.n<0n?rat(d,n):rat(n,d);
+      }
+      function unary(){
+        if(take('+'))return nested(unary);
+        if(take('-')){const x=nested(unary);return{n:-x.n,d:x.d};}
+        return power();
+      }
+      function product(){
+        let a=unary();
+        while(true){
+          if(take('*')||peek().type==='('){const b=unary();a=rat(a.n*b.n,a.d*b.d);}
+          else if(take('/')){const b=unary();a=rat(a.n*b.d,a.d*b.n);}
+          else return a;
+        }
+      }
+      function sum(){
+        let a=product();while(true){
+          if(take('+')){const b=product();a=rat(a.n*b.d+a.d*b.n,a.d*b.d);}
+          else if(take('-')){const b=product();a=rat(a.n*b.d-a.d*b.n,a.d*b.d);}
+          else return a;
+        }
+      }
+      const val=sum();return peek().type==='end'?val:null;
+    }catch{return null;}
+  }
   function format(value){
     if(!Number.isFinite(value))return '';
     const v=Number(value.toPrecision(12));
@@ -171,14 +226,14 @@
     '×':'*','multiply':'*','mult':'*','mul':'*','divide':'/','div':'/','÷':'/','−':'-','subtract':'-','minus':'-','plus':'+','add':'+',
     'power':'^','pow':'^','science':'e','scientific':'e','ee':'e','eex':'e','x10ⁿ':'e','tenpow':'10^(','lparen':'(','rparen':')','dot':'.','space':' ',
     'sqrt':'√(','√':'√(','square root':'√(','squared':'^2','square':'^2','x²':'^2','^2':'^2',
-    'pi':'π','π':'π','ans':'Ans','sin':'sin(','cos':'cos(','tan':'tan(','asin':'asin(','acos':'acos(','atan':'atan(',
-    'log':'log(','ln':'ln(','abs':'abs(','exp':'e^(','eˣ':'e^(','10ˣ':'10^(','sin⁻¹':'asin(','cos⁻¹':'acos(','tan⁻¹':'atan(',
+    'pi':'π','π':'π','ans':'Ans','sin':'sin(','cos':'cos(','tan':'tan(','asin':'sin⁻¹(','acos':'cos⁻¹(','atan':'tan⁻¹(',
+    'log':'log(','ln':'ln(','abs':'abs(','exp':'e^(','eˣ':'e^(','10ˣ':'10^(','sin⁻¹':'sin⁻¹(','cos⁻¹':'cos⁻¹(','tan⁻¹':'tan⁻¹(',
     'negative':'-','neg':'-','(-)':'-','percent':'%','factorial':'!'
   };
 
   function create(options={}){
     const callbacks=new Set();
-    let mode=getMode(options.mode), expression='', error='', value=null, ans=0,
+    let mode=getMode(options.mode), expression='', error='', value=null, ans=0, ansExact={n:0n,d:1n},
         history=[], notice='', at=0,to=0, justEvaluated=false, historyCursor=-1;
     function getState(){
       return Object.freeze({mode,expression,error,notice,value,ans,result:value===null?'':format(value),
@@ -208,17 +263,19 @@
     function setMode(next){
       mode=getMode(next);error='';return notify();
     }
-    function commit(){
+    function commit(approximate=false){
       if(!expression.trim()){
         return getState();
       }
       try{
         const base=x=>evaluate(x,{mode,ans});
         const advanced=host.TICalcTools?.evaluate(expression,base,mode);
-        const result=advanced?.display?null:finite(advanced?advanced.value:base(expression));
+        const exact=!advanced&&!approximate?rational(expression,ansExact):null;
+        const result=advanced?.display?null:finite(advanced?advanced.value:exact?Number(exact.n)/Number(exact.d):base(expression));
+        const fraction=exact&&exact.d!==1n&&String(exact.n).length<=18&&String(exact.d).length<=18?exact.n+'/'+exact.d:'';
         notice=advanced?.notice||'';
-        history=[...history,{expression,value:result,result:advanced?.display||format(result),mode}].slice(-16);
-        value=result; if(result!==null)ans=result; error=''; justEvaluated=true; historyCursor=-1;
+        history=[...history,{expression,value:result,result:advanced?.display||fraction||format(result),fraction,mode}].slice(-16);
+        value=result; if(result!==null){ans=result;ansExact=exact;} error=''; justEvaluated=true; historyCursor=-1;
         expression='';at=to=0;
       }catch(err){
         notice='';error=err instanceof Error?err.message:'This calculation could not be evaluated.';
@@ -255,7 +312,7 @@
       const entry=history[Math.floor(historyCursor/2)];
       if(!entry)return getState();
       if(historyCursor%2&&entry.value===null){historyCursor=-1;notice='This result is text, not a number. Recall the expression to edit the search.';return notify();}
-      const fragment=historyCursor%2 ? String(entry.value) : entry.expression;
+      const fragment=historyCursor%2 ? (entry.fraction?'('+entry.fraction+')':String(entry.value)) : entry.expression;
       return insert(fragment);
     }
     function backspace(forward=false){
@@ -265,6 +322,7 @@
     }
     function press(key){
       const raw=String(key??''), k=raw.toLowerCase().trim();
+      if(k==='approx'){if(historyCursor>=0)return editHistory();return commit(true);}
       if(k==='enter'||k==='='||k==='eq'||k==='return'||k==='equals')return historyCursor>=0?editHistory():commit();
       if(k==='escape'||k==='esc'){if(historyCursor>=0){historyCursor=-1;return notify();}return clear();}
       if(k==='clear'||k==='ac'||k==='escape'||k==='esc')return clear();

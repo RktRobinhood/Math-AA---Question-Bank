@@ -1,24 +1,35 @@
 <!doctype html>
-<html lang="en" data-theme="system">
+<html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Lengths, angles and bearings · Calculator Coach</title>
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css">
-<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><script defer src="lesson.js"></script>
+<title>Lengths, angles and bearings · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
+<script src="../../assets/js/courses.js" defer></script>
+<script src="../../assets/js/course.js" defer></script>
+<script src="../../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/basket.js" defer></script>
+<script src="../../assets/js/generate.js" defer></script>
+
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-shell-1">
+<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><script defer src="lesson.js?v=bank-shell-1"></script>
 </head>
-<body><main>
-<header class="head"><div><nav class="trail" aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>Lengths, angles and bearings</h1></div>
-<label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
-<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button><button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<header class="head"><div><nav class="trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>Lengths, angles and bearings</h1></div>
+</header>
+<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button><button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
 <section class="stage" id="stage" data-mode="watch" tabindex="0" aria-label="TI-Nspire CX II-T handheld">
 <div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
 <div id="try-header" hidden><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Return to Watch</button><button type="button" id="reset">Reset Try</button></nav><p id="try-context"></p></div>
 <div class="stage-grid">
 <div id="handheld-host"><div id="lcd" class="lcd" aria-label="Recreated TI-Nspire CX II-T display"><div class="lcd-status"><span>1.1</span><span id="lcd-app">Calculator</span><strong id="lcd-mode">RAD</strong><span class="battery" aria-hidden="true"></span></div><div class="lcd-body" id="lcd-body"></div><span id="lcd-text" class="sr"></span></div>
 <button class="stage-play" id="start-overlay" type="button" aria-label="Play caption rehearsal"><svg width="23" height="25" viewBox="0 0 23 25" aria-hidden="true"><path fill="currentColor" d="M4 2l16 10.5L4 23z"/></svg></button></div>
-<aside class="side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab">
+<aside class="calc-side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab">
 <p class="context">CT17 · Worked example</p><div id="watch-sketch" class="compass" aria-label="Plan sketch"></div><ol id="chapters"></ol></aside>
-<aside class="side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
+<aside class="calc-side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
 <p id="tool-status" class="feedback" role="status"></p>
 <p class="keys" id="keys-help">Home → 5 → 2 for Degree. Ctrl then x² gives √. Press trig for tan⁻¹.</p>
 <div id="try-sketch" class="compass"></div>

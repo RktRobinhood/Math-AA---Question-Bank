@@ -1,0 +1,21 @@
+/* Opt in via native-shell handset lesson templates, never exam or Scratchpad pages. */
+.qb-calculator-page { --lesson-tab-inset: var(--practice-bottom-dock, 0px); }
+@media (max-width: 860px) {
+  .qb-calculator-page { --lesson-tab-inset: calc(var(--tab-h) + env(safe-area-inset-bottom, 0px)); }
+}
+.qb-calculator-page:has(.qb-calculator-lesson :is(.stage.focus-open,#stage[data-focused="true"])) { overflow: hidden; }
+.qb-calculator-page .qb-calculator-lesson :is(.stage.focus-open,#stage[data-focused="true"]) {
+  inset: var(--top-h) 0 var(--lesson-tab-inset);
+  z-index: 20;
+  height: auto;
+  max-height: none;
+}
+
+/* A long chapter list must not push playback controls past the visible stage. */
+@media (min-width: 711px) {
+  .qb-calculator-lesson .stage[data-mode="watch"]:not(.focus-open) .calc-side {
+    max-height: calc(var(--watch-fit, 260px) * 2.0932);
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+}

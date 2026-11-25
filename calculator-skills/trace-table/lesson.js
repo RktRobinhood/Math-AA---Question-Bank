@@ -1,6 +1,7 @@
 "use strict";
 (function(){
- const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=window.CT09Tape,H=window.HandheldTransport;
+ function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
+const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=window.CT09Tape,H=window.HandheldTransport;
  const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),overlay=$("stage-play"),lcd=$("lcd"),canvas=$("drawing");
  const screen=S.screen(canvas),expression=$("expression"),exact=$("point-input"),hot=$("hotspots"),steps=$("steps"),feedback=$("feedback");
  const watchModel=M.parse("2x^2-3"),defaultModel=M.parse("3x^2-2x+1");
@@ -111,11 +112,11 @@
   focused=Boolean(v);stage.classList.toggle("ct09-focused",focused);document.body.classList.toggle("ct09-focus-open",focused);
   const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
   b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.textContent=focused?"Exit":"Focus";
-  document.querySelectorAll(".header,.tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
+  document.querySelectorAll(".header,.calc-tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
   if(focused)stage.scrollTop=0;
  }
  function ensureVisible(){
-  const height=window.visualViewport?.height||innerHeight;
+  const height=lessonEnd();
   if(!focused&&$("watch-player").getBoundingClientRect().bottom>height+1){focusChecked=true;focus(true);}
  }
  function toggle(){
@@ -143,12 +144,12 @@
  }
  function menuHit(panel,index,action){hit(panel.rows[index],panel.x,panel.y+2+index*panel.h,panel.w,panel.h,action);}
  function message(s="",error=false){
-  const el=$("keypad-result");el.hidden=!s;el.className="feedback "+(error?"is-wrong":"is-right");el.textContent=s;
+  const el=$("keypad-result");el.hidden=!s;el.className="feedback"+(error?"is-wrong":"is-right");el.textContent=s;
  }
  function warning(){return invalid&&!edited?"Invalid linked function or x-value. Showing the set exercise.":"";}
  function fitTry(){
   if(mode!=="try")return;
-  const h=window.visualViewport?.height||innerHeight,phone=innerWidth<=700;
+  const h=lessonEnd(),phone=innerWidth<=700;
   const top=Math.max(0,$("handheld-host").getBoundingClientRect().top+scrollY);
   const width=Math.min(phone?267:302,Math.max(phone?158:155,Math.floor((h-top-10)*558/1168)));
   stage.style.setProperty("--retro-try-width",width+"px");
@@ -354,7 +355,7 @@
   change("try",!finished());stage.focus({preventScroll:true});
  });
  $("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
- document.addEventListener("keydown",e=>{
+ document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
   const tag=e.target.closest("button");
@@ -378,12 +379,9 @@
   e.preventDefault();if(mode!=="try"||!isExercise())return;edited=true;
   const v=readAnswer(answerY.value),shown=Number(M.pretty(target.y).replaceAll("−","-"));
   const ok=v!==null&&(v===shown||v===target.y||Math.abs(v-target.y)<=Math.abs(target.y)*1e-12);
-  feedback.className="feedback "+(ok?"is-right":"is-wrong");
+  feedback.className="feedback"+(ok?"is-right":"is-wrong");
   feedback.textContent=ok?"Correct. Read the second coordinate or the entry in the f₁(x) column.":v===practice.x?"You entered x. Read the output next to that input.":"Check the row for x = "+askedX+", or the second coordinate in Trace.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- document.documentElement.dataset.theme=theme.value;
- theme.addEventListener("change",()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  seek.max=T.duration;
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
 })();

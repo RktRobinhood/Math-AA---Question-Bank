@@ -1,5 +1,6 @@
 "use strict";
 (function(){
+function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id),M=CT14Math,T=CT14Tape,stage=$("stage"),lcd=$("lcd"),canvas=$("drawing"),ctx=canvas.getContext("2d"),seek=$("seek"),play=$("play");
 const RAD="rad",DEG="deg",P=M.make("sin",".5",DEG,"30","390",true,false),Q=M.make("sin","1",DEG,"0","180",false,false);
 const preset=M.make("cos","-1",RAD,"0","3pi",true,true),params=new URLSearchParams(location.search);
@@ -172,7 +173,7 @@ function tryRender(){
  $("checker-context").textContent="Exploration only. Reset to return to the set exercise.";
  if(!eligible())$("feedback").textContent="";
  const out=$("keypad-result"),msg=state.msg||markLabel(state)||(!touched&&badLink?"Invalid linked trig prompt. The original exercise is shown.":"");
- out.hidden=!msg;out.textContent=msg;out.className="feedback "+(state.msg?"is-wrong":"is-right");
+ out.hidden=!msg;out.textContent=msg;out.className="feedback"+(state.msg?"is-wrong":"is-right");
  const b=state.stage==="lower"||state.stage==="upper";$("bound-form").hidden=!b;$("retry-bounds").hidden=state.stage!=="result";
  $("bound-label").textContent=(state.stage==="lower"?"Lower":"Upper")+" bound ("+plotUnit(state)+")";
  lcd.classList.toggle("pick",b||state.stage==="curve");
@@ -206,13 +207,13 @@ lcd.onclick=e=>{
 $("answer-form").onsubmit=e=>{
  e.preventDefault();if(!eligible())return;touched=true;
  const ok=M.assess($("answer").value,exercise),out=$("feedback");
- out.className="feedback "+(ok?"is-right":"is-wrong");
+ out.className="feedback"+(ok?"is-right":"is-wrong");
  out.textContent=ok?"Correct. Those are all the distinct solutions in the stated interval.":"Check the angle units, every crossing or touch, and which endpoints count. List each angle once.";
 };
 $("answer").oninput=()=>{$("feedback").textContent="";touched=true;};
 function fit(){
  if(tab!=="watch")return;
- const h=window.visualViewport?.height||innerHeight,top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+ const h=lessonEnd(),top=Math.max(0,stage.getBoundingClientRect().top);
  const used=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
  stage.style.setProperty("--watch-fit-width",Math.max(80,Math.min(focused?338:304,Math.floor((h-top-used-24)*558/1168)))+"px");
 }
@@ -253,7 +254,7 @@ tabs.forEach((b,i)=>{
 });
 $("return-watch").onclick=()=>{mode("watch");play.focus({preventScroll:true});};
 $("take-over").onclick=()=>{const done=t>=T.duration-.01;if(done&&state.fork)reset();mode("try",!done);stage.focus({preventScroll:true});};
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
  if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(tab==="watch"){if(!e.target.closest("button")&&["k"," "].includes(e.key)){e.preventDefault();toggle();}return;}
@@ -266,8 +267,6 @@ T.captions.forEach(([at,name],i)=>{
  const li=document.createElement("li"),b=document.createElement("button"),n=document.createElement("span");n.textContent="0"+(i+1);
  b.type="button";b.append(n,document.createTextNode(name));b.onclick=()=>seekAt(at);li.append(b);$("steps").append(li);
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-const themeTo=()=>{document.documentElement.dataset.theme=theme.value;};themeTo();theme.onchange=()=>{themeTo();try{localStorage.setItem("ti-lab-theme",theme.value);}catch{}};
 window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
 mode(params.get("mode")==="try"?"try":"watch");
 })();

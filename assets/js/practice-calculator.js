@@ -20,7 +20,7 @@
     return false;
   }
 
-  const source = 'calculator-skills/scratchpad/index.html?v=practice-dock-fit-1';
+  const source = 'calculator-skills/scratchpad/index.html?v=practice-secondary-1';
   const wide = win?.matchMedia('(min-width: 900px)');
   let current = null, owner = null;
   function create() {

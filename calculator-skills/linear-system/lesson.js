@@ -35,7 +35,7 @@ function formula(s,isTry=false){
  a.append(node("span","","linSolve("),brace,list,node("span","lcd-order",",{"+s.order+"})"));
  s.rows.forEach((raw,i)=>{
   const live=isTry&&s.page==="entry";
-  const v=inLCD(live?"button":"span",s.page==="entry"&&s.field===i?"lcd-eq active":"lcd-eq",raw?M.disp(raw):"□",live?()=>{
+  const v=inLCD(live?"button":"span",s.page==="entry"&&s.field===i?"lcd-eq calc-active":"lcd-eq",raw?M.disp(raw):"□",live?()=>{
    state={...state,field:i,caret:raw.length,error:""};paintTry();
   }:null);
   if(s.page==="entry"&&i===s.field){
@@ -57,9 +57,9 @@ function lcd(s,isTry=false){
  b.replaceChildren();b.classList.toggle("case-error",Boolean(s.error));
  if(s.page==="setup"){
   const box=node("div","setup"),head=node("strong","setup-title","Solve System of Linear Equations"),fields=node("div","setup-fields");
-  fields.append(node("span","","Number of equations:"),inLCD(isTry?"button":"span",s.field===0?"active":"",s.dim||"□",isTry?()=>{state={...state,field:0,setupReplace:true};paintTry();}:null),node("span","","Variables:"),inLCD(isTry?"button":"span",s.field===1?"active":"",s.order||"□",isTry?()=>{state={...state,field:1,setupReplace:true};paintTry();}:null));
+  fields.append(node("span","","Number of equations:"),inLCD(isTry?"button":"span",s.field===0?"calc-active":"",s.dim||"□",isTry?()=>{state={...state,field:0,setupReplace:true};paintTry();}:null),node("span","","Variables:"),inLCD(isTry?"button":"span",s.field===1?"calc-active":"",s.order||"□",isTry?()=>{state={...state,field:1,setupReplace:true};paintTry();}:null));
   const foot=node("div","setup-foot");
-  for(const [i,v] of [[2,"OK"],[3,"Cancel"]])foot.append(inLCD(isTry?"button":"span",s.field===i?"active":"",v,isTry?()=>{state={...state,field:i};press("enter");}:null));
+  for(const [i,v] of [[2,"OK"],[3,"Cancel"]])foot.append(inLCD(isTry?"button":"span",s.field===i?"calc-active":"",v,isTry?()=>{state={...state,field:i};press("enter");}:null));
   box.append(head,fields,foot);b.append(box);lines.push("Solve System of Linear Equations. Number of equations "+s.dim+". Variables "+s.order);
  }else if(M.MENUS[s.page]){
   const container=node("div","menu-stack");
@@ -67,7 +67,7 @@ function lcd(s,isTry=false){
    const ul=node("ul",id);
    M.MENUS[id].forEach((text,i)=>{
     const li=node("li",""),live=isTry&&id===s.page&&((id==="main"&&i===2)||(id==="algebra"&&i===1));
-    const row=inLCD(live?"button":"span",i===active?"active":"",text,live?()=>press(String(i+1)):null);
+    const row=inLCD(live?"button":"span",i===active?"calc-active":"",text,live?()=>press(String(i+1)):null);
     li.append(row);ul.append(li);
    });
    return ul;
@@ -131,9 +131,10 @@ function label(){const t=playing?"Pause":clock>=T.duration-.015?"Replay":"Play";
 function go(t){clock=Math.min(T.duration,Math.max(0,Number(t)||0));origin=performance.now()-clock*1000;paintWatch();label();}
 function pause(){playing=false;cancelAnimationFrame(frame);paintWatch();label();}
 function tick(t){if(!playing||mode!=="watch")return;clock=Math.min(T.duration,Math.max(0,(t-origin)/1000));paintWatch();if(clock>=T.duration){pause();return;}frame=requestAnimationFrame(tick);}
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
 function size(){
  if(mode!=="watch")return;
- const avail=(window.visualViewport?.height||innerHeight)-(focusOn?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
 }
@@ -192,6 +193,7 @@ $("typed").addEventListener("submit",e=>{
  }catch(e){typedNote="";state={...state,error:e.message};paintTry();}
 });
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus();return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"&&!el.closest("button")&&!e.repeat){
@@ -215,8 +217,5 @@ $("answer-form").addEventListener("submit",e=>{
  f.dataset.error=String(!ok);
  f.textContent=ok?"Correct. That pair satisfies both equations.":!x||!y?"Enter exact numbers or fractions for both x and y.":swapped?"The two values are swapped. Check the variable list before assigning x and y.":"Check your pair in both equations. Keep exact fractions if needed.";
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-const apply=()=>{document.documentElement.dataset.theme=theme.value;};apply();
-theme.addEventListener("change",()=>{apply();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
 sync(task);switchTo(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
 })();

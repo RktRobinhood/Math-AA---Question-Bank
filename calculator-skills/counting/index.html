@@ -1,17 +1,28 @@
-<!doctype html><html lang="en" data-theme="system"><head>
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Combinations and factorials · Calculator Coach</title><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css"><script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
-</head><body><main>
-<header class="head"><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / CT03</p><h1>Combinations and factorials</h1></div><label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
-<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-panel">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-panel" tabindex="-1">Try</button></div>
+<title>Combinations and factorials · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
+<script src="../../assets/js/courses.js" defer></script>
+<script src="../../assets/js/course.js" defer></script>
+<script src="../../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/basket.js" defer></script>
+<script src="../../assets/js/generate.js" defer></script>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-shell-1"><script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js?v=bank-shell-1" defer></script>
+</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<header class="head"><div><p class="trail"><a href="../skills.html">Calculator Skills</a> / CT03</p><h1>Combinations and factorials</h1></div></header>
+<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-panel">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-panel" tabindex="-1">Try</button></div>
 <section id="stage" class="stage" tabindex="0" aria-label="TI-Nspire CX II-T calculator lesson">
 <div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
 <div id="try-header" hidden><div class="try-nav"><button id="return" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button></div><p id="try-context"></p></div>
 <div class="stage-grid">
 <div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span>1.1 &nbsp; Calculator</span><span class="battery" aria-hidden="true"></span></div><div id="lcd-body" class="lcd-body"></div><p id="lcd-text" class="sr"></p></div><button id="start-overlay" class="stage-play" type="button" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button></div>
-<aside id="watch-panel" class="side" role="tabpanel" aria-labelledby="watch-tab"><p class="eyebrow">Worked example</p><h2>When does order matter?</h2><p class="context">Five different badges. Line up all five, or choose two for a display without assigning positions.</p><ol id="chapters"></ol></aside>
-<aside id="try-panel" class="side" role="tabpanel" aria-labelledby="try-tab" hidden>
-<p class="eyebrow">Calculator practice</p><p id="hint" class="hint"></p>
+<aside id="watch-panel" class="calc-side" role="tabpanel" aria-labelledby="watch-tab"><p class="eyebrow">Worked example</p><h2>When does order matter?</h2><p class="context">Five different badges. Line up all five, or choose two for a display without assigning positions.</p><ol id="chapters"></ol></aside>
+<aside id="try-panel" class="calc-side" role="tabpanel" aria-labelledby="try-tab" hidden>
+<p class="eyebrow">Calculator practice</p><p id="hint" class="calc-hint"></p>
 <form id="typed" novalidate>
 <div class="number-row"><label>Operation<select id="op"><option value="ncr">Combinations</option><option value="fact">Factorial</option></select></label><label>Total n<input id="n" type="text" inputmode="numeric" maxlength="26"></label><label id="r-field">Chosen r<input id="r" type="text" inputmode="numeric" maxlength="26"></label></div>
 <button id="load" type="submit">Load into entry</button>

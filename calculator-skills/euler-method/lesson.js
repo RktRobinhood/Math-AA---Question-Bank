@@ -63,7 +63,7 @@ function press(base,key){
  return s;
 }
 const pretty=x=>x.replace(/\*/g,"×").replace(/\//g,"÷").replace(/-/g,"−");
-const btn=(text,active,click)=>{const b=node("button",text,active?"active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
+const btn=(text,active,click)=>{const b=node("button",text,active?"calc-active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
 function renderLCD(s,watch){
  const d=$("lcd-body");d.replaceChildren();
  const history=node("div",undefined,"arithmetic-history");
@@ -118,6 +118,7 @@ $("answer").addEventListener("submit",e=>{
  status("assess-feedback",msg||C.success,Boolean(msg));
 });
 $("answer").addEventListener("input",()=>status("assess-feedback",""));
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
 function size(){
  if(mode==="try"){
   const host=$("handheld-host"),height=window.visualViewport?.height||innerHeight;
@@ -128,7 +129,7 @@ function size(){
   stage.style.setProperty("--try-fit",Math.max(150,Math.min(307,available))+"px");
   return;
  }
- const avail=(window.visualViewport?.height||innerHeight)-(focusOn?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
 }
@@ -136,7 +137,7 @@ const obs=new ResizeObserver(size);for(const x of [$("watch-message"),$("watch-p
 window.addEventListener("resize",size);window.visualViewport?.addEventListener("resize",size);
 function focus(v){
  focusOn=v;stage.classList.toggle("focus-open",v);document.body.classList.toggle("stats-focus",v);
- for(const el of document.querySelectorAll("main > .head, main > .tabs, main > .notes"))el.inert=v;
+ for(const el of document.querySelectorAll("main > .head, main > .calc-tabs, main > .notes"))el.inert=v;
  const f=$("focus");f.textContent=v?"Exit":"Focus";f.setAttribute("aria-pressed",String(v));f.setAttribute("aria-label",v?"Exit focused view":"Focused view");if(v)stage.scrollTop=0;size();
 }
 function labelPlay(){const t=playing?"Pause":clock>=C.duration-.015?"Replay":"Play";play.textContent=t;play.setAttribute("aria-label",t);}
@@ -181,6 +182,7 @@ $("take").onclick=()=>{switchMode("try",true);stage.focus({preventScroll:true});
 $("return").onclick=()=>{switchMode("watch");play.focus({preventScroll:true});};
 $("reset").onclick=()=>{reset();paintTry();stage.focus({preventScroll:true});};
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus({preventScroll:true});return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"){if(el.closest("button")||e.repeat)return;const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();seekTo(clock+(k==="j"?-10:10));}return;}
@@ -195,8 +197,5 @@ document.addEventListener("keydown",e=>{
   physical(k);
  }
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;}
-setTheme();theme.onchange=()=>{setTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}};
 switchMode(params.get("mode")==="try"?"try":"watch");
 })();

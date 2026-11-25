@@ -1,12 +1,21 @@
-<!doctype html><html lang="en" data-theme="system"><head>
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Trapezoidal approximation · Calculator Coach</title>
-<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="math.js" defer></script><script src="lesson.js" defer></script>
-</head><body><main>
-<header><div><p class="crumb"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / CT56</p><h1>Trapezoidal approximation</h1><p class="sub">Approximate an integral using equally spaced strips.</p></div>
-<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
-<nav class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-pane">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-pane" tabindex="-1">Try</button></nav>
+<title>Trapezoidal approximation · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<script src="../../assets/js/courses.js" defer></script>
+<script src="../../assets/js/course.js" defer></script>
+<script src="../../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/basket.js" defer></script>
+<script src="../../assets/js/generate.js" defer></script>
+<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="math.js" defer></script><script src="lesson.js?v=compact-native-1" defer></script>
+</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<header><div><p class="calc-crumb"><a href="../skills.html">Calculator Skills</a> / CT56</p><h1>Trapezoidal approximation</h1><p class="sub">Approximate an integral using equally spaced strips.</p></div>
+</header>
+<nav class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-pane">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-pane" tabindex="-1">Try</button></nav>
 <section id="stage" data-mode="watch" aria-label="TI-Nspire CX II-T handheld and controls">
 <div id="watch-pane" role="tabpanel" aria-labelledby="watch-tab"><p id="caption" class="caption"></p><p id="equation" class="equation"></p></div>
 <div id="try-pane" role="tabpanel" aria-labelledby="try-tab" hidden><div class="try-bar"><button type="button" id="return">Return to Watch</button><button type="button" id="edit-inputs">Edit inputs</button><button type="button" id="new-practice" hidden>Open fresh Try</button></div><p id="taskline" class="try-task"></p></div>
@@ -17,7 +26,7 @@
 </div></div>
 <div class="stage-side">
 <aside id="watch-side"><h2 id="graph-heading">Four equal strips</h2><figure aria-labelledby="graph-heading"><svg id="strips" role="img" viewBox="0 0 274 153"></svg><figcaption id="graph-note">The graph is a teaching diagram, not the Calculator screen.</figcaption></figure><ol id="chapters" aria-label="Worked example chapters"></ol></aside>
-<aside id="try-side" hidden><h2 id="try-title">Try it yourself</h2><p id="key-hint" class="hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
+<aside id="try-side" hidden><h2 id="try-title">Try it yourself</h2><p id="key-hint" class="calc-hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
 <form id="fields" novalidate>
 <label for="f">Function f(x)</label><input id="f" maxlength="96" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. x^2+1">
 <div class="form-grid"><label for="lower">Lower bound<input id="lower" maxlength="24" inputmode="decimal"></label><label for="upper">Upper bound<input id="upper" maxlength="24" inputmode="decimal"></label><label for="n">Equal strips<input id="n" maxlength="2" inputmode="numeric"></label></div>

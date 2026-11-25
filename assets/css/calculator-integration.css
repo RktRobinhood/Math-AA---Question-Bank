@@ -40,6 +40,13 @@
   .top .nav.with-calc-skills a{padding-inline:4px;font-size:.81rem}
   .top .with-calc-skills .nav-beta{margin-inline-start:2px;padding-inline:2px}
 }
+@media (1140px < width <= 1400px){
+  /* Keep the last control on screen when the optional sixth link is shown. */
+  .top:has(.nav.with-calc-skills){gap:8px;padding-inline:10px}
+  .top .nav.with-calc-skills a{padding-inline:6px;font-size:.88rem}
+  .top:has(.nav.with-calc-skills) .seg.course-seg{display:none}
+  .top:has(.nav.with-calc-skills) .course-pick{display:block}
+}
 .practice-calc-trigger{display:inline-flex;align-items:center;gap:.28rem;white-space:nowrap;
   color:var(--muted);border:1px solid var(--line);background:transparent;border-radius:6px;
   min-height:34px;padding:0 .55rem;cursor:pointer;font:600 .8rem/1 var(--sans,system-ui)}

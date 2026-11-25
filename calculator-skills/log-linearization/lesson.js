@@ -3,7 +3,7 @@ const M=window.CT34,T=window.CT34Tape,$=id=>document.getElementById(id),stage=$(
 const params=new URLSearchParams(location.search),request=M.request(params),tabs=[$("watch-tab"),$("try-tab")];
 const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T log-linearization handheld",onKey:k=>{physical(k);stage.focus({preventScroll:true});}});
 const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
-const btn=(text,active,click)=>{const b=node("button",text,active?"active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
+const btn=(text,active,click)=>{const b=node("button",text,active?"calc-active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
 const format=v=>v===null?"":M.display(v), timed=t=>"0:"+String(Math.floor(t)).padStart(2,"0");
 let mode="watch",clock=0,playing=false,frame=0,origin=0,stamped="",started=false,focusOn=false,preferFocus=false,considered=false,firstWatch=true,hasOwnTry=false,light=0,state=M.init(request.data),assignedState=state,assignedAnswer=null,feedbackState=null,forkAt=null;
 const forks=new Map();
@@ -12,13 +12,13 @@ function keyOf(k){return ({esc:"escape",del:"backspace",neg:"negative",dot:".",l
 function dataSheet(s,watch){
  const t=node("table",undefined,"lcd-sheet data-sheet"),head=t.createTHead(),body=t.createTBody();
  [["","A","B","C"],["","xval","yval",s.cname]].forEach((tr,k)=>{const row=head.insertRow();for(const [i,x] of tr.entries()){
-   const edit=s.row===-2&&s.col===2&&k===1&&i===3,cell=node("th",edit&&s.edit!==null?s.edit:x,edit?"active":"");
+   const edit=s.row===-2&&s.col===2&&k===1&&i===3,cell=node("th",edit&&s.edit!==null?s.edit:x,edit?"calc-active":"");
    if(k===1&&i===3&&!watch){cell.dataset.cell="-2:2";cell.onclick=()=>cellAt(-2,2);}
    row.append(cell);
  }});
  const form=body.insertRow();form.className="form";
  const formula=s.row===-1&&s.col===2&&s.edit!==null?s.edit:s.formula;
- const f=node("td",(s.cname?s.cname+":=":"=")+formula,s.row===-1&&s.col===2?"active":"");
+ const f=node("td",(s.cname?s.cname+":=":"=")+formula,s.row===-1&&s.col===2?"calc-active":"");
  f.title=(s.cname?s.cname+":=":"=")+formula;
  if(!watch){f.dataset.cell="-1:2";f.onclick=()=>cellAt(-1,2);}
  form.append(node("th",""),node("td","="),node("td","="),f);
@@ -27,7 +27,7 @@ function dataSheet(s,watch){
  for(let i=start;i<Math.min(start+5,rows);i++){
   const row=body.insertRow();row.append(node("th",String(i+1)));
   [s.x,s.y,s.y.map(v=>v!==null&&v>0&&s.formula?Math.log(v):null)].forEach((a,j)=>{
-   const active=i===s.row&&j===s.col&&s.page==="sheet",td=node("td",(active&&s.edit!==null?s.edit:format(a[i]))||" ",active?"active":"");
+   const active=i===s.row&&j===s.col&&s.page==="sheet",td=node("td",(active&&s.edit!==null?s.edit:format(a[i]))||" ",active?"calc-active":"");
    if(!watch&&s.page==="sheet"){
     td.dataset.cell=i+":"+j;td.title=(j===0?"xval":j===1?"yval":"lny")+", row "+(i+1);
     td.addEventListener("click",()=>cellAt(i,j));
@@ -157,6 +157,7 @@ $("answer").addEventListener("submit",e=>{
  status("assess-feedback",msg||"Correct. "+trend+" Extrapolation assumes the trend continues.",Boolean(msg));
 });
 $("answer").addEventListener("input",()=>status("assess-feedback",""));
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
 function size(){
  if(mode==="try"){
   const host=$("handheld-host"),height=window.visualViewport?.height||innerHeight;
@@ -167,7 +168,7 @@ function size(){
   stage.style.setProperty("--try-fit",Math.max(150,Math.min(307,available))+"px");
   return;
  }
- const avail=(window.visualViewport?.height||innerHeight)-(focusOn?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
 }
@@ -238,6 +239,7 @@ $("return").onclick=()=>{switchMode("watch");play.focus({preventScroll:true});};
 $("reset").onclick=()=>{reset();paintTry();stage.focus({preventScroll:true});};
 $("back-to-data").onclick=()=>{update({...state,page:state.page==="sheet"&&state.run?"result":"sheet",dropdown:null,error:"",edit:null});stage.focus({preventScroll:true});};
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus({preventScroll:true});return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"){if(el.closest("button")||e.repeat)return;const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();seekTo(clock+(k==="j"?-10:10));}return;}
@@ -252,8 +254,5 @@ document.addEventListener("keydown",e=>{
   physical(k);
  }
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;}
-setTheme();theme.onchange=()=>{setTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}};
 switchMode(params.get("mode")==="try"?"try":"watch");
 })();

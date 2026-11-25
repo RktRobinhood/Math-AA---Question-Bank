@@ -1,5 +1,6 @@
 'use strict';
 (function(){
+function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id), {density}=globalThis.NspireNormal, {cutoff}=globalThis.NspireInverseNormal;
 const demos=[{target:'mean',x:20,known:5,p:.1,side:'left'},{target:'sd',x:63,known:52,p:.9,side:'left'}],task={target:'mean',x:37,known:4,p:.75,side:'right'};
 const [demo,tailDemo]=demos.map(({p})=>({mean:0,sd:1,area:p,side:'left'}));
@@ -96,7 +97,7 @@ function LCD(s){
    let menu=s.page==='top'?drawMenu('top',s.selected):s.page==='distributions'?drawMenu(s.branch,4)+drawMenu(s.page,s.selected):drawMenu('top',s.branch==='statistics'?5:4)+drawMenu(s.page,s.selected);
    return '<div class="menu-stack">'+menu+'</div>';
  }
- if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===okField?'active':'')+'">OK</span> <span class="'+(s.field===cancelField?'active':'')+'">Cancel</span></div></div>';
+ if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===okField?'calc-active':'')+'">OK</span> <span class="'+(s.field===cancelField?'calc-active':'')+'">Cancel</span></div></div>';
  const line=(command,answer)=>'<p>'+esc(command)+'</p><p class="answers"><strong>'+esc(answer)+'</strong></p>';
  const history=s.history?line(s.history.command,s.history.answer):'';
  const latest=s.page==='result'&&s.previous!==s.history?.command?line(s.previous,s.answer):'';
@@ -289,7 +290,7 @@ if(recorded){
  audio.preload='metadata';audio.src=recorded.audio;
 }
 else if(manifest)message('The measured cue sheet is invalid. Captions only.');
-document.addEventListener('keydown',e=>{
+document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(!$('try').hidden&&e.target===document.body&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.repeat&&e.key.toLowerCase()==='m'){
    e.preventDefault();tryHost.focus({preventScroll:true});tryShell.getKey('menu').click();
  }
@@ -298,14 +299,14 @@ const tabs=[$('watch-tab'),$('try-tab')];
 const focusStage=$('watch').querySelector('.viewer');
 let preferredFocus=false,focusDismissed=false;
 focusButton.addEventListener('click',e=>{if(e.isTrusted){preferredFocus=focusButton.getAttribute('aria-pressed')==='true';focusDismissed=!preferredFocus;}});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('watch').hidden){preferredFocus=false;focusDismissed=true;}});
+document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;if(e.key==='Escape'&&!$('watch').hidden){preferredFocus=false;focusDismissed=true;}});
 function fitWatch(){
  if($('watch').hidden||focusStage.classList.contains('cx-focused'))return;
  const footer=$('watch').querySelector('.player').getBoundingClientRect();
- if(preferredFocus||!focusDismissed&&(footer.bottom>innerHeight+1||footer.top<watchShell.body.getBoundingClientRect().bottom+4||innerHeight<660||innerWidth<=375))focusButton.click();
+ if(preferredFocus||!focusDismissed&&(footer.bottom>lessonEnd()+1||footer.top<watchShell.body.getBoundingClientRect().bottom+4||innerHeight<660||innerWidth<=375))focusButton.click();
 }
 const frameEl=focusStage.querySelector('.inverse-frame');
-const focusOutside=[document.querySelector('.header'),document.querySelector('.tabs'),$('watch').querySelector('.director'),document.querySelector('.notes')];
+const focusOutside=[document.querySelector('.header'),document.querySelector('.calc-tabs'),$('watch').querySelector('.director'),document.querySelector('.notes')];
 function syncFocus(){
  const focused=!$('watch').hidden&&focusStage.classList.contains('cx-focused');
  focusOutside.forEach(el=>{el.inert=focused;});
@@ -350,10 +351,6 @@ $('reset-try').addEventListener('click',()=>{
  tryFeedback.textContent='';$('model-feedback').textContent='';paintTry();tryHost.focus();
 });
 $('return-watch').addEventListener('click',()=>tab(0,true));
-const theme=$('theme'),themeKey='ti-lab-theme';
-try{const saved=localStorage.getItem(themeKey);theme.value=['dark','light'].includes(saved)?saved:'system'}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;try{localStorage.setItem(themeKey,theme.value)}catch{}}
-theme.addEventListener('change',setTheme);setTheme();
 const ui={target:$('target'),x:$('x'),known:$('known'),area:$('area'),event:$('event')};
 function curve(el,{mean,sd,area,side='left'},reveal){
  const L=18,R=314,B=78;

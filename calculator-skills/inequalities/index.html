@@ -1,19 +1,30 @@
-<!doctype html><html lang="en" data-theme="system"><head>
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Graphical inequalities and exclusions · Calculator Coach</title>
-<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<title>Graphical inequalities and exclusions · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
+<link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css?v=canvas-1">
+<script src="../../assets/js/courses.js" defer></script>
+<script src="../../assets/js/course.js" defer></script>
+<script src="../../assets/js/shell.js?v=theme-3" defer></script>
+<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/basket.js" defer></script>
+<script src="../../assets/js/generate.js" defer></script>
+
+<link rel="stylesheet" href="lesson.css?v=bank-shell-1"><link rel="stylesheet" href="../handheld/shell.css">
 <script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
-<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
-</head><body><main>
-<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT13</span></p><h1>Graphical inequalities</h1><p class="subtitle">Find where one graph lies above or below another. Keep undefined points out.</p></div>
-<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
-<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js?v=bank-shell-1" defer></script>
+</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
+<header class="header"><div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT13</span></p><h1>Graphical inequalities</h1><p class="subtitle">Find where one graph lies above or below another. Keep undefined points out.</p></div>
+</header>
+<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
 <section class="ct13-shared" id="stage" aria-label="TI-Nspire CX II-T Graphs lesson and calculator" tabindex="0">
 <div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct13-bounds" data-visible="false" aria-hidden="true"></p></div>
 <div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
 <div class="ct13-stage-grid"><div class="ct13-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play worked example" title="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
 <div class="ct13-stage-side">
-<aside id="watch-side" class="director" aria-label="Demonstration steps"><h2>Where is f₁(x) ≤ f₂(x)?</h2><p class="formula">f₁(x) = (x² − 4)/(x − 1)<br>f₂(x) = 0<br>−4 ≤ x ≤ 4</p><ol id="steps" class="steps"></ol></aside>
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><h2>Where is f₁(x) ≤ f₂(x)?</h2><p class="calc-formula">f₁(x) = (x² − 4)/(x − 1)<br>f₂(x) = 0<br>−4 ≤ x ≤ 4</p><ol id="steps" class="steps"></ol></aside>
 <aside id="try-side" class="director" hidden><h2>Write the solution set</h2>
 <p id="keypad-problem" class="ct13-taskline"></p><p id="keypad-hint"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
 <form id="expression-form"><div class="curve-fields"><label for="curve-f"><span class="curve-one">f₁(x)</span><input type="text" id="curve-f" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label><label for="curve-g"><span class="curve-two">f₂(x)</span><input type="text" id="curve-g" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label></div>

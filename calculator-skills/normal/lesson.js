@@ -235,7 +235,12 @@ function prepare(profile){
  loadingTimeout=setTimeout(()=>fallbackFromAudio('Narration did not load in time.'),4000);
  audio.src=profile.file;audio.load();
 }
+let consideredPlaybackFocus=false;
 async function start(){
+ if(!consideredPlaybackFocus){
+   consideredPlaybackFocus=true;
+   if(!viewer.classList.contains('cx-focused')&&matchMedia('(max-height:700px), (max-width:700px) and (max-height:760px)').matches)focusButton.click();
+ }
  if(mediaState==='loading')return;
  if(now>=duration-.02)go(0);
  const ticket=++generation;
@@ -284,8 +289,9 @@ const fitWatch=()=>{
    const room=viewer.getBoundingClientRect().bottom-host.top-shellPadding-2-(landscape?0:strip);
    viewer.style.setProperty('--ct39-fit',Math.max(155,Math.floor(room*558/1168))+'px');
  }else if(matchMedia('(max-width:700px)').matches){
-   const room=document.documentElement.clientHeight-host.top-window.scrollY-shellPadding-strip-4;
-   viewer.style.setProperty('--ct39-fit-page',Math.max(167,Math.floor(room*558/1168))+'px');
+   const nav=document.querySelector('.tabbar').getBoundingClientRect().height;
+   const room=document.documentElement.clientHeight-host.top-window.scrollY-shellPadding-strip-nav-8;
+   viewer.style.setProperty('--ct39-fit-page',Math.max(145,Math.floor(room*558/1168))+'px');
  }
 };
 const observer=new ResizeObserver(fitWatch);
@@ -299,7 +305,6 @@ const syncFocus=()=>{
 };
 new MutationObserver(syncFocus).observe(viewer,{attributes:true,attributeFilter:['class']});
 const tabs=[$('watch-tab'),$('try-tab')];
-let enteredWatch=false;
 function tab(i,target){
  if(i!==0){
    if(running||pending)stop();
@@ -307,8 +312,7 @@ function tab(i,target){
  }
  tabs.forEach((el,k)=>{el.tabIndex=k===i?0:-1;el.setAttribute('aria-selected',String(k===i));$(el.getAttribute('aria-controls')).hidden=k!==i});
  if(i===0){
-   if((restoreFocus||!enteredWatch&&matchMedia('(max-height:700px), (max-width:700px) and (max-height:760px)').matches)&&!viewer.classList.contains('cx-focused'))focusButton.click();
-   enteredWatch=true;
+   if(restoreFocus&&!viewer.classList.contains('cx-focused'))focusButton.click();
    window.scrollTo({top:0,left:0,behavior:'instant'});
    viewer.scrollTop=0;
  }
@@ -340,10 +344,6 @@ $('reset-try').addEventListener('click',()=>{
  restorePractice();tryHost.focus({preventScroll:true});
 });
 $('return-watch').addEventListener('click',()=>tab(0,true));
-const theme=$('theme'),themeKey='ti-lab-theme';
-try{const saved=localStorage.getItem(themeKey);theme.value=['dark','light'].includes(saved)?saved:'system'}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;try{localStorage.setItem(themeKey,theme.value)}catch{}}
-theme.addEventListener('change',setTheme);setTheme();
 const ui={mean:$('mean'),sd:$('sd'),lower:$('lower'),upper:$('upper'),event:$('event')};
 function curve(el,{mean,sd,lower=-Infinity,upper=Infinity}){
  const L=18,R=314,B=79;

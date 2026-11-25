@@ -1,6 +1,7 @@
 "use strict";
 (function(){
- const $=id=>document.getElementById(id);
+ function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
+const $=id=>document.getElementById(id);
  const M=window.CT51Math,S=window.CT51Screen,T=window.CT51Tape,H=window.HandheldTransport;
  const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),overlay=$("stage-play"),lcd=$("lcd"),canvas=$("drawing");
  const screen=S.screen(canvas),expression=$("expression"),exact=$("point-input"),hot=$("hotspots"),steps=$("steps");
@@ -8,7 +9,7 @@
 
  function fitTry(){
   if(mode!=="try")return;
-  const h=innerHeight,w=innerWidth,phone=w<=710,host=$("handheld-host");
+  const h=lessonEnd(),w=innerWidth,phone=w<=710,host=$("handheld-host");
   if(h>960){stage.style.removeProperty("--retro-try-width");return;}
   const top=Math.max(0,host.getBoundingClientRect().top+window.scrollY);
   const visibleFraction=phone&&h<650?.804:1;
@@ -99,7 +100,7 @@
   if(mode!=="watch")return;
   if(playing){pause();return;}
   if(!focusChecked){
-   focusChecked=true;const visible=window.visualViewport?.height||innerHeight;
+   focusChecked=true;const visible=lessonEnd();
    if(!focused&&$("watch-player").getBoundingClientRect().bottom>visible+5)focus(true);
   }
   hasStarted=true;if(document.activeElement===overlay)play.focus({preventScroll:true});
@@ -121,7 +122,7 @@
   b.addEventListener("click",e=>{e.stopPropagation();action();});hot.append(b);
  }
  function message(s="",error=false){
-  const el=$("keypad-result");el.hidden=!s;el.className="feedback "+(error?"is-wrong":"is-right");el.textContent=s;
+  const el=$("keypad-result");el.hidden=!s;el.className="feedback"+(error?"is-wrong":"is-right");el.textContent=s;
  }
  function freshTry(){
   if(mode!=="try")return;
@@ -234,7 +235,7 @@
   shell.setKeys([]);shell.setInteractive(!watching);
   if(watching){
    hot.replaceChildren();lcd.classList.remove("pick");drawWatch();updatePlay();
-   const h=window.visualViewport?.height||innerHeight;
+   const h=lessonEnd();
    if(lastWatchFocus||focusChoice!==false&&$("watch-player").getBoundingClientRect().bottom>h+5)focus(true);
   }else{overlay.hidden=true;freshTry();fitTry();}
  }
@@ -247,7 +248,7 @@
  });
  $("take-over").addEventListener("click",()=>{change("try",time<T.duration-.012);stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
- document.addEventListener("keydown",e=>{
+ document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(e.key==="Escape"&&focused){e.preventDefault();focusChoice=false;focus(false);$("focus-view").focus();return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
   const tag=e.target.closest("button");
@@ -270,16 +271,13 @@
   const vals=response.map(v=>v.valueAsNumber),goals=[target.slope,target.intercept];
   if(!vals.every(Number.isFinite))return;
   const ok=vals.map((v,i)=>sig.some(p=>near(v,Number(goals[i].toPrecision(p)))));
-  feedback.className="feedback "+(ok.every(Boolean)?"is-right":"is-wrong");
+  feedback.className="feedback"+(ok.every(Boolean)?"is-right":"is-wrong");
   feedback.textContent=ok.every(Boolean)?"Correct. The line has the slope and passes through the chosen point.":ok[0]?"The slope is right. Check b using the curve’s y-coordinate.":"Check the slope at the specified x.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- document.documentElement.dataset.theme=theme.value;
- theme.addEventListener("change",()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
  // Preserve first-paint access on short mobile viewports. The visible Exit button restores the page.
  if(mode==="watch"){
-  const height=window.visualViewport?.height||innerHeight;
+  const height=lessonEnd();
   if($("watch-player").getBoundingClientRect().bottom>height+5){
    focusChecked=true;focus(true);
   }

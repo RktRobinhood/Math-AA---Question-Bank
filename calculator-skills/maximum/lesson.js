@@ -1,5 +1,6 @@
 "use strict";
 (function(){
+function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id), M=CT12MaxMath,S=CT12MaxScreen,T=CT12MaxTape,H=HandheldTransport;
 const stage=$("stage"),canvas=$("drawing"),lcd=$("lcd"),panel=$("hotspots"),screen=S.screen(canvas);
 const expression=$("expression"),left=$("allowed-left"),right=$("allowed-right"),bound=$("bound");
@@ -69,7 +70,7 @@ function pause(){playing=false;cancelAnimationFrame(frame);labelPlay();paintWatc
 function tick(t){if(!playing||mode!=="watch")return;clock=Math.min(T.duration,Math.max(0,(t-origin)/1000));paintWatch();if(clock>=T.duration){pause();return;}frame=requestAnimationFrame(tick);}
 function start(){
  if(mode!=="watch")return;
- if(!looked){looked=true;const h=window.visualViewport?.height||innerHeight;if($("watch-player").getBoundingClientRect().bottom>h+3)focus(true);}
+ if(!looked){looked=true;const h=lessonEnd();if($("watch-player").getBoundingClientRect().bottom>h+3)focus(true);}
  started=true;if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});
  if(clock>=T.duration-.015)go(0);
  origin=performance.now()-clock*1000;playing=true;labelPlay();paintWatch();frame=requestAnimationFrame(tick);
@@ -92,7 +93,7 @@ function isExercise(){
  catch{return false;}
 }
 function msg(s="",err=false){
- const p=$("keypad-result");p.textContent=s;p.hidden=!s;p.className="feedback "+(err?"is-wrong":"is-right");
+ const p=$("keypad-result");p.textContent=s;p.hidden=!s;p.className="feedback"+(err?"is-wrong":"is-right");
 }
 function drawCompare(){
  const h=$("comparison"),p=state.checked;h.replaceChildren();h.hidden=!p;
@@ -212,7 +213,7 @@ tabs.forEach((el,i)=>{
 });
 $("take-over").addEventListener("click",()=>{change("try",true);stage.focus({preventScroll:true});});
 $("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
-document.addEventListener("keydown",e=>{
+document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
  if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
  if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
@@ -229,11 +230,9 @@ $("answer-form").addEventListener("submit",e=>{
  e.preventDefault();if(!isExercise())return;edited=true;const x=M.readNumber(xField.value),y=M.readNumber(yField.value);
  const okX=Number.isFinite(x)&&(goals.flat?(x>=challenge.allowed[0]&&x<=challenge.allowed[1]):goals.winners.some(c=>M.matches(x,c.x)));
  const okY=M.matches(y,goals.maxY);
- feedback.className="feedback "+(okX&&okY?"is-right":"is-wrong");
+ feedback.className="feedback"+(okX&&okY?"is-right":"is-wrong");
  feedback.textContent=okX&&okY?"Correct. No allowed point has a larger y-value.":!Number.isFinite(x)||!Number.isFinite(y)?"Enter a numerical x-coordinate and value.":okX?"The x-coordinate is right. Check its y-value.":"Not yet. Compare the peak and both allowed endpoints.";
 });
-const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
-const apply=()=>{document.documentElement.dataset.theme=theme.value;};apply();
-theme.addEventListener("change",()=>{apply();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
 sync();change(query.get("mode")==="try"?"try":"watch");
+if(mode==="watch"&&$("watch-player").getBoundingClientRect().bottom>lessonEnd()+2)focus(true);
 })();

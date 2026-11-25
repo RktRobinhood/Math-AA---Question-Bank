@@ -16,7 +16,7 @@ const texts={
 };
 const html=(tag,c,t)=>{const e=document.createElement(tag);if(c)e.className=c;if(t)e.textContent=t;return e;};
 const leaf=(k,t,run)=>({k:String(k),t,run}), branch=(k,t,items)=>({k:String(k),t,items});
-function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCalc}){
+function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCalc,insertFraction}){
  const G=root.TIGraphGeneral,F=root.TIFreeCalc;
  let current='calc', menus=[], menuFocus=0, editable=0, useField='function', bounds=null, trace=null, win=[-10,10,-10,10], mark=null,
      sources=['',''], models=[null,null], mode='DEG', scale=[null,null], dialogOpen=false, remembered=null, pan=null, suppressGraphClick=false;
@@ -99,7 +99,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  const distributions=[command(2,'normCdf'),command(3,'invNorm'),command('a','binomPdf'),command('b','binomCdf'),command('d','poissPdf'),command('e','poissCdf')];
  const calcMenu=[
   branch(1,'Actions',[leaf(5,'Clear History',()=>{calc.clearHistory();menuStatus('History cleared.');})]),
-  branch(2,'Number',[leaf(1,'Convert to Decimal',()=>{if(calc.getState().expression)calc.press('enter');else {calc.setText('Ans');calc.press('enter');}})]),
+  branch(2,'Number',[leaf(1,'Convert to Decimal',()=>{if(calc.getState().expression)calc.press('approx');else {calc.setText('Ans');calc.press('approx');}})]),
   branch(3,'Algebra',[command(1,'nSolve')]),
   branch(4,'Calculus',[command(2,'nDerivative'),command(3,'nInt')]),
   branch(5,'Probability',[command(2,'nPr'),command(3,'nCr'),branch(5,'Distributions',distributions)]),
@@ -283,12 +283,13 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
     ginput.setRangeText(lead+tail,at,end,'end');ginput.setSelectionRange(at+lead.length,at+lead.length);focusGraph();
   };
   const append=(lead,tail='')=>current==='calc'?insertTemplate(lead,tail):graphInsert(lead,tail);
+  if(k==='fraction'){if(current==='calc')insertFraction();else {append('(',')/()');menuStatus('Type the numerator, then move right into the denominator.');}return true;}
   if(k==='catalog'){
    if(current==='calc')popup('Catalog',Object.keys(texts).map((t,i)=>command(i+1,t)));
    else popup('Catalog',[leaf(1,'abs(',()=>append('abs(',')')),leaf(2,'ln(',()=>append('ln(',')')),leaf(3,'log(',()=>append('log(',')')),leaf(4,'sqrt(',()=>append('sqrt(',')'))]);
    return true;
   }
-  if(k==='templates'){popup('Templates',[leaf(1,'Fraction',()=>{append('(',')/()');menuStatus('Type the numerator, then move right into the denominator.');}),leaf(2,'Square root',()=>append('√(',')')),leaf(3,'Power',()=>append('^(',')'))]);return true;}
+  if(k==='templates'){popup('Templates',[leaf(1,'Fraction',()=>{if(current==='calc')insertFraction();else {append('(',')/()');menuStatus('Type the numerator, then move right into the denominator.');}}),leaf(2,'Square root',()=>append('√(',')')),leaf(3,'Power',()=>append('^(',')'))]);return true;}
   if(k==='symbols'){popup('Symbols',[leaf(1,'π',()=>append('π')),leaf(2,'√',()=>append('√(',')')),...(current==='calc'?[leaf(3,'Percent',()=>append('%')),leaf(4,'Factorial',()=>append('!'))]:[])]);return true;}
   if(k==='var'){popup('Values',[...(current==='calc'?[leaf(1,'Ans',()=>append('Ans'))]:[]),leaf(2,'x',()=>append('x'))]);return true;}
   if(current==='calc'&&k==='tab'){

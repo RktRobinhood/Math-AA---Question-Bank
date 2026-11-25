@@ -85,16 +85,16 @@
  function tick(now){if(!playing||mode!=="watch")return;t=M.clamp((now-origin)/1000,0,duration);if(t>=duration){pause();return;}renderWatch();raf=requestAnimationFrame(tick);}
  function fitWatch(){
   if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight,top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+  const h=window.visualViewport?.height||innerHeight,top=Math.max(0,stage.getBoundingClientRect().top)+(document.querySelector(".tabbar")?.offsetHeight||0);
   const occupied=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
   const w=Math.max(82,Math.min(focused?338:304,Math.floor((h-top-occupied-24)*558/1168)));
   stage.style.setProperty("--watch-fit-width",w+"px");
  }
  function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct16-focused",focused);document.body.classList.toggle("ct16-focus-open",focused);
+  focused=Boolean(v);stage.classList.toggle("ct16-focused",focused);stage.dataset.focused=String(focused);document.body.classList.toggle("ct16-focus-open",focused);
   const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
   b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"⛶";
-  document.querySelectorAll(".header,.tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
+  document.querySelectorAll(".header,.calc-tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
   if(focused)stage.scrollTop=0;fitWatch();
  }
  function fitAtEntry(){fitWatch();if(mode==="watch"&&!focused&&shell.body.getBoundingClientRect().width<156)focus(true);}
@@ -283,6 +283,7 @@
  $("take-over").addEventListener("click",()=>{const done=t>=duration-.015;modeTo("try",!done);stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
  document.addEventListener("keydown",e=>{
+  if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
   if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
@@ -305,8 +306,5 @@
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?"Both correct. Day "+goal.day+" is the first checkpoint that meets the threshold.":timeRight?"The continuous time is correct. Test the adjacent whole days against the target rather than rounding.":dayRight?"The whole day is correct. Read the x-coordinate at the intersection for the continuous time.":"Use Intersection for the continuous time, then test the adjacent whole days against the target.";
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- const updateTheme=()=>{document.documentElement.dataset.theme=theme.value;};updateTheme();
- theme.addEventListener("change",()=>{updateTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  modeTo(params.get("mode")==="try"?"try":"watch");
 })();

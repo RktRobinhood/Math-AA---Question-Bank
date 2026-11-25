@@ -1,0 +1,11 @@
+/* Match the site's surface and reserve its bars without a second panel. */
+:root[data-theme] body.neutral-frame.neutral-standalone {
+  background:var(--ground);color:var(--ink);font:var(--fs)/1.45 var(--ui);
+  --solo-nav-bottom:0px;
+  padding:calc(var(--top-h) + 12px) .75rem calc(var(--solo-nav-bottom) + 6px);
+  --neutral-handheld-width:min(420px,calc(100vw - 24px),max(132px,
+    calc((100dvh - var(--top-h) - var(--solo-nav-bottom) - 73px) * 558 / 1168)));
+}
+@media (width < 1024px){
+  :root[data-theme] body.neutral-frame.neutral-standalone{--solo-nav-bottom:calc(var(--tab-h) + env(safe-area-inset-bottom,0px))}
+}

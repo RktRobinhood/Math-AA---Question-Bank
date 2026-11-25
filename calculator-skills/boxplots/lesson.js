@@ -60,13 +60,13 @@
  function tick(now){if(!playing||mode!=="watch")return;t=M.clamp((now-origin)/1000,0,T.duration);if(t>=T.duration){pause();return;}renderWatch();raf=requestAnimationFrame(tick);}
  function fitWatch(){
   if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight,top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+  const h=window.visualViewport?.height||innerHeight,top=Math.max(0,stage.getBoundingClientRect().top)+(document.querySelector(".tabbar")?.offsetHeight||0);
   const occupied=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
   const w=Math.max(82,Math.min(focused?338:304,Math.floor((h-top-occupied-29)*558/1168)));
   stage.style.setProperty("--watch-fit-width",w+"px");
  }
  function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct30-focused",focused);document.body.classList.toggle("ct30-focus-open",focused);
+  focused=Boolean(v);stage.classList.toggle("ct30-focused",focused);stage.dataset.focused=String(focused);document.body.classList.toggle("ct30-focus-open",focused);
   const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
   b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"⛶";
   if(focused)stage.scrollTop=0;fitWatch();
@@ -220,6 +220,7 @@
  $("take-over").addEventListener("click",()=>{modeTo("try",!atEnd());stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
  document.addEventListener("keydown",e=>{
+  if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus({preventScroll:true});return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
   if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
@@ -230,8 +231,5 @@
   const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");
   if(k){e.preventDefault();press(k);}
  });
- const theme=$("theme");try{const v=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(v))theme.value=v;}catch{}
- function setTheme(){document.documentElement.dataset.theme=theme.value;}
- setTheme();theme.addEventListener("change",()=>{setTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{}});
  modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
 })();

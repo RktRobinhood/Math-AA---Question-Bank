@@ -308,8 +308,3 @@ $('take-over').addEventListener('click',()=>{
 });
 modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 setMode(mode);
-const theme=$('theme');let themeChoice='auto';
-try{themeChoice=localStorage.getItem('ti-lab-theme')||'auto'}catch{}
-theme.value=themeChoice;const dark=matchMedia('(prefers-color-scheme: dark)');
-function updateTheme(){document.documentElement.dataset.theme=themeChoice==='auto'?(dark.matches?'dark':'light'):themeChoice}
-theme.addEventListener('change',()=>{themeChoice=theme.value;try{localStorage.setItem('ti-lab-theme',themeChoice)}catch{}updateTheme()});dark.addEventListener?.('change',updateTheme);updateTheme();

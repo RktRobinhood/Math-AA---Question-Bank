@@ -1,6 +1,7 @@
 "use strict";
 (function(){
- const $=id=>document.getElementById(id);
+ function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
+const $=id=>document.getElementById(id);
  const captions=[
   "Exactly three means one count: X = 3. Start on a Calculator page.",
   "Press Menu, 5 for Probability, 5 for Distributions, then D for Binomial Pdf.",
@@ -46,7 +47,7 @@
  const escape=(s)=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
  const timecode=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
  const mkMenu=(list,sel,which,live)=>'<ul class="lcd-menu">'+list.map((name,i)=>'<li'+(i===sel?' class="current"':'')+(live?' data-menu="'+which+':'+i+'"':'')+'>'+escape(name)+'</li>').join("")+"</ul>";
- const wizard=(values,field,live)=>'<div class="lcd-dialog"><strong>Binomial Pdf</strong>'+labels.map((n,i)=>'<div class="lcd-field'+(i===field?' active':'')+(live?' kbd-action" data-field="'+i:'')+'"><span>'+n+':</span><span>'+escape(values[i]||"\u00a0")+'</span></div>').join("")+'<div class="lcd-ok"><span'+(field===3?' class="active"':'')+(live?' data-field="3"':'')+'>OK</span> <span'+(live?' data-field="4"':'')+'>Cancel</span></div></div>';
+ const wizard=(values,field,live)=>'<div class="lcd-dialog"><strong>Binomial Pdf</strong>'+labels.map((n,i)=>'<div class="lcd-field'+(i===field?' active':'')+(live?' kbd-action" data-field="'+i:'')+'"><span>'+n+':</span><span>'+escape(values[i]||"\u00a0")+'</span></div>').join("")+'<div class="lcd-ok"><span'+(field===3?' class="calc-active"':'')+(live?' data-field="3"':'')+'>OK</span> <span'+(live?' data-field="4"':'')+'>Cancel</span></div></div>';
  const lcdResult=h=>'<div class="lcd-history"><p>'+escape(h.command)+'</p><p class="answers"><strong>'+escape(h.value)+'</strong></p></div>';
  const lcdEntry=x=>'<div class="lcd-entry"><p>'+escape(x||"\u00a0")+'</p></div>';
  const activate=(b,v)=>{b.setAttribute("aria-current",String(v));};
@@ -198,7 +199,7 @@
  document.addEventListener("visibilitychange",()=>{if(document.hidden&&(playing||pending))pause();});
 
  function report(message,error=false){
-  reportText=message||"";reportError=Boolean(error);kpReport.textContent=reportText;kpReport.hidden=!reportText;kpReport.className="feedback "+(reportError?"is-wrong":"is-right");
+  reportText=message||"";reportError=Boolean(error);kpReport.textContent=reportText;kpReport.hidden=!reportText;kpReport.className="feedback"+(reportError?"is-wrong":"is-right");
  }
  const decimal=/^(?:\d+(?:\.\d*)?|\.\d+)$/;
  function readNumber(x){return decimal.test(x)?Number(x):NaN;}
@@ -335,12 +336,12 @@
  });
  function fitView(allowFocus=false){
   if(typeof stage.getBoundingClientRect!=="function")return;
-  const height=window.visualViewport?.height||innerHeight, v=stage.getBoundingClientRect();
+  const height=lessonEnd(), v=stage.getBoundingClientRect();
   if(mode==="try"){
    const top=$("handheld-host").getBoundingClientRect().top+window.scrollY;
    stage.style.setProperty("--try-fit",Math.min(298,Math.max(151,Math.floor((height-top-11)*558/1168)))+"px");return;
   }
-  const avail=height-(focusView?0:Math.max(0,v.top));
+  const avail=height-Math.max(0,v.top);
   const landscape=focusView&&innerWidth>700&&avail<=600;
   const reserve=landscape?23:$("watch-message").offsetHeight+$("watch-player").offsetHeight+24;
   const width=Math.min(focusView?334:284,Math.max(98,Math.floor((avail-reserve)*558/1168)));
@@ -352,7 +353,7 @@
   document.body.classList.toggle("ct37-focus-open",focusView);
   const name=focusView?"Exit focused view":"Focused view", button=$("focus-view");
   button.setAttribute("aria-pressed",String(focusView));button.setAttribute("aria-label",name);button.title=name;button.textContent=focusView?"Exit":"Focus";
-  for(const el of document.querySelectorAll?.("main > .header, main > .tabs, main > .notes")||[])el.inert=focusView;
+  for(const el of document.querySelectorAll?.("main > .header, main > .calc-tabs, main > .notes")||[])el.inert=focusView;
   if(focusView)stage.scrollTop=0;
   if(!focusView&&mode==="watch")button.focus({preventScroll:true});fitView();
  }
@@ -403,7 +404,7 @@
  });
  $("take-over").addEventListener("click",()=>onMode("try",true,true));
  $("return-watch").addEventListener("click",()=>onMode("watch",true));
- document.addEventListener("keydown",e=>{
+ document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
   if(focusView&&e.key==="Escape"){e.preventDefault();focusChoice=false;focusStage(false);return}
   // A linked Try can land on the document body without stealing focus.
   if(mode==="try"&&e.target===document.body&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.repeat&&e.key.toLowerCase()==="m"){
@@ -414,10 +415,6 @@
   else if(e.key==="j"){e.preventDefault();go(readTime()-10)}else if(e.key==="l"){e.preventDefault();go(readTime()+10)}
  });
 
- const theme=$("theme"),themes=["system","light","dark"];
- try{const v=localStorage.getItem("ti-lab-theme");if(themes.includes(v))theme.value=v}catch{}
- document.documentElement.dataset.theme=theme.value;
- theme.addEventListener("change",()=>{document.documentElement.dataset.theme=theme.value;try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value)}catch{}});
 
  function typedPrefill(){
   const raw={n:params.get("n"),p:params.get("p"),k:params.get("k")};
@@ -471,7 +468,7 @@
   const v=answer.valueAsNumber,correct=mass(challenge.n,challenge.p,challenge.k),r=Number(correct.toPrecision(3));
   if(!Number.isFinite(v)||v<0||v>1)return;
   if(correct===0&&challenge.p>0&&challenge.p<1){feedback.className="feedback is-wrong";feedback.textContent="This nonzero probability is too small for the simulator to check.";return;}
-  const valid=v===r;feedback.className="feedback "+(valid?"is-right":"is-wrong");
+  const valid=v===r;feedback.className="feedback"+(valid?"is-right":"is-wrong");
   feedback.textContent=valid?"Correct. You found the probability of exactly "+challenge.k+".":Math.abs(v-correct)<=Math.max(Number.MIN_VALUE,Math.abs(correct)*.00055)?"The probability is right. Now round it to three significant figures.":"Not yet. Binomial Pdf needs a single X Value. Check n, p and the exact count.";
  });
  setupAudio();

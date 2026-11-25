@@ -1,12 +1,11 @@
-:root{color-scheme:light;--bg:#eef2ec;--page:#fcfdf9;--text:#19241f;--muted:#4b5d53;--line:#c9d5cc;--green:#143d2d;--primary:#1b5139;--onprimary:#f7fff9;--mint:#dcebe0;--focus:#116eb1;--error:#963514;--good:#196242;--screen:#f6f7ed;--screen-ink:#182820;--bezel:#191f21;--mono:ui-monospace, "Cascadia Mono", Consolas,monospace}
-:root[data-theme=dark]{color-scheme:dark;--bg:#111a16;--page:#1b2921;--text:#edf4ec;--muted:#b9c9bd;--line:#3f5c4a;--green:#b5e8c7;--primary:#b3e5c6;--onprimary:#143125;--mint:#293f33;--focus:#82cefc;--error:#ffb59c;--good:#a4e9c5}
-@media(prefers-color-scheme:dark){:root[data-theme=system]{color-scheme:dark;--bg:#111a16;--page:#1b2921;--text:#edf4ec;--muted:#b9c9bd;--line:#3f5c4a;--green:#b5e8c7;--primary:#b3e5c6;--onprimary:#143125;--mint:#293f33;--focus:#82cefc;--error:#ffb59c;--good:#a4e9c5}}
+:where(body.calculator-bank-lesson > main){color-scheme:light;--bg:#eef2ec;--page:#fcfdf9;--text:#19241f;--muted:#4b5d53;--line:#c9d5cc;--green:#143d2d;--primary:#1b5139;--onprimary:#f7fff9;--mint:#dcebe0;--focus:#116eb1;--error:#963514;--good:#196242;--screen:#f6f7ed;--screen-ink:#182820;--bezel:#191f21;--mono:ui-monospace, "Cascadia Mono", Consolas,monospace}
+html[data-theme=dark] :where(body.calculator-bank-lesson > main){color-scheme:dark;--bg:#111a16;--page:#1b2921;--text:#edf4ec;--muted:#b9c9bd;--line:#3f5c4a;--green:#b5e8c7;--primary:#b3e5c6;--onprimary:#143125;--mint:#293f33;--focus:#82cefc;--error:#ffb59c;--good:#a4e9c5}
 *{box-sizing:border-box} [hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1060px;margin:auto;padding:clamp(17px,4vw,45px)}
-h1,h2,p{margin:0} h1{font-size:clamp(1.7rem,4.2vw,3rem);line-height:1.05;letter-spacing:-.057em;max-width:760px} h2{font-size:clamp(1.22rem,3vw,1.75rem);line-height:1.14;letter-spacing:-.035em;margin-bottom:.55em} p{max-width:62ch}
+:where(body.calculator-bank-lesson > main) h1,:where(body.calculator-bank-lesson > main) h2,:where(body.calculator-bank-lesson > main) p{margin:0}:where(body.calculator-bank-lesson > main) h1{font-size:clamp(1.7rem,4.2vw,3rem);line-height:1.05;letter-spacing:-.057em;max-width:760px}:where(body.calculator-bank-lesson > main) h2{font-size:clamp(1.22rem,3vw,1.75rem);line-height:1.14;letter-spacing:-.035em;margin-bottom:.55em}:where(body.calculator-bank-lesson > main) p{max-width:62ch}
 .header{display:flex;gap:16px;justify-content:space-between;align-items:flex-start;margin-bottom:20px}.subtitle{color:var(--muted);margin-top:8px}.tag{font:600 .75rem/1.4 var(--mono);color:var(--green);margin-bottom:.6em;letter-spacing:.015em}.tag span{font-weight:800}
-button,select,input{font:inherit;color:inherit} button,select{cursor:pointer} button,input:not([type=checkbox],[type=range]),select{min-height:44px;border-radius:7px;border:1px solid var(--line);background:var(--page)} button{padding:7px 13px;font-weight:650} input:not([type=checkbox],[type=range]),select{padding:7px 10px;max-width:100%;width:100%} button:hover{background:var(--mint)} a{color:var(--green)} :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+:where(body.calculator-bank-lesson > main) button,:where(body.calculator-bank-lesson > main) select,:where(body.calculator-bank-lesson > main) input{font:inherit;color:inherit}:where(body.calculator-bank-lesson > main) button,:where(body.calculator-bank-lesson > main) select{cursor:pointer}:where(body.calculator-bank-lesson > main) button,:where(body.calculator-bank-lesson > main) input:not([type=checkbox],[type=range]),:where(body.calculator-bank-lesson > main) select{min-height:44px;border-radius:7px;border:1px solid var(--line);background:var(--page)}:where(body.calculator-bank-lesson > main) button{padding:7px 13px;font-weight:650}:where(body.calculator-bank-lesson > main) input:not([type=checkbox],[type=range]),:where(body.calculator-bank-lesson > main) select{padding:7px 10px;max-width:100%;width:100%}:where(body.calculator-bank-lesson > main) button:hover{background:var(--mint)}:where(body.calculator-bank-lesson > main) a{color:var(--green)}:where(body.calculator-bank-lesson > main) :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .primary{background:var(--primary);color:var(--onprimary);border-color:var(--primary)}.primary:hover{background:var(--primary);filter:brightness(1.10)}
 .theme{flex-shrink:0}.theme select{font-size:.8rem}
 .tabs{display:flex;gap:3px;border-bottom:1px solid var(--line);margin-bottom:17px}.tabs button{border:0;background:transparent;border-radius:5px 5px 0 0;border-bottom:3px solid transparent;min-width:90px}.tabs button[aria-selected=true]{border-bottom-color:var(--green);background:var(--mint);color:var(--green)}
@@ -129,7 +128,6 @@ body.ct11-focus-open{overflow:hidden}
  main:has(.ct11-shared[data-mode=watch]) .tabs{margin-bottom:8px}
 }
 @media(max-width:700px){main:has(.ct11-shared[data-mode=watch]) .header h1{font-size:clamp(1.42rem,6.25vw,1.65rem)}}
-
 .ct11-rehearsal{font:650 .73rem var(--mono);flex:none;color:var(--muted)}
 .ct11-shared .lcd-field span:last-child{overflow:hidden;white-space:nowrap}
 #model>label{margin-bottom:.8rem}
@@ -173,3 +171,10 @@ body.ct11-focus-open{overflow:hidden}
  .ct11-shared #watch-message{min-height:49px;padding:5px 9px}.ct11-shared #watch-player{padding:5px 8px}
 }
 .exercise #challenge,.exercise #exercise-inactive p{color:var(--muted);margin-bottom:12px}
+
+/* Shared navigation is behind the lesson when its existing Focus player opens. */
+body.calculator-bank-lesson:has(.ct11-focused) > :is(.top,.tabbar){visibility:hidden}
+
+@media(max-width:700px){
+ .ct11-shared[data-mode=watch]:not(.ct11-focused) .ct11-calc-anchor{--handheld-width:var(--bank-watch-fit,193px)}
+}

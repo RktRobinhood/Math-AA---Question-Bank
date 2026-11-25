@@ -4,7 +4,7 @@ const M=CT17,T=CT17Tape,$=id=>document.getElementById(id),stage=$("stage"),seek=
 const p=new URLSearchParams(location.search),link=M.request(p),original=link.d;
 const tabs=[$("watch-tab"),$("try-tab")],scope=["watch-message","watch-player","watch-panel"],tryScope=["try-header","try-panel"];
 const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;};
-const button=(text,fn,active=false,watch=false)=>{const b=node("button",text,active?"active":"");b.type="button";b.disabled=watch||!fn;if(!b.disabled)b.onclick=fn;return b;};
+const button=(text,fn,active=false,watch=false)=>{const b=node("button",text,active?"calc-active":"");b.type="button";b.disabled=watch||!fn;if(!b.disabled)b.onclick=fn;return b;};
 const clockText=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
 const label={east:"East component (km)",north:"North component (km)",up:"Vertical component (km)"};
 const answers={horizontal:"Horizontal distance (km)",bearing:"Clockwise bearing (°)",elevation:"Signed elevation (°)",diagonal:"Sloping distance (km)"};
@@ -161,6 +161,8 @@ $("answer").onsubmit=e=>{
 };
 $("answer").oninput=()=>{assess="";$("assess-feedback").textContent="";};
 
+function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
+
 function size(){
  if(mode==="try"){
   const h=window.visualViewport?.height||innerHeight, top=$("handheld-host").getBoundingClientRect().top+window.scrollY;
@@ -168,7 +170,7 @@ function size(){
   stage.style.setProperty("--try-fit",Math.min(307,Math.max(154,width))+"px");
   return;
  }
- const avail=(window.visualViewport?.height||innerHeight)-(focused?0:Math.max(0,stage.getBoundingClientRect().top));
+ const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
  const landscape=focused&&innerWidth>710&&avail<=600;
  const fixed=landscape?22:$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
  stage.style.setProperty("--watch-fit",Math.max(94,Math.min(focused?340:295,Math.floor((avail-fixed)*558/1168)))+"px");
@@ -177,7 +179,7 @@ const ro=new ResizeObserver(size);for(const e of [$("watch-message"),$("watch-pl
 window.addEventListener("resize",size);window.visualViewport?.addEventListener("resize",size);
 function focus(on){
  focused=on;stage.classList.toggle("focus-open",on);document.body.classList.toggle("stats-focus",on);
- for(const el of document.querySelectorAll("main > .head, main > .tabs, main > .notes"))el.inert=on;
+ for(const el of document.querySelectorAll("main > .head, main > .calc-tabs, main > .notes"))el.inert=on;
  const b=$("focus");b.setAttribute("aria-label",on?"Exit focused view":"Focused view");b.setAttribute("aria-pressed",String(on));b.textContent=on?"Exit":"Focus";if(on)stage.scrollTop=0;size();
 }
 function autofit(){
@@ -228,6 +230,7 @@ $("reset").onclick=()=>{
 const map={Home:"home",Escape:"esc",Backspace:"del",Delete:"del",Enter:"enter",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",
  "-":"minus","+":"plus","/":"div","*":"mul","^":"power",".":"dot","(":"lparen",")":"rparen",s:"square",t:"trig",c:"ctrl"};
 document.addEventListener("keydown",e=>{
+ if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  const el=e.target;
  if(e.altKey||e.metaKey||e.ctrlKey||e.isComposing||el.closest?.("input,textarea,select,a,summary,[contenteditable]"))return;
  if(e.key==="Escape"&&focused){e.preventDefault();focusChoice=false;focus(false);$("focus").focus({preventScroll:true});return;}
@@ -242,9 +245,5 @@ document.addEventListener("keydown",e=>{
  if(key){e.preventDefault();physical(key);}
 });
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
-const theme=$("theme");
-try{const x=localStorage.getItem("ti-lab-theme");if(["light","dark"].includes(x))theme.value=x;}catch{}
-function applyTheme(){document.documentElement.dataset.theme=theme.value;}
-theme.onchange=()=>{applyTheme();try{localStorage.setItem("ti-lab-theme",theme.value==="system"?"auto":theme.value);}catch{};};applyTheme();
 modeTo(p.get("mode")==="try"?"try":"watch");
 })();

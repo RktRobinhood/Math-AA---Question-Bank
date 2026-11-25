@@ -1,5 +1,6 @@
 'use strict';
 (function(){
+function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id), {density}=globalThis.NspireNormal, M=globalThis.NspireInverseNormal, {cutoff,quantile,parse,validate,leftFromGiven}=M;
 const demo={mean:50,sd:8,area:.75,side:'left'}, tailDemo={mean:50,sd:8,area:.9,side:'right'};
 const defaults=['','0','1'], fields=['Area','μ','σ'];
@@ -69,7 +70,7 @@ function LCD(s){
    let menu=s.page==='top'?drawMenu('top',s.selected):s.page==='distributions'?drawMenu(s.branch,4)+drawMenu(s.page,s.selected):drawMenu('top',s.branch==='statistics'?5:4)+drawMenu(s.page,s.selected);
    return '<div class="menu-stack">'+menu+'</div>';
  }
- if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===okField?'active':'')+'">OK</span> <span class="'+(s.field===cancelField?'active':'')+'">Cancel</span></div></div>';
+ if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===okField?'calc-active':'')+'">OK</span> <span class="'+(s.field===cancelField?'calc-active':'')+'">Cancel</span></div></div>';
  return (s.page==='result'?'<p>'+esc(s.previous)+'</p><p class="answers"><strong data-exact="'+esc(s.numeric)+'">'+esc(rawNumber(s.answer))+'</strong></p>':'')+'<div class="entry"><p>'+esc(s.page==='entry'?s.previous:'▏')+'</p></div>';
 }
 const qp=new URLSearchParams(location.search),request=M.exerciseFrom(qp),target=request.data;
@@ -104,7 +105,7 @@ function interact(key){
 function visibleTry(){return !$('try').hidden;}
 const watchShell=HandheldShell.mount({host:'#watch-host',screen:'#watch-host .screen',interactive:false,label:'Demonstrated TI-Nspire CX II-T'});
 const tryShell=HandheldShell.mount({host:tryHost,screen:'#try-host .screen',onKey:interact,label:'Interactive TI-Nspire CX II-T'});
-document.addEventListener('keydown',e=>{
+document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(!visibleTry()||e.altKey||e.metaKey||e.ctrlKey||e.repeat||e.isComposing)return;
  const el=e.target;
  if(el.closest?.('input,textarea,select,a,summary,[contenteditable]')||(!tryHost.contains(el)&&el!==document.body))return;
@@ -273,17 +274,17 @@ function setFocus(on){if(focusButton&&on!==focused())focusButton.click();}
 function size(){
  if(watch.hidden){
    const panel=$('try-host'),top=panel.getBoundingClientRect().top+scrollY;
-   panel.style.setProperty('--try-fit',Math.max(157,Math.min(306,Math.floor((innerHeight-top-12)*558/1168)))+'px');return;
+   panel.style.setProperty('--try-fit',Math.max(157,Math.min(306,Math.floor((lessonEnd()-top-12)*558/1168)))+'px');return;
  }
- const fixed=focused(),h=window.visualViewport?.height||innerHeight,short=fixed&&innerWidth>710&&h<=600;
+ const fixed=focused(),h=lessonEnd(),short=fixed&&innerWidth>710&&h<=600;
  const lines=$('caption').offsetHeight+$('audio-state').offsetHeight+viewer.querySelector('.worked-prompt').offsetHeight;
  const used=short?22:lines+player.offsetHeight+22;
- const top=fixed?0:Math.max(0,viewer.getBoundingClientRect().top);
+ const top=Math.max(0,viewer.getBoundingClientRect().top);
  viewer.style.setProperty('--watch-fit',Math.max(155,Math.min(fixed?345:287,Math.floor((h-top-used)*558/1168)))+'px');
 }
 function fitWatch(){
  if(watch.hidden)return;
- size();const b=watchShell.body.getBoundingClientRect(),h=(window.visualViewport?.height||innerHeight);
+ size();const b=watchShell.body.getBoundingClientRect(),h=(lessonEnd());
  if(!manuallyExited&&!focused()&&(b.width<176||player.getBoundingClientRect().bottom>h+1))setFocus(true);
 }
 const sizeObserver=new ResizeObserver(size);
@@ -292,12 +293,12 @@ window.addEventListener('resize',fitWatch);window.visualViewport?.addEventListen
 const focusObserver=new MutationObserver(()=>{
  const on=focused()&&!watch.hidden;
  document.body.classList.toggle('ct40-focused',on);
- for(const item of document.querySelectorAll('main > .header, main > .tabs, main > .notes, .director'))item.inert=on;
+ for(const item of document.querySelectorAll('main > .header, main > .calc-tabs, main > .notes, .director'))item.inert=on;
  if(on)viewer.scrollTop=0;size();
 });
 focusObserver.observe(viewer,{attributes:true,attributeFilter:['class']});
 focusButton?.addEventListener('click',e=>{if(e.isTrusted)manuallyExited=!focused();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!watch.hidden&&focusButton?.getAttribute('aria-pressed')==='false'&&document.body.classList.contains('ct40-focused')){
+document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;if(e.key==='Escape'&&!watch.hidden&&focusButton?.getAttribute('aria-pressed')==='false'&&document.body.classList.contains('ct40-focused')){
  manuallyExited=true;focusButton.focus({preventScroll:true});
 }});
 function showTrack(){
@@ -344,10 +345,6 @@ $('reset-try').onclick=()=>{
  showTrack();tryHost.focus({preventScroll:true});
 };
 $('return-watch').onclick=()=>tab(0,true);
-const theme=$('theme'),themeKey='ti-lab-theme';
-try{const saved=localStorage.getItem(themeKey);theme.value=['dark','light'].includes(saved)?saved:'system'}catch{}
-function setTheme(){document.documentElement.dataset.theme=theme.value;try{localStorage.setItem(themeKey,theme.value)}catch{}}
-theme.addEventListener('change',setTheme);setTheme();
 const ui={mean:$('mean'),sd:$('sd'),area:$('area'),event:$('event')};
 function curve(el,{mean,sd,area,side='left'},reveal){
  const L=18,R=314,B=78;

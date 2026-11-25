@@ -32,11 +32,35 @@ const hotspots=$('hotspots');
 let mode=null,time=0,duration=35.553,running=false,rafId=0,prevFrame=0,ccOn=false,silent=false,silentOrigin=0,pendingSeek=null,frameSig='';
 let step='idle', values={equation:chosen.equation,lower:chosen.lower,upper:chosen.upper}, activeResult=null;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen'),keyButton=$('key-labels'),keyOverlay=$('key-overlay');
+const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen'),keyOverlay=$('key-overlay');
 const playerUI=window.CalculatorWatchPlayer.mount({player, surface:$('watch-surface'), play,seek,expand:$('fullscreen'),
  feedback:$('play-feedback'),active:()=>mode==='watch'});
-let showKeys=false,screenOnly=false,willPlay=false;
-const scene=$('watch-surface');
+const FRAME_PREF='qb-calculator-watch-frame';
+function readFrame(){try{return localStorage.getItem(FRAME_PREF)!=='full'}catch(_){return true}}
+let screenOnly=readFrame(),willPlay=false;
+function selectFrame(screen){
+ screenOnly=screen;
+ try{localStorage.setItem(FRAME_PREF,screen?'screen':'full')}catch(_){}
+ viewState();
+}
+const scene=$('watch-surface'), rateControl=$('watch-speed'), sound=$('sound');
+let speed=Number(rateControl.value);
+media.playbackRate=speed;
+const silenceTime=()=>clamp((performance.now()-silentOrigin)*speed/1000,0,duration);
+function alignSilent(){silentOrigin=performance.now()-time*1000/speed;}
+rateControl.addEventListener('change',()=>{
+ if(silent&&running)time=silenceTime();
+ speed=Number(rateControl.value);
+ media.playbackRate=speed;
+ if(silent)alignSilent();
+});
+sound.addEventListener('click',()=>{
+ media.muted=!media.muted;
+ const label=media.muted?'Unmute':'Mute';
+ sound.setAttribute('aria-label',label);sound.title=label;
+ sound.querySelector('.sound-waves').hidden=media.muted;
+ sound.querySelector('.sound-off').hidden=!media.muted;
+});
 function fitWatch(){
  if(mode!=='watch')return;
  const h=window.innerHeight, top=scene.getBoundingClientRect().top+window.scrollY;
@@ -94,14 +118,13 @@ function paint(t){
  const cap=CAPTIONS.find(c=>ms>=c.startMs&&ms<c.endMs)?.text||'';
  if(caption.textContent!==cap)caption.textContent=cap;
  caption.hidden=!ccOn||!cap;
- keyOverlay.hidden=!showKeys||!keys.length;
- if(keys.length)keyOverlay.querySelector('kbd').textContent=({right:'→',left:'←',up:'↑',down:'↓',enter:'Enter',menu:'Menu',power:'^',delete:'Del',neg:'(−)',eq:'=',comma:',',plus:'+',minus:'−'})[keys[0]]||keys[0];
+ const recent=past.at(-1),shownKey=keys[0]||(recent&&ms-recent.timeMs<=850?recent.key:'');
+ keyOverlay.hidden=!shownKey;
+ if(shownKey)keyOverlay.querySelector('kbd').textContent=({right:'→',left:'←',up:'↑',down:'↓',enter:'Enter',menu:'Menu',power:'^',delete:'Del',neg:'(−)',eq:'=',comma:',',plus:'+',minus:'−'})[shownKey]||shownKey;
  player.dataset.step=f.state;
  seek.value=t;
  seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));
  $('time').textContent=timecode(t)+' / '+timecode(duration);
- $('take-over').textContent=t>=duration-.04?'Open Try':'Take over';
- $('take-over').setAttribute('aria-label',t>=duration-.04?'Open independent Try':'Take over the calculator');
 }
 function playing(v){
  running=v;willPlay=false;play.setAttribute('aria-label',v?'Pause':time>=duration-.04?'Replay':'Play');play.querySelector('.play-icon').hidden=v;play.querySelector('.pause-icon').hidden=!v;
@@ -110,7 +133,7 @@ function playing(v){
 function tick(now){
  if(!running||mode!=='watch')return;
  if(now-prevFrame>=31){
-  prevFrame=now;time=silent?clamp((now-silentOrigin)/1000,0,duration):media.currentTime;
+  prevFrame=now;time=silent?clamp((now-silentOrigin)*speed/1000,0,duration):media.currentTime;
   paint(time);
   if(time>=duration-.015){end();return}
  }
@@ -123,7 +146,7 @@ function pause(){
 }
 function captionsState(v){ccOn=v;cc.setAttribute('aria-pressed',String(v));cc.setAttribute('aria-label',v?'Hide captions':'Show captions');if(mode==='watch')paint(time)}
 function useSilent(){
- silent=true;silentOrigin=performance.now()-time*1000;$('audio-notice').hidden=mode!=='watch';captionsState(true)
+ silent=true;alignSilent();$('audio-notice').hidden=mode!=='watch';captionsState(true)
 }
 media.addEventListener('loadedmetadata',()=>{
  if(Number.isFinite(media.duration))duration=media.duration;seek.max=duration;
@@ -134,12 +157,11 @@ media.addEventListener('error',useSilent);
 media.addEventListener('ended',end);
 media.addEventListener('pause',()=>{if(!silent&&running&&media.paused)pause()});
 cc.addEventListener('click',()=>captionsState(!ccOn));
-keyButton.addEventListener('click',()=>{showKeys=!showKeys;keyButton.setAttribute('aria-pressed',String(showKeys));keyButton.title=showKeys?'Hide key presses':'Show key presses';if(mode==='watch')paint(time)});
-fullButton.addEventListener('click',()=>{screenOnly=false;viewState()});
-screenButton.addEventListener('click',()=>{screenOnly=true;viewState()});
+fullButton.addEventListener('click',()=>selectFrame(false));
+screenButton.addEventListener('click',()=>selectFrame(true));
 seek.addEventListener('input',()=>{
  time=clamp(Number(seek.value),0,duration);
- if(silent)silentOrigin=performance.now()-time*1000;
+ if(silent)alignSilent();
  else if(Number.isFinite(media.duration))media.currentTime=time;
  else pendingSeek=time;
  if(mode==='watch'){paint(time);if(!running)play.setAttribute('aria-label',time>=duration-.04?'Replay':'Play');}
@@ -222,7 +244,7 @@ form.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();form.
 function setMode(m){
  if(mode===m)return;
  playTicket++;pause();mode=m;frameSig='';hotspots.replaceChildren();
- document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');$('take-over').hidden=m!=='watch';
+ document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');
  watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
  $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('watch-example').hidden=m!=='watch';$('audio-notice').hidden=!(m==='watch'&&silent);
  if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;keyOverlay.hidden=true;drawTry()}
@@ -261,12 +283,6 @@ document.addEventListener('keydown',e=>{
  const key=e.key.toLowerCase()==='m'?'menu':e.key==='Tab'&&step==='entry'&&!e.shiftKey?'tab':HandheldShell.normalizeKey(e.key);
  if(!shell.getKey(key)||e.key==='Tab'&&key!=='tab')return;
  e.preventDefault();shell.getKey(key).click();
-});
-$('take-over').addEventListener('click',()=>{
- const ended=time>=duration-.04,fresh=!ended&&step==='idle'&&!key;
- setMode('try');
- if(fresh){values={equation:WATCH.equation,lower:2,upper:3};sync(values);tryStep('entry',false);show(feedback,'Watch is paused at your place. Edit the equation or choose different bounds.');}
- player.focus({preventScroll:true});
 });
 watchers.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 sync(values);

@@ -13,11 +13,6 @@ if(isTyped)try{
  if(allKeys.some(k=>params.getAll(k).length!==1))throw Error("Incomplete link");
  problem=Object.fromEntries(allKeys.map(k=>[k,params.get(k)]));parseModel(problem);
 }catch{problem={...fresh};badLink=true;}
-let persistedTheme;try{persistedTheme=localStorage.getItem("calculator-coach-theme");}catch{}
-const theme=$("theme");
-if(["system","light","dark"].includes(persistedTheme))theme.value=persistedTheme;
-function applyTheme(){document.documentElement.dataset.theme=theme.value;}applyTheme();
-theme.addEventListener("change",()=>{applyTheme();try{localStorage.setItem("calculator-coach-theme",theme.value);}catch{}});
 const pretty=s=>s.replace(/\*/g,"×").replace(/-/g,"−").replace(/\//g,"÷");
 function make(){return {menu:"",selected:0,style:"plain",raw:"",stored:"",prior:"",out:"",error:"",loaded:false};}
 function enter(s){
@@ -181,10 +176,11 @@ function start(){
  maybeFocus();
  playing=true;origin=performance.now()-clock*1000;label();renderWatch();tickId=requestAnimationFrame(tick);
 }
+function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
 function fit(){
  if(mode!=="watch")return;
- const Ht=window.visualViewport?.height||innerHeight;
- const top=focused?0:Math.max(0,stage.getBoundingClientRect().top);
+ const Ht=nativeBottom();
+ const top=Math.max(0,stage.getBoundingClientRect().top);
  const reserved=$("watch-pane").offsetHeight+$("player").offsetHeight+25;
  const w=Math.max(120,Math.min(300,Math.floor((Ht-top-reserved)*558/1168)));
  stage.style.setProperty("--watch-width",w+"px");
@@ -197,10 +193,10 @@ function focus(on){
 function maybeFocus(){
  fit();
  if(mode==="watch"&&!focused&&focusPreference!==false&&
-    (focusPreference===true||shell.body.getBoundingClientRect().width<173||$("player").getBoundingClientRect().bottom>innerHeight+1))
+    (focusPreference===true||shell.body.getBoundingClientRect().width<173||$("player").getBoundingClientRect().bottom>nativeBottom()+1))
   focus(true);
 }
-const resize=new ResizeObserver(fit);for(const e of [$("watch-pane"),$("player"),document.querySelector("header")])resize.observe(e);
+const resize=new ResizeObserver(fit);for(const e of [$("watch-pane"),$("player"),document.querySelector(".qb-calculator-lesson > header")])resize.observe(e);
 window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
 const toggle=()=>playing?pause():start();
 play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);
@@ -285,6 +281,7 @@ tabs.forEach((b,i)=>b.addEventListener("keydown",e=>{
  const to=e.key==="Home"?0:e.key==="End"?1:1-i;tabs[to].click();tabs[to].focus();
 }));
 document.addEventListener("keydown",e=>{
+ if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(e.key==="Escape"&&focused){focusPreference=false;focus(false);$("focus").focus({preventScroll:true});return;}
  if(e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target.closest("input,textarea,select,button,a,summary,[contenteditable]"))return;
  if(mode==="watch"){if(e.repeat)return;if(e.key===" "||e.key==="k")toggle();else if(e.key==="j")jump(clock-10);else if(e.key==="l")jump(clock+10);else return;e.preventDefault();return;}

@@ -1,0 +1,19 @@
+.neutral-calc .hh-fraction-mark{display:grid;gap:1px;justify-items:center;min-width:5px}
+.neutral-calc .hh-fraction-mark i{display:block;width:.45em;height:.35em;min-width:2.5px;min-height:2px;border:1px solid currentColor}
+.neutral-calc .hh-fraction-mark i:first-child{margin-bottom:1px;box-shadow:0 2px 0 -.45px currentColor}
+.neutral-edit[data-fraction=true] .neutral-caret{display:none}
+.neutral-calc .neutral-fraction-editor{display:flex;align-items:center;justify-content:flex-start;gap:3px;padding:2px 4px;border-top:1px solid #9dadbc;overflow:hidden}
+.neutral-calc .neutral-frac-prefix,.neutral-calc .neutral-frac-suffix{max-width:25%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.neutral-fraction-fields{display:grid;grid-template-columns:minmax(22px,min(71px,45cqw));margin-block:1px}
+.neutral-calc .neutral-fraction-fields input{display:block;width:100%;min-width:0;min-height:0;line-height:1.1;background:#fcfcf8;color:#172028;border:1px solid #a5b5c5;border-radius:0;font:inherit;text-align:center;padding:1px 2px;caret-color:#ab2b27}
+.neutral-calc .neutral-fraction-fields input:first-child{border-bottom:2px solid #142544}
+.neutral-calc .neutral-fraction-fields input:nth-child(2){border-top:0}
+.neutral-calc .neutral-fraction-fields input:focus{background:#e6eff8;outline:1px solid #435e7b;outline-offset:-1px}
+.neutral-calc .neutral-glass>.neutral-trig:not([hidden]){position:absolute;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;z-index:9;left:4%;right:4%;top:23%;bottom:auto;transform:none;padding:2px;width:auto;max-width:none;box-shadow:1px 2px 3px #24344b66;border:1px solid #4a6581;border-radius:0;background:#e6eef6;color:#142544}
+.neutral-calc .neutral-glass>.neutral-trig button{font:inherit;min-height:0;border-radius:0;border:1px solid #9eafc0;padding:2px 0}
+.neutral-calc .neutral-glass>.neutral-trig button[data-current=true]{background:#254c76;color:#fff}
+.neutral-calc .neutral-result.neutral-ratio-result{display:grid;justify-items:stretch;text-align:center;line-height:0;font-size:0;min-width:0;max-width:none;justify-self:end}
+.neutral-calc .neutral-ratio-result::before,.neutral-calc .neutral-ratio-result::after{display:block;font-size:max(9px,4.4cqw);line-height:1;padding-inline:2px}
+.neutral-calc .neutral-ratio-result::before{content:attr(data-numerator) / "";border-bottom:1px solid currentColor;padding-bottom:1px}
+.neutral-calc .neutral-ratio-result::after{content:attr(data-denominator) / "";padding-top:1px}
+.neutral-calc .neutral-ratio-result::selection{background:transparent}
