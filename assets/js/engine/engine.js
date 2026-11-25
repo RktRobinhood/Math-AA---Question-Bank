@@ -559,20 +559,24 @@
     return q;
   };
 
-  // Other ways to ask the same thing: every other generator of the same type, as ready requests
-  // with the same seed. sameSituation is true when the numbers will be the same too.
-  E.variants = function (question) {
+  // Other ways of the same type and primary syllabus code in this course. Adaptive practice
+  // stays at the question's level; a fixed practice band supplies its allowed levels.
+  E.variants = function (question, levels = [question.level]) {
     const me = byId.get(question.generator);
-    return find({ course: question.course, type: question.type })
-      .filter((g) => g.id !== question.generator)
-      .map((g) => {
-        const level = g.levels.reduce((best, l) => (Math.abs(l - question.level) < Math.abs(best - question.level) ? l : best), g.levels[0]);
-        return {
-          generator: g.id, unknown: g.unknown, representation: g.representation, format: g.format, title: g.title || g.unknown, level,
-          sameSituation: Boolean(me && g.situationKey && g.situationKey === me.situationKey),
-          request: { course: question.course, type: g.type, unknown: g.unknown, representation: g.representation, level, format: g.format, seed: question.seed },
-        };
+    const syllabus = question.syllabus[0];
+    const variants = [];
+    for (const g of find({ course: question.course, type: question.type, syllabus, primary: true })) {
+      if (g.id === question.generator) continue;
+      const allowed = g.levels.filter((l) => levels.includes(l));
+      if (!allowed.length) continue;
+      const level = allowed.reduce((best, l) => (Math.abs(l - question.level) < Math.abs(best - question.level) ? l : best));
+      variants.push({
+        generator: g.id, unknown: g.unknown, representation: g.representation, format: g.format, title: g.title || g.unknown, level,
+        sameSituation: Boolean(me && g.situationKey && g.situationKey === me.situationKey),
+        request: { course: question.course, generator: g.id, type: g.type, unknown: g.unknown, representation: g.representation, level, format: g.format, seed: question.seed },
       });
+    }
+    return variants;
   };
 
   // A short fingerprint of what the student sees, to spot the same question under two seeds.

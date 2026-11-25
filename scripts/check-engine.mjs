@@ -755,23 +755,41 @@ if (!ONLY) {
     assert(r.keptAs && lr.state.attempts.length === 0, "reset did not keep the old save aside");
   });
 
-  test("variants: ask it another way", () => {
-    const types = [...new Set(E.registry.map((g) => g.type))];
+  test("variants: match the course, primary code and practice band", () => {
     let multi = 0, same = 0;
-    for (const type of types) {
-      const list = E.generators({ type });
-      const q = E.make({ generator: list[0].id, seed: 11, course: list[0].home });
-      const vs = E.variants(q);
-      assert(vs.length === E.generators({ type, course: q.course }).length - 1, `variants() of ${type} is incomplete`);
-      if (vs.length) multi++;
-      for (const v of vs) {
-        const q2 = E.make(v.request);
-        assert(q2.type === q.type && (q2.unknown !== q.unknown || q2.representation !== q.representation || q2.format !== q.format), `variant of ${q.id} is the same question`);
-        if (v.sameSituation) { same++; assert(JSON.stringify(q2.params.sit) === JSON.stringify(q.params.sit), `variant ${v.generator} does not keep the situation of ${q.generator}`); }
+    for (const course of E.courses()) {
+      for (const g of E.generators({ course })) {
+        const types = E.generators({ type: g.type, course, syllabus: g.syllabus[0], primary: true }).filter((v) => v.id !== g.id);
+        for (const level of g.levels) {
+          const q = E.make({ generator: g.id, seed: 11, course, level });
+          for (const band of [null, [1, 2], [2, 3], [3, 4]]) {
+            const allowed = band || [level];
+            const want = new Map(types
+              .map((v) => [v.id, v.levels.filter((l) => allowed.includes(l)).sort((a, b) => Math.abs(a - level) - Math.abs(b - level) || a - b)[0]])
+              .filter(([, l]) => l !== undefined));
+            const vs = E.variants(q, band || undefined);
+            assert(vs.length === want.size, `variants() of ${q.id} is incomplete or overscoped: ${allowed}`);
+            if (vs.length) multi++;
+            for (const v of vs) {
+              assert(want.get(v.generator) === v.level, `variant ${v.generator} is not in-band at the nearest available level`);
+              want.delete(v.generator);
+              const q2 = E.make(v.request);
+              assert(q2.generator === v.generator && q2.type === q.type && q2.course === course &&
+                q2.syllabus[0] === q.syllabus[0] && q2.level === v.level && q2.seed === q.seed, `variant escaped the question's scope: ${q2.id}`);
+              if (v.sameSituation) {
+                same++;
+                assert(JSON.stringify(q2.params.sit) === JSON.stringify(q.params.sit), `variant ${v.generator} does not keep the situation of ${q.generator}`);
+              }
+            }
+          }
+        }
       }
     }
-    assert(multi >= 4, `only ${multi} question types have a second way of asking`);
-    assert(same >= 2, `only ${same} variants keep the same situation`);
+    assert(multi >= 4 && same >= 2, "in-band variant or same-situation examples disappeared");
+    const q = E.make({ course: "aa-hl", generator: "t3-ahl-two-lines/classify-parallel/equation", level: 2, seed: 11 });
+    const both = E.variants(q, [3, 4]).find((v) => v.generator === "t3-ahl-two-lines/intersection-point/equation");
+    assert(both && both.level === 3, "nearest allowable level must be reselected for a multilevel generator");
+    assert(E.variants(q, []).length === 0, "an explicitly empty band should not offer an alternative");
   });
 
   test("worksheet: N questions for a scope and level mix, reproducible", () => {

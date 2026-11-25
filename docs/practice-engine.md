@@ -118,13 +118,13 @@ const q = QBEngine.make({ course: "aa-sl", type: "fn-composite", unknown: "expre
 
 `expected` is a display string (the answer, the right option's text, or `"Graph B"`); choice and graph results also carry `expectedIndex`. `misconception` is present when the wrong response matches a known one. A question is correct when every part is.
 
-### `QBEngine.variants(question)` returns other ways to ask it
+### `QBEngine.variants(question, levels?)` returns other ways to ask it
 
 ```js
 [{ generator, unknown, representation, format, title, level, sameSituation, request }, ...]
 ```
 
-One entry for every other generator of the same question type. `request` is ready for `make()` and keeps the seed. `sameSituation: true` means the numbers stay the same and only what is asked changes. "Ask it another way" is `make(variants(q)[i].request)`; hide the button when the list is empty.
+One entry for each other generator of the same type and primary syllabus code, using the question's course. Adaptive practice uses the question's current level. Fixed practice passes its allowed levels (for example, `[1, 2]`); each alternative uses its nearest available level within that band. `request` is ready for `make()` and keeps the seed. `sameSituation: true` means the numbers stay the same and only what is asked changes. Hide "Ask it another way" when the list is empty.
 
 ### `QBEngine.worksheet(options)` returns a fixed set of questions
 
@@ -250,7 +250,7 @@ if (item.kind === "generated") {
 
 // Next:                 learner.next(scope)
 // Another like this:    QBEngine.make({ ...item.request, seed: newSeed })       (does not need record())
-// Ask it another way:   QBEngine.make(QBEngine.variants(item.question)[i].request)
+// Ask it another way:   QBEngine.make(QBEngine.variants(item.question, fixedLevels)[i].request)
 
 const rows = learner.summary(scope);            // the progress view
 const text = learner.exportJSON();              // save as a file

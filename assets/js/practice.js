@@ -541,7 +541,7 @@
   }
 
   function afterBar() {
-    const variants = state.question ? E.variants(state.question) : [];
+    const variants = state.question ? E.variants(state.question, MODES[state.mode][1] || undefined) : [];
     const way = variants.length === 0 ? null : variants.length === 1
       ? h('button', { class: 'btn ghost', type: 'button', text: 'Ask it another way', title: variants[0].title, onclick: () => anotherWay(variants[0].request) })
       : h('select', { class: 'select way-pick', 'aria-label': 'Ask it another way', onchange: e => { if (e.target.value !== '') anotherWay(variants[+e.target.value].request); } },
