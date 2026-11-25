@@ -318,7 +318,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   return editKey(k);
  }
  svg.addEventListener('pointerdown',e=>{
-  if(e.button!==0||dialogOpen||menus.length||useField!=='function'||!models.some(Boolean))return;
+  if(e.button!==0||dialogOpen||menus.length||useField!=='function')return;
   pan={id:e.pointerId,x:e.clientX,y:e.clientY,start:win.slice(),rect:svg.getBoundingClientRect(),moved:false};
  });
  svg.addEventListener('pointermove',e=>{
