@@ -73,32 +73,23 @@ function step(s,key){
  s.replace=false;
 }
 function LCD(s){
- const drawMenu=(id,ix)=>'<ul class="lcd-menu">'+menuItems[id].map(([k,n,to],j)=>'<li'+(j===ix?' class="current"':'')+'>'+k+': '+n+(to&&to!=='wizard'?' ▸':'')+'</li>').join('')+'</ul>';
+ const drawMenu=(id,ix)=>'<ul class="lcd-menu">'+menuItems[id].map(([k,n,to],j)=>'<li data-menu-item="'+k+'" data-menu-page="'+id+'"'+(j===ix?' class="current"':'')+'>'+k+': '+n+(to&&to!=='wizard'?' ▸':'')+'</li>').join('')+'</ul>';
  if(menuItems[s.page]){
    let menu=s.page==='top'?drawMenu('top',s.selected):s.page==='distributions'?drawMenu(s.branch,4)+drawMenu(s.page,s.selected):drawMenu('top',s.branch==='statistics'?5:4)+drawMenu(s.page,s.selected);
    return '<div class="menu-stack">'+menu+'</div>';
  }
- if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Normal Cdf</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i].replace(/infinity/ig,'∞'))+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===4?'active':'')+'">OK</span> <span class="'+(s.field===5?'active':'')+'">Cancel</span></div></div>';
+ if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Normal Cdf</strong>'+fields.map((f,i)=>'<div data-field="'+i+'" class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i].replace(/infinity/ig,'∞'))+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span data-dialog="4" class="'+(s.field===4?'active':'')+'">OK</span> <span data-dialog="5" class="'+(s.field===5?'active':'')+'">Cancel</span></div></div>';
  return (s.page==='result'?'<p>'+esc(s.previous)+'</p><p class="answers"><strong>'+esc(s.answer)+'</strong></p>':'')+'<div class="entry"><p>'+esc(s.page==='entry'?s.previous:'▏')+'</p></div>';
 }
 const qp=new URL(location.href).searchParams;
 const qpMode=qp.get('mode'), tryHost=$('try-host'), work=$('try-work'), tryFeedback=$('try-feedback');
 const fresh=(prefill=null)=>({...base(),prefill,model:null,error:''});
-const forks=new Map(), MAX_FORKS=32;
-let practice=fresh(),live=practice,forkKey=null,customLoaded=false,restoreFocus=false;
+let live=fresh();
 function paintTry(){
  work.innerHTML=LCD(live);tryFeedback.textContent=live.error;
- if(live.model)curve($('try-curve'),live.model);
+ if(live.page==='result'&&live.model)curve($('try-curve'),live.model);
  else $('try-curve').replaceChildren();
- const inFork=forkKey!==null;
- $('link-notice').hidden=inFork||!assignment.error;
- $('model').hidden=inFork;$('model-feedback').hidden=inFork;
- $('bench-title').textContent=inFork?'Watch copy':'Set your example';
- $('bench-instructions').textContent=inFork?'Practise the keys here. Your separate Try is unchanged.':'Set a new distribution or event, then practise its calculator entries.';
- $('exercise').hidden=inFork||customLoaded;
- $('reset-try').textContent=inFork?'Return to your Try':'Reset Try';
- $('return-watch').textContent=inFork?'Return to paused Watch':'Return to Watch';
- $('fork-label').textContent=inFork?'Watch copy at '+timecode(now):'';
+
 }
 function interact(key){
  try{
@@ -107,6 +98,14 @@ function interact(key){
  paintTry();
 }
 const watchShell=HandheldShell.mount({host:'#watch-host',screen:'#watch-host .screen',interactive:false,label:'Demonstrated TI-Nspire CX II-T'});
+work.addEventListener('click',e=>{
+ const menu=e.target.closest('[data-menu-item]'),field=e.target.closest('[data-field]'),button=e.target.closest('[data-dialog]');
+ if(menu&&menu.dataset.menuPage===live.page)interact(menu.dataset.menuItem);
+ else if(field&&live.page==='wizard'){live.field=Number(field.dataset.field);live.replace=true;paintTry();}
+ else if(button&&live.page==='wizard'){live.field=Number(button.dataset.dialog);interact('enter');}
+ else return;
+ tryHost.focus({preventScroll:true});
+});
 const tryShell=HandheldShell.mount({host:tryHost,screen:'#try-host .screen',onKey:key=>{interact(key);tryHost.focus({preventScroll:true});},label:'Interactive TI-Nspire CX II-T'});
 document.addEventListener('keydown',e=>{
  if($('try').hidden||e.altKey||e.metaKey||e.ctrlKey||e.repeat)return;
@@ -122,24 +121,38 @@ document.addEventListener('keydown',e=>{
 });
 const voice=window.CT39Voice,fallback=voice.rehearsal(window.NormalNarration);
 const timecode=t=>Math.floor(t/60)+':'+String(Math.floor(t)%60).padStart(2,'0');
-const seek=$('seek'),play=$('play'),stagePlay=$('stage-play'),steps=$('steps'),audio=$('narration'),notice=$('audio-state');
-let track=fallback,duration=track.duration,now=0,running=false,raf=0,reference=0,last=-2,active=-2,phase='';
+const seek=$('seek'),play=$('play'),steps=$('steps'),audio=$('narration'),notice=$('audio-state');
+const stage=$('watch-stage'),surface=$('watch-surface'),overlay=$('play-feedback'),speed=$('play-rate'),devicePane=$('watch-device-pane');
+const player=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$('fullscreen'),feedback:overlay,active:()=>!$('watch').hidden});
+const frameKey='qb-calculator-watch-frame';
+let framing='screen';
+try{if(localStorage.getItem(frameKey)==='full')framing='full';}catch{}
+function frame(next,save=false){
+ framing=next;
+ if(save)try{localStorage.setItem(frameKey,next);}catch{}
+ stage.dataset.frame=next;devicePane.scrollTop=0;
+ $('view-screen').setAttribute('aria-pressed',String(next==='screen'));
+ $('view-full').setAttribute('aria-pressed',String(next==='full'));
+ fitWatch();
+}
+$('view-screen').addEventListener('click',()=>frame('screen',true));
+$('view-full').addEventListener('click',()=>frame('full',true));
+let track=fallback,duration=track.duration,now=0,rate=1,running=false,raf=0,reference=0,last=-2,active=-2,phase='';
 let mediaState='rehearsal',pending=false,generation=0,loadingTimeout=0,playTimeout=0;
 function snapshotAt(t){
  const snapshot=base();
- for(const [time,key] of track.keys){if(time>t)break;step(snapshot,key);}
+ const start=t>=track.states['tail-context']?track.states['tail-context']:0;
+ for(const [time,key] of track.keys){if(time>t)break;if(time>=start)step(snapshot,key);}
  return snapshot;
 }
 function render(t){
- stagePlay.hidden=t>.005||running||pending||mediaState==='loading';
- stagePlay.setAttribute('aria-label',mediaState==='ready'?'Play demonstration':'Play caption rehearsal');
- const done=t>=duration-.005;
- $('take-over').textContent=done?'Open Try':'Take over';
- $('take-over').setAttribute('aria-label',done?'Open Try':'Take over the calculator');
  seek.value=String(t);seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));$('clock').textContent=timecode(t)+' / '+timecode(duration);
  const frame=voice.frameAt(track,t);
  watchShell.setKeys(frame.highlight?[frame.highlight]:[]);
- if(last!==frame.lastKey){
+ // LCD mode keeps the most recent real key visible between flashes.
+ const key=track.keys[frame.lastKey]?.[1];
+ $('active-key').textContent=key?({menu:'Menu',tab:'Tab',enter:'Enter'}[key]??key):'—';
+ if(last!==frame.lastKey||phase!==frame.phase){
    $('screen-work').innerHTML=LCD(snapshotAt(t));last=frame.lastKey;
  }
  if(active!==frame.caption){
@@ -156,9 +169,12 @@ function render(t){
 }
 function updatePlay(){
  const name=pending?'Pause':running?'Pause':now>=duration-.02?'Replay':'Play';
- stagePlay.hidden=now>.005||running||pending||mediaState==='loading';
- stagePlay.setAttribute('aria-label',mediaState==='ready'?'Play demonstration':'Play caption rehearsal');
- play.dataset.playing=String(running);play.textContent=name;play.setAttribute('aria-label',name);
+ play.dataset.playing=String(running);play.title=name;play.setAttribute('aria-label',name);
+ play.querySelector('.play-icon').hidden=running||pending;
+ play.querySelector('.pause-icon').hidden=!running&&!pending;
+ if(!running&&!pending&&now<=.005&&mediaState!=='loading'){
+   overlay.dataset.action='play';overlay.dataset.initial='true';overlay.hidden=false;
+ }
 }
 function configure(profile,secs=profile.duration,position=0){
  track=profile;duration=secs;last=profile.measured?-2:-1;active=-2;phase='';
@@ -178,12 +194,13 @@ function go(t){
  now=clampTime(t);
  if(mediaState==='ready'){
    if(Math.abs(audio.currentTime-now)>.0005)audio.currentTime=now;
- }else reference=performance.now()-now*1000;
+ }else reference=performance.now()-now*1000/rate;
+ if(!running&&now>.005&&overlay.dataset.initial==='true'){overlay.dataset.initial='false';player.clear();}
  render(now);
  if(!running)updatePlay();
 }
 function stop(capture=true){
- if(capture&&running)now=clampTime(mediaState==='ready'?audio.currentTime:(performance.now()-reference)/1000);
+ if(capture&&running)now=clampTime(mediaState==='ready'?audio.currentTime:(performance.now()-reference)*rate/1000);
  generation++;clearTimeout(playTimeout);pending=false;running=false;audio.pause();cancelAnimationFrame(raf);render(now);updatePlay();
 }
 function tick(ts){
@@ -192,14 +209,14 @@ function tick(ts){
    if(audio.ended){now=duration;stop(false);return;}
    now=clampTime(audio.currentTime);
  }else{
-   now=clampTime((ts-reference)/1000);
+   now=clampTime((ts-reference)*rate/1000);
    if(now>=duration){stop(false);return;}
  }
  render(now);raf=requestAnimationFrame(tick);
 }
 function explain(msg){notice.textContent=msg;notice.hidden=!msg;}
 function startCaptionClock(){
- pending=false;reference=performance.now()-now*1000;running=true;updatePlay();
+ pending=false;reference=performance.now()-now*1000/rate;running=true;updatePlay();
  raf=requestAnimationFrame(tick);
 }
 function fallbackFromAudio(msg){
@@ -221,7 +238,7 @@ function prepare(profile){
      fallbackFromAudio('Narration does not match its measured cues.');return;
    }
    clearTimeout(loadingTimeout);mediaState='ready';
-   configure(profile,audio.duration);play.disabled=false;explain('');
+   audio.playbackRate=rate;configure(profile,audio.duration);play.disabled=false;explain('');
  });
  audio.addEventListener('durationchange',()=>{
    if(mediaState!=='ready')return;
@@ -235,12 +252,7 @@ function prepare(profile){
  loadingTimeout=setTimeout(()=>fallbackFromAudio('Narration did not load in time.'),4000);
  audio.src=profile.file;audio.load();
 }
-let consideredPlaybackFocus=false;
 async function start(){
- if(!consideredPlaybackFocus){
-   consideredPlaybackFocus=true;
-   if(!viewer.classList.contains('cx-focused')&&matchMedia('(max-height:700px), (max-width:700px) and (max-height:760px)').matches)focusButton.click();
- }
  if(mediaState==='loading')return;
  if(now>=duration-.02)go(0);
  const ticket=++generation;
@@ -262,89 +274,68 @@ async function start(){
 audio.addEventListener('ended',()=>{
  if(running&&mediaState==='ready'){now=duration;stop(false);}
 });
-play.addEventListener('click',()=>running||pending?stop():void start());
-stagePlay.addEventListener('click',()=>{play.click();play.focus({preventScroll:true});});
+play.addEventListener('click',()=>{
+ if(mediaState==='loading')return;
+ const stopping=running||pending;
+ overlay.dataset.initial='false';player.clear();
+ if(stopping)stop();else void start();
+ player.flash(!stopping);
+});
 configure(fallback);
 if(window.NormalMeasuredCues!==undefined){
  try{prepare(voice.validate(window.NormalMeasuredCues));}
  catch(err){explain('Measured narration could not be enabled. Caption-only rehearsal is available.');}
 }
 seek.addEventListener('input',()=>go(Number(seek.value)));
-$('captions').addEventListener('change',()=>{$('caption').hidden=!$('captions').checked});
-HandheldTransport.controls({container:document.querySelector('.player-top'),play,seek,active:()=>!$('watch').hidden});
-const focusButton=$('watch').querySelector('.cx-transport-button[aria-label="Focused view"]');
-const focusText=document.createElement('span');focusText.className='focus-label';focusText.textContent=' Focus';focusButton?.append(focusText);
-const viewer=$('watch').querySelector('.viewer');
-const outer=[document.querySelector('main>.header'),document.querySelector('main>.tabs'),document.querySelector('main>.notes'),$('watch').querySelector('.director')];
-const fitWatch=()=>{
- if($('watch').hidden)return;
- const host=$('watch-host').getBoundingClientRect();
- if(!host.width)return;
- const focused=viewer.classList.contains('cx-focused');
- const device=watchShell.body.getBoundingClientRect();
- const shellPadding=host.height-device.height;
- const strip=viewer.querySelector('.player').getBoundingClientRect().height;
- if(focused){
-   const landscape=matchMedia('(min-width:701px) and (max-height:700px)').matches;
-   const room=viewer.getBoundingClientRect().bottom-host.top-shellPadding-2-(landscape?0:strip);
-   viewer.style.setProperty('--ct39-fit',Math.max(155,Math.floor(room*558/1168))+'px');
- }else if(matchMedia('(max-width:700px)').matches){
-   const nav=document.querySelector('.tabbar').getBoundingClientRect().height;
-   const room=document.documentElement.clientHeight-host.top-window.scrollY-shellPadding-strip-nav-8;
-   viewer.style.setProperty('--ct39-fit-page',Math.max(145,Math.floor(room*558/1168))+'px');
- }
-};
-const observer=new ResizeObserver(fitWatch);
-[viewer,...outer.slice(0,2),...viewer.querySelectorAll('.player,#caption,.worked-prompt,#audio-state')].forEach(el=>observer.observe(el));
-window.addEventListener('resize',fitWatch);
-const syncFocus=()=>{
- const focused=viewer.classList.contains('cx-focused')&&!$('watch').hidden;
- outer.forEach(el=>{el.inert=focused;});
- $('watch').tabIndex=focused?-1:0;
+speed.addEventListener('change',()=>{
+ const next=Number(speed.value);
+ if(running&&mediaState!=='ready')now=clampTime((performance.now()-reference)*rate/1000);
+ rate=next;audio.playbackRate=rate;reference=performance.now()-now*1000/rate;render(now);
+});
+$('cc').addEventListener('click',()=>{
+ const hide=!$('caption-band').hidden;
+ $('caption-band').hidden=hide;
+ $('cc').setAttribute('aria-pressed',String(!hide));
+ $('cc').setAttribute('aria-label',hide?'Show captions':'Hide captions');
  fitWatch();
-};
-new MutationObserver(syncFocus).observe(viewer,{attributes:true,attributeFilter:['class']});
+});
+function fitWatch(){
+ if($('watch').hidden)return;
+ const max=stage.matches(':fullscreen,.watch-fullscreen-fallback')?innerHeight-surface.getBoundingClientRect().top:innerHeight-surface.getBoundingClientRect().top-window.scrollY;
+ const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+document.querySelector('.tabbar').offsetHeight;
+ const overhead=footer+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
+ const available=max-overhead;
+ const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
+ const needsScroll=framing==='full'&&Math.ceil(full*1168/558)>available+2;
+ $('full-fit-note').hidden=!needsScroll;
+ devicePane.tabIndex=needsScroll?0:-1;
+ if(needsScroll)devicePane.setAttribute('aria-label','Full calculator. Scroll to see the keypad.');
+ else devicePane.removeAttribute('aria-label');
+ stage.style.setProperty('--normal-full-fit',full+'px');
+ stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(135,available-17)+'px':'none');
+ stage.style.setProperty('--normal-screen-fit',Math.min(420,Math.max(188,Math.floor(available*4/3)))+'px');
+}
+const resize=new ResizeObserver(fitWatch);
+[$('caption-band'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
+window.addEventListener('resize',fitWatch);
+document.addEventListener('fullscreenchange',fitWatch);
+frame(framing);
 const tabs=[$('watch-tab'),$('try-tab')];
 function tab(i,target){
- if(i!==0){
-   if(running||pending)stop();
-   if(viewer.classList.contains('cx-focused'))focusButton.click();
- }
+ if(i){if(running||pending)stop();void player.exit();}
  tabs.forEach((el,k)=>{el.tabIndex=k===i?0:-1;el.setAttribute('aria-selected',String(k===i));$(el.getAttribute('aria-controls')).hidden=k!==i});
- if(i===0){
-   if(restoreFocus&&!viewer.classList.contains('cx-focused'))focusButton.click();
-   window.scrollTo({top:0,left:0,behavior:'instant'});
-   viewer.scrollTop=0;
- }
- syncFocus();
+ if(!i){window.scrollTo({top:0,left:0,behavior:'instant'});fitWatch();}
  if(target)(i?tryHost:play).focus({preventScroll:true});
 }
-function openPractice(focus=true,saveFocus=false){
- restoreFocus=saveFocus&&viewer.classList.contains('cx-focused');forkKey=null;live=practice;paintTry();tab(1,focus);
-}
 tabs.forEach((el,i)=>{
- el.addEventListener('click',()=>{if(i)openPractice();else tab(0,false);});
+ el.addEventListener('click',()=>tab(i,Boolean(i)));
  el.addEventListener('keydown',e=>{
-   if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?1:1-i;if(j)openPractice(false);else tab(0,false);tabs[j].focus();}
+   if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?1:1-i;tab(j,false);tabs[j].focus();}
  });
 });
-$('to-try').addEventListener('click',()=>openPractice());
-$('take-over').addEventListener('click',()=>{
-   if(running||pending)stop();
-   if(now>=duration-.005){openPractice(true,true);return;}
-   restoreFocus=viewer.classList.contains('cx-focused');
-   forkKey=track.measured+'@'+now.toFixed(3);
-   live=forks.get(forkKey)??Object.assign(fresh(),snapshotAt(now));
-   forks.delete(forkKey);forks.set(forkKey,live);
-   if(forks.size>MAX_FORKS)forks.delete(forks.keys().next().value);
-   paintTry();tab(1,true);
-});
-$('reset-try').addEventListener('click',()=>{
- if(forkKey!==null){openPractice();return;}
- restorePractice();tryHost.focus({preventScroll:true});
-});
+$('to-try').addEventListener('click',()=>tab(1,true));
+$('reset-try').addEventListener('click',()=>{restorePractice();tryHost.focus({preventScroll:true});});
 $('return-watch').addEventListener('click',()=>tab(0,true));
-const ui={mean:$('mean'),sd:$('sd'),lower:$('lower'),upper:$('upper'),event:$('event')};
 function curve(el,{mean,sd,lower=-Infinity,upper=Infinity}){
  const L=18,R=314,B=79;
  const clamp=(v)=>Math.max(-4.35,Math.min(4.35,v));
@@ -366,18 +357,6 @@ function curve(el,{mean,sd,lower=-Infinity,upper=Infinity}){
 }
 
 
-const modelFeedback=$('model-feedback'), tryCurve=$('try-curve');
-function update(){
- const mode=ui.event.value,isBelow=mode==='lower',isAbove=mode==='upper';
- $('lower-row').hidden=isBelow;$('upper-row').hidden=isAbove;
- $('lower-label').textContent=isAbove?'Threshold':'Lower bound';
- $('upper-label').textContent=isBelow?'Threshold':'Upper bound';
- const l=isBelow?'−∞':ui.lower.value===''?'…':ui.lower.value.replace('-','−');
- const r=isAbove?'∞':ui.upper.value===''?'…':ui.upper.value.replace('-','−');
- $('event-line').textContent=isBelow?'P(X < '+r+')':isAbove?'P(X > '+l+')':'P('+l+' < X < '+r+')';
- modelFeedback.textContent='';
-}
-Object.values(ui).forEach(el=>el.addEventListener(el===ui.event?'change':'input',update));
 const linkParams=['event','mean','sd','lower','upper','example'];
 const valuesFor=(m,threshold=true)=>[
  threshold||m.lower===-Infinity?rawBound(m.lower):'',
@@ -405,7 +384,7 @@ function fromURL(){
    normalMass(model);
    return {event,model,linked:true,threshold:true};
  }catch{
-   return {event:'upper',model:task,error:'The link needs an event, a finite mean, a positive SD and the relevant bound(s). Open original Try or set your own values below.'};
+   return {event:'upper',model:task,error:'The link needs an event, a finite mean, a positive SD and the relevant bound(s). The original Try is shown; you can enter your own values on its handheld.'};
  }
 }
 const assignment=fromURL();
@@ -413,38 +392,19 @@ const eventLabel=(type,model)=>{
  const l=rawBound(model.lower), u=rawBound(model.upper);
  return type==='lower'?'P(X < '+u+')':type==='upper'?'P(X > '+l+')':'P('+l+' < X < '+u+')';
 };
-const read=()=>[ui.event.value==='lower'?'−∞':ui.lower.value,ui.event.value==='upper'?'∞':ui.upper.value,ui.mean.value,ui.sd.value].map(a=>a.replaceAll('-','−'));
 function restorePractice(){
  const {model,event,linked,threshold,error}=assignment;
- practice=fresh(linked?valuesFor(model,threshold):null);live=practice;customLoaded=false;
- ui.event.value=event;ui.mean.value=model.mean;ui.sd.value=model.sd;
- ui.lower.value=linked&&threshold&&Number.isFinite(model.lower)?model.lower:'';
- ui.upper.value=linked&&threshold&&Number.isFinite(model.upper)?model.upper:'';
+ live=fresh(linked?valuesFor(model,threshold):null);
  $('challenge-title').textContent=event==='range'?'Interval practice':'Tail practice';
  $('challenge-prompt').textContent='Mean '+rawBound(model.mean)+', standard deviation '+rawBound(model.sd)+'. Find '+eventLabel(event,model)+'.';
  $('hint').textContent=(event==='lower'?'Leave the lower bound at −∞. ':event==='upper'?'Leave the upper bound at ∞. ':'Enter both finite bounds in increasing order. ')+'Use the standard deviation, not the variance.';
  $('answer').value='';$('feedback').textContent='';$('feedback').className='feedback';
  $('link-notice').textContent=error??'';$('link-notice').hidden=!error;
- update();paintTry();
+ paintTry();
 }
-$('model').addEventListener('submit',e=>{
- e.preventDefault();
- if(forkKey!==null)return;
- try{
-   const draft=read(), m=decode(draft);
-   normalMass(m);
-   const expected=assignment.model;
-   customLoaded=['lower','upper','mean','sd'].some(k=>m[k]!==expected[k]);
-   practice=fresh(draft);live=practice;
-   paintTry();
-   modelFeedback.textContent='Loaded. Open Menu → Probability → Distributions → Normal Cdf.';
-   tryHost.focus({preventScroll:true});
- }catch(err){modelFeedback.textContent=err.message;}
-});
 $('answer').addEventListener('input',()=>{$('feedback').textContent='';$('feedback').className='feedback';});
 $('answer-form').addEventListener('submit',e=>{
  e.preventDefault();
- if(forkKey!==null||customLoaded)return;
  const raw=$('answer').value.trim().replace(',','.'),v=Number(raw),el=$('feedback'),prob=normalMass(assignment.model),expected=prob.toFixed(4);
  let ok=false;
  if(!raw||!Number.isFinite(v)||v<0||v>1)el.textContent='Enter a probability from 0 to 1.';
@@ -454,6 +414,6 @@ $('answer-form').addEventListener('submit',e=>{
  el.classList.toggle('is-right',ok);el.classList.toggle('is-wrong',!ok);
 });
 restorePractice();
-if(qpMode==='try')openPractice(false);
+if(qpMode==='try')tab(1,false);
 else tab(0,false);
 })();

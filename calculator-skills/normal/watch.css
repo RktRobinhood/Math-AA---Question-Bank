@@ -1,0 +1,85 @@
+/* Captioned distribution Watch. The screen and full view share one handset and tape. */
+.normal-watch main>.header,.normal-watch main>.tabs{margin-bottom:10px}
+.normal-watch main>.header h1{font-size:clamp(1.55rem,4vw,2.55rem)}
+.normal-watch main>.header .tag{margin-bottom:4px}
+.modern-watch{--video:#182621;--border:#476253;--ink:#f0f7f2;--muted-video:#c5d5ca;--key:#bfead0;min-width:0;overflow:hidden;border:1px solid var(--border);border-radius:13px;background:var(--video);color:var(--ink);color-scheme:dark;isolation:isolate}
+.modern-watch .watch-surface{position:relative;display:grid;justify-items:center;gap:4px;padding:5px 9px 4px;cursor:pointer;min-width:0}
+.modern-watch #key-strip{display:flex;align-items:center;gap:6px;width:100%;min-height:24px;color:var(--muted-video);font:650 .72rem/1.2 var(--mono)}
+.modern-watch #caption-beta{margin-inline-start:auto;color:var(--muted-video);text-align:right}
+.modern-watch #active-key{min-width:34px;padding:2px 5px;border:1px solid #739786;border-radius:4px;text-align:center;color:#fff;background:#2a4035}
+.modern-watch #watch-device-pane{width:100%;min-width:0;max-height:var(--normal-full-max-h,none);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#7f9f8e var(--video);overscroll-behavior:contain}
+.modern-watch #watch-device-pane:focus-visible{outline:2px solid #bde5ff;outline-offset:-2px}
+.modern-watch #full-fit-note{margin:0;color:var(--muted-video);font:.67rem/1.14 var(--mono)}
+.modern-watch #watch-host{margin-inline:auto;width:min(100%,var(--normal-full-fit,190px));--handheld-width:100%;min-width:0}
+.modern-watch[data-frame=screen] #watch-host{width:min(100%,var(--normal-screen-fit,360px))}
+.modern-watch[data-frame=screen] .hh-body{width:100%;aspect-ratio:4/3;overflow:hidden;border:4px solid #526d61;border-radius:8px;box-shadow:none;margin:auto}
+.modern-watch[data-frame=screen] .hh-body>*:not(.hh-lcd){display:none!important}
+.modern-watch[data-frame=screen] .hh-lcd{left:0;right:0;top:0;bottom:0;width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
+.modern-watch .worked-prompt{width:100%;max-width:none;display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:2px 4px;color:var(--ink);font-size:.78rem}
+.modern-watch .worked-prompt span{color:var(--muted-video);font:650 .68rem var(--mono)}
+.modern-watch .worked-prompt .curve{flex:0 0 68px;margin:0;overflow:hidden}
+.modern-watch .worked-prompt .curve svg{width:100%;height:26px;border:0}
+.modern-watch .worked-prompt .curve text{display:none}
+.modern-watch .worked-prompt .curve .bell,.modern-watch .worked-prompt .curve .cut{stroke:#d2eee0}
+.modern-watch .worked-prompt .curve .axis{stroke:#aec3b9}
+.modern-watch .worked-prompt .curve .shade{fill:#a5e9bb;opacity:.55}
+.modern-watch #play-feedback{position:absolute;z-index:4;pointer-events:none;left:50%;top:50%;translate:-50% -50%;width:60px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d1615eb;color:#fff;box-shadow:0 1px 10px #0009}
+.modern-watch #play-feedback svg{width:34px;height:34px;fill:currentColor}
+.modern-watch #play-feedback[data-action=play] .pause-glyph,.modern-watch #play-feedback[data-action=pause] .play-glyph{display:none}
+.modern-watch #caption-band{border-block:1px solid var(--border);background:#0c1511}
+.modern-watch #caption{margin:0;padding:6px 9px;max-width:none;min-height:0;border:0;text-align:center;color:var(--ink);font:650 clamp(.75rem,2.8vw,.90rem)/1.24 system-ui;overflow-wrap:anywhere}
+.modern-watch #watch-player{display:grid;grid-template-columns:auto auto minmax(24px,1fr) repeat(4,auto);align-items:center;gap:3px;padding:3px 7px;margin:0;min-width:0}
+.modern-watch #watch-player :is(button,select){width:auto;min-width:33px;min-height:38px;height:38px;margin:0;padding:0 4px;border:1px solid transparent;border-radius:5px;background:transparent;color:var(--ink);font:700 .78rem/1 system-ui;white-space:nowrap}
+.modern-watch #watch-player .player-icon{display:grid;place-items:center;padding:0;width:35px}
+.modern-watch #watch-player .player-icon svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.modern-watch #watch-player #play::before{content:none}
+.modern-watch #watch-player #play svg{width:23px;height:23px;fill:currentColor;stroke:none}
+.modern-watch #watch-player :is(button:hover,button[aria-pressed=true]){background:#31463b;color:#fff}
+.modern-watch #watch-player :is(button,input,select):focus-visible{outline:2px solid #bde5ff;outline-offset:-2px}
+.modern-watch #view-pick{display:flex;align-items:center;border:1px solid #647c6d;border-radius:6px}
+.modern-watch #view-pick .player-icon{min-width:29px;width:29px}
+.modern-watch #watch-player .timeline{margin:0;min-width:0}
+.modern-watch #seek{width:100%;height:24px;accent-color:var(--key);cursor:pointer}
+.modern-watch #clock{color:var(--muted-video);font:600 .69rem/1.2 var(--mono);white-space:nowrap}
+.modern-watch #watch-player select{min-width:51px;border-color:var(--border)}
+.modern-watch #watch-player select option{background:var(--video);color:var(--ink)}
+.modern-watch #audio-state{margin:0;grid-column:1/-1;color:var(--muted-video);font-size:.75rem}
+.modern-watch:is(:fullscreen,.watch-fullscreen-fallback){height:100dvh;width:100%;max-height:none;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;align-items:stretch;overflow:auto;overscroll-behavior:contain}
+.modern-watch.watch-fullscreen-fallback{position:fixed;inset:0;z-index:80}
+body.normal-watch.watch-fullscreen-open{overflow:hidden}
+.modern-watch:is(:fullscreen,.watch-fullscreen-fallback) .watch-surface{width:100%;max-width:850px;flex:1;align-content:center;margin-inline:auto}
+.modern-watch:is(:fullscreen,.watch-fullscreen-fallback) #watch-player{flex:none;position:sticky;bottom:0;z-index:8;background:var(--video);padding-bottom:max(4px,env(safe-area-inset-bottom))}
+@media(max-width:700px){
+ .normal-watch main{padding:10px 8px 17px}
+ .normal-watch main>.header .subtitle{display:none}
+ .normal-watch main>.header h1{font-size:clamp(1.35rem,5.25vw,1.68rem)}
+ .normal-watch main>.tabs button{min-height:35px;padding-block:4px;min-width:73px}
+ .normal-watch .watch-grid{gap:12px}
+ .modern-watch .watch-surface{padding-inline:5px}
+ .modern-watch[data-frame=screen] #watch-host{max-width:calc(100vw - 35px)}
+ .modern-watch #watch-player{grid-template-columns:auto auto auto 1fr auto;gap:0 2px;padding:2px 4px}
+ .modern-watch #watch-player .timeline{grid-row:1;grid-column:1/-2}
+ .modern-watch #clock{grid-row:1;grid-column:-2/-1;justify-self:end;padding-inline:2px;font-size:.65rem}
+ .modern-watch #watch-player :is(#play,#view-pick,#cc,.watch-rate,#fullscreen){grid-row:2}
+ .modern-watch #watch-player #play{grid-column:1}
+ .modern-watch #watch-player #view-pick{grid-column:2}
+ .modern-watch #watch-player #cc{grid-column:3}
+ .modern-watch #watch-player .watch-rate{grid-column:4}
+ .modern-watch #watch-player #fullscreen{grid-column:5;justify-self:end}
+ .modern-watch #watch-player :is(button,select){min-height:36px;height:36px}
+}
+@media(max-height:680px){.normal-watch main>.header .subtitle{display:none}}
+
+@media(max-width:395px) and (max-height:675px){
+ .normal-watch main:has(#watch:not([hidden])){position:relative}
+ .normal-watch main:has(#watch:not([hidden]))>.header .tag{font-size:.62rem;min-height:32px;max-width:calc(100% - 108px);margin-top:1px}
+ .normal-watch main:has(#watch:not([hidden]))>.tabs{position:absolute;right:8px;top:12px;border:1px solid var(--line);border-radius:6px;padding:2px;gap:1px}
+ .normal-watch main:has(#watch:not([hidden]))>.tabs button{min-width:45px;min-height:30px;padding:2px 4px;font-size:.8rem;border:0}
+ .modern-watch #caption{padding-block:4px}
+ .modern-watch .worked-prompt{font-size:.70rem}
+}
+
+@media(min-width:701px) and (max-height:680px){
+ .normal-watch main:has(#watch:not([hidden])){padding-block-start:14px}
+ .normal-watch main>.header,.normal-watch main>.tabs{margin-bottom:7px}
+}
