@@ -3,14 +3,8 @@ import {WATCH,TRY_CASES,solveInBounds} from './solver.js';
 
 const $=id=>document.getElementById(id);
 const media=$('voice'),play=$('play'),seek=$('seek'),cc=$('captions'),caption=$('caption'),lcd=$('lcd');
-const CAPTIONS=[
- [0,'On a Calculator page, open Menu, choose Algebra, then Numerical Solve.'],
- [6.24,'Enter the equation, then a comma and the variable you’re solving for.'],
- [10.70,'To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma.'],
- [17.91,'Close the bracket and press Enter. The calculator gives one numerical solution.'],
- [23.58,'If the equation may have more than one solution, use separate intervals and check each result.'],
- [29.43,'Keep the calculator’s full precision while you work, then round the final answer as the question asks.'],
-];
+import narration from './narration-cues.json';
+const CAPTIONS=narration.cues;
 const TOPICS=[
  ['01','Open Numerical Solve','On a Calculator page, choose Menu → 3: Algebra → 1: Numerical Solve.'],
  ['02','Enter the equation','Type the equation, a comma, and the variable. On the handheld, use → to exit the exponent first.'],
@@ -30,7 +24,7 @@ const key=params.get('example')??params.get('case');
 const legalKey=key==='roots-demo'?'demo':key;
 const chosen=Object.hasOwn(TRY_CASES,legalKey)?TRY_CASES[legalKey]:TRY_CASES.demo;
 $('context').textContent='CT06'+(key&&Object.hasOwn(TRY_CASES,legalKey)?' · '+chosen.label:'');
-$('transcript').textContent=CAPTIONS.map(c=>c[1]).join(' ');
+$('transcript').textContent=CAPTIONS.map(c=>c.text).join(' ');
 const SCREEN=surface($('drawing'));
 lcd.dataset.renderer=SCREEN.backend;
 const watchers=[...document.querySelectorAll('[data-mode]')];
@@ -38,21 +32,40 @@ const hotspots=$('hotspots');
 let mode=null,time=0,duration=35.553,running=false,rafId=0,prevFrame=0,ccOn=false,silent=false,silentOrigin=0,pendingSeek=null,frameSig='';
 let step='idle', values={equation:chosen.equation,lower:chosen.lower,upper:chosen.upper}, activeResult=null;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-function configureTheme(){
- const theme=$('theme'),dark=matchMedia('(prefers-color-scheme:dark)');
- let mode='auto';try{mode=localStorage.getItem('ti-lab-theme')||'auto'}catch{}
- theme.value=mode;
- function set(){document.documentElement.dataset.theme=mode==='auto'?(dark.matches?'dark':'light'):mode}
- theme.addEventListener('change',()=>{mode=theme.value;try{localStorage.setItem('ti-lab-theme',mode)}catch{}set()});
- dark.addEventListener?.('change',set);set();
+const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen'),keyButton=$('key-labels'),keyOverlay=$('key-overlay');
+const playerUI=window.CalculatorWatchPlayer.mount({player, surface:$('watch-surface'), play,seek,expand:$('fullscreen'),
+ feedback:$('play-feedback'),active:()=>mode==='watch'});
+let showKeys=false,screenOnly=false,willPlay=false;
+const scene=$('watch-surface');
+function fitWatch(){
+ if(mode!=='watch')return;
+ const h=window.innerHeight, top=scene.getBoundingClientRect().top+window.scrollY;
+ const tab=document.querySelector('.tabbar'), nav=tab?.getBoundingClientRect().height||0;
+ const captionHeight=caption.getBoundingClientRect().height;
+ const room=h-top-nav-$('watch-controls').getBoundingClientRect().height-captionHeight;
+ player.style.setProperty('--watch-caption-height',captionHeight+'px');
+ const stacked=matchMedia('(max-width:735px) and (min-height:701px)').matches;
+ const beatH=stacked?scene.querySelector('.beat').getBoundingClientRect().height+8:0;
+ player.style.setProperty('--watch-handheld-fit',Math.floor(Math.max(126,Math.min(300,(room-beatH-25)*558/1168)))+'px');
+ player.style.setProperty('--watch-lcd-fit',Math.floor(Math.max(198,Math.min(570,(room-beatH-81)*4/3)))+'px');
 }
-configureTheme();
+window.addEventListener('resize',fitWatch);
+document.addEventListener('fullscreenchange',fitWatch);
+const stageObserver=new ResizeObserver(fitWatch);
+[document.querySelector('main>.title'),$('watch-controls'),caption,scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
+
+function viewState(){
+ const screenMode=mode==='watch'&&screenOnly;
+ player.classList.toggle('solve-screen-only',screenMode);
+ fullButton.setAttribute('aria-pressed',String(!screenOnly));
+ screenButton.setAttribute('aria-pressed',String(screenOnly));
+ fitWatch();
+}
 function beat(i,keys=[],override=''){
  const [n,t,desc]=TOPICS[i];const key=n+'|'+keys.join('|')+'|'+override;
  if(frameSig===key)return;frameSig=key;
  $('beat-number').textContent=n;$('beat-title').textContent=t;$('beat-tip').textContent=override||desc;
- $('keypress').hidden=!keys.length;
- $('keys').replaceChildren(...keys.map(k=>{const el=document.createElement('kbd');el.className='key';el.textContent=k;return el}));
+
 }
 function frame(t){
  if(t<1.60)return {state:'idle',n:0,keys:[]};
@@ -70,7 +83,7 @@ function frame(t){
 }
 const timecode=t=>Math.floor(Math.max(0,t)/60)+':'+String(Math.floor(Math.max(0,t))%60).padStart(2,'0');
 function paint(t){
- window.HandheldTransport?.lightAt(shell,'CT06',t);
+ const keys=window.HandheldTransport?.lightAt(shell,'CT06',t)||[];
  let f=frame(t);
  const tape=window.HandheldKeyCues?.CT06||[], ms=t*1000;
  const past=tape.filter(e=>e.timeMs<=ms);
@@ -78,14 +91,20 @@ function paint(t){
  if(t>=23.58&&t<24.18){f={state:'result',n:4,...first,historyFocus:past.filter(e=>e.historyFocus).at(-1)?.historyFocus,keys:[]};}
  else if(f.state==='entry'&&cmdCue){f.cmd=cmdCue.cmdAfter;f.cursorFromEnd=cmdCue.cursorFromEnd??0;f.exponentOpen=!!cmdCue.exponentOpen;}
  SCREEN.draw(f);beat(f.n,f.keys,f.tip);
- let cap='';for(const [start,text] of CAPTIONS){if(start>t)break;cap=text}
+ const cap=CAPTIONS.find(c=>ms>=c.startMs&&ms<c.endMs)?.text||'';
  if(caption.textContent!==cap)caption.textContent=cap;
- caption.hidden=!ccOn;seek.value=t;
- seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(Math.ceil(duration)));
- $('time').textContent=timecode(t)+' / '+timecode(Math.ceil(duration));
+ caption.hidden=!ccOn||!cap;
+ keyOverlay.hidden=!showKeys||!keys.length;
+ if(keys.length)keyOverlay.querySelector('kbd').textContent=({right:'→',left:'←',up:'↑',down:'↓',enter:'Enter',menu:'Menu',power:'^',delete:'Del',neg:'(−)',eq:'=',comma:',',plus:'+',minus:'−'})[keys[0]]||keys[0];
+ player.dataset.step=f.state;
+ seek.value=t;
+ seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));
+ $('time').textContent=timecode(t)+' / '+timecode(duration);
+ $('take-over').textContent=t>=duration-.04?'Open Try':'Take over';
+ $('take-over').setAttribute('aria-label',t>=duration-.04?'Open independent Try':'Take over the calculator');
 }
 function playing(v){
- running=v;play.setAttribute('aria-label',v?'Pause':'Play');play.querySelector('.play-icon').hidden=v;play.querySelector('.pause-icon').hidden=!v;
+ running=v;willPlay=false;play.setAttribute('aria-label',v?'Pause':time>=duration-.04?'Replay':'Play');play.querySelector('.play-icon').hidden=v;play.querySelector('.pause-icon').hidden=!v;
  cancelAnimationFrame(rafId);if(v)rafId=requestAnimationFrame(tick);
 }
 function tick(now){
@@ -113,31 +132,33 @@ media.addEventListener('loadedmetadata',()=>{
 });
 media.addEventListener('error',useSilent);
 media.addEventListener('ended',end);
-media.addEventListener('pause',()=>{if(!silent&&running)pause()});
+media.addEventListener('pause',()=>{if(!silent&&running&&media.paused)pause()});
 cc.addEventListener('click',()=>captionsState(!ccOn));
+keyButton.addEventListener('click',()=>{showKeys=!showKeys;keyButton.setAttribute('aria-pressed',String(showKeys));keyButton.title=showKeys?'Hide key presses':'Show key presses';if(mode==='watch')paint(time)});
+fullButton.addEventListener('click',()=>{screenOnly=false;viewState()});
+screenButton.addEventListener('click',()=>{screenOnly=true;viewState()});
 seek.addEventListener('input',()=>{
  time=clamp(Number(seek.value),0,duration);
  if(silent)silentOrigin=performance.now()-time*1000;
  else if(Number.isFinite(media.duration))media.currentTime=time;
  else pendingSeek=time;
- if(mode==='watch')paint(time);
+ if(mode==='watch'){paint(time);if(!running)play.setAttribute('aria-label',time>=duration-.04?'Replay':'Play');}
 });
 let playTicket=0;
 play.addEventListener('click',async()=>{
  if(mode!=='watch')return;
- if(running){playTicket++;pause();return}
+ if(running||willPlay){playTicket++;pause();playerUI.flash(false);return}
  if(time>=duration-.04)time=0;
- if(silent||media.error){useSilent();playing(true);return}
- const token=++playTicket;
+ if(silent||media.error){useSilent();playing(true);playerUI.flash(true);return}
+ const token=++playTicket;willPlay=true;
  if(Number.isFinite(media.duration))media.currentTime=time;else pendingSeek=time;
- try{await media.play();if(mode==='watch'&&token===playTicket)playing(true);else media.pause()}
- catch(e){if(e.name!=='AbortError'&&mode==='watch'&&token===playTicket){useSilent();playing(true)}}
+ try{await media.play();if(mode==='watch'&&token===playTicket){playing(true);playerUI.flash(true)}else if(!willPlay&&!running)media.pause()}
+ catch(e){if(e.name!=='AbortError'&&mode==='watch'&&token===playTicket){useSilent();playing(true);playerUI.flash(true)}}
 });
-const input=$('equation'),lo=$('lower'),hi=$('upper'),form=$('solver-form'),work=$('try-work');
+const input=$('equation'),lo=$('lower'),hi=$('upper'),form=$('solver-form');
 const feedback=$('feedback'),answer=$('answer');
 function show(el,s){el.textContent=s||'';el.hidden=!s}
 function sync(v){input.value=v.equation;lo.value=v.lower;hi.value=v.upper;}
-function btn(label,fn,quiet=false){const b=document.createElement('button');b.type='button';b.className=quiet?'quiet':'solid';b.textContent=label;b.addEventListener('click',fn);return b;}
 function hotspot(m,index,fn){
  const b=document.createElement('button');b.type='button';b.tabIndex=-1;b.setAttribute('aria-hidden','true');b.className='hot';
  b.style.cssText='left:'+m.x/3.2+'%;top:'+(m.y+2+index*15)/2.4+'%;width:'+m.w/3.2+'%;height:'+15/2.4+'%';
@@ -151,59 +172,60 @@ function tryStep(s,focus=false){
  step=s;activeResult=null;show(answer,'');show(feedback,'');drawTry(focus);
 }
 function drawTry(focus=false){
- hotspots.replaceChildren();work.replaceChildren();
+ hotspots.replaceChildren();
  $('restart').hidden=step==='idle';
+ $('edit-entry').hidden=step!=='result';
  $('try-summary').hidden=step!=='idle';
  $('try-summary').textContent='Selected: '+prettify(values.equation)+' on ['+prettify(values.lower)+', '+prettify(values.upper)+']';
- form.hidden=step!=='entry'&&step!=='result';
- const row=document.createElement('div');row.className='inputrow';work.append(row);
- const state=step;
- const screenCmd=step==='entry'?'nSolve('+prettify(values.equation)+', x, '+values.lower+', '+values.upper+')':step==='result'?activeResult?.command||'':'';
- SCREEN.draw({state,cmd:screenCmd,result:activeResult?.result||'',cursor:state==='idle'});
- if(step==='idle'){
-   beat(0,[],'Open Menu on the simulated Calculator page.');row.append(btn('menu',()=>tryStep('menu',true)));
- }else if(step==='menu'){
+ const wasHidden=form.hidden;
+ form.hidden=step!=='entry';
+ player.dataset.step=step;
+ const screenCmd=step==='result'?activeResult?.command||'':'';
+ SCREEN.draw({state:step,cmd:screenCmd,result:activeResult?.result||'',cursor:step==='idle'});
+ if(step==='idle')beat(0,[],'Open Menu on the simulated Calculator page.');
+ else if(step==='menu'){
    beat(0,['menu'],'Choose 3: Algebra.');
-   const next=()=>tryStep('submenu',true);
-   row.append(btn('3: Algebra',next),btn('esc',()=>tryStep('idle',true),true));hotspot(MENUS.main,2,next);
+   hotspot(MENUS.main,2,()=>tryStep('submenu',true));
  }else if(step==='submenu'){
    beat(0,['menu','3'],'Choose 1: Numerical Solve.');
-   const next=()=>tryStep('entry',true);
-   row.append(btn('1: Numerical Solve',next),btn('esc',()=>tryStep('menu',true),true));hotspot(MENUS.sub,0,next);
+   hotspot(MENUS.sub,0,()=>tryStep('entry',true));
  }else if(step==='entry'){
    beat(2,['menu','3','1'],'Enter the equation and both bounds, then press Enter.');
-   if(focus&&matchMedia('(pointer:fine)').matches)input.focus({preventScroll:true});
- }else if(step==='result'){
-   beat(3,['enter'],'This run searches one interval. Change the bounds to look for the other solution.');
- }
- if(focus)row.querySelector('button')?.focus({preventScroll:true});
+   if((wasHidden||focus)&&matchMedia('(pointer:fine)').matches)input.focus({preventScroll:true});
+ }else if(step==='result')beat(3,['enter'],'This run searches one interval. Change the bounds to look for the other solution.');
 }
 const fields=[input,lo,hi];
 fields.forEach(f=>f.addEventListener('input',()=>{
  values={equation:input.value,lower:lo.value,upper:hi.value};
  if(step==='result'){step='entry';activeResult=null;show(answer,'');}
- show(feedback,'');if(step==='entry'){SCREEN.draw({state:'entry',cmd:cmd(prettify(values.equation),values.lower,values.upper)});beat(2,['menu','3','1'],'Enter the equation and both bounds, then press Enter.');}
+ show(feedback,'');
 }));
+function readBound(value){
+ const s=value.trim().replace(/−/g,'-');
+ return /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(s)?Number(s):NaN;
+}
 form.addEventListener('submit',ev=>{
  ev.preventDefault();values={equation:input.value,lower:lo.value,upper:hi.value};
  show(answer,'');show(feedback,'');
  try{
-    const r=solveInBounds(values.equation,lo.valueAsNumber,hi.valueAsNumber);
+    const r=solveInBounds(values.equation,readBound(values.lower),readBound(values.upper));
     step='result';activeResult={command:cmd(prettify(r.equation),values.lower,values.upper),result:r.kind==='root'?r.screen:'No root found'};drawTry();
     if(r.kind==='root')show(answer,'x ≈ '+prettify(r.screen)+' · '+prettify(r.rounded)+' to 3 significant figures.');
     else show(feedback,'This practice scanner found no sign-changing root. Try a narrower interval that brackets a crossing; a root that only touches may be missed.');
  }catch(e){if(step==='result'){step='entry';drawTry()}show(feedback,e.message)}
 });
 document.querySelectorAll('[data-case]').forEach(b=>b.addEventListener('click',()=>choosePreset(b.dataset.case)));
-$('restart').addEventListener('click',()=>tryStep('idle',true));
+$('restart').addEventListener('click',()=>{tryStep('idle',true);player.focus({preventScroll:true})});
+$('edit-entry').addEventListener('click',()=>tryStep('entry',true));
+form.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();form.requestSubmit();}});
 
 function setMode(m){
  if(mode===m)return;
  playTicket++;pause();mode=m;frameSig='';hotspots.replaceChildren();
- document.body.dataset.cxMode=m;shell?.setKeys([]);shell?.setInteractive(m==='try');$('take-over').hidden=m!=='watch';
+ document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');$('take-over').hidden=m!=='watch';
  watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
  $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('watch-example').hidden=m!=='watch';$('audio-notice').hidden=!(m==='watch'&&silent);
- if(m==='watch')paint(time);else{caption.hidden=true;drawTry()}
+ if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;keyOverlay.hidden=true;drawTry()}
 }
 let targetField=0,lastField=-1;
 fields.forEach((field,i)=>field.addEventListener('focus',()=>{targetField=i;lastField=i}));
@@ -228,12 +250,23 @@ function handleHandheld(key){
    t.modify(field,k,{replace:targetField!==lastField});lastField=targetField;
  }
 }
-const shell=window.HandheldShell?.mount({screen:lcd,host:lcd.closest('.lcd-group'),label:'TI-Nspire CX II-T Calculator',onKey:handleHandheld});
-window.HandheldTransport?.controls({container:$('watch-controls'),play,seek,active:()=>mode==='watch'});
+const shell=window.HandheldShell?.mount({screen:lcd,host:lcd.closest('.lcd-group'),label:'TI-Nspire CX II-T Calculator',onKey:(key,event)=>{
+ const focusesField=step==='entry'&&['tab','down','up'].includes(key);
+ handleHandheld(key);
+ if(!focusesField&&!fields.includes(document.activeElement)&&mode==='try')player.focus({preventScroll:true});
+}});
+document.addEventListener('keydown',e=>{
+ if(mode!=='try'||e.ctrlKey||e.metaKey||e.altKey||e.repeat||e.defaultPrevented)return;
+ if(e.target!==document.body&&e.target!==player)return;
+ const key=e.key.toLowerCase()==='m'?'menu':e.key==='Tab'&&step==='entry'&&!e.shiftKey?'tab':HandheldShell.normalizeKey(e.key);
+ if(!shell.getKey(key)||e.key==='Tab'&&key!=='tab')return;
+ e.preventDefault();shell.getKey(key).click();
+});
 $('take-over').addEventListener('click',()=>{
- const fresh=step==='idle'&&!key;
+ const ended=time>=duration-.04,fresh=!ended&&step==='idle'&&!key;
  setMode('try');
  if(fresh){values={equation:WATCH.equation,lower:2,upper:3};sync(values);tryStep('entry',false);show(feedback,'Watch is paused at your place. Edit the equation or choose different bounds.');}
+ player.focus({preventScroll:true});
 });
 watchers.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 sync(values);

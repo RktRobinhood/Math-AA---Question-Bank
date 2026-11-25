@@ -131,6 +131,27 @@ img { max-width: 100%; }
 .nav a.on { color: var(--ink); border-bottom-color: var(--accent); }
 .icon-btn { width: 36px; height: 36px; border: 1px solid var(--line); border-radius: var(--r); display: grid; place-items: center; color: var(--muted); font-size: 15px; flex: none; }
 .icon-btn:hover { color: var(--ink); border-color: var(--faint); }
+.theme-control { position: relative; flex: none; }
+.theme-control__button[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); }
+.theme-control i { display: grid; place-items: center; }
+.theme-control svg { width: 17px; height: 17px; display: block; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.theme-control__menu {
+  position: absolute; z-index: 1; inset: calc(100% + var(--s2)) 0 auto auto;
+  min-width: 144px; display: grid; gap: 2px; padding: var(--s1);
+  color: var(--ink); background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r); box-shadow: 0 8px 24px var(--shadow);
+}
+.theme-control__option {
+  display: grid; grid-template-columns: 17px 1fr 16px; align-items: center; gap: var(--s2);
+  width: 100%; min-height: 36px; padding: 0 var(--s2); border-radius: var(--r-sm);
+  text-align: start; font-size: var(--fs-sm); font-weight: 650; white-space: nowrap;
+}
+.theme-control__option:hover { background: var(--sunk); }
+.theme-control__option[aria-checked="true"] { color: var(--accent); background: var(--accent-soft); }
+.theme-control__option:focus-visible { outline-offset: -2px; }
+.theme-control__check { visibility: hidden; text-align: center; }
+.theme-control__option[aria-checked="true"] .theme-control__check { visibility: visible; }
+@media (pointer: coarse) { .theme-control__option { min-height: 44px; } }
 .paperbtn { display: flex; align-items: center; gap: var(--s2); background: var(--accent); color: var(--accent-ink); padding: 8px 13px; border-radius: var(--r); font-weight: 650; white-space: nowrap; }
 .paperbtn b { background: var(--accent-ink); color: var(--accent); border-radius: var(--r-pill); padding: 0 7px; font: 700 12px/18px var(--mono); }
 .course-pick { display: none; width: auto; min-height: 34px; padding: 4px 6px; font-weight: 650; border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }

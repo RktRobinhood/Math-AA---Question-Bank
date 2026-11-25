@@ -1,4 +1,4 @@
-/* shell.js — the top bar every page shares, the phone tab bar and the light/dark theme.
+/* shell.js — the top bar every page shares, the phone tab bar and the site appearance menu.
    Loaded on every page after courses.js and course.js. The page says which section it is with
    <body data-nav="questions|statistics|syllabus|practice"> and where the site root is with
    data-base. The theme is set before first paint by a one-line script in each page's <head>;
@@ -14,19 +14,52 @@
   const root = document.documentElement;
 
   // ── theme ────────────────────────────────────────────────────────────────
-  const media = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
-  function saved() { try { return localStorage.getItem(THEME_KEY); } catch (_) { return null; } }
-  function applyTheme() {
-    const t = saved() || (media && media.matches ? 'dark' : 'light');
-    root.dataset.theme = t;
-    const btn = document.getElementById('theme-toggle');
-    if (btn) {
-      btn.textContent = t === 'dark' ? '☀' : '☾';
-      btn.setAttribute('aria-label', t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
-      btn.title = btn.getAttribute('aria-label');
-    }
+  const media = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+  const themeOptions = [
+    ['system', 'System', 'M3 4h18v13H3zM12 17v3M8 20h8'],
+    ['light', 'Light', 'M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z'],
+    ['dark', 'Dark', 'M20.9 14.3A9 9 0 0 1 9.7 3.1 9 9 0 1 0 20.9 14.3Z'],
+  ];
+  const themeIndex = new Map(themeOptions.map((option, index) => [option[0], index]));
+  function readTheme() {
+    try {
+      const choice = localStorage.getItem(THEME_KEY);
+      if (choice === 'light' || choice === 'dark') return choice;
+    } catch (_) {}
+    return 'system';
   }
-  if (media) media.addEventListener('change', applyTheme);
+  let themeMode = readTheme();
+  let themeControl;
+  function applyTheme() {
+    root.dataset.theme = themeMode === 'system' ? (media?.matches ? 'dark' : 'light') : themeMode;
+    root.dataset.themeMode = themeMode;
+    if (!themeControl) return;
+    const { button, items } = themeControl;
+    const [, label, icon] = themeOptions[themeIndex.get(themeMode)];
+    button.replaceChildren(svgIcon(icon));
+    button.setAttribute('aria-label', `Theme: ${label}`);
+    button.title = `Theme: ${label}`;
+    items.forEach(item => item.setAttribute('aria-checked', String(item.dataset.themeValue === themeMode)));
+  }
+
+  function pickTheme(mode) {
+    themeMode = mode;
+    try {
+      // The existing first-paint script on every page already follows System
+      // when the key is absent, and understands the same saved light/dark values.
+      if (mode === 'system') localStorage.removeItem(THEME_KEY);
+      else localStorage.setItem(THEME_KEY, mode);
+    } catch (_) {} // The current page still responds if storage is blocked.
+    applyTheme();
+  }
+  function systemChanged() { if (themeMode === 'system') applyTheme(); }
+  if (media?.addEventListener) media.addEventListener('change', systemChanged);
+  else if (media?.addListener) media.addListener(systemChanged);
+  window.addEventListener('storage', event => {
+    if (event.key !== THEME_KEY && event.key !== null) return;
+    themeMode = readTheme();
+    applyTheme();
+  });
 
   // ── markup ───────────────────────────────────────────────────────────────
   function h(tag, attrs, ...kids) {
@@ -54,6 +87,59 @@
     return i;
   }
 
+  function buildThemeControl() {
+    const button = h('button', {
+      class: 'icon-btn theme-control__button', id: 'theme-toggle', type: 'button',
+      'aria-haspopup': 'menu', 'aria-expanded': 'false', 'aria-controls': 'theme-menu',
+    });
+    const items = themeOptions.map(([id, label, icon]) => h('button', {
+      class: 'theme-control__option', type: 'button', tabindex: '-1', role: 'menuitemradio',
+      'aria-checked': String(themeMode === id), 'data-theme-value': id,
+      onclick: () => { pickTheme(id); close(true); },
+    }, svgIcon(icon), h('span', { text: label }), h('span', { class: 'theme-control__check', 'aria-hidden': 'true', text: '✓' })));
+    const menu = h('div', { class: 'theme-control__menu', id: 'theme-menu', role: 'menu', 'aria-label': 'Theme', hidden: true }, ...items);
+    const control = h('div', { class: 'theme-control' }, button, menu);
+    function close(restoreFocus = false) {
+      if (menu.hidden) return;
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      if (restoreFocus) button.focus();
+    }
+    function open(index = themeIndex.get(themeMode)) {
+      menu.hidden = false;
+      button.setAttribute('aria-expanded', 'true');
+      items[index].focus();
+    }
+    button.addEventListener('click', () => { if (menu.hidden) open(); else close(); });
+    control.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !menu.hidden) {
+        event.preventDefault();
+        event.stopPropagation();
+        close(true);
+        return;
+      }
+      const index = items.indexOf(event.target);
+      if (event.target === button && (event.key === 'ArrowDown' || event.key === 'ArrowUp')) {
+        event.preventDefault();
+        open(event.key === 'ArrowDown' ? 0 : items.length - 1);
+        return;
+      }
+      if (index < 0) return; // Tab keeps its native order; focusout closes the menu.
+      const next = { ArrowDown: (index + 1) % items.length, ArrowUp: (index + items.length - 1) % items.length,
+        Home: 0, End: items.length - 1 }[event.key];
+      if (next !== undefined) {
+        event.preventDefault();
+        items[next].focus();
+      }
+    });
+    control.addEventListener('focusout', event => {
+      if (!menu.hidden && !menu.contains(event.relatedTarget)) close();
+    });
+    document.addEventListener('pointerdown', event => { if (!control.contains(event.target)) close(); });
+    themeControl = { button, items };
+    return control;
+  }
+
   function build() {
     const courses = COURSE ? COURSE.list : [];
     const seg = h('div', { class: 'seg course-seg', role: 'group', 'aria-label': 'Course' },
@@ -67,11 +153,7 @@
         ...LINKS.map(([id, href, text]) => h('a', { href: base + href, class: id === nav ? 'on' : '', 'aria-current': id === nav ? 'page' : null, text })),
         h('a', { href: '#', target: '_blank', rel: 'noopener', 'data-formula-booklet': true, text: 'Formula booklet ↗' })),
       h('span', { class: 'sp' }),
-      h('button', { class: 'icon-btn', id: 'theme-toggle', type: 'button', onclick: () => {
-        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-        try { localStorage.setItem(THEME_KEY, next); } catch (_) {}
-        applyTheme();
-      } }),
+      buildThemeControl(),
       h('button', { class: 'paperbtn', type: 'button', 'data-paper-toggle': true, 'aria-label': 'Your paper' }, 'Your paper ', h('b', { 'data-paper-count': true, text: '0' })));
     const tabs = h('nav', { class: 'tabbar', 'aria-label': 'Sections' },
       ...LINKS.map(([id, href, text, icon]) => h('a', { href: base + href, class: id === nav ? 'on' : '', 'aria-current': id === nav ? 'page' : null },

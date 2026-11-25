@@ -2,6 +2,13 @@
 (function () {
   'use strict';
   const icon = '<svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 11h1m4 0h1m-6 4h1m4 0h1m-6 3h1m4 0h1"/></svg>';
+  const badge = () => {
+    const mark = document.createElement('span');
+    mark.className = 'nav-beta';
+    mark.setAttribute('aria-hidden', 'true');
+    mark.textContent = 'Beta';
+    return mark;
+  };
   for (const bar of [document.querySelector('.top .nav'), document.querySelector('.tabbar')]) {
     if (!bar || bar.querySelector('.calc-skills-nav')) continue;
     const practice = Array.from(bar.querySelectorAll('a')).find(a => a.getAttribute('href')?.endsWith('/practice.html'));
@@ -21,6 +28,11 @@
       link.setAttribute('aria-label', 'Calculator Skills');
       link.append(mark, 'Calc skills');
     } else link.textContent = 'Calculator Skills';
+    for (const [navLink, name] of [[practice, 'Practice'], [link, 'Calculator Skills']]) {
+      navLink.classList.add('nav-preview');
+      navLink.append(badge());
+      navLink.setAttribute('title', name + ' (beta)');
+    }
     practice.after(link);
     bar.classList.add('with-calc-skills');
   }

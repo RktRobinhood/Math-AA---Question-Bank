@@ -83,7 +83,11 @@ html[data-theme=dark] body.neutral-standalone{background:#171e1b}
 .neutral-standalone-bar p{margin:0;font-size:.8rem}
 
 /* Only the embedded Practice handset; standalone Calculator Skills is unchanged. */
-body.neutral-embedded{padding:7px 12px;--neutral-handheld-width:min(280px,calc(100vw - 30px),calc((100dvh - 24px)*.4777))}
+body.neutral-embedded{
+  padding:7px 12px;
+  /* The iframe knows its own viewport; never impose a second nominal device width. */
+  --neutral-handheld-width:min(calc(100vw - 24px),calc((100dvh - 22px) * 558 / 1168))
+}
 .neutral-embedded .np-scope{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
 .neutral-embedded .neutral-trig:not([hidden]),.neutral-embedded .np-notice:not([hidden]){
   position:absolute;z-index:12;bottom:5px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 18px);

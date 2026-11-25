@@ -4,8 +4,8 @@
  const M=window.CT10Math,S=window.CT10Screen,T=window.CT10Tape,H=window.HandheldTransport;
  const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),audio=$("narration");
  const lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),expr=$("expression"),bound=$("bound");
- const watchQ=M.parse("x^2-5x+6"),defaultTry="x^2-7x+10",params=new URLSearchParams(location.search);
- const initial=raw=>({state:"entry",raw,q:null,low:null,high:null,cursor:null,mark:null,error:null});
+ const watchQ=M.parse("x^2-5x+6"),watchView={...M.windowFor(watchQ),y1:7.2},defaultTry="x^2-7x+10",params=new URLSearchParams(location.search);
+ const initial=raw=>({state:"entry",raw,q:null,low:null,high:null,cursor:null,mark:null,error:null,menuPick:5,traceEntry:null,traceResult:false,view:null});
  let linked=null,unsafe=false;
  if(params.has("expr")){
   try{
@@ -22,17 +22,18 @@
  let t=0,duration=T.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="";
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>press(key)});
  const tabs=[$("watch-tab"),$("try-tab")],steps=$("steps"),hot=$("hotspots");
- const hints={entry:"Enter a line or quadratic, then press Enter to plot.",plotted:"Press Menu on the handheld.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 1: Zero.",lower:"Put the lower bound to the left of the crossing. Move with the arrows, tap the graph, or enter x below.",upper:"Put the upper bound to the right of the same crossing, then confirm.",result:"Read the x-coordinate. To find another zero, choose new bounds."};
+ const hints={"trace-menu":"Choose 1: Graph Trace.",trace:"Type an x-coordinate, then press Enter to jump to it.",entry:"Enter a line or quadratic, then press Enter to plot.",plotted:"Press Menu on the handheld.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 1: Zero.",lower:"Put the lower bound to the left of the crossing. Move with the arrows, tap the graph, or enter x below.",upper:"Put the upper bound to the right of the same crossing, then confirm.",result:"Read the x-coordinate. To find another zero, choose new bounds."};
  $("challenge-title").textContent=M.roots(challenge).length===2?"Find the larger zero":"Find the zero";
  $("keypad-problem").textContent=prompt;$("challenge").textContent=prompt;
- function labelGraph(s){$("lcd-text").textContent=[s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw),hints[s.state],s.low!=null?"Lower: "+M.pretty(s.low):"",s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Zero at x = "+M.pretty(s.mark.x):"",s.error||""].filter(Boolean).join(". ");}
+ function stepHint(s){return s.state==="menu"&&s.menuPick===4?"Choose 5: Trace.":hints[s.state];}
+ function labelGraph(s){$("lcd-text").textContent=[s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw),stepHint(s),s.low!=null?"Lower: "+M.pretty(s.low):"",s.state==="trace"&&s.traceEntry!==null?"x = "+s.traceEntry:s.state==="trace"&&s.q&&s.cursor!=null?"f₁: ("+M.pretty(s.cursor)+", "+M.pretty(s.cursor===0?s.q.c:s.q.f(s.cursor))+")":s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Zero at x = "+M.pretty(s.mark.x):"",s.error||""].filter(Boolean).join(". ");}
  function snapshot(time){
   const s=initial("");let key="";
   for(const e of T.keys){
    if(time<e.time)break;
    Object.assign(s,e.delta);key=time<e.time+.23?e.key:"";
   }
-  if(s.state!=="entry")s.q=watchQ;
+  if(s.state!=="entry"){s.q=watchQ;s.view=watchView;}
   return{s,key};
  }
  T.titles.forEach((title,i)=>{
@@ -44,12 +45,14 @@
  function renderWatch(){
   if(mode!=="watch")return;
   const chapter=T.starts.findLastIndex(start=>t>=start), phrase=T.captionStarts.findLastIndex(start=>t>=start), {s,key}=snapshot(t);
-  const keyStamp=[s.state,s.raw,s.cursor,chapter,phrase].join("|");
+  const keyStamp=[s.state,s.raw,s.cursor,s.traceEntry,s.traceResult,chapter,phrase].join("|");
   seek.value=t;seek.setAttribute("aria-valuetext",clock(t)+" of "+clock(duration));$("clock").textContent=clock(t)+" / "+clock(duration);
   shell.setKeys(key?[key]:[]);
   if(cache===keyStamp)return;cache=keyStamp;
   screen.draw(s);labelGraph(s);
-  cap.textContent=T.captions[phrase];$("zero-readout").hidden=phrase!==6;$("intercept-contrast").hidden=phrase<7;
+  cap.textContent=T.captions[phrase];$("zero-readout").hidden=phrase!==6;
+  const contrast=$("intercept-contrast");contrast.hidden=phrase<7;
+  contrast.textContent=s.traceResult?"y-intercept: (0, 6). Read the y-coordinate.":s.state==="trace"?"Type 0, then press Enter.":"Menu → 5: Trace → 1: Graph Trace.";
   [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
  }
  function go(v){
@@ -119,10 +122,11 @@
   const b=state.state==="lower"||state.state==="upper";lcd.classList.toggle("pick",b);
   $("bound-form").hidden=!b;$("retry-bounds").hidden=state.state!=="result";
   $("bound-label").textContent=state.state==="lower"?"Lower bound x":"Upper bound x";
-  $("keypad-hint").textContent=hints[state.state];
+  $("keypad-hint").textContent=stepHint(state);
   show(state.error||(state.mark?"Zero: ("+M.pretty(state.mark.x)+", 0).":"")|| (unsafe&&!edited?"The linked function was invalid. The original practice problem is shown instead.":""),Boolean(state.error||unsafe&&!edited));
-  if(state.state==="menu")jumpMenu(S.PANEL.main,5,()=>press("6"));
+  if(state.state==="menu"){jumpMenu(S.PANEL.main,4,()=>press("5"));jumpMenu(S.PANEL.main,5,()=>press("6"));}
   if(state.state==="submenu")jumpMenu(S.PANEL.sub,0,()=>press("1"));
+  if(state.state==="trace-menu")jumpMenu(S.PANEL.trace,0,()=>press("1"));
  }
  function select(next,properties={}){
   state={...state,state:next,error:null,...properties};bound.value="";renderTry();
@@ -133,11 +137,11 @@
   }catch(e){state={...initial(raw),error:e.message};renderTry();}
  }
  function analyze(){
-  const {x0,x1}=M.windowFor(state.q);select("lower",{low:null,high:null,cursor:(x0+x1)/2,mark:null});
+  const {x0,x1}=state.view||M.windowFor(state.q);select("lower",{low:null,high:null,cursor:(x0+x1)/2,mark:null});
  }
  function confirm(x){
   if(!state.q||!["lower","upper"].includes(state.state))return;
-  edited=true;const {x0,x1}=M.windowFor(state.q);
+  edited=true;const {x0,x1}=state.view||M.windowFor(state.q);
   if(!Number.isFinite(x)||x<x0||x>x1){show("Enter an x-value in this graph window ("+M.pretty(x0)+" to "+M.pretty(x1)+").",true);return;}
   if(state.state==="lower"){select("upper",{low:x,cursor:x});return;}
   if(x<=state.low){show("The upper bound must be to the right of the lower bound.",true);return;}
@@ -147,15 +151,44 @@
  function press(k){
   if(mode!=="try")return;
   const w=state.state;
-  if(k==="esc"){edited=true;state.q?select(w==="submenu"?"menu":"plotted",{low:null,high:null,cursor:null,mark:null}):select("entry");return;}
+  if(k==="esc"){edited=true;state.q?select(["submenu","trace-menu"].includes(w)?"menu":"plotted",{low:null,high:null,cursor:null,mark:null,menuPick:w==="trace-menu"?4:5,traceEntry:null,traceResult:false}):select("entry");return;}
   if(k==="tab"){edited=true;select("entry",{q:null,raw:expr.value,low:null,high:null,cursor:null,mark:null});return;}
-  if(k==="menu"&&state.q){edited=true;select("menu",{low:null,high:null,cursor:null,mark:null});return;}
-  if(w==="menu"){if(["6","enter","right","select"].includes(k)){edited=true;select("submenu");}return;}
+  if(k==="menu"&&state.q){edited=true;select("menu",{low:null,high:null,cursor:null,mark:null,menuPick:5,traceEntry:null,traceResult:false});return;}
+  if(w==="menu"){
+   if(k==="up"||k==="down"){edited=true;select("menu",{menuPick:k==="up"?4:5});return;}
+   if(k==="5"||state.menuPick===4&&["enter","right","select"].includes(k)){edited=true;select("trace-menu");}
+   else if(["6","enter","right","select"].includes(k)){edited=true;select("submenu");}
+   return;
+  }
+  if(w==="trace-menu"){
+   if(["1","enter","right","select"].includes(k)){
+    edited=true;const {x0,x1}=state.view||M.windowFor(state.q);
+    select("trace",{cursor:M.clamp(0,x0,x1),traceEntry:null,traceResult:false});
+   }
+   return;
+  }
+  if(w==="trace"){
+   const {x0,x1}=state.view||M.windowFor(state.q);
+   if((k==="enter"||k==="select")&&state.traceEntry!==null){
+    const raw=state.traceEntry,x=Number(raw);
+    if(!/^-?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)||!Number.isFinite(x)){show("Enter a valid x-coordinate.",true);return;}
+    if(x<x0||x>x1){show("That x-coordinate is outside this window.",true);return;}
+    edited=true;select("trace",{cursor:x,traceEntry:null,traceResult:true});return;
+   }
+   if(k==="left"||k==="right"){
+    edited=true;select("trace",{cursor:M.clamp(state.cursor+(k==="left"?-1:1)*(x1-x0)/56,x0,x1),traceEntry:null,traceResult:false});return;
+   }
+   const raw=state.traceEntry??"",ch=/^\d$/.test(k)?k:k==="dot"?".":["minus","neg"].includes(k)?"-":null;
+   if(k==="del"||ch!==null&&raw.length<14){
+    edited=true;select("trace",{traceEntry:k==="del"?raw.slice(0,-1):raw+ch,traceResult:false});
+   }
+   return;
+  }
   if(w==="submenu"){if(["1","enter","right","select"].includes(k)){edited=true;analyze();}return;}
   if(w==="lower"||w==="upper"){
    if(k==="enter"||k==="select"){confirm(state.cursor);return;}
    if(k==="left"||k==="right"){
-    edited=true;const {x0,x1}=M.windowFor(state.q),step=(x1-x0)/56;
+    edited=true;const {x0,x1}=state.view||M.windowFor(state.q),step=(x1-x0)/56;
     state.cursor=M.clamp(state.cursor+(k==="left"?-step:step),x0,x1);
     screen.draw(state);labelGraph(state);
    }
@@ -177,7 +210,7 @@
  $("reset-keypad").addEventListener("click",()=>{edited=true;state=initial(challenge.raw);expr.value=state.raw;bound.value="";renderTry();stage.focus({preventScroll:true});});
  function pointer(ev){
   const r=canvas.getBoundingClientRect(),xp=(ev.clientX-r.left)*320/r.width,yp=(ev.clientY-r.top)*240/r.height;
-  return xp>=S.SCREEN_X.l&&xp<=S.SCREEN_X.r&&yp>=26&&yp<=226?S.pointAt(state.q,xp):null;
+  return xp>=S.SCREEN_X.l&&xp<=S.SCREEN_X.r&&yp>=26&&yp<=226?S.pointAt(state.q,xp,state.view):null;
  }
  lcd.addEventListener("pointermove",e=>{
   if(mode!=="try"||!lcd.classList.contains("pick")||e.pointerType==="touch")return;
@@ -216,7 +249,7 @@
    return;
   }
   if(mode!=="try"||!stage.contains(e.target)&&e.target!==document.body||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
-  const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
+  const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
   if(k){e.preventDefault();press(k);}
  });

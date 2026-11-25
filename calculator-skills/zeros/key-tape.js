@@ -2,7 +2,7 @@
 /* Guide audio boundaries verified separately; each animation event can be sought independently. */
 window.CT10Tape=Object.freeze({
  duration:24.659592,
- starts:[0,5.406,11.744,17.828],
+ starts:[0,5.406,11.744,17.828,19.82],
  captionStarts:[0,1.6,5.406,8.68,11.66,14.9,17.828,19.82],
  captions:[
   "Plot the function.",
@@ -14,7 +14,7 @@ window.CT10Tape=Object.freeze({
   "Read the x-coordinate.",
   "For a y-intercept, evaluate the function at x equal to zero instead."
  ],
- titles:["Plot the function","Open Zero","Bracket one crossing","Read the x-coordinate"],
+ titles:["Plot the function","Open Zero","Bracket one crossing","Read the x-coordinate","Trace the y-intercept"],
  keys:Object.freeze([
   [0.65,"x",{raw:"x"}],[1.19,"square",{raw:"x^2"}],[1.75,"minus",{raw:"x^2-"}],[2.13,"5",{raw:"x^2-5"}],
   [2.52,"x",{raw:"x^2-5x"}],[2.96,"plus",{raw:"x^2-5x+"}],[3.35,"6",{raw:"x^2-5x+6"}],[4.27,"enter",{state:"plotted"}],
@@ -22,6 +22,12 @@ window.CT10Tape=Object.freeze({
   [11.88,"left",{cursor:2.25}],[12.15,"left",{cursor:2}],[12.42,"left",{cursor:1.75}],[12.69,"left",{cursor:1.5}],
   [13.47,"enter",{state:"upper",low:1.5}],
   [14.63,"right",{cursor:1.75}],[14.9,"right",{cursor:2}],[15.17,"right",{cursor:2.25}],[15.44,"right",{cursor:2.5}],
-  [17.32,"enter",{state:"result",high:2.5,mark:{x:2,y:0}}]
+  [17.32,"enter",{state:"result",high:2.5,mark:{x:2,y:0}}],
+  [19.98,"menu",{state:"menu",menuPick:4,low:null,high:null,cursor:null,mark:null}],
+  [20.62,"5",{state:"trace-menu"}],
+  [21.23,"1",{state:"trace",cursor:0,traceEntry:null}],
+  [21.89,"right",{cursor:.125}],
+  [23.32,"0",{traceEntry:"0"}],
+  [23.94,"enter",{cursor:0,traceEntry:null,traceResult:true}]
  ].map(([time,key,delta])=>Object.freeze({time,key,delta:Object.freeze(delta)})))
 });

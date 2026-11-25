@@ -4,9 +4,10 @@ const {displayExpr,windowFor,pretty,clamp}=global.CT10Math;
 const W=320,H=240;
 const GRAPHMENU=['1: Actions','2: View','3: Graph Entry/Edit','4: Window/Zoom','5: Trace','6: Analyze Graph','7: Table','8: Geometry'];
 const ANALYZE=['1: Zero','2: Minimum','3: Maximum','4: Intersection','5: dy/dx','6: Integral','7: Analyze Conics'];
-const PANEL={main:{x:8,y:24,w:119,h:15,rows:GRAPHMENU,active:5},sub:{x:128,y:99,w:111,h:15,rows:ANALYZE,active:0}};
+const TRACE=['1: Graph Trace','2: Trace All','3: Trace Step'];
+const PANEL={main:{x:8,y:24,w:119,h:15,rows:GRAPHMENU,active:5},sub:{x:128,y:99,w:111,h:15,rows:ANALYZE,active:0},trace:{x:128,y:84,w:112,h:15,rows:TRACE,active:0}};
 const SCREEN_X={l:10,r:310};
-const pointAt=(q,p)=>{const r=windowFor(q);return r.x0+(p-SCREEN_X.l)/(SCREEN_X.r-SCREEN_X.l)*(r.x1-r.x0)};
+const pointAt=(q,p,view)=>{const r=view||windowFor(q);return r.x0+(p-SCREEN_X.l)/(SCREEN_X.r-SCREEN_X.l)*(r.x1-r.x0)};
 
 function screen(display){
   const off=document.createElement('canvas');off.width=640;off.height=480;
@@ -37,14 +38,14 @@ function screen(display){
     return vs;
   }
   function draw(data){
-    const {state,q,raw,low,high,cursor,phase,error,mark}=data;
+    const {state,q,raw,low,high,cursor,phase,error,mark,traceEntry,traceResult}=data;
     rect(0,0,W,H,'#fff');
     // TI-style document bar with page tab, angle mode and battery indicator.
     const bar=c.createLinearGradient(0,0,0,21);bar.addColorStop(0,'#24313a');bar.addColorStop(.68,'#19232c');bar.addColorStop(1,'#101820');rect(0,0,W,20,bar);
     rect(3,4,25,15,'#eef5fa');rect(4,5,23,13,'#d4e5f0');txt('1.1',9,15,'#0b223a',10,'bold');txt('RAD',276,14,'#e3eff2',8,'bold');
     rect(303,7,12,7,'#254057');rect(304,8,10,5,'#9dd55e');rect(315,9,2,3,'#254057');
     line(0,19,320,19,'#349eb1',1);
-    const pf=windowFor(q), left=SCREEN_X.l,right=SCREEN_X.r,top=26,bottom=226;
+    const pf=data.view||windowFor(q), left=SCREEN_X.l,right=SCREEN_X.r,top=26,bottom=226;
     const ux=x=>left+(x-pf.x0)/(pf.x1-pf.x0)*(right-left);
     const uy=y=>bottom-(y-pf.y0)/(pf.y1-pf.y0)*(bottom-top);
     const zeroY=pf.y0<=0&&pf.y1>=0,zeroX=pf.x0<=0&&pf.x1>=0;
@@ -76,7 +77,7 @@ function screen(display){
         for(let px=left;px<=right;px++){let v=pf.x0+(px-left)/(right-left)*(pf.x1-pf.x0),y=clamp(uy(q.f(v)),-4000,4000);if(px===left)c.moveTo(px,y);else c.lineTo(px,y);}
       }
       c.stroke();
-      if(state==='plotted'||state==='menu'||state==='submenu')txt('f₁(x)='+displayExpr(q.raw),right-4,top+12,'#174d99',9,'normal','right');
+      if(['plotted','menu','submenu','trace-menu','trace'].includes(state))txt('f₁(x)='+displayExpr(q.raw),right-4,top+12,'#174d99',9,'normal','right');
     }
     if(hasLow)line(ux(low),top,ux(low),bottom,'#599445',1,[2,2]);
     if(hasHigh&&state==='result')line(ux(high),top,ux(high),bottom,'#599445',1,[2,2]);
@@ -89,6 +90,14 @@ function screen(display){
       const point=mark,x=ux(point.x),y=uy(point.y);dot(x,y,'#202631',2.3);
       txt('('+pretty(point.x)+', '+pretty(point.y)+')',x+5,y-8,'#15202a',10.5,'normal');
       if(phase!=='notes')txt('zero',x+5,y+11,'#70757b',8.5);
+    }
+    if(q&&state==='trace'&&Number.isFinite(cursor)){
+      const x=ux(cursor), y=uy(cursor===0?q.c:q.f(cursor));
+      if(x>=left&&x<=right&&y>=top+4&&y<=bottom-4){
+        dot(x,y,'#223c69',traceResult?3.5:2.6);
+        line(x-5,y,x+5,y,'#2d5b8c',.8);
+        line(x,y-5,x,y+5,'#2d5b8c',.8);
+      }
     }
     c.restore();
     if(state==='entry'){
@@ -104,8 +113,21 @@ function screen(display){
       rect(6,214,error?96:72,15,'#e6e6e6');rect(6,214,error?96:72,1,'#aeb1b3');
       txt(label,10,224,'#22262b',9);
     }
-    if(state==='menu'||state==='submenu')panel(PANEL.main,state==='submenu');
+    if(state==='trace'&&q){
+      rect(5,25,23,18,'#eaedf0');line(5,43,28,43,'#85909b',.6);
+      line(9,40,23,28,'#305d93',1);dot(16,34,'#305d93',2.2);
+      if(traceEntry!==null&&traceEntry!==undefined){
+        rect(6,212,79,19,'#eef4fb');line(6,212,85,212,'#85909b',.7);
+        txt('x = '+traceEntry,11,225,'#15324e',11,'bold');
+      }else if(Number.isFinite(cursor)){
+        const y=cursor===0?q.c:q.f(cursor), shown='f₁: ('+pretty(cursor)+', '+pretty(y)+')';
+        rect(310-Math.max(75,shown.length*6.2),211,Math.max(75,shown.length*6.2),19,'#eef4fb');
+        txt(shown,306,225,'#15324e',10.5,traceResult?'bold':'normal','right');
+      }
+    }
+    if(['menu','submenu','trace-menu'].includes(state))panel({...PANEL.main,active:state==='trace-menu'?4:data.menuPick??5},state!=='menu');
     if(state==='submenu')panel(PANEL.sub);
+    if(state==='trace-menu')panel(PANEL.trace);
     display.getContext('2d',{alpha:false}).drawImage(off,0,0);
   }
   return {draw};
