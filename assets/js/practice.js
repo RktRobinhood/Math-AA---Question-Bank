@@ -576,7 +576,7 @@
       onclick: e => CALC.open(e.currentTarget),
     }, 'Calculator') : null;
     return h('section', { class: 'block qcard' },
-      h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), h('span', { text: q.title }), h('span', { class: 'sp' }),
+      h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), settled ? h('span', { text: q.title }) : null, h('span', { class: 'sp' }),
         h('span', { class: 'chip', text: `Level ${q.level}${name ? ` · ${name}` : ''}` }),
         !useCalculator || !q.calculator ? calcChip(q) : null, calculatorButton,
         h('span', { class: 'mono', text: `[${q.marks}]` })),

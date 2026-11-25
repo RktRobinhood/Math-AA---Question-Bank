@@ -30,14 +30,16 @@
   ]};
  });
 
- add("balanced-block-read","aa-sl","1.2","SL1.2.sum",1,"table","Read the average of a symmetric arithmetic block",({rng})=>{
+ add("balanced-block-read","aa-sl","1.2","SL1.2.sum",1,"table","Sum consecutive terms of an arithmetic sequence",({rng})=>{
   const l=rng.int(3,19),w=rng.int(1,5),v=rng.int(-10,25),d=rng.nonzero(-8,8);
-  return {params:{l,w,v,d},stem:"The table gives three terms of the same arithmetic sequence.",
-   table:{head:["Index",N(l),N(l+w),N(l+2*w)],rows:[["Term",N(v),N(v+w*d),N(v+2*w*d)]]},parts:[
-    P("Find the mean of all the terms from the first listed index to the last listed index, inclusive.",2,ans.int(v+w*d),
-     "The indices are equally spaced around the middle index. Each pair of terms equally far from the middle averages to the middle term.")
+  const r=l+2*w,last=v+2*w*d,count=r-l+1;
+  const u=n=>"u_{"+n+"}";
+  return {params:{l,w,v,d},stem:"Two terms of an arithmetic sequence are given in the table.",
+   table:{head:[m("n"),N(l),N(r)],rows:[[m("u_n"),N(v),N(last)]]},parts:[
+    P("Find the sum of the terms from "+m(u(l))+" to "+m(u(r))+" inclusive.",2,ans.int(count*(v+last)/2),
+     "Count both endpoints: "+m(r+"-"+l+"+1="+count)+" terms. Use the arithmetic series formula with "+m(u(l))+" as the first term of this sum and "+m(u(r))+" as the last: "+m(frac(count,2)+"\\left("+num(v)+(last<0?"-"+num(-last):"+"+num(last))+"\\right)="+num(count*(v+last)/2))+".")
    ]};
- });
+ },{notFor:["ai-sl","ai-hl"]});
 
  add("geometric-recovery-leg","aa-sl","1.3",["SL1.3.model","SL1.3.nth-term"],2,"words","Recover the absolute starting height from just the fall",({rng})=>{
   const b=rng.int(2,5),a=rng.int(1,b-1),n=rng.int(2,5),u=rng.int(3,13),top=u*b*b;

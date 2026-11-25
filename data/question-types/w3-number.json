@@ -30,7 +30,7 @@
     },
     {
       "id": "w3-number-balanced-block-read",
-      "name": "Read the average of a symmetric arithmetic block",
+      "name": "Sum consecutive terms of an arithmetic sequence",
       "source": "extension",
       "kind": "skill",
       "topic": 1,
@@ -44,7 +44,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Read the average of a symmetric arithmetic block",
+          "asked": "Sum consecutive terms of an arithmetic sequence",
           "level": 1
         }
       ],

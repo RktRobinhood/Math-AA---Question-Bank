@@ -8,8 +8,8 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 |---|---|---|---|---|---|
 | AA SL | 51 | 51 | 0 | 0 | 597 |
 | AA HL | 83 | 83 | 0 | 0 | 841 |
-| AI SL | 39 | 39 | 0 | 0 | 435 |
-| AI HL | 78 | 78 | 0 | 0 | 742 |
+| AI SL | 39 | 39 | 0 | 0 | 434 |
+| AI HL | 78 | 78 | 0 | 0 | 741 |
 
 - **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
 - **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
@@ -177,7 +177,7 @@ Generators per level: level 0: 24, level 1: 123, level 2: 244, level 3: 267, lev
 
 ## AI SL
 
-435 generators over 289 question types are offered in AI SL. 39 of 39 subtopics have generated questions; 0 use real questions only.
+434 generators over 288 question types are offered in AI SL. 39 of 39 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **39 of 39** subtopics; full tier for 13.
 
 **Thinnest subtopics** (fewest ways of asking among the 39 with generated questions; the middle one has 11): 3.4 Arc length and sector area in degrees (7 ways, 2 types); 3.6 Voronoi diagrams (7 ways, 4 types); 4.4 Pearson's, scatter diagrams and equation of y on x (8 ways, 4 types); 5.4 Tangents and normals (8 ways, 4 types); 5.8 Approximating areas with the trapezoidal rule (8 ways, 4 types); 3.5 Equations of perpendicular bisectors (8 ways, 5 types); 1.6 Approximation, bounds, percentage error and estimation (8 ways, 6 types); 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams (9 ways, 5 types).
@@ -185,7 +185,7 @@ Release minimum reached for **39 of 39** subtopics; full tier for 13.
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Question types | Ways of asking | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|---|---|
 | 1.1 Scientific notation | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 5 | 10 | 11 | 13 | no |
-| 1.2 Arithmetic sequences and series | yes | no | 2 of 3 | 0, 1, 2, 3, 4, 5 | 7 | 13 | 15 | 18 | no |
+| 1.2 Arithmetic sequences and series | yes | no | 2 of 3 | 0, 1, 2, 3, 4, 5 | 6 | 12 | 14 | 18 | no |
 | 1.3 Geometric sequences and series | yes | no | 2 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 18 | no |
 | 1.4 Financial applications of geometric sequences and series | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 12 | 12 | 11 | no |
 | 1.5 Laws of exponents with integer exponents and introduction to logarithms | yes | no | 1 of 5 | 0, 1, 2, 3, 4 | 6 | 10 | 11 | 9 | no |
@@ -224,11 +224,11 @@ Release minimum reached for **39 of 39** subtopics; full tier for 13.
 | 5.7 Optimisation in context | yes | no | 0 of 0 | 1, 2, 3, 4 | 9 | 13 | 13 | 22 | no |
 | 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 8 | 8 | 15 | no |
 
-Generators per level: level 0: 16, level 1: 77, level 2: 122, level 3: 103, level 4: 111, level 5: 7.
+Generators per level: level 0: 16, level 1: 76, level 2: 122, level 3: 103, level 4: 111, level 5: 7.
 
 ## AI HL
 
-742 generators over 468 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
+741 generators over 467 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **78 of 78** subtopics; full tier for 15.
 
 **Thinnest subtopics** (fewest ways of asking among the 78 with generated questions; the middle one has 9): 5.9 Further differentiation: standard derivatives, chain, product and quotient rules, related rates (5 ways, 3 types); 5.16 Euler's method for single and coupled first-order equations (5 ways, 3 types); 3.7 Radian measure (6 ways, 2 types); 3.8 The unit circle, the Pythagorean identity, the ambiguous case and graphical trigonometric equations (6 ways, 2 types); 3.13 Scalar and vector products (6 ways, 2 types); 5.12 Areas against either axis and volumes of revolution (6 ways, 3 types); 5.15 Slope fields (6 ways, 3 types); 5.17 Phase portraits for coupled linear differential equations (6 ways, 3 types).
@@ -236,7 +236,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Question types | Ways of asking | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|---|---|
 | 1.1 Scientific notation | yes | yes | 1 of 1 | 0, 1, 2, 3, 4 | 5 | 10 | 11 | 2 | no |
-| 1.2 Arithmetic sequences and series | yes | no | 2 of 3 | 0, 1, 2, 3, 4, 5 | 7 | 13 | 15 | 11 | no |
+| 1.2 Arithmetic sequences and series | yes | no | 2 of 3 | 0, 1, 2, 3, 4, 5 | 6 | 12 | 14 | 11 | no |
 | 1.3 Geometric sequences and series | yes | no | 2 of 3 | 1, 2, 3, 4 | 7 | 13 | 13 | 16 | no |
 | 1.4 Financial applications of geometric sequences and series | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 12 | 12 | 8 | no |
 | 1.5 Laws of exponents with integer exponents and introduction to logarithms | yes | no | 1 of 5 | 0, 1, 2, 3, 4 | 6 | 10 | 11 | 6 | no |
@@ -314,7 +314,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 5.17 Phase portraits for coupled linear differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 6 | 6 | 18 | no |
 | 5.18 Second-order differential equations by Euler's method | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 6 | 6 | 9 | no |
 
-Generators per level: level 0: 17, level 1: 127, level 2: 218, level 3: 180, level 4: 194, level 5: 10.
+Generators per level: level 0: 17, level 1: 126, level 2: 218, level 3: 180, level 4: 194, level 5: 10.
 
 ## Bank parts not assigned to a question type
 

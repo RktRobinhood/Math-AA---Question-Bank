@@ -13,10 +13,13 @@ export default {
   T.require(vals.includes("square")&&[2,6,17].every(n=>Math.abs((n+half)**2-4*n*half-(n-half)**2)<1e-9),"candidate identity checked against positive pairs");
   return{a:T.option("square"),b:T.approx(opt.value,1e-7),c:T.approx(x-y,1e-7)};
  },
- [id("balanced-block-read","table")]:({params:{l,w,v,d}},T)=>{
-  const values=Array.from({length:2*w+1},(_,i)=>v+i*d);
-  T.require(l>0&&d!==0&&values.length%2===1,"nonconstant symmetric odd-length block");
-  return{a:values.reduce((s,x)=>s+x,0)/values.length};
+ [id("balanced-block-read","table")]:({params:{l,w,v,d},table,parts},T)=>{
+  const values=[];
+  for(let n=l;n<=l+2*w;n++)values.push(v+(n-l)*d);
+  T.require(l>0&&d!==0&&table.head.length===3&&table.rows[0].length===3,"nonconstant arithmetic series and two displayed endpoints");
+  T.require(table.head[0]==="$n$"&&table.rows[0][0]==="$u_n$"&&parts[0].marks===2,"AA notation and short skill practice");
+  T.require(!/mean|average|index/i.test(parts[0].prompt)&&parts[0].prompt.includes("inclusive"),"unambiguous arithmetic sum");
+  return{a:values.reduce((s,x)=>s+x,0)};
  },
  [id("geometric-recovery-leg","words")]:({params:{a,b,n,fall}},T)=>{
   const run=x=>[[n,x],[n+1,x*a/b],[n+2,x*a/b*a/b]];

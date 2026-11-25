@@ -511,6 +511,19 @@ if (!ONLY) {
     assert(E.generators({ course: "ai-sl" }).length < E.registry.length && E.generators({ course: "ai-sl" }).length > 50, "AI SL should be offered some generators, not all");
   });
 
+  test("AA arithmetic-series practice does not transfer to AI solely on a shared syllabus code", () => {
+    const type = "w3-number-balanced-block-read";
+    for (const c of ["aa-sl", "aa-hl"]) {
+      const ways = E.generators({ course: c, type });
+      assert(ways.length === 1 && ways[0].levels.join(",") === "1" && ways[0].syllabus[0] === "1.2", c + " arithmetic series availability");
+    }
+    for (const c of ["ai-sl", "ai-hl"]) {
+      assert(idOf(c, "1.2") === "SL1.2", c + " should still have arithmetic sequences");
+      assert(E.generators({ course: c, type }).length === 0, c + " should not serve the AA-calibrated family");
+      assert(E.generators({ course: c, syllabus: "1.2", primary: true }).some(d => d.levels.includes(1)), c + " should keep warm-up coverage");
+    }
+  });
+
   test("a shared AI statement gets generated questions under its AI code", () => {
     // AI HL 1.11 is the statement AA numbers 1.8 (SL1.8).
     assert(idOf("ai-hl", "1.11") === "SL1.8" && idOf("aa-sl", "1.8") === "SL1.8", "the shared statement moved");
