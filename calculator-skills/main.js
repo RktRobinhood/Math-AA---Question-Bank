@@ -3,14 +3,16 @@ import {screen,PANEL,pointAt} from './screen.js';
 
 const $=id=>document.getElementById(id);
 const DURATION=35.788;
-const captions=[
+const spokenCues=[
  [0,'On a Graphs page, enter the function you want to investigate and press Enter.'],
  [5.22,'Open Menu, choose Analyze Graph, and select Minimum.'],
  [10.02,'We’re looking for the lowest point in the interval you choose.'],
  [13.51,'To set the lower bound, move the cursor to the left of the minimum, then press Enter.'],
  [19.13,'For the upper bound, move to the right of the minimum and press Enter again.'],
- [23.96,'Bracket just one turning point. The calculator marks the minimum and shows its coordinates.'],
- [30.33,'The x-coordinate tells you where it occurs. The y-coordinate is the minimum value.']
+ [23.96,'Bracket just one turning point.'],
+ [26.67,'The calculator marks the minimum and shows its coordinates.'],
+ [30.33,'The x-coordinate tells you where it occurs.'],
+ [33.22,'The y-coordinate is the minimum value.']
 ];
 const beats={
  entry:['01','Plot the function','Start on a Graphs page.'],
@@ -19,6 +21,7 @@ const beats={
  submenu:['02','Find Minimum in the menu','Choose 2: Minimum.'],
  lower:['03','Set the lower bound','Place it to the left of the valley.'],
  upper:['04','Set the upper bound','Place it to the right of the valley.'],
+ preview:['05','Preview the minimum','The turning point is (3, 4). Press Enter again to pin it.'],
  result:['05','Read the minimum','The selected interval should contain one minimum.'],
  notes:['06','Use both coordinates','x is where it occurs. y is the minimum value.']
 };
@@ -45,120 +48,158 @@ const contextEl=$('context');
 if(context||preloadExpr){contextEl.textContent=context||'Linked practice';contextEl.hidden=false}
 if(validSource||queryRef){const a=$('return-question');a.href=validSource||BANK;a.hidden=false;a.textContent='Back to '+bankName+' ↗'}
 $('example-expr').textContent=displayExpr(watchQ.raw);
-$('transcript').textContent=captions.map(c=>c[1]).join(' ');
+$('transcript').textContent=spokenCues.map(c=>c[1]).join(' ');
 const render=screen($('drawing'));
 const lcd=$('lcd');
 lcd.dataset.renderer=render.backend;
+const stage=$('stage');
 const modeButtons=[...document.querySelectorAll('[data-mode]')];
-const audio=$('voice');
+const audio=$('narration');
 const seek=$('seek');
 const play=$('play');
-const caption=$('caption');
-const cc=$('captions');
-let duration=DURATION, mode=p.get('mode')==='try'?'try':'watch', tryState={state:'entry',q:null,raw:preloadExpr||'2(x+1)^2-3',low:null,high:null,cursor:null,error:null};
-let playing=false, time=0, raf=0, captionsOn=false, useSilent=false, silentStart=0, frameAt=0, lastBeat='',pendingSeek=null;
-let initialUpdate=true;
-const initialNoAudio=()=>audio.error!=null;
-const dots=(v)=>[...String(v)].filter(a=>a!==' ');
-const audioSync=(t)=>{
- if(!useSilent&&Number.isFinite(audio.duration)){ try{audio.currentTime=t;}catch{pendingSeek=t} }
- else {pendingSeek=t;}
-};
-
-function onBeat(state,keyList,tip=''){
+const cap=$('caption');
+let mode=p.get('mode')==='try'?'try':'watch', tryState={state:'entry',q:null,raw:preloadExpr||'2(x+1)^2-3',low:null,high:null,cursor:null,error:null};
+let t=0,duration=DURATION,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute('src'),playEpoch=0,lastWatchStamp='';
+let initialUpdate=true,lastBeat='';
+const ordinaryTape=window.HandheldKeyCues.CT12;
+// The original recording needs only the preview. This final Enter models the optional pin step without changing its words.
+const tape=[...ordinaryTape,{timeMs:27430,key:'enter',durationMs:230,state:'pinned'}];
+const readable={x:'x',square:'x²',enter:'Enter',minus:'−',plus:'+',menu:'Menu',left:'←',right:'→'};
+ const surface=$("workspace"),overlay=$("play-feedback"),cc=$("cc"),speedSelect=$("play-rate");
+ const framingKey="qb-calculator-watch-frame";
+ const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}};
+ let framing=readFrame(),speed=Number(speedSelect.value),showCaptions=false,initiated=false,pendingSeek=null;
+ audio.playbackRate=speed;audio.preservesPitch=true;
+ const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
+ function paintFraming(){
+  stage.classList.toggle("ct12-screen-view",mode==="watch"&&framing==="screen");
+  $("view-full").setAttribute("aria-pressed",String(framing==="full"));
+  $("view-screen").setAttribute("aria-pressed",String(framing==="screen"));
+  fitBankWatch();
+ }
+ function chooseFrame(value){
+  framing=value;try{localStorage.setItem(framingKey,value);}catch{}
+  paintFraming();
+ }
+ $("view-full").addEventListener("click",()=>chooseFrame("full"));
+ $("view-screen").addEventListener("click",()=>chooseFrame("screen"));
+ window.addEventListener("storage",e=>{if(e.key===null||e.key===framingKey){framing=readFrame();paintFraming();}});
+ function captions(value){
+  showCaptions=value;cc.setAttribute("aria-pressed",String(value));
+  cc.setAttribute("aria-label",value?"Hide captions":"Show captions");
+  $("caption-band").hidden=mode!=="watch"||!value;
+  fitBankWatch();
+ }
+ cc.addEventListener("click",()=>captions(!showCaptions));
+function onBeat(state,tip=''){
  const [n,title,defaultTip]=beats[state];
- let index=state+'|'+keyList.join('|')+'|'+tip;
+ let index=state+'|'+tip;
  if(lastBeat===index)return;lastBeat=index;
  $('beat-number').textContent=n;$('beat-title').textContent=title;$('beat-tip').textContent=tip||defaultTip;
- $('keys').replaceChildren(...keyList.map(k=>{const a=document.createElement('kbd');a.className='key';a.textContent=k;return a}));
- $('keypress').hidden=!keyList.length;
 }
-const fmtTime=t=>{const r=Math.max(0,Math.round(t));return Math.floor(r/60)+':'+String(r%60).padStart(2,'0')};
+const fmtTime=value=>{
+ const n=Math.max(0,Math.floor(value));return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');
+};
 function frame(t){
- const q=watchQ, raw=q.raw, tran=(a,b)=>clamp((t-a)/(b-a),0,1);
- const r=windowFor(q), lo=q.x-r.h*.29,hi=q.x+r.h*.34;
- if(t<4.78){
-   const f=tran(.55,3.9),n=Math.floor(f*raw.length)+1;
-   return {state:'entry',q:null,raw:t<.5?'':raw.slice(0,n),keys:t<.5?[]:[...dots(displayExpr(raw.slice(0,n)))].slice(-4)};
- }
- if(t<5.49)return {state:'plotted',q,raw,keys:['enter']};
- if(t<7.35)return {state:'menu',q,raw,keys:['menu']};
- if(t<9.18)return {state:'submenu',q,raw,keys:['menu','6']};
- if(t<18.02){const s=tran(14.1,17.48);return {state:'lower',q,raw,cursor:q.x+(lo-q.x)*s,keys:t<14.2?['menu','6','2']:['←']}}
- if(t<23.35){const s=tran(19.5,22.55);return {state:'upper',q,raw,low:lo,cursor:lo+(hi-lo)*s,keys:t<19.45?['enter']:['→']}}
- if(t<30.33)return {state:'result',q,raw,low:lo,high:hi,keys:t<24.4?['enter']:[]};
- return {state:'result',phase:'notes',q,raw,low:lo,high:hi,keys:[]};
+ const q=watchQ,raw=q.raw,tran=(a,b)=>clamp((t-a)/(b-a),0,1);
+ const r=windowFor(q),lo=q.x-r.h*.29,hi=q.x+r.h*.34;
+ const recent=tape.findLast(e=>t*1000>=e.timeMs&&typeof e.rawAfter==='string');
+ if(t<4.78)return {state:'entry',q:null,raw:recent?.rawAfter||''};
+ if(t<5.49)return {state:'plotted',q,raw};
+ if(t<7.35)return {state:'menu',q,raw};
+ if(t<9.18)return {state:'submenu',q,raw};
+ if(t<18.02)return {state:'lower',q,raw,cursor:q.x+(lo-q.x)*tran(14.1,17.48)};
+ if(t<23.35)return {state:'upper',q,raw,low:lo,cursor:lo+(hi-lo)*tran(19.5,22.55)};
+ const ghost=t<27.43;
+ return {state:'result',phase:ghost?'preview':t<30.33?'result':'notes',q,raw,low:lo,high:hi,ghost};
 }
-function drawWatch(t){
- const f=frame(t);
- const recent=window.HandheldKeyCues?.CT12?.filter(e=>t*1000>=e.timeMs&&typeof e.rawAfter==='string').at(-1);
- if(recent&&f.state==='entry')f.raw=recent.rawAfter;
- window.HandheldTransport?.lightAt(shell,'CT12',t);
- render.draw(f);onBeat(f.phase||f.state,f.keys);
- const s=captions.findLast(c=>c[0]<=t)?.[1]||'';
- if(caption.textContent!==s)caption.textContent=s;
- caption.hidden=!captionsOn;
- seek.value=t;
- seek.setAttribute('aria-valuetext',fmtTime(t)+' of '+fmtTime(duration));
- $('time').textContent=fmtTime(t)+' / '+fmtTime(duration);
+function labelGraph(f){
+ const pair=f.state==='result'&&!f.error&&f.q?f.extremum||f.q:null;
+ let step=f.state==='menu'?'Graphs Menu':f.state==='submenu'?'6: Analyze Graph. 2: Minimum.':f.state==='lower'?'lower bound?':f.state==='upper'?'upper bound?':pair?(f.ghost?'Minimum preview ':'Minimum ')+ '('+pretty(pair.x)+', '+pretty(pair.y)+')':'';
+ $('lcd-text').textContent=[f.raw?'f₁(x) = '+displayExpr(f.raw):'',step].filter(Boolean).join('. ');
 }
-function animate(now){
- if(!playing||mode!=='watch')return;
- if(now-frameAt>29){
-   frameAt=now;
-   time=useSilent?clamp((now-silentStart)/1000,0,duration):audio.currentTime;
-   drawWatch(time);
-   if(time>=duration-.012){onEnded();return}
- }
- raf=requestAnimationFrame(animate);
-}
-function showPlaying(v){
- playing=v;play.setAttribute('aria-label',v?'Pause':'Play');
- play.querySelector('.play-icon').hidden=v;
- play.querySelector('.pause-icon').hidden=!v;
- cancelAnimationFrame(raf);if(v)raf=requestAnimationFrame(animate);
-}
-function stop(){audio.pause();showPlaying(false)}
-function onEnded(){time=duration;stop();if(mode==='watch')drawWatch(time)}
-audio.addEventListener('ended',onEnded);
-audio.addEventListener('pause',()=>{if(!useSilent&&playing){time=audio.currentTime;showPlaying(false);if(mode==='watch')drawWatch(time)}});
-audio.addEventListener('loadedmetadata',()=>{
- duration=Number.isFinite(audio.duration)?audio.duration:DURATION;seek.max=duration;
- if(pendingSeek!==null){audio.currentTime=clamp(pendingSeek,0,duration);pendingSeek=null;}
- if(mode==='watch')drawWatch(time);
-});
-audio.addEventListener('error',()=>{
- if(!initialNoAudio())return;
- useSilent=true;silentStart=performance.now()-time*1000;
- $('audio-notice').textContent='The narration could not load. Captions and visual playback are available.';
- if(!captionsOn){captionsOn=true;cc.setAttribute('aria-pressed','true');cc.setAttribute('aria-label','Hide captions');}
- if(mode==='watch')drawWatch(time);
-});
-play.addEventListener('click',async()=>{
+function renderWatch(){
  if(mode!=='watch')return;
- if(playing){stop();return}
- if(time>=duration-.04)time=0;
- if(useSilent||initialNoAudio()){
-   useSilent=true;silentStart=performance.now()-time*1000;showPlaying(true);return;
+ const f=frame(t),now=t*1000;
+ const last=tape.findLast(e=>now>=e.timeMs),key=last&&now<last.timeMs+Math.max(last.durationMs??500,230)?last.key:'';
+ const timeLabel=fmtTime(t>=duration-.015?Math.round(duration):t)+' / '+fmtTime(Math.round(duration));
+ seek.value=t;seek.setAttribute('aria-valuetext',timeLabel.replace('/','of'));$('clock').textContent=timeLabel;
+ shell?.setKeys(key?[key]:[]);
+ $('key-strip').hidden=!last;
+ $('active-key').textContent=last?.state==='pinned'?'Enter · pin':readable[last?.key]||last?.key||'';
+ if(!initiated){overlay.dataset.initial='true';overlay.hidden=t>.04;}
+ const line=spokenCues.findLast(c=>c[0]<=t)?.[1]||'';
+ if(cap.textContent!==line)cap.textContent=line;
+ const stamp=JSON.stringify([f.state,f.phase,f.raw,f.cursor]);
+ if(stamp!==lastWatchStamp){
+   lastWatchStamp=stamp;render.draw(f);labelGraph(f);onBeat(f.phase||f.state);
  }
- audioSync(time);
- try {await audio.play();if(mode==='watch'){showPlaying(true)}else audio.pause()}
- catch(err){
-   if(err.name==='AbortError')return;
-   useSilent=true;silentStart=performance.now()-time*1000;captionsOn=true;caption.hidden=false;cc.setAttribute('aria-pressed','true');cc.setAttribute('aria-label','Hide captions');
-   $('audio-notice').textContent='Narration is unavailable. Showing the captioned walkthrough.';
-   if(mode==='watch')showPlaying(true);
+ lcd.dataset.renderer=render.backend;
+}
+ function setOrigin(){origin=performance.now()-t*1000/speed;}
+ function audioSeek(){
+  if(!useAudio)return;
+  if(Number.isFinite(audio.duration)){audio.currentTime=t;pendingSeek=null;}
+  else pendingSeek=t;
  }
-});
-seek.addEventListener('input',()=>{
- time=clamp(Number(seek.value),0,duration);
- if(useSilent){silentStart=performance.now()-time*1000;}else audioSync(time);
- if(mode==='watch')drawWatch(time)
-});
-cc.addEventListener('click',()=>{
- captionsOn=!captionsOn;cc.setAttribute('aria-pressed',String(captionsOn));cc.setAttribute('aria-label',captionsOn?'Hide captions':'Show captions');
- if(mode==='watch')drawWatch(time)
-});
+ function go(v){
+  t=clamp(Number(v)||0,0,duration);setOrigin();audioSeek();renderWatch();if(!playing)labelPlay();
+ }
+ function labelPlay(){
+  const monitor=playing||pending,label=monitor?"Pause":t>=duration-.015?"Replay":"Play";
+  play.setAttribute("aria-label",label);play.title=label;play.dataset.playing=String(playing);
+  play.querySelector(".play-icon").hidden=monitor;play.querySelector(".pause-icon").hidden=!monitor;
+ }
+ function pause(){
+  playEpoch++;pending=false;if(playing&&useAudio&&Number.isFinite(audio.currentTime))t=audio.currentTime;
+  playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch();
+ }
+ function finish(){pause();t=duration;labelPlay();renderWatch();}
+ function tick(now){
+  if(!playing||mode!=="watch")return;
+  t=useAudio?audio.currentTime:(now-origin)*speed/1000;
+  if(t>=duration-.002){finish();return;}
+  renderWatch();raf=requestAnimationFrame(tick);
+ }
+ async function start(){
+  if(mode!=="watch")return;
+  initiated=true;overlay.dataset.initial="false";overlay.hidden=true;
+  if(t>=duration-.015)go(0);
+  const stamp=++playEpoch;
+  pending=true;setOrigin();labelPlay();
+  if(useAudio){
+   try{audioSeek();await audio.play();}
+   catch(error){if(stamp!==playEpoch)return;silentMedia();}
+  }
+  if(stamp!==playEpoch||mode!=="watch"){if(!playing&&!pending)audio.pause();return;}
+  if(!useAudio)setOrigin();
+  pending=false;playing=true;labelPlay();chrome.flash(true);raf=requestAnimationFrame(tick);
+ }
+ function toggle(){if(playing||pending){pause();chrome.flash(false);}else void start();}
+ function silentMedia(){
+  useAudio=false;pendingSeek=null;setOrigin();
+  $("media-status").textContent="Narration unavailable. Captions only.";
+  $("media-status").hidden=mode!=="watch";$("sound").hidden=true;
+  captions(true);
+ }
+ audio.addEventListener("loadedmetadata",()=>{
+  if(!useAudio||!Number.isFinite(audio.duration)||audio.duration<=0)return;
+  duration=audio.duration;seek.max=duration;t=clamp(t,0,duration);
+  if(pendingSeek!==null)audioSeek();
+  renderWatch();labelPlay();
+ });
+ audio.addEventListener("error",silentMedia);audio.addEventListener("ended",finish);
+ audio.addEventListener("pause",()=>{if(useAudio&&playing&&audio.paused&&!audio.ended)pause();});
+ $("sound").addEventListener("click",()=>{
+  audio.muted=!audio.muted;const label=audio.muted?"Unmute narration":"Mute narration";
+  $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",label);$("sound").title=label;
+ });
+ speedSelect.addEventListener("change",()=>{
+  if(playing&&!useAudio)t=clamp((performance.now()-origin)*speed/1000,0,duration);
+  speed=Number(speedSelect.value);audio.playbackRate=speed;setOrigin();
+ });
+ play.addEventListener("click",toggle);seek.addEventListener("input",()=>go(seek.value));
+
 $('download-video').hidden=false;
 
 const hotspots=$('hotspots'), form=$('expression-form'), input=$('expression'), work=$('try-work'), feedback=$('feedback'), answer=$('answer');
@@ -173,7 +214,11 @@ function addHotspot(panel,i,callback){
  h.addEventListener('click',e=>{e.stopPropagation();callback()});hotspots.append(h);
 }
 function state(next,focus=true){tryState.state=next;tryState.error=null;tell('');showAnswer('');drawTry(focus);}
-function restart(focus=true){tryState.low=tryState.high=tryState.cursor=null;state('plotted',focus);}
+function pinMinimum(){
+ const s=tryState;
+ if(s.state!=='result'||!s.ghost||!s.extremum)return;
+ s.ghost=false;drawTry();
+}
 function setBound(v){
  const s=tryState;
  if(!Number.isFinite(v)){tell('Enter an x-value.');return}
@@ -185,17 +230,15 @@ function setBound(v){
    s.high=v;
    const result=graphMinimum(s.q,s.low,s.high);
    s.extremum=result.ok?{x:result.x,y:result.y}:null;
-   s.error=!result.ok;
-   if(result.ok)state('result');else{s.state='result';drawTry(false);}
-   if(!result.ok){s.error=result.message;render.draw({...s,error:true});tell(result.message);}
-   else showAnswer('Minimum value: '+pretty(result.y)+', at x = '+pretty(result.x)+'.');
+   s.ghost=result.ok;
+   if(result.ok)state('result');
+   else{s.state='result';s.error=result.message;drawTry();tell(result.message);}
  }
 }
 function drawTry(focus=false){
  const s=tryState;
- render.draw(s);lastBeat='';
- const keys={entry:[],plotted:['enter'],menu:['menu'],submenu:['menu','6'],lower:['menu','6','2'],upper:['enter'],result:['enter']};
- onBeat(s.state,keys[s.state],s.state==='entry'?'Enter a function below or use the handheld keypad, then press enter.':s.state==='lower'?'Tap the graph to the left of the valley, or enter x below.':s.state==='upper'?'Tap to the right of the valley, or enter x below.':s.state==='plotted'?'Open the calculator’s Menu.':'');
+ render.draw(s);labelGraph(s);lastBeat='';
+ onBeat(s.ghost&&s.state==='result'?'preview':s.state,s.ghost&&s.state==='result'?'Press Enter to pin these coordinates.':s.state==='entry'?'Enter a function below or use the handheld keypad, then press enter.':s.state==='lower'?'Tap the graph to the left of the valley, or enter x below.':s.state==='upper'?'Tap to the right of the valley, or enter x below.':s.state==='plotted'?'Open the calculator’s Menu.':'');
  hotspots.replaceChildren();work.replaceChildren();work.hidden=s.state==='entry';
  lcd.classList.toggle('pick',s.state==='lower'||s.state==='upper');
  if(s.state==='entry'){if(focus)input.focus({preventScroll:true});return}
@@ -221,7 +264,13 @@ function drawTry(focus=false){
    if(focus&&matchMedia('(pointer:fine)').matches)x.focus({preventScroll:true});
    return;
  }
- if(s.state==='result')row.append(helpButton('Try new bounds',()=>{s.low=s.high=null;s.cursor=s.q.x;state('lower')},true));
+ if(s.state==='result'){
+   if(s.extremum){
+     showAnswer('Minimum value: '+pretty(s.extremum.y)+', at x = '+pretty(s.extremum.x)+'.'+(s.ghost?' Press Enter to pin.':''));
+     if(s.ghost)row.append(helpButton('Pin minimum',pinMinimum,true));
+   }
+   row.append(helpButton('Try new bounds',()=>{s.low=s.high=s.extremum=null;s.ghost=false;s.cursor=s.q.x;state('lower')},!s.ghost));
+ }
  if(s.state==='menu'||s.state==='submenu')row.append(helpButton('Esc',()=>state(s.state==='submenu'?'menu':'plotted')));
  if(focus)row.querySelector('button')?.focus({preventScroll:true});
 }
@@ -250,13 +299,16 @@ lcd.addEventListener('click',e=>{
 });
 function setMode(m){
  if(!initialUpdate&&mode===m)return;
- initialUpdate=false;mode=m;lastBeat='';stop();
- document.body.dataset.cxMode=m;shell?.setKeys([]);shell?.setInteractive(m==='try');$('take-over').hidden=m!=='watch';
+ pause();initialUpdate=false;mode=m;lastBeat='';lastWatchStamp='';
+ document.body.dataset.cxMode=m;stage.dataset.watchMode=m;
+ shell?.setKeys([]);shell?.setInteractive(m==='try');
+ if(m==='try'){void chrome.exit();chrome.clear();$('key-strip').hidden=true;}
  modeButtons.forEach(b=>{let yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
- $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';
- if(m==='watch'){hotspots.replaceChildren();lcd.classList.remove('pick');drawWatch(time);}
+ $('watch-player').hidden=m!=='watch';$('practice').hidden=m!=='try';
+ $('media-status').hidden=useAudio||m!=='watch';
+ paintFraming();captions(showCaptions);
+ if(m==='watch'){hotspots.replaceChildren();lcd.classList.remove('pick');renderWatch();}
  else{
-   caption.hidden=true;
    if(tryState.state==='entry'&&preloadExpr&&formulaOk)loadTry(preloadExpr);
    else {drawTry();if(preloadExpr&&!formulaOk)tell('The linked expression could not be loaded. Edit it or enter your own function.');}
  }
@@ -265,7 +317,7 @@ let firstKeyEdit=true;
 function handleHandheld(key){
  if(mode!=='try')return;
  const k=String(key).toLowerCase(); const s=tryState;
- if(k==='home'||k==='scratchpad'){location.assign('handheld/index.html');return}
+ if(k==='home'||k==='scratchpad'){location.assign('scratchpad/index.html');return}
  if(k==='menu'&&s.q){state('menu',false);return}
  if(k==='esc'){
    if(s.state==='menu')state('plotted',false);
@@ -287,6 +339,7 @@ function handleHandheld(key){
    if(k==='enter'||k==='click'||k==='select'){setBound(Number((s.cursor??s.q.x).toFixed(5)));return}
    return;
  }
+ if(s.state==='result'&&k==='enter'){if(s.extremum)pinMinimum();else loadTry(input.value,false);return}
  if(k==='enter'){loadTry(input.value,false);return}
  const t=window.HandheldTransport;
  if(t?.character(k)!==null||k==='del'){
@@ -299,12 +352,26 @@ function handleHandheld(key){
  }
 }
 const shell=window.HandheldShell?.mount({screen:lcd,host:lcd.closest('.lcd-group'),label:'TI-Nspire CX II-T Graphs',onKey:handleHandheld});
-window.HandheldTransport?.controls({container:$('watch-controls'),play,seek,active:()=>mode==='watch'});
 input.addEventListener('input',()=>{if(mode==='try'&&tryState.state==='entry'){tryState.raw=input.value;render.draw(tryState)}});
-$('take-over').addEventListener('click',()=>{
- const empty=tryState.state==='entry'&&!preloadExpr&&firstKeyEdit;
- setMode('try');
- if(empty){loadTry(watchQ.raw,false);tell('Watch is paused at your place. Press menu to explore this graph, or type a new function.');}
-});
 modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-setMode(mode);
+
+ function fitBankWatch(){
+  if(mode!=="watch"||!shell?.body.offsetWidth)return;
+  const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
+  const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
+  const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
+  const pads=getComputedStyle(surface);
+  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
+  stage.style.setProperty("--ct12-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?370:296,room*558/1168)))+"px");
+  stage.style.setProperty("--ct12-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,room*4/3)))+"px");
+  stage.style.setProperty("--ct12-scene-room",Math.floor(Math.max(140,room))+"px");
+ }
+ const bankWatchSizing=new ResizeObserver(fitBankWatch);
+ [$("watch-player"),$("caption-band"),document.querySelector("main>.title")].forEach(el=>bankWatchSizing.observe(el));
+ window.addEventListener("resize",fitBankWatch);
+ window.visualViewport?.addEventListener("resize",fitBankWatch);
+ document.addEventListener("fullscreenchange",fitBankWatch);
+ new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
+ setMode(mode);if(audio.error)silentMedia();
+ fitBankWatch();

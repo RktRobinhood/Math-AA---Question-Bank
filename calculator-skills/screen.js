@@ -48,7 +48,7 @@ export function screen(display){
     return vs;
   }
   function draw(data){
-    const {state,q,raw,low,high,cursor,phase,error,extremum}=data;
+    const {state,q,raw,low,high,cursor,phase,error,extremum,ghost}=data;
     rect(0,0,W,H,'#fff');
     // TI-style document bar with page tab, angle mode and battery indicator.
     const bar=c.createLinearGradient(0,0,0,21);bar.addColorStop(0,'#24313a');bar.addColorStop(.68,'#19232c');bar.addColorStop(1,'#101820');rect(0,0,W,20,bar);
@@ -97,8 +97,8 @@ export function screen(display){
       if(Number.isFinite(y)){line(x-4,y,x+4,y,'#192527',1);line(x,y-4,x,y+4,'#192527',1);}
     }
     if(q&&state==='result'&&!error){
-      const point=extremum||q,x=ux(point.x),y=uy(point.y);dot(x,y,'#202631',2.3);
-      txt('('+pretty(point.x)+', '+pretty(point.y)+')',x+5,y-8,'#15202a',10.5,'normal');
+      const point=extremum||q,x=ux(point.x),y=uy(point.y);dot(x,y,ghost?'#647c8c':'#202631',2.3);
+      txt('('+pretty(point.x)+', '+pretty(point.y)+')',x+5,y-8,ghost?'#516777':'#15202a',10.5,'normal');
       if(phase!=='notes')txt('minimum',x+5,y+11,'#70757b',8.5);
     }
     c.restore();
@@ -115,8 +115,8 @@ export function screen(display){
       rect(6,214,error?96:72,15,'#e6e6e6');rect(6,214,error?96:72,1,'#aeb1b3');
       txt(label,10,224,'#22262b',9);
     }
-    if(state==='menu'||state==='submenu')panel(PANEL.main,state==='submenu');
-    if(state==='submenu')panel(PANEL.sub);
+    if(state==='menu'||state==='submenu')panel(state==='menu'?{...PANEL.main,active:0}:PANEL.main,state==='submenu');
+    if(state==='submenu')panel({...PANEL.sub,active:0});
     if(renderer){tex.needsUpdate=true;renderer.render(scene,cam)}else display.getContext('2d',{alpha:false}).drawImage(off,0,0);
   }
   return {draw, get backend(){return renderer?'three':'canvas'}};
