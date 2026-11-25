@@ -1,7 +1,12 @@
 (function(){
  'use strict';
  const M=CT02Model,T=CT02Tape,$=n=>document.getElementById(n);
- const stage=$('stage'), body=$('lcd-body'),seek=$('seek'),play=$('play'),first=$('stage-play'),ratio=$('entry-ratio');
+ const stage=$('stage'), body=$('lcd-body'),seek=$('seek'),play=$('play'),first=$('stage-play'),toggleAngle=$('angle-toggle');
+ const ratio=document.createElement('input');
+ Object.assign(ratio,{id:'entry-ratio',type:'text',maxLength:32,enterKeyHint:'go',autocomplete:'off',spellcheck:false});
+ ratio.setAttribute('autocapitalize','off');
+ ratio.setAttribute('aria-label','Ratio on the calculator screen');
+ let caret=[0,0];
 
  function fitTry(){
   if(mode!=="try")return;
@@ -18,7 +23,10 @@
  const params=new URLSearchParams(location.search),entry=M.request(params);
  let task={...entry.task},state=M.create(entry.linked?task.ratio:''),time=0,mode='watch',at=0,playing=false,origin=0,started=false,focused=false,raf=0,stamp='',lane='practice',forkAt=null,lastWatchFocus=false,focusChoice=null;
  let practice={state,task},fork=null;
- const keys=HandheldShell.mount({host:$('handheld-host'),screen:$('lcd'),label:'TI-Nspire CX II-T physical keypad',interactive:false,onKey:k=>physical(k)});
+ const keys=HandheldShell.mount({host:$('handheld-host'),screen:$('lcd'),label:'TI-Nspire CX II-T physical keypad',interactive:false,onKey:k=>{const keep=document.activeElement===ratio;physical(k);if(mode==='try'&&!keep)stage.focus({preventScroll:true});}});
+ keys.body.addEventListener('pointerdown',e=>{
+  if(mode==='try'&&document.activeElement===ratio&&e.target.closest('.hh-key'))e.preventDefault();
+ });
  const make=(tag,text,cls)=>{const el=document.createElement(tag);if(text!=null)el.textContent=text;if(cls)el.className=cls;return el;};
  const click=(text,action,active=false,watch=false,cls='')=>{
   const b=make('button',text,[active?'active':'',cls].filter(Boolean).join(' '));b.type='button';b.disabled=watch;
@@ -60,15 +68,26 @@
   }
   body.append(ui);
  }
- function calcScene(s,watch){
+ function calcScene(s,watch,reuse=null){
   if(s.result){
    const h=make('div',null,'lcd-expression'),sym=s.result.fn+(s.result.inverse?'⁻¹':'');
    h.append(make('p',sym+'('+s.result.raw.replaceAll('-','−')+')'),make('p',M.displayResult(s.result.value,s.result.mode,s.result.inverse),'lcd-result'));
-   body.append(h);
+   if(reuse)body.insertBefore(h,reuse);else body.append(h);
   }
-  const cmd=make('div',null,'lcd-entry');
-  cmd.textContent=s.sel?s.sel.name+'('+s.raw.replaceAll('-','−')+')':'▏';
-  body.append(cmd);
+  const cmd=reuse??make('div',null,'lcd-entry');
+  if(!watch&&s.view==='calc'&&s.sel){
+   if(!reuse){
+    cmd.classList.add('lcd-edit');
+    const before=make('span',null),after=make('span',')');
+    before.setAttribute('aria-hidden','true');after.setAttribute('aria-hidden','true');
+    cmd.append(before,ratio,after);
+    cmd.addEventListener('click',e=>{if(e.target!==ratio)ratio.focus({preventScroll:true});});
+   }
+   cmd.firstElementChild.textContent=s.sel.name+'(';
+   if(ratio.value!==s.raw)ratio.value=s.raw;
+   ratio.setAttribute('aria-label',s.sel.name+' argument on the calculator screen');
+  }else cmd.textContent=s.sel?s.sel.name+'('+s.raw.replaceAll('-','−')+')':'▏';
+  if(!reuse)body.append(cmd);
   if(s.view==='palette'){
    const grid=make('div',null,'trig-grid');grid.setAttribute('role','group');grid.setAttribute('aria-label','Trigonometry palette');
    M.palette.forEach((o,i)=>{
@@ -80,13 +99,24 @@
   }
  }
  function draw(s,watch){
-  body.replaceChildren();
-  $('lcd-mode').textContent=s.mode.toUpperCase();
+  const old=ratio.closest('.lcd-entry');
+  const reuse=!watch&&s.view==='calc'&&s.sel&&old?.parentElement===body?old:null;
+  if(reuse)for(const el of [...body.children]){if(el!==reuse)el.remove();}
+  else body.replaceChildren();
+  const liveToggle=!watch&&(s.view==='calc'||s.view==='palette')&&s.mode!=='grad';
+  $('lcd-mode').textContent=s.mode.toUpperCase();$('lcd-mode').hidden=liveToggle;
+  toggleAngle.hidden=!liveToggle;
+  if(liveToggle){
+   const next=s.mode==='rad'?'degrees':'radians',current=M.unitLabels[s.mode];
+   toggleAngle.textContent=s.mode.toUpperCase();
+   const name='Angle mode: '+current+'. Switch to '+next;
+   toggleAngle.setAttribute('aria-label',name);toggleAngle.title=name;
+  }
   $('lcd-name').textContent=s.view==='home'||s.view==='settings-menu'?'Home':s.view==='settings'?'Settings':'1.1 Calculator';
   stage.dataset.lcdView=s.view;
   if(s.view==='home'||s.view==='settings-menu')buttonScene(s,watch);
   else if(s.view==='settings')settingsScene(s,watch);
-  else calcScene(s,watch);
+  else calcScene(s,watch,reuse);
  }
  const chapterEls=T.chapters.map(([t,title],i)=>{
   const li=make('li'),b=click(null,()=>go(t));
@@ -158,24 +188,66 @@
   $('link-error').hidden=lane!=='practice'||!entry.error;$('link-error').textContent=entry.error;
   $('edit').hidden=lane==='fork';$('new-try').hidden=lane!=='fork';$('edit-jump').hidden=lane==='fork';
  }
- function renderTry(){
+ function renderTry({keepRatio=document.activeElement===ratio,range=caret}={}){
   if(mode!=='try')return;
   const active=document.activeElement?.closest?.('#lcd-body');
   draw(state,false);
-  if(active)stage.focus({preventScroll:true});
-  $('hint').textContent=state.view==='calc'?(state.sel?(state.result?'Check the calculation against the task.':'Enter the ratio on the keypad or type it below.'):hints.calc):hints[state.view];
+  if(keepRatio&&body.contains(ratio)){
+   ratio.focus({preventScroll:true});
+   ratio.setSelectionRange(...range);rememberCaret();
+  }else if(active)stage.focus({preventScroll:true});
+  $('hint').textContent=state.view==='calc'?(state.sel?(state.result?'Check the calculation against the task.':'Tap the ratio on the calculator screen, or use the keypad. Press Enter to calculate.'):'Tap RAD or DEG at the top to switch units. Press trig to choose a function.'):hints[state.view];
   $('check').hidden=lane==='fork'||state.view!=='calc'||state.result==null;
-  $('typed-ratio').hidden=state.view!=='calc'||!state.sel;
-  if(ratio.value!==state.raw)ratio.value=state.raw;
   show(state.error,Boolean(state.error));
  }
- function update(next){state=next;renderTry();}
- function physical(k){if(mode==='try')update(M.press(state,k));}
- $('typed-ratio').addEventListener('submit',e=>{e.preventDefault();physical('enter');});
- ratio.addEventListener('input',()=>{if(mode!=='try'||!state.sel)return;update({...state,raw:ratio.value,result:null,error:''});});
+ function update(next,options){state=next;renderTry(options);}
+ function rememberCaret(){if(ratio.selectionStart!==null)caret=[ratio.selectionStart,ratio.selectionEnd];}
+ function physical(k){
+  if(mode!=='try')return;
+  const editing=state.view==='calc'&&state.sel&&body.contains(ratio),wasFocused=document.activeElement===ratio;
+  if(editing&&wasFocused)rememberCaret();
+  if(editing&&(k==='left'||k==='right')){
+   const [start,end]=caret,at=k==='left'?start===end?start-1:start:start===end?end+1:end;
+   const p=Math.max(0,Math.min(state.raw.length,at));ratio.setSelectionRange(p,p);rememberCaret();
+   return;
+  }
+  const char=({dot:'.',neg:'-',minus:'-',div:'/',plus:'+'})[k]??(/^\d$/.test(k)?k:null);
+  if(editing&&(char!==null||k==='del')){
+   const [a,b]=caret.map(i=>Math.min(state.raw.length,i));
+   const from=k==='del'&&a===b?Math.max(0,a-1):a, insert=char??'';
+   const raw=state.raw.slice(0,from)+insert+state.raw.slice(b);
+   if(raw.length>ratio.maxLength)return;
+   caret=[from+insert.length,from+insert.length];
+   update({...state,raw,result:null,error:'',prefill:''},{keepRatio:wasFocused,range:caret});
+   if(!wasFocused)ratio.setSelectionRange(...caret);
+   return;
+  }
+  const next=M.press(state,k);
+  if(next.sel!==state.sel||next.raw!==state.raw){caret=[next.raw.length,next.raw.length];}
+  update(next,{keepRatio:wasFocused,range:caret});
+  if(body.contains(ratio)&&!wasFocused)ratio.setSelectionRange(...caret);
+ }
+ for(const e of ['select','keyup','pointerup','focus'])ratio.addEventListener(e,rememberCaret);
+ ratio.addEventListener('input',()=>{
+  if(mode!=='try'||state.view!=='calc'||!state.sel)return;
+  rememberCaret();
+  const drop=Boolean(state.result||state.error);
+  state={...state,raw:ratio.value,prefill:'',result:null,error:''};
+  if(drop)renderTry();
+ });
+ ratio.addEventListener('keydown',e=>{
+  if(e.isComposing||e.altKey||e.ctrlKey||e.metaKey)return;
+  if(e.key==='Enter'){e.preventDefault();e.stopPropagation();physical('enter');keys.setKeys(['enter']);setTimeout(()=>{if(mode==='try')keys.setKeys([]);},140);}
+  else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();stage.focus({preventScroll:true});}
+ });
+ toggleAngle.addEventListener('click',()=>{
+  if(mode!=='try'||toggleAngle.hidden)return;
+  const unit=state.mode==='rad'?'deg':'rad';
+  update({...state,mode:unit,draft:unit,result:null,error:''});
+ });
  $('task-form').addEventListener('submit',e=>{
   e.preventDefault();if(lane!=='practice')return; const fn=$('task-fn').value,unit=$('task-unit').value;
-  try{const item=M.parseRatio($('task-ratio').value);M.inverse(fn,item.value,unit);task={fn,unit,ratio:item.raw};state=M.create();entry.error='';taskView();$('edit').open=false;renderTry();}
+  try{const item=M.parseRatio($('task-ratio').value);M.inverse(fn,item.value,unit);task={fn,unit,ratio:item.raw};state=M.create();caret=[0,0];entry.error='';taskView();$('edit').open=false;renderTry();}
   catch(err){show(err.message,true);}
  });
  $('check').addEventListener('click',()=>{
@@ -185,13 +257,13 @@
  });
  $('reset').addEventListener('click',()=>{
   state=lane==='fork'?T.snapshot(time).state:M.create(entry.linked?task.ratio:'');
-  renderTry();
+  caret=[state.raw.length,state.raw.length];renderTry();
  });
  const editorIds=['task-fn','task-ratio','task-unit'];
  function saveLane(){
   const target=lane==='fork'?fork:practice;
   Object.assign(target,{state,task,message:$('feedback').textContent,messageError:$('feedback').dataset.error==='true',
-   editor:lane==='practice'?editorIds.map(id=>$(id).value):null,editorOpen:$('edit').open});
+   caret:caret.slice(),editor:lane==='practice'?editorIds.map(id=>$(id).value):null,editorOpen:$('edit').open});
  }
  $('edit-jump').addEventListener('click',()=>{
   $('edit').open=true;$('task-fn').focus({preventScroll:true});$('edit').scrollIntoView({block:'nearest'});
@@ -206,7 +278,7 @@
   if(next==='try'){
    lane=targetLane;
    if(lane==='fork'&&forkAt!==time){forkAt=time;fork={state:T.snapshot(time).state,task:{...M.WORKED}};}
-   const target=lane==='fork'?fork:practice;state=target.state;task=target.task;
+   const target=lane==='fork'?fork:practice;state=target.state;task=target.task;caret=target.caret??[state.raw.length,state.raw.length];
   }
   mode=next;stage.dataset.mode=mode;stage.dataset.tryLane=next==='try'?lane:'';
   tabs.forEach((b,j)=>{const a=(j===0)===(mode==='watch');b.setAttribute('aria-selected',String(a));b.tabIndex=a?0:-1;});
@@ -239,7 +311,7 @@
   if(e.altKey||e.metaKey||e.ctrlKey||e.isComposing)return;
   if(mode==='watch'&&e.key==='Escape'&&focused){e.preventDefault();focusChoice=false;focus(false);return;}
   if(!stage.contains(e.target)&&e.target!==document.body)return;
-  if(e.target.closest?.('button,input,select,textarea,a,summary'))return;
+  if(e.target===toggleAngle?['Enter',' ','Tab'].includes(e.key):e.target.closest?.('button,input,select,textarea,a,summary'))return;
   if(mode==='watch'){
    if(e.key===' '||e.key==='k'){e.preventDefault();playPause();}
    if(e.key==='j'||e.key==='l'){e.preventDefault();go(time+(e.key==='j'?-10:10));}

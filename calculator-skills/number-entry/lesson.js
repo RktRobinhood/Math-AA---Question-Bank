@@ -1,7 +1,7 @@
 "use strict";
 (function(){
 const $=id=>document.getElementById(id),M=CT01Math;
-const stage=$("stage"),audio=$("narration"),seek=$("seek"),play=$("play"),overlay=$("start-overlay"),input=$("expression");
+const stage=$("stage"),audio=$("narration"),seek=$("seek"),play=$("play"),overlay=$("start-overlay"),lcd=$("lcd-body");
 const approach=new URLSearchParams(location.search), defaultCase={expr:M.defaultExpr,sf:3,value:M.evaluate(M.defaultExpr)};
 let task=defaultCase,invalidLink=false,fixedLink=false;
 if(approach.has("expr")){
@@ -19,8 +19,8 @@ const cue=[
 ];
 const keys=[[.03,"home"],[.53,"1"],[1.12,"enter"],[2.36,"ctrl"],[3.02,"div"],[6.45,"4"],[6.96,"ee"],[7.49,"5"],[7.97,"mul"],[8.41,"3"],[9.06,"ee"],[10.52,"neg"],[11.00,"2"],[11.54,"down"],[11.91,"2"],[12.33,"ee"],[12.77,"3"],[13.23,"enter"]];
 const checkpoints=[[0,"Open Calculator"],[2.1,"Group a fraction"],[6.44,"Use EE and (−)"],[13.32,"Read the value"],[20.06,"Write three significant figures"]];
-let mode="watch",state=M.pristine("calc",task.expr),usedTry=false,focused=false,firstStart=true,t=0,duration=27.01,playing=false,pending=false,epoch=0,raf=0,base=0,sound=true,stamp="";
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:k=>doKey(k)});
+let mode="watch",state=M.pristine("calc",task.expr),usedTry=false,focused=false,firstStart=true,t=0,duration=27.01,playing=false,pending=false,epoch=0,raf=0,base=0,speed=.9,sound=true,stamp="";
+const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:(k,event)=>{doKey(k);if(mode==="try"&&event?.detail>0)lcd.focus({preventScroll:true});}});
 const names=["Watch","Try"].map(x=>$(x.toLowerCase()+"-tab"));
 const node=(tag,cls,label)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(label!==undefined)n.textContent=label;return n;};
 const fmt=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
@@ -39,7 +39,7 @@ function cursor(el,text,at){
  el.append(M.show(text.slice(0,at)),node("i","lcd-caret"),M.show(text.slice(at)));
 }
 function renderLCD(s){
- const b=$("lcd-body"); b.replaceChildren();b.dataset.app=s.app;
+ const b=lcd; b.replaceChildren();b.dataset.app=s.app;
  const title={off:"TI-Nspire",home:"Home",new:"New Document",calc:"1.1   Calculator",scratch:"Scratchpad  Calculate"};
  $("lcd-title").textContent=title[s.app];
  if(s.app==="home"){
@@ -98,11 +98,10 @@ function renderWatch(){
 function renderTry(){
  if(mode!=="try")return;
  renderLCD(state);
- $("hint").textContent=state.error||({home:"Press 1 for New, or A for a quick Scratchpad calculation.",new:"Press 1 to add the Calculator page.",calc:"Press Enter to evaluate. Keep the display value until the end.",scratch:"Scratchpad Calculate. Press Enter to evaluate."}[state.app]??"Press Home to open the calculator.");
+ const tip=({home:"Press 1 for New, or A for Scratchpad Calculate.",new:"Press 1 to add the Calculator page.",calc:"Use the calculator keys, or select the screen and type. Press Enter to evaluate.",scratch:"Use the keys or type on the screen. Press Enter to evaluate."}[state.app]??"Press Home to open the calculator.");
+ const text=state.error||tip;
+ if($("hint").textContent!==text)$("hint").textContent=text;
  $("hint").classList.toggle("is-wrong",Boolean(state.error));
- const active=document.activeElement;
- if($("expression-form").contains(active)&&active===input)return;
- input.value=state.entry||(state.frac?M.input(state):"");
 }
 function doKey(k){if(mode!=="try")return;state=M.pressed(state,k);renderTry();}
 function label(){
@@ -114,7 +113,7 @@ function pause(){
  playing=false;audio.pause();cancelAnimationFrame(raf);label();renderWatch();
 }
 function go(time){
- t=Math.max(0,Math.min(duration,Number(time)||0));base=performance.now()-t*1000;
+ t=Math.max(0,Math.min(duration,Number(time)||0));base=performance.now()-t*1000/speed;
  if(sound&&Number.isFinite(audio.duration))audio.currentTime=t;
  renderWatch();label();
 }
@@ -125,18 +124,18 @@ function focus(v){
 function finish(){pause();t=duration;renderWatch();label();}
 function step(now){
  if(!playing||mode!=="watch")return;
- t=sound?audio.currentTime:(now-base)/1000;
+ t=sound?audio.currentTime:(now-base)*speed/1000;
  if(t>=duration){finish();return;}
  renderWatch();raf=requestAnimationFrame(step);
 }
 function fallback(){
- sound=false;base=performance.now()-t*1000;$("media-status").textContent="Captions only";$("sound-label").hidden=true;
+ sound=false;base=performance.now()-t*1000/speed;$("media-status").textContent="Captions only";$("sound-label").hidden=true;
 }
 async function start(){
  if(mode!=="watch")return;
  if(firstStart){firstStart=false;if(stage.getBoundingClientRect().bottom>innerHeight-57)focus(true);}
  if(t>=duration-.015)go(0);
- const id=++epoch;pending=true;base=performance.now()-t*1000;
+ const id=++epoch;pending=true;base=performance.now()-t*1000/speed;
  if(sound){
   try{audio.currentTime=t;await audio.play();}
   catch {if(id!==epoch)return;fallback();}
@@ -160,6 +159,7 @@ function setMode(next,fork=false){
  for(const [i,n] of names.entries()){const selected=(i===0)===(mode==="watch");n.setAttribute("aria-selected",String(selected));n.tabIndex=selected?0:-1;}
  for(const id of ["try-panel","try-player","challenge"])$(id).hidden=next!=="try";
  for(const id of ["watch-panel","watch-player"])$(id).hidden=next!=="watch";
+ lcd.tabIndex=next==="try"?0:-1;
  shell.setInteractive(next==="try");shell.setKeys([]);
  if(mode==="watch"){renderWatch();label();}
  else{overlay.hidden=true;renderTry();}
@@ -174,15 +174,35 @@ audio.addEventListener("loadedmetadata",()=>{
 });
 audio.addEventListener("error",fallback);audio.addEventListener("ended",finish);
 $("sound").addEventListener("change",()=>{audio.muted=!$("sound").checked;});
+audio.playbackRate=speed;
+audio.preservesPitch=true;
+$("play-rate").addEventListener("change",e=>{
+ speed=Number(e.target.value);
+ audio.playbackRate=speed;
+ base=performance.now()-t*1000/speed;
+});
+
 for(const b of [play,overlay])b.addEventListener("click",toggle);
 $("back").addEventListener("click",()=>go(t-10));$("next").addEventListener("click",()=>go(t+10));
 $("replay").addEventListener("click",()=>{pause();go(0);void start();});
 seek.addEventListener("input",()=>go(seek.value));$("focus-view").addEventListener("click",()=>focus(!focused));
-$("take-over").addEventListener("click",()=>{setMode("try",true);stage.focus();});
+$("take-over").addEventListener("click",()=>{setMode("try",true);lcd.focus();});
 $("return-watch").addEventListener("click",()=>{setMode("watch");play.focus({preventScroll:true});});
-$("reset-keypad").addEventListener("click",()=>{state=M.pristine();renderTry();stage.focus();});
-$("expression-form").addEventListener("submit",e=>{
- e.preventDefault();state=M.pressed(M.typed(state,input.value),"enter");input.blur();renderTry();stage.focus();
+$("reset-keypad").addEventListener("click",()=>{state=M.pristine();renderTry();lcd.focus();});
+lcd.addEventListener("click",()=>{if(mode==="try")lcd.focus({preventScroll:true});});
+lcd.addEventListener("paste",e=>{
+ if(mode!=="try"||!["calc","scratch"].includes(state.app)||state.frac)return;
+ const text=e.clipboardData?.getData("text/plain")?.trim();
+ if(!text)return;
+ e.preventDefault();
+ const next=state.entry.slice(0,state.at)+text+state.entry.slice(state.at);
+ if(next.length>120||!/^[0-9Ee.()+\-−–/*×÷^ ]+$/.test(next)){
+  state={...state,error:"Paste a numerical expression no longer than 120 characters."};
+ }else{
+  const app=state.app,at=state.at+text.length;
+  state={...M.typed(state,next),app,at};
+ }
+ renderTry();
 });
 $("answer-form").addEventListener("submit",e=>{
  e.preventDefault();

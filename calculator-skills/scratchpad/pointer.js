@@ -36,7 +36,7 @@ function mount(holder,glass){
   return true;
  }
  const pad=e=>e.target.closest?.('[data-hh-key=select],[data-hh-key=up],[data-hh-key=down],[data-hh-key=left],[data-hh-key=right]');
- board.addEventListener('pointerdown',e=>{if(!pad(e)||e.button!==0)return;drag={id:e.pointerId,fromX:e.clientX,fromY:e.clientY,lx:e.clientX,ly:e.clientY,moved:false};});
+ board.addEventListener('pointerdown',e=>{suppress=0;if(!pad(e)||e.button!==0)return;drag={id:e.pointerId,fromX:e.clientX,fromY:e.clientY,lx:e.clientX,ly:e.clientY,moved:false};});
  board.addEventListener('pointermove',e=>{
   if(!drag||drag.id!==e.pointerId)return;
   if(!drag.moved&&Math.hypot(e.clientX-drag.fromX,e.clientY-drag.fromY)<3)return;

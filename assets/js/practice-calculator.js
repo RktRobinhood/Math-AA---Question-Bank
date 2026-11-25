@@ -5,17 +5,18 @@
   else root.QBPracticeCalculator = factory(root);
 })(typeof window === 'undefined' ? null : window, function (win) {
   'use strict';
-  // AA uses the engine's own technology flag for Paper 2-style work. AI has no
-  // no-calculator paper, but exact-answer scaffolds outside the exam bands stay focused.
+  // AA numerical skills can start as early as Level 2. Respect the generator
+  // calculator tag, but keep Paper 1 and the AA Level 3 band no-calculator.
+  // AI always permits a calculator; exact-answer instructions still apply.
   function eligible({ item, question, course, tab = 'practice' } = {}) {
     if (tab !== 'practice' || item?.kind !== 'generated' || question?.course !== course) return false;
     if (!Number.isInteger(question.level) || question.level < 1 || question.level > 5) return false;
     if (question.paper && !['P1', 'P2', 'P3'].includes(question.paper)) return false;
     if (course === 'aa-sl' || course === 'aa-hl') {
       return question.calculator === true && question.level !== 3 &&
-        (question.paper === 'P2' || (!question.paper && question.level === 4));
+        (!question.paper || question.paper === 'P2');
     }
-    if (course === 'ai-sl' || course === 'ai-hl') return question.calculator === true || question.level >= 3;
+    if (course === 'ai-sl' || course === 'ai-hl') return true;
     return false;
   }
 

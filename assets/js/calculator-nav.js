@@ -1,4 +1,4 @@
-/* Optional Calculator Skills navigation. Included only in the generated Home and Practice entry pages. */
+/* Optional Calculator Skills navigation. Included in Home, Practice, and the Calculator Skills catalogue. */
 (function () {
   'use strict';
   const icon = '<svg viewBox="0 0 24 24"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 7h6M9 11h1m4 0h1m-6 4h1m4 0h1m-6 3h1m4 0h1"/></svg>';
@@ -9,6 +9,10 @@
     const link = document.createElement('a');
     link.href = (document.body.dataset.base || './') + 'calculator-skills/skills.html';
     link.className = 'calc-skills-nav';
+    if (document.body.dataset.nav === 'calculator-skills') {
+      link.classList.add('on');
+      link.setAttribute('aria-current', 'page');
+    }
     if (bar.classList.contains('tabbar')) {
       const mark = document.createElement('i');
       mark.setAttribute('aria-hidden', 'true');

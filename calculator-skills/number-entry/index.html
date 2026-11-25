@@ -1,7 +1,7 @@
 <!doctype html><html lang="en" data-theme="system"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Enter and round a calculation · Calculator Coach</title><link rel="stylesheet" href="../zeros/lesson.css"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js" defer></script><script src="lesson.js" defer></script>
+<title>Enter and round a calculation · Calculator Coach</title><link rel="stylesheet" href="../zeros/lesson.css"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=single-entry-2">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js" defer></script><script src="lesson.js?v=single-entry-2" defer></script>
 </head><body><main>
 <header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT01</span></p><h1>Enter and round a calculation</h1><p class="subtitle">Scientific notation and significant figures on a TI-Nspire CX II-T.</p></div>
 <label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
@@ -12,21 +12,21 @@
 <div class="ct10-stage-grid" id="workspace">
 <div class="ct10-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire display">
  <div class="status"><span id="lcd-title">TI-Nspire</span><span aria-hidden="true" class="battery"></span></div>
- <div class="screen-work" id="lcd-page"><div id="lcd-body"></div></div>
+ <div class="screen-work" id="lcd-page"><div id="lcd-body" role="group" aria-label="Calculator screen" aria-describedby="hint"></div></div>
  <p id="lcd-text" class="sr"></p>
 </div><button id="start-overlay" class="start-overlay" type="button" aria-label="Play demonstration"><span aria-hidden="true">▶</span></button></div>
 <div class="ct10-stage-side">
 <aside id="watch-panel" class="director" role="tabpanel" aria-labelledby="watch-tab"><p class="tag">Worked example</p><h2>Enter once. Round at the end.</h2><div class="math-example" aria-label="four times ten to the fifth times three times ten to the negative two, over two times ten to the third"><span>(4 × 10<sup>5</sup>) × (3 × 10<sup>−2</sup>)</span><span>2 × 10<sup>3</sup></span></div><ol id="steps" class="steps"></ol></aside>
-<aside id="try-panel" class="director ct10-try-help" role="tabpanel" aria-labelledby="try-tab" hidden><p class="tag">Calculator practice</p><h2>Enter your own expression</h2>
-<p id="hint" role="status"></p><form id="expression-form"><label for="expression">Or type an expression</label><div class="inputline"><input id="expression" type="text" maxlength="120" required autocomplete="off" autocapitalize="off" spellcheck="false"><button class="primary" type="submit">Enter</button></div></form><p class="ct10-keyboard">Use <kbd>Ctrl</kbd> then <kbd>÷</kbd> for the fraction template. Use <kbd>EE</kbd> then <kbd>(−)</kbd> for a negative exponent. On a keyboard, type <kbd>e-</kbd> in a number or press <kbd>Ctrl+/</kbd> to open the template.</p>
+<aside id="try-panel" class="director ct10-try-help" role="tabpanel" aria-labelledby="try-tab" hidden><p class="tag">Calculator practice</p><h2>Use the calculator</h2>
+<p id="hint" role="status"></p><p class="ct10-keyboard">Use <kbd>Ctrl</kbd> then <kbd>÷</kbd> for a fraction, and <kbd>EE</kbd> then <kbd>(−)</kbd> for a negative exponent. On a keyboard, <kbd>Ctrl+/</kbd> opens the fraction template.</p>
 </aside></div></div>
 <div class="player" id="watch-player" aria-label="Playback controls">
 <p id="caption" class="caption"></p><p class="ct01-takeaway" id="takeaway" hidden></p>
 <div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
-<div class="ct10-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="27.01" step="0.005"></label><span class="ct10-rehearsal" id="media-status">Narration</span><label class="ct10-option" id="sound-label"><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
+<div class="ct10-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="27.01" step="0.005"></label><span class="ct10-rehearsal" id="media-status">Narration</span><label class="ct01-rate"><span class="sr">Playback speed</span><select id="play-rate"><option value="0.75">0.75×</option><option value="0.9" selected>0.9×</option><option value="1">1×</option></select></label><label class="ct10-option" id="sound-label"><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
 <audio id="narration" preload="metadata" src="narration.mp3"></audio>
 </div>
 </section>
-<section id="challenge" class="exercise" hidden><p class="tag">Your turn</p><h2>Write the requested precision</h2><p id="question"></p><form id="answer-form"><label for="answer">Written result <small>(here, type a decimal or E notation)</small></label><div class="answer-row"><input id="answer" aria-describedby="feedback" type="text" required maxlength="60" autocomplete="off"><button class="primary" type="submit">Check</button></div></form><p class="feedback" id="feedback" role="status"></p></section>
+<section id="challenge" class="exercise" hidden><p class="tag">Your turn</p><h2>Write the requested precision</h2><p id="question"></p><form id="answer-form"><label for="answer">Rounded answer <small>(not the expression)</small></label><div class="answer-row"><input id="answer" aria-describedby="feedback" type="text" required maxlength="60" autocomplete="off"><button class="primary" type="submit">Check</button></div></form><p class="feedback" id="feedback" role="status"></p></section>
 <details class="notes"><summary>What EE means</summary><p>EE means “times ten to the power of”. For example, <code>3E−2</code> is <code>3 × 10⁻²</code>. Read the calculator value first. Put the required precision in your written answer, not in the calculator input. On paper, write scientific notation as <code>a × 10ⁿ</code>.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_Symbols.HTML">TI's reference for E notation</a></p></details>
 </main></body></html>

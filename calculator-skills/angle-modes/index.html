@@ -17,7 +17,7 @@
 <div id="try-header" hidden><p id="task" class="task"></p><div class="try-nav"><button id="resume" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><button id="edit-jump" class="retro-jump" type="button">Edit task</button><button id="new-try" type="button" hidden>Open Try</button></div></div>
 <div class="stage-grid">
 <div id="handheld-host"><div id="lcd" class="lcd" aria-label="Recreated TI-Nspire CX II-T display">
-<div id="lcd-status" class="lcd-status"><span id="lcd-name">1.1 Calculator</span><strong id="lcd-mode">RAD</strong><span class="battery" aria-hidden="true"></span></div>
+<div id="lcd-status" class="lcd-status"><span id="lcd-name">1.1 Calculator</span><strong id="lcd-mode">RAD</strong><button id="angle-toggle" type="button" hidden>RAD</button><span class="battery" aria-hidden="true"></span></div>
 <div class="lcd-body" id="lcd-body"></div>
 <button type="button" id="stage-play" class="stage-play" aria-label="Play caption rehearsal" title="Play caption rehearsal"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
 </div></div>
@@ -30,8 +30,6 @@
 <div id="try-work" role="tabpanel" aria-labelledby="try-tab" hidden>
 <p id="link-error" class="muted" hidden></p>
 <p id="hint" class="hint"></p>
-<form id="typed-ratio" hidden><label for="entry-ratio">Ratio on the calculator</label>
-<div class="field-row"><input type="text" maxlength="32" inputmode="decimal" spellcheck="false" autocomplete="off" id="entry-ratio"><button class="primary" type="submit">Enter</button></div></form>
 <p id="feedback" class="feedback" role="status" hidden></p>
 <button type="button" class="primary" id="check" hidden>Check my calculation</button>
 <details id="edit"><summary>Edit Try task</summary><form id="task-form">
@@ -49,5 +47,5 @@
 <div class="timeline"><span id="clock" aria-hidden="true"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div>
 </div>
 </section>
-<details class="notes"><summary>Calculator notes</summary><p>Choose degrees or radians from the question. Inverse trig takes a ratio and returns one principal angle. The superscript −1 means inverse, not reciprocal. If the question asks for all solutions, check its full interval.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_confighh/hc_customizing_document_settings.HTML">TI handbook: Document Settings</a> · <a href="https://education.ti.com/en/bulletinboard/2018/september/transitioning_to_the_ti-nspire">TI guide: trig palette</a></p></details>
+<details class="notes"><summary>Calculator notes</summary><p>In Try, click or tap RAD or DEG at the top of the calculator screen to switch units. Watch also demonstrates the Document Settings path. Choose the unit requested in the question. Inverse trig takes a ratio and returns one principal angle. The superscript −1 means inverse, not reciprocal. If the question asks for all solutions, check its full interval.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_hh_gs/gsc_the_hh_screen.HTML">TI handbook: angle-mode indicator</a> · <a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_confighh/hc_customizing_document_settings.HTML">TI handbook: Document Settings</a> · <a href="https://education.ti.com/en/bulletinboard/2018/september/transitioning_to_the_ti-nspire">TI guide: trig palette</a></p></details>
 </main></body></html>

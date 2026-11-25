@@ -87,7 +87,7 @@ body.ct02-focus{overflow:hidden}
 .hint,.muted{color:var(--muted);font-size:.88rem;margin:0 0 .55rem}
 .field-row{display:flex;gap:.45rem;align-items:center}
 .field-row input{min-width:0;width:100%}
-#typed-ratio label,.task-edit label{display:block;font-size:.83rem;font-weight:700;margin-bottom:.2rem}
+.task-edit label{display:block;font-size:.83rem;font-weight:700;margin-bottom:.2rem}
 .task-edit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.45rem;margin-bottom:.5rem}
 .task-edit label :is(input,select){width:100%;display:block;margin-top:.23rem;min-width:0}
 .feedback{margin:.45rem 0;color:var(--accent);font-size:.9rem}
@@ -128,3 +128,11 @@ summary{min-height:43px;padding:.55rem 0;color:var(--accent);font-weight:690}
  main:has(#stage[data-mode="try"]) h1{font-size:clamp(1.4rem,4vw,2rem)}
  #stage[data-mode="try"] #try-header{padding-block:5px}
 }
+
+/* Active TI status indicator is a Try control; the Watch text stays passive. */
+.lcd-status #angle-toggle{margin-left:auto;margin-right:1.5cqw;align-self:stretch;min-height:0;min-width:20cqw;padding:0 2cqw;border:1px solid #4b7097;border-block:0;border-radius:0;background:#d3e7fa;color:#112a46;font:inherit;cursor:pointer;touch-action:manipulation}
+.lcd-status #angle-toggle:not([hidden])::after{content:' ⇄';font-size:.82em}
+.lcd-status #angle-toggle:hover{background:#eff7ff}
+.lcd-status #angle-toggle:focus-visible,#entry-ratio:focus-visible{outline:2px solid #0c4c87;outline-offset:-2px}
+.lcd-entry.lcd-edit{display:flex;align-items:center;gap:.35cqw;min-height:20%;overflow:visible;cursor:text}
+#entry-ratio{flex:1;min-width:0;width:auto;min-height:0;height:auto;margin:0;padding:.55cqw 1cqw;border:1px solid #638bb6;border-radius:1px;background:#fff;color:#162637;font:inherit;font-size:max(16px,4.9cqw);line-height:1.12;box-shadow:none}

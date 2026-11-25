@@ -1,0 +1,26 @@
+/* The Question Bank owns the theme, type, header, buttons and mobile tabs. */
+.skills-page{width:min(68rem,calc(100% - 2.5rem));margin:auto;padding:var(--s6) 0 3rem}
+.skills-page .eyebrow{font-size:var(--fs-sm);color:var(--muted);margin-bottom:var(--s1)}
+.skills-page h1{font-size:clamp(1.8rem,4vw,2.45rem);line-height:1.12;letter-spacing:-.03em;font-weight:740}
+.skills-page .intro{margin-top:var(--s2);max-width:65ch;color:var(--muted)}
+.skills-launch{display:flex;align-items:flex-end;justify-content:space-between;gap:var(--s4);flex-wrap:wrap}
+.skills-open-calc{flex:none}
+.skills-page .filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(10rem,16rem);gap:var(--s3);margin:var(--s6) 0 var(--s3)}
+.skills-page .filters label{display:grid;gap:var(--s1);font-weight:650}
+.skills-page #count{margin-bottom:var(--s2);color:var(--muted);font-size:var(--fs-sm)}
+.skills-page .catalog-list{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);overflow:hidden}
+.skills-page .catalog-row{display:grid;grid-template-columns:3.2rem minmax(0,1fr) minmax(8rem,11rem);gap:var(--s3);align-items:start;padding:var(--s3) var(--s4)}
+.skills-page .catalog-row + .catalog-row{border-top:1px solid var(--line)}
+.skills-page .catalog-id{font:600 var(--fs-sm)/1.5 var(--mono);color:var(--faint)}
+.skills-page .catalog-record h2{margin:0 0 var(--s1);font-size:var(--fs-md);line-height:1.25}
+.skills-page .catalog-record p,.skills-page .catalog-type{font-size:var(--fs-sm);color:var(--muted)}
+.skills-page .catalog-type strong{color:var(--ink)}
+.skills-page .catalog-scope{max-width:62ch;margin-bottom:var(--s1)}
+.skills-page .catalog-list>p{padding:var(--s4)}
+.skills-page .lower{margin-top:var(--s4)}
+@media(max-width:560px){
+ .skills-page{width:calc(100% - 1.5rem);padding-top:var(--s5)}
+ .skills-page .filters{grid-template-columns:1fr;margin-top:var(--s4)}
+ .skills-page .catalog-row{grid-template-columns:2.45rem minmax(0,1fr);padding:var(--s3);gap:var(--s2)}
+ .skills-page .catalog-type{grid-column:2}
+}

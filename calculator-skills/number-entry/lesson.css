@@ -34,8 +34,8 @@
 .ct01-stage .math-example{font-family:var(--mono);color:var(--text);max-width:100%;font-size:clamp(.75rem,1.8vw,1.05rem)}
 .ct01-stage .math-example span{padding:2px 8px}
 .ct01-stage .math-example span:first-child{border-bottom:1px solid currentColor}
-.ct01-stage .ct10-try-help .inputline{margin-bottom:10px}
-.ct01-stage .inputline input{min-width:0}
+.ct01-stage[data-mode=try] #lcd-body{cursor:text}
+.ct01-stage[data-mode=try] #lcd-body:focus-visible{outline:2px solid #245786;outline-offset:-2px}
 .ct01-stage .is-wrong{color:var(--error)}
 #challenge{margin-top:12px}
 #question{overflow-wrap:anywhere}
@@ -54,3 +54,7 @@
  .ct01-stage,#challenge{display:none}
  .notes summary::after{content:" · Enter and round a calculation"}
 }
+
+.ct01-rate{flex:none}
+.ct01-rate select{min-height:32px;padding:.12rem .18rem;background:var(--page);color:var(--text);border:1px solid var(--line);border-radius:5px;font:650 .76rem var(--mono)}
+@media(max-width:380px){.ct01-stage .ct10-rehearsal{display:none}}
