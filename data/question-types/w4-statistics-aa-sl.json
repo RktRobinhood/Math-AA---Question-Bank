@@ -1,0 +1,362 @@
+{
+  "home": "aa-sl",
+  "about": "Wave 4 original Topic 4 questions. Official exam IDs are method references only.",
+  "types": [
+    {
+      "id": "w4-statistics-uniform-numbered-window",
+      "topic": 4,
+      "name": "Adjust a uniform sample space when a series of tickets is withdrawn",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [
+        "SL4.5.equally-likely",
+        "SL4.5.expected-occurrences",
+        "SL4.5.complement"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz1-p2-q09.a",
+        "aa-sl-2021-may-tz1-p2-q03.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Adjust a uniform sample space when a series of tickets is withdrawn",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-empirical-reroute-cap",
+      "topic": 4,
+      "name": "Plan a limited reroute using two empirical success rates",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [
+        "SL4.5.relative-frequency",
+        "SL4.5.expected-occurrences"
+      ],
+      "parts": [
+        "aa-sl-2023-may-tz1-p1-q03.a",
+        "aa-sl-2025-may-tz3-p2-q08.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Plan a limited reroute using two empirical success rates",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-percent-improvement-before-forecast",
+      "topic": 4,
+      "name": "Revise an expected count after a relative change, not a percentage-point change",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [
+        "SL4.5.relative-frequency",
+        "SL4.5.expected-occurrences",
+        "SL4.5.complement"
+      ],
+      "parts": [
+        "aa-sl-2024-nov-tz2-p2-q07.a",
+        "aa-sl-2023-may-tz1-p1-q03.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Revise an expected count after a relative change, not a percentage-point change",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-reference-plus-signed-steps",
+      "topic": 4,
+      "name": "Move by signed steps from a reference in equal units",
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [],
+      "supports": [
+        "SL4.12.standardise",
+        "SL4.12.z-score"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Move by signed steps from a reference in equal units",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-inverse-z-specification",
+      "topic": 4,
+      "name": "Turn a lower z-score limit into a raw measurement specification",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "SL4.12.z-score",
+        "SL4.12.standardise"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p2-q09.a",
+        "aa-sl-2025-nov-tz3-p2-q06.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Turn a lower z-score limit into a raw measurement specification",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-pair-of-z-stamps",
+      "topic": 4,
+      "name": "Reconstruct the unlabelled scale from two signed z-scores",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "SL4.12.z-score",
+        "SL4.12.unknown-mean-and-sd",
+        "SL4.12.standardise"
+      ],
+      "parts": [
+        "aa-sl-2025-nov-tz3-p2-q06.b",
+        "aa-sl-2025-may-tz2-p2-q08.f"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Reconstruct the unlabelled scale from two signed z-scores",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-equal-percentile-window",
+      "topic": 4,
+      "name": "Move a percentile window between normal distributions",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "SL4.12.compare-z",
+        "SL4.12.standardise"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Move a percentile window between normal distributions",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-same-mean-binomial-risk",
+      "topic": 4,
+      "name": "Compare binomial zero-success risks at one common mean",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.8"
+      ],
+      "skills": [
+        "SL4.8.mean-variance",
+        "SL4.8.exact-probability",
+        "SL4.8.binomial-in-context"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p2-q08.d",
+        "aa-sl-2022-may-tz2-p2-q09.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare binomial zero-success risks at one common mean",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-reverse-fit-calibration-flag",
+      "topic": 4,
+      "name": "Compare x-on-y predictions before and after a suspect point is excluded",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "SL4.10.x-on-y-line",
+        "SL4.10.choose-line",
+        "SL4.10.predict-x"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz1-p2-q06.c",
+        "aa-sl-2023-may-tz1-p2-q04.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare x-on-y predictions before and after a suspect point is excluded",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-pooled-ogive-placement",
+      "topic": 4,
+      "name": "Find a pooled percentile from two cumulative frequency profiles",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.2"
+      ],
+      "skills": [
+        "SL4.2.cumfreq-quartiles",
+        "SL4.2.cumfreq-count",
+        "SL4.2.compare-distributions"
+      ],
+      "parts": [
+        "aa-sl-2023-nov-tz2-p1-q07.b",
+        "aa-sl-2021-may-tz2-p1-q07.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Find a pooled percentile from two cumulative frequency profiles",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-statistics-equal-cohort-quota-policy",
+      "topic": 4,
+      "name": "Design normal-score cutoffs for equal expected recruitment then audit a common-cutoff policy",
+      "kind": "link",
+      "source": "extension",
+      "syllabus": [
+        "4.12",
+        "4.9",
+        "4.11"
+      ],
+      "skills": [
+        "SL4.12.standardise",
+        "SL4.12.compare-z",
+        "SL4.12.z-score",
+        "SL4.9.inverse-normal",
+        "SL4.9.normal-probability",
+        "SL4.11.reverse-conditional"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz1-p2-q04.b",
+        "aa-sl-2025-may-tz2-p2-q08.b",
+        "aa-sl-2022-may-tz1-p2-q09.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Design normal-score cutoffs for equal expected recruitment then audit a common-cutoff policy",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

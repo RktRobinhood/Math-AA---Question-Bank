@@ -1,0 +1,357 @@
+{
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t1-ext-rung-signed-change",
+      "name": "Find a signed change",
+      "topic": 1,
+      "source": "extension",
+      "kind": "prior-learning",
+      "syllabus": [
+        "1.2"
+      ],
+      "skills": [],
+      "supports": [
+        "SL1.2.find-u1-d",
+        "SL1.2.nth-term"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "find-change",
+          "asked": "Find a signed change",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t1-ext-rung-two-running-totals",
+      "name": "When daily and cumulative outputs overtake",
+      "topic": 1,
+      "source": "extension",
+      "kind": "link",
+      "syllabus": [
+        "1.2",
+        "1.3"
+      ],
+      "skills": [
+        "SL1.2.nth-term",
+        "SL1.2.sum",
+        "SL1.3.nth-term",
+        "SL1.3.sum"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "compare-term-and-total-crossings",
+          "asked": "When daily and cumulative outputs overtake",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-ext-rung-horizontal-change",
+      "name": "Find the horizontal change between points",
+      "topic": 2,
+      "source": "extension",
+      "kind": "prior-learning",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [],
+      "supports": [
+        "SL2.1.gradient",
+        "SL2.3.read-graph"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "find-input-change",
+          "asked": "Find the horizontal change between points",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-ext-rung-tariff-lower-envelope",
+      "name": "Compare two tariffs and maximise affordable use",
+      "topic": 2,
+      "source": "extension",
+      "kind": "link",
+      "syllabus": [
+        "2.1",
+        "2.2",
+        "2.4"
+      ],
+      "skills": [
+        "SL2.1.line-model",
+        "SL2.2.domain",
+        "SL2.4.intersection"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "maximise-affordable-use",
+          "asked": "Compare two tariffs and maximise affordable use",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-ext-rung-right-triangle-length",
+      "name": "Recognise and find the hypotenuse",
+      "topic": 3,
+      "source": "extension",
+      "kind": "prior-learning",
+      "syllabus": [
+        "3.2"
+      ],
+      "skills": [],
+      "supports": [
+        "SL3.2.right-side",
+        "SL3.2.right-angle",
+        "SL3.1.distance-3d"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "find-hypotenuse",
+          "asked": "Recognise and find the hypotenuse",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-ext-rung-drone-lines-of-sight",
+      "name": "A drone: bearing, elevation and sight-line angle",
+      "topic": 3,
+      "source": "extension",
+      "kind": "link",
+      "syllabus": [
+        "3.3",
+        "3.2",
+        "3.1"
+      ],
+      "skills": [
+        "SL3.3.bearings",
+        "SL3.3.elevation-depression",
+        "SL3.1.distance-3d",
+        "SL3.2.cosine-rule-angle"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "connect-bearing-elevation-and-space-angle",
+          "asked": "A drone: bearing, elevation and sight-line angle",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-ext-rung-whole-from-groups",
+      "name": "Express a group as a fraction of the whole",
+      "topic": 4,
+      "source": "extension",
+      "kind": "prior-learning",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [],
+      "supports": [
+        "SL4.5.equally-likely",
+        "SL4.6.conditional-diagram"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "find-fraction-of-whole",
+          "asked": "Express a group as a fraction of the whole",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-ext-rung-hidden-machine",
+      "name": "Update the hidden source and predict a batch",
+      "topic": 4,
+      "source": "extension",
+      "kind": "link",
+      "syllabus": [
+        "4.6",
+        "4.8"
+      ],
+      "skills": [
+        "SL4.6.conditional-diagram",
+        "SL4.6.tree",
+        "SL4.8.cumulative-probability",
+        "SL4.8.binomial-in-context"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "update-and-predict-a-batch",
+          "asked": "Update the hidden source and predict a batch",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-rung-line-rise-over-run",
+      "name": "Find a line gradient from two coordinates",
+      "topic": 5,
+      "source": "extension",
+      "kind": "prior-learning",
+      "syllabus": [
+        "5.1"
+      ],
+      "skills": [],
+      "supports": [
+        "SL5.1.gradient-from-graph",
+        "SL5.4.read-from-tangent"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "find-gradient",
+          "asked": "Find a line gradient from two coordinates",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-rung-signed-transfer",
+      "name": "A tank: turning point, original level and total transfer",
+      "topic": 5,
+      "source": "extension",
+      "kind": "link",
+      "syllabus": [
+        "5.5",
+        "5.2"
+      ],
+      "skills": [
+        "SL5.5.boundary-condition",
+        "SL5.5.area-positive",
+        "SL5.5.total-change-from-rate",
+        "SL5.2.sign-at-point"
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ],
+      "unknowns": [
+        {
+          "id": "connect-rate-volume-and-throughput",
+          "asked": "A tank: turning point, original level and total transfer",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

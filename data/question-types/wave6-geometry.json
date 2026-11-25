@@ -1,0 +1,430 @@
+{
+  "about": "Wave 6 original native AI HL Geometry and Trigonometry; 2021 criteria. References are precise skill precedents only.",
+  "types": [
+    {
+      "id": "w6-geometry-midpoint-image-readback",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover one matrix entry from the image of a centre",
+      "syllabus": [
+        "3.9"
+      ],
+      "skills": [
+        "AI-AHL3.9.image-under-transformation",
+        "AI-AHL3.9.work-back-from-images"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p1-q14.a",
+        "ai-hl-2022-may-tz2-p1-q15.c",
+        "ai-hl-2021-may-tz2-p1-q14.b",
+        "ai-hl-2022-may-tz1-p2-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-matrix-entry-from-centre",
+          "asked": "Recover one matrix entry from the image of a centre",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Recover one matrix entry from the image of a centre. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-vector-length-rescale",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Read the length after reversing and scaling a vector",
+      "syllabus": [
+        "3.10"
+      ],
+      "skills": [
+        "AI-AHL3.10.magnitude",
+        "AI-AHL3.10.parallel-vectors"
+      ],
+      "parts": [
+        "ai-hl-2022-may-tz1-p1-q06.b",
+        "ai-hl-2023-may-tz1-p1-q07.c",
+        "ai-hl-2022-nov-tz0-p2-q07.b",
+        "ai-hl-2022-nov-tz0-p2-q07.d"
+      ],
+      "unknowns": [
+        {
+          "id": "read-length-from-negative-scaling",
+          "asked": "Read the length after reversing and scaling a vector",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Read the length after reversing and scaling a vector. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-missing-balance-leg",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover the missing displacement from a total and two known legs",
+      "syllabus": [
+        "3.10"
+      ],
+      "skills": [
+        "AI-AHL3.10.displacement-vector",
+        "AI-AHL3.10.magnitude"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p1-q05.a",
+        "ai-hl-2022-may-tz1-p1-q06.a",
+        "ai-hl-2022-may-tz1-p1-q06.b",
+        "ai-hl-2023-may-tz1-p1-q07.c"
+      ],
+      "unknowns": [
+        {
+          "id": "separate-resultant-from-missing-displacement",
+          "asked": "Recover the missing displacement from a total and two known legs",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Recover the missing displacement from a total and two known legs. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-line-one-coordinate-inconsistent",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Check every coordinate before declaring that a point lies on a line",
+      "syllabus": [
+        "3.11"
+      ],
+      "skills": [
+        "AI-AHL3.11.point-on-line",
+        "AI-AHL3.11.parametric-form"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p1-q13.b",
+        "ai-hl-2026-may-tz2-p2-q06.c",
+        "ai-hl-2023-nov-tz0-p2-q06.a"
+      ],
+      "unknowns": [
+        {
+          "id": "test-membership-after-one-coordinate",
+          "asked": "Check every coordinate before declaring that a point lies on a line",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Check every coordinate before declaring that a point lies on a line. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-line-nonzero-parameter-anchor",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover the base point from a known nonzero parameter",
+      "syllabus": [
+        "3.11"
+      ],
+      "skills": [
+        "AI-AHL3.11.line-equation",
+        "AI-AHL3.11.parametric-form"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p1-q13.a",
+        "ai-hl-2022-may-tz2-p1-q15.a",
+        "ai-hl-2023-nov-tz0-p2-q06.a"
+      ],
+      "unknowns": [
+        {
+          "id": "reconstruct-origin-of-parameter",
+          "asked": "Recover the base point from a known nonzero parameter",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Recover the base point from a known nonzero parameter. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-velocity-direction-reversed",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Tell what happens to the speed when velocity is reversed",
+      "syllabus": [
+        "3.12"
+      ],
+      "skills": [
+        "AI-AHL3.12.speed-direction"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p2-q06.b",
+        "ai-hl-2021-may-tz1-p2-q06.d"
+      ],
+      "unknowns": [
+        {
+          "id": "distinguish-reversal-from-speed-change",
+          "asked": "Tell what happens to the speed when velocity is reversed",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Tell what happens to the speed when velocity is reversed. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-velocity-change-remaining-time",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Split elapsed time between two constant velocity vectors",
+      "syllabus": [
+        "3.12"
+      ],
+      "skills": [
+        "AI-AHL3.12.position-at-time",
+        "AI-AHL3.12.interpret-path"
+      ],
+      "parts": [
+        "ai-hl-2021-nov-tz0-p1-q16.a",
+        "ai-hl-2022-may-tz1-p1-q13.a",
+        "ai-hl-2022-may-tz2-p2-q06.b",
+        "ai-hl-2022-may-tz2-p2-q06.c"
+      ],
+      "unknowns": [
+        {
+          "id": "split-travel-at-one-velocity-change",
+          "asked": "Split elapsed time between two constant velocity vectors",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Split elapsed time between two constant velocity vectors. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-velocity-from-odometer-pings",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use two timed positions to recover a constant velocity and earlier position",
+      "syllabus": [
+        "3.12"
+      ],
+      "skills": [
+        "AI-AHL3.12.position-at-time",
+        "AI-AHL3.12.speed-direction"
+      ],
+      "parts": [
+        "ai-hl-2021-nov-tz0-p1-q16.a",
+        "ai-hl-2022-may-tz1-p1-q13.a",
+        "ai-hl-2021-may-tz1-p2-q06.b",
+        "ai-hl-2021-may-tz1-p2-q06.d"
+      ],
+      "unknowns": [
+        {
+          "id": "derive-average-vector-then-recover-earlier-position",
+          "asked": "Use two timed positions to recover a constant velocity and earlier position",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Use two timed positions to recover a constant velocity and earlier position. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-weighted-degree-is-not-weight",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Distinguish the degree of a vertex from the sum of its edge weights",
+      "syllabus": [
+        "3.14"
+      ],
+      "skills": [
+        "AI-AHL3.14.classify-graph",
+        "AI-AHL3.14.vertex-degree"
+      ],
+      "parts": [
+        "ai-hl-2023-may-tz2-p2-q04.a",
+        "ai-hl-2025-nov-tz0-p1-q12.a",
+        "ai-hl-2024-may-tz1-p1-q08.a",
+        "ai-hl-2026-may-tz1-p1-q15.a"
+      ],
+      "unknowns": [
+        {
+          "id": "distinguish-incidence-from-cost",
+          "asked": "Distinguish the degree of a vertex from the sum of its edge weights",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Distinguish the degree of a vertex from the sum of its edge weights. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-audit-one-unlogged-edge",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover a missing edge from two understated endpoint degrees",
+      "syllabus": [
+        "3.14"
+      ],
+      "skills": [
+        "AI-AHL3.14.model-as-graph",
+        "AI-AHL3.14.vertex-degree"
+      ],
+      "parts": [
+        "ai-hl-2023-nov-tz0-p2-q05.a",
+        "ai-hl-2022-may-tz2-p3-q02.c",
+        "ai-hl-2024-may-tz1-p1-q08.a",
+        "ai-hl-2026-may-tz1-p1-q15.a"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-endpoints-from-degree-deficits",
+          "asked": "Recover a missing edge from two understated endpoint degrees",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Recover a missing edge from two understated endpoint degrees. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-reverse-and-relabel-adjacency",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Read a reversed directed network when the matrix order changes",
+      "syllabus": [
+        "3.15"
+      ],
+      "skills": [
+        "AI-AHL3.15.read-adjacency-matrix",
+        "AI-AHL3.15.write-adjacency-matrix"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz2-p1-q08.a",
+        "ai-hl-2025-may-tz3-p2-q04.a",
+        "ai-hl-2021-may-tz1-p1-q16.a",
+        "ai-hl-2022-may-tz2-p1-q06.a"
+      ],
+      "unknowns": [
+        {
+          "id": "read-a-transposed-entry-in-new-order",
+          "asked": "Read a reversed directed network when the matrix order changes",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Read a reversed directed network when the matrix order changes. Parameters bounded by the generator."
+      ]
+    },
+    {
+      "id": "w6-geometry-walk-random-choice-from-parallel-arrows",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use local outdegrees instead of raw walk counts",
+      "syllabus": [
+        "3.15"
+      ],
+      "skills": [
+        "AI-AHL3.15.graph-transition-matrix",
+        "AI-AHL3.15.random-walk-probability"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p1-q13.a",
+        "ai-hl-2024-may-tz1-p2-q08.c"
+      ],
+      "unknowns": [
+        {
+          "id": "normalize-local-outdegree-before-combining-routes",
+          "asked": "Use local outdegrees instead of raw walk counts",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Use local outdegrees instead of raw walk counts. Parameters bounded by the generator."
+      ]
+    }
+  ]
+}

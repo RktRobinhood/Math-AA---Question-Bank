@@ -1,0 +1,112 @@
+{
+  "about": "Original Wave 3 trigonometry families (not reproduced exam questions).",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "w3-trig-ssa-perimeter-cap",
+      "name": "Select a possible triangle using a perimeter limit",
+      "home": "aa-sl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.5.ambiguous-case"
+      ],
+      "syllabus": [
+        "3.5"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Select a possible triangle using a perimeter limit",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-trig-intercept-a-bearing",
+      "name": "Recover a missing sailing distance from a required final bearing",
+      "home": "aa-sl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.3.bearings",
+        "SL3.3.multi-triangle"
+      ],
+      "syllabus": [
+        "3.3"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover a missing sailing distance from a required final bearing",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-trig-same-travel-different-sweep",
+      "name": "Compare two sweep areas when the tips travel equally far",
+      "home": "ai-hl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.7.arc-length",
+        "AI-AHL3.7.sector-area"
+      ],
+      "syllabus": [
+        "3.7"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Compare two sweep areas when the tips travel equally far",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-trig-rising-baseline-crossing",
+      "name": "Find when a falling oscillation meets a rising baseline",
+      "home": "aa-sl",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.7.model-context"
+      ],
+      "syllabus": [
+        "3.7"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find when a falling oscillation meets a rising baseline",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

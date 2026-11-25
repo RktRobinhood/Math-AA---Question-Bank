@@ -264,12 +264,8 @@
     }
     const newSeed = () => `${me.state.salt}-${me.state.nextSeed++}`;
 
-    // A generated question from one of these generators. Rotation: the generators of a pool are
-    // worked through before one repeats, least recently served first (those never served come
-    // first, in an order that depends on the student's salt). The same question type does not
-    // come twice in a row when there is a choice, and that rule may bring a generator back early,
-    // but never for a third time while another of the pool is still waiting for its first: a
-    // generator is passed over while it has been served two times more than the least served.
+    // Serve the least-used ways of asking first. Prefer a different question type
+    // only within the same usage tier; it must not force an earlier repeat.
     // A question already seen is skipped: another seed, then the next generator in line.
     // State: courses[course].rot = {generatorId: [times served, tick of the last time]}, written by
     // served() when next() hands the question out, so a question built and not used does not count.
@@ -282,12 +278,10 @@
       // does not have to catch up with a long history: counts are read at most two below the top.
       const top = Math.max(...pool.map(raw));
       const times = (g) => Math.max(raw(g), top - 2);
-      const least = Math.min(...pool.map(times));
-      let cands = pool.filter((g) => times(g) <= least + 1);
-      const other = cands.filter((g) => g.type !== c.lastType);
-      if (other.length) cands = other;
       const tie = (g) => E.hash(`rot|${me.state.salt}|${g.id}`);
-      cands = cands.slice().sort((x, y) => tick(x) - tick(y) || tie(x) - tie(y) || (x.id < y.id ? -1 : 1));
+      const cands = pool.slice().sort((x, y) =>
+        times(x) - times(y) || Number(x.type === c.lastType) - Number(y.type === c.lastType) ||
+        tick(x) - tick(y) || tie(x) - tie(y) || (x.id < y.id ? -1 : 1));
       let first = null;
       for (const g of cands) {
         for (let t = 0; t < cfg.retrySeeds; t++) {
@@ -422,8 +416,10 @@
       // Everything in scope is at the exam rung and nothing is due.
       const exam = usable.filter(atExam).sort((a, b) => st(a).lastSeen - st(b).lastSeen);
       if (c.sinceSynoptic >= cfg.synopticEvery) {
-        const ready = new Set(Object.keys(c.units).filter((code) => c.units[code].rung === "exam"));
-        const pool = E.generators({ course, level: 5 }).filter((g) => g.syllabus.every((code) => ready.has(code)) && g.syllabus.some((code) => exam.includes(code)));
+        // A remembered exam rung outside the student's current taught scope
+        // does not authorize a mixed task, nor does a narrowed type selection.
+        const ready = new Set(exam.filter((code) => !narrow[code]));
+        const pool = E.generators({ course, level: 5 }).filter((g) => g.syllabus.every((code) => ready.has(code)));
         const q = generated(pool, 5);
         if (q) return served(fromQuestion(q.syllabus[0], "synoptic", q));
       }

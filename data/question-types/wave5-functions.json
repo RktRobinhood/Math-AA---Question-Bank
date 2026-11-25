@@ -1,0 +1,332 @@
+{
+  "about": "Original modelling and function practice from Wave 5",
+  "types": [
+    {
+      "id": "w5-fn-sinusoid-return-same-phase",
+      "home": "ai-sl",
+      "name": "Find when a sinusoidal reading repeats in the same direction",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.sinusoidal-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find when a sinusoidal reading repeats in the same direction",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-inverse-square-distance-control",
+      "home": "ai-sl",
+      "name": "Change distance to achieve an intensity multiplier",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.variation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Change distance to achieve an intensity multiplier",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-floor-from-exponential-differences",
+      "home": "ai-sl",
+      "name": "Find the unobserved floor of an exponential model",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.6",
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.6.find-parameters",
+        "AI-SL2.5.exponential-model",
+        "AI-SL2.5.horizontal-asymptote"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find the unobserved floor of an exponential model",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-two-decays-with-reversing-order",
+      "home": "ai-sl",
+      "name": "Locate when a smaller initial reading becomes larger",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.exponential-model",
+        "AI-SL2.5.horizontal-asymptote"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Locate when a smaller initial reading becomes larger",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-cubic-limited-run-window",
+      "home": "ai-sl",
+      "name": "Compare the lengths of two distinct time windows above a threshold",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.cubic-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare the lengths of two distinct time windows above a threshold",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-in-range-unphysical-model",
+      "home": "ai-sl",
+      "name": "Reject a physically impossible prediction within the observed range",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.test-model",
+        "AI-SL2.6.limitations"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reject a physically impossible prediction within the observed range",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-bias-shift-held-out-check",
+      "home": "ai-sl",
+      "name": "Correct a signed model bias and test it on a separate observation",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.test-model",
+        "AI-SL2.6.find-parameters"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Correct a signed model bias and test it on a separate observation",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-difference-from-two-segment-tables",
+      "home": "aa-sl",
+      "name": "Recover two zeros by interpolating a difference graph",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.3"
+      ],
+      "skills": [
+        "SL2.3.sum-difference"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover two zeros by interpolating a difference graph",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-flat-maximum-threshold-window",
+      "home": "aa-sl",
+      "name": "Distinguish a flat maximum from a wider qualifying interval",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.4"
+      ],
+      "skills": [
+        "SL2.4.max-min",
+        "SL2.4.interval-from-graph"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Distinguish a flat maximum from a wider qualifying interval",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-composite-domain-reject-branch",
+      "home": "ai-hl",
+      "name": "Undo a two-stage calibration and reject its impossible branch",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "AI-AHL2.7.composite-equation",
+        "AI-AHL2.7.inverse-domain-range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Undo a two-stage calibration and reject its impossible branch",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-log-axis-next-grid-label",
+      "home": "ai-hl",
+      "name": "Continue consecutive major labels on a logarithmic scale",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "AI-AHL2.10.log-scale"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Continue consecutive major labels on a logarithmic scale",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-fn-decrease-to-multiplier",
+      "home": "ai-sl",
+      "name": "Convert a fixed percentage decrease to its repeated multiplier",
+      "topic": 2,
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.exponential-model"
+      ],
+      "supports": [
+        "AI-SL2.5.exponential-model"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Convert a fixed percentage decrease to its repeated multiplier",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "about": "Wave 5: original Topic 3 geometry, vectors and graph-theory practice",
+  "types": [
+    {
+      "id": "w5-geometry-bisector-gradient-sign",
+      "home": "ai-sl",
+      "name": "Find the gradient of a sloping perpendicular bisector",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.5"
+      ],
+      "skills": [
+        "AI-SL3.5.bisector-gradient"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find the gradient of a sloping perpendicular bisector",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-two-depot-coverage",
+      "home": "ai-sl",
+      "name": "Place a standby point to minimise the longer of two distances",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.5"
+      ],
+      "skills": [
+        "AI-SL3.5.bisector-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Place a standby point to minimise the longer of two distances",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-named-angle-ratio",
+      "home": "ai-sl",
+      "name": "Read a trigonometric ratio for a named corner",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.2"
+      ],
+      "skills": [
+        "SL3.2.right-ratio"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Read a trigonometric ratio for a named corner",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-shared-altitude-area-split",
+      "home": "ai-sl",
+      "name": "Locate a divider using two triangle areas on the same baseline",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.2"
+      ],
+      "skills": [
+        "SL3.2.area-sine"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Locate a divider using two triangle areas on the same baseline",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-reverse-compass-reading",
+      "home": "ai-sl",
+      "name": "Reverse a bearing and report it with three digits",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.3"
+      ],
+      "skills": [
+        "SL3.3.bearings"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Reverse a bearing and report it with three digits",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-signal-rays-component-cancel",
+      "home": "ai-sl",
+      "name": "Use opposite east–west movements to locate a landing point",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.3",
+        "3.2"
+      ],
+      "skills": [
+        "SL3.3.bearings",
+        "SL3.2.right-side"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use opposite east–west movements to locate a landing point",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-repeated-shear-register",
+      "home": "ai-hl",
+      "name": "Recover the count of equal shears and determine which points never move",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.9"
+      ],
+      "skills": [
+        "AI-AHL3.9.iterate-transformation",
+        "AI-AHL3.9.fixed-point"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover the count of equal shears and determine which points never move",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-composition-order-audit",
+      "home": "ai-hl",
+      "name": "Recover the order of a stretch and quarter-turn from an image",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.9"
+      ],
+      "skills": [
+        "AI-AHL3.9.compose-transformations",
+        "AI-AHL3.9.work-back-from-images"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover the order of a stretch and quarter-turn from an image",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-opposite-parameter-range",
+      "home": "ai-hl",
+      "name": "Reconcile two vector-line parameters describing one physical segment",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.11"
+      ],
+      "skills": [
+        "AI-AHL3.11.line-equation",
+        "AI-AHL3.11.point-on-line"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Reconcile two vector-line parameters describing one physical segment",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-signed-vector-dot-calibration",
+      "home": "ai-hl",
+      "name": "Infer one vector component from a scalar product, then classify the angle",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.13"
+      ],
+      "skills": [
+        "AI-AHL3.13.scalar-product",
+        "AI-AHL3.13.angle-between-vectors"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Infer one vector component from a scalar product, then classify the angle",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-walk-counter-missing-arrow",
+      "home": "ai-hl",
+      "name": "Use an observed two-step walk count to repair one unknown arrow",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.15"
+      ],
+      "skills": [
+        "AI-AHL3.15.count-walks",
+        "AI-AHL3.15.read-adjacency-matrix",
+        "AI-AHL3.15.walks-up-to-k"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use an observed two-step walk count to repair one unknown arrow",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-geometry-postman-budget-road-limit",
+      "home": "ai-hl",
+      "name": "Find the greatest unknown road length allowed by a closed inspection budget",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.16"
+      ],
+      "skills": [
+        "AI-AHL3.16.chinese-postman"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find the greatest unknown road length allowed by a closed inspection budget",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

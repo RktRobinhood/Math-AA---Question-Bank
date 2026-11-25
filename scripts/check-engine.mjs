@@ -494,20 +494,20 @@ if (!ONLY) {
     }
   });
 
-  test("a generator is offered exactly where the syllabus holds all its statements", () => {
+  test("a generator is offered where the syllabus fits and the course is not excluded", () => {
     for (const c of COURSES) {
       const ids = new Set(QB.statements[c].map((s) => s.id));
       const offered = new Set(E.generators({ course: c }).map((d) => d.id));
       for (const g of E.registry) {
         const d = E.generators({ type: g.type }).find((x) => x.id === g.id);
         assert(d.statements && d.statements.length === g.syllabus.length, `${g.id}: statement ids not resolved`);
-        const fits = d.statements.every((id) => ids.has(id));
+        const fits = d.statements.every((id) => ids.has(id)) && !(g.notFor || []).includes(c);
         assert(fits === offered.has(g.id), `${g.id} ${fits ? "should" : "should not"} be offered in ${c}`);
         assert(d.courses.includes(c) === fits && d.courses[0] === g.home && d.home === g.home, `${g.id}: courses list is wrong for ${c}`);
         if (!fits) { let threw = false; try { E.make({ course: c, generator: g.id, seed: 1 }); } catch (_) { threw = true; } assert(threw, `make() built ${g.id} for ${c}`); }
       }
     }
-    assert(E.registry.filter((g) => g.home === "aa-sl").every((g) => E.generators({ course: "aa-hl", type: g.type }).some((d) => d.id === g.id)), "AA HL should be offered every AA SL generator");
+    assert(E.registry.filter((g) => g.home === "aa-sl" && !(g.notFor || []).includes("aa-hl")).every((g) => E.generators({ course: "aa-hl", type: g.type }).some((d) => d.id === g.id)), "AA HL should be offered every non-excluded AA SL generator");
     assert(E.generators({ course: "ai-sl" }).length < E.registry.length && E.generators({ course: "ai-sl" }).length > 50, "AI SL should be offered some generators, not all");
   });
 
@@ -972,7 +972,7 @@ if (!ONLY) {
     assert(practice.catalogue.types.length === JSON.parse(fs.readFileSync(path.join(ROOT, "data/question-types.json"), "utf8")).types.length + n, "the shipped fragments are not all in the catalogue");
   });
 
-  test("rotation: every way of asking a subtopic at a level is served before one comes a third time", () => {
+  test("rotation: distinct ways of asking come before repeats in a fresh subtopic level", () => {
     // subtopics with at least five generators at one level
     const cases = [];
     for (const code of withGens) for (const l of [1, 2, 3, 4]) {
@@ -995,7 +995,7 @@ if (!ONLY) {
         assert(!seeds.has(it.question.seed), `${code} L${l} ${mode}: a seed was used twice`);
         seeds.add(it.question.seed);
         n[id]++; order.push(id);
-        if (n[id] >= 3) assert(pool.every((g) => n[g] >= 1), `${code} L${l} ${mode}: ${id} came a third time at draw ${i + 1} while ${pool.filter((g) => !n[g]).join(", ")} had not been asked`);
+        if (n[id] >= 2) assert(pool.every((g) => n[g] >= 1), `${code} L${l} ${mode}: ${id} repeated at draw ${i + 1} while ${pool.filter((g) => !n[g]).join(", ")} had not been asked`);
         if (i + 1 >= 2 * pool.length) assert(pool.every((g) => n[g] >= 1), `${code} L${l} ${mode}: after ${i + 1} draws ${pool.filter((g) => !n[g]).join(", ")} had not been asked`);
         lr.record(it, answer(it, true));
         clock.t += 1000;

@@ -1,0 +1,155 @@
+{
+  "home": "aa-sl",
+  "about": "Wave 6 original statistics and probability generators; source parts are verified skill precedents, not reproduced questions.",
+  "types": [
+    {
+      "id": "w6-statistics-recover-prediction-from-mean-point",
+      "topic": 4,
+      "name": "Recover a missing coefficient before predicting with the regression of x on y",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "SL4.10.mean-point-intersection",
+        "SL4.10.predict-x"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p1-q03.b",
+        "aa-sl-2024-may-tz1-p2-q06.c",
+        "aa-sl-2025-may-tz1-p2-q05.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover a missing coefficient before predicting with the regression of x on y",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-independence-through-complement",
+      "topic": 4,
+      "name": "Use split conditional probabilities to test independence and recover a joint probability",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "SL4.11.test-independence",
+        "SL4.11.multiplication-rule"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p2-q04.c",
+        "aa-sl-2021-may-tz2-p2-q04.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Use split conditional probabilities to test independence and recover a joint probability",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-match-standard-score-across-scales",
+      "topic": 4,
+      "name": "Compare positions from two Normal models despite reversed raw scores",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "SL4.12.standardise"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare positions from two Normal models despite reversed raw scores",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-cap-and-coalesce-distribution",
+      "topic": 4,
+      "name": "Rebuild a capped distribution before calculating its mean",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.7"
+      ],
+      "skills": [
+        "SL4.7.build-distribution",
+        "SL4.7.expected-value"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz1-p1-q09.d",
+        "aa-sl-2021-may-tz1-p1-q09.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Rebuild a capped distribution before calculating its mean",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-binomial-complement-counter",
+      "topic": 4,
+      "name": "Translate failure-count bounds for a calculator tracking successes",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.8"
+      ],
+      "skills": [
+        "SL4.8.identify",
+        "SL4.8.cumulative-probability"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p2-q08.e",
+        "aa-sl-2021-nov-tz0-p2-q04.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Translate failure-count bounds for a calculator tracking successes",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

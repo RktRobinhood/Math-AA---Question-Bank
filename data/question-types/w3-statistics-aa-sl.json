@@ -1,0 +1,188 @@
+{
+  "about": "Wave 3 original Topic 4 questions; official exam IDs are method references only.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "w3-statistics-outlier-equality",
+      "topic": 4,
+      "name": "Separate extreme values from the strict outlier fence",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.outlier-decision"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p1-q03.a",
+        "aa-sl-2026-may-tz3-p1-q01.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Separate extreme values from the strict outlier fence",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-box-summary-tradeoff",
+      "topic": 4,
+      "name": "Compare two box summaries when IQR and total range disagree",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.2"
+      ],
+      "skills": [
+        "SL4.2.box-plot",
+        "SL4.2.compare-distributions"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz2-p2-q05.d",
+        "aa-sl-2023-nov-tz1-p1-q07.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare two box summaries when IQR and total range disagree",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-pooled-spread-as-offsets",
+      "topic": 4,
+      "name": "Recover pooled spread from two internally summarised batches",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.3"
+      ],
+      "skills": [
+        "SL4.3.mean-totals",
+        "SL4.3.sd-variance",
+        "SL4.3.compare-average-spread"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p2-q02.b",
+        "aa-sl-2023-nov-tz1-p1-q07.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover pooled spread from two internally summarised batches",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-regression-crossover-window",
+      "topic": 4,
+      "name": "Recover a fitted line and check where two predictions can be compared",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.4"
+      ],
+      "skills": [
+        "SL4.4.mean-point",
+        "SL4.4.predict",
+        "SL4.4.interpret-ab"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz2-p2-q03.a",
+        "aa-sl-2021-may-tz1-p2-q02.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover a fitted line and check where two predictions can be compared",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-blend-payout-threshold",
+      "topic": 4,
+      "name": "Match an expected payout, then assess the resulting chance of a large prize",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.7"
+      ],
+      "skills": [
+        "SL4.7.expected-value",
+        "SL4.7.table-probabilities",
+        "SL4.7.unknowns-from-mean"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz1-p1-q09.b",
+        "aa-sl-2021-may-tz1-p1-q09.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Match an expected payout, then assess the resulting chance of a large prize",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-normal-union-reflection",
+      "topic": 4,
+      "name": "Reflect a shifted interval without counting the overlap twice",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.9"
+      ],
+      "skills": [
+        "SL4.9.symmetry-probability",
+        "SL4.9.central-interval"
+      ],
+      "parts": [
+        "aa-sl-2023-may-tz2-p2-q04.b",
+        "aa-sl-2023-nov-tz2-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Reflect a shifted interval without counting the overlap twice",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

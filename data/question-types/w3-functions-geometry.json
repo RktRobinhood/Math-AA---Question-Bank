@@ -1,0 +1,329 @@
+{
+  "about": "Original bounded Wave 3 Functions and Geometry practice",
+  "types": [
+    {
+      "id": "w3-functions-geometry-radical-branch",
+      "home": "aa-sl",
+      "name": "Reject an extraneous root after squaring",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL2.10.solve-analytic",
+        "SL2.10.number-of-solutions"
+      ],
+      "syllabus": [
+        "2.10"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Reject an extraneous root after squaring",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-cascade-range",
+      "home": "aa-sl",
+      "name": "Check whether cascaded instruments can reach a requested output",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL2.5.composite-value",
+        "SL2.5.inverse-domain-range"
+      ],
+      "syllabus": [
+        "2.5"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Check whether cascaded instruments can reach a requested output",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-paired-reflection",
+      "home": "ai-sl",
+      "name": "Audit reflected points and bound an inverse",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL2.2.inverse-undo",
+        "SL2.2.range"
+      ],
+      "syllabus": [
+        "2.2"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Audit reflected points and bound an inverse",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-holdout-tolerance",
+      "home": "ai-sl",
+      "name": "Audit a model against an error tolerance, not its fit points",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL2.6.test-model",
+        "AI-SL2.6.limitations"
+      ],
+      "syllabus": [
+        "2.6"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Audit a model against an error tolerance, not its fit points",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-extension-pole",
+      "home": "aa-sl",
+      "name": "Locate a relocated midpoint and compare cable lengths",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.1.midpoint-3d",
+        "SL3.1.distance-3d"
+      ],
+      "syllabus": [
+        "3.1"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Locate a relocated midpoint and compare cable lengths",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-bisector-translation",
+      "home": "ai-sl",
+      "name": "Update a boundary after both sites move together",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL3.5.bisector-equation",
+        "AI-SL3.5.bisector-gradient"
+      ],
+      "syllabus": [
+        "3.5"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Update a boundary after both sites move together",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-voronoi-added-edge",
+      "home": "ai-sl",
+      "name": "Track area transferred to a new Voronoi site",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL3.6.draw-or-update",
+        "AI-SL3.6.cell-measure"
+      ],
+      "syllabus": [
+        "3.6"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Track area transferred to a new Voronoi site",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-orientation-ordered-maps",
+      "home": "ai-hl",
+      "name": "Use one landmark image to identify transformation order",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.9.compose-transformations",
+        "AI-AHL3.9.image-under-transformation",
+        "AI-AHL3.9.area-scale-factor"
+      ],
+      "syllabus": [
+        "3.9"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use one landmark image to identify transformation order",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-release-delay",
+      "home": "ai-hl",
+      "name": "Find the release delay that makes two vehicles meet",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.12.meet-or-collide",
+        "AI-AHL3.12.time-shift"
+      ],
+      "syllabus": [
+        "3.12"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find the release delay that makes two vehicles meet",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-missing-intercept-plane",
+      "home": "aa-hl",
+      "name": "Infer a missing axis intercept from a point on a plane",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.17.plane-equation",
+        "AHL3.17.point-in-plane"
+      ],
+      "syllabus": [
+        "3.17"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Infer a missing axis intercept from a point on a plane",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-symmetry-unknown-phase",
+      "home": "aa-hl",
+      "name": "Recover the original phase quadrant from two shifted readings",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.11.symmetry-relations",
+        "AHL3.11.related-values"
+      ],
+      "syllabus": [
+        "3.11"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover the original phase quadrant from two shifted readings",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-functions-geometry-window-log-inequality",
+      "home": "aa-hl",
+      "name": "Find where a logarithm beats a line inside a domain window",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL2.15.graphical-inequality"
+      ],
+      "syllabus": [
+        "2.15"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find where a logarithm beats a line inside a domain window",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

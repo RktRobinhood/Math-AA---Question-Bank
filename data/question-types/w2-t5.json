@@ -1,0 +1,330 @@
+{
+  "about": "Original parameterized calculus forms, wave 2.",
+  "types": [
+    {
+      "id": "w2-t5-stationary-curvature-from-coeff",
+      "home": "ai-hl",
+      "name": "Read concavity at a stationary point from a local polynomial",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "AI-AHL5.10.find-second-derivative",
+        "AI-AHL5.10.concavity"
+      ],
+      "unknowns": [
+        {
+          "id": "curvature",
+          "asked": "Read concavity at a stationary point from a local polynomial",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-reverse-chain-frequency",
+      "home": "ai-hl",
+      "name": "Find the signed coefficient of a cosine antiderivative",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.11"
+      ],
+      "skills": [
+        "AI-AHL5.11.standard-integrals",
+        "AI-AHL5.11.linear-composites"
+      ],
+      "unknowns": [
+        {
+          "id": "signed-coefficient",
+          "asked": "Find the signed coefficient of a cosine antiderivative",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-net-inflow-two-decays",
+      "home": "ai-hl",
+      "name": "Compare two accumulated transfers with different exponential rates",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.11"
+      ],
+      "skills": [
+        "AI-AHL5.11.standard-integrals",
+        "AI-AHL5.11.linear-composites"
+      ],
+      "unknowns": [
+        {
+          "id": "change",
+          "asked": "Compare two accumulated transfers with different exponential rates",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-washer-slice-axis-reading",
+      "home": "ai-hl",
+      "name": "Identify the inner radius of a slice about the y-axis",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.12"
+      ],
+      "skills": [
+        "AI-AHL5.12.volume-y-axis"
+      ],
+      "unknowns": [
+        {
+          "id": "slice-area",
+          "asked": "Identify the inner radius of a slice about the y-axis",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-area-vertically-translated-density",
+      "home": "ai-sl",
+      "name": "Recover a vertical shift from a known area",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.area-positive",
+        "SL5.5.antidiff-power"
+      ],
+      "unknowns": [
+        {
+          "id": "level-shift",
+          "asked": "Recover a vertical shift from a known area",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-trapezoid-unknown-sample-time",
+      "home": "ai-sl",
+      "name": "Recover a sampling time from two unequal trapezoids",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.8"
+      ],
+      "skills": [
+        "AI-SL5.8.interval-width",
+        "AI-SL5.8.from-table"
+      ],
+      "unknowns": [
+        {
+          "id": "sample-time",
+          "asked": "Recover a sampling time from two unequal trapezoids",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-coupled-euler-substep",
+      "home": "ai-hl",
+      "name": "Compare one Euler step with two half-steps for a coupled system",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.16"
+      ],
+      "skills": [
+        "AI-AHL5.16.coupled-system",
+        "AI-AHL5.16.compare-values"
+      ],
+      "unknowns": [
+        {
+          "id": "refinement",
+          "asked": "Compare one Euler step with two half-steps for a coupled system",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-reciprocal-sum-area-threshold",
+      "home": "aa-hl",
+      "name": "Use the logarithmic antiderivative to solve an area threshold",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.15"
+      ],
+      "skills": [
+        "AHL5.15.standard-integrals",
+        "AHL5.15.linear-composites"
+      ],
+      "unknowns": [
+        {
+          "id": "upper-bound",
+          "asked": "Use the logarithmic antiderivative to solve an area threshold",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-isolated-zero-in-increasing-interval",
+      "home": "aa-sl",
+      "name": "Decide which stationary input does not interrupt increase",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.2"
+      ],
+      "skills": [
+        "SL5.2.increasing-decreasing-intervals"
+      ],
+      "unknowns": [
+        {
+          "id": "monotonic-set",
+          "asked": "Decide which stationary input does not interrupt increase",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-revolution-truncated-apex-scale",
+      "home": "aa-hl",
+      "name": "Find the portion of a solid produced before a given height",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.17"
+      ],
+      "skills": [
+        "AHL5.17.volume-x-axis"
+      ],
+      "unknowns": [
+        {
+          "id": "volume-ratio",
+          "asked": "Find the portion of a solid produced before a given height",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w2-t5-integrating-power-prerequisite",
+      "home": "aa-sl",
+      "name": "Recall the exponent relationship behind antidifferentiation",
+      "topic": 5,
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.antidiff-power"
+      ],
+      "unknowns": [
+        {
+          "id": "exponent",
+          "asked": "Recall the exponent relationship behind antidifferentiation",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "supports": [
+        "SL5.5.antidiff-power"
+      ]
+    },
+    {
+      "id": "w2-t5-revolve-positive-intersection-synoptic",
+      "home": "aa-hl",
+      "name": "Connect an intersection, a region's area and its volume of revolution",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.17",
+        "5.11"
+      ],
+      "skills": [
+        "AHL5.17.volume-x-axis",
+        "AHL5.17.volume-between-curves",
+        "SL5.11.area-between-curves"
+      ],
+      "unknowns": [
+        {
+          "id": "meeting-and-volume",
+          "asked": "Connect an intersection, a region's area and its volume of revolution",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

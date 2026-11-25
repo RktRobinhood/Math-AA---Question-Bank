@@ -1,0 +1,360 @@
+{
+  "about": "Wave 5. Original native Calculus families on 2021 criteria. Linked parts are precise skill-tag precedents only.",
+  "types": [
+    {
+      "id": "w5-calculus-area-share-by-strip",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Find the share of a positive area in a marked strip",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.definite-integral-gdc",
+        "SL5.5.area-positive"
+      ],
+      "parts": [
+        "ai-sl-2022-may-tz1-p1-q06.b",
+        "ai-sl-2022-may-tz2-p1-q06.b",
+        "ai-sl-2021-may-tz1-p2-q05.c",
+        "ai-sl-2021-nov-tz0-p1-q13.b"
+      ],
+      "unknowns": [
+        {
+          "id": "proportion-from-unintegrated-strip",
+          "asked": "Find the share of a positive area in a marked strip",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Integrate a positive strip and compare it to the whole area; limit nesting is explicit."
+      ]
+    },
+    {
+      "id": "w5-calculus-two-nozzle-meter",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Separate one nozzle’s contribution to a combined meter reading",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.total-change-from-rate",
+        "SL5.5.definite-integral-gdc"
+      ],
+      "parts": [
+        "ai-sl-2025-may-tz3-p1-q09.b",
+        "ai-sl-2022-may-tz1-p1-q06.b",
+        "ai-sl-2022-may-tz2-p1-q06.b"
+      ],
+      "unknowns": [
+        {
+          "id": "reconstruct-independent-accumulation",
+          "asked": "Separate one nozzle’s contribution to a combined meter reading",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Recover each nozzle’s contribution using the change between two cumulative readings, not the meter’s final value. Both rates can be positive."
+      ]
+    },
+    {
+      "id": "w5-calculus-quadratic-area-budget",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Split an area using a proportion, then find the height at the cut",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.area-expression",
+        "SL5.5.area-positive"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p2-q05.c",
+        "ai-sl-2021-nov-tz0-p1-q13.b"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-partition-then-height",
+          "asked": "Split an area using a proportion, then find the height at the cut",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "A positive area fraction determines a unique interior cut; substitute its exact position to find height."
+      ]
+    },
+    {
+      "id": "w5-calculus-folded-shift-panel",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Find the area under two panels with a reversed height profile",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.area-expression",
+        "SL5.5.area-positive"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p2-q05.c",
+        "ai-sl-2021-nov-tz0-p1-q13.b"
+      ],
+      "unknowns": [
+        {
+          "id": "compose-mirrored-area-with-offset",
+          "asked": "Find the area under two panels with a reversed height profile",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Compose two sections of positive area, one with a reversed and horizontally stretched height profile and a separate constant offset."
+      ]
+    },
+    {
+      "id": "w5-calculus-admissible-cost-table",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Choose the minimum-cost setting among admissible candidates",
+      "syllabus": [
+        "5.7"
+      ],
+      "skills": [
+        "AI-SL5.7.optimal-input"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.c",
+        "ai-sl-2021-may-tz2-p2-q05.e"
+      ],
+      "unknowns": [
+        {
+          "id": "choose-feasible-tabulated-minimizer",
+          "asked": "Choose the minimum-cost setting among admissible candidates",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Filter discrete candidates for feasibility before comparing cost; the cheapest unrestricted entry is invalid."
+      ]
+    },
+    {
+      "id": "w5-calculus-rising-cap-boundary",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use monotonicity to locate a constrained minimum without solving a derivative equation",
+      "syllabus": [
+        "5.7"
+      ],
+      "skills": [
+        "AI-SL5.7.optimal-input"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.c",
+        "ai-sl-2021-may-tz2-p2-q05.e"
+      ],
+      "unknowns": [
+        {
+          "id": "minimize-monotone-model-on-subinterval",
+          "asked": "Use monotonicity to locate a constrained minimum without solving a derivative equation",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Locate the feasible endpoint for an explicitly monotone model; increasing and decreasing versions are bounded."
+      ]
+    },
+    {
+      "id": "w5-calculus-average-cost-reciprocal",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Minimise an average cost rather than total cost",
+      "syllabus": [
+        "5.7"
+      ],
+      "skills": [
+        "AI-SL5.7.form-objective",
+        "AI-SL5.7.optimal-input",
+        "AI-SL5.7.optimum-value"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.a",
+        "ai-sl-2021-may-tz2-p2-q05.b",
+        "ai-sl-2021-may-tz1-p1-q12.c",
+        "ai-sl-2021-may-tz2-p2-q05.e",
+        "ai-sl-2021-may-tz2-p2-q05.f",
+        "ai-sl-2022-may-tz2-p2-q05.b"
+      ],
+      "unknowns": [
+        {
+          "id": "differentiate-average-not-total-cost",
+          "asked": "Minimise an average cost rather than total cost",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Form average rather than total cost, find its stationary point and justify the global minimum inside a closed run interval."
+      ]
+    },
+    {
+      "id": "w5-calculus-disjoint-operating-bands",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Compare the best points in two permitted operating bands",
+      "syllabus": [
+        "5.7"
+      ],
+      "skills": [
+        "AI-SL5.7.optimal-input",
+        "AI-SL5.7.optimum-value",
+        "AI-SL5.7.test-optimality"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.c",
+        "ai-sl-2021-may-tz2-p2-q05.e",
+        "ai-sl-2021-may-tz2-p2-q05.f",
+        "ai-sl-2022-may-tz2-p2-q05.b",
+        "ai-sl-2023-nov-tz1-p2-q05.f",
+        "ai-sl-2023-nov-tz2-p2-q05.f"
+      ],
+      "unknowns": [
+        {
+          "id": "compare-stationary-with-feasible-band-ends",
+          "asked": "Compare the best points in two permitted operating bands",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "The unrestricted vertex is infeasible; compare the best permitted point of each disjoint interval. No ties."
+      ]
+    },
+    {
+      "id": "w5-calculus-reverse-chain-calibrated-dose",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover a calibrated accumulation model and invert it",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "SL5.10.inspection-substitution",
+        "SL5.10.find-function-from-derivative"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p1-q09.b",
+        "aa-sl-2023-nov-tz1-p1-q09.b",
+        "aa-sl-2024-nov-tz1-p2-q03.b",
+        "aa-sl-2024-nov-tz2-p2-q03.b"
+      ],
+      "unknowns": [
+        {
+          "id": "fit-a-nonlinear-boundary-then-invert",
+          "asked": "Recover a calibrated accumulation model and invert it",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Reverse the chain rule with a nonlinear inner function, fit a nonzero calibration time, and invert a positive rate model."
+      ]
+    },
+    {
+      "id": "w5-calculus-calibrated-relative-decline",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use relative rather than absolute gradient to calibrate a model",
+      "syllabus": [
+        "5.6"
+      ],
+      "skills": [
+        "SL5.6.product-rule",
+        "SL5.6.chain-rule"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz2-p2-q06.b",
+        "aa-sl-2026-may-tz2-p2-q09.b",
+        "aa-sl-2021-may-tz1-p2-q09.b",
+        "aa-sl-2022-may-tz1-p2-q05.b"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-decay-from-relative-gradient",
+          "asked": "Use relative rather than absolute gradient to calibrate a model",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Use the product and chain rules, calibrate the decay constant from a relative gradient, then predict a percentage decrease."
+      ]
+    }
+  ]
+}

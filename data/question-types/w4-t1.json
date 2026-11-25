@@ -1,0 +1,297 @@
+{
+  "about": "Original bounded Wave 4 Numbers and Algebra practice",
+  "types": [
+    {
+      "id": "w4-t1-place-value-repair",
+      "home": "aa-sl",
+      "name": "Repair a decimal move while keeping the same value",
+      "topic": 1,
+      "kind": "prior-learning",
+      "source": "extension",
+      "skills": [],
+      "syllabus": [
+        "1.1"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Repair a decimal move while keeping the same value",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "supports": [
+        "SL1.1.convert",
+        "SL1.1.multiply-divide",
+        "SL1.1.add-subtract"
+      ],
+      "level": [
+        0,
+        0
+      ],
+      "formats": [
+        "value"
+      ]
+    },
+    {
+      "id": "w4-t1-load-minimum",
+      "home": "aa-sl",
+      "name": "Combine unequal scientific scales and round a load count up",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.1.context",
+        "SL1.1.add-subtract",
+        "SL1.1.multiply-divide"
+      ],
+      "syllabus": [
+        "1.1"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Combine unequal scientific scales and round a load count up",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-remaining-value-rate",
+      "home": "aa-sl",
+      "name": "Read loss rather than retained value from a depreciation table",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.4.depreciation"
+      ],
+      "syllabus": [
+        "1.4"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Read loss rather than retained value from a depreciation table",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-divisibility-condition",
+      "home": "aa-sl",
+      "name": "Deduce parity from a divisibility condition",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.6.conditional-proof",
+        "SL1.6.integer-proof"
+      ],
+      "syllabus": [
+        "1.6"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Deduce parity from a divisibility condition",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-pascal-mirror-position",
+      "home": "aa-sl",
+      "name": "Locate the other coefficient at the mirror position",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.9.ncr-pascal",
+        "SL1.9.specific-term"
+      ],
+      "syllabus": [
+        "1.9"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Locate the other coefficient at the mirror position",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-repair-geometric-record",
+      "home": "aa-sl",
+      "name": "Repair a suspect reading using two confirmed readings",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.3.find-r-u1",
+        "SL1.3.nth-term"
+      ],
+      "syllabus": [
+        "1.3"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Repair a suspect reading using two confirmed readings",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-reroute-infinite-pool",
+      "home": "aa-sl",
+      "name": "Move part of a fixed infinite sum to an up-front allocation",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.8.sum-to-infinity",
+        "SL1.8.find-unknown"
+      ],
+      "syllabus": [
+        "1.8"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Move part of a fixed infinite sum to an up-front allocation",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-log-display-tolerance",
+      "home": "aa-sl",
+      "name": "Reverse a rounded logarithmic instrument reading into bounds",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL1.5.log-context",
+        "SL1.5.evaluate-tech",
+        "SL1.5.exp-log-form"
+      ],
+      "syllabus": [
+        "1.5"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reverse a rounded logarithmic instrument reading into bounds",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-possible-side-count",
+      "home": "ai-sl",
+      "name": "Count the integer side lengths consistent with two rounded readings",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.6.write-bounds",
+        "AI-SL1.6.bounds-of-calculation",
+        "AI-SL1.6.whole-items-in-context"
+      ],
+      "syllabus": [
+        "1.6"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Count the integer side lengths consistent with two rounded readings",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t1-alternating-retention",
+      "home": "aa-sl",
+      "name": "Decide when alternating retention has delivered a fixed fraction",
+      "topic": 1,
+      "kind": "link",
+      "source": "extension",
+      "skills": [
+        "SL1.8.convergence",
+        "SL1.8.sum-to-infinity",
+        "SL1.8.sn-vs-sinf",
+        "SL1.3.find-n",
+        "SL1.3.model"
+      ],
+      "syllabus": [
+        "1.8",
+        "1.3"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Decide when alternating retention has delivered a fixed fraction",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "level": [
+        5,
+        5
+      ],
+      "formats": [
+        "value"
+      ]
+    }
+  ]
+}

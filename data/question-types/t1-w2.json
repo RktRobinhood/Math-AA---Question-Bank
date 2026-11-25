@@ -1,0 +1,407 @@
+{
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t1-w2-ratio-interval-endpoints",
+      "home": "ai-sl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Bound the ratio of two rounded measurements",
+      "source": "extension",
+      "syllabus": [
+        "1.6"
+      ],
+      "skills": [
+        "AI-SL1.6.write-bounds",
+        "AI-SL1.6.bounds-of-calculation"
+      ],
+      "parts": [
+        "ai-sl-2026-may-tz3-p2-q04.b"
+      ],
+      "unknowns": [
+        {
+          "id": "ratio-interval-endpoints",
+          "asked": "Bound the ratio of two rounded measurements",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-amortisation-statement-order",
+      "home": "ai-sl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Read the interest, principal reduction and balance from a loan statement",
+      "source": "extension",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "AI-SL1.7.outstanding-balance",
+        "AI-SL1.7.total-interest"
+      ],
+      "parts": [
+        "ai-sl-2025-may-tz1-p2-q02.d"
+      ],
+      "unknowns": [
+        {
+          "id": "amortisation-statement-order",
+          "asked": "Read the interest, principal reduction and balance from a loan statement",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-validate-gdc-solutions-in-context",
+      "home": "ai-sl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Check exact candidate solutions against model restrictions",
+      "source": "extension",
+      "syllabus": [
+        "1.8"
+      ],
+      "skills": [
+        "AI-SL1.8.polynomial-equation",
+        "AI-SL1.8.select-roots"
+      ],
+      "parts": [
+        "ai-sl-2026-may-tz1-p1-q11.c"
+      ],
+      "unknowns": [
+        {
+          "id": "validate-gdc-solutions-in-context",
+          "asked": "Check exact candidate solutions against model restrictions",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-complex-quotient-axis-landing",
+      "home": "ai-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Track a complex quotient to a coordinate axis exactly",
+      "source": "extension",
+      "syllabus": [
+        "1.13"
+      ],
+      "skills": [
+        "AI-AHL1.13.multiply-divide-powers",
+        "AI-AHL1.13.geometric-interpretation",
+        "AI-AHL1.13.polar-to-cartesian"
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz2-p1-q13.c"
+      ],
+      "unknowns": [
+        {
+          "id": "complex-quotient-axis-landing",
+          "asked": "Track a complex quotient to a coordinate axis exactly",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-partial-fractions-cancelled-pole",
+      "home": "aa-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Recognise a zero coefficient and retain the excluded input",
+      "source": "extension",
+      "syllabus": [
+        "1.11"
+      ],
+      "skills": [
+        "AHL1.11.cover-up-or-compare",
+        "AHL1.11.distinct-linear-factors"
+      ],
+      "parts": [
+        "aa-hl-2026-may-tz2-p1-q11.a"
+      ],
+      "unknowns": [
+        {
+          "id": "partial-fractions-cancelled-pole",
+          "asked": "Recognise a zero coefficient and retain the excluded input",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-matrix-eigenline-check",
+      "home": "ai-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Identify which displayed vector stays on its own line",
+      "source": "extension",
+      "syllabus": [
+        "1.15"
+      ],
+      "skills": [
+        "AI-AHL1.15.verify-eigenvector",
+        "AI-AHL1.15.eigenvectors"
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz1-p2-q05.d"
+      ],
+      "unknowns": [
+        {
+          "id": "matrix-eigenline-check",
+          "asked": "Identify which displayed vector stays on its own line",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-third-report-check",
+      "home": "aa-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Check whether a third linear report is compatible",
+      "source": "extension",
+      "syllabus": [
+        "1.16"
+      ],
+      "skills": [
+        "AHL1.16.consistency-condition",
+        "AHL1.16.set-up-system"
+      ],
+      "parts": [
+        "aa-hl-2026-may-tz2-p2-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "third-report-check",
+          "asked": "Check whether a third linear report is compatible",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-verify-broken-inverse",
+      "home": "ai-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Recover an unreadable entry in an inverse matrix",
+      "source": "extension",
+      "syllabus": [
+        "1.14"
+      ],
+      "skills": [
+        "AI-AHL1.14.inverse",
+        "AI-AHL1.14.unknown-entries",
+        "AI-AHL1.14.determinant"
+      ],
+      "parts": [
+        "ai-hl-2022-may-tz2-p1-q15.b"
+      ],
+      "unknowns": [
+        {
+          "id": "verify-broken-inverse",
+          "asked": "Recover an unreadable entry in an inverse matrix",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-parity-condition-repair",
+      "home": "aa-sl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Repair an integer divisibility claim with an explicit condition",
+      "source": "extension",
+      "syllabus": [
+        "1.6"
+      ],
+      "skills": [
+        "SL1.6.integer-proof",
+        "SL1.6.conditional-proof"
+      ],
+      "parts": [
+        "aa-sl-2024-nov-tz2-p1-q04"
+      ],
+      "unknowns": [
+        {
+          "id": "parity-condition-repair",
+          "asked": "Repair an integer divisibility claim with an explicit condition",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-exclude-periodic-subsequence",
+      "home": "aa-sl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Keep every third term of an infinite geometric progression",
+      "source": "extension",
+      "syllabus": [
+        "1.8",
+        "1.3"
+      ],
+      "skills": [
+        "SL1.8.convergence",
+        "SL1.8.sum-to-infinity",
+        "SL1.8.applications",
+        "SL1.8.sn-vs-sinf",
+        "SL1.3.nth-term"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "exclude-periodic-subsequence",
+          "asked": "Keep every third term of an infinite geometric progression",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-recurrence-invariant-induction",
+      "home": "aa-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Find and prove a preserved divisibility relation",
+      "source": "extension",
+      "syllabus": [
+        "1.15",
+        "1.3"
+      ],
+      "skills": [
+        "AHL1.15.induction-divisibility",
+        "AHL1.15.induction-structure",
+        "AHL1.15.conjecture",
+        "SL1.3.find-r-u1"
+      ],
+      "parts": [
+        "aa-hl-2026-may-tz2-p1-q07"
+      ],
+      "unknowns": [
+        {
+          "id": "recurrence-invariant-induction",
+          "asked": "Find and prove a preserved divisibility relation",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t1-w2-linear-factor-prerequisite",
+      "home": "aa-hl",
+      "topic": 1,
+      "kind": "prior-learning",
+      "name": "Find the input that makes a linear denominator zero",
+      "source": "extension",
+      "syllabus": [
+        "1.11"
+      ],
+      "skills": [
+        "AHL1.11.distinct-linear-factors"
+      ],
+      "parts": [
+        "aa-hl-2026-may-tz1-p1-q12.a"
+      ],
+      "unknowns": [
+        {
+          "id": "linear-factor-prerequisite",
+          "asked": "Find the input that makes a linear denominator zero",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "supports": [
+        "AHL1.11.cover-up-or-compare",
+        "AHL1.16.row-reduction"
+      ]
+    },
+    {
+      "id": "t1-w2-log-ratio-compare",
+      "home": "ai-hl",
+      "topic": 1,
+      "kind": "skill",
+      "name": "Convert one logarithmic difference into a simple ratio",
+      "source": "extension",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "AI-AHL1.9.ratio-quotient-law",
+        "AI-AHL1.9.combine"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz1-p1-q10.a"
+      ],
+      "unknowns": [
+        {
+          "id": "log-ratio-compare",
+          "asked": "Convert one logarithmic difference into a simple ratio",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

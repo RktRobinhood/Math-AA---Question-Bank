@@ -1,0 +1,68 @@
+{
+  "about": "Wave 3 original Topic 4 questions; official exam IDs are method references only.",
+  "home": "ai-sl",
+  "types": [
+    {
+      "id": "w3-statistics-spearman-reverse-scale",
+      "topic": 4,
+      "name": "Reverse one rank column without breaking its ties",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.interpret-rs",
+        "AI-SL4.10.compare-with-r"
+      ],
+      "parts": [
+        "ai-sl-2022-may-tz1-p2-q03.d",
+        "ai-sl-2022-may-tz1-p2-q03.f"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Reverse one rank column without breaking its ties",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-goodness-of-fit-critical-contribution",
+      "topic": 4,
+      "name": "Find which categories drive a goodness-of-fit decision",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "AI-SL4.11.expected-frequencies",
+        "AI-SL4.11.goodness-of-fit",
+        "AI-SL4.11.conclusion"
+      ],
+      "parts": [
+        "ai-sl-2026-may-tz2-p2-q02.e",
+        "ai-sl-2021-may-tz2-p1-q11.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Find which categories drive a goodness-of-fit decision",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

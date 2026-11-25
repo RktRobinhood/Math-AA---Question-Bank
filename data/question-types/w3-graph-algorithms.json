@@ -1,0 +1,58 @@
+{
+  "about": "Original graph problems, Wave 3 staging.",
+  "types": [
+    {
+      "id": "w3-graph-repair-after-closure",
+      "home": "ai-hl",
+      "name": "Repair a minimum spanning tree after a link closes",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.16"
+      ],
+      "skills": [
+        "AI-AHL3.16.kruskal"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Repair a minimum spanning tree after a link closes",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-graph-cycle-chord-route",
+      "home": "ai-hl",
+      "name": "Compare Eulerian and Hamiltonian routes before and after removing a chord",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.16"
+      ],
+      "skills": [
+        "AI-AHL3.16.eulerian",
+        "AI-AHL3.16.hamiltonian"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare Eulerian and Hamiltonian routes before and after removing a chord",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "about": "Original structural Wave 2 generators; official exam references are metadata-only skill anchors.",
+  "home": "ai-sl",
+  "types": [
+    {
+      "id": "t4-wave2-spearman-transform-one-score",
+      "topic": 4,
+      "name": "Separate rank invariance from a genuine rank change",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.calculate-rs",
+        "AI-SL4.10.compare-with-r"
+      ],
+      "parts": [
+        "ai-sl-2024-nov-tz1-p2-q03.d",
+        "ai-sl-2022-may-tz1-p2-q03.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Separate rank invariance from a genuine rank change",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-test-observed-direction",
+      "topic": 4,
+      "name": "Choose the correct one-sided p-value from a two-sided output",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "AI-SL4.11.hypotheses",
+        "AI-SL4.11.two-sample-t-test",
+        "AI-SL4.11.conclusion"
+      ],
+      "parts": [
+        "ai-sl-2025-nov-tz3-p2-q02.d",
+        "ai-sl-2024-may-tz2-p2-q04.g"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Choose the correct one-sided p-value from a two-sided output",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

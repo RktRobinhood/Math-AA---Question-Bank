@@ -627,11 +627,12 @@
         else if (opts.scope.every((c) => !find({ course, syllabus: c, primary: true }).length && (realUsed[c] || 0) >= ((opts.real && opts.real[c]) || []).length)) break;
         continue;
       }
-      let cands = pool.filter((x) => x.g.type !== lastType);
-      if (!cands.length) cands = pool;
-      // the generators used least on this sheet first, so the ways of asking are worked through
-      const fewest = Math.min(...cands.map((x) => used.get(x.g.id) || 0));
-      const { g, levels } = r.pick(cands.filter((x) => (used.get(x.g.id) || 0) === fewest));
+      // A new way of asking takes priority over avoiding a consecutive type.
+      // Otherwise a narrower type can be reused while another generator is still unseen.
+      const fewest = Math.min(...pool.map((x) => used.get(x.g.id) || 0));
+      const cands = pool.filter((x) => (used.get(x.g.id) || 0) === fewest);
+      const varied = cands.filter((x) => x.g.type !== lastType);
+      const { g, levels } = r.pick(varied.length ? varied : cands);
       used.set(g.id, (used.get(g.id) || 0) + 1);
       const total = levels.reduce((s, l) => s + (weights[l] || 1), 0);
       let roll = r.next() * total, level = levels[0];

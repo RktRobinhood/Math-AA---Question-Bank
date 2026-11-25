@@ -1,0 +1,358 @@
+{
+  "about": "Bounded original Geometry and Trigonometry practice, Wave 2",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t3-wave2-exact-included-angle",
+      "home": "aa-sl",
+      "name": "Recover a side, an area and an altitude from one exact angle ratio",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.2.cosine-rule-side",
+        "SL3.2.area-sine"
+      ],
+      "syllabus": [
+        "3.2"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover a side, an area and an altitude from one exact angle ratio",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-balcony-two-objects",
+      "home": "aa-sl",
+      "name": "Combine one elevation and one depression from the same balcony",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.3.elevation-depression",
+        "SL3.3.multi-triangle"
+      ],
+      "syllabus": [
+        "3.3"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Combine one elevation and one depression from the same balcony",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-double-angle-measurement",
+      "home": "aa-sl",
+      "name": "Use an angle range to recover both readings from a doubled angle",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "SL3.6.double-angle-values",
+        "SL3.6.ratio-from-ratio"
+      ],
+      "syllabus": [
+        "3.6"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use an angle range to recover both readings from a doubled angle",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-phase-threshold-two-times",
+      "home": "aa-hl",
+      "name": "Solve a weighted sine and cosine model twice in one cycle",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.10.compound-angle",
+        "AHL3.10.solve-equation"
+      ],
+      "syllabus": [
+        "3.10"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Solve a weighted sine and cosine model twice in one cycle",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-reflected-signal-difference",
+      "home": "aa-hl",
+      "name": "Use reflection symmetry to compare a signal with its mirror",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.11.symmetry-relations",
+        "AHL3.11.simplify-expression"
+      ],
+      "syllabus": [
+        "3.11"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use reflection symmetry to compare a signal with its mirror",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-force-rail-direction",
+      "home": "aa-hl",
+      "name": "Distinguish the signed force along a rail from the full force magnitude",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.13.scalar-product",
+        "AHL3.13.angle-between-vectors",
+        "AHL3.13.scalar-product-algebra"
+      ],
+      "syllabus": [
+        "3.13"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Distinguish the signed force along a rail from the full force magnitude",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-parallel-witness-coordinate",
+      "home": "aa-hl",
+      "name": "Find the coordinate that rules out coincidence of parallel lines",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.15.classify-lines"
+      ],
+      "syllabus": [
+        "3.15"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Find the coordinate that rules out coincidence of parallel lines",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-plane-height-interpolation",
+      "home": "aa-hl",
+      "name": "Construct a plane from height readings, then interpolate in it",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.17.plane-equation",
+        "AHL3.17.point-in-plane"
+      ],
+      "syllabus": [
+        "3.17"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Construct a plane from height readings, then interpolate in it",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-line-plane-parallel-gap",
+      "home": "aa-hl",
+      "name": "Distinguish disjoint parallelism from a line lying in a plane",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AHL3.18.line-meets-plane"
+      ],
+      "syllabus": [
+        "3.18"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Distinguish disjoint parallelism from a line lying in a plane",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-ai-nearest-sensor-switch",
+      "home": "ai-sl",
+      "name": "Locate where a moving rover switches between two nearest sensors",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL3.5.bisector-equation",
+        "AI-SL3.5.bisector-gradient"
+      ],
+      "syllabus": [
+        "3.5"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Locate where a moving rover switches between two nearest sensors",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-ai-exact-reciprocal-tangent",
+      "home": "ai-hl",
+      "name": "Locate both exact tangent solutions, then recover a signed ratio",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.8.tan-quotient",
+        "AI-AHL3.8.pythagorean-identity",
+        "AI-AHL3.8.solve-trig-equation"
+      ],
+      "syllabus": [
+        "3.8"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Locate both exact tangent solutions, then recover a signed ratio",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-ai-bipartite-audit",
+      "home": "ai-hl",
+      "name": "Audit a network whose links must cross between two groups",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.14.model-as-graph",
+        "AI-AHL3.14.vertex-degree",
+        "AI-AHL3.14.classify-graph"
+      ],
+      "syllabus": [
+        "3.14"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Audit a network whose links must cross between two groups",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-wave2-ai-closed-walks-wheel",
+      "home": "ai-hl",
+      "name": "Subtract the effects of a spur when counting short closed walks",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL3.15.count-walks",
+        "AI-AHL3.15.read-adjacency-matrix"
+      ],
+      "syllabus": [
+        "3.15"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Subtract the effects of a spur when counting short closed walks",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

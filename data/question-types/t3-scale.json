@@ -1,0 +1,757 @@
+{
+  "about": "Original Topic 3 templates; listed exam references identify related skills only. No exam questions, data, wording or diagrams are reused.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t3-scale-endpoint-cable",
+      "name": "Recover a cable endpoint from its midpoint",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.1"
+      ],
+      "skills": [
+        "SL3.1.midpoint-3d",
+        "SL3.1.distance-3d"
+      ],
+      "parts": [
+        "aa-sl-2022-nov-tz0-p1-q03.a",
+        "aa-sl-2026-may-tz3-p2-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "recover a cable endpoint from its midpoint",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-hollow-basin",
+      "name": "Infer the thickness of a hemispherical basin",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.1"
+      ],
+      "skills": [
+        "SL3.1.volume-solids"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz1-p1-q02.b",
+        "aa-sl-2022-may-tz1-p2-q07.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "infer the thickness of a hemispherical basin",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-slant-floor",
+      "name": "Separate a sloping strut from its floor projection",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.1"
+      ],
+      "skills": [
+        "SL3.1.angle-line-plane"
+      ],
+      "parts": [
+        "aa-sl-2025-may-tz2-p2-q02.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "separate a sloping strut from its floor projection",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-ssa-perimeter",
+      "name": "Choose the shorter of two possible SSA routes",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.5",
+        "3.2"
+      ],
+      "skills": [
+        "SL3.5.ambiguous-case",
+        "SL3.2.sine-rule"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p2-q03",
+        "aa-sl-2024-may-tz1-p2-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "choose the shorter of two possible SSA routes",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-reverse-bearing",
+      "name": "Compute the return bearing after two compass legs",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.3",
+        "3.2"
+      ],
+      "skills": [
+        "SL3.3.bearings",
+        "SL3.2.cosine-rule-side"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz2-p2-q07.a",
+        "aa-sl-2025-may-tz2-p2-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "compute the return bearing after two compass legs",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-opposite-observers",
+      "name": "Locate a mast between two observers",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.3",
+        "3.2"
+      ],
+      "skills": [
+        "SL3.3.two-observations",
+        "SL3.2.right-angle"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p2-q02.b",
+        "aa-sl-2025-may-tz2-p2-q02.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "locate a mast between two observers",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-sector-reverse",
+      "name": "Recover a sector radius and angle from area and arc",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.4"
+      ],
+      "skills": [
+        "SL3.4.sector-two-conditions",
+        "SL3.4.sector-area"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz1-p1-q04.a",
+        "aa-sl-2025-nov-tz3-p2-q05.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "recover a sector radius and angle from area and arc",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-wheel-signed-travel",
+      "name": "Separate net wheel rotation from total rim travel",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.4"
+      ],
+      "skills": [
+        "SL3.4.angular-rate",
+        "SL3.4.arc-length"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz2-p2-q09.c",
+        "aa-sl-2021-may-tz2-p1-q01.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "separate net wheel rotation from total rim travel",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-double-angle-sign",
+      "name": "Fix quadrant signs before doubling an angle",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.6"
+      ],
+      "skills": [
+        "SL3.6.double-angle-values",
+        "SL3.6.ratio-from-ratio"
+      ],
+      "parts": [
+        "aa-sl-2023-may-tz2-p1-q08.a",
+        "aa-sl-2024-nov-tz2-p1-q05"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "fix quadrant signs before doubling an angle",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-retained-zero",
+      "name": "Keep endpoints and the zero branch when solving",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.8",
+        "3.6"
+      ],
+      "skills": [
+        "SL3.8.factorise-not-divide",
+        "SL3.8.compound-angle"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p1-q04.b",
+        "aa-sl-2022-nov-tz0-p1-q09.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "keep endpoints and the zero branch when solving",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-opposed-temperature",
+      "name": "Use half-period offsets to combine models",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-sl",
+      "syllabus": [
+        "3.7"
+      ],
+      "skills": [
+        "SL3.7.model-context",
+        "SL3.7.transformations",
+        "SL3.7.read-features"
+      ],
+      "parts": [
+        "aa-sl-2024-may-tz2-p1-q07.c",
+        "aa-sl-2021-may-tz2-p2-q07.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "use half-period offsets to combine models",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-inverse-principal-branch",
+      "name": "Reduce an angle to each principal inverse-trig branch",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.9"
+      ],
+      "skills": [
+        "AHL3.9.inverse-trig-values",
+        "AHL3.9.inverse-trig-graphs"
+      ],
+      "parts": [
+        "aa-hl-2021-may-tz2-p1-q12.b",
+        "aa-hl-2021-may-tz2-p1-q12.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "reduce an angle to each principal inverse-trig branch",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-compound-rotation",
+      "name": "Resolve the difference between unequal angle rotations",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.10"
+      ],
+      "skills": [
+        "AHL3.10.compound-angle",
+        "AHL3.10.exact-value"
+      ],
+      "parts": [
+        "aa-hl-2021-may-tz2-p1-q12.c",
+        "aa-hl-2021-may-tz2-p1-q12.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "resolve the difference between unequal angle rotations",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-external-vector-division",
+      "name": "Divide a directed segment externally",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.12"
+      ],
+      "skills": [
+        "AHL3.12.position-displacement",
+        "AHL3.12.parallel-vectors"
+      ],
+      "parts": [
+        "aa-hl-2024-nov-tz0-p1-q08.a",
+        "aa-hl-2024-nov-tz0-p1-q08.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "divide a directed segment externally",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-dot-from-resultant",
+      "name": "Infer a dot product from resultant length",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.13"
+      ],
+      "skills": [
+        "AHL3.13.scalar-product-algebra",
+        "AHL3.13.scalar-product"
+      ],
+      "parts": [
+        "aa-hl-2024-nov-tz0-p1-q08.b",
+        "aa-hl-2021-may-tz2-p1-q05"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "infer a dot product from resultant length",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-nearest-space-line",
+      "name": "Project a point onto a line then compute separation",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.14",
+        "3.13"
+      ],
+      "skills": [
+        "AHL3.14.foot-of-perpendicular",
+        "AHL3.13.perpendicular-test"
+      ],
+      "parts": [
+        "aa-hl-2025-nov-tz3-p1-q10.e",
+        "aa-hl-2023-may-tz2-p2-q06.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "project a point onto a line then compute separation",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-skew-separation",
+      "name": "Prove the shortest distance between two skew lines",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.15",
+        "3.16"
+      ],
+      "skills": [
+        "AHL3.15.skew-distance",
+        "AHL3.15.classify-lines",
+        "AHL3.16.perpendicular-vector"
+      ],
+      "parts": [
+        "aa-hl-2021-may-tz2-p1-q08.b",
+        "aa-hl-2025-may-tz1-p1-q11.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "prove the shortest distance between two skew lines",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-slant-projection-area",
+      "name": "Compare a slanted triangle with its projected area",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.16"
+      ],
+      "skills": [
+        "AHL3.16.area-triangle-parallelogram"
+      ],
+      "parts": [
+        "aa-hl-2025-nov-tz1-p2-q12.d",
+        "aa-hl-2024-may-tz1-p2-q12.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "compare a slanted triangle with its projected area",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-line-plane-coefficient",
+      "name": "Find a missing line coefficient from a known plane crossing",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "aa-hl",
+      "syllabus": [
+        "3.18",
+        "3.17"
+      ],
+      "skills": [
+        "AHL3.18.line-meets-plane",
+        "AHL3.17.point-in-plane"
+      ],
+      "parts": [
+        "aa-hl-2023-nov-tz1-p2-q12.c",
+        "aa-hl-2023-nov-tz2-p2-q12.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "find a missing line coefficient from a known plane crossing",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-sector-cone-liner",
+      "name": "Find the opening and volume of a folded sector",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "ai-sl",
+      "syllabus": [
+        "3.4",
+        "3.1"
+      ],
+      "skills": [
+        "AI-SL3.4.sector-cone",
+        "SL3.1.volume-solids"
+      ],
+      "parts": [
+        "ai-sl-2026-may-tz3-p2-q05.b",
+        "ai-sl-2021-nov-tz0-p1-q08.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "find the opening and volume of a folded sector",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-reflect-voronoi",
+      "name": "Reflect a missing Voronoi site across a sloping boundary",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "ai-sl",
+      "syllabus": [
+        "3.6",
+        "3.5"
+      ],
+      "skills": [
+        "AI-SL3.6.locate-site",
+        "AI-SL3.5.bisector-equation"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q05.b",
+        "ai-sl-2024-nov-tz2-p2-q01.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "reflect a missing Voronoi site across a sloping boundary",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-voronoi-boundary-tie",
+      "name": "Identify a tie from a Voronoi vertex",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "ai-sl",
+      "syllabus": [
+        "3.6"
+      ],
+      "skills": [
+        "AI-SL3.6.vertex",
+        "AI-SL3.6.nearest-site"
+      ],
+      "parts": [
+        "ai-sl-2023-nov-tz1-p1-q04.a",
+        "ai-sl-2023-nov-tz2-p1-q04.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "identify a tie from a Voronoi vertex",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-composite-matrix-area",
+      "name": "Recover an unknown stretch from a composite map's area",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "ai-hl",
+      "syllabus": [
+        "3.9"
+      ],
+      "skills": [
+        "AI-AHL3.9.area-scale-factor",
+        "AI-AHL3.9.compose-transformations"
+      ],
+      "parts": [
+        "ai-hl-2022-nov-tz0-p1-q09.a",
+        "ai-hl-2023-may-tz2-p1-q13.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "recover an unknown stretch from a composite map's area",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t3-scale-staggered-crossing",
+      "name": "Distinguish path intersection from collision with staggered starts",
+      "topic": 3,
+      "source": "extension",
+      "kind": "skill",
+      "home": "ai-hl",
+      "syllabus": [
+        "3.12"
+      ],
+      "skills": [
+        "AI-AHL3.12.meet-or-collide",
+        "AI-AHL3.12.position-at-time"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz1-p2-q04.c",
+        "ai-hl-2022-may-tz2-p2-q06.f"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "distinguish path intersection from collision with staggered starts",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

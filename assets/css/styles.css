@@ -570,6 +570,7 @@ table.heat { border-collapse: separate; border-spacing: 2px; font-size: 12px; }
 .opt .graph, .ws-doc .graph { color: var(--paper-ink); }
 .opt { color: inherit; }
 .opt:disabled { cursor: default; opacity: 1; }
+.qtable-wrap { position: relative; }
 table.qtable { width: auto; margin: 0 auto; }
 .qtable th, .qtable td { border: 1px solid var(--line); background: none; padding: 6px 14px; text-align: center; font-weight: 500; }
 .ws-doc .qtable th, .ws-doc .qtable td { border-color: var(--paper-rule); }
@@ -751,15 +752,16 @@ table.qtable { width: auto; margin: 0 auto; }
   .qbar .nav-btn.off { opacity: .35; pointer-events: none; }
   body.has-qbar { padding-bottom: calc(var(--tab-h) + 62px + env(safe-area-inset-bottom, 0px)); }
 
-  .tbl thead { display: none; }
-  .tbl, .tbl tbody { display: block; }
-  .tbl tr { display: grid; grid-template-columns: 1fr 1fr; gap: 6px var(--s3); padding: var(--s3); border-bottom: 1px solid var(--line); }
-  .tbl td { border: 0; padding: 0; }
-  .tbl td.rank { display: none; }
-  .tbl td.name { grid-column: 1 / -1; min-width: 0; }
-  .tbl td.num { text-align: left; }
-  .tbl td[data-l]::before { content: attr(data-l) " "; font: 600 10.5px var(--ui); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
-  .tbl td.go { grid-column: 1 / -1; text-align: left; }
+  /* Practice data tables retain their row and column relationships on phones. */
+  .tbl:not(:where(.qtable)) thead { display: none; }
+  .tbl:not(:where(.qtable)), .tbl:not(:where(.qtable)) tbody { display: block; }
+  .tbl:not(:where(.qtable)) tr { display: grid; grid-template-columns: 1fr 1fr; gap: 6px var(--s3); padding: var(--s3); border-bottom: 1px solid var(--line); }
+  .tbl:not(:where(.qtable)) td { border: 0; padding: 0; }
+  .tbl:not(:where(.qtable)) td.rank { display: none; }
+  .tbl:not(:where(.qtable)) td.name { grid-column: 1 / -1; min-width: 0; }
+  .tbl:not(:where(.qtable)) td.num { text-align: left; }
+  .tbl:not(:where(.qtable)) td[data-l]::before { content: attr(data-l) " "; font: 600 10.5px var(--ui); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; display: block; }
+  .tbl:not(:where(.qtable)) td.go { grid-column: 1 / -1; text-align: left; }
   .mbar { justify-content: flex-start; }
   .block-head, .block-foot { padding-left: var(--s3); padding-right: var(--s3); }
   .block-body { padding: 0 var(--s3) var(--s3); }

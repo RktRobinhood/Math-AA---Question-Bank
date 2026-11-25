@@ -1,0 +1,185 @@
+{
+  "home": "ai-sl",
+  "about": "Original Wave 5 Topic 4 question families; exact exam parts are precedents for the skill only.",
+  "types": [
+    {
+      "id": "w5-statistics-rank-agreement-pattern",
+      "topic": 4,
+      "name": "Recognise complete rank agreement and reversal",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.calculate-rs",
+        "AI-SL4.10.interpret-rs"
+      ],
+      "parts": [
+        "ai-sl-2023-may-tz2-p1-q04.c",
+        "ai-sl-2022-may-tz1-p2-q03.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recognise complete rank agreement and reversal",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-coefficient-target-selection",
+      "topic": 4,
+      "name": "Match the association measure to the analytical goal",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.compare-with-r",
+        "AI-SL4.10.interpret-rs"
+      ],
+      "parts": [
+        "ai-sl-2023-may-tz2-p1-q04.d",
+        "ai-sl-2024-nov-tz1-p2-q03.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Match the association measure to the analytical goal",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-rank-update-new-pair",
+      "topic": 4,
+      "name": "Trace both columns' rank changes when an observation is added",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.interpret-rs"
+      ],
+      "parts": [
+        "ai-sl-2023-may-tz2-p1-q04.a",
+        "ai-sl-2023-may-tz2-p1-q04.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Trace both columns' rank changes when an observation is added",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-rank-export-tie-check",
+      "topic": 4,
+      "name": "Audit two spreadsheet rank exports that handle ties differently",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data"
+      ],
+      "parts": [
+        "ai-sl-2023-may-tz1-p1-q01.a",
+        "ai-sl-2023-may-tz2-p1-q04.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Audit two spreadsheet rank exports that handle ties differently",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-rank-audit-missing-pair",
+      "topic": 4,
+      "name": "Recover a missing observation from a reported rank coefficient",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.calculate-rs"
+      ],
+      "parts": [
+        "ai-sl-2023-may-tz1-p1-q01.a",
+        "ai-sl-2023-may-tz1-p1-q01.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover a missing observation from a reported rank coefficient",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-rounded-p-value-audit",
+      "topic": 4,
+      "name": "Check whether a displayed p-value supports a test decision",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "AI-SL4.11.conclusion",
+        "AI-SL4.11.test-conditions"
+      ],
+      "parts": [
+        "ai-sl-2021-nov-tz0-p2-q01.d",
+        "ai-sl-2023-may-tz2-p2-q04.h"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Check whether a displayed p-value supports a test decision",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

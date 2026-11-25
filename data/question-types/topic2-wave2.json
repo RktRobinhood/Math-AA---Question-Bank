@@ -1,0 +1,323 @@
+{
+  "about": "Original Functions families targeting remaining coverage gaps after Wave 1.",
+  "types": [
+    {
+      "id": "fn-wave2-range-with-overlap",
+      "name": "Recover a disconnected range and locate a collision",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover a disconnected range and locate a collision",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-touch-beats-sign-scan",
+      "name": "Use a graph to recover a root missed by a sign scan",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.3"
+      ],
+      "skills": [
+        "SL2.3.read-graph"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a graph to recover a root missed by a sign scan",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "graph"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-ai-cubic-interval-rate",
+      "name": "Compare total and per-unit changes in a cubic model",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.cubic-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare total and per-unit changes in a cubic model",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-ai-order-equivalence",
+      "name": "Find when two orders of a calibration agree",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "AI-AHL2.7.composite-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find when two orders of a calibration agree",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-ai-log-ruler-interpolation",
+      "name": "Interpolate between labels on a logarithmic axis",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "AI-AHL2.10.log-scale"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Interpolate between labels on a logarithmic axis",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-ahl-inverse-by-odd-symmetry",
+      "name": "Use odd symmetry to recover inverse values numerically",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.14"
+      ],
+      "skills": [
+        "AHL2.14.use-symmetry"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use odd symmetry to recover inverse values numerically",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-ahl-comparison-at-discrete-inputs",
+      "name": "Read a weak function inequality at given inputs",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.15"
+      ],
+      "skills": [
+        "AHL2.15.graphical-inequality"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Read a weak function inequality at given inputs",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-line-translation-crossing",
+      "name": "Recover an intersection after moving one line",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.intersection-lines"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover an intersection after moving one line",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-reciprocal-mid-output",
+      "name": "Find where a rational graph reaches a mean output",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.8"
+      ],
+      "skills": [
+        "SL2.8.rational-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find where a rational graph reaches a mean output",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-reflect-coordinate-prerequisite",
+      "name": "Repair which coordinate a reflection changes",
+      "source": "extension",
+      "kind": "prior-learning",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.11"
+      ],
+      "skills": [
+        "SL2.11.reflect"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Repair which coordinate a reflection changes",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "supports": [
+        "SL2.11.reflect",
+        "SL2.11.composite-transform"
+      ]
+    },
+    {
+      "id": "fn-wave2-ai-regime-crossing-gap",
+      "name": "Reject a threshold solution from the wrong regime",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.piecewise-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reject a threshold solution from the wrong regime",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-wave2-aa-rectangular-constraint-design",
+      "name": "Optimise a fenced rectangle with a minimum frontage",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.6",
+        "2.4"
+      ],
+      "skills": [
+        "SL2.6.model",
+        "SL2.4.max-min"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Optimise a fenced rectangle with a minimum frontage",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

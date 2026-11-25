@@ -1,0 +1,440 @@
+{
+  "about": "Original structural variation, with exam parts recorded only as method references.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t4-scale-partition-right-tail",
+      "topic": 4,
+      "name": "Complement inside a deliberately chosen sample space",
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [
+        "SL4.5.complement"
+      ],
+      "supports": [
+        "SL4.6.union",
+        "SL4.8.cumulative-probability"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz2-p2-q08.c"
+      ],
+      "unknowns": [
+        {
+          "id": "partition-right-tail",
+          "asked": "Complement inside a deliberately chosen sample space",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-stratum-reverse",
+      "topic": 4,
+      "name": "Recover a population count from a proportional allocation",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.stratified-numbers"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p1-q01.a"
+      ],
+      "unknowns": [
+        {
+          "id": "stratum-reverse",
+          "asked": "Recover a population count from a proportional allocation",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-histogram-missing-width",
+      "topic": 4,
+      "name": "Recover a histogram interval from density and area",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.2"
+      ],
+      "skills": [
+        "SL4.2.frequency-histogram"
+      ],
+      "parts": [
+        "aa-sl-2023-nov-tz1-p1-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "histogram-missing-width",
+          "asked": "Recover a histogram interval from density and area",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-remove-duplicate-mean",
+      "topic": 4,
+      "name": "Correct a reported mean after a duplicate entry",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.3"
+      ],
+      "skills": [
+        "SL4.3.mean-totals"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz2-p2-q01.b"
+      ],
+      "unknowns": [
+        {
+          "id": "remove-duplicate-mean",
+          "asked": "Correct a reported mean after a duplicate entry",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-regression-residual-swap",
+      "topic": 4,
+      "name": "Use residuals to audit a regression prediction",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.4"
+      ],
+      "skills": [
+        "SL4.4.predict",
+        "SL4.4.interpret-ab"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p2-q01.c"
+      ],
+      "unknowns": [
+        {
+          "id": "regression-residual-swap",
+          "asked": "Use residuals to audit a regression prediction",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-unequal-experiment-comparison",
+      "topic": 4,
+      "name": "Compare relative frequencies rather than raw counts",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.5"
+      ],
+      "skills": [
+        "SL4.5.relative-frequency"
+      ],
+      "parts": [
+        "aa-sl-2024-nov-tz1-p2-q07.a"
+      ],
+      "unknowns": [
+        {
+          "id": "unequal-experiment-comparison",
+          "asked": "Compare relative frequencies rather than raw counts",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-venn-exactly-one-reverse",
+      "topic": 4,
+      "name": "Reconstruct event counts from exactly-one information",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.6"
+      ],
+      "skills": [
+        "SL4.6.venn",
+        "SL4.6.union"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz2-p2-q02.a"
+      ],
+      "unknowns": [
+        {
+          "id": "venn-exactly-one-reverse",
+          "asked": "Reconstruct event counts from exactly-one information",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-discrete-fair-stake",
+      "topic": 4,
+      "name": "Recover the fair price and break-even chance",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.7"
+      ],
+      "skills": [
+        "SL4.7.expected-value",
+        "SL4.7.fair-game"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p2-q04.c"
+      ],
+      "unknowns": [
+        {
+          "id": "discrete-fair-stake",
+          "asked": "Recover the fair price and break-even chance",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-binomial-majority-vs-tie",
+      "topic": 4,
+      "name": "Translate a voting rule into win and tie probabilities",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.8"
+      ],
+      "skills": [
+        "SL4.8.identify",
+        "SL4.8.exact-probability",
+        "SL4.8.cumulative-probability",
+        "SL4.8.binomial-in-context"
+      ],
+      "parts": [],
+      "unknowns": [
+        {
+          "id": "binomial-majority-vs-tie",
+          "asked": "Translate a voting rule into win and tie probabilities",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-normal-probability-complement-map",
+      "topic": 4,
+      "name": "Rebuild equal tails from a central normal probability",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.9"
+      ],
+      "skills": [
+        "SL4.9.symmetry-probability",
+        "SL4.9.central-interval"
+      ],
+      "parts": [
+        "aa-sl-2025-nov-tz1-p2-q02.c"
+      ],
+      "unknowns": [
+        {
+          "id": "normal-probability-complement-map",
+          "asked": "Rebuild equal tails from a central normal probability",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-inverse-regression-disagreement",
+      "topic": 4,
+      "name": "Compare x-on-y with algebraically reversing y-on-x",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "SL4.10.choose-line",
+        "SL4.10.predict-x"
+      ],
+      "parts": [
+        "aa-sl-2025-may-tz1-p2-q05.a"
+      ],
+      "unknowns": [
+        {
+          "id": "inverse-regression-disagreement",
+          "asked": "Compare x-on-y with algebraically reversing y-on-x",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-independence-cell-repair",
+      "topic": 4,
+      "name": "Repair a contingency table to make events independent",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "SL4.11.independence-unknown",
+        "SL4.11.test-independence"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz1-p1-q06.b"
+      ],
+      "unknowns": [
+        {
+          "id": "independence-cell-repair",
+          "asked": "Repair a contingency table to make events independent",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-standardise-opposite-scales",
+      "topic": 4,
+      "name": "Judge outcomes measured on opposite scales",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "SL4.12.z-score",
+        "SL4.12.compare-z"
+      ],
+      "parts": [
+        "aa-sl-2025-nov-tz3-p2-q06.b"
+      ],
+      "unknowns": [
+        {
+          "id": "standardise-opposite-scales",
+          "asked": "Judge outcomes measured on opposite scales",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-median-append-extreme",
+      "topic": 4,
+      "name": "Predict which median changes after appending one extreme observation",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.3"
+      ],
+      "skills": [
+        "SL4.3.mean-median-mode"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz2-p2-q01.b"
+      ],
+      "unknowns": [
+        {
+          "id": "median-append-extreme",
+          "asked": "Predict which median changes after appending one extreme observation",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "terms"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-normal-conditional-visual",
+      "topic": 4,
+      "name": "Select a shaded component of a central normal region",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.9"
+      ],
+      "skills": [
+        "SL4.9.normal-probability",
+        "SL4.9.central-interval",
+        "SL4.9.symmetry-probability"
+      ],
+      "parts": [
+        "aa-sl-2025-nov-tz1-p2-q02.b"
+      ],
+      "unknowns": [
+        {
+          "id": "normal-conditional-visual",
+          "asked": "Select a shaded component of a central normal region",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "graph"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "home": "ai-hl",
+  "about": "Wave 6 original statistics and probability generators; source parts are verified skill precedents, not reproduced questions.",
+  "types": [
+    {
+      "id": "w6-statistics-validation-across-operating-ranges",
+      "topic": 4,
+      "name": "Choose a measurement design using repeatability and criterion agreement",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "AI-AHL4.12.design-collection",
+        "AI-AHL4.12.reliability",
+        "AI-AHL4.12.validity"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p3-q02.c(i)",
+        "ai-hl-2021-may-tz1-p3-q02.c(iii)",
+        "ai-hl-2021-may-tz1-p3-q02.d(i)",
+        "ai-hl-2021-may-tz1-p3-q02.d(iii)"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Choose a measurement design using repeatability and criterion agreement",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-sample-size-before-merging",
+      "topic": 4,
+      "name": "Plan the smallest goodness-of-fit sample before choosing adjacent merges",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "AI-AHL4.12.combine-categories",
+        "AI-AHL4.12.reduce-df",
+        "AI-SL4.11.expected-frequencies"
+      ],
+      "parts": [
+        "ai-hl-2024-nov-tz0-p3-q02.c",
+        "ai-hl-2024-nov-tz0-p3-q02.d(ii)",
+        "ai-hl-2023-may-tz1-p2-q05.d",
+        "ai-hl-2022-may-tz2-p3-q01.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Plan the smallest goodness-of-fit sample before choosing adjacent merges",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-normal-paired-difference",
+      "topic": 4,
+      "name": "Combine distinct independent normal measurements into a difference",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.15"
+      ],
+      "skills": [
+        "AI-AHL4.15.normal-combination"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p1-q14.c",
+        "ai-hl-2021-nov-tz0-p1-q14.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Combine distinct independent normal measurements into a difference",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-confidence-label-recovery",
+      "topic": 4,
+      "name": "Recover confidence levels from two intervals from the same sample",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.16"
+      ],
+      "skills": [
+        "AI-AHL4.16.interpret-interval"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p1-q10.d",
+        "ai-hl-2023-may-tz2-p1-q15.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover confidence levels from two intervals from the same sample",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-poisson-zero-one-ratio",
+      "topic": 4,
+      "name": "Recover a Poisson rate from adjacent masses, then change the exposure",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.17"
+      ],
+      "skills": [
+        "AI-AHL4.17.find-parameter",
+        "AI-AHL4.17.rescale-mean",
+        "AI-AHL4.17.poisson-probability"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p2-q05.a",
+        "ai-hl-2021-may-tz1-p1-q01",
+        "ai-hl-2021-may-tz2-p2-q05.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover a Poisson rate from adjacent masses, then change the exposure",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "about": "Original structural Wave 2 generators; official exam references are metadata-only skill anchors.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t4-wave2-repair-disproportionate-sample",
+      "topic": 4,
+      "name": "Correct an overall estimate when strata are over- and undersampled",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.bias-reliability",
+        "SL4.1.stratified-numbers"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p1-q07.e",
+        "aa-sl-2026-may-tz3-p1-q01.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Correct an overall estimate when strata are over- and undersampled",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-histogram-split-bins",
+      "topic": 4,
+      "name": "Read a cutoff inside a histogram bar before estimating a percentile",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.2"
+      ],
+      "skills": [
+        "SL4.2.frequency-histogram",
+        "SL4.2.cumfreq-quartiles"
+      ],
+      "parts": [
+        "aa-sl-2023-nov-tz1-p1-q07.a",
+        "aa-sl-2021-may-tz2-p1-q07.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Read a cutoff inside a histogram bar before estimating a percentile",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-conditional-removal-reversal",
+      "topic": 4,
+      "name": "Use a random removal before observing a two-draw result",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.6"
+      ],
+      "skills": [
+        "SL4.6.tree",
+        "SL4.6.conditional-diagram"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p2-q09.c",
+        "aa-sl-2023-may-tz1-p2-q08.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Use a random removal before observing a two-draw result",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-capped-payout-expectation",
+      "topic": 4,
+      "name": "Compare a cap and an uncapped charge under the same distribution",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.7"
+      ],
+      "skills": [
+        "SL4.7.table-probabilities",
+        "SL4.7.expected-value",
+        "SL4.7.fair-game"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p2-q09.b",
+        "aa-sl-2021-may-tz2-p2-q09.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare a cap and an uncapped charge under the same distribution",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

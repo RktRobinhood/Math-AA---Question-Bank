@@ -1,0 +1,300 @@
+{
+  "about": "Original Wave 5 bounded AI Numbers and Algebra practice",
+  "types": [
+    {
+      "id": "w5-number-signed-bin-model",
+      "home": "ai-sl",
+      "name": "Set up a system from a total and a signed difference",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.8.set-up-system"
+      ],
+      "syllabus": [
+        "1.8"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Set up a system from a total and a signed difference",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-cubic-missing-column",
+      "home": "ai-sl",
+      "name": "Keep the zero coefficient when entering a cubic",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.8.polynomial-equation"
+      ],
+      "syllabus": [
+        "1.8"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Keep the zero coefficient when entering a cubic",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-weighed-swap",
+      "home": "ai-sl",
+      "name": "Recover individual masses from a total and the effect of a swap",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.8.set-up-system",
+        "AI-SL1.8.solve-system"
+      ],
+      "syllabus": [
+        "1.8"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover individual masses from a total and the effect of a swap",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-recover-polynomial-record",
+      "home": "ai-sl",
+      "name": "Recover a missing cubic coefficient from one verified zero",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.8.polynomial-equation",
+        "AI-SL1.8.select-roots"
+      ],
+      "syllabus": [
+        "1.8"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover a missing cubic coefficient from one verified zero",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-upper-tolerance-budget",
+      "home": "ai-sl",
+      "name": "Translate a stated percentage tolerance into the greatest acceptable reading",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.6.percentage-error",
+        "AI-SL1.6.reverse-percentage-error"
+      ],
+      "syllabus": [
+        "1.6"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Translate a stated percentage tolerance into the greatest acceptable reading",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-fin-loan-input-sign",
+      "home": "ai-sl",
+      "name": "Choose loan-solver signs from the borrower's cash flow",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.7.number-of-payments",
+        "AI-SL1.7.find-payment"
+      ],
+      "syllabus": [
+        "1.7"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose loan-solver signs from the borrower's cash flow",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-fund-balancing-gift",
+      "home": "ai-sl",
+      "name": "Compare a starting gift with equal deposits at the end of each year",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-SL1.7.future-value-deposits",
+        "AI-SL1.7.compare-interpret"
+      ],
+      "syllabus": [
+        "1.7"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare a starting gift with equal deposits at the end of each year",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-matrix-order-dimensions",
+      "home": "ai-hl",
+      "name": "Determine which order of rectangular matrix multiplication is defined",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL1.14.multiply"
+      ],
+      "syllabus": [
+        "1.14"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Determine which order of rectangular matrix multiplication is defined",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-matrix-det-sign-control",
+      "home": "ai-hl",
+      "name": "Recover an adjustable matrix entry from a signed determinant target",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL1.14.determinant",
+        "AI-AHL1.14.unknown-entries",
+        "AI-AHL1.14.inverse"
+      ],
+      "syllabus": [
+        "1.14"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover an adjustable matrix entry from a signed determinant target",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-power-scale-cancellation",
+      "home": "ai-hl",
+      "name": "Compare the effects of two simultaneous fractional-power changes",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL1.10.evaluate-numerical",
+        "AI-AHL1.10.simplify-algebraic"
+      ],
+      "syllabus": [
+        "1.10"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare the effects of two simultaneous fractional-power changes",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w5-number-eigenmode-tolerance",
+      "home": "ai-hl",
+      "name": "Use signed eigenmodes to locate an error threshold",
+      "topic": 1,
+      "kind": "skill",
+      "source": "extension",
+      "skills": [
+        "AI-AHL1.15.powers-by-diagonalisation",
+        "AI-AHL1.15.eigenvectors"
+      ],
+      "syllabus": [
+        "1.15"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use signed eigenmodes to locate an error threshold",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

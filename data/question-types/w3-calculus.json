@@ -1,0 +1,332 @@
+{
+  "about": "Wave 3 original parameterized calculus practice",
+  "types": [
+    {
+      "id": "w3-calculus-minimum-acceleration-from-jerk",
+      "home": "aa-hl",
+      "name": "Locate the least acceleration using the third derivative",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.12"
+      ],
+      "skills": [
+        "AHL5.12.higher-derivatives"
+      ],
+      "unknowns": [
+        {
+          "id": "acceleration-time-and-value",
+          "asked": "Locate the least acceleration using the third derivative",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-limit-referenced-calibration",
+      "home": "aa-hl",
+      "name": "Prove a baseline limit and find a numerical tolerance crossing",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.13"
+      ],
+      "skills": [
+        "AHL5.13.indeterminate-form-condition",
+        "AHL5.13.lhopital"
+      ],
+      "unknowns": [
+        {
+          "id": "positive-threshold",
+          "asked": "Prove a baseline limit and find a numerical tolerance crossing",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-equal-slopes-cubic",
+      "home": "ai-hl",
+      "name": "Locate a cubic inflection from two equal tangent slopes",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "AI-AHL5.10.find-second-derivative",
+        "AI-AHL5.10.points-of-inflexion"
+      ],
+      "unknowns": [
+        {
+          "id": "inflection-and-coefficients",
+          "asked": "Locate a cubic inflection from two equal tangent slopes",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-substitution-reversed-middle",
+      "home": "ai-hl",
+      "name": "Follow a substitution whose inner function reverses direction",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.11"
+      ],
+      "skills": [
+        "AI-AHL5.11.inspection-substitution",
+        "AI-AHL5.11.exact-definite-integral"
+      ],
+      "unknowns": [
+        {
+          "id": "signed-composite-integral",
+          "asked": "Follow a substitution whose inner function reverses direction",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-axis-crossing-disk-switch",
+      "home": "ai-hl",
+      "name": "Choose a disk radius when the region crosses the axis",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.12"
+      ],
+      "skills": [
+        "AI-AHL5.12.volume-y-axis",
+        "AI-AHL5.12.composite-volume"
+      ],
+      "unknowns": [
+        {
+          "id": "outer-radius-switch",
+          "asked": "Choose a disk radius when the region crosses the axis",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-parallel-slope-field-calibration",
+      "home": "ai-hl",
+      "name": "Recover the zero-gradient line from parallel marked segments",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.15"
+      ],
+      "skills": [
+        "AI-AHL5.15.gradient-at-point",
+        "AI-AHL5.15.zero-gradient-curve"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-flat-location",
+          "asked": "Recover the zero-gradient line from parallel marked segments",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-reverse-second-order-euler",
+      "home": "ai-hl",
+      "name": "Recover initial velocity from a two-step Euler position",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.18"
+      ],
+      "skills": [
+        "AI-AHL5.18.convert-to-system",
+        "AI-AHL5.18.euler-system"
+      ],
+      "unknowns": [
+        {
+          "id": "initial-velocity",
+          "asked": "Recover initial velocity from a two-step Euler position",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-phase-portrait-angular-direction",
+      "home": "ai-hl",
+      "name": "Separate rotation from shrinking in a phase portrait",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.17"
+      ],
+      "skills": [
+        "AI-AHL5.17.gradient-direction",
+        "AI-AHL5.17.match-portrait"
+      ],
+      "unknowns": [
+        {
+          "id": "axis-crossing-and-radius",
+          "asked": "Separate rotation from shrinking in a phase portrait",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-perpendicular-motion-closest",
+      "home": "ai-hl",
+      "name": "Use a distance derivative to find when approaching turns to receding",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.9"
+      ],
+      "skills": [
+        "AI-AHL5.9.related-rates",
+        "AI-AHL5.9.chain-rule"
+      ],
+      "unknowns": [
+        {
+          "id": "closest-time",
+          "asked": "Use a distance derivative to find when approaching turns to receding",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-gradient-from-uneven-times",
+      "home": "aa-sl",
+      "name": "Choose and compare secants using unequal sampling intervals",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.1"
+      ],
+      "skills": [
+        "SL5.1.gradient-from-graph"
+      ],
+      "unknowns": [
+        {
+          "id": "compare-secant-estimates",
+          "asked": "Choose and compare secants using unequal sampling intervals",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-two-reversals-flow-budget",
+      "home": "ai-sl",
+      "name": "Separate intake from net change when a flow reverses twice",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.definite-integral-gdc",
+        "SL5.5.area-positive"
+      ],
+      "notFor": [
+        "aa-sl",
+        "aa-hl"
+      ],
+      "unknowns": [
+        {
+          "id": "net-versus-intake",
+          "asked": "Separate intake from net change when a flow reverses twice",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-calculus-shifted-inverse-drain",
+      "home": "ai-hl",
+      "name": "Calibrate a differential equation with a restricted physical domain",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "5.14"
+      ],
+      "skills": [
+        "AI-AHL5.14.set-up",
+        "AI-AHL5.14.separate-variables",
+        "AI-AHL5.14.interpret-model"
+      ],
+      "unknowns": [
+        {
+          "id": "time-to-clearance",
+          "asked": "Calibrate a differential equation with a restricted physical domain",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

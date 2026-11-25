@@ -1,0 +1,355 @@
+{
+  "home": "ai-hl",
+  "about": "Original Wave 6 AI HL Topic 1 practice. Home-course references are skills, not question reuse.",
+  "types": [
+    {
+      "id": "w6-number-power-identity-backsolve",
+      "topic": 1,
+      "name": "Recover a missing exponent from equality at every positive input",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.10"
+      ],
+      "skills": [
+        "AI-AHL1.10.simplify-algebraic",
+        "AI-AHL1.10.roots-as-powers",
+        "AI-AHL1.10.evaluate-numerical"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Recover a missing exponent from equality at every positive input",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w6-number-power-fourth-root-filter",
+      "topic": 1,
+      "name": "Solve a hidden quadratic and reject an invalid fourth-root branch",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.10"
+      ],
+      "skills": [
+        "AI-AHL1.10.roots-as-powers",
+        "AI-AHL1.10.evaluate-numerical"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Solve a hidden quadratic and reject an invalid fourth-root branch",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w6-number-power-competing-crossover",
+      "topic": 1,
+      "name": "Find a whole-number switch between two opposite fractional-power responses",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.10"
+      ],
+      "skills": [
+        "AI-AHL1.10.evaluate-numerical",
+        "AI-AHL1.10.simplify-algebraic"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Find a whole-number switch between two opposite fractional-power responses",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-number-power-geometric-cancellation",
+      "topic": 1,
+      "name": "Cancel setting drift by multiplying two power responses",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.10"
+      ],
+      "skills": [
+        "AI-AHL1.10.evaluate-numerical",
+        "AI-AHL1.10.simplify-algebraic",
+        "AI-AHL1.10.roots-as-powers"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Cancel setting drift by multiplying two power responses",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-number-log-identity-weight",
+      "topic": 1,
+      "name": "Determine a log weight from an identity, then quantify the residual",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "AI-AHL1.9.expand",
+        "AI-AHL1.9.combine"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Determine a log weight from an identity, then quantify the residual",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz1-p1-q10.a"
+      ]
+    },
+    {
+      "id": "w6-number-log-average-missing-input",
+      "topic": 1,
+      "name": "Recover a missing reading from the mean of three logs",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "AI-AHL1.9.combine",
+        "AI-AHL1.9.solve-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Recover a missing reading from the mean of three logs",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz1-p1-q10.a",
+        "ai-hl-2026-may-tz1-p2-q07.e"
+      ]
+    },
+    {
+      "id": "w6-number-conjugate-reflection-components",
+      "topic": 1,
+      "name": "Read the component and distance effects of conjugate reflection",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.12"
+      ],
+      "skills": [
+        "AI-AHL1.12.conjugate",
+        "AI-AHL1.12.argand-diagram",
+        "AI-AHL1.12.modulus-argument"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Read the component and distance effects of conjugate reflection",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz1-p1-q14.a",
+        "ai-hl-2024-nov-tz0-p1-q09.a"
+      ]
+    },
+    {
+      "id": "w6-number-conjugate-mix-reverse",
+      "topic": 1,
+      "name": "Undo an unequal mix of a complex number and its conjugate",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.12"
+      ],
+      "skills": [
+        "AI-AHL1.12.equate-parts",
+        "AI-AHL1.12.conjugate",
+        "AI-AHL1.12.arithmetic"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Undo an unequal mix of a complex number and its conjugate",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2025-nov-tz0-p1-q05.b",
+        "ai-hl-2026-may-tz1-p1-q14.b"
+      ]
+    },
+    {
+      "id": "w6-number-complex-circle-row",
+      "topic": 1,
+      "name": "Recover a complex point from a distance and an imaginary component",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.12"
+      ],
+      "skills": [
+        "AI-AHL1.12.modulus-argument",
+        "AI-AHL1.12.equate-parts",
+        "AI-AHL1.12.argand-diagram"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Recover a complex point from a distance and an imaginary component",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2022-may-tz1-p1-q10.b",
+        "ai-hl-2026-may-tz2-p1-q13.b"
+      ]
+    },
+    {
+      "id": "w6-number-polar-cancel-vertical",
+      "topic": 1,
+      "name": "Choose a polar magnitude so two phasors have a real sum",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.13"
+      ],
+      "skills": [
+        "AI-AHL1.13.polar-to-cartesian",
+        "AI-AHL1.13.geometric-interpretation"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Choose a polar magnitude so two phasors have a real sum",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2021-nov-tz0-p2-q05.b",
+        "ai-hl-2025-may-tz3-p2-q07.c"
+      ]
+    },
+    {
+      "id": "w6-number-polar-ordered-map-inverse",
+      "topic": 1,
+      "name": "Undo a rotation and translation, then quantify an order error",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.13"
+      ],
+      "skills": [
+        "AI-AHL1.13.geometric-interpretation",
+        "AI-AHL1.13.multiply-divide-powers"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Undo a rotation and translation, then quantify an order error",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p1-q09.c",
+        "ai-hl-2026-may-tz1-p3-q02.e(ii)"
+      ]
+    },
+    {
+      "id": "w6-number-polar-inverse-wave-compensation",
+      "topic": 1,
+      "name": "Design the missing sinusoid to obtain a specified resultant",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "1.13"
+      ],
+      "skills": [
+        "AI-AHL1.13.sum-sinusoids",
+        "AI-AHL1.13.cartesian-to-polar",
+        "AI-AHL1.13.polar-to-cartesian"
+      ],
+      "unknowns": [
+        {
+          "id": "reason",
+          "asked": "Design the missing sinusoid to obtain a specified resultant",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz1-p1-q14.b",
+        "ai-hl-2022-nov-tz0-p1-q17.a"
+      ]
+    }
+  ]
+}

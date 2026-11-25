@@ -224,9 +224,9 @@
   }
   const svg = (graph, opts) => h('div', { class: 'graph', html: E.graph.toSVG(graph, opts || { width: 420, height: 320 }), role: 'img', 'aria-label': graph.alt || 'Graph' });
   function tableOf(t) {
-    return h('div', { class: 'tbl-wrap' }, h('table', { class: 'tbl qtable' },
-      h('thead', {}, h('tr', {}, ...t.head.map(c => h('th', {}, mx(c))))),
-      h('tbody', {}, ...t.rows.map(r => h('tr', {}, ...r.map((c, i) => h(i ? 'td' : 'th', {}, mx(c))))))));
+    return h('div', { class: 'tbl-wrap qtable-wrap' }, h('table', { class: 'tbl qtable' },
+      h('thead', {}, h('tr', {}, ...t.head.map(c => h('th', { scope: 'col' }, mx(c))))),
+      h('tbody', {}, ...t.rows.map(r => h('tr', {}, ...r.map((c, i) => h(i ? 'td' : 'th', i ? {} : { scope: 'row' }, mx(c))))))));
   }
   // Real questions need the image lists in data.js, which is large; fetch it only when one comes up.
   let dataLoading = null;

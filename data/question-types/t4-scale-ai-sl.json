@@ -1,0 +1,66 @@
+{
+  "about": "Original structural variation, with exam parts recorded only as method references.",
+  "home": "ai-sl",
+  "types": [
+    {
+      "id": "t4-scale-rank-correct-swapped-orders",
+      "topic": 4,
+      "name": "Repair paired ranks and compare their agreement",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.calculate-rs",
+        "AI-SL4.10.interpret-rs"
+      ],
+      "parts": [
+        "ai-sl-2025-may-tz2-p1-q10.b"
+      ],
+      "unknowns": [
+        {
+          "id": "rank-correct-swapped-orders",
+          "asked": "Repair paired ranks and compare their agreement",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-chi-decision-changed-level",
+      "topic": 4,
+      "name": "A fixed p-value and two significance decisions",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "AI-SL4.11.expected-frequencies",
+        "AI-SL4.11.degrees-of-freedom",
+        "AI-SL4.11.conclusion"
+      ],
+      "parts": [
+        "ai-sl-2026-may-tz3-p1-q03.c"
+      ],
+      "unknowns": [
+        {
+          "id": "chi-decision-changed-level",
+          "asked": "A fixed p-value and two significance decisions",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

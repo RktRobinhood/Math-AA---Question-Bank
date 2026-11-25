@@ -1,0 +1,126 @@
+{
+  "about": "Wave 3 original Topic 4 questions; official exam IDs are method references only.",
+  "home": "ai-hl",
+  "types": [
+    {
+      "id": "w3-statistics-compare-vertical-retunes",
+      "topic": 4,
+      "name": "Choose a vertical retune by balancing signed residuals",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.13"
+      ],
+      "skills": [
+        "AI-AHL4.13.ssres",
+        "AI-AHL4.13.minimise-ssres"
+      ],
+      "parts": [
+        "ai-hl-2023-may-tz1-p1-q16.a",
+        "ai-hl-2023-may-tz1-p1-q16.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Choose a vertical retune by balancing signed residuals",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-clt-average-or-total",
+      "topic": 4,
+      "name": "Translate a threshold on an average and justify a normal model",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.15"
+      ],
+      "skills": [
+        "AI-AHL4.15.sample-mean",
+        "AI-AHL4.15.central-limit-theorem"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p2-q06.d",
+        "ai-hl-2026-may-tz1-p2-q06.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Translate a threshold on an average and justify a normal model",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-trade-false-alarm-and-miss",
+      "topic": 4,
+      "name": "Compare false-alarm and miss probabilities when a cutoff changes",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.18"
+      ],
+      "skills": [
+        "AI-AHL4.18.error-probability",
+        "AI-AHL4.18.errors-in-context"
+      ],
+      "parts": [
+        "ai-hl-2022-may-tz1-p1-q15.b",
+        "ai-hl-2022-may-tz1-p1-q15.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare false-alarm and miss probabilities when a cutoff changes",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-statistics-markov-invert-mixed-start",
+      "topic": 4,
+      "name": "Infer the starting distribution from a one-step outcome",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.19"
+      ],
+      "skills": [
+        "AI-AHL4.19.transition-matrix",
+        "AI-AHL4.19.n-step"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p2-q04.b",
+        "ai-hl-2024-nov-tz0-p3-q01.d(ii)"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Infer the starting distribution from a one-step outcome",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

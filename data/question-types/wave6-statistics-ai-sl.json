@@ -1,0 +1,66 @@
+{
+  "home": "ai-sl",
+  "about": "Wave 6 original statistics and probability generators; source parts are verified skill precedents, not reproduced questions.",
+  "types": [
+    {
+      "id": "w6-statistics-rank-swap-local-audit",
+      "topic": 4,
+      "name": "Update Spearman's coefficient when two assigned ranks were transposed",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.10"
+      ],
+      "skills": [
+        "AI-SL4.10.rank-data",
+        "AI-SL4.10.calculate-rs"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p2-q01.h",
+        "ai-sl-2021-may-tz1-p2-q01.i"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Update Spearman's coefficient when two assigned ranks were transposed",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-statistics-chi-square-equal-residuals",
+      "topic": 4,
+      "name": "Compare contributions from equal raw residuals and different expected counts",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.11"
+      ],
+      "skills": [
+        "AI-SL4.11.expected-frequencies",
+        "AI-SL4.11.chi-squared-independence"
+      ],
+      "parts": [
+        "ai-sl-2021-nov-tz0-p2-q01.d",
+        "ai-sl-2021-may-tz1-p2-q04.d"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare contributions from equal raw residuals and different expected counts",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

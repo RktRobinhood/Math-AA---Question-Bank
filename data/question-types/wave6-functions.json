@@ -1,0 +1,276 @@
+{
+  "about": "Original functions and modelling practice for Wave 6",
+  "types": [
+    {
+      "id": "w6-fn-negative-distance-intercept",
+      "home": "aa-sl",
+      "name": "Read a signed rate using two line intercepts",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.gradient",
+        "SL2.1.intercepts"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Read a signed rate using two line intercepts",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-rate-gap-reconstruct-plans",
+      "home": "aa-sl",
+      "name": "Recover two competing linear tariffs from two price gaps",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.line-model",
+        "SL2.1.gradient",
+        "SL2.1.intersection-lines"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover two competing linear tariffs from two price gaps",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-blocked-input-range-gaps",
+      "home": "aa-sl",
+      "name": "Recover a discrete function’s range after removing unavailable inputs",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.domain",
+        "SL2.2.range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover a discrete function’s range after removing unavailable inputs",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-key-features-different-baseline",
+      "home": "aa-sl",
+      "name": "Distinguish the zero of a graph from the zero of a shifted graph",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.4"
+      ],
+      "skills": [
+        "SL2.4.zeros-intercepts",
+        "SL2.4.max-min"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Distinguish the zero of a graph from the zero of a shifted graph",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-two-branches-clearance",
+      "home": "aa-sl",
+      "name": "Use a quadratic inequality to check clearance beyond a buffer zone",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "SL2.7.inequality",
+        "SL2.7.solve-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a quadratic inequality to check clearance beyond a buffer zone",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-reciprocal-centre-meeting",
+      "home": "aa-sl",
+      "name": "Find where two shifted reciprocal branches share a height",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.8"
+      ],
+      "skills": [
+        "SL2.8.rational-equation",
+        "SL2.8.asymptotes"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find where two shifted reciprocal branches share a height",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-reflection-translation-order",
+      "home": "aa-sl",
+      "name": "Compare graph images when reflection and translation swap order",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.11"
+      ],
+      "skills": [
+        "SL2.11.composite-transform",
+        "SL2.11.image-point"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare graph images when reflection and translation swap order",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-mean-error-can-hide-offsets",
+      "home": "ai-sl",
+      "name": "Check whether zero mean signed error means a model is exact",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.test-model",
+        "AI-SL2.6.limitations"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Check whether zero mean signed error means a model is exact",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-logistic-gap-to-capacity",
+      "home": "ai-hl",
+      "name": "Infer the hidden logistic parameter from a gap to capacity",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.logistic-model",
+        "AI-AHL2.9.carrying-capacity"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Infer the hidden logistic parameter from a gap to capacity",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w6-fn-log-difference-slope-two-axis",
+      "home": "ai-hl",
+      "name": "Recover the original-unit multiplier from change on a log–log plot",
+      "topic": 2,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "AI-AHL2.10.transform-data",
+        "AI-AHL2.10.predict-from-line"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover the original-unit multiplier from change on a log–log plot",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "about": "Original structural variation, with exam parts recorded only as method references.",
+  "home": "ai-hl",
+  "types": [
+    {
+      "id": "t4-scale-merge-tail-df-cost",
+      "topic": 4,
+      "name": "Combine sparse categories and track the degrees of freedom",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "AI-AHL4.12.combine-categories",
+        "AI-AHL4.12.reduce-df"
+      ],
+      "parts": [
+        "ai-hl-2024-nov-tz0-p3-q02.d(ii)"
+      ],
+      "unknowns": [
+        {
+          "id": "merge-tail-df-cost",
+          "asked": "Combine sparse categories and track the degrees of freedom",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-residual-score-model-switch",
+      "topic": 4,
+      "name": "Choose the better model by squared residuals",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.13"
+      ],
+      "skills": [
+        "AI-AHL4.13.ssres",
+        "AI-AHL4.13.compare-models"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz3-p3-q02.e"
+      ],
+      "unknowns": [
+        {
+          "id": "residual-score-model-switch",
+          "asked": "Choose the better model by squared residuals",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-unbias-and-rescale",
+      "topic": 4,
+      "name": "Correct a variance divisor and then change units",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.14"
+      ],
+      "skills": [
+        "AI-AHL4.14.unbiased-variance",
+        "AI-AHL4.14.linear-transformation"
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz2-p3-q02.e"
+      ],
+      "unknowns": [
+        {
+          "id": "unbias-and-rescale",
+          "asked": "Correct a variance divisor and then change units",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-sample-mean-backsolve-n",
+      "topic": 4,
+      "name": "Recover sample size from the spread of a sample mean",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.15"
+      ],
+      "skills": [
+        "AI-AHL4.15.sample-mean",
+        "AI-AHL4.15.central-limit-theorem"
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz1-p2-q06.e"
+      ],
+      "unknowns": [
+        {
+          "id": "sample-mean-backsolve-n",
+          "asked": "Recover sample size from the spread of a sample mean",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-confidence-interval-deconstruct",
+      "topic": 4,
+      "name": "Recover a sample mean and margin from the interval",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.16"
+      ],
+      "skills": [
+        "AI-AHL4.16.find-interval",
+        "AI-AHL4.16.interpret-interval"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz2-p1-q06.c"
+      ],
+      "unknowns": [
+        {
+          "id": "confidence-interval-deconstruct",
+          "asked": "Recover a sample mean and margin from the interval",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-poisson-change-rate-and-mix",
+      "topic": 4,
+      "name": "Combine independent Poisson counts with unequal exposure",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.17"
+      ],
+      "skills": [
+        "AI-AHL4.17.rescale-mean",
+        "AI-AHL4.17.sum-of-poissons",
+        "AI-AHL4.17.poisson-probability"
+      ],
+      "parts": [
+        "ai-hl-2026-may-tz2-p2-q05.c"
+      ],
+      "unknowns": [
+        {
+          "id": "poisson-change-rate-and-mix",
+          "asked": "Combine independent Poisson counts with unequal exposure",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-critical-region-from-tail-table",
+      "topic": 4,
+      "name": "Read the minimum rejection count from a discrete tail table",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.18"
+      ],
+      "skills": [
+        "AI-AHL4.18.critical-region",
+        "AI-AHL4.18.error-probability"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p3-q01.f"
+      ],
+      "unknowns": [
+        {
+          "id": "critical-region-from-tail-table",
+          "asked": "Read the minimum rejection count from a discrete tail table",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-markov-two-step-bridge",
+      "topic": 4,
+      "name": "Compare returning to a state with remaining there",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.19"
+      ],
+      "skills": [
+        "AI-AHL4.19.n-step",
+        "AI-AHL4.19.sequence-probability"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz2-p2-q07.b"
+      ],
+      "unknowns": [
+        {
+          "id": "markov-two-step-bridge",
+          "asked": "Compare returning to a state with remaining there",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

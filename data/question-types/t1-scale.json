@@ -1,0 +1,715 @@
+{
+  "home": "aa-sl",
+  "about": "Original scaled Topic 1 practice; preliminary curriculum levels verified separately.",
+  "types": [
+    {
+      "id": "t1-scale-signal-difference",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Subtract and divide signals in standard form",
+      "syllabus": [
+        "1.1"
+      ],
+      "skills": [
+        "SL1.1.add-subtract",
+        "SL1.1.multiply-divide",
+        "SL1.1.convert"
+      ],
+      "unknowns": [
+        {
+          "id": "normalise-after-subtraction",
+          "asked": "Subtract and divide signals in standard form",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Align unlike powers before subtraction, then renormalise an independent quotient. Exact small terminating mantissas make the algebra appropriate without technology."
+      ]
+    },
+    {
+      "id": "t1-scale-square-footprint",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover a length from a standard-form area",
+      "syllabus": [
+        "1.1"
+      ],
+      "skills": [
+        "SL1.1.powers-roots",
+        "SL1.1.multiply-divide",
+        "SL1.1.context"
+      ],
+      "unknowns": [
+        {
+          "id": "root-and-rescale",
+          "asked": "Recover a length from a standard-form area",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Take a root across coefficient and power, then convert units and aggregate lengths. The displayed area is a positive exact square."
+      ]
+    },
+    {
+      "id": "t1-scale-arithmetic-blocks",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover arithmetic terms from two block sums",
+      "syllabus": [
+        "1.2"
+      ],
+      "skills": [
+        "SL1.2.find-u1-d",
+        "SL1.2.sum"
+      ],
+      "unknowns": [
+        {
+          "id": "reconstruct-from-two-blocks",
+          "asked": "Recover arithmetic terms from two block sums",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Compare corresponding terms in disjoint equal-length blocks and reconstruct the first term. The blocks give unique independent constraints."
+      ]
+    },
+    {
+      "id": "t1-scale-arithmetic-mean",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Find an omitted partial sum of an arithmetic sequence",
+      "syllabus": [
+        "1.2"
+      ],
+      "skills": [
+        "SL1.2.sum",
+        "SL1.2.find-u1-d",
+        "SL1.2.find-n"
+      ],
+      "unknowns": [
+        {
+          "id": "partial-backsolve",
+          "asked": "Find an omitted partial sum of an arithmetic sequence",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Infer the common difference from nonconsecutive terms and reconstruct an earlier endpoint before summing."
+      ]
+    },
+    {
+      "id": "t1-scale-alternating-geometric",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover a negative geometric ratio across an odd gap",
+      "syllabus": [
+        "1.3"
+      ],
+      "skills": [
+        "SL1.3.find-r-u1",
+        "SL1.3.sum"
+      ],
+      "unknowns": [
+        {
+          "id": "negative-ratio-from-odd-gap",
+          "asked": "Recover a negative geometric ratio across an odd gap",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "An odd term gap uniquely determines the sign and magnitude of the ratio. Rebuild an earlier initial term before finding the sum."
+      ]
+    },
+    {
+      "id": "t1-scale-geometric-sums-to-terms",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Extract geometric terms from three partial totals",
+      "syllabus": [
+        "1.3"
+      ],
+      "skills": [
+        "SL1.3.find-r-u1",
+        "SL1.3.sum",
+        "SL1.3.nth-term"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-from-three-partial-totals",
+          "asked": "Extract geometric terms from three partial totals",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Partial totals are not terms; use successive differences to obtain the ratio and a new partial total."
+      ]
+    },
+    {
+      "id": "t1-scale-indices-nested-powers",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Solve an index equation with a reciprocal",
+      "syllabus": [
+        "1.5"
+      ],
+      "skills": [
+        "SL1.5.integer-exponent-laws",
+        "SL1.5.zero-negative",
+        "SL1.5.exp-log-form"
+      ],
+      "unknowns": [
+        {
+          "id": "solve-and-verify-power",
+          "asked": "Solve an index equation with a reciprocal",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Combine positive and negative powers, establish the zero exponent, then translate a reciprocal into logarithmic notation."
+      ]
+    },
+    {
+      "id": "t1-scale-log-reject-root",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Solve a log equation and reject the inadmissible root",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "SL1.7.log-laws",
+        "SL1.7.log-equations",
+        "SL1.7.common-base"
+      ],
+      "unknowns": [
+        {
+          "id": "product-log-domain",
+          "asked": "Solve a log equation and reject the inadmissible root",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Both arguments must be positive. Their product creates a two-root quadratic, but only one candidate is legal in the log equation."
+      ]
+    },
+    {
+      "id": "t1-scale-rational-exponent-ratio",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Reconcile a reciprocal power with a rational power",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "SL1.7.rational-exponents"
+      ],
+      "unknowns": [
+        {
+          "id": "two-powers-same-root",
+          "asked": "Reconcile a reciprocal power with a rational power",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Recover the exact common root, reconstruct the base and apply the reciprocal exponent without decimalising."
+      ]
+    },
+    {
+      "id": "t1-scale-repeating-tail",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Convert a two-digit repeating tail into an exact fraction",
+      "syllabus": [
+        "1.8"
+      ],
+      "skills": [
+        "SL1.8.applications",
+        "SL1.8.sum-to-infinity"
+      ],
+      "unknowns": [
+        {
+          "id": "fraction-with-leading-nonrepeat",
+          "asked": "Convert a two-digit repeating tail into an exact fraction",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Separate the non-repeating prefix and model the repeating tail as an infinite geometric sequence."
+      ]
+    },
+    {
+      "id": "t1-scale-alternating-tail",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Find a signed remainder in an alternating geometric series",
+      "syllabus": [
+        "1.8"
+      ],
+      "skills": [
+        "SL1.8.convergence",
+        "SL1.8.sn-vs-sinf",
+        "SL1.8.sum-to-infinity"
+      ],
+      "unknowns": [
+        {
+          "id": "convergent-tail-with-sign",
+          "asked": "Find a signed remainder in an alternating geometric series",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Justify convergence and retain the sign of the remaining tail. Parameters keep the ratio within the open unit interval."
+      ]
+    },
+    {
+      "id": "t1-scale-binomial-adjacent",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover a binomial index from adjacent coefficient ratios",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "SL1.9.find-unknown",
+        "SL1.9.specific-term"
+      ],
+      "unknowns": [
+        {
+          "id": "recover-index-from-ratio",
+          "asked": "Recover a binomial index from adjacent coefficient ratios",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Simplify a ratio of adjacent binomial coefficients to identify the unknown exponent; then find the requested coefficient."
+      ]
+    },
+    {
+      "id": "t1-scale-binomial-product-cancellation",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Cancel a product\u2019s linear term and find its quadratic coefficient",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "SL1.9.product-expansion",
+        "SL1.9.specific-term",
+        "SL1.9.find-unknown"
+      ],
+      "unknowns": [
+        {
+          "id": "cancel-linear-read-quadratic",
+          "asked": "Cancel a product\u2019s linear term and find its quadratic coefficient",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Combine contributions to the linear coefficient to find the multiplier, then combine different term pairs for the quadratic coefficient."
+      ]
+    },
+    {
+      "id": "t1-scale-proof-odd-square-gap",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Use an identity to prove divisibility of a gap of squares",
+      "syllabus": [
+        "1.6"
+      ],
+      "skills": [
+        "SL1.6.integer-proof",
+        "SL1.6.identity-lhs-rhs"
+      ],
+      "unknowns": [
+        {
+          "id": "factor-and-divisibility",
+          "asked": "Use an identity to prove divisibility of a gap of squares",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Numerical preparation supports a general identity and divisibility argument. The proof is independently checked by polynomial coefficients, but the learner self-marks reasoning."
+      ]
+    },
+    {
+      "id": "t1-scale-mean-particle-count",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Combine measurements with different powers of ten",
+      "syllabus": [
+        "1.1"
+      ],
+      "skills": [
+        "SL1.1.add-subtract",
+        "SL1.1.multiply-divide",
+        "SL1.1.context"
+      ],
+      "unknowns": [
+        {
+          "id": "sum-and-average-measurements",
+          "asked": "Combine measurements with different powers of ten",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Align scales, keep unrounded totals and round each technology-assisted final value in standard form."
+      ]
+    },
+    {
+      "id": "t1-scale-bonus-bracket",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Compare the crossover of two increasing pay schedules",
+      "syllabus": [
+        "1.2"
+      ],
+      "skills": [
+        "SL1.2.sum",
+        "SL1.2.model",
+        "SL1.2.find-n"
+      ],
+      "unknowns": [
+        {
+          "id": "step-pay-versus-cost",
+          "asked": "Compare the crossover of two increasing pay schedules",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Compare two different finite arithmetic sums, then use a numeric table to locate the first whole week with a positive difference. Whole-week answers are intentional."
+      ]
+    },
+    {
+      "id": "t1-scale-sensor-calibration",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Infer a decay factor from sensor measurements and find a threshold time",
+      "syllabus": [
+        "1.3"
+      ],
+      "skills": [
+        "SL1.3.find-r-u1",
+        "SL1.3.find-n",
+        "SL1.3.model"
+      ],
+      "unknowns": [
+        {
+          "id": "ratio-from-separation-and-threshold",
+          "asked": "Infer a decay factor from sensor measurements and find a threshold time",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Infer a non-integer decay multiplier from two observations, then use it without premature rounding to locate a strict threshold."
+      ]
+    },
+    {
+      "id": "t1-scale-accounts-alternate-frequencies",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Compare annual and monthly compounding over the same period",
+      "syllabus": [
+        "1.4"
+      ],
+      "skills": [
+        "SL1.4.compare-options",
+        "SL1.4.future-value"
+      ],
+      "unknowns": [
+        {
+          "id": "compare-one-annual-one-monthly",
+          "asked": "Compare annual and monthly compounding over the same period",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Use different compounding frequencies and compare near balances in currency. Keep unrounded values until the requested cents."
+      ]
+    },
+    {
+      "id": "t1-scale-nominal-backsolve",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover a nominal annual rate from a target balance",
+      "syllabus": [
+        "1.4"
+      ],
+      "skills": [
+        "SL1.4.find-rate-or-pv",
+        "SL1.4.future-value"
+      ],
+      "unknowns": [
+        {
+          "id": "target-monthly-balance-to-apr",
+          "asked": "Recover a nominal annual rate from a target balance",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Invert monthly compounding for an awkward multiplier, then convert the unrounded value into a nominal annual rate."
+      ]
+    },
+    {
+      "id": "t1-scale-real-purchasing",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Separate nominal interest from real purchasing power",
+      "syllabus": [
+        "1.4"
+      ],
+      "skills": [
+        "SL1.4.real-value",
+        "SL1.4.future-value",
+        "SL1.4.compare-options"
+      ],
+      "unknowns": [
+        {
+          "id": "inflation-adjusted-balance",
+          "asked": "Separate nominal interest from real purchasing power",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Apply independent growth and inflation processes, distinguish nominal euros from constant-price euros, and report a signed percentage change."
+      ]
+    },
+    {
+      "id": "t1-scale-resale-fee",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Reverse depreciation and a resale commission",
+      "syllabus": [
+        "1.4"
+      ],
+      "skills": [
+        "SL1.4.depreciation",
+        "SL1.4.find-rate-or-pv"
+      ],
+      "unknowns": [
+        {
+          "id": "reverse-depreciation-and-percentage-fee",
+          "asked": "Reverse depreciation and a resale commission",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Undo the one-time percentage fee then reverse compounded depreciation across several years."
+      ]
+    },
+    {
+      "id": "t1-scale-sound-log-combine",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Combine intensities before applying a logarithmic scale",
+      "syllabus": [
+        "1.5"
+      ],
+      "skills": [
+        "SL1.5.log-context",
+        "SL1.5.evaluate-tech",
+        "SL1.5.exp-log-form"
+      ],
+      "unknowns": [
+        {
+          "id": "intensity-addition-then-log",
+          "asked": "Combine intensities before applying a logarithmic scale",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Add intensity ratios before the logarithm and compare levels. This explicitly distinguishes intensity space and level space."
+      ]
+    },
+    {
+      "id": "t1-scale-mixed-exponential",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Solve a shifted exponential quadratic and round at the end",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "SL1.7.hidden-quadratic",
+        "SL1.7.solve-with-logs"
+      ],
+      "unknowns": [
+        {
+          "id": "quadratic-in-growth-factor",
+          "asked": "Solve a shifted exponential quadratic and round at the end",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Use a hidden quadratic substitution, enforce the positive branch, and recover a noninteger exponent with logarithms."
+      ]
+    },
+    {
+      "id": "t1-scale-infinite-measurements",
+      "topic": 1,
+      "source": "extension",
+      "kind": "skill",
+      "name": "Recover an infinite sum from two measured partial sums",
+      "syllabus": [
+        "1.8"
+      ],
+      "skills": [
+        "SL1.8.sn-vs-sinf",
+        "SL1.8.find-unknown",
+        "SL1.8.sum-to-infinity"
+      ],
+      "unknowns": [
+        {
+          "id": "remaining-from-consecutive-partial-sums",
+          "asked": "Recover an infinite sum from two measured partial sums",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Use the difference of consecutive partial sums to predict the next term, then estimate an entire remaining tail without rounding twice."
+      ]
+    }
+  ]
+}

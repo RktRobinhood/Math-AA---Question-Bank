@@ -1,0 +1,325 @@
+{
+  "about": "Original Numbers and Algebra families for Wave 3.",
+  "types": [
+    {
+      "id": "w3-number-product-certificate",
+      "name": "Prove and apply a product ceiling",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.6"
+      ],
+      "skills": [
+        "SL1.6.inequality-proof",
+        "SL1.6.deduce-inequality"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Prove and apply a product ceiling",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-balanced-block-read",
+      "name": "Read the average of a symmetric arithmetic block",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.2"
+      ],
+      "skills": [
+        "SL1.2.sum"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Read the average of a symmetric arithmetic block",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-geometric-recovery-leg",
+      "name": "Recover the absolute starting height from just the fall",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.3"
+      ],
+      "skills": [
+        "SL1.3.model",
+        "SL1.3.nth-term"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover the absolute starting height from just the fall",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-depreciation-discrete-loss",
+      "name": "Separate first-year loss from next-year loss",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.4"
+      ],
+      "skills": [
+        "SL1.4.depreciation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Separate first-year loss from next-year loss",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-change-base-reciprocal",
+      "name": "Recognise the reciprocal when a logarithm swaps its base",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "SL1.7.change-of-base"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recognise the reciprocal when a logarithm swaps its base",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-infinite-tail-fraction-test",
+      "name": "Select an alternating series that has a finite sum",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-sl",
+      "syllabus": [
+        "1.8"
+      ],
+      "skills": [
+        "SL1.8.convergence"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Select an alternating series that has a finite sum",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-log-two-measurements-repair",
+      "name": "Repair an inconsistent logarithmic measurement without undoing both logs",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "ai-hl",
+      "syllabus": [
+        "1.9"
+      ],
+      "skills": [
+        "AI-AHL1.9.combine",
+        "AI-AHL1.9.solve-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Repair an inconsistent logarithmic measurement without undoing both logs",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-weighted-pole-reconstruction",
+      "name": "Recover both partial fractions from two weighted observations",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-hl",
+      "syllabus": [
+        "1.11"
+      ],
+      "skills": [
+        "AHL1.11.distinct-linear-factors",
+        "AHL1.11.cover-up-or-compare"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover both partial fractions from two weighted observations",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-argand-perpendicular-bisector",
+      "name": "Locate the real point equidistant from two complex numbers",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "aa-hl",
+      "syllabus": [
+        "1.12"
+      ],
+      "skills": [
+        "AHL1.12.argand-diagram",
+        "AHL1.12.modulus-argument-values"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Locate the real point equidistant from two complex numbers",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-subtracted-rounding-error",
+      "name": "Find the largest relative error after subtracting rounded readings",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "ai-sl",
+      "syllabus": [
+        "1.6"
+      ],
+      "skills": [
+        "AI-SL1.6.bounds-of-calculation",
+        "AI-SL1.6.max-percentage-error"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find the largest relative error after subtracting rounded readings",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-annuity-shifted-stream",
+      "name": "Compare deposit streams shifted by one period",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "ai-sl",
+      "syllabus": [
+        "1.7"
+      ],
+      "skills": [
+        "AI-SL1.7.future-value-deposits",
+        "AI-SL1.7.compare-interpret"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Compare deposit streams shifted by one period",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w3-number-eigenline-reconstruct-column",
+      "name": "Recover an unknown matrix from two eigenline responses",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 1,
+      "home": "ai-hl",
+      "syllabus": [
+        "1.15"
+      ],
+      "skills": [
+        "AI-AHL1.15.eigenvectors",
+        "AI-AHL1.15.diagonalise"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover an unknown matrix from two eigenline responses",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

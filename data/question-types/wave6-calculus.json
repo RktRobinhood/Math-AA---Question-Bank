@@ -1,0 +1,361 @@
+{
+  "about": "Original Wave 6 calculus families. Exam part references indicate existing skills only.",
+  "types": [
+    {
+      "id": "w6-calculus-tangent-axis-intercept-from-local-reference",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use a local reference displacement to locate a tangent’s axis intercept",
+      "syllabus": [
+        "5.4"
+      ],
+      "skills": [
+        "SL5.4.tangent-gradient",
+        "SL5.4.tangent-meets-axes-or-curve"
+      ],
+      "parts": [
+        "aa-sl-2025-may-tz1-p2-q06.a",
+        "aa-sl-2025-may-tz1-p2-q06.b",
+        "aa-sl-2023-may-tz2-p1-q07.e",
+        "aa-sl-2023-nov-tz1-p2-q01.c"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a local reference displacement to locate a tangent’s axis intercept",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Nonhorizontal tangent; its finite axis intercept is not an axis intercept of the original profile."
+      ]
+    },
+    {
+      "id": "w6-calculus-stationary-spacing-from-slope",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Find the separation of stationary points from a slope measurement",
+      "syllabus": [
+        "5.6"
+      ],
+      "skills": [
+        "AI-SL5.6.solve-gradient-zero",
+        "AI-SL5.6.classify-from-derivative"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p2-q05.a",
+        "ai-sl-2022-nov-tz0-p1-q13.a"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find the separation of stationary points from a slope measurement",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "The calibrated derivative has two distinct zeros and is strictly negative between them."
+      ]
+    },
+    {
+      "id": "w6-calculus-contract-retarget-demand",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Infer a pricing parameter from the revenue-maximising choice",
+      "syllabus": [
+        "5.7"
+      ],
+      "skills": [
+        "AI-SL5.7.form-objective",
+        "AI-SL5.7.parameter-from-optimum"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.a",
+        "ai-sl-2021-may-tz2-p2-q05.b",
+        "ai-sl-2023-may-tz1-p2-q05.d"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Infer a pricing parameter from the revenue-maximising choice",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Unique strictly interior revenue maximizer and strictly positive demand across the stated price domain."
+      ]
+    },
+    {
+      "id": "w6-calculus-product-slope-neutral-factor",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Choose a local factor slope that flattens the product",
+      "syllabus": [
+        "5.6"
+      ],
+      "skills": [
+        "SL5.6.product-rule",
+        "SL5.6.rules-with-values"
+      ],
+      "parts": [
+        "aa-sl-2022-may-tz1-p1-q05",
+        "aa-sl-2022-may-tz2-p2-q06.b",
+        "aa-sl-2021-nov-tz0-p1-q05.d"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose a local factor slope that flattens the product",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Two factors are nonzero at the specified point; the adjusted local slope changes the product derivative by that first factor."
+      ]
+    },
+    {
+      "id": "w6-calculus-reverse-chain-offset-calibration",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover the scale and offset of a reverse-chain antiderivative",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "SL5.10.linear-composites",
+        "SL5.10.find-function-from-derivative"
+      ],
+      "parts": [
+        "aa-sl-2021-nov-tz0-p1-q02",
+        "aa-sl-2022-may-tz2-p1-q08.b",
+        "aa-sl-2022-may-tz2-p2-q02"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover the scale and offset of a reverse-chain antiderivative",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Nonzero derivative of the inner expression; one supplied function value fixes the additive constant."
+      ]
+    },
+    {
+      "id": "w6-calculus-stationarity-before-curvature",
+      "home": "ai-hl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Separate the condition for stationarity from the sign of curvature",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "AI-AHL5.10.find-second-derivative",
+        "AI-AHL5.10.concavity"
+      ],
+      "parts": [
+        "ai-hl-2022-may-tz1-p1-q08.a",
+        "ai-hl-2023-nov-tz0-p1-q09.b",
+        "ai-hl-2025-may-tz3-p2-q01.h",
+        "ai-hl-2026-may-tz3-p1-q15.b"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Separate the condition for stationarity from the sign of curvature",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "The first derivative and curvature are both nonzero at the inspection input."
+      ]
+    },
+    {
+      "id": "w6-calculus-double-zero-is-not-inflexion",
+      "home": "ai-hl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Distinguish a double zero of curvature from a genuine change of concavity",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "AI-AHL5.10.concavity",
+        "AI-AHL5.10.points-of-inflexion"
+      ],
+      "parts": [
+        "ai-hl-2025-may-tz3-p2-q01.h",
+        "ai-hl-2026-may-tz3-p1-q15.b",
+        "ai-hl-2022-may-tz1-p1-q08.b",
+        "ai-hl-2023-nov-tz0-p1-q09.c"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Distinguish a double zero of curvature from a genuine change of concavity",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Distinct simple and double zeros; the second derivative changes sign at exactly one."
+      ]
+    },
+    {
+      "id": "w6-calculus-rate-band-width",
+      "home": "ai-hl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Locate the slowest instant, then measure how long the rate stays near it",
+      "syllabus": [
+        "5.10"
+      ],
+      "skills": [
+        "AI-AHL5.10.greatest-rate-of-change",
+        "AI-AHL5.10.points-of-inflexion"
+      ],
+      "parts": [
+        "ai-hl-2021-nov-tz0-p1-q08.a",
+        "ai-hl-2022-may-tz1-p2-q02.c",
+        "ai-hl-2022-may-tz1-p1-q08.b",
+        "ai-hl-2023-nov-tz0-p1-q09.c"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Locate the slowest instant, then measure how long the rate stays near it",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Unique interior minimum rate; both allowed-rate boundaries lie strictly inside the monitoring window."
+      ]
+    },
+    {
+      "id": "w6-calculus-order-after-reversed-input",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Track monotonic intervals under reversed input and negated output",
+      "syllabus": [
+        "5.2"
+      ],
+      "skills": [
+        "SL5.2.increasing-decreasing-intervals",
+        "SL5.2.sign-at-point"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz1-p1-q07.d",
+        "aa-sl-2021-nov-tz0-p1-q09.a"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Track monotonic intervals under reversed input and negated output",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Both pieces have positive length; reverse input, then reverse order again by subtracting the function value."
+      ]
+    },
+    {
+      "id": "w6-calculus-pair-of-gradient-readings",
+      "home": "ai-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Recover inverse-power model coefficients from two gradient readings",
+      "syllabus": [
+        "5.3"
+      ],
+      "skills": [
+        "SL5.3.negative-powers",
+        "SL5.3.gradient-at-point",
+        "SL5.3.unknown-coefficients"
+      ],
+      "parts": [
+        "ai-sl-2021-may-tz1-p1-q12.b",
+        "ai-sl-2021-nov-tz0-p1-q12.a",
+        "ai-sl-2022-may-tz2-p1-q11.b",
+        "ai-sl-2023-nov-tz1-p1-q08.a",
+        "ai-sl-2024-may-tz1-p2-q05.e",
+        "ai-sl-2024-may-tz2-p1-q10"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover inverse-power model coefficients from two gradient readings",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Two distinct positive measurement inputs give independent linear equations for nonzero coefficients."
+      ]
+    }
+  ]
+}

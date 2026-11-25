@@ -1,0 +1,37 @@
+{
+  "home": "ai-hl",
+  "about": "Original Wave 5 Topic 4 question families; exact exam parts are precedents for the skill only.",
+  "types": [
+    {
+      "id": "w5-statistics-poisson-two-interval-composition",
+      "topic": 4,
+      "name": "Use Poisson totals without assuming two intervals contribute equally",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.17"
+      ],
+      "skills": [
+        "AI-AHL4.17.rescale-mean",
+        "AI-AHL4.17.poisson-probability",
+        "AI-AHL4.17.sum-of-poissons"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p2-q06.a",
+        "ai-hl-2025-may-tz2-p1-q13.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Use Poisson totals without assuming two intervals contribute equally",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

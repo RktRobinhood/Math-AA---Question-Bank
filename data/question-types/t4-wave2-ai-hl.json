@@ -1,0 +1,218 @@
+{
+  "about": "Original structural Wave 2 generators; official exam references are metadata-only skill anchors.",
+  "home": "ai-hl",
+  "types": [
+    {
+      "id": "t4-wave2-test-retest-versus-calibration",
+      "topic": 4,
+      "name": "Diagnose a stable calibration error without mistaking reliability for validity",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.12"
+      ],
+      "skills": [
+        "AI-AHL4.12.reliability",
+        "AI-AHL4.12.validity"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz1-p3-q02.c(iii)",
+        "ai-hl-2021-may-tz1-p3-q02.d(iii)"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Diagnose a stable calibration error without mistaking reliability for validity",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-held-out-residual-check",
+      "topic": 4,
+      "name": "Select a model using separate held-out observations",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.13"
+      ],
+      "skills": [
+        "AI-AHL4.13.ssres",
+        "AI-AHL4.13.r-squared",
+        "AI-AHL4.13.compare-models"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p3-q01.e(vi)",
+        "ai-hl-2023-may-tz1-p1-q16.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Select a model using separate held-out observations",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-paired-independent-contrasts",
+      "topic": 4,
+      "name": "Distinguish systematic shifts from independent variation",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.14"
+      ],
+      "skills": [
+        "AI-AHL4.14.linear-combination",
+        "AI-AHL4.14.linear-transformation"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p2-q06.b",
+        "ai-hl-2024-nov-tz0-p1-q15.a"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Distinguish systematic shifts from independent variation",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-two-normal-batches-disagree",
+      "topic": 4,
+      "name": "Find the chance that one sample mean exceeds another",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.15"
+      ],
+      "skills": [
+        "AI-AHL4.15.normal-combination",
+        "AI-AHL4.15.sample-mean"
+      ],
+      "parts": [
+        "ai-hl-2023-may-tz1-p1-q11",
+        "ai-hl-2022-may-tz1-p1-q09.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Find the chance that one sample mean exceeds another",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-confidence-precision-tradeoff",
+      "topic": 4,
+      "name": "Trade measurement precision for a higher confidence level",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.16"
+      ],
+      "skills": [
+        "AI-AHL4.16.find-interval",
+        "AI-AHL4.16.interval-conditions"
+      ],
+      "parts": [
+        "ai-hl-2021-may-tz2-p1-q10.c",
+        "ai-hl-2023-may-tz2-p1-q15.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Trade measurement precision for a higher confidence level",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-poisson-separate-windows",
+      "topic": 4,
+      "name": "Account for an overlap before combining Poisson counts",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.17"
+      ],
+      "skills": [
+        "AI-AHL4.17.poisson-probability",
+        "AI-AHL4.17.rescale-mean",
+        "AI-AHL4.17.sum-of-poissons"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p2-q06.a",
+        "ai-hl-2026-may-tz1-p2-q06.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Account for an overlap before combining Poisson counts",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t4-wave2-markov-recover-transition",
+      "topic": 4,
+      "name": "Recover a missing transition by comparing two starting states",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.19"
+      ],
+      "skills": [
+        "AI-AHL4.19.transition-matrix",
+        "AI-AHL4.19.n-step"
+      ],
+      "parts": [
+        "ai-hl-2024-may-tz1-p2-q08.e",
+        "ai-hl-2021-may-tz2-p2-q04.b"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Recover a missing transition by comparing two starting states",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

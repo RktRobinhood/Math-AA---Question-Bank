@@ -1,0 +1,53 @@
+{
+  "about": "Original probability practice switches the representation, unknown or reasoning task; exam references are skill mappings only.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t4-empirical-forecast",
+      "name": "Forecasts from observed frequencies",
+      "topic": 4,
+      "source": "extension",
+      "kind": "skill",
+      "syllabus": ["4.5"],
+      "skills": ["SL4.5.relative-frequency", "SL4.5.expected-occurrences", "SL4.5.complement"],
+      "parts": ["aa-sl-2023-may-tz1-p1-q03.b", "aa-sl-2025-may-tz3-p2-q08.b"],
+      "unknowns": [
+        {"id":"predict-combined-count","asked":"Forecast a total from grouped frequencies.","level":2},
+        {"id":"recover-sample-size","asked":"Recover the future sample size from an expected count.","level":2}
+      ],
+      "representations": [{"rep":"table"},{"rep":"words"}]
+    },
+    {
+      "id": "t4-binomial-reading-cdf",
+      "name": "Read and rearrange binomial cumulative probabilities",
+      "topic": 4,
+      "source": "extension",
+      "kind": "skill",
+      "syllabus": ["4.8"],
+      "skills": ["SL4.8.cumulative-probability","SL4.8.exact-probability"],
+      "parts": ["aa-sl-2024-nov-tz1-p2-q07.b","aa-sl-2025-may-tz3-p2-q08.c","aa-sl-2026-may-tz1-p2-q09.b"],
+      "unknowns": [
+        {"id":"complement-boundary","asked":"Read an upper-tail probability without a calculator.","level":1},
+        {"id":"interval-and-point","asked":"Use CDF differences for a range and one point.","level":3}
+      ],
+      "representations": [{"rep":"table"}],
+      "misconceptions": ["Subtracting at the wrong integer boundary", "Confusing the probability of a single count with its cumulative probability"]
+    },
+    {
+      "id": "t4-binomial-with-condition",
+      "name": "Binomial probabilities with information or uncertainty",
+      "topic": 4,
+      "source": "extension",
+      "kind": "skill",
+      "syllabus": ["4.8","4.11"],
+      "skills": ["SL4.8.cumulative-probability","SL4.8.binomial-in-context","SL4.11.conditional-formula","SL4.11.reverse-conditional"],
+      "parts": ["aa-sl-2023-nov-tz1-p2-q09.c","aa-sl-2025-nov-tz1-p2-q06.a","aa-sl-2025-nov-tz1-p2-q06.b","aa-sl-2026-may-tz3-p2-q08.b"],
+      "unknowns": [
+        {"id":"restricted-count","asked":"Update a count probability after receiving a threshold report.","level":4},
+        {"id":"latent-source","asked":"Identify the more likely source after observing a threshold.","level":4}
+      ],
+      "representations": [{"rep":"words"},{"rep":"table"}],
+      "misconceptions": ["Using the unconditioned probability", "Averaging binomial parameters rather than averaging conditional event probabilities"]
+    }
+  ]
+}

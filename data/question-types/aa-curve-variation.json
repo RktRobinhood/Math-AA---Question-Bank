@@ -1,0 +1,214 @@
+{
+  "about": "Original opt-in practice pack; no changes to shared engine files.",
+  "home": "aa-sl",
+  "types": [
+    {
+      "id": "t5-ext-curve-sign-evidence",
+      "name": "Diagnose a point from derivative signs",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 5,
+      "syllabus": [
+        "5.8",
+        "5.7"
+      ],
+      "skills": [
+        "SL5.8.classify-stationary-points",
+        "SL5.8.points-of-inflexion",
+        "SL5.7.concavity"
+      ],
+      "unknowns": [
+        {
+          "id": "classify-sign-table",
+          "asked": "Classify a point from a derivative sign table",
+          "level": 1
+        },
+        {
+          "id": "audit-inflexion-claim",
+          "asked": "Decide what the evidence proves about an inflexion",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        },
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-degenerate-points",
+      "name": "Stationary points with zero second derivative",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 5,
+      "syllabus": [
+        "5.8",
+        "5.7"
+      ],
+      "skills": [
+        "SL5.8.classify-stationary-points",
+        "SL5.8.points-of-inflexion",
+        "SL5.8.find-stationary-points",
+        "SL5.7.find-second-derivative"
+      ],
+      "unknowns": [
+        {
+          "id": "flat-point-classification",
+          "asked": "A flat curve can still have a turning point",
+          "level": 1
+        },
+        {
+          "id": "quartic-zero-second-derivative",
+          "asked": "Classify a quartic when the second derivative test is inconclusive",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-derivative-trends",
+      "name": "Translate between a function and its derivatives",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 5,
+      "syllabus": [
+        "5.7",
+        "5.8"
+      ],
+      "skills": [
+        "SL5.7.concavity",
+        "SL5.7.f-from-derivative-graph",
+        "SL5.8.points-of-inflexion",
+        "SL5.7.find-second-derivative"
+      ],
+      "unknowns": [
+        {
+          "id": "concavity-from-gradient-change",
+          "asked": "Infer concavity from how the gradient changes",
+          "level": 1
+        },
+        {
+          "id": "gradient-graph-vertex",
+          "asked": "Read concavity from the turning point of a gradient graph",
+          "level": 2
+        },
+        {
+          "id": "parameter-from-inflexion",
+          "asked": "Work backwards from a known point of inflexion",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        },
+        {
+          "rep": "graph"
+        },
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-context-rate",
+      "name": "Interpret derivatives and optimise a model",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 5,
+      "syllabus": [
+        "5.7",
+        "5.8",
+        "5.6"
+      ],
+      "skills": [
+        "SL5.7.find-second-derivative",
+        "SL5.7.interpret-second-derivative",
+        "SL5.8.optimise-given-function",
+        "SL5.8.closed-interval-extremes",
+        "SL5.6.chain-rule"
+      ],
+      "unknowns": [
+        {
+          "id": "interpret-cooling-curvature",
+          "asked": "Interpret whether a changing quantity is slowing down",
+          "level": 2
+        },
+        {
+          "id": "largest-reading-on-time-interval",
+          "asked": "Compare an interior maximum with both endpoints",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "t5-ext-context-constraint",
+      "name": "Optimisation with a constraint",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 5,
+      "syllabus": [
+        "5.8"
+      ],
+      "skills": [
+        "SL5.8.optimise-given-function",
+        "SL5.8.closed-interval-extremes",
+        "SL5.8.optimisation-modelling"
+      ],
+      "unknowns": [
+        {
+          "id": "minimum-with-capacity-limit",
+          "asked": "Check whether a resource limit rules out an optimum",
+          "level": 3
+        },
+        {
+          "id": "least-enclosure-cost",
+          "asked": "Build and minimise a cost model with two fence prices",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-ext-graph-threshold",
+      "name": "Graphical comparison with a moving threshold",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "syllabus": [
+        "2.4"
+      ],
+      "skills": [
+        "SL2.4.intersection"
+      ],
+      "unknowns": [
+        {
+          "id": "crossing-time-and-integer",
+          "asked": "Find a graphical crossing, then answer a whole-period question",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "about": "Original Wave 4 geometry and trigonometry practice",
+  "types": [
+    {
+      "id": "w4-t3-two-roots-recover-target",
+      "home": "aa-sl",
+      "name": "Recover a shifted cosine equation from two known solutions",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.8"
+      ],
+      "skills": [
+        "SL3.8.solve-basic"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover a shifted cosine equation from two known solutions",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-tangent-endpoint-policy",
+      "home": "aa-sl",
+      "name": "Distinguish open and closed ends of a shifted tangent solution interval",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.8"
+      ],
+      "skills": [
+        "SL3.8.solve-basic",
+        "SL3.8.compound-angle"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Distinguish open and closed ends of a shifted tangent solution interval",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-fundamental-harmonic-crossings",
+      "home": "aa-sl",
+      "name": "Discard an infeasible cosine level, then track crossings in a shifted interval",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.8"
+      ],
+      "skills": [
+        "SL3.8.quadratic-in-trig",
+        "SL3.8.graphical"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Discard an infeasible cosine level, then track crossings in a shifted interval",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-unsigned-signal-tolerance",
+      "home": "aa-sl",
+      "name": "Choose both branches of an unsigned trig tolerance",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.8"
+      ],
+      "skills": [
+        "SL3.8.graphical",
+        "SL3.8.solve-basic"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Choose both branches of an unsigned trig tolerance",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-double-angle-recover-signed-ratio",
+      "home": "aa-sl",
+      "name": "Recover a signed ratio from a same-angle and doubled-angle signal",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.6"
+      ],
+      "skills": [
+        "SL3.6.double-angle-values",
+        "SL3.6.ratio-from-ratio"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Recover a signed ratio from a same-angle and doubled-angle signal",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-double-angle-interval-compatibility",
+      "home": "aa-sl",
+      "name": "Use the doubled-cosine interval to check two measurement channels",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.6"
+      ],
+      "skills": [
+        "SL3.6.double-angle-values",
+        "SL3.6.ratio-from-ratio"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use the doubled-cosine interval to check two measurement channels",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-annular-ribbon-from-two-edges",
+      "home": "aa-sl",
+      "name": "Use the difference in two curved edge lengths to recover an annular sector",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.4"
+      ],
+      "skills": [
+        "SL3.4.arc-length",
+        "SL3.4.sector-area"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use the difference in two curved edge lengths to recover an annular sector",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-two-overlapping-circular-sweeps",
+      "home": "aa-sl",
+      "name": "Combine two unequal segments to measure an overlap",
+      "topic": 3,
+      "kind": "link",
+      "source": "extension",
+      "syllabus": [
+        "3.4",
+        "3.2"
+      ],
+      "skills": [
+        "SL3.4.sector-area",
+        "SL3.4.segment-shaded",
+        "SL3.2.cosine-rule-angle"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Combine two unequal segments to measure an overlap",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "level": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "w4-t3-fraction-turn-to-degrees",
+      "home": "aa-sl",
+      "name": "Read the degrees in a proper fraction of one turn",
+      "topic": 3,
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "3.4"
+      ],
+      "skills": [
+        "SL3.4.arc-length"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Read the degrees in a proper fraction of one turn",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "supports": [
+        "SL3.4.arc-length"
+      ],
+      "level": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "w4-t3-quarter-cycle-model-direction",
+      "home": "aa-sl",
+      "name": "Use table order to recover the sign and period of a sine model",
+      "topic": 3,
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "3.7"
+      ],
+      "skills": [
+        "SL3.7.read-features",
+        "SL3.7.model-context"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Use table order to recover the sign and period of a sine model",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-t3-compass-turn-wrap",
+      "home": "aa-sl",
+      "name": "Normalize a clockwise compass turn across north",
+      "topic": 3,
+      "kind": "prior-learning",
+      "source": "extension",
+      "syllabus": [
+        "3.3"
+      ],
+      "skills": [
+        "SL3.3.bearings"
+      ],
+      "unknowns": [
+        {
+          "id": "result",
+          "asked": "Normalize a clockwise compass turn across north",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "supports": [
+        "SL3.3.bearings"
+      ],
+      "level": [
+        0,
+        0
+      ]
+    }
+  ]
+}

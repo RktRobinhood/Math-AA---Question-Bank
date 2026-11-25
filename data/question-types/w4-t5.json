@@ -1,0 +1,314 @@
+{
+  "home": "aa-sl",
+  "about": "Original Wave 4 Topic 5 practice. Exam skill pointers are external metadata only.",
+  "types": [
+    {
+      "id": "w4-t5-paired-chord-calibration",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Separate the effects on two opposite chord gradients",
+      "syllabus": [
+        "5.1"
+      ],
+      "skills": [
+        "SL5.1.chord-to-tangent",
+        "SL5.1.estimate-limit"
+      ],
+      "unknowns": [
+        {
+          "id": "separate-even-and-odd-contributions",
+          "asked": "Separate the effects on two opposite chord gradients",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Exact Level 3: invert a pair of chord measurements, take the limit, and separate bias from terms that cancel."
+      ]
+    },
+    {
+      "id": "w4-t5-tangent-prediction-at-slowing-point",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Use a local tangent prediction at a specified instantaneous rate",
+      "syllabus": [
+        "5.1"
+      ],
+      "skills": [
+        "SL5.1.interpret-derivative",
+        "SL5.1.chord-to-tangent"
+      ],
+      "unknowns": [
+        {
+          "id": "rate-threshold-then-prediction-error",
+          "asked": "Use a local tangent prediction at a specified instantaneous rate",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Level 4: find a rate threshold using technology, extrapolate locally, then distinguish the tangent prediction from the nonlinear model."
+      ]
+    },
+    {
+      "id": "w4-t5-monotonicity-with-hole",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Distinguish a missing input from a stationary input in a sign chart",
+      "syllabus": [
+        "5.2"
+      ],
+      "skills": [
+        "SL5.2.increasing-decreasing-intervals",
+        "SL5.2.sign-at-point"
+      ],
+      "unknowns": [
+        {
+          "id": "decrease-separated-by-excluded-input",
+          "asked": "Distinguish a missing input from a stationary input in a sign chart",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Exact Level 3: sign analysis must split at an excluded input rather than at every zero or carry one interval through a hole."
+      ]
+    },
+    {
+      "id": "w4-t5-rising-window-in-cycles",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Combine two increasing intervals within a nonaligned observation window",
+      "syllabus": [
+        "5.2"
+      ],
+      "skills": [
+        "SL5.2.increasing-decreasing-intervals",
+        "SL5.2.sign-at-point"
+      ],
+      "unknowns": [
+        {
+          "id": "combine-two-rising-intervals",
+          "asked": "Combine two increasing intervals within a nonaligned observation window",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Level 4: numerically solve the derivative threshold twice, then combine interval lengths cut by the observation window."
+      ]
+    },
+    {
+      "id": "w4-t5-piecewise-delivery-meter",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Accumulate delivery across a switch of rate model",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.definite-integral-gdc",
+        "SL5.5.total-change-from-rate"
+      ],
+      "unknowns": [
+        {
+          "id": "continuous-rate-change-and-reset",
+          "asked": "Accumulate delivery across a switch of rate model",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Level 4: combine two nonnegative rate models with the same value at the join; invert a cumulative quantity after validating the correct stage."
+      ]
+    },
+    {
+      "id": "w4-t5-steady-reading-unknown-drain",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Infer a constant leak from equal reservoir readings",
+      "syllabus": [
+        "5.5"
+      ],
+      "skills": [
+        "SL5.5.definite-integral-gdc",
+        "SL5.5.total-change-from-rate",
+        "SL5.5.boundary-condition"
+      ],
+      "unknowns": [
+        {
+          "id": "calibrate-baseline-loss-from-integrals",
+          "asked": "Infer a constant leak from equal reservoir readings",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ],
+      "constraints": [
+        "Level 4: infer an unknown constant outflow from a measured boundary condition; reconstruct an intermediate volume with unrounded values."
+      ]
+    },
+    {
+      "id": "w4-t5-inverse-power-slope-band",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Find the width of an input band selected by tangent gradients",
+      "syllabus": [
+        "5.3"
+      ],
+      "skills": [
+        "SL5.3.negative-powers",
+        "SL5.3.point-with-given-gradient",
+        "SL5.3.power-rule"
+      ],
+      "unknowns": [
+        {
+          "id": "two-slope-thresholds",
+          "asked": "Find the width of an input band selected by tangent gradients",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Level 4: find both roots of a slope band with reciprocal and positive powers and subtract unrounded endpoints."
+      ]
+    },
+    {
+      "id": "w4-t5-log-power-inflection",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "skill",
+      "source": "extension",
+      "name": "Find where the concavity changes without a stationary point",
+      "syllabus": [
+        "5.7",
+        "5.6"
+      ],
+      "skills": [
+        "SL5.7.find-second-derivative",
+        "SL5.7.concavity",
+        "SL5.6.standard-derivatives"
+      ],
+      "unknowns": [
+        {
+          "id": "nonstationary-concavity-switch",
+          "asked": "Find where the concavity changes without a stationary point",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Level 4: locate the sign change in the second derivative and distinguish inflection from stationarity through the first derivative."
+      ]
+    },
+    {
+      "id": "w4-t5-signed-rise-over-run-prerequisite",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "prior-learning",
+      "source": "extension",
+      "name": "Read the sign of the change as the input increases",
+      "syllabus": [
+        "5.2"
+      ],
+      "skills": [
+        "SL5.2.sign-at-point"
+      ],
+      "unknowns": [
+        {
+          "id": "opposite-direction-deltas",
+          "asked": "Read the sign of the change as the input increases",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ],
+      "constraints": [
+        "Level 0: infer signed change after reordering the input; intended prerequisite for reading derivative signs."
+      ],
+      "supports": [
+        "SL5.2.sign-at-point",
+        "SL5.2.increasing-decreasing-intervals"
+      ]
+    },
+    {
+      "id": "w4-t5-balanced-chord-quartic",
+      "home": "aa-sl",
+      "topic": 5,
+      "kind": "link",
+      "source": "extension",
+      "name": "Use a level chord to reconstruct a quartic and its increasing intervals",
+      "syllabus": [
+        "5.1",
+        "5.2"
+      ],
+      "skills": [
+        "SL5.1.chord-to-tangent",
+        "SL5.2.increasing-decreasing-intervals"
+      ],
+      "unknowns": [
+        {
+          "id": "zero-secant-calibrates-monotonicity",
+          "asked": "Use a level chord to reconstruct a quartic and its increasing intervals",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "constraints": [
+        "Synoptic Level 5: connect equal chord endpoint heights, a missing quartic parameter, maximal increasing intervals and the vertical separation of extrema."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "about": "Original Functions families for Wave 4.",
+  "types": [
+    {
+      "id": "w4-fn-perpendicular-drop",
+      "name": "Find the closest point on a straight route",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.parallel-perpendicular"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find the closest point on a straight route",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-cable-safe-segment",
+      "name": "Find the portion of a straight cable that satisfies two limits",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.line-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find the portion of a straight cable that satisfies two limits",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-calibration-reject-time",
+      "name": "Distinguish a physical inverse reading from extrapolation",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.function-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Distinguish a physical inverse reading from extrapolation",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-inverse-duplicate-witness",
+      "name": "Find numerical witnesses that a function is not one-to-one",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.is-function"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find numerical witnesses that a function is not one-to-one",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-arch-width-transfer",
+      "name": "Transfer a measured width to a different height on a parabola",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "SL2.6.axis-symmetry"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Transfer a measured width to a different height on a parabola",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-mirror-quadratic-repair",
+      "name": "Reconstruct a quadratic from repeated outputs and its axis",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "SL2.6.vertex"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reconstruct a quadratic from repeated outputs and its axis",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-affine-restore-feature",
+      "name": "Recover an original graph feature by undoing mixed transformations",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.11"
+      ],
+      "skills": [
+        "SL2.11.image-point"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover an original graph feature by undoing mixed transformations",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-decay-gap-matching",
+      "name": "Match two exponentially decaying gaps above different baselines",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "SL2.9.exp-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Match two exponentially decaying gaps above different baselines",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-reciprocal-asymptote-absent-output",
+      "name": "Identify the horizontal asymptote as the missing output",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.8"
+      ],
+      "skills": [
+        "SL2.8.asymptotes"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Identify the horizontal asymptote as the missing output",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-refine-bracket",
+      "name": "Refine a numerical root bracket using one new test value",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "SL2.10.solve-gdc"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Refine a numerical root bracket using one new test value",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-unit-chain-ready",
+      "name": "Match the output units of one step to the input units of another",
+      "source": "extension",
+      "kind": "prior-learning",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "SL2.5.composite-expression"
+      ],
+      "supports": [
+        "SL2.5.composite-value",
+        "SL2.5.composite-expression"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Match the output units of one step to the input units of another",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "w4-fn-reciprocal-linear-tradeoff",
+      "name": "Balance a reciprocal penalty against a rising linear cost",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.8",
+        "2.4"
+      ],
+      "skills": [
+        "SL2.8.rational-model",
+        "SL2.4.max-min",
+        "SL2.4.intersection"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Balance a reciprocal penalty against a rising linear cost",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}

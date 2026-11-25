@@ -1,0 +1,68 @@
+{
+  "about": "Original structural variation, with exam parts recorded only as method references.",
+  "home": "aa-hl",
+  "types": [
+    {
+      "id": "t4-scale-bayes-reverse-mixture",
+      "topic": 4,
+      "name": "Recover a new prior from a known mixture rate",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.13"
+      ],
+      "skills": [
+        "AHL4.13.total-probability",
+        "AHL4.13.bayes-formula"
+      ],
+      "parts": [
+        "aa-hl-2023-may-tz1-p2-q07.b"
+      ],
+      "unknowns": [
+        {
+          "id": "bayes-reverse-mixture",
+          "asked": "Recover a new prior from a known mixture rate",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "t4-scale-pdf-triangular-median",
+      "topic": 4,
+      "name": "Find the median and report a scaled continuous variable",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.14",
+        "5.11"
+      ],
+      "skills": [
+        "AHL4.14.pdf-normalise",
+        "AHL4.14.pdf-probability",
+        "AHL4.14.median-mode",
+        "AHL4.14.linear-transformation",
+        "SL5.11.evaluate-definite"
+      ],
+      "parts": [
+        "aa-hl-2025-may-tz2-p2-q11.d"
+      ],
+      "unknowns": [
+        {
+          "id": "pdf-triangular-median",
+          "asked": "Find the median and report a scaled continuous variable",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    }
+  ]
+}

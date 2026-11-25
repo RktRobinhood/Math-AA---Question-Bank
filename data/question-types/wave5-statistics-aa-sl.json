@@ -1,0 +1,126 @@
+{
+  "home": "aa-sl",
+  "about": "Original Wave 5 Topic 4 question families; exact exam parts are precedents for the skill only.",
+  "types": [
+    {
+      "id": "w5-statistics-systematic-periodic-start",
+      "topic": 4,
+      "name": "Diagnose how a periodic list affects a systematic sample",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.sampling-technique",
+        "SL4.1.bias-reliability"
+      ],
+      "parts": [
+        "aa-sl-2023-nov-tz1-p1-q07.c",
+        "aa-sl-2023-nov-tz2-p1-q07.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Diagnose how a periodic list affects a systematic sample",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-sample-frame-duplicate-entries",
+      "topic": 4,
+      "name": "Compare a random record draw with a random person draw",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.population-sample",
+        "SL4.1.bias-reliability"
+      ],
+      "parts": [
+        "aa-sl-2021-may-tz2-p1-q07.e",
+        "aa-sl-2023-nov-tz1-p1-q07.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Compare a random record draw with a random person draw",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-stratified-capacity-exact",
+      "topic": 4,
+      "name": "Maximise an exactly proportional sample subject to staffing and cost",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.stratified-numbers",
+        "SL4.1.sampling-technique"
+      ],
+      "parts": [
+        "aa-sl-2026-may-tz3-p1-q01.a",
+        "aa-sl-2021-may-tz2-p1-q07.e"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Maximise an exactly proportional sample subject to staffing and cost",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "w5-statistics-overlapping-quota-feasibility",
+      "topic": 4,
+      "name": "Use overlapping quota margins to plan recruitment time",
+      "kind": "skill",
+      "source": "extension",
+      "syllabus": [
+        "4.1"
+      ],
+      "skills": [
+        "SL4.1.sampling-technique",
+        "SL4.1.bias-reliability"
+      ],
+      "parts": [
+        "aa-sl-2023-nov-tz1-p1-q07.c",
+        "aa-sl-2023-nov-tz2-p1-q07.c"
+      ],
+      "unknowns": [
+        {
+          "id": "solve",
+          "asked": "Use overlapping quota margins to plan recruitment time",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    }
+  ]
+}

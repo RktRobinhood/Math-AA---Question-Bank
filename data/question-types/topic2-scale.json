@@ -1,0 +1,1029 @@
+{
+  "about": "Original reusable Functions reasoning structures.",
+  "types": [
+    {
+      "id": "fn-scale-finite-range",
+      "name": "Add the distinct outputs of a finite function",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Add the distinct outputs of a finite function",
+          "level": 1
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-inverse-input-audit",
+      "name": "Check where a finite inverse is defined",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.inverse-undo"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Check where a finite inverse is defined",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-line-axis-area",
+      "name": "Find a triangle area from both intercepts",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.1"
+      ],
+      "skills": [
+        "SL2.1.intercepts"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find a triangle area from both intercepts",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-graph-other-branch",
+      "name": "Use symmetry to locate a matching marked height",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.4"
+      ],
+      "skills": [
+        "SL2.4.symmetry"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use symmetry to locate a matching marked height",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "graph"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-two-remainders",
+      "name": "Recover a cubic from two independent remainders",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.12"
+      ],
+      "skills": [
+        "AHL2.12.remainder-theorem"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover a cubic from two independent remainders",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-root-product",
+      "name": "Recover two roots from the given root and Vieta constraints",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.12"
+      ],
+      "skills": [
+        "AHL2.12.sum-product-roots"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover two roots from the given root and Vieta constraints",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-hole-pole",
+      "name": "Distinguish a removable hole from a true vertical asymptote",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.13"
+      ],
+      "skills": [
+        "AHL2.13.vertical-asymptotes"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Distinguish a removable hole from a true vertical asymptote",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-rational-range-disc",
+      "name": "Find range boundaries of a rational function using attainability",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.13"
+      ],
+      "skills": [
+        "AHL2.13.range-rational"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find range boundaries of a rational function using attainability",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-reciprocal-symmetry",
+      "name": "Choose the constant that makes a rational function odd",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.14"
+      ],
+      "skills": [
+        "AHL2.14.odd-even-test"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose the constant that makes a rational function odd",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-restricted-sqrt",
+      "name": "Invert a left-branch quadratic without taking the right square root",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.14"
+      ],
+      "skills": [
+        "AHL2.14.inverse-restricted"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Invert a left-branch quadratic without taking the right square root",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-cross-pole-inequality",
+      "name": "Solve a rational inequality without multiplying by an unknown sign",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.15"
+      ],
+      "skills": [
+        "AHL2.15.rational-inequality"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Solve a rational inequality without multiplying by an unknown sign",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-cubic-sign-repeated",
+      "name": "Use a repeated root without switching the sign there",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.15"
+      ],
+      "skills": [
+        "AHL2.15.polynomial-inequality"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a repeated root without switching the sign there",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-modulus-inverse-level",
+      "name": "Count branches of a modulus parabola against a horizontal level",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.16"
+      ],
+      "skills": [
+        "AHL2.16.modulus-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Count branches of a modulus parabola against a horizontal level",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ahl-squared-collapse",
+      "name": "Track sign loss and duplicate outputs after squaring",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-hl",
+      "syllabus": [
+        "2.16"
+      ],
+      "skills": [
+        "AHL2.16.squared-or-composite"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Track sign loss and duplicate outputs after squaring",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-inverse-reflect-coordinates",
+      "name": "Reflect a point onto the inverse graph",
+      "source": "extension",
+      "kind": "prior-learning",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.2"
+      ],
+      "skills": [
+        "SL2.2.inverse-undo"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reflect a point onto the inverse graph",
+          "level": 0
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ],
+      "supports": [
+        "SL2.2.inverse-undo",
+        "SL2.5.find-inverse"
+      ]
+    },
+    {
+      "id": "fn-scale-transform-fixed-height",
+      "name": "Track a marked point through a horizontal reflection and shift",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.11"
+      ],
+      "skills": [
+        "SL2.11.image-point"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Track a marked point through a horizontal reflection and shift",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-tariff-break-even",
+      "name": "Choose the correct piece of a tiered tariff before solving",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.piecewise-linear"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose the correct piece of a tiered tariff before solving",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-quadratic-reconstruction-context",
+      "name": "Reconstruct a quadratic arch from its floor contacts and a measured height",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.quadratic-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reconstruct a quadratic arch from its floor contacts and a measured height",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-power-scaling",
+      "name": "Use two measurements to identify a power model",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "AI-SL2.5.variation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use two measurements to identify a power model",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-validation-errors",
+      "name": "Choose a model using errors on held-out observations",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.test-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose a model using errors on held-out observations",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-extrapolation-domain",
+      "name": "Separate the validity of a formula from the evidence for a prediction",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.predict-reliability"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Separate the validity of a formula from the evidence for a prediction",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-functional-calibration",
+      "name": "Reverse two calibration steps in the right order",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "AI-AHL2.7.composite-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reverse two calibration steps in the right order",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-compose-valid-input",
+      "name": "Pull an instrument's range of acceptable readings back to valid settings",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "AI-AHL2.7.inverse-domain-range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Pull an instrument's range of acceptable readings back to valid settings",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-logistic-target",
+      "name": "Find when a logistic model reaches a target fraction of capacity",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.logistic-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Find when a logistic model reaches a target fraction of capacity",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-half-life-delay",
+      "name": "Infer half-life from two later observations, then predict a threshold",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.half-life"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Infer half-life from two later observations, then predict a threshold",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-piecewise-join-slope",
+      "name": "Choose a quadratic segment that meets a linear ramp and a later checkpoint",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.piecewise-join"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Choose a quadratic segment that meets a linear ramp and a later checkpoint",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-sinusoid-cycle-window",
+      "name": "Use a known maximum and period to identify the next descending crossing",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "AI-AHL2.9.sinusoidal-phase"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a known maximum and period to identify the next descending crossing",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-logarithmic-combination",
+      "name": "Convert a logarithmic scale back before adding intensities",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "AI-AHL2.10.log-scale"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Convert a logarithmic scale back before adding intensities",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-linearised-power-predict",
+      "name": "Read a line on log-log axes and predict in the original units",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "AI-AHL2.10.predict-from-line"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Read a line on log-log axes and predict in the original units",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-semilog-two-stage",
+      "name": "Use a semi-log line to compare two decay paths and assess a mismatch",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-hl",
+      "syllabus": [
+        "2.10",
+        "2.1"
+      ],
+      "skills": [
+        "AI-AHL2.10.linear-form",
+        "SL2.1.gradient"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a semi-log line to compare two decay paths and assess a mismatch",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-graph-sum-from-plots",
+      "name": "Combine outputs read from two plotted functions",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.3"
+      ],
+      "skills": [
+        "SL2.3.sum-difference"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Combine outputs read from two plotted functions",
+          "level": 2
+        }
+      ],
+      "representations": [
+        {
+          "rep": "graph"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-composite-pullback-radical",
+      "name": "Pull a square-root domain through a decreasing inner function",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.5"
+      ],
+      "skills": [
+        "SL2.5.composite-expression"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Pull a square-root domain through a decreasing inner function",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-quadratic-equal-heights",
+      "name": "Reconstruct a quadratic from equal heights and its vertical intercept",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "SL2.6.find-equation"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Reconstruct a quadratic from equal heights and its vertical intercept",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-quadratic-integer-threshold",
+      "name": "Count integer parameters giving no real roots or one repeated root",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.7"
+      ],
+      "skills": [
+        "SL2.7.discriminant-parameter"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Count integer parameters giving no real roots or one repeated root",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-reciprocal-asymptote-from-samples",
+      "name": "Recover a reciprocal model and test an unreachable output",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.8",
+        "2.2"
+      ],
+      "skills": [
+        "SL2.8.find-constants",
+        "SL2.2.range"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Recover a reciprocal model and test an unreachable output",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-exponential-shift-three-observations",
+      "name": "Fit a shifted exponential by taking consecutive differences",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.9"
+      ],
+      "skills": [
+        "SL2.9.find-parameters"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Fit a shifted exponential by taking consecutive differences",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-gdc-nonpolynomial-two-crossings",
+      "name": "Isolate two exponential-line intersections with separate brackets",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "aa-sl",
+      "syllabus": [
+        "2.10"
+      ],
+      "skills": [
+        "SL2.10.solve-gdc"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Isolate two exponential-line intersections with separate brackets",
+          "level": 4
+        }
+      ],
+      "representations": [
+        {
+          "rep": "equation"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-model-tiebreak",
+      "name": "Use a middle observation to distinguish models agreeing at the endpoints",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.6"
+      ],
+      "skills": [
+        "AI-SL2.6.choose-model"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Use a middle observation to distinguish models agreeing at the endpoints",
+          "level": 3
+        }
+      ],
+      "representations": [
+        {
+          "rep": "table"
+        }
+      ]
+    },
+    {
+      "id": "fn-scale-ai-discrete-fee-optimum",
+      "name": "Fit demand, maximise revenue over all permitted whole-euro fees, and test a restriction",
+      "source": "extension",
+      "kind": "skill",
+      "topic": 2,
+      "home": "ai-sl",
+      "syllabus": [
+        "2.5",
+        "2.4"
+      ],
+      "skills": [
+        "AI-SL2.5.quadratic-model",
+        "SL2.4.max-min"
+      ],
+      "unknowns": [
+        {
+          "id": "reasoning",
+          "asked": "Fit demand, maximise revenue over all permitted whole-euro fees, and test a restriction",
+          "level": 5
+        }
+      ],
+      "representations": [
+        {
+          "rep": "words"
+        }
+      ]
+    }
+  ]
+}
