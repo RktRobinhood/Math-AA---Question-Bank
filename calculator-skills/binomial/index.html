@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Binomial CDF · Calculator Coach</title>
+<title>Binomial CDF · Calculator Skills | IB Math Question Bank</title>
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("qb-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
@@ -15,31 +15,26 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=bank-banner-1">
+<link rel="stylesheet" href="lesson.css?v=ct38-watch-1">
 <link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="watch.css?v=ct38-watch-1">
 <script src="../handheld/shell.js" defer></script>
 <script src="../handheld/key-cues.js" defer></script>
-<script src="lesson.js?v=bank-banner-1" defer></script>
+<script src="../handheld/watch-player.js?v=ct38-watch-1" defer></script>
+<script src="lesson.js?v=ct38-watch-1" defer></script>
 </head>
-<body class="calculator-bank-lesson" data-base="../../" data-nav="calculator-skills">
+<body class="calculator-bank-lesson ct38-binomial" data-base="../../" data-nav="calculator-skills">
 <main>
 <header class="header">
-<div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT38</span></p><h1>Binomial CDF: intervals and tails</h1><p class="subtitle">Translate probability wording into the two bounds your TI-Nspire needs.</p></div>
+<div><p class="tag"><a href="../skills.html">Calculator Skills</a> · <a href="../scratchpad/index.html">Open calculator</a></p><h1>Binomial CDF: intervals and tails</h1><p class="subtitle">Translate probability wording into the two bounds your TI-Nspire needs.</p></div>
 </header>
 <div class="tabs" role="tablist" aria-label="Lesson mode">
 <button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button>
 <button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button>
 </div>
-<section class="ct38-shared" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
-<div class="player" id="watch-player" aria-label="Playback controls">
-<div class="player-top"><button id="play" type="button" class="primary" aria-label="Play">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
-<div class="ct38-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="39.079" step="0.005"></label><label class="ct38-option"><input type="checkbox" id="captions" checked><span aria-hidden="true">CC</span><span class="sr">Captions</span></label><label class="ct38-option" id="sound-label" hidden><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
-<audio id="narration" preload="metadata" src="narration.mp3"></audio>
-<p id="caption" class="caption"></p>
-<p class="ct38-bounds" id="watch-bounds"></p>
-</div>
+<section class="ct38-shared" id="stage" data-mode="watch" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
 <div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Restart keypad</button></div>
-<div class="ct38-stage-grid">
+<div class="ct38-stage-grid" id="workspace">
 <div class="ct38-calc-anchor" id="handheld-host">
   <div class="screen" id="lcd" aria-label="Calculator LCD"><div class="status"><span>1.1</span><span>Calculator &nbsp; <small>RAD</small></span><span class="battery" aria-label="Battery"></span></div><div class="screen-work" id="screen-work"></div></div>
 </div>
@@ -60,6 +55,24 @@
 <p id="keypad-result" class="feedback" role="status" hidden></p>
 </aside>
 </div>
+<div id="key-strip" hidden><span>Last key</span> <kbd id="active-key">—</kbd></div>
+<span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
+</div>
+<p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p>
+<div id="caption-band" hidden><p id="caption" class="caption"></p></div>
+<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
+<div id="view-pick" role="group" aria-label="Calculator framing">
+ <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
+ <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
+</div>
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="39.079" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:39</span>
+<button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
+<label class="ct38-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+<button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4zm11 0c1.5 1.7 1.5 4.3 0 6m2-8c3 3 3 7 0 10"/></svg></button>
+<button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
+<p id="media-status" role="status" hidden></p>
+<audio id="narration" preload="metadata" src="narration.mp3"></audio>
 </div>
 </section>
 <section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="-1" class="ct38-watch-panel"><p class="sr">The Watch player is above.</p></section>

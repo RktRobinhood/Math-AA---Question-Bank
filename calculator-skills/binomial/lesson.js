@@ -20,8 +20,20 @@
  const params=new URLSearchParams(location.search),tabs=[$("watch-tab"),$("try-tab")];
  const model=$("model"),nEl=$("trials"),pEl=$("chance"),eventEl=$("event"),kEl=$("lower"),jEl=$("upper"),out=$("result"),eventLine=$("event-line");
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,onKey:key=>press(key)});
- let mode="watch",duration=39.079,time=0,raf=0,playing=false,pending=false,audioAvailable=false,audioOn=false,epoch=0,sig="",chapter=0,origin=0;
- let calcState="idle",calcValues=["","","",""],selected=0,activeMenu=0,replaceField=true,history=[],entry="",tryEdited=false,tryForked=false,focusView=false,focusConsidered=false;
+ const framingKey="qb-calculator-watch-frame", workspace=$("workspace"), cc=$("cc"), overlay=$("play-feedback"), rate=$("play-rate");
+ const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen"}catch{return "screen"}};
+ let mode="watch",duration=39.079,time=0,raf=0,playing=false,pending=false,useAudio=audio.hasAttribute("src"),epoch=0,sig="",chapter=0,origin=0;
+ let speed=Number(rate.value),framing=readFrame(),captionsOn=false,initiated=false,awaitingSeek=false;
+ audio.playbackRate=speed;audio.preservesPitch=true;
+ const player=CalculatorWatchPlayer.mount({player:stage,surface:workspace,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
+ const keyNames={menu:"Menu",down:"↓",enter:"Enter",tab:"Tab",decimal:".",e:"E"};
+ // The original key tape is acted once. Later narration compares settings, not keystrokes.
+ const boundsCards=[
+  {label:"At least 5", range:"5 ≤ X ≤ 12 · inclusive"},
+  {label:"At most 5", range:"0 ≤ X ≤ 5 · preview", values:["12","0.25","0","5"]},
+  {label:"More than 5", range:"6 ≤ X ≤ 12 · preview", values:["12","0.25","6","12"]}
+ ];
+ let calcState="idle",calcValues=["","","",""],selected=0,activeMenu=0,replaceField=true,history=[],entry="";
 
  function massInRange(n,p,lo,hi){
   if(lo>hi)return 0;if(lo===0&&hi===n)return 1;if(p===0)return lo===0?1:0;if(p===1)return hi===n?1:0;
@@ -38,105 +50,146 @@
  const escape=(s)=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
  const timecode=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
  const mkMenu=(list,sel,which,live)=>'<ul class="lcd-menu">'+list.map((name,i)=>'<li'+(i===sel?' class="current"':'')+(live?' data-menu="'+which+':'+i+'"':'')+'>'+escape(name)+'</li>').join("")+"</ul>";
- const wizard=(values,field,live)=>'<div class="lcd-dialog"><strong>Binomial Cdf</strong>'+labels.map((n,i)=>'<div class="lcd-field'+(i===field?' active':'')+(live?' kbd-action" data-field="'+i:'')+'"><span>'+n+':</span><span>'+escape(values[i]||"\u00a0")+'</span></div>').join("")+'<div class="lcd-ok"><span'+(field===4?' class="active"':'')+(live?' data-field="4"':'')+'>OK</span> <span'+(live?' data-field="5"':'')+'>Cancel</span></div></div>';
+ const wizard=(values,field,live,preview=false)=>'<div class="lcd-dialog"><strong>Binomial Cdf</strong>'+labels.map((n,i)=>'<div class="lcd-field'+((i===field||(preview&&i>=2))?' active':'')+(live?' kbd-action" data-field="'+i:'')+'"><span>'+n+':</span><span>'+escape(values[i]||"\u00a0")+'</span></div>').join("")+(preview?'<p class="lcd-preview-note">Bounds preview · not calculated</p>':'<div class="lcd-ok"><span'+(field===4?' class="active"':'')+(live?' data-field="4"':'')+'>OK</span> <span'+(live?' data-field="5"':'')+'>Cancel</span></div>')+'</div>';
  const lcdResult=h=>'<div class="lcd-history"><p>'+escape(h.command)+'</p><p class="answers"><strong>'+escape(h.value)+'</strong></p></div>';
  const lcdEntry=x=>'<div class="lcd-entry"><p>'+escape(x||"\u00a0")+'</p></div>';
  const activate=(b,v)=>{b.setAttribute("aria-current",String(v));};
 
  function watchSnapshot(t){
-  const ms=t*1000,values=["","","",""];let state="idle",field=0,key=null;
+  const ms=t*1000,values=["","","",""];let state="idle",field=0,key=null,lastKey=null;
   for(const e of tape){
    if(e.timeMs>ms)break;
    if(e.state)state=e.state;
    if(e.field!==undefined)field=e.field;
    if(e.fieldAfter!==undefined)values[e.field]=e.fieldAfter;
-   key=ms<e.timeMs+Math.max(170,e.durationMs)?e.key:null;
+   lastKey=e.key;key=ms<e.timeMs+Math.max(170,e.durationMs)?e.key:null;
   }
-  return {state,field,key,values};
+  return {state,field,key,lastKey,values};
  }
  function renderWatch(t){
   if(mode!=="watch")return;
   chapter=0;for(let i=1;i<starts.length;i++){if(t>=starts[i])chapter=i;else break}
   seek.value=t;seek.setAttribute("aria-valuetext",timecode(t)+" of "+timecode(duration));
   $("clock").textContent=timecode(t)+" / "+timecode(duration);
-  const {state,field,key,values}=watchSnapshot(t);
-  shell.setKeys(key?[key]:[]);
+  const {state,field,key,lastKey,values}=watchSnapshot(t);
   const example=t>=35.192?2:t>=28.089?1:0;
-  const nextSig=[chapter,state,field,values.join("|"),example].join("/");
+  shell.setKeys(!example&&key?[key]:[]);
+  $("key-strip").hidden=!lastKey||!!example;
+  $("active-key").textContent=keyNames[lastKey]||lastKey||"";
+  if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
+  const clip=t>=20.641&&t<23.361;
+  const nextSig=[chapter,state,field,values.join("|"),example,clip].join("/");
   if(nextSig===sig)return;
   sig=nextSig;
+  $("bounds-case").textContent=boundsCards[example].label;
+  $("bounds-range").textContent=clip?"5 ≤ X ≤ 12 · both ends count":boundsCards[example].range;
   let html="";
   if(state==="probability-menu")html='<div class="menu-stack">'+mkMenu(menuA,4,"a",false)+"</div>";
   if(state==="probability-submenu")html='<div class="menu-stack">'+mkMenu(menuA,4,"a",false)+mkMenu(menuB,4,"b",false)+"</div>";
   if(state==="distributions-submenu"||state==="cdf-selected")html='<div class="menu-stack">'+mkMenu(menuB,4,"b",false)+mkMenu(menuC,state==="cdf-selected"?2:1,"c",false)+"</div>";
   if(state==="wizard")html=wizard(values,field,false);
   if(state==="entry")html=lcdEntry(command);
-  if(state==="result")html=lcdResult({command,value:watchedResult})+lcdEntry("");
+  if(state==="result")html=example?wizard(boundsCards[example].values,-1,false,true):lcdResult({command,value:watchedResult})+lcdEntry("");
   if(!html)html=lcdEntry("");
   work.innerHTML=html;
   $("caption").textContent=captions[chapter];
-  $("watch-bounds").textContent=["Worked example: at least 5 → 5 ≤ X ≤ 12.","Another event: at most 5 → 0 ≤ X ≤ 5. The LCD still shows the worked example.","Another event: more than 5 → 6 ≤ X ≤ 12. The LCD still shows the worked example."][example];
   [...steps.children].forEach((li,i)=>activate(li.firstElementChild,i===chapter));
  }
  stages.forEach((s,i)=>{
   const li=document.createElement("li"),b=document.createElement("button"),num=document.createElement("span");
   b.type="button";num.textContent="0"+(i+1);b.append(num,document.createTextNode(s));b.addEventListener("click",()=>go(starts[i]));li.append(b);steps.append(li);
  });
+ function paintFrame(){
+  stage.classList.toggle("ct38-screen-view",mode==="watch"&&framing==="screen");
+  $("view-screen").setAttribute("aria-pressed",String(framing==="screen"));
+  $("view-full").setAttribute("aria-pressed",String(framing==="full"));
+  fitBankWatch();
+ }
+ function chooseFrame(value){
+  framing=value;try{localStorage.setItem(framingKey,value)}catch{}
+  paintFrame();
+ }
+ $("view-screen").addEventListener("click",()=>chooseFrame("screen"));
+ $("view-full").addEventListener("click",()=>chooseFrame("full"));
+ window.addEventListener("storage",e=>{if(e.key===null||e.key===framingKey){framing=readFrame();paintFrame()}});
+ function paintCaptions(value){
+  captionsOn=value;cc.setAttribute("aria-pressed",String(value));
+  cc.setAttribute("aria-label",value?"Hide captions":"Show captions");
+  $("caption-band").hidden=mode!=="watch"||!value;
+  fitBankWatch();
+ }
+ cc.addEventListener("click",()=>paintCaptions(!captionsOn));
+ function setOrigin(){origin=performance.now()-time*1000/speed}
+ function syncAudio(){
+  if(!useAudio)return;
+  if(Number.isFinite(audio.duration)){
+   audio.currentTime=Math.min(time,audio.duration);awaitingSeek=false;
+  }else awaitingSeek=true;
+ }
  function go(t){
   time=Math.max(0,Math.min(Number(t)||0,duration));
-  origin=performance.now()-time*1000;
-  if(audioAvailable&&Number.isFinite(audio.duration))audio.currentTime=Math.min(time,audio.duration);
-  renderWatch(time);if(!playing)labelPlay(false);
+  setOrigin();syncAudio();renderWatch(time);
+  if(!playing)labelPlay();
  }
- function labelPlay(v){const name=v?"Pause":time>=duration-.02?"Replay":"Play";play.textContent=name;play.setAttribute("aria-label",name);}
- function changePlaying(v){
-  playing=v;play.dataset.playing=String(v);labelPlay(v);
-  cancelAnimationFrame(raf);if(v)raf=requestAnimationFrame(tick);
+ function labelPlay(){
+  const active=playing||pending,name=active?"Pause":time>=duration-.015?"Replay":"Play";
+  play.title=name;play.setAttribute("aria-label",name);
+  play.querySelector(".play-icon").hidden=active;
+  play.querySelector(".pause-icon").hidden=!active;
  }
  function pause(){
-  pending=false;
-  if(playing&&audioOn&&Number.isFinite(audio.currentTime))time=Math.min(duration,audio.currentTime);
-  audio.pause();audioOn=false;changePlaying(false);renderWatch(time);
+  epoch++;pending=false;
+  if(playing&&useAudio&&Number.isFinite(audio.currentTime))time=Math.min(duration,audio.currentTime);
+  playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch(time);
  }
- function end(){time=duration;audio.pause();audioOn=false;changePlaying(false);renderWatch(time)}
+ function end(){pause();time=duration;labelPlay();renderWatch(time)}
  function tick(now){
   if(!playing||mode!=="watch")return;
-  time=audioOn?audio.currentTime:Math.max(0,(now-origin)/1000);
-  if(time>=duration-.012){end();return}
+  time=useAudio?audio.currentTime:Math.max(0,(now-origin)*speed/1000);
+  if(time>=duration-.002){end();return}
   renderWatch(time);raf=requestAnimationFrame(tick);
  }
  async function start(){
   if(mode!=="watch")return;
-  if(!focusConsidered){
-   focusConsidered=true;const limit=window.visualViewport?.height||innerHeight;
-   const lowest=Math.max(...["e","enter","dot","tab"].map(k=>shell.getKey(k).getBoundingClientRect().bottom));
-   if(!focusView&&lowest>limit-28)focusStage(true);
+  initiated=true;overlay.hidden=true;overlay.dataset.initial="false";
+  if(time>=duration-.015)go(0);
+  const stamp=++epoch;pending=true;setOrigin();labelPlay();
+  if(useAudio){
+   try{syncAudio();await audio.play()}
+   catch(error){if(stamp!==epoch)return;silentMedia()}
   }
-  if(time>=duration-.02)go(0);
-  const e=++epoch;pending=true;origin=performance.now()-time*1000;
-  if(audioAvailable&&!audio.error){
-   try{audio.currentTime=Math.min(duration,time);audio.muted=!$("sound").checked;await audio.play();
-    if(e!==epoch||mode!=="watch")return;
-    audioOn=true;
-   }catch(error){if(e!==epoch||mode!=="watch")return;audioOn=false;origin=performance.now()-time*1000}
-  }
-  pending=false;changePlaying(true);
+  if(stamp!==epoch||mode!=="watch"){if(!playing&&!pending)audio.pause();return}
+  if(!useAudio)setOrigin();
+  pending=false;playing=true;labelPlay();player.flash(true);raf=requestAnimationFrame(tick);
  }
- function toggle(){if(playing||pending){epoch++;pending=false;pause()}else void start()}
- play.addEventListener("click",toggle);
- $("back").addEventListener("click",()=>go(time-10));
- $("next").addEventListener("click",()=>go(time+10));
- $("replay").addEventListener("click",()=>{epoch++;pause();go(0);void start();});
- seek.addEventListener("input",()=>go(Number(seek.value)));
- $("captions").addEventListener("change",()=>$("caption").classList.toggle("off",!$("captions").checked));
- $("sound").addEventListener("change",()=>{audio.muted=!$("sound").checked;});
+ function toggle(){if(playing||pending){pause();player.flash(false)}else void start()}
+ function silentMedia(){
+  useAudio=false;awaitingSeek=false;setOrigin();
+  $("media-status").textContent="Narration unavailable. Captions only.";
+  $("media-status").hidden=mode!=="watch";
+  $("sound").hidden=true;paintCaptions(true);
+ }
  function metadata(){
-  if(Number.isFinite(audio.duration)){duration=audio.duration;seek.max=String(duration);audioAvailable=true;$("sound-label").hidden=false;renderWatch(time);}
+  if(!useAudio||!Number.isFinite(audio.duration)||audio.duration<=0)return;
+  duration=audio.duration;seek.max=String(duration);time=Math.min(time,duration);
+  if(awaitingSeek)syncAudio();
+  renderWatch(time);labelPlay();
  }
  audio.addEventListener("loadedmetadata",metadata);
  audio.addEventListener("ended",()=>{if(mode==="watch")end()});
- audio.addEventListener("error",()=>{audioAvailable=false;audioOn=false;origin=performance.now()-time*1000;$("sound-label").hidden=true;});
- metadata();
+ audio.addEventListener("error",silentMedia);
+ audio.addEventListener("pause",()=>{if(useAudio&&playing&&audio.paused&&!audio.ended)pause()});
+ $("sound").addEventListener("click",()=>{
+  audio.muted=!audio.muted;
+  const name=audio.muted?"Unmute narration":"Mute narration";
+  $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",name);$("sound").title=name;
+ });
+ rate.addEventListener("change",()=>{
+  if(playing&&!useAudio)time=Math.max(0,Math.min(duration,(performance.now()-origin)*speed/1000));
+  speed=Number(rate.value);audio.playbackRate=speed;setOrigin();
+ });
+ play.addEventListener("click",toggle);
+ seek.addEventListener("input",()=>go(seek.value));
 
  function report(message,error=false){
   kpReport.textContent=message||"";kpReport.hidden=!message;kpReport.className="feedback "+(error?"is-wrong":"is-right");
@@ -180,7 +233,8 @@
   entry=cmd(v.n,v.p,v.l,v.h);calcState="entry";report("");
  }
  function press(k){
-  if(mode!=="try")return;tryEdited=true;
+  if(mode!=="try")return;
+  if(k==="home"||k==="scratchpad"){location.assign("../scratchpad/index.html");return}
   if(k==="menu"){openMenu("menu",4);renderTry();return}
   if(k==="esc"){
    if(calcState==="wizard"){openMenu("dist",2);}
@@ -224,7 +278,7 @@
   if(mode!=="try")return;
   const f=e.target.closest("[data-field]"),m=e.target.closest("[data-menu]");
   if(f&&calcState==="wizard"){
-   tryEdited=true;const n=Number(f.dataset.field);
+   const n=Number(f.dataset.field);
    if(n===5){press("esc");return}
    if(n===4){selected=4;press("enter");return}
    selected=n;replaceField=true;renderTry();return;
@@ -246,38 +300,23 @@
  let blink=0;
  function uiFlash(k){clearTimeout(blink);shell.setKeys([k]);blink=setTimeout(()=>{if(mode==="try")shell.setKeys([]);},185)}
  function resetKeypad(){
-  tryEdited=true;calcState="idle";calcValues=["","","",""];selected=0;replaceField=true;history=[];entry="";report("");renderTry()
+  calcState="idle";calcValues=["","","",""];selected=0;replaceField=true;history=[];entry="";report("");renderTry()
  }
  $("reset-keypad").addEventListener("click",()=>{resetKeypad();stage.focus({preventScroll:true});});
 
- function focusStage(v){
-  focusView=Boolean(v);stage.classList.toggle("ct38-focused",focusView);
-  document.body.classList.toggle("ct38-focus-open",focusView);
-  const name=focusView?"Exit focused view":"Focused view", button=$("focus-view");
-  button.setAttribute("aria-pressed",String(focusView));button.setAttribute("aria-label",name);button.title=name;button.textContent=focusView?"Exit":"⛶";
-  if(focusView)stage.scrollTop=0;
-  if(!focusView&&mode==="watch")button.focus({preventScroll:true});
- }
- $("focus-view").addEventListener("click",()=>focusStage(!focusView));
- function forkWatch(){
-  const x=watchSnapshot(time), map={idle:"idle","probability-menu":"menu","probability-submenu":"probability","distributions-submenu":"dist","cdf-selected":"dist",wizard:"wizard",entry:"entry",result:"result"};
-  calcState=map[x.state];selected=x.field;calcValues=x.values.slice();
-  activeMenu=x.state==="distributions-submenu"?1:x.state==="cdf-selected"?2:4;replaceField=!calcValues[selected];
-  entry=calcState==="entry"||calcState==="result"?command:"";
-  history=calcState==="result"?[{command,value:watchedResult}]:[];
-  report("");tryForked=true;
- }
- function onMode(next,focus=false,takeover=false){
+ function onMode(next,focus=false){
   if(next!=="watch"&&next!=="try")return;
-  if(mode==="watch"&&next==="try"){epoch++;pause();if(focusView)focusStage(false);if(takeover&&!preset&&!tryEdited&&!tryForked)forkWatch()}
+  if(mode==="watch"&&next==="try"){pause();void player.exit();player.clear()}
   mode=next;stage.dataset.mode=next;sig="";clearTimeout(blink);shell.setKeys([]);shell.setInteractive(next==="try");
   tabs.forEach((el,i)=>{
    const yes=(i===0)===(next==="watch");el.tabIndex=yes?0:-1;el.setAttribute("aria-selected",String(yes));$(el.getAttribute("aria-controls")).hidden=!yes;
   });
-  $("watch-side").hidden=$("watch-player").hidden=next!=="watch";
+  $("watch-side").hidden=$("watch-player").hidden=$("watch-bounds").hidden=next!=="watch";
   $("try-side").hidden=$("try-player").hidden=next!=="try";
-  if(next==="watch"){renderWatch(time);if(focus)play.focus({preventScroll:true});}
-  else{renderTry();if(focus)stage.focus({preventScroll:true});}
+  $("media-status").hidden=useAudio||next!=="watch";
+  paintFrame();paintCaptions(captionsOn);
+  if(next==="watch"){renderWatch(time);if(focus)play.focus({preventScroll:true})}
+  else{$("key-strip").hidden=true;renderTry();if(focus)stage.focus({preventScroll:true})}
  }
  tabs.forEach((el,i)=>{
   el.addEventListener("click",()=>onMode(i?"try":"watch",Boolean(i)));
@@ -285,17 +324,13 @@
    e.preventDefault();const x=e.key==="Home"?0:e.key==="End"?1:1-i;onMode(x?"try":"watch");tabs[x].focus();
   }});
  });
- $("take-over").addEventListener("click",()=>onMode("try",true,true));
  $("return-watch").addEventListener("click",()=>onMode("watch",true));
  document.addEventListener("keydown",e=>{
-  if(focusView&&e.key==="Escape"){e.preventDefault();focusStage(false);return}
   // A linked Try can land on the document body without stealing focus.
   if(mode==="try"&&e.target===document.body&&!e.altKey&&!e.ctrlKey&&!e.metaKey&&!e.repeat&&e.key.toLowerCase()==="m"){
    e.preventDefault();stage.focus({preventScroll:true});press("menu");uiFlash("menu");return;
   }
-  if(mode!=="watch"||e.altKey||e.ctrlKey||e.metaKey||e.repeat||e.target.closest("input,button,a,select,summary,[contenteditable]"))return;
-  if(e.key==="k"||e.key===" "){e.preventDefault();toggle();}
-  else if(e.key==="j"){e.preventDefault();go(time-10)}else if(e.key==="l"){e.preventDefault();go(time+10)}
+
  });
 
 
@@ -332,7 +367,7 @@
   eventLine.textContent=row.every(x=>Number.isFinite(x.valueAsNumber)&&x.validity.valid)?"P("+computed(nEl.valueAsNumber,eventEl.value,kEl.valueAsNumber,jEl.valueAsNumber).label+")":"Enter valid values to set the event.";
   out.hidden=true;out.replaceChildren();
  }
- model.addEventListener("input",()=>{tryEdited=true;update()});model.addEventListener("change",()=>{tryEdited=true;update()});update();
+ model.addEventListener("input",()=>{update()});model.addEventListener("change",()=>{update()});update();
  const append=(type,content,parent=out)=>{const el=document.createElement(type);el.textContent=content;parent.append(el);return el};
  model.addEventListener("submit",e=>{
   e.preventDefault();const n=nEl.valueAsNumber,p=pEl.valueAsNumber,k=kEl.valueAsNumber,j=jEl.valueAsNumber,event=eventEl.value;
@@ -352,7 +387,7 @@
   out.hidden=false;
  });
  const answer=$("answer"),feedback=$("feedback");
- answer.addEventListener("input",()=>{tryEdited=true;feedback.textContent="";feedback.className="feedback";});
+ answer.addEventListener("input",()=>{feedback.textContent="";feedback.className="feedback";});
  $("answer-form").addEventListener("submit",e=>{
   e.preventDefault();const v=answer.valueAsNumber,correct=target.impossible?0:massInRange(challenge.n,challenge.p,target.lo,target.hi),r=Number(correct.toPrecision(3));
   if(!Number.isFinite(v)||v<0||v>1)return;
@@ -360,19 +395,25 @@
   const valid=v===r;feedback.className="feedback "+(valid?"is-right":"is-wrong");
   feedback.textContent=valid?(linked?"Correct. You used the counts the event includes.":"Correct. Fewer than three includes 0, 1 and 2."):Math.abs(v-correct)<=Math.max(Number.MIN_VALUE,Math.abs(correct)*.00055)?"The probability is right. Now round it to three significant figures.":linked?"Not yet. Check the first and last included counts.":"Not yet. Check that your upper bound excludes a count of 3.";
  });
+ function fitBankWatch(){
+  if(mode!=="watch")return;
+  const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
+  const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
+  const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("watch-bounds").offsetHeight;
+  const pads=getComputedStyle(workspace);
+  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-4;
+  stage.style.setProperty("--ct38-body-fit",Math.floor(Math.max(innerHeight<680?78:98,Math.min(full?365:288,room*558/1168)))+"px");
+  stage.style.setProperty("--ct38-lcd-fit",Math.floor(Math.max(176,Math.min(full?650:570,room*4/3)))+"px");
+  stage.style.setProperty("--ct38-scene-room",Math.floor(Math.max(126,room))+"px");
+ }
+ const sizing=new ResizeObserver(fitBankWatch);
+ [$("watch-player"),$("caption-band"),$("watch-bounds"),document.querySelector("main>.header"),document.querySelector("main>.tabs")].forEach(el=>sizing.observe(el));
+ window.addEventListener("resize",fitBankWatch);
+ window.visualViewport?.addEventListener("resize",fitBankWatch);
+ document.addEventListener("fullscreenchange",fitBankWatch);
+ new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
  onMode(params.get("mode")==="try"?"try":"watch");
-
-// Reserve the bank's fixed bottom tabs in in-page Watch. The existing Focus view owns the viewport.
-function fitBankWatch(){
- if(!matchMedia("(max-width:700px)").matches||stage.dataset.mode!=="watch"||focusView)return;
- const nav=document.querySelector(".tabbar").getBoundingClientRect().height;
- const box=stage.getBoundingClientRect(),shellHeight=shell.body.getBoundingClientRect().height;
- const room=innerHeight-nav-box.top-window.scrollY-(box.height-shellHeight)-8;
- stage.style.setProperty("--bank-watch-fit",Math.floor(Math.max(145,Math.min(275,room*558/1168)))+"px");
-}
-const bankWatchSizing=new ResizeObserver(fitBankWatch);
-bankWatchSizing.observe(stage);
-window.addEventListener("resize",fitBankWatch);
-fitBankWatch();
+ if(audio.error)silentMedia();else metadata();
+ fitBankWatch();
 })();
-
