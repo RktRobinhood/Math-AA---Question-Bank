@@ -20,13 +20,13 @@ add("paired-chord-calibration","separate-even-and-odd-contributions","table",3,[
  return {...obj,table:{head:[T("k"),T(h),T(-h)],rows:[["Chord gradient",T(up),T(down)]]}};
 });
 
-add("tangent-prediction-at-slowing-point","rate-threshold-then-prediction-error","words",4,["5.1"],"SL5.1.interpret-derivative SL5.1.chord-to-tangent","Use a local tangent prediction at a specified instantaneous rate",({rng:r})=>{
+add("tangent-prediction-at-slowing-point","rate-threshold-then-prediction-error","words",4,["5.1"],"SL5.1.interpret-derivative SL5.1.chord-to-tangent","Use a local tangent prediction at a specified instantaneous rate",({rng:r,course})=>{
  const h=r.int(2,6),v=r.int(13,32),b=r.int(6,35),d=r.int(12,23)/10,g=r.int(5,13)/5;
  const model=t=>b+v*Math.sqrt(t+h);
  const t=(v/(2*d))**2-h,pred=model(t)+d*g,actual=model(t+g),err=pred-actual;
  return q(R`A reservoir level in centimetres is modelled by $H(t)=${b}+${v}@sqrt{t+${h}}$, where $t@ge0$ is time in minutes. Let $t_{0}$ be the time when the instantaneous rate is $${num(d)}$ centimetres per minute.`,{h,v,b,d,g},
-  p("Use a numerical derivative and solver, or an algebraic method, to find $t_{0}$. Give three significant figures.",2,round(t),
-  R`Solve $H'(t)=${num(d)}$. The gradient decreases from $H'(0)$ to zero, so there is one solution: $t_{0}@approx${sf(t)}$.`),
+  p(course==="ai-sl" ? "Find $t_{0}$. Give three significant figures." : "Use a numerical derivative and solver, or an algebraic method, to find $t_{0}$. Give three significant figures.",2,round(t),
+  course==="ai-sl" ? R`On the GDC, graph the numerical derivative of $H$ and the horizontal line $y=${num(d)}$. Use Intersection on $0@le t@le 180$ to find $t_{0}@approx${sf(t)}$.` : R`Solve $H'(t)=${num(d)}$. The gradient decreases from $H'(0)$ to zero, so there is one solution: $t_{0}@approx${sf(t)}$.`),
   p(R`Use the tangent at $t_{0}$ to predict the level $${num(g)}$ minutes later. Give three significant figures.`,2,round(pred),
   R`The horizontal change is $${num(g)}$ minutes; the tangent assumes the same instantaneous rate throughout. Use $H(t_{0})+${num(d)}(@,${num(g)}@,)@approx${sf(pred)}$ centimetres, keeping the unrounded time.`),
   p("By how many centimetres does this tangent prediction exceed the model value? Give three significant figures.",2,round(err),

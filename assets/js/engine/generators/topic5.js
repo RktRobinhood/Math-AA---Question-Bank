@@ -382,7 +382,7 @@
           `$g'(x) \\ge 0$ for all $x$ when $k \\ge ${kmin}$, so the least value of $k$ is $${kmin}$.`])] };
     } });
   reg({ ...INC, unknown: "interval-gdc", representation: "equation", format: "mcq", levels: [4], calculator: true, skills: ["SL5.2.increasing-decreasing-intervals"], title: "Decreasing interval of a cubic with the GDC",
-    build({ rng }) {
+    build({ rng, course }) {
       let b, c, d, disc;
       do { b = rng.int(1, 5); c = rng.int(1, 7); d = rng.int(-4, 6); disc = 4 * b * b + 12 * c; } while (Number.isInteger(Math.sqrt(disc)));
       const r1 = (2 * b - Math.sqrt(disc)) / 6, r2 = (2 * b + Math.sqrt(disc)) / 6, least = -c - (b * b) / 3;
@@ -393,7 +393,7 @@
         P("Find the $x$-coordinate of the local minimum point.", 1, ans.sf(r2), [`The other solution of $f'(x) = 0$ is the local minimum: $x \\approx ${sf(r2)}$.`]),
         P("For which values of $x$ is $f$ decreasing?", 1, intervalChoice(rng, r1, r2, "in", sf(r1), sf(r2)), [`$f$ is decreasing where $f'(x) < 0$, which is between the two stationary points: $${sf(r1)} < x < ${sf(r2)}$.`]),
         P("Find the least value of $f'(x)$.", 2, ans.sf(least), [
-          `$f'(x)$ is a quadratic. Find its minimum point on the GDC, or use $f''(x) = ${lin(6, -2 * b)} = 0$, which gives $x = ${frac(b, 3)}$.`, `The least value of $f'(x)$ is $f'\\left(${frac(b, 3)}\\right) \\approx ${sf(least)}$.`])] };
+          (course === "ai-sl" ? "Graph $f'(x)$ as a new function on the GDC and use Minimum on that graph. Read the $y$-coordinate, not the $x$-coordinate." : `$f'(x)$ is a quadratic. Find its minimum point on the GDC, or use $f''(x) = ${lin(6, -2 * b)} = 0$, which gives $x = ${frac(b, 3)}$.`), course === "ai-sl" ? `The minimum on the graph of $f'(x)$ is approximately $${sf(least)}$.` : `The least value of $f'(x)$ is $f'\\left(${frac(b, 3)}\\right) \\approx ${sf(least)}$.`])] };
     } });
   reg({ ...INC, unknown: "interval-from-derivative-graph", representation: "graph", format: "mcq", levels: [2], skills: ["SL5.2.sign-from-graph", "SL5.2.increasing-decreasing-intervals"], title: "Increasing and decreasing from the graph of the derivative",
     build({ rng }) {
@@ -495,7 +495,7 @@
     } });
   reg({ type: "t5-normal-meets-curve", syllabus: ["5.4"], unknown: "tangent-x-intercept", representation: "equation", format: "value", levels: [4], calculator: true,
     skills: ["SL5.4.tangent-meets-axes-or-curve", "SL5.4.tangent-equation"], title: "Where a tangent to an exponential curve meets the axes",
-    build({ rng }) {
+    build({ rng, course }) {
       let a, k, b, x0, mm, y0, xi, yi;
       do {
         a = rng.int(2, 5); k = rng.pick([0.3, 0.4, 0.5, 0.6, -0.4, -0.5]); b = rng.pick([-2, -1, 1, 2]); x0 = rng.int(1, 3);
@@ -503,9 +503,9 @@
       } while (Math.abs(mm) < 0.5 || Math.abs(xi) > 40 || Math.abs(yi) < 0.2 || Math.abs(xi) < 0.2 || Math.abs(y0) < 0.2);
       return { params: { a, k, b, x0 }, stem: `The curve $C$ has equation $y = ${expr([[a, ek(k)], [b, "x"]])}$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$. The tangent to $C$ at $\\mathrm{A}$ meets the $y$-axis at $\\mathrm{Q}$ and the $x$-axis at $\\mathrm{R}$.`, parts: [
         P("Find the $y$-coordinate of $\\mathrm{A}$.", 1, ans.sf(y0), [`$y = ${expr([[a, `\\mathrm{e}^{${num(k * x0)}}`], [b * x0, ""]])} \\approx ${sf(y0)}$`]),
-        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), [`$${D} = ${expr([[a * k, ek(k)], [b, ""]])}$`, `At $x = ${x0}$: $${D} \\approx ${sf(mm)}$`]),
-        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`The tangent is $y = ${sf(mm)}(x - ${x0}) ${sg(y0)} ${sf(Math.abs(y0))}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
-        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the tangent and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
+        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), course === "ai-sl" ? [`On the GDC, evaluate the numerical derivative of the given curve at $x = ${x0}$. This gives the tangent gradient $m \\approx ${sf(mm)}$.`, "Store the gradient before rounding, to use in the next parts."] : [`$${D} = ${expr([[a * k, ek(k)], [b, ""]])}$`, `At $x = ${x0}$: $${D} \\approx ${sf(mm)}$`]),
+        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), course === "ai-sl" ? [`Use the tangent equation $y - f(${x0}) = m(x - ${x0})$, where $f$ is the curve’s given function and $m$ is the stored numerical gradient.`, `Substitute $x=0$ to get $y \\approx ${sf(yi)}$.`] : [`The tangent is $y = ${sf(mm)}(x - ${x0}) ${sg(y0)} ${sf(Math.abs(y0))}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
+        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), course === "ai-sl" ? [`Set $y=0$ and solve $-f(${x0})=m(x-${x0})$ using the stored gradient, so $x \\approx ${sf(xi)}$.`] : ["Set $y = 0$ in the equation of the tangent and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
     } });
 
   // ======================= 5.5 antiderivatives and a boundary condition =======================
@@ -1053,12 +1053,12 @@
     } });
   reg({ type: "t5-normal-meets-curve", syllabus: ["5.4"], unknown: "normal-y-intercept", representation: "equation", format: "value", levels: [4], calculator: true,
     skills: ["SL5.4.tangent-meets-axes-or-curve", "SL5.4.normal-equation"], title: "Where a normal to a logarithmic curve meets the axes",
-    build({ rng }) {
+    build({ rng, course }) {
       const a = rng.pick([2, 3, 4, 5, 6]), x0 = rng.pick([2, 3, 4, 5].filter((x) => a % x !== 0)), y0 = a * Math.log(x0) + x0, mm = a / x0 + 1, nm = -1 / mm, yi = y0 + x0 / mm, xi = x0 + mm * y0;
       return { params: { a, x0 }, stem: `The curve $C$ has equation $y = ${a}\\ln x + x$, for $x > 0$. The point $\\mathrm{A}$ on $C$ has $x$-coordinate $${x0}$. The normal to $C$ at $\\mathrm{A}$ meets the $y$-axis at $\\mathrm{Q}$ and the $x$-axis at $\\mathrm{R}$.`, parts: [
-        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), [`$${D} = \\dfrac{${a}}{x} + 1$`, `At $x = ${x0}$: $${D} = \\dfrac{${a}}{${x0}} + 1 \\approx ${sf(mm)}$`]),
+        P("Find the gradient of $C$ at $\\mathrm{A}$.", 2, ans.sf(mm), course === "ai-sl" ? [`On the GDC, evaluate the numerical derivative of the given curve at $x = ${x0}$. This gives the tangent gradient $m \\approx ${sf(mm)}$.`, "Keep the unrounded value to use for the perpendicular gradient."] : [`$${D} = \\dfrac{${a}}{x} + 1$`, `At $x = ${x0}$: $${D} = \\dfrac{${a}}{${x0}} + 1 \\approx ${sf(mm)}$`]),
         P("Find the gradient of the normal to $C$ at $\\mathrm{A}$.", 1, ans.sf(nm), [`The normal is perpendicular to the tangent, so its gradient is the negative reciprocal of the gradient of $C$: approximately $${sf(nm)}$.`]),
-        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), [`At $\\mathrm{A}$, $y = ${a}\\ln ${x0} + ${x0} \\approx ${sf(y0)}$.`, `The normal is $y = ${sf(nm)}(x - ${x0}) + ${sf(y0)}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
-        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), ["Set $y = 0$ in the equation of the normal and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
+        P("Find the $y$-coordinate of $\\mathrm{Q}$.", 2, ans.sf(yi), course === "ai-sl" ? [`Use $y-f(${x0})=m_N(x-${x0})$, where $f$ is the given function and $m_N=-1/m$ is the normal gradient. Substitute $x=0$ with the unrounded values to get $y \\approx ${sf(yi)}$.`] : [`At $\\mathrm{A}$, $y = ${a}\\ln ${x0} + ${x0} \\approx ${sf(y0)}$.`, `The normal is $y = ${sf(nm)}(x - ${x0}) + ${sf(y0)}$. Keep the unrounded values on the GDC.`, `At $x = 0$: $y \\approx ${sf(yi)}$`]),
+        P("Find the $x$-coordinate of $\\mathrm{R}$.", 2, ans.sf(xi), course === "ai-sl" ? [`Set $y=0$ and solve $-f(${x0})=m_N(x-${x0})$ using the unrounded normal gradient, so $x \\approx ${sf(xi)}$.`] : ["Set $y = 0$ in the equation of the normal and solve for $x$.", `$x \\approx ${sf(xi)}$`])] };
     } });
 })(typeof globalThis !== "undefined" ? globalThis : this);
