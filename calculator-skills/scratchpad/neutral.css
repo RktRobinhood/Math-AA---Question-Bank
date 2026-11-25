@@ -81,3 +81,13 @@ html[data-theme=dark] body.neutral-standalone{background:#171e1b}
 .neutral-standalone-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.25rem 1rem;max-width:42rem;margin:0 auto .3rem;min-height:38px;padding:.2rem 0;border-bottom:1px solid color-mix(in srgb,currentColor 26%,transparent)}
 .neutral-standalone-bar a{color:inherit;font-weight:700;min-height:32px;display:inline-flex;align-items:center}
 .neutral-standalone-bar p{margin:0;font-size:.8rem}
+
+/* Only the embedded Practice handset; standalone Calculator Skills is unchanged. */
+body.neutral-embedded{padding:7px 12px;--neutral-handheld-width:min(280px,calc(100vw - 30px),calc((100dvh - 24px)*.4777))}
+.neutral-embedded .np-scope{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+.neutral-embedded .neutral-trig:not([hidden]),.neutral-embedded .np-notice:not([hidden]){
+  position:absolute;z-index:12;bottom:5px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 18px);
+  padding:.3rem .45rem;border:1px solid #9aa7a1;border-radius:8px;background:#f6faf6;color:#24342b;
+  box-shadow:0 3px 8px #162c2926
+}
+.neutral-embedded .neutral-trig:not([hidden])+.np-notice:not([hidden]){bottom:49px}

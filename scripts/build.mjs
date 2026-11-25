@@ -317,7 +317,7 @@ function page({ base, baseHref = "", title, nav = "questions", head = "", body, 
     <title>${esc(title)}</title>${description ? `\n    <meta name="description" content="${esc(description)}">` : ""}
     ${THEME}
     <link rel="stylesheet" href="${base}assets/css/styles.css">${calcNav ? `
-    <link rel="stylesheet" href="${base}assets/css/calculator-integration.css">` : ""}${head}
+    <link rel="stylesheet" href="${base}assets/css/calculator-integration.css${nav === 'practice' ? '?v=practice-dock-1' : ''}">` : ""}${head}
   </head>
   <body data-base="${base}" data-nav="${nav}"${bodyAttrs}>
     <noscript><p class="page"><a href="${base}">Questions</a> · <a href="${base}statistics/">Statistics</a> · <a href="${base}syllabus/">Syllabus</a> · <a href="${base}practice.html">Practice</a>${calcNav ? ` · <a href="${base}calculator-skills/skills.html">Calculator Skills</a>` : ""}</p></noscript>
@@ -364,8 +364,8 @@ write("practice.html", page({
   head: `\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
-    "vendor/katex/katex.min.js", "js/question-types.js", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
-    ...generatorFiles.map((f) => `js/engine/generators/${f}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js", "js/practice.js",
+    "vendor/katex/katex.min.js", "js/question-types.js?v=49785a1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}${f === "w3-number.js" ? "?v=49785a1" : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-dock-1", "js/practice.js?v=practice-dock-1",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));
 

@@ -28,6 +28,9 @@
   const CALC = window.QBPracticeCalculator;
   const app = document.getElementById('app');
   if (!E || !TYPES) { app.textContent = 'Practice could not load. Run node scripts/build.mjs.'; return; }
+  const practiceContent = document.createElement('div');
+  practiceContent.className = 'practice-content';
+  app.replaceChildren(practiceContent);
 
   const L = E.learner;
   const SCOPE_KEY = 'qb-practice-scope';
@@ -259,15 +262,14 @@
 
   // ── render ───────────────────────────────────────────────────────────────
   function render() {
-    CALC?.close();
     const tab = (id, text) => h('button', { type: 'button', class: state.tab === id ? 'on' : '', role: 'tab', 'aria-selected': String(state.tab === id), text, onclick: () => { state.tab = id; render(); } });
-    app.replaceChildren(h('main', { class: 'prac' },
+    practiceContent.replaceChildren(h('main', { class: 'prac' },
       h('div', { class: 'page-head no-print' }, h('h1', { text: 'Practice' }), h('span', { class: 'muted', text: `${C.short} · your progress is saved in this browser` })),
       firstLoad === 'unreadable' ? h('p', { class: 'verdict no no-print', text: 'Your saved progress could not be read. It has been kept aside, not deleted, and a fresh record was started.' }) : null,
       h('div', { class: 'prac-tabs no-print', role: 'tablist' }, tab('practice', 'Practise'), tab('progress', 'Progress'), tab('worksheet', 'Print a worksheet')),
       ...(state.tab === 'practice' ? practiceView() : state.tab === 'progress' ? progressView() : worksheetView())));
     const active = !state.picking && CALC?.eligible({ item: state.item, question: state.question, course: C.id, tab: state.tab });
-    CALC?.bind(active ? state.question : null);
+    CALC?.bind(active ? state.question : null, practiceContent.querySelector('.practice-calc-trigger'));
   }
 
   // ── scope: what's the test on? ───────────────────────────────────────────

@@ -20,7 +20,8 @@
     return false;
   }
 
-  const source = 'calculator-skills/scratchpad/index.html';
+  const source = 'calculator-skills/scratchpad/index.html?v=practice-dock-1';
+  const wide = win?.matchMedia('(min-width: 900px)');
   let current = null, owner = null;
   function create() {
     if (!win) return null;
@@ -33,19 +34,21 @@
     };
     const panel = el('dialog', 'practice-calc-panel');
     if (typeof panel.showModal !== 'function') return;
-    const head = el('div', 'practice-calc-head');
-    const title = el('h2', '', 'Calculator'); title.id = 'practice-calc-title';
-    const back = el('button', 'practice-calc-back', 'Back to question'); back.type = 'button'; back.autofocus = true;
+    const layout = d.getElementById('app');
+    const back = el('button', 'practice-calc-back', '×'); back.type = 'button';
+    back.setAttribute('aria-label', 'Close calculator');
+    back.title = 'Close calculator';
+    back.autofocus = true;
     const status = el('p', 'practice-calc-status', 'Loading calculator…');
     status.setAttribute('role', 'status');
-    head.append(title, back); panel.append(head, status);
-    panel.setAttribute('aria-labelledby', title.id);
+    panel.append(back, status);
+    panel.setAttribute('aria-label', 'Calculator');
     const frame = el('iframe', 'practice-calc-frame');
     frame.title = 'Blank TI-Nspire calculator';
     frame.setAttribute('sandbox', 'allow-scripts');
     frame.setAttribute('referrerpolicy', 'no-referrer');
     frame.src = new URL((d.body.dataset.base || './') + source, d.baseURI).href;
-    panel.append(frame); d.body.append(panel);
+    panel.append(frame); layout.append(panel);
     const syncTheme = () => frame.contentWindow?.postMessage({ type: 'qb-scratchpad-theme', theme: d.documentElement.dataset.theme }, '*');
     const onMessage = event => {
       if (event.source !== frame.contentWindow || event.data?.type !== 'qb-scratchpad-ready') return;
@@ -58,15 +61,25 @@
     const timer = win.setTimeout(() => {
       if (!status.hidden) status.textContent = 'The calculator did not start. You can go back to your question.';
     }, 4000);
-    const session = { panel, back, opened: null, dispose() {
+    const session = { panel, back, layout, opened: null, dispose() {
       win.removeEventListener('message', onMessage);
       observer.disconnect(); win.clearTimeout(timer);
+      wide.removeEventListener('change', switchView);
       panel.remove();
     } };
     panel.id = 'practice-calc';
     panel.addEventListener('close', () => { if (!panel.open) finish(session); });
     panel.addEventListener('cancel', event => { event.preventDefault(); close(); });
+    panel.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && wide.matches) { event.preventDefault(); close(); }
+    });
     back.addEventListener('click', () => close());
+    const switchView = () => {
+      if (!session.opened || !panel.open) return;
+      panel.close();
+      show(session);
+    };
+    wide.addEventListener('change', switchView);
     return session;
   }
 
@@ -75,13 +88,16 @@
     const session = current || create();
     if (!session) return;
     current = session;
-    session.opened = { from, scroll: win.scrollY };
+    session.opened = { from, scroll: win.scrollY, mobile: !wide.matches };
     from.setAttribute('aria-expanded', 'true');
     from.setAttribute('aria-controls', 'practice-calc');
-    win.document.body.classList.add('practice-calc-open');
-    // Native Escape while in the parent closes the sheet. The calculator still owns
-    // Escape in its iframe, for example to back out of an LCD menu.
-    session.panel.showModal();
+    session.layout.classList.add('with-practice-calc');
+    show(session);
+  }
+
+  function show(session) {
+    if (wide.matches) session.panel.show();
+    else session.panel.showModal();
     session.back.focus({ preventScroll: true });
   }
 
@@ -89,12 +105,12 @@
     const opened = session?.opened;
     if (!opened) return;
     session.opened = null;
-    win.document.body.classList.remove('practice-calc-open');
+    session.layout.classList.remove('with-practice-calc');
     opened.from.removeAttribute('aria-controls');
     opened.from.setAttribute('aria-expanded', 'false');
     if (restore && opened.from.isConnected) {
       opened.from.focus({ preventScroll: true });
-      if (win.scrollY !== opened.scroll) win.scrollTo(0, opened.scroll);
+      if (opened.mobile && win.scrollY !== opened.scroll) win.scrollTo(0, opened.scroll);
     }
   }
 
@@ -107,8 +123,16 @@
   // The parent uses identity only. No question, seed, draft or answers are sent to
   // the iframe. Reopening this question restores the student's scratchpad, while a
   // different question or leaving Practice destroys its in-memory calculations.
-  function bind(nextOwner) {
-    if (owner === nextOwner) return;
+  function bind(nextOwner, trigger) {
+    if (owner === nextOwner) {
+      // Grading and answer help may redraw controls without changing the question.
+      if (current?.opened && trigger) {
+        current.opened.from = trigger;
+        trigger.setAttribute('aria-expanded', 'true');
+        trigger.setAttribute('aria-controls', 'practice-calc');
+      }
+      return;
+    }
     owner = nextOwner;
     if (!current) return;
     close(false);

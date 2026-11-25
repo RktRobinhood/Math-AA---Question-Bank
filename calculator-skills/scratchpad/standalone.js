@@ -1,5 +1,6 @@
 (function () {
   'use strict';
+  if (parent !== window) document.body.classList.add('neutral-embedded');
   window.NeutralCalculator.mount(document.getElementById('calculator-root'));
   if (parent === window) {
     document.body.classList.add('neutral-standalone');
