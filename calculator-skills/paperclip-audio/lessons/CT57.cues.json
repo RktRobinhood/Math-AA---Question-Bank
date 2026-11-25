@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "id": "CT57",
+  "route": "volume-revolution/index.html",
+  "catalogueTitle": "Volumes of revolution",
+  "playerHeading": "Volumes of revolution",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "volume-revolution/index.html"
+  },
+  "script": "lessons/CT57.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Rotate the region from y equals one to y equals two x, with x from one to two inclusive, about the x axis. Each slice has a hole.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "The outer radius is two x and the inner radius is one. Enter pi outside the integral. Use a difference of squares, not the square of the gap.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "On Calculator, choose Menu then four: Calculus then two: Numerical Definite Integral.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Tab moves from the lower bound one to the upper bound two, then into the integrand.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter the square of two times x, minus one squared. The pi outside multiplies every slice. Tab to the differential, type x, then Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The solid has volume about twenty-six point one eight zero cubic units. For a disk touching the axis, the inner radius is zero.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 38000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Rotate the region from y = 1 to y = 2x, for 1 ≤ x ≤ 2, about the x-axis. Each slice has a hole.",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "The outer radius is 2x and the inner radius is 1. Enter π outside the integral. Use a difference of squares, not the square of the gap.",
+        "endMs": 10000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10000,
+        "text": "On Calculator, choose Menu → 4: Calculus → 2: Numerical Definite Integral.",
+        "endMs": 14000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 14000,
+        "text": "Tab moves from the lower bound 1 to the upper bound 2, then into the integrand.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 20000,
+        "text": "Enter (2 × x)² − 1². The π outside multiplies every slice. Tab to the differential, type x, then Enter.",
+        "endMs": 33000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 33000,
+        "text": "The solid has volume about 26.180 cubic units. For a disk touching the axis, the inner radius is zero.",
+        "endMs": 38000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6100,
+        "keys": [
+          "pi"
+        ]
+      },
+      {
+        "timeMs": 6520,
+        "keys": []
+      },
+      {
+        "timeMs": 7400,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7820,
+        "keys": []
+      },
+      {
+        "timeMs": 8050,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 8470,
+        "keys": []
+      },
+      {
+        "timeMs": 10500,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 10920,
+        "keys": []
+      },
+      {
+        "timeMs": 11200,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 11620,
+        "keys": []
+      },
+      {
+        "timeMs": 12400,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 12820,
+        "keys": []
+      },
+      {
+        "timeMs": 14400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14820,
+        "keys": []
+      },
+      {
+        "timeMs": 15100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15520,
+        "keys": []
+      },
+      {
+        "timeMs": 15800,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16221,
+        "keys": []
+      },
+      {
+        "timeMs": 16600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17021,
+        "keys": []
+      },
+      {
+        "timeMs": 20300,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 20721,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 21420,
+        "keys": []
+      },
+      {
+        "timeMs": 21720,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 22140,
+        "keys": []
+      },
+      {
+        "timeMs": 22380,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 22800,
+        "keys": []
+      },
+      {
+        "timeMs": 23020,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 23440,
+        "keys": []
+      },
+      {
+        "timeMs": 23720,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 24140,
+        "keys": []
+      },
+      {
+        "timeMs": 24420,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 24841,
+        "keys": []
+      },
+      {
+        "timeMs": 25110,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25530,
+        "keys": []
+      },
+      {
+        "timeMs": 25810,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 26230,
+        "keys": []
+      },
+      {
+        "timeMs": 27500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27920,
+        "keys": []
+      },
+      {
+        "timeMs": 28600,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 29021,
+        "keys": []
+      },
+      {
+        "timeMs": 31400,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 31820,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

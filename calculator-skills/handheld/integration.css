@@ -1,0 +1,57 @@
+/* Presentation layout around the original handheld skin. */
+.cx-player-nav {display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+a.cx-tool-link{color:var(--accent,#88c8af);text-underline-offset:.22em;font-weight:700}
+.cx-handheld-stage .scene{grid-template-columns:minmax(255px,345px) minmax(195px,1fr);gap:clamp(14px,4vw,38px);align-items:start;justify-content:center;padding:clamp(12px,3vw,26px)}
+.cx-handheld-stage .scene .lcd-group{min-width:0;max-width:100%;width:100%}
+.cx-handheld-stage .scene .lcd-group .device-label{display:none}
+.cx-handheld-stage .scene .beat{align-self:start;margin-top:clamp(12px,12vw,140px);max-width:31ch}
+.cx-handheld-stage .scene .keypress{display:none}
+.cx-handheld-stage .transport{border-top:0;border-bottom:1px solid var(--line,#33463f);flex-wrap:wrap;gap:8px}
+.cx-handheld-stage .seek{flex:1 1 120px;min-width:78px}
+.cx-transport-button{border:1px solid var(--line,#567368);color:var(--ink,#e3f1ec);background:transparent;min-width:41px;min-height:40px;border-radius:8px;font:700 .8rem/1 system-ui;cursor:pointer}
+.cx-transport-button:hover,.cx-transport-button:focus-visible{outline:2px solid var(--accent,#66b69c);outline-offset:1px}
+.cx-note{max-width:63ch}
+.cx-live-help{font-size:.9rem;color:var(--muted,#95a3a0)}
+.cx-watch-try{display:inline-block;margin:.75rem 0;padding:.5rem .8rem;border:1px solid var(--line,#557267);border-radius:9px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+@media(max-width:640px){
+  .cx-handheld-stage .scene{display:flex;flex-direction:column;align-items:center;padding:12px;gap:8px}
+  .cx-handheld-stage .scene .lcd-group{width:min(100%,335px)}
+  .cx-handheld-stage .scene .beat{align-self:stretch;max-width:none;margin:0;padding:.5rem 0}
+  .cx-handheld-stage .transport{padding:8px}
+  .cx-handheld-stage .transport .seek{order:3;flex:1 1 100%}
+  .cx-handheld-stage .transport .time{margin-left:auto}
+  .cx-transport-button{min-width:40px}
+}
+.cx-handheld-stage .caption:not([hidden]){margin:0;padding:.6rem 1rem;border-bottom:1px solid var(--line,#33463f);line-height:1.35}
+.cx-handheld-stage .lcd.hh-screen-content{border-radius:0;box-shadow:none;border:0}
+.cx-handheld-stage .cx-transport-button{color:var(--stage-ink,#e3f1ec);border-color:var(--stage-line,#567368)}
+.cx-handheld-stage .cx-watch-try{color:var(--stage-ink,#e3f1ec)}
+@media(max-width:640px){
+ body[data-cx-mode="watch"] .cx-handheld-stage .scene .lcd-group{--handheld-width:clamp(178px,calc((100svh - 238px) * .4777),298px)}
+}
+body[data-cx-mode="watch"] .cx-handheld-stage .scene .lcd-group{--handheld-width:clamp(205px,calc((100svh - 278px) * .4777),310px)}
+.cx-handheld-stage.cx-focused{position:fixed;inset:0;z-index:50;border:0;border-radius:0;overflow:auto;background:var(--stage,#17251f);max-width:none}
+.cx-handheld-stage.cx-focused .transport{position:sticky;top:0;z-index:2;background:var(--stage,#17251f)}
+body[data-cx-mode="watch"] .cx-handheld-stage.cx-focused .scene .lcd-group{--handheld-width:clamp(206px,calc((100svh - 137px) * .4777),390px)}
+@media(max-width:640px){
+  .mast .mast-inner{gap:clamp(.3rem,2vw,.55rem);justify-content:space-between}
+  .mast .mast-inner>.wordmark:not(a) span{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+  .mast .cx-tool-link,.mast .catalog{font-size:.87rem}
+  .mast .theme select{max-width:72px}
+  .cx-handheld-stage .cx-transport-button{min-width:32px;min-height:38px}
+  .cx-handheld-stage .transport{gap:5px}
+  .cx-handheld-stage .transport .play,.cx-handheld-stage .transport .cc{min-width:36px;height:38px}
+  body[data-cx-mode="watch"] .cx-handheld-stage .scene .lcd-group{--handheld-width:clamp(178px,calc((100svh - 278px) * .4777),285px)}
+  body[data-cx-mode="watch"] .cx-handheld-stage.cx-focused .scene .lcd-group{--handheld-width:clamp(205px,calc((100svh - 145px) * .4777),335px)}
+  .cx-handheld-stage.cx-focused .scene{padding-block:6px}
+  .cx-handheld-stage.cx-focused .beat{display:none}
+}
+.transport .cx-watch-try{margin:0;padding:.35rem .58rem;min-height:38px;font-size:.82rem;white-space:nowrap;flex:none}
+@media(max-width:640px){.cx-handheld-stage .transport .cx-watch-try{order:1}.cx-handheld-stage .transport .time{order:2;margin-left:0}.cx-handheld-stage .transport .seek{order:3}}
+body[data-cx-mode="watch"] main>.title{margin-block:.95rem .55rem}
+@media(max-width:640px){
+ body[data-cx-mode="watch"] main>.title{margin-block:.48rem .4rem}
+ .cx-handheld-stage .transport .seek{order:3;flex:1 1 57%;min-width:110px}
+ .cx-handheld-stage .transport .time{order:4;margin-left:0}
+ .cx-handheld-stage .transport .cx-watch-try{padding-inline:.42rem;font-size:.77rem}
+}

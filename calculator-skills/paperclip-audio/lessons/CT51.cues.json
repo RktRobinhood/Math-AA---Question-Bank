@@ -1,0 +1,298 @@
+{
+  "schemaVersion": 1,
+  "id": "CT51",
+  "route": "derivative/index.html",
+  "catalogueTitle": "Numerical derivative and tangent line",
+  "playerHeading": "Find a derivative and tangent",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "derivative/index.html"
+  },
+  "script": "lessons/CT51.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "On a Graphs page, plot f of x equals x cubed plus x.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu, six for Analyze Graph, then five for d y by d x.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Move to the point on the curve at x equals two, then click. You select one point, not two bounds.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The graph reports the slope. Evaluate f of two separately to find the point on the curve.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Put the slope and the point into point-slope form.",
+      "watchCueId": "watch-05"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 23000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Graphs page, plot f(x) = x³ + x.",
+        "endMs": 5100
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5100,
+        "text": "Open Menu → 6: Analyze Graph → 5: dy/dx.",
+        "endMs": 9000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9000,
+        "text": "Move to the point on the curve at x = 2, then click. You select one point, not two bounds.",
+        "endMs": 14500
+      },
+      {
+        "id": "watch-04",
+        "startMs": 14500,
+        "text": "The graph reports the slope. Evaluate f(2) separately to find the point on the curve.",
+        "endMs": 18700
+      },
+      {
+        "id": "watch-05",
+        "startMs": 18700,
+        "text": "Put the slope and the point into point–slope form.",
+        "endMs": 23000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 520,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 770,
+        "keys": []
+      },
+      {
+        "timeMs": 930,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 1181,
+        "keys": []
+      },
+      {
+        "timeMs": 1340,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 1590,
+        "keys": []
+      },
+      {
+        "timeMs": 1890,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 2140,
+        "keys": []
+      },
+      {
+        "timeMs": 2250,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 2500,
+        "keys": []
+      },
+      {
+        "timeMs": 2650,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 2900,
+        "keys": []
+      },
+      {
+        "timeMs": 3240,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 3490,
+        "keys": []
+      },
+      {
+        "timeMs": 5360,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5610,
+        "keys": []
+      },
+      {
+        "timeMs": 6150,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6400,
+        "keys": []
+      },
+      {
+        "timeMs": 7210,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7460,
+        "keys": []
+      },
+      {
+        "timeMs": 9480,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 9730,
+        "keys": []
+      },
+      {
+        "timeMs": 10080,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 10330,
+        "keys": []
+      },
+      {
+        "timeMs": 10650,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 10900,
+        "keys": []
+      },
+      {
+        "timeMs": 11170,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11420,
+        "keys": []
+      },
+      {
+        "timeMs": 13550,
+        "keys": [
+          "select"
+        ]
+      },
+      {
+        "timeMs": 13800,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT51Tape",
+        "keys": [
+          {
+            "timeMs": 520,
+            "key": "x"
+          },
+          {
+            "timeMs": 930,
+            "key": "power"
+          },
+          {
+            "timeMs": 1340,
+            "key": "3"
+          },
+          {
+            "timeMs": 1890,
+            "key": "right"
+          },
+          {
+            "timeMs": 2250,
+            "key": "plus"
+          },
+          {
+            "timeMs": 2650,
+            "key": "x"
+          },
+          {
+            "timeMs": 3240,
+            "key": "enter"
+          },
+          {
+            "timeMs": 5360,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6150,
+            "key": "6"
+          },
+          {
+            "timeMs": 7210,
+            "key": "5"
+          },
+          {
+            "timeMs": 9480,
+            "key": "right"
+          },
+          {
+            "timeMs": 10080,
+            "key": "right"
+          },
+          {
+            "timeMs": 10650,
+            "key": "right"
+          },
+          {
+            "timeMs": 11170,
+            "key": "right"
+          },
+          {
+            "timeMs": 13550,
+            "key": "select"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

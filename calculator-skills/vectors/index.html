@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Dot product &amp; angle · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head>
+<body><main>
+<header><div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>Dot product &amp; angle</h1></div>
+<label><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
+<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T calculator rehearsal">
+<div id="watch-message" class="message"><p id="caption"></p></div>
+<div id="try-message" class="message" hidden>
+<p id="task">Find the dot product and the angle for these rows.</p>
+<div id="target-wrap" class="exercise" aria-label="Assigned vectors"></div>
+<div class="try-actions"><button id="return">Watch</button><button id="reset">Reset</button></div>
+</div>
+<div class="deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b><span>Calculator</span><i id="unit">DEG</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal">▶</button></div></div>
+<aside id="watch" role="tabpanel" aria-labelledby="watch-tab">
+<h2>Two vectors, one scalar</h2>
+<div class="example" aria-label="Worked example vectors"><span>a&nbsp;=&nbsp;[2, −1, 2]</span><span>b&nbsp;=&nbsp;[1, 2, −2]</span></div>
+<ol id="chapters"></ol></aside>
+<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden>
+<h2>Use the keypad</h2>
+<p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
+<details><summary>Key paths</summary><p>Store: <kbd>a</kbd> or <kbd>b</kbd>, <kbd>Ctrl</kbd> + <kbd>templates</kbd>, then <kbd>Menu</kbd> → 7 → 1 → 1. Set 1 row and 2 or 3 columns. Tab between dimensions or cells.</p>
+<p>Scalar: <kbd>Menu</kbd> → 7 → C → 3. Type <code>a,b)</code>, then Enter.</p>
+<p>Angle: <kbd>trig</kbd>, select cos⁻¹, then <kbd>Ctrl</kbd> + <kbd>÷</kbd>. Put <code>dotP(a,b)</code> above and <code>norm(a)×norm(b)</code> below. Menu → 7 → 7 → 1 inserts <code>norm(</code>. The down arrow moves below the fraction bar.</p>
+<p>Computer keyboard: <kbd>M</kbd> opens Menu, <kbd>T</kbd> opens trig, <kbd>:</kbd> then <kbd>=</kbd> inserts assignment, and <kbd>F</kbd> opens the fraction inside cos⁻¹.</p></details>
+</aside>
+</div>
+<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">Focus</button><button id="takeover">Open Try</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="53" step=".005"></label><span>Captions only</span></div></div>
+</section>
+<details class="reference"><summary>Formula, units, and sources</summary>
+<p>The dot product is a single number: multiply corresponding components and add. For nonzero vectors, cos θ = (a · b) ÷ (|a| |b|). Apply inverse cosine to get the angle from 0° to 180°, or 0 to π radians. A zero vector still has dot product 0, but no direction, so the angle is undefined.</p>
+<p>Use the angle unit requested by the question. The rehearsal opens a Calculator page in the task’s unit. On the physical TI, set it in Document Settings. <a href="../angle-modes/index.html">Angle mode lesson</a>.</p>
+<p>Recreated Calculator screen and controls, not TI firmware. Only two- or three-component real row vectors and the commands shown are implemented. <a href="https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/qce-sm-trb-for-cx-ii-t-03-april-2025.pdf#page=89">Texas Instruments CX II-T workbook (pp. 89–90)</a>.</p>
+</details>
+</main></body>
+</html>

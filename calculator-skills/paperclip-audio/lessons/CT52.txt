@@ -1,0 +1,9 @@
+On a Graphs page, enter f one of x and press Enter.
+Press Control and G for f two. Shift and subtraction opens the first derivative template.
+Enter x in the denominator box and f one of x in the expression box. Press Enter to graph f two.
+Choose Menu then six: Analyze Graph then one: Zero. Select f two, the derivative, not f one.
+Bracket one crossing of f two with bounds on either side. The zero gives an x-coordinate.
+Substitute that x into f one. The derivative changes from positive to negative.
+Repeat Zero on f two with a separate bracket around the second crossing.
+Evaluate the original function again. This time the derivative changes from negative to positive.
+A derivative can touch zero without changing sign. A crossing search may miss it; verify a candidate separately.

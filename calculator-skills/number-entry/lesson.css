@@ -1,0 +1,56 @@
+.ct01-stage .player{border-top:1px solid var(--line);border-bottom:0}
+.ct01-stage #watch-player .caption{margin-bottom:2px}
+.ct01-stage .ct01-takeaway{font:650 .84rem var(--mono);color:var(--green);margin:2px 0 5px}
+.ct01-stage .ct10-calc-anchor{position:relative}
+.ct01-stage #lcd{display:flex;flex-direction:column}
+.ct01-stage .screen-work{flex:auto;width:100%}
+.ct01-stage #lcd-body{position:absolute;inset:0;padding:1.8cqw}
+.ct01-stage .lcd-row{height:auto;min-height:12%;font:500 4.05cqw/1.3 Arial,sans-serif;border-bottom:1px solid #d4dce5;padding:1.1cqw 2.1cqw}
+.ct01-stage .lcd-expression{overflow-wrap:anywhere;max-height:8em;overflow:hidden;letter-spacing:.01em}
+.ct01-stage .lcd-result{text-align:right;font-weight:700;margin:1cqw 0}
+.ct01-stage .lcd-input{display:flex;align-items:center;white-space:pre-wrap;overflow-wrap:anywhere;min-height:5.5cqw;border-bottom:1px solid #b1c2d3;padding:1.6cqw 1.3cqw;font:500 4.25cqw/1.3 Arial,sans-serif}
+.ct01-stage .lcd-frac,.math-example{display:inline-flex;vertical-align:middle;align-items:stretch;flex-direction:column;text-align:center}
+.ct01-stage .lcd-frac>span{display:block;min-width:3.4cqw;line-height:1.12;padding:.4cqw .9cqw;overflow-wrap:anywhere;white-space:pre-wrap}
+.ct01-stage .lcd-frac span:first-child{border-bottom:1px solid #223447}
+.ct01-stage .lcd-frac .active{background:#e0edfc;outline:1px solid #96acc7;outline-offset:-1px}
+.ct01-stage .lcd-caret{display:inline-block;width:1px;height:.9em;vertical-align:-.05em;background:#234c82}
+.ct01-stage .ctrl-flag{position:absolute;right:3cqw;bottom:1cqw;color:#2661a7;font-weight:700}
+.ct01-stage .lcd-error{border:1px solid #bf7147;background:#fff4ec;color:#733316;padding:1cqw 1.5cqw;margin:1.3cqw 2cqw;border-radius:.6cqw;font:650 3.7cqw/1.2 Arial,sans-serif}
+.ct01-stage .home-menu{display:grid;grid-template-columns:1fr 1fr;gap:2cqw;padding:1cqw;font-size:3.4cqw}
+.ct01-stage .home-menu b{display:block;background:#d2e3f2;padding:.6cqw 1cqw}
+.ct01-stage .home-menu div div,.ct01-stage .new-menu li{padding:.45cqw 1.1cqw}
+.ct01-stage .chosen{background:#2168ae;color:#fff}
+.ct01-stage .home-apps{margin:3cqw 2cqw;border-top:1px solid #a5c7e3;padding-top:1cqw;color:#234575;letter-spacing:.9cqw;font-size:4.4cqw}
+.ct01-stage .new-menu{padding:.4cqw;list-style:none;margin:.5cqw 2cqw;border:1px solid #a7b8cc;font-size:3.35cqw;background:#f3f7fc}
+.ct01-stage .start-overlay{position:absolute;z-index:3;top:26%;left:50%;transform:translate(-50%,-50%);border:1px solid #b9e3d0;border-radius:50%;background:#12452fe8;color:#fff;text-align:center;width:56px;height:56px;min-height:56px;font-size:1.4rem;box-shadow:0 3px 15px #142c2148}
+.ct01-stage .start-overlay:hover{background:#16583b}
+.ct01-stage .start-overlay span{padding-left:.14em}
+.ct01-stage[data-mode=watch] .hh-body[data-interactive=false]{cursor:default}
+.ct01-stage[data-mode=watch].ct10-focused{display:flex;flex-direction:column}
+.ct01-stage[data-mode=watch].ct10-focused .ct10-stage-grid{margin:auto;width:100%;overflow:visible;flex:none}
+.ct01-stage[data-mode=watch].ct10-focused .player{position:static;margin-top:auto}
+.ct01-stage[data-mode=watch].ct10-focused .ct10-calc-anchor{--handheld-width:clamp(172px,calc((100svh - 195px) * .4777),364px)}
+.ct01-stage[data-mode=watch]:not(.ct10-focused) .ct10-calc-anchor{--handheld-width:clamp(174px,calc((100svh - 390px) * .4777),292px)}
+.ct01-stage .math-example{font-family:var(--mono);color:var(--text);max-width:100%;font-size:clamp(.75rem,1.8vw,1.05rem)}
+.ct01-stage .math-example span{padding:2px 8px}
+.ct01-stage .math-example span:first-child{border-bottom:1px solid currentColor}
+.ct01-stage .ct10-try-help .inputline{margin-bottom:10px}
+.ct01-stage .inputline input{min-width:0}
+.ct01-stage .is-wrong{color:var(--error)}
+#challenge{margin-top:12px}
+#question{overflow-wrap:anywhere}
+@media(max-width:700px){
+ .ct01-stage:not(.ct10-focused)[data-mode=watch] .ct10-calc-anchor{--handheld-width:clamp(171px,calc((100svh - 312px) * .4777),259px)}
+ .ct01-stage[data-mode=watch] #watch-panel{display:none}
+ .ct01-stage .ct01-takeaway{font-size:.76rem}
+ .ct01-stage #try-panel{margin-top:9px}
+}
+@media(max-height:560px) and (orientation:landscape){
+ .ct01-stage[data-mode=watch].ct10-focused .ct10-stage-grid{padding-block:3px}
+ .ct01-stage[data-mode=watch].ct10-focused .ct10-calc-anchor{--handheld-width:clamp(133px,calc((100svh - 145px) * .4777),196px)}
+ .ct01-stage[data-mode=watch].ct10-focused #watch-panel{display:none}
+}
+@media print {
+ .ct01-stage,#challenge{display:none}
+ .notes summary::after{content:" · Enter and round a calculation"}
+}

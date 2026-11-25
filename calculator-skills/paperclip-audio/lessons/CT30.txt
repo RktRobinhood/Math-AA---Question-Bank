@@ -1,0 +1,11 @@
+Start in Data and Statistics with the numeric list reading on the horizontal axis.
+Open Menu then one: Plot Type then two: Box Plot. It starts as a modified box plot.
+Point at the box edges and the line inside. The first quartile is two. The median is four. The third quartile is six.
+The interquartile range is six minus two, or four. Subtract one point five times this range from the first quartile, and add it to the third quartile.
+The fences are minus four and twelve. These are calculated cutoffs, not necessarily data points.
+There is no observation at minus four. The left whisker stops at zero, the smallest value inside.
+By the mathematical rule, twelve is on the fence and stays in. thirteen is strictly beyond it.
+In Plot Properties, choose Extend Box Plot Whiskers. This makes a standard box plot.
+The whiskers now run from zero to thirteen. The quartiles stay the same; thirteen is not marked separately.
+Choose Show Box Plot Outliers to return to the modified plot.
+Report the fence and the observed whisker separately.

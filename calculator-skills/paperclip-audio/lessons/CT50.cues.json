@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "id": "CT50",
+  "route": "binomial-test/index.html",
+  "catalogueTitle": "Exact binomial hypothesis test",
+  "playerHeading": "Exact binomial hypothesis test",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "binomial-test/index.html"
+  },
+  "script": "lessons/CT50.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Eight of sixteen independent checks pass. Does the pass rate exceed the usual twenty-five percent?",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Higher is the alternative, so look at eight or more. Include the observed eight.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "On a Calculator page choose Probability, Distributions, then Binomial C D F.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter sixteen trials and the null probability, zero point two five, not the sample proportion of eight out of sixteen.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Set the lower bound to eight and the upper bound to sixteen. Both are included.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Enter inserts the command. Enter again finds the whole upper tail.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The tail probability is about zero point zero two seven one. It is below zero point zero five: reject the null hypothesis.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "For a lower alternative, count from zero through the observation. The LCD still shows the upper-tail example.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 59000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Eight of 16 independent checks pass. Does the pass rate exceed the usual 25%?",
+        "endMs": 6400
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6400,
+        "text": "Higher is the alternative, so look at eight or more. Include the observed eight.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13000,
+        "text": "On a Calculator page choose Probability, Distributions, then Binomial Cdf.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 20000,
+        "text": "Enter 16 trials and the null probability 0.25, not the sample proportion 8/16.",
+        "endMs": 31000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 31000,
+        "text": "Set the lower bound to 8 and the upper bound to 16. Both are included.",
+        "endMs": 40000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 40000,
+        "text": "Enter inserts the command. Enter again finds the whole upper tail.",
+        "endMs": 46000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 46000,
+        "text": "The tail probability is about 0.0271. It is below 0.05: reject H₀.",
+        "endMs": 52000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 52000,
+        "text": "For a lower alternative, count from zero through the observation. The LCD still shows the upper-tail example.",
+        "endMs": 59000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 13800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 14160,
+        "keys": []
+      },
+      {
+        "timeMs": 15000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 15360,
+        "keys": []
+      },
+      {
+        "timeMs": 16300,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 16660,
+        "keys": []
+      },
+      {
+        "timeMs": 18000,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 18360,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 22000,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 22360,
+        "keys": []
+      },
+      {
+        "timeMs": 23000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23360,
+        "keys": []
+      },
+      {
+        "timeMs": 24000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 24360,
+        "keys": []
+      },
+      {
+        "timeMs": 25000,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 25360,
+        "keys": []
+      },
+      {
+        "timeMs": 26000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 26360,
+        "keys": []
+      },
+      {
+        "timeMs": 27000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 27360,
+        "keys": []
+      },
+      {
+        "timeMs": 29000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 29360,
+        "keys": []
+      },
+      {
+        "timeMs": 32000,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 32360,
+        "keys": []
+      },
+      {
+        "timeMs": 34000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 34360,
+        "keys": []
+      },
+      {
+        "timeMs": 36000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 36360,
+        "keys": []
+      },
+      {
+        "timeMs": 37000,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 37360,
+        "keys": []
+      },
+      {
+        "timeMs": 41000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 41360,
+        "keys": []
+      },
+      {
+        "timeMs": 44000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 44360,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

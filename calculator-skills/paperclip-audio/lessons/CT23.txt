@@ -1,0 +1,9 @@
+Solve two x plus y equals seven, and x minus y equals two. Use x, y in that order. Store the coefficients as A using Control and Template for the assignment symbol.
+On a Calculator page choose Menu then seven: Matrix and Vector then one: Create then one: Matrix. Use two rows and two columns.
+Enter two, one in the first row and one, minus one in the second. Tab moves to the next cell. Press Enter to store a.
+Store b the same way, but use two rows and one column. Enter seven above two to match the original equation order.
+Type A, then the power key, the negative key and one. Press Right to leave the exponent, then the times key, B, and Enter. The inverse of A multiplies B on the left.
+Read x equals three above y equals one. In the original equations, twice three plus one is seven, and three minus one is two.
+For x plus two y equals four, and two x plus four y equals nine, enter a two by three matrix, M. Keep x, y first; put the constants in the final column.
+Open Menu, then seven for Matrix and Vector, then five for Reduced Row-Echelon Form. Enter M as the argument and press Enter.
+The last row means zero times x plus zero times y equals one, so there is no solution. A zero row instead leaves one variable free here. For these cases, the inverse method does not apply.

@@ -1,0 +1,459 @@
+{
+  "schemaVersion": 1,
+  "id": "CT10",
+  "route": "zeros/index.html",
+  "catalogueTitle": "Zeros and intercepts",
+  "playerHeading": "Find a graph zero",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json"
+  },
+  "script": "lessons/CT10.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Plot the function."
+    },
+    {
+      "id": "watch-02",
+      "text": "A zero is an x value for which the function is zero."
+    },
+    {
+      "id": "watch-03",
+      "text": "Open Analyze Graph and choose Zero."
+    },
+    {
+      "id": "watch-04",
+      "text": "If prompted, select the curve to analyze."
+    },
+    {
+      "id": "watch-05",
+      "text": "Place one bound on each side of the crossing."
+    },
+    {
+      "id": "watch-06",
+      "text": "Keep other zeros outside those bounds."
+    },
+    {
+      "id": "watch-07",
+      "text": "Read the x-coordinate."
+    },
+    {
+      "id": "watch-08",
+      "text": "For a y-intercept, evaluate the function at x equal to zero instead."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 24616,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Plot the function.",
+        "endMs": 1600
+      },
+      {
+        "id": "watch-02",
+        "startMs": 1600,
+        "text": "A zero is an x value for which the function is zero.",
+        "endMs": 5406
+      },
+      {
+        "id": "watch-03",
+        "startMs": 5406,
+        "text": "Open Analyze Graph and choose Zero.",
+        "endMs": 8680
+      },
+      {
+        "id": "watch-04",
+        "startMs": 8680,
+        "text": "If prompted, select the curve to analyze.",
+        "endMs": 11660
+      },
+      {
+        "id": "watch-05",
+        "startMs": 11660,
+        "text": "Place one bound on each side of the crossing.",
+        "endMs": 14900
+      },
+      {
+        "id": "watch-06",
+        "startMs": 14900,
+        "text": "Keep other zeros outside those bounds.",
+        "endMs": 17828
+      },
+      {
+        "id": "watch-07",
+        "startMs": 17828,
+        "text": "Read the x-coordinate.",
+        "endMs": 19820
+      },
+      {
+        "id": "watch-08",
+        "startMs": 19820,
+        "text": "For a y-intercept, evaluate the function at x equal to zero instead.",
+        "endMs": 24616
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 650,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 880,
+        "keys": []
+      },
+      {
+        "timeMs": 1190,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 1420,
+        "keys": []
+      },
+      {
+        "timeMs": 1750,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 1980,
+        "keys": []
+      },
+      {
+        "timeMs": 2130,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 2360,
+        "keys": []
+      },
+      {
+        "timeMs": 2520,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 2750,
+        "keys": []
+      },
+      {
+        "timeMs": 2960,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 3190,
+        "keys": []
+      },
+      {
+        "timeMs": 3350,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 3580,
+        "keys": []
+      },
+      {
+        "timeMs": 4270,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 4500,
+        "keys": []
+      },
+      {
+        "timeMs": 5750,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5980,
+        "keys": []
+      },
+      {
+        "timeMs": 6840,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7070,
+        "keys": []
+      },
+      {
+        "timeMs": 7960,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 8190,
+        "keys": []
+      },
+      {
+        "timeMs": 11880,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 12650,
+        "keys": []
+      },
+      {
+        "timeMs": 12690,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 12920,
+        "keys": []
+      },
+      {
+        "timeMs": 13470,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 13701,
+        "keys": []
+      },
+      {
+        "timeMs": 14630,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15130,
+        "keys": []
+      },
+      {
+        "timeMs": 15170,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15670,
+        "keys": []
+      },
+      {
+        "timeMs": 17320,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17550,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT10Tape",
+        "keys": [
+          {
+            "timeMs": 650,
+            "key": "x"
+          },
+          {
+            "timeMs": 1190,
+            "key": "square"
+          },
+          {
+            "timeMs": 1750,
+            "key": "minus"
+          },
+          {
+            "timeMs": 2130,
+            "key": "5"
+          },
+          {
+            "timeMs": 2520,
+            "key": "x"
+          },
+          {
+            "timeMs": 2960,
+            "key": "plus"
+          },
+          {
+            "timeMs": 3350,
+            "key": "6"
+          },
+          {
+            "timeMs": 4270,
+            "key": "enter"
+          },
+          {
+            "timeMs": 5750,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6840,
+            "key": "6"
+          },
+          {
+            "timeMs": 7960,
+            "key": "1"
+          },
+          {
+            "timeMs": 11880,
+            "key": "left"
+          },
+          {
+            "timeMs": 12150,
+            "key": "left"
+          },
+          {
+            "timeMs": 12420,
+            "key": "left"
+          },
+          {
+            "timeMs": 12690,
+            "key": "left"
+          },
+          {
+            "timeMs": 13470,
+            "key": "enter"
+          },
+          {
+            "timeMs": 14630,
+            "key": "right"
+          },
+          {
+            "timeMs": 14900,
+            "key": "right"
+          },
+          {
+            "timeMs": 15170,
+            "key": "right"
+          },
+          {
+            "timeMs": 15440,
+            "key": "right"
+          },
+          {
+            "timeMs": 17320,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "zeros/narration.mp3",
+    "bytes": 328642,
+    "sha256": "3e092089855cae2cd75df1617171f773a3b1aeef31434294166de25be4048077",
+    "streamDurationMs": 24660,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "existing-runtime-captions-plus-approximate-offline-alignments",
+      "runtimeCaptionCues": [
+        {
+          "id": "watch-01",
+          "startMs": 0,
+          "text": "Plot the function.",
+          "endMs": 1600
+        },
+        {
+          "id": "watch-02",
+          "startMs": 1600,
+          "text": "A zero is an x value for which the function is zero.",
+          "endMs": 5406
+        },
+        {
+          "id": "watch-03",
+          "startMs": 5406,
+          "text": "Open Analyze Graph and choose Zero.",
+          "endMs": 8680
+        },
+        {
+          "id": "watch-04",
+          "startMs": 8680,
+          "text": "If prompted, select the curve to analyze.",
+          "endMs": 11660
+        },
+        {
+          "id": "watch-05",
+          "startMs": 11660,
+          "text": "Place one bound on each side of the crossing.",
+          "endMs": 14900
+        },
+        {
+          "id": "watch-06",
+          "startMs": 14900,
+          "text": "Keep other zeros outside those bounds.",
+          "endMs": 17828
+        },
+        {
+          "id": "watch-07",
+          "startMs": 17828,
+          "text": "Read the x-coordinate.",
+          "endMs": 19820
+        },
+        {
+          "id": "watch-08",
+          "startMs": 19820,
+          "text": "For a y-intercept, evaluate the function at x equal to zero instead.",
+          "endMs": 24616
+        }
+      ],
+      "guideChapterStartsMs": [
+        0,
+        5406,
+        11744,
+        17828
+      ],
+      "guideDurationMs": 24660,
+      "source": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json",
+      "offlineSpeechSegments": [
+        {
+          "startMs": 0,
+          "endMs": 7860,
+          "text": "Plot the function. A 0 is an X value for which the function is 0. Open Analyze Graph and choose 0."
+        },
+        {
+          "startMs": 8680,
+          "endMs": 13880,
+          "text": "If prompted, select the curve to analyze. Place one bound on each side of the crossing."
+        },
+        {
+          "startMs": 14900,
+          "endMs": 21820,
+          "text": "Keep other zeros outside those bounds. Read the X coordinate. For a Y intercept, evaluate the"
+        },
+        {
+          "startMs": 21820,
+          "endMs": 24160,
+          "text": "function at x equal to zero instead."
+        }
+      ]
+    },
+    "byteIdenticalCopy": "guided-audio/CT10.mp3"
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

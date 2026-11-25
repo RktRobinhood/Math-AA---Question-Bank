@@ -1,0 +1,19 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.241
+On a Calculator page, open Menu, choose Algebra, then Numerical Solve.
+
+00:00:06.241 --> 00:00:10.696
+Enter the equation, then a comma and the variable you’re solving for.
+
+00:00:10.696 --> 00:00:17.912
+To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma.
+
+00:00:17.912 --> 00:00:23.580
+Close the bracket and press Enter. The calculator gives one numerical solution.
+
+00:00:23.580 --> 00:00:29.431
+If the equation may have more than one solution, use separate intervals and check each result.
+
+00:00:29.431 --> 00:00:35.553
+Keep the calculator’s full precision while you work, then round the final answer as the question asks.

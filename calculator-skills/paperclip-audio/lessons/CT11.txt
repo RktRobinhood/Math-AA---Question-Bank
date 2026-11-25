@@ -1,0 +1,7 @@
+Plot both functions on the same page.
+Look for the crossing that matches the requested point.
+Choose Intersection.
+Select the relevant graphs if prompted.
+Bracket one crossing at a time with the lower and upper bounds.
+Read the coordinates.
+At the intersection, both expressions give the same y-value.

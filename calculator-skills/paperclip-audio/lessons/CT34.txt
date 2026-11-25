@@ -1,0 +1,9 @@
+Each response is positive, so we can take its natural logarithm.
+Move to column C's name cell. Call the new list L N Y.
+In the formula cell, press Control and the e to the x key for natural log. Enter the list named y val and close the bracket.
+Enter calculates every log in the new column. Keep the same pairing by row.
+On Lists and Spreadsheet, choose Menu, Statistics, Stat Calculations, then Linear Regression in the m x plus b form.
+Keep x val as the X list. In the Y menu choose L N Y. Press Enter to fit the transformed response.
+The slope is the natural log of two and the intercept is the natural log of three. The saved line predicts the natural log of y.
+Exponentiate the slope and intercept to get the multiplier and initial value. Use the original y-scale for predictions.
+A log-log power fit would transform x too. Do not use that workflow for this exponential example.

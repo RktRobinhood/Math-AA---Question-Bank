@@ -1,0 +1,9 @@
+Enter the directed arrow counts. Rows are where a walk starts; columns are where it goes.
+Two arrows go from A to B, so the entry in row A, column B is two. An absent arrow gives zero.
+Open Matrix and Vector, then Create, then Matrix.
+Set three rows and three columns. Fill each count, then press Tab.
+From after the last cell, press Control and Var to insert the store arrow, type A, then Enter.
+Type a raised to power two, then Enter. This uses matrix multiplication.
+From A to C, read row A, column C: two. The two parallel arrows from A to B each allow a walk through B. Read the reverse entry: zero.
+For exactly three edges, use a cubed instead. Do not add shorter lengths to it.
+There is one three-edge walk: A to C, back to A, then to C. Repeated vertices are allowed in a walk.

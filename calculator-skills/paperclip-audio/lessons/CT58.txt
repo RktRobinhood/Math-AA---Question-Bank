@@ -1,0 +1,7 @@
+Estimate y at x equals one in two steps. Start at the known point zero, two.
+Use the starting pair for the slope: zero minus two equals minus two. Multiply the slope by the step size.
+On a Calculator page, type two, plus zero point five times the quantity zero minus two, then press Enter.
+The new y is one, and the new x is zero point five. Keep that pair together.
+Now find the slope from the new pair: zero point five minus one equals minus zero point five. The previous slope is no longer used.
+Type one, plus zero point five times the quantity zero point five minus one. Then press Enter. This is the second update.
+At x equals one the Euler estimate is zero point seven five. Two tangent steps give an approximation, not an exact solution.

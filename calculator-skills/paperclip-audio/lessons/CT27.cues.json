@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "id": "CT27",
+  "route": "minimum-route-table/index.html",
+  "catalogueTitle": "Network algorithms: shortest routes",
+  "playerHeading": "Minimum-route-distance table",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "minimum-route-table/index.html"
+  },
+  "script": "lessons/CT27.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Find row A, column D: the shortest distance from A to D, not a full tour.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "There is no direct road from A to D. Compare both two-road routes and both routes that use the road between B and C.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "First add the two lengths on the route A to B to D. The first road is short, but the last one is not.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Next add the distances from A to C to D. Keep the total for comparison.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "A to B to C to D is also possible. Add all three road lengths, in order.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The reverse middle leg gives a different route. Add A to C to B to D as well.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Compare eleven, seven, eight and eighteen. Enter seven in row A, column D.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Two-way roads give the same distance in reverse. Tied routes share one table value.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 53000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Find row A, column D: the shortest A–D distance, not a full tour.",
+        "endMs": 7000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 7000,
+        "text": "There is no direct A–D road. Compare both two-road routes and both routes that use B–C.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13000,
+        "text": "First add the two lengths on A–B–D. The first road is short, but the last one is not.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 20000,
+        "text": "Next add the distances on A–C–D. Keep the total for comparison.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27000,
+        "text": "A–B–C–D is also possible. Add all three road lengths, in order.",
+        "endMs": 34500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 34500,
+        "text": "The reverse middle leg gives a different route. Add A–C–B–D as well.",
+        "endMs": 42000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 42000,
+        "text": "Compare 11, 7, 8 and 18. Enter 7 in row A, column D.",
+        "endMs": 48000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 48000,
+        "text": "Two-way roads give the same distance in reverse. Tied routes share one table value.",
+        "endMs": 53000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 14000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 14360,
+        "keys": []
+      },
+      {
+        "timeMs": 14660,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 15020,
+        "keys": []
+      },
+      {
+        "timeMs": 15320,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 15680,
+        "keys": []
+      },
+      {
+        "timeMs": 17000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17360,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 21660,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 22020,
+        "keys": []
+      },
+      {
+        "timeMs": 22320,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 22680,
+        "keys": []
+      },
+      {
+        "timeMs": 24000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24360,
+        "keys": []
+      },
+      {
+        "timeMs": 28000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 28360,
+        "keys": []
+      },
+      {
+        "timeMs": 28660,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 29020,
+        "keys": []
+      },
+      {
+        "timeMs": 29320,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 29680,
+        "keys": []
+      },
+      {
+        "timeMs": 29980,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 30340,
+        "keys": []
+      },
+      {
+        "timeMs": 30640,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 31000,
+        "keys": []
+      },
+      {
+        "timeMs": 32000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32360,
+        "keys": []
+      },
+      {
+        "timeMs": 35400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 35760,
+        "keys": []
+      },
+      {
+        "timeMs": 36060,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 36420,
+        "keys": []
+      },
+      {
+        "timeMs": 36720,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 37080,
+        "keys": []
+      },
+      {
+        "timeMs": 37380,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 37740,
+        "keys": []
+      },
+      {
+        "timeMs": 38040,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 38400,
+        "keys": []
+      },
+      {
+        "timeMs": 40500,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 40860,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

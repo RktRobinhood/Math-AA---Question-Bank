@@ -1,0 +1,394 @@
+{
+  "schemaVersion": 1,
+  "id": "CT05",
+  "route": "finance-solver/index.html",
+  "catalogueTitle": "Financial mathematics and TVM",
+  "playerHeading": "Finance Solver",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "finance-solver/index.html"
+  },
+  "script": "lessons/CT05.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Deposit one thousand for two years at six percent nominal interest, compounded monthly. There are no later payments.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On a Calculator page, press Menu then eight: Finance then one: Finance Solver.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Two years times twelve months gives twenty-four payment periods. Enter six for the annual percentage rate.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Present value is negative one thousand: the deposit leaves you now. Payment is zero because there are no recurring payments.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Skip future value. To count periods in months, set payments per year and compounding periods per year to twelve. Leave payment timing at End; it has no effect without recurring payments.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Move back to FV, then press Enter to solve for the highlighted field.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "A positive future value is money you receive at the end. Rounded to two decimal places, the balance is one thousand, one hundred and twenty-seven point one six.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 40500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Deposit 1,000 for 2 years at 6% nominal interest, compounded monthly. There are no later payments.",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "On a Calculator page, press Menu → 8: Finance → 1: Finance Solver.",
+        "endMs": 8000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 8000,
+        "text": "Two years × 12 months gives N = 24. Enter 6 in I(%), the annual percentage rate.",
+        "endMs": 14000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 14000,
+        "text": "PV = −1,000: the deposit leaves you now. Pmt = 0 because there are no recurring payments.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 22000,
+        "text": "Skip FV. To count N in months, set both PpY and CpY to 12 here. Keep PmtAt at END; it has no effect when Pmt is zero.",
+        "endMs": 31000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 31000,
+        "text": "Move back to FV, then press Enter to solve for the highlighted field.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 36000,
+        "text": "A positive FV is money you receive at the end. Rounded to two decimal places, the balance is 1,127.16.",
+        "endMs": 40500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 4570,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 4931,
+        "keys": []
+      },
+      {
+        "timeMs": 5600,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 5960,
+        "keys": []
+      },
+      {
+        "timeMs": 6650,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7011,
+        "keys": []
+      },
+      {
+        "timeMs": 8450,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8810,
+        "keys": []
+      },
+      {
+        "timeMs": 9190,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 9550,
+        "keys": []
+      },
+      {
+        "timeMs": 10250,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10610,
+        "keys": []
+      },
+      {
+        "timeMs": 11480,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 11840,
+        "keys": []
+      },
+      {
+        "timeMs": 12850,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13210,
+        "keys": []
+      },
+      {
+        "timeMs": 14430,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 14790,
+        "keys": []
+      },
+      {
+        "timeMs": 15160,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 15520,
+        "keys": []
+      },
+      {
+        "timeMs": 15800,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 16160,
+        "keys": []
+      },
+      {
+        "timeMs": 16460,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 16820,
+        "keys": []
+      },
+      {
+        "timeMs": 17100,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17460,
+        "keys": []
+      },
+      {
+        "timeMs": 18430,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 18790,
+        "keys": []
+      },
+      {
+        "timeMs": 19820,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20180,
+        "keys": []
+      },
+      {
+        "timeMs": 20950,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 21310,
+        "keys": []
+      },
+      {
+        "timeMs": 22420,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 22780,
+        "keys": []
+      },
+      {
+        "timeMs": 23540,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23900,
+        "keys": []
+      },
+      {
+        "timeMs": 24160,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 24520,
+        "keys": []
+      },
+      {
+        "timeMs": 25060,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25420,
+        "keys": []
+      },
+      {
+        "timeMs": 26300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 26660,
+        "keys": []
+      },
+      {
+        "timeMs": 26960,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 27320,
+        "keys": []
+      },
+      {
+        "timeMs": 28150,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28510,
+        "keys": []
+      },
+      {
+        "timeMs": 31340,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31700,
+        "keys": []
+      },
+      {
+        "timeMs": 31880,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 32240,
+        "keys": []
+      },
+      {
+        "timeMs": 32420,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 32780,
+        "keys": []
+      },
+      {
+        "timeMs": 32960,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 33320,
+        "keys": []
+      },
+      {
+        "timeMs": 33500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 33860,
+        "keys": []
+      },
+      {
+        "timeMs": 34600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34960,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

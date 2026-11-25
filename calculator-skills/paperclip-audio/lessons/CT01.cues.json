@@ -1,0 +1,399 @@
+{
+  "schemaVersion": 1,
+  "id": "CT01",
+  "route": "number-entry/index.html",
+  "catalogueTitle": "Numerical entry, notation and rounding",
+  "playerHeading": "Enter and round a calculation",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json"
+  },
+  "script": "lessons/CT01.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Open a Calculator page."
+    },
+    {
+      "id": "watch-02",
+      "text": "Group the numerator and denominator before entering a fraction."
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the scientific notation key for powers of 10."
+    },
+    {
+      "id": "watch-04",
+      "text": "Keep the negative sign inside the exponent."
+    },
+    {
+      "id": "watch-05",
+      "text": "Read the unrounded value first."
+    },
+    {
+      "id": "watch-06",
+      "text": "Scientific notation on the screen may use the letter E."
+    },
+    {
+      "id": "watch-07",
+      "text": "Show the requested precision in your written answer."
+    },
+    {
+      "id": "watch-08",
+      "text": "6.00 has three significant figures."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 26974,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Open a Calculator page.",
+        "endMs": 2100
+      },
+      {
+        "id": "watch-02",
+        "startMs": 2100,
+        "text": "Group the numerator and denominator before entering a fraction.",
+        "endMs": 6440
+      },
+      {
+        "id": "watch-03",
+        "startMs": 6440,
+        "text": "Use the scientific notation key for powers of 10.",
+        "endMs": 10240
+      },
+      {
+        "id": "watch-04",
+        "startMs": 10240,
+        "text": "Keep the negative sign inside the exponent.",
+        "endMs": 13320
+      },
+      {
+        "id": "watch-05",
+        "startMs": 13320,
+        "text": "Read the unrounded value first.",
+        "endMs": 16020
+      },
+      {
+        "id": "watch-06",
+        "startMs": 16020,
+        "text": "Scientific notation on the screen may use the letter E.",
+        "endMs": 20060
+      },
+      {
+        "id": "watch-07",
+        "startMs": 20060,
+        "text": "Show the requested precision in your written answer.",
+        "endMs": 23450
+      },
+      {
+        "id": "watch-08",
+        "startMs": 23450,
+        "text": "6.00 has three significant figures.",
+        "endMs": 26974
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 30,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 280,
+        "keys": []
+      },
+      {
+        "timeMs": 530,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 780,
+        "keys": []
+      },
+      {
+        "timeMs": 1120,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 1370,
+        "keys": []
+      },
+      {
+        "timeMs": 2360,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 2610,
+        "keys": []
+      },
+      {
+        "timeMs": 3020,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 3270,
+        "keys": []
+      },
+      {
+        "timeMs": 6450,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6700,
+        "keys": []
+      },
+      {
+        "timeMs": 6960,
+        "keys": [
+          "ee"
+        ]
+      },
+      {
+        "timeMs": 7210,
+        "keys": []
+      },
+      {
+        "timeMs": 7490,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7740,
+        "keys": []
+      },
+      {
+        "timeMs": 7970,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 8220,
+        "keys": []
+      },
+      {
+        "timeMs": 8410,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8660,
+        "keys": []
+      },
+      {
+        "timeMs": 9060,
+        "keys": [
+          "ee"
+        ]
+      },
+      {
+        "timeMs": 9310,
+        "keys": []
+      },
+      {
+        "timeMs": 10520,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 10770,
+        "keys": []
+      },
+      {
+        "timeMs": 11000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 11250,
+        "keys": []
+      },
+      {
+        "timeMs": 11540,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 11790,
+        "keys": []
+      },
+      {
+        "timeMs": 11910,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 12160,
+        "keys": []
+      },
+      {
+        "timeMs": 12330,
+        "keys": [
+          "ee"
+        ]
+      },
+      {
+        "timeMs": 12580,
+        "keys": []
+      },
+      {
+        "timeMs": 12770,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 13020,
+        "keys": []
+      },
+      {
+        "timeMs": 13230,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 13480,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": {
+    "src": "number-entry/narration.mp3",
+    "bytes": 344304,
+    "sha256": "327fb4fbb2d362f17e03ba835fa8fb3e107e801151bfd8975a74ae9e0399692f",
+    "streamDurationMs": 27011,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "existing-runtime-captions-plus-approximate-offline-alignments",
+      "runtimeCaptionCues": [
+        {
+          "id": "watch-01",
+          "startMs": 0,
+          "text": "Open a Calculator page.",
+          "endMs": 2100
+        },
+        {
+          "id": "watch-02",
+          "startMs": 2100,
+          "text": "Group the numerator and denominator before entering a fraction.",
+          "endMs": 6440
+        },
+        {
+          "id": "watch-03",
+          "startMs": 6440,
+          "text": "Use the scientific notation key for powers of 10.",
+          "endMs": 10240
+        },
+        {
+          "id": "watch-04",
+          "startMs": 10240,
+          "text": "Keep the negative sign inside the exponent.",
+          "endMs": 13320
+        },
+        {
+          "id": "watch-05",
+          "startMs": 13320,
+          "text": "Read the unrounded value first.",
+          "endMs": 16020
+        },
+        {
+          "id": "watch-06",
+          "startMs": 16020,
+          "text": "Scientific notation on the screen may use the letter E.",
+          "endMs": 20060
+        },
+        {
+          "id": "watch-07",
+          "startMs": 20060,
+          "text": "Show the requested precision in your written answer.",
+          "endMs": 23450
+        },
+        {
+          "id": "watch-08",
+          "startMs": 23450,
+          "text": "6.00 has three significant figures.",
+          "endMs": 26974
+        }
+      ],
+      "guideChapterStartsMs": [
+        0,
+        6453,
+        13373,
+        20099
+      ],
+      "guideDurationMs": 27011,
+      "source": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json",
+      "offlineSpeechSegments": [
+        {
+          "startMs": 0,
+          "endMs": 1480,
+          "text": "Open a calculator page."
+        },
+        {
+          "startMs": 2100,
+          "endMs": 5540,
+          "text": "Group the numerator and denominator before entering a fraction."
+        },
+        {
+          "startMs": 6440,
+          "endMs": 9340,
+          "text": "Use the scientific notation key for powers of 10."
+        },
+        {
+          "startMs": 10240,
+          "endMs": 12460,
+          "text": "Keep the negative sign inside the exponent."
+        },
+        {
+          "startMs": 13320,
+          "endMs": 15180,
+          "text": "Read the unrounded value first."
+        },
+        {
+          "startMs": 16020,
+          "endMs": 19300,
+          "text": "Scientific notation on the screen may use the letter E."
+        },
+        {
+          "startMs": 20060,
+          "endMs": 22680,
+          "text": "Show the requested precision in your written answer."
+        },
+        {
+          "startMs": 22680,
+          "endMs": 26440,
+          "text": "6.00 has three significant figures."
+        }
+      ]
+    },
+    "byteIdenticalCopy": "guided-audio/CT01.mp3"
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

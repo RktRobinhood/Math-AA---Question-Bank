@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "id": "CT46",
+  "route": "t-tests/index.html",
+  "catalogueTitle": "One-sample and two-sample t-tests",
+  "playerHeading": "One- and two-sample t-tests",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "t-tests/index.html"
+  },
+  "script": "lessons/CT46.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "For the same items measured twice, first compute one difference per item. Here use the nine differences, not two independent lists.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Population standard deviation is unknown. On Calculator, choose Menu then six Statistics then seven Stat Tests then two t Test. Switch Data Input Method to Stats.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use zero for the hypothesised mean, three for the sample mean, four for the sample standard deviation, and nine for the sample size. The claim is an increase. Choose mean greater than the hypothesised mean, and confirm.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The t statistic is two point two five, with eight degrees of freedom. The one-sided p value is about zero point zero two seven two eight. At five percent, reject the null hypothesis. There is evidence the mean difference is positive.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "For independent normal groups with equal population variances, choose Stat Tests, then option four for the two-sample t test. Switch to Stats.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Group one: sample mean thirty-five, sample standard deviation four, sample size ten. Group two: sample mean thirty-one, sample standard deviation five, sample size twelve. Choose the not-equal alternative and set Pooled to Yes.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The two-sided p value is about zero point zero five four seven, above zero point zero five. Do not reject the null hypothesis. That is not evidence the two means are equal.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 58000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "For the same items measured twice, first compute one difference per item. Here use the nine differences, not two independent lists.",
+        "endMs": 5400
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5400,
+        "text": "Population SD is unknown. On Calculator, choose Menu → 6 Statistics → 7 Stat Tests → 2 t Test. Switch Data Input Method to Stats.",
+        "endMs": 13100
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13100,
+        "text": "Use μ₀ = 0, x̄ = 3, sx = 4 and n = 9. The claim is an increase: select μ > μ₀ and confirm.",
+        "endMs": 25800
+      },
+      {
+        "id": "watch-04",
+        "startMs": 25800,
+        "text": "t = 2.25, df = 8. The one-sided PVal is about 0.02728. At 5%, reject H₀: there is evidence the mean difference is positive.",
+        "endMs": 30400
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30400,
+        "text": "For independent normal groups with equal population variances, choose Stat Tests → 4 2-Sample t Test and switch to Stats.",
+        "endMs": 38150
+      },
+      {
+        "id": "watch-06",
+        "startMs": 38150,
+        "text": "Group 1: x̄ = 35, sx = 4, n = 10. Group 2: x̄ = 31, sx = 5, n = 12. Choose μ₁ ≠ μ₂ and Pooled: Yes.",
+        "endMs": 53100
+      },
+      {
+        "id": "watch-07",
+        "startMs": 53100,
+        "text": "The two-sided PVal is about 0.0547, above 0.05. Do not reject H₀; that is not evidence the two means are equal.",
+        "endMs": 58000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 6490,
+        "keys": []
+      },
+      {
+        "timeMs": 6830,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7220,
+        "keys": []
+      },
+      {
+        "timeMs": 7560,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 7950,
+        "keys": []
+      },
+      {
+        "timeMs": 8290,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8680,
+        "keys": []
+      },
+      {
+        "timeMs": 9020,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 9410,
+        "keys": []
+      },
+      {
+        "timeMs": 9750,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 10140,
+        "keys": []
+      },
+      {
+        "timeMs": 10480,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 10871,
+        "keys": []
+      },
+      {
+        "timeMs": 11210,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11601,
+        "keys": []
+      },
+      {
+        "timeMs": 11940,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 12330,
+        "keys": []
+      },
+      {
+        "timeMs": 13400,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 13791,
+        "keys": []
+      },
+      {
+        "timeMs": 14230,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14621,
+        "keys": []
+      },
+      {
+        "timeMs": 15060,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 15451,
+        "keys": []
+      },
+      {
+        "timeMs": 15890,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16280,
+        "keys": []
+      },
+      {
+        "timeMs": 16720,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 17110,
+        "keys": []
+      },
+      {
+        "timeMs": 17550,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17940,
+        "keys": []
+      },
+      {
+        "timeMs": 18380,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 18770,
+        "keys": []
+      },
+      {
+        "timeMs": 19210,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 19600,
+        "keys": []
+      },
+      {
+        "timeMs": 20040,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 20430,
+        "keys": []
+      },
+      {
+        "timeMs": 20870,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 21260,
+        "keys": []
+      },
+      {
+        "timeMs": 21700,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 22090,
+        "keys": []
+      },
+      {
+        "timeMs": 22530,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22920,
+        "keys": []
+      },
+      {
+        "timeMs": 23360,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23750,
+        "keys": []
+      },
+      {
+        "timeMs": 24190,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24581,
+        "keys": []
+      },
+      {
+        "timeMs": 31100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 31491,
+        "keys": []
+      },
+      {
+        "timeMs": 31830,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 32220,
+        "keys": []
+      },
+      {
+        "timeMs": 32560,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 32950,
+        "keys": []
+      },
+      {
+        "timeMs": 33290,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 33680,
+        "keys": []
+      },
+      {
+        "timeMs": 34020,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 34411,
+        "keys": []
+      },
+      {
+        "timeMs": 34750,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 35140,
+        "keys": []
+      },
+      {
+        "timeMs": 35480,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 35870,
+        "keys": []
+      },
+      {
+        "timeMs": 36210,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36600,
+        "keys": []
+      },
+      {
+        "timeMs": 36940,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 37330,
+        "keys": []
+      },
+      {
+        "timeMs": 38350,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 38740,
+        "keys": []
+      },
+      {
+        "timeMs": 38990,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 39380,
+        "keys": []
+      },
+      {
+        "timeMs": 39630,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 40020,
+        "keys": []
+      },
+      {
+        "timeMs": 40270,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 40661,
+        "keys": []
+      },
+      {
+        "timeMs": 40910,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 41300,
+        "keys": []
+      },
+      {
+        "timeMs": 41550,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 41940,
+        "keys": []
+      },
+      {
+        "timeMs": 42190,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 42580,
+        "keys": []
+      },
+      {
+        "timeMs": 42830,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 43220,
+        "keys": []
+      },
+      {
+        "timeMs": 43470,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 43860,
+        "keys": []
+      },
+      {
+        "timeMs": 44110,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 44500,
+        "keys": []
+      },
+      {
+        "timeMs": 44750,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 45140,
+        "keys": []
+      },
+      {
+        "timeMs": 45390,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 45780,
+        "keys": []
+      },
+      {
+        "timeMs": 46030,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 46420,
+        "keys": []
+      },
+      {
+        "timeMs": 46670,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 47060,
+        "keys": []
+      },
+      {
+        "timeMs": 47310,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 47700,
+        "keys": []
+      },
+      {
+        "timeMs": 47950,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 48340,
+        "keys": []
+      },
+      {
+        "timeMs": 48590,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 48981,
+        "keys": []
+      },
+      {
+        "timeMs": 49230,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 49620,
+        "keys": []
+      },
+      {
+        "timeMs": 49870,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 50260,
+        "keys": []
+      },
+      {
+        "timeMs": 50510,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 50900,
+        "keys": []
+      },
+      {
+        "timeMs": 51150,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 51540,
+        "keys": []
+      },
+      {
+        "timeMs": 51790,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 52180,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

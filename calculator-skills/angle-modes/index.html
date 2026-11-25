@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Angle modes and inverse trig · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="head">
+<div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> <span aria-hidden="true">/</span> <a href="../skills.html">All skills</a></nav>
+<h1>Angle modes and inverse trig</h1></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode">
+<button type="button" id="watch-tab" role="tab" aria-controls="watch-work" aria-selected="true">Watch</button><button type="button" id="try-tab" role="tab" aria-controls="try-work" aria-selected="false" tabindex="-1">Try</button></div>
+<section id="stage" class="stage" data-mode="watch" aria-label="Handheld lesson" tabindex="0">
+<div id="watch-message"><p id="caption"></p></div>
+<div id="try-header" hidden><p id="task" class="task"></p><div class="try-nav"><button id="resume" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><button id="edit-jump" class="retro-jump" type="button">Edit task</button><button id="new-try" type="button" hidden>Open Try</button></div></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="lcd" aria-label="Recreated TI-Nspire CX II-T display">
+<div id="lcd-status" class="lcd-status"><span id="lcd-name">1.1 Calculator</span><strong id="lcd-mode">RAD</strong><span class="battery" aria-hidden="true"></span></div>
+<div class="lcd-body" id="lcd-body"></div>
+<button type="button" id="stage-play" class="stage-play" aria-label="Play caption rehearsal" title="Play caption rehearsal"><svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
+</div></div>
+<div class="side">
+<div id="watch-work" role="tabpanel" aria-labelledby="watch-tab">
+<p class="eyebrow">Worked example · CT02</p>
+<h2>Find an angle in degrees</h2><p class="mathline">sin θ = 0.6</p>
+<ol id="chapters"></ol>
+</div>
+<div id="try-work" role="tabpanel" aria-labelledby="try-tab" hidden>
+<p id="link-error" class="muted" hidden></p>
+<p id="hint" class="hint"></p>
+<form id="typed-ratio" hidden><label for="entry-ratio">Ratio on the calculator</label>
+<div class="field-row"><input type="text" maxlength="32" inputmode="decimal" spellcheck="false" autocomplete="off" id="entry-ratio"><button class="primary" type="submit">Enter</button></div></form>
+<p id="feedback" class="feedback" role="status" hidden></p>
+<button type="button" class="primary" id="check" hidden>Check my calculation</button>
+<details id="edit"><summary>Edit Try task</summary><form id="task-form">
+<div class="task-edit"><label>Inverse function<select id="task-fn"><option value="sin">Sine</option><option value="cos">Cosine</option><option value="tan">Tangent</option></select></label>
+<label>Ratio<input id="task-ratio" type="text" maxlength="32" autocomplete="off"></label>
+<label>Requested unit<select id="task-unit"><option value="deg">Degrees</option><option value="rad">Radians</option></select></label></div>
+<button type="submit">Load task</button>
+</form></details>
+</div>
+</div></div>
+<div id="watch-player" class="player" aria-label="Playback controls">
+<div class="transport">
+<button type="button" class="primary" id="play">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from the start">↺</button><button type="button" id="focus" aria-label="Focused view" aria-pressed="false">⛶</button><button type="button" id="takeover">Take over</button><button type="button" class="primary" id="open-try" hidden>Open Try</button>
+</div>
+<div class="timeline"><span id="clock" aria-hidden="true"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div>
+</div>
+</section>
+<details class="notes"><summary>Calculator notes</summary><p>Choose degrees or radians from the question. Inverse trig takes a ratio and returns one principal angle. The superscript −1 means inverse, not reciprocal. If the question asks for all solutions, check its full interval.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/content/m_confighh/hc_customizing_document_settings.HTML">TI handbook: Document Settings</a> · <a href="https://education.ti.com/en/bulletinboard/2018/september/transitioning_to_the_ti-nspire">TI guide: trig palette</a></p></details>
+</main></body></html>

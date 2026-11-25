@@ -1,0 +1,1198 @@
+{
+  "baseline": "calc-run16/site exact paired with HANDHELD-COVERAGE.json",
+  "firstAssessment": 2021,
+  "library": {
+    "canonicalSkills": 59,
+    "dedicatedHandheldLessonRoutes": 60,
+    "companions": [
+      {
+        "id": "CT12",
+        "route": "maximum/index.html"
+      }
+    ],
+    "auditedNarratedPrimary": 7,
+    "captionPrimary": 52,
+    "inventoryNativeApproach": 47,
+    "inventoryAssistedApproach": 12
+  },
+  "legalCalculatorPapersByCourse": {
+    "aa-sl": [
+      "P2"
+    ],
+    "aa-hl": [
+      "P2",
+      "P3"
+    ],
+    "ai-sl": [
+      "P1",
+      "P2"
+    ],
+    "ai-hl": [
+      "P1",
+      "P2",
+      "P3"
+    ]
+  },
+  "launchOriginalPracticeTypeByCourse": {
+    "aa-sl": [
+      "P2-type"
+    ],
+    "aa-hl": [
+      "P2-type"
+    ],
+    "ai-sl": [
+      "P1-type",
+      "P2-type"
+    ],
+    "ai-hl": [
+      "P1-type",
+      "P2-type",
+      "P3-type"
+    ]
+  },
+  "placeOnActualExamQuestions": false,
+  "legend": {
+    "D": "Current-course supported workflow (may be explicitly scoped to demonstrated subtype).",
+    "L": "Limited branch, modelling transfer or enrichment; may not be auto-eligible.",
+    "-": "No recommended launch curriculum mapping, not a ban on browsing standalone."
+  },
+  "courses": {
+    "aa-sl": {
+      "direct": 31,
+      "limited": 1,
+      "notMapped": 27
+    },
+    "aa-hl": {
+      "direct": 35,
+      "limited": 0,
+      "notMapped": 24
+    },
+    "ai-sl": {
+      "direct": 32,
+      "limited": 7,
+      "notMapped": 20
+    },
+    "ai-hl": {
+      "direct": 56,
+      "limited": 3,
+      "notMapped": 0
+    }
+  },
+  "topics": {
+    "Number and algebra": {
+      "aa-sl": {
+        "direct": 4,
+        "limited": 0,
+        "notMapped": 4
+      },
+      "aa-hl": {
+        "direct": 5,
+        "limited": 0,
+        "notMapped": 3
+      },
+      "ai-sl": {
+        "direct": 3,
+        "limited": 1,
+        "notMapped": 4
+      },
+      "ai-hl": {
+        "direct": 7,
+        "limited": 1,
+        "notMapped": 0
+      }
+    },
+    "Functions": {
+      "aa-sl": {
+        "direct": 8,
+        "limited": 1,
+        "notMapped": 3
+      },
+      "aa-hl": {
+        "direct": 9,
+        "limited": 0,
+        "notMapped": 3
+      },
+      "ai-sl": {
+        "direct": 9,
+        "limited": 2,
+        "notMapped": 1
+      },
+      "ai-hl": {
+        "direct": 12,
+        "limited": 0,
+        "notMapped": 0
+      }
+    },
+    "Geometry and trigonometry": {
+      "aa-sl": {
+        "direct": 3,
+        "limited": 0,
+        "notMapped": 5
+      },
+      "aa-hl": {
+        "direct": 4,
+        "limited": 0,
+        "notMapped": 4
+      },
+      "ai-sl": {
+        "direct": 3,
+        "limited": 1,
+        "notMapped": 4
+      },
+      "ai-hl": {
+        "direct": 8,
+        "limited": 0,
+        "notMapped": 0
+      }
+    },
+    "Statistics and probability": {
+      "aa-sl": {
+        "direct": 10,
+        "limited": 0,
+        "notMapped": 11
+      },
+      "aa-hl": {
+        "direct": 10,
+        "limited": 0,
+        "notMapped": 11
+      },
+      "ai-sl": {
+        "direct": 13,
+        "limited": 2,
+        "notMapped": 6
+      },
+      "ai-hl": {
+        "direct": 20,
+        "limited": 1,
+        "notMapped": 0
+      }
+    },
+    "Calculus": {
+      "aa-sl": {
+        "direct": 6,
+        "limited": 0,
+        "notMapped": 4
+      },
+      "aa-hl": {
+        "direct": 7,
+        "limited": 0,
+        "notMapped": 3
+      },
+      "ai-sl": {
+        "direct": 4,
+        "limited": 1,
+        "notMapped": 5
+      },
+      "ai-hl": {
+        "direct": 9,
+        "limited": 1,
+        "notMapped": 0
+      }
+    }
+  },
+  "entries": [
+    {
+      "id": "CT01",
+      "title": "Numerical entry, notation and rounding",
+      "family": "GETTING STARTED",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "number-entry/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter parentheses, signed values and scientific notation; round the final result.",
+      "limits": "Shared foundational calculator skill.",
+      "narrated": true
+    },
+    {
+      "id": "CT02",
+      "title": "Angle modes and inverse trigonometry",
+      "family": "GETTING STARTED",
+      "topic": 3,
+      "deviceApproach": "native",
+      "route": "angle-modes/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Set degree/radian mode and use inverse trig with correct angular output.",
+      "limits": "AI SL triangle work uses degrees; radians are explicitly AI AHL3.7.",
+      "narrated": false
+    },
+    {
+      "id": "CT03",
+      "title": "Combinations and factorials",
+      "family": "GETTING STARTED",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "counting/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "L"
+      },
+      "representativeMethod": "Enter nCr and factorial; distinguish different counting operands.",
+      "limits": "AA SL1.9 nCr; AA HL1.10 broader counting; AI use only as a binomial-probability aid, not a combinatorics course claim.",
+      "narrated": false
+    },
+    {
+      "id": "CT04",
+      "title": "Sequences, sigma and first threshold",
+      "family": "GETTING STARTED",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "sequences/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use explicit sequence terms and finite sums; check the first integer term meeting a threshold.",
+      "limits": "Shared SL1.2–1.3; not a full recurrence/spreadsheet coach.",
+      "narrated": false
+    },
+    {
+      "id": "CT05",
+      "title": "Financial mathematics and TVM",
+      "family": "GETTING STARTED",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "finance-solver/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Finance Solver with PMT=0; enter signed PV, annual rate and compounding to solve lump-sum FV.",
+      "limits": "Shared compound growth SL1.4; recurring payments, annuities and amortization AI SL1.7 not implemented.",
+      "narrated": false
+    },
+    {
+      "id": "CT06",
+      "title": "Numerical solve: equations with multiple roots",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "solve/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "nSolve on deliberately separated brackets; confirm number/domain of relevant roots.",
+      "limits": "Shared numerical equation workflow; it does not enumerate all solutions automatically.",
+      "narrated": true
+    },
+    {
+      "id": "CT07",
+      "title": "Simultaneous equations and unknown parameters",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "linear-system/index.html",
+      "coverage": {
+        "aa-sl": "L",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use the native simultaneous-equation tool with numerical coefficients and read an ordered solution.",
+      "limits": "For AA SL use only as applied equation solving/checking; formal three-variable systems are AA AHL1.16.",
+      "narrated": false
+    },
+    {
+      "id": "CT08",
+      "title": "Graph setup, zoom and viewing window",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "window/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Select an informative viewing window and zoom without changing the mathematical domain.",
+      "limits": "Shared graph prerequisite; no exact proof inferred from screen.",
+      "narrated": true
+    },
+    {
+      "id": "CT09",
+      "title": "Trace, tables and function values",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "trace-table/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Trace and use a function table to evaluate formulae and inspect features.",
+      "limits": "Shared graph prerequisite; tracing alone does not prove a global result.",
+      "narrated": false
+    },
+    {
+      "id": "CT10",
+      "title": "Zeros and intercepts",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "zeros/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Select and bracket a zero or read a graph intercept.",
+      "limits": "Only an original compatible input and workflow; discontinuity/tangency checks remain needed.",
+      "narrated": true
+    },
+    {
+      "id": "CT11",
+      "title": "Intersections of two functions",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "intersection/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter two curves, select Intersection and bracket the intended crossing.",
+      "limits": "Shared graphical solve; a canvas crossing is not an exact solution.",
+      "narrated": true
+    },
+    {
+      "id": "CT12",
+      "title": "Local and global maxima and minima",
+      "family": "SOLVE & GRAPH",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Bracket a minimum; separate maximum companion checks endpoints against an interior extremum.",
+      "limits": "AA SL5.8 and AI SL5.6–5.7; 1 skill ID with 2 routes, not 2 skills.",
+      "narrated": true
+    },
+    {
+      "id": "CT13",
+      "title": "Graphical inequalities and exclusions",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "inequalities/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Find and interpret where one graph lies above/below another; respect exclusions.",
+      "limits": "AI SL as inequality/threshold interpretation on a given model; not a general symbolic inequality engine.",
+      "narrated": false
+    },
+    {
+      "id": "CT14",
+      "title": "All trigonometric solutions in an interval",
+      "family": "SOLVE & GRAPH",
+      "topic": 3,
+      "deviceApproach": "native",
+      "route": "trig-interval/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use angle setup and bracket multiple trig intersections within a finite interval; account for endpoints.",
+      "limits": "AA SL3.8; AI AHL3.8 explicitly; AI SL only contextual sinusoid/finite evaluation, not a standalone exhaustive-equation mandate.",
+      "narrated": false
+    },
+    {
+      "id": "CT15",
+      "title": "Piecewise, restricted and transformed graphs",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "assisted",
+      "route": "piecewise/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter restricted/piecewise graph expressions and check branch endpoints and values.",
+      "limits": "AI AHL2.8–2.9; AI SL restricted-domain/model practice only and not full transformation or arbitrary piecewise coverage.",
+      "narrated": false
+    },
+    {
+      "id": "CT16",
+      "title": "Finding a model threshold",
+      "family": "SOLVE & GRAPH",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "threshold/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Find a continuous threshold crossing and decide first whole period correctly.",
+      "limits": "Not interchangeable with CT06 when domain or strict/inclusive integer threshold matters.",
+      "narrated": false
+    },
+    {
+      "id": "CT17",
+      "title": "2D/3D lengths, angles and bearings",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "native",
+      "route": "lengths-bearings/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use arithmetic, trigonometry and degree settings for selected 2D/3D lengths, angles and bearings.",
+      "limits": "Shared SL3.1–3.3; no geometric drawing engine.",
+      "narrated": false
+    },
+    {
+      "id": "CT18",
+      "title": "Voronoi sites and nearest neighbours",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "assisted",
+      "route": "voronoi/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Compare squared Euclidean distances to decide a nearest site; distinguish equal-distance ties.",
+      "limits": "AI SL3.6; not a calculator-generated Voronoi graph or full construction/area workflow.",
+      "narrated": false
+    },
+    {
+      "id": "CT19",
+      "title": "Vector arithmetic and angles",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "assisted",
+      "route": "vectors/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "D",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter/interpret vector operations and compute an angle by dot product / magnitudes.",
+      "limits": "AA HL Topic 3 and AI HL AHL3.11–3.13; no line/plane system proof, vector-locus or general intersection coach.",
+      "narrated": false
+    },
+    {
+      "id": "CT20",
+      "title": "Complex numbers: rectangular and polar",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "complex/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "D",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Set complex display; enter numeric a+bi, modulus and argument; switch rectangular/polar.",
+      "limits": "AA and AI AHL1.12–1.13; no general roots/de Moivre or exact symbolic proof.",
+      "narrated": false
+    },
+    {
+      "id": "CT21",
+      "title": "Matrices: entry, determinant and inverse",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "matrices/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Create/store a numerical matrix and obtain determinant or inverse with domain checks.",
+      "limits": "AI AHL1.14; does not teach every possible operation or large singular system.",
+      "narrated": false
+    },
+    {
+      "id": "CT22",
+      "title": "Matrix transformations of coordinates",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "native",
+      "route": "matrix-transformations/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Multiply 2×2 transformation by a 2×1 position vector and interpret the output.",
+      "limits": "AI AHL3.9; single linear transform, not full affine translation/composition/determinant-area workflow.",
+      "narrated": false
+    },
+    {
+      "id": "CT23",
+      "title": "Solve linear systems using matrices",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 1,
+      "deviceApproach": "native",
+      "route": "matrix-systems/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Set up numerical matrix coefficients/constants and solve the compatible system.",
+      "limits": "AI AHL1.14; AA HL numerical system solving uses CT07, not matrix syllabus credit.",
+      "narrated": false
+    },
+    {
+      "id": "CT24",
+      "title": "Transition matrices and Markov chains",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "markov-chains/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter a transition matrix; use matrix powers and start-state orientation.",
+      "limits": "AI AHL4.19; no automatic chain diagnosis or all absorbing/irregular cases.",
+      "narrated": false
+    },
+    {
+      "id": "CT25",
+      "title": "Eigenvalues and long-run behaviour",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 1,
+      "deviceApproach": "assisted",
+      "route": "eigenvalues/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "2×2 distinct-real eigenvalue/long-run calculation using the supported workflow.",
+      "limits": "AI AHL1.15; no complex/repeated-eigenvalue or unlimited diagonalization.",
+      "narrated": false
+    },
+    {
+      "id": "CT26",
+      "title": "Adjacency matrices and walks",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "native",
+      "route": "adjacency-walks/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Raise a small adjacency matrix to the required power and read the correct walk count.",
+      "limits": "AI AHL3.15; walks are not simple paths; not general graph algorithms.",
+      "narrated": false
+    },
+    {
+      "id": "CT27",
+      "title": "Network algorithms: shortest routes",
+      "family": "GEOMETRY & NETWORKS",
+      "topic": 3,
+      "deviceApproach": "assisted",
+      "route": "minimum-route-table/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Compare numerical simple routes and complete one symmetric least-distance entry, with ties.",
+      "limits": "AI AHL3.16 assist only; no Prim, Kruskal, Chinese postman, or nearest-neighbour/deleted-vertex TSP.",
+      "narrated": false
+    },
+    {
+      "id": "CT28",
+      "title": "Create lists and frequency tables",
+      "family": "DATA & STATISTICS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "named-lists/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Name lists and prepare aligned values/frequencies for subsequent tools.",
+      "limits": "Shared descriptive-statistics prerequisite.",
+      "narrated": false
+    },
+    {
+      "id": "CT29",
+      "title": "One-variable statistics and standard deviation",
+      "family": "DATA & STATISTICS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "one-variable-stats/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Run one-variable stats and distinguish population sigma from sample SD.",
+      "limits": "Shared SL4.3; choose the right frequency input and result label.",
+      "narrated": false
+    },
+    {
+      "id": "CT30",
+      "title": "Box plots, outliers and histograms",
+      "family": "DATA & STATISTICS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "boxplots/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Build a boxplot and interpret quartiles/fences/outliers.",
+      "limits": "No histogram or ogive implemented, despite catalogue title.",
+      "narrated": false
+    },
+    {
+      "id": "CT31",
+      "title": "Pearson correlation and linear regression",
+      "family": "DATA & STATISTICS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "linear-regression/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Run Pearson r and fit/read a linear regression using matched pairs and correct orientation.",
+      "limits": "Shared SL4.4; no reverse-fit shortcut or significance test for population rho.",
+      "narrated": false
+    },
+    {
+      "id": "CT32",
+      "title": "Quadratic and other nonlinear regression",
+      "family": "DATA & STATISTICS",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "quadratic-regression/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use QuadReg with paired input; read a,b,c, R² and residuals; plot/follow a saved formula.",
+      "limits": "AI SL2.5–2.6; R²/residual comparison AI AHL4.13; only quadratic calculator workflow.",
+      "narrated": false
+    },
+    {
+      "id": "CT33",
+      "title": "Exponential regression and growth factors",
+      "family": "DATA & STATISTICS",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "exponential-regression/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Run ExpReg and interpret a,b in a·b^x; positive responses and transformed-fit caveat.",
+      "limits": "AI SL2.5–2.6 modelling; ExpReg is not PowerReg, SinReg or general nonlinear least squares.",
+      "narrated": false
+    },
+    {
+      "id": "CT34",
+      "title": "Linearizing data with logarithms",
+      "family": "DATA & STATISTICS",
+      "topic": 2,
+      "deviceApproach": "native",
+      "route": "log-linearization/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Create ln(y) list and fit a line against x; back-transform intercept and slope.",
+      "limits": "AI AHL2.10, semi-log only; the log–log power branch is described, not simulated.",
+      "narrated": false
+    },
+    {
+      "id": "CT35",
+      "title": "Spearman rank correlation",
+      "family": "DATA & STATISTICS",
+      "topic": 4,
+      "deviceApproach": "assisted",
+      "route": "spearman/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Assign midranks for ties then use Pearson on rank lists, not raw data.",
+      "limits": "AI SL4.10; assisted because ranking is not faked as a native Spearman wizard.",
+      "narrated": false
+    },
+    {
+      "id": "CT36",
+      "title": "Discrete random variables and expectation",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "assisted",
+      "route": "expectation/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Compute an expected value with weighted outcomes and guard probability totals.",
+      "limits": "Shared SL4.7 family; AI HL linear-combination variance is not covered end-to-end.",
+      "narrated": false
+    },
+    {
+      "id": "CT37",
+      "title": "Binomial: exact probability",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "binomial-pdf/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter binomial parameters and a single exact X outcome in Binomial Pdf.",
+      "limits": "Shared binomial distribution; not a significance interpretation.",
+      "narrated": false
+    },
+    {
+      "id": "CT38",
+      "title": "Binomial: cumulative and complements",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "binomial/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use Binomial Cdf with inclusive limits; translate strict events and complements correctly.",
+      "limits": "Shared binomial probability; raw answer alone is not exam working.",
+      "narrated": true
+    },
+    {
+      "id": "CT39",
+      "title": "Normal: interval and tail probabilities",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "normal/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use Normal Cdf for intervals, lower tails and upper tails with mean and SD.",
+      "limits": "Shared normal probability.",
+      "narrated": false
+    },
+    {
+      "id": "CT40",
+      "title": "Inverse normal: percentiles and cutoffs",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "inverse-normal/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use inverse normal to convert area into a percentile/cutoff with parameters known.",
+      "limits": "Shared normal quantile; choose lower-tail cumulative area, not the literal upper-tail probability.",
+      "narrated": false
+    },
+    {
+      "id": "CT41",
+      "title": "Solve an unknown normal parameter",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "assisted",
+      "route": "normal-parameter/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "L"
+      },
+      "representativeMethod": "Find an unknown mean or SD from a known cutoff/probability using inverse normal and algebra.",
+      "limits": "AA SL4.12 direct; AI SL4.9 inverse tasks specify mean and SD are given and not standardized z. Enrichment/compatible advanced case only; no generic AI auto-link.",
+      "narrated": false
+    },
+    {
+      "id": "CT42",
+      "title": "Poisson: exact and cumulative probabilities",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "poisson/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use Poisson Pdf/Cdf with the rate for a given interval and discrete inclusivity.",
+      "limits": "AI AHL4.17; Poisson hypothesis test/critical region is distinct AI AHL4.18, not a tested route here.",
+      "narrated": false
+    },
+    {
+      "id": "CT43",
+      "title": "Sampling means and the central limit theorem",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "sampling-means/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Select sampling-mean distribution, use sigma/sqrt(n), enter finite or tail Normal Cdf.",
+      "limits": "AI AHL4.15; not general sums/differences of independent non-identically distributed normal variables.",
+      "narrated": false
+    },
+    {
+      "id": "CT44",
+      "title": "Random simulation and repeated trials",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "random-simulation/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Simulate repeated random trials, distinguish observed proportion and theoretical probability.",
+      "limits": "AI probability modelling context; not a substitute for exact methods or every simulation.",
+      "narrated": false
+    },
+    {
+      "id": "CT45",
+      "title": "One-sample z-test: known population SD",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "z-test/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Run one-sample mean z-test with known population SD, choose alternative and interpret p.",
+      "limits": "AI AHL4.18, not an unknown-SD t-test or generic two-sample z workflow.",
+      "narrated": false
+    },
+    {
+      "id": "CT46",
+      "title": "One-sample and two-sample t-tests",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "t-tests/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "L",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use a pooled independent two-sample t-test or one-sample t-test via summary statistics.",
+      "limits": "AI SL4.11 covers the pooled independent branch only; one-sample/matched differences AI AHL4.18. In AI SL link only pooled two-sample.",
+      "narrated": false
+    },
+    {
+      "id": "CT47",
+      "title": "Chi-square test of independence",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "chi-square-independence/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter contingency table, run chi-square independence and interpret p and df.",
+      "limits": "AI SL4.11; no automatic validity for sparse tables and exam bounds still apply.",
+      "narrated": false
+    },
+    {
+      "id": "CT48",
+      "title": "Chi-square goodness-of-fit",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "chi-square-goodness-of-fit/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Enter observed/expected lists, df, and run chi-square goodness-of-fit.",
+      "limits": "AI SL4.11 uses prescribed df; check expected frequencies and any fitted-parameter constraints for HL.",
+      "narrated": false
+    },
+    {
+      "id": "CT49",
+      "title": "Confidence intervals: z and t",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "confidence-intervals/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Pick z/t interval from known/unknown population SD and interpret interval endpoints.",
+      "limits": "AI AHL4.16 one normal population mean; not a proportion interval.",
+      "narrated": false
+    },
+    {
+      "id": "CT50",
+      "title": "Exact binomial hypothesis test",
+      "family": "DISTRIBUTIONS & TESTS",
+      "topic": 4,
+      "deviceApproach": "native",
+      "route": "binomial-test/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Run a one-tailed exact binomial test through the inclusive binomial tail and decide.",
+      "limits": "AI AHL4.18; not a full critical-region/Type-II-power workflow.",
+      "narrated": false
+    },
+    {
+      "id": "CT51",
+      "title": "Numerical derivative and tangent line",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "derivative/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Find a numerical derivative at a point and build/read a tangent equation.",
+      "limits": "Shared SL5.4; not symbolic differentiation, normal-line construction or second derivative.",
+      "narrated": false
+    },
+    {
+      "id": "CT52",
+      "title": "Stationary points via numerical derivative",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "assisted",
+      "route": "stationary/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Graph f′, isolate zero and classify with sign on either side; repeated-root safeguard.",
+      "limits": "AA SL5.7–5.8 and AI SL5.6: compatible polynomials; AI SL classification only required scope, not formal non-stationary inflection/second-derivative treatment.",
+      "narrated": false
+    },
+    {
+      "id": "CT53",
+      "title": "Kinematics: displacement versus total distance",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "displacement-distance/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Find velocity sign-change points, integrate signed pieces, compare displacement/total distance.",
+      "limits": "AA SL5.9 and AI AHL5.13. AI SL5.7 explicitly excludes exam kinematics.",
+      "narrated": false
+    },
+    {
+      "id": "CT54",
+      "title": "Numerical definite integral and signed area",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "integral/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "L",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Use Graphs Integral and distinguish signed result from geometric area.",
+      "limits": "AA SL5.5/5.11–5.12; AI SL5.5 only compatible numerical integral/positive area; AI AHL5.12 negative integrals direct.",
+      "narrated": false
+    },
+    {
+      "id": "CT55",
+      "title": "Area between two curves",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "area-between/index.html",
+      "coverage": {
+        "aa-sl": "D",
+        "aa-hl": "D",
+        "ai-sl": "-",
+        "ai-hl": "L"
+      },
+      "representativeMethod": "Split where upper curve changes, use Bounded Area on each region and add magnitudes.",
+      "limits": "AA SL5.12; for AI HL transfer of integral setup only, not explicit AHL5.12 two-curve syllabus coverage; no AI SL auto-link.",
+      "narrated": false
+    },
+    {
+      "id": "CT56",
+      "title": "Trapezoidal rule and approximation",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "assisted",
+      "route": "trapezoidal/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "D",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Compute equal-step trapezoid estimate and distinguish an estimate from exact area.",
+      "limits": "AI SL5.8 explicitly equal-width; not AA launch exam scope.",
+      "narrated": false
+    },
+    {
+      "id": "CT57",
+      "title": "Volumes of revolution",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "native",
+      "route": "volume-revolution/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "D",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Set up and numerically evaluate x-axis disk/washer volume.",
+      "limits": "AA AHL5.17 and AI AHL5.12 include both axes, but y-axis is not implemented.",
+      "narrated": false
+    },
+    {
+      "id": "CT58",
+      "title": "Euler method for a first-order ODE",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "assisted",
+      "route": "euler-method/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Carry out forward-Euler updates manually on calculator using prior row values.",
+      "limits": "AI AHL5.16; assisted arithmetic, not native differential-equation solver or arbitrary nonlinear problem support.",
+      "narrated": false
+    },
+    {
+      "id": "CT59",
+      "title": "Coupled ODEs, slopes and phase paths",
+      "family": "CALCULUS & NUMERICS",
+      "topic": 5,
+      "deviceApproach": "assisted",
+      "route": "coupled-euler/index.html",
+      "coverage": {
+        "aa-sl": "-",
+        "aa-hl": "-",
+        "ai-sl": "-",
+        "ai-hl": "D"
+      },
+      "representativeMethod": "Update both state components from the same old state and interpret plotted phase samples.",
+      "limits": "AI HL extension workflow for AHL5.16/5.18 related case; no generic nonlinear/coupled solver or native phase portrait.",
+      "narrated": false
+    }
+  ]
+}

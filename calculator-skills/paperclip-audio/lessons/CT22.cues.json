@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "CT22",
+  "route": "matrix-transformations/index.html",
+  "catalogueTitle": "Matrix transformations of coordinates",
+  "playerHeading": "Matrix transformations",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "matrix-transformations/index.html"
+  },
+  "script": "lessons/CT22.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Rotate point P, at four, negative one, ninety degrees anticlockwise about the origin. On a Calculator page, type T, then Control and Template for the assignment symbol.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Choose Menu then seven: Matrix and Vector then one: Create then one: Matrix. Set two rows and two columns.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter the first row, zero and negative one. Enter the second row, one and zero. Tab between cells; Enter stores T.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Name P with the assignment symbol and use the same menu. Choose two rows and one column, not one row and two columns.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter x equals four above y equals minus one. Press Enter to store p.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Type t times p, in that order, then Enter. The inner dimensions two and two match.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The upper entry is x prime; the lower is y prime. Write the image of P as one, four. This rotation sends a point at x, y to negative y, x.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 47000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Rotate P = (4, −1) 90° anticlockwise about the origin. On a Calculator page, type t, then Ctrl + template (:=).",
+        "endMs": 4800
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4800,
+        "text": "Choose Menu → 7: Matrix & Vector → 1: Create → 1: Matrix. Set 2 rows and 2 columns.",
+        "endMs": 12200
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12200,
+        "text": "Enter the rows (0, −1) and (1, 0), left to right. Tab between cells; Enter stores t.",
+        "endMs": 20800
+      },
+      {
+        "id": "watch-04",
+        "startMs": 20800,
+        "text": "Name p with := and use the same menu. Choose 2 rows and 1 column, not 1 row and 2 columns.",
+        "endMs": 30400
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30400,
+        "text": "Enter x = 4 above y = −1. Press Enter to store p.",
+        "endMs": 35600
+      },
+      {
+        "id": "watch-06",
+        "startMs": 35600,
+        "text": "Type t × p, in that order, then Enter. The inner dimensions 2 and 2 match.",
+        "endMs": 41200
+      },
+      {
+        "id": "watch-07",
+        "startMs": 41200,
+        "text": "The upper entry is x′; the lower is y′. Write P′ = (1, 4). Here the rotation sends (x, y) to (−y, x).",
+        "endMs": 47000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1750,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 2130,
+        "keys": []
+      },
+      {
+        "timeMs": 2600,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 2980,
+        "keys": []
+      },
+      {
+        "timeMs": 3120,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 3500,
+        "keys": []
+      },
+      {
+        "timeMs": 5050,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5430,
+        "keys": []
+      },
+      {
+        "timeMs": 5820,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 6200,
+        "keys": []
+      },
+      {
+        "timeMs": 6520,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6900,
+        "keys": []
+      },
+      {
+        "timeMs": 7330,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7710,
+        "keys": []
+      },
+      {
+        "timeMs": 8350,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8730,
+        "keys": []
+      },
+      {
+        "timeMs": 9020,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 9400,
+        "keys": []
+      },
+      {
+        "timeMs": 9570,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9951,
+        "keys": []
+      },
+      {
+        "timeMs": 10250,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10630,
+        "keys": []
+      },
+      {
+        "timeMs": 11200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11580,
+        "keys": []
+      },
+      {
+        "timeMs": 12680,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 13060,
+        "keys": []
+      },
+      {
+        "timeMs": 13470,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13851,
+        "keys": []
+      },
+      {
+        "timeMs": 14180,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 14560,
+        "keys": []
+      },
+      {
+        "timeMs": 14730,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 15111,
+        "keys": []
+      },
+      {
+        "timeMs": 15430,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15810,
+        "keys": []
+      },
+      {
+        "timeMs": 16190,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16570,
+        "keys": []
+      },
+      {
+        "timeMs": 16900,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17280,
+        "keys": []
+      },
+      {
+        "timeMs": 17640,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 18020,
+        "keys": []
+      },
+      {
+        "timeMs": 19170,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19550,
+        "keys": []
+      },
+      {
+        "timeMs": 21150,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 21530,
+        "keys": []
+      },
+      {
+        "timeMs": 21740,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 22120,
+        "keys": []
+      },
+      {
+        "timeMs": 22270,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 22650,
+        "keys": []
+      },
+      {
+        "timeMs": 23120,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 23500,
+        "keys": []
+      },
+      {
+        "timeMs": 23830,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 24210,
+        "keys": []
+      },
+      {
+        "timeMs": 24430,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 24810,
+        "keys": []
+      },
+      {
+        "timeMs": 25100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25480,
+        "keys": []
+      },
+      {
+        "timeMs": 26070,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 26450,
+        "keys": []
+      },
+      {
+        "timeMs": 26720,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27100,
+        "keys": []
+      },
+      {
+        "timeMs": 27320,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 27700,
+        "keys": []
+      },
+      {
+        "timeMs": 28030,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28410,
+        "keys": []
+      },
+      {
+        "timeMs": 29010,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29390,
+        "keys": []
+      },
+      {
+        "timeMs": 30840,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 31220,
+        "keys": []
+      },
+      {
+        "timeMs": 31580,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31960,
+        "keys": []
+      },
+      {
+        "timeMs": 32320,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 32700,
+        "keys": []
+      },
+      {
+        "timeMs": 32870,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 33250,
+        "keys": []
+      },
+      {
+        "timeMs": 34120,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34500,
+        "keys": []
+      },
+      {
+        "timeMs": 36380,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 36761,
+        "keys": []
+      },
+      {
+        "timeMs": 37200,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 37581,
+        "keys": []
+      },
+      {
+        "timeMs": 38040,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 38420,
+        "keys": []
+      },
+      {
+        "timeMs": 40360,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 40740,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

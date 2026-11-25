@@ -1,0 +1,5 @@
+The possible outcomes are minus two, one and four. Their respective probabilities are zero point two five, zero point three five and zero point four zero.
+First add just the probabilities. A valid distribution gives a total of one.
+Type the outcome, times , and its own probability. A negative outcome gives a negative contribution.
+Join the three products with plus signs. Press Enter; do not simply average the outcomes.
+The expectation is one point four five: a long-run average, not a value that must occur on any individual trial.

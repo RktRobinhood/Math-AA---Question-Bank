@@ -1,0 +1,457 @@
+{
+  "schemaVersion": 1,
+  "id": "CT38",
+  "route": "binomial/index.html",
+  "catalogueTitle": "Binomial: cumulative and complements",
+  "playerHeading": "Binomial CDF: intervals and tails",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "binomial/narration-cues.json"
+  },
+  "script": "lessons/CT38.txt",
+  "spokenCues": [
+    {
+      "id": "binomial-1",
+      "text": "Before opening the calculator, identify the first and last whole-number counts that belong in the event."
+    },
+    {
+      "id": "binomial-2",
+      "text": "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F."
+    },
+    {
+      "id": "binomial-3",
+      "text": "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds."
+    },
+    {
+      "id": "binomial-4",
+      "text": "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero."
+    },
+    {
+      "id": "binomial-5",
+      "text": "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 39040,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Before opening the calculator, identify the first and last whole-number counts that belong in the event.",
+        "endMs": 6868
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6868,
+        "text": "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F.",
+        "endMs": 14647
+      },
+      {
+        "id": "watch-03",
+        "startMs": 14647,
+        "text": "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds.",
+        "endMs": 23361
+      },
+      {
+        "id": "watch-04",
+        "startMs": 23361,
+        "text": "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero.",
+        "endMs": 31851
+      },
+      {
+        "id": "watch-05",
+        "startMs": 31851,
+        "text": "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds.",
+        "endMs": 39040
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6868,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 7078,
+        "keys": []
+      },
+      {
+        "timeMs": 8418,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 8628,
+        "keys": []
+      },
+      {
+        "timeMs": 9968,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 10178,
+        "keys": []
+      },
+      {
+        "timeMs": 11518,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 11728,
+        "keys": []
+      },
+      {
+        "timeMs": 14647,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14857,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 15070,
+        "keys": []
+      },
+      {
+        "timeMs": 15200,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 15370,
+        "keys": []
+      },
+      {
+        "timeMs": 16097,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16308,
+        "keys": []
+      },
+      {
+        "timeMs": 16370,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 16540,
+        "keys": []
+      },
+      {
+        "timeMs": 16600,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 16770,
+        "keys": []
+      },
+      {
+        "timeMs": 16910,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17080,
+        "keys": []
+      },
+      {
+        "timeMs": 17220,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 17390,
+        "keys": []
+      },
+      {
+        "timeMs": 17547,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17757,
+        "keys": []
+      },
+      {
+        "timeMs": 17930,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 18100,
+        "keys": []
+      },
+      {
+        "timeMs": 18997,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 19207,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 19440,
+        "keys": []
+      },
+      {
+        "timeMs": 19620,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19790,
+        "keys": []
+      },
+      {
+        "timeMs": 20447,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 20657,
+        "keys": []
+      },
+      {
+        "timeMs": 22680,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22890,
+        "keys": []
+      },
+      {
+        "timeMs": 23361,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 23571,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "HandheldKeyCues.CT38",
+        "keys": [
+          {
+            "timeMs": 6868,
+            "key": "menu",
+            "durationMs": 210,
+            "state": "probability-menu"
+          },
+          {
+            "timeMs": 8418,
+            "key": "5",
+            "durationMs": 210,
+            "state": "probability-submenu"
+          },
+          {
+            "timeMs": 9968,
+            "key": "5",
+            "durationMs": 210,
+            "state": "distributions-submenu"
+          },
+          {
+            "timeMs": 11518,
+            "key": "down",
+            "durationMs": 210,
+            "state": "cdf-selected"
+          },
+          {
+            "timeMs": 14647,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "wizard",
+            "field": 0
+          },
+          {
+            "timeMs": 14900,
+            "key": "1",
+            "durationMs": 145,
+            "field": 0,
+            "fieldAfter": "1"
+          },
+          {
+            "timeMs": 15200,
+            "key": "2",
+            "durationMs": 145,
+            "field": 0,
+            "fieldAfter": "12"
+          },
+          {
+            "timeMs": 16097,
+            "key": "tab",
+            "durationMs": 210,
+            "field": 1
+          },
+          {
+            "timeMs": 16370,
+            "key": "0",
+            "durationMs": 145,
+            "field": 1,
+            "fieldAfter": "0"
+          },
+          {
+            "timeMs": 16600,
+            "key": "decimal",
+            "durationMs": 145,
+            "field": 1,
+            "fieldAfter": "0."
+          },
+          {
+            "timeMs": 16910,
+            "key": "2",
+            "durationMs": 145,
+            "field": 1,
+            "fieldAfter": "0.2"
+          },
+          {
+            "timeMs": 17220,
+            "key": "5",
+            "durationMs": 145,
+            "field": 1,
+            "fieldAfter": "0.25"
+          },
+          {
+            "timeMs": 17547,
+            "key": "tab",
+            "durationMs": 210,
+            "field": 2
+          },
+          {
+            "timeMs": 17930,
+            "key": "5",
+            "durationMs": 145,
+            "field": 2,
+            "fieldAfter": "5"
+          },
+          {
+            "timeMs": 18997,
+            "key": "tab",
+            "durationMs": 210,
+            "field": 3
+          },
+          {
+            "timeMs": 19270,
+            "key": "1",
+            "durationMs": 145,
+            "field": 3,
+            "fieldAfter": "1"
+          },
+          {
+            "timeMs": 19620,
+            "key": "2",
+            "durationMs": 145,
+            "field": 3,
+            "fieldAfter": "12"
+          },
+          {
+            "timeMs": 20447,
+            "key": "tab",
+            "durationMs": 210,
+            "field": 4,
+            "note": "Move to OK."
+          },
+          {
+            "timeMs": 22680,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "entry",
+            "cmdAfter": "binomCdf(12,0.25,5,12)"
+          },
+          {
+            "timeMs": 23361,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "result",
+            "cmdAfter": "binomCdf(12,0.25,5,12)"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "binomial/narration.mp3",
+    "bytes": 642853,
+    "sha256": "a3adc13dddb24f6079ea812bbafd7297960f649c5f04819928ca7896826afd57",
+    "streamDurationMs": 39079,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "measured-existing-clip",
+      "source": "binomial/narration-cues.json",
+      "cues": [
+        {
+          "id": "binomial-1",
+          "startMs": 0,
+          "endMs": 6868,
+          "text": "Before opening the calculator, identify the first and last whole-number counts that belong in the event."
+        },
+        {
+          "id": "binomial-2",
+          "startMs": 6868,
+          "endMs": 14647,
+          "text": "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F."
+        },
+        {
+          "id": "binomial-3",
+          "startMs": 14647,
+          "endMs": 23361,
+          "text": "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds."
+        },
+        {
+          "id": "binomial-4",
+          "startMs": 23361,
+          "endMs": 31851,
+          "text": "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero."
+        },
+        {
+          "id": "binomial-5",
+          "startMs": 31851,
+          "endMs": 39079,
+          "text": "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds."
+        }
+      ],
+      "uiCuesMs": {
+        "inclusive": 20641,
+        "atMost": 28089,
+        "adjustStrict": 35192
+      }
+    }
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

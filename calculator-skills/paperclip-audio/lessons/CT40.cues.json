@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "id": "CT40",
+  "route": "inverse-normal/index.html",
+  "catalogueTitle": "Inverse normal: percentiles and cutoffs",
+  "playerHeading": "Inverse Normal",
+  "status": "recording-ready-native-contract",
+  "scriptSource": {
+    "type": "original-recording-cue-sheet",
+    "file": "DISTRIBUTION-RECORDING-CUE-SHEET.md"
+  },
+  "script": "lessons/CT40.txt",
+  "spokenCues": [
+    {
+      "id": "40.01",
+      "text": "This time we know the probability, not the cutoff. The seventy-fifth percentile has zero point seven five of the area to its left."
+    },
+    {
+      "id": "40.02",
+      "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."
+    },
+    {
+      "id": "40.03",
+      "text": "In Area, enter zero point seven five. Enter fifty for the mean and eight for the standard deviation."
+    },
+    {
+      "id": "40.04",
+      "text": "Confirm. Press Enter again to calculate. The cutoff is about fifty-five point four, above the mean of fifty."
+    },
+    {
+      "id": "40.05",
+      "text": "For the top ten percent, zero point one is on the right. Subtract from one: zero point nine is on the left."
+    },
+    {
+      "id": "40.06",
+      "text": "Open Menu, Probability, Distributions, and Inverse Normal again. Enter zero point nine for Area. Keep fifty for the mean and eight for the standard deviation."
+    },
+    {
+      "id": "40.07",
+      "text": "Confirm, then press Enter again. The cutoff is about sixty point three, in the original measurement units."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 48500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "This time we know the probability, not the cutoff. The seventy-fifth percentile has 0.75 of the area to its left.",
+        "endMs": 5150
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5150,
+        "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal.",
+        "endMs": 12400
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12400,
+        "text": "In Area, enter 0.75. Enter 50 for the mean and 8 for the standard deviation.",
+        "endMs": 23100
+      },
+      {
+        "id": "watch-04",
+        "startMs": 23100,
+        "text": "Confirm. Press Enter again to calculate. The cutoff is about 55.4, above the mean of 50.",
+        "endMs": 30900
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30900,
+        "text": "For the top 10%, 0.10 is on the right. Subtract from one: 0.90 is on the left.",
+        "endMs": 33300
+      },
+      {
+        "id": "watch-06",
+        "startMs": 33300,
+        "text": "Open Menu, Probability, Distributions, and Inverse Normal again. Enter 0.90 for Area. Keep 50 for the mean and 8 for the standard deviation.",
+        "endMs": 41300
+      },
+      {
+        "id": "watch-07",
+        "startMs": 41300,
+        "text": "Confirm, then press Enter again. The cutoff is about 60.3, in the original measurement units.",
+        "endMs": 48500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5550,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5860,
+        "keys": []
+      },
+      {
+        "timeMs": 7400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7711,
+        "keys": []
+      },
+      {
+        "timeMs": 9400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 9710,
+        "keys": []
+      },
+      {
+        "timeMs": 11450,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 11760,
+        "keys": []
+      },
+      {
+        "timeMs": 13750,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 14060,
+        "keys": []
+      },
+      {
+        "timeMs": 14753,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 15063,
+        "keys": []
+      },
+      {
+        "timeMs": 15756,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 16067,
+        "keys": []
+      },
+      {
+        "timeMs": 16759,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 17070,
+        "keys": []
+      },
+      {
+        "timeMs": 17762,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 18143,
+        "keys": []
+      },
+      {
+        "timeMs": 18765,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 19076,
+        "keys": []
+      },
+      {
+        "timeMs": 19768,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20079,
+        "keys": []
+      },
+      {
+        "timeMs": 20771,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 21152,
+        "keys": []
+      },
+      {
+        "timeMs": 21774,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 22085,
+        "keys": []
+      },
+      {
+        "timeMs": 22777,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23158,
+        "keys": []
+      },
+      {
+        "timeMs": 24200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24510,
+        "keys": []
+      },
+      {
+        "timeMs": 25600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 25911,
+        "keys": []
+      },
+      {
+        "timeMs": 33600,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 33911,
+        "keys": []
+      },
+      {
+        "timeMs": 34100,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 34411,
+        "keys": []
+      },
+      {
+        "timeMs": 34600,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 34911,
+        "keys": []
+      },
+      {
+        "timeMs": 35100,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 35411,
+        "keys": []
+      },
+      {
+        "timeMs": 35900,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 36180,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 36470,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 36780,
+        "keys": []
+      },
+      {
+        "timeMs": 37000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 37380,
+        "keys": []
+      },
+      {
+        "timeMs": 37700,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 38000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 38310,
+        "keys": []
+      },
+      {
+        "timeMs": 38700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 39081,
+        "keys": []
+      },
+      {
+        "timeMs": 39350,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 39661,
+        "keys": []
+      },
+      {
+        "timeMs": 39960,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 40340,
+        "keys": []
+      },
+      {
+        "timeMs": 41800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 42110,
+        "keys": []
+      },
+      {
+        "timeMs": 43100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 43411,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": {
+    "mechanism": "inline-json",
+    "elementId": "ct40-narration-manifest",
+    "version": 1,
+    "timing": "measured-playback",
+    "audioFilename": "narration.mp3",
+    "cues": [
+      {
+        "id": "40.01",
+        "keys": [],
+        "text": "This time we know the probability, not the cutoff. The seventy-fifth percentile has zero point seven five of the area to its left."
+      },
+      {
+        "id": "40.02",
+        "keys": [
+          {
+            "id": "left-menu",
+            "key": "menu",
+            "rehearsalTimeMs": 5550,
+            "phase": 1
+          },
+          {
+            "id": "left-probability",
+            "key": "5",
+            "rehearsalTimeMs": 7400,
+            "phase": 1
+          },
+          {
+            "id": "left-distributions",
+            "key": "5",
+            "rehearsalTimeMs": 9400,
+            "phase": 1
+          },
+          {
+            "id": "left-inverse-normal",
+            "key": "3",
+            "rehearsalTimeMs": 11450,
+            "phase": 1
+          }
+        ],
+        "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."
+      },
+      {
+        "id": "40.03",
+        "keys": [
+          {
+            "id": "left-area-0",
+            "key": "0",
+            "rehearsalTimeMs": 13750,
+            "phase": 2
+          },
+          {
+            "id": "left-area-dot",
+            "key": "dot",
+            "rehearsalTimeMs": 14753,
+            "phase": 2
+          },
+          {
+            "id": "left-area-7",
+            "key": "7",
+            "rehearsalTimeMs": 15756,
+            "phase": 2
+          },
+          {
+            "id": "left-area-5",
+            "key": "5",
+            "rehearsalTimeMs": 16759,
+            "phase": 2
+          },
+          {
+            "id": "left-tab-mean",
+            "key": "tab",
+            "rehearsalTimeMs": 17762,
+            "phase": 2
+          },
+          {
+            "id": "left-mean-5",
+            "key": "5",
+            "rehearsalTimeMs": 18765,
+            "phase": 2
+          },
+          {
+            "id": "left-mean-0",
+            "key": "0",
+            "rehearsalTimeMs": 19768,
+            "phase": 2
+          },
+          {
+            "id": "left-tab-sd",
+            "key": "tab",
+            "rehearsalTimeMs": 20771,
+            "phase": 2
+          },
+          {
+            "id": "left-sd-8",
+            "key": "8",
+            "rehearsalTimeMs": 21774,
+            "phase": 2
+          },
+          {
+            "id": "left-tab-ok",
+            "key": "tab",
+            "rehearsalTimeMs": 22777,
+            "phase": 2
+          }
+        ],
+        "text": "In Area, enter zero point seven five. Enter fifty for the mean and eight for the standard deviation."
+      },
+      {
+        "id": "40.04",
+        "keys": [
+          {
+            "id": "left-insert",
+            "key": "enter",
+            "rehearsalTimeMs": 24200,
+            "phase": 3
+          },
+          {
+            "id": "left-evaluate",
+            "key": "enter",
+            "rehearsalTimeMs": 25600,
+            "phase": 3
+          }
+        ],
+        "text": "Confirm. Press Enter again to calculate. The cutoff is about fifty-five point four, above the mean of fifty."
+      },
+      {
+        "id": "40.05",
+        "keys": [],
+        "text": "For the top ten percent, zero point one is on the right. Subtract from one: zero point nine is on the left."
+      },
+      {
+        "id": "40.06",
+        "keys": [
+          {
+            "id": "right-menu",
+            "key": "menu",
+            "rehearsalTimeMs": 33600,
+            "phase": 5
+          },
+          {
+            "id": "right-probability",
+            "key": "5",
+            "rehearsalTimeMs": 34100,
+            "phase": 5
+          },
+          {
+            "id": "right-distributions",
+            "key": "5",
+            "rehearsalTimeMs": 34600,
+            "phase": 5
+          },
+          {
+            "id": "right-inverse-normal",
+            "key": "3",
+            "rehearsalTimeMs": 35100,
+            "phase": 5
+          },
+          {
+            "id": "right-area-0",
+            "key": "0",
+            "rehearsalTimeMs": 35900,
+            "phase": 5
+          },
+          {
+            "id": "right-area-dot",
+            "key": "dot",
+            "rehearsalTimeMs": 36180,
+            "phase": 5
+          },
+          {
+            "id": "right-area-9",
+            "key": "9",
+            "rehearsalTimeMs": 36470,
+            "phase": 5
+          },
+          {
+            "id": "right-tab-mean",
+            "key": "tab",
+            "rehearsalTimeMs": 37000,
+            "phase": 5
+          },
+          {
+            "id": "right-mean-5",
+            "key": "5",
+            "rehearsalTimeMs": 37700,
+            "phase": 5
+          },
+          {
+            "id": "right-mean-0",
+            "key": "0",
+            "rehearsalTimeMs": 38000,
+            "phase": 5
+          },
+          {
+            "id": "right-tab-sd",
+            "key": "tab",
+            "rehearsalTimeMs": 38700,
+            "phase": 5
+          },
+          {
+            "id": "right-sd-8",
+            "key": "8",
+            "rehearsalTimeMs": 39350,
+            "phase": 5
+          },
+          {
+            "id": "right-tab-ok",
+            "key": "tab",
+            "rehearsalTimeMs": 39960,
+            "phase": 5
+          }
+        ],
+        "text": "Open Menu, Probability, Distributions, and Inverse Normal again. Enter zero point nine for Area. Keep fifty for the mean and eight for the standard deviation."
+      },
+      {
+        "id": "40.07",
+        "keys": [
+          {
+            "id": "right-insert",
+            "key": "enter",
+            "rehearsalTimeMs": 41800,
+            "phase": 6
+          },
+          {
+            "id": "right-evaluate",
+            "key": "enter",
+            "rehearsalTimeMs": 43100,
+            "phase": 6
+          }
+        ],
+        "text": "Confirm, then press Enter again. The cutoff is about sixty point three, in the original measurement units."
+      }
+    ],
+    "rehearsalStatesMs": {
+      "tailContext": 30900
+    },
+    "contractSource": "CT40-MEASURED-NARRATION-HANDOFF.md"
+  },
+  "integrationStatus": "inline-json"
+}

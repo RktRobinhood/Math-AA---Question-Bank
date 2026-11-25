@@ -1,0 +1,41 @@
+1
+00:00:00,000 --> 00:00:05,220
+On a Graphs page, enter the function
+you want to investigate and press Enter.
+
+2
+00:00:05,220 --> 00:00:10,020
+Open Menu, choose Analyze Graph,
+and select Minimum.
+
+3
+00:00:10,020 --> 00:00:13,510
+We're looking for the lowest point
+in the interval you choose.
+
+4
+00:00:13,510 --> 00:00:19,130
+To set the lower bound, move the cursor
+to the left of the minimum, then press Enter.
+
+5
+00:00:19,130 --> 00:00:23,960
+For the upper bound, move to the right
+of the minimum and press Enter again.
+
+6
+00:00:23,960 --> 00:00:26,670
+Bracket just one turning point.
+
+7
+00:00:26,670 --> 00:00:30,330
+The calculator marks the minimum
+and shows its coordinates.
+
+8
+00:00:30,330 --> 00:00:33,220
+The x-coordinate tells you where it occurs.
+
+9
+00:00:33,220 --> 00:00:35,780
+The y-coordinate is the minimum value.

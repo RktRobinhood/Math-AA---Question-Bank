@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "id": "CT44",
+  "route": "random-simulation/index.html",
+  "catalogueTitle": "Random simulation and repeated trials",
+  "playerHeading": "Random simulation",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "random-simulation/index.html"
+  },
+  "script": "lessons/CT44.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "A fair five-sector spinner has blue sectors one and two. Use one random integer from one to five for each spin.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On a Calculator page open Probability, Random, then Integer.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter the first label, last label, and number of spins. Both labels are included.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Count every blue result, including repeats. Here one or two appears five times in the twelve observed outcomes.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Choose the same command with the same inputs. Press Enter again after entering those inputs; the new run uses fresh draws.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The next list gives three blues in twelve spins. The estimates differ; the exact two divided by five stays the same.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 49000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "A fair five-sector spinner has blue sectors 1 and 2. Use one random integer from 1 to 5 for each spin.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "On a Calculator page open Probability, Random, then Integer.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13000,
+        "text": "Enter the first label, last label, and number of spins. Both labels are included.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 24000,
+        "text": "Count every blue result, including repeats. Here 1 or 2 appears five times in the 12 observed outcomes.",
+        "endMs": 32000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 32000,
+        "text": "Choose the same command with the same inputs. Press Enter again after entering those inputs; the new run uses fresh draws.",
+        "endMs": 42000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 42000,
+        "text": "The next list gives three blues in 12 spins. The estimates differ; the exact 2 ÷ 5 stays the same.",
+        "endMs": 49000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 7000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 7380,
+        "keys": []
+      },
+      {
+        "timeMs": 8160,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 8541,
+        "keys": []
+      },
+      {
+        "timeMs": 9320,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 9701,
+        "keys": []
+      },
+      {
+        "timeMs": 10600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 10980,
+        "keys": []
+      },
+      {
+        "timeMs": 14000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14380,
+        "keys": []
+      },
+      {
+        "timeMs": 15000,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 15380,
+        "keys": []
+      },
+      {
+        "timeMs": 16000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 16380,
+        "keys": []
+      },
+      {
+        "timeMs": 17000,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 17380,
+        "keys": []
+      },
+      {
+        "timeMs": 18200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 18580,
+        "keys": []
+      },
+      {
+        "timeMs": 19300,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19680,
+        "keys": []
+      },
+      {
+        "timeMs": 20500,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 20880,
+        "keys": []
+      },
+      {
+        "timeMs": 22000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22380,
+        "keys": []
+      },
+      {
+        "timeMs": 32250,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 32630,
+        "keys": []
+      },
+      {
+        "timeMs": 33000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 33380,
+        "keys": []
+      },
+      {
+        "timeMs": 33750,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 34130,
+        "keys": []
+      },
+      {
+        "timeMs": 34450,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 34831,
+        "keys": []
+      },
+      {
+        "timeMs": 35200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 35581,
+        "keys": []
+      },
+      {
+        "timeMs": 35750,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 36130,
+        "keys": []
+      },
+      {
+        "timeMs": 36250,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 36630,
+        "keys": []
+      },
+      {
+        "timeMs": 36750,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 37130,
+        "keys": []
+      },
+      {
+        "timeMs": 37250,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 37630,
+        "keys": []
+      },
+      {
+        "timeMs": 37750,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 38130,
+        "keys": []
+      },
+      {
+        "timeMs": 38250,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 38630,
+        "keys": []
+      },
+      {
+        "timeMs": 40250,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 40630,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

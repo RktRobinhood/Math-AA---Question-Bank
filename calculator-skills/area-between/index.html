@@ -1,0 +1,38 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Area between two curves · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT55</span></p><h1>Area between two curves</h1><p class="subtitle">Split where the upper curve changes on a TI-Nspire CX II-T.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct55-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct55-bounds" data-visible="false" aria-hidden="true"></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct55-stage-grid">
+<div class="ct55-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play caption rehearsal" title="Play caption rehearsal"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<div class="ct55-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example · Caption rehearsal</p><h2>Split, measure, add</h2><p class="formula">f₁(x) = x + 1<br>f₂(x) = 3</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct55-try-help" hidden><p class="tag">Your turn</p><h2>Find the total area</h2>
+<p id="keypad-problem" class="ct55-taskline"></p><p id="keypad-hint" role="status"></p>
+<p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools"><form id="expression-form"><div class="curve-fields"><label for="curve-f"><span class="curve-one">f₁(x)</span><input type="text" id="curve-f" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label><label for="curve-g"><span class="curve-two">f₂(x)</span><input type="text" id="curve-g" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label></div><button type="submit" class="primary">Plot both curves</button></form>
+<form id="bound-form" hidden><label id="bound-label" for="bound">Lower bound x</label><div class="inputline"><input type="text" id="bound" maxlength="24" inputmode="decimal" autocomplete="off"><button type="submit" class="primary">Enter</button></div></form>
+<button id="retry-bounds" type="button" hidden>Measure another region</button></div>
+<p id="checker-context" class="checker-context" hidden></p><form id="answer-form">
+<label for="area-answer">Total area (square units)<input id="area-answer" inputmode="decimal" type="number" step="any" required></label><p class="checker-precision">Use the original stated bounds. Give at least three significant figures if rounding.</p><button type="submit">Check total area</button></form>
+<p id="feedback" class="feedback" role="status"></p>
+<details><summary>Hint</summary><p>Find where the curves cross within the interval. On each side, check which curve is on top. Use Bounded Area separately and add the readings.</p></details>
+<p class="ct55-keyboard">Open <kbd>M</kbd> → Analyze Graph → Bounded Area by name. Type the bounds or point to them, and confirm each with <kbd>Enter</kbd>.</p>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct55-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="38.5" step="0.005"></label><span class="ct55-rehearsal" id="media-status">Captions only</span></div>
+</div>
+</section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct55-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
+<details class="notes"><summary>What this practice viewer supports</summary><p>Two polynomial curves in x of degree up to four, with coefficients between −1000 and 1000 and increasing decimal bounds between −20 and 20. This rehearses the Graphs Bounded Area workflow one region at a time, not full TI firmware. Follow menu names; item numbers can vary by software version. If the upper curve changes, split at each crossing. A touch with no change of order does not require a split.</p><p>Alternatively, on each region graph upper minus lower, then use Analyze Graph → Integral on the difference. Reverse the subtraction when the upper curve switches. The signed integral of one fixed difference can cancel parts of the area.</p><p><a href="https://education.ti.com/html/webhelp/nspire/4.0/SS/TI-NspireStudentSoftwareHelp_EN/Content/M_Graphs/GRA_Bounded_Area.htm">TI guide: Analyze Graph → Bounded Area</a></p></details>
+</main></body></html>

@@ -1,0 +1,595 @@
+{
+  "schemaVersion": 1,
+  "id": "CT47",
+  "route": "chi-square-independence/index.html",
+  "catalogueTitle": "Chi-square test of independence",
+  "playerHeading": "Chi-square independence",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "chi-square-independence/index.html"
+  },
+  "script": "lessons/CT47.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "A random sample records each student once: how they commute and whether they arrive on time. Test for association.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "The null hypothesis says commute mode and arrival status are independent. The alternative is that they are associated. Choose a five percent significance level before testing.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Type A, then Control and Template for the assignment symbol. Use Menu, Matrix and Vector, Create, Matrix. Choose three rows and two columns.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter the Walk, Cycle and Bus counts, row by row. Use Tab between cells and Enter to store a. Leave out totals and percentages.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Open Menu, Statistics, Stat Tests, then the chi squared two-way test. Enter A as the observed matrix and confirm.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read chi squared, the p value and the degrees of freedom. The p value is an upper-tail probability under the null hypothesis, not the probability that the null hypothesis is true.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "On the next input line, enter stat dot exp mat. Expected counts are the counts predicted under independence. Here all are greater than five.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The p value is about zero point zero zero one five eight, below zero point zero five. Reject the null hypothesis. The sample gives evidence of association between commute mode and arrival status, not causation.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 56500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "A random sample records each student once: how they commute and whether they arrive on time. Test for association.",
+        "endMs": 4600
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4600,
+        "text": "H₀: commute mode and arrival status are independent. H₁: they are associated. Choose a 5% significance level before testing.",
+        "endMs": 9100
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9100,
+        "text": "Type a, then Ctrl + template (:=). Use Menu → Matrix & Vector → Create → Matrix. Choose 3 rows and 2 columns.",
+        "endMs": 19900
+      },
+      {
+        "id": "watch-04",
+        "startMs": 19900,
+        "text": "Enter the Walk, Cycle and Bus counts, row by row. Use Tab between cells and Enter to store a. Leave out totals and percentages.",
+        "endMs": 30500
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30500,
+        "text": "Menu → Statistics → Stat Tests → χ² 2-way Test. Enter a as the Observed Matrix and confirm.",
+        "endMs": 38600
+      },
+      {
+        "id": "watch-06",
+        "startMs": 38600,
+        "text": "Read χ², PVal and df. PVal is the upper-tail probability under H₀, not the probability that H₀ is true.",
+        "endMs": 44000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 44000,
+        "text": "On the next input line, enter stat.expmat. Expected counts are the counts predicted under independence; here all are greater than 5.",
+        "endMs": 51200
+      },
+      {
+        "id": "watch-08",
+        "startMs": 51200,
+        "text": "PVal ≈ 0.00158 is below 0.05. Reject H₀: this sample gives evidence of association between commute mode and arrival status, not causation.",
+        "endMs": 56500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 9450,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 9725,
+        "keys": []
+      },
+      {
+        "timeMs": 10050,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 10326,
+        "keys": []
+      },
+      {
+        "timeMs": 10600,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 10875,
+        "keys": []
+      },
+      {
+        "timeMs": 11500,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 11775,
+        "keys": []
+      },
+      {
+        "timeMs": 12250,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 12525,
+        "keys": []
+      },
+      {
+        "timeMs": 13020,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 13295,
+        "keys": []
+      },
+      {
+        "timeMs": 13820,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14095,
+        "keys": []
+      },
+      {
+        "timeMs": 14700,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 14975,
+        "keys": []
+      },
+      {
+        "timeMs": 15470,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15746,
+        "keys": []
+      },
+      {
+        "timeMs": 16220,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16495,
+        "keys": []
+      },
+      {
+        "timeMs": 17220,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17495,
+        "keys": []
+      },
+      {
+        "timeMs": 18480,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18755,
+        "keys": []
+      },
+      {
+        "timeMs": 20250,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 20525,
+        "keys": []
+      },
+      {
+        "timeMs": 20680,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20955,
+        "keys": []
+      },
+      {
+        "timeMs": 21160,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 21435,
+        "keys": []
+      },
+      {
+        "timeMs": 21640,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 21915,
+        "keys": []
+      },
+      {
+        "timeMs": 22050,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 22325,
+        "keys": []
+      },
+      {
+        "timeMs": 22550,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 22825,
+        "keys": []
+      },
+      {
+        "timeMs": 23020,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 23295,
+        "keys": []
+      },
+      {
+        "timeMs": 23450,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 23725,
+        "keys": []
+      },
+      {
+        "timeMs": 23930,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 24205,
+        "keys": []
+      },
+      {
+        "timeMs": 24430,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 24705,
+        "keys": []
+      },
+      {
+        "timeMs": 24920,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25195,
+        "keys": []
+      },
+      {
+        "timeMs": 25430,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25705,
+        "keys": []
+      },
+      {
+        "timeMs": 25870,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 26145,
+        "keys": []
+      },
+      {
+        "timeMs": 26400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 26675,
+        "keys": []
+      },
+      {
+        "timeMs": 26900,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 27175,
+        "keys": []
+      },
+      {
+        "timeMs": 27330,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 27605,
+        "keys": []
+      },
+      {
+        "timeMs": 28780,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29055,
+        "keys": []
+      },
+      {
+        "timeMs": 31000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 31275,
+        "keys": []
+      },
+      {
+        "timeMs": 31820,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 32095,
+        "keys": []
+      },
+      {
+        "timeMs": 32640,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 32915,
+        "keys": []
+      },
+      {
+        "timeMs": 33530,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 33805,
+        "keys": []
+      },
+      {
+        "timeMs": 34720,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 34995,
+        "keys": []
+      },
+      {
+        "timeMs": 35550,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 35825,
+        "keys": []
+      },
+      {
+        "timeMs": 36740,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 37015,
+        "keys": []
+      },
+      {
+        "timeMs": 44150,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 44425,
+        "keys": []
+      },
+      {
+        "timeMs": 44620,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 44895,
+        "keys": []
+      },
+      {
+        "timeMs": 45080,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 45355,
+        "keys": []
+      },
+      {
+        "timeMs": 45530,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 45805,
+        "keys": []
+      },
+      {
+        "timeMs": 45990,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 46265,
+        "keys": []
+      },
+      {
+        "timeMs": 46450,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 46725,
+        "keys": []
+      },
+      {
+        "timeMs": 46910,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 47185,
+        "keys": []
+      },
+      {
+        "timeMs": 47380,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 47655,
+        "keys": []
+      },
+      {
+        "timeMs": 47840,
+        "keys": [
+          "m"
+        ]
+      },
+      {
+        "timeMs": 48115,
+        "keys": []
+      },
+      {
+        "timeMs": 48300,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 48575,
+        "keys": []
+      },
+      {
+        "timeMs": 48780,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 49055,
+        "keys": []
+      },
+      {
+        "timeMs": 50000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 50275,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

@@ -1,0 +1,13 @@
+In Graphs, enter f one of x equals x plus one and press Enter.
+Press Tab. Enter f two of x equals three and press Enter.
+From x equals zero to x equals five, the curves cross at x equals two. The upper curve changes there.
+Open Menu and choose Analyze Graph, then Bounded Area.
+With exactly two eligible curves, the tool selects them automatically.
+For the left region, type zero and press Enter.
+Type two and press Enter. That stops the region at the crossing.
+The left region has area two. Here the horizontal line is on top.
+Run Bounded Area again for the right region.
+Type two and press Enter. Then type five and press Enter.
+The right region has area four point five. Now the sloping line is on top.
+Add the positive areas: two plus four point five equals six point five square units.
+When the upper curve changes, split there before calculating the area.

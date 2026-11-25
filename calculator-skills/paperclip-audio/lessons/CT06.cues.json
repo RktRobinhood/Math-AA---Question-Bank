@@ -1,0 +1,648 @@
+{
+  "schemaVersion": 1,
+  "id": "CT06",
+  "route": "solve/index.html",
+  "catalogueTitle": "Numerical solve: equations with multiple roots",
+  "playerHeading": "Solve an equation numerically",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "solve/narration-cues.json"
+  },
+  "script": "lessons/CT06.txt",
+  "spokenCues": [
+    {
+      "id": "solve-1",
+      "text": "On a Calculator page, open Menu, choose Algebra, then Numerical Solve."
+    },
+    {
+      "id": "solve-2",
+      "text": "Enter the equation, then a comma and the variable you’re solving for."
+    },
+    {
+      "id": "solve-3",
+      "text": "To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma."
+    },
+    {
+      "id": "solve-4",
+      "text": "Close the bracket and press Enter. The calculator gives one numerical solution."
+    },
+    {
+      "id": "solve-5",
+      "text": "If the equation may have more than one solution, use separate intervals and check each result."
+    },
+    {
+      "id": "solve-6",
+      "text": "Keep the calculator’s full precision while you work, then round the final answer as the question asks."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 40000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Calculator page, open Menu, choose Algebra, then Numerical Solve.",
+        "endMs": 6240
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6240,
+        "text": "Enter the equation, then a comma and the variable you’re solving for.",
+        "endMs": 10700
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10700,
+        "text": "To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma.",
+        "endMs": 17910
+      },
+      {
+        "id": "watch-04",
+        "startMs": 17910,
+        "text": "Close the bracket and press Enter. The calculator gives one numerical solution.",
+        "endMs": 23580
+      },
+      {
+        "id": "watch-05",
+        "startMs": 23580,
+        "text": "If the equation may have more than one solution, use separate intervals and check each result.",
+        "endMs": 29430
+      },
+      {
+        "id": "watch-06",
+        "startMs": 29430,
+        "text": "Keep the calculator’s full precision while you work, then round the final answer as the question asks.",
+        "endMs": 40000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1600,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 1830,
+        "keys": []
+      },
+      {
+        "timeMs": 3550,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 3780,
+        "keys": []
+      },
+      {
+        "timeMs": 5310,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5540,
+        "keys": []
+      },
+      {
+        "timeMs": 6450,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 6680,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 6940,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 7150,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 7380,
+        "keys": []
+      },
+      {
+        "timeMs": 7450,
+        "keys": [
+          "eq"
+        ]
+      },
+      {
+        "timeMs": 7680,
+        "keys": []
+      },
+      {
+        "timeMs": 7820,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 8050,
+        "keys": []
+      },
+      {
+        "timeMs": 8230,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 8460,
+        "keys": []
+      },
+      {
+        "timeMs": 8570,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 8800,
+        "keys": []
+      },
+      {
+        "timeMs": 8860,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 9090,
+        "keys": []
+      },
+      {
+        "timeMs": 9750,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 9980,
+        "keys": []
+      },
+      {
+        "timeMs": 10700,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 10930,
+        "keys": []
+      },
+      {
+        "timeMs": 13500,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 13730,
+        "keys": []
+      },
+      {
+        "timeMs": 15140,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 15370,
+        "keys": []
+      },
+      {
+        "timeMs": 15400,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 15630,
+        "keys": []
+      },
+      {
+        "timeMs": 17910,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 18140,
+        "keys": []
+      },
+      {
+        "timeMs": 20500,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20730,
+        "keys": []
+      },
+      {
+        "timeMs": 23650,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 24130,
+        "keys": []
+      },
+      {
+        "timeMs": 24180,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24410,
+        "keys": []
+      },
+      {
+        "timeMs": 24510,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 24740,
+        "keys": []
+      },
+      {
+        "timeMs": 24770,
+        "keys": [
+          "del"
+        ]
+      },
+      {
+        "timeMs": 25430,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 25680,
+        "keys": []
+      },
+      {
+        "timeMs": 25760,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 25990,
+        "keys": []
+      },
+      {
+        "timeMs": 26070,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 26300,
+        "keys": []
+      },
+      {
+        "timeMs": 26380,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 26610,
+        "keys": []
+      },
+      {
+        "timeMs": 26700,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 26930,
+        "keys": []
+      },
+      {
+        "timeMs": 27080,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 27310,
+        "keys": []
+      },
+      {
+        "timeMs": 27920,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28150,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "HandheldKeyCues.CT06",
+        "keys": [
+          {
+            "timeMs": 1600,
+            "key": "menu",
+            "durationMs": 210,
+            "state": "menu"
+          },
+          {
+            "timeMs": 3550,
+            "key": "3",
+            "durationMs": 210,
+            "state": "submenu"
+          },
+          {
+            "timeMs": 5310,
+            "key": "1",
+            "durationMs": 210,
+            "state": "entry",
+            "cmdAfter": "nSolve("
+          },
+          {
+            "timeMs": 6450,
+            "key": "2",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2"
+          },
+          {
+            "timeMs": 6710,
+            "key": "power",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2",
+            "exponentOpen": true
+          },
+          {
+            "timeMs": 6950,
+            "key": "x",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ",
+            "exponentOpen": true
+          },
+          {
+            "timeMs": 7150,
+            "key": "right",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ",
+            "exponentOpen": false
+          },
+          {
+            "timeMs": 7450,
+            "key": "equals",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ="
+          },
+          {
+            "timeMs": 7820,
+            "key": "x",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x"
+          },
+          {
+            "timeMs": 8230,
+            "key": "plus",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+"
+          },
+          {
+            "timeMs": 8570,
+            "key": "4",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4"
+          },
+          {
+            "timeMs": 8860,
+            "key": "comma",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4,"
+          },
+          {
+            "timeMs": 9750,
+            "key": "x",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x"
+          },
+          {
+            "timeMs": 10700,
+            "key": "comma",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x,"
+          },
+          {
+            "timeMs": 13500,
+            "key": "2",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2"
+          },
+          {
+            "timeMs": 15140,
+            "key": "comma",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2,"
+          },
+          {
+            "timeMs": 15400,
+            "key": "3",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, 3"
+          },
+          {
+            "timeMs": 17910,
+            "key": "rightParen",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, 3)"
+          },
+          {
+            "timeMs": 20500,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "result",
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, 3)",
+            "note": "First solution on the positive interval."
+          },
+          {
+            "timeMs": 23650,
+            "key": "up",
+            "durationMs": 145,
+            "historyFocus": "result"
+          },
+          {
+            "timeMs": 23900,
+            "key": "up",
+            "durationMs": 145,
+            "historyFocus": "input"
+          },
+          {
+            "timeMs": 24180,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "entry",
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, 3)",
+            "note": "Copy the previous command into the entry line."
+          },
+          {
+            "timeMs": 24510,
+            "key": "left",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, 3)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 24770,
+            "key": "del",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2, )",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 24980,
+            "key": "del",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, 2)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 25200,
+            "key": "del",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, )",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 25450,
+            "key": "negative",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 25760,
+            "key": "4",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 26070,
+            "key": "comma",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4, )",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 26380,
+            "key": "negative",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4, −)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 26700,
+            "key": "3",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4, −3)",
+            "cursorFromEnd": 1
+          },
+          {
+            "timeMs": 27080,
+            "key": "right",
+            "durationMs": 145,
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4, −3)",
+            "cursorFromEnd": 0
+          },
+          {
+            "timeMs": 27920,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "result",
+            "cmdAfter": "nSolve(2ˣ=x+4, x, −4, −3)",
+            "note": "Solve again using the negative interval."
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "solve/narration.mp3",
+    "bytes": 586429,
+    "sha256": "f8587931ebc439cada549aba5812b9c11a7de43b6c464ba37af9fd17ece33034",
+    "streamDurationMs": 35553,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "measured-existing-clip",
+      "source": "solve/narration-cues.json",
+      "cues": [
+        {
+          "id": "solve-1",
+          "startMs": 0,
+          "endMs": 6241,
+          "text": "On a Calculator page, open Menu, choose Algebra, then Numerical Solve."
+        },
+        {
+          "id": "solve-2",
+          "startMs": 6241,
+          "endMs": 10696,
+          "text": "Enter the equation, then a comma and the variable you’re solving for."
+        },
+        {
+          "id": "solve-3",
+          "startMs": 10696,
+          "endMs": 17912,
+          "text": "To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma."
+        },
+        {
+          "id": "solve-4",
+          "startMs": 17912,
+          "endMs": 23580,
+          "text": "Close the bracket and press Enter. The calculator gives one numerical solution."
+        },
+        {
+          "id": "solve-5",
+          "startMs": 23580,
+          "endMs": 29431,
+          "text": "If the equation may have more than one solution, use separate intervals and check each result."
+        },
+        {
+          "id": "solve-6",
+          "startMs": 29431,
+          "endMs": 35553,
+          "text": "Keep the calculator’s full precision while you work, then round the final answer as the question asks."
+        }
+      ],
+      "uiCuesMs": {
+        "result": 20503
+      }
+    }
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

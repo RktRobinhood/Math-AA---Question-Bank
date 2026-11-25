@@ -1,0 +1,9 @@
+On a Graphs page, enter the function you want to investigate and press Enter.
+Open Menu, choose Analyze Graph, and select Minimum.
+We're looking for the lowest point in the interval you choose.
+To set the lower bound, move the cursor to the left of the minimum, then press Enter.
+For the upper bound, move to the right of the minimum and press Enter again.
+Bracket just one turning point.
+The calculator marks the minimum and shows its coordinates.
+The x-coordinate tells you where it occurs.
+The y-coordinate is the minimum value.

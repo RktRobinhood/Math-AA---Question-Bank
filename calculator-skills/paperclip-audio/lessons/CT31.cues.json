@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "id": "CT31",
+  "route": "linear-regression/index.html",
+  "catalogueTitle": "Pearson correlation and linear regression",
+  "playerHeading": "Linear regression and Pearson r",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "linear-regression/index.html"
+  },
+  "script": "lessons/CT31.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start with two named lists. Values on the same row belong to the same observation.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "In Lists and Spreadsheet, open Statistics, then Stat Calculations. Choose the m x plus b form.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the right arrow to choose the list named x val for X, then Tab. Choose the list named y val for Y.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Use each pair once. Keep the fitted equation in f one and the results starting in C.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Read m and b. The slope is the change in predicted y per extra unit of x.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read the two rows separately. r is positive here and gives the upward direction.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "A falling pattern can have the same r squared. Use the unsquared r to tell which way the pattern goes.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "For a prediction, substitute x into the fitted line. Do not use r or r squared as the slope.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 43000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start with two named lists. Values on the same row belong to the same observation.",
+        "endMs": 4800
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4800,
+        "text": "In Lists & Spreadsheet, open Statistics, then Stat Calculations. Choose the mx+b form.",
+        "endMs": 11000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 11000,
+        "text": "Use the right arrow to choose xval for X, then Tab. Choose yval for Y.",
+        "endMs": 17400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 17400,
+        "text": "Use each pair once. Keep the fitted equation in f1 and the results starting in C.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 22000,
+        "text": "Read m and b. The slope is the change in predicted y per extra unit of x.",
+        "endMs": 28000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 28000,
+        "text": "Read the two rows separately. r is positive here and gives the upward direction.",
+        "endMs": 32700
+      },
+      {
+        "id": "watch-07",
+        "startMs": 32700,
+        "text": "A falling pattern can have the same r². Use the unsquared r to tell which way the pattern goes.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 36000,
+        "text": "For a prediction, substitute x into the fitted line. Do not use r or r² as the slope.",
+        "endMs": 43000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5460,
+        "keys": []
+      },
+      {
+        "timeMs": 6050,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6410,
+        "keys": []
+      },
+      {
+        "timeMs": 7100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7460,
+        "keys": []
+      },
+      {
+        "timeMs": 8450,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8810,
+        "keys": []
+      },
+      {
+        "timeMs": 11500,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11860,
+        "keys": []
+      },
+      {
+        "timeMs": 12650,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13010,
+        "keys": []
+      },
+      {
+        "timeMs": 14100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 14460,
+        "keys": []
+      },
+      {
+        "timeMs": 15250,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15610,
+        "keys": []
+      },
+      {
+        "timeMs": 16350,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16710,
+        "keys": []
+      },
+      {
+        "timeMs": 19900,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20260,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT31Tape",
+        "keys": [
+          {
+            "timeMs": 5100,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6050,
+            "key": "4"
+          },
+          {
+            "timeMs": 7100,
+            "key": "1"
+          },
+          {
+            "timeMs": 8450,
+            "key": "3"
+          },
+          {
+            "timeMs": 11500,
+            "key": "right"
+          },
+          {
+            "timeMs": 12650,
+            "key": "tab"
+          },
+          {
+            "timeMs": 14100,
+            "key": "right"
+          },
+          {
+            "timeMs": 15250,
+            "key": "right"
+          },
+          {
+            "timeMs": 16350,
+            "key": "tab"
+          },
+          {
+            "timeMs": 19900,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "id": "CT07",
+  "route": "linear-system/index.html",
+  "catalogueTitle": "Simultaneous equations and unknown parameters",
+  "playerHeading": "Solve simultaneous equations",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "linear-system/index.html"
+  },
+  "script": "lessons/CT07.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "On a Calculator page, open Menu then three: Algebra then two: Solve System of Linear Equations.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Use two equations and keep the variables in x, y order. Confirm to insert the template.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter the first equation, including its equals sign. Then press Tab for the second line.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter the second equation. It can be in a different linear form. Press Enter to solve.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The order, x then y, tells you what each list entry means.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Substitute the pair into both equations to check.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 28000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Calculator page, open Menu → 3: Algebra → 2: Solve System of Linear Equations.",
+        "endMs": 5400
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5400,
+        "text": "Use two equations and keep the variables in {x, y} order. Confirm to insert the template.",
+        "endMs": 8300
+      },
+      {
+        "id": "watch-03",
+        "startMs": 8300,
+        "text": "Enter the first equation, including its equals sign. Then press Tab for the second line.",
+        "endMs": 14200
+      },
+      {
+        "id": "watch-04",
+        "startMs": 14200,
+        "text": "Enter the second equation. It can be in a different linear form. Press Enter to solve.",
+        "endMs": 19900
+      },
+      {
+        "id": "watch-05",
+        "startMs": 19900,
+        "text": "The order {x, y} tells you what each list entry means.",
+        "endMs": 23100
+      },
+      {
+        "id": "watch-06",
+        "startMs": 23100,
+        "text": "Substitute the pair into both equations to check.",
+        "endMs": 28000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 1441,
+        "keys": []
+      },
+      {
+        "timeMs": 2350,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2690,
+        "keys": []
+      },
+      {
+        "timeMs": 3600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 3940,
+        "keys": []
+      },
+      {
+        "timeMs": 6400,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 6740,
+        "keys": []
+      },
+      {
+        "timeMs": 8670,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9010,
+        "keys": []
+      },
+      {
+        "timeMs": 9160,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 9500,
+        "keys": []
+      },
+      {
+        "timeMs": 9640,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 9980,
+        "keys": []
+      },
+      {
+        "timeMs": 10120,
+        "keys": [
+          "y"
+        ]
+      },
+      {
+        "timeMs": 10460,
+        "keys": []
+      },
+      {
+        "timeMs": 10610,
+        "keys": [
+          "eq"
+        ]
+      },
+      {
+        "timeMs": 10950,
+        "keys": []
+      },
+      {
+        "timeMs": 11100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 11440,
+        "keys": []
+      },
+      {
+        "timeMs": 11590,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 11930,
+        "keys": []
+      },
+      {
+        "timeMs": 13410,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13750,
+        "keys": []
+      },
+      {
+        "timeMs": 14550,
+        "keys": [
+          "y"
+        ]
+      },
+      {
+        "timeMs": 14890,
+        "keys": []
+      },
+      {
+        "timeMs": 15060,
+        "keys": [
+          "eq"
+        ]
+      },
+      {
+        "timeMs": 15400,
+        "keys": []
+      },
+      {
+        "timeMs": 15580,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 15920,
+        "keys": []
+      },
+      {
+        "timeMs": 16080,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 16420,
+        "keys": []
+      },
+      {
+        "timeMs": 16580,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16920,
+        "keys": []
+      },
+      {
+        "timeMs": 19660,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20000,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT07Tape",
+        "keys": [
+          {
+            "timeMs": 1100,
+            "key": "menu"
+          },
+          {
+            "timeMs": 2350,
+            "key": "3"
+          },
+          {
+            "timeMs": 3600,
+            "key": "2"
+          },
+          {
+            "timeMs": 6400,
+            "key": "enter"
+          },
+          {
+            "timeMs": 8670,
+            "key": "2"
+          },
+          {
+            "timeMs": 9160,
+            "key": "x"
+          },
+          {
+            "timeMs": 9640,
+            "key": "plus"
+          },
+          {
+            "timeMs": 10120,
+            "key": "y"
+          },
+          {
+            "timeMs": 10610,
+            "key": "eq"
+          },
+          {
+            "timeMs": 11100,
+            "key": "1"
+          },
+          {
+            "timeMs": 11590,
+            "key": "1"
+          },
+          {
+            "timeMs": 13410,
+            "key": "tab"
+          },
+          {
+            "timeMs": 14550,
+            "key": "y"
+          },
+          {
+            "timeMs": 15060,
+            "key": "eq"
+          },
+          {
+            "timeMs": 15580,
+            "key": "x"
+          },
+          {
+            "timeMs": 16080,
+            "key": "minus"
+          },
+          {
+            "timeMs": 16580,
+            "key": "1"
+          },
+          {
+            "timeMs": 19660,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

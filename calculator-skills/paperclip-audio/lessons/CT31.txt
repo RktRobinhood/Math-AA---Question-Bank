@@ -1,0 +1,8 @@
+Start with two named lists. Values on the same row belong to the same observation.
+In Lists and Spreadsheet, open Statistics, then Stat Calculations. Choose the m x plus b form.
+Use the right arrow to choose the list named x val for X, then Tab. Choose the list named y val for Y.
+Use each pair once. Keep the fitted equation in f one and the results starting in C.
+Read m and b. The slope is the change in predicted y per extra unit of x.
+Read the two rows separately. r is positive here and gives the upward direction.
+A falling pattern can have the same r squared. Use the unsquared r to tell which way the pattern goes.
+For a prediction, substitute x into the fitted line. Do not use r or r squared as the slope.

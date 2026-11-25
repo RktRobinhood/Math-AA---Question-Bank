@@ -1,0 +1,23 @@
+<!doctype html><html lang="en" data-theme="system"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Create lists and frequency tables · Calculator Coach</title><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css"><script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script></head>
+<body><main><header class="head"><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / CT28</p><h1>Create lists and frequency tables</h1></div><label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-panel">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-panel" tabindex="-1">Try</button></div>
+<section id="stage" class="stage" tabindex="0" aria-label="TI-Nspire CX II-T Lists &amp; Spreadsheet">
+ <div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
+ <div id="try-header" hidden><div class="try-nav"><button id="return" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button></div><p id="try-context"></p></div>
+ <div class="stage-grid">
+  <div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span id="lcd-title"></span><span class="battery" aria-hidden="true"></span></div><div id="lcd-body" class="lcd-body"></div><p id="lcd-text" class="sr"></p></div><button id="start-overlay" class="stage-play" type="button" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button></div>
+  <aside id="watch-panel" class="side" role="tabpanel" aria-labelledby="watch-tab"><p class="eyebrow">Worked example</p><h2>One count for each value</h2><p class="context">Group people by the number of laps they completed.</p><table id="watch-table"></table><ol id="chapters"></ol></aside>
+  <aside id="try-panel" class="side" role="tabpanel" aria-labelledby="try-tab" hidden><p class="eyebrow">Your turn</p><table id="source-table"></table>
+   <form id="typed" novalidate><label for="cell-text">Type in selected cell <span id="selection"></span></label><div class="answer-line"><input id="cell-text" type="text" maxlength="12" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="submit">Store cell</button></div></form>
+   <p id="tool-status" class="feedback" role="status"></p>
+   <button id="assess" class="primary" type="button">Check the lists</button><p id="assess-feedback" class="feedback" role="status"></p>
+   <details class="keys"><summary>Keys and practice limits</summary><p>Use the arrows to select cells. In a numbered row, Enter stores your value and moves down. Use the handheld Tab key to switch between naming and data zones. Selecting an LCD cell with a tap is a practice shortcut. This lesson supports two columns, six rows, and short distinct names.</p></details>
+  </aside>
+ </div>
+ <div class="player" id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play" class="primary" type="button">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="forward" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from start">↺</button><button id="focus" type="button" aria-label="Focused view" aria-pressed="false">Focus</button><button id="take" type="button">Open Try</button></div>
+ <div class="timeline"><span id="clock" aria-hidden="true">0:00</span><label><span class="sr">Seek caption rehearsal</span><input id="seek" type="range" min="0" max="44" value="0" step=".01"></label><span class="rehearsal">Captions only</span></div></div>
+</section>
+<details class="notes"><summary>Raw list or frequency table?</summary><p>Raw data: each reading gets its own row. Frequency table: each value appears once, with its count beside it. A zero count is not an empty cell. Named columns become list variables in the current problem. The formula row is not the first data row.</p>
+<p><a href="https://education.ti.com/html/eguides/nspire/eg_nspire/en/content/m_listssheet/ls_creating_and_sharing_spreadsheet_data.HTML">Texas Instruments: naming spreadsheet columns</a></p></details>
+</main></body></html>

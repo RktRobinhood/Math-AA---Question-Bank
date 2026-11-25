@@ -1,0 +1,8 @@
+Shade the area you want. Here, it’s between eighteen and twenty-three.
+On a Calculator page, press Menu. Choose Probability, then Distributions, then Normal C D F.
+The lower bound is eighteen. The upper bound is twenty-three.
+Enter the mean, twenty. Then the standard deviation, two. Use two, not the variance of four.
+Confirm the dialog. Press Enter again to calculate. The probability is about zero point seven seven five.
+Now shade the upper tail, beyond twenty-two. Open Menu, then Probability, Distributions, and Normal C D F again.
+Enter twenty-two as the lower bound. Leave the upper bound at infinity. Keep the mean at twenty and the standard deviation at two.
+Confirm, then press Enter again. The upper-tail probability is about zero point one five nine.

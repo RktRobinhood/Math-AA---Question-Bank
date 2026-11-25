@@ -1,0 +1,6 @@
+Start on a Calculator page. Type A, then Control and Template, to name the matrix with the assignment symbol.
+Open Menu then seven: Matrix and Vector then one: Create then one: Matrix. Set the number of rows and columns.
+Fill the matrix from left to right, row by row. Use Tab to move between cells. Press Enter to store it.
+Type the determinant command with A in brackets, then press Enter. The determinant is a single number.
+For a square matrix with nonzero determinant, type A, press the power key, then the negative key and one. Press Enter.
+The inverse is another matrix. If the determinant is zero, the matrix is singular and has no inverse.

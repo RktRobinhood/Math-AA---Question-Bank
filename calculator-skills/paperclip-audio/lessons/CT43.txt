@@ -1,0 +1,8 @@
+We want an average, not one observation. Independent population readings have mean eighty and standard deviation twelve.
+The sample mean keeps the same centre. Its spread is the standard error: twelve divided by the square root of thirty-six.
+For this large sample, the CLT gives an approximately normal mean. A normal population would give an exact normal mean.
+On a Calculator page, open Probability, Distributions, then Normal Cdf.
+Enter the lower and upper bounds of the interval.
+Keep the mean at eighty. Enter two as the standard deviation of the mean, not twelve and not the variance four.
+Enter inserts the command, then Enter again evaluates it.
+The chance is about zero point seven seven five under the normal approximation. Distinguish an exact normal model from an approximation.

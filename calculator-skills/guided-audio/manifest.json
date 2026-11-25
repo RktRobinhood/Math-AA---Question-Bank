@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "lessons": {
+    "CT01": {
+      "src": "guided-audio/CT01.mp3",
+      "durationMs": 27011,
+      "cueStartsMs": [
+        0,
+        6453,
+        13373,
+        20099
+      ]
+    },
+    "CT08": {
+      "src": "guided-audio/CT08.mp3",
+      "durationMs": 25182,
+      "cueStartsMs": [
+        0,
+        4084,
+        11520,
+        18160
+      ]
+    },
+    "CT10": {
+      "src": "guided-audio/CT10.mp3",
+      "durationMs": 24660,
+      "cueStartsMs": [
+        0,
+        5406,
+        11744,
+        17828
+      ]
+    },
+    "CT11": {
+      "src": "guided-audio/CT11.mp3",
+      "durationMs": 20323,
+      "cueStartsMs": [
+        0,
+        6183,
+        10754,
+        14863
+      ]
+    }
+  }
+}

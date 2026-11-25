@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Finance Solver · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>Finance Solver</h1></div>
+<label><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
+<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
+<div id="watch-message" class="message"><p id="caption"></p></div>
+<div id="try-message" class="message" hidden><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
+<div class="deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.5 3.5v17l13-8.5z"/></svg></button></div></div>
+<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>One deposit, one balance</h2>
+<p>Use the same cash-flow perspective throughout.</p><ol id="chapters"></ol></aside>
+<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Find the balance</h2>
+<p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
+<details><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu. Enter selects the current menu row or calculates the highlighted field. Use Tab and Shift+Tab to move around the solver.</p></details></aside>
+</div>
+<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="40.5" step=".005"></label><span>Captions only</span></div></div>
+</section>
+<details class="reference"><summary>Why these settings?</summary><dl><dt>PV and FV</dt><dd>From your perspective, the opening deposit leaves you now (negative PV); the balance is money you can receive later (positive FV).</dd><dt>N, PpY and CpY</dt><dd>N counts payment periods, not years. PpY is payment periods per year; CpY counts compoundings per year. Here we set them equal so N counts compounding periods, even though Pmt is zero. The nominal rate I(%) is entered per year as a percentage.</dd><dt>Pmt and PmtAt</dt><dd>Set Pmt to zero for no recurring payments. With no payments, the BEGIN/END timing does not change the result.</dd></dl><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/22730">TI handheld menu</a> · <a href="https://education.ti.com/html/eguides/nspire/EG_Nspire/EN/content/m_calculator/ca_financial_calculations.HTML">TI Finance Solver guide</a></p></details>
+</main></body></html>

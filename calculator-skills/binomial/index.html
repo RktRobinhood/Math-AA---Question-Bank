@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Binomial CDF · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css">
+<link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script>
+<script src="../handheld/key-cues.js" defer></script>
+<script src="lesson.js" defer></script>
+</head>
+<body>
+<main>
+<header class="header">
+<div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT38</span></p><h1>Binomial CDF: intervals and tails</h1><p class="subtitle">Translate probability wording into the two bounds your TI-Nspire needs.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode">
+<button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button>
+<button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button>
+</div>
+<section class="ct38-shared" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary" aria-label="Play">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct38-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="39.079" step="0.005"></label><label class="ct38-option"><input type="checkbox" id="captions" checked><span aria-hidden="true">CC</span><span class="sr">Captions</span></label><label class="ct38-option" id="sound-label" hidden><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
+<audio id="narration" preload="metadata" src="narration.mp3"></audio>
+<p id="caption" class="caption"></p>
+<p class="ct38-bounds" id="watch-bounds"></p>
+</div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Restart keypad</button></div>
+<div class="ct38-stage-grid">
+<div class="ct38-calc-anchor" id="handheld-host">
+  <div class="screen" id="lcd" aria-label="Calculator LCD"><div class="status"><span>1.1</span><span>Calculator &nbsp; <small>RAD</small></span><span class="battery" aria-label="Battery"></span></div><div class="screen-work" id="screen-work"></div></div>
+</div>
+<div class="ct38-stage-side">
+<div id="watch-side"><aside class="director" aria-label="Demonstration steps">
+<p class="tag">Worked example</p>
+<h2>At least five</h2>
+<p>Across 12 independent trials, the chance of success each time is 0.25. What is the probability of at least 5 successes?</p>
+<ol id="steps" class="steps"></ol>
+
+</aside>
+</div>
+<aside id="try-side" class="director ct38-try-help" hidden>
+<p class="tag">Calculator practice</p><h2>Run a Binomial Cdf</h2>
+<p class="ct38-taskline" id="keypad-problem"></p>
+<p id="keypad-hint" role="status">Press Menu to begin.</p>
+<p class="ct38-keyboard">On a keyboard: <kbd>M</kbd> opens Menu. Use the same digits, <kbd>E</kbd> or arrow keys, <kbd>Tab</kbd> in the wizard, and <kbd>Enter</kbd>. Tab from OK leaves the keypad.</p>
+<p id="keypad-result" class="feedback" role="status" hidden></p>
+</aside>
+</div>
+</div>
+</section>
+<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="-1" class="ct38-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
+<div class="try-grid">
+<section class="exercise" aria-labelledby="challenge-title">
+<p class="tag">Your turn</p><h2 id="challenge-title">Fewer than three</h2>
+<p id="challenge-description">A robot takes 9 independent shots. Each has a 0.35 chance of hitting the target. What is the probability of fewer than 3 hits?</p>
+<form id="answer-form">
+<label for="answer">Your probability <small>(3 significant figures)</small></label>
+<div class="answer-row"><input type="number" inputmode="decimal" step="any" min="0" max="1" required id="answer" placeholder="e.g. 0.250"><button class="primary">Check</button></div>
+</form>
+<p class="feedback" id="feedback" role="status"></p>
+<details><summary>Hint</summary><p id="answer-hint">List the integers included in “fewer than 3”. Is 3 on your list?</p></details>
+</section>
+<section class="workbench" aria-labelledby="bench-title">
+<h2 id="bench-title">Test an event</h2>
+<p>Translate the event below, or enter your own bounds on the handheld above.</p>
+<form id="model">
+<div class="model-fields">
+<label>Trials <i>n</i><input required type="number" id="trials" min="1" max="500" step="1" value="12" inputmode="numeric"></label>
+<label>Success probability <i>p</i><input required type="number" id="chance" min="0" max="1" step="any" value="0.25" inputmode="decimal"></label>
+</div>
+<div class="event-fields">
+<label>Event<select id="event"><option value="ge">At least</option><option value="le">At most</option><option value="lt">Fewer than</option><option value="gt">More than</option><option value="range">Between, inclusive</option></select></label>
+<label><span id="lower-label">Count <i>k</i></span><input required type="number" min="-500" max="1000" step="1" value="5" id="lower" inputmode="numeric"></label>
+<label id="upper-row" hidden>Upper count<input type="number" step="1" min="-500" max="1000" value="8" id="upper" inputmode="numeric"></label>
+</div>
+<p class="event-line" id="event-line"></p>
+<button class="primary">Calculate</button>
+</form>
+<div class="result" id="result" hidden role="status"></div>
+</section>
+</div>
+</section>
+<details class="notes"><summary>Keep in your notes</summary><p><strong>CDF</strong> adds the probabilities of all integer counts in a range, including both bounds. The possible counts are 0 through <i>n</i>.</p><ul><li>At least <i>k</i>: <i>k</i> to <i>n</i>. At most <i>k</i>: 0 to <i>k</i>.</li><li>More than <i>k</i>: start at <i>k</i> + 1. Fewer than <i>k</i>: end at <i>k</i> − 1.</li><li>Complement: subtract the probability of the counts <em>outside</em> your event from 1.</li></ul><p class="note-source"><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29570">TI’s button sequence</a> · <a href="https://rktrobinhood.github.io/Math-AA---Question-Bank/questions/ai-sl-2022-may-tz2-p1-q05/">Exam reference: May 2022 AI SL P1 TZ2 Q5(c)</a></p></details>
+</main>
+</body>
+</html>

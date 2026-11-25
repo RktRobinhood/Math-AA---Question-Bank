@@ -1,0 +1,611 @@
+{
+  "schemaVersion": 1,
+  "id": "CT35",
+  "route": "spearman/index.html",
+  "catalogueTitle": "Spearman rank correlation",
+  "playerHeading": "Spearman rank correlation",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "spearman/index.html"
+  },
+  "script": "lessons/CT35.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "The paired rows are x: twenty-one, seven, fifteen, eleven and y: seven, twelve, five, seven.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "The x ranks in the original row order are four, one, three, two. Enter these in the list named r x.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "The two sevens would occupy ranks two and three. Give each two point five.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter the y-ranks in the original row order: two point five, four, one, two point five.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Open Menu, then four for Statistics, one for Stat Calculations, and four for Linear Regression in the a plus b x form.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Use the rank lists rx and ry. Run the calculation, then look for r.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Pearson r on the paired ranks equals Spearman's rank correlation. Here it is about negative zero point six three two.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The number describes monotonic association, not proof that a change in one variable causes the other.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 47000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "The paired rows are x: 21, 7, 15, 11 and y: 7, 12, 5, 7.",
+        "endMs": 6200
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6200,
+        "text": "The x-ranks in the original row order are 4, 1, 3, 2. Enter these in rx.",
+        "endMs": 13400
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13400,
+        "text": "The two sevens would occupy ranks 2 and 3. Give each 2.5.",
+        "endMs": 17500
+      },
+      {
+        "id": "watch-04",
+        "startMs": 17500,
+        "text": "Enter the y-ranks in the original row order: 2.5, 4, 1, 2.5.",
+        "endMs": 25000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 25000,
+        "text": "Open Menu → 4: Statistics → 1: Stat Calculations → 4: Linear Regression (a+bx).",
+        "endMs": 31000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 31000,
+        "text": "Use the rank lists rx and ry. Run the calculation, then look for r.",
+        "endMs": 39500
+      },
+      {
+        "id": "watch-07",
+        "startMs": 39500,
+        "text": "Pearson r on the paired ranks equals Spearman’s rₛ. Here it is about −0.632.",
+        "endMs": 43000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 43000,
+        "text": "The number describes monotonic association, not proof that a change in one variable causes the other.",
+        "endMs": 47000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6650,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6971,
+        "keys": []
+      },
+      {
+        "timeMs": 7100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7420,
+        "keys": []
+      },
+      {
+        "timeMs": 7630,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7950,
+        "keys": []
+      },
+      {
+        "timeMs": 8090,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8410,
+        "keys": []
+      },
+      {
+        "timeMs": 8610,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8930,
+        "keys": []
+      },
+      {
+        "timeMs": 9120,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9440,
+        "keys": []
+      },
+      {
+        "timeMs": 9630,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9951,
+        "keys": []
+      },
+      {
+        "timeMs": 10120,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 10440,
+        "keys": []
+      },
+      {
+        "timeMs": 11200,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11520,
+        "keys": []
+      },
+      {
+        "timeMs": 11700,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 12020,
+        "keys": []
+      },
+      {
+        "timeMs": 12200,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 12520,
+        "keys": []
+      },
+      {
+        "timeMs": 12700,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 13020,
+        "keys": []
+      },
+      {
+        "timeMs": 17620,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17940,
+        "keys": []
+      },
+      {
+        "timeMs": 18020,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 18340,
+        "keys": []
+      },
+      {
+        "timeMs": 18420,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 18741,
+        "keys": []
+      },
+      {
+        "timeMs": 18820,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19140,
+        "keys": []
+      },
+      {
+        "timeMs": 19290,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 19610,
+        "keys": []
+      },
+      {
+        "timeMs": 19700,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20020,
+        "keys": []
+      },
+      {
+        "timeMs": 20190,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 20510,
+        "keys": []
+      },
+      {
+        "timeMs": 20600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20920,
+        "keys": []
+      },
+      {
+        "timeMs": 21070,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 21390,
+        "keys": []
+      },
+      {
+        "timeMs": 21480,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 21800,
+        "keys": []
+      },
+      {
+        "timeMs": 21890,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 22210,
+        "keys": []
+      },
+      {
+        "timeMs": 22300,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22620,
+        "keys": []
+      },
+      {
+        "timeMs": 23300,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 23620,
+        "keys": []
+      },
+      {
+        "timeMs": 25500,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 25820,
+        "keys": []
+      },
+      {
+        "timeMs": 26500,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 26820,
+        "keys": []
+      },
+      {
+        "timeMs": 27480,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 27800,
+        "keys": []
+      },
+      {
+        "timeMs": 28440,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 28760,
+        "keys": []
+      },
+      {
+        "timeMs": 31200,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31520,
+        "keys": []
+      },
+      {
+        "timeMs": 32150,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 32470,
+        "keys": []
+      },
+      {
+        "timeMs": 33060,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 33380,
+        "keys": []
+      },
+      {
+        "timeMs": 34020,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 34340,
+        "keys": []
+      },
+      {
+        "timeMs": 36000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 36320,
+        "keys": []
+      },
+      {
+        "timeMs": 39620,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 39940,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT35Tape",
+        "keys": [
+          {
+            "timeMs": 6650,
+            "key": "4"
+          },
+          {
+            "timeMs": 7100,
+            "key": "enter"
+          },
+          {
+            "timeMs": 7630,
+            "key": "1"
+          },
+          {
+            "timeMs": 8090,
+            "key": "enter"
+          },
+          {
+            "timeMs": 8610,
+            "key": "3"
+          },
+          {
+            "timeMs": 9120,
+            "key": "enter"
+          },
+          {
+            "timeMs": 9630,
+            "key": "2"
+          },
+          {
+            "timeMs": 10120,
+            "key": "enter"
+          },
+          {
+            "timeMs": 11200,
+            "key": "right"
+          },
+          {
+            "timeMs": 11700,
+            "key": "up"
+          },
+          {
+            "timeMs": 12200,
+            "key": "up"
+          },
+          {
+            "timeMs": 12700,
+            "key": "up"
+          },
+          {
+            "timeMs": 17620,
+            "key": "2"
+          },
+          {
+            "timeMs": 18020,
+            "key": "dot"
+          },
+          {
+            "timeMs": 18420,
+            "key": "5"
+          },
+          {
+            "timeMs": 18820,
+            "key": "enter"
+          },
+          {
+            "timeMs": 19290,
+            "key": "4"
+          },
+          {
+            "timeMs": 19700,
+            "key": "enter"
+          },
+          {
+            "timeMs": 20190,
+            "key": "1"
+          },
+          {
+            "timeMs": 20600,
+            "key": "enter"
+          },
+          {
+            "timeMs": 21070,
+            "key": "2"
+          },
+          {
+            "timeMs": 21480,
+            "key": "dot"
+          },
+          {
+            "timeMs": 21890,
+            "key": "5"
+          },
+          {
+            "timeMs": 22300,
+            "key": "enter"
+          },
+          {
+            "timeMs": 23300,
+            "key": "left"
+          },
+          {
+            "timeMs": 25500,
+            "key": "menu"
+          },
+          {
+            "timeMs": 26500,
+            "key": "4"
+          },
+          {
+            "timeMs": 27480,
+            "key": "1"
+          },
+          {
+            "timeMs": 28440,
+            "key": "4"
+          },
+          {
+            "timeMs": 31200,
+            "key": "tab"
+          },
+          {
+            "timeMs": 32150,
+            "key": "right"
+          },
+          {
+            "timeMs": 33060,
+            "key": "right"
+          },
+          {
+            "timeMs": 34020,
+            "key": "tab"
+          },
+          {
+            "timeMs": 36000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 39620,
+            "key": "down"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

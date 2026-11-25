@@ -1,0 +1,9 @@
+Each row records dough volume at one hour. Every volume must be positive because exponential regression fits the natural log of y.
+Open Statistics, then Stat Calculations. Press the letter A, even if the option is below the visible list.
+Use the right arrow and Tab. Set the list called x val as the X List and y val as the Y List.
+Use each pair once. Save to f one and keep the results in C and D. Press Enter.
+Read a and b. The value a is the estimate at x equals zero. It need not equal the measurement there.
+A one-unit rise in x multiplies the estimate by b. Here that is about a fifty point seven percent increase.
+The r and r squared rows assess the line fitted to x and the natural log of y, not the raw readings.
+At x equals two point five the input is inside the observed span. Substituting gives an interpolation.
+At x equals six the input is outside the observed span. The model can predict, but the trend may not continue.

@@ -1,0 +1,35 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Find a graph zero · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT10</span></p><h1>Find a graph zero</h1><p class="subtitle">Bracket one crossing on a TI-Nspire CX II-T.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct10-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct10-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="24.66" step="0.005"></label><span class="ct10-rehearsal" id="media-status">Narration</span><label class="ct10-option" id="sound-label"><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
+<audio id="narration" preload="metadata" src="narration.mp3"></audio>
+<p id="caption" class="caption"></p><p id="zero-readout" class="ct10-bounds" hidden><strong>Zero found:</strong> x = 2</p><p id="intercept-contrast" class="ct10-bounds" hidden><strong>Different target:</strong> f(0) = 6 gives the y-intercept (0, 6). The LCD is still finding x-intercepts.</p>
+</div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
+<div class="ct10-stage-grid">
+<div class="ct10-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div></div>
+<div class="ct10-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>Isolate the smaller zero</h2><p>Use Zero on <span class="formula">f(x) = x² − 5x + 6</span>. The other crossing should stay outside the bounds.</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct10-try-help" hidden><p class="tag">Calculator practice</p><h2>Find one crossing</h2><p id="keypad-problem" class="ct10-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools">
+<form id="expression-form"><label for="expression">Function in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
+<form id="bound-form" hidden><label for="bound" id="bound-label"></label><div class="inputline"><input id="bound" type="number" step="any" inputmode="decimal" required><button type="submit" class="primary">Enter</button></div></form>
+<button id="retry-bounds" type="button" hidden>Try new bounds</button>
+</div>
+<p class="ct10-keyboard">Keyboard: <kbd>M</kbd>, <kbd>6</kbd>, <kbd>1</kbd>; arrows move the cursor and <kbd>Enter</kbd> confirms. <kbd>Tab</kbd> moves between page controls.</p>
+</aside></div></div>
+</section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct10-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Your turn</p><h2 id="challenge-title">Find the larger zero</h2><p id="challenge"></p><form id="answer-form"><label for="answer">x-coordinate <small>(to three significant figures if needed)</small></label><div class="answer-row"><input type="number" step="any" inputmode="decimal" required id="answer"><button class="primary">Check</button></div></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Look for the curve crossing the x-axis. Put one bound on each side of just that crossing.</p></details></section></section>
+<details class="notes"><summary>Zero or y-intercept?</summary><p>A zero is an x-coordinate where the function output is zero. For the y-intercept, evaluate the function at x = 0 instead.</p><p><a href="https://education.ti.com/-/media/ti/files/resources/student-parent/ti-nspire-best-practices.pdf#page=20">TI's graph analysis guide</a></p></details>
+</main></body></html>

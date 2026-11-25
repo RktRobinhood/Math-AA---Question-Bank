@@ -1,0 +1,750 @@
+{
+  "schemaVersion": 1,
+  "id": "CT39",
+  "route": "normal/index.html",
+  "catalogueTitle": "Normal: interval and tail probabilities",
+  "playerHeading": "Normal intervals & tails",
+  "status": "recording-ready-native-contract",
+  "scriptSource": {
+    "type": "original-recording-cue-sheet",
+    "file": "DISTRIBUTION-RECORDING-CUE-SHEET.md"
+  },
+  "script": "lessons/CT39.txt",
+  "spokenCues": [
+    {
+      "id": "39.01",
+      "text": "Shade the area you want. Here, it’s between eighteen and twenty-three."
+    },
+    {
+      "id": "39.02",
+      "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Normal C D F."
+    },
+    {
+      "id": "39.03",
+      "text": "The lower bound is eighteen. The upper bound is twenty-three."
+    },
+    {
+      "id": "39.04",
+      "text": "Enter the mean, twenty. Then the standard deviation, two. Use two, not the variance of four."
+    },
+    {
+      "id": "39.05",
+      "text": "Confirm the dialog. Press Enter again to calculate. The probability is about zero point seven seven five."
+    },
+    {
+      "id": "39.06",
+      "text": "Now shade the upper tail, beyond twenty-two. Open Menu, then Probability, Distributions, and Normal C D F again."
+    },
+    {
+      "id": "39.07",
+      "text": "Enter twenty-two as the lower bound. Leave the upper bound at infinity. Keep the mean at twenty and the standard deviation at two."
+    },
+    {
+      "id": "39.08",
+      "text": "Confirm, then press Enter again. The upper-tail probability is about zero point one five nine."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 46800,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "First, shade the part you want. Here, we need the area between eighteen and twenty-three.",
+        "endMs": 5200
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5200,
+        "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Normal C D F.",
+        "endMs": 13600
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13600,
+        "text": "Enter the lower bound, then the upper bound. Next enter the mean, then the standard deviation. Here that is two, not the variance, four.",
+        "endMs": 26200
+      },
+      {
+        "id": "watch-04",
+        "startMs": 26200,
+        "text": "Confirm the dialog. Press Enter again to calculate. The area is about zero point seven seven five.",
+        "endMs": 33200
+      },
+      {
+        "id": "watch-05",
+        "startMs": 33200,
+        "text": "For an upper tail, start at the threshold and leave the upper bound at infinity. Here, the area beyond twenty-two is about zero point one five nine.",
+        "endMs": 46800
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5720,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 6030,
+        "keys": []
+      },
+      {
+        "timeMs": 7250,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7561,
+        "keys": []
+      },
+      {
+        "timeMs": 9030,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 9340,
+        "keys": []
+      },
+      {
+        "timeMs": 11160,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 11470,
+        "keys": []
+      },
+      {
+        "timeMs": 13950,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14260,
+        "keys": []
+      },
+      {
+        "timeMs": 15082,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 15392,
+        "keys": []
+      },
+      {
+        "timeMs": 16214,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16594,
+        "keys": []
+      },
+      {
+        "timeMs": 17346,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17656,
+        "keys": []
+      },
+      {
+        "timeMs": 18478,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 18788,
+        "keys": []
+      },
+      {
+        "timeMs": 19610,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 19990,
+        "keys": []
+      },
+      {
+        "timeMs": 20741,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 21051,
+        "keys": []
+      },
+      {
+        "timeMs": 21873,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 22183,
+        "keys": []
+      },
+      {
+        "timeMs": 23005,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23385,
+        "keys": []
+      },
+      {
+        "timeMs": 24137,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 24447,
+        "keys": []
+      },
+      {
+        "timeMs": 25269,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25649,
+        "keys": []
+      },
+      {
+        "timeMs": 26820,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 27131,
+        "keys": []
+      },
+      {
+        "timeMs": 29100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29411,
+        "keys": []
+      },
+      {
+        "timeMs": 34000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 34310,
+        "keys": []
+      },
+      {
+        "timeMs": 34650,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 34960,
+        "keys": []
+      },
+      {
+        "timeMs": 35200,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 35511,
+        "keys": []
+      },
+      {
+        "timeMs": 35750,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 36060,
+        "keys": []
+      },
+      {
+        "timeMs": 36650,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 36960,
+        "keys": []
+      },
+      {
+        "timeMs": 37020,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 37331,
+        "keys": []
+      },
+      {
+        "timeMs": 37540,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 37920,
+        "keys": []
+      },
+      {
+        "timeMs": 38600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 38981,
+        "keys": []
+      },
+      {
+        "timeMs": 39120,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 39430,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 39761,
+        "keys": []
+      },
+      {
+        "timeMs": 39930,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 40310,
+        "keys": []
+      },
+      {
+        "timeMs": 40460,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 40770,
+        "keys": []
+      },
+      {
+        "timeMs": 40980,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 41360,
+        "keys": []
+      },
+      {
+        "timeMs": 41590,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 41901,
+        "keys": []
+      },
+      {
+        "timeMs": 42240,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 42551,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": {
+    "mechanism": "strict-json-assignment",
+    "file": "normal/measured-cues.js",
+    "assignTo": "window.NormalMeasuredCues",
+    "format": "ct39-measured-cues-v1",
+    "audioFilename": "narration.mp3",
+    "cues": [
+      {
+        "id": "39.01",
+        "title": "Shade the interval",
+        "text": "Shade the area you want. Here, it’s between eighteen and twenty-three.",
+        "keys": [],
+        "lcdEvents": [
+          {
+            "state": "range-context",
+            "keyIndex": null
+          }
+        ]
+      },
+      {
+        "id": "39.02",
+        "title": "Open Normal Cdf",
+        "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Normal C D F.",
+        "keys": [
+          {
+            "key": "menu"
+          },
+          {
+            "key": "5"
+          },
+          {
+            "key": "5"
+          },
+          {
+            "key": "2"
+          }
+        ],
+        "lcdEvents": [
+          {
+            "state": "range-wizard",
+            "keyIndex": 3
+          }
+        ]
+      },
+      {
+        "id": "39.03",
+        "title": "Enter both bounds",
+        "text": "The lower bound is eighteen. The upper bound is twenty-three.",
+        "keys": [
+          {
+            "key": "1"
+          },
+          {
+            "key": "8"
+          },
+          {
+            "key": "tab"
+          },
+          {
+            "key": "2"
+          },
+          {
+            "key": "3"
+          },
+          {
+            "key": "tab"
+          }
+        ],
+        "lcdEvents": []
+      },
+      {
+        "id": "39.04",
+        "title": "Enter the model",
+        "text": "Enter the mean, twenty. Then the standard deviation, two. Use two, not the variance of four.",
+        "keys": [
+          {
+            "key": "2"
+          },
+          {
+            "key": "0"
+          },
+          {
+            "key": "tab"
+          },
+          {
+            "key": "2"
+          },
+          {
+            "key": "tab"
+          }
+        ],
+        "lcdEvents": []
+      },
+      {
+        "id": "39.05",
+        "title": "Evaluate the interval",
+        "text": "Confirm the dialog. Press Enter again to calculate. The probability is about zero point seven seven five.",
+        "keys": [
+          {
+            "key": "enter"
+          },
+          {
+            "key": "enter"
+          }
+        ],
+        "lcdEvents": [
+          {
+            "state": "range-command",
+            "keyIndex": 0
+          },
+          {
+            "state": "range-result",
+            "keyIndex": 1
+          }
+        ]
+      },
+      {
+        "id": "39.06",
+        "title": "Switch to the upper tail",
+        "text": "Now shade the upper tail, beyond twenty-two. Open Menu, then Probability, Distributions, and Normal C D F again.",
+        "keys": [
+          {
+            "key": "menu"
+          },
+          {
+            "key": "5"
+          },
+          {
+            "key": "5"
+          },
+          {
+            "key": "2"
+          }
+        ],
+        "lcdEvents": [
+          {
+            "state": "tail-context",
+            "keyIndex": null
+          },
+          {
+            "state": "tail-wizard",
+            "keyIndex": 3
+          }
+        ]
+      },
+      {
+        "id": "39.07",
+        "title": "Set the tail bounds",
+        "text": "Enter twenty-two as the lower bound. Leave the upper bound at infinity. Keep the mean at twenty and the standard deviation at two.",
+        "keys": [
+          {
+            "key": "2"
+          },
+          {
+            "key": "2"
+          },
+          {
+            "key": "tab"
+          },
+          {
+            "key": "tab"
+          },
+          {
+            "key": "2"
+          },
+          {
+            "key": "0"
+          },
+          {
+            "key": "tab"
+          },
+          {
+            "key": "2"
+          },
+          {
+            "key": "tab"
+          }
+        ],
+        "lcdEvents": []
+      },
+      {
+        "id": "39.08",
+        "title": "Evaluate the tail",
+        "text": "Confirm, then press Enter again. The upper-tail probability is about zero point one five nine.",
+        "keys": [
+          {
+            "key": "enter"
+          },
+          {
+            "key": "enter"
+          }
+        ],
+        "lcdEvents": [
+          {
+            "state": "tail-command",
+            "keyIndex": 0
+          },
+          {
+            "state": "tail-result",
+            "keyIndex": 1
+          }
+        ]
+      }
+    ],
+    "rehearsalStatesMs": {
+      "range-context": 0,
+      "range-wizard": 11160,
+      "range-command": 26820,
+      "range-result": 29100,
+      "tail-context": 33200,
+      "tail-wizard": 35750,
+      "tail-command": 41590,
+      "tail-result": 42240
+    },
+    "rehearsalKeys": [
+      {
+        "key": "menu",
+        "rehearsalTimeMs": 5720
+      },
+      {
+        "key": "5",
+        "rehearsalTimeMs": 7250
+      },
+      {
+        "key": "5",
+        "rehearsalTimeMs": 9030
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 11160
+      },
+      {
+        "key": "1",
+        "rehearsalTimeMs": 13950
+      },
+      {
+        "key": "8",
+        "rehearsalTimeMs": 15082
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 16214
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 17345
+      },
+      {
+        "key": "3",
+        "rehearsalTimeMs": 18477
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 19609
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 20741
+      },
+      {
+        "key": "0",
+        "rehearsalTimeMs": 21873
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 23005
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 24136
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 25268
+      },
+      {
+        "key": "enter",
+        "rehearsalTimeMs": 26820
+      },
+      {
+        "key": "enter",
+        "rehearsalTimeMs": 29100
+      },
+      {
+        "key": "menu",
+        "rehearsalTimeMs": 34000
+      },
+      {
+        "key": "5",
+        "rehearsalTimeMs": 34650
+      },
+      {
+        "key": "5",
+        "rehearsalTimeMs": 35200
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 35750
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 36650
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 37020
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 37540
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 38600
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 39120
+      },
+      {
+        "key": "0",
+        "rehearsalTimeMs": 39450
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 39930
+      },
+      {
+        "key": "2",
+        "rehearsalTimeMs": 40460
+      },
+      {
+        "key": "tab",
+        "rehearsalTimeMs": 40980
+      },
+      {
+        "key": "enter",
+        "rehearsalTimeMs": 41590
+      },
+      {
+        "key": "enter",
+        "rehearsalTimeMs": 42240
+      }
+    ],
+    "contractSource": "CT39-MEASURED-CUE-INTEGRATION.md"
+  },
+  "integrationStatus": "strict-json-assignment"
+}

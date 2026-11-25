@@ -1,0 +1,44 @@
+{
+  "voice": "George",
+  "provider": "ElevenLabs",
+  "model": "eleven_v4",
+  "timingMethod": "measured MP3 quiet boundary, decoded playback time",
+  "durationMs": 39079,
+  "uiCuesMs": {
+    "inclusive": 20641,
+    "atMost": 28089,
+    "adjustStrict": 35192
+  },
+  "cues": [
+    {
+      "id": "binomial-1",
+      "startMs": 0,
+      "endMs": 6868,
+      "text": "Before opening the calculator, identify the first and last whole-number counts that belong in the event."
+    },
+    {
+      "id": "binomial-2",
+      "startMs": 6868,
+      "endMs": 14647,
+      "text": "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F."
+    },
+    {
+      "id": "binomial-3",
+      "startMs": 14647,
+      "endMs": 23361,
+      "text": "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds."
+    },
+    {
+      "id": "binomial-4",
+      "startMs": 23361,
+      "endMs": 31851,
+      "text": "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero."
+    },
+    {
+      "id": "binomial-5",
+      "startMs": 31851,
+      "endMs": 39079,
+      "text": "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Box plots and outliers · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT30</span></p><h1>Box plots and outliers</h1><p class="subtitle">A fence is a cutoff. A whisker ends at an observation.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct30-shared" id="stage" aria-label="TI-Nspire CX II-T Data and Statistics lesson and calculator" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct30-bounds" data-visible="false" aria-hidden="true"></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct30-stage-grid"><div class="ct30-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Data and Statistics display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play worked example" title="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<div class="ct30-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><h2>Read the box, then check the tails</h2><p class="formula">List <code>reading</code><br>0, 1, 2, 2, 3, 4, 4, 5, 6, 6, 12, 13</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director" hidden><h2>Find the fences and whiskers</h2>
+<p id="keypad-problem" class="ct30-taskline"></p>
+<form id="data-form"><label for="data">Observations<textarea id="data" maxlength="480" rows="2" autocomplete="off" spellcheck="false"></textarea></label><button type="submit" class="primary">Load list</button></form>
+<p id="keypad-hint"></p><p id="keypad-result" class="feedback" role="status" hidden></p><p id="trace-help" class="trace-help" hidden>Point to a mark to inspect it, or use the handheld arrows.</p>
+<form id="answer-form"><div class="paired"><label>Lower fence<input id="fence-low" required inputmode="decimal" autocomplete="off"></label><label>Upper fence<input id="fence-high" required inputmode="decimal" autocomplete="off"></label><label>Modified left whisker<input id="whisker-low" required inputmode="decimal" autocomplete="off"></label><label>Modified right whisker<input id="whisker-high" required inputmode="decimal" autocomplete="off"></label></div>
+<label>Outlier observations<input id="outliers" required autocomplete="off" placeholder="e.g. −2, 18, 18 or none"></label><p class="checker-precision">Repeat a value if it occurs more than once.</p><button type="submit">Check answers</button></form>
+<p id="feedback" class="feedback" role="status"></p>
+<details><summary>Hint</summary><p>Calculate Q₁ − 1.5 × IQR and Q₃ + 1.5 × IQR. Modified whiskers end at the smallest and largest observations that are not outside those cutoffs. Equality is inside.</p></details>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls"><div class="player-top">
+<button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct30-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" value="0" max="41" step="0.005"></label><span class="ct30-rehearsal" id="media-status">Captioned</span></div>
+</div></section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct30-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
+<details class="notes"><summary>Calculator and lesson scope</summary><p>From a Data &amp; Statistics page, bind a numeric list already entered in the same problem to the horizontal axis. You can also start from <a href="../named-lists/">a named list</a>. Use Menu → 1: Plot Type → 2: Box Plot. The default is modified. Plot Properties contains Extend Box Plot Whiskers and, after extending, Show Box Plot Outliers.</p><p>For the lesson, sort the data and use the median of each half for Q₁ and Q₃; omit the middle observation when the count is odd. The mathematical 1.5 × IQR rule flags only values strictly outside the fences. Matching real handheld behavior for observations exactly on a fence has not been tested. Use 4–32 finite observations, with at most four decimal places.</p><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/36094">TI: create a box plot</a> · <a href="https://education.ti.com/html/eguides/nspire/eg_nspire/en/content/m_datastats/ds_working_numeric_plot.HTML">TI: compare the plot modes</a></p></details>
+</main></body></html>

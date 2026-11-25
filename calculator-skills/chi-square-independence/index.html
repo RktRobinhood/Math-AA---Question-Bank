@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Chi-square independence · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>Chi-square independence</h1></div>
+<label><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
+<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
+<div id="watch-message" class="message"><p id="caption"></p></div>
+<div id="try-message" class="message" hidden><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
+<div class="deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.5 3.5v17l13-8.5z"/></svg></button></div></div>
+<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>Commute mode and arrival</h2>
+<table class="context-table"><caption class="sr">Observed counts, excluding totals</caption><thead><tr><th scope="col">Mode</th><th scope="col">On time</th><th scope="col">Late</th></tr></thead><tbody><tr><th scope="row">Walk</th><td>30</td><td>10</td></tr><tr><th scope="row">Cycle</th><td>32</td><td>8</td></tr><tr><th scope="row">Bus</th><td>18</td><td>22</td></tr></tbody></table>
+<ol id="chapters"></ol></aside>
+<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Test the association</h2>
+<p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
+<details class="keyboard"><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu unless typing stat.expmat; <kbd>F2</kbd> also opens Menu. Tab moves between cells and wizard fields. Enter stores the matrix or confirms a menu or wizard. Click/tap a cell, then use the physical or desktop number keys to replace its count.</p></details></aside>
+</div>
+<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="56.5" step=".005"></label><span>Captions only</span></div></div>
+</section>
+<details class="reference"><summary>What makes the test valid?</summary><dl><dt>Observed counts</dt><dd>Each independent observation belongs to exactly one row and one column. Enter counts only, excluding row totals, column totals and percentages. The categories must be mutually exclusive within each variable.</dd><dt>Expected counts</dt><dd>Under independence, an expected count is its row total times its column total, divided by the grand total. In this IB-style lesson, every expected count must be greater than 5. Use a defensible study design; counts alone cannot establish independent observations. Never combine unlike categories just to obtain a test result.</dd><dt>Meaning of PVal</dt><dd>Assuming independence and the test conditions, it is the probability of a chi-square statistic at least as large as the one observed. A large p-value does not prove independence, and association does not establish causation.</dd></dl><p><a href="https://education.ti.com/en/ib/activities/applications-interpretation/nspire-chi-square-tests">TI chi-square workflow</a> · <a href="https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf">IB Mathematics AI, SL 4.11</a></p></details>
+</main></body></html>

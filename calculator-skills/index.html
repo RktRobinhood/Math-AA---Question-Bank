@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Calculator skills · TI-Nspire CX II</title>
+<link rel="stylesheet" href="styles.css">
+<script>try{let p=localStorage.getItem('ti-lab-theme')||'auto';document.documentElement.dataset.theme=p==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p}catch{}</script>
+<link rel="stylesheet" href="handheld/shell.css">
+<link rel="stylesheet" href="handheld/integration.css">
+<script src="handheld/shell.js" defer></script>
+<script src="handheld/key-cues.js" defer></script>
+<script src="handheld/transport.js" defer></script>
+<script src="handheld/graph-general.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="mast"><div class="wrap mast-inner">
+  <div class="wordmark"><svg aria-hidden="true" width="31" height="31" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor"/><path d="M7 24h18M9 26V6m1 3c2 8 4 12 7 12s5-4 7-12" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="21" r="2" fill="currentColor"/></svg><span>Calculator skills</span></div>
+  <span class="model">TI-Nspire CX II-T · non-CAS</span><a class="catalog" href="skills.html">Skill library</a>
+  <a class="cx-tool-link" href="handheld/index.html">Calculator</a>
+  <label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="auto">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</div></header>
+<main class="wrap">
+  <header class="title">
+    <div><p class="context" id="context" hidden></p><h1 id="lesson-title">Find a graph minimum</h1><p id="lesson-intro">Use two bounds to find the lowest point on a curve.</p></div>
+    <div class="modes" aria-label="Lesson mode"><button class="mode active" data-mode="watch" aria-pressed="true">Watch</button><button class="mode" data-mode="try" aria-pressed="false">Try</button></div>
+  </header>
+  <section aria-label="Calculator walkthrough">
+    <div class="player cx-handheld-stage">
+      <div id="watch-controls" class="transport">
+        <button id="play" class="play" type="button" aria-label="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z" fill="currentColor"/></svg></button>
+        <label class="seek"><span class="sr">Seek walkthrough</span><input type="range" id="seek" min="0" max="35.788" step=".01" value="0"></label>
+        <span class="time" id="time">0:00 / 0:36</span>
+        <button id="captions" class="cc" aria-label="Show captions" aria-pressed="false">CC</button>
+      </div>
+      <p class="caption" id="caption" hidden></p>
+      <div class="scene">
+        <div class="lcd-group">
+          <div class="device-label"><span>TI-Nspire CX II</span><span>GRAPHS · RECREATED SCREEN</span></div>
+          <div class="lcd" id="lcd" aria-label="Simulated TI-Nspire Graphs screen" tabindex="-1">
+            <canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas>
+            <div id="hotspots"></div>
+          </div>
+        </div>
+        <aside class="beat" id="beat">
+          <div id="beat-number" class="beat-no" aria-hidden="true">01</div>
+          <div><p id="beat-title" class="beat-title">Plot the function</p><p id="beat-tip" class="beat-tip">Start on a Graphs page.</p></div>
+          <button type="button" id="take-over" class="cx-watch-try">Take over</button>
+          <div class="keypress" id="keypress" aria-label="Keys pressed"><span>Keys</span><div id="keys"></div></div>
+        </aside>
+      </div>
+      <p class="sr" id="audio-notice" role="status"></p>
+      <audio id="voice" preload="metadata" src="minimum.mp3"></audio>
+    </div>
+    <div class="practice" id="practice" hidden>
+      <form id="expression-form" class="practice-form">
+        <label for="expression">Your function in x</label>
+        <div class="inputrow"><span aria-hidden="true">f₁(x) =</span><input id="expression" required maxlength="80" spellcheck="false" autocapitalize="off" autocomplete="off"><button type="submit" class="solid">Plot</button></div>
+        <small>Try a polynomial or an expression such as <code>exp(x)-2x</code> or <code>cos(x)</code>. Trig is in radians.</small>
+      </form>
+      <div id="try-work" class="try-work" hidden></div>
+      <p id="feedback" class="feedback" role="status" hidden></p>
+      <p id="answer" class="answer" role="status" hidden></p>
+    </div>
+  </section>
+  <div class="resource-bar">
+    <p id="standalone-example">Example: <span id="example-expr">x² − 6x + 13</span></p>
+    <details><summary>Transcript</summary><p id="transcript"></p></details>
+    <details><summary>Calculator steps</summary><p>Graphs → <strong>Menu</strong> → <strong>6: Analyze Graph</strong> → <strong>2: Minimum</strong> → lower bound → upper bound. Read the result as <strong>(x, y)</strong>: where it occurs, then the minimum value.</p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/21770" target="_blank" rel="noopener">TI handheld guide</a></details>
+    <a id="return-question" hidden>Back to the question bank ↗</a>
+    <a id="download-video" href="graph-minimum.mp4" hidden>Earlier screen-only video</a>
+  </div>
+</main>
+</body>
+</html>

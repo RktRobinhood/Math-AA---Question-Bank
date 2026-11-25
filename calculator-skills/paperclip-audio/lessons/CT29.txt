@@ -1,0 +1,7 @@
+Column A is named values. For the first run, use each row once.
+Menu then four: Statistics then one: Stat Calculations then one: One-Variable Statistics. Confirm one list.
+Choose the list named values for the first X list. Leave Frequency List at one. Send the results to column C.
+Read the result names in C and values in D. Use sigma x for the whole collection, or s sub x for sample standard deviation.
+Run the same menu. Keep the list named values for the first X list. Instead of one, choose the list named freq for Frequency List.
+Confirm and read the new mean and sigma x. Now n is the sum of the frequencies, not the number of rows.
+Check that n counts observations, not rows. Open Try for a different collection.

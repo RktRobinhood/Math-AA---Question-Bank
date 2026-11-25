@@ -1,0 +1,544 @@
+{
+  "schemaVersion": 1,
+  "id": "CT28",
+  "route": "named-lists/index.html",
+  "catalogueTitle": "Create lists and frequency tables",
+  "playerHeading": "Create lists and frequency tables",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "named-lists/index.html"
+  },
+  "script": "lessons/CT28.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "To record laps for a group, start a new Lists and Spreadsheet page.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Name column A in its top name cell. Leave the formula row blank and go to numbered row one.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter the measured values down column A. Enter stores each value and moves down.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Name column B separately. Enter the counts on the same numbered rows as the values.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "A count of zero is data. Do not leave that cell blank.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read across a row: the measured value seven occurred twice. Read down the counts for the total.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "If you start from raw readings instead, give the list one name and enter every observation, including repeats.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 44000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "To record laps for a group, start a new Lists & Spreadsheet page.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Name column A in its top name cell. Leave the formula row blank and go to numbered row 1.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "Enter the measured values down column A. Enter stores each value and moves down.",
+        "endMs": 19000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 19000,
+        "text": "Name column B separately. Enter the counts on the same numbered rows as the values.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27000,
+        "text": "A count of zero is data. Do not leave that cell blank.",
+        "endMs": 33000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 33000,
+        "text": "Read across a row: the measured value seven occurred twice. Read down the counts for the total.",
+        "endMs": 39000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 39000,
+        "text": "If you start from raw readings instead, give the list one name and enter every observation, including repeats.",
+        "endMs": 44000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 250,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 600,
+        "keys": []
+      },
+      {
+        "timeMs": 1680,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 2030,
+        "keys": []
+      },
+      {
+        "timeMs": 3140,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 3490,
+        "keys": []
+      },
+      {
+        "timeMs": 6350,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 6700,
+        "keys": []
+      },
+      {
+        "timeMs": 7110,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 7460,
+        "keys": []
+      },
+      {
+        "timeMs": 7850,
+        "keys": [
+          "l"
+        ]
+      },
+      {
+        "timeMs": 8200,
+        "keys": []
+      },
+      {
+        "timeMs": 8400,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 8750,
+        "keys": []
+      },
+      {
+        "timeMs": 8950,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 9300,
+        "keys": []
+      },
+      {
+        "timeMs": 9550,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9900,
+        "keys": []
+      },
+      {
+        "timeMs": 10260,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10610,
+        "keys": []
+      },
+      {
+        "timeMs": 12350,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 12700,
+        "keys": []
+      },
+      {
+        "timeMs": 12900,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 13250,
+        "keys": []
+      },
+      {
+        "timeMs": 13530,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 13880,
+        "keys": []
+      },
+      {
+        "timeMs": 14070,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14420,
+        "keys": []
+      },
+      {
+        "timeMs": 14590,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 14940,
+        "keys": []
+      },
+      {
+        "timeMs": 15130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15480,
+        "keys": []
+      },
+      {
+        "timeMs": 15910,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16260,
+        "keys": []
+      },
+      {
+        "timeMs": 16560,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 16910,
+        "keys": []
+      },
+      {
+        "timeMs": 19300,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 19651,
+        "keys": []
+      },
+      {
+        "timeMs": 19840,
+        "keys": [
+          "r"
+        ]
+      },
+      {
+        "timeMs": 20190,
+        "keys": []
+      },
+      {
+        "timeMs": 20380,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 20730,
+        "keys": []
+      },
+      {
+        "timeMs": 20920,
+        "keys": [
+          "q"
+        ]
+      },
+      {
+        "timeMs": 21271,
+        "keys": []
+      },
+      {
+        "timeMs": 21600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21951,
+        "keys": []
+      },
+      {
+        "timeMs": 22310,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 22660,
+        "keys": []
+      },
+      {
+        "timeMs": 24300,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 24651,
+        "keys": []
+      },
+      {
+        "timeMs": 25000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 25350,
+        "keys": []
+      },
+      {
+        "timeMs": 27320,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 27670,
+        "keys": []
+      },
+      {
+        "timeMs": 28000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28350,
+        "keys": []
+      },
+      {
+        "timeMs": 29160,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 29510,
+        "keys": []
+      },
+      {
+        "timeMs": 30050,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 30401,
+        "keys": []
+      },
+      {
+        "timeMs": 33570,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 33920,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT28Tape",
+        "keys": [
+          {
+            "timeMs": 250,
+            "key": "home"
+          },
+          {
+            "timeMs": 1680,
+            "key": "1"
+          },
+          {
+            "timeMs": 3140,
+            "key": "4"
+          },
+          {
+            "timeMs": 6350,
+            "key": "up"
+          },
+          {
+            "timeMs": 7110,
+            "key": "up"
+          },
+          {
+            "timeMs": 7850,
+            "key": "l"
+          },
+          {
+            "timeMs": 8400,
+            "key": "a"
+          },
+          {
+            "timeMs": 8950,
+            "key": "p"
+          },
+          {
+            "timeMs": 9550,
+            "key": "enter"
+          },
+          {
+            "timeMs": 10260,
+            "key": "tab"
+          },
+          {
+            "timeMs": 12350,
+            "key": "2"
+          },
+          {
+            "timeMs": 12900,
+            "key": "enter"
+          },
+          {
+            "timeMs": 13530,
+            "key": "4"
+          },
+          {
+            "timeMs": 14070,
+            "key": "enter"
+          },
+          {
+            "timeMs": 14590,
+            "key": "7"
+          },
+          {
+            "timeMs": 15130,
+            "key": "enter"
+          },
+          {
+            "timeMs": 15910,
+            "key": "tab"
+          },
+          {
+            "timeMs": 16560,
+            "key": "right"
+          },
+          {
+            "timeMs": 19300,
+            "key": "f"
+          },
+          {
+            "timeMs": 19840,
+            "key": "r"
+          },
+          {
+            "timeMs": 20380,
+            "key": "e"
+          },
+          {
+            "timeMs": 20920,
+            "key": "q"
+          },
+          {
+            "timeMs": 21600,
+            "key": "enter"
+          },
+          {
+            "timeMs": 22310,
+            "key": "tab"
+          },
+          {
+            "timeMs": 24300,
+            "key": "3"
+          },
+          {
+            "timeMs": 25000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 27320,
+            "key": "0"
+          },
+          {
+            "timeMs": 28000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 29160,
+            "key": "2"
+          },
+          {
+            "timeMs": 30050,
+            "key": "enter"
+          },
+          {
+            "timeMs": 33570,
+            "key": "up"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

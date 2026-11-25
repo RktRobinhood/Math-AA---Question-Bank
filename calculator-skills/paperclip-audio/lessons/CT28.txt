@@ -1,0 +1,7 @@
+To record laps for a group, start a new Lists and Spreadsheet page.
+Name column A in its top name cell. Leave the formula row blank and go to numbered row one.
+Enter the measured values down column A. Enter stores each value and moves down.
+Name column B separately. Enter the counts on the same numbered rows as the values.
+A count of zero is data. Do not leave that cell blank.
+Read across a row: the measured value seven occurred twice. Read down the counts for the total.
+If you start from raw readings instead, give the list one name and enter every observation, including repeats.

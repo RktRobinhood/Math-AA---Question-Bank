@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "id": "CT30",
+  "route": "boxplots/index.html",
+  "catalogueTitle": "Box plots, outliers and histograms",
+  "playerHeading": "Box plots and outliers",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "boxplots/index.html"
+  },
+  "script": "lessons/CT30.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start in Data and Statistics with the numeric list reading on the horizontal axis.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu then one: Plot Type then two: Box Plot. It starts as a modified box plot.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Point at the box edges and the line inside. The first quartile is two. The median is four. The third quartile is six.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The interquartile range is six minus two, or four. Subtract one point five times this range from the first quartile, and add it to the third quartile.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The fences are minus four and twelve. These are calculated cutoffs, not necessarily data points.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "There is no observation at minus four. The left whisker stops at zero, the smallest value inside.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "By the mathematical rule, twelve is on the fence and stays in. thirteen is strictly beyond it.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "In Plot Properties, choose Extend Box Plot Whiskers. This makes a standard box plot.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "The whiskers now run from zero to thirteen. The quartiles stay the same; thirteen is not marked separately.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Choose Show Box Plot Outliers to return to the modified plot.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "Report the fence and the observed whisker separately.",
+      "watchCueId": "watch-11"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 41000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start in Data & Statistics with the numeric list reading on the horizontal axis.",
+        "endMs": 4500
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4500,
+        "text": "Open Menu → 1: Plot Type → 2: Box Plot. It starts as a modified box plot.",
+        "endMs": 10200
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10200,
+        "text": "Point at the box edges and the line inside: Q₁ = 2, median = 4, Q₃ = 6.",
+        "endMs": 15500
+      },
+      {
+        "id": "watch-04",
+        "startMs": 15500,
+        "text": "IQR = 6 − 2 = 4. Subtract 1.5 × IQR from Q₁; add it to Q₃.",
+        "endMs": 19100
+      },
+      {
+        "id": "watch-05",
+        "startMs": 19100,
+        "text": "The fences are −4 and 12. These are calculated cutoffs, not necessarily data points.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 22000,
+        "text": "There is no observation at −4. The left whisker stops at 0, the smallest value inside.",
+        "endMs": 25700
+      },
+      {
+        "id": "watch-07",
+        "startMs": 25700,
+        "text": "By the mathematical rule, 12 is on the fence and stays in. 13 is strictly beyond it.",
+        "endMs": 30000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 30000,
+        "text": "In Plot Properties, choose Extend Box Plot Whiskers. This makes a standard box plot.",
+        "endMs": 33900
+      },
+      {
+        "id": "watch-09",
+        "startMs": 33900,
+        "text": "The whiskers now run from 0 to 13. The quartiles stay the same; 13 is not marked separately.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-10",
+        "startMs": 36000,
+        "text": "Choose Show Box Plot Outliers to return to the modified plot.",
+        "endMs": 39000
+      },
+      {
+        "id": "watch-11",
+        "startMs": 39000,
+        "text": "Report the fence and the observed whisker separately.",
+        "endMs": 41000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5200,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5510,
+        "keys": []
+      },
+      {
+        "timeMs": 6550,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6860,
+        "keys": []
+      },
+      {
+        "timeMs": 8250,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8560,
+        "keys": []
+      },
+      {
+        "timeMs": 30280,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 30590,
+        "keys": []
+      },
+      {
+        "timeMs": 31280,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 31590,
+        "keys": []
+      },
+      {
+        "timeMs": 32600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32911,
+        "keys": []
+      },
+      {
+        "timeMs": 36330,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 36640,
+        "keys": []
+      },
+      {
+        "timeMs": 37150,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 37460,
+        "keys": []
+      },
+      {
+        "timeMs": 38450,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 38761,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT30Tape",
+        "keys": [
+          {
+            "timeMs": 5200,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6550,
+            "key": "1"
+          },
+          {
+            "timeMs": 8250,
+            "key": "2"
+          },
+          {
+            "timeMs": 10550,
+            "key": ""
+          },
+          {
+            "timeMs": 12050,
+            "key": ""
+          },
+          {
+            "timeMs": 13600,
+            "key": ""
+          },
+          {
+            "timeMs": 15500,
+            "key": ""
+          },
+          {
+            "timeMs": 22450,
+            "key": ""
+          },
+          {
+            "timeMs": 26100,
+            "key": ""
+          },
+          {
+            "timeMs": 28100,
+            "key": ""
+          },
+          {
+            "timeMs": 30280,
+            "key": "menu"
+          },
+          {
+            "timeMs": 31280,
+            "key": "2"
+          },
+          {
+            "timeMs": 32600,
+            "key": "enter"
+          },
+          {
+            "timeMs": 34200,
+            "key": ""
+          },
+          {
+            "timeMs": 36330,
+            "key": "menu"
+          },
+          {
+            "timeMs": 37150,
+            "key": "2"
+          },
+          {
+            "timeMs": 38450,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

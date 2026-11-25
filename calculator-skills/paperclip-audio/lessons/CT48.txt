@@ -1,0 +1,6 @@
+One categorical variable, three outcomes. The claimed proportions are zero point two zero, zero point three zero and zero point five zero. The observed counts total eighty. The observed list is already entered.
+Multiply eighty by each claimed proportion: sixteen, twenty-four and forty. Enter them into expt in the same category order. All are greater than five.
+On Lists and Spreadsheet, choose Menu, four for Statistics, four for Stat Tests, and seven for chi squared goodness of fit. This is not the two-way test of independence.
+Enter the list named obs as Observed List and the list named expt as Expected List. Three categories and no fitted parameters give two degrees of freedom. Keep the output column at C, leave Draw off, and Tab to OK.
+Read chi squared and the p value. The p value is an upper-tail probability under the claimed distribution, not the probability that the claim is true.
+the p value is about zero point zero zero three five eight, below zero point zero five. Reject the claimed category proportions; the sample gives evidence the distribution does not fit.

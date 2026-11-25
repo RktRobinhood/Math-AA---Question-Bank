@@ -1,0 +1,1127 @@
+{
+  "schemaVersion": 1,
+  "id": "CT41",
+  "route": "normal-parameter/index.html",
+  "catalogueTitle": "Solve an unknown normal parameter",
+  "playerHeading": "Unknown normal parameter",
+  "status": "recording-ready-native-contract",
+  "scriptSource": {
+    "type": "original-recording-cue-sheet",
+    "file": "DISTRIBUTION-RECORDING-CUE-SHEET.md"
+  },
+  "script": "lessons/CT41.txt",
+  "spokenCues": [
+    {
+      "id": "41.01",
+      "text": "Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve."
+    },
+    {
+      "id": "41.02",
+      "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."
+    },
+    {
+      "id": "41.03",
+      "text": "Enter zero point one for the left area, zero for the mean, and one for the standard deviation."
+    },
+    {
+      "id": "41.04",
+      "text": "Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value."
+    },
+    {
+      "id": "41.05",
+      "text": "The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four."
+    },
+    {
+      "id": "41.06",
+      "text": "Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again."
+    },
+    {
+      "id": "41.07",
+      "text": "Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive."
+    },
+    {
+      "id": "41.08",
+      "text": "Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be."
+    },
+    {
+      "id": "41.09",
+      "text": "If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 62000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "We know that ten percent is below twenty, and the standard deviation is five. We need the mean, not another cutoff.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "On a Calculator page, open Inverse Normal. Enter zero point one for the area, zero for the mean and one for the standard deviation. This gives a z-score.",
+        "endMs": 18000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 18000,
+        "text": "Rearrange: the mean is the cutoff minus five times z. Use Control then the negative key to insert the previous answer without rounding it.",
+        "endMs": 28000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 28000,
+        "text": "This time, ninety percent is below sixty-three and the mean is fifty-two. Find the standard normal z-score for zero point nine.",
+        "endMs": 43000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 43000,
+        "text": "The standard deviation is the cutoff minus the mean, all divided by z. Keep the brackets, reuse the previous answer, and check that the spread is positive.",
+        "endMs": 52400
+      },
+      {
+        "id": "watch-06",
+        "startMs": 52400,
+        "text": "For a right-tail question, subtract the stated probability from one first. The Inverse Normal Area field takes area to the left.",
+        "endMs": 62000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5450,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5761,
+        "keys": []
+      },
+      {
+        "timeMs": 6560,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 6870,
+        "keys": []
+      },
+      {
+        "timeMs": 7620,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7931,
+        "keys": []
+      },
+      {
+        "timeMs": 8700,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 9010,
+        "keys": []
+      },
+      {
+        "timeMs": 10340,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 10640,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 10950,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 11260,
+        "keys": []
+      },
+      {
+        "timeMs": 11600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11980,
+        "keys": []
+      },
+      {
+        "timeMs": 12200,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 12510,
+        "keys": []
+      },
+      {
+        "timeMs": 13000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13380,
+        "keys": []
+      },
+      {
+        "timeMs": 13650,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 13960,
+        "keys": []
+      },
+      {
+        "timeMs": 14400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14781,
+        "keys": []
+      },
+      {
+        "timeMs": 15200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15510,
+        "keys": []
+      },
+      {
+        "timeMs": 16280,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 16591,
+        "keys": []
+      },
+      {
+        "timeMs": 19000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19280,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 19591,
+        "keys": []
+      },
+      {
+        "timeMs": 19700,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 20010,
+        "keys": []
+      },
+      {
+        "timeMs": 20100,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 20411,
+        "keys": []
+      },
+      {
+        "timeMs": 20580,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 20890,
+        "keys": []
+      },
+      {
+        "timeMs": 22300,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 22611,
+        "keys": []
+      },
+      {
+        "timeMs": 22780,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 23091,
+        "keys": []
+      },
+      {
+        "timeMs": 24540,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24850,
+        "keys": []
+      },
+      {
+        "timeMs": 31000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 31311,
+        "keys": []
+      },
+      {
+        "timeMs": 31700,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 32011,
+        "keys": []
+      },
+      {
+        "timeMs": 32400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 32710,
+        "keys": []
+      },
+      {
+        "timeMs": 33100,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 33411,
+        "keys": []
+      },
+      {
+        "timeMs": 34000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 34300,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 34600,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 34911,
+        "keys": []
+      },
+      {
+        "timeMs": 35400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 35780,
+        "keys": []
+      },
+      {
+        "timeMs": 36000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 36310,
+        "keys": []
+      },
+      {
+        "timeMs": 36700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 37081,
+        "keys": []
+      },
+      {
+        "timeMs": 37300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 37610,
+        "keys": []
+      },
+      {
+        "timeMs": 38000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 38380,
+        "keys": []
+      },
+      {
+        "timeMs": 39000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 39310,
+        "keys": []
+      },
+      {
+        "timeMs": 40200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 40511,
+        "keys": []
+      },
+      {
+        "timeMs": 44000,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 44300,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 44600,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 44911,
+        "keys": []
+      },
+      {
+        "timeMs": 45000,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 45310,
+        "keys": []
+      },
+      {
+        "timeMs": 45400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 45700,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 46011,
+        "keys": []
+      },
+      {
+        "timeMs": 46200,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 46511,
+        "keys": []
+      },
+      {
+        "timeMs": 46800,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 47110,
+        "keys": []
+      },
+      {
+        "timeMs": 47650,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 47960,
+        "keys": []
+      },
+      {
+        "timeMs": 48100,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 48411,
+        "keys": []
+      },
+      {
+        "timeMs": 50500,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 50810,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "NormalNarration",
+        "keys": [
+          {
+            "timeMs": 5450,
+            "key": "menu",
+            "id": "mean-menu-open"
+          },
+          {
+            "timeMs": 6560,
+            "key": "5",
+            "id": "mean-menu-probability"
+          },
+          {
+            "timeMs": 7620,
+            "key": "5",
+            "id": "mean-menu-distributions"
+          },
+          {
+            "timeMs": 8700,
+            "key": "3",
+            "id": "mean-menu-inverse-normal"
+          },
+          {
+            "timeMs": 10340,
+            "key": "0",
+            "id": "mean-input-area-0"
+          },
+          {
+            "timeMs": 10640,
+            "key": "dot",
+            "id": "mean-input-area-decimal"
+          },
+          {
+            "timeMs": 10950,
+            "key": "1",
+            "id": "mean-input-area-1"
+          },
+          {
+            "timeMs": 11600,
+            "key": "tab",
+            "id": "mean-input-to-mu"
+          },
+          {
+            "timeMs": 12200,
+            "key": "0",
+            "id": "mean-input-mu-0"
+          },
+          {
+            "timeMs": 13000,
+            "key": "tab",
+            "id": "mean-input-to-sigma"
+          },
+          {
+            "timeMs": 13650,
+            "key": "1",
+            "id": "mean-input-sigma-1"
+          },
+          {
+            "timeMs": 14400,
+            "key": "tab",
+            "id": "mean-input-to-ok"
+          },
+          {
+            "timeMs": 15200,
+            "key": "enter",
+            "id": "mean-z-insert"
+          },
+          {
+            "timeMs": 16280,
+            "key": "enter",
+            "id": "mean-z-evaluate"
+          },
+          {
+            "timeMs": 19000,
+            "key": "2",
+            "id": "mean-calc-cutoff-2"
+          },
+          {
+            "timeMs": 19280,
+            "key": "0",
+            "id": "mean-calc-cutoff-0"
+          },
+          {
+            "timeMs": 19700,
+            "key": "minus",
+            "id": "mean-calc-subtract"
+          },
+          {
+            "timeMs": 20100,
+            "key": "5",
+            "id": "mean-calc-sigma-5"
+          },
+          {
+            "timeMs": 20580,
+            "key": "mul",
+            "id": "mean-calc-multiply"
+          },
+          {
+            "timeMs": 22300,
+            "key": "ctrl",
+            "id": "mean-calc-control"
+          },
+          {
+            "timeMs": 22780,
+            "key": "neg",
+            "id": "mean-calc-recall-ans"
+          },
+          {
+            "timeMs": 24540,
+            "key": "enter",
+            "id": "mean-calc-evaluate"
+          },
+          {
+            "timeMs": 31000,
+            "key": "menu",
+            "id": "sd-menu-open"
+          },
+          {
+            "timeMs": 31700,
+            "key": "5",
+            "id": "sd-menu-probability"
+          },
+          {
+            "timeMs": 32400,
+            "key": "5",
+            "id": "sd-menu-distributions"
+          },
+          {
+            "timeMs": 33100,
+            "key": "3",
+            "id": "sd-menu-inverse-normal"
+          },
+          {
+            "timeMs": 34000,
+            "key": "0",
+            "id": "sd-input-area-0"
+          },
+          {
+            "timeMs": 34300,
+            "key": "dot",
+            "id": "sd-input-area-decimal"
+          },
+          {
+            "timeMs": 34600,
+            "key": "9",
+            "id": "sd-input-area-9"
+          },
+          {
+            "timeMs": 35400,
+            "key": "tab",
+            "id": "sd-input-to-mu"
+          },
+          {
+            "timeMs": 36000,
+            "key": "0",
+            "id": "sd-input-mu-0"
+          },
+          {
+            "timeMs": 36700,
+            "key": "tab",
+            "id": "sd-input-to-sigma"
+          },
+          {
+            "timeMs": 37300,
+            "key": "1",
+            "id": "sd-input-sigma-1"
+          },
+          {
+            "timeMs": 38000,
+            "key": "tab",
+            "id": "sd-input-to-ok"
+          },
+          {
+            "timeMs": 39000,
+            "key": "enter",
+            "id": "sd-z-insert"
+          },
+          {
+            "timeMs": 40200,
+            "key": "enter",
+            "id": "sd-z-evaluate"
+          },
+          {
+            "timeMs": 44000,
+            "key": "lparen",
+            "id": "sd-calc-open-bracket"
+          },
+          {
+            "timeMs": 44300,
+            "key": "6",
+            "id": "sd-calc-cutoff-6"
+          },
+          {
+            "timeMs": 44600,
+            "key": "3",
+            "id": "sd-calc-cutoff-3"
+          },
+          {
+            "timeMs": 45000,
+            "key": "minus",
+            "id": "sd-calc-subtract"
+          },
+          {
+            "timeMs": 45400,
+            "key": "5",
+            "id": "sd-calc-mu-5"
+          },
+          {
+            "timeMs": 45700,
+            "key": "2",
+            "id": "sd-calc-mu-2"
+          },
+          {
+            "timeMs": 46200,
+            "key": "rparen",
+            "id": "sd-calc-close-bracket"
+          },
+          {
+            "timeMs": 46800,
+            "key": "div",
+            "id": "sd-calc-divide"
+          },
+          {
+            "timeMs": 47650,
+            "key": "ctrl",
+            "id": "sd-calc-control"
+          },
+          {
+            "timeMs": 48100,
+            "key": "neg",
+            "id": "sd-calc-recall-ans"
+          },
+          {
+            "timeMs": 50500,
+            "key": "enter",
+            "id": "sd-calc-evaluate"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": {
+    "mechanism": "inline-json",
+    "elementId": "ct41-measured-recording",
+    "version": 1,
+    "timing": "measured-playback",
+    "audioFilename": "narration.mp3",
+    "cues": [
+      {
+        "id": "41.01",
+        "keys": [],
+        "text": "Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve."
+      },
+      {
+        "id": "41.02",
+        "keys": [
+          {
+            "id": "mean-menu-open",
+            "key": "menu",
+            "phase": 1,
+            "rehearsalTimeMs": 5450
+          },
+          {
+            "id": "mean-menu-probability",
+            "key": "5",
+            "phase": 1,
+            "rehearsalTimeMs": 6560
+          },
+          {
+            "id": "mean-menu-distributions",
+            "key": "5",
+            "phase": 1,
+            "rehearsalTimeMs": 7620
+          },
+          {
+            "id": "mean-menu-inverse-normal",
+            "key": "3",
+            "phase": 1,
+            "rehearsalTimeMs": 8700
+          }
+        ],
+        "text": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."
+      },
+      {
+        "id": "41.03",
+        "keys": [
+          {
+            "id": "mean-input-area-0",
+            "key": "0",
+            "phase": 2,
+            "rehearsalTimeMs": 10340
+          },
+          {
+            "id": "mean-input-area-decimal",
+            "key": "dot",
+            "phase": 2,
+            "rehearsalTimeMs": 10640
+          },
+          {
+            "id": "mean-input-area-1",
+            "key": "1",
+            "phase": 2,
+            "rehearsalTimeMs": 10950
+          },
+          {
+            "id": "mean-input-to-mu",
+            "key": "tab",
+            "phase": 2,
+            "rehearsalTimeMs": 11600
+          },
+          {
+            "id": "mean-input-mu-0",
+            "key": "0",
+            "phase": 2,
+            "rehearsalTimeMs": 12200
+          },
+          {
+            "id": "mean-input-to-sigma",
+            "key": "tab",
+            "phase": 2,
+            "rehearsalTimeMs": 13000
+          },
+          {
+            "id": "mean-input-sigma-1",
+            "key": "1",
+            "phase": 2,
+            "rehearsalTimeMs": 13650
+          },
+          {
+            "id": "mean-input-to-ok",
+            "key": "tab",
+            "phase": 2,
+            "rehearsalTimeMs": 14400
+          }
+        ],
+        "text": "Enter zero point one for the left area, zero for the mean, and one for the standard deviation."
+      },
+      {
+        "id": "41.04",
+        "keys": [
+          {
+            "id": "mean-z-insert",
+            "key": "enter",
+            "phase": 3,
+            "rehearsalTimeMs": 15200
+          },
+          {
+            "id": "mean-z-evaluate",
+            "key": "enter",
+            "phase": 3,
+            "rehearsalTimeMs": 16280
+          }
+        ],
+        "text": "Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value."
+      },
+      {
+        "id": "41.05",
+        "keys": [
+          {
+            "id": "mean-calc-cutoff-2",
+            "key": "2",
+            "phase": 4,
+            "rehearsalTimeMs": 19000
+          },
+          {
+            "id": "mean-calc-cutoff-0",
+            "key": "0",
+            "phase": 4,
+            "rehearsalTimeMs": 19280
+          },
+          {
+            "id": "mean-calc-subtract",
+            "key": "minus",
+            "phase": 4,
+            "rehearsalTimeMs": 19700
+          },
+          {
+            "id": "mean-calc-sigma-5",
+            "key": "5",
+            "phase": 4,
+            "rehearsalTimeMs": 20100
+          },
+          {
+            "id": "mean-calc-multiply",
+            "key": "mul",
+            "phase": 4,
+            "rehearsalTimeMs": 20580
+          },
+          {
+            "id": "mean-calc-control",
+            "key": "ctrl",
+            "phase": 4,
+            "rehearsalTimeMs": 22300
+          },
+          {
+            "id": "mean-calc-recall-ans",
+            "key": "neg",
+            "phase": 4,
+            "rehearsalTimeMs": 22780
+          },
+          {
+            "id": "mean-calc-evaluate",
+            "key": "enter",
+            "phase": 4,
+            "rehearsalTimeMs": 24540
+          }
+        ],
+        "text": "The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four."
+      },
+      {
+        "id": "41.06",
+        "keys": [
+          {
+            "id": "sd-menu-open",
+            "key": "menu",
+            "phase": 5,
+            "rehearsalTimeMs": 31000
+          },
+          {
+            "id": "sd-menu-probability",
+            "key": "5",
+            "phase": 5,
+            "rehearsalTimeMs": 31700
+          },
+          {
+            "id": "sd-menu-distributions",
+            "key": "5",
+            "phase": 5,
+            "rehearsalTimeMs": 32400
+          },
+          {
+            "id": "sd-menu-inverse-normal",
+            "key": "3",
+            "phase": 5,
+            "rehearsalTimeMs": 33100
+          }
+        ],
+        "text": "Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again."
+      },
+      {
+        "id": "41.07",
+        "keys": [
+          {
+            "id": "sd-input-area-0",
+            "key": "0",
+            "phase": 6,
+            "rehearsalTimeMs": 34000
+          },
+          {
+            "id": "sd-input-area-decimal",
+            "key": "dot",
+            "phase": 6,
+            "rehearsalTimeMs": 34300
+          },
+          {
+            "id": "sd-input-area-9",
+            "key": "9",
+            "phase": 6,
+            "rehearsalTimeMs": 34600
+          },
+          {
+            "id": "sd-input-to-mu",
+            "key": "tab",
+            "phase": 6,
+            "rehearsalTimeMs": 35400
+          },
+          {
+            "id": "sd-input-mu-0",
+            "key": "0",
+            "phase": 6,
+            "rehearsalTimeMs": 36000
+          },
+          {
+            "id": "sd-input-to-sigma",
+            "key": "tab",
+            "phase": 6,
+            "rehearsalTimeMs": 36700
+          },
+          {
+            "id": "sd-input-sigma-1",
+            "key": "1",
+            "phase": 6,
+            "rehearsalTimeMs": 37300
+          },
+          {
+            "id": "sd-input-to-ok",
+            "key": "tab",
+            "phase": 6,
+            "rehearsalTimeMs": 38000
+          },
+          {
+            "id": "sd-z-insert",
+            "key": "enter",
+            "phase": 6,
+            "rehearsalTimeMs": 39000
+          },
+          {
+            "id": "sd-z-evaluate",
+            "key": "enter",
+            "phase": 6,
+            "rehearsalTimeMs": 40200
+          }
+        ],
+        "text": "Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive."
+      },
+      {
+        "id": "41.08",
+        "keys": [
+          {
+            "id": "sd-calc-open-bracket",
+            "key": "lparen",
+            "phase": 7,
+            "rehearsalTimeMs": 44000
+          },
+          {
+            "id": "sd-calc-cutoff-6",
+            "key": "6",
+            "phase": 7,
+            "rehearsalTimeMs": 44300
+          },
+          {
+            "id": "sd-calc-cutoff-3",
+            "key": "3",
+            "phase": 7,
+            "rehearsalTimeMs": 44600
+          },
+          {
+            "id": "sd-calc-subtract",
+            "key": "minus",
+            "phase": 7,
+            "rehearsalTimeMs": 45000
+          },
+          {
+            "id": "sd-calc-mu-5",
+            "key": "5",
+            "phase": 7,
+            "rehearsalTimeMs": 45400
+          },
+          {
+            "id": "sd-calc-mu-2",
+            "key": "2",
+            "phase": 7,
+            "rehearsalTimeMs": 45700
+          },
+          {
+            "id": "sd-calc-close-bracket",
+            "key": "rparen",
+            "phase": 7,
+            "rehearsalTimeMs": 46200
+          },
+          {
+            "id": "sd-calc-divide",
+            "key": "div",
+            "phase": 7,
+            "rehearsalTimeMs": 46800
+          },
+          {
+            "id": "sd-calc-control",
+            "key": "ctrl",
+            "phase": 7,
+            "rehearsalTimeMs": 47650
+          },
+          {
+            "id": "sd-calc-recall-ans",
+            "key": "neg",
+            "phase": 7,
+            "rehearsalTimeMs": 48100
+          },
+          {
+            "id": "sd-calc-evaluate",
+            "key": "enter",
+            "phase": 7,
+            "rehearsalTimeMs": 50500
+          }
+        ],
+        "text": "Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be."
+      },
+      {
+        "id": "41.09",
+        "keys": [],
+        "text": "If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left."
+      }
+    ],
+    "rehearsalStatesMs": {
+      "problemB": 28000,
+      "meanZRevealed": 16280,
+      "sdZRevealed": 40200,
+      "rightTailExplanation": 52400
+    },
+    "contractSource": "CT41-VOICE-HANDOFF.md"
+  },
+  "integrationStatus": "inline-json"
+}

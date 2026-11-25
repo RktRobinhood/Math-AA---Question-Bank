@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "id": "CT24",
+  "route": "markov-chains/index.html",
+  "catalogueTitle": "Transition matrices and Markov chains",
+  "playerHeading": "Markov chains",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "markov-chains/index.html"
+  },
+  "script": "lessons/CT24.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "A locker is either ready (A) or in use (B). Columns of T are the current states; rows are the next states. Store T as t.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Type T, then Control and Template for the assignment symbol. On a Calculator page open Menu, then seven for Matrix and Vector, one for Create, and one for Matrix.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter zero point eight, zero point three then zero point two, zero point seven. The second column says a locker currently in use moves to Ready with probability zero point three.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Store s using the same menu, with two rows and one column. The locker starts Ready, so enter one above zero.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter t times s. The state column belongs on the right. The upper result, zero point eight, is the probability of Ready after one transition.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Enter T to the fourth power. Press Right to leave the exponent, then times S and Enter. Read zero point six two five after four transitions. Do not take the fourth power of each entry.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Repeat with exponent twenty-four. It is very close to zero point six for Ready. For these positive transitions the model tends to a unique steady state.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "At equilibrium, flow from Ready to In Use equals flow back. Zero point two times p equals zero point three times the quantity one minus p. So p is three fifths. That is exact; a finite power is only an approximation.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 68000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "A locker is either ready (A) or in use (B). Columns of T are the current states; rows are the next states. Store T as t.",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "Type t then Ctrl + template (:=). On a Calculator page open Menu → 7: Matrix & Vector → 1: Create → 1: Matrix.",
+        "endMs": 9000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9000,
+        "text": "Enter 0.8, 0.3 then 0.2, 0.7. The second column says a locker currently in use moves to Ready with probability 0.3.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 22000,
+        "text": "Store s using the same menu, with 2 rows and 1 column. The locker starts Ready, so enter 1 above 0.",
+        "endMs": 32000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 32000,
+        "text": "Enter t × s. The state column belongs on the right. The upper result, 0.8, is the probability of Ready after one transition.",
+        "endMs": 40000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 40000,
+        "text": "Enter t ^ 4, then → to leave the exponent, then × s, Enter. Read 0.625 after four transitions; do not take the fourth power of each entry.",
+        "endMs": 50000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 50000,
+        "text": "Repeat with exponent 24. It is very close to 0.6 for Ready. For these positive transitions the model tends to a unique steady state.",
+        "endMs": 60000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 60000,
+        "text": "At equilibrium, flow from Ready to In use equals flow back: 0.2p = 0.3(1 − p), so p = 3/5. That is exact; a finite power is only an approximation.",
+        "endMs": 68000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3100,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 3480,
+        "keys": []
+      },
+      {
+        "timeMs": 3600,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 3980,
+        "keys": []
+      },
+      {
+        "timeMs": 4100,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 4480,
+        "keys": []
+      },
+      {
+        "timeMs": 4700,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5080,
+        "keys": []
+      },
+      {
+        "timeMs": 5190,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 5570,
+        "keys": []
+      },
+      {
+        "timeMs": 5680,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6060,
+        "keys": []
+      },
+      {
+        "timeMs": 6170,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6550,
+        "keys": []
+      },
+      {
+        "timeMs": 6660,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 7040,
+        "keys": []
+      },
+      {
+        "timeMs": 7150,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 7530,
+        "keys": []
+      },
+      {
+        "timeMs": 7640,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8020,
+        "keys": []
+      },
+      {
+        "timeMs": 8130,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 8511,
+        "keys": []
+      },
+      {
+        "timeMs": 8620,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9000,
+        "keys": []
+      },
+      {
+        "timeMs": 9430,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 9810,
+        "keys": []
+      },
+      {
+        "timeMs": 10050,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 10431,
+        "keys": []
+      },
+      {
+        "timeMs": 10670,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 11050,
+        "keys": []
+      },
+      {
+        "timeMs": 11290,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11670,
+        "keys": []
+      },
+      {
+        "timeMs": 11910,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 12291,
+        "keys": []
+      },
+      {
+        "timeMs": 12530,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 12910,
+        "keys": []
+      },
+      {
+        "timeMs": 13150,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 13531,
+        "keys": []
+      },
+      {
+        "timeMs": 13770,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14150,
+        "keys": []
+      },
+      {
+        "timeMs": 14390,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 14771,
+        "keys": []
+      },
+      {
+        "timeMs": 15010,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 15390,
+        "keys": []
+      },
+      {
+        "timeMs": 15630,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16010,
+        "keys": []
+      },
+      {
+        "timeMs": 16250,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16630,
+        "keys": []
+      },
+      {
+        "timeMs": 16870,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17250,
+        "keys": []
+      },
+      {
+        "timeMs": 17490,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 17870,
+        "keys": []
+      },
+      {
+        "timeMs": 18110,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 18490,
+        "keys": []
+      },
+      {
+        "timeMs": 18730,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19110,
+        "keys": []
+      },
+      {
+        "timeMs": 22400,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 22780,
+        "keys": []
+      },
+      {
+        "timeMs": 22970,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 23350,
+        "keys": []
+      },
+      {
+        "timeMs": 23540,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 23920,
+        "keys": []
+      },
+      {
+        "timeMs": 24110,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 24490,
+        "keys": []
+      },
+      {
+        "timeMs": 24680,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 25060,
+        "keys": []
+      },
+      {
+        "timeMs": 25250,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25630,
+        "keys": []
+      },
+      {
+        "timeMs": 25820,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 26200,
+        "keys": []
+      },
+      {
+        "timeMs": 26390,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 26770,
+        "keys": []
+      },
+      {
+        "timeMs": 26960,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27340,
+        "keys": []
+      },
+      {
+        "timeMs": 27530,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 27910,
+        "keys": []
+      },
+      {
+        "timeMs": 28100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28480,
+        "keys": []
+      },
+      {
+        "timeMs": 28670,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29050,
+        "keys": []
+      },
+      {
+        "timeMs": 29400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 29780,
+        "keys": []
+      },
+      {
+        "timeMs": 29940,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 30320,
+        "keys": []
+      },
+      {
+        "timeMs": 30480,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 30860,
+        "keys": []
+      },
+      {
+        "timeMs": 31020,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 31400,
+        "keys": []
+      },
+      {
+        "timeMs": 32400,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 32780,
+        "keys": []
+      },
+      {
+        "timeMs": 33130,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 33511,
+        "keys": []
+      },
+      {
+        "timeMs": 33860,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 34240,
+        "keys": []
+      },
+      {
+        "timeMs": 34590,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34971,
+        "keys": []
+      },
+      {
+        "timeMs": 40400,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 40780,
+        "keys": []
+      },
+      {
+        "timeMs": 41180,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 41560,
+        "keys": []
+      },
+      {
+        "timeMs": 41960,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 42340,
+        "keys": []
+      },
+      {
+        "timeMs": 42740,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 43121,
+        "keys": []
+      },
+      {
+        "timeMs": 43520,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 43901,
+        "keys": []
+      },
+      {
+        "timeMs": 44300,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 44680,
+        "keys": []
+      },
+      {
+        "timeMs": 45080,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 45460,
+        "keys": []
+      },
+      {
+        "timeMs": 50400,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 50780,
+        "keys": []
+      },
+      {
+        "timeMs": 51200,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 51581,
+        "keys": []
+      },
+      {
+        "timeMs": 52000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 52380,
+        "keys": []
+      },
+      {
+        "timeMs": 52800,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 53180,
+        "keys": []
+      },
+      {
+        "timeMs": 53600,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 53981,
+        "keys": []
+      },
+      {
+        "timeMs": 54400,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 54780,
+        "keys": []
+      },
+      {
+        "timeMs": 55200,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 55581,
+        "keys": []
+      },
+      {
+        "timeMs": 56000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 56380,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

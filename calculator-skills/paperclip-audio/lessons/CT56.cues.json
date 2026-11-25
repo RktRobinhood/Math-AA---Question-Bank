@@ -1,0 +1,1024 @@
+{
+  "schemaVersion": 1,
+  "id": "CT56",
+  "route": "trapezoidal/index.html",
+  "catalogueTitle": "Trapezoidal rule and approximation",
+  "playerHeading": "Trapezoidal approximation",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "trapezoidal/index.html"
+  },
+  "script": "lessons/CT56.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Store the curve on a Calculator page so you can reuse its heights.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu, then one for Actions, then one for Define. Type f of x equals x squared, then press Enter.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Done means the function is stored. Now f of one, for example, means the height at x equals one.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Four equal strips have width one. Count their edges: there are five ordinates.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The first and last heights belong to one strip each. The interior heights belong to two.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Type half the width, times the bracket. Enter each end height once.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Group the interior heights so the factor of two applies to all three.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Enter returns twenty-two. Each ordinate is a function value; only the sum estimates the integral.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "Double the number of strips. The width halves, but there are now nine ordinates.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Keep both endpoints; double the seven interior heights. Multiply by zero point two five.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "Use the half-step x-values (zero point five, one point five, two point five and three point five) as well as the original x-values.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "Enter returns twenty-one point five. On this convex curve, the tops of the strips lie above the curve.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "The exact integral is sixty-four thirds, about twenty-one point three three three. Eight strips are closer here; that is not a guarantee for every function.",
+      "watchCueId": "watch-13"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 63000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Store the curve on a Calculator page so you can reuse its heights.",
+        "endMs": 1700
+      },
+      {
+        "id": "watch-02",
+        "startMs": 1700,
+        "text": "Open Menu → 1: Actions → 1: Define. Type f(x) = x², then press Enter.",
+        "endMs": 7150
+      },
+      {
+        "id": "watch-03",
+        "startMs": 7150,
+        "text": "Done means the function is stored. Now f(1), for example, means the height at x = 1.",
+        "endMs": 8650
+      },
+      {
+        "id": "watch-04",
+        "startMs": 8650,
+        "text": "Four equal strips have width 1. Count their edges: there are five ordinates.",
+        "endMs": 12600
+      },
+      {
+        "id": "watch-05",
+        "startMs": 12600,
+        "text": "The first and last heights belong to one strip each. The interior heights belong to two.",
+        "endMs": 15500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 15500,
+        "text": "Type half the width, times the bracket. Enter each end height once.",
+        "endMs": 21500
+      },
+      {
+        "id": "watch-07",
+        "startMs": 21500,
+        "text": "Group the interior heights so the factor of two applies to all three.",
+        "endMs": 28540
+      },
+      {
+        "id": "watch-08",
+        "startMs": 28540,
+        "text": "Enter returns 22. Each ordinate is a function value; only the sum estimates the integral.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 34000,
+        "text": "Double the number of strips. The width halves, but there are now nine ordinates.",
+        "endMs": 37500
+      },
+      {
+        "id": "watch-10",
+        "startMs": 37500,
+        "text": "Keep both endpoints; double the seven interior heights. Multiply by 0.25.",
+        "endMs": 48000
+      },
+      {
+        "id": "watch-11",
+        "startMs": 48000,
+        "text": "Use the half-step x-values (0.5, 1.5, 2.5 and 3.5) as well as the original x-values.",
+        "endMs": 55690
+      },
+      {
+        "id": "watch-12",
+        "startMs": 55690,
+        "text": "Enter returns 21.5. On this convex curve, the tops of the strips lie above the curve.",
+        "endMs": 59000
+      },
+      {
+        "id": "watch-13",
+        "startMs": 59000,
+        "text": "The exact integral is 64/3, about 21.333. Eight strips are closer here; that is not a guarantee for every function.",
+        "endMs": 63000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 2000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 2330,
+        "keys": []
+      },
+      {
+        "timeMs": 2450,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 2781,
+        "keys": []
+      },
+      {
+        "timeMs": 2900,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 3230,
+        "keys": []
+      },
+      {
+        "timeMs": 4000,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 4330,
+        "keys": []
+      },
+      {
+        "timeMs": 4450,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 4780,
+        "keys": []
+      },
+      {
+        "timeMs": 4900,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 5230,
+        "keys": []
+      },
+      {
+        "timeMs": 5350,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 5680,
+        "keys": []
+      },
+      {
+        "timeMs": 5800,
+        "keys": [
+          "eq"
+        ]
+      },
+      {
+        "timeMs": 6130,
+        "keys": []
+      },
+      {
+        "timeMs": 6250,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 6580,
+        "keys": []
+      },
+      {
+        "timeMs": 6700,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 7030,
+        "keys": []
+      },
+      {
+        "timeMs": 7150,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7480,
+        "keys": []
+      },
+      {
+        "timeMs": 16000,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 16330,
+        "keys": []
+      },
+      {
+        "timeMs": 16380,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 16710,
+        "keys": []
+      },
+      {
+        "timeMs": 16760,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 17090,
+        "keys": []
+      },
+      {
+        "timeMs": 17140,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 17470,
+        "keys": []
+      },
+      {
+        "timeMs": 17520,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 17850,
+        "keys": []
+      },
+      {
+        "timeMs": 17900,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 18230,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 18610,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 18990,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 19370,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19750,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 20130,
+        "keys": []
+      },
+      {
+        "timeMs": 20180,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 20510,
+        "keys": []
+      },
+      {
+        "timeMs": 20560,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 20890,
+        "keys": []
+      },
+      {
+        "timeMs": 20940,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 21270,
+        "keys": []
+      },
+      {
+        "timeMs": 21320,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 21650,
+        "keys": []
+      },
+      {
+        "timeMs": 21700,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 22030,
+        "keys": []
+      },
+      {
+        "timeMs": 22080,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 22410,
+        "keys": []
+      },
+      {
+        "timeMs": 22460,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 22790,
+        "keys": []
+      },
+      {
+        "timeMs": 22840,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 23170,
+        "keys": []
+      },
+      {
+        "timeMs": 23220,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 23550,
+        "keys": []
+      },
+      {
+        "timeMs": 23600,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 23930,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 24310,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 24690,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 25070,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 25450,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 25830,
+        "keys": []
+      },
+      {
+        "timeMs": 25880,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 26210,
+        "keys": []
+      },
+      {
+        "timeMs": 26260,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 26590,
+        "keys": []
+      },
+      {
+        "timeMs": 26640,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 26970,
+        "keys": []
+      },
+      {
+        "timeMs": 27020,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 27350,
+        "keys": []
+      },
+      {
+        "timeMs": 27400,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 27730,
+        "keys": []
+      },
+      {
+        "timeMs": 27780,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 28110,
+        "keys": []
+      },
+      {
+        "timeMs": 28160,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 28490,
+        "keys": []
+      },
+      {
+        "timeMs": 28540,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28870,
+        "keys": []
+      },
+      {
+        "timeMs": 38000,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 38261,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 38551,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 38841,
+        "keys": []
+      },
+      {
+        "timeMs": 38870,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 39131,
+        "keys": []
+      },
+      {
+        "timeMs": 39160,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 39421,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 39712,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 40002,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 40292,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 40581,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 40871,
+        "keys": []
+      },
+      {
+        "timeMs": 40900,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 41161,
+        "keys": []
+      },
+      {
+        "timeMs": 41190,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 41451,
+        "keys": []
+      },
+      {
+        "timeMs": 41480,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 41741,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 42031,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 42322,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 42612,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 42901,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 43191,
+        "keys": []
+      },
+      {
+        "timeMs": 43220,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 43481,
+        "keys": []
+      },
+      {
+        "timeMs": 43510,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 43771,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 44061,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 44352,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 44642,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 44932,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 45222,
+        "keys": []
+      },
+      {
+        "timeMs": 45250,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 45511,
+        "keys": []
+      },
+      {
+        "timeMs": 45540,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 45801,
+        "keys": []
+      },
+      {
+        "timeMs": 45830,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 46091,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 46381,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 46671,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 46962,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 47252,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 47542,
+        "keys": []
+      },
+      {
+        "timeMs": 47570,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 47831,
+        "keys": []
+      },
+      {
+        "timeMs": 47860,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 48121,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 48411,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 48701,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 48991,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 49281,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 49572,
+        "keys": []
+      },
+      {
+        "timeMs": 49600,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 49862,
+        "keys": []
+      },
+      {
+        "timeMs": 49890,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 50151,
+        "keys": []
+      },
+      {
+        "timeMs": 50180,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 50441,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 50731,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 51021,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 51311,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 51602,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 51891,
+        "keys": []
+      },
+      {
+        "timeMs": 51920,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 52182,
+        "keys": []
+      },
+      {
+        "timeMs": 52210,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 52472,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 52761,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 53051,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 53341,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 53921,
+        "keys": []
+      },
+      {
+        "timeMs": 53950,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 54212,
+        "keys": []
+      },
+      {
+        "timeMs": 54240,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 54501,
+        "keys": []
+      },
+      {
+        "timeMs": 54530,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 54792,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 55081,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 55661,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 55951,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

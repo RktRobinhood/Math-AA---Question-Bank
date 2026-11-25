@@ -1,0 +1,6 @@
+On a Calculator page, open Menu then three: Algebra then two: Solve System of Linear Equations.
+Use two equations and keep the variables in x, y order. Confirm to insert the template.
+Enter the first equation, including its equals sign. Then press Tab for the second line.
+Enter the second equation. It can be in a different linear form. Press Enter to solve.
+The order, x then y, tells you what each list entry means.
+Substitute the pair into both equations to check.

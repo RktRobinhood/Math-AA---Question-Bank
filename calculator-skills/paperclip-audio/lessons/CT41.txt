@@ -1,0 +1,9 @@
+Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve.
+On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal.
+Enter zero point one for the left area, zero for the mean, and one for the standard deviation.
+Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value.
+The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four.
+Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again.
+Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive.
+Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be.
+If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left.

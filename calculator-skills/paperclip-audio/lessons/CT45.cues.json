@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "id": "CT45",
+  "route": "z-test/index.html",
+  "catalogueTitle": "One-sample z-test: known population SD",
+  "playerHeading": "One-sample z-test",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "z-test/index.html"
+  },
+  "script": "lessons/CT45.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "A normal population has known standard deviation four. Test whether its mean is below fifty using an independent sample.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Use a z test because the population standard deviation is known. Choose the less-than alternative before seeing the test result.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "The independent observations are already in column A. Open the one-sample z Test.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Choose Data because the individual readings are already in a named list.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter the null mean fifty and the known population standard deviation four. Then choose readings for List.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Keep frequency at one. Change the alternative to less than. Leave the optional graph unchecked.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Under the null hypothesis, the chance of a z score of negative three or lower is about zero point zero zero one three five. The test counted nine observations from the list.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "There is evidence that the mean is below fifty. A two-sided alternative would use both tails.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 57000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "A normal population has known standard deviation 4. Test whether its mean is below 50 using an independent sample.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Use a z test because population σ is known. Choose the less-than alternative before seeing the test result.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "The independent observations are already in column A. Open the one-sample z Test.",
+        "endMs": 18000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 18000,
+        "text": "Choose Data because the individual readings are already in a named list.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 24000,
+        "text": "Enter the null mean 50 and the known population standard deviation 4. Then choose readings for List.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 36000,
+        "text": "Keep frequency at 1. Change the alternative to less than. Leave the optional graph unchecked.",
+        "endMs": 47000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 47000,
+        "text": "Under H₀, the chance of z = −3 or lower is about 0.00135. The test counted nine observations from the list.",
+        "endMs": 52000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 52000,
+        "text": "There is evidence that the mean is below 50. A two-sided alternative uses both tails.",
+        "endMs": 57000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 12400,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 12760,
+        "keys": []
+      },
+      {
+        "timeMs": 13300,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 13660,
+        "keys": []
+      },
+      {
+        "timeMs": 14500,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 14860,
+        "keys": []
+      },
+      {
+        "timeMs": 16000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16360,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 24400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 24760,
+        "keys": []
+      },
+      {
+        "timeMs": 25500,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 25860,
+        "keys": []
+      },
+      {
+        "timeMs": 26700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27060,
+        "keys": []
+      },
+      {
+        "timeMs": 28300,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 28660,
+        "keys": []
+      },
+      {
+        "timeMs": 29500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 29860,
+        "keys": []
+      },
+      {
+        "timeMs": 31100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 31460,
+        "keys": []
+      },
+      {
+        "timeMs": 32250,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 32610,
+        "keys": []
+      },
+      {
+        "timeMs": 33500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 33860,
+        "keys": []
+      },
+      {
+        "timeMs": 36350,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36710,
+        "keys": []
+      },
+      {
+        "timeMs": 37800,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 38160,
+        "keys": []
+      },
+      {
+        "timeMs": 39300,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 39660,
+        "keys": []
+      },
+      {
+        "timeMs": 40600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 40960,
+        "keys": []
+      },
+      {
+        "timeMs": 44000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 44360,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

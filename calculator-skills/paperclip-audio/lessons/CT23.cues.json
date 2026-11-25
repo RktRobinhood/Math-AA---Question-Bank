@@ -1,0 +1,866 @@
+{
+  "schemaVersion": 1,
+  "id": "CT23",
+  "route": "matrix-systems/index.html",
+  "catalogueTitle": "Solve linear systems using matrices",
+  "playerHeading": "Simultaneous equations with matrices",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "matrix-systems/index.html"
+  },
+  "script": "lessons/CT23.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Solve two x plus y equals seven, and x minus y equals two. Use x, y in that order. Store the coefficients as A using Control and Template for the assignment symbol.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On a Calculator page choose Menu then seven: Matrix and Vector then one: Create then one: Matrix. Use two rows and two columns.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter two, one in the first row and one, minus one in the second. Tab moves to the next cell. Press Enter to store a.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Store b the same way, but use two rows and one column. Enter seven above two to match the original equation order.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Type A, then the power key, the negative key and one. Press Right to leave the exponent, then the times key, B, and Enter. The inverse of A multiplies B on the left.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read x equals three above y equals one. In the original equations, twice three plus one is seven, and three minus one is two.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "For x plus two y equals four, and two x plus four y equals nine, enter a two by three matrix, M. Keep x, y first; put the constants in the final column.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Open Menu, then seven for Matrix and Vector, then five for Reduced Row-Echelon Form. Enter M as the argument and press Enter.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "The last row means zero times x plus zero times y equals one, so there is no solution. A zero row instead leaves one variable free here. For these cases, the inverse method does not apply.",
+      "watchCueId": "watch-09"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 69000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Solve 2x + y = 7 and x − y = 2. Use x, y in that order. Store the coefficients as a with Ctrl + template (:=).",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "On a Calculator page choose Menu → 7: Matrix & Vector → 1: Create → 1: Matrix. Use 2 rows and 2 columns.",
+        "endMs": 9000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9000,
+        "text": "Enter 2, 1 in the first row and 1, −1 in the second. Tab moves to the next cell. Press Enter to store a.",
+        "endMs": 15000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 15000,
+        "text": "Store b the same way, but use 2 rows and 1 column. Enter 7 above 2 to match the original equation order.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27000,
+        "text": "Type a, then ^, the negative key and 1. Press → to leave the exponent, then ×, b, Enter. A⁻¹ multiplies b on the left.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 34000,
+        "text": "Read x = 3 above y = 1. In the original equations, 2(3) + 1 = 7 and 3 − 1 = 2.",
+        "endMs": 39000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 39000,
+        "text": "For x + 2y = 4 and 2x + 4y = 9, enter a 2×3 matrix m. Keep x, y first; put the constants in the final column.",
+        "endMs": 56000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 56000,
+        "text": "Select Menu → 7: Matrix & Vector → 5: Reduced Row-Echelon Form. Enter m inside rref( and press Enter.",
+        "endMs": 62000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 62000,
+        "text": "The last row represents 0x + 0y = 1, so there is no solution. A zero row instead leaves one variable free here. This is a diagnostic, not the invertible exam case.",
+        "endMs": 69000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1600,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 1980,
+        "keys": []
+      },
+      {
+        "timeMs": 2250,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 2630,
+        "keys": []
+      },
+      {
+        "timeMs": 2900,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 3280,
+        "keys": []
+      },
+      {
+        "timeMs": 4250,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 4630,
+        "keys": []
+      },
+      {
+        "timeMs": 4790,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 5170,
+        "keys": []
+      },
+      {
+        "timeMs": 5330,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5710,
+        "keys": []
+      },
+      {
+        "timeMs": 5870,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6250,
+        "keys": []
+      },
+      {
+        "timeMs": 6410,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 6790,
+        "keys": []
+      },
+      {
+        "timeMs": 6950,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 7330,
+        "keys": []
+      },
+      {
+        "timeMs": 7490,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 7870,
+        "keys": []
+      },
+      {
+        "timeMs": 8030,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 8410,
+        "keys": []
+      },
+      {
+        "timeMs": 8570,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8951,
+        "keys": []
+      },
+      {
+        "timeMs": 9400,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9781,
+        "keys": []
+      },
+      {
+        "timeMs": 9920,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10300,
+        "keys": []
+      },
+      {
+        "timeMs": 10440,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 10820,
+        "keys": []
+      },
+      {
+        "timeMs": 10960,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11341,
+        "keys": []
+      },
+      {
+        "timeMs": 11480,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 11861,
+        "keys": []
+      },
+      {
+        "timeMs": 12000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 12380,
+        "keys": []
+      },
+      {
+        "timeMs": 12520,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 12900,
+        "keys": []
+      },
+      {
+        "timeMs": 13040,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 13420,
+        "keys": []
+      },
+      {
+        "timeMs": 13560,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 13941,
+        "keys": []
+      },
+      {
+        "timeMs": 15400,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 15781,
+        "keys": []
+      },
+      {
+        "timeMs": 15930,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 16310,
+        "keys": []
+      },
+      {
+        "timeMs": 16460,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 16840,
+        "keys": []
+      },
+      {
+        "timeMs": 16990,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 17370,
+        "keys": []
+      },
+      {
+        "timeMs": 17520,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 17900,
+        "keys": []
+      },
+      {
+        "timeMs": 18050,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 18430,
+        "keys": []
+      },
+      {
+        "timeMs": 18580,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 18960,
+        "keys": []
+      },
+      {
+        "timeMs": 19110,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19490,
+        "keys": []
+      },
+      {
+        "timeMs": 19640,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 20020,
+        "keys": []
+      },
+      {
+        "timeMs": 20170,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 20550,
+        "keys": []
+      },
+      {
+        "timeMs": 20700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 21080,
+        "keys": []
+      },
+      {
+        "timeMs": 21230,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21610,
+        "keys": []
+      },
+      {
+        "timeMs": 22200,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 22580,
+        "keys": []
+      },
+      {
+        "timeMs": 22780,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23160,
+        "keys": []
+      },
+      {
+        "timeMs": 23360,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 23740,
+        "keys": []
+      },
+      {
+        "timeMs": 23940,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24320,
+        "keys": []
+      },
+      {
+        "timeMs": 27300,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 27680,
+        "keys": []
+      },
+      {
+        "timeMs": 27970,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 28350,
+        "keys": []
+      },
+      {
+        "timeMs": 28640,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 29020,
+        "keys": []
+      },
+      {
+        "timeMs": 29310,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 29690,
+        "keys": []
+      },
+      {
+        "timeMs": 29980,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 30360,
+        "keys": []
+      },
+      {
+        "timeMs": 30650,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 31030,
+        "keys": []
+      },
+      {
+        "timeMs": 31320,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 31700,
+        "keys": []
+      },
+      {
+        "timeMs": 31990,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32370,
+        "keys": []
+      },
+      {
+        "timeMs": 39350,
+        "keys": [
+          "m"
+        ]
+      },
+      {
+        "timeMs": 39731,
+        "keys": []
+      },
+      {
+        "timeMs": 39990,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 40371,
+        "keys": []
+      },
+      {
+        "timeMs": 40630,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 41011,
+        "keys": []
+      },
+      {
+        "timeMs": 41270,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 41651,
+        "keys": []
+      },
+      {
+        "timeMs": 41910,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 42290,
+        "keys": []
+      },
+      {
+        "timeMs": 42550,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 42930,
+        "keys": []
+      },
+      {
+        "timeMs": 43190,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 43570,
+        "keys": []
+      },
+      {
+        "timeMs": 43830,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 44210,
+        "keys": []
+      },
+      {
+        "timeMs": 44470,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 44850,
+        "keys": []
+      },
+      {
+        "timeMs": 45110,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 45490,
+        "keys": []
+      },
+      {
+        "timeMs": 45750,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 46130,
+        "keys": []
+      },
+      {
+        "timeMs": 46390,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 46770,
+        "keys": []
+      },
+      {
+        "timeMs": 47400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 47780,
+        "keys": []
+      },
+      {
+        "timeMs": 48030,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 48411,
+        "keys": []
+      },
+      {
+        "timeMs": 48660,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 49040,
+        "keys": []
+      },
+      {
+        "timeMs": 49290,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 49670,
+        "keys": []
+      },
+      {
+        "timeMs": 49920,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 50301,
+        "keys": []
+      },
+      {
+        "timeMs": 50550,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 50930,
+        "keys": []
+      },
+      {
+        "timeMs": 51180,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 51560,
+        "keys": []
+      },
+      {
+        "timeMs": 51810,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 52191,
+        "keys": []
+      },
+      {
+        "timeMs": 52440,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 52820,
+        "keys": []
+      },
+      {
+        "timeMs": 53070,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 53450,
+        "keys": []
+      },
+      {
+        "timeMs": 53700,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 54081,
+        "keys": []
+      },
+      {
+        "timeMs": 54330,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 54710,
+        "keys": []
+      },
+      {
+        "timeMs": 56350,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 56731,
+        "keys": []
+      },
+      {
+        "timeMs": 57200,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 57581,
+        "keys": []
+      },
+      {
+        "timeMs": 58050,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 58430,
+        "keys": []
+      },
+      {
+        "timeMs": 58900,
+        "keys": [
+          "m"
+        ]
+      },
+      {
+        "timeMs": 59280,
+        "keys": []
+      },
+      {
+        "timeMs": 59750,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 60130,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

@@ -1,0 +1,564 @@
+{
+  "schemaVersion": 1,
+  "id": "CT49",
+  "route": "confidence-intervals/index.html",
+  "catalogueTitle": "Confidence intervals: z and t",
+  "playerHeading": "Confidence intervals: z and t",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "confidence-intervals/index.html"
+  },
+  "script": "lessons/CT49.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Estimate the mean of a normal population. The sample mean is forty and the sample size is thirty-six. First suppose we know the population standard deviation is six.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On a Calculator page, choose Menu then Statistics then Confidence Intervals then z Interval. Select Stats rather than Data.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter six for the population standard deviation, forty for the sample mean, thirty-six for the sample size, and zero point nine five for C Level. Enter a proportion, not ninety-five.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Read the lower and upper confidence bounds: about thirty-eight point zero four and forty-one point nine six. The margin of error is half the width, not an endpoint.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Now suppose six is only the sample standard deviation. Use t Interval with Stats. The distinction is whether the population standard deviation is known, not whether the sample size exceeds thirty.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "For t, enter the sample mean first and the sample standard deviation second. Keep the sample size at thirty-six and C Level at zero point nine five.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "About thirty-seven point nine seven to forty-two point zero three for the population mean. Over many repeated samples, this method would capture the true mean about ninety-five percent of the time.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 52000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Estimate the mean of a normal population. The sample mean is 40 and n = 36. First suppose the population standard deviation σ = 6 is known.",
+        "endMs": 5150
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5150,
+        "text": "On a Calculator page, choose Menu → Statistics → Confidence Intervals → z Interval. Select Stats rather than Data.",
+        "endMs": 12200
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12200,
+        "text": "Enter σ = 6, x̄ = 40, n = 36, and C Level = 0.95. Enter a proportion, not 95.",
+        "endMs": 22300
+      },
+      {
+        "id": "watch-04",
+        "startMs": 22300,
+        "text": "Read CLower and CUpper: about 38.04 and 41.96. ME is the half-width, not an endpoint.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27000,
+        "text": "Now suppose 6 is only the sample SD, sx. Use t Interval with Stats. The distinction is whether σ is known, not whether n exceeds 30.",
+        "endMs": 35000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 35000,
+        "text": "For t, enter x̄ first and sx second. Keep n = 36 and C Level = 0.95.",
+        "endMs": 47100
+      },
+      {
+        "id": "watch-07",
+        "startMs": 47100,
+        "text": "About 37.97 to 42.03 for the population mean. Over many repeated samples, this method would capture the true mean about 95% of the time.",
+        "endMs": 52000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5450,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5840,
+        "keys": []
+      },
+      {
+        "timeMs": 6160,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6550,
+        "keys": []
+      },
+      {
+        "timeMs": 6870,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7260,
+        "keys": []
+      },
+      {
+        "timeMs": 7580,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7970,
+        "keys": []
+      },
+      {
+        "timeMs": 8290,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 8680,
+        "keys": []
+      },
+      {
+        "timeMs": 9000,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 9390,
+        "keys": []
+      },
+      {
+        "timeMs": 9710,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 10101,
+        "keys": []
+      },
+      {
+        "timeMs": 10420,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10810,
+        "keys": []
+      },
+      {
+        "timeMs": 11130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11521,
+        "keys": []
+      },
+      {
+        "timeMs": 12450,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 12840,
+        "keys": []
+      },
+      {
+        "timeMs": 13090,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13480,
+        "keys": []
+      },
+      {
+        "timeMs": 13730,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 14121,
+        "keys": []
+      },
+      {
+        "timeMs": 14370,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 14760,
+        "keys": []
+      },
+      {
+        "timeMs": 15010,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15400,
+        "keys": []
+      },
+      {
+        "timeMs": 15650,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 16040,
+        "keys": []
+      },
+      {
+        "timeMs": 16290,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 16680,
+        "keys": []
+      },
+      {
+        "timeMs": 16930,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17320,
+        "keys": []
+      },
+      {
+        "timeMs": 17570,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17960,
+        "keys": []
+      },
+      {
+        "timeMs": 18210,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 18600,
+        "keys": []
+      },
+      {
+        "timeMs": 18850,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 19241,
+        "keys": []
+      },
+      {
+        "timeMs": 19490,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 19880,
+        "keys": []
+      },
+      {
+        "timeMs": 20130,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 20520,
+        "keys": []
+      },
+      {
+        "timeMs": 20770,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21160,
+        "keys": []
+      },
+      {
+        "timeMs": 27350,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 27741,
+        "keys": []
+      },
+      {
+        "timeMs": 28060,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 28450,
+        "keys": []
+      },
+      {
+        "timeMs": 28770,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 29160,
+        "keys": []
+      },
+      {
+        "timeMs": 29480,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 29870,
+        "keys": []
+      },
+      {
+        "timeMs": 30190,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 30581,
+        "keys": []
+      },
+      {
+        "timeMs": 30900,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 31290,
+        "keys": []
+      },
+      {
+        "timeMs": 31610,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32000,
+        "keys": []
+      },
+      {
+        "timeMs": 32320,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 32710,
+        "keys": []
+      },
+      {
+        "timeMs": 33030,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 33420,
+        "keys": []
+      },
+      {
+        "timeMs": 35280,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 35670,
+        "keys": []
+      },
+      {
+        "timeMs": 36000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 36390,
+        "keys": []
+      },
+      {
+        "timeMs": 36720,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 37110,
+        "keys": []
+      },
+      {
+        "timeMs": 37440,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 37830,
+        "keys": []
+      },
+      {
+        "timeMs": 38160,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 38550,
+        "keys": []
+      },
+      {
+        "timeMs": 38880,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 39270,
+        "keys": []
+      },
+      {
+        "timeMs": 39600,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 39990,
+        "keys": []
+      },
+      {
+        "timeMs": 40320,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 40710,
+        "keys": []
+      },
+      {
+        "timeMs": 41040,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 41430,
+        "keys": []
+      },
+      {
+        "timeMs": 41760,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 42150,
+        "keys": []
+      },
+      {
+        "timeMs": 42480,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 42870,
+        "keys": []
+      },
+      {
+        "timeMs": 43200,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 43590,
+        "keys": []
+      },
+      {
+        "timeMs": 43920,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 44310,
+        "keys": []
+      },
+      {
+        "timeMs": 44640,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 45030,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

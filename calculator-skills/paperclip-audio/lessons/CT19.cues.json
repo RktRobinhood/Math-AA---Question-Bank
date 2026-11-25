@@ -1,0 +1,775 @@
+{
+  "schemaVersion": 1,
+  "id": "CT19",
+  "route": "vectors/index.html",
+  "catalogueTitle": "Vector arithmetic and angles",
+  "playerHeading": "Dot product & angle",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "vectors/index.html"
+  },
+  "script": "lessons/CT19.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Find the dot product and angle for vector A, with components two, negative one, two, and vector B, with components one, two, negative two. The example is in degrees.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Type A, then Control and Templates to get the assignment symbol. Open Menu, then seven, one, one. Use one row and three columns.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Store B as another matrix with one row and three columns. Use the negative key for negative entries.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Choose Menu, then seven for Matrix and Vector, the letter C for Vector, then three for Dot Product. Enter A followed by a comma and B.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Use inverse cosine, not the reciprocal of cosine. Control and the divide key open a fraction. Put the dot product on top.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Below, use the norm of A times the norm of B. Open Menu, then seven, then seven for Norms, then one for Norm, to insert each norm.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The dot product is negative four. Both lengths are three, so cosine theta is negative four ninths. The negative cosine gives an obtuse angle.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The angle is about one hundred and sixteen point three eight eight degrees. This is one hundred and sixteen degrees to three significant figures. A zero-length vector has no direction.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 53000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Find the dot product and angle for a = [2, −1, 2] and b = [1, 2, −2]. The example is in degrees.",
+        "endMs": 2600
+      },
+      {
+        "id": "watch-02",
+        "startMs": 2600,
+        "text": "Type a, then Ctrl + templates for :=. Open Menu → 7 → 1 → 1. Use one row and three columns.",
+        "endMs": 10300
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10300,
+        "text": "Store b as another 1 × 3 row. Use the (−) key for negative entries.",
+        "endMs": 17300
+      },
+      {
+        "id": "watch-04",
+        "startMs": 17300,
+        "text": "Choose Menu → 7: Matrix & Vector → C: Vector → 3: Dot Product. Enter a,b.",
+        "endMs": 23500
+      },
+      {
+        "id": "watch-05",
+        "startMs": 23500,
+        "text": "Use cos⁻¹, not 1/cos. Ctrl + ÷ opens a fraction. Put the dot product on top.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 34000,
+        "text": "Below, use norm(a) × norm(b). Menu → 7 → 7: Norms → 1: Norm inserts each norm.",
+        "endMs": 44000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 44000,
+        "text": "The dot product is −4. Both lengths are 3, so cos θ = −4/9. The negative cosine gives an obtuse angle.",
+        "endMs": 48400
+      },
+      {
+        "id": "watch-08",
+        "startMs": 48400,
+        "text": "The angle is about 116.388°. This is 116° to three significant figures. A zero-length vector has no direction.",
+        "endMs": 53000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3060,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 3350,
+        "keys": []
+      },
+      {
+        "timeMs": 3400,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 3690,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 4030,
+        "keys": []
+      },
+      {
+        "timeMs": 4080,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 4370,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 4710,
+        "keys": []
+      },
+      {
+        "timeMs": 4760,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5390,
+        "keys": []
+      },
+      {
+        "timeMs": 5440,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5730,
+        "keys": []
+      },
+      {
+        "timeMs": 5780,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 6070,
+        "keys": []
+      },
+      {
+        "timeMs": 6120,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 6410,
+        "keys": []
+      },
+      {
+        "timeMs": 6460,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 6750,
+        "keys": []
+      },
+      {
+        "timeMs": 6800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7090,
+        "keys": []
+      },
+      {
+        "timeMs": 7500,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 7790,
+        "keys": []
+      },
+      {
+        "timeMs": 7830,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 8120,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 8450,
+        "keys": []
+      },
+      {
+        "timeMs": 8490,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 8780,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 9110,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9440,
+        "keys": []
+      },
+      {
+        "timeMs": 9480,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9770,
+        "keys": []
+      },
+      {
+        "timeMs": 10550,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 10840,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 11140,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 11440,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 11740,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 12040,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 12940,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13240,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 13540,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13840,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14140,
+        "keys": []
+      },
+      {
+        "timeMs": 14500,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14790,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15090,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 15390,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15690,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 15990,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16290,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 16590,
+        "keys": []
+      },
+      {
+        "timeMs": 17800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 18090,
+        "keys": []
+      },
+      {
+        "timeMs": 18190,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 18480,
+        "keys": []
+      },
+      {
+        "timeMs": 18580,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 18870,
+        "keys": []
+      },
+      {
+        "timeMs": 18970,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 19260,
+        "keys": []
+      },
+      {
+        "timeMs": 19360,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 19650,
+        "keys": []
+      },
+      {
+        "timeMs": 19750,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 20040,
+        "keys": []
+      },
+      {
+        "timeMs": 20140,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 20430,
+        "keys": []
+      },
+      {
+        "timeMs": 20530,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 20820,
+        "keys": []
+      },
+      {
+        "timeMs": 20920,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21210,
+        "keys": []
+      },
+      {
+        "timeMs": 24050,
+        "keys": [
+          "trig"
+        ]
+      },
+      {
+        "timeMs": 24340,
+        "keys": []
+      },
+      {
+        "timeMs": 24490,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 24780,
+        "keys": []
+      },
+      {
+        "timeMs": 24930,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 25220,
+        "keys": []
+      },
+      {
+        "timeMs": 25370,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 25660,
+        "keys": []
+      },
+      {
+        "timeMs": 25810,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 26100,
+        "keys": []
+      },
+      {
+        "timeMs": 26250,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 26540,
+        "keys": []
+      },
+      {
+        "timeMs": 27550,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 27840,
+        "keys": []
+      },
+      {
+        "timeMs": 27980,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 28270,
+        "keys": []
+      },
+      {
+        "timeMs": 28410,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 28700,
+        "keys": []
+      },
+      {
+        "timeMs": 28840,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 29130,
+        "keys": []
+      },
+      {
+        "timeMs": 29270,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 29560,
+        "keys": []
+      },
+      {
+        "timeMs": 29700,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 29990,
+        "keys": []
+      },
+      {
+        "timeMs": 30130,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 30420,
+        "keys": []
+      },
+      {
+        "timeMs": 30560,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 30850,
+        "keys": []
+      },
+      {
+        "timeMs": 34280,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 34570,
+        "keys": []
+      },
+      {
+        "timeMs": 34700,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 34990,
+        "keys": []
+      },
+      {
+        "timeMs": 35120,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 35410,
+        "keys": []
+      },
+      {
+        "timeMs": 35540,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 35830,
+        "keys": []
+      },
+      {
+        "timeMs": 35960,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 36250,
+        "keys": []
+      },
+      {
+        "timeMs": 36380,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 36670,
+        "keys": []
+      },
+      {
+        "timeMs": 36800,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 37090,
+        "keys": []
+      },
+      {
+        "timeMs": 37220,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 37510,
+        "keys": []
+      },
+      {
+        "timeMs": 37640,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 37930,
+        "keys": []
+      },
+      {
+        "timeMs": 38060,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 38350,
+        "keys": []
+      },
+      {
+        "timeMs": 38480,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 38770,
+        "keys": []
+      },
+      {
+        "timeMs": 38900,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 39190,
+        "keys": []
+      },
+      {
+        "timeMs": 39320,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 39610,
+        "keys": []
+      },
+      {
+        "timeMs": 39740,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 40030,
+        "keys": []
+      },
+      {
+        "timeMs": 40160,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 40450,
+        "keys": []
+      },
+      {
+        "timeMs": 42750,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 43040,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

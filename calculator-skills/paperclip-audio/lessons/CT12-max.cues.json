@@ -1,0 +1,250 @@
+{
+  "schemaVersion": 1,
+  "id": "CT12-max",
+  "route": "maximum/index.html",
+  "catalogueTitle": "Local and global maxima and minima",
+  "playerHeading": "Find a graph maximum",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "maximum/index.html"
+  },
+  "script": "lessons/CT12-max.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "The allowed interval is minus two to three. The graph is already on the screen.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu, choose Analyze Graph, then Maximum.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Move to the left of the peak and press Enter. Then choose the upper bound just to its right.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The calculator marks the point negative one, four. That is a local peak, not yet the answer.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Both endpoints count because the interval is closed. Substitute minus two into the function.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Substitute three to check the other endpoint.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Compare the three heights. The right endpoint is highest.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 39000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "The allowed interval is −2 to 3. The graph is already on the screen.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "Open Menu, choose Analyze Graph, then Maximum.",
+        "endMs": 11000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 11000,
+        "text": "Move to the left of the peak and press Enter. Then choose the upper bound just to its right.",
+        "endMs": 23000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 23000,
+        "text": "The calculator marks (−1, 4). That is a local peak, not yet the answer.",
+        "endMs": 30000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30000,
+        "text": "Both endpoints count because the interval is closed. Substitute minus two into the function.",
+        "endMs": 33000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 33000,
+        "text": "Substitute three to check the other endpoint.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 36000,
+        "text": "Compare the three heights. The right endpoint is highest.",
+        "endMs": 39000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 6110,
+        "keys": []
+      },
+      {
+        "timeMs": 7100,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7410,
+        "keys": []
+      },
+      {
+        "timeMs": 8500,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8810,
+        "keys": []
+      },
+      {
+        "timeMs": 12550,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 12861,
+        "keys": []
+      },
+      {
+        "timeMs": 15250,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15560,
+        "keys": []
+      },
+      {
+        "timeMs": 17100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 17410,
+        "keys": []
+      },
+      {
+        "timeMs": 17900,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 18210,
+        "keys": []
+      },
+      {
+        "timeMs": 18700,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 19010,
+        "keys": []
+      },
+      {
+        "timeMs": 19500,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 19810,
+        "keys": []
+      },
+      {
+        "timeMs": 22400,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22710,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT12MaxTape",
+        "keys": [
+          {
+            "timeMs": 5800,
+            "key": "menu"
+          },
+          {
+            "timeMs": 7100,
+            "key": "6"
+          },
+          {
+            "timeMs": 8500,
+            "key": "3"
+          },
+          {
+            "timeMs": 12550,
+            "key": "left"
+          },
+          {
+            "timeMs": 15250,
+            "key": "enter"
+          },
+          {
+            "timeMs": 17100,
+            "key": "right"
+          },
+          {
+            "timeMs": 17900,
+            "key": "right"
+          },
+          {
+            "timeMs": 18700,
+            "key": "right"
+          },
+          {
+            "timeMs": 19500,
+            "key": "right"
+          },
+          {
+            "timeMs": 22400,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

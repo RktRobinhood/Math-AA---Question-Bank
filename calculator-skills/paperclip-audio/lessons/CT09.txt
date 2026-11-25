@@ -1,0 +1,7 @@
+On a Graphs page, plot f of x equals two x squared minus three.
+Open Menu then five: Trace then one: Graph Trace. Step along the curve with the arrows.
+To jump to a given input, type its x-value and press Enter. Read the second coordinate.
+Press Esc to leave Trace. Open a split-screen table with Control and T, or use Menu then seven then one.
+Auto gives a regular list. Focus the table and use Menu then two: Table then five: Edit Table Settings. Change Independent to Ask.
+Type the x values you want in the x column. Read each result from the same row in f one of x.
+Trace locates a point on the graph. A table keeps the results for multiple inputs together.

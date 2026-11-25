@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "id": "CT58",
+  "route": "euler-method/index.html",
+  "catalogueTitle": "Euler method for a first-order ODE",
+  "playerHeading": "Euler method for a first-order ODE",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "euler-method/index.html"
+  },
+  "script": "lessons/CT58.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Estimate y at x equals one in two steps. Start at the known point zero, two.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Use the starting pair for the slope: zero minus two equals minus two. Multiply the slope by the step size.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "On a Calculator page, type two, plus zero point five times the quantity zero minus two, then press Enter.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The new y is one, and the new x is zero point five. Keep that pair together.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Now find the slope from the new pair: zero point five minus one equals minus zero point five. The previous slope is no longer used.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Type one, plus zero point five times the quantity zero point five minus one. Then press Enter. This is the second update.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "At x equals one the Euler estimate is zero point seven five. Two tangent steps give an approximation, not an exact solution.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 51000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Estimate y at x = 1 in two steps. Start at the known point (0, 2).",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Use the starting pair for the slope: 0 − 2 = −2. Multiply the slope by the step size.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "On a Calculator page, type 2 + 0.5 × (0 − 2), then press Enter.",
+        "endMs": 21000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 21000,
+        "text": "The new y is 1, and the new x is 0.5. Keep that pair together.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27000,
+        "text": "Now find the slope from the new pair: 0.5 − 1 = −0.5. The previous slope is no longer used.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 34000,
+        "text": "Type 1 + 0.5 × (0.5 − 1), then press Enter. This is the second update.",
+        "endMs": 44000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 44000,
+        "text": "At x = 1 the Euler estimate is 0.75. Two tangent steps give an approximation, not an exact solution.",
+        "endMs": 51000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 12800,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 13160,
+        "keys": []
+      },
+      {
+        "timeMs": 13430,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 13790,
+        "keys": []
+      },
+      {
+        "timeMs": 14060,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 14420,
+        "keys": []
+      },
+      {
+        "timeMs": 14690,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 15050,
+        "keys": []
+      },
+      {
+        "timeMs": 15320,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 15680,
+        "keys": []
+      },
+      {
+        "timeMs": 15950,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 16310,
+        "keys": []
+      },
+      {
+        "timeMs": 16580,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 16940,
+        "keys": []
+      },
+      {
+        "timeMs": 17210,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 17570,
+        "keys": []
+      },
+      {
+        "timeMs": 17840,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 18200,
+        "keys": []
+      },
+      {
+        "timeMs": 18470,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 18830,
+        "keys": []
+      },
+      {
+        "timeMs": 20000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20360,
+        "keys": []
+      },
+      {
+        "timeMs": 34300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 34660,
+        "keys": []
+      },
+      {
+        "timeMs": 34950,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 35310,
+        "keys": []
+      },
+      {
+        "timeMs": 35600,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 35960,
+        "keys": []
+      },
+      {
+        "timeMs": 36250,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 36610,
+        "keys": []
+      },
+      {
+        "timeMs": 36900,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 37260,
+        "keys": []
+      },
+      {
+        "timeMs": 37550,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 37910,
+        "keys": []
+      },
+      {
+        "timeMs": 38200,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 38560,
+        "keys": []
+      },
+      {
+        "timeMs": 38850,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 39210,
+        "keys": []
+      },
+      {
+        "timeMs": 39500,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 39860,
+        "keys": []
+      },
+      {
+        "timeMs": 40150,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 40510,
+        "keys": []
+      },
+      {
+        "timeMs": 40800,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 41160,
+        "keys": []
+      },
+      {
+        "timeMs": 43000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 43360,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

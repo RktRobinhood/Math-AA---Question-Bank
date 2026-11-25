@@ -1,0 +1,586 @@
+{
+  "schemaVersion": 1,
+  "id": "CT09",
+  "route": "trace-table/index.html",
+  "catalogueTitle": "Trace, tables and function values",
+  "playerHeading": "Trace and table values",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "trace-table/index.html"
+  },
+  "script": "lessons/CT09.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "On a Graphs page, plot f of x equals two x squared minus three.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu then five: Trace then one: Graph Trace. Step along the curve with the arrows.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "To jump to a given input, type its x-value and press Enter. Read the second coordinate.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Press Esc to leave Trace. Open a split-screen table with Control and T, or use Menu then seven then one.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Auto gives a regular list. Focus the table and use Menu then two: Table then five: Edit Table Settings. Change Independent to Ask.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Type the x values you want in the x column. Read each result from the same row in f one of x.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Trace locates a point on the graph. A table keeps the results for multiple inputs together.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 43000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Graphs page, plot f(x) = 2x² − 3.",
+        "endMs": 4800
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4800,
+        "text": "Open Menu → 5: Trace → 1: Graph Trace. Step along the curve with the arrows.",
+        "endMs": 10300
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10300,
+        "text": "To jump to a given input, type its x-value and press Enter. Read the second coordinate.",
+        "endMs": 15500
+      },
+      {
+        "id": "watch-04",
+        "startMs": 15500,
+        "text": "Press Esc to leave Trace. Open a split-screen table with Ctrl + T, or use Menu → 7 → 1.",
+        "endMs": 20300
+      },
+      {
+        "id": "watch-05",
+        "startMs": 20300,
+        "text": "Auto gives a regular list. Focus the table and use Menu → 2: Table → 5: Edit Table Settings. Change Independent to Ask.",
+        "endMs": 29300
+      },
+      {
+        "id": "watch-06",
+        "startMs": 29300,
+        "text": "Type the x-values you want in the x column. Read each result from the same row in f₁(x).",
+        "endMs": 38000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 38000,
+        "text": "Trace locates a point on the graph. A table keeps the results for multiple inputs together.",
+        "endMs": 43000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 420,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 690,
+        "keys": []
+      },
+      {
+        "timeMs": 860,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 1130,
+        "keys": []
+      },
+      {
+        "timeMs": 1290,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 1560,
+        "keys": []
+      },
+      {
+        "timeMs": 1750,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 2020,
+        "keys": []
+      },
+      {
+        "timeMs": 2200,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2470,
+        "keys": []
+      },
+      {
+        "timeMs": 3000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 3270,
+        "keys": []
+      },
+      {
+        "timeMs": 5080,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5350,
+        "keys": []
+      },
+      {
+        "timeMs": 5980,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 6250,
+        "keys": []
+      },
+      {
+        "timeMs": 6920,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7190,
+        "keys": []
+      },
+      {
+        "timeMs": 7850,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 8120,
+        "keys": []
+      },
+      {
+        "timeMs": 8660,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 8930,
+        "keys": []
+      },
+      {
+        "timeMs": 10630,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 10900,
+        "keys": []
+      },
+      {
+        "timeMs": 11590,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11860,
+        "keys": []
+      },
+      {
+        "timeMs": 15820,
+        "keys": [
+          "esc"
+        ]
+      },
+      {
+        "timeMs": 16090,
+        "keys": []
+      },
+      {
+        "timeMs": 16700,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 16970,
+        "keys": []
+      },
+      {
+        "timeMs": 17140,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 17410,
+        "keys": []
+      },
+      {
+        "timeMs": 21180,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 21450,
+        "keys": []
+      },
+      {
+        "timeMs": 22070,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 22340,
+        "keys": []
+      },
+      {
+        "timeMs": 23100,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 23370,
+        "keys": []
+      },
+      {
+        "timeMs": 24100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 24370,
+        "keys": []
+      },
+      {
+        "timeMs": 24760,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25030,
+        "keys": []
+      },
+      {
+        "timeMs": 25410,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 25680,
+        "keys": []
+      },
+      {
+        "timeMs": 26080,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 26350,
+        "keys": []
+      },
+      {
+        "timeMs": 26780,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 27050,
+        "keys": []
+      },
+      {
+        "timeMs": 27400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27670,
+        "keys": []
+      },
+      {
+        "timeMs": 28000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28270,
+        "keys": []
+      },
+      {
+        "timeMs": 28670,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28940,
+        "keys": []
+      },
+      {
+        "timeMs": 29650,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 29920,
+        "keys": []
+      },
+      {
+        "timeMs": 30120,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 30390,
+        "keys": []
+      },
+      {
+        "timeMs": 30560,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 30830,
+        "keys": []
+      },
+      {
+        "timeMs": 31000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 31270,
+        "keys": []
+      },
+      {
+        "timeMs": 31900,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32170,
+        "keys": []
+      },
+      {
+        "timeMs": 34020,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 34291,
+        "keys": []
+      },
+      {
+        "timeMs": 34960,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 35231,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT09Tape",
+        "keys": [
+          {
+            "timeMs": 420,
+            "key": "2"
+          },
+          {
+            "timeMs": 860,
+            "key": "x"
+          },
+          {
+            "timeMs": 1290,
+            "key": "square"
+          },
+          {
+            "timeMs": 1750,
+            "key": "minus"
+          },
+          {
+            "timeMs": 2200,
+            "key": "3"
+          },
+          {
+            "timeMs": 3000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 5080,
+            "key": "menu"
+          },
+          {
+            "timeMs": 5980,
+            "key": "5"
+          },
+          {
+            "timeMs": 6920,
+            "key": "1"
+          },
+          {
+            "timeMs": 7850,
+            "key": "right"
+          },
+          {
+            "timeMs": 8660,
+            "key": "right"
+          },
+          {
+            "timeMs": 10630,
+            "key": "3"
+          },
+          {
+            "timeMs": 11590,
+            "key": "enter"
+          },
+          {
+            "timeMs": 15820,
+            "key": "esc"
+          },
+          {
+            "timeMs": 16700,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 17140,
+            "key": "t"
+          },
+          {
+            "timeMs": 21180,
+            "key": "menu"
+          },
+          {
+            "timeMs": 22070,
+            "key": "2"
+          },
+          {
+            "timeMs": 23100,
+            "key": "5"
+          },
+          {
+            "timeMs": 24100,
+            "key": "tab"
+          },
+          {
+            "timeMs": 24760,
+            "key": "tab"
+          },
+          {
+            "timeMs": 25410,
+            "key": "right"
+          },
+          {
+            "timeMs": 26080,
+            "key": "down"
+          },
+          {
+            "timeMs": 26780,
+            "key": "enter"
+          },
+          {
+            "timeMs": 27400,
+            "key": "tab"
+          },
+          {
+            "timeMs": 28000,
+            "key": "tab"
+          },
+          {
+            "timeMs": 28670,
+            "key": "enter"
+          },
+          {
+            "timeMs": 29650,
+            "key": "neg"
+          },
+          {
+            "timeMs": 30120,
+            "key": "1"
+          },
+          {
+            "timeMs": 30560,
+            "key": "dot"
+          },
+          {
+            "timeMs": 31000,
+            "key": "5"
+          },
+          {
+            "timeMs": 31900,
+            "key": "enter"
+          },
+          {
+            "timeMs": 34020,
+            "key": "3"
+          },
+          {
+            "timeMs": 34960,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

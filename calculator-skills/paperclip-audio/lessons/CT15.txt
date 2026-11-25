@@ -1,0 +1,9 @@
+In Graphs, press the template key. Select the n-piece function template.
+Set the number of pieces to two and press Enter.
+Type the first expression. Move right to its condition. Control plus the equals key opens the inequality symbols.
+Less than or equal to includes an endpoint. Strictly less than leaves it out. The first rule does not include x equals one.
+Move down to the second row. Enter its expression, then move right to its condition.
+Include x equals one in the second condition, so only one rule owns the join.
+Press Enter to graph. The graph only exists where the conditions allow it.
+At the join, read the inequality before using the expression.
+Both outer endpoints are included. Outside the restricted domain the function is undefined.

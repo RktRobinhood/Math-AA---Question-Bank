@@ -1,0 +1,516 @@
+{
+  "schemaVersion": 1,
+  "id": "CT26",
+  "route": "adjacency-walks/index.html",
+  "catalogueTitle": "Adjacency matrices and walks",
+  "playerHeading": "Adjacency matrices and walks",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "adjacency-walks/index.html"
+  },
+  "script": "lessons/CT26.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Enter the directed arrow counts. Rows are where a walk starts; columns are where it goes.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Two arrows go from A to B, so the entry in row A, column B is two. An absent arrow gives zero.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Open Matrix and Vector, then Create, then Matrix.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Set three rows and three columns. Fill each count, then press Tab.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "From after the last cell, press Control and Var to insert the store arrow, type A, then Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Type a raised to power two, then Enter. This uses matrix multiplication.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "From A to C, read row A, column C: two. The two parallel arrows from A to B each allow a walk through B. Read the reverse entry: zero.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "For exactly three edges, use a cubed instead. Do not add shorter lengths to it.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "There is one three-edge walk: A to C, back to A, then to C. Repeated vertices are allowed in a walk.",
+      "watchCueId": "watch-09"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 58000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Enter the directed arrow counts. Rows are where a walk starts; columns are where it goes.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Two arrows go A→B, so the entry in row A, column B is 2. An absent arrow gives 0.",
+        "endMs": 11000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 11000,
+        "text": "Open Matrix & Vector, then Create, then Matrix.",
+        "endMs": 18000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 18000,
+        "text": "Set 3 rows and 3 columns. Fill each count, then press Tab.",
+        "endMs": 31500
+      },
+      {
+        "id": "watch-05",
+        "startMs": 31500,
+        "text": "From after the last cell, use Ctrl + Var (sto→), type a, then Enter.",
+        "endMs": 35450
+      },
+      {
+        "id": "watch-06",
+        "startMs": 35450,
+        "text": "Type a raised to power 2, then Enter. This uses matrix multiplication.",
+        "endMs": 41000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 41000,
+        "text": "A to C is row A, column C: 2. The two parallel A→B arrows each allow a walk through B. Read the reverse entry: 0.",
+        "endMs": 49000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 49000,
+        "text": "For exactly three edges, use a³ instead. Do not add shorter lengths to it.",
+        "endMs": 54000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 54000,
+        "text": "There is one three-edge walk A→C→A→C. Repeated vertices are allowed in a walk.",
+        "endMs": 58000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 11500,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 11860,
+        "keys": []
+      },
+      {
+        "timeMs": 12400,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 12760,
+        "keys": []
+      },
+      {
+        "timeMs": 13300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 13660,
+        "keys": []
+      },
+      {
+        "timeMs": 14200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14560,
+        "keys": []
+      },
+      {
+        "timeMs": 16000,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 16360,
+        "keys": []
+      },
+      {
+        "timeMs": 16760,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17120,
+        "keys": []
+      },
+      {
+        "timeMs": 17520,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 17880,
+        "keys": []
+      },
+      {
+        "timeMs": 18280,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 18640,
+        "keys": []
+      },
+      {
+        "timeMs": 19040,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19400,
+        "keys": []
+      },
+      {
+        "timeMs": 20000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20360,
+        "keys": []
+      },
+      {
+        "timeMs": 20700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 21060,
+        "keys": []
+      },
+      {
+        "timeMs": 21400,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 21760,
+        "keys": []
+      },
+      {
+        "timeMs": 22100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 22460,
+        "keys": []
+      },
+      {
+        "timeMs": 22800,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23160,
+        "keys": []
+      },
+      {
+        "timeMs": 23500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23860,
+        "keys": []
+      },
+      {
+        "timeMs": 24200,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 24560,
+        "keys": []
+      },
+      {
+        "timeMs": 24900,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25260,
+        "keys": []
+      },
+      {
+        "timeMs": 25600,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 25960,
+        "keys": []
+      },
+      {
+        "timeMs": 26300,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 26660,
+        "keys": []
+      },
+      {
+        "timeMs": 27000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 27360,
+        "keys": []
+      },
+      {
+        "timeMs": 27700,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28060,
+        "keys": []
+      },
+      {
+        "timeMs": 28400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 28760,
+        "keys": []
+      },
+      {
+        "timeMs": 29100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 29460,
+        "keys": []
+      },
+      {
+        "timeMs": 29800,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 30160,
+        "keys": []
+      },
+      {
+        "timeMs": 30500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 30860,
+        "keys": []
+      },
+      {
+        "timeMs": 31200,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 31560,
+        "keys": []
+      },
+      {
+        "timeMs": 31900,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 32260,
+        "keys": []
+      },
+      {
+        "timeMs": 32500,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 32860,
+        "keys": []
+      },
+      {
+        "timeMs": 33100,
+        "keys": [
+          "var"
+        ]
+      },
+      {
+        "timeMs": 33460,
+        "keys": []
+      },
+      {
+        "timeMs": 33750,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 34110,
+        "keys": []
+      },
+      {
+        "timeMs": 34550,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34910,
+        "keys": []
+      },
+      {
+        "timeMs": 35600,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 35960,
+        "keys": []
+      },
+      {
+        "timeMs": 36450,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 36810,
+        "keys": []
+      },
+      {
+        "timeMs": 37300,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 37660,
+        "keys": []
+      },
+      {
+        "timeMs": 38150,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 38510,
+        "keys": []
+      },
+      {
+        "timeMs": 49100,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 49460,
+        "keys": []
+      },
+      {
+        "timeMs": 49940,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 50300,
+        "keys": []
+      },
+      {
+        "timeMs": 50780,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 51140,
+        "keys": []
+      },
+      {
+        "timeMs": 51620,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 51980,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

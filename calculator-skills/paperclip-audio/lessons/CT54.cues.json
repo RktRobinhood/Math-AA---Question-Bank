@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "id": "CT54",
+  "route": "integral/index.html",
+  "catalogueTitle": "Numerical definite integral and signed area",
+  "playerHeading": "Definite integral and signed area",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "integral/index.html"
+  },
+  "script": "lessons/CT54.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Plot f of x equals x minus three on a Graphs page.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu then six: Analyze Graph then six: Integral.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "This page contains one curve. If prompted on your handheld, select the curve first.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Type zero for the lower bound and press Enter.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Type four for the upper bound and press Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The integral is minus four. The contribution below the x-axis is negative.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "For geometric area, split where the graph crosses the axis, at x equals three.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Add the magnitudes: four point five below and zero point five above. Total geometric area is five.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 27800,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Plot f(x) = x − 3 on a Graphs page.",
+        "endMs": 4700
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4700,
+        "text": "Open Menu → 6: Analyze Graph → 6: Integral.",
+        "endMs": 9100
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9100,
+        "text": "This page contains one curve. If prompted on your handheld, select the curve first.",
+        "endMs": 10400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 10400,
+        "text": "Type 0 for the lower bound and press Enter.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 13000,
+        "text": "Type 4 for the upper bound and press Enter.",
+        "endMs": 16500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 16500,
+        "text": "The integral is −4. The contribution below the x-axis is negative.",
+        "endMs": 21500
+      },
+      {
+        "id": "watch-07",
+        "startMs": 21500,
+        "text": "For geometric area, split where the graph crosses the axis, at x = 3.",
+        "endMs": 24700
+      },
+      {
+        "id": "watch-08",
+        "startMs": 24700,
+        "text": "Add the magnitudes: 4.5 below and 0.5 above. Total geometric area is 5.",
+        "endMs": 27800
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 550,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 861,
+        "keys": []
+      },
+      {
+        "timeMs": 1150,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 1460,
+        "keys": []
+      },
+      {
+        "timeMs": 1770,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2080,
+        "keys": []
+      },
+      {
+        "timeMs": 2650,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 2960,
+        "keys": []
+      },
+      {
+        "timeMs": 4980,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5290,
+        "keys": []
+      },
+      {
+        "timeMs": 5920,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6230,
+        "keys": []
+      },
+      {
+        "timeMs": 7550,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7860,
+        "keys": []
+      },
+      {
+        "timeMs": 10720,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 11031,
+        "keys": []
+      },
+      {
+        "timeMs": 11880,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 12191,
+        "keys": []
+      },
+      {
+        "timeMs": 13420,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 13730,
+        "keys": []
+      },
+      {
+        "timeMs": 15130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15441,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT54Tape",
+        "keys": [
+          {
+            "timeMs": 550,
+            "key": "x"
+          },
+          {
+            "timeMs": 1150,
+            "key": "minus"
+          },
+          {
+            "timeMs": 1770,
+            "key": "3"
+          },
+          {
+            "timeMs": 2650,
+            "key": "enter"
+          },
+          {
+            "timeMs": 4980,
+            "key": "menu"
+          },
+          {
+            "timeMs": 5920,
+            "key": "6"
+          },
+          {
+            "timeMs": 7550,
+            "key": "6"
+          },
+          {
+            "timeMs": 10720,
+            "key": "0"
+          },
+          {
+            "timeMs": 11880,
+            "key": "enter"
+          },
+          {
+            "timeMs": 13420,
+            "key": "4"
+          },
+          {
+            "timeMs": 15130,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

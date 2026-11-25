@@ -1,0 +1,7 @@
+Enter the function in the Graphs application and press Enter.
+The default window may hide the interesting feature.
+Here the vertex lies beyond the usual central view.
+Set the horizontal and vertical limits independently.
+A viewing window does not change the domain.
+This window contains the vertex with space on both sides.
+Use your context to choose sensible bounds.

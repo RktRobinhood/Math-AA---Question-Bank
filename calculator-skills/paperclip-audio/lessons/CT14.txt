@@ -1,0 +1,7 @@
+The equation is in degrees. Check Graphing Angle in the Graphs settings.
+The blue graph is the sine of x; the red line is zero point five. The window already covers the whole interval.
+Use Intersection. Put a lower and an upper bound around the crossing near one hundred and fifty degrees.
+thirty degrees counts. three hundred and ninety degrees also makes the equation true, but the interval excludes it.
+Now the target is one, with x strictly between zero and one hundred and eighty degrees. The curves touch; there is no sign change.
+Enter the upper bound, then compare the maximum height with the target.
+The maximum is at ninety degrees, with a height of one. It touches the target, so count ninety degrees once.

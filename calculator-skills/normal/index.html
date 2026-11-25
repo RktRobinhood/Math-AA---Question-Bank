@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Normal CDF · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css"><script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="narration.js" defer></script><script src="measured-cues.js" defer></script><script src="voice-profile.js" defer></script><script src="math.js" defer></script><script src="lesson.js" defer></script>
+</head>
+<body><main>
+<header class="header">
+<div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT39</span><span id="caption-beta" class="rehearsal-tag"> · Caption-only rehearsal</span></p><h1>Normal intervals &amp; tails</h1><p class="subtitle">Find the area between two limits, or on one side of a limit.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="0">
+<div class="watch-grid">
+<div class="viewer cx-handheld-stage">
+<p id="caption" class="caption"></p><p id="audio-state" class="audio-state" role="status" hidden></p>
+<div class="worked-prompt"><div><span>Watch example</span> <i>X</i> ∼ N(20, 2²) · <strong id="worked-event">P(18 &lt; X &lt; 23)</strong></div><div id="compact-curve" class="curve"></div></div>
+<div id="watch-host"><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="screen-work"></div><button id="stage-play" type="button" aria-label="Play caption rehearsal" hidden><svg width="21" height="23" viewBox="0 0 22 24" aria-hidden="true"><path fill="currentColor" d="M4 2l16 10L4 22z"/></svg></button></div></div>
+<div class="player transport" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" aria-label="Play" class="primary">Play</button><label><input type="checkbox" id="captions" checked> CC</label><button id="take-over" type="button" class="cx-watch-try">Take over</button></div>
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="30" step=".01"><span id="clock" aria-hidden="true">0:00</span></label>
+<audio id="narration" preload="metadata"></audio>
+</div>
+
+</div>
+<aside class="director" aria-label="Demonstration steps">
+<h2>Walkthrough</h2>
+<div id="watch-curve" class="curve" aria-label="Normal curve with the selected area shaded"></div>
+<ol id="steps" class="steps"></ol>
+<button class="plain-link" type="button" id="to-try">Try a tail probability <span aria-hidden="true">→</span></button>
+<details class="transcript"><summary>Transcript</summary><p id="transcript"></p></details>
+</aside>
+</div>
+</section>
+<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
+<div class="try-grid">
+<section class="try-device" aria-label="Practice on the handheld">
+<div id="try-host" tabindex="0" aria-label="Practice calculator. M opens Menu. In the wizard, Tab changes fields and Escape closes it."><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="try-work"></div></div></div>
+<p id="try-feedback" class="feedback" role="status"></p>
+<p id="key-help">Start with <b>Menu</b>. Select a field with <b>Tab</b>. Type <kbd>infinity</kbd> for ∞.</p>
+<p id="fork-label" role="status"></p><button id="reset-try" type="button" class="plain-link">Reset Try</button>
+<button id="return-watch" type="button" class="plain-link">Return to Watch</button>
+</section>
+<div class="try-material">
+<p id="link-notice" class="link-notice" role="status" hidden></p><section id="exercise" class="exercise" aria-labelledby="challenge-title">
+<p class="tag">Your turn</p><h2 id="challenge-title">Tail practice</h2>
+<p id="challenge-prompt">Mean 20, standard deviation 2. Find P(X &gt; 23).</p>
+<form id="answer-form"><label for="answer">Your probability <small>(4 decimal places)</small></label><div class="answer-row"><input type="text" inputmode="decimal" required id="answer" autocomplete="off" placeholder="e.g. 0.2500"><button class="primary">Check</button></div></form>
+<p class="feedback" id="feedback" role="status"></p>
+<details><summary>Hint</summary><p id="hint">Shade the side of 23 where the values are greater. The unbounded end needs infinity. Use 2 for the standard deviation, not 4.</p></details>
+</section>
+<section class="workbench" aria-labelledby="bench-title">
+<h2 id="bench-title">Set your example</h2>
+<p id="bench-instructions">Set a new distribution or event, then practise its calculator entries.</p>
+<form id="model" novalidate>
+<div class="model-fields">
+<label>Mean <i>μ</i><input required type="number" id="mean" step="any" value="20" inputmode="decimal"></label>
+<label>Standard deviation <i>σ</i><input required type="number" id="sd" step="any" value="2" inputmode="decimal"></label>
+</div>
+<div class="event-fields">
+<label>Event<select id="event"><option value="range">Between two bounds</option><option value="lower">Below a bound</option><option value="upper">Above a bound</option></select></label>
+<label id="lower-row"><span id="lower-label">Lower bound</span><input type="number" step="any" id="lower" inputmode="decimal"></label>
+<label id="upper-row"><span id="upper-label">Upper bound</span><input type="number" step="any" id="upper" inputmode="decimal"></label>
+</div>
+<p class="event-line" id="event-line" aria-live="polite"></p>
+<button class="primary">Load values into the handheld</button>
+</form>
+<p id="model-feedback" class="feedback" role="status"></p>
+<div id="try-curve" class="curve" aria-label="Normal curve with chosen area shaded"></div>
+</section>
+</div>
+</div>
+</section>
+<details class="notes"><summary>Keep in your notes</summary><p><strong>Normal Cdf</strong> gives an area, not the height of the curve. Enter <code>normCdf(lower, upper, mean, SD)</code>. Enter the standard deviation, not the variance.</p><ul><li>Below a bound: use −∞ for the lower endpoint.</li><li>Above a bound: use +∞ for the upper endpoint, or subtract the probability below the bound from 1.</li><li>The normal curve is continuous: a single endpoint has probability zero, so including it does not change the result.</li></ul><p class="note-source"><a href="https://education.ti.com/-/media/files/activities/us/math/statistics/is-it-normal/nspire-isitnormal-teacher-pdf.pdf">Texas Instruments: Probability menu route</a> · <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/36294">TI alternative via Statistics menu</a></p></details>
+</main></body></html>

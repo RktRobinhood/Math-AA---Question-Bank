@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 1,
+  "id": "CT48",
+  "route": "chi-square-goodness-of-fit/index.html",
+  "catalogueTitle": "Chi-square goodness-of-fit",
+  "playerHeading": "Chi-square goodness-of-fit",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "chi-square-goodness-of-fit/index.html"
+  },
+  "script": "lessons/CT48.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "One categorical variable, three outcomes. The claimed proportions are zero point two zero, zero point three zero and zero point five zero. The observed counts total eighty. The observed list is already entered.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Multiply eighty by each claimed proportion: sixteen, twenty-four and forty. Enter them into expt in the same category order. All are greater than five.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "On Lists and Spreadsheet, choose Menu, four for Statistics, four for Stat Tests, and seven for chi squared goodness of fit. This is not the two-way test of independence.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter the list named obs as Observed List and the list named expt as Expected List. Three categories and no fitted parameters give two degrees of freedom. Keep the output column at C, leave Draw off, and Tab to OK.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Read chi squared and the p value. The p value is an upper-tail probability under the claimed distribution, not the probability that the claim is true.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "the p value is about zero point zero zero three five eight, below zero point zero five. Reject the claimed category proportions; the sample gives evidence the distribution does not fit.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 45000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "One categorical variable, three outcomes. The claimed proportions are 0.20, 0.30 and 0.50. The observed counts total 80. The observed list is already entered.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Multiply 80 by each claimed proportion: 16, 24 and 40. Enter them into expt in the same category order. All are greater than 5.",
+        "endMs": 17000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 17000,
+        "text": "On Lists & Spreadsheet: Menu → 4 Statistics → 4 Stat Tests → 7 χ² GOF. This is not the two-way test of independence.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 22000,
+        "text": "Enter obs as Observed List and expt as Expected List. Three categories and no fitted parameters give df = 2. Leave c[] and Draw off; tab to OK.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 36000,
+        "text": "Read χ² and PVal. The p-value is the upper-tail probability under the claimed distribution, not the probability that the claim is true.",
+        "endMs": 40500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 40500,
+        "text": "PVal is about 0.00358, below 0.05. Reject the claimed category proportions; the sample gives evidence the distribution does not fit.",
+        "endMs": 45000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 7200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7590,
+        "keys": []
+      },
+      {
+        "timeMs": 8000,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 8390,
+        "keys": []
+      },
+      {
+        "timeMs": 8800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9191,
+        "keys": []
+      },
+      {
+        "timeMs": 9600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9990,
+        "keys": []
+      },
+      {
+        "timeMs": 10400,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 10791,
+        "keys": []
+      },
+      {
+        "timeMs": 11200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11590,
+        "keys": []
+      },
+      {
+        "timeMs": 12000,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 12390,
+        "keys": []
+      },
+      {
+        "timeMs": 12800,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 13191,
+        "keys": []
+      },
+      {
+        "timeMs": 13600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 13990,
+        "keys": []
+      },
+      {
+        "timeMs": 17800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 18190,
+        "keys": []
+      },
+      {
+        "timeMs": 18710,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 19100,
+        "keys": []
+      },
+      {
+        "timeMs": 19620,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 20010,
+        "keys": []
+      },
+      {
+        "timeMs": 20530,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 20920,
+        "keys": []
+      },
+      {
+        "timeMs": 22600,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 22991,
+        "keys": []
+      },
+      {
+        "timeMs": 23500,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 23890,
+        "keys": []
+      },
+      {
+        "timeMs": 24400,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 24790,
+        "keys": []
+      },
+      {
+        "timeMs": 25300,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 25690,
+        "keys": []
+      },
+      {
+        "timeMs": 26200,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 26590,
+        "keys": []
+      },
+      {
+        "timeMs": 27100,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 27491,
+        "keys": []
+      },
+      {
+        "timeMs": 28000,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 28390,
+        "keys": []
+      },
+      {
+        "timeMs": 28900,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 29290,
+        "keys": []
+      },
+      {
+        "timeMs": 29800,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 30190,
+        "keys": []
+      },
+      {
+        "timeMs": 30700,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 31090,
+        "keys": []
+      },
+      {
+        "timeMs": 31600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31991,
+        "keys": []
+      },
+      {
+        "timeMs": 32500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 32890,
+        "keys": []
+      },
+      {
+        "timeMs": 33400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 33790,
+        "keys": []
+      },
+      {
+        "timeMs": 34300,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34690,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

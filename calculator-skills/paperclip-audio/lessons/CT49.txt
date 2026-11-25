@@ -1,0 +1,7 @@
+Estimate the mean of a normal population. The sample mean is forty and the sample size is thirty-six. First suppose we know the population standard deviation is six.
+On a Calculator page, choose Menu then Statistics then Confidence Intervals then z Interval. Select Stats rather than Data.
+Enter six for the population standard deviation, forty for the sample mean, thirty-six for the sample size, and zero point nine five for C Level. Enter a proportion, not ninety-five.
+Read the lower and upper confidence bounds: about thirty-eight point zero four and forty-one point nine six. The margin of error is half the width, not an endpoint.
+Now suppose six is only the sample standard deviation. Use t Interval with Stats. The distinction is whether the population standard deviation is known, not whether the sample size exceeds thirty.
+For t, enter the sample mean first and the sample standard deviation second. Keep the sample size at thirty-six and C Level at zero point nine five.
+About thirty-seven point nine seven to forty-two point zero three for the population mean. Over many repeated samples, this method would capture the true mean about ninety-five percent of the time.

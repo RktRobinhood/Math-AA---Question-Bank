@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "id": "CT32",
+  "route": "quadratic-regression/index.html",
+  "catalogueTitle": "Quadratic and other nonlinear regression",
+  "playerHeading": "Quadratic regression",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "quadratic-regression/index.html"
+  },
+  "script": "lessons/CT32.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start with two named columns. Each row is one paired observation.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "In Lists and Spreadsheet, choose Statistics, Stat Calculations, then Quadratic Regression.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the right arrow and Tab to choose the lists x val for X and y val for Y.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Store the fit to f one. Keep each pair once and the results in C. Press Enter.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Read a, b and c in order. R squared summarises this fit; it is not another coefficient in the equation.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Predict at x equals one point five by substituting it into the fitted equation, not reading a nearby data row.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The curve bends down. Its vertex lies inside the observed interval and is higher than both endpoints.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "At x equals two the recorded value was nineteen point five. The fitted curve predicts eighteen there. The model need not pass through any observation.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 49000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start with two named columns. Each row is one paired observation.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "In Lists & Spreadsheet, choose Statistics, Stat Calculations, then Quadratic Regression.",
+        "endMs": 11000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 11000,
+        "text": "Use the right arrow and Tab to choose xval for X and yval for Y.",
+        "endMs": 17400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 17400,
+        "text": "Store the fit to f1. Keep each pair once and the results in C. Press Enter.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 22000,
+        "text": "Read a, b and c in order. R² summarises this fit; it is not another coefficient in the equation.",
+        "endMs": 28000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 28000,
+        "text": "Predict at x = 1.5 by substituting it into the fitted equation, not reading a nearby data row.",
+        "endMs": 33000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 33000,
+        "text": "The curve bends down. Its vertex lies inside the observed interval and is higher than both endpoints.",
+        "endMs": 40000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 40000,
+        "text": "At x = 2 the recorded value was 19.5. The fitted curve predicts 18 there. The model need not pass through any observation.",
+        "endMs": 49000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5250,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5610,
+        "keys": []
+      },
+      {
+        "timeMs": 6150,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6511,
+        "keys": []
+      },
+      {
+        "timeMs": 7300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7660,
+        "keys": []
+      },
+      {
+        "timeMs": 8650,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 9010,
+        "keys": []
+      },
+      {
+        "timeMs": 11500,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11860,
+        "keys": []
+      },
+      {
+        "timeMs": 12650,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13010,
+        "keys": []
+      },
+      {
+        "timeMs": 14100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 14460,
+        "keys": []
+      },
+      {
+        "timeMs": 15250,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15610,
+        "keys": []
+      },
+      {
+        "timeMs": 16350,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16710,
+        "keys": []
+      },
+      {
+        "timeMs": 20100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20460,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT32Tape",
+        "keys": [
+          {
+            "timeMs": 5250,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6150,
+            "key": "4"
+          },
+          {
+            "timeMs": 7300,
+            "key": "1"
+          },
+          {
+            "timeMs": 8650,
+            "key": "6"
+          },
+          {
+            "timeMs": 11500,
+            "key": "right"
+          },
+          {
+            "timeMs": 12650,
+            "key": "tab"
+          },
+          {
+            "timeMs": 14100,
+            "key": "right"
+          },
+          {
+            "timeMs": 15250,
+            "key": "right"
+          },
+          {
+            "timeMs": 16350,
+            "key": "tab"
+          },
+          {
+            "timeMs": 20100,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

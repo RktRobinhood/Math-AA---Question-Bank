@@ -1,0 +1,460 @@
+{
+  "schemaVersion": 1,
+  "id": "CT11",
+  "route": "intersection/index.html",
+  "catalogueTitle": "Intersections of two functions",
+  "playerHeading": "Find an intersection",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json"
+  },
+  "script": "lessons/CT11.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Plot both functions on the same page."
+    },
+    {
+      "id": "watch-02",
+      "text": "Look for the crossing that matches the requested point."
+    },
+    {
+      "id": "watch-03",
+      "text": "Choose Intersection."
+    },
+    {
+      "id": "watch-04",
+      "text": "Select the relevant graphs if prompted."
+    },
+    {
+      "id": "watch-05",
+      "text": "Bracket one crossing at a time with the lower and upper bounds."
+    },
+    {
+      "id": "watch-06",
+      "text": "Read the coordinates."
+    },
+    {
+      "id": "watch-07",
+      "text": "At the intersection, both expressions give the same y-value."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 20284,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Plot both functions on the same page.",
+        "endMs": 2920
+      },
+      {
+        "id": "watch-02",
+        "startMs": 2920,
+        "text": "Look for the crossing that matches the requested point.",
+        "endMs": 6500
+      },
+      {
+        "id": "watch-03",
+        "startMs": 6500,
+        "text": "Choose Intersection.",
+        "endMs": 8260
+      },
+      {
+        "id": "watch-04",
+        "startMs": 8260,
+        "text": "Select the relevant graphs if prompted.",
+        "endMs": 10780
+      },
+      {
+        "id": "watch-05",
+        "startMs": 10780,
+        "text": "Bracket one crossing at a time with the lower and upper bounds.",
+        "endMs": 15040
+      },
+      {
+        "id": "watch-06",
+        "startMs": 15040,
+        "text": "Read the coordinates.",
+        "endMs": 16600
+      },
+      {
+        "id": "watch-07",
+        "startMs": 16600,
+        "text": "At the intersection, both expressions give the same y-value.",
+        "endMs": 20284
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 160,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 345,
+        "keys": []
+      },
+      {
+        "timeMs": 430,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 615,
+        "keys": []
+      },
+      {
+        "timeMs": 720,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 905,
+        "keys": []
+      },
+      {
+        "timeMs": 1030,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 1215,
+        "keys": []
+      },
+      {
+        "timeMs": 1280,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 1465,
+        "keys": []
+      },
+      {
+        "timeMs": 1510,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 1695,
+        "keys": []
+      },
+      {
+        "timeMs": 1730,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 1915,
+        "keys": []
+      },
+      {
+        "timeMs": 1970,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2155,
+        "keys": []
+      },
+      {
+        "timeMs": 2320,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 2505,
+        "keys": []
+      },
+      {
+        "timeMs": 5810,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5995,
+        "keys": []
+      },
+      {
+        "timeMs": 6210,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6395,
+        "keys": []
+      },
+      {
+        "timeMs": 6760,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6945,
+        "keys": []
+      },
+      {
+        "timeMs": 11520,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11705,
+        "keys": []
+      },
+      {
+        "timeMs": 12740,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 12925,
+        "keys": []
+      },
+      {
+        "timeMs": 12990,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 13175,
+        "keys": []
+      },
+      {
+        "timeMs": 13230,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 13416,
+        "keys": []
+      },
+      {
+        "timeMs": 13470,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 13896,
+        "keys": []
+      },
+      {
+        "timeMs": 14070,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14255,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT11Tape",
+        "keys": [
+          {
+            "timeMs": 160,
+            "key": "x"
+          },
+          {
+            "timeMs": 430,
+            "key": "square"
+          },
+          {
+            "timeMs": 720,
+            "key": "enter"
+          },
+          {
+            "timeMs": 1030,
+            "key": "tab"
+          },
+          {
+            "timeMs": 1280,
+            "key": "2"
+          },
+          {
+            "timeMs": 1510,
+            "key": "x"
+          },
+          {
+            "timeMs": 1730,
+            "key": "plus"
+          },
+          {
+            "timeMs": 1970,
+            "key": "3"
+          },
+          {
+            "timeMs": 2320,
+            "key": "enter"
+          },
+          {
+            "timeMs": 5810,
+            "key": "menu"
+          },
+          {
+            "timeMs": 6210,
+            "key": "6"
+          },
+          {
+            "timeMs": 6760,
+            "key": "4"
+          },
+          {
+            "timeMs": 11520,
+            "key": "right"
+          },
+          {
+            "timeMs": 12740,
+            "key": "enter"
+          },
+          {
+            "timeMs": 12990,
+            "key": "right"
+          },
+          {
+            "timeMs": 13230,
+            "key": "right"
+          },
+          {
+            "timeMs": 13470,
+            "key": "right"
+          },
+          {
+            "timeMs": 13710,
+            "key": "right"
+          },
+          {
+            "timeMs": 14070,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "intersection/narration.mp3",
+    "bytes": 265115,
+    "sha256": "e44fcd1e794ed48d11341e504592d80b7befb1760828d1655e919715e481313e",
+    "streamDurationMs": 20323,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "existing-runtime-captions-plus-approximate-offline-alignments",
+      "runtimeCaptionCues": [
+        {
+          "id": "watch-01",
+          "startMs": 0,
+          "text": "Plot both functions on the same page.",
+          "endMs": 2920
+        },
+        {
+          "id": "watch-02",
+          "startMs": 2920,
+          "text": "Look for the crossing that matches the requested point.",
+          "endMs": 6500
+        },
+        {
+          "id": "watch-03",
+          "startMs": 6500,
+          "text": "Choose Intersection.",
+          "endMs": 8260
+        },
+        {
+          "id": "watch-04",
+          "startMs": 8260,
+          "text": "Select the relevant graphs if prompted.",
+          "endMs": 10780
+        },
+        {
+          "id": "watch-05",
+          "startMs": 10780,
+          "text": "Bracket one crossing at a time with the lower and upper bounds.",
+          "endMs": 15040
+        },
+        {
+          "id": "watch-06",
+          "startMs": 15040,
+          "text": "Read the coordinates.",
+          "endMs": 16600
+        },
+        {
+          "id": "watch-07",
+          "startMs": 16600,
+          "text": "At the intersection, both expressions give the same y-value.",
+          "endMs": 20284
+        }
+      ],
+      "guideChapterStartsMs": [
+        0,
+        6183,
+        10754,
+        14863
+      ],
+      "guideDurationMs": 20323,
+      "source": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json",
+      "offlineSpeechSegments": [
+        {
+          "startMs": 0,
+          "endMs": 2100,
+          "text": "Plot both functions on the same page."
+        },
+        {
+          "startMs": 2920,
+          "endMs": 5340,
+          "text": "Look for the crossing that matches the requested point."
+        },
+        {
+          "startMs": 6500,
+          "endMs": 7140,
+          "text": "Choose Intersection."
+        },
+        {
+          "startMs": 8260,
+          "endMs": 9880,
+          "text": "Select the relevant graphs if prompted."
+        },
+        {
+          "startMs": 10780,
+          "endMs": 13920,
+          "text": "Bracket one crossing at a time with the lower and upper bounds."
+        },
+        {
+          "startMs": 15040,
+          "endMs": 15560,
+          "text": "Read the coordinates."
+        },
+        {
+          "startMs": 16600,
+          "endMs": 19740,
+          "text": "At the intersection, both expressions give the same y value."
+        }
+      ]
+    },
+    "byteIdenticalCopy": "guided-audio/CT11.mp3"
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

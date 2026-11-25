@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "id": "CT02",
+  "route": "angle-modes/index.html",
+  "catalogueTitle": "Angle modes and inverse trigonometry",
+  "playerHeading": "Angle modes and inverse trig",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "angle-modes/index.html"
+  },
+  "script": "lessons/CT02.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Given that the sine of theta is zero point six, find the principal angle in degrees. Check the angle mode first.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Press Home, then five: Settings and two: Document Settings.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Tab to Angle, press Right, select Degree, then tab to OK and confirm.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Return to the current document. Press Trig and choose inverse sine, not sine.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter zero point six and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The display is in degrees. The calculator gives one principal angle; check the range for other solutions.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 31800,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Given sin θ = 0.6, find the principal angle in degrees. Check the angle mode first.",
+        "endMs": 3400
+      },
+      {
+        "id": "watch-02",
+        "startMs": 3400,
+        "text": "Press Home, then 5: Settings and 2: Document Settings.",
+        "endMs": 7100
+      },
+      {
+        "id": "watch-03",
+        "startMs": 7100,
+        "text": "Tab to Angle, press Right, select Degree, then tab to OK and confirm.",
+        "endMs": 13100
+      },
+      {
+        "id": "watch-04",
+        "startMs": 13100,
+        "text": "Return to the current document. Press trig and choose sin⁻¹, not sin.",
+        "endMs": 18500
+      },
+      {
+        "id": "watch-05",
+        "startMs": 18500,
+        "text": "Enter 0.6 and press Enter. Inverse sine turns a ratio into an angle, not its reciprocal.",
+        "endMs": 25000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 25000,
+        "text": "The display is in degrees. The calculator gives one principal angle; check the range for other solutions.",
+        "endMs": 31800
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3650,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 3895,
+        "keys": []
+      },
+      {
+        "timeMs": 4580,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 4825,
+        "keys": []
+      },
+      {
+        "timeMs": 5600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 5845,
+        "keys": []
+      },
+      {
+        "timeMs": 7340,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 7585,
+        "keys": []
+      },
+      {
+        "timeMs": 8100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 8345,
+        "keys": []
+      },
+      {
+        "timeMs": 8770,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 9015,
+        "keys": []
+      },
+      {
+        "timeMs": 9450,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9695,
+        "keys": []
+      },
+      {
+        "timeMs": 10060,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10305,
+        "keys": []
+      },
+      {
+        "timeMs": 10370,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10615,
+        "keys": []
+      },
+      {
+        "timeMs": 10680,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10925,
+        "keys": []
+      },
+      {
+        "timeMs": 10990,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11235,
+        "keys": []
+      },
+      {
+        "timeMs": 11310,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 11555,
+        "keys": []
+      },
+      {
+        "timeMs": 11940,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 12185,
+        "keys": []
+      },
+      {
+        "timeMs": 13420,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 13665,
+        "keys": []
+      },
+      {
+        "timeMs": 14300,
+        "keys": [
+          "trig"
+        ]
+      },
+      {
+        "timeMs": 14545,
+        "keys": []
+      },
+      {
+        "timeMs": 15780,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 16025,
+        "keys": []
+      },
+      {
+        "timeMs": 16650,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 16895,
+        "keys": []
+      },
+      {
+        "timeMs": 18860,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 19105,
+        "keys": []
+      },
+      {
+        "timeMs": 19270,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 19515,
+        "keys": []
+      },
+      {
+        "timeMs": 19680,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 19925,
+        "keys": []
+      },
+      {
+        "timeMs": 20540,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20785,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT02Tape",
+        "keys": [
+          {
+            "timeMs": 3650,
+            "key": "home"
+          },
+          {
+            "timeMs": 4580,
+            "key": "5"
+          },
+          {
+            "timeMs": 5600,
+            "key": "2"
+          },
+          {
+            "timeMs": 7340,
+            "key": "tab"
+          },
+          {
+            "timeMs": 8100,
+            "key": "right"
+          },
+          {
+            "timeMs": 8770,
+            "key": "down"
+          },
+          {
+            "timeMs": 9450,
+            "key": "enter"
+          },
+          {
+            "timeMs": 10060,
+            "key": "tab"
+          },
+          {
+            "timeMs": 10370,
+            "key": "tab"
+          },
+          {
+            "timeMs": 10680,
+            "key": "tab"
+          },
+          {
+            "timeMs": 10990,
+            "key": "tab"
+          },
+          {
+            "timeMs": 11310,
+            "key": "tab"
+          },
+          {
+            "timeMs": 11940,
+            "key": "enter"
+          },
+          {
+            "timeMs": 13420,
+            "key": "4"
+          },
+          {
+            "timeMs": 14300,
+            "key": "trig"
+          },
+          {
+            "timeMs": 15780,
+            "key": "down"
+          },
+          {
+            "timeMs": 16650,
+            "key": "enter"
+          },
+          {
+            "timeMs": 18860,
+            "key": "0"
+          },
+          {
+            "timeMs": 19270,
+            "key": "dot"
+          },
+          {
+            "timeMs": 19680,
+            "key": "6"
+          },
+          {
+            "timeMs": 20540,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

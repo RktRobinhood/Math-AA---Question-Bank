@@ -1,0 +1,5 @@
+Before opening the calculator, identify the first and last whole-number counts that belong in the event.
+On a Calculator page, open Probability, then Distributions, and choose Binomial C D F.
+Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds.
+For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero.
+A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds.

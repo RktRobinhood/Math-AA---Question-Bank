@@ -1,0 +1,15 @@
+Find one term first: substitute n equals five into the rule.
+For the fifth term, replace n with five. Keep the exponent in brackets.
+The fifth term is forty-eight. That is not the total of the first five terms.
+For a total of consecutive terms, open Menu then four: Calculus then three: Sum.
+Type n, then Tab to the lower index, upper index and rule.
+Enter the original rule in n. The template automatically steps by one.
+Enter gives ninety-three: the total of all five terms, including both endpoints.
+Need every second index? Open Statistics, List Operations, then Sequence to insert the sequence command.
+Type the rule, then press Right to leave the exponent before typing the comma.
+Enter n, the lower and upper indices, then the step. That last two is not the number of terms.
+This produces a list of four terms, not their sum.
+For the total, first open Statistics, List Math, then Sum of Elements to insert the sum command.
+Inside the sum command, insert the sequence command again. Keep the last argument, a step of two.
+Enter gives five hundred and ten. The outer sum adds only the terms created by the sequence command.
+For a first threshold, find the first integer index whose term passes the target, not the first total that does.

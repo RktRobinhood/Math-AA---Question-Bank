@@ -1,0 +1,6 @@
+On a Calculator page, open Menu, choose Algebra, then Numerical Solve.
+Enter the equation, then a comma and the variable you’re solving for.
+To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma.
+Close the bracket and press Enter. The calculator gives one numerical solution.
+If the equation may have more than one solution, use separate intervals and check each result.
+Keep the calculator’s full precision while you work, then round the final answer as the question asks.

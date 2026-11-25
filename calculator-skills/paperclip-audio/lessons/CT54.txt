@@ -1,0 +1,8 @@
+Plot f of x equals x minus three on a Graphs page.
+Open Menu then six: Analyze Graph then six: Integral.
+This page contains one curve. If prompted on your handheld, select the curve first.
+Type zero for the lower bound and press Enter.
+Type four for the upper bound and press Enter.
+The integral is minus four. The contribution below the x-axis is negative.
+For geometric area, split where the graph crosses the axis, at x equals three.
+Add the magnitudes: four point five below and zero point five above. Total geometric area is five.

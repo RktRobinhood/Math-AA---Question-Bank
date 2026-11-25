@@ -25,6 +25,7 @@
 
   const E = window.QBEngine;
   const TYPES = window.QB_TYPES;
+  const CALC = window.QBPracticeCalculator;
   const app = document.getElementById('app');
   if (!E || !TYPES) { app.textContent = 'Practice could not load. Run node scripts/build.mjs.'; return; }
 
@@ -258,12 +259,15 @@
 
   // ── render ───────────────────────────────────────────────────────────────
   function render() {
+    CALC?.close();
     const tab = (id, text) => h('button', { type: 'button', class: state.tab === id ? 'on' : '', role: 'tab', 'aria-selected': String(state.tab === id), text, onclick: () => { state.tab = id; render(); } });
     app.replaceChildren(h('main', { class: 'prac' },
       h('div', { class: 'page-head no-print' }, h('h1', { text: 'Practice' }), h('span', { class: 'muted', text: `${C.short} · your progress is saved in this browser` })),
       firstLoad === 'unreadable' ? h('p', { class: 'verdict no no-print', text: 'Your saved progress could not be read. It has been kept aside, not deleted, and a fresh record was started.' }) : null,
       h('div', { class: 'prac-tabs no-print', role: 'tablist' }, tab('practice', 'Practise'), tab('progress', 'Progress'), tab('worksheet', 'Print a worksheet')),
       ...(state.tab === 'practice' ? practiceView() : state.tab === 'progress' ? progressView() : worksheetView())));
+    const active = !state.picking && CALC?.eligible({ item: state.item, question: state.question, course: C.id, tab: state.tab });
+    CALC?.bind(active ? state.question : null);
   }
 
   // ── scope: what's the test on? ───────────────────────────────────────────
@@ -564,10 +568,17 @@
     const q = state.question, item = state.item;
     const name = E.levelName(q.level, C.id);
     const settled = state.results && !state.selfLeft;
+    const useCalculator = CALC?.eligible({ item, question: q, course: C.id, tab: state.tab });
+    const calculatorButton = useCalculator ? h('button', {
+      class: 'practice-calc-trigger no-print', type: 'button', 'aria-label': 'Open calculator',
+      'aria-haspopup': 'dialog', 'aria-expanded': 'false',
+      title: q.calculator ? 'Open a blank calculator' : 'Open a blank calculator. Give an exact answer as requested.',
+      onclick: e => CALC.open(e.currentTarget),
+    }, 'Calculator') : null;
     return h('section', { class: 'block qcard' },
       h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), h('span', { text: q.title }), h('span', { class: 'sp' }),
         h('span', { class: 'chip', text: `Level ${q.level}${name ? ` · ${name}` : ''}` }),
-        calcChip(q),
+        !useCalculator || !q.calculator ? calcChip(q) : null, calculatorButton,
         h('span', { class: 'mono', text: `[${q.marks}]` })),
       state.extra ? h('div', { class: 'verdict info', text: 'Extra practice. It does not change your level.' })
         : item.reason === 'refresh' ? h('div', { class: 'verdict info', text: `A refresher for ${item.refreshFor} ${C.byCode.get(item.refreshFor)?.title || ''}.` })

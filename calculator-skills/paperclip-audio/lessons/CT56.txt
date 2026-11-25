@@ -1,0 +1,13 @@
+Store the curve on a Calculator page so you can reuse its heights.
+Open Menu, then one for Actions, then one for Define. Type f of x equals x squared, then press Enter.
+Done means the function is stored. Now f of one, for example, means the height at x equals one.
+Four equal strips have width one. Count their edges: there are five ordinates.
+The first and last heights belong to one strip each. The interior heights belong to two.
+Type half the width, times the bracket. Enter each end height once.
+Group the interior heights so the factor of two applies to all three.
+Enter returns twenty-two. Each ordinate is a function value; only the sum estimates the integral.
+Double the number of strips. The width halves, but there are now nine ordinates.
+Keep both endpoints; double the seven interior heights. Multiply by zero point two five.
+Use the half-step x-values (zero point five, one point five, two point five and three point five) as well as the original x-values.
+Enter returns twenty-one point five. On this convex curve, the tops of the strips lie above the curve.
+The exact integral is sixty-four thirds, about twenty-one point three three three. Eight strips are closer here; that is not a guarantee for every function.

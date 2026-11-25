@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "id": "CT33",
+  "route": "exponential-regression/index.html",
+  "catalogueTitle": "Exponential regression and growth factors",
+  "playerHeading": "Exponential regression",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "exponential-regression/index.html"
+  },
+  "script": "lessons/CT33.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Each row records dough volume at one hour. Every volume must be positive because exponential regression fits the natural log of y.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Statistics, then Stat Calculations. Press the letter A, even if the option is below the visible list.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the right arrow and Tab. Set the list called x val as the X List and y val as the Y List.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Use each pair once. Save to f one and keep the results in C and D. Press Enter.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Read a and b. The value a is the estimate at x equals zero. It need not equal the measurement there.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "A one-unit rise in x multiplies the estimate by b. Here that is about a fifty point seven percent increase.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The r and r squared rows assess the line fitted to x and the natural log of y, not the raw readings.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "At x equals two point five the input is inside the observed span. Substituting gives an interpolation.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "At x equals six the input is outside the observed span. The model can predict, but the trend may not continue.",
+      "watchCueId": "watch-09"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 52000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Each row records dough volume at one hour. Every volume must be positive because ExpReg fits ln(y).",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "Open Statistics, then Stat Calculations. Press the letter A, even if the option is below the visible list.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13000,
+        "text": "Use the right arrow and Tab. Set xval as the X List and yval as the Y List.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 20000,
+        "text": "Use each pair once. Save to f1 and keep the results in C and D. Press Enter.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 24000,
+        "text": "Read a and b. The value a is the estimate at x = 0. It need not equal the measurement there.",
+        "endMs": 30000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 30000,
+        "text": "A one-unit rise in x multiplies the estimate by b. Here that is about a 50.7% increase.",
+        "endMs": 34800
+      },
+      {
+        "id": "watch-07",
+        "startMs": 34800,
+        "text": "The r and r² rows assess the line fitted to x and ln(y), not the raw readings.",
+        "endMs": 38000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 38000,
+        "text": "At x = 2.5 the input is inside the observed span. Substituting gives an interpolation.",
+        "endMs": 44000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 44000,
+        "text": "At x = 6 the input is outside the observed span. The model can predict, but the trend may not continue.",
+        "endMs": 52000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6250,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 6610,
+        "keys": []
+      },
+      {
+        "timeMs": 7250,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 7610,
+        "keys": []
+      },
+      {
+        "timeMs": 8450,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 8810,
+        "keys": []
+      },
+      {
+        "timeMs": 10100,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 10460,
+        "keys": []
+      },
+      {
+        "timeMs": 13200,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 13560,
+        "keys": []
+      },
+      {
+        "timeMs": 14150,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14510,
+        "keys": []
+      },
+      {
+        "timeMs": 15800,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 16160,
+        "keys": []
+      },
+      {
+        "timeMs": 17100,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 17460,
+        "keys": []
+      },
+      {
+        "timeMs": 18400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 18760,
+        "keys": []
+      },
+      {
+        "timeMs": 22100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22460,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT33Tape",
+        "keys": [
+          {
+            "timeMs": 6250,
+            "key": "menu"
+          },
+          {
+            "timeMs": 7250,
+            "key": "4"
+          },
+          {
+            "timeMs": 8450,
+            "key": "1"
+          },
+          {
+            "timeMs": 10100,
+            "key": "a"
+          },
+          {
+            "timeMs": 13200,
+            "key": "right"
+          },
+          {
+            "timeMs": 14150,
+            "key": "tab"
+          },
+          {
+            "timeMs": 15800,
+            "key": "right"
+          },
+          {
+            "timeMs": 17100,
+            "key": "right"
+          },
+          {
+            "timeMs": 18400,
+            "key": "tab"
+          },
+          {
+            "timeMs": 22100,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

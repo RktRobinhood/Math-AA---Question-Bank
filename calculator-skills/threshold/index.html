@@ -1,0 +1,36 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Find a model threshold · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT16</span></p><h1>Find a model threshold</h1><p class="subtitle">Read the crossing, then decide the first whole day.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct16-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct16-bounds" data-visible="false" aria-hidden="true"></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct16-stage-grid">
+<div class="ct16-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<div class="ct16-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example · Caption rehearsal</p><h2>When does the culture reach 12 units?</h2><p class="formula">C(x) = 5 · 1.5ˣ, 0 ≤ x ≤ 8 days</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct16-try-help" hidden><p class="tag">Your turn</p><h2>Read the crossing and the first checkpoint</h2>
+<p id="keypad-problem" class="ct16-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools"><form id="expression-form"><div class="expression-grid">
+<label for="expression-1">Model f₁<input id="expression-1" type="text" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label>
+<label for="expression-2">Horizontal target f₂<input id="expression-2" type="text" maxlength="24" required spellcheck="false" autocomplete="off" inputmode="decimal"></label></div><button type="submit" class="primary">Plot both</button></form>
+<form id="bound-form" hidden><label for="bound" id="bound-label"></label><div class="inputline"><input id="bound" type="text" inputmode="decimal" maxlength="19" autocomplete="off"><button type="submit" class="primary">Enter</button></div></form>
+<button id="retry-bounds" type="button" hidden>Choose new bounds</button></div>
+<p id="checker-context" class="checker-context" hidden></p>
+<form id="answer-form"><label for="answer-x">Continuous crossing time (days)<input type="number" step="any" inputmode="decimal" required id="answer-x"></label><label for="answer-day">First whole day that meets the threshold<input type="number" step="1" inputmode="numeric" required id="answer-day"></label><p class="checker-precision">Give the continuous time to at least three significant figures if rounding.</p><button type="submit">Check answers</button></form><p class="feedback" id="feedback" role="status"></p>
+<details><summary>Hint</summary><p>The graph gives the time of equality. For the first whole day, test the integer days either side using the original inequality. An exact whole-day equality counts for “at least” or “at most”.</p></details>
+<p class="ct16-keyboard"><kbd>M</kbd>, <kbd>6</kbd>, <kbd>4</kbd> opens Intersection. Type a bound or move with <kbd>←</kbd> <kbd>→</kbd>, then confirm with <kbd>Enter</kbd>. The onscreen <kbd>Tab</kbd> opens the next entry line.</p>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct16-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="37.5" step="0.005"></label><span class="ct16-rehearsal" id="media-status">Captions only</span></div></div>
+</section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct16-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
+<details class="notes"><summary>What this practice viewer supports</summary><p>The practice viewer supports positive exponential models in the form A*B^x and positive horizontal targets reached strictly inside the time interval. Bases must be between 0.1 and 4, excluding 1; the end of the interval must be a whole day between 2 and 30. A growing model uses “at least”; a decreasing model uses “at most”. Other kinds of thresholds exist; this is a rehearsal of the menu, not calculator firmware.</p><p><a href="https://education.ti.com/-/media/files/ti-education/us/professional-development/teks/tutorial-guides/ti-nspire-solving-a-system-of-equations.pdf">TI’s handheld tutorial: Analyze Graph → Intersection</a></p></details>
+</main></body></html>

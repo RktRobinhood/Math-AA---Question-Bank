@@ -1,0 +1,13 @@
+Enter three minus two x in Graphs. The calculator's x is time t, measured in seconds.
+For displacement, take one signed integral. Choose Menu then six: Analyze Graph then six: Integral.
+Type zero and press Enter for the lower bound. Type four and press Enter for the upper bound.
+The signed result is negative four metres. The cart finishes four metres behind its starting point.
+The distance needs the reversal time. Choose Menu then six: Analyze Graph then one: Zero.
+Move the cursor to either side of the crossing, confirming each bound with Enter.
+Press Enter to mark the zero. Velocity is positive before one point five seconds and negative after it.
+Repeat Integral from zero to one point five. This positive part is the forward travel.
+The forward piece is positive two point two five metres.
+Repeat Integral from one point five to four. The second result is negative because motion was backward.
+The second signed piece is negative six point two five metres, so the cart travelled six point two five metres backward.
+Add magnitudes for distance. Taking the absolute value of the net result would lose the forward travel.
+If the graph only touches zero and stays on the same side, the cart stops but does not reverse. Try a fresh model.

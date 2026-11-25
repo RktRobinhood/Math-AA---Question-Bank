@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "id": "CT42",
+  "route": "poisson/index.html",
+  "catalogueTitle": "Poisson: exact and cumulative probabilities",
+  "playerHeading": "Poisson probabilities",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "poisson/index.html"
+  },
+  "script": "lessons/CT42.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "The Poisson model averages three events per ten minutes. We are counting in twenty minutes.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Double the mean. Use lambda equals six for this interval.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "For exactly six events, type the Poisson P D F command on a Calculator page. Enter six for the mean and six for the count.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Press Enter once to evaluate a typed command.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Exactly six has probability about zero point one six one.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "For three to six events inclusive, use the Poisson C D F command with mean six, lower bound three, and upper bound six.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "PDF takes one count. CDF adds every count between its two bounds.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Counts three, four, five and six together have probability about zero point five four four.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "More than six excludes six. Its complement includes every count from zero through six.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Type one minus Poisson C D F, with mean six, lower bound zero and upper bound six. Press Enter.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "More than six has probability about zero point three nine four.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "At least six includes six. Its complement now stops at five.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "Type one minus Poisson C D F, with mean six, lower bound zero and upper bound five. Press Enter.",
+      "watchCueId": "watch-13"
+    },
+    {
+      "id": "watch-14",
+      "text": "At least six has probability about zero point five five four. The two answers differ by the probability of exactly six.",
+      "watchCueId": "watch-14"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 50500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "The Poisson model averages three events per ten minutes. We are counting in twenty minutes.",
+        "endMs": 3100
+      },
+      {
+        "id": "watch-02",
+        "startMs": 3100,
+        "text": "Double the mean. Use λ = 6 for this interval.",
+        "endMs": 5700
+      },
+      {
+        "id": "watch-03",
+        "startMs": 5700,
+        "text": "For exactly six events, type poissPdf(6,6) on a Calculator page.",
+        "endMs": 11100
+      },
+      {
+        "id": "watch-04",
+        "startMs": 11100,
+        "text": "Press Enter once to evaluate a typed command.",
+        "endMs": 12200
+      },
+      {
+        "id": "watch-05",
+        "startMs": 12200,
+        "text": "Exactly six has probability about 0.161.",
+        "endMs": 15500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 15500,
+        "text": "For three to six events inclusive, type poissCdf(6,3,6).",
+        "endMs": 21650
+      },
+      {
+        "id": "watch-07",
+        "startMs": 21650,
+        "text": "PDF takes one count. CDF adds every count between its two bounds.",
+        "endMs": 22800
+      },
+      {
+        "id": "watch-08",
+        "startMs": 22800,
+        "text": "Counts 3, 4, 5 and 6 together have probability about 0.544.",
+        "endMs": 24700
+      },
+      {
+        "id": "watch-09",
+        "startMs": 24700,
+        "text": "More than six excludes six. Its complement includes every count from zero through six.",
+        "endMs": 27900
+      },
+      {
+        "id": "watch-10",
+        "startMs": 27900,
+        "text": "Type 1 − poissCdf(6,0,6) and press Enter.",
+        "endMs": 35150
+      },
+      {
+        "id": "watch-11",
+        "startMs": 35150,
+        "text": "More than six has probability about 0.394.",
+        "endMs": 36500
+      },
+      {
+        "id": "watch-12",
+        "startMs": 36500,
+        "text": "At least six includes six. Its complement now stops at five.",
+        "endMs": 39250
+      },
+      {
+        "id": "watch-13",
+        "startMs": 39250,
+        "text": "Type 1 − poissCdf(6,0,5) and press Enter.",
+        "endMs": 46600
+      },
+      {
+        "id": "watch-14",
+        "startMs": 46600,
+        "text": "At least six has probability about 0.554. The two answers differ by the probability of exactly six.",
+        "endMs": 50500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6350,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 6550,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 6800,
+        "keys": []
+      },
+      {
+        "timeMs": 6850,
+        "keys": [
+          "i"
+        ]
+      },
+      {
+        "timeMs": 7050,
+        "keys": []
+      },
+      {
+        "timeMs": 7100,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 7550,
+        "keys": []
+      },
+      {
+        "timeMs": 7600,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 7800,
+        "keys": []
+      },
+      {
+        "timeMs": 7850,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 8050,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 8300,
+        "keys": []
+      },
+      {
+        "timeMs": 8350,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 8550,
+        "keys": []
+      },
+      {
+        "timeMs": 8600,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 8800,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 9050,
+        "keys": []
+      },
+      {
+        "timeMs": 9100,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 9300,
+        "keys": []
+      },
+      {
+        "timeMs": 9350,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 9550,
+        "keys": []
+      },
+      {
+        "timeMs": 11650,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11850,
+        "keys": []
+      },
+      {
+        "timeMs": 16200,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 16400,
+        "keys": []
+      },
+      {
+        "timeMs": 16450,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 16650,
+        "keys": []
+      },
+      {
+        "timeMs": 16700,
+        "keys": [
+          "i"
+        ]
+      },
+      {
+        "timeMs": 16900,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 17150,
+        "keys": []
+      },
+      {
+        "timeMs": 17200,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 17400,
+        "keys": []
+      },
+      {
+        "timeMs": 17450,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 17650,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 17900,
+        "keys": []
+      },
+      {
+        "timeMs": 17950,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 18150,
+        "keys": []
+      },
+      {
+        "timeMs": 18200,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 18400,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 18650,
+        "keys": []
+      },
+      {
+        "timeMs": 18700,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 18900,
+        "keys": []
+      },
+      {
+        "timeMs": 18950,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 19150,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 19400,
+        "keys": []
+      },
+      {
+        "timeMs": 19450,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 19650,
+        "keys": []
+      },
+      {
+        "timeMs": 19700,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 19900,
+        "keys": []
+      },
+      {
+        "timeMs": 22350,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22550,
+        "keys": []
+      },
+      {
+        "timeMs": 28250,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 28450,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 28700,
+        "keys": []
+      },
+      {
+        "timeMs": 28750,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 28950,
+        "keys": []
+      },
+      {
+        "timeMs": 29000,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 29200,
+        "keys": [
+          "i"
+        ]
+      },
+      {
+        "timeMs": 29450,
+        "keys": []
+      },
+      {
+        "timeMs": 29500,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 29700,
+        "keys": []
+      },
+      {
+        "timeMs": 29750,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 29950,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 30200,
+        "keys": []
+      },
+      {
+        "timeMs": 30250,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 30450,
+        "keys": []
+      },
+      {
+        "timeMs": 30500,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 30700,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 30950,
+        "keys": []
+      },
+      {
+        "timeMs": 31000,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 31200,
+        "keys": []
+      },
+      {
+        "timeMs": 31250,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 31450,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 31700,
+        "keys": []
+      },
+      {
+        "timeMs": 31750,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 31950,
+        "keys": []
+      },
+      {
+        "timeMs": 32000,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 32200,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 32450,
+        "keys": []
+      },
+      {
+        "timeMs": 34650,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34850,
+        "keys": []
+      },
+      {
+        "timeMs": 39700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 39901,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 40151,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 40401,
+        "keys": []
+      },
+      {
+        "timeMs": 40450,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 40651,
+        "keys": [
+          "i"
+        ]
+      },
+      {
+        "timeMs": 40901,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 41151,
+        "keys": []
+      },
+      {
+        "timeMs": 41200,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 41401,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 41651,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 41901,
+        "keys": []
+      },
+      {
+        "timeMs": 41950,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 42151,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 42401,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 42651,
+        "keys": []
+      },
+      {
+        "timeMs": 42700,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 42901,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 43151,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 43401,
+        "keys": []
+      },
+      {
+        "timeMs": 43450,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 43651,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 43901,
+        "keys": []
+      },
+      {
+        "timeMs": 46000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 46200,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

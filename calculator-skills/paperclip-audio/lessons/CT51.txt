@@ -1,0 +1,5 @@
+On a Graphs page, plot f of x equals x cubed plus x.
+Open Menu, six for Analyze Graph, then five for d y by d x.
+Move to the point on the curve at x equals two, then click. You select one point, not two bounds.
+The graph reports the slope. Evaluate f of two separately to find the point on the curve.
+Put the slope and the point into point-slope form.

@@ -1,0 +1,8 @@
+A locker is either ready (A) or in use (B). Columns of T are the current states; rows are the next states. Store T as t.
+Type T, then Control and Template for the assignment symbol. On a Calculator page open Menu, then seven for Matrix and Vector, one for Create, and one for Matrix.
+Enter zero point eight, zero point three then zero point two, zero point seven. The second column says a locker currently in use moves to Ready with probability zero point three.
+Store s using the same menu, with two rows and one column. The locker starts Ready, so enter one above zero.
+Enter t times s. The state column belongs on the right. The upper result, zero point eight, is the probability of Ready after one transition.
+Enter T to the fourth power. Press Right to leave the exponent, then times S and Enter. Read zero point six two five after four transitions. Do not take the fourth power of each entry.
+Repeat with exponent twenty-four. It is very close to zero point six for Ready. For these positive transitions the model tends to a unique steady state.
+At equilibrium, flow from Ready to In Use equals flow back. Zero point two times p equals zero point three times the quantity one minus p. So p is three fifths. That is exact; a finite power is only an approximation.

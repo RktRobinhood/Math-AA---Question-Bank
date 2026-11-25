@@ -1,0 +1,13 @@
+In Graphs, plot f one of x equals x squared minus four, divided by x minus one. Put each expression in its own brackets.
+Press Tab. Plot f two of x equals zero. We want f one of x to be less than or equal to f two of x, with x from negative four to four inclusive.
+Open Menu then six: Analyze Graph then four: Intersection.
+Bracket the first crossing from minus three to minus one. Confirm each bound.
+The first crossing is x equals minus two. Record it.
+Run Intersection again. Bracket the second crossing from one point five to three.
+The second crossing is x equals two. Record it.
+The denominator x minus one is zero at x equals one. That point is undefined, not an intersection.
+Split the domain at minus two, one and two. Check one value in each interval.
+At x equals minus three, f one is below f two. At x equals zero, it is above.
+At x equals one point five, f one is below f two again. At x equals three, it is above.
+Include the equal points at negative two and two because the inequality includes equality. Leave x equals one out.
+At the domain edge x equals minus four, f one is below f two, so include minus four too.

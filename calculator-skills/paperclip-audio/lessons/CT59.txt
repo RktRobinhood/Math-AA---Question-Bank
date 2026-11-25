@@ -1,0 +1,6 @@
+Start with the point one, zero. In each step, find both slopes from the same old point.
+On the Calculator page, type one plus zero point two five times zero, then Enter. This gives the first new x value, which is one.
+Still using the point one, zero, type zero plus zero point two five times the quantity negative two times one minus zero. Press Enter. The first new y value is negative zero point five.
+Now use the first new pair. Type one plus zero point two five times negative zero point five for the second new x value.
+For the second new y value, keep using the pair one, negative zero point five. Enter negative zero point five, plus zero point two five times the quantity negative two times one plus zero point five.
+Read the phase samples in arrow order. Neither axis is time. Exit Focus if needed to see the sketch below.

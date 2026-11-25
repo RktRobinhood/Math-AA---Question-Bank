@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>One-variable statistics · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>One-variable statistics</h1></div>
+<label><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
+<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
+<div id="watch-message" class="message"><p id="caption"></p></div>
+<div id="try-message" class="message" hidden><p id="task"></p><div><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
+<div class="deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Lists & Spreadsheet display"><div class="lcd-bar"><b>1.1</b> Lists &amp; Spreadsheet <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal">▶</button></div></div>
+<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>Readings and counts</h2>
+<p>Each value is a reading. Its frequency tells you how many times it occurs.</p><ol id="chapters"></ol></aside>
+<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Read the results</h2><p id="hint"></p><p id="error" class="feedback" role="status" hidden></p>
+<p class="keys">Keyboard: <kbd>M</kbd>, then <kbd>4</kbd>, <kbd>1</kbd>, <kbd>1</kbd>. Tab moves between wizard fields; arrows open or move through lists.</p>
+<form id="answer"><label for="mean">Mean</label><input id="mean" inputmode="decimal" type="number" step="any" required>
+<label for="sd">Standard deviation</label><input id="sd" inputmode="decimal" type="number" step="any" min="0" required>
+<label for="kind">LCD row used</label><select id="kind" required><option value="">Choose a row</option><option value="population">σx</option><option value="sample">sx</option></select>
+<button type="submit">Check</button></form><p class="feedback" id="feedback" role="status" hidden></p></aside>
+</div>
+<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="34" step=".005"></label><span>Captions only</span></div></div>
+</section>
+<details><summary>Sample or population?</summary><p>Use <b>σx</b> (divide by n) for the standard deviation of the whole collection being described. Use <b>sx</b> (divide by n−1) when the task asks for the sample standard deviation. Both are in the original units. Frequency List <b>1</b> uses each row once. Counts of zero exclude those rows. Keep the result columns separate from the named source lists.</p><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/31931">TI handheld menu and SD reference</a> · <a href="https://education.ti.com/-/media/ti/education/images/product-resources/aus/maths-teachers-vic/vce-gm-trb.pdf">TI named-list frequency example (p. 9)</a></p></details>
+</main></body></html>

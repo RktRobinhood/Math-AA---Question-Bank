@@ -1,0 +1,562 @@
+{
+  "schemaVersion": 1,
+  "id": "CT14",
+  "route": "trig-interval/index.html",
+  "catalogueTitle": "All trigonometric solutions in an interval",
+  "playerHeading": "Find all trig solutions",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "trig-interval/index.html"
+  },
+  "script": "lessons/CT14.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "The equation is in degrees. Check Graphing Angle in the Graphs settings.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "The blue graph is the sine of x; the red line is zero point five. The window already covers the whole interval.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use Intersection. Put a lower and an upper bound around the crossing near one hundred and fifty degrees.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "thirty degrees counts. three hundred and ninety degrees also makes the equation true, but the interval excludes it.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Now the target is one, with x strictly between zero and one hundred and eighty degrees. The curves touch; there is no sign change.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Enter the upper bound, then compare the maximum height with the target.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The maximum is at ninety degrees, with a height of one. It touches the target, so count ninety degrees once.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 41000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "The equation is in degrees. Check Graphing Angle in the Graphs settings.",
+        "endMs": 10000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 10000,
+        "text": "The blue graph is sin x; the red line is 0.5. The window already covers the whole interval.",
+        "endMs": 14400
+      },
+      {
+        "id": "watch-03",
+        "startMs": 14400,
+        "text": "Use Intersection. Put a lower and an upper bound around the crossing near 150°.",
+        "endMs": 23000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 23000,
+        "text": "30° counts. 390° also makes the equation true, but the interval excludes it.",
+        "endMs": 30000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 30000,
+        "text": "Now the target is 1 on 0° < x < 180°. The curves touch: there is no sign change.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 36000,
+        "text": "Enter the upper bound, then compare the maximum height with the target.",
+        "endMs": 37300
+      },
+      {
+        "id": "watch-07",
+        "startMs": 37300,
+        "text": "The maximum is (90°, 1). It touches the target, so count 90° once.",
+        "endMs": 41000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 950,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 1195,
+        "keys": []
+      },
+      {
+        "timeMs": 2200,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 2446,
+        "keys": []
+      },
+      {
+        "timeMs": 3100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 3345,
+        "keys": []
+      },
+      {
+        "timeMs": 4110,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 4355,
+        "keys": []
+      },
+      {
+        "timeMs": 5050,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 5295,
+        "keys": []
+      },
+      {
+        "timeMs": 6040,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 6285,
+        "keys": []
+      },
+      {
+        "timeMs": 7050,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 9375,
+        "keys": []
+      },
+      {
+        "timeMs": 9550,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9795,
+        "keys": []
+      },
+      {
+        "timeMs": 14510,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 14755,
+        "keys": []
+      },
+      {
+        "timeMs": 15020,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 15265,
+        "keys": []
+      },
+      {
+        "timeMs": 15610,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 15855,
+        "keys": []
+      },
+      {
+        "timeMs": 16620,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16866,
+        "keys": []
+      },
+      {
+        "timeMs": 16940,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17186,
+        "keys": []
+      },
+      {
+        "timeMs": 17260,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17506,
+        "keys": []
+      },
+      {
+        "timeMs": 17680,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17925,
+        "keys": []
+      },
+      {
+        "timeMs": 18680,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 18925,
+        "keys": []
+      },
+      {
+        "timeMs": 19000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 19245,
+        "keys": []
+      },
+      {
+        "timeMs": 19320,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 19565,
+        "keys": []
+      },
+      {
+        "timeMs": 19770,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20015,
+        "keys": []
+      },
+      {
+        "timeMs": 32220,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 32465,
+        "keys": []
+      },
+      {
+        "timeMs": 32720,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 32965,
+        "keys": []
+      },
+      {
+        "timeMs": 33220,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 33465,
+        "keys": []
+      },
+      {
+        "timeMs": 34070,
+        "keys": [
+          "select"
+        ]
+      },
+      {
+        "timeMs": 34315,
+        "keys": []
+      },
+      {
+        "timeMs": 34550,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 34795,
+        "keys": []
+      },
+      {
+        "timeMs": 34820,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 35065,
+        "keys": []
+      },
+      {
+        "timeMs": 35120,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 35365,
+        "keys": []
+      },
+      {
+        "timeMs": 36200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 36445,
+        "keys": []
+      },
+      {
+        "timeMs": 36480,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 36725,
+        "keys": []
+      },
+      {
+        "timeMs": 36760,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 37005,
+        "keys": []
+      },
+      {
+        "timeMs": 37240,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 37485,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT14Tape",
+        "keys": [
+          {
+            "timeMs": 950,
+            "key": "menu"
+          },
+          {
+            "timeMs": 2200,
+            "key": "9"
+          },
+          {
+            "timeMs": 3100,
+            "key": "tab"
+          },
+          {
+            "timeMs": 4110,
+            "key": "right"
+          },
+          {
+            "timeMs": 5050,
+            "key": "down"
+          },
+          {
+            "timeMs": 6040,
+            "key": "enter"
+          },
+          {
+            "timeMs": 7050,
+            "key": "tab"
+          },
+          {
+            "timeMs": 7310,
+            "key": "tab"
+          },
+          {
+            "timeMs": 7570,
+            "key": "tab"
+          },
+          {
+            "timeMs": 7830,
+            "key": "tab"
+          },
+          {
+            "timeMs": 8090,
+            "key": "tab"
+          },
+          {
+            "timeMs": 8350,
+            "key": "tab"
+          },
+          {
+            "timeMs": 8610,
+            "key": "tab"
+          },
+          {
+            "timeMs": 8870,
+            "key": "tab"
+          },
+          {
+            "timeMs": 9130,
+            "key": "tab"
+          },
+          {
+            "timeMs": 9550,
+            "key": "enter"
+          },
+          {
+            "timeMs": 14510,
+            "key": "menu"
+          },
+          {
+            "timeMs": 15020,
+            "key": "6"
+          },
+          {
+            "timeMs": 15610,
+            "key": "4"
+          },
+          {
+            "timeMs": 16620,
+            "key": "1"
+          },
+          {
+            "timeMs": 16940,
+            "key": "0"
+          },
+          {
+            "timeMs": 17260,
+            "key": "0"
+          },
+          {
+            "timeMs": 17680,
+            "key": "enter"
+          },
+          {
+            "timeMs": 18680,
+            "key": "2"
+          },
+          {
+            "timeMs": 19000,
+            "key": "0"
+          },
+          {
+            "timeMs": 19320,
+            "key": "0"
+          },
+          {
+            "timeMs": 19770,
+            "key": "enter"
+          },
+          {
+            "timeMs": 32220,
+            "key": "menu"
+          },
+          {
+            "timeMs": 32720,
+            "key": "6"
+          },
+          {
+            "timeMs": 33220,
+            "key": "3"
+          },
+          {
+            "timeMs": 34070,
+            "key": "select"
+          },
+          {
+            "timeMs": 34550,
+            "key": "6"
+          },
+          {
+            "timeMs": 34820,
+            "key": "0"
+          },
+          {
+            "timeMs": 35120,
+            "key": "enter"
+          },
+          {
+            "timeMs": 36200,
+            "key": "1"
+          },
+          {
+            "timeMs": 36480,
+            "key": "2"
+          },
+          {
+            "timeMs": 36760,
+            "key": "0"
+          },
+          {
+            "timeMs": 37240,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

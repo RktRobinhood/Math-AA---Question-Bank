@@ -1,0 +1,728 @@
+{
+  "schemaVersion": 1,
+  "id": "CT25",
+  "route": "eigenvalues/index.html",
+  "catalogueTitle": "Eigenvalues and long-run behaviour",
+  "playerHeading": "Eigenvalues and long-run behaviour",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "eigenvalues/index.html"
+  },
+  "script": "lessons/CT25.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start from a two-by-two matrix. We will use its characteristic equation, not an eigenvalue menu.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Add the main diagonal entries for the trace.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "For the determinant, subtract the product off the diagonal from the product on it.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The characteristic equation is lambda squared minus seven lambda plus ten. Find its discriminant.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "For the square root, press Control and the x squared key. Enter nine, then press Right to leave the slot.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The discriminant is nine. Take its square root, three, and subtract it from the trace before dividing by two.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Use plus three instead. The matching upper root is five.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "For lambda equals five, the first row of the eigenvector equation gives y equals x. Set x equal to one; use the vector with entries one, one.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "The second entry is also five, so A times the vector gives five, five, or five times the whole vector. Any nonzero multiple of the eigenvector works.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "For lambda equals two, the first row gives y equals negative two x. For the vector with entries one, negative two, the product gives two, negative four.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "Five has the larger magnitude. Its direction dominates only if the starting vector has a component there.",
+      "watchCueId": "watch-11"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 74000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start from a two-by-two matrix. We will use its characteristic equation, not an eigenvalue menu.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "Add the main diagonal entries for the trace.",
+        "endMs": 11000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 11000,
+        "text": "For the determinant, subtract the product off the diagonal from the product on it.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 20000,
+        "text": "The characteristic equation is lambda squared minus seven lambda plus ten. Find its discriminant.",
+        "endMs": 27800
+      },
+      {
+        "id": "watch-05",
+        "startMs": 27800,
+        "text": "For the square root, press Ctrl + x². Enter 9, then Right to leave the slot.",
+        "endMs": 31000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 31000,
+        "text": "The discriminant is 9. Take its square root, 3, and subtract it from the trace before dividing by two.",
+        "endMs": 40000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 40000,
+        "text": "Use plus three instead. The matching upper root is five.",
+        "endMs": 49000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 49000,
+        "text": "For λ = 5, the first row of Av = λv gives y = x. Set x = 1 to get (1,1).",
+        "endMs": 56000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 56000,
+        "text": "The second entry is also 5, so Av = (5,5) = 5v. Any nonzero multiple of v works.",
+        "endMs": 64000
+      },
+      {
+        "id": "watch-10",
+        "startMs": 64000,
+        "text": "For λ = 2, the first row gives y = −2x. For v = (1,−2), Av = (2,−4).",
+        "endMs": 69000
+      },
+      {
+        "id": "watch-11",
+        "startMs": 69000,
+        "text": "Five has the larger magnitude. Its direction dominates only if the starting vector has a component there.",
+        "endMs": 74000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 6000,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 6360,
+        "keys": []
+      },
+      {
+        "timeMs": 6760,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 7120,
+        "keys": []
+      },
+      {
+        "timeMs": 7520,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 7880,
+        "keys": []
+      },
+      {
+        "timeMs": 8800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9160,
+        "keys": []
+      },
+      {
+        "timeMs": 12000,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 12360,
+        "keys": []
+      },
+      {
+        "timeMs": 12820,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 13180,
+        "keys": []
+      },
+      {
+        "timeMs": 13640,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 14000,
+        "keys": []
+      },
+      {
+        "timeMs": 14460,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 14820,
+        "keys": []
+      },
+      {
+        "timeMs": 15280,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 15640,
+        "keys": []
+      },
+      {
+        "timeMs": 16100,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 16460,
+        "keys": []
+      },
+      {
+        "timeMs": 16920,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17280,
+        "keys": []
+      },
+      {
+        "timeMs": 18000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18360,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 21750,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 22110,
+        "keys": []
+      },
+      {
+        "timeMs": 22500,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 22860,
+        "keys": []
+      },
+      {
+        "timeMs": 23250,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 23610,
+        "keys": []
+      },
+      {
+        "timeMs": 24000,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 24360,
+        "keys": []
+      },
+      {
+        "timeMs": 24750,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 25110,
+        "keys": []
+      },
+      {
+        "timeMs": 25500,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25860,
+        "keys": []
+      },
+      {
+        "timeMs": 26250,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 26610,
+        "keys": []
+      },
+      {
+        "timeMs": 27200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 27560,
+        "keys": []
+      },
+      {
+        "timeMs": 28000,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 28360,
+        "keys": []
+      },
+      {
+        "timeMs": 28500,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 28860,
+        "keys": []
+      },
+      {
+        "timeMs": 29000,
+        "keys": [
+          "9"
+        ]
+      },
+      {
+        "timeMs": 29360,
+        "keys": []
+      },
+      {
+        "timeMs": 29500,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 29860,
+        "keys": []
+      },
+      {
+        "timeMs": 30000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 30360,
+        "keys": []
+      },
+      {
+        "timeMs": 31600,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 31960,
+        "keys": []
+      },
+      {
+        "timeMs": 32290,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 32650,
+        "keys": []
+      },
+      {
+        "timeMs": 32980,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 33340,
+        "keys": []
+      },
+      {
+        "timeMs": 33670,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 34030,
+        "keys": []
+      },
+      {
+        "timeMs": 34360,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 34720,
+        "keys": []
+      },
+      {
+        "timeMs": 35050,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 35410,
+        "keys": []
+      },
+      {
+        "timeMs": 35740,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 36100,
+        "keys": []
+      },
+      {
+        "timeMs": 37100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 37460,
+        "keys": []
+      },
+      {
+        "timeMs": 41000,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 41360,
+        "keys": []
+      },
+      {
+        "timeMs": 41690,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 42050,
+        "keys": []
+      },
+      {
+        "timeMs": 42380,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 42740,
+        "keys": []
+      },
+      {
+        "timeMs": 43070,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 43430,
+        "keys": []
+      },
+      {
+        "timeMs": 43760,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 44120,
+        "keys": []
+      },
+      {
+        "timeMs": 44450,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 44810,
+        "keys": []
+      },
+      {
+        "timeMs": 45140,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 45500,
+        "keys": []
+      },
+      {
+        "timeMs": 46600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 46960,
+        "keys": []
+      },
+      {
+        "timeMs": 49500,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 49860,
+        "keys": []
+      },
+      {
+        "timeMs": 50150,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 50510,
+        "keys": []
+      },
+      {
+        "timeMs": 50800,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 51160,
+        "keys": []
+      },
+      {
+        "timeMs": 51450,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 51810,
+        "keys": []
+      },
+      {
+        "timeMs": 52100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 52460,
+        "keys": []
+      },
+      {
+        "timeMs": 52750,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 53110,
+        "keys": []
+      },
+      {
+        "timeMs": 53400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 53760,
+        "keys": []
+      },
+      {
+        "timeMs": 54350,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 54710,
+        "keys": []
+      },
+      {
+        "timeMs": 56800,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 57160,
+        "keys": []
+      },
+      {
+        "timeMs": 57450,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 57810,
+        "keys": []
+      },
+      {
+        "timeMs": 58100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 58460,
+        "keys": []
+      },
+      {
+        "timeMs": 58750,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 59110,
+        "keys": []
+      },
+      {
+        "timeMs": 59400,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 59760,
+        "keys": []
+      },
+      {
+        "timeMs": 60050,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 60410,
+        "keys": []
+      },
+      {
+        "timeMs": 60700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 61060,
+        "keys": []
+      },
+      {
+        "timeMs": 61550,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 61910,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Sequences and finite sums · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><p class="crumb"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / CT04</p><h1>Sequences and finite sums</h1><p class="sub">Get one term, a list of terms, or their total.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<nav class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-pane">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-pane" tabindex="-1">Try</button></nav>
+<section id="stage" data-mode="watch" aria-label="TI-Nspire CX II-T handheld and controls">
+<div id="watch-pane" role="tabpanel" aria-labelledby="watch-tab"><p id="caption" class="caption"></p><p id="equation" class="equation"></p></div>
+<div id="try-pane" role="tabpanel" aria-labelledby="try-tab" hidden><div class="try-bar"><button type="button" id="return">Return to Watch</button><button type="button" id="edit-inputs">Edit inputs</button><button type="button" id="new-practice" hidden>Open fresh Try</button></div><p id="taskline" class="try-task"></p></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="screen" aria-label="Recreated TI-Nspire Calculator display">
+<div class="lcd-status"><b>1.1</b><span>Calculator</span><i></i></div><div id="lcd-work"></div>
+<button type="button" id="stage-play" aria-label="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
+</div></div>
+<div class="stage-side">
+<aside id="watch-side"><h2>Watch one rule three ways</h2><p class="demo-rule">u<sub>n</sub> = 3 × 2<sup>n−1</sup></p><ol id="chapters" aria-label="Worked example chapters"></ol></aside>
+<aside id="try-side" hidden><h2 id="try-title">Work on the calculator</h2><p id="key-hint" class="hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
+<form id="fields" novalidate>
+<label for="rule">Rule in <var>n</var></label><input id="rule" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. 2*n+1">
+<div class="form-grid"><label for="task">Output<select id="task"><option value="sum">Sum</option><option value="list">List of terms</option><option value="term">Nth term</option></select></label><label for="lower" id="lower-label">Lower index<input id="lower" maxlength="6" inputmode="numeric"></label><label for="upper"><span id="upper-label">Upper index</span><input id="upper" maxlength="6" inputmode="numeric"></label><label for="step" id="step-label">Step<input id="step" maxlength="6" inputmode="numeric"></label></div>
+<div class="field-actions"><button id="load" type="submit">Load on calculator</button><button id="run" type="button" class="primary" hidden>Enter</button><button type="button" id="reset">Reset calculator</button></div>
+</form>
+<form id="answer-form" hidden novalidate><label for="answer" id="answer-label">Your answer</label><div class="answer-row"><input id="answer" maxlength="900" autocomplete="off" spellcheck="false"><button type="submit">Check answer</button></div><p id="feedback" role="status"></p></form>
+</aside></div></div>
+<div id="player" aria-label="Playback controls"><div class="controls"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from the start">↺</button><button type="button" id="focus" aria-label="Focused view" aria-pressed="false">⛶</button><button type="button" id="take-over">Take over</button></div>
+<div class="time"><span id="clock" aria-hidden="true"></span><label class="seek"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" max="57" value="0" step=".005"></label><span class="captioned">Captioned</span></div></div>
+</section>
+<details class="notes"><summary>Calculator routes and practice limits</summary><p>Consecutive sum: Calculator → Menu → 4: Calculus → 3: Sum. Enter the index letter first; Tab goes to the lower bound, upper bound and rule. The TI reference also documents typing <code>sumSeq(rule,n,lower,upper)</code>.</p><p>Stepped sum: Menu → 6: Statistics → 3: List Math → 5: Sum of Elements, then add <code>seq</code> inside it from 6: Statistics → 4: List Operations → 5: Sequence. The last argument is the step. <code>seq</code> alone returns the list, stopping at the last index at or below the upper bound.</p><p>The practice calculator accepts n, decimal constants and + − × ÷ ^ (use <code>*</code> when typing multiplication). Use integer indices between −1,000 and 1,000, increasing ranges up to 80 terms, and positive integer steps. This is a lesson simulator, not TI firmware.</p><p>Looking for the first term above a target? Check the actual sequence values at integer indices. If you use a continuous crossing to estimate where to look, test the neighboring integer indices in the original rule. Use a stepped list to check candidates when needed. <a href="../threshold/index.html">CT16 shows a continuous crossing</a>.</p><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/28870">TI worked key paths</a> · <a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_Symbols.HTML">TI CX reference</a></p></details>
+</main></body></html>

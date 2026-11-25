@@ -1,0 +1,7 @@
+Use z equals negative eight plus fifteen times the imaginary unit. Set Angle to Degree and Real or Complex to Rectangular.
+Type the real and imaginary coefficients. Press pi and choose the imaginary unit, not the letter i.
+Use the absolute-value command on negative eight plus fifteen i. Control and Enter give a decimal where needed. Modulus is distance.
+Use the angle command on negative eight plus fifteen i. The point is in quadrant two; the principal angle is obtuse.
+Open Document Settings again. Change Real or Complex to Polar. The number itself does not change.
+Re-enter the same value. In Degree mode, the polar display has magnitude seventeen and angle one hundred and eighteen point zero seven two degrees. In Radian mode it uses exponential form.
+The argument shown is principal. Only change the range if the question asks. Zero has no argument.

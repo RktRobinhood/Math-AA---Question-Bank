@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Numerical Solve · Calculator Skills</title>
+<link rel="stylesheet" href="styles.css">
+<script>try{let p=localStorage.getItem('ti-lab-theme')||'auto';document.documentElement.dataset.theme=p==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):p}catch{}</script>
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/integration.css">
+<script src="../handheld/shell.js" defer></script>
+<script src="../handheld/key-cues.js" defer></script>
+<script src="../handheld/transport.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="mast"><div class="wrap mast-inner">
+  <a href="../skills.html" class="wordmark"><svg aria-hidden="true" width="31" height="31" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor"/><path d="M8 10h16M8 16h16M12 22h8" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span>Calculator skills</span></a>
+  <span class="model">TI-Nspire CX II-T · non-CAS</span>
+  <a class="cx-tool-link" href="../handheld/index.html">Calculator</a>
+  <label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="auto">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</div></header>
+<main class="wrap">
+  <header class="title">
+    <div><p class="context" id="context">CT06</p><h1>Solve an equation numerically</h1><p>Use <code>nSolve</code> to find one solution in an interval.</p></div>
+    <div class="modes" aria-label="Lesson mode"><button class="mode active" data-mode="watch" aria-pressed="true">Watch</button><button class="mode" data-mode="try" aria-pressed="false">Try</button></div>
+  </header>
+  <section aria-label="Calculator walkthrough">
+    <div class="player cx-handheld-stage">
+      <div id="watch-controls" class="transport">
+        <button id="play" class="play" type="button" aria-label="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z" fill="currentColor"/></svg></button>
+        <label class="seek"><span class="sr">Seek walkthrough</span><input type="range" id="seek" min="0" max="40" step=".01" value="0"></label>
+        <span class="time" id="time">0:00</span>
+        <button id="captions" class="cc" aria-label="Show captions" aria-pressed="false">CC</button>
+      </div>
+      <p class="caption" id="caption" hidden></p>
+      <div class="scene">
+        <div class="lcd-group">
+          <div class="device-label"><span>TI-Nspire CX II</span><span>CALCULATOR · RECREATED SCREEN</span></div>
+          <div class="lcd" id="lcd" aria-label="Simulated TI-Nspire Calculator screen">
+            <canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas>
+            <div id="hotspots"></div>
+          </div>
+        </div>
+        <aside class="beat">
+          <div id="beat-number" class="beat-no" aria-hidden="true">01</div>
+          <div><p id="beat-title" class="beat-title">Open Numerical Solve</p><p id="beat-tip" class="beat-tip">Start on a Calculator page.</p></div>
+          <button type="button" id="take-over" class="cx-watch-try">Take over</button>
+          <div class="keypress" id="keypress" aria-label="Keys pressed"><span>Keys</span><div id="keys"></div></div>
+        </aside>
+      </div>
+      <p class="audio-notice" id="audio-notice" role="status" hidden>Narration is unavailable in this copy. You can still watch with captions.</p>
+      <audio id="voice" preload="metadata" src="narration.mp3"></audio>
+    </div>
+
+    <section class="practice" id="practice" aria-label="Calculator practice" hidden>
+      <div class="practice-head"><p>Find both solutions of <strong><var>x</var>² = 5</strong> using two separate intervals.</p><button type="button" class="quiet" id="restart" hidden>Restart steps</button></div>
+      <div class="case-row" id="case-row" aria-label="Practice presets">
+        <button type="button" class="quiet" data-case="positive">Positive interval</button>
+        <button type="button" class="quiet" data-case="negative">Negative interval</button>
+      </div>
+      <div id="try-summary" class="try-summary" aria-live="polite"></div>
+      <div id="try-work" class="try-work"></div>
+      <form id="solver-form" class="practice-form" hidden>
+        <label for="equation">Equation in <var>x</var></label>
+        <input class="field" type="text" id="equation" required maxlength="100" autocomplete="off" spellcheck="false" autocapitalize="off">
+        <div class="range-row">
+          <label>Lower bound<input class="field" id="lower" type="number" inputmode="decimal" required step="any"></label>
+          <label>Upper bound<input class="field" id="upper" type="number" inputmode="decimal" required step="any"></label>
+          <button class="solid" type="submit">Enter</button>
+        </div>
+        <small>Use <code>^</code> for powers. The practice variable is always <code>x</code>.</small>
+      </form>
+      <p id="feedback" class="feedback" role="status" hidden></p>
+      <p id="answer" class="answer" role="status" hidden></p>
+    </section>
+  </section>
+  <div class="resource-bar">
+    <p id="watch-example">Watch example: <span>2ˣ = x + 4</span></p>
+    <a href="numerical-solve.mp4">Earlier screen-only video</a>
+    <details><summary>Transcript</summary><p id="transcript"></p></details>
+    <details><summary>Calculator steps</summary><p>Calculator → <strong>Menu</strong> → <strong>3: Algebra</strong> → <strong>1: Numerical Solve</strong>. Use <code>nSolve(equation, variable, lower, upper)</code>. Press <kbd>→</kbd> to leave an exponent before you type the equals sign. Use separate intervals to look for separate solutions.</p><a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_alpha_N.HTML" target="_blank" rel="noopener">TI non-CAS reference guide</a></details>
+  </div>
+</main>
+</body>
+</html>

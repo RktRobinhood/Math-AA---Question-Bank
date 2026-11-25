@@ -1,0 +1,424 @@
+{
+  "schemaVersion": 1,
+  "id": "CT29",
+  "route": "one-variable-stats/index.html",
+  "catalogueTitle": "One-variable statistics and standard deviation",
+  "playerHeading": "One-variable statistics",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "one-variable-stats/index.html"
+  },
+  "script": "lessons/CT29.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Column A is named values. For the first run, use each row once.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Menu then four: Statistics then one: Stat Calculations then one: One-Variable Statistics. Confirm one list.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Choose the list named values for the first X list. Leave Frequency List at one. Send the results to column C.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Read the result names in C and values in D. Use sigma x for the whole collection, or s sub x for sample standard deviation.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Run the same menu. Keep the list named values for the first X list. Instead of one, choose the list named freq for Frequency List.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Confirm and read the new mean and sigma x. Now n is the sum of the frequencies, not the number of rows.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Check that n counts observations, not rows. Open Try for a different collection.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 39500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Column A is named values. For the first run, use each row once.",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "Menu → 4: Statistics → 1: Stat Calculations → 1: One-Variable Statistics. Confirm one list.",
+        "endMs": 10500
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10500,
+        "text": "Choose values as X1 List. Leave Frequency List at 1. Send the results to c[].",
+        "endMs": 16000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 16000,
+        "text": "Read the result names in C and values in D. Use σx for the whole collection, or sx for sample SD.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 20000,
+        "text": "Run the same menu. Keep values for X1 List; choose freq instead of 1 for Frequency List.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 27000,
+        "text": "Confirm and read the new mean and σx. Now n is the sum of frequencies, not the number of rows.",
+        "endMs": 34300
+      },
+      {
+        "id": "watch-07",
+        "startMs": 34300,
+        "text": "Check that n counts observations, not rows. Open Try for a different collection.",
+        "endMs": 39500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 4250,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 4490,
+        "keys": []
+      },
+      {
+        "timeMs": 4950,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 5190,
+        "keys": []
+      },
+      {
+        "timeMs": 5650,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5891,
+        "keys": []
+      },
+      {
+        "timeMs": 6550,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6790,
+        "keys": []
+      },
+      {
+        "timeMs": 8000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 8240,
+        "keys": []
+      },
+      {
+        "timeMs": 8680,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 8920,
+        "keys": []
+      },
+      {
+        "timeMs": 9440,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9680,
+        "keys": []
+      },
+      {
+        "timeMs": 10850,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 11090,
+        "keys": []
+      },
+      {
+        "timeMs": 11560,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11800,
+        "keys": []
+      },
+      {
+        "timeMs": 12180,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 12420,
+        "keys": []
+      },
+      {
+        "timeMs": 12760,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13000,
+        "keys": []
+      },
+      {
+        "timeMs": 13110,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13350,
+        "keys": []
+      },
+      {
+        "timeMs": 13480,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13720,
+        "keys": []
+      },
+      {
+        "timeMs": 13960,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14201,
+        "keys": []
+      },
+      {
+        "timeMs": 15450,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15690,
+        "keys": []
+      },
+      {
+        "timeMs": 20450,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 20690,
+        "keys": []
+      },
+      {
+        "timeMs": 21080,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 21320,
+        "keys": []
+      },
+      {
+        "timeMs": 21630,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 21870,
+        "keys": []
+      },
+      {
+        "timeMs": 22240,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 22480,
+        "keys": []
+      },
+      {
+        "timeMs": 22940,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23180,
+        "keys": []
+      },
+      {
+        "timeMs": 23300,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 23540,
+        "keys": []
+      },
+      {
+        "timeMs": 23760,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24000,
+        "keys": []
+      },
+      {
+        "timeMs": 24100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 24340,
+        "keys": []
+      },
+      {
+        "timeMs": 24560,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 24800,
+        "keys": []
+      },
+      {
+        "timeMs": 24990,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 25230,
+        "keys": []
+      },
+      {
+        "timeMs": 25420,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 25660,
+        "keys": []
+      },
+      {
+        "timeMs": 25960,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 26200,
+        "keys": []
+      },
+      {
+        "timeMs": 27300,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27540,
+        "keys": []
+      },
+      {
+        "timeMs": 27660,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27900,
+        "keys": []
+      },
+      {
+        "timeMs": 28050,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28290,
+        "keys": []
+      },
+      {
+        "timeMs": 28500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28740,
+        "keys": []
+      },
+      {
+        "timeMs": 29100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29340,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

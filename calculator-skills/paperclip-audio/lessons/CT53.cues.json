@@ -1,0 +1,562 @@
+{
+  "schemaVersion": 1,
+  "id": "CT53",
+  "route": "displacement-distance/index.html",
+  "catalogueTitle": "Kinematics: displacement versus total distance",
+  "playerHeading": "Displacement and total distance",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "displacement-distance/index.html"
+  },
+  "script": "lessons/CT53.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Enter three minus two x in Graphs. The calculator's x is time t, measured in seconds.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "For displacement, take one signed integral. Choose Menu then six: Analyze Graph then six: Integral.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Type zero and press Enter for the lower bound. Type four and press Enter for the upper bound.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "The signed result is negative four metres. The cart finishes four metres behind its starting point.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The distance needs the reversal time. Choose Menu then six: Analyze Graph then one: Zero.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Move the cursor to either side of the crossing, confirming each bound with Enter.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Press Enter to mark the zero. Velocity is positive before one point five seconds and negative after it.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Repeat Integral from zero to one point five. This positive part is the forward travel.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "The forward piece is positive two point two five metres.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Repeat Integral from one point five to four. The second result is negative because motion was backward.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "The second signed piece is negative six point two five metres, so the cart travelled six point two five metres backward.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "Add magnitudes for distance. Taking the absolute value of the net result would lose the forward travel.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "If the graph only touches zero and stays on the same side, the cart stops but does not reverse. Try a fresh model.",
+      "watchCueId": "watch-13"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 50000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Enter 3 − 2x in Graphs. The calculator’s x is time t, measured in seconds.",
+        "endMs": 4500
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4500,
+        "text": "For displacement, take one signed integral. Choose Menu → 6: Analyze Graph → 6: Integral.",
+        "endMs": 7350
+      },
+      {
+        "id": "watch-03",
+        "startMs": 7350,
+        "text": "Type 0 and press Enter for the lower bound. Type 4 and press Enter for the upper bound.",
+        "endMs": 9040
+      },
+      {
+        "id": "watch-04",
+        "startMs": 9040,
+        "text": "The signed result is −4 m: the cart finishes 4 m behind its starting point.",
+        "endMs": 10900
+      },
+      {
+        "id": "watch-05",
+        "startMs": 10900,
+        "text": "The distance needs the reversal time. Choose Menu → 6: Analyze Graph → 1: Zero.",
+        "endMs": 13500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 13500,
+        "text": "Move the cursor to either side of the crossing, confirming each bound with Enter.",
+        "endMs": 16870
+      },
+      {
+        "id": "watch-07",
+        "startMs": 16870,
+        "text": "Press Enter to mark the zero. Velocity is positive before 1.5 s and negative after it.",
+        "endMs": 21400
+      },
+      {
+        "id": "watch-08",
+        "startMs": 21400,
+        "text": "Repeat Integral from 0 to 1.5. This positive part is the forward travel.",
+        "endMs": 26460
+      },
+      {
+        "id": "watch-09",
+        "startMs": 26460,
+        "text": "The forward piece is +2.25 m.",
+        "endMs": 30500
+      },
+      {
+        "id": "watch-10",
+        "startMs": 30500,
+        "text": "Repeat Integral from 1.5 to 4. The second result is negative because motion was backward.",
+        "endMs": 35210
+      },
+      {
+        "id": "watch-11",
+        "startMs": 35210,
+        "text": "The second signed piece is −6.25 m, so the cart travelled 6.25 m backward.",
+        "endMs": 41000
+      },
+      {
+        "id": "watch-12",
+        "startMs": 41000,
+        "text": "Add magnitudes for distance. Taking the absolute value of the net result would lose the forward travel.",
+        "endMs": 45000
+      },
+      {
+        "id": "watch-13",
+        "startMs": 45000,
+        "text": "If the graph only touches zero and stays on the same side, the cart stops but does not reverse. Try a fresh model.",
+        "endMs": 50000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 800,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 1179,
+        "keys": []
+      },
+      {
+        "timeMs": 1240,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 1619,
+        "keys": []
+      },
+      {
+        "timeMs": 1680,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 2059,
+        "keys": []
+      },
+      {
+        "timeMs": 2120,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 2499,
+        "keys": []
+      },
+      {
+        "timeMs": 2560,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 2939,
+        "keys": []
+      },
+      {
+        "timeMs": 5100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5530,
+        "keys": []
+      },
+      {
+        "timeMs": 5600,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6030,
+        "keys": []
+      },
+      {
+        "timeMs": 6100,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 6530,
+        "keys": []
+      },
+      {
+        "timeMs": 7400,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 7873,
+        "keys": []
+      },
+      {
+        "timeMs": 7950,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8423,
+        "keys": []
+      },
+      {
+        "timeMs": 8500,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 8973,
+        "keys": []
+      },
+      {
+        "timeMs": 9050,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 9524,
+        "keys": []
+      },
+      {
+        "timeMs": 11500,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 11930,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 12430,
+        "keys": []
+      },
+      {
+        "timeMs": 12500,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 12930,
+        "keys": []
+      },
+      {
+        "timeMs": 13550,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 13963,
+        "keys": []
+      },
+      {
+        "timeMs": 14030,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 14443,
+        "keys": []
+      },
+      {
+        "timeMs": 14510,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14923,
+        "keys": []
+      },
+      {
+        "timeMs": 14990,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15403,
+        "keys": []
+      },
+      {
+        "timeMs": 15470,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 15883,
+        "keys": []
+      },
+      {
+        "timeMs": 15950,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 16363,
+        "keys": []
+      },
+      {
+        "timeMs": 16430,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 16843,
+        "keys": []
+      },
+      {
+        "timeMs": 16910,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17323,
+        "keys": []
+      },
+      {
+        "timeMs": 22300,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 22696,
+        "keys": []
+      },
+      {
+        "timeMs": 22760,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 23156,
+        "keys": []
+      },
+      {
+        "timeMs": 23220,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 23616,
+        "keys": []
+      },
+      {
+        "timeMs": 24100,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 24505,
+        "keys": []
+      },
+      {
+        "timeMs": 24570,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24975,
+        "keys": []
+      },
+      {
+        "timeMs": 25040,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25445,
+        "keys": []
+      },
+      {
+        "timeMs": 25510,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 25915,
+        "keys": []
+      },
+      {
+        "timeMs": 25980,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 26385,
+        "keys": []
+      },
+      {
+        "timeMs": 26450,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 26855,
+        "keys": []
+      },
+      {
+        "timeMs": 31100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 31496,
+        "keys": []
+      },
+      {
+        "timeMs": 31560,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 32416,
+        "keys": []
+      },
+      {
+        "timeMs": 33000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 33379,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 33819,
+        "keys": []
+      },
+      {
+        "timeMs": 33880,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 34259,
+        "keys": []
+      },
+      {
+        "timeMs": 34320,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34699,
+        "keys": []
+      },
+      {
+        "timeMs": 34760,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 35139,
+        "keys": []
+      },
+      {
+        "timeMs": 35200,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 35579,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

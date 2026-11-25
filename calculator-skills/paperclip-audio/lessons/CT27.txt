@@ -1,0 +1,8 @@
+Find row A, column D: the shortest distance from A to D, not a full tour.
+There is no direct road from A to D. Compare both two-road routes and both routes that use the road between B and C.
+First add the two lengths on the route A to B to D. The first road is short, but the last one is not.
+Next add the distances from A to C to D. Keep the total for comparison.
+A to B to C to D is also possible. Add all three road lengths, in order.
+The reverse middle leg gives a different route. Add A to C to B to D as well.
+Compare eleven, seven, eight and eighteen. Enter seven in row A, column D.
+Two-way roads give the same distance in reverse. Tied routes share one table value.

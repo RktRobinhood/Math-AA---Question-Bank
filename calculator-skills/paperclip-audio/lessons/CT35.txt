@@ -1,0 +1,8 @@
+The paired rows are x: twenty-one, seven, fifteen, eleven and y: seven, twelve, five, seven.
+The x ranks in the original row order are four, one, three, two. Enter these in the list named r x.
+The two sevens would occupy ranks two and three. Give each two point five.
+Enter the y-ranks in the original row order: two point five, four, one, two point five.
+Open Menu, then four for Statistics, one for Stat Calculations, and four for Linear Regression in the a plus b x form.
+Use the rank lists rx and ry. Run the calculation, then look for r.
+Pearson r on the paired ranks equals Spearman's rank correlation. Here it is about negative zero point six three two.
+The number describes monotonic association, not proof that a change in one variable causes the other.

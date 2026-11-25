@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Guided lesson · TI‑Nspire CX II</title>
+<link rel="stylesheet" href="guide.css">
+<script src="guide-theme.js"></script>
+<script src="guide-links.js" defer></script>
+<script src="lessons-data.js" defer></script>
+<script src="guide-app.js" defer></script>
+</head>
+<body>
+<header class="mast"><div class="wrap">
+<a class="mark" href="skills.html"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor"/><path d="M7 24h18M9 26V6m1 3c2 8 4 12 7 12s5-4 7-12" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="21" r="2" fill="currentColor"/></svg><span>Skill library</span></a>
+<span class="mast-model">TI‑Nspire CX II · non-CAS</span>
+<label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="auto">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</div></header>
+<main class="wrap">
+<div id="not-found" hidden>
+<h1>Lesson unavailable</h1>
+<p class="intro">Choose a lesson from the <a href="skills.html">skill library</a>.</p>
+</div>
+<article id="lesson" hidden>
+<header class="head">
+<div><p class="eyebrow"><b id="skill-id"></b><span id="walk-kind">Captioned guide</span></p><h1 id="lesson-title"></h1><p class="intro">Follow the keys on your TI‑Nspire, then check your answer on a new problem.</p></div>
+<div class="modes" aria-label="Lesson mode"><button class="mode" type="button" data-mode="watch" aria-pressed="true">Watch steps</button><button class="mode" type="button" data-mode="try" aria-pressed="false">Try</button></div>
+</header>
+<section id="watch" aria-label="Guided walkthrough">
+<div class="scene">
+<div class="scene-content">
+<div class="screen">
+<div class="screen-top"><span>TI‑Nspire CX II</span><span>Step display</span></div>
+<div class="screen-paper"><p class="screen-value" id="screen"></p></div>
+<div class="keyrow" id="keyrow"><span>Keys</span><div id="keys" style="display:contents"></div></div>
+</div>
+<div class="beat">
+<p class="beat-code" id="beat-code" aria-hidden="true"></p>
+<h2 id="beat-title">Follow on your calculator</h2>
+<p class="caption" id="caption"></p>
+</div>
+</div>
+<div class="transport">
+<button type="button" id="prior" aria-label="Previous step">‹</button>
+<button type="button" id="play">Play</button>
+<input type="range" id="seek" aria-label="Seek the walkthrough" min="0" max="8" step=".05" value="0">
+<span class="time" id="time" aria-hidden="true"></span>
+<button type="button" id="next" aria-label="Next step">›</button>
+</div>
+</div>
+<div class="step-navigation"><nav class="step-list" id="steps" aria-label="Jump to step"></nav><button class="solid" id="to-try" type="button" hidden>Try a new problem</button></div>
+<p id="sound-notice" class="sr" role="status"></p>
+<p id="step-announcement" class="sr" role="status"></p>
+</section>
+<section class="try-panel" id="try" aria-labelledby="try-title" hidden>
+<h2 id="try-title">Try it on your calculator</h2>
+<p id="prompt"></p>
+<form id="practice-form">
+<div id="answer-controls"></div>
+<div class="actions">
+<button class="solid" type="submit">Check answer</button>
+<button class="quiet" type="button" id="reveal" hidden>Show solution</button>
+</div>
+</form>
+<p id="feedback" role="status" hidden></p>
+<section id="solution" aria-label="Worked answer" hidden><b>Worked answer</b><p id="answer"></p><p id="reason"></p></section>
+</section>
+<footer class="lower">
+<p class="print-example" id="print-example"></p>
+<details id="notes"><summary>Calculator notes</summary><ol id="note-steps"></ol><button type="button" id="print" class="quiet print-hide">Print steps</button></details>
+</footer>
+</article>
+<noscript><p>Turn on JavaScript to play the walkthrough and check your answer.</p></noscript>
+</main>
+</body>
+</html>

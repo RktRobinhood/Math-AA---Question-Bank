@@ -1,0 +1,33 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Voronoi sites and nearest neighbours · Calculator Coach</title>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css">
+<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="lesson.js"></script>
+</head><body><main>
+<header class="head"><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></p><h1>Voronoi sites and nearest neighbours</h1></div>
+<label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button><button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="stage" id="stage" data-mode="watch" tabindex="0" aria-label="TI-Nspire CX II-T handheld">
+<div id="watch-message"><p id="caption"></p></div>
+<div id="try-header" hidden><div class="try-top"><p id="try-context"></p><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Watch</button><button type="button" id="reset">Reset</button></nav></div><p id="givens"></p></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span>1.1</span><span>Calculator</span><strong>RAD</strong><span class="battery"></span></div><div class="lcd-body" id="lcd-body"></div><span id="lcd-text" class="sr"></span>
+<button class="stage-play" id="start-overlay" type="button" aria-label="Play caption rehearsal"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path fill="currentColor" d="M6 3l13 8-13 8z"/></svg></button></div></div>
+<aside class="side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab"><figure id="watch-plot"></figure><ol id="chapters"></ol></aside>
+<aside class="side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
+<p id="tool-status" class="feedback" role="status"></p><p class="keys" id="keys-help">Subtract matching coordinates in brackets, square each difference with x², then add. Press Enter for each site.</p>
+<details id="edit-details"><summary>Edit practice inputs</summary><form id="data-form"><p>Use coordinates from −12 to 12, with distinct sites, and whole readings from 0 to 999. Applying clears your Try calculator.</p><div class="field-grid" id="data-fields"></div><button type="submit">Use these inputs</button><p class="feedback" id="edit-feedback" role="status"></p></form></details>
+<form id="answer" aria-label="Check your work"><p id="assessment">Compare the three squared distances, then give the nearest site or sites and the estimate at P.</p>
+<div class="answer-grid"><label>To A, d²<input type="text" inputmode="numeric" autocomplete="off" maxlength="8" id="answer-da"></label><label>To B, d²<input type="text" inputmode="numeric" autocomplete="off" maxlength="8" id="answer-db"></label><label>To C, d²<input type="text" inputmode="numeric" autocomplete="off" maxlength="8" id="answer-dc"></label></div>
+<label class="select-row">Nearest site(s) <select id="answer-near"><option value="">Choose</option><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="A,B">A and B</option><option value="A,C">A and C</option><option value="B,C">B and C</option><option value="A,B,C">A, B and C</option></select></label>
+<label class="select-row">Estimate at P <select id="answer-rule"><option value="">Choose</option><option value="value">One reading applies</option><option value="no">No unique estimate</option></select></label>
+<label class="select-row" id="value-wrap" hidden>Estimated reading <input type="text" inputmode="numeric" autocomplete="off" maxlength="8" id="answer-value"></label>
+<button type="submit" id="assess">Check answers</button><p class="feedback" id="assess-feedback" role="status"></p></form>
+<details id="try-map"><summary>See the practice map</summary><figure id="try-plot"></figure></details>
+<details><summary>Browser keyboard</summary><p>Use digits, parentheses, +, − and × (*). Press <kbd>S</kbd> for x², <kbd>Enter</kbd> to calculate, arrow keys to move and <kbd>Backspace</kbd> to edit.</p></details>
+</aside></div>
+<div id="watch-player" class="player" aria-label="Playback controls"><div class="transport"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from start">↺</button><button type="button" id="focus" aria-pressed="false">Focus</button><button type="button" id="take">Take over</button></div>
+<div class="timeline"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div></div></section>
+<details class="notes"><summary>Why squared distance?</summary><p>Taking a square root does not change the order of non-negative values. Smallest squared distance means nearest site. A tie between two sites marks their shared boundary only if neither is farther than a third site. When tied sites disagree, give no unique estimate unless the question gives a tie-break rule. Tied sites with the same reading still give the same estimate.</p>
+<p>The handset here evaluates arithmetic only. The optional map is a lesson illustration, not a TI screen. <a href="https://education.ti.com/html/eguides/nspire/EG_Nspire/EN/content/m_calculator/ca_enter_evaluate_math_expr.HTML">TI Calculator expressions</a> · <a href="https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=50">IB AI SL 3.6</a></p></details>
+</main></body></html>

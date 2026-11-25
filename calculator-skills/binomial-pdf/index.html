@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Binomial PDF · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css">
+<link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script>
+<script src="key-tape.js" defer></script>
+<script src="watch-media.js" defer></script>
+<script src="lesson.js" defer></script>
+</head>
+<body>
+<main>
+<header class="header">
+<div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT37</span></p><h1>Binomial PDF: exactly one count</h1><p class="subtitle">Find the probability of exactly k successes in n trials.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode">
+<button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button>
+<button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button>
+</div>
+<section class="ct37-shared" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p>
+<p class="feedback" id="media-notice" hidden role="status"></p>
+<p class="ct37-bounds" id="watch-bounds"></p>
+</div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Restart keypad</button><p class="ct37-taskline" id="keypad-problem"></p><p id="prefill-notice" class="feedback is-wrong" role="status" hidden></p></div>
+<div class="ct37-stage-grid">
+<div class="ct37-calc-anchor" id="handheld-host">
+<button class="stage-play" id="stage-play" type="button" aria-label="Play caption rehearsal"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4v16l13-8z"/></svg></button>
+  <div class="screen" id="lcd" aria-label="Calculator LCD"><div class="status"><span>1.1</span><span>Calculator &nbsp; <small>RAD</small></span><span class="battery" aria-label="Battery"></span></div><div class="screen-work" id="screen-work"></div></div>
+</div>
+<div class="ct37-stage-side">
+<div id="watch-side"><aside class="director" aria-label="Demonstration steps">
+<p class="tag">Worked example</p>
+<h2>Exactly three</h2>
+<p>Eight independent seeds have a 0.30 chance each of sprouting in a trial. Find the probability that exactly three sprout.</p>
+<ol id="steps" class="steps"></ol>
+
+</aside>
+</div>
+<aside id="try-side" class="director ct37-try-help" hidden>
+<p class="tag">Calculator practice</p><h2>Run a Binomial Pdf</h2>
+<p id="keypad-hint" role="status">Press Menu to begin.</p>
+<p class="ct37-keyboard">On a keyboard: <kbd>M</kbd> opens Menu. Use the same digits, <kbd>D</kbd> or arrow keys, <kbd>Tab</kbd> in the wizard, and <kbd>Enter</kbd>. Tab from OK leaves the keypad.</p>
+<p id="keypad-result" class="feedback" role="status" hidden></p>
+</aside>
+</div>
+</div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary" aria-label="Play">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Open Try</button></div>
+<div class="ct37-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="23.8" step="0.005"></label><span class="ct37-rehearsal" id="media-status">Captions only</span></div>
+</div>
+</section>
+<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="-1" class="ct37-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
+<div class="try-grid">
+<section class="exercise" aria-labelledby="challenge-title">
+<p class="tag">Your turn</p><h2 id="challenge-title">Exactly two</h2>
+<p id="challenge-description">A robot takes 10 independent shots with a 0.40 chance of hitting on each shot. What is the probability that exactly 2 hit?</p>
+<form id="answer-form">
+<label for="answer">Your probability <small>(3 significant figures)</small></label>
+<div class="answer-row"><input type="number" inputmode="decimal" step="any" min="0" max="1" required id="answer" placeholder="e.g. 0.250"><button class="primary">Check</button></div>
+</form>
+<p class="feedback" id="feedback" role="status"></p>
+<details><summary>Hint</summary><p id="answer-hint">“Exactly 2” includes only 2. Which function takes a single X Value?</p></details>
+</section>
+<section class="workbench" aria-labelledby="bench-title">
+<h2 id="bench-title">Change the question</h2>
+<p>Load new givens into your calculator practice. Nothing is calculated for you.</p>
+<form id="model">
+<div class="model-fields">
+<label>Trials <i>n</i><input required type="number" id="trials" min="1" max="500" step="1" value="10" inputmode="numeric"></label>
+<label>Success probability <i>p</i><input required type="number" id="chance" min="0" max="1" step="any" value="0.4" inputmode="decimal"></label>
+</div>
+<label>Exact count <i>k</i><input required type="number" min="0" max="500" step="1" value="2" id="count" inputmode="numeric"></label>
+<p class="event-line" id="event-line"></p>
+<button class="primary">Use these inputs</button>
+</form>
+<div class="result" id="result" hidden role="status"></div>
+</section>
+</div>
+</section>
+<details class="notes"><summary>PDF or CDF?</summary><p><strong>Exactly 3:</strong> include 3 only. Use <code>binomPdf(n,p,3)</code>.</p><p><strong>At most 3:</strong> include 0, 1, 2 and 3. Use <code>binomCdf(n,p,0,3)</code>.</p><p>The TI can return a full probability list if X Value is blank. This lesson always asks for one count.</p><p class="note-source"><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29570">TI’s button sequence</a> · <a href="../binomial/index.html">Practise Binomial CDF</a></p></details>
+</main>
+</body>
+</html>

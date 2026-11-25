@@ -1,0 +1,623 @@
+{
+  "schemaVersion": 1,
+  "id": "CT59",
+  "route": "coupled-euler/index.html",
+  "catalogueTitle": "Coupled ODEs, slopes and phase paths",
+  "playerHeading": "Coupled Euler steps and phase paths",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "coupled-euler/index.html"
+  },
+  "script": "lessons/CT59.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start with the point one, zero. In each step, find both slopes from the same old point.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On the Calculator page, type one plus zero point two five times zero, then Enter. This gives the first new x value, which is one.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Still using the point one, zero, type zero plus zero point two five times the quantity negative two times one minus zero. Press Enter. The first new y value is negative zero point five.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Now use the first new pair. Type one plus zero point two five times negative zero point five for the second new x value.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "For the second new y value, keep using the pair one, negative zero point five. Enter negative zero point five, plus zero point two five times the quantity negative two times one plus zero point five.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read the phase samples in arrow order. Neither axis is time. Exit Focus if needed to see the sketch below.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 64000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start with (1, 0). In each step, find both slopes from the same old point.",
+        "endMs": 4000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4000,
+        "text": "On the Calculator page, type 1 + .25 × 0, then Enter. This gives x₁ = 1.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "Still using (1, 0), type 0 + .25 × (−2 × 1 − 0). Press Enter for y₁ = −0.5.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 24000,
+        "text": "Now use the first new pair. Type 1 + .25 × (−.5) for x₂.",
+        "endMs": 35000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 35000,
+        "text": "For y₂, keep using (1, −0.5). Enter −.5 + .25 × (−2 × 1 + .5).",
+        "endMs": 52000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 52000,
+        "text": "Read the phase samples in arrow order. Neither axis is time. Exit Focus if needed to see the sketch below.",
+        "endMs": 64000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 4700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 5061,
+        "keys": []
+      },
+      {
+        "timeMs": 5340,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 5700,
+        "keys": []
+      },
+      {
+        "timeMs": 5980,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 6341,
+        "keys": []
+      },
+      {
+        "timeMs": 6620,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 6980,
+        "keys": []
+      },
+      {
+        "timeMs": 7260,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7620,
+        "keys": []
+      },
+      {
+        "timeMs": 7900,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 8260,
+        "keys": []
+      },
+      {
+        "timeMs": 8540,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 8900,
+        "keys": []
+      },
+      {
+        "timeMs": 10600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 10960,
+        "keys": []
+      },
+      {
+        "timeMs": 12700,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 13060,
+        "keys": []
+      },
+      {
+        "timeMs": 13340,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 13700,
+        "keys": []
+      },
+      {
+        "timeMs": 13980,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 14340,
+        "keys": []
+      },
+      {
+        "timeMs": 14620,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 14980,
+        "keys": []
+      },
+      {
+        "timeMs": 15260,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 15620,
+        "keys": []
+      },
+      {
+        "timeMs": 15900,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 16260,
+        "keys": []
+      },
+      {
+        "timeMs": 16540,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 16900,
+        "keys": []
+      },
+      {
+        "timeMs": 17180,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 17540,
+        "keys": []
+      },
+      {
+        "timeMs": 17820,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 18180,
+        "keys": []
+      },
+      {
+        "timeMs": 18460,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 18820,
+        "keys": []
+      },
+      {
+        "timeMs": 19100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 19460,
+        "keys": []
+      },
+      {
+        "timeMs": 19740,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 20100,
+        "keys": []
+      },
+      {
+        "timeMs": 20380,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20740,
+        "keys": []
+      },
+      {
+        "timeMs": 21020,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 21380,
+        "keys": []
+      },
+      {
+        "timeMs": 22500,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 22860,
+        "keys": []
+      },
+      {
+        "timeMs": 24700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25060,
+        "keys": []
+      },
+      {
+        "timeMs": 25340,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 25700,
+        "keys": []
+      },
+      {
+        "timeMs": 25980,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 26340,
+        "keys": []
+      },
+      {
+        "timeMs": 26620,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 26980,
+        "keys": []
+      },
+      {
+        "timeMs": 27260,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 27620,
+        "keys": []
+      },
+      {
+        "timeMs": 27900,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 28260,
+        "keys": []
+      },
+      {
+        "timeMs": 28540,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 28900,
+        "keys": []
+      },
+      {
+        "timeMs": 29180,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 29540,
+        "keys": []
+      },
+      {
+        "timeMs": 29820,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 30180,
+        "keys": []
+      },
+      {
+        "timeMs": 30460,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 30820,
+        "keys": []
+      },
+      {
+        "timeMs": 31100,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 31460,
+        "keys": []
+      },
+      {
+        "timeMs": 33300,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 33660,
+        "keys": []
+      },
+      {
+        "timeMs": 35700,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 36060,
+        "keys": []
+      },
+      {
+        "timeMs": 36350,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 36710,
+        "keys": []
+      },
+      {
+        "timeMs": 37000,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 37360,
+        "keys": []
+      },
+      {
+        "timeMs": 37650,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 38010,
+        "keys": []
+      },
+      {
+        "timeMs": 38300,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 38660,
+        "keys": []
+      },
+      {
+        "timeMs": 38950,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 39310,
+        "keys": []
+      },
+      {
+        "timeMs": 39600,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 39960,
+        "keys": []
+      },
+      {
+        "timeMs": 40250,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 40610,
+        "keys": []
+      },
+      {
+        "timeMs": 40900,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 41260,
+        "keys": []
+      },
+      {
+        "timeMs": 41550,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 41910,
+        "keys": []
+      },
+      {
+        "timeMs": 42200,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 42560,
+        "keys": []
+      },
+      {
+        "timeMs": 42850,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 43210,
+        "keys": []
+      },
+      {
+        "timeMs": 43500,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 43860,
+        "keys": []
+      },
+      {
+        "timeMs": 44150,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 44510,
+        "keys": []
+      },
+      {
+        "timeMs": 44800,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 45160,
+        "keys": []
+      },
+      {
+        "timeMs": 45450,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 45810,
+        "keys": []
+      },
+      {
+        "timeMs": 46100,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 46460,
+        "keys": []
+      },
+      {
+        "timeMs": 49900,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 50260,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

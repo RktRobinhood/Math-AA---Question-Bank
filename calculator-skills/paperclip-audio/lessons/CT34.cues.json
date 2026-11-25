@@ -1,0 +1,524 @@
+{
+  "schemaVersion": 1,
+  "id": "CT34",
+  "route": "log-linearization/index.html",
+  "catalogueTitle": "Linearizing data with logarithms",
+  "playerHeading": "Linearizing with logarithms",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "log-linearization/index.html"
+  },
+  "script": "lessons/CT34.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Each response is positive, so we can take its natural logarithm.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Move to column C's name cell. Call the new list L N Y.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "In the formula cell, press Control and the e to the x key for natural log. Enter the list named y val and close the bracket.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Enter calculates every log in the new column. Keep the same pairing by row.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "On Lists and Spreadsheet, choose Menu, Statistics, Stat Calculations, then Linear Regression in the m x plus b form.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Keep x val as the X list. In the Y menu choose L N Y. Press Enter to fit the transformed response.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The slope is the natural log of two and the intercept is the natural log of three. The saved line predicts the natural log of y.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Exponentiate the slope and intercept to get the multiplier and initial value. Use the original y-scale for predictions.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "A log-log power fit would transform x too. Do not use that workflow for this exponential example.",
+      "watchCueId": "watch-09"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 49000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Each response is positive, so we can take its natural logarithm.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "Move to column C’s name cell. Call the new list lny.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "In the formula cell, press Ctrl + eˣ for ln(, then enter yval and close the bracket.",
+        "endMs": 19000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 19000,
+        "text": "Enter calculates every log in the new column. Keep the same pairing by row.",
+        "endMs": 23000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 23000,
+        "text": "On Lists & Spreadsheet, choose Menu → Statistics → Stat Calculations → Linear Regression (mx+b).",
+        "endMs": 28000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 28000,
+        "text": "Keep xval as X. In the Y menu choose lny. Press Enter to fit the transformed response.",
+        "endMs": 35000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 35000,
+        "text": "The slope is ln(2) and the intercept is ln(3). The saved line predicts ln(y).",
+        "endMs": 41000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 41000,
+        "text": "Exponentiate the slope and intercept to get the multiplier and initial value. Use the original y-scale for predictions.",
+        "endMs": 46000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 46000,
+        "text": "A log-log power fit would transform x too. Do not use that workflow for this exponential example.",
+        "endMs": 49000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5220,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 5540,
+        "keys": []
+      },
+      {
+        "timeMs": 5660,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 5980,
+        "keys": []
+      },
+      {
+        "timeMs": 6110,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 6431,
+        "keys": []
+      },
+      {
+        "timeMs": 6570,
+        "keys": [
+          "up"
+        ]
+      },
+      {
+        "timeMs": 6891,
+        "keys": []
+      },
+      {
+        "timeMs": 7210,
+        "keys": [
+          "l"
+        ]
+      },
+      {
+        "timeMs": 7530,
+        "keys": []
+      },
+      {
+        "timeMs": 7620,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 7940,
+        "keys": []
+      },
+      {
+        "timeMs": 8030,
+        "keys": [
+          "y"
+        ]
+      },
+      {
+        "timeMs": 8350,
+        "keys": []
+      },
+      {
+        "timeMs": 8510,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8830,
+        "keys": []
+      },
+      {
+        "timeMs": 12180,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 12500,
+        "keys": []
+      },
+      {
+        "timeMs": 12640,
+        "keys": [
+          "exp"
+        ]
+      },
+      {
+        "timeMs": 12960,
+        "keys": []
+      },
+      {
+        "timeMs": 13310,
+        "keys": [
+          "y"
+        ]
+      },
+      {
+        "timeMs": 13630,
+        "keys": []
+      },
+      {
+        "timeMs": 13720,
+        "keys": [
+          "v"
+        ]
+      },
+      {
+        "timeMs": 14041,
+        "keys": []
+      },
+      {
+        "timeMs": 14130,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 14451,
+        "keys": []
+      },
+      {
+        "timeMs": 14540,
+        "keys": [
+          "l"
+        ]
+      },
+      {
+        "timeMs": 14860,
+        "keys": []
+      },
+      {
+        "timeMs": 15010,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 15330,
+        "keys": []
+      },
+      {
+        "timeMs": 19210,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19530,
+        "keys": []
+      },
+      {
+        "timeMs": 20190,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 20510,
+        "keys": []
+      },
+      {
+        "timeMs": 20770,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 21090,
+        "keys": []
+      },
+      {
+        "timeMs": 23380,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 23700,
+        "keys": []
+      },
+      {
+        "timeMs": 24420,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 24741,
+        "keys": []
+      },
+      {
+        "timeMs": 25180,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 25500,
+        "keys": []
+      },
+      {
+        "timeMs": 25950,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 26270,
+        "keys": []
+      },
+      {
+        "timeMs": 28280,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 28600,
+        "keys": []
+      },
+      {
+        "timeMs": 28860,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 29180,
+        "keys": []
+      },
+      {
+        "timeMs": 29450,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 29770,
+        "keys": []
+      },
+      {
+        "timeMs": 30050,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 30370,
+        "keys": []
+      },
+      {
+        "timeMs": 30800,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31120,
+        "keys": []
+      },
+      {
+        "timeMs": 32650,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32970,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT34Tape",
+        "keys": [
+          {
+            "timeMs": 5220,
+            "key": "right"
+          },
+          {
+            "timeMs": 5660,
+            "key": "right"
+          },
+          {
+            "timeMs": 6110,
+            "key": "up"
+          },
+          {
+            "timeMs": 6570,
+            "key": "up"
+          },
+          {
+            "timeMs": 7210,
+            "key": "l"
+          },
+          {
+            "timeMs": 7620,
+            "key": "n"
+          },
+          {
+            "timeMs": 8030,
+            "key": "y"
+          },
+          {
+            "timeMs": 8510,
+            "key": "enter"
+          },
+          {
+            "timeMs": 12180,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 12640,
+            "key": "exp"
+          },
+          {
+            "timeMs": 13310,
+            "key": "y"
+          },
+          {
+            "timeMs": 13720,
+            "key": "v"
+          },
+          {
+            "timeMs": 14130,
+            "key": "a"
+          },
+          {
+            "timeMs": 14540,
+            "key": "l"
+          },
+          {
+            "timeMs": 15010,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 19210,
+            "key": "enter"
+          },
+          {
+            "timeMs": 20190,
+            "key": "left"
+          },
+          {
+            "timeMs": 20770,
+            "key": "left"
+          },
+          {
+            "timeMs": 23380,
+            "key": "menu"
+          },
+          {
+            "timeMs": 24420,
+            "key": "4"
+          },
+          {
+            "timeMs": 25180,
+            "key": "1"
+          },
+          {
+            "timeMs": 25950,
+            "key": "3"
+          },
+          {
+            "timeMs": 28280,
+            "key": "tab"
+          },
+          {
+            "timeMs": 28860,
+            "key": "right"
+          },
+          {
+            "timeMs": 29450,
+            "key": "right"
+          },
+          {
+            "timeMs": 30050,
+            "key": "right"
+          },
+          {
+            "timeMs": 30800,
+            "key": "tab"
+          },
+          {
+            "timeMs": 32650,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

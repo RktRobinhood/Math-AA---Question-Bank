@@ -1,0 +1,8 @@
+Eight of sixteen independent checks pass. Does the pass rate exceed the usual twenty-five percent?
+Higher is the alternative, so look at eight or more. Include the observed eight.
+On a Calculator page choose Probability, Distributions, then Binomial C D F.
+Enter sixteen trials and the null probability, zero point two five, not the sample proportion of eight out of sixteen.
+Set the lower bound to eight and the upper bound to sixteen. Both are included.
+Enter inserts the command. Enter again finds the whole upper tail.
+The tail probability is about zero point zero two seven one. It is below zero point zero five: reject the null hypothesis.
+For a lower alternative, count from zero through the observation. The LCD still shows the upper-tail example.

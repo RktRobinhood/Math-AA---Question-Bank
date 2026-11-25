@@ -1,0 +1,7 @@
+Rotate point P, at four, negative one, ninety degrees anticlockwise about the origin. On a Calculator page, type T, then Control and Template for the assignment symbol.
+Choose Menu then seven: Matrix and Vector then one: Create then one: Matrix. Set two rows and two columns.
+Enter the first row, zero and negative one. Enter the second row, one and zero. Tab between cells; Enter stores T.
+Name P with the assignment symbol and use the same menu. Choose two rows and one column, not one row and two columns.
+Enter x equals four above y equals minus one. Press Enter to store p.
+Type t times p, in that order, then Enter. The inner dimensions two and two match.
+The upper entry is x prime; the lower is y prime. Write the image of P as one, four. This rotation sends a point at x, y to negative y, x.

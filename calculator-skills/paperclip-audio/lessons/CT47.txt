@@ -1,0 +1,8 @@
+A random sample records each student once: how they commute and whether they arrive on time. Test for association.
+The null hypothesis says commute mode and arrival status are independent. The alternative is that they are associated. Choose a five percent significance level before testing.
+Type A, then Control and Template for the assignment symbol. Use Menu, Matrix and Vector, Create, Matrix. Choose three rows and two columns.
+Enter the Walk, Cycle and Bus counts, row by row. Use Tab between cells and Enter to store a. Leave out totals and percentages.
+Open Menu, Statistics, Stat Tests, then the chi squared two-way test. Enter A as the observed matrix and confirm.
+Read chi squared, the p value and the degrees of freedom. The p value is an upper-tail probability under the null hypothesis, not the probability that the null hypothesis is true.
+On the next input line, enter stat dot exp mat. Expected counts are the counts predicted under independence. Here all are greater than five.
+The p value is about zero point zero zero one five eight, below zero point zero five. Reject the null hypothesis. The sample gives evidence of association between commute mode and arrival status, not causation.

@@ -1,0 +1,6 @@
+Rotate the region from y equals one to y equals two x, with x from one to two inclusive, about the x axis. Each slice has a hole.
+The outer radius is two x and the inner radius is one. Enter pi outside the integral. Use a difference of squares, not the square of the gap.
+On Calculator, choose Menu then four: Calculus then two: Numerical Definite Integral.
+Tab moves from the lower bound one to the upper bound two, then into the integrand.
+Enter the square of two times x, minus one squared. The pi outside multiplies every slice. Tab to the differential, type x, then Enter.
+The solid has volume about twenty-six point one eight zero cubic units. For a disk touching the axis, the inner radius is zero.

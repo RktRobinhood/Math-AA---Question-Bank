@@ -1,0 +1,8 @@
+Point P is at three, two. Site A is at one, one; B is at seven, one; and C is at five, six. Their readings are fifteen, thirty-two and forty-eight. Which site's reading estimates P?
+On the Calculator page, enter the square of three minus one, plus the square of two minus one. Close each bracket and press the x squared key, then press Enter. No square root is needed.
+Use the same P, but subtract B's coordinates. Square three minus seven, then add the square of two minus one. A negative difference becomes positive when squared.
+Now use C. Square three minus five, then add the square of two minus six. Compare all the results, not just A and B.
+The squared distances are A: five, B: seventeen, C: twenty. Site A is nearest. The estimate at P is A's reading, fifteen, not an average.
+Now move P to four, two. Its offsets from A are three and one; from B they are negative three and one. Enter three squared plus one squared to check both.
+For C, the offsets are negative one and negative four. Enter negative one squared plus negative four squared, using the negative key inside each pair of brackets.
+A and B tie at ten; C is farther at seventeen. This point lies on their cell boundary. With readings fifteen and thirty-two, no unique estimate exists unless a tie-break rule is given.

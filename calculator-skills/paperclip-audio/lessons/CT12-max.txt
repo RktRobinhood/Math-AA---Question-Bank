@@ -1,0 +1,7 @@
+The allowed interval is minus two to three. The graph is already on the screen.
+Open Menu, choose Analyze Graph, then Maximum.
+Move to the left of the peak and press Enter. Then choose the upper bound just to its right.
+The calculator marks the point negative one, four. That is a local peak, not yet the answer.
+Both endpoints count because the interval is closed. Substitute minus two into the function.
+Substitute three to check the other endpoint.
+Compare the three heights. The right endpoint is highest.

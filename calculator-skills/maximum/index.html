@@ -1,0 +1,35 @@
+<!doctype html><html lang="en" data-theme="system"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Find a graph maximum · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script></head>
+<body><main><header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <span>CT12</span> / <span>Caption rehearsal</span></p><h1>Find a graph maximum</h1><p class="subtitle">Find a local peak, then check whether an endpoint beats it.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section id="stage" class="ct12max-shared" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+ <div id="watch-message"><p id="caption" class="caption"></p><p id="readout" class="ct12max-bounds" hidden></p></div>
+ <div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
+ <div class="ct12max-stage-grid">
+  <div class="ct12max-calc-anchor" id="handheld-host"><div class="screen" id="lcd"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div>
+  <div class="ct12max-stage-side">
+   <aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>A peak is not always the maximum</h2><p class="formula">f(x) = x³ − 3x + 2<br>Allowed interval: [−2, 3]</p><ol id="steps" class="steps"></ol></aside>
+   <aside id="try-side" class="director ct12max-try-help" hidden>
+    <p id="keypad-problem" class="ct12max-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+    <div id="try-tools"><form id="expression-form"><label for="expression">Function f(x)<input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label>
+      <div class="expression-grid"><label for="allowed-left">Allowed left endpoint<input type="text" id="allowed-left" inputmode="decimal" maxlength="19" required></label><label for="allowed-right">Allowed right endpoint<input type="text" id="allowed-right" inputmode="decimal" maxlength="19" required></label></div><button type="submit" class="primary">Plot function</button></form>
+     <form id="bound-form" hidden><label for="bound" id="bound-label"></label><div class="inputline"><input id="bound" type="text" inputmode="decimal" maxlength="19" required><button type="submit" class="primary">Enter</button></div></form>
+     <div class="actions"><button id="retry-bounds" type="button" hidden>Try new bounds</button><button id="compare" type="button" hidden>Check the allowed interval</button></div>
+     <div id="comparison" hidden role="status"></div>
+    </div>
+    <p class="ct12max-keyboard">Keyboard: <kbd>M</kbd>, <kbd>6</kbd>, <kbd>3</kbd>. Move with arrow keys or type an x-value. Press <kbd>Enter</kbd> for each bound.</p>
+   </aside>
+  </div>
+ </div>
+ <div class="player" id="watch-player" aria-label="Playback controls">
+  <div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-pressed="false">Focus</button><button id="take-over" class="takeover" type="button">Take over</button></div>
+  <div class="ct12max-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek caption rehearsal</span><input type="range" id="seek" value="0" min="0" max="39" step="0.01"></label></div>
+ </div>
+</section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct12max-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Your turn</p><h2>Maximum on the allowed interval</h2><p id="challenge"></p><p id="exercise-inactive" hidden>Exploring another model. Reset to restore this question and its answer check.</p>
+<form id="answer-form"><div class="answer-pair"><label>x-coordinate<input type="text" inputmode="decimal" required id="answer-x"></label><label>Maximum value<input type="text" inputmode="decimal" required id="answer-y"></label><button class="primary">Check</button></div><p class="precision">Give one maximizing x-coordinate and the maximum value (3 s.f. if needed).</p></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Read the peak if there is one inside the allowed interval. Evaluate f at both allowed endpoints. Compare the y-values, not the x-values.</p></details></section></section>
+<details class="notes"><summary>Why check the endpoints?</summary><p>Maximum in the Analyze Graph menu finds a local peak between the two search bounds. The absolute maximum on a closed interval can occur at an interior peak or at an endpoint. The search bounds locate the peak; the allowed interval comes from the problem.</p><p><a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/content/m_scratchpad/sc_graphing_with_the_scratchpad.HTML">Texas Instruments: Analyze Graph keys and search bounds</a></p></details>
+</main></body></html>

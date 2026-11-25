@@ -1,0 +1,8 @@
+Find the dot product and angle for vector A, with components two, negative one, two, and vector B, with components one, two, negative two. The example is in degrees.
+Type A, then Control and Templates to get the assignment symbol. Open Menu, then seven, one, one. Use one row and three columns.
+Store B as another matrix with one row and three columns. Use the negative key for negative entries.
+Choose Menu, then seven for Matrix and Vector, the letter C for Vector, then three for Dot Product. Enter A followed by a comma and B.
+Use inverse cosine, not the reciprocal of cosine. Control and the divide key open a fraction. Put the dot product on top.
+Below, use the norm of A times the norm of B. Open Menu, then seven, then seven for Norms, then one for Norm, to insert each norm.
+The dot product is negative four. Both lengths are three, so cosine theta is negative four ninths. The negative cosine gives an obtuse angle.
+The angle is about one hundred and sixteen point three eight eight degrees. This is one hundred and sixteen degrees to three significant figures. A zero-length vector has no direction.

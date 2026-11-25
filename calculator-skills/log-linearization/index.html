@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en" data-theme="system">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Linearizing with logarithms · Calculator Coach</title>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css">
+<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="key-tape.js"></script><script defer src="lesson.js"></script>
+</head>
+<body><main>
+<header class="head"><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></p><h1>Linearizing with logarithms</h1></div>
+<label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode">
+<button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button>
+<button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="stage" id="stage" data-mode="watch" tabindex="0" aria-label="TI-Nspire CX II-T handheld">
+<div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
+<div id="try-header" hidden><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Return to Watch</button><button type="button" id="back-to-data">Back to data</button><button type="button" id="reset">Reset Try</button></nav>
+<p id="try-context"></p></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span>1.1</span><span>Lists &amp; Spreadsheet</span><strong>RAD</strong><span class="battery"></span></div><div class="lcd-body" id="lcd-body"></div><span id="lcd-text" class="sr" aria-live="off"></span></div>
+<button class="stage-play" id="start-overlay" type="button" aria-label="Play caption rehearsal"><svg width="23" height="25" viewBox="0 0 23 25" aria-hidden="true"><path fill="currentColor" d="M4 2l16 10.5L4 23z"/></svg></button></div>
+<aside class="side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab"><p class="eyebrow">Lists &amp; Spreadsheet</p>
+<p class="context">AI HL · Semi-log transformation for an exponential model.</p>
+<div id="watch-picture" class="plot"></div><ol id="chapters"></ol></aside>
+<aside class="side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
+<p id="tool-status" class="feedback" role="status"></p>
+<p class="keys" id="keys-help">Linear regression: <kbd>M</kbd>, <kbd>4</kbd>, <kbd>1</kbd>, <kbd>3</kbd>. Use arrows and Tab to select lists; Enter runs the calculation.</p>
+<details><summary>Build the transformed column</summary><p>Select the name cell of column C and type <code>lny</code>. Press Enter. In the formula cell below, enter <code>ln(yval)</code> and press Enter. On the handheld, Ctrl + eˣ inserts <code>ln(</code>; on the computer, type the formula. The list assignment is already there. Then choose <code>xval</code> for X and <code>lny</code> for Y.</p></details>
+<details id="edit-details"><summary>Edit paired data</summary>
+<form id="data-form">
+<label for="x-input">Predictor <i>x</i> values</label><input id="x-input" autocomplete="off" placeholder="Separate numbers with commas">
+<label for="y-input">Response <i>y</i> values, in matching order</label><input id="y-input" autocomplete="off">
+<label for="at-input">First prediction input <i>x</i></label><input id="at-input" inputmode="decimal" autocomplete="off">
+<label for="also-input">Second prediction input <i>x</i></label><input id="also-input" inputmode="decimal" autocomplete="off">
+<button type="submit">Use these pairs</button></form></details>
+<div id="try-picture" class="plot" hidden></div>
+<p id="transfer" class="context" hidden></p>
+<form id="answer" aria-label="Check your regression">
+<p id="assessment">From the line in ln(y), find the original exponential coefficients. Predict at the first input and classify both inputs. Keep the fitted digits for predictions. If rounding a submitted answer, use at least three significant figures.</p>
+<div class="answer-grid"><label for="answer-a">Initial value <i>A</i></label><input id="answer-a" inputmode="decimal" autocomplete="off">
+<label for="answer-b">Multiplier <i>B</i></label><input id="answer-b" inputmode="decimal" autocomplete="off">
+<label for="answer-y">First predicted <i>y</i></label><input id="answer-y" inputmode="decimal" autocomplete="off">
+<label for="answer-first" id="first-label">First input</label><select id="answer-first"><option value="">Choose</option><option value="observed">Data already at this x</option><option value="inter">Interpolation</option><option value="extra">Extrapolation</option></select>
+<label for="answer-second" id="second-label">Second input</label><select id="answer-second"><option value="">Choose</option><option value="observed">Data already at this x</option><option value="inter">Interpolation</option><option value="extra">Extrapolation</option></select></div>
+<button type="submit" id="assess">Check</button><p class="feedback" id="assess-feedback" role="status"></p></form>
+</aside></div>
+<div id="watch-player" class="player" aria-label="Playback controls">
+<div class="transport"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from start">↺</button><button type="button" id="focus" aria-pressed="false">Focus</button><button type="button" id="take">Open Try</button></div>
+<div class="timeline"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div>
+</div></section>
+<details class="notes"><summary>Why this is semi-log, not log-log</summary><p>For <i>y</i> = <i>A</i> · <i>B</i><sup><i>x</i></sup>, take natural logs of positive <i>y</i> only: ln(<i>y</i>) = (<i>ln B</i>)<i>x</i> + <i>ln A</i>. A straight-line fit of <i>x</i> and ln(<i>y</i>) therefore gives <i>A</i> = e<sup>intercept</sup> and <i>B</i> = e<sup>slope</sup>. The saved <i>f</i><sub>1</sub> predicts ln(<i>y</i>), not <i>y</i>. Exponentiate its output to predict on the original scale.</p><p>For a power model <i>y</i> = <i>A x</i><sup><i>k</i></sup>, take logs of both positive variables and regress ln(<i>y</i>) on ln(<i>x</i>). That is a different workflow, not simulated here. A strong line in transformed data is evidence for a model, not proof it remains valid outside the data range.</p><p>Current scope: <a href="https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf">IB Mathematics AI, AHL 2.10</a>. <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/25110">TI Linear Regression guide</a>.</p></details>
+</main></body></html>

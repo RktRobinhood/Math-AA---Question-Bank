@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "id": "CT37",
+  "route": "binomial-pdf/index.html",
+  "catalogueTitle": "Binomial: exact probability",
+  "playerHeading": "Binomial PDF: exactly one count",
+  "status": "recording-ready-native-contract",
+  "scriptSource": {
+    "type": "original-recording-cue-sheet",
+    "file": "DISTRIBUTION-RECORDING-CUE-SHEET.md"
+  },
+  "script": "lessons/CT37.txt",
+  "spokenCues": [
+    {
+      "id": "37.01",
+      "text": "We want exactly three seeds to sprout. That means one count, not a range."
+    },
+    {
+      "id": "37.02",
+      "text": "On a Calculator page, press Menu. Choose five for Probability, five for Distributions, then the letter D for Binomial P D F."
+    },
+    {
+      "id": "37.03",
+      "text": "Enter eight for the number of trials. Tab to the success probability, zero point three. Tab to X Value and enter three."
+    },
+    {
+      "id": "37.04",
+      "text": "Press Enter to insert the command. Press Enter again to calculate. The probability of exactly three is about zero point two five four."
+    },
+    {
+      "id": "37.05",
+      "text": "At most three would include zero, one, two and three. That’s a cumulative probability. This calculation is for exactly three only."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 23800,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Exactly three means one count: X = 3. Start on a Calculator page.",
+        "endMs": 3500
+      },
+      {
+        "id": "watch-02",
+        "startMs": 3500,
+        "text": "Press Menu, 5 for Probability, 5 for Distributions, then D for Binomial Pdf.",
+        "endMs": 8400
+      },
+      {
+        "id": "watch-03",
+        "startMs": 8400,
+        "text": "Enter 8 trials, 0.3 for the success probability, and 3 for X Value. Use Tab between fields.",
+        "endMs": 15400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 15400,
+        "text": "Press Enter to insert the command, then Enter again to calculate.",
+        "endMs": 19600
+      },
+      {
+        "id": "watch-05",
+        "startMs": 19600,
+        "text": "The screen shows P(X = 3). At most three is a different event; it also includes 0, 1 and 2.",
+        "endMs": 23800
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3650,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 3900,
+        "keys": []
+      },
+      {
+        "timeMs": 4750,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 5000,
+        "keys": []
+      },
+      {
+        "timeMs": 5900,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 6150,
+        "keys": []
+      },
+      {
+        "timeMs": 7350,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 7600,
+        "keys": []
+      },
+      {
+        "timeMs": 8950,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 9200,
+        "keys": []
+      },
+      {
+        "timeMs": 9900,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10150,
+        "keys": []
+      },
+      {
+        "timeMs": 10900,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 11150,
+        "keys": []
+      },
+      {
+        "timeMs": 11200,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 11450,
+        "keys": []
+      },
+      {
+        "timeMs": 11500,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 11750,
+        "keys": []
+      },
+      {
+        "timeMs": 12800,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13050,
+        "keys": []
+      },
+      {
+        "timeMs": 13900,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 14150,
+        "keys": []
+      },
+      {
+        "timeMs": 15700,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15950,
+        "keys": []
+      },
+      {
+        "timeMs": 17000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17250,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": {
+    "mechanism": "inline-json",
+    "elementId": "ct37-narration-manifest",
+    "version": 1,
+    "timing": "measured-playback",
+    "audioFilename": "narration.mp3",
+    "cues": [
+      {
+        "id": "37.01",
+        "keys": [],
+        "text": "We want exactly three seeds to sprout. That means one count, not a range."
+      },
+      {
+        "id": "37.02",
+        "keys": [
+          {
+            "id": "menu",
+            "key": "menu",
+            "rehearsalTimeMs": 3650
+          },
+          {
+            "id": "choose-probability",
+            "key": "5",
+            "rehearsalTimeMs": 4750
+          },
+          {
+            "id": "choose-distributions",
+            "key": "5",
+            "rehearsalTimeMs": 5900
+          },
+          {
+            "id": "choose-binomial-pdf",
+            "key": "d",
+            "rehearsalTimeMs": 7350
+          }
+        ],
+        "text": "On a Calculator page, press Menu. Choose five for Probability, five for Distributions, then the letter D for Binomial P D F."
+      },
+      {
+        "id": "37.03",
+        "keys": [
+          {
+            "id": "type-n-8",
+            "key": "8",
+            "rehearsalTimeMs": 8950
+          },
+          {
+            "id": "tab-probability",
+            "key": "tab",
+            "rehearsalTimeMs": 9900
+          },
+          {
+            "id": "type-p-0",
+            "key": "0",
+            "rehearsalTimeMs": 10900
+          },
+          {
+            "id": "decimal-p",
+            "key": "dot",
+            "rehearsalTimeMs": 11200
+          },
+          {
+            "id": "type-p-3",
+            "key": "3",
+            "rehearsalTimeMs": 11500
+          },
+          {
+            "id": "tab-x-value",
+            "key": "tab",
+            "rehearsalTimeMs": 12800
+          },
+          {
+            "id": "type-k-3",
+            "key": "3",
+            "rehearsalTimeMs": 13900
+          }
+        ],
+        "text": "Enter eight for the number of trials. Tab to the success probability, zero point three. Tab to X Value and enter three."
+      },
+      {
+        "id": "37.04",
+        "keys": [
+          {
+            "id": "insert-command",
+            "key": "enter",
+            "rehearsalTimeMs": 15700
+          },
+          {
+            "id": "evaluate-result",
+            "key": "enter",
+            "rehearsalTimeMs": 17000
+          }
+        ],
+        "text": "Press Enter to insert the command. Press Enter again to calculate. The probability of exactly three is about zero point two five four."
+      },
+      {
+        "id": "37.05",
+        "keys": [],
+        "text": "At most three would include zero, one, two and three. That’s a cumulative probability. This calculation is for exactly three only."
+      }
+    ],
+    "contractSource": "CT37-VOICE-READINESS.md"
+  },
+  "integrationStatus": "inline-json"
+}

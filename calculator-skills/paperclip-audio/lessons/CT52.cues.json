@@ -1,0 +1,678 @@
+{
+  "schemaVersion": 1,
+  "id": "CT52",
+  "route": "stationary/index.html",
+  "catalogueTitle": "Stationary points via numerical derivative",
+  "playerHeading": "Stationary points",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "stationary/index.html"
+  },
+  "script": "lessons/CT52.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "On a Graphs page, enter f one of x and press Enter.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Press Control and G for f two. Shift and subtraction opens the first derivative template.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Enter x in the denominator box and f one of x in the expression box. Press Enter to graph f two.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Choose Menu then six: Analyze Graph then one: Zero. Select f two, the derivative, not f one.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Bracket one crossing of f two with bounds on either side. The zero gives an x-coordinate.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Substitute that x into f one. The derivative changes from positive to negative.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Repeat Zero on f two with a separate bracket around the second crossing.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Evaluate the original function again. This time the derivative changes from negative to positive.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "A derivative can touch zero without changing sign. A crossing search may miss it; verify a candidate separately.",
+      "watchCueId": "watch-09"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 44000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Graphs page, enter f₁(x) and press Enter.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "Press Ctrl + G for f₂. Shift + subtraction opens the first derivative template.",
+        "endMs": 8000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 8000,
+        "text": "Enter x in the denominator box and f₁(x) in the expression box. Press Enter to graph f₂.",
+        "endMs": 12600
+      },
+      {
+        "id": "watch-04",
+        "startMs": 12600,
+        "text": "Choose Menu → 6: Analyze Graph → 1: Zero. Select f₂, the derivative, not f₁.",
+        "endMs": 15900
+      },
+      {
+        "id": "watch-05",
+        "startMs": 15900,
+        "text": "Bracket one crossing of f₂ with bounds on either side. The zero gives an x-coordinate.",
+        "endMs": 19200
+      },
+      {
+        "id": "watch-06",
+        "startMs": 19200,
+        "text": "Substitute that x into f₁. The derivative changes from positive to negative.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 22000,
+        "text": "Repeat Zero on f₂ with a separate bracket around the second crossing.",
+        "endMs": 28300
+      },
+      {
+        "id": "watch-08",
+        "startMs": 28300,
+        "text": "Evaluate the original function again. This time the derivative changes from negative to positive.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 36000,
+        "text": "A derivative can touch zero without changing sign. A crossing search may miss it; verify a candidate separately.",
+        "endMs": 44000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1000,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 1270,
+        "keys": []
+      },
+      {
+        "timeMs": 1480,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 1750,
+        "keys": []
+      },
+      {
+        "timeMs": 1960,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2230,
+        "keys": []
+      },
+      {
+        "timeMs": 2440,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 2710,
+        "keys": []
+      },
+      {
+        "timeMs": 2920,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 3190,
+        "keys": []
+      },
+      {
+        "timeMs": 3400,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 3670,
+        "keys": []
+      },
+      {
+        "timeMs": 3880,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 4150,
+        "keys": []
+      },
+      {
+        "timeMs": 4360,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 4631,
+        "keys": []
+      },
+      {
+        "timeMs": 5500,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 5770,
+        "keys": []
+      },
+      {
+        "timeMs": 6100,
+        "keys": [
+          "g"
+        ]
+      },
+      {
+        "timeMs": 6370,
+        "keys": []
+      },
+      {
+        "timeMs": 6700,
+        "keys": [
+          "shift"
+        ]
+      },
+      {
+        "timeMs": 6971,
+        "keys": []
+      },
+      {
+        "timeMs": 7300,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 7570,
+        "keys": []
+      },
+      {
+        "timeMs": 8000,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 8270,
+        "keys": []
+      },
+      {
+        "timeMs": 8460,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 8730,
+        "keys": []
+      },
+      {
+        "timeMs": 8920,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 9190,
+        "keys": []
+      },
+      {
+        "timeMs": 9380,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 9650,
+        "keys": []
+      },
+      {
+        "timeMs": 9840,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 10110,
+        "keys": []
+      },
+      {
+        "timeMs": 10300,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 10570,
+        "keys": []
+      },
+      {
+        "timeMs": 10760,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 11030,
+        "keys": []
+      },
+      {
+        "timeMs": 11220,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11490,
+        "keys": []
+      },
+      {
+        "timeMs": 13000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 13270,
+        "keys": []
+      },
+      {
+        "timeMs": 13450,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 13720,
+        "keys": []
+      },
+      {
+        "timeMs": 13900,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14170,
+        "keys": []
+      },
+      {
+        "timeMs": 14350,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 14620,
+        "keys": []
+      },
+      {
+        "timeMs": 14800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15070,
+        "keys": []
+      },
+      {
+        "timeMs": 16000,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 16270,
+        "keys": []
+      },
+      {
+        "timeMs": 16430,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16700,
+        "keys": []
+      },
+      {
+        "timeMs": 16860,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17130,
+        "keys": []
+      },
+      {
+        "timeMs": 17290,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17560,
+        "keys": []
+      },
+      {
+        "timeMs": 17720,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17990,
+        "keys": []
+      },
+      {
+        "timeMs": 22000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 22270,
+        "keys": []
+      },
+      {
+        "timeMs": 22420,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 22690,
+        "keys": []
+      },
+      {
+        "timeMs": 22840,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23110,
+        "keys": []
+      },
+      {
+        "timeMs": 23260,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 23530,
+        "keys": []
+      },
+      {
+        "timeMs": 23680,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 23950,
+        "keys": []
+      },
+      {
+        "timeMs": 24700,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 24970,
+        "keys": []
+      },
+      {
+        "timeMs": 25140,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 25410,
+        "keys": []
+      },
+      {
+        "timeMs": 25580,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 25850,
+        "keys": []
+      },
+      {
+        "timeMs": 26020,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 26290,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT52Tape",
+        "keys": [
+          {
+            "timeMs": 1000,
+            "key": "x"
+          },
+          {
+            "timeMs": 1480,
+            "key": "power"
+          },
+          {
+            "timeMs": 1960,
+            "key": "3"
+          },
+          {
+            "timeMs": 2440,
+            "key": "right"
+          },
+          {
+            "timeMs": 2920,
+            "key": "minus"
+          },
+          {
+            "timeMs": 3400,
+            "key": "3"
+          },
+          {
+            "timeMs": 3880,
+            "key": "x"
+          },
+          {
+            "timeMs": 4360,
+            "key": "enter"
+          },
+          {
+            "timeMs": 5500,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 6100,
+            "key": "g"
+          },
+          {
+            "timeMs": 6700,
+            "key": "shift"
+          },
+          {
+            "timeMs": 7300,
+            "key": "minus"
+          },
+          {
+            "timeMs": 8000,
+            "key": "x"
+          },
+          {
+            "timeMs": 8460,
+            "key": "right"
+          },
+          {
+            "timeMs": 8920,
+            "key": "f"
+          },
+          {
+            "timeMs": 9380,
+            "key": "1"
+          },
+          {
+            "timeMs": 9840,
+            "key": "lparen"
+          },
+          {
+            "timeMs": 10300,
+            "key": "x"
+          },
+          {
+            "timeMs": 10760,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 11220,
+            "key": "enter"
+          },
+          {
+            "timeMs": 13000,
+            "key": "menu"
+          },
+          {
+            "timeMs": 13450,
+            "key": "6"
+          },
+          {
+            "timeMs": 13900,
+            "key": "1"
+          },
+          {
+            "timeMs": 14350,
+            "key": "down"
+          },
+          {
+            "timeMs": 14800,
+            "key": "enter"
+          },
+          {
+            "timeMs": 16000,
+            "key": "neg"
+          },
+          {
+            "timeMs": 16430,
+            "key": "2"
+          },
+          {
+            "timeMs": 16860,
+            "key": "enter"
+          },
+          {
+            "timeMs": 17290,
+            "key": "0"
+          },
+          {
+            "timeMs": 17720,
+            "key": "enter"
+          },
+          {
+            "timeMs": 22000,
+            "key": "menu"
+          },
+          {
+            "timeMs": 22420,
+            "key": "6"
+          },
+          {
+            "timeMs": 22840,
+            "key": "1"
+          },
+          {
+            "timeMs": 23260,
+            "key": "down"
+          },
+          {
+            "timeMs": 23680,
+            "key": "enter"
+          },
+          {
+            "timeMs": 24700,
+            "key": "0"
+          },
+          {
+            "timeMs": 25140,
+            "key": "enter"
+          },
+          {
+            "timeMs": 25580,
+            "key": "2"
+          },
+          {
+            "timeMs": 26020,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

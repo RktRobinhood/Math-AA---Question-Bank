@@ -1,0 +1,7 @@
+Start at the base. The drone is six kilometres west, eight kilometres south, and five kilometres above it.
+From Calculator, press Home then five: Settings then two: Document Settings. Set Angle to Degree.
+Press Control, then the x squared key, to insert a square root. Square the east and north distances and add them inside the root.
+Measure clockwise from north. In the south-west, add the acute angle west of south to one hundred and eighty degrees.
+Compare the rise with the horizontal distance, not the sloping line.
+For the straight-line distance, all three perpendicular displacements contribute.
+The bearing is two hundred and seventeen degrees to the nearest degree. The sloping distance is eleven point two kilometres to three significant figures.

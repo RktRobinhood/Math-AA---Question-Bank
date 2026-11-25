@@ -1,0 +1,14 @@
+The Poisson model averages three events per ten minutes. We are counting in twenty minutes.
+Double the mean. Use lambda equals six for this interval.
+For exactly six events, type the Poisson P D F command on a Calculator page. Enter six for the mean and six for the count.
+Press Enter once to evaluate a typed command.
+Exactly six has probability about zero point one six one.
+For three to six events inclusive, use the Poisson C D F command with mean six, lower bound three, and upper bound six.
+PDF takes one count. CDF adds every count between its two bounds.
+Counts three, four, five and six together have probability about zero point five four four.
+More than six excludes six. Its complement includes every count from zero through six.
+Type one minus Poisson C D F, with mean six, lower bound zero and upper bound six. Press Enter.
+More than six has probability about zero point three nine four.
+At least six includes six. Its complement now stops at five.
+Type one minus Poisson C D F, with mean six, lower bound zero and upper bound five. Press Enter.
+At least six has probability about zero point five five four. The two answers differ by the probability of exactly six.

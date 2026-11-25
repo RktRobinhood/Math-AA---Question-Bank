@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 1,
+  "id": "CT03",
+  "route": "counting/index.html",
+  "catalogueTitle": "Combinations and factorials",
+  "playerHeading": "Combinations and factorials",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "counting/index.html"
+  },
+  "script": "lessons/CT03.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start on a Calculator page. The same five badges can be lined up or chosen for a display.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "For a line-up of all five, type the number first. Choose Factorial to put the exclamation mark after it.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "The factorial counts complete line-ups. Change the order and you have a different line-up.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "This time choose two badges for a display with no roles. Swapping them does not make a new group.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter the total first, then a comma and the number chosen. Close the parenthesis and press Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Read the exact number of groups. It is not a probability or a count of ordered choices.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 32000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start on a Calculator page. The same five badges can be lined up or chosen for a display.",
+        "endMs": 3000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 3000,
+        "text": "For a line-up of all five, type the number first. Choose Factorial to put the exclamation mark after it.",
+        "endMs": 9000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 9000,
+        "text": "The factorial counts complete line-ups. Change the order and you have a different line-up.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 13000,
+        "text": "This time choose two badges for a display with no roles. Swapping them does not make a new group.",
+        "endMs": 20000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 20000,
+        "text": "Enter the total first, then a comma and the number chosen. Close the parenthesis and press Enter.",
+        "endMs": 26000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 26000,
+        "text": "Read the exact number of groups. It is not a probability or a count of ordered choices.",
+        "endMs": 32000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 4100,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 4440,
+        "keys": []
+      },
+      {
+        "timeMs": 5020,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5360,
+        "keys": []
+      },
+      {
+        "timeMs": 5950,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 6290,
+        "keys": []
+      },
+      {
+        "timeMs": 6900,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7240,
+        "keys": []
+      },
+      {
+        "timeMs": 8220,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8560,
+        "keys": []
+      },
+      {
+        "timeMs": 15200,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 15540,
+        "keys": []
+      },
+      {
+        "timeMs": 16500,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 16840,
+        "keys": []
+      },
+      {
+        "timeMs": 17910,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 18250,
+        "keys": []
+      },
+      {
+        "timeMs": 20380,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 20720,
+        "keys": []
+      },
+      {
+        "timeMs": 21280,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 21620,
+        "keys": []
+      },
+      {
+        "timeMs": 22150,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 22490,
+        "keys": []
+      },
+      {
+        "timeMs": 23120,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 23460,
+        "keys": []
+      },
+      {
+        "timeMs": 24050,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24390,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT03Tape",
+        "keys": [
+          {
+            "timeMs": 4100,
+            "key": "5"
+          },
+          {
+            "timeMs": 5020,
+            "key": "menu"
+          },
+          {
+            "timeMs": 5950,
+            "key": "5"
+          },
+          {
+            "timeMs": 6900,
+            "key": "1"
+          },
+          {
+            "timeMs": 8220,
+            "key": "enter"
+          },
+          {
+            "timeMs": 15200,
+            "key": "menu"
+          },
+          {
+            "timeMs": 16500,
+            "key": "5"
+          },
+          {
+            "timeMs": 17910,
+            "key": "3"
+          },
+          {
+            "timeMs": 20380,
+            "key": "5"
+          },
+          {
+            "timeMs": 21280,
+            "key": "comma"
+          },
+          {
+            "timeMs": 22150,
+            "key": "2"
+          },
+          {
+            "timeMs": 23120,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 24050,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

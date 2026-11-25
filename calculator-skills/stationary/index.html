@@ -1,0 +1,39 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Stationary points · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="editor.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT52</span></p><h1>Stationary points</h1><p class="subtitle">Find a zero of the derivative. Then check the original function.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct52-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p class="ct52-bounds" id="readout" hidden></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
+<div class="ct52-stage-grid">
+<div class="ct52-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div><button type="button" id="stage-play" aria-label="Play captioned demonstration" title="Play captioned demonstration"><svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div>
+<div class="ct52-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>Find and classify both turns</h2><p class="sample-f1">f₁(x) = x³ − 3x<br>f₂(x) = derivative of f₁</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct52-try-help" hidden>
+<p id="keypad-problem" class="ct52-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools">
+<form id="expression-form"><label for="expression">Original function f₁(x)</label><div class="inputline"><input id="expression" type="text" maxlength="80" spellcheck="false" autocomplete="off" required><button type="submit" class="primary">Load f₁ entry</button></div></form>
+<form id="bound-form" hidden><label for="bound" id="bound-label">Lower bound x (lesson shortcut)</label><div class="inputline"><input id="bound" type="text" maxlength="19" inputmode="decimal" autocomplete="off" required><button type="submit">Enter bound</button></div></form>
+<form id="point-form" hidden><label for="point-input">Check a candidate x <small>(lesson helper)</small></label><div class="inputline"><input id="point-input" type="text" inputmode="decimal" maxlength="19" autocomplete="off" required><button type="submit">Evaluate f₁ and slopes</button></div></form>
+<p id="probe-result" class="feedback" role="status"></p>
+<p class="ct52-keyboard">Keyboard: <kbd>Ctrl</kbd> + <kbd>G</kbd> opens f₂; <kbd>Shift</kbd> + subtraction opens the derivative template; <kbd>M</kbd> opens Menu. Use the arrows or physical keypad.</p>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false">Focus</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct52-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="44" step="0.005"></label><span class="ct52-rehearsal">Captions only</span></div>
+</div></section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct52-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Set exercise</p>
+<div id="exercise-active"><h2>Check the stationary point</h2><p id="challenge"></p>
+<form id="answer-form"><div class="grade-row"><label for="answer-y">Height y <input id="answer-y" type="text" inputmode="decimal" maxlength="24" required></label><label for="kind">Classification <select id="kind" required><option value="">Select…</option><option value="maximum">Local maximum</option><option value="minimum">Local minimum</option><option value="stationary inflection">Stationary inflection</option></select></label><button class="primary">Check</button></div></form>
+<p id="feedback" class="feedback" role="status"></p><details><summary>Hint</summary><p>Use f₁ for height and f₂ for slope. A zero slope is stationary; use one derivative sign on each side to tell whether the graph turns.</p></details></div>
+<div id="exercise-inactive" hidden><h2>Your graph workspace</h2><p>Explore this function. Reset to return to the assigned check.</p></div>
+</section></section>
+<details class="notes"><summary>What a derivative zero tells you</summary><p>The zero of f₂ gives an x-coordinate. Substitute into f₁ for y. A + to − change gives a local maximum; − to + gives a local minimum. For the cubics in this lesson, the same nonzero sign on both sides of an isolated derivative zero gives a stationary inflection.</p><p>A crossing search may miss a touching zero. Use a known candidate and verify it, rather than treating a near-zero number as proof. The bound fields and candidate panel are lesson helpers, not TI menus. The simulator accepts smooth polynomials up to degree three and models the non-CAS menus.</p><p><a href="https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/qce-mm-trb-for-cx-ii-t-2025.pdf">TI CX II‑T workbook · p. 41</a> · <a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/content/m_scratchpad/sc_graphing_with_the_scratchpad.HTML">TI Graphs and Zero</a></p></details>
+</main></body></html>

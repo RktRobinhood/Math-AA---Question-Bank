@@ -1,0 +1,8 @@
+A normal population has known standard deviation four. Test whether its mean is below fifty using an independent sample.
+Use a z test because the population standard deviation is known. Choose the less-than alternative before seeing the test result.
+The independent observations are already in column A. Open the one-sample z Test.
+Choose Data because the individual readings are already in a named list.
+Enter the null mean fifty and the known population standard deviation four. Then choose readings for List.
+Keep frequency at one. Change the alternative to less than. Leave the optional graph unchecked.
+Under the null hypothesis, the chance of a z score of negative three or lower is about zero point zero zero one three five. The test counted nine observations from the list.
+There is evidence that the mean is below fifty. A two-sided alternative would use both tails.

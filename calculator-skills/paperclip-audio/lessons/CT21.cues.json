@@ -1,0 +1,413 @@
+{
+  "schemaVersion": 1,
+  "id": "CT21",
+  "route": "matrices/index.html",
+  "catalogueTitle": "Matrices: entry, determinant and inverse",
+  "playerHeading": "Determinant & inverse",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "matrices/index.html"
+  },
+  "script": "lessons/CT21.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start on a Calculator page. Type A, then Control and Template, to name the matrix with the assignment symbol.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Open Menu then seven: Matrix and Vector then one: Create then one: Matrix. Set the number of rows and columns.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Fill the matrix from left to right, row by row. Use Tab to move between cells. Press Enter to store it.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Type the determinant command with A in brackets, then press Enter. The determinant is a single number.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "For a square matrix with nonzero determinant, type A, press the power key, then the negative key and one. Press Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "The inverse is another matrix. If the determinant is zero, the matrix is singular and has no inverse.",
+      "watchCueId": "watch-06"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 36000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start on a Calculator page. Type a, then Ctrl + template (:=) to name the matrix.",
+        "endMs": 4100
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4100,
+        "text": "Open Menu → 7: Matrix & Vector → 1: Create → 1: Matrix. Set the number of rows and columns.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "Fill the matrix from left to right, row by row. Use Tab to move between cells. Press Enter to store it.",
+        "endMs": 19400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 19400,
+        "text": "Type det(a), then press Enter. The determinant is a single number.",
+        "endMs": 25700
+      },
+      {
+        "id": "watch-05",
+        "startMs": 25700,
+        "text": "For a square matrix with nonzero determinant, type a, ^, the negative key, 1, then Enter.",
+        "endMs": 32000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 32000,
+        "text": "The inverse is another matrix. If the determinant is zero, the matrix is singular and has no inverse.",
+        "endMs": 36000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 1800,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 2180,
+        "keys": []
+      },
+      {
+        "timeMs": 2620,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 3000,
+        "keys": []
+      },
+      {
+        "timeMs": 3140,
+        "keys": [
+          "templates"
+        ]
+      },
+      {
+        "timeMs": 3520,
+        "keys": []
+      },
+      {
+        "timeMs": 4800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5180,
+        "keys": []
+      },
+      {
+        "timeMs": 5720,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 6100,
+        "keys": []
+      },
+      {
+        "timeMs": 6550,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6930,
+        "keys": []
+      },
+      {
+        "timeMs": 7250,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 7630,
+        "keys": []
+      },
+      {
+        "timeMs": 8450,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 8830,
+        "keys": []
+      },
+      {
+        "timeMs": 9060,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 9441,
+        "keys": []
+      },
+      {
+        "timeMs": 9600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9980,
+        "keys": []
+      },
+      {
+        "timeMs": 10300,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 10681,
+        "keys": []
+      },
+      {
+        "timeMs": 11330,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 11710,
+        "keys": []
+      },
+      {
+        "timeMs": 12720,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 13101,
+        "keys": []
+      },
+      {
+        "timeMs": 13410,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13791,
+        "keys": []
+      },
+      {
+        "timeMs": 14030,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14410,
+        "keys": []
+      },
+      {
+        "timeMs": 14720,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15101,
+        "keys": []
+      },
+      {
+        "timeMs": 15400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 15781,
+        "keys": []
+      },
+      {
+        "timeMs": 16100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 16480,
+        "keys": []
+      },
+      {
+        "timeMs": 16760,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 17140,
+        "keys": []
+      },
+      {
+        "timeMs": 18330,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18710,
+        "keys": []
+      },
+      {
+        "timeMs": 20150,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 20530,
+        "keys": []
+      },
+      {
+        "timeMs": 20700,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 21080,
+        "keys": []
+      },
+      {
+        "timeMs": 21250,
+        "keys": [
+          "t"
+        ]
+      },
+      {
+        "timeMs": 21630,
+        "keys": []
+      },
+      {
+        "timeMs": 21900,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 22280,
+        "keys": []
+      },
+      {
+        "timeMs": 22500,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 22880,
+        "keys": []
+      },
+      {
+        "timeMs": 23080,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 23460,
+        "keys": []
+      },
+      {
+        "timeMs": 24320,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24700,
+        "keys": []
+      },
+      {
+        "timeMs": 26400,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 26780,
+        "keys": []
+      },
+      {
+        "timeMs": 27300,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 27680,
+        "keys": []
+      },
+      {
+        "timeMs": 28180,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 28560,
+        "keys": []
+      },
+      {
+        "timeMs": 29100,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 29480,
+        "keys": []
+      },
+      {
+        "timeMs": 30600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 30980,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

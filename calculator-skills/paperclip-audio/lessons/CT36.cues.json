@@ -1,0 +1,452 @@
+{
+  "schemaVersion": 1,
+  "id": "CT36",
+  "route": "expectation/index.html",
+  "catalogueTitle": "Discrete random variables and expectation",
+  "playerHeading": "Discrete expectation",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "expectation/index.html"
+  },
+  "script": "lessons/CT36.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "The possible outcomes are minus two, one and four. Their respective probabilities are zero point two five, zero point three five and zero point four zero.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "First add just the probabilities. A valid distribution gives a total of one.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Type the outcome, times , and its own probability. A negative outcome gives a negative contribution.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Join the three products with plus signs. Press Enter; do not simply average the outcomes.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The expectation is one point four five: a long-run average, not a value that must occur on any individual trial.",
+      "watchCueId": "watch-05"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 42000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "The possible outcomes are −2, 1 and 4. Their respective probabilities are 0.25, 0.35 and 0.40.",
+        "endMs": 5000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5000,
+        "text": "First add just the probabilities. A valid distribution gives a total of 1.",
+        "endMs": 15000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 15000,
+        "text": "Type the outcome, ×, and its own probability. A negative outcome gives a negative contribution.",
+        "endMs": 25000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 25000,
+        "text": "Join the three products with +. Press Enter; do not simply average the outcomes.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 34000,
+        "text": "The expectation is 1.45: a long-run average, not a value that must occur on any individual trial.",
+        "endMs": 42000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 5550,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 5870,
+        "keys": []
+      },
+      {
+        "timeMs": 5990,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 6311,
+        "keys": []
+      },
+      {
+        "timeMs": 6430,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 6750,
+        "keys": []
+      },
+      {
+        "timeMs": 6870,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 7190,
+        "keys": []
+      },
+      {
+        "timeMs": 7310,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 7630,
+        "keys": []
+      },
+      {
+        "timeMs": 7750,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 8070,
+        "keys": []
+      },
+      {
+        "timeMs": 8190,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 8510,
+        "keys": []
+      },
+      {
+        "timeMs": 8630,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8951,
+        "keys": []
+      },
+      {
+        "timeMs": 9070,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 9390,
+        "keys": []
+      },
+      {
+        "timeMs": 9510,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 9830,
+        "keys": []
+      },
+      {
+        "timeMs": 9950,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 10270,
+        "keys": []
+      },
+      {
+        "timeMs": 10390,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 10710,
+        "keys": []
+      },
+      {
+        "timeMs": 10830,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 11150,
+        "keys": []
+      },
+      {
+        "timeMs": 11270,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 11590,
+        "keys": []
+      },
+      {
+        "timeMs": 11710,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 12031,
+        "keys": []
+      },
+      {
+        "timeMs": 15520,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 15840,
+        "keys": []
+      },
+      {
+        "timeMs": 15980,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 16300,
+        "keys": []
+      },
+      {
+        "timeMs": 16440,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 16760,
+        "keys": []
+      },
+      {
+        "timeMs": 16900,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 17220,
+        "keys": []
+      },
+      {
+        "timeMs": 17360,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 17680,
+        "keys": []
+      },
+      {
+        "timeMs": 17820,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 18140,
+        "keys": []
+      },
+      {
+        "timeMs": 18280,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 18600,
+        "keys": []
+      },
+      {
+        "timeMs": 18740,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 19060,
+        "keys": []
+      },
+      {
+        "timeMs": 19200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 19520,
+        "keys": []
+      },
+      {
+        "timeMs": 19660,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 19980,
+        "keys": []
+      },
+      {
+        "timeMs": 20120,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 20440,
+        "keys": []
+      },
+      {
+        "timeMs": 20580,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 20900,
+        "keys": []
+      },
+      {
+        "timeMs": 21040,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 21500,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 21820,
+        "keys": []
+      },
+      {
+        "timeMs": 25200,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 25520,
+        "keys": []
+      },
+      {
+        "timeMs": 25680,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 26000,
+        "keys": []
+      },
+      {
+        "timeMs": 26160,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 26480,
+        "keys": []
+      },
+      {
+        "timeMs": 26640,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 26960,
+        "keys": []
+      },
+      {
+        "timeMs": 27120,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 27440,
+        "keys": []
+      },
+      {
+        "timeMs": 27600,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 27920,
+        "keys": []
+      },
+      {
+        "timeMs": 28080,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 28400,
+        "keys": []
+      },
+      {
+        "timeMs": 28560,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28880,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

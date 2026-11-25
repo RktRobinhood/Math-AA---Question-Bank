@@ -1,0 +1,6 @@
+A fair five-sector spinner has blue sectors one and two. Use one random integer from one to five for each spin.
+On a Calculator page open Probability, Random, then Integer.
+Enter the first label, last label, and number of spins. Both labels are included.
+Count every blue result, including repeats. Here one or two appears five times in the twelve observed outcomes.
+Choose the same command with the same inputs. Press Enter again after entering those inputs; the new run uses fresh draws.
+The next list gives three blues in twelve spins. The estimates differ; the exact two divided by five stays the same.

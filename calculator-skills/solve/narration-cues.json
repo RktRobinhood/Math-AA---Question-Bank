@@ -1,0 +1,48 @@
+{
+  "voice": "George",
+  "provider": "ElevenLabs",
+  "model": "eleven_v4",
+  "timingMethod": "measured MP3 quiet boundary, decoded playback time",
+  "durationMs": 35553,
+  "uiCuesMs": {
+    "result": 20503
+  },
+  "cues": [
+    {
+      "id": "solve-1",
+      "startMs": 0,
+      "endMs": 6241,
+      "text": "On a Calculator page, open Menu, choose Algebra, then Numerical Solve."
+    },
+    {
+      "id": "solve-2",
+      "startMs": 6241,
+      "endMs": 10696,
+      "text": "Enter the equation, then a comma and the variable you’re solving for."
+    },
+    {
+      "id": "solve-3",
+      "startMs": 10696,
+      "endMs": 17912,
+      "text": "To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma."
+    },
+    {
+      "id": "solve-4",
+      "startMs": 17912,
+      "endMs": 23580,
+      "text": "Close the bracket and press Enter. The calculator gives one numerical solution."
+    },
+    {
+      "id": "solve-5",
+      "startMs": 23580,
+      "endMs": 29431,
+      "text": "If the equation may have more than one solution, use separate intervals and check each result."
+    },
+    {
+      "id": "solve-6",
+      "startMs": 29431,
+      "endMs": 35553,
+      "text": "Keep the calculator’s full precision while you work, then round the final answer as the question asks."
+    }
+  ]
+}

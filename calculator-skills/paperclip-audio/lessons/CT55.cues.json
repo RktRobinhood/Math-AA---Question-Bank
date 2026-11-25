@@ -1,0 +1,604 @@
+{
+  "schemaVersion": 1,
+  "id": "CT55",
+  "route": "area-between/index.html",
+  "catalogueTitle": "Area between two curves",
+  "playerHeading": "Area between two curves",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "area-between/index.html"
+  },
+  "script": "lessons/CT55.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "In Graphs, enter f one of x equals x plus one and press Enter.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Press Tab. Enter f two of x equals three and press Enter.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "From x equals zero to x equals five, the curves cross at x equals two. The upper curve changes there.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Open Menu and choose Analyze Graph, then Bounded Area.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "With exactly two eligible curves, the tool selects them automatically.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "For the left region, type zero and press Enter.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Type two and press Enter. That stops the region at the crossing.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The left region has area two. Here the horizontal line is on top.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "Run Bounded Area again for the right region.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Type two and press Enter. Then type five and press Enter.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "The right region has area four point five. Now the sloping line is on top.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "Add the positive areas: two plus four point five equals six point five square units.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "When the upper curve changes, split there before calculating the area.",
+      "watchCueId": "watch-13"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 38500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "In Graphs, enter f₁(x) = x + 1 and press Enter.",
+        "endMs": 2600
+      },
+      {
+        "id": "watch-02",
+        "startMs": 2600,
+        "text": "Press Tab. Enter f₂(x) = 3 and press Enter.",
+        "endMs": 5700
+      },
+      {
+        "id": "watch-03",
+        "startMs": 5700,
+        "text": "From x = 0 to x = 5, the curves cross at x = 2. The upper curve changes there.",
+        "endMs": 10000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 10000,
+        "text": "Open Menu and choose Analyze Graph, then Bounded Area.",
+        "endMs": 13850
+      },
+      {
+        "id": "watch-05",
+        "startMs": 13850,
+        "text": "With exactly two eligible curves, the tool selects them automatically.",
+        "endMs": 15500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 15500,
+        "text": "For the left region, type 0 and press Enter.",
+        "endMs": 18800
+      },
+      {
+        "id": "watch-07",
+        "startMs": 18800,
+        "text": "Type 2 and press Enter. That stops the region at the crossing.",
+        "endMs": 21500
+      },
+      {
+        "id": "watch-08",
+        "startMs": 21500,
+        "text": "The left region has area 2. Here the horizontal line is on top.",
+        "endMs": 25000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 25000,
+        "text": "Run Bounded Area again for the right region.",
+        "endMs": 28200
+      },
+      {
+        "id": "watch-10",
+        "startMs": 28200,
+        "text": "Type 2 and press Enter. Then type 5 and press Enter.",
+        "endMs": 31000
+      },
+      {
+        "id": "watch-11",
+        "startMs": 31000,
+        "text": "The right region has area 4.5. Now the sloping line is on top.",
+        "endMs": 34400
+      },
+      {
+        "id": "watch-12",
+        "startMs": 34400,
+        "text": "Add the positive areas: 2 + 4.5 = 6.5 square units.",
+        "endMs": 36300
+      },
+      {
+        "id": "watch-13",
+        "startMs": 36300,
+        "text": "When the upper curve changes, split there before calculating the area.",
+        "endMs": 38500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 350,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 610,
+        "keys": []
+      },
+      {
+        "timeMs": 880,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 1141,
+        "keys": []
+      },
+      {
+        "timeMs": 1400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 1660,
+        "keys": []
+      },
+      {
+        "timeMs": 2000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 2260,
+        "keys": []
+      },
+      {
+        "timeMs": 2860,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 3120,
+        "keys": []
+      },
+      {
+        "timeMs": 3550,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 3810,
+        "keys": []
+      },
+      {
+        "timeMs": 4500,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 4760,
+        "keys": []
+      },
+      {
+        "timeMs": 10330,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 10590,
+        "keys": []
+      },
+      {
+        "timeMs": 11220,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 11480,
+        "keys": []
+      },
+      {
+        "timeMs": 11640,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 11900,
+        "keys": []
+      },
+      {
+        "timeMs": 11970,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 12560,
+        "keys": []
+      },
+      {
+        "timeMs": 12630,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 12890,
+        "keys": []
+      },
+      {
+        "timeMs": 12960,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 13220,
+        "keys": []
+      },
+      {
+        "timeMs": 13290,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 13550,
+        "keys": []
+      },
+      {
+        "timeMs": 13780,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14040,
+        "keys": []
+      },
+      {
+        "timeMs": 15890,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 16151,
+        "keys": []
+      },
+      {
+        "timeMs": 17280,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17541,
+        "keys": []
+      },
+      {
+        "timeMs": 19020,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19280,
+        "keys": []
+      },
+      {
+        "timeMs": 20420,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20681,
+        "keys": []
+      },
+      {
+        "timeMs": 25190,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 25451,
+        "keys": []
+      },
+      {
+        "timeMs": 25970,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 26230,
+        "keys": []
+      },
+      {
+        "timeMs": 26300,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 27181,
+        "keys": []
+      },
+      {
+        "timeMs": 27230,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 27491,
+        "keys": []
+      },
+      {
+        "timeMs": 27540,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 27800,
+        "keys": []
+      },
+      {
+        "timeMs": 27850,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 28111,
+        "keys": []
+      },
+      {
+        "timeMs": 28170,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28431,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 28730,
+        "keys": []
+      },
+      {
+        "timeMs": 29080,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 29340,
+        "keys": []
+      },
+      {
+        "timeMs": 29830,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 30090,
+        "keys": []
+      },
+      {
+        "timeMs": 30630,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 30890,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT55Tape",
+        "keys": [
+          {
+            "timeMs": 350,
+            "key": "x"
+          },
+          {
+            "timeMs": 880,
+            "key": "plus"
+          },
+          {
+            "timeMs": 1400,
+            "key": "1"
+          },
+          {
+            "timeMs": 2000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 2860,
+            "key": "tab"
+          },
+          {
+            "timeMs": 3550,
+            "key": "3"
+          },
+          {
+            "timeMs": 4500,
+            "key": "enter"
+          },
+          {
+            "timeMs": 10330,
+            "key": "menu"
+          },
+          {
+            "timeMs": 11220,
+            "key": "6"
+          },
+          {
+            "timeMs": 11640,
+            "key": "down"
+          },
+          {
+            "timeMs": 11970,
+            "key": "down"
+          },
+          {
+            "timeMs": 12300,
+            "key": "down"
+          },
+          {
+            "timeMs": 12630,
+            "key": "down"
+          },
+          {
+            "timeMs": 12960,
+            "key": "down"
+          },
+          {
+            "timeMs": 13290,
+            "key": "down"
+          },
+          {
+            "timeMs": 13780,
+            "key": "enter"
+          },
+          {
+            "timeMs": 15890,
+            "key": "0"
+          },
+          {
+            "timeMs": 17280,
+            "key": "enter"
+          },
+          {
+            "timeMs": 19020,
+            "key": "2"
+          },
+          {
+            "timeMs": 20420,
+            "key": "enter"
+          },
+          {
+            "timeMs": 25190,
+            "key": "menu"
+          },
+          {
+            "timeMs": 25970,
+            "key": "6"
+          },
+          {
+            "timeMs": 26300,
+            "key": "down"
+          },
+          {
+            "timeMs": 26610,
+            "key": "down"
+          },
+          {
+            "timeMs": 26920,
+            "key": "down"
+          },
+          {
+            "timeMs": 27230,
+            "key": "down"
+          },
+          {
+            "timeMs": 27540,
+            "key": "down"
+          },
+          {
+            "timeMs": 27850,
+            "key": "down"
+          },
+          {
+            "timeMs": 28170,
+            "key": "enter"
+          },
+          {
+            "timeMs": 28470,
+            "key": "2"
+          },
+          {
+            "timeMs": 29080,
+            "key": "enter"
+          },
+          {
+            "timeMs": 29830,
+            "key": "5"
+          },
+          {
+            "timeMs": 30630,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

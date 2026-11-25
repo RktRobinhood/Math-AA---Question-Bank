@@ -1,0 +1,8 @@
+Plot the function.
+A zero is an x value for which the function is zero.
+Open Analyze Graph and choose Zero.
+If prompted, select the curve to analyze.
+Place one bound on each side of the crossing.
+Keep other zeros outside those bounds.
+Read the x-coordinate.
+For a y-intercept, evaluate the function at x equal to zero instead.

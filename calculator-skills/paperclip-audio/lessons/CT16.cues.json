@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "id": "CT16",
+  "route": "threshold/index.html",
+  "catalogueTitle": "Finding a model threshold",
+  "playerHeading": "Find a model threshold",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "threshold/index.html"
+  },
+  "script": "lessons/CT16.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "A culture is ready at twelve units. How soon?",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Enter the growth model in f one.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "In f two, enter twelve for the horizontal target.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Press Menu, six: Analyze Graph, four: Intersection.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Put the lower bound at day two. Press Enter.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Put the upper bound at day three. Press Enter.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The x-coordinate is the continuous time: about two point one six days.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "If you can check only once per whole day, don't round to the nearest day.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "At day two, the model is only eleven point two five units.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "At day three, it is sixteen point eight seven five units. That meets the target.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "The model rises, so day three is the first eligible whole day.",
+      "watchCueId": "watch-11"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 37500,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "A culture is ready at 12 units. How soon?",
+        "endMs": 1900
+      },
+      {
+        "id": "watch-02",
+        "startMs": 1900,
+        "text": "Enter the growth model in f₁.",
+        "endMs": 6200
+      },
+      {
+        "id": "watch-03",
+        "startMs": 6200,
+        "text": "In f₂, enter 12 for the horizontal target.",
+        "endMs": 9400
+      },
+      {
+        "id": "watch-04",
+        "startMs": 9400,
+        "text": "Press Menu, 6: Analyze Graph, 4: Intersection.",
+        "endMs": 13500
+      },
+      {
+        "id": "watch-05",
+        "startMs": 13500,
+        "text": "Put the lower bound at day 2. Press Enter.",
+        "endMs": 16300
+      },
+      {
+        "id": "watch-06",
+        "startMs": 16300,
+        "text": "Put the upper bound at day 3. Press Enter.",
+        "endMs": 20600
+      },
+      {
+        "id": "watch-07",
+        "startMs": 20600,
+        "text": "The x-coordinate is the continuous time: about 2.16 days.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 24000,
+        "text": "If you can check only once per whole day, don’t round to the nearest day.",
+        "endMs": 26800
+      },
+      {
+        "id": "watch-09",
+        "startMs": 26800,
+        "text": "At day 2, the model is only 11.25 units.",
+        "endMs": 30400
+      },
+      {
+        "id": "watch-10",
+        "startMs": 30400,
+        "text": "At day 3, it is 16.875 units. That meets the target.",
+        "endMs": 34100
+      },
+      {
+        "id": "watch-11",
+        "startMs": 34100,
+        "text": "The model rises, so day 3 is the first eligible whole day.",
+        "endMs": 37500
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 2030,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 2330,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 2690,
+        "keys": []
+      },
+      {
+        "timeMs": 2740,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 3040,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 3360,
+        "keys": []
+      },
+      {
+        "timeMs": 3390,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 3690,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 4021,
+        "keys": []
+      },
+      {
+        "timeMs": 4120,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 4420,
+        "keys": []
+      },
+      {
+        "timeMs": 4620,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 4920,
+        "keys": []
+      },
+      {
+        "timeMs": 6240,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 6540,
+        "keys": []
+      },
+      {
+        "timeMs": 6620,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6920,
+        "keys": []
+      },
+      {
+        "timeMs": 7010,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 7310,
+        "keys": []
+      },
+      {
+        "timeMs": 7680,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7980,
+        "keys": []
+      },
+      {
+        "timeMs": 9450,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 9750,
+        "keys": []
+      },
+      {
+        "timeMs": 10670,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 10970,
+        "keys": []
+      },
+      {
+        "timeMs": 12090,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 12390,
+        "keys": []
+      },
+      {
+        "timeMs": 13720,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 14021,
+        "keys": []
+      },
+      {
+        "timeMs": 15090,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15390,
+        "keys": []
+      },
+      {
+        "timeMs": 16820,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 17120,
+        "keys": []
+      },
+      {
+        "timeMs": 18950,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 19250,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT16Tape",
+        "keys": [
+          {
+            "timeMs": 2030,
+            "key": "5"
+          },
+          {
+            "timeMs": 2390,
+            "key": "mul"
+          },
+          {
+            "timeMs": 2740,
+            "key": "1"
+          },
+          {
+            "timeMs": 3060,
+            "key": "dot"
+          },
+          {
+            "timeMs": 3390,
+            "key": "5"
+          },
+          {
+            "timeMs": 3720,
+            "key": "power"
+          },
+          {
+            "timeMs": 4120,
+            "key": "x"
+          },
+          {
+            "timeMs": 4620,
+            "key": "enter"
+          },
+          {
+            "timeMs": 6240,
+            "key": "tab"
+          },
+          {
+            "timeMs": 6620,
+            "key": "1"
+          },
+          {
+            "timeMs": 7010,
+            "key": "2"
+          },
+          {
+            "timeMs": 7680,
+            "key": "enter"
+          },
+          {
+            "timeMs": 9450,
+            "key": "menu"
+          },
+          {
+            "timeMs": 10670,
+            "key": "6"
+          },
+          {
+            "timeMs": 12090,
+            "key": "4"
+          },
+          {
+            "timeMs": 13720,
+            "key": "2"
+          },
+          {
+            "timeMs": 15090,
+            "key": "enter"
+          },
+          {
+            "timeMs": 16820,
+            "key": "3"
+          },
+          {
+            "timeMs": 18950,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

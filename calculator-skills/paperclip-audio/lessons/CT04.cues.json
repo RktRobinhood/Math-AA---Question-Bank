@@ -1,0 +1,902 @@
+{
+  "schemaVersion": 1,
+  "id": "CT04",
+  "route": "sequences/index.html",
+  "catalogueTitle": "Sequences, sigma and first threshold",
+  "playerHeading": "Sequences and finite sums",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "sequences/index.html"
+  },
+  "script": "lessons/CT04.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Find one term first: substitute n equals five into the rule.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "For the fifth term, replace n with five. Keep the exponent in brackets.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "The fifth term is forty-eight. That is not the total of the first five terms.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "For a total of consecutive terms, open Menu then four: Calculus then three: Sum.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Type n, then Tab to the lower index, upper index and rule.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Enter the original rule in n. The template automatically steps by one.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Enter gives ninety-three: the total of all five terms, including both endpoints.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "Need every second index? Open Statistics, List Operations, then Sequence to insert the sequence command.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "Type the rule, then press Right to leave the exponent before typing the comma.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "Enter n, the lower and upper indices, then the step. That last two is not the number of terms.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "This produces a list of four terms, not their sum.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "For the total, first open Statistics, List Math, then Sum of Elements to insert the sum command.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "Inside the sum command, insert the sequence command again. Keep the last argument, a step of two.",
+      "watchCueId": "watch-13"
+    },
+    {
+      "id": "watch-14",
+      "text": "Enter gives five hundred and ten. The outer sum adds only the terms created by the sequence command.",
+      "watchCueId": "watch-14"
+    },
+    {
+      "id": "watch-15",
+      "text": "For a first threshold, find the first integer index whose term passes the target, not the first total that does.",
+      "watchCueId": "watch-15"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 57000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Find one term first: substitute n = 5 into the rule.",
+        "endMs": 2500
+      },
+      {
+        "id": "watch-02",
+        "startMs": 2500,
+        "text": "For the fifth term, replace n with 5. Keep the exponent in brackets.",
+        "endMs": 6850
+      },
+      {
+        "id": "watch-03",
+        "startMs": 6850,
+        "text": "The fifth term is 48. That is not the total of the first five terms.",
+        "endMs": 8500
+      },
+      {
+        "id": "watch-04",
+        "startMs": 8500,
+        "text": "For a total of consecutive terms, open Menu → 4: Calculus → 3: Sum.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 12000,
+        "text": "Type n, then Tab to the lower index, upper index and rule.",
+        "endMs": 16400
+      },
+      {
+        "id": "watch-06",
+        "startMs": 16400,
+        "text": "Enter the original rule in n. The template automatically steps by one.",
+        "endMs": 21000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 21000,
+        "text": "Enter gives 93: the total of all five terms, including both endpoints.",
+        "endMs": 23500
+      },
+      {
+        "id": "watch-08",
+        "startMs": 23500,
+        "text": "Need every second index? Insert seq from Statistics → List Operations → Sequence.",
+        "endMs": 27000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 27000,
+        "text": "Type the rule, then press Right to leave the exponent before typing the comma.",
+        "endMs": 30950
+      },
+      {
+        "id": "watch-10",
+        "startMs": 30950,
+        "text": "Enter n, the lower and upper indices, then the step. That last 2 is not the number of terms.",
+        "endMs": 34700
+      },
+      {
+        "id": "watch-11",
+        "startMs": 34700,
+        "text": "This produces a list of four terms, not their sum.",
+        "endMs": 36700
+      },
+      {
+        "id": "watch-12",
+        "startMs": 36700,
+        "text": "For the total, first insert sum from Statistics → List Math → Sum of Elements.",
+        "endMs": 40000
+      },
+      {
+        "id": "watch-13",
+        "startMs": 40000,
+        "text": "Inside sum, insert seq again. Keep the last argument: step 2.",
+        "endMs": 49800
+      },
+      {
+        "id": "watch-14",
+        "startMs": 49800,
+        "text": "Enter gives 510. The outer sum adds only the terms created by seq.",
+        "endMs": 51500
+      },
+      {
+        "id": "watch-15",
+        "startMs": 51500,
+        "text": "For a first threshold, find the first integer index whose term passes the target, not the first total that does.",
+        "endMs": 57000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 700,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 1040,
+        "keys": []
+      },
+      {
+        "timeMs": 1090,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 1820,
+        "keys": []
+      },
+      {
+        "timeMs": 3000,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 3340,
+        "keys": []
+      },
+      {
+        "timeMs": 3390,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 3730,
+        "keys": []
+      },
+      {
+        "timeMs": 3780,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 4120,
+        "keys": []
+      },
+      {
+        "timeMs": 4170,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 4510,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 4900,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 5290,
+        "keys": []
+      },
+      {
+        "timeMs": 5340,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 5680,
+        "keys": []
+      },
+      {
+        "timeMs": 5730,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 6070,
+        "keys": []
+      },
+      {
+        "timeMs": 6120,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 6460,
+        "keys": []
+      },
+      {
+        "timeMs": 6850,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 7190,
+        "keys": []
+      },
+      {
+        "timeMs": 9450,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 9790,
+        "keys": []
+      },
+      {
+        "timeMs": 9840,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 10180,
+        "keys": []
+      },
+      {
+        "timeMs": 10230,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 10570,
+        "keys": []
+      },
+      {
+        "timeMs": 13000,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 13340,
+        "keys": []
+      },
+      {
+        "timeMs": 13390,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13730,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 14120,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14510,
+        "keys": []
+      },
+      {
+        "timeMs": 14560,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 14900,
+        "keys": []
+      },
+      {
+        "timeMs": 14950,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15290,
+        "keys": []
+      },
+      {
+        "timeMs": 16750,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 17090,
+        "keys": []
+      },
+      {
+        "timeMs": 17140,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 17480,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17870,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 18260,
+        "keys": []
+      },
+      {
+        "timeMs": 18310,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 18650,
+        "keys": []
+      },
+      {
+        "timeMs": 18700,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 19040,
+        "keys": []
+      },
+      {
+        "timeMs": 19090,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 19430,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 19820,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 20210,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 21340,
+        "keys": []
+      },
+      {
+        "timeMs": 25000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 25340,
+        "keys": []
+      },
+      {
+        "timeMs": 25390,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 25730,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 26120,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 26510,
+        "keys": []
+      },
+      {
+        "timeMs": 27050,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 27390,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 27780,
+        "keys": []
+      },
+      {
+        "timeMs": 27830,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 28170,
+        "keys": []
+      },
+      {
+        "timeMs": 28220,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 28560,
+        "keys": []
+      },
+      {
+        "timeMs": 28610,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 28950,
+        "keys": []
+      },
+      {
+        "timeMs": 29000,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 29340,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 29730,
+        "keys": []
+      },
+      {
+        "timeMs": 29780,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 30120,
+        "keys": []
+      },
+      {
+        "timeMs": 30170,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 30510,
+        "keys": []
+      },
+      {
+        "timeMs": 30560,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 30901,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 31291,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 31680,
+        "keys": []
+      },
+      {
+        "timeMs": 31730,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 32070,
+        "keys": []
+      },
+      {
+        "timeMs": 32120,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 32461,
+        "keys": []
+      },
+      {
+        "timeMs": 32510,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 32850,
+        "keys": []
+      },
+      {
+        "timeMs": 32900,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 33240,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 33630,
+        "keys": []
+      },
+      {
+        "timeMs": 33680,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 34020,
+        "keys": []
+      },
+      {
+        "timeMs": 34700,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 35041,
+        "keys": []
+      },
+      {
+        "timeMs": 38000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 38340,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 38731,
+        "keys": []
+      },
+      {
+        "timeMs": 38780,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 39121,
+        "keys": []
+      },
+      {
+        "timeMs": 39170,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 39511,
+        "keys": []
+      },
+      {
+        "timeMs": 40150,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 40490,
+        "keys": []
+      },
+      {
+        "timeMs": 40540,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 40880,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 41270,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 41661,
+        "keys": []
+      },
+      {
+        "timeMs": 42200,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 42541,
+        "keys": [
+          "mul"
+        ]
+      },
+      {
+        "timeMs": 42931,
+        "keys": []
+      },
+      {
+        "timeMs": 42980,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 43321,
+        "keys": []
+      },
+      {
+        "timeMs": 43370,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 43711,
+        "keys": []
+      },
+      {
+        "timeMs": 43760,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 44101,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 44491,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 44881,
+        "keys": []
+      },
+      {
+        "timeMs": 44930,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 45270,
+        "keys": []
+      },
+      {
+        "timeMs": 45320,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 45661,
+        "keys": []
+      },
+      {
+        "timeMs": 45710,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 46051,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 46441,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 46831,
+        "keys": []
+      },
+      {
+        "timeMs": 46880,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 47221,
+        "keys": []
+      },
+      {
+        "timeMs": 47270,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 47611,
+        "keys": []
+      },
+      {
+        "timeMs": 47660,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 48001,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 48391,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 48781,
+        "keys": []
+      },
+      {
+        "timeMs": 48830,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 49171,
+        "keys": []
+      },
+      {
+        "timeMs": 49800,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 50140,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Matrix transformations · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><nav aria-label="Calculator Coach"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></nav><h1>Matrix transformations</h1></div>
+<label><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
+<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
+<div id="watch-message" class="message"><p id="caption"></p></div>
+<div id="try-message" class="message" hidden><p id="task">Use the transformation matrix on the point. Read the image as (x′, y′).</p><div id="target-wrap" class="exercise"></div><div class="try-actions"><button id="return" aria-label="Return to Watch">Watch</button> <button id="reset" aria-label="Reset practice calculator">Reset</button></div></div>
+<div class="deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal">▶</button></div></div>
+<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><div class="chapters-wrap"><h2>Transform a point</h2><ol id="chapters"></ol></div><figure id="watch-plot" class="plot" hidden></figure></aside>
+<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Calculator steps</h2>
+<p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p><figure id="try-plot" class="plot" hidden></figure>
+<details id="edit"><summary>Edit practice values</summary>
+<form id="edit-form"><p>Use integers from −999 to 999. Applying clears the practice calculator.</p><label>Matrix <input id="edit-matrix" placeholder="a,b;c,d" maxlength="64" required></label><label>Point <input id="edit-point" placeholder="x,y" maxlength="34" required></label><button>Apply</button><p id="edit-error" class="feedback bad" role="status" hidden></p></form></details>
+<details><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu. Type <kbd>:</kbd> then <kbd>=</kbd> for assignment, <kbd>*</kbd> for multiply, <kbd>−</kbd> for a negative, and use <kbd>Tab</kbd> to move between cells.</p></details></aside>
+</div>
+<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="47" step=".005"></label><span>Captions only</span></div></div>
+</section>
+<details class="reference"><summary>Why this order?</summary><p>A point written as a 2×1 column goes on the right of the 2×2 transformation matrix. A row of the matrix acts on the column to produce one coordinate. Reversing these two operands cannot work: their two inner dimensions would be 1 and 2.</p><p>Note down: <strong>matrix × point column → image column; read top to bottom.</strong></p><p><a href="https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/ti-nspire_cx-ii-t-quick-guide.pdf#page=9">TI CX II-T quick guide: transformations</a> · <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29690">TI matrix entry</a></p></details>
+</main></body></html>

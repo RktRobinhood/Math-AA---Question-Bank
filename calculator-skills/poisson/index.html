@@ -1,0 +1,39 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Poisson probabilities · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT42</span></p><h1>Poisson probabilities</h1><p class="subtitle">Choose one count, a range, or a right tail.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct42-shared" id="stage" aria-label="TI-Nspire CX II-T Calculator lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct42-bounds" data-visible="false" aria-hidden="true"></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct42-stage-grid"><div class="ct42-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Calculator display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play worked example" title="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<div class="ct42-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><h2>One count, a range, then a tail</h2><p class="formula">3 events per 10 minutes<br>20-minute observation</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director" hidden><h2>Choose the count boundary</h2>
+<p id="keypad-problem" class="ct42-taskline"></p>
+<form id="model-form"><div class="poisson-inputs">
+<label>Mean for the interval (λ)<input type="text" id="mean" maxlength="18" inputmode="decimal" autocomplete="off" required></label>
+<label>Event<select id="event"><option value="pmf">Exactly</option><option value="between">Between, inclusive</option><option value="gt">More than</option><option value="ge">At least</option></select></label>
+<label id="a-label"><span id="a-caption">Count</span><input type="text" id="a" maxlength="5" inputmode="numeric" autocomplete="off" required></label>
+<label id="b-label" hidden>Upper count<input type="text" id="b" maxlength="5" inputmode="numeric" autocomplete="off"></label></div>
+<button type="submit">Use this event</button></form>
+<p id="event-warning" class="feedback" role="status" hidden></p>
+<form id="command-form"><label for="command">Calculator entry</label><div class="inputline"><input id="command" type="text" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="keypad-hint"><button class="primary" type="submit">Enter</button></div></form>
+<p id="keypad-hint">Type the command here or use the handheld keys.</p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<form id="answer-form"><label>Probability<input id="answer" required type="text" maxlength="28" inputmode="decimal" autocomplete="off"></label><p class="checker-precision">Give at least three significant figures.</p><button type="submit">Check probability</button></form>
+<p id="feedback" class="feedback" role="status"></p>
+<details><summary>Hint</summary><p>Use <code>poissPdf(λ,x)</code> for one exact count or <code>poissCdf(λ,lower,upper)</code> for a range. For a right tail, subtract the CDF from one. Decide whether its upper bound includes the stated count.</p></details>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls"><div class="player-top">
+<button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct42-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" value="0" max="50.5" step="0.005"></label><span class="ct42-rehearsal" id="media-status">Captioned</span></div>
+</div></section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct42-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
+<details class="notes"><summary>Calculator and lesson scope</summary><p>This lesson types <code>poissPdf</code> and <code>poissCdf</code> on the Calculator page. A typed command evaluates with one Enter. If your model has a distribution dialog, the first Enter inserts the command and a second Enter evaluates it. Find commands by name or type them; menu shortcuts can differ.</p><p>Use a positive mean for the requested observation interval. This simulator accepts λ from 0.0001 to 120 and integer counts 0–150; more extreme results may be below the simulator’s numerical range. Built-in probability names are supported, not arbitrary calculator expressions.</p><p><a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_alpha_P.HTML">TI: Poisson command syntax</a> · <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29450">TI: family distribution dialog</a></p></details>
+</main></body></html>

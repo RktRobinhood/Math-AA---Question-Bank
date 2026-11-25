@@ -1,0 +1,8 @@
+Start with two named columns. Each row is one paired observation.
+In Lists and Spreadsheet, choose Statistics, Stat Calculations, then Quadratic Regression.
+Use the right arrow and Tab to choose the lists x val for X and y val for Y.
+Store the fit to f one. Keep each pair once and the results in C. Press Enter.
+Read a, b and c in order. R squared summarises this fit; it is not another coefficient in the equation.
+Predict at x equals one point five by substituting it into the fitted equation, not reading a nearby data row.
+The curve bends down. Its vertex lies inside the observed interval and is higher than both endpoints.
+At x equals two the recorded value was nineteen point five. The fitted curve predicts eighteen there. The model need not pass through any observation.

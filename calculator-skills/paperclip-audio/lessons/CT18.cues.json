@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 1,
+  "id": "CT18",
+  "route": "voronoi/index.html",
+  "catalogueTitle": "Voronoi sites and nearest neighbours",
+  "playerHeading": "Voronoi sites and nearest neighbours",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "voronoi/index.html"
+  },
+  "script": "lessons/CT18.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Point P is at three, two. Site A is at one, one; B is at seven, one; and C is at five, six. Their readings are fifteen, thirty-two and forty-eight. Which site's reading estimates P?",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "On the Calculator page, enter the square of three minus one, plus the square of two minus one. Close each bracket and press the x squared key, then press Enter. No square root is needed.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the same P, but subtract B's coordinates. Square three minus seven, then add the square of two minus one. A negative difference becomes positive when squared.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Now use C. Square three minus five, then add the square of two minus six. Compare all the results, not just A and B.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The squared distances are A: five, B: seventeen, C: twenty. Site A is nearest. The estimate at P is A's reading, fifteen, not an average.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Now move P to four, two. Its offsets from A are three and one; from B they are negative three and one. Enter three squared plus one squared to check both.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "For C, the offsets are negative one and negative four. Enter negative one squared plus negative four squared, using the negative key inside each pair of brackets.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "A and B tie at ten; C is farther at seventeen. This point lies on their cell boundary. With readings fifteen and thirty-two, no unique estimate exists unless a tie-break rule is given.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 87000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "P = (3, 2). Sites: A (1, 1), B (7, 1), C (5, 6). Their readings are 15, 32 and 48. Which site's reading estimates P?",
+        "endMs": 7000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 7000,
+        "text": "On the Calculator page, enter (3 − 1)² + (2 − 1)². Close each bracket, tap x², then Enter. No square root is needed.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 22000,
+        "text": "Use the same P, but subtract B’s coordinates: (3 − 7)² + (2 − 1)². A negative difference becomes positive when squared.",
+        "endMs": 36000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 36000,
+        "text": "Now use C: (3 − 5)² + (2 − 6)². Compare all the results, not just A and B.",
+        "endMs": 50000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 50000,
+        "text": "The squared distances are A: 5, B: 17, C: 20. Site A is nearest. The estimate at P is A’s reading, 15, not an average.",
+        "endMs": 57000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 57000,
+        "text": "Now move P to (4, 2). Its offsets from A are 3 and 1; from B they are −3 and 1. Enter 3² + 1² to check both.",
+        "endMs": 67000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 67000,
+        "text": "For C the offsets are −1 and −4. Enter (−1)² + (−4)², using the negative key inside each bracket.",
+        "endMs": 79000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 79000,
+        "text": "A and B tie at 10; C is farther at 17. This point lies on their cell boundary. With readings 15 and 32, no unique estimate exists unless a tie-break rule is given.",
+        "endMs": 87000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 7600,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 8000,
+        "keys": []
+      },
+      {
+        "timeMs": 8410,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 8810,
+        "keys": []
+      },
+      {
+        "timeMs": 9220,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 9621,
+        "keys": []
+      },
+      {
+        "timeMs": 10030,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 10430,
+        "keys": []
+      },
+      {
+        "timeMs": 10840,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 11240,
+        "keys": []
+      },
+      {
+        "timeMs": 11650,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 12050,
+        "keys": []
+      },
+      {
+        "timeMs": 12460,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 12861,
+        "keys": []
+      },
+      {
+        "timeMs": 13270,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 13670,
+        "keys": []
+      },
+      {
+        "timeMs": 14080,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 14480,
+        "keys": []
+      },
+      {
+        "timeMs": 14890,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 15291,
+        "keys": []
+      },
+      {
+        "timeMs": 15700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16100,
+        "keys": []
+      },
+      {
+        "timeMs": 16510,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 16910,
+        "keys": []
+      },
+      {
+        "timeMs": 17320,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 17720,
+        "keys": []
+      },
+      {
+        "timeMs": 18130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18530,
+        "keys": []
+      },
+      {
+        "timeMs": 22600,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 23000,
+        "keys": []
+      },
+      {
+        "timeMs": 23410,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 23810,
+        "keys": []
+      },
+      {
+        "timeMs": 24220,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 24620,
+        "keys": []
+      },
+      {
+        "timeMs": 25030,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 25430,
+        "keys": []
+      },
+      {
+        "timeMs": 25840,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 26240,
+        "keys": []
+      },
+      {
+        "timeMs": 26650,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 27050,
+        "keys": []
+      },
+      {
+        "timeMs": 27460,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 27860,
+        "keys": []
+      },
+      {
+        "timeMs": 28270,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 28670,
+        "keys": []
+      },
+      {
+        "timeMs": 29080,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 29480,
+        "keys": []
+      },
+      {
+        "timeMs": 29890,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 30290,
+        "keys": []
+      },
+      {
+        "timeMs": 30700,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 31100,
+        "keys": []
+      },
+      {
+        "timeMs": 31510,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 31910,
+        "keys": []
+      },
+      {
+        "timeMs": 32320,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 32720,
+        "keys": []
+      },
+      {
+        "timeMs": 33130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 33530,
+        "keys": []
+      },
+      {
+        "timeMs": 36600,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 37000,
+        "keys": []
+      },
+      {
+        "timeMs": 37410,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 37810,
+        "keys": []
+      },
+      {
+        "timeMs": 38220,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 38620,
+        "keys": []
+      },
+      {
+        "timeMs": 39030,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 39430,
+        "keys": []
+      },
+      {
+        "timeMs": 39840,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 40240,
+        "keys": []
+      },
+      {
+        "timeMs": 40650,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 41050,
+        "keys": []
+      },
+      {
+        "timeMs": 41460,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 41860,
+        "keys": []
+      },
+      {
+        "timeMs": 42270,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 42670,
+        "keys": []
+      },
+      {
+        "timeMs": 43080,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 43480,
+        "keys": []
+      },
+      {
+        "timeMs": 43890,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 44290,
+        "keys": []
+      },
+      {
+        "timeMs": 44700,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 45100,
+        "keys": []
+      },
+      {
+        "timeMs": 45510,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 45910,
+        "keys": []
+      },
+      {
+        "timeMs": 46320,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 46720,
+        "keys": []
+      },
+      {
+        "timeMs": 47130,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 47530,
+        "keys": []
+      },
+      {
+        "timeMs": 58400,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 58800,
+        "keys": []
+      },
+      {
+        "timeMs": 59200,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 59600,
+        "keys": []
+      },
+      {
+        "timeMs": 60000,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 60400,
+        "keys": []
+      },
+      {
+        "timeMs": 60800,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 61200,
+        "keys": []
+      },
+      {
+        "timeMs": 61600,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 62000,
+        "keys": []
+      },
+      {
+        "timeMs": 62400,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 62800,
+        "keys": []
+      },
+      {
+        "timeMs": 67350,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 67750,
+        "keys": []
+      },
+      {
+        "timeMs": 68130,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 68530,
+        "keys": []
+      },
+      {
+        "timeMs": 68910,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 69310,
+        "keys": []
+      },
+      {
+        "timeMs": 69690,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 70090,
+        "keys": []
+      },
+      {
+        "timeMs": 70470,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 70870,
+        "keys": []
+      },
+      {
+        "timeMs": 71250,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 71650,
+        "keys": []
+      },
+      {
+        "timeMs": 72030,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 72430,
+        "keys": []
+      },
+      {
+        "timeMs": 72810,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 73211,
+        "keys": []
+      },
+      {
+        "timeMs": 73590,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 73991,
+        "keys": []
+      },
+      {
+        "timeMs": 74370,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 74771,
+        "keys": []
+      },
+      {
+        "timeMs": 75150,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 75551,
+        "keys": []
+      },
+      {
+        "timeMs": 75930,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 76331,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

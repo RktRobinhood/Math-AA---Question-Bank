@@ -1,0 +1,646 @@
+{
+  "schemaVersion": 1,
+  "id": "CT13",
+  "route": "inequalities/index.html",
+  "catalogueTitle": "Graphical inequalities and exclusions",
+  "playerHeading": "Graphical inequalities",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "inequalities/index.html"
+  },
+  "script": "lessons/CT13.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "In Graphs, plot f one of x equals x squared minus four, divided by x minus one. Put each expression in its own brackets.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Press Tab. Plot f two of x equals zero. We want f one of x to be less than or equal to f two of x, with x from negative four to four inclusive.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Open Menu then six: Analyze Graph then four: Intersection.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Bracket the first crossing from minus three to minus one. Confirm each bound.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "The first crossing is x equals minus two. Record it.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Run Intersection again. Bracket the second crossing from one point five to three.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The second crossing is x equals two. Record it.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The denominator x minus one is zero at x equals one. That point is undefined, not an intersection.",
+      "watchCueId": "watch-08"
+    },
+    {
+      "id": "watch-09",
+      "text": "Split the domain at minus two, one and two. Check one value in each interval.",
+      "watchCueId": "watch-09"
+    },
+    {
+      "id": "watch-10",
+      "text": "At x equals minus three, f one is below f two. At x equals zero, it is above.",
+      "watchCueId": "watch-10"
+    },
+    {
+      "id": "watch-11",
+      "text": "At x equals one point five, f one is below f two again. At x equals three, it is above.",
+      "watchCueId": "watch-11"
+    },
+    {
+      "id": "watch-12",
+      "text": "Include the equal points at negative two and two because the inequality includes equality. Leave x equals one out.",
+      "watchCueId": "watch-12"
+    },
+    {
+      "id": "watch-13",
+      "text": "At the domain edge x equals minus four, f one is below f two, so include minus four too.",
+      "watchCueId": "watch-13"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 51000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Plot f₁(x) = (x² − 4)/(x − 1) in Graphs.",
+        "endMs": 4500
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4500,
+        "text": "Press Tab. Plot f₂(x) = 0. We want f₁(x) ≤ f₂(x), for −4 ≤ x ≤ 4.",
+        "endMs": 8600
+      },
+      {
+        "id": "watch-03",
+        "startMs": 8600,
+        "text": "Open Menu → 6: Analyze Graph → 4: Intersection.",
+        "endMs": 12600
+      },
+      {
+        "id": "watch-04",
+        "startMs": 12600,
+        "text": "Bracket the first crossing from −3 to −1. Confirm each bound.",
+        "endMs": 17100
+      },
+      {
+        "id": "watch-05",
+        "startMs": 17100,
+        "text": "The first crossing is x = −2. Record it.",
+        "endMs": 19500
+      },
+      {
+        "id": "watch-06",
+        "startMs": 19500,
+        "text": "Run Intersection again. Bracket the second crossing from 1.5 to 3.",
+        "endMs": 25600
+      },
+      {
+        "id": "watch-07",
+        "startMs": 25600,
+        "text": "The second crossing is x = 2. Record it.",
+        "endMs": 29400
+      },
+      {
+        "id": "watch-08",
+        "startMs": 29400,
+        "text": "The denominator x − 1 is zero at x = 1. That point is undefined, not an intersection.",
+        "endMs": 33400
+      },
+      {
+        "id": "watch-09",
+        "startMs": 33400,
+        "text": "Split the domain at −2, 1 and 2. Check one value in each interval.",
+        "endMs": 36500
+      },
+      {
+        "id": "watch-10",
+        "startMs": 36500,
+        "text": "At x = −3, f₁ is below f₂. At x = 0, it is above.",
+        "endMs": 40300
+      },
+      {
+        "id": "watch-11",
+        "startMs": 40300,
+        "text": "At x = 1.5, f₁ is below f₂ again. At x = 3, it is above.",
+        "endMs": 45100
+      },
+      {
+        "id": "watch-12",
+        "startMs": 45100,
+        "text": "Include equal points at −2 and 2 because the sign is ≤. Leave x = 1 out.",
+        "endMs": 48200
+      },
+      {
+        "id": "watch-13",
+        "startMs": 48200,
+        "text": "At the domain edge x = −4, f₁ is below f₂, so include −4 too.",
+        "endMs": 51000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 480,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 670,
+        "keys": []
+      },
+      {
+        "timeMs": 720,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 910,
+        "keys": [
+          "power"
+        ]
+      },
+      {
+        "timeMs": 1150,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 1390,
+        "keys": []
+      },
+      {
+        "timeMs": 1440,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 1630,
+        "keys": []
+      },
+      {
+        "timeMs": 1680,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 1870,
+        "keys": []
+      },
+      {
+        "timeMs": 1920,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 2110,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 2350,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 2590,
+        "keys": []
+      },
+      {
+        "timeMs": 2640,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 2830,
+        "keys": []
+      },
+      {
+        "timeMs": 2880,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 3070,
+        "keys": []
+      },
+      {
+        "timeMs": 3120,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 3310,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 3550,
+        "keys": []
+      },
+      {
+        "timeMs": 3880,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 4070,
+        "keys": []
+      },
+      {
+        "timeMs": 4790,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 4980,
+        "keys": []
+      },
+      {
+        "timeMs": 5250,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 5440,
+        "keys": []
+      },
+      {
+        "timeMs": 5910,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 6101,
+        "keys": []
+      },
+      {
+        "timeMs": 9110,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 9300,
+        "keys": []
+      },
+      {
+        "timeMs": 10080,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 10270,
+        "keys": []
+      },
+      {
+        "timeMs": 11190,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 11380,
+        "keys": []
+      },
+      {
+        "timeMs": 13110,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 13300,
+        "keys": []
+      },
+      {
+        "timeMs": 13490,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 13680,
+        "keys": []
+      },
+      {
+        "timeMs": 14300,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14490,
+        "keys": []
+      },
+      {
+        "timeMs": 15510,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 15700,
+        "keys": []
+      },
+      {
+        "timeMs": 15940,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 16130,
+        "keys": []
+      },
+      {
+        "timeMs": 16810,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 17000,
+        "keys": []
+      },
+      {
+        "timeMs": 20100,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 20291,
+        "keys": []
+      },
+      {
+        "timeMs": 20840,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 21030,
+        "keys": []
+      },
+      {
+        "timeMs": 21550,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 21741,
+        "keys": []
+      },
+      {
+        "timeMs": 22160,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 22350,
+        "keys": []
+      },
+      {
+        "timeMs": 22450,
+        "keys": [
+          "dot"
+        ]
+      },
+      {
+        "timeMs": 22640,
+        "keys": []
+      },
+      {
+        "timeMs": 22750,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 22940,
+        "keys": []
+      },
+      {
+        "timeMs": 23280,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 23471,
+        "keys": []
+      },
+      {
+        "timeMs": 24340,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 24530,
+        "keys": []
+      },
+      {
+        "timeMs": 25140,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 25331,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT13Tape",
+        "keys": [
+          {
+            "timeMs": 480,
+            "key": "lparen"
+          },
+          {
+            "timeMs": 720,
+            "key": "x"
+          },
+          {
+            "timeMs": 960,
+            "key": "power"
+          },
+          {
+            "timeMs": 1200,
+            "key": "2"
+          },
+          {
+            "timeMs": 1440,
+            "key": "minus"
+          },
+          {
+            "timeMs": 1680,
+            "key": "4"
+          },
+          {
+            "timeMs": 1920,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 2160,
+            "key": "div"
+          },
+          {
+            "timeMs": 2400,
+            "key": "lparen"
+          },
+          {
+            "timeMs": 2640,
+            "key": "x"
+          },
+          {
+            "timeMs": 2880,
+            "key": "minus"
+          },
+          {
+            "timeMs": 3120,
+            "key": "1"
+          },
+          {
+            "timeMs": 3360,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 3880,
+            "key": "enter"
+          },
+          {
+            "timeMs": 4790,
+            "key": "tab"
+          },
+          {
+            "timeMs": 5250,
+            "key": "0"
+          },
+          {
+            "timeMs": 5910,
+            "key": "enter"
+          },
+          {
+            "timeMs": 9110,
+            "key": "menu"
+          },
+          {
+            "timeMs": 10080,
+            "key": "6"
+          },
+          {
+            "timeMs": 11190,
+            "key": "4"
+          },
+          {
+            "timeMs": 13110,
+            "key": "neg"
+          },
+          {
+            "timeMs": 13490,
+            "key": "3"
+          },
+          {
+            "timeMs": 14300,
+            "key": "enter"
+          },
+          {
+            "timeMs": 15510,
+            "key": "neg"
+          },
+          {
+            "timeMs": 15940,
+            "key": "1"
+          },
+          {
+            "timeMs": 16810,
+            "key": "enter"
+          },
+          {
+            "timeMs": 20100,
+            "key": "menu"
+          },
+          {
+            "timeMs": 20840,
+            "key": "6"
+          },
+          {
+            "timeMs": 21550,
+            "key": "4"
+          },
+          {
+            "timeMs": 22160,
+            "key": "1"
+          },
+          {
+            "timeMs": 22450,
+            "key": "dot"
+          },
+          {
+            "timeMs": 22750,
+            "key": "5"
+          },
+          {
+            "timeMs": 23280,
+            "key": "enter"
+          },
+          {
+            "timeMs": 24340,
+            "key": "3"
+          },
+          {
+            "timeMs": 25140,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

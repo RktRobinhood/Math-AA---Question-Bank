@@ -1,0 +1,5 @@
+We want exactly three seeds to sprout. That means one count, not a range.
+On a Calculator page, press Menu. Choose five for Probability, five for Distributions, then the letter D for Binomial P D F.
+Enter eight for the number of trials. Tab to the success probability, zero point three. Tab to X Value and enter three.
+Press Enter to insert the command. Press Enter again to calculate. The probability of exactly three is about zero point two five four.
+At most three would include zero, one, two and three. That’s a cumulative probability. This calculation is for exactly three only.

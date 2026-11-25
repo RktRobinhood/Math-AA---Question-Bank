@@ -1,0 +1,542 @@
+{
+  "schemaVersion": 1,
+  "id": "CT08",
+  "route": "window/index.html",
+  "catalogueTitle": "Graph setup, zoom and viewing window",
+  "playerHeading": "Choose a graph window",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json"
+  },
+  "script": "lessons/CT08.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Enter the function in the Graphs application and press Enter."
+    },
+    {
+      "id": "watch-02",
+      "text": "The default window may hide the interesting feature."
+    },
+    {
+      "id": "watch-03",
+      "text": "Here the vertex lies beyond the usual central view."
+    },
+    {
+      "id": "watch-04",
+      "text": "Set the horizontal and vertical limits independently."
+    },
+    {
+      "id": "watch-05",
+      "text": "A viewing window does not change the domain."
+    },
+    {
+      "id": "watch-06",
+      "text": "This window contains the vertex with space on both sides."
+    },
+    {
+      "id": "watch-07",
+      "text": "Use your context to choose sensible bounds."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 25137,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Enter the function in the Graphs application and press Enter.",
+        "endMs": 4080
+      },
+      {
+        "id": "watch-02",
+        "startMs": 4080,
+        "text": "The default window may hide the interesting feature.",
+        "endMs": 7500
+      },
+      {
+        "id": "watch-03",
+        "startMs": 7500,
+        "text": "Here the vertex lies beyond the usual central view.",
+        "endMs": 11480
+      },
+      {
+        "id": "watch-04",
+        "startMs": 11480,
+        "text": "Set the horizontal and vertical limits independently.",
+        "endMs": 15200
+      },
+      {
+        "id": "watch-05",
+        "startMs": 15200,
+        "text": "A viewing window does not change the domain.",
+        "endMs": 18160
+      },
+      {
+        "id": "watch-06",
+        "startMs": 18160,
+        "text": "This window contains the vertex with space on both sides.",
+        "endMs": 22360
+      },
+      {
+        "id": "watch-07",
+        "startMs": 22360,
+        "text": "Use your context to choose sensible bounds.",
+        "endMs": 25137
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 290,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 505,
+        "keys": []
+      },
+      {
+        "timeMs": 530,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 745,
+        "keys": []
+      },
+      {
+        "timeMs": 770,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 985,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 1235,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 1475,
+        "keys": []
+      },
+      {
+        "timeMs": 1520,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 1735,
+        "keys": []
+      },
+      {
+        "timeMs": 1860,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 2075,
+        "keys": []
+      },
+      {
+        "timeMs": 2130,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 2345,
+        "keys": []
+      },
+      {
+        "timeMs": 2410,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 2625,
+        "keys": []
+      },
+      {
+        "timeMs": 2880,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 3095,
+        "keys": []
+      },
+      {
+        "timeMs": 10670,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 10885,
+        "keys": []
+      },
+      {
+        "timeMs": 10960,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 11175,
+        "keys": []
+      },
+      {
+        "timeMs": 11280,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 11495,
+        "keys": []
+      },
+      {
+        "timeMs": 11790,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 12005,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 12245,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 12515,
+        "keys": []
+      },
+      {
+        "timeMs": 12580,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 12795,
+        "keys": []
+      },
+      {
+        "timeMs": 12850,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 13065,
+        "keys": []
+      },
+      {
+        "timeMs": 13130,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13345,
+        "keys": []
+      },
+      {
+        "timeMs": 13480,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 13695,
+        "keys": []
+      },
+      {
+        "timeMs": 13750,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 13965,
+        "keys": []
+      },
+      {
+        "timeMs": 14210,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 14425,
+        "keys": []
+      },
+      {
+        "timeMs": 14490,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 14705,
+        "keys": []
+      },
+      {
+        "timeMs": 15180,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 15395,
+        "keys": []
+      },
+      {
+        "timeMs": 17390,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 17605,
+        "keys": []
+      },
+      {
+        "timeMs": 17980,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18195,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT08Tape",
+        "keys": [
+          {
+            "timeMs": 290,
+            "key": "lparen"
+          },
+          {
+            "timeMs": 530,
+            "key": "x"
+          },
+          {
+            "timeMs": 770,
+            "key": "minus"
+          },
+          {
+            "timeMs": 1020,
+            "key": "1"
+          },
+          {
+            "timeMs": 1260,
+            "key": "2"
+          },
+          {
+            "timeMs": 1520,
+            "key": "rparen"
+          },
+          {
+            "timeMs": 1860,
+            "key": "square"
+          },
+          {
+            "timeMs": 2130,
+            "key": "plus"
+          },
+          {
+            "timeMs": 2410,
+            "key": "3"
+          },
+          {
+            "timeMs": 2880,
+            "key": "enter"
+          },
+          {
+            "timeMs": 10670,
+            "key": "menu"
+          },
+          {
+            "timeMs": 10960,
+            "key": "4"
+          },
+          {
+            "timeMs": 11280,
+            "key": "1"
+          },
+          {
+            "timeMs": 11790,
+            "key": "1"
+          },
+          {
+            "timeMs": 12030,
+            "key": "0"
+          },
+          {
+            "timeMs": 12300,
+            "key": "tab"
+          },
+          {
+            "timeMs": 12580,
+            "key": "1"
+          },
+          {
+            "timeMs": 12850,
+            "key": "4"
+          },
+          {
+            "timeMs": 13130,
+            "key": "tab"
+          },
+          {
+            "timeMs": 13480,
+            "key": "tab"
+          },
+          {
+            "timeMs": 13750,
+            "key": "0"
+          },
+          {
+            "timeMs": 14210,
+            "key": "tab"
+          },
+          {
+            "timeMs": 14490,
+            "key": "8"
+          },
+          {
+            "timeMs": 15180,
+            "key": "tab"
+          },
+          {
+            "timeMs": 17390,
+            "key": "tab"
+          },
+          {
+            "timeMs": 17980,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "window/narration.mp3",
+    "bytes": 332980,
+    "sha256": "fe48a5582f8cd3d27a7c95e2a45eb476929831c2ecd439a85f84627d7ce85574",
+    "streamDurationMs": 25182,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "existing-runtime-captions-plus-approximate-offline-alignments",
+      "runtimeCaptionCues": [
+        {
+          "id": "watch-01",
+          "startMs": 0,
+          "text": "Enter the function in the Graphs application and press Enter.",
+          "endMs": 4080
+        },
+        {
+          "id": "watch-02",
+          "startMs": 4080,
+          "text": "The default window may hide the interesting feature.",
+          "endMs": 7500
+        },
+        {
+          "id": "watch-03",
+          "startMs": 7500,
+          "text": "Here the vertex lies beyond the usual central view.",
+          "endMs": 11480
+        },
+        {
+          "id": "watch-04",
+          "startMs": 11480,
+          "text": "Set the horizontal and vertical limits independently.",
+          "endMs": 15200
+        },
+        {
+          "id": "watch-05",
+          "startMs": 15200,
+          "text": "A viewing window does not change the domain.",
+          "endMs": 18160
+        },
+        {
+          "id": "watch-06",
+          "startMs": 18160,
+          "text": "This window contains the vertex with space on both sides.",
+          "endMs": 22360
+        },
+        {
+          "id": "watch-07",
+          "startMs": 22360,
+          "text": "Use your context to choose sensible bounds.",
+          "endMs": 25137
+        }
+      ],
+      "guideChapterStartsMs": [
+        0,
+        4084,
+        11520,
+        18160
+      ],
+      "guideDurationMs": 25182,
+      "source": "GUIDED-AUDIO-OFFLINE-ALIGNMENT.json",
+      "offlineSpeechSegments": [
+        {
+          "startMs": 0,
+          "endMs": 3280,
+          "text": "Enter the function in the graphs application and press enter."
+        },
+        {
+          "startMs": 4080,
+          "endMs": 6760,
+          "text": "The default window may hide the interesting feature."
+        },
+        {
+          "startMs": 7500,
+          "endMs": 13500,
+          "text": "Here the vertex lies beyond the usual central view. Set the horizontal and vertical limits"
+        },
+        {
+          "startMs": 13500,
+          "endMs": 19780,
+          "text": "independently. A viewing window does not change the domain. This window contains the vertex"
+        },
+        {
+          "startMs": 19780,
+          "endMs": 24500,
+          "text": "with space on both sides. Use your context to choose sensible bounds."
+        }
+      ]
+    },
+    "byteIdenticalCopy": "guided-audio/CT08.mp3"
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

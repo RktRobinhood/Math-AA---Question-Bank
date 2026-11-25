@@ -1,0 +1,974 @@
+{
+  "schemaVersion": 1,
+  "id": "CT20",
+  "route": "complex/index.html",
+  "catalogueTitle": "Complex numbers: rectangular and polar",
+  "playerHeading": "Complex numbers",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "complex/index.html"
+  },
+  "script": "lessons/CT20.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Use z equals negative eight plus fifteen times the imaginary unit. Set Angle to Degree and Real or Complex to Rectangular.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Type the real and imaginary coefficients. Press pi and choose the imaginary unit, not the letter i.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Use the absolute-value command on negative eight plus fifteen i. Control and Enter give a decimal where needed. Modulus is distance.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Use the angle command on negative eight plus fifteen i. The point is in quadrant two; the principal angle is obtuse.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Open Document Settings again. Change Real or Complex to Polar. The number itself does not change.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Re-enter the same value. In Degree mode, the polar display has magnitude seventeen and angle one hundred and eighteen point zero seven two degrees. In Radian mode it uses exponential form.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The argument shown is principal. Only change the range if the question asks. Zero has no argument.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 55000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Use z = −8 + 15i. Set Angle to Degree and Real or Complex to Rectangular.",
+        "endMs": 10200
+      },
+      {
+        "id": "watch-02",
+        "startMs": 10200,
+        "text": "Type the real and imaginary coefficients. Press π and choose the imaginary unit, not the letter i.",
+        "endMs": 17300
+      },
+      {
+        "id": "watch-03",
+        "startMs": 17300,
+        "text": "Type abs(−8+15i). Ctrl + Enter gives a decimal where needed. Modulus is distance.",
+        "endMs": 25000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 25000,
+        "text": "Type angle(−8+15i). The point is in quadrant II; the principal angle is obtuse.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 34000,
+        "text": "Open Document Settings again. Change Real or Complex to Polar. The number itself does not change.",
+        "endMs": 42000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 42000,
+        "text": "Re-enter the same value. In Degree mode the polar display gives 17∠118.072°. In Radian mode it uses exponential form.",
+        "endMs": 50000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 50000,
+        "text": "The argument shown is principal. Only change the range if the question asks. Zero has no argument.",
+        "endMs": 55000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 750,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 1090,
+        "keys": []
+      },
+      {
+        "timeMs": 1230,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 1570,
+        "keys": []
+      },
+      {
+        "timeMs": 1710,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 2050,
+        "keys": []
+      },
+      {
+        "timeMs": 2190,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 2530,
+        "keys": []
+      },
+      {
+        "timeMs": 2670,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 3010,
+        "keys": []
+      },
+      {
+        "timeMs": 3150,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 3490,
+        "keys": []
+      },
+      {
+        "timeMs": 3630,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 3970,
+        "keys": []
+      },
+      {
+        "timeMs": 4110,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 4450,
+        "keys": []
+      },
+      {
+        "timeMs": 4590,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 4930,
+        "keys": []
+      },
+      {
+        "timeMs": 5070,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 5410,
+        "keys": []
+      },
+      {
+        "timeMs": 5550,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 5890,
+        "keys": []
+      },
+      {
+        "timeMs": 6030,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 6370,
+        "keys": []
+      },
+      {
+        "timeMs": 6510,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 6850,
+        "keys": []
+      },
+      {
+        "timeMs": 6990,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 7330,
+        "keys": []
+      },
+      {
+        "timeMs": 7470,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 7810,
+        "keys": []
+      },
+      {
+        "timeMs": 7950,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8291,
+        "keys": []
+      },
+      {
+        "timeMs": 8430,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 8770,
+        "keys": []
+      },
+      {
+        "timeMs": 10750,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 11090,
+        "keys": []
+      },
+      {
+        "timeMs": 11230,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 11570,
+        "keys": []
+      },
+      {
+        "timeMs": 11710,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 12050,
+        "keys": []
+      },
+      {
+        "timeMs": 12190,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 12530,
+        "keys": []
+      },
+      {
+        "timeMs": 12670,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 13010,
+        "keys": []
+      },
+      {
+        "timeMs": 13150,
+        "keys": [
+          "pi"
+        ]
+      },
+      {
+        "timeMs": 13490,
+        "keys": []
+      },
+      {
+        "timeMs": 13630,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 13970,
+        "keys": []
+      },
+      {
+        "timeMs": 14110,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 14450,
+        "keys": []
+      },
+      {
+        "timeMs": 14590,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 14930,
+        "keys": []
+      },
+      {
+        "timeMs": 15070,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 15410,
+        "keys": []
+      },
+      {
+        "timeMs": 15550,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 15890,
+        "keys": []
+      },
+      {
+        "timeMs": 17650,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 17990,
+        "keys": []
+      },
+      {
+        "timeMs": 18080,
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "timeMs": 18420,
+        "keys": []
+      },
+      {
+        "timeMs": 18510,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 18850,
+        "keys": []
+      },
+      {
+        "timeMs": 18940,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 19280,
+        "keys": []
+      },
+      {
+        "timeMs": 19370,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 19710,
+        "keys": []
+      },
+      {
+        "timeMs": 19800,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 20140,
+        "keys": []
+      },
+      {
+        "timeMs": 20230,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 20570,
+        "keys": []
+      },
+      {
+        "timeMs": 20660,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 21000,
+        "keys": []
+      },
+      {
+        "timeMs": 21090,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 21430,
+        "keys": []
+      },
+      {
+        "timeMs": 21520,
+        "keys": [
+          "pi"
+        ]
+      },
+      {
+        "timeMs": 21860,
+        "keys": []
+      },
+      {
+        "timeMs": 21950,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 22290,
+        "keys": []
+      },
+      {
+        "timeMs": 22380,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 22720,
+        "keys": []
+      },
+      {
+        "timeMs": 22810,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 23150,
+        "keys": []
+      },
+      {
+        "timeMs": 23240,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 23580,
+        "keys": []
+      },
+      {
+        "timeMs": 23670,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 24010,
+        "keys": []
+      },
+      {
+        "timeMs": 24100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 24440,
+        "keys": []
+      },
+      {
+        "timeMs": 25280,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 25620,
+        "keys": []
+      },
+      {
+        "timeMs": 25700,
+        "keys": [
+          "n"
+        ]
+      },
+      {
+        "timeMs": 26040,
+        "keys": []
+      },
+      {
+        "timeMs": 26120,
+        "keys": [
+          "g"
+        ]
+      },
+      {
+        "timeMs": 26460,
+        "keys": []
+      },
+      {
+        "timeMs": 26540,
+        "keys": [
+          "l"
+        ]
+      },
+      {
+        "timeMs": 26880,
+        "keys": []
+      },
+      {
+        "timeMs": 26960,
+        "keys": [
+          "e"
+        ]
+      },
+      {
+        "timeMs": 27300,
+        "keys": []
+      },
+      {
+        "timeMs": 27380,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 27720,
+        "keys": []
+      },
+      {
+        "timeMs": 27800,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 28140,
+        "keys": []
+      },
+      {
+        "timeMs": 28220,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 28560,
+        "keys": []
+      },
+      {
+        "timeMs": 28640,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 28980,
+        "keys": []
+      },
+      {
+        "timeMs": 29060,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 29400,
+        "keys": []
+      },
+      {
+        "timeMs": 29480,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 29820,
+        "keys": []
+      },
+      {
+        "timeMs": 29900,
+        "keys": [
+          "pi"
+        ]
+      },
+      {
+        "timeMs": 30240,
+        "keys": []
+      },
+      {
+        "timeMs": 30320,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 30660,
+        "keys": []
+      },
+      {
+        "timeMs": 30740,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 31080,
+        "keys": []
+      },
+      {
+        "timeMs": 31160,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 31500,
+        "keys": []
+      },
+      {
+        "timeMs": 31580,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 31920,
+        "keys": []
+      },
+      {
+        "timeMs": 32000,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 32340,
+        "keys": []
+      },
+      {
+        "timeMs": 32420,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32761,
+        "keys": []
+      },
+      {
+        "timeMs": 34250,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 34590,
+        "keys": []
+      },
+      {
+        "timeMs": 34720,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 35060,
+        "keys": []
+      },
+      {
+        "timeMs": 35190,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 35530,
+        "keys": []
+      },
+      {
+        "timeMs": 35660,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36000,
+        "keys": []
+      },
+      {
+        "timeMs": 36130,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36471,
+        "keys": []
+      },
+      {
+        "timeMs": 36600,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36941,
+        "keys": []
+      },
+      {
+        "timeMs": 37070,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 37411,
+        "keys": []
+      },
+      {
+        "timeMs": 37540,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 37880,
+        "keys": []
+      },
+      {
+        "timeMs": 38010,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 38350,
+        "keys": []
+      },
+      {
+        "timeMs": 38480,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 38820,
+        "keys": []
+      },
+      {
+        "timeMs": 38950,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 39291,
+        "keys": []
+      },
+      {
+        "timeMs": 39420,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 39761,
+        "keys": []
+      },
+      {
+        "timeMs": 39890,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 40231,
+        "keys": []
+      },
+      {
+        "timeMs": 40360,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 40700,
+        "keys": []
+      },
+      {
+        "timeMs": 42220,
+        "keys": [
+          "neg"
+        ]
+      },
+      {
+        "timeMs": 42560,
+        "keys": []
+      },
+      {
+        "timeMs": 42740,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 43081,
+        "keys": []
+      },
+      {
+        "timeMs": 43260,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 43600,
+        "keys": []
+      },
+      {
+        "timeMs": 43780,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 44121,
+        "keys": []
+      },
+      {
+        "timeMs": 44300,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 44640,
+        "keys": []
+      },
+      {
+        "timeMs": 44820,
+        "keys": [
+          "pi"
+        ]
+      },
+      {
+        "timeMs": 45161,
+        "keys": []
+      },
+      {
+        "timeMs": 45340,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 45681,
+        "keys": []
+      },
+      {
+        "timeMs": 45860,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 46200,
+        "keys": []
+      },
+      {
+        "timeMs": 46380,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 46721,
+        "keys": []
+      },
+      {
+        "timeMs": 46900,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 47240,
+        "keys": []
+      },
+      {
+        "timeMs": 47420,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 47761,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

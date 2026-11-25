@@ -1,0 +1,36 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Choose a graph window · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT08</span></p><h1>Choose a graph window</h1><p class="subtitle">Bring a vertex into view on a TI-Nspire CX II-T.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
+</header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct08-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p id="window-readout" class="ct08-bounds" data-visible="false" aria-hidden="true"><strong>Vertex in view:</strong> x: 10 to 14 · y: 0 to 8</p>
+</div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><button id="check-window" type="button" hidden>Check my window</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct08-stage-grid">
+<div class="ct08-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><form id="settings" class="lcd-settings" aria-label="Window Settings" hidden><h2>Window Settings</h2><div id="window-fields"></div><div class="lcd-actions"><button type="submit" id="apply">OK</button><button type="button" id="cancel">Cancel</button></div></form><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play narrated demonstration" title="Play narrated demonstration"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<div class="ct08-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>Reveal the vertex</h2><p class="formula">f(x) = (x − 12)² + 3</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct08-try-help" hidden><p class="tag">Your turn</p><h2>Frame the vertex</h2><p id="keypad-problem" class="ct08-taskline"></p>
+<p id="keypad-hint" role="status"></p><div id="try-tools">
+<form id="expression-form"><label for="expression">Function in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
+</div>
+<p id="keypad-result" class="feedback" role="status" hidden></p>
+<p class="ct08-keyboard">Handheld: <kbd>menu</kbd>, <kbd>4</kbd>, <kbd>1</kbd>. Use <kbd>tab</kbd> to move through the fields. <kbd>enter</kbd> applies.</p>
+<details><summary>Hint</summary><p>For a quadratic in vertex form, read its shift in both directions. Leave space beside and above or below the turn.</p></details>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct08-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="25.182" step="0.005"></label><span class="ct08-rehearsal" id="media-status" role="status">Narration</span><label class="ct08-option" id="sound-label"><input type="checkbox" id="sound" checked><span aria-hidden="true">♪</span><span class="sr">Sound</span></label></div>
+<audio id="narration" preload="metadata" src="narration.mp3"></audio>
+</div>
+</section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct08-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator is above.</p></section>
+<details class="notes"><summary>Window or domain?</summary><p>The window only changes the rectangle you can see. It does not change which x-values the function allows.</p><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/27950">TI’s Window/Zoom reference</a></p></details>
+</main></body></html>

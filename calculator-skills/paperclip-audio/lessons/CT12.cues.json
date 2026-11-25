@@ -1,0 +1,439 @@
+{
+  "schemaVersion": 1,
+  "id": "CT12",
+  "route": "index.html",
+  "catalogueTitle": "Local and global maxima and minima",
+  "playerHeading": "Find a graph minimum",
+  "status": "existing-verified-asset-preserve",
+  "scriptSource": {
+    "type": "existing-recording-transcript",
+    "file": "graph-minimum.srt"
+  },
+  "script": "lessons/CT12.txt",
+  "spokenCues": [
+    {
+      "id": "12.01",
+      "text": "On a Graphs page, enter the function you want to investigate and press Enter."
+    },
+    {
+      "id": "12.02",
+      "text": "Open Menu, choose Analyze Graph, and select Minimum."
+    },
+    {
+      "id": "12.03",
+      "text": "We're looking for the lowest point in the interval you choose."
+    },
+    {
+      "id": "12.04",
+      "text": "To set the lower bound, move the cursor to the left of the minimum, then press Enter."
+    },
+    {
+      "id": "12.05",
+      "text": "For the upper bound, move to the right of the minimum and press Enter again."
+    },
+    {
+      "id": "12.06",
+      "text": "Bracket just one turning point."
+    },
+    {
+      "id": "12.07",
+      "text": "The calculator marks the minimum and shows its coordinates."
+    },
+    {
+      "id": "12.08",
+      "text": "The x-coordinate tells you where it occurs."
+    },
+    {
+      "id": "12.09",
+      "text": "The y-coordinate is the minimum value."
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 35788,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On a Graphs page, enter the function you want to investigate and press Enter.",
+        "endMs": 5220
+      },
+      {
+        "id": "watch-02",
+        "startMs": 5220,
+        "text": "Open Menu, choose Analyze Graph, and select Minimum.",
+        "endMs": 10020
+      },
+      {
+        "id": "watch-03",
+        "startMs": 10020,
+        "text": "We’re looking for the lowest point in the interval you choose.",
+        "endMs": 13510
+      },
+      {
+        "id": "watch-04",
+        "startMs": 13510,
+        "text": "To set the lower bound, move the cursor to the left of the minimum, then press Enter.",
+        "endMs": 19130
+      },
+      {
+        "id": "watch-05",
+        "startMs": 19130,
+        "text": "For the upper bound, move to the right of the minimum and press Enter again.",
+        "endMs": 23960
+      },
+      {
+        "id": "watch-06",
+        "startMs": 23960,
+        "text": "Bracket just one turning point. The calculator marks the minimum and shows its coordinates.",
+        "endMs": 30330
+      },
+      {
+        "id": "watch-07",
+        "startMs": 30330,
+        "text": "The x-coordinate tells you where it occurs. The y-coordinate is the minimum value.",
+        "endMs": 35788
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 500,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 730,
+        "keys": []
+      },
+      {
+        "timeMs": 1294,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 1524,
+        "keys": []
+      },
+      {
+        "timeMs": 1667,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 1897,
+        "keys": []
+      },
+      {
+        "timeMs": 2039,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 2269,
+        "keys": []
+      },
+      {
+        "timeMs": 2411,
+        "keys": [
+          "x"
+        ]
+      },
+      {
+        "timeMs": 2641,
+        "keys": []
+      },
+      {
+        "timeMs": 2783,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 3013,
+        "keys": []
+      },
+      {
+        "timeMs": 3156,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 3386,
+        "keys": []
+      },
+      {
+        "timeMs": 3528,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 3758,
+        "keys": []
+      },
+      {
+        "timeMs": 4780,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 5010,
+        "keys": []
+      },
+      {
+        "timeMs": 5490,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 5720,
+        "keys": []
+      },
+      {
+        "timeMs": 7350,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 7580,
+        "keys": []
+      },
+      {
+        "timeMs": 9180,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 9410,
+        "keys": []
+      },
+      {
+        "timeMs": 14100,
+        "keys": [
+          "left"
+        ]
+      },
+      {
+        "timeMs": 17480,
+        "keys": []
+      },
+      {
+        "timeMs": 18020,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 18250,
+        "keys": []
+      },
+      {
+        "timeMs": 19500,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 22550,
+        "keys": []
+      },
+      {
+        "timeMs": 23350,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 23580,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "HandheldKeyCues.CT12",
+        "keys": [
+          {
+            "timeMs": 500,
+            "key": "x",
+            "durationMs": 145,
+            "rawAfter": "x"
+          },
+          {
+            "timeMs": 1294,
+            "key": "square",
+            "durationMs": 145,
+            "rawAfter": "x^2"
+          },
+          {
+            "timeMs": 1667,
+            "key": "minus",
+            "durationMs": 145,
+            "rawAfter": "x^2-"
+          },
+          {
+            "timeMs": 2039,
+            "key": "6",
+            "durationMs": 145,
+            "rawAfter": "x^2-6"
+          },
+          {
+            "timeMs": 2411,
+            "key": "x",
+            "durationMs": 145,
+            "rawAfter": "x^2-6x"
+          },
+          {
+            "timeMs": 2783,
+            "key": "plus",
+            "durationMs": 145,
+            "rawAfter": "x^2-6x+"
+          },
+          {
+            "timeMs": 3156,
+            "key": "1",
+            "durationMs": 145,
+            "rawAfter": "x^2-6x+1"
+          },
+          {
+            "timeMs": 3528,
+            "key": "3",
+            "durationMs": 145,
+            "rawAfter": "x^2-6x+13"
+          },
+          {
+            "timeMs": 4780,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "plotted"
+          },
+          {
+            "timeMs": 5490,
+            "key": "menu",
+            "durationMs": 210,
+            "state": "menu"
+          },
+          {
+            "timeMs": 7350,
+            "key": "6",
+            "durationMs": 210,
+            "state": "submenu"
+          },
+          {
+            "timeMs": 9180,
+            "key": "2",
+            "durationMs": 210,
+            "state": "lower"
+          },
+          {
+            "timeMs": 14100,
+            "key": "left",
+            "durationMs": 3380,
+            "state": "lower",
+            "note": "Move the touchpad cursor to the left of the valley."
+          },
+          {
+            "timeMs": 18020,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "upper",
+            "note": "Confirm the lower bound."
+          },
+          {
+            "timeMs": 19500,
+            "key": "right",
+            "durationMs": 3050,
+            "state": "upper",
+            "note": "Move the touchpad cursor to the right of the valley."
+          },
+          {
+            "timeMs": 23350,
+            "key": "enter",
+            "durationMs": 210,
+            "state": "result",
+            "note": "Confirm the upper bound and mark the minimum."
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": {
+    "src": "minimum.mp3",
+    "bytes": 590191,
+    "sha256": "8512bc36bb5eb129779767a0a8bde13e560385484bf2bfb1defab1f4a2fa0c27",
+    "streamDurationMs": 35788,
+    "voice": "George",
+    "provider": "ElevenLabs",
+    "replacementPolicy": "preserve existing file bytes",
+    "phraseEvidence": {
+      "quality": "existing-aligned-sidecar",
+      "source": "graph-minimum.srt",
+      "cues": [
+        {
+          "id": "12.01",
+          "startMs": 0,
+          "endMs": 5220,
+          "text": "On a Graphs page, enter the function you want to investigate and press Enter."
+        },
+        {
+          "id": "12.02",
+          "startMs": 5220,
+          "endMs": 10020,
+          "text": "Open Menu, choose Analyze Graph, and select Minimum."
+        },
+        {
+          "id": "12.03",
+          "startMs": 10020,
+          "endMs": 13510,
+          "text": "We're looking for the lowest point in the interval you choose."
+        },
+        {
+          "id": "12.04",
+          "startMs": 13510,
+          "endMs": 19130,
+          "text": "To set the lower bound, move the cursor to the left of the minimum, then press Enter."
+        },
+        {
+          "id": "12.05",
+          "startMs": 19130,
+          "endMs": 23960,
+          "text": "For the upper bound, move to the right of the minimum and press Enter again."
+        },
+        {
+          "id": "12.06",
+          "startMs": 23960,
+          "endMs": 26670,
+          "text": "Bracket just one turning point."
+        },
+        {
+          "id": "12.07",
+          "startMs": 26670,
+          "endMs": 30330,
+          "text": "The calculator marks the minimum and shows its coordinates."
+        },
+        {
+          "id": "12.08",
+          "startMs": 30330,
+          "endMs": 33220,
+          "text": "The x-coordinate tells you where it occurs."
+        },
+        {
+          "id": "12.09",
+          "startMs": 33220,
+          "endMs": 35780,
+          "text": "The y-coordinate is the minimum value."
+        }
+      ]
+    }
+  },
+  "nativeMediaAdapter": null,
+  "integrationStatus": "already-wired-preserve"
+}

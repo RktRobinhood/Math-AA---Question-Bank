@@ -1,0 +1,7 @@
+Deposit one thousand for two years at six percent nominal interest, compounded monthly. There are no later payments.
+On a Calculator page, press Menu then eight: Finance then one: Finance Solver.
+Two years times twelve months gives twenty-four payment periods. Enter six for the annual percentage rate.
+Present value is negative one thousand: the deposit leaves you now. Payment is zero because there are no recurring payments.
+Skip future value. To count periods in months, set payments per year and compounding periods per year to twelve. Leave payment timing at End; it has no effect without recurring payments.
+Move back to FV, then press Enter to solve for the highlighted field.
+A positive future value is money you receive at the end. Rounded to two decimal places, the balance is one thousand, one hundred and twenty-seven point one six.

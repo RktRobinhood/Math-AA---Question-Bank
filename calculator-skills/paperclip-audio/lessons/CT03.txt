@@ -1,0 +1,6 @@
+Start on a Calculator page. The same five badges can be lined up or chosen for a display.
+For a line-up of all five, type the number first. Choose Factorial to put the exclamation mark after it.
+The factorial counts complete line-ups. Change the order and you have a different line-up.
+This time choose two badges for a display with no roles. Swapping them does not make a new group.
+Enter the total first, then a comma and the number chosen. Close the parenthesis and press Enter.
+Read the exact number of groups. It is not a probability or a count of ordered choices.

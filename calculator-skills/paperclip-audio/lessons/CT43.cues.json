@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "id": "CT43",
+  "route": "sampling-means/index.html",
+  "catalogueTitle": "Sampling means and the central limit theorem",
+  "playerHeading": "Sampling means and the CLT",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "sampling-means/index.html"
+  },
+  "script": "lessons/CT43.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "We want an average, not one observation. Independent population readings have mean eighty and standard deviation twelve.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "The sample mean keeps the same centre. Its spread is the standard error: twelve divided by the square root of thirty-six.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "For this large sample, the CLT gives an approximately normal mean. A normal population would give an exact normal mean.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "On a Calculator page, open Probability, Distributions, then Normal Cdf.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Enter the lower and upper bounds of the interval.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Keep the mean at eighty. Enter two as the standard deviation of the mean, not twelve and not the variance four.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Enter inserts the command, then Enter again evaluates it.",
+      "watchCueId": "watch-07"
+    },
+    {
+      "id": "watch-08",
+      "text": "The chance is about zero point seven seven five under the normal approximation. Distinguish an exact normal model from an approximation.",
+      "watchCueId": "watch-08"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 54000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "We want an average, not one observation. Independent population readings have mean 80 and standard deviation 12.",
+        "endMs": 6000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 6000,
+        "text": "The sample mean keeps the same centre. Its spread is the standard error: 12 divided by the square root of 36.",
+        "endMs": 12000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 12000,
+        "text": "For this large sample, the CLT gives an approximately normal mean. A normal population would give an exact normal mean.",
+        "endMs": 18600
+      },
+      {
+        "id": "watch-04",
+        "startMs": 18600,
+        "text": "On a Calculator page, open Probability, Distributions, then Normal Cdf.",
+        "endMs": 24000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 24000,
+        "text": "Enter the lower and upper bounds of the interval.",
+        "endMs": 33000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 33000,
+        "text": "Keep the mean at 80. Enter 2 as the standard deviation of the mean, not 12 and not the variance 4.",
+        "endMs": 42000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 42000,
+        "text": "Enter inserts the command, then Enter again evaluates it.",
+        "endMs": 48000
+      },
+      {
+        "id": "watch-08",
+        "startMs": 48000,
+        "text": "The chance is about 0.775 under the normal approximation. In Try, decide whether your model is exact or approximate.",
+        "endMs": 54000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 19000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 19360,
+        "keys": []
+      },
+      {
+        "timeMs": 20300,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 20660,
+        "keys": []
+      },
+      {
+        "timeMs": 21500,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 21860,
+        "keys": []
+      },
+      {
+        "timeMs": 22600,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 22960,
+        "keys": []
+      },
+      {
+        "timeMs": 25000,
+        "keys": [
+          "7"
+        ]
+      },
+      {
+        "timeMs": 25360,
+        "keys": []
+      },
+      {
+        "timeMs": 26000,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 26360,
+        "keys": []
+      },
+      {
+        "timeMs": 27000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 27360,
+        "keys": []
+      },
+      {
+        "timeMs": 29000,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 29360,
+        "keys": []
+      },
+      {
+        "timeMs": 30000,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 30360,
+        "keys": []
+      },
+      {
+        "timeMs": 31000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 31360,
+        "keys": []
+      },
+      {
+        "timeMs": 34000,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 34360,
+        "keys": []
+      },
+      {
+        "timeMs": 35000,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 35360,
+        "keys": []
+      },
+      {
+        "timeMs": 36400,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 36760,
+        "keys": []
+      },
+      {
+        "timeMs": 38000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 38360,
+        "keys": []
+      },
+      {
+        "timeMs": 43000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 43360,
+        "keys": []
+      },
+      {
+        "timeMs": 45000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 45360,
+        "keys": []
+      }
+    ],
+    "authoredTape": []
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

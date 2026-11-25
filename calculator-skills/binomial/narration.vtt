@@ -1,0 +1,16 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.868
+Before opening the calculator, identify the first and last whole-number counts that belong in the event.
+
+00:00:06.868 --> 00:00:14.647
+On a Calculator page, open Probability, then Distributions, and choose Binomial C D F.
+
+00:00:14.647 --> 00:00:23.361
+Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds.
+
+00:00:23.361 --> 00:00:31.851
+For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero.
+
+00:00:31.851 --> 00:00:39.079
+A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds.

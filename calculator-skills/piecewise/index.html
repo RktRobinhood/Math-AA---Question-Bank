@@ -1,0 +1,42 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Restricted and piecewise graphs · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="editor.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT15</span></p><h1>Restricted and piecewise graphs</h1><p class="subtitle">Choose which rule owns each endpoint.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct15-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p class="ct15-bounds" id="readout" hidden></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
+<div class="ct15-stage-grid">
+<div class="ct15-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div><button type="button" id="stage-play" aria-label="Play captioned demonstration" title="Play captioned demonstration"><svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div>
+<div class="ct15-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>One boundary, two expressions</h2><p class="sample-f1">x² for −2 ≤ x &lt; 1<br>x + 2 for 1 ≤ x ≤ 3</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct15-try-help" hidden>
+<p id="keypad-problem" class="ct15-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools">
+<form id="expression-form">
+<div class="branch-fields"><label for="f">Expression 1 <input id="f" maxlength="80" type="text" spellcheck="false" autocomplete="off"></label><label for="c1">Condition 1 <input id="c1" maxlength="46" type="text" spellcheck="false" autocomplete="off"></label>
+<label for="g">Expression 2 <input id="g" maxlength="80" type="text" spellcheck="false" autocomplete="off"></label><label for="c2">Condition 2 <input id="c2" maxlength="46" type="text" spellcheck="false" autocomplete="off"></label></div>
+<button type="submit" class="primary">Load into template</button>
+</form>
+<label id="marker-switch" class="marker-switch" hidden><input type="checkbox" checked id="mark-endpoints"> Show endpoint study circles</label>
+<form id="point-form" hidden><label for="point-input">Check an x-value <small>(lesson helper)</small></label><div class="inputline"><input id="point-input" type="text" inputmode="decimal" maxlength="17" autocomplete="off" required><button type="submit">Check point</button></div></form>
+<p id="probe-result" class="feedback" role="status"></p>
+</div>
+<p class="ct15-keyboard">Use the template key and arrows. To add an inequality on the handheld press <kbd>Ctrl</kbd> then <kbd>=</kbd>. You can also type &lt;, &lt;=, &gt;, &gt;= in the lesson editor.</p>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false">Focus</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct15-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="43" step="0.005"></label><span class="ct15-rehearsal">Captions only</span></div>
+</div></section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct15-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Set exercise</p>
+<div id="exercise-active"><h2>Check the boundary</h2><p id="challenge"></p><form id="answer-form"><div class="inputline"><label for="answer-y">Function value</label><input id="answer-y" type="text" autocomplete="off" maxlength="24" required><button class="primary">Check</button></div><p class="precision">Enter a value or type “undefined”.</p></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Check which condition includes this input before looking at the expression. An input outside both conditions has no function value.</p></details></div>
+<div id="exercise-inactive" hidden><h2>Your graph workspace</h2><p>The assigned answer check is paused for this graph. Reset to return to the problem.</p></div>
+</section></section>
+<details class="notes"><summary>What the endpoint means</summary><p>In a Graphs entry line, open Math Templates, select the n-piece template, then set the piece count. Enter each expression next to its condition. The union of the two conditions gives the domain. Do not include the same x in both branches.</p><p>The study circles and point checker are lesson overlays, not claims about native TI rendering. The simulator supports two polynomial expressions (up to cubic), decimal endpoints in [−20, 20] and single-sided conditions. This is a lesson, not full calculator firmware.</p><p><a href="https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/qce-mm-trb-for-cx-ii-t-2025.pdf#page=12">TI CX II‑T workbook · printed page 12</a> · <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/21431">TI n-piece template keys</a></p></details>
+</main></body></html>

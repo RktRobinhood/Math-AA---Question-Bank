@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Displacement and total distance · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header><div><p class="crumb"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / CT53</p><h1>Displacement and total distance</h1><p class="sub">Split the velocity integral only where motion reverses.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<nav class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-pane">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-pane" tabindex="-1">Try</button></nav>
+<section id="stage" data-mode="watch" aria-label="TI-Nspire CX II-T handheld and controls" tabindex="0">
+<div id="watch-pane" role="tabpanel" aria-labelledby="watch-tab"><p id="caption" class="caption"></p><p id="equation" class="equation"></p></div>
+<div id="try-pane" role="tabpanel" aria-labelledby="try-tab" hidden><div class="try-bar"><button type="button" id="return">Return to Watch</button><button type="button" id="edit-inputs">Edit inputs</button><button type="button" id="new-practice" hidden>Open fresh Try</button></div><p id="taskline" class="try-task"></p></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="screen" aria-label="Recreated TI-Nspire Graphs display">
+<canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><p class="sr" id="lcd-text"></p><div id="hotspots"></div>
+<button type="button" id="stage-play" aria-label="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
+</div></div>
+<div class="stage-side">
+<aside id="watch-side"><h2>Follow motion over time</h2><p class="demo-rule">v(t) = 3 − 2t, &nbsp; 0 ≤ t ≤ 4</p><ol id="chapters" aria-label="Worked example chapters"></ol></aside>
+<aside id="try-side" hidden><h2 id="try-title">Try it yourself</h2><p id="key-hint" class="hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
+<form id="fields" novalidate>
+<label for="v">Velocity as a polynomial in x (time)</label><input id="v" maxlength="80" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. (x−1)(x+2)">
+<div class="form-grid"><label for="lower">Start time (s)<input id="lower" maxlength="24" inputmode="decimal"></label><label for="upper">End time (s)<input id="upper" maxlength="24" inputmode="decimal"></label></div>
+<div class="field-actions"><button id="plot" type="submit" class="primary">Plot velocity</button><button type="button" id="reset">Reset</button></div></form>
+<form id="bound-form" hidden novalidate><label id="bound-label" for="bound">Lower bound</label><div class="answer-row"><input id="bound" maxlength="24" inputmode="decimal" autocomplete="off"><button type="submit">Enter</button></div></form>
+<form id="answer-form" hidden novalidate><div class="form-grid"><label for="displacement">Displacement (m)<input id="displacement" maxlength="24" inputmode="decimal"></label><label for="distance">Distance (m)<input id="distance" maxlength="24" inputmode="decimal"></label></div>
+<label for="reversals">Reversal times (s)<input id="reversals" maxlength="100" autocomplete="off" placeholder="Comma-separated, or none"></label>
+<p class="hint compact-hint">Include only interior times that change the sign. Use at least 3 significant figures, and more if two times round to the same value.</p><button type="submit">Check answers</button><p id="feedback" role="status"></p></form>
+</aside></div></div>
+<div id="player" aria-label="Playback controls"><div class="controls"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from the start">↺</button><button type="button" id="focus" aria-label="Focused view" aria-pressed="false">⛶</button><button type="button" id="take-over">Take over</button></div>
+<div class="time"><span id="clock" aria-hidden="true"></span><label class="seek"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" max="50" value="0" step=".005"></label><span class="captioned">Captioned</span></div></div>
+</section>
+<details class="notes"><summary>Calculator routes and practice limits</summary><p>In Graphs, x is time. Go to Menu → 6: Analyze Graph → 1: Zero to bracket a crossing. Confirm the lower and upper bounds, then mark the zero with Enter. Test the velocity on each side: a zero that only touches the axis is not a reversal.</p>
+<p>On the non-CAS/Exact Arithmetic CX II-T, Menu → 6: Analyze Graph → 6: Integral takes the lower and upper bounds. The result keeps its sign. For distance, repeat on each interval between reversals and add the magnitudes of these signed results. A true zero of velocity at a domain endpoint does not split the interval.</p>
+<p>This lesson simulator supports polynomials of degree 0 to 4 with coefficients from −1000 to 1000, decimal time bounds from 0 to 15, and the named Graphs tools. It is not TI firmware. Its Zero exercise isolates sign crossings; real calculator root-finding behavior near touch points can vary.</p>
+<p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/21770">TI Zero key path</a> · <a href="https://education.ti.com/html/webhelp/EG_TINspire/EN/content/m_scratchpad/sc_graphing_with_the_scratchpad.HTML">TI non-CAS graph tools</a> · <a href="https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/qce-mm-trb-for-cx-ii-t-2025.pdf">TI CX II-T worked examples</a></p></details>
+</main></body></html>

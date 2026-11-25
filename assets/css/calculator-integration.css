@@ -1,0 +1,39 @@
+/* Optional Home and Practice integration; not loaded on archived exam routes. */
+@media (max-width:860px){
+  .tabbar.with-calc-skills{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .tabbar.with-calc-skills .calc-skills-nav{white-space:nowrap}
+}
+@media (min-width:861px) and (max-width:1340px){
+  .top .nav.with-calc-skills a{padding-inline:6px;font-size:.88rem}
+}
+.practice-calc-trigger{display:inline-flex;align-items:center;gap:.28rem;white-space:nowrap;
+  color:var(--muted);border:1px solid var(--line);background:transparent;border-radius:6px;
+  min-height:34px;padding:0 .55rem;cursor:pointer;font:600 .8rem/1 var(--sans,system-ui)}
+.practice-calc-trigger:hover{color:var(--ink);border-color:var(--accent)}
+.practice-calc-trigger svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round}
+.practice-calc-trigger:focus-visible,.practice-calc-back:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+body.practice-calc-open{overflow:hidden}
+.practice-calc-panel[open]{position:fixed;inset:0 0 0 auto;margin:0;display:grid;
+  width:min(100%,31rem);max-width:100%;height:100dvh;max-height:100dvh;box-sizing:border-box;
+  grid-template-rows:auto auto minmax(0,1fr);padding:0;border:0;border-inline-start:1px solid var(--line);
+  background:var(--surface);color:var(--ink);overflow:hidden;
+  box-shadow:-1rem 0 3rem rgba(14,28,51,.15)}
+.practice-calc-panel::backdrop{background:rgba(13,20,33,.26)}
+.practice-calc-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:calc(.6rem + env(safe-area-inset-top,0px)) .8rem .6rem;border-bottom:1px solid var(--line)}
+.practice-calc-head h2{font-size:1.05rem;margin:0}
+.practice-calc-back{border:1px solid var(--line);border-radius:6px;background:transparent;
+  color:var(--ink);font:600 .82rem/1 var(--sans,system-ui);padding:.25rem .65rem;min-height:44px;cursor:pointer}
+.practice-calc-back:hover{border-color:var(--accent)}
+.practice-calc-status{font-size:.8rem;margin:.6rem .8rem;color:var(--muted)}
+.practice-calc-frame{display:block;width:100%;height:100%;min-height:0;grid-row:3;
+  background:transparent;border:0;padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (max-width:640px){
+  .practice-calc-panel[open]{width:100%;border:0;box-shadow:none}
+}
+@media print{.practice-calc-panel,.practice-calc-trigger{display:none!important}}
+@media (min-width:1024px){
+  /* Keep the question legible beside the desktop dock instead of covering its right edge. */
+  body.practice-calc-open #app{margin-inline-end:min(31rem,36vw)}
+  .practice-calc-panel[open]{width:min(31rem,36vw)}
+}

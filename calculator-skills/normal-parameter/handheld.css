@@ -1,0 +1,144 @@
+/* Lecture player + authentic-sized CX II-T screen. */
+:root{--ink:var(--text);--accent:var(--green);--stage:var(--page);--stage-ink:var(--text);--stage-line:var(--line)}
+.viewer{background:var(--page);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.player.transport{margin:0;padding:8px 10px}
+.player-top{gap:4px}
+.player-top #play{min-width:72px}
+.player-top :is(button:not(.primary),.cx-transport-button){min-width:37px;min-height:38px;padding:4px 7px;font-size:.85rem}
+.viewer .timeline{margin-top:1px}
+#watch-host,#try-host{padding:12px 7px;--handheld-width:clamp(213px,calc((100svh - 252px)*.4777),305px)}
+#watch-host{border-top:1px solid var(--line)}
+#try-host{--handheld-width:315px}
+.viewer.cx-focused #watch-host{--handheld-width:clamp(207px,calc((100svh - 155px)*.4777),375px);padding-block:7px}
+.viewer.cx-focused .caption{max-width:65ch;margin-inline:auto}
+.viewer.cx-focused .player{max-width:720px;margin-inline:auto}
+.viewer .caption{min-height:55px;border-left:0;border-top:1px solid var(--line)}
+.try-grid{grid-template-columns:minmax(240px,1fr) minmax(0,1.4fr)}
+.try-device{background:var(--page);border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.try-device p{margin:.35rem .8rem;color:var(--muted);font-size:.87rem}
+.try-device .feedback:not(:empty){font-weight:650;color:var(--error)}
+.try-material{display:grid;gap:1rem}
+.screen.hh-screen-content{display:flex;flex-direction:column;background:#fff;color:#171622}
+.hh-lcd .status{min-height:0;flex:0 0 auto;padding:.55cqw 1.25cqw;white-space:nowrap;font:600 3.08cqw/1.1 Arial,sans-serif;background:linear-gradient(#b3cbe8,#759cc9);border-color:#5e7490}
+.hh-lcd .screen-work{flex:1;min-height:0;height:auto;font:600 3.9cqw/1.15 Arial,sans-serif}
+.hh-lcd .screen-work p{margin:2cqw 2.2cqw}
+.hh-lcd .screen-work .lcd-note{font-size:.81em;color:#3c495a}
+.hh-lcd .entry{position:absolute;bottom:0;left:0;right:0;border-top:1px solid #9ca5b5;overflow-wrap:anywhere}
+.hh-lcd .menu-stack{inset:1cqw 1cqw auto;display:grid;grid-template-columns:1fr 1fr;gap:.7cqw}
+.hh-lcd .lcd-menu{box-sizing:border-box;width:100%;max-width:none;font-size:.82em;background:#f9fafc;border-color:#8a9db6}
+.hh-lcd .lcd-menu li{padding:.36cqw .75cqw;overflow:hidden;text-overflow:ellipsis}
+.hh-lcd .lcd-menu li.current{background:#375d90}
+.hh-lcd .lcd-dialog{inset:2cqw 7% auto;background:#edf1f7;border-color:#7b8ba7;padding:0 1.3cqw 1.05cqw;font-size:.86em}
+.hh-lcd .lcd-dialog strong{margin:0 -1.3cqw .8cqw;padding:.6cqw 1.3cqw;background:#b5cce9}
+.hh-lcd .lcd-field{margin:.66cqw 0;gap:.72cqw;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.hh-lcd .lcd-field span:last-child{min-height:1.18em;padding:.2cqw .6cqw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-color:#a5acc2}
+.hh-lcd .lcd-field.active span:last-child{outline:1px solid #365c90;background:#e5effe}
+.hh-lcd .lcd-ok{margin-top:.85cqw}
+.hh-lcd .lcd-ok span{padding:.25cqw 1.45cqw;border-color:#a1acc3}
+.hh-lcd .lcd-ok .active{background:#375d90}
+@media(max-width:700px){.try-grid{grid-template-columns:1fr}.try-device{max-width:420px;width:100%;margin-inline:auto}}
+@media(max-width:395px){.header{display:flex;gap:5px}.header h1{font-size:1.49rem}.header .theme{margin-top:0}.player.transport{padding:6px}.player-top{gap:3px}.player-top :is(button:not(.primary),.cx-transport-button){min-width:31px;padding-inline:4px}.player-top #play{min-width:61px;padding-inline:4px}.player-top #clock{margin:0 .14rem}.player-top label{min-height:38px}}
+.viewer .timeline{display:flex;align-items:center;gap:.65rem}
+.viewer .timeline input{min-width:0}
+#clock{font:700 .72rem/1 var(--mono);white-space:nowrap;min-width:5.9ch;font-variant-numeric:tabular-nums}
+.viewer .worked-prompt{color:var(--text);font:600 .83rem/1.3 system-ui;margin:0;padding:.42rem .75rem;text-align:center;max-width:none}
+.viewer .worked-prompt span{font:650 .67rem/1 var(--mono);color:var(--muted);margin-right:.4rem}
+.viewer.cx-focused .worked-prompt{padding-block:.18rem}
+@media(max-width:395px){
+ .player-top .cx-watch-try{order:0;margin-left:auto;min-width:0}
+ .player-top label{padding:0 2px}
+ .player.transport{gap:0}
+}
+.viewer .timeline input{flex:1 1 0;width:auto}
+#clock{min-width:10ch;flex:0 0 auto;text-align:right}
+@media(max-width:700px){.viewer.cx-focused #watch-host{--handheld-width:clamp(207px,calc((100svh - 200px)*.4777),345px)}}
+.viewer .worked-prompt{display:flex;align-items:center;justify-content:center;gap:.35rem .72rem;text-align:left}
+.viewer .worked-prompt .curve{width:clamp(58px,16%,82px);flex:none;margin:0;overflow:hidden}
+.viewer .worked-prompt .curve svg{border:0;width:100%;height:28px;margin-top:1px}
+.viewer .worked-prompt .curve text{display:none}
+.viewer .worked-prompt .curve .shade{opacity:.65}
+.viewer .worked-prompt .curve svg{overflow:visible}
+@media(max-width:395px){.viewer .worked-prompt{font-size:.76rem;padding-inline:.35rem}.viewer .worked-prompt span{font-size:.55rem;margin-right:.2rem}}
+#watch-host{--handheld-width:clamp(206px,calc((100svh - 345px)*.4777),288px);padding-block:8px}
+.viewer .caption{min-height:3.3em;padding:.38rem .7rem;font-size:.86rem;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.viewer.cx-focused .caption{max-width:none}
+@media(max-width:700px){
+ #watch-host{--handheld-width:clamp(203px,calc((100svh - 310px)*.4777),282px)}
+ .viewer.cx-focused #watch-host{--handheld-width:clamp(205px,calc((100svh - 200px)*.4777),345px)}
+}
+.audio-state{padding:.3rem .7rem;color:var(--muted);font:650 .68rem/1.35 var(--mono);max-width:none;margin:0}
+main{padding-top:clamp(14px,2.1vw,28px)}
+.header{margin-bottom:11px}
+.tabs{margin-bottom:11px}
+.viewer .player-top label{min-height:35px}
+.viewer .player-top .primary{min-height:37px}
+@media(max-width:700px){
+ .header{margin-bottom:8px}
+ .header h1{font-size:clamp(1.3rem,5.15vw,1.82rem)}
+ .header .subtitle{display:none}
+ .header .theme{margin-top:0}
+ .header .theme select{min-height:34px}
+ .header .tag{margin-bottom:4px;font-size:.68rem}
+ .tabs button{min-height:39px}
+ .player-top .cx-watch-try{padding-inline:5px;white-space:nowrap}
+}
+@media(max-width:395px){
+ .viewer .player-top{gap:2px}
+ .player-top #play{min-width:55px}
+ .player-top :is(button:not(.primary),.cx-transport-button){min-width:28px;padding-inline:3px}
+ .viewer .caption{min-height:3.3em}
+}
+@media(max-width:415px){.focus-label{display:none}}
+.inverse-frame{position:relative;display:grid;place-items:center}
+.inverse-frame #watch-host{width:100%}
+.viewer .player.transport{border-top:1px solid var(--line);border-bottom:0}
+.viewer.cx-focused .player{top:auto;bottom:0;z-index:4}
+.viewer #watch-host{border-top:0}
+.stage-play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);width:76px;height:52px;border:1px solid #ffffffb0;border-radius:12px;background:#0f2828cf;color:#fff;box-shadow:0 2px 13px #14282260;font-size:22px;line-height:1;display:grid;place-items:center;z-index:3;padding:0}
+.stage-play:hover{background:#0f2828ed}
+.stage-play:focus-visible{outline-offset:5px}
+.viewer .inverse-frame #watch-host{--handheld-width:clamp(193px,calc((100svh - 330px)*.4777),294px)}
+.viewer.cx-focused .inverse-frame #watch-host{--handheld-width:clamp(201px,calc((100svh - 187px)*.4777),351px)}
+.event-fields.inverse-inputs{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.event-fields.inverse-inputs>label:first-child{grid-column:auto}
+.curve .complement{fill:var(--primary);opacity:.12}
+.worked-prompt .curve .complement{opacity:.25}
+.viewer:not(.cx-focused){overflow:clip}
+.viewer .player.transport{position:sticky;bottom:0;z-index:4;background:var(--page)}
+.viewer.cx-focused .focus-label{display:none}
+.viewer.cx-focused .cx-transport-button[aria-pressed=true]::after{content:" Exit";font-size:.75rem}
+.stage-play span{width:20px;height:22px;background:#fff;clip-path:polygon(0 0,100% 50%,0 100%);font-size:0;transform:translateX(2px)}
+@media(max-width:700px){
+ .viewer.cx-focused .inverse-frame #watch-host{--handheld-width:clamp(200px,calc((100svh - 209px)*.4777),350px)}
+}
+@media(max-width:340px) and (max-height:720px){
+ .viewer.cx-focused .inverse-frame #watch-host{--handheld-width:clamp(190px,calc((100svh - 249px)*.4777),235px)}
+}
+.hh-lcd .screen-work .history{font-size:.87em;line-height:1.08}
+.hh-lcd .screen-work .history p{margin-block:1.45cqw}
+.model-fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:455px){.model-fields{grid-template-columns:1fr 1fr}.model-fields label:first-child{grid-column:1/-1}}
+/* Keep the player centered on the LCD, not the keypad. */
+.viewer .inverse-frame{--frame-device:clamp(193px,calc((100svh - 330px)*.4777),294px);--frame-inset:8px}
+.viewer .inverse-frame #watch-host{--handheld-width:var(--frame-device)}
+.viewer .stage-play{top:calc(var(--frame-inset) + min(100% - 14px,var(--frame-device))*.4482)}
+.viewer.cx-focused .inverse-frame{--frame-device:clamp(167px,calc((100svh - 196px)*.4777),350px);--frame-inset:7px}
+.viewer.cx-focused .inverse-frame #watch-host{--handheld-width:var(--frame-device)}
+.viewer.cx-focused .caption{min-height:0}
+.viewer.cx-focused .caption:not([hidden]){max-width:720px}
+.viewer .transport .cx-watch-try{min-width:0}
+#try-host .lcd-field span:last-child{min-width:0}
+#link-warning:not([hidden]){margin:.55rem 0;border-left:3px solid var(--error);padding-left:.6rem}
+.hh-lcd .lcd-menu li.current{font-size:max(9px,1em);overflow:visible;text-overflow:clip}
+.hh-lcd .lcd-menu li.current{white-space:normal}
+.hh-lcd .lcd-dialog{font-size:max(9px,.86em)}
+@media(max-height:580px){
+ .viewer.cx-focused .inverse-frame{--frame-device:clamp(167px,calc((100svh - 180px)*.4777),220px)}
+}
+/* Reserve full rows for both the caption and transport before sizing the handset. */
+.viewer.cx-focused{display:flex;flex-direction:column;overflow:hidden}
+.viewer.cx-focused > :is(.caption,.worked-prompt,.player,.audio-state){flex:none;width:100%}
+.viewer.cx-focused .inverse-frame{flex:1;min-height:0;container-type:size}
+.viewer.cx-focused .inverse-frame #watch-host{--handheld-width:min(350px,max(105px,calc((100cqh - 14px)*.4777)))}
+.viewer.cx-focused .player.transport{position:static}
+#try-host{--handheld-width:clamp(175px,calc((100svh - 200px)*.4777),315px);padding-block:8px}

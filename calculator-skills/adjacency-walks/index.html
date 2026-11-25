@@ -1,0 +1,26 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Adjacency matrices and walks · Calculator Coach</title>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css">
+<script defer src="../handheld/shell.js"></script><script defer src="matrix-math.js"></script><script defer src="config.js"></script><script defer src="lesson.js"></script>
+</head><body><main>
+<header class="head"><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a></p><h1 id="title">Adjacency matrices and walks</h1></div>
+<label class="theme"><span class="sr">Colour theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button><button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="stage" id="stage" data-mode="watch" tabindex="0" aria-label="TI-Nspire CX II-T handheld">
+<div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
+<div id="try-header" hidden><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Return to Watch</button><button type="button" id="reset">Reset Try</button></nav><p id="try-context"></p></div>
+<div class="stage-grid">
+<div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span>1.1</span><span id="lcd-app"></span><strong>RAD</strong><span class="battery"></span></div><div class="lcd-body" id="lcd-body"></div><span id="lcd-text" class="sr" aria-live="off"></span></div>
+<button class="stage-play" id="start-overlay" type="button" aria-label="Play caption rehearsal"><svg width="23" height="25" viewBox="0 0 23 25" aria-hidden="true"><path fill="currentColor" d="M4 2l16 10.5L4 23z"/></svg></button></div>
+<aside class="side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab"><p class="context" id="intro"></p><ol id="chapters"></ol></aside>
+<aside class="side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
+<p id="tool-status" class="feedback" role="status"></p><p class="keys" id="keys-help"></p>
+<div class="context" id="given-list" hidden></div>
+<details id="edit-details"><summary>Edit example inputs</summary><form id="data-form"><div class="field-grid" id="data-fields"></div><button type="submit">Use these inputs</button></form></details>
+<form id="answer" aria-label="Check your work"><p id="assessment">Store the given matrix and evaluate its requested power. Read both directions.</p><div class="answer-grid" id="answer-fields"></div><button type="submit" id="assess">Check answers</button><p class="feedback" id="assess-feedback" role="status"></p></form>
+</aside></div>
+<div id="watch-player" class="player" aria-label="Playback controls"><div class="transport"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from start">↺</button><button type="button" id="focus" aria-pressed="false">Focus</button><button type="button" id="take">Open Try</button></div>
+<div class="timeline"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div></div></section>
+<details class="notes"><summary>When this method applies</summary><p id="notes"></p><p id="references"></p></details>
+</main></body></html>

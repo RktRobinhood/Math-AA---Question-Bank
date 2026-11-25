@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>TI-Nspire CX II-T · Calculator practice</title>
+<link rel="stylesheet" href="shell.css"><link rel="stylesheet" href="free.css">
+<script src="shell.js" defer></script><script src="freecalc.js" defer></script><script src="free-ui.js" defer></script>
+</head>
+<body>
+<header><nav class="wrap"><a href="../skills.html" class="brand">Calculator Lab</a><a href="../index.html">Graph minimum</a><a href="../solve/index.html">Numerical solve</a></nav></header>
+<main class="wrap">
+<div class="heading"><h1>Calculator</h1><p>Use the keys or type on your keyboard.</p></div>
+<div class="work">
+<div id="handheld">
+ <section id="lcd" aria-label="Calculator display">
+  <div class="bar"><strong>1.1</strong><span>Calculator</span><b id="lcd-mode">DEG</b></div>
+  <div id="history" aria-label="Previous calculations"></div>
+  <label class="sr" for="expression">Expression</label><input id="expression" inputmode="none" autocomplete="off" spellcheck="false" placeholder="Enter an expression">
+  <p id="lcd-error" role="status"></p>
+ </section>
+</div>
+<aside>
+ <div class="toolbar"><label for="angle">Angle mode</label><select id="angle"><option value="DEG">Degrees</option><option value="RAD">Radians</option></select></div>
+ <div id="trig-panel" hidden><h2>Trigonometry</h2><div class="chips">
+ <button type="button" data-k="sin">sin</button><button type="button" data-k="cos">cos</button><button type="button" data-k="tan">tan</button>
+ <button type="button" data-k="asin">sin⁻¹</button><button type="button" data-k="acos">cos⁻¹</button><button type="button" data-k="atan">tan⁻¹</button>
+ </div></div>
+ <div class="chips"><button type="button" data-k="sqrt">√</button><button type="button" data-k="ans">Ans</button><button type="button" id="clear">Clear entry</button></div>
+ <p class="note">Arithmetic, powers, roots, π and trig. For the IB workflows, open a lesson. This practice simulator does not run TI firmware.</p>
+ <p id="message" role="status"></p>
+</aside>
+</div>
+</main>
+</body></html>

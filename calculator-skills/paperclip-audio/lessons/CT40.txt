@@ -1,0 +1,7 @@
+This time we know the probability, not the cutoff. The seventy-fifth percentile has zero point seven five of the area to its left.
+On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal.
+In Area, enter zero point seven five. Enter fifty for the mean and eight for the standard deviation.
+Confirm. Press Enter again to calculate. The cutoff is about fifty-five point four, above the mean of fifty.
+For the top ten percent, zero point one is on the right. Subtract from one: zero point nine is on the left.
+Open Menu, Probability, Distributions, and Inverse Normal again. Enter zero point nine for Area. Keep fifty for the mean and eight for the standard deviation.
+Confirm, then press Enter again. The cutoff is about sixty point three, in the original measurement units.

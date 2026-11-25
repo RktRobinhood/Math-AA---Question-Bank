@@ -1,0 +1,37 @@
+<!doctype html><html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Find a derivative and tangent · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="lesson.js" defer></script>
+</head><body><main>
+<header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT51</span></p><h1>Find a derivative and tangent</h1><p class="subtitle">Read a slope; then write the line.</p></div>
+<label class="theme"><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<section class="ct51-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<div id="watch-message"><p id="caption" class="caption"></p><p class="ct51-bounds" id="readout" hidden></p></div>
+<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><button type="button" id="open-independent" hidden>Open Try</button><button type="button" id="jump-input" class="retro-jump">Edit function</button><button type="button" id="jump-answer" class="retro-jump">Enter answers</button></div>
+<div class="ct51-stage-grid">
+<div class="ct51-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div><button type="button" id="stage-play" aria-label="Play captioned demonstration" title="Play captioned demonstration"><svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div>
+<div class="ct51-stage-side">
+<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>The tangent at x = 2</h2><p class="sample-f1">f(x) = x³ + x</p><ol id="steps" class="steps"></ol></aside>
+<aside id="try-side" class="director ct51-try-help" hidden>
+<p id="keypad-problem" class="ct51-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<div id="try-tools">
+<form id="expression-form"><label for="expression">Function in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
+<form id="point-form" hidden><label for="point-input">Exact x <span class="muted">(simulator shortcut)</span></label><div class="inputline"><input id="point-input" type="text" inputmode="decimal" maxlength="19" required><button type="submit" class="primary">Select point</button></div></form>
+<button id="another-point" type="button" hidden>Choose another point</button>
+</div>
+<p class="ct51-keyboard">Keyboard: <kbd>M</kbd> → <kbd>6</kbd> → <kbd>5</kbd>. Arrow keys move along the curve; <kbd>Enter</kbd> selects the point.</p>
+</aside></div></div>
+<div class="player" id="watch-player" aria-label="Playback controls">
+<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false">Focus</button><button class="takeover" type="button" id="take-over">Take over</button></div>
+<div class="ct51-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="23" step="0.005"></label><span class="ct51-rehearsal">Captions only</span></div>
+</div></section>
+<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct51-watch-panel"><p class="sr">The Watch player is above.</p></section>
+<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Set exercise</p>
+<div id="exercise-active"><h2>Write the tangent</h2><p id="challenge"></p><form id="answer-form"><div class="answer-pair"><label>Slope m<input type="number" step="any" inputmode="decimal" required id="answer-m"></label><label>Intercept b<input type="number" step="any" inputmode="decimal" required id="answer-b"></label><button class="primary">Check</button></div><p class="precision">Use three significant figures if needed.</p></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>The derivative tells you m. Separately evaluate f(x) at the specified x, then use that point in y = mx + b.</p></details></div>
+<div id="exercise-inactive" hidden><h2>Exploring a different function</h2><p>The set exercise is paused. Reset the calculator to return to it.</p></div>
+</section></section>
+<details class="notes"><summary>Derivative vs tangent</summary><p>dy/dx reads a slope at one point. Find the curve’s y-coordinate separately, then write <strong>y − y₀ = m(x − x₀)</strong>. On the handheld, edit a point’s x-coordinate from its context menu if you need precise placement.</p><p><a href="https://education.ti.com/-/media/files/download-center/guidebooks/ti-nspire/5%2C-d-%2C4/gb_ti-nspire_cxii_handhelds/ti-nspire_cxii-hh_guidebook_en.aspx">TI’s handheld guide</a> · <a href="https://education.ti.com/html/webhelp/nspire/3.2/NAVHH/TI-NspireNavigatorHelp_EN/Content/GraphsGeometry/GG_Working_with_Relations.htm#Finding_the_Derivative_at_a_Point_(the_Slope)">TI’s exact-point note</a></p></details>
+</main></body></html>

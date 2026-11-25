@@ -1,0 +1,11 @@
+Start from a two-by-two matrix. We will use its characteristic equation, not an eigenvalue menu.
+Add the main diagonal entries for the trace.
+For the determinant, subtract the product off the diagonal from the product on it.
+The characteristic equation is lambda squared minus seven lambda plus ten. Find its discriminant.
+For the square root, press Control and the x squared key. Enter nine, then press Right to leave the slot.
+The discriminant is nine. Take its square root, three, and subtract it from the trace before dividing by two.
+Use plus three instead. The matching upper root is five.
+For lambda equals five, the first row of the eigenvector equation gives y equals x. Set x equal to one; use the vector with entries one, one.
+The second entry is also five, so A times the vector gives five, five, or five times the whole vector. Any nonzero multiple of the eigenvector works.
+For lambda equals two, the first row gives y equals negative two x. For the vector with entries one, negative two, the product gives two, negative four.
+Five has the larger magnitude. Its direction dominates only if the starting vector has a component there.

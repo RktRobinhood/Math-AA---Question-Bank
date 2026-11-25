@@ -1,0 +1,8 @@
+Open a Calculator page.
+Group the numerator and denominator before entering a fraction.
+Use the scientific notation key for powers of 10.
+Keep the negative sign inside the exponent.
+Read the unrounded value first.
+Scientific notation on the screen may use the letter E.
+Show the requested precision in your written answer.
+6.00 has three significant figures.

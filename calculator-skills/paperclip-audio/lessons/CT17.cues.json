@@ -1,0 +1,898 @@
+{
+  "schemaVersion": 1,
+  "id": "CT17",
+  "route": "lengths-bearings/index.html",
+  "catalogueTitle": "2D/3D lengths, angles and bearings",
+  "playerHeading": "Lengths, angles and bearings",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "lengths-bearings/index.html"
+  },
+  "script": "lessons/CT17.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "Start at the base. The drone is six kilometres west, eight kilometres south, and five kilometres above it.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "From Calculator, press Home then five: Settings then two: Document Settings. Set Angle to Degree.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Press Control, then the x squared key, to insert a square root. Square the east and north distances and add them inside the root.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Measure clockwise from north. In the south-west, add the acute angle west of south to one hundred and eighty degrees.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Compare the rise with the horizontal distance, not the sloping line.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "For the straight-line distance, all three perpendicular displacements contribute.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "The bearing is two hundred and seventeen degrees to the nearest degree. The sloping distance is eleven point two kilometres to three significant figures.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
+    "sliderEndAtExtractionMs": 61200,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "Start at the base. The drone is 6 km west, 8 km south, and 5 km above it.",
+        "endMs": 3150
+      },
+      {
+        "id": "watch-02",
+        "startMs": 3150,
+        "text": "From Calculator, press Home → 5: Settings → 2: Document Settings. Set Angle to Degree.",
+        "endMs": 13000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 13000,
+        "text": "Press Ctrl then x² for √. Square the east and north distances and add them inside the root.",
+        "endMs": 22000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 22000,
+        "text": "Measure clockwise from north. In the south-west, add the acute angle west of south to 180°.",
+        "endMs": 34000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 34000,
+        "text": "Compare the rise with the horizontal distance, not the sloping line.",
+        "endMs": 45000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 45000,
+        "text": "For the straight-line distance, all three perpendicular displacements contribute.",
+        "endMs": 56300
+      },
+      {
+        "id": "watch-07",
+        "startMs": 56300,
+        "text": "The bearing is 217° to the nearest degree. The sloping distance is 11.2 km to three significant figures.",
+        "endMs": 61200
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3400,
+        "keys": [
+          "home"
+        ]
+      },
+      {
+        "timeMs": 3700,
+        "keys": []
+      },
+      {
+        "timeMs": 4250,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 4550,
+        "keys": []
+      },
+      {
+        "timeMs": 5200,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 5500,
+        "keys": []
+      },
+      {
+        "timeMs": 6100,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 6400,
+        "keys": []
+      },
+      {
+        "timeMs": 6850,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 7150,
+        "keys": []
+      },
+      {
+        "timeMs": 7450,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 7750,
+        "keys": []
+      },
+      {
+        "timeMs": 8100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 8400,
+        "keys": []
+      },
+      {
+        "timeMs": 11320,
+        "keys": [
+          "select"
+        ]
+      },
+      {
+        "timeMs": 11621,
+        "keys": []
+      },
+      {
+        "timeMs": 12050,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 12351,
+        "keys": []
+      },
+      {
+        "timeMs": 14300,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 14601,
+        "keys": []
+      },
+      {
+        "timeMs": 14890,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 15191,
+        "keys": []
+      },
+      {
+        "timeMs": 15480,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 15781,
+        "keys": []
+      },
+      {
+        "timeMs": 16070,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 16370,
+        "keys": []
+      },
+      {
+        "timeMs": 16660,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 16960,
+        "keys": []
+      },
+      {
+        "timeMs": 17250,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 17550,
+        "keys": []
+      },
+      {
+        "timeMs": 17840,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 18140,
+        "keys": []
+      },
+      {
+        "timeMs": 18430,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 18730,
+        "keys": []
+      },
+      {
+        "timeMs": 20100,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 20401,
+        "keys": []
+      },
+      {
+        "timeMs": 23050,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23350,
+        "keys": []
+      },
+      {
+        "timeMs": 23710,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 24010,
+        "keys": []
+      },
+      {
+        "timeMs": 24370,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 24670,
+        "keys": []
+      },
+      {
+        "timeMs": 25030,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 25331,
+        "keys": []
+      },
+      {
+        "timeMs": 25690,
+        "keys": [
+          "trig"
+        ]
+      },
+      {
+        "timeMs": 25991,
+        "keys": []
+      },
+      {
+        "timeMs": 26350,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 26651,
+        "keys": []
+      },
+      {
+        "timeMs": 27010,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 27311,
+        "keys": []
+      },
+      {
+        "timeMs": 27670,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 27971,
+        "keys": []
+      },
+      {
+        "timeMs": 28330,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 28630,
+        "keys": []
+      },
+      {
+        "timeMs": 28990,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 29290,
+        "keys": []
+      },
+      {
+        "timeMs": 29650,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 29950,
+        "keys": []
+      },
+      {
+        "timeMs": 30310,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 30610,
+        "keys": []
+      },
+      {
+        "timeMs": 30970,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 31270,
+        "keys": []
+      },
+      {
+        "timeMs": 32350,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 32650,
+        "keys": []
+      },
+      {
+        "timeMs": 35000,
+        "keys": [
+          "trig"
+        ]
+      },
+      {
+        "timeMs": 35300,
+        "keys": []
+      },
+      {
+        "timeMs": 35680,
+        "keys": [
+          "down"
+        ]
+      },
+      {
+        "timeMs": 35980,
+        "keys": []
+      },
+      {
+        "timeMs": 36360,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 36660,
+        "keys": []
+      },
+      {
+        "timeMs": 37040,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 37340,
+        "keys": []
+      },
+      {
+        "timeMs": 37720,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 38020,
+        "keys": []
+      },
+      {
+        "timeMs": 38400,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 38700,
+        "keys": []
+      },
+      {
+        "timeMs": 39080,
+        "keys": [
+          "div"
+        ]
+      },
+      {
+        "timeMs": 39380,
+        "keys": []
+      },
+      {
+        "timeMs": 39760,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 40060,
+        "keys": []
+      },
+      {
+        "timeMs": 40440,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 40740,
+        "keys": []
+      },
+      {
+        "timeMs": 41120,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 41420,
+        "keys": []
+      },
+      {
+        "timeMs": 43000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 43300,
+        "keys": []
+      },
+      {
+        "timeMs": 46100,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 46400,
+        "keys": []
+      },
+      {
+        "timeMs": 46730,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 47030,
+        "keys": []
+      },
+      {
+        "timeMs": 47360,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 47660,
+        "keys": []
+      },
+      {
+        "timeMs": 47990,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 48290,
+        "keys": []
+      },
+      {
+        "timeMs": 48620,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 48920,
+        "keys": []
+      },
+      {
+        "timeMs": 49250,
+        "keys": [
+          "8"
+        ]
+      },
+      {
+        "timeMs": 49550,
+        "keys": []
+      },
+      {
+        "timeMs": 49880,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 50180,
+        "keys": []
+      },
+      {
+        "timeMs": 50510,
+        "keys": [
+          "plus"
+        ]
+      },
+      {
+        "timeMs": 50810,
+        "keys": []
+      },
+      {
+        "timeMs": 51140,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 51440,
+        "keys": []
+      },
+      {
+        "timeMs": 51770,
+        "keys": [
+          "square"
+        ]
+      },
+      {
+        "timeMs": 52070,
+        "keys": []
+      },
+      {
+        "timeMs": 52400,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 52700,
+        "keys": []
+      },
+      {
+        "timeMs": 53680,
+        "keys": [
+          "ctrl"
+        ]
+      },
+      {
+        "timeMs": 53980,
+        "keys": []
+      },
+      {
+        "timeMs": 54300,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 54600,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "CT17Tape",
+        "keys": [
+          {
+            "timeMs": 3400,
+            "key": "home"
+          },
+          {
+            "timeMs": 4250,
+            "key": "5"
+          },
+          {
+            "timeMs": 5200,
+            "key": "2"
+          },
+          {
+            "timeMs": 6100,
+            "key": "tab"
+          },
+          {
+            "timeMs": 6850,
+            "key": "right"
+          },
+          {
+            "timeMs": 7450,
+            "key": "down"
+          },
+          {
+            "timeMs": 8100,
+            "key": "enter"
+          },
+          {
+            "timeMs": 10150,
+            "key": "point-ok"
+          },
+          {
+            "timeMs": 11320,
+            "key": "select"
+          },
+          {
+            "timeMs": 12050,
+            "key": "4"
+          },
+          {
+            "timeMs": 14300,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 14890,
+            "key": "square"
+          },
+          {
+            "timeMs": 15480,
+            "key": "6"
+          },
+          {
+            "timeMs": 16070,
+            "key": "square"
+          },
+          {
+            "timeMs": 16660,
+            "key": "plus"
+          },
+          {
+            "timeMs": 17250,
+            "key": "8"
+          },
+          {
+            "timeMs": 17840,
+            "key": "square"
+          },
+          {
+            "timeMs": 18430,
+            "key": "right"
+          },
+          {
+            "timeMs": 20100,
+            "key": "enter"
+          },
+          {
+            "timeMs": 23050,
+            "key": "1"
+          },
+          {
+            "timeMs": 23710,
+            "key": "8"
+          },
+          {
+            "timeMs": 24370,
+            "key": "0"
+          },
+          {
+            "timeMs": 25030,
+            "key": "plus"
+          },
+          {
+            "timeMs": 25690,
+            "key": "trig"
+          },
+          {
+            "timeMs": 26350,
+            "key": "down"
+          },
+          {
+            "timeMs": 27010,
+            "key": "right"
+          },
+          {
+            "timeMs": 27670,
+            "key": "right"
+          },
+          {
+            "timeMs": 28330,
+            "key": "enter"
+          },
+          {
+            "timeMs": 28990,
+            "key": "6"
+          },
+          {
+            "timeMs": 29650,
+            "key": "div"
+          },
+          {
+            "timeMs": 30310,
+            "key": "8"
+          },
+          {
+            "timeMs": 30970,
+            "key": "right"
+          },
+          {
+            "timeMs": 32350,
+            "key": "enter"
+          },
+          {
+            "timeMs": 35000,
+            "key": "trig"
+          },
+          {
+            "timeMs": 35680,
+            "key": "down"
+          },
+          {
+            "timeMs": 36360,
+            "key": "right"
+          },
+          {
+            "timeMs": 37040,
+            "key": "right"
+          },
+          {
+            "timeMs": 37720,
+            "key": "enter"
+          },
+          {
+            "timeMs": 38400,
+            "key": "5"
+          },
+          {
+            "timeMs": 39080,
+            "key": "div"
+          },
+          {
+            "timeMs": 39760,
+            "key": "1"
+          },
+          {
+            "timeMs": 40440,
+            "key": "0"
+          },
+          {
+            "timeMs": 41120,
+            "key": "right"
+          },
+          {
+            "timeMs": 43000,
+            "key": "enter"
+          },
+          {
+            "timeMs": 46100,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 46730,
+            "key": "square"
+          },
+          {
+            "timeMs": 47360,
+            "key": "6"
+          },
+          {
+            "timeMs": 47990,
+            "key": "square"
+          },
+          {
+            "timeMs": 48620,
+            "key": "plus"
+          },
+          {
+            "timeMs": 49250,
+            "key": "8"
+          },
+          {
+            "timeMs": 49880,
+            "key": "square"
+          },
+          {
+            "timeMs": 50510,
+            "key": "plus"
+          },
+          {
+            "timeMs": 51140,
+            "key": "5"
+          },
+          {
+            "timeMs": 51770,
+            "key": "square"
+          },
+          {
+            "timeMs": 52400,
+            "key": "right"
+          },
+          {
+            "timeMs": 53680,
+            "key": "ctrl"
+          },
+          {
+            "timeMs": 54300,
+            "key": "enter"
+          }
+        ]
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null,
+  "integrationStatus": "requires-player-hook"
+}

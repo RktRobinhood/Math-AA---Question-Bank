@@ -1,0 +1,11 @@
+A culture is ready at twelve units. How soon?
+Enter the growth model in f one.
+In f two, enter twelve for the horizontal target.
+Press Menu, six: Analyze Graph, four: Intersection.
+Put the lower bound at day two. Press Enter.
+Put the upper bound at day three. Press Enter.
+The x-coordinate is the continuous time: about two point one six days.
+If you can check only once per whole day, don't round to the nearest day.
+At day two, the model is only eleven point two five units.
+At day three, it is sixteen point eight seven five units. That meets the target.
+The model rises, so day three is the first eligible whole day.
