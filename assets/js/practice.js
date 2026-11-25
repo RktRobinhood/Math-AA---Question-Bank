@@ -532,7 +532,8 @@
     if (done) {
       out.push(h('div', { class: 'working' }, h('span', { class: 'cap', text: 'Worked solution' }),
         h('ol', {}, ...p.working.map(w => h('li', {}, mx(w)))),
-        a.kind === 'self' && a.display ? h('p', {}, h('b', { text: 'Answer: ' }), mx(a.display)) : null));
+        a.kind === 'self' && a.display ? h('p', {}, h('b', { text: 'Answer: ' }), mx(a.display)) : null,
+        a.kind === 'self' && a.solutionGraph ? svg(a.solutionGraph, { width: 320, height: 240 }) : null));
       if (a.kind === 'self') {
         out.push(res ? h('div', { class: `verdict ${res.correct ? 'ok' : 'no'}`, text: res.correct ? 'Marked as right.' : 'Marked as not yet.' })
           : h('div', { class: 'next-row' }, h('span', { class: 'muted', style: 'align-self:center', text: 'Compare your work with the solution:' }),
@@ -758,7 +759,8 @@
           const ans = a.kind === 'choice' ? `${'ABCDEF'[a.correct]}: ${typeof a.options[a.correct] === 'string' ? a.options[a.correct] : a.options[a.correct].text}` : a.kind === 'graph' ? `Graph ${'ABCDEF'[a.correct]}` : a.display;
           return h('div', { style: 'margin:4px 0 8px' },
             h('div', {}, q.parts.length > 1 ? h('b', { text: `(${p.label}) ` }) : null, h('b', { text: 'Answer: ' }), mx(ans), `  [${p.marks}]`),
-            h('ol', { style: 'margin:4px 0 0;padding-left:22px' }, ...p.working.map(w => h('li', {}, mx(w)))));
+            h('ol', { style: 'margin:4px 0 0;padding-left:22px' }, ...p.working.map(w => h('li', {}, mx(w)))),
+            a.kind === 'self' && a.solutionGraph ? svg(a.solutionGraph, { width: 280, height: 210 }) : null);
         }));
     };
     const reals = sheet.items.filter(it => it.kind === 'real').length;

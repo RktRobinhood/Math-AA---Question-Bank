@@ -565,19 +565,20 @@
       do { a = rng.pick([0.5, 0.25, 0.4, 0.2]); c = rng.int(2, 5); k = rng.nonzero(-3, 3); xm = Math.sqrt(c / (3 * a)); top = k + 2 * c * xm / 3; bot = k - 2 * c * xm / 3;
         lvl = rng.bool() ? rng.int(Math.ceil(bot + 0.6), Math.floor(top - 0.6)) : rng.pick([Math.ceil(top + 0.7), Math.floor(bot - 0.7)]); n = lvl > top || lvl < bot ? 1 : 3; }
       while (top > 7.2 || bot < -7.2 || xm > 3.2 || Math.abs(lvl) > 7.5 || lvl === k || Math.ceil(bot + 0.6) > Math.floor(top - 0.6) || Math.abs(xm - Math.round(xm * 10) / 10) < 1e-3);
-      const win = (fn) => ({ x: [-5, 5], y: [-8, 8], xStep: 1, yStep: 2, functions: [{ fn }], alt: "A curve on a grid" });
-      const cub = (aa, cc, kk) => ({ type: "poly", coeffs: [kk, -cc, 0, aa] });
-      const right = win(cub(a, c, k));
-      const cands = [{ graph: win(cub(-a, -c, k)), why: "Check a point: for a large positive $x$ the value of the function must be positive." }, { graph: win(cub(a, c, -k)), why: "The curve must cross the $y$-axis at the constant term." },
-        { graph: win({ type: "poly", coeffs: [k, -c, a] }), why: "This is a parabola. A cubic has two ends going in opposite directions." }, { graph: win(cub(a, -c, k)), why: "This curve has no turning points. The function has a local maximum and a local minimum." },
-        { graph: win(cub(-a, -c, -k)), why: "Check the $y$-intercept and the direction of the curve for large $x$." }, { graph: win(cub(a, c, k + (k > 0 ? -4 : 4))), why: "The curve must cross the $y$-axis at the constant term." }];
-      const picked = E.graph.pickDistinct(right, cands.map((o) => o.graph), 3), wrongs = cands.filter((o) => picked.includes(o.graph));
+      const solutionGraph = {
+        x: [-5, 5], y: [-8, 8], xStep: 1, yStep: 2,
+        functions: [{ fn: { type: "poly", coeffs: [k, -c, 0, a] } }],
+        alt: "Model sketch of the cubic in the suggested viewing window"
+      };
       const model = `${expr([[a, "x^{3}"], [-c, "x"], [k, ""]])}`;
       return { params: { a, c, k, lvl }, stem: `Consider the function $f(x) = ${model}$ for $-5 \\le x \\le 5$.`, parts: [
-        P("Which graph shows $y = f(x)$?", 2, ans.graph(rng, { graph: right, value: "f" }, wrongs.map((o, i2) => ({ graph: o.graph, value: "w" + i2, why: o.why }))), [
-          `Draw the graph on the GDC with a window such as $-5 \\le x \\le 5$, $-8 \\le y \\le 8$.`, `The curve rises to a local maximum on the left of the $y$-axis, crosses the $y$-axis at $${k}$, falls to a local minimum and then rises.`]),
+        // Keep the historical saved-request format key. The visible response is a paper sketch.
+        P("Sketch the graph of $y = f(x)$ on paper. Label the axes.", 2,
+          Object.assign(ans.self("One mark for labelled axes and the correct overall shape; one for the local maximum left of the $y$-axis and local minimum right of it."), { solutionGraph }),
+          [`Use the GDC with a window such as $-5 \\le x \\le 5$, $-8 \\le y \\le 8$. Label the horizontal axis $x$ and the vertical axis $y$.`,
+           `The curve rises to a maximum near $${point(sf(-xm), sf(top))}$, falls through $${point(0, k)}$ to a minimum near $${point(sf(xm), sf(bot))}$, then rises again.`]),
         P("Write down the $y$-intercept of the graph.", 1, ans.int(k), [`$f(0) = ${k}$`]),
-        P("Find the $x$-coordinate of the local maximum point.", 1, ans.sf(-xm), [`The GDC gives the local maximum point $${point(sf(-xm), sf(top))}$, so $x = ${sf(-xm)}$.`]),
+        P("Find the $x$-coordinate of the local maximum point, to three significant figures.", 1, ans.sf(-xm), [`The GDC gives the local maximum point $${point(sf(-xm), sf(top))}$, so $x = ${sf(-xm)}$.`]),
         P(`Write down the number of solutions of the equation $f(x) = ${lvl}$.`, 1, ans.int(n), [
           `The local maximum value is $${sf(top)}$ and the local minimum value is $${sf(bot)}$.`, n === 3 ? `$${lvl}$ lies between them, so the line $y = ${lvl}$ meets the curve $3$ times.` : `$${lvl}$ does not lie between them, so the line $y = ${lvl}$ meets the curve only once: $1$ solution.`])] };
     } });
@@ -630,16 +631,19 @@
 
   reg({ type: "fn-ai-gdc-intersection", unknown: "time-above-a-level", representation: "words", format: "value", levels: [4],
     syllabus: ["2.4"], skills: ["SL2.4.intersection", "SL2.4.interval-from-graph"], title: "For how long is a model above a given level?",
-    build({ rng }) {
+    build({ rng, course }) {
       let a, d, L, t1, t2, c;
       do { c = rng.pick([{ what: "The depth of water at the entrance to a harbour, $h$ metres,", t: "hours after midnight", need: "A ship can enter the harbour only when the depth is at least", u: "m", ask: "the ship can enter the harbour" },
         { what: "The height of a buoy above the sea bed, $h$ metres,", t: "hours after midnight", need: "A warning light on the buoy is visible from the shore when the height is at least", u: "m", ask: "the warning light is visible" }]);
         a = rng.int(12, 36) / 10; d = rng.int(45, 90) / 10; L = Math.round((d + a * rng.pick([0.2, 0.35, 0.5, 0.65, 0.8])) * 10) / 10; t1 = Math.asin((L - d) / a) * 6 / Math.PI; t2 = 6 - t1; }
       while (L <= d || Math.abs(t1 * 10 - Math.round(t1 * 10)) < 1e-3);
-      return { params: { a, d, L }, stem: `${c.what} $t$ ${c.t} is modelled by $h(t) = ${num(a)}\\sin(30t^\\circ) + ${num(d)}$, for $0 \\le t \\le 12$. ${c.need} $${num(L)}\\text{ ${c.u}}$.`, parts: [
-        P(`Find the first value of $t$ at which $h(t) = ${num(L)}$.`, 2, ans.sf(t1), [`Draw $y = h(t)$ and $y = ${num(L)}$ on the GDC (degree mode) for $0 \\le t \\le 12$ and find where they meet.`, `The first intersection is at $t = ${sf(t1)}$.`]),
+      const aa = course === "aa-sl" || course === "aa-hl";
+      const angle = aa ? "\\left(\\dfrac{\\pi t}{6}\\right)" : "\\left(30t^\\circ\\right)";
+      const mode = aa ? "radian" : "degree";
+      return { params: { a, d, L }, stem: `${c.what} is modelled by $h(t) = ${num(a)}\\sin${angle} + ${num(d)}$, for $0 \\le t \\le 12$, where $t$ is the number of ${c.t}. ${c.need} $${num(L)}\\text{ ${c.u}}$.`, parts: [
+        P(`Find the first value of $t$ at which $h(t) = ${num(L)}$.`, 2, ans.sf(t1), [`Draw $y = h(t)$ and $y = ${num(L)}$ on the GDC (${mode} mode) for $0 \\le t \\le 12$ and find where they meet.`, `The first intersection is at $t = ${sf(t1)}$.`]),
         P(`Find the second value of $t$ at which $h(t) = ${num(L)}$.`, 2, ans.sf(t2), [`The second intersection is at $t = ${sf(t2)}$.`]),
-        P(`Find the length of time, in hours, for which ${c.ask} during these $12$ hours.`, 1, ans.sf(t2 - t1), [`The graph is above the line between the two intersections: $${dp(t2, 3)} - ${dp(t1, 3)} = ${sf(t2 - t1)}$ hours.`])] };
+        P(`Find the length of time, in hours, for which ${c.ask} during these $12$ hours.`, 1, ans.sf(t2 - t1), [`Between the intersections, $h(t)$ is at least the required height. Subtract the unrounded times: $t_2-t_1\\approx ${sf(t2 - t1)}$ hours.`])] };
     } });
 
   // =====================================================================================

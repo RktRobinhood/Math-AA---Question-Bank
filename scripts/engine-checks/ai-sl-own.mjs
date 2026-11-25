@@ -308,12 +308,15 @@ export default {
   },
   "fn-ai-gdc-sketch/sketch-and-describe-cubic/graph": (q, T) => {
     const { a, c, k, lvl } = q.params, f = (x) => a * x ** 3 - c * x + k;
-    const pick = T.optionWhere(q, "a", (v, i, opt) => [-4, -2.5, -1, 0, 0.7, 2, 3.5].every((x) => Math.abs(T.evalGraph(opt.functions[0].fn, x) - f(x)) < 1e-9));
+    T.require(q.parts[0].answer.kind === "self" && !q.graph && !q.parts[0].answer.options, "produce the paper sketch, do not recognise an exposed answer");
+    const model = q.parts[0].answer.solutionGraph;
+    T.require(model && [-5,-4,-2.5,-1,0,0.7,2,3.5,5].every((x) => Math.abs(T.evalGraph(model.functions[0].fn, x) - f(x)) < 1e-9), "worked graph matches the cubic across the domain");
+    T.require(model?.x[0] === -5 && model?.x[1] === 5, "worked graph uses the stated domain");
     const st = T.roots((x) => T.deriv(f, x), -5, 5, 10000);
     T.require(st.length === 2 && T.deriv2(f, st[0]) < 0, "a local maximum, then a local minimum");
     T.require(Math.abs(f(st[0])) < 7.5 && Math.abs(f(st[1])) < 7.5, "the turning points are inside the window");
     T.require(Math.abs(f(st[0]) - lvl) > 0.5 && Math.abs(f(st[1]) - lvl) > 0.5, "the level is not close to a turning value");
-    return { a: pick, b: f(0), c: ap(T, st[0], 1e-5), d: T.roots((x) => f(x) - lvl, -40, 40, 80000).length };
+    return { b: f(0), c: ap(T, st[0], 1e-5), d: T.roots((x) => f(x) - lvl, -5, 5, 10000).length };
   },
   "fn-ai-gdc-key-features/intercept-and-asymptote/equation": (q, T) => {
     const { a, b, c } = q.params, f = (x) => a * b ** x + c;
@@ -333,6 +336,9 @@ export default {
   },
   "fn-ai-gdc-intersection/time-above-a-level/words": (q, T) => {
     const { a, d, L } = q.params, h = (t) => a * Math.sin(T.rad(30 * t)) + d, r = T.roots((t) => h(t) - L, 0, 12, 24000);
+    const aa = q.course === "aa-sl" || q.course === "aa-hl";
+    T.require(q.stem.includes(aa ? "\\pi t" : "30t^\\circ"), "course-appropriate angle notation");
+    T.require(q.parts[0].working[0].includes(aa ? "radian mode" : "degree mode"), "matching calculator mode");
     T.require(r.length === 2 && h((r[0] + r[1]) / 2) > L, "above the level between two crossings");
     return { a: ap(T, r[0], 1e-5), b: ap(T, r[1], 1e-5), c: ap(T, r[1] - r[0], 1e-5) };
   },
