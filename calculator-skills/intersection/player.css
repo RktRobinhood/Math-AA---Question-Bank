@@ -1,0 +1,111 @@
+/* CT11 only. The two framings share the same live TI LCD and replay. */
+.ct11-shared[data-mode=watch]{--tape-bg:#182621;--tape-line:#425c4d;--tape-ink:#f0f7f2;--tape-soft:#c1d3c5;--tape-on:#bfead0;background:var(--tape-bg);color:var(--tape-ink);color-scheme:dark;isolation:isolate}
+.ct11-shared[data-mode=watch] #workspace{position:relative;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;justify-content:center;gap:clamp(10px,3vw,30px);padding:39px clamp(9px,2vw,24px) 8px;min-width:0;cursor:pointer}
+.ct11-shared[data-mode=watch] #handheld-host{--handheld-width:var(--ct11-handset-fit,200px);min-width:0;align-self:center}
+.ct11-shared[data-mode=watch] #watch-side{color:var(--tape-ink);background:transparent;align-self:center}
+.ct11-shared[data-mode=watch] #watch-side :is(.tag,.ct11-takeaway){color:var(--tape-on)}
+.ct11-shared[data-mode=watch] #watch-side .steps button{background:transparent;color:var(--tape-soft);border-color:transparent}
+.ct11-shared[data-mode=watch] #watch-side .steps button:is(:hover,[aria-current=true]){background:#30463a;color:#fff}
+.ct11-shared[data-mode=watch] .sample-f1{color:#a0cdff}.ct11-shared[data-mode=watch] .sample-f2{color:#ffc0b8}
+.ct11-shared #play-feedback{position:absolute;z-index:8;pointer-events:none;left:50%;top:50%;translate:-50% -50%;width:62px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d1615e9;color:#fff;box-shadow:0 1px 10px #0009}
+.ct11-shared #play-feedback svg{width:36px;height:36px;fill:currentColor}
+.ct11-shared #play-feedback[data-action=play] .pause-glyph,.ct11-shared #play-feedback[data-action=pause] .play-glyph{display:none}
+.ct11-shared #key-strip{position:absolute;top:6px;left:9px;right:9px;min-height:23px;display:flex;align-items:center;gap:6px;white-space:nowrap;font:600 .72rem/1.2 var(--mono);color:var(--tape-soft);pointer-events:none}
+.ct11-shared #active-key{display:inline-block;min-width:2rem;text-align:center;font:700 .77rem/1.15 var(--mono);border:1px solid #7b9888;border-radius:4px;padding:3px 6px;background:#283e33;color:#fff}
+.ct11-shared[data-mode=watch] #caption-band{border-top:1px solid var(--tape-line);background:#090f0d;color:var(--tape-ink)}
+.ct11-shared[data-mode=watch] #caption{margin:0;padding:6px 9px;min-height:0;text-align:center;max-width:none;color:inherit;font:650 clamp(.76rem,2.8vw,.93rem)/1.25 system-ui;overflow-wrap:anywhere}
+.ct11-shared[data-mode=watch] #watch-player{position:static;display:grid;grid-template-columns:auto auto minmax(30px,1fr) repeat(5,auto);align-items:center;gap:4px;padding:4px 8px;border:0;border-top:1px solid var(--tape-line);background:var(--tape-bg);color:var(--tape-ink)}
+.ct11-shared #watch-player :is(button,select){margin:0;min-width:36px;min-height:40px;height:40px;padding:0 5px;border:1px solid transparent;border-radius:5px;background:transparent;color:inherit;font:700 .8rem/1 system-ui;white-space:nowrap}
+.ct11-shared #watch-player select{border-color:var(--tape-line);padding:0 2px;max-width:76px;color-scheme:dark}
+.ct11-shared #watch-player select option{background:var(--tape-bg);color:var(--tape-ink)}
+.ct11-shared #watch-player .player-icon{display:grid;place-items:center;padding:0;width:39px}
+.ct11-shared #watch-player .player-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ct11-shared #watch-player #play svg{width:24px;height:24px;fill:currentColor;stroke:none}
+.ct11-shared #watch-player :is(button:hover,button[aria-pressed=true]){background:#31463b;color:#fff}
+.ct11-shared #watch-player :is(button:focus-visible,select:focus-visible,input:focus-visible){outline-color:#bde5ff;outline-offset:-2px}
+.ct11-shared #view-pick{display:flex;align-items:center;border:1px solid #647c6d;border-radius:6px}
+.ct11-shared #view-pick .player-icon{min-width:33px;width:33px}
+.ct11-shared #watch-player .timeline,.ct11-shared #seek{width:100%;margin:0;min-width:0}
+.ct11-shared #seek{height:23px;accent-color:var(--tape-on);cursor:pointer}
+.ct11-shared #clock{color:var(--tape-soft);font:600 .73rem/1.2 var(--mono);white-space:nowrap}
+.ct11-shared #media-status{grid-column:1/-1;color:var(--tape-soft);font-size:.73rem}
+.ct11-shared[data-mode=watch].ct11-screen-view #handheld-host{width:min(100%,var(--ct11-lcd-fit,360px));justify-self:center}
+.ct11-shared[data-mode=watch].ct11-screen-view .hh-body{width:100%;aspect-ratio:4/3;overflow:hidden;border:4px solid #486054;border-radius:8px;box-shadow:none;margin:auto}
+.ct11-shared[data-mode=watch].ct11-screen-view .hh-body>*:not(.hh-lcd){display:none!important}
+.ct11-shared[data-mode=watch].ct11-screen-view .hh-lcd{left:0;right:0;top:0;bottom:0;width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
+.ct11-shared:is(:fullscreen,.watch-fullscreen-fallback){height:100dvh;width:100%;max-height:none;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;align-items:stretch;overflow:auto;overscroll-behavior:contain}
+.ct11-shared.watch-fullscreen-fallback{position:fixed;inset:0;z-index:80}
+body.watch-fullscreen-open{overflow:hidden}
+.ct11-shared:is(:fullscreen,.watch-fullscreen-fallback) #workspace{width:100%;max-width:1100px;flex:1;min-height:0;margin:0 auto}
+.ct11-shared:is(:fullscreen,.watch-fullscreen-fallback) #watch-player{flex:none;position:sticky;bottom:0;z-index:9;padding-bottom:max(4px,env(safe-area-inset-bottom))}
+@media(max-width:700px){
+ .ct11-shared[data-mode=watch] #workspace{grid-template-columns:minmax(0,1fr);padding:34px 6px 8px;gap:0}
+ .ct11-shared[data-mode=watch] #workspace .ct11-stage-side{display:none}
+ .ct11-shared[data-mode=watch].ct11-screen-view #handheld-host{max-width:calc(100vw - 48px)}
+ .ct11-shared[data-mode=watch] #watch-player{grid-template-columns:auto auto auto 1fr auto auto;gap:0 2px;padding:2px 4px}
+ .ct11-shared #watch-player .timeline{grid-row:1;grid-column:1/-2}
+ .ct11-shared #clock{grid-row:1;grid-column:-2;justify-self:end;font-size:.68rem}
+ .ct11-shared #watch-player :is(#play,#view-pick,#cc,.ct11-rate,#sound,#fullscreen){grid-row:2}
+ .ct11-shared #watch-player #play{grid-column:1}
+ .ct11-shared #watch-player #view-pick{grid-column:2}
+ .ct11-shared #watch-player #cc{grid-column:3}
+ .ct11-shared #watch-player .ct11-rate{grid-column:4}
+ .ct11-shared #watch-player #sound{grid-column:5}
+ .ct11-shared #watch-player #fullscreen{grid-column:6}
+ .ct11-shared #watch-player :is(button,select){height:37px;min-height:37px;min-width:32px}
+ .ct11-shared #watch-player .player-icon{width:33px}
+ .ct11-shared #view-pick .player-icon{min-width:28px;width:28px}
+}
+@media(max-width:700px) and (max-height:680px){body.calculator-bank-lesson main>.header .subtitle{display:none}}
+@media(min-width:701px) and (max-height:620px){body.calculator-bank-lesson main>.header .subtitle{display:none}.ct11-shared[data-mode=watch] #workspace{padding-top:33px}}
+@media(prefers-reduced-motion:no-preference){.ct11-shared #play-feedback[data-initial=false]{animation:ct11-feedback-in .15s ease-out}@keyframes ct11-feedback-in{from{opacity:.45;scale:.88}to{opacity:1;scale:1}}}
+.ct11-shared #watch-player #play::before{content:none}
+.ct11-shared #watch-player #play-rate{min-width:57px}
+@media(max-width:380px) and (max-height:659px){
+ body.calculator-bank-lesson main{padding-top:7px}
+ body.calculator-bank-lesson main>.header{margin-bottom:4px}
+ body.calculator-bank-lesson main>.header .tag{font-size:.66rem;margin-bottom:3px}
+ body.calculator-bank-lesson main>.header h1{font-size:1.26rem}
+ body.calculator-bank-lesson main>.tabs{margin-bottom:5px}
+ body.calculator-bank-lesson main>.tabs button{min-height:37px}
+ .ct11-shared[data-mode=watch] #workspace{padding-top:30px;padding-bottom:5px}
+}
+.ct11-shared[data-mode=watch] #watch-side{padding-block:0}
+.ct11-shared[data-mode=watch] #watch-side .steps button{min-height:34px}
+@media(min-width:701px) and (max-height:620px){
+ .ct11-shared[data-mode=watch] #watch-side :is(.tag,.steps){display:none}
+ .ct11-shared[data-mode=watch] #watch-side h2{font-size:1.15rem}
+ .ct11-shared[data-mode=watch] #watch-side .ct11-takeaway{font-size:.73rem}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]){padding-top:11px}
+}
+@media(min-width:701px) and (max-height:750px){
+ .ct11-shared:is(:fullscreen,.watch-fullscreen-fallback) #watch-side :is(.tag,.steps){display:none}
+}
+@media(min-width:850px) and (max-height:620px){
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]){position:relative}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .header{padding-inline-end:205px;margin-bottom:8px}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .tabs{position:absolute;top:17px;right:clamp(17px,4vw,45px);margin:0;border:0}
+}
+
+.ct11-shared[data-mode=watch]:not(:fullscreen,.watch-fullscreen-fallback) #watch-player { position:static; }
+.ct11-shared[data-mode=watch] #watch-side { min-width:0; }
+.ct11-shared[data-mode=watch] #watch-side .ct11-takeaway { margin:0;color:var(--tape-on);font-size:.86rem; }
+.ct11-shared[data-mode=watch] #watch-side .tag { margin-block-end:4px; }
+.ct11-shared[data-mode=watch] #watch-side>p:not(.tag) { margin-bottom:4px; }
+.ct11-shared[data-mode=watch] #watch-side .steps { margin-top:5px; }
+.ct11-shared[data-mode=watch] #caption { border:0; }
+.ct11-shared[data-mode=watch] #sound[aria-pressed=true]::after {
+  content:"";position:absolute;width:20px;height:1.5px;transform:rotate(-43deg);background:#ffd1c5;pointer-events:none;
+}
+.ct11-shared[data-mode=watch] #key-strip { padding-inline-start:2px; }
+.ct11-shared #watch-player #sound { position:relative; }
+
+/* Keep a viewable full handset as well as captions on the shortest phone. */
+@media(max-width:420px) and (max-height:660px){
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]){position:relative}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .header{padding-top:8px;margin-bottom:7px!important}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .header .tag{min-height:24px;margin-bottom:2px;padding-top:4px}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .tabs{position:absolute;top:9px;right:clamp(10px,4vw,17px);margin:0;border:0}
+ body.calculator-bank-lesson main:has(.ct11-shared[data-mode=watch]) > .tabs button{min-width:48px;min-height:31px;font-size:.79rem;padding:2px 7px}
+}
+.ct11-shared[data-mode=watch] #watch-side{max-height:var(--ct11-scene-room,none);overflow:auto;scrollbar-width:thin}

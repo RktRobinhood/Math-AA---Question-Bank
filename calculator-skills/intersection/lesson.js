@@ -16,7 +16,6 @@
    linked=pair;
   }catch{unsafe=true;}
  }
- const fixed=Boolean(linked)||params.get("case")==="intersection-demo"||params.get("example")==="demo";
  const challenge=linked||defaultTry,points=M.crossings(challenge).points;
  const right=Boolean(linked)&&params.get("target")==="right",target=right?points.at(-1):points[0];
  const where=points.length>1?(right?"larger":"smaller")+" x-coordinate":"unique crossing";
@@ -24,9 +23,37 @@
  const pairText="f₁(x) = "+M.displayExpr(challenge[0].raw)+"; f₂(x) = "+M.displayExpr(challenge[1].raw)+".";
  const prompt=points.length>1?"Find both coordinates of the intersection with the "+where+".":"Find both coordinates of the intersection.";
  const sameCurve=(a,b)=>["a","b","c"].every(k=>a[k]===b[k]);
- let mode="watch",state=initial(challenge.map(q=>q.raw)),edited=false,forked=false,focused=false,focusConsidered=false,started=false,fresh=true;
+ let mode="watch",state=initial(challenge.map(q=>q.raw)),edited=false,fresh=true;
  let t=0,duration=T.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="";
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>press(key)});
+ const surface=$("workspace"),overlay=$("play-feedback"),cc=$("cc"),speedSelect=$("play-rate");
+ const framingKey="qb-calculator-watch-frame";
+ const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}};
+ let framing=readFrame(),speed=Number(speedSelect.value),showCaptions=false,initiated=false,pendingSeek=null;
+ audio.playbackRate=speed;audio.preservesPitch=true;
+ const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
+ function paintFraming(){
+  stage.classList.toggle("ct11-screen-view",mode==="watch"&&framing==="screen");
+  $("view-full").setAttribute("aria-pressed",String(framing==="full"));
+  $("view-screen").setAttribute("aria-pressed",String(framing==="screen"));
+  fitBankWatch();
+ }
+ function chooseFrame(value){
+  framing=value;try{localStorage.setItem(framingKey,value);}catch{}
+  paintFraming();
+ }
+ $("view-full").addEventListener("click",()=>chooseFrame("full"));
+ $("view-screen").addEventListener("click",()=>chooseFrame("screen"));
+ window.addEventListener("storage",e=>{if(e.key===null||e.key===framingKey){framing=readFrame();paintFraming();}});
+ function captions(value){
+  showCaptions=value;cc.setAttribute("aria-pressed",String(value));
+  cc.setAttribute("aria-label",value?"Hide captions":"Show captions");
+  $("caption-band").hidden=mode!=="watch"||!value;
+  fitBankWatch();
+ }
+ cc.addEventListener("click",()=>captions(!showCaptions));
+ $("transcript").textContent=T.captions.join(" ");
+ const readable={x:"x",square:"x²",enter:"Enter",tab:"Tab",plus:"+",menu:"Menu",right:"→"};
  const tabs=[$("watch-tab"),$("try-tab")],steps=$("steps"),hot=$("hotspots");
  const hints={entry:"Enter a function and press Enter to plot. The handheld Tab key switches lines.",plotted:"Two curves are needed. Press Menu when both are plotted.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 4: Intersection.",lower:"Place the lower bound just left of one crossing. Type an x-value or move the cursor.",upper:"Choose the upper bound just right of the same crossing.",result:"Read the x-coordinate and the common y-coordinate."};
  const syncFields=()=>fields.forEach((el,i)=>{el.value=state.raw[i]});
@@ -40,14 +67,14 @@
   $("lcd-text").textContent=[...graphs,hints[s.state],s.low!=null?"Lower: "+M.pretty(s.low):"",s.typed?"Typed bound: "+s.typed:"",s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Intersection "+fmtPair(s.mark):"",s.error||""].filter(Boolean).join(". ");
  }
  function snapshot(time){
-  const v={state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false}, key="";
-  let lit=key;
+  const v={state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false};
+  let lit="",last="";
   for(const e of T.keys){
    if(time<e.time)break;
-   Object.assign(v,e.delta);lit=time<e.time+.185?e.key:"";
+   Object.assign(v,e.delta);last=e.key;lit=time<e.time+.185?e.key:"";
   }
   const s={...initial([v.first,v.second]),...v,q:[v.firstPlot?watchPair[0]:null,v.secondPlot?watchPair[1]:null],windows:knownWindow};
-  return{s,key:lit};
+  return{s,key:lit,last};
  }
  T.titles.forEach((title,i)=>{
   const li=document.createElement("li"),b=document.createElement("button"),no=document.createElement("span");
@@ -57,72 +84,84 @@
  const sec=x=>Math.floor(x),clock=x=>Math.floor(x/60)+":"+String(sec(x)%60).padStart(2,"0");
  function renderWatch(){
   if(mode!=="watch")return;
-  const chapter=T.starts.findLastIndex(start=>t>=start), phrase=T.captionStarts.findLastIndex(start=>t>=start), {s,key}=snapshot(t);
+  const chapter=T.starts.findLastIndex(start=>t>=start),phrase=T.captionStarts.findLastIndex(start=>t>=start),{s,key,last}=snapshot(t);
   const keyStamp=[s.state,...s.raw,s.cursor,chapter,phrase].join("|");
-  seek.value=t;seek.setAttribute("aria-valuetext",clock(t)+" of "+clock(duration));$("clock").textContent=clock(t)+" / "+clock(duration);
+  const timeLabel=clock(t>=duration-.015?Math.round(duration):t)+" / "+clock(Math.round(duration));
+  seek.value=t;seek.setAttribute("aria-valuetext",timeLabel.replace("/","of"));$("clock").textContent=timeLabel;
   shell.setKeys(key?[key]:[]);
-  $("stage-play").hidden=started||t>0;
+  const keyLabel=readable[last]||last||"—";
+  if($("active-key").textContent!==keyLabel)$("active-key").textContent=keyLabel;
+  if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
   if(cache===keyStamp)return;cache=keyStamp;
   screen.draw(s);labelGraph(s);
   cap.textContent=T.captions[phrase];
-  const captionsGuide=phrase===3?"Two curves: the lower-bound prompt opens directly.":phrase===5?"Intersection: (3, 9).":phrase===6?"Same output: 3² = 2(3) + 3 = 9.":"";
-  $("readout").hidden=!captionsGuide;$("readout").textContent=captionsGuide;
+  const guide=phrase===0?"Enter f₁(x), press Enter, then Tab to open f₂(x).":phrase===3?"With these two curves, the lower-bound prompt opens directly.":phrase===5?"Intersection: (3, 9).":phrase===6?"Same output: 3² = 2(3) + 3 = 9.":"";
+  $("readout").hidden=!guide;$("readout").textContent=guide;
   [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
  }
- function go(v){
-  t=M.clamp(Number(v)||0,0,duration);origin=performance.now()-t*1000;
-  if(Number.isFinite(audio.duration))audio.currentTime=t;
-  renderWatch();if(!playing)labelPlay();
+ function setOrigin(){origin=performance.now()-t*1000/speed;}
+ function audioSeek(){
+  if(!useAudio)return;
+  if(Number.isFinite(audio.duration)){audio.currentTime=t;pendingSeek=null;}
+  else pendingSeek=t;
  }
- function labelPlay(){const label=playing?"Pause":t>=duration-.015?"Replay":"Play";play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(playing);}
- function pause(){playEpoch++;pending=false;if(playing&&useAudio)t=audio.currentTime;playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch();}
+ function go(v){
+  t=M.clamp(Number(v)||0,0,duration);setOrigin();audioSeek();renderWatch();if(!playing)labelPlay();
+ }
+ function labelPlay(){
+  const monitor=playing||pending,label=monitor?"Pause":t>=duration-.015?"Replay":"Play";
+  play.setAttribute("aria-label",label);play.title=label;play.dataset.playing=String(playing);
+  play.querySelector(".play-icon").hidden=monitor;play.querySelector(".pause-icon").hidden=!monitor;
+ }
+ function pause(){
+  playEpoch++;pending=false;if(playing&&useAudio&&Number.isFinite(audio.currentTime))t=audio.currentTime;
+  playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch();
+ }
  function finish(){pause();t=duration;labelPlay();renderWatch();}
  function tick(now){
   if(!playing||mode!=="watch")return;
-  t=useAudio?audio.currentTime:(now-origin)/1000;
-  if(t>=duration){finish();return}
+  t=useAudio?audio.currentTime:(now-origin)*speed/1000;
+  if(t>=duration-.002){finish();return;}
   renderWatch();raf=requestAnimationFrame(tick);
  }
  async function start(){
   if(mode!=="watch")return;
-  if(!focusConsidered){
-   focusConsidered=true;const h=window.visualViewport?.height||innerHeight;
-   const low=Math.max($("watch-player").getBoundingClientRect().bottom,...["enter","4","x","tab"].map(k=>shell.getKey(k).getBoundingClientRect().bottom));
-   if(!focused&&low>h+9)focus(true);
-  }
-  started=true;
-  if(!$("stage-play").hidden){if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});$("stage-play").hidden=true;}
+  initiated=true;overlay.dataset.initial="false";overlay.hidden=true;
   if(t>=duration-.015)go(0);
   const stamp=++playEpoch;
-  pending=true;origin=performance.now()-t*1000;
+  pending=true;setOrigin();labelPlay();
   if(useAudio){
-   try{audio.currentTime=t;await audio.play();}
+   try{audioSeek();await audio.play();}
    catch(error){if(stamp!==playEpoch)return;silentMedia();}
   }
-  if(stamp!==playEpoch||mode!=="watch")return;
-  pending=false;playing=true;labelPlay();raf=requestAnimationFrame(tick);
+  if(stamp!==playEpoch||mode!=="watch"){if(!playing&&!pending)audio.pause();return;}
+  if(!useAudio)setOrigin();
+  pending=false;playing=true;labelPlay();chrome.flash(true);raf=requestAnimationFrame(tick);
  }
- function toggle(){if(playing||pending)pause();else void start();}
+ function toggle(){if(playing||pending){pause();chrome.flash(false);}else void start();}
  function silentMedia(){
-  useAudio=false;origin=performance.now()-t*1000;
-  $("media-status").textContent="Captions only";$("sound-label").hidden=true;
+  useAudio=false;pendingSeek=null;setOrigin();
+  $("media-status").textContent="Narration unavailable. Captions only.";
+  $("media-status").hidden=mode!=="watch";$("sound").hidden=true;
+  captions(true);
  }
- // The packaging of this lesson includes a narration source only after independent transcript review.
  audio.addEventListener("loadedmetadata",()=>{
-  if(!Number.isFinite(audio.duration)||audio.duration<=0)return;
-  if(!useAudio)return;duration=audio.duration;seek.max=duration;$("media-status").textContent="Narration";$("sound-label").hidden=false;renderWatch();
+  if(!useAudio||!Number.isFinite(audio.duration)||audio.duration<=0)return;
+  duration=audio.duration;seek.max=duration;t=M.clamp(t,0,duration);
+  if(pendingSeek!==null)audioSeek();
+  renderWatch();labelPlay();
  });
  audio.addEventListener("error",silentMedia);audio.addEventListener("ended",finish);
- $("sound").addEventListener("change",()=>{audio.muted=!$("sound").checked;});
- play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);$("back").addEventListener("click",()=>go(t-10));$("next").addEventListener("click",()=>go(t+10));
- $("replay").addEventListener("click",()=>{pause();go(0);void start();});seek.addEventListener("input",()=>go(seek.value));
- function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct11-focused",focused);document.body.classList.toggle("ct11-focus-open",focused);
-  const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
-  b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"Focus";
-  if(focused)stage.scrollTop=0;
- }
- $("focus-view").addEventListener("click",()=>focus(!focused));
+ audio.addEventListener("pause",()=>{if(useAudio&&playing&&audio.paused&&!audio.ended)pause();});
+ $("sound").addEventListener("click",()=>{
+  audio.muted=!audio.muted;const label=audio.muted?"Unmute narration":"Mute narration";
+  $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",label);$("sound").title=label;
+ });
+ speedSelect.addEventListener("change",()=>{
+  if(playing&&!useAudio)t=M.clamp((performance.now()-origin)*speed/1000,0,duration);
+  speed=Number(speedSelect.value);audio.playbackRate=speed;setOrigin();
+ });
+ play.addEventListener("click",toggle);seek.addEventListener("input",()=>go(seek.value));
  function jumpMenu(panel,index,action){
   const b=document.createElement("button");
   b.type="button";b.setAttribute("aria-label",panel.rows[index]);b.style.left=panel.x/3.2+"%";
@@ -145,7 +184,7 @@
   const inExercise=isExercise();
   $("exercise-active").hidden=!inExercise;
   $("exercise-inactive").hidden=inExercise;
-  $("keypad-problem").textContent=inExercise?prompt:state.fromWatch?"You took over the Watch example.":"Explore intersections for your own functions.";
+  $("keypad-problem").textContent=inExercise?prompt:"Explore intersections for your own functions.";
   const b=state.state==="lower"||state.state==="upper";lcd.classList.toggle("pick",b);
   $("bound-form").hidden=!b;$("retry-bounds").hidden=state.state!=="result";
   $("bound-label").textContent=state.state==="lower"?"Lower bound x":"Upper bound x";
@@ -241,35 +280,26 @@
   if(mode!=="try"||!lcd.classList.contains("pick"))return;
   const x=pointer(e);if(x!==null)confirm(x);
  });
- function modeTo(next,steal=false){
-  if(next==="try"&&mode==="watch"){
-   pause();if(focused)focus(false);
-   if(steal&&!fixed&&!edited&&!forked){state={...snapshot(t).s,fromWatch:true};bound.value="";fresh=false;forked=true;}
-   syncFields();
-  }
+ function modeTo(next){
+  if(next==="try"&&mode==="watch"){pause();chrome.clear();void chrome.exit();syncFields();}
   mode=next;stage.dataset.mode=mode;cache="";
   const watch=mode==="watch";
   tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
-  for(const n of ["watch","watch-side","watch-player","watch-message"])$(n).hidden=!watch;
+  for(const n of ["watch","watch-side","watch-player","key-strip"])$(n).hidden=!watch;
   for(const n of ["try","try-side","try-player"])$(n).hidden=watch;
-  shell.setKeys([]);shell.setInteractive(!watch);
-  if(watch){hot.replaceChildren();lcd.classList.remove("pick");renderWatch();}
-  else{$("stage-play").hidden=true;renderTry();}
+  shell.setKeys([]);shell.setInteractive(!watch);paintFraming();captions(showCaptions);
+  $("media-status").hidden=!watch||useAudio;
+  if(watch){hot.replaceChildren();lcd.classList.remove("pick");renderWatch();labelPlay();}
+  else {overlay.hidden=true;renderTry();}
  }
  tabs.forEach((b,i)=>{
   b.addEventListener("click",()=>{modeTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
   b.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const next=e.key==="Home"?0:e.key==="End"?1:1-i;modeTo(next?"try":"watch");tabs[next].focus();});
  });
- $("take-over").addEventListener("click",()=>{modeTo("try",true);stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
  document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
-  if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
-  if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
-   const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(t+(k==="j"?-10:10));}
-   return;
-  }
-  if(mode!=="try"||!stage.contains(e.target)&&e.target!==document.body||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
+  if(mode!=="try"||e.defaultPrevented||e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
+  if((!stage.contains(e.target)&&e.target!==document.body)||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
   const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
   if(k){e.preventDefault();press(k);}
@@ -288,17 +318,25 @@
   feedback.textContent=yes?(atThree.every(Boolean)?"Correct. Both functions have that y-value at your x.":"Correct. Round to three significant figures in your written answer if requested."):hits[0]?"The x-coordinate is right. Check the common y-value.":"Check that your bounds isolated the requested crossing.";
  });
  modeTo(params.get("mode")==="try"?"try":"watch");
+ if(audio.error)silentMedia();
 
-// Reserve the bank's fixed bottom tabs in in-page Watch. The existing Focus view owns the viewport.
-function fitBankWatch(){
- if(!matchMedia("(max-width:700px)").matches||stage.dataset.mode!=="watch"||focused)return;
- const nav=document.querySelector(".tabbar").getBoundingClientRect().height;
- const box=stage.getBoundingClientRect(),shellHeight=shell.body.getBoundingClientRect().height;
- const room=innerHeight-nav-box.top-window.scrollY-(box.height-shellHeight)-8;
- stage.style.setProperty("--bank-watch-fit",Math.floor(Math.max(145,Math.min(275,room*558/1168)))+"px");
-}
-const bankWatchSizing=new ResizeObserver(fitBankWatch);
-bankWatchSizing.observe(stage);
-window.addEventListener("resize",fitBankWatch);
-fitBankWatch();
+ // Fit both live framings to the same stage and reserve the native phone/tablet tabs.
+ function fitBankWatch(){
+  if(mode!=="watch"||!shell.body.offsetWidth)return;
+  const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
+  const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
+  const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
+  const pads=getComputedStyle(surface);
+  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
+  stage.style.setProperty("--ct11-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?370:296,room*558/1168)))+"px");
+  stage.style.setProperty("--ct11-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,room*4/3)))+"px");
+  stage.style.setProperty("--ct11-scene-room",Math.floor(Math.max(140,room))+"px");
+ }
+ const bankWatchSizing=new ResizeObserver(fitBankWatch);
+ [$("watch-player"),$("caption-band"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+ window.addEventListener("resize",fitBankWatch);
+ window.visualViewport?.addEventListener("resize",fitBankWatch);
+ document.addEventListener("fullscreenchange",fitBankWatch);
+ fitBankWatch();
 })();

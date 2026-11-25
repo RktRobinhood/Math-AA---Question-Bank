@@ -54,7 +54,6 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.
 .ct11-shared #try-player{padding:8px 14px;border-bottom:1px solid var(--line)}
 .ct11-stage-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.89fr);align-items:start;gap:clamp(14px,3vw,32px);padding:14px clamp(14px,3vw,25px)}
 .ct11-calc-anchor{min-width:0}
-.ct11-shared[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(203px,calc((100svh - 255px) * .4777),304px)}
 .ct11-stage-side{min-width:0;align-self:start}
 .ct11-shared .director{padding-top:clamp(10px,8vw,86px)}
 .ct11-shared .watch-grid{display:initial}
@@ -94,33 +93,12 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.
  .ct11-shared[data-mode=try] .ct11-try-help>p:not(.feedback){margin:0 0 3px}
  .ct11-shared[data-mode=try] .ct11-try-help>.feedback:not([hidden]){margin:5px 0 2px!important}
 }
-body.ct11-focus-open{overflow:hidden}
-.ct11-shared.ct11-focused{position:fixed;inset:0;z-index:50;border:0;border-radius:0;overflow:auto}
-.ct11-shared.ct11-focused .player{position:sticky;top:0;z-index:5;background:var(--page)}
-.ct11-shared.ct11-focused .ct11-stage-grid{max-width:1060px;margin:auto}
-.ct11-shared.ct11-focused[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(205px,calc((100svh - 175px) * .4777),385px)}
-#focus-view[aria-pressed=true]{background:var(--mint);color:var(--green)}
-@media(max-width:700px){.ct11-shared.ct11-focused .ct11-stage-side{display:none}}
-.ct11-shared .ct11-bounds{margin:0 0 4px;padding:4px 0 2px;color:var(--green);font-size:.85rem;font-weight:680;max-width:none}
-@media(max-width:700px){.ct11-shared .ct11-bounds{font-size:.77rem}}
-.ct11-time-row{display:flex;align-items:center;gap:9px;min-height:30px}
-.ct11-time-row .timeline{flex:1;min-width:40px}.ct11-time-row #clock{font:650 .74rem var(--mono);white-space:nowrap}
-.ct11-time-row .ct11-option{display:flex;min-height:28px;align-items:center;gap:2px;font-size:.76rem;color:var(--muted);cursor:pointer;flex:none}
-.ct11-time-row input{accent-color:var(--primary)}.ct11-time-row .ct11-option input{margin:0 1px}
-.ct11-shared[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(203px,calc((100svh - 300px) * .4777),304px)}
 @media(max-width:700px){
  .header{margin-bottom:7px!important;position:relative}.header .tag{padding-right:74px;margin-bottom:7px}
  main:has(.ct11-shared[data-mode=watch]) .header .subtitle{display:none}
  .header .theme{position:absolute;right:0;top:-4px;margin:0}
  .header .theme select{min-height:33px;font-size:.71rem}
  .tabs{margin-bottom:8px}
- .ct11-shared #watch-player .player-top{flex-wrap:nowrap;gap:4px}
- .ct11-shared #watch-player .player-top .primary{min-width:49px;font-size:.84rem;padding:4px 5px}
- .ct11-shared #watch-player .player-top button:not(.primary){min-width:33px;min-height:37px;padding:4px 5px;font-size:.76rem}
- .ct11-shared #watch-player .player-top .takeover{margin-left:auto;padding-inline:6px}
- .ct11-time-row{gap:6px}
- .ct11-shared[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(195px,calc((100svh - 249px) * .4777),284px)}
- .ct11-shared.ct11-focused[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(205px,calc((100svh - 152px) * .4777),322px)}
 }
 @media(min-width:701px) and (max-height:850px){
  main:has(.ct11-shared[data-mode=watch]){padding-block-start:20px}
@@ -141,19 +119,7 @@ body.ct11-focus-open{overflow:hidden}
 #keypad-result{min-height:0;font-weight:680}
 .notes code{font-family:var(--mono)}
 @media(max-width:700px){.ct11-shared[data-mode=try] #try-tools{margin-top:6px}.ct11-shared[data-mode=try] #try-tools form{margin-bottom:5px}.ct11-shared[data-mode=try] #try-tools input,.ct11-shared[data-mode=try] #try-tools button{min-height:37px}.ct11-shared[data-mode=try] .ct11-stage-side{grid-row:auto}}
-/* Caption above the action; video-style controls inside the bottom frame. */
-.ct11-shared #watch-message{padding:7px 12px 4px;border-bottom:1px solid var(--line);min-height:57px}
-.ct11-shared #watch-message .caption{margin:0}
-.ct11-shared #watch-message .ct11-bounds{font-size:.82rem;font-weight:700;padding:0 0 2px 9px}
-.ct11-shared #watch-player{border-bottom:0;border-top:1px solid var(--line);padding:6px 12px 4px;position:relative}
 .ct11-shared .ct11-calc-anchor{position:relative}
-#stage-play{position:absolute;z-index:2;top:18%;left:50%;translate:-50% -50%;width:53px;height:53px;min-height:0;display:grid;place-items:center;padding:0 0 0 3px;border:1px solid #ffffffc0;border-radius:50%;background:#182528c9;color:white;box-shadow:0 3px 16px #192a3063;font-size:1.28rem}
-#stage-play:hover{background:#18332c}
-.ct11-shared[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(196px,calc((100svh - 370px) * .4777),304px)}
-.ct11-shared.ct11-focused[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(195px,calc((100svh - 172px) * .4777),360px)}
-.ct11-shared.ct11-focused #watch-player{position:sticky;bottom:0;top:auto}
-.ct11-shared.ct11-focused #watch-message{position:sticky;top:0;z-index:4;background:var(--page)}
-.ct11-shared.ct11-focused #watch-side{padding-block-start:26px}
 .sample-f1,.sample-f2,.formula{font:650 .9rem/1.45 var(--mono);white-space:normal;overflow-wrap:anywhere}
 .sample-f1{color:#205a91}.sample-f2{color:#a13f35}
 :root[data-theme=dark] .sample-f1{color:#94c9ff}:root[data-theme=dark] .sample-f2{color:#f8afa5}
@@ -164,17 +130,7 @@ body.ct11-focus-open{overflow:hidden}
 .precision{color:var(--muted);margin-top:6px;font-size:.8rem}
 #keypad-problem{overflow-wrap:anywhere}
 @media(max-width:700px){
- .ct11-shared[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(177px,calc((100svh - 324px) * .4777),270px)}
- .ct11-shared.ct11-focused[data-mode=watch] .ct11-calc-anchor{--handheld-width:clamp(190px,calc((100svh - 158px) * .4777),320px)}
  .ct11-shared[data-mode=watch] .ct11-stage-side{display:none}
  .ct11-shared[data-mode=watch] .ct11-stage-grid{padding-block:7px}
- .ct11-shared #watch-message{min-height:49px;padding:5px 9px}.ct11-shared #watch-player{padding:5px 8px}
 }
 .exercise #challenge,.exercise #exercise-inactive p{color:var(--muted);margin-bottom:12px}
-
-/* Shared navigation is behind the lesson when its existing Focus player opens. */
-body.calculator-bank-lesson:has(.ct11-focused) > :is(.top,.tabbar){visibility:hidden}
-
-@media(max-width:700px){
- .ct11-shared[data-mode=watch]:not(.ct11-focused) .ct11-calc-anchor{--handheld-width:var(--bank-watch-fit,193px)}
-}
