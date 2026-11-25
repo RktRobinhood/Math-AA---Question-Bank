@@ -2,7 +2,7 @@
 (function(){
  const $=id=>document.getElementById(id);
  const M=window.CT10Math,S=window.CT10Screen,T=window.CT10Tape,H=window.HandheldTransport;
- const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),audio=$("narration");
+ const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),audio=$("narration"),surface=$("workspace"),overlay=$("play-feedback");
  const lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),expr=$("expression"),bound=$("bound");
  const watchQ=M.parse("x^2-5x+6"),watchView={...M.windowFor(watchQ),y1:7.2},defaultTry="x^2-7x+10",params=new URLSearchParams(location.search);
  const initial=raw=>({state:"entry",raw,q:null,low:null,high:null,cursor:null,mark:null,error:null,menuPick:5,traceEntry:null,traceResult:false,view:null});
@@ -15,11 +15,33 @@
    linked=q;
   }catch{unsafe=true;}
  }
- const fixed=Boolean(linked)||params.get("case")==="zero-demo"||params.get("example")==="demo";
  const challenge=linked||M.parse(defaultTry),target=M.roots(challenge).at(-1).x;
  const prompt="Find the "+(M.roots(challenge).length===2?"larger ":"")+"zero of f(x) = "+M.displayExpr(challenge.raw)+".";
- let mode="watch",state=initial(challenge.raw),edited=false,forked=false,focused=false,focusConsidered=false;
- let t=0,duration=T.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="";
+ let mode="watch",state=initial(challenge.raw),edited=false;
+ let t=0,duration=T.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="",rate=.9,showCaptions=false,initiated=false;
+ const framingKey="qb-calculator-watch-frame";
+ function readFrame(){try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}}
+ let framing=readFrame();
+ const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
+ function paintFraming(){
+  stage.classList.toggle("ct10-screen-view",mode==="watch"&&framing==="screen");
+  $("view-full").setAttribute("aria-pressed",String(framing==="full"));
+  $("view-screen").setAttribute("aria-pressed",String(framing==="screen"));
+ }
+ function chooseFrame(value){
+  framing=value;try{localStorage.setItem(framingKey,value);}catch{}
+  paintFraming();fitBankWatch();
+ }
+ $("view-full").addEventListener("click",()=>chooseFrame("full"));
+ $("view-screen").addEventListener("click",()=>chooseFrame("screen"));
+ window.addEventListener("storage",e=>{if(!e.key||e.key===framingKey){framing=readFrame();paintFraming();fitBankWatch();}});
+ function captions(v){
+  showCaptions=v;$("cc").setAttribute("aria-pressed",String(v));
+  $("cc").setAttribute("aria-label",v?"Hide captions":"Show captions");
+  $("caption-band").hidden=mode!=="watch"||!v;
+ }
+ $("cc").addEventListener("click",()=>captions(!showCaptions));
+ $("transcript").textContent=T.captions.join(" ");
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>press(key)});
  const tabs=[$("watch-tab"),$("try-tab")],steps=$("steps"),hot=$("hotspots");
  const hints={"trace-menu":"Choose 1: Graph Trace.",trace:"Type an x-coordinate, then press Enter to jump to it.",entry:"Enter a line or quadratic, then press Enter to plot.",plotted:"Press Menu on the handheld.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 1: Zero.",lower:"Put the lower bound to the left of the crossing. Move with the arrows, tap the graph, or enter x below.",upper:"Put the upper bound to the right of the same crossing, then confirm.",result:"Read the x-coordinate. To find another zero, choose new bounds."};
@@ -28,13 +50,13 @@
  function stepHint(s){return s.state==="menu"&&s.menuPick===4?"Choose 5: Trace.":hints[s.state];}
  function labelGraph(s){$("lcd-text").textContent=[s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw),stepHint(s),s.low!=null?"Lower: "+M.pretty(s.low):"",s.state==="trace"&&s.traceEntry!==null?"x = "+s.traceEntry:s.state==="trace"&&s.q&&s.cursor!=null?"f₁: ("+M.pretty(s.cursor)+", "+M.pretty(s.cursor===0?s.q.c:s.q.f(s.cursor))+")":s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Zero at x = "+M.pretty(s.mark.x):"",s.error||""].filter(Boolean).join(". ");}
  function snapshot(time){
-  const s=initial("");let key="";
+  const s=initial("");let key="",last="";
   for(const e of T.keys){
    if(time<e.time)break;
-   Object.assign(s,e.delta);key=time<e.time+.23?e.key:"";
+   Object.assign(s,e.delta);last=e.key;key=time<e.time+.23?e.key:"";
   }
   if(s.state!=="entry"){s.q=watchQ;s.view=watchView;}
-  return{s,key};
+  return{s,key,last};
  }
  T.titles.forEach((title,i)=>{
   const li=document.createElement("li"),b=document.createElement("button"),no=document.createElement("span");
@@ -44,69 +66,73 @@
  const sec=x=>Math.floor(x),clock=x=>Math.floor(x/60)+":"+String(sec(x)%60).padStart(2,"0");
  function renderWatch(){
   if(mode!=="watch")return;
-  const chapter=T.starts.findLastIndex(start=>t>=start), phrase=T.captionStarts.findLastIndex(start=>t>=start), {s,key}=snapshot(t);
+  const chapter=T.starts.findLastIndex(start=>t>=start), phrase=T.captionStarts.findLastIndex(start=>t>=start), {s,key,last}=snapshot(t);
   const keyStamp=[s.state,s.raw,s.cursor,s.traceEntry,s.traceResult,chapter,phrase].join("|");
-  seek.value=t;seek.setAttribute("aria-valuetext",clock(t)+" of "+clock(duration));$("clock").textContent=clock(t)+" / "+clock(duration);
+  const current=t>=duration-.015?Math.round(duration):t, total=Math.round(duration);
+  seek.value=t;seek.setAttribute("aria-valuetext",clock(current)+" of "+clock(total));$("clock").textContent=clock(current)+" / "+clock(total);
   shell.setKeys(key?[key]:[]);
+  if(!initiated){overlay.hidden=t>.04;overlay.dataset.initial="true";}
+  const readable={menu:"Menu",square:"x²",minus:"−",plus:"+",enter:"Enter",left:"←",right:"→"};
+  $("active-key").textContent=last?readable[last]||last:"—";
   if(cache===keyStamp)return;cache=keyStamp;
   screen.draw(s);labelGraph(s);
   cap.textContent=T.captions[phrase];$("zero-readout").hidden=phrase!==6;
   const contrast=$("intercept-contrast");contrast.hidden=phrase<7;
-  contrast.textContent=s.traceResult?"y-intercept: (0, 6). Read the y-coordinate.":s.state==="trace"?"Type 0, then press Enter.":"Menu → 5: Trace → 1: Graph Trace.";
+  contrast.textContent=s.traceResult?"y-intercept: (0, 6)":s.state==="trace"?"Type 0 → Enter":"5: Trace → 1: Graph Trace";
   [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
  }
  function go(v){
-  t=M.clamp(Number(v)||0,0,duration);origin=performance.now()-t*1000;
+  t=M.clamp(Number(v)||0,0,duration);origin=performance.now()-t*1000/rate;
   if(Number.isFinite(audio.duration))audio.currentTime=t;
   renderWatch();if(!playing)labelPlay();
  }
- function labelPlay(){const label=playing?"Pause":t>=duration-.015?"Replay":"Play";play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(playing);}
+ function labelPlay(){
+  const label=playing?"Pause":t>=duration-.015?"Replay":"Play";
+  play.setAttribute("aria-label",label);play.title=label;play.dataset.playing=String(playing);
+  play.querySelector(".play-icon").toggleAttribute("hidden",playing);
+  play.querySelector(".pause-icon").toggleAttribute("hidden",!playing);
+ }
  function pause(){playEpoch++;pending=false;if(playing&&useAudio)t=audio.currentTime;playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch();}
  function finish(){pause();t=duration;labelPlay();renderWatch();}
  function tick(now){
   if(!playing||mode!=="watch")return;
-  t=useAudio?audio.currentTime:(now-origin)/1000;
+  t=useAudio?audio.currentTime:(now-origin)*rate/1000;
   if(t>=duration){finish();return}
   renderWatch();raf=requestAnimationFrame(tick);
  }
  async function start(){
   if(mode!=="watch")return;
-  if(!focusConsidered){
-   focusConsidered=true;const h=window.visualViewport?.height||innerHeight;
-   const low=Math.max(...["enter","1","x"].map(k=>shell.getKey(k).getBoundingClientRect().bottom));
-   if(!focused&&low>h-26)focus(true);
-  }
+  initiated=true;overlay.dataset.initial="false";
   if(t>=duration-.015)go(0);
   const stamp=++playEpoch;
-  pending=true;origin=performance.now()-t*1000;
+  pending=true;origin=performance.now()-t*1000/rate;
   if(useAudio){
    try{audio.currentTime=t;await audio.play();}
    catch(error){if(stamp!==playEpoch)return;silentMedia();}
   }
   if(stamp!==playEpoch||mode!=="watch")return;
-  pending=false;playing=true;labelPlay();raf=requestAnimationFrame(tick);
+  pending=false;playing=true;labelPlay();chrome.flash(true);raf=requestAnimationFrame(tick);
  }
- function toggle(){if(playing||pending)pause();else void start();}
+ function toggle(){if(playing||pending){pause();chrome.flash(false);}else void start();}
  function silentMedia(){
-  useAudio=false;origin=performance.now()-t*1000;
-  $("media-status").textContent="Captions only";$("sound-label").hidden=true;
+  useAudio=false;origin=performance.now()-t*1000/rate;
+  $("media-status").textContent="Captions only";$("media-status").hidden=false;$("sound").hidden=true;captions(true);
  }
  // The packaging of this lesson includes a narration source only after independent transcript review.
  audio.addEventListener("loadedmetadata",()=>{
   if(!Number.isFinite(audio.duration)||audio.duration<=0)return;
-  if(!useAudio)return;duration=audio.duration;seek.max=duration;$("media-status").textContent="Narration";$("sound-label").hidden=false;renderWatch();
+  if(!useAudio)return;duration=audio.duration;seek.max=duration;renderWatch();
  });
  audio.addEventListener("error",silentMedia);audio.addEventListener("ended",finish);
- $("sound").addEventListener("change",()=>{audio.muted=!$("sound").checked;});
- play.addEventListener("click",toggle);$("back").addEventListener("click",()=>go(t-10));$("next").addEventListener("click",()=>go(t+10));
- $("replay").addEventListener("click",()=>{pause();go(0);void start();});seek.addEventListener("input",()=>go(seek.value));
- function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct10-focused",focused);document.body.classList.toggle("ct10-focus-open",focused);
-  const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
-  b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"⛶";
-  if(focused)stage.scrollTop=0;
- }
- $("focus-view").addEventListener("click",()=>focus(!focused));
+ $("sound").addEventListener("click",()=>{
+  audio.muted=!audio.muted;$("sound").setAttribute("aria-pressed",String(audio.muted));
+  const label=audio.muted?"Unmute narration":"Mute narration";$("sound").setAttribute("aria-label",label);$("sound").title=label;
+ });
+ audio.playbackRate=rate;audio.preservesPitch=true;
+ $("play-rate").addEventListener("change",e=>{
+  rate=Number(e.target.value);audio.playbackRate=rate;origin=performance.now()-t*1000/rate;
+ });
+ play.addEventListener("click",toggle);seek.addEventListener("input",()=>go(seek.value));
  function jumpMenu(panel,index,action){
   const b=document.createElement("button");
   b.type="button";b.setAttribute("aria-label",panel.rows[index]);b.style.left=panel.x/3.2+"%";
@@ -220,34 +246,27 @@
   if(mode!=="try"||!lcd.classList.contains("pick"))return;
   const x=pointer(e);if(x!==null)confirm(x);
  });
- function modeTo(next,steal=false){
+ function modeTo(next){
   if(next==="try"&&mode==="watch"){
-   pause();if(focused)focus(false);
-   if(steal&&!fixed&&!edited&&!forked){state={...snapshot(t).s};bound.value="";forked=true;}
+   pause();chrome.clear();void chrome.exit();
    expr.value=state.raw;
   }
-  mode=next;stage.dataset.mode=mode;cache="";
+  mode=next;stage.dataset.mode=mode;cache="";paintFraming();captions(showCaptions);
   const watch=mode==="watch";
   tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
-  for(const n of ["watch","watch-side","watch-player"])$(n).hidden=!watch;
+  for(const n of ["watch","watch-side","watch-player","key-strip"])$(n).hidden=!watch;
   for(const n of ["try","try-side","try-player"])$(n).hidden=watch;
   shell.setKeys([]);shell.setInteractive(!watch);
-  if(watch){hot.replaceChildren();lcd.classList.remove("pick");renderWatch();}
-  else renderTry();
+  if(watch){hot.replaceChildren();lcd.classList.remove("pick");renderWatch();labelPlay();fitBankWatch();}
+  else {overlay.hidden=true;renderTry();}
  }
  tabs.forEach((b,i)=>{
   b.addEventListener("click",()=>{modeTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
   b.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const next=e.key==="Home"?0:e.key==="End"?1:1-i;modeTo(next?"try":"watch");tabs[next].focus();});
  });
- $("take-over").addEventListener("click",()=>{modeTo("try",true);stage.focus({preventScroll:true});});
  $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
  document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
-  if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
-   const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(t+(k==="j"?-10:10));}
-   return;
-  }
   if(mode!=="try"||!stage.contains(e.target)&&e.target!==document.body||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
   const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
@@ -262,5 +281,21 @@
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?"Correct. That x-coordinate gives a zero output.":"Not yet. Check that you chose the requested crossing and reported its x-coordinate.";
  });
+function fitBankWatch(){
+ if(mode!=="watch"||!shell.body.offsetWidth)return;
+ const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
+ const nav=full?0:document.querySelector(".tabbar").getBoundingClientRect().height;
+ const box=stage.getBoundingClientRect();
+ const vh=window.visualViewport?.height||innerHeight;
+ const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
+ const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
+ stage.style.setProperty("--ct10-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?370:296,(room-28)*558/1168)))+"px");
+ stage.style.setProperty("--ct10-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,(room-31)*4/3)))+"px");
+}
+const bankWatchSizing=new ResizeObserver(fitBankWatch);
+[$("watch-player"),$("caption-band"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+window.addEventListener("resize",fitBankWatch);
+document.addEventListener("fullscreenchange",fitBankWatch);
+fitBankWatch();
  modeTo(params.get("mode")==="try"?"try":"watch");
 })();

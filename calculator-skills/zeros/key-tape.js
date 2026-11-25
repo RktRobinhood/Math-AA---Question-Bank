@@ -3,7 +3,8 @@
 window.CT10Tape=Object.freeze({
  duration:24.659592,
  starts:[0,5.406,11.744,17.828,19.82],
- captionStarts:[0,1.6,5.406,8.68,11.66,14.9,17.828,19.82],
+ // Phrase onsets independently checked in the original narration MP3. The first starts with the short audio lead-in.
+ captionStarts:[0,1.647,5.406,8.713,11.744,14.767,17.815,19.827],
  captions:[
   "Plot the function.",
   "A zero is an x value for which the function is zero.",
