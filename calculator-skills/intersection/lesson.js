@@ -85,7 +85,8 @@
  function renderWatch(){
   if(mode!=="watch")return;
   const chapter=T.starts.findLastIndex(start=>t>=start),phrase=T.captionStarts.findLastIndex(start=>t>=start),{s,key,last}=snapshot(t);
-  const keyStamp=[s.state,...s.raw,s.cursor,chapter,phrase].join("|");
+  // A seek can skip across Tab without changing the raw strings or chapter.
+  const keyStamp=JSON.stringify([s.state,s.active,s.raw,s.q.map(q=>q?.raw??null),s.cursor,s.low,s.typed,s.mark,s.error,chapter,phrase]);
   const timeLabel=clock(t>=duration-.015?Math.round(duration):t)+" / "+clock(Math.round(duration));
   seek.value=t;seek.setAttribute("aria-valuetext",timeLabel.replace("/","of"));$("clock").textContent=timeLabel;
   shell.setKeys(key?[key]:[]);
