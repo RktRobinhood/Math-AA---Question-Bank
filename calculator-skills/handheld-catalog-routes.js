@@ -303,6 +303,12 @@ window.HANDHELD_CATALOG_ROUTES={
         "path": "maximum/index.html",
         "label": "Maximum example"
       }
+    ],
+    "CT30": [
+      {
+        "path": "histogram/index.html",
+        "label": "Frequency histograms (AI SL/HL)"
+      }
     ]
   }
 };

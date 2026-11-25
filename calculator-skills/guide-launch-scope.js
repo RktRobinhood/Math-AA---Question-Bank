@@ -10,7 +10,7 @@ window.CALCULATOR_LAUNCH_SCOPE = {
   },
   "CT30": {
     "title": "Box plots and outliers",
-    "scopeNote": "Read quartiles, draw a box plot and flag outliers. Histograms and cumulative frequency are not covered here."
+    "scopeNote": "Read quartiles, draw a box plot and flag outliers. The AI histogram companion covers equal-width bins and manual counts below a cutoff, not cumulative-frequency graphs."
   },
   "CT32": {
     "title": "Quadratic regression",

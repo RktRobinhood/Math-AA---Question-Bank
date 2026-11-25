@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Frequency histograms · Calculator Coach</title>
+<link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><script defer src="lesson.js"></script>
+</head><body><main>
+<header><div><p class="trail"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / AI SL &amp; HL</p><h1>Frequency histograms</h1><p class="subtitle">Set equal bins. Read the edges. Count below a cutoff.</p></div>
+<label><span class="sr">Color theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<nav class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></nav>
+<section id="stage" class="stage" data-mode="watch" tabindex="0" aria-label="Interactive TI-Nspire CX II-T calculator">
+ <div id="watch-message"><p id="caption" class="caption"></p><p id="takeaway" hidden></p></div>
+ <div class="stage-grid">
+  <div id="try-brief" hidden>
+   <p id="link-notice" role="status" hidden></p><h2 id="try-title">Try a new histogram</h2><p id="try-data" class="list-strip"></p><p id="prompt"></p>
+   <div id="try-player"><button id="return-watch" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><p id="lane" role="status"></p></div>
+  </div>
+  <div id="host"><div id="lcd" class="screen"><div class="status"><span>1.2</span><span>Data &amp; Statistics · RAD</span><span aria-hidden="true">▰</span></div><div id="screen"></div><p id="screen-text" class="sr" aria-live="polite"></p><button id="stage-play" aria-label="Play captioned walkthrough" title="Play captioned walkthrough" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4v16l13-8z"/></svg></button></div></div>
+  <div class="side">
+   <aside id="watch-side"><h2>From list to class counts</h2><p>Already entered in <code>reading</code>:</p><p id="worked-list" class="list-strip"></p><ol id="steps"></ol></aside>
+   <aside id="try-side" hidden>
+    <p id="instruction">Select the horizontal variable, then open Menu.</p><p id="error" class="feedback" role="status"></p>
+    <form id="answer-form"><div class="touch-grid"><label>Class frequency <input id="frequency" inputmode="numeric" required autocomplete="off"></label><label>Readings below cutoff <input id="cumulative" inputmode="numeric" required autocomplete="off"></label></div><button type="submit" class="primary">Check answers</button></form><p id="feedback" class="feedback" role="status"></p>
+    <details id="hint"><summary>Hint</summary><p>Check the width and alignment under Plot Properties. Trace the requested class. Add all whole classes with upper endpoints at or below the cutoff. A reading at the cutoff does not count.</p></details>
+    <details id="custom-case"><summary>Set a different practice case</summary><p>Change the supplied observations and the task. Set the actual bins on the calculator.</p>
+     <form id="setup"><label>Observations <textarea id="data" rows="2" maxlength="400" autocomplete="off" spellcheck="false"></textarea></label><div class="touch-grid"><label>Requested width <input id="width" inputmode="decimal" autocomplete="off" required></label><label>Requested alignment <input id="alignment" inputmode="decimal" autocomplete="off" required></label><label>Class lower bound <input id="bin" inputmode="decimal" autocomplete="off" required></label><label>Cutoff <input id="cutoff" inputmode="decimal" autocomplete="off" required></label></div><button type="submit">Load this practice case</button><p id="case-error" class="feedback" role="status"></p></form>
+    </details>
+   </aside>
+  </div>
+ </div>
+ <div id="watch-player" aria-label="Playback controls"><div class="control-row"><button id="play" class="primary" type="button">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false">⛶</button><button id="take-over" type="button">Take over</button></div>
+ <div class="seek-row"><span id="clock" aria-hidden="true">0:00</span><label><span class="sr">Seek worked example</span><input id="seek" type="range" min="0" max="62" step=".005" value="0"></label><span>Captioned</span></div></div>
+</section>
+<section role="tabpanel" id="watch" aria-labelledby="watch-tab"><p class="sr">Watch player above.</p></section><section role="tabpanel" id="try" aria-labelledby="try-tab" hidden><p class="sr">Try calculator and exercise above.</p></section>
+<details class="notes"><summary>Transcript and scope</summary><p>Watch observations: <span id="transcript-data"></span>.</p><ol id="transcript"></ol><p>This is a scoped reconstruction starting from a prepared one-variable list. Frequencies only, not density, unequal widths or a cumulative-frequency graph. The last step adds counts below a class boundary by hand.</p><p><a href="../named-lists/">Entering a named list</a> · <a href="https://education.ti.com/-/media/files/activities/us/math/statistics/best-class_ns/nspire-bestclass-teacher-pdf.pdf">TI Histogram workflow</a> · <a href="https://education.ti.com/html/eguides/nspire/eg_nspire/en/content/m_datastats/ds_working_numeric_plot.HTML">TI Bin settings and trace</a></p></details>
+</main></body></html>

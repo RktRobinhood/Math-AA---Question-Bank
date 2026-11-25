@@ -1,7 +1,7 @@
 {
   "CT05":{"title":"Compound interest with Finance Solver","scopeNote":"Single deposit or lump sum only. Recurring payments, annuities and loan amortization are not covered here."},
   "CT27":{"title":"Complete a least-distance table entry","scopeNote":"AI HL. Compare route lengths on a small network. This lesson does not teach minimum spanning trees, postman routes or travelling-salesman bounds."},
-  "CT30":{"title":"Box plots and outliers","scopeNote":"Read quartiles, draw a box plot and flag outliers. Histograms and cumulative frequency are not covered here."},
+  "CT30":{"title":"Box plots and outliers","scopeNote":"Read quartiles, draw a box plot and flag outliers. The AI histogram companion covers equal-width bins and manual counts below a cutoff, not cumulative-frequency graphs."},
   "CT32":{"title":"Quadratic regression","scopeNote":"Fit a quadratic model and read its coefficients and residuals. Other models are not part of this simulator."},
   "CT34":{"title":"Linearize exponential data with logarithms","scopeNote":"AI HL. Fit x against ln(y) and recover the original scale. Log–log power fits are not simulated."},
   "CT41":{"title":"Find an unknown normal mean or standard deviation","scopeNote":"AA SL/HL. AI extension only; for the usual AI inverse-normal method with both parameters given, use CT40.","directCourses":["aa-sl","aa-hl"],"extensionCourses":["ai-sl","ai-hl"]},

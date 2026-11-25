@@ -817,6 +817,20 @@
       "integrationStatus": "requires-player-hook",
       "existingAudio": null,
       "parentId": "CT12"
+    },
+    {
+      "id": "SUP-HIST-01",
+      "route": "histogram/index.html",
+      "title": "Frequency histograms",
+      "playerHeading": "Frequency histograms",
+      "transcript": "lessons/SUP-HIST-01.txt",
+      "cueMap": "lessons/SUP-HIST-01.cues.json",
+      "status": "draft-from-original-watch",
+      "transcriptSha256": "65a763f8aedc321530684df08e9c095a42bbd4d6af96850895010e1a994bfc05",
+      "cueMapSha256": "bb314c647e517df75de222be08afd527b28f26e0d09a4517161b4a18d03d00fa",
+      "integrationStatus": "requires-player-hook",
+      "existingAudio": null,
+      "parentId": "CT30"
     }
   ]
 }

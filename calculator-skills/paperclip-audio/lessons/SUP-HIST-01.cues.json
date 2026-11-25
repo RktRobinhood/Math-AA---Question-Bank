@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "id": "SUP-HIST-01",
+  "route": "histogram/index.html",
+  "catalogueTitle": "Frequency histograms",
+  "playerHeading": "Frequency histograms",
+  "status": "draft-from-original-watch",
+  "scriptSource": {
+    "type": "speech-copy-of-original-watch-captions",
+    "file": "histogram/index.html"
+  },
+  "script": "lessons/SUP-HIST-01.txt",
+  "spokenCues": [
+    {
+      "id": "watch-01",
+      "text": "On Data and Statistics, press Tab. Select the prepared list reading on the horizontal axis.",
+      "watchCueId": "watch-01"
+    },
+    {
+      "id": "watch-02",
+      "text": "Menu, Plot Type, Histogram. The vertical scale counts observations.",
+      "watchCueId": "watch-02"
+    },
+    {
+      "id": "watch-03",
+      "text": "Open Plot Properties, Histogram Properties, Bin Settings, Equal Bin Width. Width is the interval size; alignment sets a boundary.",
+      "watchCueId": "watch-03"
+    },
+    {
+      "id": "watch-04",
+      "text": "Type ten for width. Tab to Alignment and type ten again. Confirm the settings.",
+      "watchCueId": "watch-04"
+    },
+    {
+      "id": "watch-05",
+      "text": "Use Analyze, Graph Trace. Press Right until you reach the class from twenty up to, but not including, thirty.",
+      "watchCueId": "watch-05"
+    },
+    {
+      "id": "watch-06",
+      "text": "Five observations fall here. Twenty belongs here; thirty starts the next bin.",
+      "watchCueId": "watch-06"
+    },
+    {
+      "id": "watch-07",
+      "text": "Add the bins that end at or below forty. The reading at forty is not included.",
+      "watchCueId": "watch-07"
+    }
+  ],
+  "watch": {
+    "timingBasis": "Authored caption rehearsal and physical key tape; not measured speech.",
+    "sliderEndAtExtractionMs": 62000,
+    "captionCues": [
+      {
+        "id": "watch-01",
+        "startMs": 0,
+        "text": "On Data & Statistics, press Tab. Select the prepared list reading on the horizontal axis.",
+        "endMs": 7000
+      },
+      {
+        "id": "watch-02",
+        "startMs": 7000,
+        "text": "Menu, Plot Type, Histogram. The vertical scale counts observations.",
+        "endMs": 15000
+      },
+      {
+        "id": "watch-03",
+        "startMs": 15000,
+        "text": "Open Plot Properties, Histogram Properties, Bin Settings, Equal Bin Width. Width is the interval size; alignment sets a boundary.",
+        "endMs": 26000
+      },
+      {
+        "id": "watch-04",
+        "startMs": 26000,
+        "text": "Type ten for width. Tab to Alignment and type ten again. Confirm the settings.",
+        "endMs": 37000
+      },
+      {
+        "id": "watch-05",
+        "startMs": 37000,
+        "text": "Use Analyze, Graph Trace. Press Right until you reach the class from twenty up to, but not including, thirty.",
+        "endMs": 45000
+      },
+      {
+        "id": "watch-06",
+        "startMs": 45000,
+        "text": "Five observations fall here. Twenty belongs here; thirty starts the next bin.",
+        "endMs": 53000
+      },
+      {
+        "id": "watch-07",
+        "startMs": 53000,
+        "text": "Add the bins that end at or below forty. The reading at forty is not included.",
+        "endMs": 62000
+      }
+    ],
+    "displayKeyStateChanges": [
+      {
+        "timeMs": 3000,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 3360,
+        "keys": []
+      },
+      {
+        "timeMs": 5000,
+        "keys": [
+          "select"
+        ]
+      },
+      {
+        "timeMs": 5360,
+        "keys": []
+      },
+      {
+        "timeMs": 8000,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 8360,
+        "keys": []
+      },
+      {
+        "timeMs": 9300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 9660,
+        "keys": []
+      },
+      {
+        "timeMs": 11400,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 11760,
+        "keys": []
+      },
+      {
+        "timeMs": 15800,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 16160,
+        "keys": []
+      },
+      {
+        "timeMs": 17400,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 17760,
+        "keys": []
+      },
+      {
+        "timeMs": 19000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 19360,
+        "keys": []
+      },
+      {
+        "timeMs": 21000,
+        "keys": [
+          "2"
+        ]
+      },
+      {
+        "timeMs": 21360,
+        "keys": []
+      },
+      {
+        "timeMs": 23400,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 23760,
+        "keys": []
+      },
+      {
+        "timeMs": 27200,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 27560,
+        "keys": []
+      },
+      {
+        "timeMs": 28300,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 28660,
+        "keys": []
+      },
+      {
+        "timeMs": 29500,
+        "keys": [
+          "tab"
+        ]
+      },
+      {
+        "timeMs": 29860,
+        "keys": []
+      },
+      {
+        "timeMs": 31300,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 31660,
+        "keys": []
+      },
+      {
+        "timeMs": 32400,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 32760,
+        "keys": []
+      },
+      {
+        "timeMs": 34600,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 34960,
+        "keys": []
+      },
+      {
+        "timeMs": 38300,
+        "keys": [
+          "menu"
+        ]
+      },
+      {
+        "timeMs": 38660,
+        "keys": []
+      },
+      {
+        "timeMs": 39600,
+        "keys": [
+          "4"
+        ]
+      },
+      {
+        "timeMs": 39960,
+        "keys": []
+      },
+      {
+        "timeMs": 41300,
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "timeMs": 41660,
+        "keys": []
+      },
+      {
+        "timeMs": 43200,
+        "keys": [
+          "right"
+        ]
+      },
+      {
+        "timeMs": 43560,
+        "keys": []
+      }
+    ],
+    "authoredTape": [
+      {
+        "global": "HistTape",
+        "keys": [
+          {
+            "timeMs": 3000,
+            "key": "tab"
+          },
+          {
+            "timeMs": 5000,
+            "key": "select"
+          },
+          {
+            "timeMs": 8000,
+            "key": "menu"
+          },
+          {
+            "timeMs": 9300,
+            "key": "1"
+          },
+          {
+            "timeMs": 11400,
+            "key": "3"
+          },
+          {
+            "timeMs": 15800,
+            "key": "menu"
+          },
+          {
+            "timeMs": 17400,
+            "key": "2"
+          },
+          {
+            "timeMs": 19000,
+            "key": "2"
+          },
+          {
+            "timeMs": 21000,
+            "key": "2"
+          },
+          {
+            "timeMs": 23400,
+            "key": "1"
+          },
+          {
+            "timeMs": 27200,
+            "key": "1"
+          },
+          {
+            "timeMs": 28300,
+            "key": "0"
+          },
+          {
+            "timeMs": 29500,
+            "key": "tab"
+          },
+          {
+            "timeMs": 31300,
+            "key": "1"
+          },
+          {
+            "timeMs": 32400,
+            "key": "0"
+          },
+          {
+            "timeMs": 34600,
+            "key": "enter"
+          },
+          {
+            "timeMs": 38300,
+            "key": "menu"
+          },
+          {
+            "timeMs": 39600,
+            "key": "4"
+          },
+          {
+            "timeMs": 41300,
+            "key": "a"
+          },
+          {
+            "timeMs": 43200,
+            "key": "right"
+          }
+        ]
+      }
+    ],
+    "anchors": [
+      {
+        "id": "watch-01",
+        "editorial": "Show only the prepared reading list. TAB activates the horizontal add-variable strip; Select closes the list pick."
+      },
+      {
+        "id": "watch-02",
+        "editorial": "Menu, then 1 then 3; plot switches from dot to Frequency histogram. Do not show a solved requested count."
+      },
+      {
+        "id": "watch-03",
+        "editorial": "Menu, 2, 2, 2, 1; last key opens Equal Bin Width Settings with Width selected."
+      },
+      {
+        "id": "watch-04",
+        "editorial": "Use 1, 0, Tab, 1, 0, Enter. Confirm the same value for width and alignment; rebin only on Enter."
+      },
+      {
+        "id": "watch-05",
+        "editorial": "Menu, 4, A, Right; LCD shows [20, 30), 5 points when the required bin is selected."
+      },
+      {
+        "id": "watch-06",
+        "editorial": "Hold the selected trace, then show the half-open edge marker. No new keys."
+      },
+      {
+        "id": "watch-07",
+        "editorial": "Hold the histogram. Show a separate lesson overlay for 4 + 5 + 3 = 12. No cumulative-plot command or Try values."
+      }
+    ]
+  },
+  "existingAudio": null,
+  "nativeMediaAdapter": null
+}

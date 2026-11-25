@@ -1,8 +1,8 @@
 # Calculator Coach narration handoff for Paperclip
 
 Start at [manifest.json](manifest.json). **59 catalogue lessons; seven already
-narrated; 52 await audio.** CT12's separately staged graph maximum is listed
-under supplements, not as a sixtieth skill. Each entry includes the actual
+narrated; 52 await audio.** Graph Maximum (CT12) and Frequency Histograms
+(AI SL/HL, CT30) are listed as companions with their own draft transcripts and cue maps. Each entry includes the actual
 player heading and original catalogue title, so same-topic lessons do not get
 each other's tracks.
 

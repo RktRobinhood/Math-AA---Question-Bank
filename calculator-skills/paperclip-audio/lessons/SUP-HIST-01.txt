@@ -1,0 +1,7 @@
+On Data and Statistics, press Tab. Select the prepared list reading on the horizontal axis.
+Menu, Plot Type, Histogram. The vertical scale counts observations.
+Open Plot Properties, Histogram Properties, Bin Settings, Equal Bin Width. Width is the interval size; alignment sets a boundary.
+Type ten for width. Tab to Alignment and type ten again. Confirm the settings.
+Use Analyze, Graph Trace. Press Right until you reach the class from twenty up to, but not including, thirty.
+Five observations fall here. Twenty belongs here; thirty starts the next bin.
+Add the bins that end at or below forty. The reading at forty is not included.
