@@ -348,6 +348,7 @@
     // take turns; each gets a question at one of the wanted levels it has generators for (the
     // nearest level when it has none of them), or a real question when it has no generator.
     const turns = {};
+    const fixedVisits = new Map();
     let turn = 0;
     function fixed(usable, levels) {
       const order = usable.slice().sort((a, b) => (turns[a] || 0) - (turns[b] || 0));
@@ -360,9 +361,17 @@
             const gap = (l) => Math.min(...levels.map((w) => Math.abs(w - l)));
             want = [ls.reduce((best, l) => (gap(l) < gap(best) ? l : best), ls[0])];
           }
-          const level = want[(u.attempts + turn) % want.length];
+          // Each subtopic/range has its own cursor. An answered question increments
+          // attempts as well as the global turn, so adding the two can skip a level
+          // indefinitely. Advance only when a question in this range is served.
+          const key = code + "|" + want.join(",");
+          const visit = fixedVisits.get(key) ?? 0;
+          const level = want[visit % want.length];
           const q = generated(gens(code, level, sel), level);
-          if (q) it = fromQuestion(code, "fixed", q);
+          if (q) {
+            fixedVisits.set(key, visit + 1);
+            it = fromQuestion(code, "fixed", q);
+          }
         } else {
           const r = realQuestion(code, u);
           if (r) it = fromReal(code, "fixed", r);
