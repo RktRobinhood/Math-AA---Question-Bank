@@ -1,0 +1,210 @@
+{
+  "id": "CT45",
+  "title": "One-sample z-test",
+  "intro": "Known population σ only. Choose the alternative before you compare p with α.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "17bfdfc142296eab8476954a9f7d138243013461fe3599f864ad2cbfa8954188",
+    "scriptSha256": "e3a8a92788b70cacee1c72798110e082c5dc982daa60f26d7ed56b4dcc5c16e8"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Set the hypotheses"
+    },
+    {
+      "id": "menu",
+      "title": "Open the one-sample z Test"
+    },
+    {
+      "id": "data",
+      "title": "Choose Data and enter inputs"
+    },
+    {
+      "id": "tail",
+      "title": "Choose the left tail and run"
+    },
+    {
+      "id": "result",
+      "title": "Read z, p and the decision"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "A normal population has known standard deviation four. Test whether its mean is below fifty using an independent sample.",
+      "coach": "H₀: μ = 50; Hₐ: μ < 50. The population is normal, its standard deviation is known, and the sample is independent.",
+      "end": 8.803,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "setup",
+      "spoken": "Use a z test because the population standard deviation is known. Choose the less-than alternative before seeing the test result.",
+      "coach": "Known population σ = 4 calls for a z test. Decide on the left-sided alternative and α = 0.05 before you inspect the result.",
+      "end": 17.197,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "The independent observations are already in column A. Open the one-sample z Test.",
+      "coach": "Column A already contains the list readings. From Lists & Spreadsheet: Menu → 4 Statistics → 4 Stat Tests → 1 z Test.",
+      "end": 24.179,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "data",
+      "spoken": "Choose Data because the individual readings are already in a named list.",
+      "coach": "Individual readings are available, so keep Data in the input-method dialog and press Enter.",
+      "end": 29.863,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        }
+      ]
+    },
+    {
+      "chapter": "data",
+      "spoken": "Enter the null mean fifty and the known population standard deviation four. Then choose readings for List.",
+      "coach": "Enter μ₀ = 50 and σ = 4, then choose the named list readings. Tab moves between fields.",
+      "end": 40.345,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-5",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1711
+        },
+        {
+          "id": "press-6",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2622
+        },
+        {
+          "id": "press-7",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-8",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.4444
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5356
+        },
+        {
+          "id": "press-10",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-11",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.7178
+        },
+        {
+          "id": "press-12",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8089
+        }
+      ]
+    },
+    {
+      "chapter": "tail",
+      "spoken": "Keep frequency at one. Change the alternative to less than. Leave the optional graph unchecked.",
+      "coach": "Keep Frequency List = 1. Choose μ < μ₀, leave Draw unchecked and press Enter.",
+      "end": 51.513,
+      "hold": 9,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2167
+        },
+        {
+          "id": "press-14",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.3533
+        },
+        {
+          "id": "press-15",
+          "label": "←",
+          "ariaLabel": "Left arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6267
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "spoken": "Under the null hypothesis, the chance of a z score of negative three or lower is about zero point zero zero one three five. The test counted nine observations from the list.",
+      "coach": "The LCD counts n = 9 and shows z = −3. The one-tailed p-value is about 0.00135.",
+      "end": 65.139,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "result",
+      "spoken": "There is evidence that the mean is below fifty. A two-sided alternative would use both tails.",
+      "coach": "p ≈ 0.00135 < 0.05. Reject H₀: there is evidence that μ is below 50. A two-sided alternative would use both tails.",
+      "end": 72.789,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}

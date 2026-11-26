@@ -1,0 +1,202 @@
+{
+  "id": "CT43",
+  "title": "Sampling means and the CLT",
+  "intro": "Use the spread of sample means, not the spread of individual values.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "710fc5e3c81bc8620e3de4496f299d4005338f4f0482ee24bd2a50298fc4376a",
+    "scriptSha256": "d01864bae214346ce484868319d472c84f33c19ba759bbfdaf87f3a915a16358"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Work with the sample mean"
+    },
+    {
+      "id": "menu",
+      "title": "Open Normal Cdf"
+    },
+    {
+      "id": "bounds",
+      "title": "Enter the interval"
+    },
+    {
+      "id": "distribution",
+      "title": "Enter the mean and spread"
+    },
+    {
+      "id": "calculate",
+      "title": "Insert and evaluate"
+    },
+    {
+      "id": "interpret",
+      "title": "Read and interpret the result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "We want an average, not one observation. Independent population readings have mean eighty and standard deviation twelve.",
+      "coach": "Find a probability about X̄, an average of 36 independent readings, not about one reading. Population μ = 80 and σ = 12.",
+      "end": 9.048,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "setup",
+      "spoken": "The sample mean keeps the same centre. Its spread is the standard error: twelve divided by the square root of thirty-six.",
+      "coach": "The sample mean keeps centre 80. Its standard error is 12/√36 = 2.",
+      "end": 18.113,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "setup",
+      "spoken": "For this large sample, the CLT gives an approximately normal mean. A normal population would give an exact normal mean.",
+      "coach": "The distribution of the mean is approximately normal here. For a normal population, the distribution of the mean is exactly normal.",
+      "end": 27.185,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page, open Probability, Distributions, then Normal Cdf.",
+      "coach": "On a Calculator page: Menu → 5 Probability → 5 Distributions → 2 Normal Cdf.",
+      "end": 33.827,
+      "hold": 9,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Enter the lower and upper bounds of the interval.",
+      "coach": "Lower Bound 78, Upper Bound 83. Each Tab moves the highlight to the next field.",
+      "end": 40.153,
+      "hold": 9,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.1971
+        },
+        {
+          "id": "press-5",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.3143
+        },
+        {
+          "id": "press-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4314
+        },
+        {
+          "id": "press-7",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.5486
+        },
+        {
+          "id": "press-8",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6657
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7829
+        }
+      ]
+    },
+    {
+      "chapter": "distribution",
+      "spoken": "Keep the mean at eighty. Enter two as the standard deviation of the mean, not twelve and not the variance four.",
+      "coach": "Enter μ = 80 and σ = 2. Normal Cdf wants a standard deviation: do not enter 12 or the variance 4.",
+      "end": 52.099,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-10",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.244
+        },
+        {
+          "id": "press-11",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.408
+        },
+        {
+          "id": "press-12",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.572
+        },
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "calculate",
+      "spoken": "Enter inserts the command, then Enter again evaluates it.",
+      "coach": "First Enter inserts normCdf(78,83,80,2). The second Enter evaluates the command.",
+      "end": 58.076,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3533
+        },
+        {
+          "id": "press-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "interpret",
+      "spoken": "The chance is about zero point seven seven five under the normal approximation. Distinguish an exact normal model from an approximation.",
+      "coach": "P(78 < X̄ < 83) ≈ 0.775 under the normal approximation. Keep the normality assumption with the result.",
+      "end": 67.632,
+      "hold": 4,
+      "keys": []
+    }
+  ]
+}

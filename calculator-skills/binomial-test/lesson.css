@@ -202,3 +202,7 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 /* Keep the chosen reasoning legible instead of truncating a native select. */
 .answer-grid:where(.qb-calculator-lesson, .qb-calculator-lesson *){grid-template-columns:minmax(0,11rem) minmax(8.5rem,1fr);max-width:28rem}
 .answer-grid select:where(.qb-calculator-lesson, .qb-calculator-lesson *){padding-inline:5px}
+
+/* The common Watch frame owns its device size. Independent Try still uses the full handset. */
+.stat-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}

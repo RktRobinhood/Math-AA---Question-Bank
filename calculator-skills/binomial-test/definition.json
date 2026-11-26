@@ -1,0 +1,214 @@
+{
+  "id": "CT50",
+  "title": "Exact binomial hypothesis test",
+  "intro": "Use the null probability and include the observed count in the correct tail.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "3f524a222a830b1eeab582c1e698b487387acf6bfe4d1efbf2c81b2065cd8627",
+    "scriptSha256": "a3eadb457c540b7bd99e9c92daf2ee09a28bb317fcba113d62670b3056b66f6b"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Set the hypotheses and tail"
+    },
+    {
+      "id": "menu",
+      "title": "Open Binomial Cdf"
+    },
+    {
+      "id": "inputs",
+      "title": "Enter trials and null probability"
+    },
+    {
+      "id": "bounds",
+      "title": "Set inclusive bounds"
+    },
+    {
+      "id": "calculate",
+      "title": "Insert and evaluate"
+    },
+    {
+      "id": "result",
+      "title": "Decide and transfer"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "Eight of sixteen independent checks pass. Does the pass rate exceed the usual twenty-five percent?",
+      "coach": "Eight successes in 16 independent trials. H₀: p = 0.25. Hₐ: p > 0.25.",
+      "end": 6.98,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "setup",
+      "spoken": "Higher is the alternative, so look at eight or more. Include the observed eight.",
+      "coach": "Under H₀, X ~ Bin(16, 0.25). Count the observed eight and every count above it: P(X ≥ 8).",
+      "end": 13.621,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page choose Probability, Distributions, then Binomial C D F.",
+      "coach": "On a Calculator page: Menu → 5 Probability → 5 Distributions → E Binomial Cdf.",
+      "end": 20.536,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "E",
+          "ariaLabel": "E",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "inputs",
+      "spoken": "Enter sixteen trials and the null probability, zero point two five, not the sample proportion of eight out of sixteen.",
+      "coach": "Enter 16 trials and the null probability 0.25, not the observed proportion 8/16.",
+      "end": 31.06,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.1711
+        },
+        {
+          "id": "press-5",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.2622
+        },
+        {
+          "id": "press-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-7",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.4444
+        },
+        {
+          "id": "press-8",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.5356
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6267
+        },
+        {
+          "id": "press-10",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.7178
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8089
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Set the lower bound to eight and the upper bound to sixteen. Both are included.",
+      "coach": "Lower bound 8, upper bound 16. Binomial Cdf includes both endpoints.",
+      "end": 39.421,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.244
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.408
+        },
+        {
+          "id": "press-14",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-15",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "calculate",
+      "spoken": "Enter inserts the command. Enter again finds the whole upper tail.",
+      "coach": "First Enter inserts binomCdf(16,0.25,8,16). The second Enter evaluates the command.",
+      "end": 47.291,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3533
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "spoken": "The tail probability is about zero point zero two seven one. It is below zero point zero five: reject the null hypothesis.",
+      "coach": "The complete upper-tail probability is about 0.0271. Since it is below 0.05, reject H₀.",
+      "end": 56.8,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "result",
+      "spoken": "For a lower alternative, count from zero through the observation. The LCD still shows the upper-tail example.",
+      "coach": "For a lower-sided alternative, count from 0 through the observation. The LCD deliberately stays on this original upper-tail example.",
+      "end": 65.677,
+      "hold": 4,
+      "keys": []
+    }
+  ]
+}
