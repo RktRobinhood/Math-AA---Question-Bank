@@ -1070,10 +1070,18 @@
     } });
   // A table of distinct distances between five places, from points on a map.
   const tableSit = (rng) => {
-    let pts, D;
-    do { pts = [0, 1, 2, 3, 4].map(() => [rng.int(0, 40), rng.int(0, 40)]); D = pts.map((p) => pts.map((q) => Math.round(Math.hypot(p[0] - q[0], p[1] - q[1])))); }
-    while (new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size < 10 || D.some((r, i) => r.some((v, j) => i !== j && v < 4)));
-    return { D };
+    for (let attempt = 0; attempt < 120; attempt++) {
+      const pts = [0, 1, 2, 3, 4].map(() => [rng.int(0, 40), rng.int(0, 40)]);
+      const D = pts.map(p => pts.map(q => Math.round(Math.hypot(p[0] - q[0], p[1] - q[1]))));
+      const distances = D.flatMap((r, i) => r.slice(i + 1));
+      if (new Set(distances).size !== 10 || distances.some(v => v < 4)) continue;
+      // Rounding can break the triangle inequality: a table of least
+      // distances must not be improved by going through another vertex.
+      if (D.some((row, i) => row.some((v, j) => D.some((_, k) => v > D[i][k] + D[k][j])))) continue;
+      return { D };
+    }
+    // Fixed valid table only if the bounded sampler is exhausted.
+    return { D: [[0,24,7,12,33],[24,0,19,27,44],[7,19,0,17,38],[12,27,17,0,22],[33,44,38,22,0]] };
   };
   const distTable = (D) => ({ head: ["Vertex", ...D.map((_, i) => vx(i))], rows: D.map((r, i) => [vx(i), ...r.map((v, j) => (i === j ? "–" : `$${v}$`))]) });
   const prim = (D, verts, start) => { const inT = [start], order = []; while (inT.length < verts.length) { let best = null; for (const a of inT) for (const b of verts) if (!inT.includes(b) && (!best || D[a][b] < D[best[0]][best[1]])) best = [a, b]; inT.push(best[1]); order.push(best); } return order; };

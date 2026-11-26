@@ -540,6 +540,9 @@ export default {
   "t3-ai-graph-algorithms/tsp-bounds/table": (q, T) => {
     const D = readTable(q, T), n = D.length;
     T.require(new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size === (n * (n - 1)) / 2, "all the distances are different, so the nearest neighbour is never tied");
+    T.require(D.every((row, i) => row.every((v, j) =>
+      v === D[j][i] && D.every((_, k) => v <= D[i][k] + D[k][j]))),
+      "the table gives symmetric least distances, never shortened by an intermediate stop");
     let at = 0, upper = 0; const left = new Set([...Array(n).keys()].slice(1));
     while (left.size) { let nxt = null; for (const j of left) if (nxt === null || D[at][j] < D[at][nxt]) nxt = j; upper += D[at][nxt]; left.delete(nxt); at = nxt; }
     upper += D[at][0];
