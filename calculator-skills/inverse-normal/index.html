@@ -13,27 +13,36 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=native-bank-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css?v=native-bank-1"><script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="narration.js" defer></script><script src="watch-media.js" defer></script><script src="../normal/math.js" defer></script><script src="inverse.js" defer></script><script src="lesson.js?v=native-bank-1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=native-bank-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css?v=ct40-watch-1"><script src="../handheld/shell.js" defer></script><link rel="stylesheet" href="../normal/watch.css?v=ct39-watch-1"><script src="../handheld/watch-player.js?v=ct39-watch-1" defer></script><script src="narration.js" defer></script><script src="watch-media.js" defer></script><script src="../normal/math.js" defer></script><script src="inverse.js" defer></script><script src="lesson.js?v=ct40-watch-1" defer></script>
 </head>
-<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page normal-watch inverse-watch"><main class="qb-calculator-lesson">
 <header class="header">
-<div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT40</span><span id="caption-beta" class="rehearsal-tag"> · Caption-only rehearsal</span></p><h1>Inverse Normal</h1><p class="subtitle">Find the cutoff that leaves a given probability below or above it.</p></div>
-
+<div><p class="tag"><a href="../skills.html">Calculator Skills</a> · <a href="../scratchpad/index.html">Open calculator</a></p><h1>Inverse Normal</h1><p class="subtitle">Find the cutoff that leaves a given probability below or above it.</p></div>
 </header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
+<div class="calc-tabs tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
 <section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="0">
 <div class="watch-grid">
-<div class="viewer cx-handheld-stage">
-<p id="caption" class="caption"></p><p id="audio-state" class="audio-state" role="status" hidden></p>
+<div class="viewer modern-watch" id="watch-stage">
+<div class="watch-surface" id="watch-surface">
+<div id="key-strip"><span>Last key</span> <kbd id="active-key">—</kbd><span id="caption-beta">Caption-only rehearsal</span></div>
+<div id="watch-device-pane"><div id="watch-host"><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="screen-work"></div></div></div></div>
 <div class="worked-prompt"><div><span>Watch example</span> <i>X</i> ∼ N(50, 8²) · <strong id="worked-event">P(X &lt; c) = 0.75</strong></div><div id="compact-curve" class="curve"></div></div>
-<div class="inverse-frame">
-<div id="watch-host"><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="screen-work"></div><button type="button" id="stage-play" class="stage-play" aria-label="Play the demonstration"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 3l12 7-12 7z" fill="currentColor"/></svg></button></div></div>
+<p id="full-fit-note" hidden>Scroll the calculator to see the keypad.</p>
+<span id="play-feedback" aria-hidden="true" hidden data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
-<div class="player transport" aria-label="Playback controls">
-<div class="player-top"><button id="play" type="button" aria-label="Play" class="primary">Play</button><label><input type="checkbox" id="captions" checked> CC</label><button id="take-over" type="button" class="cx-watch-try">Take over</button></div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="30" step=".001"><span id="clock" aria-hidden="true">0:00</span></label>
+<div id="caption-band"><p id="caption" class="caption"></p></div>
+<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
+<div id="view-pick" role="group" aria-label="Calculator framing">
+ <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
+ <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
 </div>
-
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="48.5" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:48</span>
+<button id="cc" type="button" aria-label="Hide captions" title="Captions" aria-pressed="true">CC</button>
+<label class="watch-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+<button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
+<p id="audio-state" role="status" hidden></p>
+</div>
 
 </div>
 <aside class="director" aria-label="Demonstration steps">
@@ -46,40 +55,27 @@
 </div>
 </section>
 <section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
-<p id="try-origin" hidden></p><p id="link-warning" class="feedback" role="status" hidden></p><div class="try-grid">
+<div class="try-grid">
 <section class="try-device" aria-label="Practice on the handheld">
 <div id="try-host" tabindex="0" aria-label="Practice calculator. M opens Menu. In the wizard, Tab changes fields and Escape closes it."><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="try-work"></div></div></div>
 <p id="try-feedback" class="feedback" role="status"></p>
 <p id="key-help">Start with <b>Menu</b>. Select a field with <b>Tab</b>. Enter the area to the <b>left</b> of the cutoff.</p>
-<button id="reset-try" type="button" class="plain-link">Start blank</button>
+<button id="reset-try" type="button" class="plain-link">Reset Try</button>
 <button id="return-watch" type="button" class="plain-link">Return to Watch</button>
 </section>
 <div class="try-material">
-<section class="exercise" id="exercise" aria-labelledby="challenge-title">
+<p id="link-warning" class="link-notice" role="status" hidden></p><section class="exercise" id="exercise" aria-labelledby="challenge-title">
 <p class="tag">Your turn</p><h2 id="challenge-title">Tail practice</h2>
 <p id="challenge">Sensor lifetimes are normally distributed with mean 40 months and standard deviation 5 months. Find the cutoff exceeded by 20% of sensors.</p>
 <form id="answer-form"><label for="answer">Your cutoff <small>(2 decimal places)</small></label><div class="answer-row"><input type="text" inputmode="decimal" required id="answer" autocomplete="off" placeholder="e.g. 41.25"><button class="primary">Check</button></div></form>
 <p class="feedback" id="feedback" role="status"></p>
 <details><summary>Hint</summary><p>If the named area is to the right, subtract it from one before entering the area in Inverse Normal.</p></details>
 </section>
-<section class="workbench" id="custom-controls" aria-labelledby="bench-title">
-<h2 id="bench-title">Set your example</h2>
-<p>Set a distribution and tail area. Calculate on the handheld.</p>
-<form id="model" novalidate>
-<div class="model-fields">
-<label>Mean <i>μ</i><input required type="number" id="mean" step="any" value="35" inputmode="decimal"></label>
-<label>Standard deviation <i>σ</i><input required type="number" id="sd" step="any" value="4" inputmode="decimal"></label>
-</div>
-<div class="event-fields inverse-inputs">
-<label>Area is<select id="event"><option value="left">Left of the cutoff</option><option value="right" selected>Right of the cutoff</option></select></label>
-<label>Probability<input type="number" id="area" step="any" min="0" max="1" value="0.15" inputmode="decimal"></label>
-</div>
-<p class="event-line" id="event-line" aria-live="polite"></p>
-<button class="primary">Load into the handheld</button>
-</form>
-<p id="model-feedback" class="feedback" role="status"></p>
+<section class="workbench" aria-labelledby="bench-title">
+<h2 id="bench-title">Use a different example</h2>
+<p>Enter the left area, mean and standard deviation directly in the handheld. The graph below shows the area you entered. The answer checker above is only for the practice prompt.</p>
+<div id="try-curve" class="curve" aria-label="Normal curve with the entered left area shaded"></div>
 </section>
-<div id="try-curve" class="curve" aria-label="Normal curve with chosen area shaded"></div>
 </div>
 </div>
 </section>

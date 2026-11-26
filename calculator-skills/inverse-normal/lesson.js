@@ -1,6 +1,5 @@
 'use strict';
 (function(){
-function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id), {density}=globalThis.NspireNormal, M=globalThis.NspireInverseNormal, {cutoff,quantile,parse,validate,leftFromGiven}=M;
 const demo={mean:50,sd:8,area:.75,side:'left'}, tailDemo={mean:50,sd:8,area:.9,side:'right'};
 const defaults=['','0','1'], fields=['Area','μ','σ'];
@@ -65,27 +64,21 @@ function step(s,key){
  s.replace=false;
 }
 function LCD(s){
- const drawMenu=(id,ix)=>'<ul class="lcd-menu">'+menuItems[id].map(([k,n,to],j)=>'<li'+(j===ix?' class="current"':'')+'>'+k+': '+n+(to&&to!=='wizard'?' ▸':'')+'</li>').join('')+'</ul>';
+ const drawMenu=(id,ix)=>'<ul class="lcd-menu">'+menuItems[id].map(([k,n,to],j)=>'<li data-menu-item="'+k+'" data-menu-page="'+id+'"'+(j===ix?' class="current"':'')+'>'+k+': '+n+(to&&to!=='wizard'?' ▸':'')+'</li>').join('')+'</ul>';
  if(menuItems[s.page]){
    let menu=s.page==='top'?drawMenu('top',s.selected):s.page==='distributions'?drawMenu(s.branch,4)+drawMenu(s.page,s.selected):drawMenu('top',s.branch==='statistics'?5:4)+drawMenu(s.page,s.selected);
    return '<div class="menu-stack">'+menu+'</div>';
  }
- if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span class="'+(s.field===okField?'calc-active':'')+'">OK</span> <span class="'+(s.field===cancelField?'calc-active':'')+'">Cancel</span></div></div>';
+ if(s.page==='wizard')return '<div class="lcd-dialog"><strong>Inverse Normal</strong>'+fields.map((f,i)=>'<div data-field="'+i+'" class="lcd-field'+(i===s.field?' active':'')+'"><span>'+f+':</span><span>'+esc(s.values[i])+'&nbsp;</span></div>').join('')+'<div class="lcd-ok"><span data-dialog="3" class="'+(s.field===3?'calc-active':'')+'">OK</span> <span data-dialog="4" class="'+(s.field===4?'calc-active':'')+'">Cancel</span></div></div>';
  return (s.page==='result'?'<p>'+esc(s.previous)+'</p><p class="answers"><strong data-exact="'+esc(s.numeric)+'">'+esc(rawNumber(s.answer))+'</strong></p>':'')+'<div class="entry"><p>'+esc(s.page==='entry'?s.previous:'▏')+'</p></div>';
 }
 const qp=new URLSearchParams(location.search),request=M.exerciseFrom(qp),target=request.data;
 const tryHost=$('try-host'),work=$('try-work'),tryFeedback=$('try-feedback');
-let live,practice,track='practice',forkKey=null,light=0,exploring=false;
-const forkDrafts=new Map();
+let light=0;
 function seed(model){
- return {...base(),side:model.side,prefill:[model.side==='left'?rawNumber(model.p):'',rawNumber(model.mean),rawNumber(model.sd)]};
+ return {...base(),prefill:[model.side==='left'?rawNumber(model.p):'',rawNumber(model.mean),rawNumber(model.sd)]};
 }
-practice=seed(target);live=practice;
-function keepFork(){
- if(track!=='fork'||forkKey===null)return;
- forkDrafts.delete(forkKey);forkDrafts.set(forkKey,live);
- if(forkDrafts.size>12)forkDrafts.delete(forkDrafts.keys().next().value);
-}
+let live=seed(target);
 function paintTry(){
  work.innerHTML=LCD(live);
  tryFeedback.textContent=live.error||'';
@@ -97,7 +90,6 @@ function interact(key){
  if(!visibleTry())return;
  live.error='';
  try{step(live,key)}catch(err){live.error=err.message;live.selected=live.selected??0;}
- if(track==='fork')keepFork();else practice=live;
  if(document.activeElement!==tryHost)tryHost.focus({preventScroll:true});
  clearTimeout(light);tryShell.setKeys([key==='shift-tab'?'tab':key]);light=setTimeout(()=>tryShell.setKeys([]),160);
  paintTry();
@@ -105,6 +97,14 @@ function interact(key){
 function visibleTry(){return !$('try').hidden;}
 const watchShell=HandheldShell.mount({host:'#watch-host',screen:'#watch-host .screen',interactive:false,label:'Demonstrated TI-Nspire CX II-T'});
 const tryShell=HandheldShell.mount({host:tryHost,screen:'#try-host .screen',onKey:interact,label:'Interactive TI-Nspire CX II-T'});
+work.addEventListener('click',e=>{
+ const menu=e.target.closest('[data-menu-item]'), field=e.target.closest('[data-field]'), button=e.target.closest('[data-dialog]');
+ if(menu&&menu.dataset.menuPage===live.page)interact(menu.dataset.menuItem);
+ else if(field&&live.page==='wizard'){live.field=Number(field.dataset.field);live.replace=true;paintTry();}
+ else if(button&&live.page==='wizard'){live.field=Number(button.dataset.dialog);interact('enter');}
+ else return;
+ tryHost.focus({preventScroll:true});
+});
 document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  if(!visibleTry()||e.altKey||e.metaKey||e.ctrlKey||e.repeat||e.isComposing)return;
  const el=e.target;
@@ -120,34 +120,60 @@ const media=window.InverseNormalMedia,rehearsal=media.compose(window.InverseNorm
 const manifest=$('ct40-narration-manifest'),recording=manifest?media.decode(manifest.textContent,rehearsal):null;
 const timecode=t=>Math.floor(t/60)+':'+String(Math.floor(t)%60).padStart(2,'0');
 const seek=$('seek'),play=$('play'),steps=$('steps'),player=play.closest('.player'),watch=$('watch');
-let timeline=rehearsal,audio=null,mediaReady=false,now=0,active=-1,curveSignature='',firstPlay=true,running=false,raf=0,reference=0,last=-1,pending=false,generation=0,startTimer=0;
+let timeline=rehearsal,audio=null,mediaReady=false,now=0,rate=1,active=-1,curveSignature='',running=false,raf=0,reference=0,last='',pending=false,generation=0,startTimer=0;
+const stage=$('watch-stage'),surface=$('watch-surface'),overlay=$('play-feedback'),speed=$('play-rate'),devicePane=$('watch-device-pane');
+const transport=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$('fullscreen'),feedback:overlay,active:()=>!watch.hidden});
+const frameKey='qb-calculator-watch-frame';
+let framing='screen';
+try{if(localStorage.getItem(frameKey)==='full')framing='full';}catch{}
+function frame(next,save=false){
+ framing=next;
+ if(save)try{localStorage.setItem(frameKey,next);}catch{}
+ stage.dataset.frame=next;devicePane.scrollTop=0;
+ $('view-screen').setAttribute('aria-pressed',String(next==='screen'));
+ $('view-full').setAttribute('aria-pressed',String(next==='full'));
+ fitWatch();
+}
+$('view-screen').addEventListener('click',()=>frame('screen',true));
+$('view-full').addEventListener('click',()=>frame('full',true));
 watch.dataset.clock='caption';
 const clamp=t=>Math.min(timeline.duration,Math.max(0,Number(t)||0));
 function snapshotAt(t){
  const snapshot=base(),marker=timeline.markersMs.tailContext;
  for(const {timeMs,key} of timeline.tape){
    if(timeMs/1000>t)break;
+   if(t*1000>=marker&&timeMs<marker)continue;
    snapshot.side=timeMs>=marker?'right':'left';step(snapshot,key);
  }
  snapshot.side=t*1000>=marker?'right':'left';
  return snapshot;
 }
+function captionAt(cue,showResult){
+ const text=cue?.text??'';
+ if(showResult||!['40.04','40.07'].includes(cue?.id))return text;
+ // Before the second Enter show only the original instruction sentences,
+ // not the answer already present in the full cue/transcript.
+ const instruction=cue.id==='40.04'?'Confirm. Press Enter again to calculate.':'Confirm, then press Enter again.';
+ return text.startsWith(instruction)?text.slice(0,instruction.length):'';
+}
 function render(t){
  const {duration,starts,cues,tape,markersMs,timing}=timeline;
- const finish=t>=timeline.duration-.002,take=$('take-over');take.textContent=finish?'Try it':'Take over';take.setAttribute('aria-label',finish?'Open independent practice':'Take over the calculator');
  seek.value=String(t);seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));$('clock').textContent=timecode(t)+' / '+timecode(duration);
  const cue=tape.findLastIndex(e=>e.timeMs/1000<=t),event=tape[cue];
- watchShell.setKeys(event&&t-event.timeMs/1000<(event.key==='tab'?.38:.31)?[event.key]:[]);
+ const tail=t*1000>=markersMs.tailContext, current=event&&(!tail||event.timeMs>=markersMs.tailContext)?event:null;
+ watchShell.setKeys(current&&t-current.timeMs/1000<(current.key==='tab'?.38:.31)?[current.key]:[]);
+ $('active-key').textContent=current?({menu:'Menu',tab:'Tab',enter:'Enter',dot:'.'}[current.key]??current.key):'—';
  const beat=starts.findLastIndex(u=>u<=t);
- if(last!==cue){$('screen-work').innerHTML=LCD(snapshotAt(t));last=cue;}
- $('stage-play').hidden=!firstPlay||t>0;
- if(active!==beat||$('caption').textContent===''){
-   active=beat;$('caption').textContent=cues[beat]?.text??'';
+ const keyState=String(tail)+':'+cue;
+ if(last!==keyState){$('screen-work').innerHTML=LCD(snapshotAt(t));last=keyState;}
+ // The question switches independently of the cue and keyboard caches.
+ const isTail=tail,model=isTail?tailDemo:demo;
+ const revealed=t>=(isTail?timing['right-evaluate']:timing['left-evaluate']);
+ const captionState=beat+':'+revealed;
+ if(active!==captionState){
+   active=captionState;$('caption').textContent=captionAt(cues[beat],revealed);
    [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute('aria-current',String(i===beat)));
  }
- // This marker is deliberately independent of caption cache and both Evaluate events.
- const isTail=t>=markersMs.tailContext/1000,model=isTail?tailDemo:demo;
- const revealed=t>=(isTail?timing['right-evaluate']:timing['left-evaluate']);
  const cs=String(isTail)+':'+String(revealed);
  if(curveSignature!==cs){
    curveSignature=cs;
@@ -162,11 +188,16 @@ rehearsal.cues.forEach(({title},i)=>{
 });
 function label(){
  const text=running||pending?'Pause':now>=timeline.duration-.002?'Replay':'Play';
- play.textContent=text;play.setAttribute('aria-label',text);play.dataset.playing=String(running);
+ play.title=text;play.setAttribute('aria-label',text);play.dataset.playing=String(running);
+ play.querySelector('.play-icon').hidden=running||pending;
+ play.querySelector('.pause-icon').hidden=!running&&!pending;
+ if(!running&&!pending&&now<=.005){
+   overlay.dataset.action='play';overlay.dataset.initial='true';overlay.hidden=false;
+ }
 }
 function configure(next){
  now=media.remap(now,timeline,next);timeline=next;
- seek.max=String(timeline.duration);last=-1;active=-1;curveSignature='';
+ seek.max=String(timeline.duration);last='';active=-1;curveSignature='';
  $('transcript').textContent=timeline.cues.map(c=>c.text).join(' ');
  render(now);label();
 }
@@ -175,12 +206,13 @@ function mediaSeek(){
 }
 function go(t){
  now=clamp(t);
- if(mediaReady)mediaSeek();else reference=performance.now()-now*1000;
+ if(mediaReady)mediaSeek();else reference=performance.now()-now*1000/rate;
+ if(!running&&now>.005&&overlay.dataset.initial==='true'){overlay.dataset.initial='false';transport.clear();}
  render(now);label();fitWatch();
 }
 function readTime(at=performance.now()){
  if(!running)return now;
- return clamp(mediaReady&&audio?audio.currentTime:(at-reference)/1000);
+ return clamp(mediaReady&&audio?audio.currentTime:(at-reference)*rate/1000);
 }
 function stop(capture=true){
  if(capture)now=readTime();
@@ -200,7 +232,7 @@ function tick(ts){
  render(now);raf=requestAnimationFrame(tick);
 }
 function captionPlay(){
- reference=performance.now()-now*1000;running=true;pending=false;label();raf=requestAnimationFrame(tick);
+ reference=performance.now()-now*1000/rate;running=true;pending=false;label();raf=requestAnimationFrame(tick);
 }
 function status(message=''){
  $('audio-state').textContent=message;$('audio-state').hidden=!message;
@@ -237,17 +269,15 @@ function setupAudio(){
  el.addEventListener('durationchange',()=>{if(audio===el&&el.readyState>=2)adopt();});
  el.addEventListener('ended',()=>{if(audio===el&&running){now=readTime();if(now<timeline.duration-.12)fallback('Narration ended before its measured cues.');else end();}});
  el.addEventListener('error',()=>{if(audio===el)fallback('Narration could not load or decode.');});
- el.src=recording.audio;player.append(el);
+ el.playbackRate=rate;el.src=recording.audio;player.append(el);
 }
 function start(){
  if(watch.hidden||running||pending)return;
  if(now>=timeline.duration-.002)go(0);
  fitWatch();
- if(document.activeElement===$('stage-play'))play.focus({preventScroll:true});
- firstPlay=false;$('stage-play').hidden=true;
  if(!audio){captionPlay();return;}
  const el=audio,ticket=++generation;
- pending=true;label();mediaSeek();
+ pending=true;el.playbackRate=rate;label();mediaSeek();
  startTimer=setTimeout(()=>{if(ticket===generation&&pending)fallback('Narration did not start.');},8000);
  const fail=()=>{if(ticket===generation&&audio===el)fallback('Narration could not play.');};
  try{
@@ -259,93 +289,68 @@ function start(){
    },fail);
  }catch{fail();}
 }
-const toggle=()=>running||pending?stop():start();
-play.addEventListener('click',toggle);$('stage-play').addEventListener('click',toggle);
-seek.addEventListener('input',()=>go(Number(seek.value)));
-$('captions').addEventListener('change',()=>{$('caption').hidden=!$('captions').checked});
-HandheldTransport.controls({container:document.querySelector('.player-top'),play,seek,active:()=>!watch.hidden,onRestart:()=>{stop();go(0);start();}});
-const focusButton=watch.querySelector('.cx-transport-button[aria-label="Focused view"]');
-const focusText=document.createElement('span');focusText.className='focus-label';focusText.textContent=' Focus';focusButton?.append(focusText);
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||pending))stop();});
-const viewer=watch.querySelector('.viewer'),tabs=[$('watch-tab'),$('try-tab')];
-let manuallyExited=false,preferFocus=false;
-function focused(){return viewer.classList.contains('cx-focused');}
-function setFocus(on){if(focusButton&&on!==focused())focusButton.click();}
-function size(){
- if(watch.hidden){
-   const panel=$('try-host'),top=panel.getBoundingClientRect().top+scrollY;
-   panel.style.setProperty('--try-fit',Math.max(157,Math.min(306,Math.floor((lessonEnd()-top-12)*558/1168)))+'px');return;
- }
- const fixed=focused(),h=lessonEnd(),short=fixed&&innerWidth>710&&h<=600;
- const lines=$('caption').offsetHeight+$('audio-state').offsetHeight+viewer.querySelector('.worked-prompt').offsetHeight;
- const used=short?22:lines+player.offsetHeight+22;
- const top=Math.max(0,viewer.getBoundingClientRect().top);
- viewer.style.setProperty('--watch-fit',Math.max(155,Math.min(fixed?345:287,Math.floor((h-top-used)*558/1168)))+'px');
-}
-function fitWatch(){
- if(watch.hidden)return;
- size();const b=watchShell.body.getBoundingClientRect(),h=(lessonEnd());
- if(!manuallyExited&&!focused()&&(b.width<176||player.getBoundingClientRect().bottom>h+1))setFocus(true);
-}
-const sizeObserver=new ResizeObserver(size);
-[$('caption'),$('audio-state'),viewer.querySelector('.worked-prompt'),player].forEach(el=>sizeObserver.observe(el));
-window.addEventListener('resize',fitWatch);window.visualViewport?.addEventListener('resize',fitWatch);
-const focusObserver=new MutationObserver(()=>{
- const on=focused()&&!watch.hidden;
- document.body.classList.toggle('ct40-focused',on);
- for(const item of document.querySelectorAll('main > .header, main > .calc-tabs, main > .notes, .director'))item.inert=on;
- if(on)viewer.scrollTop=0;size();
+play.addEventListener('click',()=>{
+ const stopping=running||pending;
+ overlay.dataset.initial='false';transport.clear();
+ if(stopping)stop();else start();
+ transport.flash(!stopping);
 });
-focusObserver.observe(viewer,{attributes:true,attributeFilter:['class']});
-focusButton?.addEventListener('click',e=>{if(e.isTrusted)manuallyExited=!focused();});
-document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;if(e.key==='Escape'&&!watch.hidden&&focusButton?.getAttribute('aria-pressed')==='false'&&document.body.classList.contains('ct40-focused')){
- manuallyExited=true;focusButton.focus({preventScroll:true});
-}});
-function showTrack(){
- const copy=track==='fork';
- $('try').dataset.track=track;
- $('try-origin').textContent=copy?'Editable copy. Your independent practice stays as you left it.':exploring?'Custom distribution. The independent challenge is paused.':'';
- $('try-origin').hidden=!copy&&!exploring;
- $('exercise').hidden=copy||exploring;
- $('custom-controls').hidden=copy;
- $('reset-try').textContent=copy||exploring?'Open independent practice':'Reset practice';
- $('link-warning').hidden=copy||!request.error;
- paintTry();size();
+seek.addEventListener('input',()=>go(Number(seek.value)));
+speed.addEventListener('change',()=>{
+ now=readTime();rate=Number(speed.value);
+ if(audio)audio.playbackRate=rate;
+ reference=performance.now()-now*1000/rate;
+ render(now);fitWatch();
+});
+$('cc').addEventListener('click',()=>{
+ const hide=!$('caption-band').hidden;
+ $('caption-band').hidden=hide;
+ $('cc').setAttribute('aria-pressed',String(!hide));
+ $('cc').setAttribute('aria-label',hide?'Show captions':'Hide captions');
+ fitWatch();
+});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||pending))stop();});
+function fitWatch(){
+ if($('watch').hidden)return;
+ const max=stage.matches(':fullscreen,.watch-fullscreen-fallback')?innerHeight-surface.getBoundingClientRect().top:innerHeight-surface.getBoundingClientRect().top-window.scrollY;
+ const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+(document.querySelector('.tabbar')?.offsetHeight||0);
+ const overhead=footer+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
+ const available=max-overhead;
+ const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
+ const needsScroll=framing==='full'&&Math.ceil(full*1168/558)>available+2;
+ $('full-fit-note').hidden=!needsScroll;
+ devicePane.tabIndex=needsScroll?0:-1;
+ if(needsScroll)devicePane.setAttribute('aria-label','Full calculator. Scroll to see the keypad.');
+ else devicePane.removeAttribute('aria-label');
+ stage.style.setProperty('--normal-full-fit',full+'px');
+ stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(135,available-17)+'px':'none');
+ stage.style.setProperty('--normal-screen-fit',Math.min(420,Math.max(188,Math.floor(available*4/3)))+'px');
 }
-function openPractice(){
- keepFork();track='practice';forkKey=null;live=practice;tab(1,true);
-}
-function tab(i,shouldFocus){
- if(i===0){keepFork();}
- else if(!watch.hidden){stop();preferFocus=focused();setFocus(false);}
- tabs.forEach((el,k)=>{el.tabIndex=k===i?0:-1;el.setAttribute('aria-selected',String(k===i));$(el.getAttribute('aria-controls')).hidden=k!==i;});
+const resize=new ResizeObserver(fitWatch);
+[$('caption-band'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
+window.addEventListener('resize',fitWatch);
+document.addEventListener('fullscreenchange',fitWatch);
+frame(framing);
+const tabs=[$('watch-tab'),$('try-tab')];
+function tab(i,target){
+ if(i){if(running||pending)stop();void transport.exit();}
+ tabs.forEach((el,k)=>{el.tabIndex=k===i?0:-1;el.setAttribute('aria-selected',String(i===k));$(el.getAttribute('aria-controls')).hidden=i!==k;});
  clearTimeout(light);tryShell.setKeys([]);
- if(i===0){
-   render(now);label();if(preferFocus&&!manuallyExited)setFocus(true);fitWatch();requestAnimationFrame(fitWatch);
- }else{showTrack();requestAnimationFrame(size);}
- if(shouldFocus)(i?tryHost:play).focus({preventScroll:true});
+ if(i)paintTry();else{window.scrollTo({top:0,left:0,behavior:'instant'});fitWatch();}
+ if(target)(i?tryHost:play).focus({preventScroll:true});
 }
 tabs.forEach((el,i)=>{
- el.onclick=()=>{if(i)openPractice();else tab(0,true);};
+ el.onclick=()=>tab(i,true);
  el.onkeydown=e=>{
-   if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?1:1-i;if(j)openPractice();else tab(0,false);tabs[j].focus();}
+   if(['ArrowLeft','ArrowRight','Home','End'].includes(e.key)){e.preventDefault();const j=e.key==='Home'?0:e.key==='End'?1:1-i;tab(j,false);tabs[j].focus();}
  };
 });
-$('to-try').onclick=openPractice;
-$('take-over').onclick=()=>{
- if(running||pending)stop();
- if(now>=timeline.duration-.002){openPractice();return;}
- track='fork';forkKey=now.toFixed(3);
- live=forkDrafts.get(forkKey)||snapshotAt(now);keepFork();tab(1,true);
-};
-$('reset-try').onclick=()=>{
- if(track==='fork'){openPractice();return;}
- practice=seed(target);live=practice;exploring=false;
- resetForm();$('answer').value='';$('feedback').textContent='';$('model-feedback').textContent='';
- showTrack();tryHost.focus({preventScroll:true});
-};
+$('to-try').onclick=()=>tab(1,true);
 $('return-watch').onclick=()=>tab(0,true);
-const ui={mean:$('mean'),sd:$('sd'),area:$('area'),event:$('event')};
+$('reset-try').onclick=()=>{
+ live=seed(target);$('answer').value='';$('feedback').textContent='';$('feedback').classList.remove('correct');
+ paintTry();tryHost.focus({preventScroll:true});
+};
 function curve(el,{mean,sd,area,side='left'},reveal){
  const L=18,R=314,B=78;
  const x=z=>L+(z+4.4)*(R-L)/8.8,y=z=>B-150*density(z);
@@ -359,37 +364,13 @@ function curve(el,{mean,sd,area,side='left'},reveal){
  const cut=Math.abs(z)<4.3, marker=x(clamped).toFixed(2);
  el.innerHTML='<svg viewBox="0 0 332 116" role="img" aria-label="Normal curve; '+esc(side)+' side of cutoff shaded'+(reveal?', cutoff '+esc(show(value)):'')+'" xmlns="http://www.w3.org/2000/svg"><path class="axis" d="M12,'+B+' H320"/>'+fill+'<path class="bell" d="'+path(-4.35,4.35)+'"/><path class="axis" d="M'+x(0)+','+(B-2)+' v4"/><text x="'+x(0)+'" y="96" text-anchor="middle">'+esc(show(mean))+'</text>'+(cut?'<path class="cut" d="M'+marker+','+B+' V'+y(z).toFixed(2)+'"/><text x="'+marker+'" y="'+(Math.abs(z)<.37?111:96)+'" text-anchor="middle">'+esc(label)+'</text>':'')+'</svg>';
 }
-const eventLine=$('event-line');
-function description(d){
- return 'Mean '+show(d.mean)+', standard deviation '+show(d.sd)+'. Find the cutoff with probability '+show(d.p)+' to its '+d.side+'.';
+if(request.linked){
+ $('challenge-title').textContent='Linked cutoff';
+ $('challenge').textContent='Mean '+show(target.mean)+', standard deviation '+show(target.sd)+'. Find the cutoff with probability '+show(target.p)+' to its '+target.side+'.';
 }
-function resetForm(){
- ui.mean.value=String(target.mean);ui.sd.value=String(target.sd);ui.area.value=String(target.p);ui.event.value=target.side;update();
-}
-function update(){
- const side=ui.event.value,p=parse(ui.area.value);
- $('model-feedback').textContent='';
- let message='Use a probability strictly between 0 and 1.';
- try{leftFromGiven(p,side);message=(side==='left'?'Left':'Right')+' area = '+show(p)+(side==='right'?' · Convert to the left area.':'');}
- catch(e){message=e.message;}
- eventLine.textContent=message;
-}
-if(request.linked){$('challenge-title').textContent='Linked cutoff';$('challenge').textContent=description(target);}
-$('link-warning').textContent=request.error;
-Object.values(ui).forEach(el=>el.addEventListener(el===ui.event?'change':'input',update));resetForm();
-$('model').onsubmit=e=>{
- e.preventDefault();if(track==='fork')return;
- const feedback=$('model-feedback');
- try{
-   const data={side:ui.event.value,p:parse(ui.area.value),mean:parse(ui.mean.value),sd:parse(ui.sd.value)};
-   cutoff({...data,area:leftFromGiven(data.p,data.side)});
-   practice=seed(data);live=practice;exploring=true;showTrack();
-   feedback.textContent=data.side==='right'?'Loaded the model. Enter the left area yourself.':'Loaded. Open Inverse Normal on the handheld to calculate.';
-   tryHost.focus({preventScroll:true});
- }catch(err){feedback.textContent=err.message;}
-};
+$('link-warning').textContent=request.error;$('link-warning').hidden=!request.error;
 $('answer-form').onsubmit=e=>{
- e.preventDefault();if(track==='fork'||exploring)return;
+ e.preventDefault();
  const raw=$('answer').value.trim().replace(',','.'),v=parse(raw),el=$('feedback');
  try{
    const answer=cutoff({...target,area:leftFromGiven(target.p,target.side)}),expected=Number(answer.toFixed(2)),lcd=Number(Number(fmtAnswer(answer)).toFixed(2));
