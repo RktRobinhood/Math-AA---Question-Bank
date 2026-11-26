@@ -185,3 +185,60 @@ html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
  html[data-practice-watch] #player #watch-controls .time{grid-column:5/-1}
  html[data-practice-watch] #player #watch-controls .seek{grid-column:1/5}
 }
+
+
+/* Fullscreen uses a separate fit budget for both LCD and directions.
+   The playhead, rendering surface and student's selected framing stay put. */
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback){
+ --full-watch-room:calc(100dvh - 125px - var(--watch-caption-height,0px));
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene{
+ width:100%;max-width:1720px;flex:1 1 auto;min-height:0;align-content:center;
+ grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);grid-template-rows:auto;
+ gap:clamp(18px,3.2vw,66px);padding:clamp(12px,2vw,34px);
+}
+.solve-lesson[data-cx-mode=watch] #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .lcd-group{
+ width:100%;max-width:100%;--handheld-width:clamp(140px,calc(var(--full-watch-room)*.47774),680px);
+}
+.solve-lesson #player.solve-screen-only:is(:fullscreen,.watch-fullscreen-fallback) .scene .hh-body{
+ width:min(100%,calc(var(--full-watch-room)*1.33333));max-width:none
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat{
+ display:grid;gap:.48rem;max-width:39ch;justify-self:start
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-title{
+ font-size:clamp(1.3rem,calc(.88rem + 1.65vw),3rem);
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-tip{
+ display:block;font-size:clamp(.95rem,calc(.69rem + .72vw),1.55rem);min-height:0;max-width:38ch
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .key-trail-label{
+ display:block;font-size:clamp(.72rem,calc(.62rem + .4vw),1.18rem)
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps{gap:5px}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps kbd{
+ font-size:clamp(.72rem,calc(.61rem + .37vw),1.13rem)
+}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps li{
+ min-width:1.35rem;min-height:1.15rem
+}
+@media(max-width:700px) and (orientation:portrait){
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene{
+  padding:10px 10px 8px;gap:12px;grid-template-columns:minmax(0,1fr);justify-items:center;
+ }
+ .solve-lesson[data-cx-mode=watch] #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .lcd-group{
+  --handheld-width:clamp(130px,calc((var(--full-watch-room) - 130px)*.47774),300px)
+ }
+ .solve-lesson #player.solve-screen-only:is(:fullscreen,.watch-fullscreen-fallback) .scene .hh-body{
+  width:min(100%,calc(max(160px,var(--full-watch-room) - 150px)*1.33333))
+ }
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat{
+  gap:.25rem;max-width:none;width:100%
+ }
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps{gap:3px}
+}
+@media(max-height:530px) and (orientation:landscape){
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene{padding:8px 12px;gap:12px}
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-title{font-size:1.2rem}
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-tip{font-size:.86rem}
+}

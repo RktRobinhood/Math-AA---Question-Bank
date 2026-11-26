@@ -67,8 +67,8 @@ sound.addEventListener('click',()=>{
  media.muted=!media.muted;
  const label=media.muted?'Unmute':'Mute';
  sound.setAttribute('aria-label',label);sound.title=label;
- sound.querySelector('.sound-waves').hidden=media.muted;
- sound.querySelector('.sound-off').hidden=!media.muted;
+ sound.querySelector('.sound-waves').toggleAttribute('hidden',media.muted);
+ sound.querySelector('.sound-off').toggleAttribute('hidden',!media.muted);
 });
 function fitWatch(){
  if(mode!=='watch')return;
@@ -159,8 +159,9 @@ function paint(t){
 function playing(v){
  running=v;willPlay=false;
  play.setAttribute('aria-label',v?'Pause':time>=duration-.015?'Replay':'Play');
- play.querySelector('.play-icon').hidden=v;
- play.querySelector('.pause-icon').hidden=!v;
+ // These are SVG elements; setting a .hidden property does not change the attribute.
+ play.querySelector('.play-icon').toggleAttribute('hidden',v);
+ play.querySelector('.pause-icon').toggleAttribute('hidden',!v);
  cancelAnimationFrame(rafId);if(v)rafId=requestAnimationFrame(tick);
 }
 function tick(now){
