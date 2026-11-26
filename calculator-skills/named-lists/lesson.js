@@ -129,7 +129,7 @@ $("typed").addEventListener("submit",e=>{
 });
 const label=()=>{
  const t=playing?"Pause":clock>=layout.duration-.007?"Replay":"Play";
- play.querySelector(".watch-play-icon").hidden=playing;play.querySelector(".watch-pause-icon").hidden=!playing;
+ play.querySelector(".watch-play-icon").toggleAttribute("hidden",playing);play.querySelector(".watch-pause-icon").toggleAttribute("hidden",!playing);
  play.setAttribute("aria-label",t);play.title=t;
 };
 function pause(){

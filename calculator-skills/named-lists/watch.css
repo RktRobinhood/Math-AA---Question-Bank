@@ -104,3 +104,5 @@
 @media(max-width:340px) and (max-height:610px){
  #stage[data-mode=watch][data-frame=full]:not(:fullscreen):not(.watch-fullscreen-fallback) #handheld-host{--handheld-width:calc((var(--ct28-scene) + 92px)*.47774)}
 }
+
+#watch-player svg[hidden]{display:none!important}
