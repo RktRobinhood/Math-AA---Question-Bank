@@ -77,6 +77,12 @@ exact `spokenCues` array order from its `CTxx.cues.json`.
 | CT42 | `poisson/narration.mp3`, inline inert `ct42-narration-manifest` in `poisson/index.html`. Keep the existing transcript and measure all typed keys; see lesson hold rules below. |
 | Entries marked `shared-measured-json` (49) | Add the reviewed `narration.mp3` next to the lesson, and replace its existing `narration.sync.json` with a measured package (below). Neither file alone activates narration. |
 
+CT37 and CT39 to CT42 are recorded (FAL-1695). Their inline packages also carry
+`audioSha256`, which the players ignore and
+`node scripts/check-calculator-narration.mjs` verifies; the checker runs each
+route's own `watch-media.js` (CT39: `voice-profile.js`) on the package exactly
+as the page does.
+
 Inert tags are `type="application/json"`. Escape `<` in inline data as
 `\u003c`. Their shape is `{version:1,lesson,timing:"measured-playback",audio,durationMs,cues,keyTimesMs}`;
 each cue has `id,startMs,text`; CT40 additionally requires `markersMs`.
