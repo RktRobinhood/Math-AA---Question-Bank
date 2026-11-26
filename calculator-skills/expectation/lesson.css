@@ -113,3 +113,9 @@ button:where(.qb-calculator-lesson, .qb-calculator-lesson *),input:where(.qb-cal
   .qb-calculator-lesson #stage.focused #caption{font-size:.8rem;line-height:1.3}
   .qb-calculator-lesson #stage.focused .deck{padding-block:5px}
 }
+
+/* CT36 adapter styling only. Mode switching and all Watch chrome are shared. */
+.ct36-page #ct36-shell{margin:.35rem 0 .85rem;width:100%;max-width:none}
+.ct36-page .lw-stage[data-mode=try]{background:none;border:0;overflow:visible}
+.ct36-page .lw-stage[data-mode=try] .lw-surface{padding:0}
+.ct36-page .lw-stage[data-mode=try] .lw-device{width:100%;max-width:none}
