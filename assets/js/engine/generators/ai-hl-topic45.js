@@ -699,12 +699,12 @@
         const t = r * Math.sqrt((n - 2) / (1 - r * r));
         p = c.pos ? 1 - tCdf(t, n - 2) : tCdf(t, n - 2);
       } while (!(Math.abs(r) < 0.97) || ys.some((y) => y <= 0) || p < 0.0005 || p > 0.4 || (p > 0.75 * alpha && p < 1.3 * alpha));
-      const alt = `there is a ${c.pos ? "positive" : "negative"} correlation between the two variables`;
-      return { params: { xs, ys, pos: c.pos, alpha }, stem: `The table shows the ${c.x}, $x$, and the ${c.y}, $y$, for eight randomly chosen ${c.unit}. Both variables are assumed to be normally distributed, and $\\rho$ is the population product moment correlation coefficient. ` +
+      const alt = `there is a ${c.pos ? "positive" : "negative"} linear correlation between the two variables in the population`;
+      return { params: { xs, ys, pos: c.pos, alpha }, stem: `The table shows the ${c.x}, $x$, and the ${c.y}, $y$, for eight randomly chosen ${c.unit}. Assume the pairs are independent observations from a bivariate normal distribution. Let $\\rho$ be the population product moment correlation coefficient. ` +
         `The hypotheses $${H0}: \\rho = 0$ and $${H1}: \\rho ${tail(!c.pos)} 0$ are tested at the $${pct(alpha * 100)}$ significance level.`,
         table: { head: [c.rows[0]].concat(xs.map((x) => m(num(x)))), rows: [[c.rows[1]].concat(ys.map((y) => m(num(y))))] }, parts: [
           P("Find the value of the sample correlation coefficient, $r$.", 2, ans.sf(r), ["Enter the data in the GDC and run the linear regression $t$-test.", `$r = ${sf(r)}$`]),
-          P("Find the $p$-value for the test.", 2, ans.sf(p), [`The one-tailed test of $\\rho = 0$ on the GDC gives $p = ${sf(p)}$.`]),
+          P("Find the $p$-value for the test.", 2, ans.sf(p), [`Use the ${c.pos ? "positive" : "negative"} alternative in the GDC calculation. The one-tailed test of $\\rho = 0$ on the GDC gives $p = ${sf(p)}$.`]),
           P("State the conclusion of the test.", 1, conclusion(rng, p < alpha, alt), [compare(p, alpha), p < alpha ? `Reject $${H0}$.` : `Do not reject $${H0}$.`])] };
     } });
   const CR_SK = ["AI-AHL4.18.critical-region", "AI-AHL4.18.error-probability"];
