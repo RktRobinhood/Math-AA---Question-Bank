@@ -88,3 +88,23 @@ body.neutral-embedded{
   box-shadow:0 3px 8px #162c2926
 }
 .neutral-embedded .neutral-trig:not([hidden])+.np-notice:not([hidden]){bottom:49px}
+
+/* Phone Practice can scroll the physical shell on short/landscape screens
+   instead of shrinking the keys until every row fits. Desktop and solo are untouched. */
+body.neutral-embedded.neutral-applet{
+  --applet-unit:calc(1px * var(--applet-scale,1));
+  --applet-pad:calc(8 * var(--applet-unit));
+  padding:var(--applet-pad) var(--applet-pad) calc(16 * var(--applet-unit));
+  overscroll-behavior:contain;
+  --neutral-handheld-width:min(100%,max(calc(414 * var(--applet-unit)),82vw),
+    max(calc(292 * var(--applet-unit)),calc((100dvh - 2 * var(--applet-pad)) * 558 / 1168)))
+}
+html:has(body.neutral-applet){overscroll-behavior:contain}
+/* Extend hit areas within their clear physical spacing; never overlap rockers. */
+.neutral-applet .hh-key.hh-number:not(:disabled)::before,
+.neutral-applet .hh-key.hh-enter:not(:disabled)::before,
+.neutral-applet .hh-key.hh-segment:not(:disabled)::before{
+  content:"";position:absolute;inset:-1.45cqw 0
+}
+.neutral-applet .hh-key.hh-number:not(:disabled)::before{inset-inline:-1.02cqw}
+.neutral-applet .hh-key.hh-segment:not(:disabled)::before{inset-inline:-.1cqw}

@@ -309,7 +309,7 @@ const THEME = `<script>try{document.documentElement.dataset.theme=localStorage.g
 
 // Every page has the same frame. shell.js draws the top bar (course switch, sections, theme,
 // Your paper) and the phone tab bar; the links in <noscript> are for readers without scripts.
-function page({ base, baseHref = "", title, nav = "questions", head = "", body, scripts = [], bodyAttrs = "", description = "", calcNav = false }) {
+function page({ base, baseHref = "", title, nav = "questions", head = "", body, scripts = [], bodyAttrs = "", description = "", calcNav = false, calcCssVersion = "beta-fit-2" }) {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -318,7 +318,7 @@ function page({ base, baseHref = "", title, nav = "questions", head = "", body, 
     <title>${esc(title)}</title>${description ? `\n    <meta name="description" content="${esc(description)}">` : ""}
     ${THEME}
     <link rel="stylesheet" href="${base}assets/css/styles.css${calcNav ? "?v=theme-3" : ""}">${calcNav ? `
-    <link rel="stylesheet" href="${base}assets/css/calculator-integration.css?v=beta-fit-2">` : ""}${head}
+    <link rel="stylesheet" href="${base}assets/css/calculator-integration.css?v=${calcCssVersion}">` : ""}${head}
   </head>
   <body data-base="${base}" data-nav="${nav}"${bodyAttrs}>
     <noscript><p class="page"><a href="${base}">Questions</a> · <a href="${base}statistics/">Statistics</a> · <a href="${base}syllabus/">Syllabus</a> · <a href="${base}practice.html">Practice</a>${calcNav ? ` · <a href="${base}calculator-skills/skills.html">Calculator Skills</a>` : ""}</p></noscript>
@@ -359,13 +359,13 @@ for (const [topic, name] of Object.entries(topics)) {
 // folder is included, so adding a topic file needs no change here.
 const generatorFiles = fs.readdirSync(path.join(ROOT, "assets/js/engine/generators")).filter((f) => f.endsWith(".js")).sort();
 write("practice.html", page({
-  base: "./", title: "Practice | IB Math Question Bank", nav: "practice", calcNav: true,
+  base: "./", title: "Practice | IB Math Question Bank", nav: "practice", calcNav: true, calcCssVersion: "practice-applet-1",
   description: "Adaptive IB Mathematics practice for AA and AI, SL and HL: generated questions with worked solutions, by subtopic.",
   head: `\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
     "vendor/katex/katex.min.js", "js/question-types.js?v=49785a1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
-    ...generatorFiles.map((f) => `js/engine/generators/${f}${f === "w3-number.js" ? "?v=49785a1" : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-secondary-1", "js/practice.js?v=practice-dock-1",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}${f === "w3-number.js" ? "?v=49785a1" : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice.js?v=practice-dock-1",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));
 

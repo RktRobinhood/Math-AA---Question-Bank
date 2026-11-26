@@ -65,7 +65,7 @@
   font-size:.81rem;line-height:1.35;padding:.25rem;margin:0;color:var(--muted);pointer-events:none}
 .practice-calc-frame{display:block;width:100%;height:100%;min-height:0;border:0;background:transparent}
 @media (min-width:900px){
-  #app.with-practice-calc{
+  #app.with-practice-calc[data-practice-calc-mode=dock]{
     /* Reserve the reading rail first. The handset fills whichever real limit it reaches first. */
     --calc-gap:12px;
     --calc-inset:14px;
@@ -80,18 +80,27 @@
     width:min(100%,calc(860px + var(--calc-frame-w) + var(--calc-gap)));margin:0 auto;display:grid;
     grid-template-columns:minmax(0,1fr) minmax(0,var(--calc-frame-w));gap:0 var(--calc-gap);align-items:start
   }
-  .practice-calc-panel[open]{position:sticky;inset:auto;top:calc(var(--top-h) + var(--calc-inset));margin:var(--calc-inset) 0 0;
+  .practice-calc-panel[open][data-mode=dock]{position:sticky;inset:auto;top:calc(var(--top-h) + var(--calc-inset));margin:var(--calc-inset) 0 0;
     grid-column:2;grid-row:1;width:100%;max-width:none;
     height:var(--calc-frame-h);max-height:none}
-  .practice-calc-back{right:0;top:-10px}
+  [data-mode=dock]>.practice-calc-back{right:0;top:-10px}
 }
-@media (max-width:899px){
-  html:has(#app.with-practice-calc){overflow:hidden}
-  .practice-calc-panel[open]{position:fixed;inset:0;margin:0;width:100%;height:100dvh;max-height:none;
-    max-width:none;background:var(--surface)}
-  .practice-calc-back{top:calc(6px + env(safe-area-inset-top,0px));right:calc(9px + env(safe-area-inset-right,0px));width:44px;height:44px}
-  .practice-calc-frame{height:calc(100% - 41px - env(safe-area-inset-top,0px));margin-top:calc(41px + env(safe-area-inset-top,0px))}
+/* One CSS mode, selected by the same JS test as the native modal. This also
+   catches Android "Desktop site" where the layout viewport can report 980px. */
+html:has(.practice-calc-panel[open][data-mode=applet]){overflow:hidden;overscroll-behavior:none}
+.practice-calc-panel[open][data-mode=applet]{
+  --applet-unit:calc(1px * var(--applet-scale,1));
+  --applet-bar:calc(52 * var(--applet-unit) + env(safe-area-inset-top,0px));
+  position:fixed;inset:0;margin:0;width:100%;height:100dvh;max-height:none;max-width:none;
+  background:var(--surface);overflow:hidden
 }
+[data-mode=applet]>.practice-calc-back{display:none}
+[data-mode=applet]>.practice-calc-frame{
+  width:calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));
+  height:calc(100% - var(--applet-bar) - env(safe-area-inset-bottom,0px));
+  margin:var(--applet-bar) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)
+}
+[data-mode=applet]>.practice-calc-status{top:var(--applet-bar);font-size:calc(13 * var(--applet-unit))}
 @media print{.practice-calc-panel,.practice-calc-trigger{display:none!important}#app.with-practice-calc{display:block;width:100%}}
 
 /* Practice only: permission stays passive; the right-edge tab opens the live handheld. */
@@ -143,20 +152,30 @@
 .practice-lesson-content iframe{
   display:block;width:100%;height:min(466px,calc(100dvh - 74px));border:0;background:#182621
 }
-@media(max-width:899px){
- .practice-calc-help{top:calc(6px + env(safe-area-inset-top,0px));right:59px}
+[data-mode=applet]>.practice-calc-help{
+  top:calc(4 * var(--applet-unit) + env(safe-area-inset-top,0px));
+  right:max(calc(8 * var(--applet-unit)),env(safe-area-inset-right,0px));
+  width:calc(44 * var(--applet-unit));height:calc(44 * var(--applet-unit))
 }
+[data-mode=applet]>.practice-calc-help svg{width:calc(20 * var(--applet-unit));height:calc(20 * var(--applet-unit))}
 @media(max-width:510px){
  .practice-lesson-content iframe{height:min(446px,calc(100dvh - 74px))}
 }
 @media print{.practice-lesson,.practice-calc-help{display:none!important}}
 
-/* The same question toggle stays reachable inside the full-screen mobile calculator. */
+/* The one real question toggle doubles as the applet's predictable return. */
 .practice-calc-modal-edge[hidden]{display:none}
-@media(max-width:899px){
- .practice-calc-modal-edge{
-  position:absolute;z-index:2;top:env(safe-area-inset-top,0px);
-  left:max(9px,env(safe-area-inset-left,0px));margin:0;
- }
- .practice-calc-modal-edge .practice-calc-trigger{min-height:40px;border-radius:8px}
+[data-mode=applet]>.practice-calc-modal-edge{
+  position:absolute;z-index:2;top:calc(4 * var(--applet-unit) + env(safe-area-inset-top,0px));
+  left:max(calc(8 * var(--applet-unit)),env(safe-area-inset-left,0px));margin:0
 }
+[data-mode=applet]>.practice-calc-modal-edge .practice-calc-trigger{
+  min-height:calc(44 * var(--applet-unit));padding-inline:calc(10 * var(--applet-unit));
+  gap:calc(6 * var(--applet-unit));font-size:calc(14 * var(--applet-unit));
+  border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)
+}
+[data-mode=applet]>.practice-calc-modal-edge .practice-calc-trigger:hover{background:var(--sunk);color:var(--accent)}
+[data-mode=applet]>.practice-calc-modal-edge .practice-calc-trigger svg{
+  width:calc(18 * var(--applet-unit));height:calc(18 * var(--applet-unit))
+}
+[data-mode=applet]>.practice-calc-modal-edge .practice-calc-panel-icon{display:none}
