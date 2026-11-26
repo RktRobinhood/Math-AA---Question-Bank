@@ -27,6 +27,8 @@ function validate(spec) {
    if (column === undefined || column < previousChapter || !Number.isFinite(beat.end) || beat.end <= end ||
        !Number.isFinite(beat.hold) || beat.hold < 0 || !validText(beat.coach,300) ||
        (beat.spoken !== '' && !validText(beat.spoken,500))) fail('bad beat ' + (i+1));
+   if (beat.silent!==undefined&&(beat.silent!==true||beat.spoken!==''))
+     fail('explicit silent beat must have no spoken text');
    if (!Array.isArray(beat.keys)) fail('a beat needs an explicit key list');
    if (!beat.hold && beat.keys.length) fail('keys require a teaching hold');
    let last = -1;
@@ -214,10 +216,11 @@ function mount(host, input, adapter) {
    mediaAlert.textContent='Audio unavailable.';
    clockOrigin=win.performance.now()-t*1000;update();
  }
+ function mediaFor(span){return spec.beats[span.i].silent?null:activeMedia?.audio;}
  async function enter(ticket){
-   const point=layout.at(t),a=activeMedia?.audio;phase=point.speaking?'voice':'hold';
+   const point=layout.at(t),a=mediaFor(point.span);phase=point.speaking?'voice':'hold';
    clockOrigin=win.performance.now()-t*1000;
-   if(!a||phase!=='voice'){a?.pause();return ticket===epoch;}
+   if(!a||phase!=='voice'){activeMedia?.audio.pause();return ticket===epoch;}
    let timeout;
    try{
       a.currentTime=point.audioTime;a.playbackRate=1;
@@ -228,7 +231,7 @@ function mount(host, input, adapter) {
  }
  function step(now){
    if(!playing||disposed||mode!=='watch')return;
-   const here=layout.at(t).span,a=activeMedia?.audio;
+   const here=layout.at(t).span,a=mediaFor(here);
    if(phase==='voice'){
       t=a?Math.min(here.voiceEnd,here.start+Math.max(0,a.currentTime-here.from)):Math.min(here.voiceEnd,(now-clockOrigin)/1000);
       if(t>=here.voiceEnd-.013||a?.ended){
