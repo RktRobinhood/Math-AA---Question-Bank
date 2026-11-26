@@ -39,7 +39,9 @@ _Avoid_: “Variant” without saying whether the form changed or only the numbe
 **Calculator Skills**: The standalone library of lessons on specific TI-Nspire CX II-T workflows. Lessons have **Watch**, and **Try** where the relevant calculator workflow can be practised.
 _Avoid_: “Scratchpad” or “full emulator” for the lessons.
 
-**Watch**: The demonstration of a worked example in a **Calculator Skills** lesson.
+**Watch**: The worked problem in a **Calculator Skills** lesson. It states what to find, shows the handheld method and interprets the result.
+
+**Matched practice case**: A distinct original **Try** problem that exercises the same mathematical decision, calculator workflow and interpretation as **Watch**, at the relevant **Course** level.
 
 **Watch player**: The shared **Watch** surface and its controls. A lesson supplies a worked example, chapters, and key presses, not a new player. The same player can also open from eligible **Practice**.
 

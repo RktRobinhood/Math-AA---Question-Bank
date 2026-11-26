@@ -195,3 +195,16 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.
  .lcd-settings .lcd-actions{flex-direction:column;justify-content:flex-end;gap:2px;margin-bottom:1px}
  .lcd-settings .lcd-actions button{padding-inline:2px}
 }
+
+/* The common Watch stage owns framing. Keep sizing just for interactive Try. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+#stage[data-mode=try] #handheld-host{--handheld-width:min(300px,100%)}
+#stage[data-mode=try] .inputline input{min-width:0}
+@media(max-height:740px){#stage[data-mode=try] #handheld-host{--handheld-width:min(235px,100%)}}
+.lw-device .hh-body:not([data-interactive="true"]) #settings{pointer-events:none}
+#stage[data-mode="try"][data-step="plotted"] #drawing{cursor:grab;touch-action:none}
+#stage[data-mode="try"][data-panning="true"] #drawing{cursor:grabbing}
+#stage[data-mode="try"] .player-top button{touch-action:manipulation}
+.ct08-answer-grid{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:.4rem}
+.ct08-answer-grid label,.ct08-answer-grid input{min-width:0;width:100%}

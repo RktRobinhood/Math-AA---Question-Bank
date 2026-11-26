@@ -7,6 +7,13 @@ lessons can adopt it in reviewed batches without replacing their math or audio.
 
 ## Author a lesson
 
+Start with the [worked-problem acceptance criteria](TEACHING-AUDIT.md):
+give an original course-appropriate problem, demonstrate the calculator work,
+and interpret the result. Pick a different case for Try with the same decision,
+calculator method and expected interpretation. Use a concrete microcase for a
+beginner control. A signed legacy recording may be kept through a clearly
+identified visual-context pass; the full contextual script needs matching audio.
+
 1. Write a `definition.json`. Define each short, titled chapter and enter one
    or more beats in order. `coach` is what the learner should look for and
    why. `spoken` is the exact voice line (use an empty string if unvoiced).

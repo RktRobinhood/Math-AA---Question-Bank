@@ -1,0 +1,228 @@
+{
+  "id": "CT08",
+  "title": "Choose a graph window",
+  "intro": "Find a skate ramp’s lowest point when the default window misses it.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "fe48a5582f8cd3d27a7c95e2a45eb476929831c2ecd439a85f84627d7ce85574",
+    "scriptSha256": "b94064e569db964f243398838b5ad6faf3dd52e7ec91ec802f15d90501de3758"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the function"
+    },
+    {
+      "id": "clipped",
+      "title": "Spot the missing vertex"
+    },
+    {
+      "id": "open-window",
+      "title": "Open Window Settings"
+    },
+    {
+      "id": "set-limits",
+      "title": "Set both axis ranges"
+    },
+    {
+      "id": "apply",
+      "title": "Apply the window"
+    },
+    {
+      "id": "check",
+      "title": "Check the new view"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "Enter the function in the Graphs application and press Enter.",
+      "coach": "A ramp’s height is h(x) = (x − 12)² + 3 metres, with distance x from 0 to 20 m. Where is it lowest? Enter the model and press Enter.",
+      "end": 3.8,
+      "hold": 14,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "(",
+          "at": 0.0516
+        },
+        {
+          "id": "press-2",
+          "label": "x",
+          "at": 0.1455
+        },
+        {
+          "id": "press-3",
+          "label": "−",
+          "at": 0.2394
+        },
+        {
+          "id": "press-4",
+          "label": "1",
+          "at": 0.3333
+        },
+        {
+          "id": "press-5",
+          "label": "2",
+          "at": 0.4272
+        },
+        {
+          "id": "press-6",
+          "label": ")",
+          "at": 0.5211
+        },
+        {
+          "id": "press-7",
+          "label": "x²",
+          "at": 0.615
+        },
+        {
+          "id": "press-8",
+          "label": "+",
+          "at": 0.7089
+        },
+        {
+          "id": "press-9",
+          "label": "3",
+          "at": 0.8028
+        },
+        {
+          "id": "press-10",
+          "label": "Enter",
+          "at": 0.8967
+        }
+      ]
+    },
+    {
+      "chapter": "clipped",
+      "spoken": "The default window may hide the interesting feature.",
+      "coach": "The default view ends at x = 10. A blank screen does not mean the function is wrong.",
+      "end": 7.22,
+      "hold": 8,
+      "keys": []
+    },
+    {
+      "chapter": "open-window",
+      "spoken": "Here the vertex lies beyond the usual central view.",
+      "coach": "The vertex is at x = 12. Press Menu → 4: Window/Zoom → 1: Window Settings.",
+      "end": 11.2,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-11",
+          "label": "Menu",
+          "at": 0.1507
+        },
+        {
+          "id": "press-12",
+          "label": "4",
+          "at": 0.4247
+        },
+        {
+          "id": "press-13",
+          "label": "1",
+          "at": 0.6986
+        }
+      ]
+    },
+    {
+      "chapter": "set-limits",
+      "spoken": "Set the horizontal and vertical limits independently.",
+      "coach": "Set XMin = 10 and XMax = 14, YMin = 0 and YMax = 8. Use Tab between fields and leave both scales on Auto. The arms are at y = 7 on the two x-edges.",
+      "end": 14.88,
+      "hold": 23,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": "1",
+          "at": 0.0435
+        },
+        {
+          "id": "press-15",
+          "label": "0",
+          "at": 0.1225
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "at": 0.2016
+        },
+        {
+          "id": "press-17",
+          "label": "1",
+          "at": 0.2806
+        },
+        {
+          "id": "press-18",
+          "label": "4",
+          "at": 0.3597
+        },
+        {
+          "id": "press-19",
+          "label": "Tab",
+          "at": 0.4387
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "at": 0.5178
+        },
+        {
+          "id": "press-21",
+          "label": "0",
+          "at": 0.5968
+        },
+        {
+          "id": "press-22",
+          "label": "Tab",
+          "at": 0.6759
+        },
+        {
+          "id": "press-23",
+          "label": "8",
+          "at": 0.7549
+        },
+        {
+          "id": "press-24",
+          "label": "Tab",
+          "at": 0.834
+        },
+        {
+          "id": "press-25",
+          "label": "Tab",
+          "at": 0.913
+        }
+      ]
+    },
+    {
+      "chapter": "apply",
+      "spoken": "A viewing window does not change the domain.",
+      "coach": "Tab to OK and press Enter. The chosen screen shows x from 10 to 14, but the model still applies from 0 to 20 m.",
+      "end": 17.86,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-26",
+          "label": "Enter",
+          "at": 0.3333
+        }
+      ]
+    },
+    {
+      "chapter": "check",
+      "spoken": "This window contains the vertex with space on both sides.",
+      "coach": "Read the vertex (12, 3). The ramp is lowest 12 m from the marker, at a height of 3 m.",
+      "end": 21.98,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "check",
+      "spoken": "Use your context to choose sensible bounds.",
+      "coach": "Answer the question in metres. For a new plot, frame the feature along x and leave enough vertical space to see both arms.",
+      "end": 25.182041,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}
