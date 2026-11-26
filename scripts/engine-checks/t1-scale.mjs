@@ -134,7 +134,7 @@ set('accounts-alternate-frequencies','compare-one-annual-one-monthly','words',(q
   let av=principal,bv=principal;
   for(let j=0;j<n;j++){av+=av*apr/100;for(let i=0;i<12;i++)bv+=bv*monthly/100/12;}
   T.require(Math.abs(av-bv)>.005,'different balances are distinguishable');
-  return{a:toDp(bv,2),b:toDp(Math.abs(av-bv),2)};
+  return{a:toDp(bv,2),b:toDp(Math.abs(av-bv),2),c:T.option(av>bv?"A":"B")};
 });
 set('nominal-backsolve','target-monthly-balance-to-apr','words',(q,T)=>{
   const {a,n,b}=q.params;

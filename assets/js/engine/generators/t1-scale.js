@@ -177,9 +177,13 @@ reg('accounts-alternate-frequencies','compare-one-annual-one-monthly','1.4',['co
     P('Find the balance in Account B, to the nearest cent.',3,A.dp(closest(b,2),2),
       M(`B=${num(principal)}\\left(1+\\dfrac{${num(monthly)}}{1200}\\right)^{${12*n}}`),
       M(`B\\approx ${dp(b,2)}\\text{ euros}`)),
-    P('Find the absolute difference in the balances, to the nearest cent. State which account has the higher balance.',3,A.dp(closest(difference,2),2),
+    P('By how much do the two balances differ? Give your answer to the nearest cent.',2,A.dp(closest(difference,2),2),
       M(`A=${num(principal)}\\left(1+\\dfrac{${num(apr)}}{100}\\right)^{${n}}\\approx ${dp(a,2)}\\text{ euros}`),
-      `Using the unrounded balances, the difference is $${dp(difference,2)}\\text{ euros}$. Account ${a>b?'A':'B'} has the higher balance.`)]};
+      `Using the unrounded balances, the difference is $${dp(difference,2)}\\text{ euros}$.`),
+    P('State which account has the higher balance.',1,
+      A.choice(rng,{text:a>b?'Account A':'Account B',value:a>b?'A':'B'},
+        [{text:a>b?'Account B':'Account A',value:a>b?'B':'A'},{text:'Neither; the balances are equal',value:'equal'}],3),
+      `Account ${a>b?'A':'B'} has the higher balance, since its unrounded balance is greater.`)]};
 });
 reg('nominal-backsolve','target-monthly-balance-to-apr','1.4',['find-rate-or-pv','future-value'],4,'words','Recover a nominal annual rate from a target balance',({rng})=>{
   const a=rng.int(30,170)*100,n=rng.int(4,12),b=a+rng.int(15,62)*100,m=(b/a)**(1/(12*n)),pct=1200*(m-1);
