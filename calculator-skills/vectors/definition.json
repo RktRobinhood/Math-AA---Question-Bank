@@ -1,0 +1,577 @@
+{
+  "id": "CT19",
+  "title": "Vectors: dot product and angle",
+  "intro": "Find the dot product between two stored row vectors, then use their lengths and inverse cosine to find the angle.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "8240f003e45ea0daf160282ceceb39ae64e83e54c9fd8640a54d708e7fce625d",
+    "scriptSha256": "51ba327650b069518f44c3cc229be48ddce1a5bd81efa33e19c8c6c64c5a67b7"
+  },
+  "chapters": [
+    {
+      "id": "read-vectors",
+      "title": "Read both vectors"
+    },
+    {
+      "id": "store-a",
+      "title": "Store the first row"
+    },
+    {
+      "id": "store-b",
+      "title": "Store the second row"
+    },
+    {
+      "id": "dot-product",
+      "title": "Get the scalar"
+    },
+    {
+      "id": "start-angle",
+      "title": "Start the angle"
+    },
+    {
+      "id": "use-norms",
+      "title": "Enter both lengths"
+    },
+    {
+      "id": "read-angle",
+      "title": "Read the angle"
+    },
+    {
+      "id": "precision",
+      "title": "Check precision"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-vectors",
+      "spoken": "Find the dot product and angle for vector A, with components two, negative one, two, and vector B, with components one, two, negative two. The example is in degrees.",
+      "coach": "Use a = [2, −1, 2] and b = [1, 2, −2]. The example uses degrees.",
+      "end": 13.05,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "store-a",
+      "spoken": "Type A, then Control and Templates to get the assignment symbol. Open Menu, then seven, one, one. Use one row and three columns.",
+      "coach": "Type a and Ctrl + Templates. Menu → 7 → 1 → 1 creates a 1 × 3 row; enter with Tab.",
+      "end": 26.521,
+      "hold": 9.93,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.0306
+        },
+        {
+          "id": "press-2",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0816
+        },
+        {
+          "id": "press-3",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.1327
+        },
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1837
+        },
+        {
+          "id": "press-5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2347
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2857
+        },
+        {
+          "id": "press-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3367
+        },
+        {
+          "id": "press-8",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3878
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4388
+        },
+        {
+          "id": "press-10",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4898
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5408
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5918
+        },
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6429
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6939
+        },
+        {
+          "id": "press-15",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.7449
+        },
+        {
+          "id": "press-16",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7959
+        },
+        {
+          "id": "press-17",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8469
+        },
+        {
+          "id": "press-18",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.898
+        },
+        {
+          "id": "press-19",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.949
+        }
+      ]
+    },
+    {
+      "chapter": "store-b",
+      "spoken": "Store B as another matrix with one row and three columns. Use the negative key for negative entries.",
+      "coach": "Store b as its own 1 × 3 row, again using the negative key for negative entries.",
+      "end": 34.154,
+      "hold": 9.93,
+      "keys": [
+        {
+          "id": "press-20",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.0306
+        },
+        {
+          "id": "press-21",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0816
+        },
+        {
+          "id": "press-22",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.1327
+        },
+        {
+          "id": "press-23",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1837
+        },
+        {
+          "id": "press-24",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2347
+        },
+        {
+          "id": "press-25",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2857
+        },
+        {
+          "id": "press-26",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3367
+        },
+        {
+          "id": "press-27",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3878
+        },
+        {
+          "id": "press-28",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4388
+        },
+        {
+          "id": "press-29",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4898
+        },
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5408
+        },
+        {
+          "id": "press-31",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5918
+        },
+        {
+          "id": "press-32",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6429
+        },
+        {
+          "id": "press-33",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6939
+        },
+        {
+          "id": "press-34",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7449
+        },
+        {
+          "id": "press-35",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7959
+        },
+        {
+          "id": "press-36",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.8469
+        },
+        {
+          "id": "press-37",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.898
+        },
+        {
+          "id": "press-38",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.949
+        }
+      ]
+    },
+    {
+      "chapter": "dot-product",
+      "spoken": "Choose Menu, then seven for Matrix and Vector, the letter C for Vector, then three for Dot Product. Enter A followed by a comma and B.",
+      "coach": "Menu → 7 → C: Vector → 3: Dot Product. Enter a, b in that order.",
+      "end": 45.457,
+      "hold": 5.23,
+      "keys": [
+        {
+          "id": "press-39",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0625
+        },
+        {
+          "id": "press-40",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.1667
+        },
+        {
+          "id": "press-41",
+          "label": "c",
+          "ariaLabel": "c",
+          "at": 0.2708
+        },
+        {
+          "id": "press-42",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.375
+        },
+        {
+          "id": "press-43",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.4792
+        },
+        {
+          "id": "press-44",
+          "label": ",",
+          "ariaLabel": ",",
+          "at": 0.5833
+        },
+        {
+          "id": "press-45",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.6875
+        },
+        {
+          "id": "press-46",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7917
+        },
+        {
+          "id": "press-47",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "start-angle",
+      "spoken": "Use inverse cosine, not the reciprocal of cosine. Control and the divide key open a fraction. Put the dot product on top.",
+      "coach": "Use inverse cosine from trig, then Ctrl + ÷ for a fraction. Put dotP(a,b) above the bar.",
+      "end": 55.538,
+      "hold": 7.58,
+      "keys": [
+        {
+          "id": "press-48",
+          "label": "trig",
+          "ariaLabel": "trig",
+          "at": 0.0411
+        },
+        {
+          "id": "press-49",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.1096
+        },
+        {
+          "id": "press-50",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.1781
+        },
+        {
+          "id": "press-51",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2466
+        },
+        {
+          "id": "press-52",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.3151
+        },
+        {
+          "id": "press-53",
+          "label": "÷",
+          "ariaLabel": "÷",
+          "at": 0.3836
+        },
+        {
+          "id": "press-54",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.4521
+        },
+        {
+          "id": "press-55",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.5205
+        },
+        {
+          "id": "press-56",
+          "label": "c",
+          "ariaLabel": "c",
+          "at": 0.589
+        },
+        {
+          "id": "press-57",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6575
+        },
+        {
+          "id": "press-58",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.726
+        },
+        {
+          "id": "press-59",
+          "label": ",",
+          "ariaLabel": ",",
+          "at": 0.7945
+        },
+        {
+          "id": "press-60",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.863
+        },
+        {
+          "id": "press-61",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "use-norms",
+      "spoken": "Below, use the norm of A times the norm of B. Open Menu, then seven, then seven for Norms, then one for Norm, to insert each norm.",
+      "coach": "Press Down. Put norm(a) × norm(b) below. Menu → 7 → 7 → 1 inserts each norm.",
+      "end": 67.772,
+      "hold": 8.52,
+      "keys": [
+        {
+          "id": "press-62",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.0361
+        },
+        {
+          "id": "press-63",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0964
+        },
+        {
+          "id": "press-64",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.1566
+        },
+        {
+          "id": "press-65",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2169
+        },
+        {
+          "id": "press-66",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2771
+        },
+        {
+          "id": "press-67",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.3373
+        },
+        {
+          "id": "press-68",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.3976
+        },
+        {
+          "id": "press-69",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.4578
+        },
+        {
+          "id": "press-70",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.5181
+        },
+        {
+          "id": "press-71",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.5783
+        },
+        {
+          "id": "press-72",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.6386
+        },
+        {
+          "id": "press-73",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6988
+        },
+        {
+          "id": "press-74",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.759
+        },
+        {
+          "id": "press-75",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.8193
+        },
+        {
+          "id": "press-76",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.8795
+        },
+        {
+          "id": "press-77",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "read-angle",
+      "spoken": "The dot product is negative four. Both lengths are three, so cosine theta is negative four ninths. The negative cosine gives an obtuse angle.",
+      "coach": "The dot product is −4, and both lengths are 3: cos θ = −4/9. The negative cosine means an obtuse angle.",
+      "end": 79.242,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "precision",
+      "spoken": "The angle is about one hundred and sixteen point three eight eight degrees. This is one hundred and sixteen degrees to three significant figures. A zero-length vector has no direction.",
+      "coach": "The calculator gives 116.388°. To 3 significant figures, write 116°. The angle is undefined if either length is zero.",
+      "end": 91.788,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
