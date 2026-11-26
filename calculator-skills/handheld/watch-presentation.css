@@ -1,0 +1,47 @@
+/* Opt-in video chrome. The owning lesson still fits its one live LCD to its
+   measured caption and transport heights; Try and in-page Watch are unchanged. */
+[data-watch-presentation] #watch-player svg[hidden],
+[data-watch-presentation] #watch-player svg [hidden]{display:none!important}
+/* The previous single speaker icon drew a slash on top; these paths are exclusive. */
+[data-watch-presentation] #watch-player #sound[aria-pressed=true]::after{content:none}
+
+[data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace{
+ width:100%;max-width:1640px;flex:1 1 auto;min-height:0;
+ align-content:center;align-items:center;
+ grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);
+ gap:clamp(16px,3vw,52px);padding:clamp(35px,4vh,58px) clamp(12px,3vw,44px) 12px;
+}
+[data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace :is(.calc-side,.ct01-stage-side,.ct08-stage-side,.ct10-stage-side,.ct11-stage-side){
+ align-self:center;min-width:0
+}
+[data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace :is(#watch-panel,#watch-work,#watch-side) h2{
+ font-size:clamp(1.35rem,calc(.9rem + 1.15vw),2.65rem);line-height:1.1
+}
+[data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace :is(.formula,.mathline,.sample-f1,.sample-f2,.math-example,#beat){
+ font-size:clamp(.95rem,calc(.7rem + .49vw),1.28rem)
+}
+[data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #key-strip{
+ font-size:clamp(.73rem,calc(.62rem + .28vw),1rem)
+}
+@media(max-width:700px){
+ [data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace{
+  grid-template-columns:minmax(0,1fr);gap:8px;padding:34px 8px 7px;
+ }
+ [data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace #handheld-host{
+  max-width:100%
+ }
+}
+@media(max-height:530px) and (orientation:landscape){
+ [data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace{
+  gap:12px;padding:32px 10px 7px
+ }
+ [data-watch-presentation][data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #workspace :is(#watch-panel,#watch-work,#watch-side) h2{
+  font-size:1.2rem
+ }
+}
+
+/* Worked-example math is on the tape, not on the bank page's white formula card. */
+.ct08-shared[data-watch-presentation][data-mode=watch] #watch-side .formula{
+ color:var(--tape-ink);background:transparent;border:0;
+ padding:0;margin:0 0 .5rem;text-align:start;white-space:normal;overflow:visible
+}

@@ -11,13 +11,13 @@
 <script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="player.css?v=ct01-trail-1">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="../handheld/hold-timeline.js?v=ct01-pauses-1" defer></script><script src="lesson.js?v=ct01-trail-1" defer></script>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="player.css?v=ct01-trail-1"> <link rel="stylesheet" href="../handheld/watch-presentation.css?v=2">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js?v=ct01-exact-1" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="../handheld/hold-timeline.js?v=ct01-pauses-1" defer></script><script src="lesson.js?v=ct01-exact-1" defer></script>
 </head><body class="calculator-bank-lesson" data-base="../../" data-nav="calculator-skills"><main>
 <header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT01</span></p><h1>Enter and round a calculation</h1><p class="subtitle">Scientific notation and significant figures on a TI-Nspire CX II-T.</p></div>
 </header>
 <div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
-<section class="ct10-shared ct01-stage" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
+<section class="ct10-shared ct01-stage" id="stage" data-watch-presentation aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
 <div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
 <div class="ct10-stage-grid" id="workspace">
 <div class="ct10-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire display">
@@ -26,7 +26,7 @@
  <p id="lcd-text" class="sr"></p>
 </div></div>
 <div class="ct10-stage-side">
-<aside id="watch-panel" class="director" role="tabpanel" aria-labelledby="watch-tab"><p class="tag">Worked example</p><h2>Enter once. Round at the end.</h2><div class="math-example" aria-label="four times ten to the fifth times three times ten to the negative two, over two times ten to the third"><span>(4 × 10<sup>5</sup>) × (3 × 10<sup>−2</sup>)</span><span>2 × 10<sup>3</sup></span></div><ol id="steps" class="steps" aria-label="Lesson steps and calculator key trail"></ol><p class="ct01-takeaway" id="takeaway" hidden></p></aside>
+<aside id="watch-panel" class="director" role="tabpanel" aria-labelledby="watch-tab"><p class="tag">Worked example</p><h2>Enter once. Round only if needed.</h2><div class="math-example" aria-label="four times ten to the fifth times three times ten to the negative two, over two times ten to the third"><span>(4 × 10<sup>5</sup>) × (3 × 10<sup>−2</sup>)</span><span>2 × 10<sup>3</sup></span></div><ol id="steps" class="steps" aria-label="Lesson steps and calculator key trail"></ol><p class="ct01-takeaway" id="takeaway" hidden></p></aside>
 <aside id="try-panel" class="director ct10-try-help" role="tabpanel" aria-labelledby="try-tab" hidden><p class="tag">Calculator practice</p><h2>Use the calculator</h2>
 <p id="hint" role="status"></p><p class="ct10-keyboard">Use <kbd>Ctrl</kbd> then <kbd>÷</kbd> for a fraction, and <kbd>EE</kbd> then <kbd>(−)</kbd> for a negative exponent. On a keyboard, <kbd>Ctrl+/</kbd> opens the fraction template.</p>
 </aside></div>
@@ -43,13 +43,13 @@
 <label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="95.974" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 1:36</span>
 <button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
 <label class="ct01-rate"><span class="sr">Teaching pauses</span><select id="play-rate" aria-label="Teaching pauses" title="Change the time between steps, not the narration speed"><option value="0.75">Pauses −</option><option value="1" selected>Pauses</option><option value="1.3">Pauses +</option></select></label>
-<button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4zm11 0c1.5 1.7 1.5 4.3 0 6m2-8c3 3 3 7 0 10"/></svg></button>
+<button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4z"/><path class="sound-waves" d="M15 8c2 2 2 6 0 8m3-11c3.5 3.5 3.5 10.5 0 14"/><path class="sound-off" d="m16 10 5 5m0-5-5 5" hidden/></svg></button>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
 <p id="media-status" role="status" hidden></p>
 <audio id="narration" preload="metadata" src="narration.mp3"></audio>
 </div>
 </section>
-<section id="challenge" class="exercise" hidden><p class="tag">Your turn</p><h2>Write the requested precision</h2><p id="question"></p><form id="answer-form"><label for="answer">Rounded answer <small>(not the expression)</small></label><div class="answer-row"><input id="answer" aria-describedby="feedback" type="text" required maxlength="60" autocomplete="off"><button class="primary" type="submit">Check</button></div></form><p class="feedback" id="feedback" role="status"></p></section>
+<section id="challenge" class="exercise" hidden><p class="tag">Your turn</p><h2>Write your answer</h2><p id="question"></p><form id="answer-form"><label for="answer">Answer <small>(not the expression)</small></label><div class="answer-row"><input id="answer" aria-describedby="feedback" type="text" required maxlength="60" autocomplete="off"><button class="primary" type="submit">Check</button></div></form><p class="feedback" id="feedback" role="status"></p></section>
 <details id="transcript-details" class="notes"><summary>Transcript</summary><p id="transcript"></p></details>
-<details class="notes"><summary>What EE means</summary><p>EE means “times ten to the power of”. For example, <code>3E−2</code> is <code>3 × 10⁻²</code>. Read the calculator value first. Put the required precision in your written answer, not in the calculator input. On paper, write scientific notation as <code>a × 10ⁿ</code>.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_Symbols.HTML">TI's reference for E notation</a></p></details>
+<details class="notes"><summary>What EE means</summary><p>EE means “times ten to the power of”. For example, <code>3E−2</code> is <code>3 × 10⁻²</code>. Read the calculator value first. Keep an exact answer if you have it. Otherwise round only the written final answer, as the question asks. On paper, write scientific notation as <code>a × 10ⁿ</code>.</p><p><a href="https://education.ti.com/html/webhelp/eg_tinspire/en/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_Symbols.HTML">TI's reference for E notation</a></p></details>
 </main></body></html>

@@ -68,7 +68,7 @@ function linked(p){
  if(!Number.isInteger(sf)||sf<1||sf>8||!expr||!/^[\d E.e()*/+\-]+$/.test(expr))throw Error("This link is not a supported numerical question.");
  const val=evaluate(expr);
  if(val===0||Math.abs(val)<1e-100||Math.abs(val)>=1e100)throw Error("This rounding practice needs a nonzero finite answer.");
- return {expr,sf,value:val};
+ return {expr,sf,value:val,explicitPrecision:fig.length===1};
 }
 function roundSF(value,sf){
  if(!value)return value;
@@ -77,12 +77,14 @@ function roundSF(value,sf){
  const n=BigInt(digits.slice(0,sf))+(Number(digits[sf])>=5?1n:0n);
  return Math.sign(value)*Number(String(n)+"e"+(Number(e)-sf+1));
 }
-function grade(text,value,sf){
+function grade(text,value,sf,{explicitPrecision=true}={}){
  const raw=canonical(String(text)).trim().replace(/\s/g,"");
  const m=/^([+-]?)(\d*\.?\d+|\d+\.)(?:[eE]([+-]?\d+))?$/.exec(raw);
  if(!m||!Number.isFinite(Number(raw)))return {ok:false,kind:"format"};
  if(m[3]&&!/^[1-9](?:\.\d*)?$/.test(m[2]))return {ok:false,kind:"format"};
  const rounded=roundSF(value,sf),given=Number(raw);
+ const same=(a,b)=>Math.abs(a-b)<=Math.abs(b)*1e-12;
+ if(!explicitPrecision&&(same(given,value)||same(given,rounded)))return {ok:true,kind:"correct"};
  if(given===0||Math.abs(given-rounded)>Math.abs(rounded)*1e-12)return {ok:false,kind:"value"};
  const digits=m[2].replace(".","").replace(/^0+/,""),ambiguity=!m[2].includes(".")&&/0$/.test(digits)&&(!m[3]||digits.length!==sf);
  if(digits.length!==sf||ambiguity)return {ok:false,kind:"precision"};

@@ -2,12 +2,13 @@
 (function(){
 const $=id=>document.getElementById(id),M=CT01Math;
 const stage=$("stage"),audio=$("narration"),seek=$("seek"),play=$("play"),overlay=$("play-feedback"),lcd=$("lcd-body"),surface=$("workspace");
-const approach=new URLSearchParams(location.search), defaultCase={expr:M.defaultExpr,sf:3,value:M.evaluate(M.defaultExpr)};
+const approach=new URLSearchParams(location.search), defaultCase={expr:M.defaultExpr,sf:3,explicitPrecision:false,value:M.evaluate(M.defaultExpr)};
 let task=defaultCase,invalidLink=false;
 if(approach.has("expr")){
  try{task=M.linked(approach);}catch{invalidLink=true;}
 }
-// The approved recording transcript; phrase onsets checked against the local MP3.
+// The unchanged legacy take is usable through beat 7 only. The last sentence
+// is retired for accuracy; the corrected last beat is unvoiced until a new take.
 const cue=[
  [0,"Open a Calculator page."],
  [2.152,"Group the numerator and denominator before entering a fraction."],
@@ -15,11 +16,12 @@ const cue=[
  [10.147,"Keep the negative sign inside the exponent."],
  [13.373,"Read the unrounded value first."],
  [16.050,"Scientific notation on the screen may use the letter E."],
- [20.099,"Show the requested precision in your written answer."],
- [23.450,"6.00 has three significant figures."]
+ [20.099,"Show the requested precision in your written answer."]
 ];
 // Measured cuts inside each quiet gap (FFmpeg silencedetect -39 dB, dwell .18 s).
 // The existing George file stays at 1×. Only the separate teaching holds vary.
+const recordedBeatCount=cue.length;
+const correctedEnding="The exact result here is 6. Write 6. For an approximation, 6.274… to three significant figures is 6.27. Follow any precision the question specifies.";
 const beats=[
  [0,1.78,6], [1.78,6.08,8], [6.08,9.80,12], [9.80,12.96,12],
  [12.96,15.68,8], [15.68,19.70,7], [19.70,23.09,9], [23.09,26.974,7]
@@ -39,8 +41,8 @@ const teaching=[
  "Use (−), just left of Enter, for a negative exponent. Type 2, then ↓ to the denominator. Type 2, EE, 3, then Enter.",
  "Read the result from the Calculator history. Keep it unrounded until the last step.",
  "E means “times ten to the power of”. In the entry, 3E−2 means 3 × 10⁻².",
- "For three significant figures, start at the first non-zero digit. Write the rounded value in your answer.",
- "Here, write 6.00. Both zeros count after the decimal point, so the answer has three significant figures."
+ "Give an exact answer if you have one. Otherwise round the final answer to three significant figures, unless the question asks for something else.",
+ correctedEnding
 ];
 const keyNames={ctrl:"Ctrl",div:"÷",ee:"EE",neg:"(−)",mul:"×",enter:"Enter",down:"↓",home:"Home"};
 let mode="watch",state=M.pristine("calc",task.expr),t=0,playing=false,pending=false,epoch=0,raf=0,base=0,phase="",sound=true,stamp="",showCaptions=false,initiated=false;
@@ -72,7 +74,7 @@ function captions(v){
  $("caption-band").hidden=mode!=="watch"||!v;
 }
 $("cc").addEventListener("click",()=>captions(!showCaptions));
-$("transcript").textContent=cue.map(([,spoken])=>spoken).join(" ");
+$("transcript").textContent=cue.map(([,spoken])=>spoken).join(" ")+" [Unvoiced final note] "+correctedEnding;
 const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:(k,event)=>{doKey(k);if(mode==="try"&&event?.detail>0)lcd.focus({preventScroll:true});}});
 const names=["Watch","Try"].map(x=>$(x.toLowerCase()+"-tab"));
 const node=(tag,cls,label)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(label!==undefined)n.textContent=label;return n;};
@@ -156,7 +158,8 @@ function renderWatch(){
  $("active-key").textContent=f.last?f.last.split("+").map(k=>keyNames[k]||k).join(" + "):"—";
  if(!initiated){overlay.hidden=t>.04;overlay.dataset.initial="true";}
  const source=point.audioTime,end=Number.isFinite(beats[a+1]?.[0])?beats[a][1]-.16:26.77;
- const caption=point.speaking&&source>=cue[a][0]&&source<end?cue[a][1]:"";
+ const caption=point.speaking&&a<recordedBeatCount&&source>=cue[a][0]&&source<end?cue[a][1]:"";
+ if(sound){$("media-status").textContent="Final note is on screen only";$("media-status").hidden=a<recordedBeatCount;}
  $("caption").textContent=caption;
  const next=JSON.stringify([a,c,f.s]);
  if(next===stamp)return;stamp=next;
@@ -186,7 +189,7 @@ function go(time){
  const resume=playing||pending;
  if(resume)pause();
  t=Math.max(0,Math.min(duration,Number(time)||0));
- if(sound&&Number.isFinite(audio.duration))audio.currentTime=Math.min(audio.duration,layout.at(t).audioTime);
+ if(sound&&layout.at(t).span.i<recordedBeatCount&&Number.isFinite(audio.duration))audio.currentTime=Math.min(audio.duration,layout.at(t).audioTime);
  renderWatch();label();if(resume)void start(false);
 }
 function finish(){pause();t=duration;renderWatch();label();}
@@ -198,7 +201,7 @@ function fallback(){
 async function enterPhase(id){
  const p=layout.at(t);base=performance.now()-t*1000;
  phase=p.speaking?"voice":"hold";
- if(sound&&p.speaking){
+ if(sound&&p.speaking&&p.span.i<recordedBeatCount){
   try{
    audio.currentTime=Math.min(Number.isFinite(audio.duration)?audio.duration:p.audioTime,p.audioTime);
    audio.playbackRate=1;
@@ -214,7 +217,7 @@ async function enterPhase(id){
 function step(now){
  if(!playing||mode!=="watch")return;
  const p=layout.at(t),s=p.span;
- if(phase==="voice"&&sound){
+ if(phase==="voice"&&sound&&s.i<recordedBeatCount){
   t=Math.min(s.voiceEnd,s.start+Math.max(0,audio.currentTime-s.from));
   if(audio.currentTime>=s.to-.014||audio.ended){
    audio.pause();t=s.voiceEnd;phase="hold";base=performance.now()-t*1000;
@@ -265,6 +268,8 @@ $("sound").addEventListener("click",()=>{
  audio.muted=!audio.muted; $("sound").setAttribute("aria-pressed",String(audio.muted));
  const name=audio.muted?"Unmute narration":"Mute narration";
  $("sound").setAttribute("aria-label",name);$("sound").title=name;
+  $("sound").querySelector(".sound-waves").toggleAttribute("hidden",audio.muted);
+  $("sound").querySelector(".sound-off").toggleAttribute("hidden",!audio.muted);
 });
 audio.playbackRate=1;
 audio.preservesPitch=true;
@@ -298,8 +303,8 @@ lcd.addEventListener("paste",e=>{
 });
 $("answer-form").addEventListener("submit",e=>{
  e.preventDefault();
- const chk=M.grade($("answer").value,task.value,task.sf),f=$("feedback");
- const msg={correct:"Correct value and precision.",precision:"The value is right. Show exactly "+task.sf+" significant figures.",format:"Use a decimal or E notation, such as 3.40E−2.",value:"Not quite. Recheck the grouping and round only at the end."};
+ const chk=M.grade($("answer").value,task.value,task.sf,{explicitPrecision:task.explicitPrecision}),f=$("feedback");
+ const msg={correct:task.explicitPrecision?"Correct value and precision.":"Correct.",precision:"The value is right. Show exactly "+task.sf+" significant figures.",format:"Use a decimal or E notation, such as 3.40E−2.",value:"Not quite. Recheck the grouping and round only at the end."};
  f.textContent=msg[chk.kind];f.className="feedback "+(chk.ok?"is-right":"is-wrong");
 });
 document.addEventListener("keydown",e=>{
@@ -336,7 +341,7 @@ for(const [chapter,name] of chapters){
 }
 const sup={"-":"⁻","+":"⁺","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
 const written=task.expr.replace(/(\d+(?:\.\d+)?)[eE]([+-]?\d+)/g,(_,c,e)=>c+" × 10"+[...e].map(v=>sup[v]).join("")).replace(/\*/g," × ").replace(/\//g," ÷ ").replace(/-/g,"−");
-$("question").textContent="Evaluate "+written+". Give the written answer to "+task.sf+" significant figure"+(task.sf===1?"":"s")+".";
+$("question").textContent="Evaluate "+written+". "+(task.explicitPrecision ? "Give the answer to "+task.sf+" significant figure"+(task.sf===1?"":"s")+"." : "Give the exact answer if you can, or round to three significant figures.");
 if(invalidLink)$("question").prepend("The linked expression could not be loaded. Default example: ");
 seek.max=duration;stage.dataset.mode="watch";paintFraming();renderWatch();label();
 if(approach.get("mode")==="try")setMode("try");
@@ -349,12 +354,13 @@ function fitBankWatch(){
  const vh=window.visualViewport?.height||innerHeight;
  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(innerWidth<=700?$("watch-panel").offsetHeight+10:0);
  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
- stage.style.setProperty("--ct01-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?370:296,(room-28)*558/1168)))+"px");
- stage.style.setProperty("--ct01-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,(room-31)*4/3)))+"px");
+ stage.style.setProperty("--ct01-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?620:296,(room-28)*558/1168)))+"px");
+ stage.style.setProperty("--ct01-lcd-fit",Math.floor(Math.max(142,Math.min(full?1160:600,(room-31)*4/3)))+"px");
 }
 const bankWatchSizing=new ResizeObserver(fitBankWatch);
 [$("watch-player"),$("caption-band"),$("watch-panel"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
 window.addEventListener("resize",fitBankWatch);
 document.addEventListener("fullscreenchange",fitBankWatch);
+new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
 fitBankWatch();
 })();
