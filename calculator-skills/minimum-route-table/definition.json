@@ -1,0 +1,234 @@
+{
+  "id": "CT27",
+  "title": "Minimum-route-distance table",
+  "intro": "Compare full routes before entering a distance. The cheapest first road need not lead to the cheapest route.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "c18735806d88673cff3227b22471cdfe7766be4305115b78556c0f2db4f96a05",
+    "scriptSha256": "aacca5fc7d3d489cf78d61dcfb29d7a09f662747093aecb124b1eebdb48492bc"
+  },
+  "chapters": [
+    {
+      "id": "read-cell",
+      "title": "Read the table cell"
+    },
+    {
+      "id": "list-routes",
+      "title": "List all candidate routes"
+    },
+    {
+      "id": "route-abd",
+      "title": "Add A–B–D"
+    },
+    {
+      "id": "route-acd",
+      "title": "Add A–C–D"
+    },
+    {
+      "id": "route-abcd",
+      "title": "Add A–B–C–D"
+    },
+    {
+      "id": "route-acbd",
+      "title": "Add A–C–B–D"
+    },
+    {
+      "id": "enter-minimum",
+      "title": "Enter the minimum"
+    },
+    {
+      "id": "reflect",
+      "title": "Reflect the distance"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-cell",
+      "spoken": "Find row A, column D: the shortest distance from A to D, not a full tour.",
+      "coach": "Find A to D. The five two-way roads are AB 2, AC 5, BC 4, BD 9 and CD 2 km.",
+      "end": 6.862,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "list-routes",
+      "spoken": "There is no direct road from A to D. Compare both two-road routes and both routes that use the road between B and C.",
+      "coach": "The candidates are ABD, ACD, ABCD and ACBD. There is no direct A–D road.",
+      "end": 15.612,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "route-abd",
+      "spoken": "First add the two lengths on the route A to B to D. The first road is short, but the last one is not.",
+      "coach": "A–B–D: enter 2 + 9. The first road alone does not decide the result.",
+      "end": 23.309,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1304
+        },
+        {
+          "id": "press-2",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3478
+        },
+        {
+          "id": "press-3",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.5652
+        },
+        {
+          "id": "press-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "route-acd",
+      "spoken": "Next add the distances from A to C to D. Keep the total for comparison.",
+      "coach": "A–C–D: enter 5 + 2. Keep the total for comparison.",
+      "end": 30.1055,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-5",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1304
+        },
+        {
+          "id": "press-6",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3478
+        },
+        {
+          "id": "press-7",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5652
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "route-abcd",
+      "spoken": "A to B to C to D is also possible. Add all three road lengths, in order.",
+      "coach": "A–B–C–D: enter 2 + 4 + 2. Include every leg.",
+      "end": 37.663,
+      "hold": 4.18,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0909
+        },
+        {
+          "id": "press-10",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2424
+        },
+        {
+          "id": "press-11",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3939
+        },
+        {
+          "id": "press-12",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.5455
+        },
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.697
+        },
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "route-acbd",
+      "spoken": "The reverse middle leg gives a different route. Add A to C to B to D as well.",
+      "coach": "A–C–B–D: enter 5 + 4 + 9. The middle road is used in reverse.",
+      "end": 44.8255,
+      "hold": 4.18,
+      "keys": [
+        {
+          "id": "press-15",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.0909
+        },
+        {
+          "id": "press-16",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2424
+        },
+        {
+          "id": "press-17",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3939
+        },
+        {
+          "id": "press-18",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.5455
+        },
+        {
+          "id": "press-19",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.697
+        },
+        {
+          "id": "press-20",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "enter-minimum",
+      "spoken": "Compare eleven, seven, eight and eighteen. Enter seven in row A, column D.",
+      "coach": "Compare 11, 7, 8 and 18 km. Record 7 km in the answer table at A → D.",
+      "end": 52.183,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "reflect",
+      "spoken": "Two-way roads give the same distance in reverse. Tied routes share one table value.",
+      "coach": "The roads are two-way, so record 7 km for D → A too. Ties still give one distance.",
+      "end": 59.228,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
