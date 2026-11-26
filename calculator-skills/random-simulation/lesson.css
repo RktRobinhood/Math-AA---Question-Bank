@@ -102,3 +102,9 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 }
 @media(prefers-reduced-motion:reduce){*:where(.qb-calculator-lesson, .qb-calculator-lesson *),*:where(.qb-calculator-lesson, .qb-calculator-lesson *)::before,*:where(.qb-calculator-lesson, .qb-calculator-lesson *)::after{transition:none!important}}
 @media print{#stage:where(.qb-calculator-lesson, .qb-calculator-lesson *),.calc-tabs:where(.qb-calculator-lesson, .qb-calculator-lesson *){display:none!important}}
+
+/* The specialist Calculator LCD moves between the common Watch player and Try. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.ct44-try #handheld-host{--handheld-width:min(307px,100%)}
+@media(max-height:760px){.ct44-try #handheld-host{--handheld-width:min(235px,100%)}}
