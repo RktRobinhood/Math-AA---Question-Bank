@@ -10,13 +10,15 @@
   });
   box.append(prefixNode,stack,suffixNode);entry.append(box);
   let active=-1, prefix='', suffix='';
+  const size=()=>stack.style.setProperty('--ti-fraction-cols',Math.max(1.65,...fields.map(f=>f.value.length+.65))+'ch');
+  fields.forEach(f=>f.addEventListener('input',size));
   const focus=(i,end=true)=>{active=i;fields[i].focus({preventScroll:true});const p=end?fields[i].value.length:0;fields[i].setSelectionRange(p,p);};
   fields.forEach((f,i)=>f.addEventListener('focus',()=>{active=i;}));
   function open(){
    if(active>=0){notify('Use / with parentheses for a fraction inside a box.');return;}
    const s=calc.getState(), a=input.selectionStart,b=input.selectionEnd;
    prefix=s.justEvaluated?'':s.expression.slice(0,a);suffix=s.justEvaluated?'':s.expression.slice(b);
-   fields[0].value=s.justEvaluated?'':s.expression.slice(a,b);fields[1].value='';
+   fields[0].value=s.justEvaluated?'':s.expression.slice(a,b);fields[1].value='';size();
    prefixNode.textContent=prefix;suffixNode.textContent=suffix;
    entry.dataset.fraction='true';box.hidden=false;input.hidden=true;notify('Fill the numerator, then press Down or Tab for the denominator. Press Enter to calculate.');focus(0);
   }
@@ -60,10 +62,10 @@
    if(event)return false; // Ordinary computer typing edits the focused HTML field.
    f.focus({preventScroll:true});
    if(k==='del'){
-    f.setRangeText('',a===b?Math.max(0,a-1):a,b,'end');return true;
+    f.setRangeText('',a===b?Math.max(0,a-1):a,b,'end');size();return true;
    }
    const fragment=tokens[k]??(/^[0-9a-z%!]+$/.test(k)&&k.length===1?k:null);
-   if(fragment&&f.value.length-(b-a)+fragment.length<=64)f.setRangeText(fragment,a,b,'end');
+   if(fragment&&f.value.length-(b-a)+fragment.length<=64){f.setRangeText(fragment,a,b,'end');size();}
    return true;
   }
   return Object.freeze({open,key,active:()=>active>=0,owns:target=>box.contains(target),focus:()=>fields[active]?.focus({preventScroll:true})});

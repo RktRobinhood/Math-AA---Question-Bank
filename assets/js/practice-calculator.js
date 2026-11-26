@@ -20,7 +20,7 @@
     return false;
   }
 
-  const source = 'calculator-skills/scratchpad/index.html?v=split-table-1';
+  const source = 'calculator-skills/scratchpad/index.html?v=mathprint-1';
   const wide = win?.matchMedia('(min-width: 900px)');
   let current = null, owner = null;
   function create() {

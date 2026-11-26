@@ -19,12 +19,12 @@ const leaf=(k,t,run)=>({k:String(k),t,run}), branch=(k,t,items)=>({k:String(k),t
 function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCalc,insertFraction}){
  const G=root.TIGraphGeneral,F=root.TIFreeCalc;
  let current='calc', menus=[], menuFocus=0, editable=0, useField='function', bounds=null, trace=null, win=[-10,10,-10,10], mark=null,
-     sources=['',''], models=[null,null], mode='DEG', scale=[null,null], dialogOpen=false, remembered=null, pan=null, suppressGraphClick=false;
+     sources=['',''], printModels=[null,null], models=[null,null], mode='DEG', scale=[null,null], dialogOpen=false, remembered=null, pan=null, suppressGraphClick=false;
  glass.style.position='relative';
  const graph=html('section','np-graphs');graph.hidden=true;graph.setAttribute('aria-label','Graphs workspace');
  const svg=document.createElementNS(SVG,'svg');svg.setAttribute('viewBox','0 0 240 115');svg.setAttribute('preserveAspectRatio','none');svg.setAttribute('role','img');svg.setAttribute('aria-label','Graph display');
  const plane=html('div','np-graph-plane');plane.append(svg);
- const label=html('label','np-entry-label'), caption=html('span',null,'f1(x)='), ginput=html('input','np-input'), status=html('div','np-readout');
+ const label=html('div','np-entry-label'), caption=html('span',null,'f1(x)='), ginput=html('input','np-input'), status=html('div','np-readout');
  ginput.type='text';ginput.inputMode='none';ginput.spellcheck=false;ginput.autocomplete='off';ginput.maxLength=128;
  status.setAttribute('role','status');label.append(caption,ginput);graph.append(plane,label,status);glass.append(graph);
  const menu=html('div','np-menu');menu.hidden=true;menu.setAttribute('role','group');glass.append(menu);
@@ -44,12 +44,13 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  dialog.addEventListener('submit',e=>{e.preventDefault();commitWindow();});
  cancel.addEventListener('click',()=>closeDialog(false));
  const fmt=x=>Math.abs(x)<1e-8?'0':String(Number(x.toPrecision(8)));
- const focusGraph=()=>{table.blur();ginput.focus({preventScroll:true});};
+ const print=root.NspireGraphMathPrint.mount({line:label,input:ginput,notify:msg=>{status.textContent=msg;}});
+ const focusGraph=()=>{table.blur();print.focus();};
  const focusPage=()=>current==='calc'?focusCalc():table.focused()?table.focus():focusGraph();
  const numeric=(s)=>F.evaluate(s,{mode,ans:calc.getState().ans});
  const table=root.NspireFunctionTable.mount({plane,glass,graph,head,models:()=>models,evaluate:numeric,onGraph:focusGraph,notify:msg=>{status.textContent=msg;}});
  svg.addEventListener('pointerdown',()=>{if(table.focused())focusGraph();});
- ginput.addEventListener('focus',()=>table.blur());
+ label.addEventListener('focusin',()=>table.blur());
  const menuStatus=(message)=>notify(message||'');
  function labelMenu(title,items){return {title,items};}
  function path(node, title){
@@ -120,8 +121,8 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  const tableMenu=[branch(2,'Table',[leaf(1,'Remove Table',()=>table.hide()),leaf(5,'Edit Table Settings',()=>table.settings())])];
  function plot(){
   try{
-   const raw=ginput.value.trim();
-   models[editable]=raw?root.NspireFunctionTable.parseRelation(raw,mode):null;sources[editable]=raw;
+   const raw=print.expression().trim();
+   models[editable]=raw?root.NspireFunctionTable.parseRelation(raw,mode):null;sources[editable]=raw;printModels[editable]=print.save();
    if(table.shown()&&!models.some(Boolean))table.hide();else table.render();
    mark=null;trace=null;bounds=null;draw();
    status.textContent=raw?'':'Function cleared';
@@ -130,7 +131,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  function edit(n){
   editable=n;useField='function';bounds=null;trace=null;
   caption.textContent='f'+(n+1)+'(x)=';
-  ginput.setAttribute('aria-label','Function f'+(n+1));ginput.value=sources[n];
+  ginput.setAttribute('aria-label','Function f'+(n+1));ginput.value=sources[n];print.restore(printModels[n],n);
   status.textContent='';focusGraph();
  }
  function switchApp(next){
@@ -233,6 +234,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(!models[editable]&&!models[0]&&!models[1]){status.textContent='Plot a function first.';return;}
   if(!models[editable])editable=models[0]?0:1;
   if(name!=='Trace'&&(models[editable].discrete||(name==='Intersection'&&models.some(m=>m?.discrete)))){status.textContent='Use the table to inspect discrete values.';return;}
+  print.restore(null,editable);
   useField=name==='Trace'?'trace':'bound';mark=null;trace=name==='Trace'?0:null;
   if(useField==='trace'){caption.textContent='x=';ginput.setAttribute('aria-label','Trace x');ginput.value='0';status.textContent='Graph Trace';}
   else{
@@ -299,17 +301,22 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(current==='graph'&&k==='switch-pane'&&table.shown()&&!table.focused()){table.focus();return true;}
   if(current==='graph'&&table.focused()){table.key(k);return true;}
   const graphInsert=(lead,tail='')=>{
+    if(useField==='function'&&print.active()){print.insertText(lead,tail);return;}
     const at=ginput.selectionStart,end=ginput.selectionEnd;
     ginput.setRangeText(lead+tail,at,end,'end');ginput.setSelectionRange(at+lead.length,at+lead.length);focusGraph();
   };
   const append=(lead,tail='')=>current==='calc'?insertTemplate(lead,tail):graphInsert(lead,tail);
-  if(k==='fraction'){if(current==='calc')insertFraction();else {append('(',')/()');menuStatus('Type the numerator, then move right into the denominator.');}return true;}
+  const addFraction=()=>{if(current==='calc')insertFraction();else if(useField==='function')print.insert('fraction',editable);else append('(',')/()');};
+  if(k==='fraction'){addFraction();return true;}
+  if(current==='graph'&&useField==='function'&&['power','square','exp','tenpow'].includes(k)){
+   print.insert('power',editable,k==='square',k==='exp'?'e':k==='tenpow'?'10':'');return true;
+  }
   if(k==='catalog'){
    if(current==='calc')popup('Catalog',Object.keys(texts).map((t,i)=>command(i+1,t)));
    else popup('Catalog',[leaf(1,'abs(',()=>append('abs(',')')),leaf(2,'ln(',()=>append('ln(',')')),leaf(3,'log(',()=>append('log(',')')),leaf(4,'sqrt(',()=>append('sqrt(',')'))]);
    return true;
   }
-  if(k==='templates'){popup('Templates',[leaf(1,'Fraction',()=>{if(current==='calc')insertFraction();else {append('(',')/()');menuStatus('Type the numerator, then move right into the denominator.');}}),leaf(2,'Square root',()=>append('√(',')')),leaf(3,'Power',()=>append('^(',')'))]);return true;}
+  if(k==='templates'){popup('Templates',[leaf(1,'Fraction',addFraction),leaf(2,'Square root',()=>append('√(',')')),leaf(3,'Power',()=>{if(current==='graph'&&useField==='function')print.insert('power',editable);else append('^(',')');})]);return true;}
   if(k==='symbols'){popup('Symbols',[leaf(1,'π',()=>append('π')),leaf(2,'√',()=>append('√(',')')),...(current==='calc'?[leaf(3,'Percent',()=>append('%')),leaf(4,'Factorial',()=>append('!'))]:[])]);return true;}
   if(k==='var'){popup('Values',[...(current==='calc'?[leaf(1,'Ans',()=>append('Ans'))]:[]),leaf(2,'x',()=>append('x'))]);return true;}
   if(current==='calc'&&k==='tab'){
@@ -319,7 +326,19 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   }
   if(current==='calc')return false;
   if(k==='esc'){edit(editable);mark=null;draw();return true;}
-  if(k==='clear'){ginput.value='';return true;}
+  if(k==='clear'){ginput.value='';print.restore(null,editable);focusGraph();return true;}
+  if(useField==='function'&&print.active()){
+   if(['up','down','left','right','tab','backtab'].includes(k)){
+    if(!print.move(k,false)&&k==='tab')edit(1-editable);return true;
+   }
+   if(k==='del')return print.erase();
+   if(k==='select'){print.focus();return true;}
+   if(k==='trig'){popup('Trigonometry',[leaf(1,'sin(',()=>append('sin(',')')),leaf(2,'cos(',()=>append('cos(',')')),leaf(3,'tan(',()=>append('tan(',')'))]);return true;}
+   if(!['enter','return'].includes(k)){
+    const val=keyTokens[k]??(/^[a-z0-9]$/.test(k)?k:null);
+    return val!==null?print.insertText(val):false;
+   }
+  }
   if(k==='tab'||k==='up'||k==='down'){edit(1-editable);return true;}
   if(k==='enter'||k==='select'||k==='return'){
    if(useField==='function')plot();else if(useField==='bound')commitBound();
@@ -365,7 +384,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(useField==='trace')tracePoint(v);
   focusGraph();
  });
- return Object.freeze({key,setMode,focusPage,isGraph:()=>current==='graph',contains:t=>menu.contains(t)||graph.contains(t),isMenu:()=>menus.length>0,isDialog:()=>dialogOpen||table.isDialog(),dialogKey:(k,e)=>table.isDialog()?table.dialogKey(k,e):dialogKey(k,e),isTable:()=>table.focused(),wantsArrows:()=>useField==='trace',graphInput:ginput});
+ return Object.freeze({key,setMode,focusPage,isGraph:()=>current==='graph',contains:t=>menu.contains(t)||graph.contains(t),isMenu:()=>menus.length>0,isDialog:()=>dialogOpen||table.isDialog(),dialogKey:(k,e)=>table.isDialog()?table.dialogKey(k,e):dialogKey(k,e),isTable:()=>table.focused(),graphPrintOwns:print.owns,graphPrintMove:(k)=>print.move(k,true),acceptsGraphPower:()=>current==='graph'&&useField==='function'&&!table.focused(),wantsArrows:()=>useField==='trace',graphInput:ginput});
 }
 root.NspireApplet=Object.freeze({mount});
 })(window);
