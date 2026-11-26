@@ -290,3 +290,14 @@ html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
  .solve-lesson #player #watch-controls .seek{grid-column:1/5}
  .solve-lesson #player #watch-controls .watch-speed select{width:3.9rem;font-size:.66rem}
 }
+
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.lw-device #handheld-host .device-label{display:none}
+.solve-try #try-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.85fr);gap:1rem;padding:1rem}
+.solve-try #handheld-host{--handheld-width:min(300px,100%);min-width:0}
+.solve-try #practice{margin:0;min-width:0}
+@media(max-width:680px){.solve-try #try-grid{grid-template-columns:1fr}}
+html[data-practice-watch] :is(.reg-trail,.lw-header,.lw-mode,.solve-try){display:none!important}
+html[data-practice-watch] main.qb-calculator-lesson{margin:0;padding:0;width:100%;max-width:none}
+html[data-practice-watch] .lw-lesson{margin:0}

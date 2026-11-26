@@ -1,263 +1,41 @@
 import {surface,MENUS} from './screen.js';
 import {WATCH,TRY_CASES,solveInBounds} from './solver.js';
 
+
 const $=id=>document.getElementById(id);
-const media=$('voice'),play=$('play'),seek=$('seek'),cc=$('captions'),caption=$('caption'),lcd=$('lcd');
-import {makeLayout,demoTime,keyName} from './watch-plan.js?v=1';
-const narration=await fetch(new URL('./narration-cues.json', import.meta.url)).then(r=>r.json());
-const CAPTIONS=narration.cues;
-const TOPICS=[
- ['01','Open Numerical Solve','On a Calculator page, choose Menu → 3: Algebra → 1: Numerical Solve.'],
- ['02','Enter the equation','Type the equation, a comma, and the variable. On the handheld, use → to exit the exponent first.'],
- ['03','Add two bounds','The lower bound comes first. Both bounds are values of x.'],
- ['04','Read one solution','Press Enter. The display gives a numerical solution in the chosen interval.'],
- ['05','Search separate intervals','If you expect another root, choose another interval and run nSolve again.'],
- ['06','Round at the end','Keep the unrounded result while working. Round the final answer as needed.'],
-];
+const lcd=$('lcd'),host=$('handheld-host'),player=$('player'),hotspots=$('hotspots');
 const cmd=(eq,a,b)=>'nSolve('+eq+', x, '+a+', '+b+')';
 const prettify=s=>String(s).replace(/-/g,'−').replace(/\^2/g,'²').replace(/\^3/g,'³');
-const wPos=solveInBounds(WATCH.equation,2,3);
-const wNeg=solveInBounds(WATCH.equation,-4,-3);
-const first={cmd:cmd(WATCH.show,2,3),result:wPos.screen};
-const second={cmd:cmd(WATCH.show,-4,-3),result:wNeg.screen};
-const params=new URL(location.href).searchParams;
-const key=params.get('example')??params.get('case');
-const legalKey=key==='roots-demo'?'demo':key;
-const chosen=Object.hasOwn(TRY_CASES,legalKey)?TRY_CASES[legalKey]:TRY_CASES.demo;
-$('context').textContent='CT06'+(key&&Object.hasOwn(TRY_CASES,legalKey)?' · '+chosen.label:'');
-$('transcript').textContent=CAPTIONS.map(c=>c.text).join(' ');
+const wPos=solveInBounds(WATCH.equation,2,3),wNeg=solveInBounds(WATCH.equation,-4,-3);
+const first={cmd:cmd(WATCH.show,2,3),result:wPos.screen},second={cmd:cmd(WATCH.show,-4,-3),result:wNeg.screen};
 const SCREEN=surface($('drawing'));
 lcd.dataset.renderer=SCREEN.backend;
-const watchers=[...document.querySelectorAll('[data-mode]')];
-const hotspots=$('hotspots');
-let layout=makeLayout(),duration=layout.duration;
-let mode=null,time=0,running=false,rafId=0,ccOn=false,silent=false,origin=0,phase='',frameSig='',lcdSig='',trailIndex=-2;
-let step='idle', values={equation:chosen.equation,lower:chosen.lower,upper:chosen.upper}, activeResult=null;
-const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen');
-const playerUI=window.CalculatorWatchPlayer.mount({player, surface:$('watch-surface'), play,seek,expand:$('fullscreen'),
- feedback:$('play-feedback'),active:()=>mode==='watch'});
-const FRAME_PREF='qb-calculator-watch-frame';
-function readFrame(){try{return localStorage.getItem(FRAME_PREF)!=='full'}catch(_){return true}}
-let screenOnly=readFrame(),willPlay=false,playTicket=0;
-function selectFrame(screen){
- screenOnly=screen;
- try{localStorage.setItem(FRAME_PREF,screen?'screen':'full')}catch(_){}
- viewState();
+const params=new URL(location.href).searchParams,key=params.get('example')??params.get('case'),legalKey=key==='roots-demo'?'demo':key;
+const practiceCase={equation:'2^x=x+3',lower:'2',upper:'3',label:'Second pair of models'};
+const originalPreset=Object.hasOwn(TRY_CASES,legalKey);
+const chosen=originalPreset?TRY_CASES[legalKey]:practiceCase;
+$('try-task').textContent=originalPreset?
+ 'Find where y = x² and y = 5 meet. Use a different interval for each x-value.':
+ 'Find where y = 2ˣ and y = x + 3 meet between x = −3 and x = 3. Use one interval for each crossing.';
+const tape=window.HandheldKeyCues.CT06, practiceWatch=document.documentElement.dataset.practiceWatch==='true';
+let mode='watch',step='idle',values={equation:chosen.equation,lower:chosen.lower,upper:chosen.upper},activeResult=null,cache='',returnToWatch;
+function beat(i,keys=[],copy=''){$('try-tip').textContent=copy;}
+function showScreen(f){SCREEN.draw(f);$('lcd-text').textContent=[f.state,f.cmd,f.result,f.historyFocus].filter(Boolean).join('. ');}
+function renderWatch(device,{beat,point,key,crossed}){
+ if(host.parentElement!==device)device.append(host);
+ const count=crossed.length,e=tape[count-1],hold=point.span.end-point.span.voiceEnd;
+ shell.setKeys(e&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*hold<.55?[e.key]:[]);
+ const signature=beat+':'+count;
+ if(signature===cache)return;cache=signature;
+ let f={state:'idle',cursor:true};
+ if(count===1)f={state:'menu'};
+ else if(count===2)f={state:'submenu'};
+ else if(count>=3&&count<19)f={state:'entry',cmd:e.cmdAfter,cursor:true,exponentOpen:e.exponentOpen};
+ else if(count>=19&&count<22)f={state:'result',...first,historyFocus:e.historyFocus};
+ else if(count>=22&&count<33)f={state:'entry',history:[first],cmd:e.cmdAfter??tape.slice(0,count).findLast(c=>c.cmdAfter)?.cmdAfter,cursor:true,cursorFromEnd:e.cursorFromEnd};
+ else if(count===33)f={state:'result',history:[first],...second};
+ showScreen(f);
 }
-const scene=$('watch-surface'), rateControl=$('watch-speed'), sound=$('sound');
-const tape=window.HandheldKeyCues.CT06;
-const trail=$('key-trail');
-// Each key belongs to one student-facing step, not one undifferentiated tape.
-const chapters=[
- ['Open Numerical Solve',0,3],
- ['Enter the equation',1,13],
- ['Set the bounds',2,17],
- ['Read the first solution',3,19],
- ['Try another interval',5,33],
- ['Round at the end',6,33],
-];
-let chapterIndex=-1,tapeStart=0;
-const chips=[];
-const stepButtons=chapters.map(([name,span,tapeEnd],i)=>{
- const group=document.createElement('li'),button=document.createElement('button');
- group.className='solve-trail-group';button.type='button';button.className='solve-trail-step';
- button.textContent=(i+1)+'. '+name;group.append(button);
- button.addEventListener('click',()=>{
-  seek.value=layout.spans[span].start;
-  seek.dispatchEvent(new Event('input',{bubbles:true}));
- });
- if(tapeEnd>tapeStart){
-  const row=document.createElement('ol');row.className='solve-trail-row';
-  row.setAttribute('aria-label',name+' keys');
-  tape.slice(tapeStart,tapeEnd).forEach(event=>{
-   const item=document.createElement('li'),key=document.createElement('kbd');
-   item.className='solve-trail-key';key.textContent=keyName(event.key);
-   item.append(key);row.append(item);chips.push(item);
-  });
-  group.append(row);
- }
- tapeStart=tapeEnd;$('key-steps').append(group);return button;
-});
-seek.max=duration;media.playbackRate=1;media.preservesPitch=true;
-rateControl.addEventListener('change',()=>{
- const resume=running||willPlay;
- if(resume)pause();
- const old=layout;
- layout=makeLayout(Number(rateControl.value));duration=layout.duration;seek.max=duration;
- time=layout.remap(old,time);paint(time);playing(false);
- if(resume)void start(false);
-});
-sound.addEventListener('click',()=>{
- media.muted=!media.muted;
- const label=media.muted?'Unmute':'Mute';
- sound.setAttribute('aria-label',label);sound.title=label;
- sound.querySelector('.sound-waves').toggleAttribute('hidden',media.muted);
- sound.querySelector('.sound-off').toggleAttribute('hidden',!media.muted);
-});
-function fitWatch(){
- if(mode!=='watch')return;
- const h=window.innerHeight, top=scene.getBoundingClientRect().top+window.scrollY;
- const tab=document.querySelector('.tabbar'), nav=tab?.getBoundingClientRect().height||0;
- const room=h-top-nav-$('watch-controls').getBoundingClientRect().height;
- const stacked=matchMedia('(max-width:735px) and (min-height:701px)').matches;
- const beatH=stacked?scene.querySelector('.beat').getBoundingClientRect().height+8:0;
- player.style.setProperty('--watch-handheld-fit',Math.floor(Math.max(126,Math.min(300,(room-beatH-25)*558/1168)))+'px');
- player.style.setProperty('--watch-lcd-fit',Math.floor(Math.max(198,Math.min(570,(room-beatH-(stacked?35:81))*4/3)))+'px');
-}
-window.addEventListener('resize',fitWatch);
-document.addEventListener('fullscreenchange',fitWatch);
-const stageObserver=new ResizeObserver(fitWatch);
-[document.querySelector('main>.title'),$('watch-controls'),scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
-
-function viewState(){
- const screenMode=mode==='watch'&&screenOnly;
- player.classList.toggle('solve-screen-only',screenMode);
- fullButton.setAttribute('aria-pressed',String(!screenOnly));
- screenButton.setAttribute('aria-pressed',String(screenOnly));
- fitWatch();
-}
-function beat(i,keys=[],override=''){
- const [n,t,desc]=TOPICS[i];const key=n+'|'+keys.join('|')+'|'+override;
- if(frameSig===key)return;frameSig=key;
- $('beat-number').textContent=n;$('beat-title').textContent=t;$('beat-tip').textContent=override||desc;
-
-}
-function frame(t){
- if(t<1.60)return {state:'idle',n:0,keys:[]};
- if(t<3.55)return {state:'menu',n:0,keys:['menu']};
- if(t<5.31)return {state:'submenu',n:0,keys:['menu','3']};
- if(t<6.25)return {state:'entry',n:0,cmd:'nSolve(',cursor:true,keys:['menu','3','1']};
- if(t<8.86)return {state:'entry',n:1,cmd:'nSolve('+WATCH.show.slice(0,Math.floor(clamp((t-6.25)/2.6,0,1)*WATCH.show.length)),cursor:true,keys:t<7.15?['2','^','x']:t<7.8?['→','=']:['=','x','+','4']};
- if(t<10.70)return {state:'entry',n:1,cmd:'nSolve('+WATCH.show+(t<9.75?',':', x'),cursor:true,keys:[',','x']};
- if(t<17.91)return {state:'entry',n:2,cmd:'nSolve('+WATCH.show+', x'+(t<13.5?',':t<15.4?', 2':', 2, 3'),cursor:true,keys:t<13.5?[',']:t<15.4?[',','2']:[',','3']};
- if(t<20.5)return {state:'entry',n:3,cmd:first.cmd,cursor:true,keys:[')']};
- if(t<23.58)return {state:'result',n:3,...first,keys:t<22.4?['enter']:[]};
- if(t<27.92)return {state:'entry',n:4,cmd:second.cmd,history:[first],cursor:true,keys:['−','4',',','−','3']};
- if(t<29.43)return {state:'result',n:4,...second,history:[first],keys:t<29.1?['enter']:[]};
- return{state:'result',n:5,...second,history:[first],keys:[],tip:'To 3 significant figures: x ≈ '+prettify(wNeg.rounded)+' or '+wPos.rounded+'.'};
-}
-const timecode=t=>Math.floor(Math.max(0,t)/60)+':'+String(Math.floor(Math.max(0,t))%60).padStart(2,'0');
-function paint(t){
- if(mode!=='watch')return;
- const point=layout.at(t),demo=demoTime(point),ms=demo*1000;
- const keys=window.HandheldTransport?.lightAt(shell,'CT06',demo)||[];
- let f=frame(demo);
- const index=tape.findLastIndex(e=>e.timeMs<=ms);
- const past=tape.slice(0,index+1);
- const cmdCue=past.findLast(e=>typeof e.cmdAfter==='string');
- if(demo>=23.58&&demo<24.18){f={state:'result',n:4,...first,historyFocus:past.findLast(e=>e.historyFocus)?.historyFocus,keys:[]};}
- else if(f.state==='entry'&&cmdCue){f.cmd=cmdCue.cmdAfter;f.cursorFromEnd=cmdCue.cursorFromEnd??0;f.exponentOpen=!!cmdCue.exponentOpen;}
- // Carry the completed LCD state into narration without relighting its key.
- if(point.speaking||!keys.length)shell?.setKeys([]);
- if(index!==trailIndex){
-  trailIndex=index;
-  chips.forEach((n,i)=>{
-   n.dataset.progress=i<index?'done':i===index?'current':'next';
-   if(i===index)n.setAttribute('aria-current','step');else n.removeAttribute('aria-current');
-  });
- }
- const stage=Math.min(5,point.span.i===4?3:point.span.i>=5?point.span.i-1:point.span.i);
- if(stage!==chapterIndex){
-  chapterIndex=stage;
-  stepButtons.forEach((button,i)=>{
-   if(i===stage)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');
-  });
- }
- const holdNote=[
-  'Press Menu just below and to the right of the touchpad. Choose 3 for Algebra, then 1 for Numerical Solve.',
-  'Use the power key for the exponent. Press → to leave the exponent before typing =. After the equation, enter a comma and x.',
-  'Enter a comma, 2, a comma, then 3. These are x-values, with the lower bound first.',
-  'Close the bracket and press Enter. Only the interval from 2 to 3 is searched.',
-  'Read the positive solution. Keep these digits for your working.',
-  'Press ↑ twice and Enter to copy the expression. Edit the bounds to −4 and −3 with the negative key, then press Enter.',
-  'To 3 significant figures: x ≈ '+prettify(wNeg.rounded)+' or '+wPos.rounded+'.'
- ][point.span.i];
- const sig=JSON.stringify([f.state,f.cmd,f.result,f.historyFocus,f.cursorFromEnd,f.exponentOpen,!!f.cursor,!!f.history]);
- if(sig!==lcdSig){lcdSig=sig;SCREEN.draw(f);}
- beat(stage,[],holdNote);
- const audioMs=point.audioTime*1000;
- const cap=point.speaking?(CAPTIONS.find(c=>audioMs>=c.startMs&&audioMs<c.endMs)?.text||''):'';
- if(caption.textContent!==cap)caption.textContent=cap;
- caption.hidden=!ccOn||!cap;
- player.dataset.step=f.state;player.dataset.phase=point.speaking?'voice':'hold';
- seek.value=t;
- seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(Math.round(duration)));
- $('time').textContent=timecode(t>=duration-.015?Math.round(duration):t)+' / '+timecode(Math.round(duration));
-}
-function playing(v){
- running=v;willPlay=false;
- play.setAttribute('aria-label',v?'Pause':time>=duration-.015?'Replay':'Play');
- // These are SVG elements; setting a .hidden property does not change the attribute.
- play.querySelector('.play-icon').toggleAttribute('hidden',v);
- play.querySelector('.pause-icon').toggleAttribute('hidden',!v);
- cancelAnimationFrame(rafId);if(v)rafId=requestAnimationFrame(tick);
-}
-function tick(now){
- if(!running||mode!=='watch')return;
- const p=layout.at(time),s=p.span;
- if(phase==='voice'){
-  time=silent?Math.min(s.voiceEnd,(now-origin)/1000):
-   Math.min(s.voiceEnd,s.start+Math.max(0,media.currentTime-s.from));
-  if(time>=s.voiceEnd-.014||(!silent&&media.ended)){
-   media.pause();time=s.voiceEnd;phase='hold';origin=performance.now()-time*1000;
-  }
- }else{
-  time=Math.min(s.end,(now-origin)/1000);
-  if(time>=duration){time=duration;pause();return;}
-  if(time>=s.end){
-   const token=playTicket;paint(time);
-   void enterPhase(token).then(ok=>{if(ok&&running)rafId=requestAnimationFrame(tick);});
-   return;
-  }
- }
- paint(time);rafId=requestAnimationFrame(tick);
-}
-function pause(){
- playTicket++;media.pause();playing(false);phase='';paint(time);
-}
-function captionsState(v){
- ccOn=v;cc.setAttribute('aria-pressed',String(v));cc.setAttribute('aria-label',v?'Hide captions':'Show captions');paint(time);
-}
-function useSilent(){
- if(silent)return;
- silent=true;media.pause();origin=performance.now()-time*1000;
- $('audio-notice').hidden=mode!=='watch';sound.hidden=true;captionsState(true);
-}
-async function enterPhase(token){
- const p=layout.at(time);origin=performance.now()-time*1000;phase=p.speaking?'voice':'hold';
- if(!p.speaking||silent){media.pause();return token===playTicket&&mode==='watch';}
- let deadline;
- try{
-  media.currentTime=p.audioTime;media.playbackRate=1;
-  await Promise.race([media.play(),new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error('Audio unavailable')),4500);})]);
- }catch{if(token===playTicket)useSilent();}
- finally{clearTimeout(deadline);}
- return token===playTicket&&mode==='watch';
-}
-async function start(manual=true){
- if(mode!=='watch')return;
- if(time>=duration-.015)time=0;
- const token=++playTicket;willPlay=true;
- if(!await enterPhase(token))return;
- playing(true);if(manual)playerUI.flash(true);
-}
-media.addEventListener('error',useSilent);
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||willPlay))pause();});
-cc.addEventListener('click',()=>captionsState(!ccOn));
-fullButton.addEventListener('click',()=>selectFrame(false));
-screenButton.addEventListener('click',()=>selectFrame(true));
-seek.addEventListener('input',()=>{
- const next=Number(seek.value),resume=running||willPlay;
- if(resume)pause();
- time=clamp(next,0,duration);paint(time);playing(false);
- if(resume)void start(false);
-});
-play.addEventListener('click',()=>{
- if(mode!=='watch')return;
- if(running||willPlay){pause();playerUI.flash(false);}
- else void start();
-});
 const input=$('equation'),lo=$('lower'),hi=$('upper'),form=$('solver-form');
 const feedback=$('feedback'),answer=$('answer');
 function show(el,s){el.textContent=s||'';el.hidden=!s}
@@ -268,7 +46,7 @@ function hotspot(m,index,fn){
  b.addEventListener('mousedown',e=>e.preventDefault());b.addEventListener('click',e=>{e.stopPropagation();fn()});hotspots.append(b);
 }
 function choosePreset(k){
- const v=TRY_CASES[k];values={equation:v.equation,lower:v.lower,upper:v.upper};sync(values);
+ const v=originalPreset?TRY_CASES[k]:k==='negative'?{...practiceCase,lower:'-3',upper:'-2'}:practiceCase;values={equation:v.equation,lower:v.lower,upper:v.upper};sync(values);
  tryStep(step==='idle'?'idle':'entry',false);
 }
 function tryStep(s,focus=false){
@@ -284,7 +62,7 @@ function drawTry(focus=false){
  form.hidden=step!=='entry';
  player.dataset.step=step;
  const screenCmd=step==='result'?activeResult?.command||'':'';
- SCREEN.draw({state:step,cmd:screenCmd,result:activeResult?.result||'',cursor:step==='idle'});
+ showScreen({state:step,cmd:screenCmd,result:activeResult?.result||'',cursor:step==='idle'});
  if(step==='idle')beat(0,[],'Open Menu on the simulated Calculator page.');
  else if(step==='menu'){
    beat(0,['menu'],'Choose 3: Algebra.');
@@ -322,20 +100,12 @@ $('restart').addEventListener('click',()=>{tryStep('idle',true);player.focus({pr
 $('edit-entry').addEventListener('click',()=>tryStep('entry',true));
 form.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();form.requestSubmit();}});
 
-function setMode(m){
- if(mode===m)return;
- pause();mode=m;frameSig='';lcdSig='';trail.hidden=m!=='watch';hotspots.replaceChildren();
- document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');
- watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
- $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('audio-notice').hidden=!(m==='watch'&&silent);
- if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;drawTry()}
-}
 let targetField=0,lastField=-1;
 fields.forEach((field,i)=>field.addEventListener('focus',()=>{targetField=i;lastField=i}));
 function handleHandheld(key){
  if(mode!=='try')return;
  const k=String(key).toLowerCase();
- if(k==='home'||k==='scratchpad'){location.assign('../handheld/index.html');return}
+ if(k==='home'||k==='scratchpad'){location.assign('../scratchpad/index.html');return}
  if(k==='menu'){tryStep('menu',false);return}
  if(k==='esc'){tryStep(step==='submenu'?'menu':'idle',false);return}
  if(step==='idle'&&(k==='enter'||k==='click')){tryStep('menu',false);return}
@@ -353,7 +123,7 @@ function handleHandheld(key){
    t.modify(field,k,{replace:targetField!==lastField});lastField=targetField;
  }
 }
-const shell=window.HandheldShell?.mount({screen:lcd,host:lcd.closest('.lcd-group'),label:'TI-Nspire CX II-T Calculator',onKey:(key,event)=>{
+const shell=CalculatorLessonHandset.mount(host,{screen:lcd,label:'TI-Nspire CX II-T Calculator',onKey:(key,event)=>{
  const focusesField=step==='entry'&&['tab','down','up'].includes(key);
  handleHandheld(key);
  if(!focusesField&&!fields.includes(document.activeElement)&&mode==='try')player.focus({preventScroll:true});
@@ -365,18 +135,24 @@ document.addEventListener('keydown',e=>{
  if(!shell.getKey(key)||e.key==='Tab'&&key!=='tab')return;
  e.preventDefault();shell.getKey(key).click();
 });
-watchers.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
-sync(values);
-const practiceWatch=document.documentElement.dataset.practiceWatch==='true';
-setMode(!practiceWatch&&params.get('mode')==='try'?'try':'watch');
-if(media.error)useSilent(); // Metadata preload can fail before the module binds listeners.
-if(practiceWatch){
- const tellParent=type=>window.parent.postMessage({type},location.origin);
- tellParent('qb-practice-watch-ready');
- document.addEventListener('keydown',event=>{
-  if(event.key==='Escape'&&!event.defaultPrevented&&!document.fullscreenElement){
-    event.preventDefault();
-    tellParent('qb-practice-watch-exit');
-  }
- });
+
+function enterTry(device,actions){
+ if(practiceWatch)return;
+ mode='try';returnToWatch=actions.returnToWatch;device.prepend(player);$('try-grid').prepend(host);player.hidden=false;
+ shell.setKeys([]);shell.setInteractive(true);drawTry();player.focus({preventScroll:true});
 }
+function exitTry(){mode='watch';cache='';player.hidden=true;form.hidden=true;hotspots.replaceChildren();shell.setKeys([]);shell.setInteractive(false);}
+$('return-watch').addEventListener('click',()=>returnToWatch?.());
+sync(values);shell.setInteractive(false);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:!practiceWatch&&params.get('mode')==='try'?'try':'watch',renderWatch,enterTry,exitTry});
+if(practiceWatch){
+ const root=document.querySelector('[data-calculator-watch]'),tell=type=>window.parent.postMessage({type},location.origin);
+ const observer=new MutationObserver(()=>{if(!root.querySelector('.lw-stage'))return;observer.disconnect();tell('qb-practice-watch-ready');});
+ observer.observe(root,{childList:true,subtree:true});
+ document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!event.defaultPrevented&&!document.fullscreenElement&&!root.querySelector('.watch-fullscreen-fallback')){
+   event.preventDefault();tell('qb-practice-watch-exit');
+  }
+ },false);
+}
+await import('../handheld/watch-bootstrap.js?v=1');
