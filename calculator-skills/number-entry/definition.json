@@ -1,0 +1,215 @@
+{
+  "id": "CT01",
+  "title": "Enter and round a calculation",
+  "intro": "Evaluate an expression in scientific notation, then decide whether the result needs rounding.",
+  "recording": {
+    "file": "narration.mp3",
+    "scriptSha256": "18ab1f2478a4cb0752efa9cde8378c0cd1f2878a41c054951fdd2991765ce154",
+    "audioSha256": "327fb4fbb2d362f17e03ba835fa8fb3e107e801151bfd8975a74ae9e0399692f"
+  },
+  "chapters": [
+    {
+      "id": "open",
+      "title": "Open Calculator"
+    },
+    {
+      "id": "fraction",
+      "title": "Set up the fraction"
+    },
+    {
+      "id": "ee",
+      "title": "Find EE"
+    },
+    {
+      "id": "negative",
+      "title": "Enter the negative exponent"
+    },
+    {
+      "id": "read",
+      "title": "Read the result"
+    },
+    {
+      "id": "precision",
+      "title": "Round on paper"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open",
+      "spoken": "Open a Calculator page.",
+      "coach": "Evaluate (4 × 10⁵ × 3 × 10⁻²) ÷ (2 × 10³). Is the result exact or does it need rounding? Open Calculator from Home.",
+      "end": 1.78,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.12
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4
+        },
+        {
+          "id": "press-3",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.67
+        }
+      ]
+    },
+    {
+      "chapter": "fraction",
+      "spoken": "Group the numerator and denominator before entering a fraction.",
+      "coach": "Press Ctrl, then ÷. The top box is for the numerator; the bottom box is for the denominator.",
+      "end": 6.08,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.21
+        },
+        {
+          "id": "press-5",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.46
+        }
+      ]
+    },
+    {
+      "chapter": "ee",
+      "spoken": "Use the scientific notation key for powers of 10.",
+      "coach": "Find EE at the far left of the letter keys. Type 4, EE, 5, then ×. Start the next factor with 3, EE.",
+      "end": 9.8,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "press-6",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1
+        },
+        {
+          "id": "press-7",
+          "label": "EE",
+          "ariaLabel": "E E",
+          "at": 0.23
+        },
+        {
+          "id": "press-8",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.36
+        },
+        {
+          "id": "press-9",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.49
+        },
+        {
+          "id": "press-10",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.62
+        },
+        {
+          "id": "press-11",
+          "label": "EE",
+          "ariaLabel": "E E",
+          "at": 0.78
+        }
+      ]
+    },
+    {
+      "chapter": "negative",
+      "spoken": "Keep the negative sign inside the exponent.",
+      "coach": "Use (−), just left of Enter, for a negative exponent. Type 2, then ↓ to the denominator. Type 2, EE, 3, then Enter.",
+      "end": 12.96,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "(−)",
+          "ariaLabel": "Negative key",
+          "at": 0.09
+        },
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.21
+        },
+        {
+          "id": "press-14",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.34
+        },
+        {
+          "id": "press-15",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.47
+        },
+        {
+          "id": "press-16",
+          "label": "EE",
+          "ariaLabel": "E E",
+          "at": 0.59
+        },
+        {
+          "id": "press-17",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.71
+        },
+        {
+          "id": "press-18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.85
+        }
+      ]
+    },
+    {
+      "chapter": "read",
+      "spoken": "Read the unrounded value first.",
+      "coach": "Read the result from the Calculator history. Keep it unrounded until the last step.",
+      "end": 15.68,
+      "hold": 8,
+      "keys": []
+    },
+    {
+      "chapter": "read",
+      "spoken": "Scientific notation on the screen may use the letter E.",
+      "coach": "E means “times ten to the power of”. In the entry, 3E−2 means 3 × 10⁻².",
+      "end": 19.7,
+      "hold": 7,
+      "keys": []
+    },
+    {
+      "chapter": "precision",
+      "spoken": "Show the requested precision in your written answer.",
+      "coach": "Give an exact answer if you have one. Otherwise round the final answer to three significant figures, unless the question asks for something else.",
+      "end": 23.09,
+      "hold": 9,
+      "keys": []
+    },
+    {
+      "chapter": "precision",
+      "spoken": "",
+      "coach": "The exact result here is 6. Write 6. For an approximation, 6.274… to three significant figures is 6.27. Follow any precision the question specifies.",
+      "end": 26.974,
+      "hold": 7,
+      "keys": [],
+      "silent": true
+    }
+  ]
+}

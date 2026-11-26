@@ -75,3 +75,10 @@ body.calculator-bank-lesson > .tabbar button{border-radius:0}
 @media(max-width:700px){
  .ct01-stage[data-mode=watch]:not(.ct10-focused) .ct10-calc-anchor{--handheld-width:var(--bank-watch-fit,193px)}
 }
+
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+#stage[data-mode=try] #handheld-host{--handheld-width:min(300px,100%)}
+.ct01-stage .screen-work{min-width:0}
+#challenge{margin-top:1rem}
+@media(max-height:700px){#stage[data-mode=try] #handheld-host{--handheld-width:min(235px,100%)}}
