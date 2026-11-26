@@ -198,3 +198,7 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 .lcd-number:where(.qb-calculator-lesson, .qb-calculator-lesson *){text-align:right;margin:1.6cqw 2.4cqw;font:700 max(8px,5.6cqw)/1.25 Consolas,monospace;color:#173653}
 .wizard>span:where(.qb-calculator-lesson, .qb-calculator-lesson *){display:block;margin:.6cqw 0}
 .stats-try .lcd-status>span:nth-child(2):where(.qb-calculator-lesson, .qb-calculator-lesson *){white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* The common Watch frame owns its device size. Independent Try still uses the full handset. */
+.stat-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
