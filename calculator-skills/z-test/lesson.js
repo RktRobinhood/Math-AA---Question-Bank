@@ -190,7 +190,7 @@ window.addEventListener("resize",sizeTry);window.visualViewport?.addEventListene
 function enterTry(device,actions){
  mode="try";returnToWatch=actions.returnToWatch;document.body.classList.add("stats-try");
  device.prepend(stage);$("try-grid").prepend(handheld);stage.hidden=false;
- clearTimeout(light);shell.setKeys([]);shell.setInteractive(true);paintTry();sizeTry();
+ clearTimeout(light);shell.setKeys([]);shell.setInteractive(true);paintTry();sizeTry();stage.focus({preventScroll:true});
 }
 function exitTry(){
  mode="watch";stage.hidden=true;stamp=-1;document.body.classList.remove("stats-try");
@@ -210,8 +210,7 @@ document.addEventListener("keydown",e=>{
  const keys={m:"menu",M:"menu",Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down","-":"neg",".":"dot"};
  const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");if(k){
   e.preventDefault();
-  // A direct Try URL initially has the body focused. The first calculator
-  // shortcut opts into the stage so the upcoming wizard Tab selects a field.
+  // If focus has returned to the page, reclaim it for wizard Tab navigation.
   if(el===document.body)stage.focus({preventScroll:true});
   physical(k);
  }
