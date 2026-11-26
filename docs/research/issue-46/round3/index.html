@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" data-theme="system"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Question Studio · Block prototypes</title>
+<style>
+:root{color-scheme:light;--bg:#edf2f7;--surface:#fff;--muted:#f7f9fc;--grid:#e0e7ef;--edge:#ccd7e4;--text:#152439;--sub:#52677e;--blue:#244d85;--blueBg:#e6eefb;--purple:#62408d;--purpleBg:#efe6fa;--good:#185a43;--goodBg:#e5f4ec;--bad:#9a391d;--badBg:#fff0e4;--shadow:0 2px 6px #283d5517}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#131c29;--surface:#202d3f;--muted:#192638;--grid:#293c51;--edge:#40546a;--text:#eff4fe;--sub:#b5c5d8;--blue:#b7d4ff;--blueBg:#2a4566;--purple:#dcc6ff;--purpleBg:#4b356a;--good:#a8e7c9;--goodBg:#274b42;--bad:#ffd0b1;--badBg:#5a382c;--shadow:none}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#131c29;--surface:#202d3f;--muted:#192638;--grid:#293c51;--edge:#40546a;--text:#eff4fe;--sub:#b5c5d8;--blue:#b7d4ff;--blueBg:#2a4566;--purple:#dcc6ff;--purpleBg:#4b356a;--good:#a8e7c9;--goodBg:#274b42;--bad:#ffd0b1;--badBg:#5a382c;--shadow:none}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 system-ui,sans-serif}h1,h2,h3,p{margin:0}button,select,input,textarea{font:inherit;color:inherit;border:1px solid var(--edge);border-radius:7px;background:var(--surface);max-width:100%}button,select{min-height:38px;padding:5px 10px}button{cursor:pointer}button:hover{border-color:var(--blue);background:var(--blueBg)}button:disabled{cursor:not-allowed;opacity:.46}input,textarea{padding:6px 8px;width:100%}textarea{min-height:65px;resize:vertical}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+header{background:#142c4a;color:white;padding:17px 26px;display:flex;align-items:center;justify-content:space-between;gap:15px}.brand span{font-size:12px;color:#b9d0ef}.brand h1{font-size:clamp(21px,3vw,29px);line-height:1.13;letter-spacing:-.025em}header select{background:#1e3c60;color:white;border-color:#58799e}nav{min-height:64px;display:flex;padding:10px 24px;gap:9px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--edge);background:var(--surface)}nav label{font-size:13px;color:var(--sub)}.switch{margin-left:auto;display:flex;gap:5px}.switch [aria-pressed=true],.topic[aria-pressed=true]{font-weight:700;background:var(--blueBg);border-color:var(--blue);color:var(--blue)}
+.columns{max-width:1740px;margin:auto;display:grid;grid-template-columns:minmax(190px,225px) minmax(0,1fr) minmax(285px,330px);gap:16px;padding:16px 20px;align-items:start}.pane{min-width:0;background:var(--surface);border:1px solid var(--edge);border-radius:10px;box-shadow:var(--shadow)}.paneHead{padding:15px 15px 10px;border-bottom:1px solid var(--edge)}.paneHead h2{font-size:17px;line-height:1.15}.hint{font-size:12px;color:var(--sub);line-height:1.35}.paneHead .hint{margin-top:5px}.content{padding:12px}.label{display:block;font-size:12px;font-weight:650;color:var(--sub)}.label+*{margin-top:4px}.topics{margin:9px 0 12px;display:flex;gap:4px;flex-direction:column}.topic{text-align:left;border-color:transparent;min-height:32px;border-left:3px solid var(--edge);padding-left:7px}.topic[data-topic=Functions]{border-left-color:#397ec8}.topic[data-topic="Number and algebra"]{border-left-color:#c47621}.topic[data-topic="Geometry and trigonometry"]{border-left-color:#2d8b71}.topic[data-topic="Statistics and probability"]{border-left-color:#875ab3}.topic[data-topic=Calculus]{border-left-color:#c55d6a}
+.lib{display:grid;gap:6px}.lib button{width:100%;text-align:left;display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:44px}.lib button strong{font-size:13px}.status{font-size:11px;color:var(--sub)}.workbar{display:flex;justify-content:space-between;align-items:center;gap:8px}.workbar button{font-size:12px}.workbar>div:last-child{flex-shrink:0}.empty{position:relative;z-index:2;border:1px dashed var(--edge);border-radius:8px;padding:20px;background:var(--muted);max-width:350px}.note{padding:10px 12px;background:var(--muted);font-size:12px;color:var(--sub);border-bottom:1px solid var(--edge)}.work{position:relative;isolation:isolate;background:radial-gradient(circle,var(--edge) 1px,transparent 1px) 0 0/17px 17px;padding:12px;min-height:450px}.card{position:relative;z-index:2;min-width:0;background:var(--surface);border:1px solid var(--edge);border-top:3px solid var(--blue);border-radius:8px;padding:9px 10px;box-shadow:var(--shadow);width:100%}.card[data-kind=story],.card[data-kind=note]{border-top-color:var(--sub)}.card[data-kind=target]{border-top-color:var(--purple)}.card.hidden-card{border-style:dashed;opacity:.76}.cardHead{display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap}.cardTitle{font-size:14px;font-weight:700;margin:auto 0}.cardHead .cardTitle{flex:1;min-width:95px}.part{font:700 12px/1.6 system-ui;padding:1px 6px;border-radius:4px;background:var(--blueBg);color:var(--blue)}.action{font-size:12px;min-height:31px;padding:3px 7px}.drag{cursor:grab;touch-action:none}.cardBody{margin-top:8px}.fieldrow{display:flex;gap:5px;flex-wrap:wrap}.fieldrow label{flex:1;min-width:43px}.fieldrow input{padding:4px 3px}.expression{color:var(--blue);font:16px Georgia,serif;margin:5px 0;overflow-wrap:anywhere}.prompt{font:15px/1.4 Georgia,serif}.order{display:flex;gap:4px;align-items:center;margin-top:8px;flex-wrap:wrap}.order .hint{margin-right:auto}.port{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:7px}.port button{background:var(--purpleBg);color:var(--purple);border-color:var(--purple)}.port select{min-width:0;flex:1;font-size:12px;min-height:32px}.work.stack{display:grid;align-content:start;gap:11px;padding-right:32px}.work.graph{height:690px;overflow:auto}.work.graph .card{position:absolute;width:calc(50% - 25px);min-width:175px;max-width:310px}.work.graph .cardHead{cursor:grab;touch-action:none}.wires{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:visible;color:var(--purple)}.railmsg{display:none}.badge{display:inline-block;background:var(--goodBg);color:var(--good);border-radius:5px;padding:3px 8px;font-weight:650;font-size:12px}.badge.bad{background:var(--badBg);color:var(--bad)}.check{padding:10px 0;border-bottom:1px solid var(--edge)}.check:first-child{padding-top:0}.check h3{font-size:14px;margin:8px 0 5px}.warn{margin-top:6px;background:var(--badBg);color:var(--bad);padding:7px;border-radius:6px;font-size:13px}.check ol{padding-left:18px;margin:4px 0}.check li{margin:3px 0}.printPart{padding-bottom:6px}.math{font-family:Georgia,serif}.foot{padding:10px 16px;color:var(--sub);font-size:12px}.flash{color:var(--purple);font-weight:650}.sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%)}.ink{background:var(--muted);padding:10px;border-radius:6px;margin-top:6px}.check .label input{margin-top:4px}.check .label{margin-top:8px}
+@media(max-width:1120px){.columns{grid-template-columns:minmax(170px,192px) minmax(0,1fr) minmax(245px,275px);gap:10px;padding:12px}.work.graph .card{width:calc(50% - 16px);min-width:132px}.work.graph .cardTitle{min-width:70px}}
+@media(max-width:920px){.columns{grid-template-columns:155px minmax(0,1fr)}.checks{grid-column:2}.work.graph{height:690px}}
+@media(max-width:620px){header{padding:14px}.brand span{font-size:11px}nav{padding:8px 12px}.switch{margin-left:0}.columns{display:flex;flex-direction:column;gap:12px;padding:10px}.pane{width:100%}.topics{flex-direction:row;flex-wrap:wrap;margin:5px 0}.topic{min-height:36px}.lib{grid-template-columns:repeat(2,minmax(0,1fr))}.work.stack,.work.graph{padding:9px 25px 9px 9px;display:grid;height:auto;gap:9px}.work.graph .card{position:relative!important;left:auto!important;top:auto!important;width:100%;min-width:0;max-width:none}.work.graph .cardHead{cursor:default}.work.graph .drag{display:none}.railmsg{display:block}.action{min-height:40px}.fieldrow input{min-height:39px}}
+@media print{header,nav,.libpane,.workpane,.foot,.teacher{display:none!important}.columns{display:block;padding:0}.pane{border:0;box-shadow:none}.renderTitle{display:block}}
+</style></head>
+<body>
+<header><div class="brand"><span>IB Math Question Bank / Feasibility #46</span><h1>Question Studio</h1></div><label><span class="sr">Theme</span><select id="theme"><option value="system">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label></header>
+<nav><label for="example">Example</label><select id="example"><option value="q">Quadratics · Water jet</option><option value="s">Arithmetic sequences · Theatre seating</option></select><span class="status">Original AA SL samples</span><div class="switch" aria-label="Workspace prototype"><button id="stack" aria-pressed="true">A · Paper stack</button><button id="graph" aria-pressed="false">B · Node canvas</button></div></nav>
+<main class="columns">
+<aside class="pane libpane"><div class="paneHead"><h2>Block library</h2><p class="hint">AA SL · 2021 syllabus</p></div><div class="content"><label class="label" for="search">Find a skill</label><input type="search" id="search" placeholder="e.g. maximum"><div class="topics" id="topics" aria-label="Syllabus topics"></div><div class="lib" id="library"></div></div></aside>
+<section class="pane workpane" aria-labelledby="workTitle"><div class="paneHead workbar"><div><h2 id="workTitle">Paper stack</h2><p class="hint" id="workHint"></p></div><div><button id="blank">Start blank</button> <button id="reset">Reset example</button></div></div><p id="workNote" class="note" role="status"></p><div id="work" class="work stack"></div></section>
+<aside class="pane checks" aria-labelledby="checkTitle"><div class="paneHead"><h2 id="checkTitle">Live checks</h2><p class="hint">Student paper and teacher key</p></div><div id="checks" class="content"></div></aside></main>
+<footer class="foot">Research only · Local browser session · No original exam materials</footer>
+<script>
+(()=>{'use strict';
+const $=x=>document.getElementById(x), e=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const TOP=['All topics','Number and algebra','Functions','Geometry and trigonometry','Statistics and probability','Calculus'];
+const S={
+ q:{title:'Water jet',topic:'Functions',story:'A water jet rises above a paved courtyard.',model:'Quadratic height model',fields:[['a','a',-2],['b','b',12],['c','c',1],['T','End (s)',6]],
+ src:'Time at maximum',srcShort:'Time',out:'seconds',target:'Height at maximum',ans:'3',targetAns:'19',sample:['2','17'],
+ basePrompt:'Find the time at which the jet reaches its maximum height.',depPrompt:x=>'Using your answer to ('+x+'), find the height of the jet at that time.',indPrompt:'Find the maximum height of the jet.',
+ formula:m=>'h(t) = '+m.a+'t² '+signed(m.b)+'t '+signed(m.c),require:m=>'Height h is in metres, t is in seconds and 0 ≤ t ≤ '+m.T+'.',altReason:'Enter a time strictly between the endpoints.',
+ calc(m){if(!ints(m)||m.a>=0||m.c<0||m.T<=0||m.T>60)return {reason:'Use integer coefficients with a < 0, a nonnegative starting height and 0 < end ≤ 60.'};const k=-m.b/(2*m.a), f=t=>m.a*t*t+m.b*t+m.c;if(!(k>0&&k<m.T))return {reason:'There is no interior maximum in the given time interval.'};if(f(m.T)<0)return {reason:'The model goes below the courtyard within the given interval.'};return {x:k,y:f(k),keyA:rational(-m.b,2*m.a),keyB:rational(4*m.a*m.c-m.b*m.b,4*m.a),unitA:'s',unitB:'m',f,valid:v=>Number.isFinite(v)&&v>0&&v<m.T}} },
+ s:{title:'Theatre seating',topic:'Number and algebra',story:'A small theatre has several rows of seats. Each row has the same number of additional seats compared with the row in front.',model:'Arithmetic sequence model',fields:[['a','First row',20],['d','Increase',5],['n','Rows',8]],
+ src:'Seats in final row',srcShort:'Final-row seats',out:'seats',target:'Total seats',ans:'55',targetAns:'300',sample:['50','280'],
+ basePrompt:'Find the number of seats in the final row.',depPrompt:x=>'Using your answer to ('+x+'), find the total number of seats in the theatre.',indPrompt:'Find the total number of seats in the theatre.',
+ formula:m=>'uₖ = '+m.a+' + (k − 1) × '+m.d,require:m=>'There are '+m.n+' rows. The first row has '+m.a+' seats, with '+m.d+' more in each successive row.',altReason:'Enter a whole number larger than the first row. The resulting total must also be a whole number.',
+ calc(m){if(!ints(m)||m.a<1||m.d<1||m.n<3||m.n>75)return {reason:'Use a positive first term and increase with 3 to 75 rows.'};const x=m.a+(m.n-1)*m.d, f=v=>m.n*(m.a+v)/2;return{x,y:f(x),unitA:'seats',unitB:'seats',f,valid:v=>Number.isInteger(v)&&v>m.a&&v<=10000&&Number.isInteger(f(v))}}}
+};
+function rational(n,d){if(d<0){n=-n;d=-d}let a=Math.abs(n), b=d;while(b){[a,b]=[b,a%b]}a=a||1;return d===a?String(n/a):String(n/a)+'/'+String(d/a)}
+function signed(n){return n<0?'− '+Math.abs(n):'+ '+n}
+function ints(m){return Object.values(m).every(x=>Number.isInteger(x)&&Math.abs(x)<=10000)}
+function fmt(v){if(!Number.isFinite(v))return '—';return String(Math.round(v*1e8)/1e8)}
+const defs=[['story','Introduction','Text'],['model','Model','Math'],['source','Source result','Math'],['target','Dependent result','Math'],['note','Written response','Text']];
+const parse=()=>{try{return JSON.parse(localStorage.getItem('studio-46-r3-2'))}catch{return null}};
+function make(k){let c=S[k];return{blocks:['story','model','source','target'].map((kind,i)=>({kind,id:'b'+i,visible:true,x:i%2?53:4,y:i<2?24:315})),serial:4,edges:{b3:'b2'},m:Object.fromEntries(c.fields.map(f=>[f[0],String(f[2])])),story:c.story,note:{},test:c.sample.slice()}}
+let saved=parse()||{}, app={q:saved.q||make('q'),s:saved.s||make('s')}, k=new URLSearchParams(location.search).get('example')==='s'?'s':'q', mode=new URLSearchParams(location.search).get('view')==='graph'?'graph':'stack',topic=S[k].topic,srcPort=null,changed='',dragState=null;
+const st=()=>app[k], cfg=()=>S[k], by=(id)=>st().blocks.find(b=>b.id===id);
+function persist(){try{localStorage.setItem('studio-46-r3-2',JSON.stringify(app))}catch{}}
+function order(){const ids=st().blocks.filter(b=>b.visible&&['source','target','note'].includes(b.kind));return Object.fromEntries(ids.map((b,i)=>[b.id,String.fromCharCode(97+i)]))}
+function label(b){return ({story:'Introduction',model:cfg().model,source:cfg().src,target:cfg().target,note:'Written response'})[b.kind]}
+function values(){return Object.fromEntries(Object.entries(st().m).map(([key,value])=>[key,value.trim()===''?NaN:Number(value)]))}
+function linked(b){return by(st().edges[b.id])}
+function blockName(b,map){return map[b.id]?'('+map[b.id]+') '+label(b):b.visible?label(b):label(b)+' (hidden)'}
+function usePrompt(b,map){const c=cfg();if(b.kind==='source')return c.basePrompt;if(b.kind==='target'){const s=linked(b);return s?c.depPrompt(map[s.id]||'missing part'):c.indPrompt}return st().note[b.id]||'State how your calculation supports your conclusion.'}
+function constraints(){const s=st(),m=values(),calc=cfg().calc(m), map=order(), errs=[], warns=[];
+ const hasMath=s.blocks.some(b=>b.visible&&['source','target'].includes(b.kind)), model=s.blocks.find(b=>b.kind==='model'), modelAt=s.blocks.indexOf(model);
+ if(hasMath&&(!model||!model.visible))errs.push('Show or add the model before publishing. It supplies the student givens.');
+ if((hasMath||model?.visible)&&calc.reason)errs.push(calc.reason);
+ for(const [i,b] of s.blocks.entries()){
+  if(!b.visible)continue;
+  if(b.kind==='note')warns.push(s.note[b.id]?.trim()?'Teacher review: add a rubric for the written response.':'Add wording and review the written-response rubric.');
+  if(['source','target'].includes(b.kind)&&model?.visible&&modelAt>i)errs.push('Place the model before '+blockName(b,map)+'.');
+  if(b.kind==='target'&&s.edges[b.id]){
+    const a=linked(b);
+    if(!a||a.kind!=='source'||!a.visible)errs.push(blockName(b,map)+' needs its source part. Show it or remove the link.');
+    else if(s.blocks.indexOf(a)>=i)errs.push(blockName(a,map)+' must print before '+blockName(b,map)+'.');
+  }
+ }
+ if(!Object.keys(map).length)warns.push('No visible question parts.');
+ return {m,calc,map,errs:[...new Set(errs)],warns:[...new Set(warns)]};
+}
+function showLibrary(){
+ const term=$('search').value.trim().toLowerCase(), c=cfg();
+ $('topics').innerHTML=TOP.map(t=>'<button class="topic" data-topic="'+e(t)+'" aria-pressed="'+(topic===t)+'">'+e(t)+'</button>').join('');
+ let list=defs.map(([kind,base,group])=>[kind,({model:c.model,source:c.src,target:c.target})[kind]||base,group]);
+ if(topic!=='All topics'&&topic!==c.topic)list=list.filter(v=>v[2]==='Text');
+ list=list.filter(v=>(v[1]+' '+v[2]+' '+(v[2]==='Math'?c.topic:'')).toLowerCase().includes(term));
+ $('library').innerHTML=list.map(([kind,name,group])=>'<button draggable="true" data-add="'+kind+'" title="Add or drag '+e(name)+'"><span><strong>'+e(name)+'</strong><br><span class="status">'+group+'</span></span><span aria-hidden="true">+</span></button>').join('')||'<p class="hint">No matching blocks in this sample.</p>';
+}
+function card(b,i,q){const c=cfg(),s=st(),map=q.map;
+ const title=label(b);let inside='';
+ if(b.kind==='story')inside='<label class="label">Introduction<textarea data-text="story">'+e(s.story)+'</textarea></label>';
+ if(b.kind==='note')inside='<label class="label">Prompt<textarea data-text="'+b.id+'">'+e(s.note[b.id]||'')+'</textarea></label>';
+ if(b.kind==='model')inside='<div class="fieldrow">'+c.fields.map(([id,name])=>'<label class="label">'+e(name)+'<input data-m="'+id+'" type="number" step="1" value="'+e(s.m[id])+'"></label>').join('')+'</div><p class="expression" data-formula></p><button class="action" data-roll>Reroll valid values</button>';
+ if(b.kind==='source'||b.kind==='target')inside='<p class="prompt" data-prompt="'+b.id+'">'+e(usePrompt(b,map))+'</p>';
+ if(b.kind==='source')inside+='<div class="port"><button class="action" data-out="'+b.id+'" aria-pressed="'+(srcPort===b.id)+'">◉ '+e(c.out)+' output</button></div>';
+ if(b.kind==='target'){
+  const list=s.blocks.filter(x=>x.kind==='source');
+  inside+='<div class="port"><button class="action" data-in="'+b.id+'" title="Use selected matching output">◉ Input</button><select aria-label="Link '+e(title)+'" data-link="'+b.id+'"><option value="">Independent</option>'+list.map(x=>'<option '+(s.edges[b.id]===x.id?'selected':'')+' value="'+x.id+'">'+e(blockName(x,map))+'</option>').join('')+'</select></div>';
+ }
+ const y=b.y||24,x=b.x||0;
+ return '<article class="card '+(b.visible?'':'hidden-card')+'" data-id="'+b.id+'" data-kind="'+b.kind+'" style="--px:'+x+'%;--py:'+y+'px;left:'+(mode==='graph'?x+'%':'auto')+';top:'+(mode==='graph'?y+'px':'auto')+'"><div class="cardHead"><button class="action drag" draggable="'+(mode==='stack')+'" data-handle="'+b.id+'" aria-label="Drag '+e(title)+'">⠿</button>'+(map[b.id]?'<span class="part">'+map[b.id].toUpperCase()+'</span>':'')+'<h3 class="cardTitle">'+e(title)+'</h3><button class="action" aria-label="'+(b.visible?'Hide ':'Show ')+e(title)+'" data-hide="'+b.id+'">'+(b.visible?'Hide':'Show')+'</button></div><div class="cardBody">'+inside+'</div><div class="order"><span class="hint">'+(b.visible?'Paper '+(i+1):'Hidden from paper')+'</span><button class="action" data-move="'+b.id+'" data-by="-1" aria-label="Move '+e(title)+' up" '+(!i?'disabled':'')+'>↑</button><button class="action" data-move="'+b.id+'" data-by="1" aria-label="Move '+e(title)+' down" '+(i===s.blocks.length-1?'disabled':'')+'>↓</button></div></article>';
+}
+function draw(){
+ const w=$('work');w.querySelector('svg')?.remove();const host=w.getBoundingClientRect(), ns='http://www.w3.org/2000/svg';
+ const svg=document.createElementNS(ns,'svg');svg.setAttribute('class','wires');svg.setAttribute('width',w.scrollWidth);svg.setAttribute('height',w.scrollHeight);svg.setAttribute('aria-hidden','true');
+ const start=(n)=>{const r=n.getBoundingClientRect();return {x:r.left-host.left+w.scrollLeft,y:r.top-host.top+w.scrollTop,w:r.width,h:r.height}};
+ for(const [b,a] of Object.entries(st().edges)){
+  const nodeA=w.querySelector('[data-id="'+a+'"]'), nodeB=w.querySelector('[data-id="'+b+'"]');if(!nodeA||!nodeB)continue;
+  const p=start(nodeA),q=start(nodeB);let x1,y1,x2,y2,d, rail=Math.max(p.x+p.w,q.x+q.w)+10;
+  if(p.x+p.w+13<q.x){x1=p.x+p.w;y1=p.y+p.h*.72;x2=q.x;y2=q.y+q.h*.72;let b=(x1+x2)/2;d='M'+x1+','+y1+' C'+b+','+y1+' '+b+','+y2+' '+x2+','+y2}
+  else if(q.x+q.w+13<p.x){x1=p.x;y1=p.y+p.h*.72;x2=q.x+q.w;y2=q.y+q.h*.72;let b=(x1+x2)/2;d='M'+x1+','+y1+' C'+b+','+y1+' '+b+','+y2+' '+x2+','+y2}
+  else{x1=p.x+p.w;y1=p.y+p.h*.72;x2=q.x+q.w;y2=q.y+q.h*.72;d='M'+x1+','+y1+' H'+rail+' V'+y2+' H'+x2}
+  const path=document.createElementNS(ns,'path');path.setAttribute('d',d);path.setAttribute('fill','none');path.setAttribute('stroke','currentColor');path.setAttribute('stroke-width','2');if(!by(a)?.visible||!by(b)?.visible)path.setAttribute('stroke-dasharray','5 4');svg.append(path);
+  for(const [x,y] of [[x1,y1],[x2,y2]]){const dot=document.createElementNS(ns,'circle');dot.setAttribute('cx',x);dot.setAttribute('cy',y);dot.setAttribute('r',4);dot.setAttribute('fill','currentColor');svg.append(dot)}
+ }
+ w.prepend(svg);
+}
+function render(focus){const w=$('work'),q=constraints(), scroll=w.scrollTop;
+ $('example').value=k; $('workTitle').textContent=mode==='stack'?'Paper stack':'Node canvas';
+ $('workHint').textContent=mode==='stack'?'Block order is the paper order.':'Position cards freely. Arrows set paper order.';
+ $('workNote').textContent=changed||(mode==='stack'?'Drag a library block or click +. Reorder with the grip or arrows.':'Drag blocks by their headers. Connect a purple output to an input.');
+ for(const x of ['stack','graph'])$(x).setAttribute('aria-pressed',String(x===mode));
+ $('blank').textContent=st().blankUndo?'Restore prior draft':'Start blank';
+ w.className='work '+mode;w.innerHTML=st().blocks.map((b,i)=>card(b,i,q)).join('')||'<div class="empty"><strong>Drop the first block here</strong><p class="hint">Start with an introduction or the model. Click + in the library to add without dragging.</p></div>';
+ w.scrollTop=scroll; showLibrary(); refresh();
+ if(focus)w.querySelector(focus)?.focus({preventScroll:true});
+}
+function refresh(){const q=constraints(),c=cfg(),s=st(),m=q.m;
+ const formula=document.querySelector('[data-formula]');if(formula)formula.textContent=Number.isFinite(Object.values(m).reduce((a,b)=>a+b,0))?c.formula(m):'Enter the model values';
+ for(const p of document.querySelectorAll('[data-prompt]'))p.textContent=usePrompt(by(p.dataset.prompt),q.map);
+ const checks=$('checks'),old=document.activeElement?.dataset?.trial; const selection=old!=null?[document.activeElement.selectionStart,document.activeElement.selectionEnd]:null;
+ const visible=s.blocks.filter(b=>b.visible), math=visible.filter(b=>b.kind==='source'||b.kind==='target'), status=q.errs.length?'Blocked':q.warns.length?'Review':'Ready to review';
+ const modeCalc=!q.errs.length&&!q.calc.reason;
+ const key=modeCalc?math.map(b=>'<li>('+q.map[b.id]+') <strong>'+(b.kind==='source'?(q.calc.keyA??fmt(q.calc.x)):(q.calc.keyB??fmt(q.calc.y)))+'</strong> '+e(b.kind==='source'?q.calc.unitA:q.calc.unitB)+'</li>').join(''):'';
+ const active=visible.find(b=>b.kind==='target'&&linked(b)?.visible&&s.blocks.indexOf(linked(b))<s.blocks.indexOf(b));
+ let trial='';
+ if(modeCalc&&active){
+   const av=s.test[0].trim()===''?NaN:Number(s.test[0]),bv=s.test[1].trim()===''?NaN:Number(s.test[1]), zz=q.calc;
+   const close=(x,y)=>Number.isFinite(x)&&Math.abs(x-y)<=1e-7;let verdict='';
+   if(!Number.isFinite(av)||!Number.isFinite(bv))verdict='Enter both simulated answers.';
+   else if(!zz.valid(av))verdict=c.altReason+' No follow-through check.';
+   else if(close(av,zz.x)&&close(bv,zz.y))verdict='Matches the canonical key.';
+   else if(close(bv,zz.y))verdict='B matches the canonical key independently.';
+   else if(close(bv,zz.f(av)))verdict='Consistent follow-through: '+fmt(zz.f(av))+' '+zz.unitB+'. No marks assigned.';
+   else verdict='Not consistent with the earlier answer. Expected '+fmt(zz.f(av))+' '+zz.unitB+' from the simulated input.';
+   trial='<div class="check teacher"><h3>Follow-through test</h3><p class="hint">Simulated answers only. The key above does not change.</p><div class="fieldrow"><label class="label">Part ('+e(q.map[linked(active).id])+')<input inputmode="decimal" data-trial="0" value="'+e(s.test[0])+'"></label><label class="label">Part ('+e(q.map[active.id])+')<input inputmode="decimal" data-trial="1" value="'+e(s.test[1])+'"></label></div><p class="ink hint">'+e(verdict)+'</p></div>';
+ }
+ const paper=visible.map(b=>b.kind==='model'?'<p class="printPart math">'+e(c.require(m))+(k==='q'&&Object.values(m).every(Number.isFinite)?' '+e(c.formula(m))+'.':'')+'</p>':b.kind==='story'?'<p class="printPart">'+e(s.story)+'</p>':'<p class="printPart"><strong>('+q.map[b.id]+')</strong> '+e(usePrompt(b,q.map))+'</p>').join('');
+ checks.innerHTML='<div class="check teacher"><span class="badge '+(q.errs.length?'bad':'')+'" role="status">'+status+'</span>'+q.errs.concat(q.warns).map(x=>'<p class="warn">'+e(x)+'</p>').join('')+'</div><div class="check"><h3 class="renderTitle">Student paper</h3>'+(q.errs.length?'<p class="hint">Preview blocked until the checks above are fixed.</p>':paper||'<p class="hint">No visible blocks.</p>')+'</div><div class="check teacher"><h3>Canonical answer key</h3>'+(key?'<ol>'+key+'</ol>':'<p class="hint">'+(q.errs.length?'Fix the authoring checks first.':'No computed answers yet.')+'</p>')+'</div>'+trial;
+ if(old!=null){const t=checks.querySelector('[data-trial="'+old+'"]');if(t){t.focus({preventScroll:true});try{t.setSelectionRange(...selection)}catch{}}}
+ requestAnimationFrame(draw);
+}
+function add(kind,place){const s=st(); if(kind!=='note'&&s.blocks.some(b=>b.kind===kind)){changed='That block is already on the workspace.';return render()}
+ const count=s.blocks.length,id='b'+s.serial++,b={id,kind,visible:true,x:place?.x??(count%2?53:4),y:place?.y??(24+Math.floor(count/2)*285)};
+ if(place?.before){const i=s.blocks.findIndex(x=>x.id===place.before);s.blocks.splice(Math.max(0,i),0,b)}else s.blocks.push(b);
+ if(kind==='note')s.note[id]='Explain what the result means in context.';
+ changed='Added '+label(b)+'.';persist();render('[data-hide="'+id+'"]');
+ if(mode==='graph'&&!place&&innerWidth>620)$('work').scrollTop=Math.max(0,b.y-24);
+}
+function move(id,d,before){const s=st(),i=s.blocks.findIndex(x=>x.id===id);if(i<0)return;
+ let j=before?s.blocks.findIndex(x=>x.id===before):i+d;if(j<0||j>=s.blocks.length||j===i)return;
+ const b=s.blocks.splice(i,1)[0];if(before&&j>i)j--;s.blocks.splice(j,0,b);changed='Updated the paper order.';persist();render('[data-handle="'+id+'"]');
+}
+function link(t,a){const s=st(),b=by(t),p=by(a);if(!b||b.kind!=='target'||(a&&(!p||p.kind!=='source'||p.id===b.id))){changed='Choose a compatible source output first.';return render()}
+ if(a)s.edges[t]=a;else delete s.edges[t];
+ srcPort=null;changed=a?'Follow-through link connected.':'Follow-through link removed.';persist();render('[data-link="'+t+'"]');
+}
+document.addEventListener('click',ev=>{const b=ev.target.closest('button');if(!b)return;const d=b.dataset;
+ if(d.topic){topic=d.topic;showLibrary();return}
+ if(d.add)return add(d.add);
+ if(d.roll!==undefined){const v=st(); const sets=k==='q'?[[-2,12,1,6],[-3,10,4,3],[-1,8,5,8],[-4,24,2,6]]:[[20,5,8],[16,3,10],[18,4,9],[22,2,12]];const ref=cfg().fields;const current=sets.findIndex(arr=>arr.every((n,i)=>String(n)===v.m[ref[i][0]]));const next=sets[(current+1)%sets.length];v.m=Object.fromEntries(ref.map((f,i)=>[f[0],String(next[i])]));changed='Rerolled the model; paper and key updated.';persist();return render('[data-roll]')}
+ if(d.hide){const x=by(d.hide);x.visible=!x.visible;changed=x.visible?'Restored '+label(x)+'.':'Hidden on paper. This block is still saved.';persist();return render('[data-hide="'+x.id+'"]')}
+ if(d.move)return move(d.move,Number(d.by));
+ if(d.out){srcPort=srcPort===d.out?null:d.out;changed=srcPort?'Output selected. Click the matching Input.':'';return render('[data-out="'+d.out+'"]')}
+ if(d.in){if(!srcPort){changed='First choose an output, or pick a source from the input menu.';return render('[data-link="'+d.in+'"]')}return link(d.in,srcPort)}
+ if(['graph','stack'].includes(b.id)){mode=b.id;changed='';srcPort=null;return render()}
+ if(b.id==='blank'){const cur=st();if(cur.blankUndo){app[k]=cur.blankUndo;changed='Restored the prior draft.'}else{app[k]={...make(k),blocks:[],edges:{},blankUndo:JSON.parse(JSON.stringify(cur))};changed='Blank workspace. Your prior draft is saved.'}srcPort=null;persist();return render()}
+ if(b.id==='reset'){app[k]=make(k);srcPort=null;changed='Example reset.';persist();return render()}
+});
+document.addEventListener('input',ev=>{const x=ev.target,d=x.dataset;
+ if(x.id==='search')return showLibrary();
+ if(d.m)st().m[d.m]=x.value;else if(d.text==='story')st().story=x.value;else if(d.text)st().note[d.text]=x.value;else if(d.trial!==undefined)st().test[d.trial]=x.value;else return;
+ persist();refresh();
+});
+document.addEventListener('change',ev=>{const x=ev.target,d=x.dataset;if(d.link)return link(d.link,x.value);
+ if(x.id==='example'){k=x.value;topic=cfg().topic;changed='';srcPort=null;$('search').value='';return render()}
+ if(x.id==='theme'){document.documentElement.dataset.theme=x.value;try{localStorage.setItem('studio46-theme',x.value)}catch{}}
+});
+const work=$('work');
+document.addEventListener('dragstart',ev=>{const x=ev.target.closest('[data-add],[data-handle]');if(!x)return;dragState=x.dataset.add?{kind:x.dataset.add}:{id:x.dataset.handle};ev.dataTransfer.setData('text/plain',JSON.stringify(dragState));ev.dataTransfer.effectAllowed='move'});
+document.addEventListener('dragend',()=>{dragState=null});
+work.addEventListener('dragover',e=>{if(dragState)e.preventDefault()});
+work.addEventListener('drop',ev=>{if(!dragState)return;ev.preventDefault();const d=dragState;dragState=null;const over=ev.target.closest('.card')?.dataset.id,r=work.getBoundingClientRect();
+ if(d.kind)return add(d.kind,mode==='graph'&&innerWidth>620?{x:Math.max(1,Math.min(53,100*(ev.clientX-r.left)/r.width-9)),y:Math.max(8,ev.clientY-r.top+work.scrollTop-18)}:{before:over});
+ if(d.id&&over)return move(d.id,0,over);
+ if(d.id&&!over)return move(d.id,st().blocks.length-1-st().blocks.indexOf(by(d.id)));
+});
+let ptr=null;
+work.addEventListener('pointerdown',ev=>{if(mode!=='graph'||innerWidth<=620||!ev.target.closest('.cardHead')||ev.target.closest('button:not(.drag)')||ev.button!==0)return;
+ const n=ev.target.closest('.card'),b=by(n.dataset.id);if(!b)return;ptr={n,b,x:b.x,y:b.y,ix:ev.clientX,iy:ev.clientY,id:ev.pointerId};try{n.setPointerCapture(ev.pointerId)}catch{}});
+work.addEventListener('pointermove',ev=>{if(!ptr||ptr.id!==ev.pointerId)return;const r=work.getBoundingClientRect(), p=ptr;
+ p.b.x=Math.max(1,Math.min(100-100*p.n.offsetWidth/r.width-1,p.x+100*(ev.clientX-p.ix)/r.width));p.b.y=Math.max(4,Math.min(1200,p.y+ev.clientY-p.iy));p.n.style.left=p.b.x+'%';p.n.style.top=p.b.y+'px';draw()});
+for(const t of ['pointerup','pointercancel'])work.addEventListener(t,ev=>{if(ptr?.id===ev.pointerId){ptr=null;persist()}});
+work.addEventListener('scroll',()=>requestAnimationFrame(draw));addEventListener('resize',()=>requestAnimationFrame(draw));
+try{const t=localStorage.getItem('studio46-theme');if(['system','light','dark'].includes(t))document.documentElement.dataset.theme=$('theme').value=t}catch{}
+render();
+})();
+
+</script></body></html>
