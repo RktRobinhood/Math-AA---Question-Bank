@@ -60,6 +60,7 @@ window.CALCULATOR_COURSE_SCOPE={skills:{
   "CT58":{"direct":["ai-hl"]},
   "CT59":{"direct":["ai-hl"]}
 },companions:{
+  "linear-system-three/index.html":{"parent":"CT07","title":"Solve a 3×3 linear system","direct":["aa-hl","ai-sl","ai-hl"],"keywords":"linsolve simultaneous three equations three unknowns"},
   "maximum/index.html":{"parent":"CT12","title":"Find a graph maximum","direct":["aa-sl","aa-hl","ai-sl","ai-hl"]},
   "histogram/index.html":{"parent":"CT30","title":"Frequency histograms","direct":["ai-sl","ai-hl"],"note":"Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph."}
 },foundations:{

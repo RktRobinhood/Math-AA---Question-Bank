@@ -1,0 +1,272 @@
+{
+  "id": "CT07-three",
+  "title": "Solve a 3×3 linear system",
+  "intro": "Use linSolve on a TI-Nspire CX II-T.",
+  "chapters": [
+    {
+      "id": "open",
+      "title": "Open the linear solver"
+    },
+    {
+      "id": "setup",
+      "title": "Set three equations"
+    },
+    {
+      "id": "first",
+      "title": "Enter row 1"
+    },
+    {
+      "id": "second",
+      "title": "Enter row 2"
+    },
+    {
+      "id": "third",
+      "title": "Enter row 3 and solve"
+    },
+    {
+      "id": "check",
+      "title": "Read and check the ordered result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open",
+      "spoken": "In Calculator, open Menu, then Algebra, then Solve System of Linear Equations.",
+      "coach": "Menu → 3: Algebra → 2: Solve System of Linear Equations.",
+      "end": 6,
+      "hold": 4.1,
+      "keys": [
+        {
+          "id": "open-1",
+          "label": "Menu",
+          "at": 0.25,
+          "physicalKey": "menu"
+        },
+        {
+          "id": "open-2",
+          "label": "3",
+          "at": 0.5,
+          "physicalKey": "3"
+        },
+        {
+          "id": "open-3",
+          "label": "2",
+          "at": 0.75,
+          "physicalKey": "2"
+        }
+      ]
+    },
+    {
+      "chapter": "setup",
+      "spoken": "Change the number of equations to three. Tab to Variables and enter x, y, z with commas, then confirm.",
+      "coach": "Use three equations. The variable order is x, y, z.",
+      "end": 12.8,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "setup-1",
+          "label": "3",
+          "at": 0.11111,
+          "physicalKey": "3"
+        },
+        {
+          "id": "setup-2",
+          "label": "Tab",
+          "at": 0.22222,
+          "physicalKey": "tab"
+        },
+        {
+          "id": "setup-3",
+          "label": "x",
+          "at": 0.33333,
+          "physicalKey": "x"
+        },
+        {
+          "id": "setup-4",
+          "label": ",",
+          "at": 0.44444,
+          "physicalKey": "comma"
+        },
+        {
+          "id": "setup-5",
+          "label": "y",
+          "at": 0.55556,
+          "physicalKey": "y"
+        },
+        {
+          "id": "setup-6",
+          "label": ",",
+          "at": 0.66667,
+          "physicalKey": "comma"
+        },
+        {
+          "id": "setup-7",
+          "label": "z",
+          "at": 0.77778,
+          "physicalKey": "z"
+        },
+        {
+          "id": "setup-8",
+          "label": "Enter",
+          "at": 0.88889,
+          "physicalKey": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "first",
+      "spoken": "Type x plus y plus z equals six. Press Tab to move to the second equation.",
+      "coach": "Row 1: x + y + z = 6.",
+      "end": 18.6,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "first-1",
+          "label": "x",
+          "at": 0.11111,
+          "physicalKey": "x"
+        },
+        {
+          "id": "first-2",
+          "label": "+",
+          "at": 0.22222,
+          "physicalKey": "plus"
+        },
+        {
+          "id": "first-3",
+          "label": "y",
+          "at": 0.33333,
+          "physicalKey": "y"
+        },
+        {
+          "id": "first-4",
+          "label": "+",
+          "at": 0.44444,
+          "physicalKey": "plus"
+        },
+        {
+          "id": "first-5",
+          "label": "z",
+          "at": 0.55556,
+          "physicalKey": "z"
+        },
+        {
+          "id": "first-6",
+          "label": "=",
+          "at": 0.66667,
+          "physicalKey": "eq"
+        },
+        {
+          "id": "first-7",
+          "label": "6",
+          "at": 0.77778,
+          "physicalKey": "6"
+        },
+        {
+          "id": "first-8",
+          "label": "Tab",
+          "at": 0.88889,
+          "physicalKey": "tab"
+        }
+      ]
+    },
+    {
+      "chapter": "second",
+      "spoken": "Type x minus y equals two. Press Tab to move to the third equation.",
+      "coach": "Row 2: x − y = 2.",
+      "end": 24.1,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "second-1",
+          "label": "x",
+          "at": 0.14286,
+          "physicalKey": "x"
+        },
+        {
+          "id": "second-2",
+          "label": "−",
+          "at": 0.28571,
+          "physicalKey": "minus"
+        },
+        {
+          "id": "second-3",
+          "label": "y",
+          "at": 0.42857,
+          "physicalKey": "y"
+        },
+        {
+          "id": "second-4",
+          "label": "=",
+          "at": 0.57143,
+          "physicalKey": "eq"
+        },
+        {
+          "id": "second-5",
+          "label": "2",
+          "at": 0.71429,
+          "physicalKey": "2"
+        },
+        {
+          "id": "second-6",
+          "label": "Tab",
+          "at": 0.85714,
+          "physicalKey": "tab"
+        }
+      ]
+    },
+    {
+      "chapter": "third",
+      "spoken": "Type z minus y equals one. Now press Enter to solve all three equations at once.",
+      "coach": "Row 3: z − y = 1. Enter evaluates the template.",
+      "end": 30.4,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "third-1",
+          "label": "z",
+          "at": 0.14286,
+          "physicalKey": "z"
+        },
+        {
+          "id": "third-2",
+          "label": "−",
+          "at": 0.28571,
+          "physicalKey": "minus"
+        },
+        {
+          "id": "third-3",
+          "label": "y",
+          "at": 0.42857,
+          "physicalKey": "y"
+        },
+        {
+          "id": "third-4",
+          "label": "=",
+          "at": 0.57143,
+          "physicalKey": "eq"
+        },
+        {
+          "id": "third-5",
+          "label": "1",
+          "at": 0.71429,
+          "physicalKey": "1"
+        },
+        {
+          "id": "third-6",
+          "label": "Enter",
+          "at": 0.85714,
+          "physicalKey": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "check",
+      "spoken": "Read the answers in the order x, y, z: three, one, two. Check that these values satisfy each original equation.",
+      "coach": "Check: 3 + 1 + 2 = 6; 3 − 1 = 2; 2 − 1 = 1.",
+      "end": 38.7,
+      "hold": 2.5,
+      "keys": []
+    }
+  ]
+}

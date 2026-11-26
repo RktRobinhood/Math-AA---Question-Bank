@@ -298,6 +298,9 @@ window.HANDHELD_CATALOG_ROUTES={
     }
   },
   "companions": {
+    "CT07": [
+      {"path": "linear-system-three/index.html", "label": "Solve a 3×3 linear system"}
+    ],
     "CT12": [
       {
         "path": "maximum/index.html",

@@ -14,6 +14,13 @@
       "transcript": "SUP-HANDSET-SETTINGS.txt",
       "transcriptSha256": "a33660c89f9643bcf06933741226c8e849a18477c2b1a72671dc36a9e6d300a8",
       "audioDestination": "../../handset-settings/narration.mp3"
+    },
+    {
+      "id": "CT07-three",
+      "definition": "../../linear-system-three/definition.json",
+      "transcript": "../../linear-system-three/narration-script.txt",
+      "transcriptSha256": "2107ffbf59a2c8abcbfb63f44b6f0f1c534965b8f38945322c0ba224d02dc93d",
+      "audioDestination": "../../linear-system-three/narration.mp3"
     }
   ]
 }

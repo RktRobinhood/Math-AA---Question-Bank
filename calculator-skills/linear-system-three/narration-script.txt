@@ -1,0 +1,6 @@
+In Calculator, open Menu, then Algebra, then Solve System of Linear Equations.
+Change the number of equations to three. Tab to Variables and enter x, y, z with commas, then confirm.
+Type x plus y plus z equals six. Press Tab to move to the second equation.
+Type x minus y equals two. Press Tab to move to the third equation.
+Type z minus y equals one. Now press Enter to solve all three equations at once.
+Read the answers in the order x, y, z: three, one, two. Check that these values satisfy each original equation.

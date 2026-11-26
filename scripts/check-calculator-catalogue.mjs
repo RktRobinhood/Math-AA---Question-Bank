@@ -58,6 +58,7 @@ for(const reviews of [scoped,omitted])for(const [id,exceptions] of Object.entrie
 
 // These are separate teaching routes, not permission inherited from the parent card.
 const companions={
+ 'linear-system-three/index.html':{parent:'CT07',title:'Solve a 3×3 linear system',direct:['aa-hl','ai-sl','ai-hl'],keywords:'linsolve simultaneous three equations three unknowns'},
  'maximum/index.html':{parent:'CT12',title:'Find a graph maximum',direct:[...courses]},
  'histogram/index.html':{parent:'CT30',title:'Frequency histograms',direct:['ai-sl','ai-hl'],note:'Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph.'}
 };

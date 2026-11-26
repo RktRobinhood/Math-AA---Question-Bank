@@ -1,0 +1,49 @@
+/* Only the calculator LCD and its original Try exercise. The shared player owns Watch layout. */
+.ls3-lcd{display:flex;flex-direction:column;position:relative;color:#142b3b;background:#fcfdff;font-family:Arial,sans-serif}
+.ls3-status{flex:0 0 10%;display:flex;align-items:center;justify-content:space-between;padding:0 2.3cqw;background:linear-gradient(#bcd1e8,#82a2c7);border-bottom:1px solid #577da7;font:700 max(6px,3.05cqw)/1 ui-monospace,monospace}
+.ls3-battery{font-size:.9em;color:#477719}
+.ls3-content{flex:1;position:relative;min-height:0;overflow:hidden;font-size:max(7px,4.2cqw);line-height:1.22}
+.ls3-menu{display:grid;grid-template-columns:.86fr 1.14fr;align-items:start;padding:1.4cqw;gap:.9cqw}
+.ls3-menu ol{list-style:none;padding:0;margin:0;border:1px solid #748ba5;background:#f1f7fd;box-shadow:1px 1px 2px #21384e40}
+.ls3-menu .ls3-menu-algebra{margin-top:7.3cqw}
+.ls3-menu li>*{padding:.65cqw .8cqw;display:block;max-width:100%;min-height:0;text-align:left;line-height:1.08;font:500 max(6px,3.28cqw)/1.12 Arial,sans-serif;color:inherit}
+.ls3-menu button,.ls3-setup button{width:100%;border:0;cursor:pointer;background:transparent}
+.ls3-menu button:hover,.ls3-setup button:hover{background:#d4e8f5;color:#152d48}
+.ls3-selected{background:#2566a0!important;color:white!important}
+.ls3-setup{position:absolute;inset:4% 6% auto;background:#edf4fa;border:1px solid #627f9d;box-shadow:1px 1px 3px #1f436449}
+.ls3-dialog-head{display:block;padding:1cqw 2cqw;background:#bcd1e5;font-weight:700;font-size:max(6px,3.8cqw)}
+.ls3-fields{padding:2cqw 2cqw .9cqw;display:grid;grid-template-columns:1fr minmax(20%,34%);align-items:center;gap:1.35cqw .7cqw;font-size:max(6px,3.62cqw)}
+.ls3-fields :is(b,button),.ls3-dialog-actions>*{padding:.55cqw 1.2cqw;min-height:0;border:1px solid #7c91aa;background:white;text-align:center;line-height:1.11}
+.ls3-variable-note{display:block;padding:.75cqw 2cqw;color:#2a4967;font-size:max(5px,3.13cqw)}
+.ls3-dialog-actions{display:flex;justify-content:flex-end;gap:1cqw;padding:0 2cqw 1.4cqw;font-size:max(5px,3.45cqw)}
+.ls3-dialog-actions>*{width:auto;white-space:nowrap}
+.ls3-command{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:1.05cqw;margin:3.2cqw 2.1cqw 0;font:600 max(6px,4.25cqw)/1.16 Georgia,serif}
+.ls3-linsolve,.ls3-order{align-self:end;margin-bottom:.4cqw;white-space:nowrap}
+.ls3-brace{font-size:14cqw;font-weight:400;line-height:1;transform:scaleY(1.25);transform-origin:center}
+.ls3-inputs{display:grid;gap:1.2cqw;min-width:0}
+.ls3-cell{display:block;margin:0;padding:.4cqw .65cqw;min-width:0;width:100%;font:inherit;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#142b3b}
+input.ls3-cell{appearance:none;border:1px solid #6689a8;border-radius:0;background:#f3f8fd;color:#142b3b}
+input.ls3-cell:focus{outline:1px solid #0c4d91;outline-offset:0}
+.ls3-result{padding:.55cqw 0;margin:2cqw 3cqw 0;text-align:right;font:700 max(7.5px,6.2cqw)/1.11 Georgia,serif}
+.ls3-result:not([data-solution=unique]){font-size:max(7px,3.6cqw)}
+.ls3-error{position:absolute;inset:auto 0 0;padding:1.2cqw 1.8cqw;color:#7e2d18;background:#fff0dc;font-size:max(7px,3.4cqw);line-height:1.13}
+.ls3-caret{position:absolute;inset:auto 0 0;border-top:1px solid #9eb2c4;padding:1.2cqw 2cqw;background:#ecf4fc;margin:0}
+.ls3-practice{padding:.6rem;font-size:.90rem;align-self:center;min-width:0}
+.ls3-practice h2{font-size:1.06rem;margin:0 0 .24rem}
+.ls3-practice p{margin:.3rem 0;color:#d9e7e0}
+.ls3-practice .ls3-task{font:650 .98rem/1.5 ui-monospace,monospace;white-space:pre-line;color:#f6fcf8}
+.ls3-actions{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+.ls3-actions .btn.ghost{min-height:39px;color:#f0f6f2;border-color:#759489}
+.ls3-support:empty{display:none}
+.lw-stage[data-mode=try] .ls3-device{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.lw-stage[data-mode=try] .ls3-host{min-width:0;--handheld-width:clamp(206px,calc((100svh - 95px)*.4777),340px)}
+@media(max-width:780px){
+ .lw-stage[data-mode=try] .ls3-device{grid-template-columns:1fr}
+ .lw-stage[data-mode=try] .ls3-practice{grid-row:1;padding:.25rem}
+ .lw-stage[data-mode=try] .ls3-host{--handheld-width:clamp(188px,calc((100svh - 205px)*.4777),270px)}
+}
+@media(max-width:420px) and (max-height:650px){
+ .lw-lesson .lw-header{margin-bottom:.38rem}
+ .lw-lesson .lw-header h1{font-size:1.32rem}
+ .lw-lesson .lw-header p{font-size:.75rem}
+}

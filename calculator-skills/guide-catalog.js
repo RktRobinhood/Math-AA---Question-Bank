@@ -31,7 +31,7 @@
     const href=safeRoute(c.path),part=href&&scope?.companions?.[href];
     if(!part||part.parent!==parent.id)return [];
     return [{id:parent.id,href,title:part.title,family:parent.family,scopeNote:part.note||'',companion:true,
-      tag:companionTitles[href.split('/')[0]]||'',direct:part.direct}];
+      tag:part.keywords||companionTitles[href.split('/')[0]]||'',direct:part.direct}];
   }));
   const foundations=Object.entries(scope?.foundations??{}).flatMap(([route,row])=>{
     const href=safeRoute(route);
