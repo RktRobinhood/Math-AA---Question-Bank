@@ -575,14 +575,33 @@
     const calculatorButton = useCalculator ? h('button', {
       class: 'practice-calc-trigger no-print', type: 'button', 'aria-label': 'Open calculator',
       'aria-haspopup': 'dialog', 'aria-expanded': 'false',
-      title: q.calculator ? 'Open a blank calculator' : 'Open a blank calculator. Give an exact answer as requested.',
+      title: q.calculator ? 'Open the on-screen calculator' : 'Open a blank calculator. Give an exact answer as requested.',
       onclick: e => CALC.open(e.currentTarget),
-    }, 'Calculator') : null;
+    }) : null;
+    if (calculatorButton) {
+      const addIcon = (path, side) => {
+        const ns = 'http://www.w3.org/2000/svg';
+        const icon = document.createElementNS(ns, 'svg');
+        icon.setAttribute('viewBox', '0 0 24 24');
+        icon.setAttribute('aria-hidden', 'true');
+        if (side) icon.classList.add('practice-calc-panel-icon');
+        const line = document.createElementNS(ns, 'path');
+        line.setAttribute('d', path);
+        icon.append(line);
+        calculatorButton.append(icon);
+      };
+      addIcon('M7 3.5h10a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-13a2 2 0 0 1 2-2ZM8.5 8h7M9 12.2h.1m5.8 0h.1M9 16.5h.1m5.8 0h.1');
+      calculatorButton.append(document.createTextNode('Calculator'));
+      addIcon('M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm9 0v14m-7-7h4m-2-2 2 2-2 2', true);
+    }
+    const calculatorStatus = useCalculator && q.calculator
+      ? h('span', { class: 'chip practice-calc-status-chip', text: 'Calculator allowed' })
+      : calcChip(q);
     return h('section', { class: 'block qcard' },
       h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), settled ? h('span', { text: q.title }) : null, h('span', { class: 'sp' }),
         h('span', { class: 'chip', text: `Level ${q.level}${name ? ` · ${name}` : ''}` }),
-        !useCalculator || !q.calculator ? calcChip(q) : null, calculatorButton,
-        h('span', { class: 'mono', text: `[${q.marks}]` })),
+        calculatorStatus, h('span', { class: 'mono', text: `[${q.marks}]` })),
+      calculatorButton ? h('div', { class: 'practice-calc-edge no-print' }, calculatorButton) : null,
       state.extra ? h('div', { class: 'verdict info', text: 'Extra practice. It does not change your level.' })
         : item.reason === 'refresh' ? h('div', { class: 'verdict info', text: `A refresher for ${item.refreshFor} ${C.byCode.get(item.refreshFor)?.title || ''}.` })
         : item.reason === 'review' ? h('div', { class: 'verdict info', text: 'A review, to check this is still secure.' }) : null,

@@ -93,3 +93,18 @@
   .practice-calc-frame{height:calc(100% - 41px - env(safe-area-inset-top,0px));margin-top:calc(41px + env(safe-area-inset-top,0px))}
 }
 @media print{.practice-calc-panel,.practice-calc-trigger{display:none!important}#app.with-practice-calc{display:block;width:100%}}
+
+/* Practice only: permission stays passive; the right-edge tab opens the live handheld. */
+.practice-calc-status-chip{color:var(--muted);background:var(--sunk);border-radius:var(--r-pill)}
+.practice-calc-edge{display:flex;justify-content:flex-end;margin:-4px calc(-1 * var(--s5)) -1px 0}
+.practice-calc-edge .practice-calc-trigger{
+  gap:7px;min-height:44px;padding:0 12px;background:var(--accent-soft);color:var(--accent);
+  border:1px solid var(--accent);border-inline-end-width:3px;border-radius:8px 0 0 8px;
+  font:680 13px/1 var(--ui);
+}
+.practice-calc-edge .practice-calc-trigger svg{width:17px;height:17px;flex:none;stroke-linejoin:round}
+.practice-calc-edge .practice-calc-trigger .practice-calc-panel-icon{width:13px;height:13px}
+.practice-calc-edge .practice-calc-trigger:is(:hover,[aria-expanded=true]){color:var(--accent-ink);background:var(--accent)}
+@media(max-width:700px){
+ .practice-calc-edge{margin-inline-end:calc(-1 * var(--s3))}
+}
