@@ -1,7 +1,7 @@
 "use strict";
 (function(){
  const $=id=>document.getElementById(id),M=CT54Math,T=CT54Tape,S=CT54Screen,H=HandheldTransport;
- const stage=$("stage"),lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),play=$("play"),seek=$("seek"),expr=$("expression"),bound=$("bound");
+ const stage=$("stage"),lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),expr=$("expression"),bound=$("bound");
 
  function fitTry(){
   if(mode!=="try")return;
@@ -13,7 +13,7 @@
   stage.style.setProperty("--retro-try-width",width+"px");
  }
  const tryLayout=new ResizeObserver(fitTry);
- for(const el of [document.querySelector("header"),$("try-player")])tryLayout.observe(el);
+ tryLayout.observe($("try-player"));
  window.addEventListener("resize",fitTry);
  const params=new URLSearchParams(location.search);
  let challenge={q:M.parse("x-4"),limits:[0,6]},unsafe=false;
@@ -25,16 +25,14 @@
   const q=M.parse(params.get("expr")??"x-4");
   challenge={q,limits:[l,u]};
  }catch{unsafe=true;}
- const fixed=hasCustom||params.get("case")==="integral-demo"||params.get("example")==="demo";
  const wd=M.parse("x-3"),watchLimits=[0,4],watchAnswer=M.integrate(wd,0,4);
  const create=(raw,preset)=>({state:"entry",raw,preset,q:null,low:null,high:null,cursor:null,draft:"",result:null,teaching:false,menuIndex:0,subIndex:0,error:""});
  const goal="Find the signed integral and geometric area of f(x) = "+M.displayExpr(challenge.q.raw)+" from "+M.pretty(challenge.limits[0])+" to "+M.pretty(challenge.limits[1])+".";
  $("keypad-problem").textContent=$("try-line").textContent=goal;
- let mode="watch",state=create(challenge.q.raw,challenge.limits),edited=false,lane="practice",started=false,focusConsidered=false,focused=false;
- let practice={state,edited},fork=null,forkAt=null,lastWatchFocus=false,focusChoice=null;
- let t=0,playing=false,origin=0,raf=0,cache="";
- const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:k=>press(k)});
- const hot=$("hotspots"),tabs=[$("watch-tab"),$("try-tab")];
+ let mode="watch",state=create(challenge.q.raw,challenge.limits),edited=false,cache="",returnToWatch;
+ const handheld=$("handheld-host");
+ const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:k=>press(k)});
+ const hot=$("hotspots");
  const hints={entry:"Press Enter to plot your function.",plotted:"Press Menu on the handheld.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 6: Integral.",lower:"Type or point to the lower bound, then press Enter.",upper:"Type or point to the upper bound, then press Enter.",result:"The calculator shows the signed integral. To find geometric area, split at each sign change and add magnitudes."};
  function snapshot(time){
   const s=create("",watchLimits);let key="";
@@ -47,65 +45,23 @@
   const limit=s.low!=null?" Lower: "+M.pretty(s.low)+".":"",draft=s.draft?" Typed "+s.draft+".":"";
   const result=s.result?" Signed integral: "+M.pretty(s.result.total)+".":"";
   const shaded=s.result&&s.teaching?" Below-axis parts are negative; above-axis parts are positive.":"";
+  handheld.dataset.scene=s.state;
   $("lcd-text").textContent=(s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw))+". "+hints[s.state]+limit+draft+result+shaded+(s.error?" "+s.error:"");
  }
- const steps=$("steps");
- T.titles.forEach((name,i)=>{
-  const li=document.createElement("li"),b=document.createElement("button"),no=document.createElement("span");
-  b.type="button";no.textContent="0"+(i+1);b.append(no,document.createTextNode(name));
-  b.addEventListener("click",()=>go(T.starts[i]));li.append(b);steps.append(li);
- });
- const clock=x=>Math.floor(x/60)+":"+String(Math.floor(x)%60).padStart(2,"0");
- function renderWatch(){
-  if(mode!=="watch")return;
-  const ch=T.starts.findLastIndex(x=>t>=x),ph=T.captionStarts.findLastIndex(x=>t>=x),{s,key}=snapshot(t);
-  seek.value=t;$("clock").textContent=clock(t)+" / "+clock(T.duration);seek.setAttribute("aria-valuetext",clock(t)+" of "+clock(T.duration));
-  shell.setKeys(key?[key]:[]);$("stage-play").hidden=started||t>=.1;
-  const stamp=[s.state,s.raw,s.cursor,s.draft,s.teaching,ch,ph].join("|");
+ // Passive annotations belong to their original visual cue, not to the rail.
+ const physicalTape=T.keys.filter(event=>event.key);
+ const passiveTape=T.keys.filter(event=>!event.key);
+ function renderWatch(device,{beat,point,crossed,key}){
+  if(handheld.parentElement!==device)device.append(handheld);
+  const count=crossed.length,press=physicalTape[count-1],hold=point.span.end-point.span.voiceEnd;
+  const lit=press&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*hold<.65;
+  shell.setKeys(lit?[press.key]:[]);
+  const stamp=beat+":"+count;
   if(stamp===cache)return;cache=stamp;
-  screen.draw(s);graphLabel(s);$("caption").textContent=T.captions[ph];
-  const eq=$("watch-equation");
-  eq.textContent=ph>=7?"Signed: −4 · Geometric: 5":ph===6?"− Below axis   ·   + Above axis":s.result?"Signed: −4.5 + 0.5 = −4":"";
-  eq.dataset.visible=String(Boolean(s.result));eq.setAttribute("aria-hidden",String(!s.result));
-  [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===ch)));
+  const passive=passiveTape.findLast(event=>event.time<=T.captionStarts[beat]);
+  const {s}=snapshot(Math.max(0,press?.time??0,passive?.time??0));
+  screen.draw(s);graphLabel(s);
  }
- function labelPlay(){const name=playing?"Pause":t>=T.duration-.025?"Replay":"Play";play.textContent=name;play.setAttribute("aria-label",name);play.dataset.playing=String(playing);$("take-over").textContent=name==="Replay"?"Open Try":"Take over";}
- function go(v){t=M.clamp(Number(v)||0,0,T.duration);origin=performance.now()-t*1000;renderWatch();labelPlay();}
- function pause(){if(playing)t=M.clamp((performance.now()-origin)/1000,0,T.duration);playing=false;cancelAnimationFrame(raf);labelPlay();renderWatch();}
- function tick(now){if(!playing||mode!=="watch")return;t=M.clamp((now-origin)/1000,0,T.duration);if(t>=T.duration){pause();return;}renderWatch();raf=requestAnimationFrame(tick);}
- function fitWatch(){
-  if(mode==="try"){fitTry();return;}
-  if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight,top=Math.max(0,stage.getBoundingClientRect().top)+(document.querySelector(".tabbar")?.offsetHeight||0);
-  const occupied=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
-  const w=Math.max(82,Math.min(focused?338:304,Math.floor((h-top-occupied-24)*558/1168)));
-  stage.style.setProperty("--watch-fit-width",w+"px");
- }
- function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct54-focused",focused);stage.dataset.focused=String(focused);document.body.classList.toggle("ct54-focus-open",focused);
-  const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
-  b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"⛶";
-  if(focused)stage.scrollTop=0;fitWatch();
- }
- function fitAtEntry(){fitWatch();if(mode==="watch"&&!focused&&!focusConsidered&&shell.body.getBoundingClientRect().width<156)focus(true);}
- const observer=new ResizeObserver(fitWatch);
- for(const e of [$("watch-message"),$("try-player"),$("watch-player"),document.querySelector(".header")])observer.observe(e);
- window.addEventListener("resize",fitWatch);
- window.visualViewport?.addEventListener("resize",fitWatch);
- function start(){
-  if(mode!=="watch")return;
-  if(!focusConsidered){
-   focusConsidered=true;fitWatch();const r=shell.body.getBoundingClientRect();if(!focused&&(r.width<185||r.top<0))focus(true);
-  }
-  if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});
-  started=true;$("stage-play").hidden=true;
-  if(t>=T.duration-.025)go(0);
-  playing=true;origin=performance.now()-t*1000;labelPlay();raf=requestAnimationFrame(tick);
- }
- function toggle(){if(playing)pause();else start();}
- $("stage-play").addEventListener("click",toggle);play.addEventListener("click",toggle);seek.addEventListener("input",()=>go(seek.value));
- $("back").addEventListener("click",()=>go(t-10));$("next").addEventListener("click",()=>go(t+10));$("replay").addEventListener("click",()=>{pause();go(0);start();});
- $("focus-view").addEventListener("click",()=>{focusChoice=!focused;focus(!focused);});
  function jumpMenu(panel,index,fn){
   const b=document.createElement("button");b.type="button";b.setAttribute("aria-label",panel.rows[index]);
   b.style.left=panel.x/3.2+"%";b.style.top=(panel.y+2+index*panel.h)/2.4+"%";b.style.width=panel.w/3.2+"%";b.style.height=panel.h/2.4+"%";
@@ -116,7 +72,6 @@
  }
  const picking=()=>state.state==="lower"||state.state==="upper";
  function checkerEnabled(){
-  if(lane!=="practice")return false;
   const samePolynomial=state.q?state.q.p.length===challenge.q.p.length&&state.q.p.every((x,i)=>x===challenge.q.p[i]):state.raw===challenge.q.raw;
   return samePolynomial&&state.preset.every((x,i)=>x===challenge.limits[i]);
  }
@@ -129,12 +84,12 @@
   $("color-key").hidden=!(state.result?.pos>0&&state.result.neg<0);
   if(bound.value!==state.draft)bound.value=state.draft;
   const grade=checkerEnabled();$("answer-form").hidden=!grade;$("checker-context").hidden=grade;
-  $("checker-context").textContent=grade?"":lane==="fork"?"Exploration only. Open Try to resume your independent exercise.":"Exploration only. Reset calculator to return to the assigned answer check.";
+  $("checker-context").textContent=grade?"":"Exploration only. Reset calculator to return to the assigned answer check.";
   $("feedback").hidden=!grade;
-  $("open-independent").hidden=lane!=="fork";$("jump-answer").hidden=!grade;
-  const description=lane==="fork"?"Exploring the paused Watch graph.":grade?goal:"Exploring an edited graph. Reset to return to the assigned exercise.";
+  $("jump-answer").hidden=!grade;
+  const description=grade?goal:"Exploring an edited graph. Reset to return to the assigned exercise.";
   $("keypad-problem").textContent=$("try-line").textContent=description;
-  const invalid=lane==="practice"&&unsafe&&!edited?"This link had an invalid function or interval. The original exercise is shown instead.":"";
+  const invalid=unsafe&&!edited?"This link had an invalid function or interval. The original exercise is shown instead.":"";
   setMessage(state.error||invalid||(state.result?"Signed integral: "+M.pretty(state.result.total)+".":""),Boolean(state.error||invalid));
   if(state.state==="menu")jumpMenu(S.PANEL.main,5,()=>press("6"));
   if(state.state==="submenu")jumpMenu(S.PANEL.sub,5,()=>press("6"));
@@ -201,8 +156,8 @@
  $("bound-form").addEventListener("submit",e=>{e.preventDefault();confirm(state.draft?M.number(state.draft):state.cursor);});
  $("retry-bounds").addEventListener("click",()=>{edited=true;beginIntegral();});
  $("reset-keypad").addEventListener("click",()=>{
-  edited=true;state=lane==="fork"?snapshot(t).s:create(challenge.q.raw,challenge.limits);expr.value=state.raw;
-  if(lane==="practice"){$("answer-form").reset();$("feedback").textContent="";}
+  edited=true;state=create(challenge.q.raw,challenge.limits);expr.value=state.raw;
+  $("answer-form").reset();$("feedback").textContent="";
   renderTry();stage.focus({preventScroll:true});
  });
  function pointer(e){
@@ -217,44 +172,23 @@
   if(mode!=="try"||!picking()||e.target.closest("button"))return;
   const x=pointer(e);if(x!==null)confirm(x);
  });
- function modeTo(next,steal=false){
-  const targetLane=steal?"fork":"practice";
-  if(mode===next&&next==="try"&&targetLane===lane)return;
-  if(mode==="try")Object.assign(lane==="fork"?fork:practice,{state,edited});
-  else{pause();lastWatchFocus=focused;if(focused)focus(false);}
-  if(next==="try"){
-   lane=targetLane;
-   if(lane==="fork"&&forkAt!==t){forkAt=t;fork={state:snapshot(t).s,edited:false};}
-   ({state,edited}=lane==="fork"?fork:practice);expr.value=state.raw;
-  }
-  mode=next;stage.dataset.mode=mode;stage.dataset.tryLane=next==="try"?lane:"";cache="";
-  const watch=mode==="watch";
-  tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
-  for(const id of ["watch","watch-message","watch-side","watch-player"])$(id).hidden=!watch;
-  for(const id of ["try","try-side","try-player"])$(id).hidden=watch;
-  shell.setKeys([]);shell.setInteractive(!watch);
-  if(watch){
-   hot.replaceChildren();lcd.classList.remove("pick");renderWatch();labelPlay();fitWatch();
-   if(lastWatchFocus||focusChoice!==false&&shell.body.getBoundingClientRect().width<156)focus(true);
-  }else{$("stage-play").hidden=true;renderTry();fitTry();}
+ function enterTry(device,actions){
+  mode="try";returnToWatch=actions.returnToWatch;
+  device.prepend(stage);$("try-grid").prepend(handheld);stage.hidden=false;
+  expr.value=state.raw;renderTry();fitTry();
+  shell.setKeys([]);shell.setInteractive(true);stage.focus({preventScroll:true});
  }
- $("open-independent").addEventListener("click",()=>{modeTo("try");stage.focus({preventScroll:true});});
- $("jump-input").addEventListener("click",()=>expr.focus());
+ function exitTry(){
+  mode="watch";stage.hidden=true;cache="";
+  hot.replaceChildren();lcd.classList.remove("pick");shell.setKeys([]);shell.setInteractive(false);
+ }
+  $("jump-input").addEventListener("click",()=>expr.focus());
  $("jump-answer").addEventListener("click",()=>$("signed-answer").focus());
- tabs.forEach((b,i)=>{
-  b.addEventListener("click",()=>{modeTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
-  b.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const v=e.key==="Home"?0:e.key==="End"?1:1-i;modeTo(v?"try":"watch");tabs[v].focus();});
- });
- $("take-over").addEventListener("click",()=>{modeTo("try",t<T.duration-.025);stage.focus({preventScroll:true});});
- $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
+ $("return-watch").addEventListener("click",()=>returnToWatch?.());
  document.addEventListener("keydown",e=>{
-  if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
-  if(e.key==="Escape"&&focused){e.preventDefault();focusChoice=false;focus(false);$("focus-view").focus({preventScroll:true});return;}
+  if(mode!=="try"||e.defaultPrevented||e.isComposing||e.target.closest?.(".top, .tabbar"))return;
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
-  if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
-   const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(t+(k==="j"?-10:10));}return;
-  }
-  if(mode!=="try"||(!stage.contains(e.target)&&e.target!==document.body)||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
+  if((!stage.contains(e.target)&&e.target!==document.body)||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
   const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
   if(k){e.preventDefault();press(k);}
@@ -268,6 +202,8 @@
   v.className="feedback "+(yes?"is-right":"is-wrong");
   v.textContent=yes?"Both are correct. The integral keeps the signs; geometric area adds magnitudes.":verdict[0]?"Signed integral correct. For geometric area, add the magnitudes of the pieces.":verdict[1]?"Geometric area correct. For the integral, keep negative pieces negative.":"Check both bounds and whether you should keep the signs.";
  });
- modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
-window.QBRecordedWatch?.bind(pause);
+ window.CalculatorLessonAdapter=Object.freeze({
+  initialMode:params.get("mode")==="try"?"try":"watch",
+  renderWatch,enterTry,exitTry
+ });
 })();

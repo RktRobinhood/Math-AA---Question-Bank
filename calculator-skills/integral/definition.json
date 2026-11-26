@@ -1,0 +1,168 @@
+{
+  "id": "CT54",
+  "title": "Definite integral",
+  "intro": "Compare the signed integral with geometric area.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "9e09d007fe38c247ea907c219e8b6a18e02c682609e657efaaa9a596743faf94",
+    "scriptSha256": "39d3f8912d6c0204ce23a4a50b8849405732901f6a17dbb68f8dcd80537f6b96"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot x − 3"
+    },
+    {
+      "id": "menu",
+      "title": "Open Integral"
+    },
+    {
+      "id": "bounds",
+      "title": "Set both bounds"
+    },
+    {
+      "id": "signed",
+      "title": "Read the signed result"
+    },
+    {
+      "id": "area",
+      "title": "Split for geometric area"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "Plot f of x equals x minus three on a Graphs page.",
+      "coach": "In Graphs, enter f₁(x) = x − 3 and press Enter. The line crosses the x-axis at x = 3.",
+      "end": 4.654,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "Open Menu then six: Analyze Graph then six: Integral.",
+      "coach": "Menu → 6 Analyze Graph → 6 Integral.",
+      "end": 11.331,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.285
+        },
+        {
+          "id": "press-5",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.49
+        },
+        {
+          "id": "press-6",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.695
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "This page contains one curve. If prompted on your handheld, select the curve first.",
+      "coach": "Only one curve is plotted here. If your calculator asks which curve, select the one you want.",
+      "end": 18.535,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Type zero for the lower bound and press Enter.",
+      "coach": "Type 0 then Enter. The lower bound is locked and the handheld now asks for the upper bound.",
+      "end": 22.261,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-7",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3533
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Type four for the upper bound and press Enter.",
+      "coach": "Type 4 and Enter to finish the definite integral.",
+      "end": 26.368,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3533
+        },
+        {
+          "id": "press-10",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "signed",
+      "spoken": "The integral is minus four. The contribution below the x-axis is negative.",
+      "coach": "The integral is exactly −4. The contribution below the axis is negative: −4.5 + 0.5 = −4.",
+      "end": 32.95,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "area",
+      "spoken": "For geometric area, split where the graph crosses the axis, at x equals three.",
+      "coach": "Split at the sign change x = 3. Both pieces count positively when finding geometric area.",
+      "end": 39.533,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "area",
+      "spoken": "Add the magnitudes: four point five below and zero point five above. Total geometric area is five.",
+      "coach": "The two triangular areas are 4.5 and 0.5. Add their magnitudes to get 5 square units. The LCD still shows the signed result, −4.",
+      "end": 48.496,
+      "hold": 7,
+      "keys": []
+    }
+  ]
+}

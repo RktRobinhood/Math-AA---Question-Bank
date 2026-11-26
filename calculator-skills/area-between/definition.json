@@ -1,0 +1,347 @@
+{
+  "id": "CT55",
+  "title": "Area between curves",
+  "intro": "Split where the upper curve changes.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "f811ef2f604b7238cb0a7cde8c018f73d09319ea5690d3ac67bf339f2f27a3e5",
+    "scriptSha256": "0a182d36dcb3bd0f3cc19a95d9696a4859a8ee1f9121a2112ceae6f2c48f64be"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot both curves"
+    },
+    {
+      "id": "cross",
+      "title": "Locate the crossing"
+    },
+    {
+      "id": "menu",
+      "title": "Open Bounded Area"
+    },
+    {
+      "id": "left",
+      "title": "Measure the left region"
+    },
+    {
+      "id": "right",
+      "title": "Measure the right region"
+    },
+    {
+      "id": "add",
+      "title": "Add the separate areas"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "In Graphs, enter f one of x equals x plus one and press Enter.",
+      "coach": "In Graphs, enter f₁(x) = x + 1 and press Enter.",
+      "end": 6.109,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "+",
+          "ariaLabel": "Plus",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "plot",
+      "spoken": "Press Tab. Enter f two of x equals three and press Enter.",
+      "coach": "Press Tab to bring up the next function entry; enter f₂(x) = 3 and press Enter.",
+      "end": 12.837,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.285
+        },
+        {
+          "id": "press-5",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.49
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.695
+        }
+      ]
+    },
+    {
+      "chapter": "cross",
+      "spoken": "From x equals zero to x equals five, the curves cross at x equals two. The upper curve changes there.",
+      "coach": "Solve x + 1 = 3 to get x = 2. Over [0, 5], the upper curve changes at this crossing.",
+      "end": 21.231,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "Open Menu and choose Analyze Graph, then Bounded Area.",
+      "coach": "Menu → 6 Analyze Graph. Move down to Bounded Area and press Enter.",
+      "end": 26.425,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-7",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-8",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-9",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.326
+        },
+        {
+          "id": "press-10",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.408
+        },
+        {
+          "id": "press-11",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-12",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-13",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.654
+        },
+        {
+          "id": "press-14",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.736
+        },
+        {
+          "id": "press-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "With exactly two eligible curves, the tool selects them automatically.",
+      "coach": "With exactly two eligible curves, the handheld selects both. The lower-bound prompt is already on screen.",
+      "end": 32.295,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "left",
+      "spoken": "For the left region, type zero and press Enter.",
+      "coach": "For the left region, type 0 and press Enter to lock the lower bound.",
+      "end": 36.265,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3533
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "left",
+      "spoken": "Type two and press Enter. That stops the region at the crossing.",
+      "coach": "Type 2 and press Enter. Stop the interval at the crossing.",
+      "end": 41.77,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-18",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3533
+        },
+        {
+          "id": "press-19",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "left",
+      "spoken": "The left region has area two. Here the horizontal line is on top.",
+      "coach": "On [0, 2], f₂(x) = 3 is on top. The Bounded Area readout is exactly 2.",
+      "end": 48.329,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "right",
+      "spoken": "Run Bounded Area again for the right region.",
+      "coach": "Open Bounded Area again with the same two curves.",
+      "end": 52.22,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-20",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-21",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-22",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.326
+        },
+        {
+          "id": "press-23",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.408
+        },
+        {
+          "id": "press-24",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-25",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-26",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.654
+        },
+        {
+          "id": "press-27",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.736
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "right",
+      "spoken": "Type two and press Enter. Then type five and press Enter.",
+      "coach": "Set lower bound 2 and upper bound 5, confirming each with Enter.",
+      "end": 58.101,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.244
+        },
+        {
+          "id": "press-30",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.408
+        },
+        {
+          "id": "press-31",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.572
+        },
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "right",
+      "spoken": "The right region has area four point five. Now the sloping line is on top.",
+      "coach": "On [2, 5], f₁(x) = x + 1 is on top. The second readout is exactly 4.5.",
+      "end": 64.229,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "add",
+      "spoken": "Add the positive areas: two plus four point five equals six point five square units.",
+      "coach": "Total geometric area = 2 + 4.5 = 6.5 square units. These are two positive area readings.",
+      "end": 71.437,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "add",
+      "spoken": "When the upper curve changes, split there before calculating the area.",
+      "coach": "Split at each crossing where the upper curve changes, then add the separate areas.",
+      "end": 77.167,
+      "hold": 2,
+      "keys": []
+    }
+  ]
+}
