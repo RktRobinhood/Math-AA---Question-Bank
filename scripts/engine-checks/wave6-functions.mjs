@@ -50,10 +50,12 @@ const verifier={
   V.require(f[i]!==g[i]&&f[1-i]===g[1-i],"composition changes exactly one coordinate when reversed");
   return {a:f[i],b:g[i],c:Math.hypot(f[0]-g[0],f[1]-g[1])};
  },
- "mean-error-can-hide-offsets/table":({x,z,one,two},V)=>{
-  const residual=[one-x,two-z], signed=residual.reduce((a,b)=>a+b,0)/2, rms=Math.sqrt(residual.reduce((a,b)=>a+b*b,0)/2);
-  V.require(signed===0&&rms>0&&residual[0]*residual[1]<0,"nonzero equal and opposite residuals");
-  return {a:{optionValue:1}};
+ "mean-error-can-hide-offsets/table":({x,z,one,two,threshold},V)=>{
+  const readings=[[x,one],[z,two]], accepted=readings.map(([measure,pred])=>pred>=measure-threshold&&pred<=measure+threshold);
+  V.require(threshold>0&&readings.every(([m,p])=>m!==p),"both differences need to be checked");
+  const labels=[[false,false],[true,false],[false,true],[true,true]], idx=labels.findIndex(([a,b])=>a===accepted[0]&&b===accepted[1]);
+  const [low,high]=readings[0].sort((a,b)=>a-b);
+  return {a:high-low,b:{optionValue:idx}};
  },
  "logistic-gap-to-capacity/words":({K,gap,k},V)=>{
   const capacity=Math.round(K/(1+Math.exp(-1000/k)));

@@ -5,7 +5,7 @@
     {
       "id": "w3-statistics-compare-vertical-retunes",
       "topic": 4,
-      "name": "Choose a vertical retune by balancing signed residuals",
+      "name": "Compare two models using squared residuals",
       "kind": "skill",
       "source": "extension",
       "syllabus": [
@@ -22,7 +22,7 @@
       "unknowns": [
         {
           "id": "solve",
-          "asked": "Choose a vertical retune by balancing signed residuals",
+          "asked": "Compare two models using squared residuals",
           "level": 2
         }
       ],

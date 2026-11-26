@@ -5,7 +5,7 @@
     {
       "id": "w3-statistics-outlier-equality",
       "topic": 4,
-      "name": "Separate extreme values from the strict outlier fence",
+      "name": "Identify an outlier and decide whether to keep it",
       "kind": "skill",
       "source": "extension",
       "syllabus": [
@@ -21,7 +21,7 @@
       "unknowns": [
         {
           "id": "solve",
-          "asked": "Separate extreme values from the strict outlier fence",
+          "asked": "Identify an outlier and decide whether to keep it",
           "level": 1
         }
       ],

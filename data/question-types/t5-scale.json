@@ -116,7 +116,7 @@
     {
       "id": "t5-scale-ai-stationary-bracket",
       "home": "ai-sl",
-      "name": "Find the interval where a stationary point must occur",
+      "name": "Find a stationary point using a table",
       "topic": 5,
       "kind": "skill",
       "source": "extension",
@@ -129,7 +129,7 @@
       "unknowns": [
         {
           "id": "result",
-          "asked": "Find the interval where a stationary point must occur",
+          "asked": "Find a stationary point using a table",
           "level": 1
         }
       ],

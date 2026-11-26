@@ -2,10 +2,11 @@
 const r=(n)=>Array.from({length:n},(_,i)=>i),sum=v=>v.reduce((a,b)=>a+b,0);
 const checks={
  "outlier-equality":(q,T)=>{
-  const {a,g,v}=q.params,normalised=(v-a)/g;
+  const {a,g,v,confirmed}=q.params,normalised=(v-a)/g;
   const correct=normalised< -1.5||normalised>2.5?"out":"inside";
   T.require(g>0&&(v<a||v>a+g),"test value is extreme enough that the fence matters");
-  return {a:T.option(correct)};
+  T.require(q.parts[1].prompt.includes(confirmed?"independently confirms":"faulty clock"),"prompt gives independent evidence of record accuracy");
+  return {a:T.option(correct),b:T.option(confirmed?"keep":"exclude")};
  },
  "box-summary-tradeoff":(q,T)=>{
   const {a,c}=q.params;
@@ -64,10 +65,16 @@ const checks={
   return {a:mean,b:stat,c:T.option("ABCD"[key]),d:T.option(stat>7.815?"reject":"retain")};
  },
  "compare-vertical-retunes":(q,T)=>{
-  const {pred,obs,cand}=q.params,scores=cand.map(shift=>sum(obs.map((o,i)=>(o-(pred[i]+shift))**2)));
-  const m=Math.min(...scores),pos=scores.indexOf(m);
-  T.require(scores.filter(x=>x===m).length===1&&cand.length===new Set(cand).size,"distinct settings and one best retune");
-  return {a:cand[pos],b:m};
+  const {obs,pA,pB}=q.params;
+  const read=s=>Number(s.replaceAll("$",""));
+  const scores=[0,0];
+  for(const [i,row] of q.table.rows.entries()){
+   const measured=read(row[1]),pred=[read(row[2]),read(row[3])];
+   T.require(measured===obs[i]&&pred[0]===pA[i]&&pred[1]===pB[i],"every modeled value matches the displayed table");
+   for(const [j,y] of pred.entries())scores[j]+=(y-measured)**2;
+  }
+  T.require(scores[0]!==scores[1]&&scores.every(x=>x>0),"nonzero errors with one better model");
+  return {a:scores[0],b:T.option(scores[0]<scores[1]?"A":"B")};
  },
  "clt-average-or-total":(q,T)=>{
   const {n,m,sd,k,normal}=q.params;

@@ -90,15 +90,16 @@ add("reflection-translation-order","Compare graph images when reflection and tra
  R`The image points have the same ${acrossY?"vertical":"horizontal"} coordinate. The absolute difference of the other coordinates gives $${acrossY?2*Math.abs(h):2*Math.abs(v)}$ units.`));
 });
 
-add("mean-error-can-hide-offsets","Check whether zero mean signed error means a model is exact",ai,"2.6","AI-SL2.6.test-model AI-SL2.6.limitations",1,"table",({rng:r})=>{
- const x=r.int(21,39),z=r.int(52,79),d=r.int(2,10)*r.sign(),one=x+d,two=z-d;
- const opts=["Both predictions must equal the measured values.","The two nonzero signed errors cancel.","The signed errors are both positive.","Both predictions must have lower values than the measurements."];
- return table(Q("The table shows two checks of one sensor model. A signed prediction error is the prediction minus the observation.",{x,z,one,two},
- P("The mean signed error is zero. Which statement explains why?",2,choose(r,opts,1),
- R`The signed errors are $${one}-${x}=${d}$ and $${two}-${z}=${-d}$. They cancel in the mean, but neither one is zero.`)),
- ["Observation","Prediction"],[["A observed: "+m(x),"A predicted: "+m(one)],["B observed: "+m(z),"B predicted: "+m(two)]]);
+add("mean-error-can-hide-offsets","Check a model's predictions against recorded values",ai,"2.6","AI-SL2.6.test-model AI-SL2.6.limitations",1,"table",({rng:r})=>{
+ const x=r.int(12,23),z=r.int(13,25),d=r.int(1,6)*r.sign(),e=r.int(1,6)*r.sign(),one=x+d,two=z+e,threshold=r.int(2,5);
+ const opts=["Neither day","Monday only","Tuesday only","Both days"], key=Number(Math.abs(d)<=threshold)+2*Number(Math.abs(e)<=threshold);
+ return table(Q(R`A model predicts outdoor temperatures in degrees Celsius. A prediction is acceptable if it differs from the measured temperature by at most $${threshold}^{@circ}@mathrm{C}$.`,{x,z,one,two,threshold},
+ P("By how many degrees Celsius do the predicted and measured temperatures differ on Monday?",1,A.int(Math.abs(d)),
+ R`The difference is $|${one}-${x}|=${Math.abs(d)}$ degrees Celsius.`),
+ P("On which days are the predictions acceptable?",1,choose(r,opts,key),
+ R`The differences are $${Math.abs(d)}$ degrees Celsius on Monday and $${Math.abs(e)}$ degrees Celsius on Tuesday. A difference of $${threshold}$ or less is acceptable.`)),
+ ["Day","Measured","Predicted"],[["Monday",m(x),m(one)],["Tuesday",m(z),m(two)]]);
 });
-
 add("logistic-gap-to-capacity","Infer the hidden logistic parameter from a gap to capacity",hl,"2.9","AI-AHL2.9.logistic-model AI-AHL2.9.carrying-capacity",2,"words",({rng:r})=>{
  const d=r.pick([2,3,4,5,6,7,8]),i=r.int(12,69),K=d*i, gap=K-i,k=r.pick([2,3,4,5,6,7,8,9]);
  return Q(R`A filtration system’s output at time $t@ge0$ follows $H(t)=@dfrac{${K}}{1+a@, @mathrm{e}^{-@dfrac{t}{${k}}}}$, where $a>0$. Initially its output is $${gap}$ units below its long-run capacity.`,{K,gap,k},

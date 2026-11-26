@@ -14,10 +14,12 @@ const table=(head,rows)=>({head:head.map(x=>typeof x==="number"?N(x):x),rows:row
 const V=(text,value,why)=>({text,value,why});
 function C(r,key,options){return A.choice(r,options.find(x=>x.value===key),options.filter(x=>x.value!==key));}
 const rg=(slug,title,home,code,level,representation,skills,build,calculator=false,niceOk=false)=>E.register({type:"w3-statistics-"+slug,title,home,syllabus:[code],levels:[level],skills,unknown:"solve",representation,format:"value",source:"original-wave3",build,calculator,niceOk});
-rg("outlier-equality","Separate extreme values from the strict outlier fence",S,"4.1",1,"words",["SL4.1.outlier-decision"],({rng:r})=>{
- const a=r.int(24,52),g=2*r.int(2,7),side=r.pick([-1,1]),delta=r.pick([-2,-1,0,1,2]),f=side<0?a-1.5*g:a+2.5*g,v=f+side*delta,out=delta>0;
- return Q({a,g,side,v},T`A set of response times has lower quartile $${a}$ and upper quartile $${a+g}$. The outlier rule is more than $${1.5}$ interquartile ranges past the nearer quartile.`,[
-  P(T`Classify a time of $${v}$.`,2,C(r,out?"out":"inside",[V("An outlier: it is beyond the relevant fence.","out"),V("Not an outlier: it is on or inside the relevant fence.","inside"),V("An outlier: every value outside the interquartile interval is an outlier.","quartiles")]),T`The relevant fence is $${f}$. A point exactly at the fence is not beyond it. The time is ${out?"an outlier":"not an outlier"}.`)
+rg("outlier-equality","Identify an outlier and decide whether to keep it",S,"4.1",1,"words",["SL4.1.outlier-decision"],({rng:r})=>{
+ const a=r.int(24,52),g=2*r.int(2,7),side=r.pick([-1,1]),delta=r.pick([-2,-1,0,1,2]),f=side<0?a-1.5*g:a+2.5*g,v=f+side*delta,out=delta>0,near=side<0?a:a+g,confirmed=r.int(0,1)===1;
+ const beyond=side<0?"below the lower quartile":"above the upper quartile", distance=Math.abs(v-near);
+ return Q({a,g,side,v,confirmed},T`The lower and upper quartiles of a set of waiting times are $${a}$ and $${a+g}$ minutes. A value is an outlier if it lies more than $1.5$ interquartile ranges below the lower quartile or above the upper quartile.`,[
+  P(T`Is a waiting time of $${v}$ minutes an outlier?`,1,C(r,out?"out":"inside",[V("Yes","out"),V("No","inside"),V("Cannot be determined from the given information","unknown")]),T`The interquartile range is $${a+g}-${a}=${g}$, so $1.5 \times ${g}=${1.5*g}$. The time is $${distance}$ minutes ${beyond}. This is ${out?"more":"not more"} than $${1.5*g}$, so it is ${out?"an outlier":"not an outlier"}.`),
+  P(`${confirmed?"A second clock independently confirms this time.":"A faulty clock gave this reading, and the correct time is not known."} What should the analyst do with this record?`,1,C(r,confirmed?"keep":"exclude",[V("Keep the recorded time in the data.","keep"),V("Exclude the recorded time and note why.","exclude"),V("Replace the recorded time with the nearest quartile.","replace")]),confirmed?"Keep the reading because it is a genuine observation, even if it is unusually far from the other values.":"Exclude the reading because it is a known error. An unusual value is not, on its own, a reason to exclude it.")
  ]);
 });
 rg("box-summary-tradeoff","Compare two box summaries when IQR and total range disagree",S,"4.2",3,"table",["SL4.2.box-plot","SL4.2.compare-distributions"],({rng:r})=>{
@@ -85,13 +87,15 @@ rg("goodness-of-fit-critical-contribution","Find which categories drive a goodne
   P("Which decision follows from the stated rule?",1,C(r,yes?"reject":"retain",[V("Reject equal probabilities.","reject"),V("Do not reject equal probabilities.","retain"),V("The observations prove the probabilities equal.","proved")]),T`The statistic is ${yes?"above":"below"} $7.815$. A non-rejection would not prove equal probabilities.`)
  ],table(["Label",...names],[["Observed",...raw]]));
 });
-rg("compare-vertical-retunes","Choose a vertical retune by balancing signed residuals",H,"4.13",2,"table",["AI-AHL4.13.ssres","AI-AHL4.13.minimise-ssres"],({rng:r})=>{
- const a=r.int(11,27),b=r.int(2,7),base=r.int(2,5),d=r.int(4,9),c=r.pick([-1,1])*r.int(2,5),noise=[-d,-b,b,d],obs=noise.map((v,i)=>a+base*(i+1)**2+c+v),pred=noise.map((_,i)=>a+base*(i+1)**2);
- const sign=r.pick([-1,1]),small=r.int(1,3),large=r.int(4,7),cand=r.shuffle([c,c+sign*small,c+r.pick([-1,1])*large]),score=noise.reduce((u,x)=>u+x*x,0);
- return Q({pred,obs,cand},"A previously fitted quadratic curve keeps its shape, but every prediction may be shifted vertically by the same amount. Only the three listed retunes are allowed.",[
-  P(T`Which retune gives the smallest sum of squared residuals? Enter the amount added (negative means down): $${cand[0]}$, $${cand[1]}$ or $${cand[2]}$.`,2,A.int(c),T`Before the shift the signed residuals average $${c}$. Retuning by $${c}$ centres them on zero. Each other shift increases the sum of squares.`),
-  P("Find the minimum sum of squared residuals among those retunes.",2,A.int(score),T`At the chosen shift the residuals are $${-d},${-b},${b},${d}$. Square and add to get $${score}$.`)
- ],table(["Input","Predicted without retune","Observed"],obs.map((x,i)=>[i+1,pred[i],x])));
+rg("compare-vertical-retunes","Compare two models using squared residuals",H,"4.13",2,"table",["AI-AHL4.13.ssres","AI-AHL4.13.minimise-ssres"],({rng:r})=>{
+ const base=r.int(6,13),growth=r.int(3,7),obs=Array.from({length:3},(_,i)=>base+(i+1)*growth+r.int(-1,1));
+ const near=[r.pick([-1,1])*r.int(1,2),r.int(-1,1),r.pick([-1,1])*r.int(1,2)],far=[r.pick([-1,1])*r.int(3,4),r.pick([-1,1])*r.int(2,3),r.int(-2,2)];
+ const [a,b]=r.int(0,1)?[near,far]:[far,near],pred=offset=>obs.map((v,i)=>v-offset[i]),pA=pred(a),pB=pred(b),score=z=>z.reduce((s,v)=>s+v*v,0),ssA=score(a),ssB=score(b);
+ const work=(name,z,ss)=>T`For model ${name}, the residuals (measured minus predicted) are $${z.join(",\\,")}$. Squaring and adding gives $SS_{\mathrm{res}}=${ss}$.`;
+ return Q({obs,pA,pB},"Two models predict the height of a seedling. The table gives the measured and predicted heights, in centimetres.",[
+  P(T`Find the sum of squared residuals, $SS_{\mathrm{res}}$, for model A.`,2,A.int(ssA),work("A",a,ssA)),
+  P(T`Using $SS_{\mathrm{res}}$, decide which model fits these data better.`,2,C(r,ssA<ssB?"A":"B",[V("Model A","A"),V("Model B","B"),V("They fit equally well","tie")]),work("B",b,ssB),T`Model ${ssA<ssB?"A":"B"} has the smaller $SS_{\mathrm{res}}$ for these measurements.`)
+ ],table(["Week","Measured","Model A","Model B"],obs.map((v,i)=>[i+1,v,pA[i],pB[i]])));
 });
 rg("clt-average-or-total","Translate a threshold on an average and justify a normal model",H,"4.15",2,"words",["AI-AHL4.15.sample-mean","AI-AHL4.15.central-limit-theorem"],({rng:r})=>{
  const normal=r.int(0,1)===1,root=r.int(4,10),n=root*root,m=r.int(10,28),sd=r.int(2,6)*root,change=r.pick([-1,1])*r.int(1,4),k=m+change;

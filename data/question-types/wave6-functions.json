@@ -194,7 +194,7 @@
     {
       "id": "w6-fn-mean-error-can-hide-offsets",
       "home": "ai-sl",
-      "name": "Check whether zero mean signed error means a model is exact",
+      "name": "Check a model's predictions against recorded values",
       "topic": 2,
       "kind": "skill",
       "source": "extension",
@@ -208,7 +208,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Check whether zero mean signed error means a model is exact",
+          "asked": "Check a model's predictions against recorded values",
           "level": 1
         }
       ],

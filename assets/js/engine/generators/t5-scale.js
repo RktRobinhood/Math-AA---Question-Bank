@@ -49,14 +49,14 @@ add("velocity-position-backwards","graph",3,A,"5.9","SL5.9.motion-graphs SL5.9.i
   P("Find the initial position.",1,ans.int(finish-dp),R`Subtract the displacement from the final position to obtain $${finish-dp}@text{ m}$.`)
  ],{graph});
 });
-add("ai-stationary-bracket","table",1,I,"5.6","AI-SL5.6.solve-gradient-zero","Find the interval where a stationary point must occur",({rng})=>{
- const x=rng.int(-4,4), h=rng.int(1,3), r=rng.int(0,2), top=Array.from({length:4},(_,i)=>x+i*h), s=rng.sign();
- const v=top.map((_,i)=>(i<=r?s:-s)*rng.int(1,8)); const L=i=>R`$${top[i]}<x<${top[i+1]}$`;
- return Q(R`Starting at $x=${x}$, values of a continuous derivative are sampled at regular intervals.`,{top,v},[
-  P("Which interval must contain a stationary point?",2,O(rng,[L(r),r],[0,1,2].filter(k=>k!==r).map(k=>[L(k),k,"The gradient has the same sign at both ends."])),
-   "A continuous derivative with opposite signs at the ends must be zero somewhere between them.")
- ],{table:{head:[M("x"),...top.map(M)],rows:[[M("f'(x)"),...v.map(M)]]}});
-},{format:"mcq"});
+add("ai-stationary-bracket","table",1,I,"5.6","AI-SL5.6.solve-gradient-zero","Find a stationary point using a table",({rng})=>{
+ const x=rng.int(-5,5), h=rng.int(1,3), r=rng.int(0,3), c=rng.nonzero(-9,9), a=rng.sign()*rng.int(1,2), top=Array.from({length:4},(_,i)=>x+i*h), centre=top[r];
+ const y=top.map(u=>c+a*(u-centre)**2), v=top.map(u=>2*a*(u-centre));
+ return Q("The table gives values of $f(x)$ and $f'(x)$.",{top,y,v},[
+  P("Write down the $x$-coordinate of the stationary point shown in the table.",1,ans.int(centre),R`At a stationary point, $f'(x)=0$. The row for $f'$ gives $x=${centre}$.`),
+  P("Write down the $y$-coordinate of this point.",1,ans.int(c),R`In the same column, the row for $f$ gives $f(${centre})=${c}$.`)
+ ],{table:{head:[M("x"),...top.map(M)],rows:[[M("f(x)"),...y.map(M)],[M("f'(x)"),...v.map(M)]]}});
+});
 add("ai-shift-stationary","equation",2,I,"5.6","AI-SL5.6.turning-point AI-SL5.6.classify-from-derivative","Track a turning point through a vertical adjustment",({rng})=>{
  const a=rng.int(1,6)*rng.sign(), c=rng.int(-6,6), h=rng.nonzero(-5,5), k=rng.int(1,7);
  return Q(R`Let $f(x)=${poly([a,-2*a*h,a*h*h+c])}$ and $g(x)=f(x)+${k}$.`,{a,c,h,k},[

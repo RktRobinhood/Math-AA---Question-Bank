@@ -35,7 +35,12 @@ add("velocity-position-backwards","graph",({finish},T,q)=>{
  const displacement=areas.reduce((a,b)=>a+b,0);
  return {a:areas.filter(x=>x>0).reduce((a,b)=>a+b,0),b:displacement,c:finish-displacement};
 });
-add("ai-stationary-bracket","table",({v},T)=>({a:T.option(v.findIndex((u,i)=>i+1<v.length&&v[i+1]*u<0))}));
+add("ai-stationary-bracket","table",({top,y,v},T,q)=>{
+ const read=s=>Number(s.replaceAll("$","")), col=q.table.rows[1].slice(1).map(read).findIndex(t=>t===0);
+ T.require(col>=0&&v.filter(t=>t===0).length===1&&new Set(top).size===top.length,"one listed zero gradient");
+ T.require(q.table.rows[0].slice(1).map(read).every((n,i)=>n===y[i]),"function row matches display");
+ return {a:read(q.table.head[col+1]),b:read(q.table.rows[0][col+1])};
+});
 add("ai-shift-stationary","equation",({a,c,h,k},T)=>{
  const f=x=>a*(x-h)*(x-h)+c+k, root=T.roots(x=>dd(f,x),-10,10,501);
  T.require(root.length===1,"single stationary point");
