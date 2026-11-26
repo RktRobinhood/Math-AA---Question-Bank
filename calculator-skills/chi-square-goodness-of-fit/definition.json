@@ -1,0 +1,247 @@
+{
+  "id": "CT48",
+  "title": "Chi-square goodness-of-fit",
+  "intro": "Test one categorical distribution against claimed proportions.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "c3803ffdfb8aa499e0719826b14af18b4c5616380edbf8ecec043cb72e185f3b",
+    "scriptSha256": "a9ea55b298028178e946637fb4be5161eaf6eefbb00d8812925b0401982d148e"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Start with the claimed proportions"
+    },
+    {
+      "id": "expected",
+      "title": "Enter expected counts"
+    },
+    {
+      "id": "menu",
+      "title": "Open goodness of fit"
+    },
+    {
+      "id": "test",
+      "title": "Assign lists and degrees of freedom"
+    },
+    {
+      "id": "decide",
+      "title": "Read and interpret the output"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "One categorical variable, three outcomes. The claimed proportions are zero point two zero, zero point three zero and zero point five zero. The observed counts total eighty. The observed list is already entered.",
+      "coach": "One categorical variable, three outcomes. The obs list contains 28, 20 and 32, a total of 80. Claimed proportions: 0.20, 0.30, 0.50.",
+      "end": 15.039,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "expected",
+      "spoken": "Multiply eighty by each claimed proportion: sixteen, twenty-four and forty. Enter them into expt in the same category order. All are greater than five.",
+      "coach": "Multiply 80 by each claimed proportion: 16, 24 and 40. Enter these into expt in the same order as obs. All exceed 5.",
+      "end": 25.899,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.162
+        },
+        {
+          "id": "press-1",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.326
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.408
+        },
+        {
+          "id": "press-4",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.49
+        },
+        {
+          "id": "press-5",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.572
+        },
+        {
+          "id": "press-6",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.654
+        },
+        {
+          "id": "press-7",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.736
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On Lists and Spreadsheet, choose Menu, four for Statistics, four for Stat Tests, and seven for chi squared goodness of fit. This is not the two-way test of independence.",
+      "coach": "From Lists & Spreadsheet: Menu → 4 Statistics → 4 Stat Tests → 7 χ² GOF. Do not choose the two-way test.",
+      "end": 37.266,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-10",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-11",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.572
+        },
+        {
+          "id": "press-12",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "test",
+      "spoken": "Enter the list named obs as Observed List and the list named expt as Expected List. Three categories and no fitted parameters give two degrees of freedom. Keep the output column at C, leave Draw off, and Tab to OK.",
+      "coach": "Observed List: obs. Expected List: expt. Three categories and no fitted parameters give df = 2. Keep C, turn Draw off and Tab to OK.",
+      "end": 55.046,
+      "hold": 13,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "O",
+          "ariaLabel": "O",
+          "at": 0.1347
+        },
+        {
+          "id": "press-14",
+          "label": "B",
+          "ariaLabel": "B",
+          "at": 0.1893
+        },
+        {
+          "id": "press-15",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.244
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2987
+        },
+        {
+          "id": "press-17",
+          "label": "E",
+          "ariaLabel": "E",
+          "at": 0.3533
+        },
+        {
+          "id": "press-18",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.408
+        },
+        {
+          "id": "press-19",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.4627
+        },
+        {
+          "id": "press-20",
+          "label": "T",
+          "ariaLabel": "T",
+          "at": 0.5173
+        },
+        {
+          "id": "press-21",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.572
+        },
+        {
+          "id": "press-22",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6267
+        },
+        {
+          "id": "press-23",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6813
+        },
+        {
+          "id": "press-24",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.736
+        },
+        {
+          "id": "press-25",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7907
+        },
+        {
+          "id": "press-26",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8453
+        }
+      ]
+    },
+    {
+      "chapter": "decide",
+      "spoken": "Read chi squared and the p value. The p value is an upper-tail probability under the claimed distribution, not the probability that the claim is true.",
+      "coach": "χ² ≈ 11.3 and p ≈ 0.00358. Under the claimed proportions, p is the upper-tail probability, not the probability that the claim is true.",
+      "end": 66.021,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "decide",
+      "spoken": "the p value is about zero point zero zero three five eight, below zero point zero five. Reject the claimed category proportions; the sample gives evidence the distribution does not fit.",
+      "coach": "p ≈ 0.00358 < 0.05, so reject the claimed proportions. The observations give evidence that the distribution does not fit.",
+      "end": 79.919,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}
