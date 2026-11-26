@@ -44,14 +44,13 @@ const teaching=[
 ];
 const keyNames={ctrl:"Ctrl",div:"÷",ee:"EE",neg:"(−)",mul:"×",enter:"Enter",down:"↓",home:"Home"};
 let mode="watch",state=M.pristine("calc",task.expr),t=0,playing=false,pending=false,epoch=0,raf=0,base=0,phase="",sound=true,stamp="",showCaptions=false,initiated=false;
-let layout=TeachingHolds.make(beats), duration=layout.duration,frameOverride=null,activeFrame="";
+let layout=TeachingHolds.make(beats), duration=layout.duration,activeFrame="",trailIndex=-2;
 const framingKey="qb-calculator-watch-frame";
 function readFrame(){try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}}
 let framing=readFrame();
 const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
 function paintFraming(){
- const beat=layout.at(t)?.span.i??0;
- const next=mode!=="watch"?"full":frameOverride??(initiated&&beat<=3?"full":framing);
+ const next=mode!=="watch"?"full":framing;
  if(activeFrame===next)return;
  activeFrame=next;
  stage.classList.toggle("ct01-screen-view",mode==="watch"&&next==="screen");
@@ -60,7 +59,7 @@ function paintFraming(){
  fitBankWatch();
 }
 function chooseFrame(value){
- framing=frameOverride=value;try{localStorage.setItem(framingKey,value);}catch{}
+ framing=value;try{localStorage.setItem(framingKey,value);}catch{}
  paintFraming();
 }
 $("view-full").addEventListener("click",()=>chooseFrame("full"));
@@ -124,20 +123,20 @@ function renderLCD(s){
  $("lcd-text").textContent=[title[s.app],s.app==="new"?"1: Add Calculator":s.app==="home"?"1 New, A Calculate":"",s.app==="calc"||s.app==="scratch"?M.input(s):"",s.rows.length?"Last result "+M.number(s.rows.at(-1).value):"",s.error].filter(Boolean).join(". ");
 }
 function snapshot(time){
- let s=M.pristine("off"),key="",prev="",last="";
+ let s=M.pristine("off"),key="",prev="",last="",eventIndex=-1;
  for(const [i,row] of actions.entries()){
   const span=layout.spans[i];
   for(const [position,k] of row){
    const when=span.voiceEnd+(span.end-span.voiceEnd)*position;
    if(when>time)break;
    const held=s.ctrl;
-   s=M.pressed(s,k);
+   s=M.pressed(s,k);eventIndex++;
    last=held&&k!=="ctrl"?"ctrl+"+k:k;
    if(time<when+.45){key=k;prev=held&&k!=="ctrl"?"ctrl":"";}
    else{key="";prev="";}
   }
  }
- return {s,key,prev,last};
+ return {s,key,prev,last,eventIndex};
 }
 function renderWatch(){
  if(mode!=="watch")return;
@@ -146,6 +145,13 @@ function renderWatch(){
  seek.setAttribute("aria-valuetext",fmt(t>=duration-.015?Math.round(duration):t)+" of "+fmt(Math.round(duration)));
  $("clock").textContent=fmt(t>=duration-.015?Math.round(duration):t)+" / "+fmt(Math.round(duration));
  paintFraming();
+ if(f.eventIndex!==trailIndex){
+  trailIndex=f.eventIndex;
+  for(const [i,chip] of keysOnPage.entries()){
+   chip.dataset.progress=i===trailIndex?"current":i<trailIndex?"done":"next";
+   if(i===trailIndex)chip.setAttribute("aria-current","step");else chip.removeAttribute("aria-current");
+  }
+ }
  shell.setKeys([f.prev,f.key].filter(Boolean));
  $("active-key").textContent=f.last?f.last.split("+").map(k=>keyNames[k]||k).join(" + "):"—";
  if(!initiated){overlay.hidden=t>.04;overlay.dataset.initial="true";}
@@ -195,7 +201,12 @@ async function enterPhase(id){
  if(sound&&p.speaking){
   try{
    audio.currentTime=Math.min(Number.isFinite(audio.duration)?audio.duration:p.audioTime,p.audioTime);
-   audio.playbackRate=1;await audio.play();
+   audio.playbackRate=1;
+   // A media request can remain pending during a seek (for example if a
+   // browser cannot resume its network stream). Don't strand the Watch clock.
+   let deadline;
+   try{await Promise.race([audio.play(),new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error("audio seek timed out")),4500);})]);}
+   finally{clearTimeout(deadline);}
   } catch {if(id!==epoch)return false;fallback();}
  }else audio.pause();
  return id===epoch&&mode==="watch";
@@ -235,7 +246,7 @@ function toggle(){if(playing||pending){pause();chrome.flash(false);}else void st
 function setMode(next){
  if(next===mode)return;
  pause();chrome.clear();void chrome.exit();
- mode=next;stage.dataset.mode=mode;stamp="";paintFraming();captions(showCaptions);
+ mode=next;stage.dataset.mode=mode;stamp="";trailIndex=-2;paintFraming();captions(showCaptions);
  for(const [i,n] of names.entries()){const selected=(i===0)===(mode==="watch");n.setAttribute("aria-selected",String(selected));n.tabIndex=selected?0:-1;}
  for(const id of ["try-panel","try-player","challenge"])$(id).hidden=next!=="try";
  for(const id of ["watch-panel","watch-player","key-strip"])$(id).hidden=next!=="watch";
@@ -303,9 +314,25 @@ document.addEventListener("keydown",e=>{
  const match=keyMap[k]??keyMap[z]??(/^[0-9]$/.test(k)?k:null);
  if(match){e.preventDefault();doKey(match);shell.setKeys([match]);setTimeout(()=>{if(mode==="try")shell.setKeys([]);},125);}
 });
+const keysOnPage=[];
+const keyTrailName={down:"Down arrow",neg:"Negative key",ee:"E E",div:"Divide",mul:"Multiply"};
+const taughtLabels=["Open Calculator","Fraction template","Start numerator","Finish & evaluate"];
+let preceding=null;
 for(const [chapter,name] of chapters){
  const li=node("li"),b=node("button");b.type="button";b.append(node("span","",String(1+$("steps").children.length).padStart(2,"0")),document.createTextNode(name));
  b.addEventListener("click",()=>go(layout.spans[chapter].start));li.append(b);$("steps").append(li);
+ if(actions[chapter].length){
+  li.className="ct01-trail-group";
+  const row=node("div","ct01-trail-row");row.setAttribute("role","list");row.setAttribute("aria-label",taughtLabels[chapter]+" key trail");
+  li.append(row);
+  for(const [,key] of actions[chapter]){
+   const chip=node("kbd","ct01-trail-key",keyNames[key]||key);
+   chip.setAttribute("role","listitem");
+   chip.setAttribute("aria-label",(keysOnPage.length+1)+". "+(keyTrailName[key]||keyNames[key]||key));
+   if(preceding==="ctrl"&&key==="div")chip.title="Press Divide after Ctrl to open the fraction template";
+   row.append(chip);keysOnPage.push(chip);preceding=key;
+  }
+ }
 }
 const sup={"-":"⁻","+":"⁺","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
 const written=task.expr.replace(/(\d+(?:\.\d+)?)[eE]([+-]?\d+)/g,(_,c,e)=>c+" × 10"+[...e].map(v=>sup[v]).join("")).replace(/\*/g," × ").replace(/\//g," ÷ ").replace(/-/g,"−");
@@ -320,13 +347,13 @@ function fitBankWatch(){
  const nav=full?0:document.querySelector(".tabbar").getBoundingClientRect().height;
  const box=stage.getBoundingClientRect();
  const vh=window.visualViewport?.height||innerHeight;
- const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(innerWidth<=700?$("takeaway").offsetHeight+10:0);
+ const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(innerWidth<=700?$("watch-panel").offsetHeight+10:0);
  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
  stage.style.setProperty("--ct01-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?370:296,(room-28)*558/1168)))+"px");
  stage.style.setProperty("--ct01-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,(room-31)*4/3)))+"px");
 }
 const bankWatchSizing=new ResizeObserver(fitBankWatch);
-[$("watch-player"),$("caption-band"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+[$("watch-player"),$("caption-band"),$("watch-panel"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
 window.addEventListener("resize",fitBankWatch);
 document.addEventListener("fullscreenchange",fitBankWatch);
 fitBankWatch();
