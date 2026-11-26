@@ -1,0 +1,330 @@
+{
+  "id": "CT09",
+  "title": "Trace and table values",
+  "intro": "Use Graph Trace to read one point, or a split-screen table to collect several values.",
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the function"
+    },
+    {
+      "id": "trace",
+      "title": "Open Graph Trace"
+    },
+    {
+      "id": "x-value",
+      "title": "Enter an x-value"
+    },
+    {
+      "id": "open-table",
+      "title": "Open the table"
+    },
+    {
+      "id": "ask",
+      "title": "Switch Auto to Ask"
+    },
+    {
+      "id": "rows",
+      "title": "Enter selected inputs"
+    },
+    {
+      "id": "choose",
+      "title": "Choose the right tool"
+    },
+    {
+      "id": "menu-alternative",
+      "title": "Open the table from Menu"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "end": 6.065,
+      "hold": 7.7,
+      "coach": "On a Graphs page, enter f(x) = 2x² − 3 and press Enter.",
+      "spoken": "On a Graphs page, plot f of x equals two x squared minus three.",
+      "keys": [
+        {
+          "id": "key-1",
+          "label": "2",
+          "at": 0.06
+        },
+        {
+          "id": "key-2",
+          "label": "x",
+          "at": 0.1983
+        },
+        {
+          "id": "key-3",
+          "label": "x²",
+          "at": 0.3367,
+          "ariaLabel": "Squared"
+        },
+        {
+          "id": "key-4",
+          "label": "−",
+          "at": 0.475
+        },
+        {
+          "id": "key-5",
+          "label": "3",
+          "at": 0.6133
+        },
+        {
+          "id": "key-6",
+          "label": "Enter",
+          "at": 0.7517
+        }
+      ]
+    },
+    {
+      "chapter": "trace",
+      "end": 16.42,
+      "hold": 6.4,
+      "coach": "Menu → 5: Trace → 1: Graph Trace. Use the arrows to move along the curve.",
+      "spoken": "Open Menu then five: Trace then one: Graph Trace. Step along the curve with the arrows.",
+      "keys": [
+        {
+          "id": "key-7",
+          "label": "Menu",
+          "at": 0.06
+        },
+        {
+          "id": "key-8",
+          "label": "5",
+          "at": 0.226
+        },
+        {
+          "id": "key-9",
+          "label": "1",
+          "at": 0.392
+        },
+        {
+          "id": "key-10",
+          "label": "→",
+          "at": 0.558,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-11",
+          "label": "→",
+          "at": 0.724,
+          "ariaLabel": "Right arrow"
+        }
+      ]
+    },
+    {
+      "chapter": "x-value",
+      "end": 23.737,
+      "hold": 5,
+      "coach": "Type 3, then press Enter. Read the second coordinate as the output.",
+      "spoken": "To jump to a given input, type its x-value and press Enter. Read the second coordinate.",
+      "keys": [
+        {
+          "id": "key-12",
+          "label": "3",
+          "at": 0.06
+        },
+        {
+          "id": "key-13",
+          "label": "Enter",
+          "at": 0.475
+        }
+      ]
+    },
+    {
+      "chapter": "open-table",
+      "end": 32.663,
+      "hold": 5,
+      "coach": "Leave Trace with Esc, then press Ctrl + T to open the split-screen table.",
+      "spoken": "Press Esc to leave Trace. Open a split-screen table with Control and T, or use Menu then seven then one.",
+      "keys": [
+        {
+          "id": "key-14",
+          "label": "Esc",
+          "at": 0.06,
+          "ariaLabel": "Escape"
+        },
+        {
+          "id": "key-15",
+          "label": "Ctrl",
+          "at": 0.3367
+        },
+        {
+          "id": "key-16",
+          "label": "T",
+          "at": 0.6133
+        }
+      ]
+    },
+    {
+      "chapter": "ask",
+      "end": 44.702,
+      "hold": 11.8,
+      "coach": "Focus the table. Menu → 2: Table → 5: Edit Table Settings. Set Independent to Ask and keep Dependent set to Auto.",
+      "spoken": "Auto gives a regular list. Focus the table and use Menu then two: Table then five: Edit Table Settings. Change Independent to Ask.",
+      "keys": [
+        {
+          "id": "key-17",
+          "label": "Menu",
+          "at": 0.06
+        },
+        {
+          "id": "key-18",
+          "label": "2",
+          "at": 0.1355
+        },
+        {
+          "id": "key-19",
+          "label": "5",
+          "at": 0.2109
+        },
+        {
+          "id": "key-20",
+          "label": "Tab",
+          "at": 0.2864
+        },
+        {
+          "id": "key-21",
+          "label": "Tab",
+          "at": 0.3618
+        },
+        {
+          "id": "key-22",
+          "label": "→",
+          "at": 0.4373,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-23",
+          "label": "↓",
+          "at": 0.5127,
+          "ariaLabel": "Down arrow"
+        },
+        {
+          "id": "key-24",
+          "label": "Enter",
+          "at": 0.5882
+        },
+        {
+          "id": "key-25",
+          "label": "Tab",
+          "at": 0.6636
+        },
+        {
+          "id": "key-26",
+          "label": "Tab",
+          "at": 0.7391
+        },
+        {
+          "id": "key-27",
+          "label": "Enter",
+          "at": 0.8145
+        }
+      ]
+    },
+    {
+      "chapter": "rows",
+      "end": 52.9485,
+      "hold": 8.3,
+      "coach": "Enter −1.5 and 3 in the x column. The result on each row is in the f₁(x) column.",
+      "spoken": "Type the x values you want in the x column. Read each result from the same row in f one of x.",
+      "keys": [
+        {
+          "id": "key-28",
+          "label": "(−)",
+          "at": 0.06,
+          "ariaLabel": "Negative key"
+        },
+        {
+          "id": "key-29",
+          "label": "1",
+          "at": 0.1786
+        },
+        {
+          "id": "key-30",
+          "label": ".",
+          "at": 0.2971,
+          "ariaLabel": "Decimal point"
+        },
+        {
+          "id": "key-31",
+          "label": "5",
+          "at": 0.4157
+        },
+        {
+          "id": "key-32",
+          "label": "Enter",
+          "at": 0.5343
+        },
+        {
+          "id": "key-33",
+          "label": "3",
+          "at": 0.6529
+        },
+        {
+          "id": "key-34",
+          "label": "Enter",
+          "at": 0.7714
+        }
+      ]
+    },
+    {
+      "chapter": "choose",
+      "end": 60.107,
+      "hold": 4,
+      "coach": "Graph Trace locates a point; the table keeps several outputs together.",
+      "spoken": "Trace locates a point on the graph. A table keeps the results for multiple inputs together.",
+      "keys": []
+    },
+    {
+      "chapter": "menu-alternative",
+      "end": 60.277,
+      "hold": 9,
+      "coach": "Alternative: close the existing table, then use Graphs Menu → 7: Table → 1: Split-screen Table.",
+      "spoken": "",
+      "keys": [
+        {
+          "id": "key-35",
+          "label": "Ctrl",
+          "at": 0.06
+        },
+        {
+          "id": "key-36",
+          "label": "Tab",
+          "at": 0.1786
+        },
+        {
+          "id": "key-37",
+          "label": "Ctrl",
+          "at": 0.2971
+        },
+        {
+          "id": "key-38",
+          "label": "T",
+          "at": 0.4157
+        },
+        {
+          "id": "key-39",
+          "label": "Menu",
+          "at": 0.5343
+        },
+        {
+          "id": "key-40",
+          "label": "7",
+          "at": 0.6529
+        },
+        {
+          "id": "key-41",
+          "label": "1",
+          "at": 0.7714
+        }
+      ]
+    }
+  ],
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "0c407eb904a0c87841b92dab05421af36f09f596dfa5841a0da5414495445ad0",
+    "scriptSha256": "23732ada4637410f74167b421339109986739669eed847f9fce9dfea5b68f8b3"
+  }
+}

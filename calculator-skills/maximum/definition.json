@@ -1,0 +1,147 @@
+{
+  "id": "CT12-max",
+  "title": "Find a graph maximum",
+  "intro": "Find the local peak, then compare it with both endpoints of the allowed interval.",
+  "chapters": [
+    {
+      "id": "interval",
+      "title": "Read the allowed interval"
+    },
+    {
+      "id": "maximum",
+      "title": "Open Maximum"
+    },
+    {
+      "id": "bounds",
+      "title": "Set the search bounds"
+    },
+    {
+      "id": "local",
+      "title": "Read the local peak"
+    },
+    {
+      "id": "endpoints",
+      "title": "Compare the endpoints"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "interval",
+      "end": 6.301,
+      "hold": 4.7,
+      "coach": "The allowed interval is [−2, 3]. The graph of f(x) = x³ − 3x + 2 is already plotted.",
+      "spoken": "The allowed interval is minus two to three. The graph is already on the screen.",
+      "keys": []
+    },
+    {
+      "chapter": "maximum",
+      "end": 11.8365,
+      "hold": 6,
+      "coach": "Menu → 6: Analyze Graph → 3: Maximum.",
+      "spoken": "Open Menu, choose Analyze Graph, then Maximum.",
+      "keys": [
+        {
+          "id": "key-1",
+          "label": "Menu",
+          "at": 0.06
+        },
+        {
+          "id": "key-2",
+          "label": "6",
+          "at": 0.3367
+        },
+        {
+          "id": "key-3",
+          "label": "3",
+          "at": 0.6133
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "end": 21.652,
+      "hold": 11,
+      "coach": "Bracket the local peak using −2 and 0. The search bounds are not the same as the allowed interval.",
+      "spoken": "Move to the left of the peak and press Enter. Then choose the upper bound just to its right.",
+      "keys": [
+        {
+          "id": "key-4",
+          "label": "←",
+          "at": 0.06,
+          "ariaLabel": "Left arrow"
+        },
+        {
+          "id": "key-5",
+          "label": "Enter",
+          "at": 0.1786
+        },
+        {
+          "id": "key-6",
+          "label": "→",
+          "at": 0.2971,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-7",
+          "label": "→",
+          "at": 0.4157,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-8",
+          "label": "→",
+          "at": 0.5343,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-9",
+          "label": "→",
+          "at": 0.6529,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-10",
+          "label": "Enter",
+          "at": 0.7714
+        }
+      ]
+    },
+    {
+      "chapter": "local",
+      "end": 31.831,
+      "hold": 4.5,
+      "coach": "The marker is (−1, 4). This is a local peak, not necessarily the maximum on [−2, 3].",
+      "spoken": "The calculator marks the point negative one, four. That is a local peak, not yet the answer.",
+      "keys": []
+    },
+    {
+      "chapter": "endpoints",
+      "end": 39.214,
+      "hold": 5,
+      "coach": "Check the left endpoint by substituting −2 into f(x).",
+      "spoken": "Both endpoints count because the interval is closed. Substitute minus two into the function.",
+      "keys": []
+    },
+    {
+      "chapter": "endpoints",
+      "end": 42.455,
+      "hold": 4.2,
+      "coach": "Check the right endpoint by substituting 3 into f(x).",
+      "spoken": "Substitute three to check the other endpoint.",
+      "keys": []
+    },
+    {
+      "chapter": "endpoints",
+      "end": 47.32,
+      "hold": 7,
+      "coach": "Compare the y-values at the peak and at both allowed endpoints.",
+      "spoken": "Compare the three heights. The right endpoint is highest.",
+      "keys": []
+    }
+  ],
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "44b7e014396103ab15348c15d9f2faeb4d3cb572d85fbc8c26b1878d09cfb6e0",
+    "scriptSha256": "37165e1a00243a15e7a69295c6ef209f216796f39219ec23ea55b5c540cfdef2"
+  }
+}

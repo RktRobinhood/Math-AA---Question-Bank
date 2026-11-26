@@ -2,8 +2,8 @@
 (function(){
  function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=window.CT09Tape,H=window.HandheldTransport;
- const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),overlay=$("stage-play"),lcd=$("lcd"),canvas=$("drawing");
- const screen=S.screen(canvas),expression=$("expression"),exact=$("point-input"),hot=$("hotspots"),steps=$("steps"),feedback=$("feedback");
+ const stage=$("stage"),lcd=$("lcd"),canvas=$("drawing");
+ const screen=S.screen(canvas),expression=$("expression"),exact=$("point-input"),hot=$("hotspots"),feedback=$("feedback");
  const watchModel=M.parse("2x^2-3"),defaultModel=M.parse("3x^2-2x+1");
  const params=new URLSearchParams(location.search),same=k=>params.getAll(k).length===1;
  let linked=null,invalid=false;
@@ -24,26 +24,35 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i.test(text))return null;
   const n=Number(text);return Number.isFinite(n)?n:null;
  }
- 
- const initial=raw=>({state:"entry",raw,q:null,w:null,cursor:0,buffer:"",committed:false,pane:"graph",row:0,rows:[],tableOpen:false,ask:false,askDraft:false,setting:0,dropdown:false,tableValue:null,error:null,ctrl:false,fromWatch:false});
- let mode="watch",state=initial(practice.q.raw),fresh=true,edited=false,focused=false,hasStarted=false,focusChecked=false;
- let time=0,origin=0,frame=0,playing=false,cache="",watchFocus=false,watchScroll=0;
- const forks=new Map(),MAX_FORKS=24,answerY=$("answer-y");
- let activeFork=null,assigned=null;
- function capture(){const display=$("keypad-result");return {state,fresh,edited,answer:answerY.value,feedback:feedback.textContent,gradeClass:feedback.className,status:{text:display.textContent,cls:display.className,hidden:display.hidden}};}
- function restore(d){({state,fresh,edited}=d);answerY.value=d.answer;feedback.textContent=d.feedback;feedback.className=d.gradeClass;}
- function saveLane(){const d=capture();if(activeFork===null){assigned=d;return;}
-  forks.delete(activeFork);forks.set(activeFork,d);
-  if(forks.size>MAX_FORKS)forks.delete(forks.keys().next().value);
- }
- function newFork(){return {state:{...snapshot(time).model,fromWatch:true},fresh:false,edited:true,answer:"",feedback:"",gradeClass:"feedback"};}
- function clearAssigned(){state=initial(practice.q.raw);fresh=true;edited=false;answerY.value="";feedback.textContent="";feedback.className="feedback";expression.value=state.raw;exact.value="";}
- function restoreStatus(d){if(!d?.status)return;const e=$("keypad-result");e.textContent=d.status.text;e.className=d.status.cls;e.hidden=d.status.hidden;}
 
- const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs and Table",interactive:false,onKey:press});
+ const initial=raw=>({state:"entry",raw,q:null,w:null,cursor:0,buffer:"",committed:false,pane:"graph",row:0,rows:[],tableOpen:false,ask:false,askDraft:false,setting:0,dropdown:false,tableValue:null,error:null,ctrl:false});
+ let mode="watch",state=initial(practice.q.raw),fresh=true,edited=false;
+ const answerY=$("answer-y");
+let watchStamp="",returnToWatch=null;
+ const handheld=$("handheld-host");
+ const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",onKey:physical});
+ function physical(k){
+  if(mode!=="try")return;
+  if(!document.activeElement?.matches("input,textarea,select"))stage.focus({preventScroll:true});
+  press(k);
+ }
+ // The source recording mentions both ways to open a table. Keep its
+ // original tape unchanged and finish with the verified alternate menu route.
+ const alternate=[
+  ["ctrl",{}],["tab",{pane:"graph"}],["ctrl",{}],["t",{state:"graph",tableOpen:false,pane:"graph"}],
+  ["menu",{state:"main"}],["7",{state:"openMenu"}],["1",{state:"table",tableOpen:true,pane:"table"}]
+ ];
+ const keys=[...T.keys,...alternate.map(([key])=>({key}))];
+ function drawWatchFrame(beat,point,crossed,key,paint){
+  const count=crossed.length,hold=point.span.end-point.span.voiceEnd;
+  const current=key?.beat===beat&&!point.speaking&&(point.fraction-key.at)*hold<.66;
+  const physical=current&&keys[count-1]?.key;
+  shell.setKeys(physical?(["t","tab"].includes(physical)&&keys[count-2]?.key==="ctrl"?["ctrl",physical]:[physical]):[]);
+  paint(count);
+ }
+
+ function clearAssigned(){state=initial(practice.q.raw);fresh=true;edited=false;answerY.value="";feedback.textContent="";feedback.className="feedback";expression.value=state.raw;exact.value="";}
  const hints={entry:"Enter a polynomial in x (up to a cubic), then press Enter to plot.",graph:"Open Menu for Graph Trace or a split-screen table.",main:"Choose 5: Trace or 7: Table.",traceMenu:"Choose 1: Graph Trace.",openMenu:"Choose 1: Split-screen Table.",trace:"Arrow keys step along the graph. Type an x-value and press Enter to jump to it.",table:"Use Up or Down to move through the Auto rows. To enter your own x-value, change Independent to Ask.",tableRoot:"Choose 2: Table.",tableMenu:"Choose 5: Edit Table Settings.",settings:"Tab to Independent, open its choice and select Ask. Leave Dependent at Auto."};
- const finished=()=>time>=T.duration-.25;
- const clock=x=>Math.floor(x/60)+":"+String(Math.floor(x)%60).padStart(2,"0");
  const isTable=s=>["table","tableRoot","tableMenu","settings"].includes(s.state);
  function lcText(s){
   let t=s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw);
@@ -60,13 +69,10 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
    else if(s.state==="table"&&!s.ask)t+=". Selected row: "+M.prettyX(s.row)+" → "+M.pretty(s.q.f(s.row));
    if(s.buffer)t+=". Entering x "+s.buffer;
   }
+  if(s.state==="main")t+=". Graphs Menu.";
+  if(s.state==="openMenu")t+=". 7: Table. 1: Split-screen Table.";
   return t;
  }
- T.titles.forEach((name,i)=>{
-  const row=document.createElement("li"),button=document.createElement("button"),n=document.createElement("span");
-  button.type="button";n.textContent="0"+(i+1);button.append(n,document.createTextNode(name));
-  button.addEventListener("click",()=>go(T.starts[i]));row.append(button);steps.append(row);
- });
  function snapshot(s){
   let model=initial(""),active=[];
   for(const e of T.keys){
@@ -77,64 +83,18 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   if(model.state!=="entry"){model.q=watchModel;model.w={x0:-4,x1:4,y0:-6,y1:32};}
   return {model:{...model,rows:[...model.rows]},active};
  }
- function drawWatch(){
-  if(mode!=="watch")return;
-  const chapter=T.starts.findLastIndex(s=>time>=s),{model,active}=snapshot(time);
-  seek.value=time;seek.setAttribute("aria-valuetext",clock(time)+" of "+clock(T.duration));$("clock").textContent=clock(time)+" / "+clock(T.duration);
-  overlay.hidden=hasStarted||time>0;shell.setKeys(active);
-  $("take-over").textContent=finished()?"Open Try":"Take over";
-  const token=JSON.stringify([chapter,model.state,model.raw,model.cursor,model.buffer,model.pane,model.row,model.rows,model.ask,model.askDraft,model.setting,model.dropdown]);
-  if(token===cache)return;cache=token;
-  screen.draw(model);$("lcd-text").textContent=lcText(model);cap.textContent=T.captions[chapter];
-  const text=chapter===2&&model.committed?"Trace: (3, 15). The second coordinate tells you f(3) = 15.":chapter>=5&&model.rows.length===2?"Table: x = −1.5 → 1.5; x = 3 → 15.":chapter>=5&&model.rows.length?"Table: x = −1.5 → 1.5.":"";
-  $("readout").hidden=!text;$("readout").textContent=text;
-  [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
+
+ function renderWatch(device,{beat,point,crossed,key}){
+  if(handheld.parentElement!==device)device.append(handheld);
+  drawWatchFrame(beat,point,crossed,key,count=>{
+   if(watchStamp===String(count))return;watchStamp=String(count);
+   const taped=Math.min(count,T.keys.length);
+   const m=snapshot(taped?(T.keys[taped-1].time+1e-7):0).model;
+   for(const [,delta] of alternate.slice(0,Math.max(0,count-taped)))Object.assign(m,delta);
+   screen.draw(m);$("lcd-text").textContent=lcText(m);
+  });
  }
- function updatePlay(){
-  const label=playing?"Pause":time>=T.duration-.012?"Replay":"Play";
-  play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(playing);
- }
- function go(n){
-  time=M.clamp(Number(n)||0,0,T.duration);origin=performance.now()-time*1000;
-  drawWatch();if(!playing)updatePlay();
- }
- function pause(){
-  if(playing)time=M.clamp((performance.now()-origin)/1000,0,T.duration);
-  playing=false;cancelAnimationFrame(frame);updatePlay();drawWatch();
- }
- function tick(now){
-  if(!playing||mode!=="watch")return;
-  time=M.clamp((now-origin)/1000,0,T.duration);
-  if(time>=T.duration){pause();return;}
-  drawWatch();frame=requestAnimationFrame(tick);
- }
- function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct09-focused",focused);document.body.classList.toggle("ct09-focus-open",focused);
-  const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
-  b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.textContent=focused?"Exit":"Focus";
-  document.querySelectorAll(".header,.calc-tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
-  if(focused)stage.scrollTop=0;
- }
- function ensureVisible(){
-  const height=lessonEnd();
-  if(!focused&&$("watch-player").getBoundingClientRect().bottom>height+1){focusChecked=true;focus(true);}
- }
- function toggle(){
-  if(mode!=="watch")return;
-  if(playing){pause();return;}
-  if(!focusChecked){
-   focusChecked=true;ensureVisible();
-  }
-  hasStarted=true;if(document.activeElement===overlay)play.focus({preventScroll:true});
-  if(time>=T.duration-.012)go(0);
-  origin=performance.now()-time*1000;playing=true;drawWatch();updatePlay();frame=requestAnimationFrame(tick);
- }
- overlay.addEventListener("click",toggle);play.addEventListener("click",toggle);
- $("back").addEventListener("click",()=>go(time-10));$("next").addEventListener("click",()=>go(time+10));
- $("focus-view").addEventListener("click",()=>focus(!focused));$("replay").addEventListener("click",()=>{pause();go(0);toggle();});
- seek.addEventListener("input",()=>go(seek.value));
  function isExercise(){
-  if(activeFork!==null||state.fromWatch)return false;
   try{return M.equivalent(M.parse(state.raw),practice.q);}catch{return false;}
  }
  function hit(label,x,y,w,h,action){
@@ -155,7 +115,7 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   stage.style.setProperty("--retro-try-width",width+"px");
  }
  const tryLayout=new ResizeObserver(fitTry);
- for(const el of [document.querySelector("header"),$("try-player")])tryLayout.observe(el);
+ tryLayout.observe($("try-player"));
  window.addEventListener("resize",fitTry);
  window.visualViewport?.addEventListener("resize",fitTry);
  function freshTry(){
@@ -163,8 +123,7 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   screen.draw(state);$("lcd-text").textContent=lcText(state);hot.replaceChildren();
   const inExercise=isExercise(),t=state.state;
   $("exercise-active").hidden=!inExercise;$("exercise-inactive").hidden=inExercise;
-  $("reset-keypad").textContent=activeFork===null?"Reset calculator":"Return to assigned Try";
-  $("keypad-problem").textContent=inExercise?(linked?"Linked input: x = ":"Practice input: x = ")+askedX+".":activeFork!==null?"You took over the Watch example.":linked?"Linked input: x = "+askedX+".":"Choose inputs for your own function.";
+  $("keypad-problem").textContent=inExercise?(linked?"Linked input: x = ":"Practice input: x = ")+askedX+".":linked?"Linked input: x = "+askedX+".":"Choose inputs for your own function.";
   $("keypad-hint").textContent=t==="table"&&state.ask?"Select an x cell, type an input and press Enter. Read the function value on the same row.":hints[t];
   const entry=t==="trace"||t==="table"&&state.ask&&state.pane==="table";
   $("point-form").hidden=!entry;$("point-label").textContent=t==="trace"?"Trace x":"Table x cell";
@@ -197,7 +156,7 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   edited=true;feedback.textContent="";
   try{
    const q=M.parse(expression.value),aim=linked&&M.equivalent(q,linked.q)?linked.x:0;
-   state={...initial(q.raw),q,w:M.windowFor(q,aim),state:"graph",fromWatch:state.fromWatch&&M.equivalent(q,watchModel)};
+   state={...initial(q.raw),q,w:M.windowFor(q,aim),state:"graph"};
    expression.value=q.raw;freshTry();
   }catch(e){state={...initial(expression.value),error:e.message};freshTry();}
  }
@@ -295,8 +254,7 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
  exact.addEventListener("input",()=>{edited=true;state={...state,buffer:exact.value,error:null};freshTry();});
  $("point-form").addEventListener("submit",e=>{e.preventDefault();edited=true;inputX(M.readX(exact.value));});
  $("reset-keypad").addEventListener("click",()=>{
-  if(activeFork!==null){saveLane();activeFork=null;restore(assigned);expression.value=state.raw;freshTry();restoreStatus(assigned);}
-  else{clearAssigned();freshTry();}
+  clearAssigned();freshTry();
   stage.focus({preventScroll:true});
  });
  function position(e){const r=canvas.getBoundingClientRect();return {x:(e.clientX-r.left)*320/r.width,y:(e.clientY-r.top)*240/r.height,tol:12*240/r.height};}
@@ -322,56 +280,31 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
    shift("table",{pane,row,buffer:"",tableValue:state.ask?(state.rows[row]??null):row});
   }
  });
- const tabs=[$("watch-tab"),$("try-tab")];
- function change(next,takeover=false){
-  let restored=null;
-  if(mode==="try"&&next==="try"&&!takeover&&activeFork!==null){
-   saveLane();activeFork=null;restored=assigned;restore(restored);expression.value=state.raw;
-  }else if(mode==="try"&&next==="watch"){saveLane();activeFork=null;}
-  else if(mode==="watch"&&next==="try"){
-   pause();watchFocus=focused;watchScroll=scrollY;if(focused)focus(false);
-   if(!assigned){assigned=capture();delete assigned.status;}
-   activeFork=takeover?String(Math.round(time*1000)):null;
-   restored=activeFork===null?assigned:forks.get(activeFork)||newFork();
-   restore(restored);expression.value=state.raw;
-  }
-  mode=next;stage.dataset.mode=mode;cache="";
-  const watching=next==="watch";
-  tabs.forEach((b,i)=>{const active=watching===(i===0);b.setAttribute("aria-selected",String(active));b.tabIndex=active?0:-1;});
-  for(const id of ["watch-player","watch-message","watch-side","watch"])$(id).hidden=!watching;
-  for(const id of ["try-player","try-side","try"])$(id).hidden=watching;
-  shell.setKeys([]);shell.setInteractive(!watching);
-  if(watching){hot.replaceChildren();lcd.classList.remove("pick");drawWatch();window.scrollTo(0,watchScroll);if(watchFocus)focus(true);else ensureVisible();}
-  else{overlay.hidden=true;freshTry();restoreStatus(restored);fitTry();}
- }
- tabs.forEach((b,i)=>{
-  b.addEventListener("click",()=>{change(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
-  b.addEventListener("keydown",e=>{
-   if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
-   e.preventDefault();const j=e.key==="Home"?0:e.key==="End"?1:1-i;change(j?"try":"watch");tabs[j].focus();
-  });
- });
- $("take-over").addEventListener("click",()=>{
-  change("try",!finished());stage.focus({preventScroll:true});
- });
- $("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
- document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
-  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
-  if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;
+ device.append(stage);$("try-grid").prepend(handheld);stage.hidden=false;$("try").hidden=false;
+ document.body.classList.add("graph-try");shell.setInteractive(true);shell.setKeys([]);
+ expression.value=state.raw;freshTry();fitTry();stage.focus({preventScroll:true});
+}
+function exitTry(){
+ mode="watch";stage.hidden=true;$("try").hidden=true;watchStamp="";
+ document.body.classList.remove("graph-try");shell.setInteractive(false);shell.setKeys([]);
+ $("hotspots").replaceChildren();lcd.classList.remove("pick");
+
+}
+$("return-watch").addEventListener("click",()=>returnToWatch?.());
+
+ document.addEventListener("keydown",e=>{
+  if(e.defaultPrevented||e.isComposing||mode!=="try"||e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable],.top,.tabbar"))return;
   const tag=e.target.closest("button");
-  if(mode==="watch"){
-   if(tag||e.repeat)return;
-   const k=e.key.toLowerCase();
-   if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(time+(k==="j"?-10:10));}return;
-  }
   if(!stage.contains(e.target)&&e.target!==document.body||tag&&(e.key==="Enter"||e.key===" "))return;
   if(e.key==="Tab"&&(tForTab()==="settings"||e.target===stage&&tForTab()==="graph")&&!e.shiftKey){
    if(tForTab()==="settings"&&state.setting===4&&!state.dropdown)return;
-   e.preventDefault();press("tab");return;
+   e.preventDefault();physical("tab");return;
   }
   const map={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=map[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
-  if(k){e.preventDefault();press(k);}
+  if(k){e.preventDefault();physical(k);}
  });
  const tForTab=()=>state.state;
  $("answer-y").addEventListener("input",()=>{edited=true;feedback.textContent="";});
@@ -382,7 +315,5 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
   feedback.className="feedback"+(ok?"is-right":"is-wrong");
   feedback.textContent=ok?"Correct. Read the second coordinate or the entry in the f₁(x) column.":v===practice.x?"You entered x. Read the output next to that input.":"Check the row for x = "+askedX+", or the second coordinate in Trace.";
  });
- seek.max=T.duration;
- change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
-window.QBRecordedWatch?.bind(pause);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch",renderWatch,enterTry,exitTry});
 })();
