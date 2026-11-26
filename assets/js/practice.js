@@ -576,7 +576,7 @@
       class: 'practice-calc-trigger no-print', type: 'button', 'aria-label': 'Open calculator',
       'aria-haspopup': 'dialog', 'aria-expanded': 'false',
       title: q.calculator ? 'Open the on-screen calculator' : 'Open a blank calculator. Give an exact answer as requested.',
-      onclick: e => CALC.open(e.currentTarget),
+      onclick: e => CALC.toggle(e.currentTarget),
     }) : null;
     if (calculatorButton) {
       const addIcon = (path, side) => {
