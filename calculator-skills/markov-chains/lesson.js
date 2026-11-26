@@ -1,13 +1,12 @@
 (function(){"use strict";
-const M=window.CTMatrix,$=id=>document.getElementById(id),stage=$("stage"),seek=$("seek"),screen=$("screen");
+const M=window.CTMatrix,$=id=>document.getElementById(id),stage=$("stage"),screen=$("screen");
 const params=new URLSearchParams(location.search),request=M.request(params);
-const {cues,duration}=M;
-seek.max=duration;
-let mode="watch",t=0,origin=0,playing=false,started=false,focus=false,frame=0,stamp="",s=M.start(),forked=false,light=0;
-let colon=false,target=request.target,linkError=request.error,savedPractice=null,forkKey="";
-const forks=new Map(),SYS=M.SYS;
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T Calculator",onKey:k=>{physical(k);stage.focus({preventScroll:true});}});
-const tt=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0"),pretty=v=>String(v).replace(/-/g,"−");
+let mode="watch",s=M.start(),light=0,stamp=-1,returnToWatch;
+let colon=false,target=request.target,linkError=request.error;
+const SYS=M.SYS;
+const handheld=$("handheld-host");
+const shell=CalculatorLessonHandset.mount(handheld,{screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T Calculator",onKey:k=>{physical(k);stage.focus({preventScroll:true});}});
+const pretty=v=>String(v).replace(/-/g,"−");
 const elt=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n};
 function label(text,action,active,watch,cls){
  const b=elt("button",text,cls);b.type="button";
@@ -78,7 +77,7 @@ $("status-field").hidden=!SYS;
 $("answer-x").textContent=SYS?"x (exact)":"P(Ready), 3 decimal places";
 $("answer-y").textContent=SYS?"y (exact)":"Steady-state P(Ready), exact";
 $("answer").onsubmit=e=>{
- e.preventDefault();if(forked||!M.matches(s.history.at(-1),target))return;
+ e.preventDefault();if(!M.matches(s.history.at(-1),target))return;
  const feedback=M.grade(target,$("classification").value,$("guess-x").value,$("guess-y").value);
  $("answer-feedback").textContent=feedback;$("answer-feedback").classList.toggle("bad",!feedback.startsWith("Correct."));
 };
@@ -101,7 +100,7 @@ function render(snapshot,watch){
  if(watch)return;
  const newest=snapshot.history.at(-1);
  const h=SYS?
-  (forked?"Continue from the copied calculator. Your assigned exercise is separate.":target.matrix[0][0]*target.matrix[1][1]===target.matrix[0][1]*target.matrix[1][0]?
+  (target.matrix[0][0]*target.matrix[1][1]===target.matrix[0][1]*target.matrix[1][0]?
   "Use a 2×3 matrix m: x-coefficients, y-coefficients, then right-hand sides. Select Menu → 7 → 5 and enter m.":!snapshot.vars.a?
   "Store the coefficient matrix as a. Use Ctrl + template, then Menu → 7 → 1 → 1.":
   !snapshot.vars.b?"Store the right-hand sides as a 2×1 column called b.":"Enter a ^ (−) 1, →, × b, Enter. Match each result to the variable order."):
@@ -109,9 +108,9 @@ function render(snapshot,watch){
   !snapshot.vars.s?"Store s using the 2×1 template. Ready goes above In use.":"Enter t ^ n, then →, × s, Enter. Replace n with the number of transitions requested.";
  const hints={calc:h,menu:SYS?"Build a matrix via Create, or use Reduced Row-Echelon Form for m.":"Choose Matrix & Vector → Create → Matrix.",dims:"Set the number of rows and columns. Tab to OK, then Enter.",cells:"Enter the entries row by row. Tab to move between cells and Enter to finish."};
  $("hint").textContent=hints[snapshot.page];
- const error=snapshot.error||(!forked&&linkError)||"";$("error").textContent=error;$("error").hidden=!error;
- const result=["prediction","inverse","rref"].includes(newest?.kind)&&!snapshot.error,matching=result&&M.matches(newest,target)&&!forked;
- $("progress").textContent=result?(forked?"This is the copied demonstration, not your assigned exercise.":matching?"Read the output, then check your interpretation.":"The result used different inputs or a different number of transitions from the exercise."): "";
+ const error=snapshot.error||linkError||"";$("error").textContent=error;$("error").hidden=!error;
+ const result=["prediction","inverse","rref"].includes(newest?.kind)&&!snapshot.error,matching=result&&M.matches(newest,target);
+ $("progress").textContent=result?(matching?"Read the output, then check your interpretation.":"The result used different inputs or a different number of transitions from the exercise."): "";
  $("progress").hidden=!$("progress").textContent;
  $("answer").hidden=!matching;
 }
@@ -121,10 +120,9 @@ function physical(key){
  const keys=s.ctrl&&key==="templates"?["ctrl","templates"]:[key==="assign"?"templates":key];
  shell.setKeys(keys);light=setTimeout(()=>shell.setKeys([]),175);
  const old=s.history.at(-1);s=M.press(s,key);
- if(!forked&&s.history.at(-1)!==old&&M.matches(s.history.at(-1),target)&&!M.matches(old,target))resetAnswer();
+ if(s.history.at(-1)!==old&&M.matches(s.history.at(-1),target)&&!M.matches(old,target))resetAnswer();
  render(s,false);
 }
-cues.forEach(([,title],i)=>{const row=elt("li");row.append(label(String(i+1).padStart(2,"0")+"  "+title,()=>go(cues[i][0]),false,false));$("chapters").append(row);});
 const fieldLabels=SYS?{matrix:"Coefficients: a,b;c,d",rhs:"Right-hand sides: e,f"}:{transition:"Transition matrix: a,b;c,d",state:"Start column: p,q",steps:"Transitions: 1–30"};
 M.taskKeys.forEach(k=>{
  const label=elt("label",fieldLabels[k]),input=elt("input");input.type="text";input.name=k;input.maxLength=64;input.required=true;input.autocomplete="off";
@@ -139,101 +137,24 @@ function targetDraw(){
  $("edit-error").hidden=true;
 }
 targetDraw();resetAnswer();
-function draw(){
- if(mode!=="watch")return;
- const {state,keys,chapter}=M.watchAt(t),sig=JSON.stringify(state)+"|"+chapter;
- seek.value=t;seek.setAttribute("aria-valuetext",tt(t)+" of "+tt(duration));$("clock").textContent=tt(t)+" / "+tt(duration);
- shell.setKeys(keys);$("stage-play").hidden=started||t>0;
- if(sig!==stamp){
-  stamp=sig;render(state,true);$("caption").textContent=cues[chapter][2];fitFocused();ensureFit();
-  [...$("chapters").children].forEach((it,i)=>it.firstElementChild.setAttribute("aria-current",String(i===chapter)));
- }
+function taskMode(){$("task").textContent="Store a transition matrix T and an initial state s. Find the requested prediction and exact steady state.";}
+const tape=M.tape.map(x=>x[1]),frames=[M.start()];
+for(const k of tape)frames.push(M.press(frames.at(-1),k));
+function renderWatch(device,{beat,point,crossed,key}){
+ if(handheld.parentElement!==device)device.append(handheld);
+ const n=crossed.length,lit=n&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*(point.span.end-point.span.voiceEnd)<.62;
+ shell.setKeys(lit?(tape[n-1]==='templates'?['ctrl','templates']:[tape[n-1]]):[]);
+ if(stamp===n)return;stamp=n;render(frames[n],true);
 }
-const bounded=at=>Math.min(duration,Math.max(0,Number(at)||0));
-function labelPlay(){
- const ended=t>=duration-.012,name=playing?"Pause":ended?"Replay":"Play";
- $("play").textContent=name;$("play").setAttribute("aria-label",name);
- $("takeover").textContent=ended?"Try it":"Take over";
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;device.prepend(stage);$("try-deck").prepend(handheld);stage.hidden=false;
+ shell.setKeys([]);shell.setInteractive(true);colon=false;taskMode();render(s,false);stage.focus({preventScroll:true});
 }
-function go(at){t=bounded(at);origin=performance.now()-t*1000;draw();labelPlay();}
-function pause(){if(playing)t=bounded((performance.now()-origin)/1000);playing=false;cancelAnimationFrame(frame);draw();labelPlay();}
-function loop(now){if(!playing||mode!=="watch")return;t=bounded((now-origin)/1000);if(t>=duration){pause();return;}draw();frame=requestAnimationFrame(loop);}
-function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
-function fitFocused(){
- if(!focus)return;
- const avail=stage.getBoundingClientRect().height-$("watch-message").offsetHeight-$("watch-player").offsetHeight-25;
- stage.style.setProperty("--fit-handset",Math.max(120,Math.min(322,Math.floor(avail*.4777)))+"px");
+function exitTry(){
+ mode="watch";stage.hidden=true;stamp=-1;clearTimeout(light);shell.setKeys([]);shell.setInteractive(false);
 }
-window.addEventListener("resize",fitFocused);
-const nativeFitObserver=new ResizeObserver(fitFocused);
-[$("watch-message"),$("watch-player")].forEach(n=>nativeFitObserver.observe(n));
-function setFocus(next){
- focus=next;stage.classList.toggle("focused",focus);document.body.classList.toggle("has-focus",focus);
- document.querySelectorAll("main > header, main > .calc-tabs, main > .reference").forEach(n=>n.inert=focus);
- $("focus").setAttribute("aria-pressed",String(focus));$("focus").setAttribute("aria-label",focus?"Exit Focus":"Focus");$("focus").textContent=focus?"Exit":"⛶";if(focus){fitFocused();stage.scrollTop=0;}
-}
-function ensureFit(){if(mode==="watch"&&!focus&&$("watch-player").getBoundingClientRect().bottom>nativeBottom()+1)setFocus(true);}
-function toggle(){
- if(mode!=="watch")return;
- if(playing){pause();return;}
- if(!started)ensureFit();
- if(document.activeElement===$("stage-play"))$("play").focus({preventScroll:true});
- started=true;if(t>=duration-.012)go(0);origin=performance.now()-t*1000;playing=true;labelPlay();draw();frame=requestAnimationFrame(loop);
-}
-$("stage-play").onclick=$("play").onclick=toggle;
-$("back").onclick=()=>go(t-10);$("next").onclick=()=>go(t+10);$("replay").onclick=()=>{pause();go(0);toggle()};
-$("focus").onclick=()=>setFocus(!focus);seek.oninput=()=>go(seek.value);
-function taskMode(){
- $("task").textContent=forked?"Copied Watch calculator. Your independent practice is unchanged.":SYS?"Use rows in x, y order. Decide how many solutions there are; if unique, find x and y exactly.":"States: Ready above In use. Find P(Ready) after n transitions, then its exact steady-state value.";
- $("target-wrap").hidden=forked;$("reset").textContent=forked?"Practice task":"Reset";
- $("reset").setAttribute("aria-label",forked?"Practice task":"Reset practice calculator");
- $("edit").hidden=forked;
-}
-function draft(){return {choice:$("classification").value,x:$("guess-x").value,y:$("guess-y").value,feedback:$("answer-feedback").textContent,bad:$("answer-feedback").classList.contains("bad")};}
-function restorePractice(){
- if(!forked)return;
- s=savedPractice.s;const a=savedPractice.answer;
- $("classification").value=a.choice;$("guess-x").value=a.x;$("guess-y").value=a.y;
- $("answer-feedback").textContent=a.feedback;$("answer-feedback").classList.toggle("bad",a.bad);setAnswerFields();
- savedPractice=null;forked=false;forkKey="";colon=false;
-}
-function saveFork(){
- if(!forked||!forkKey)return;
- forks.delete(forkKey);forks.set(forkKey,s);
- if(forks.size>12)forks.delete(forks.keys().next().value);
-}
-function change(to,takeover=false,fromTab=false){
- if(to===mode)return;
- if(mode==="try")saveFork();
- if(mode==="watch"){
-  pause();
-  if(focus)setFocus(false);
-  if(to==="try"){
-   if(takeover&&t<duration-.012){
-    if(!forked)savedPractice={s,answer:draft()};
-    forkKey=t.toFixed(3);s=forks.get(forkKey)??M.watchAt(t).state;forked=true;colon=false;resetAnswer();
-   }else restorePractice();
-  }
- }
- mode=to;stage.dataset.mode=mode;document.body.classList.toggle("in-try",to==="try");
- const watch=to==="watch",tabs=[$("watch-tab"),$("try-tab")];
- tabs.forEach((b,i)=>{const yes=(i===0)===watch;b.setAttribute("aria-selected",String(yes));b.tabIndex=yes?0:-1;});
- for(const id of ["watch","watch-message","watch-player"])$(id).hidden=!watch;
- for(const id of ["try","try-message"])$(id).hidden=watch;
- shell.setInteractive(!watch);shell.setKeys([]);clearTimeout(light);
- if(watch){stamp="";draw();requestAnimationFrame(ensureFit);if(!fromTab)$("play").focus({preventScroll:true});}
- else{$("stage-play").hidden=true;taskMode();render(s,false);if(!fromTab)stage.focus({preventScroll:true});}
-}
-[$("watch-tab"),$("try-tab")].forEach((b,i)=>{b.onclick=()=>change(i?"try":"watch",false,false);b.onkeydown=e=>{
- if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
- e.preventDefault();const to=e.key==="Home"?"watch":e.key==="End"?"try":i?"watch":"try";change(to,false,true);$(to+"-tab").focus();
-};});
-$("takeover").onclick=()=>change("try",true);$("return").onclick=()=>change("watch");
-$("reset").onclick=()=>{
- if(forked){saveFork();restorePractice();}
- else{s=M.start();colon=false;resetAnswer();}
- taskMode();render(s,false);stage.focus({preventScroll:true});
-};
+$("return").onclick=()=>returnToWatch?.();
+$("reset").onclick=()=>{s=M.start();colon=false;resetAnswer();taskMode();render(s,false);stage.focus({preventScroll:true});};
 $("edit-form").onsubmit=e=>{
  e.preventDefault();
  const msg=$("edit-error");
@@ -244,15 +165,9 @@ $("edit-form").onsubmit=e=>{
 };
 document.addEventListener("keydown",e=>{
  if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
- if(e.key==="Escape"&&focus){e.preventDefault();setFocus(false);$("focus").focus({preventScroll:true});return;}
  if(e.altKey||e.ctrlKey||e.metaKey||e.isComposing||e.target.closest("input,select,a,summary,textarea,[contenteditable]"))return;
  const b=e.target.closest("button");
- if(mode==="watch"){
-  if(b||e.repeat)return;
-  if(e.key===" "||e.key==="k"){e.preventDefault();toggle();}
-  if(e.key==="j"||e.key==="l"){e.preventDefault();go(t+(e.key==="j"?-10:10));}
-  return;
- }
+ if(mode!=="try")return;
  if((!stage.contains(e.target)&&e.target!==document.body)||(b&&["Enter"," ","Tab"].includes(e.key)))return;
  if(e.key===":"){colon=true;e.preventDefault();return;}
  const map={M:"menu",Escape:"esc",Enter:"enter",ArrowDown:"down",ArrowUp:"up",ArrowLeft:"left",ArrowRight:"right",Backspace:"del",Delete:"del","-":"neg","×":"mul","*":"mul","^":"power",".":"dot",")":"rparen","=":colon?"assign":""};
@@ -264,7 +179,5 @@ document.addEventListener("keydown",e=>{
  }
  if(key){e.preventDefault();if(e.target===document.body)stage.focus({preventScroll:true});physical(key);}
 });
-stage.dataset.mode="watch";draw();labelPlay();if(params.get("mode")==="try"||request.linked)change("try",false,true);
-requestAnimationFrame(ensureFit);
-window.QBRecordedWatch?.bind(pause);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"||request.linked?"try":"watch",renderWatch,enterTry,exitTry});
 })();

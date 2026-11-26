@@ -1,0 +1,495 @@
+{
+  "id": "CT24",
+  "title": "Markov chains",
+  "intro": "Predict the next state, repeat the transition, then distinguish the long-run estimate from the exact steady state.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "caf0c9e230924f5bea2a6f1676766248942cbd45c1c7103088e8deb0217a3e82",
+    "scriptSha256": "0a5dacb25874eae64018b759e016c0f7e779681010dba9eb15a957cfa0dba57e"
+  },
+  "chapters": [
+    {
+      "id": "orientation",
+      "title": "Label the states"
+    },
+    {
+      "id": "template",
+      "title": "Open a 2×2 matrix"
+    },
+    {
+      "id": "probabilities",
+      "title": "Enter row by row"
+    },
+    {
+      "id": "starting-column",
+      "title": "Make the starting state a column"
+    },
+    {
+      "id": "one-transition",
+      "title": "Predict the first transition"
+    },
+    {
+      "id": "four-transitions",
+      "title": "Predict four transitions"
+    },
+    {
+      "id": "long-run",
+      "title": "Compare the long run"
+    },
+    {
+      "id": "equilibrium",
+      "title": "Find the exact steady state"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "orientation",
+      "spoken": "A locker is either ready (A) or in use (B). Columns of T are the current states; rows are the next states. Store T as t.",
+      "coach": "Columns are current states. Rows are next states. Each column adds to 1.",
+      "end": 11.479,
+      "hold": 2.08,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.2308
+        },
+        {
+          "id": "press-2",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.6154
+        }
+      ]
+    },
+    {
+      "chapter": "template",
+      "spoken": "Type T, then Control and Template for the assignment symbol. On a Calculator page open Menu, then seven for Matrix and Vector, one for Create, and one for Matrix.",
+      "coach": "Store T as t. Ctrl + Templates enters :=, then open a 2 × 2 matrix.",
+      "end": 24.119,
+      "hold": 6.4,
+      "keys": [
+        {
+          "id": "press-3",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.0566
+        },
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1509
+        },
+        {
+          "id": "press-5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2453
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3396
+        },
+        {
+          "id": "press-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.434
+        },
+        {
+          "id": "press-8",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5283
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6226
+        },
+        {
+          "id": "press-10",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.717
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8113
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9057
+        }
+      ]
+    },
+    {
+      "chapter": "probabilities",
+      "spoken": "Enter zero point eight, zero point three then zero point two, zero point seven. The second column says a locker currently in use moves to Ready with probability zero point three.",
+      "coach": "Enter (0.8, 0.3), then (0.2, 0.7). From In Use, the chance of Ready next time is 0.3.",
+      "end": 38.345,
+      "hold": 9.64,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.0361
+        },
+        {
+          "id": "press-14",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.0964
+        },
+        {
+          "id": "press-15",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.1566
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2169
+        },
+        {
+          "id": "press-17",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2771
+        },
+        {
+          "id": "press-18",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.3373
+        },
+        {
+          "id": "press-19",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3976
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4578
+        },
+        {
+          "id": "press-21",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5181
+        },
+        {
+          "id": "press-22",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.5783
+        },
+        {
+          "id": "press-23",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6386
+        },
+        {
+          "id": "press-24",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6988
+        },
+        {
+          "id": "press-25",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.759
+        },
+        {
+          "id": "press-26",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.8193
+        },
+        {
+          "id": "press-27",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.8795
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "starting-column",
+      "spoken": "Store s using the same menu, with two rows and one column. The locker starts Ready, so enter one above zero.",
+      "coach": "Store s as a 2 × 1 column. Put 1 above 0 for a locker that starts Ready.",
+      "end": 47.6895,
+      "hold": 9.64,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "s",
+          "ariaLabel": "s",
+          "at": 0.0361
+        },
+        {
+          "id": "press-30",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0964
+        },
+        {
+          "id": "press-31",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.1566
+        },
+        {
+          "id": "press-32",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.2169
+        },
+        {
+          "id": "press-33",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2771
+        },
+        {
+          "id": "press-34",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3373
+        },
+        {
+          "id": "press-35",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3976
+        },
+        {
+          "id": "press-36",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4578
+        },
+        {
+          "id": "press-37",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5181
+        },
+        {
+          "id": "press-38",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5783
+        },
+        {
+          "id": "press-39",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6386
+        },
+        {
+          "id": "press-40",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6988
+        },
+        {
+          "id": "press-41",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.759
+        },
+        {
+          "id": "press-42",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8193
+        },
+        {
+          "id": "press-43",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.8795
+        },
+        {
+          "id": "press-44",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "one-transition",
+      "spoken": "Enter t times s. The state column belongs on the right. The upper result, zero point eight, is the probability of Ready after one transition.",
+      "coach": "Multiply t × s in that order. The upper entry is 0.8 after one transition.",
+      "end": 59.222,
+      "hold": 3.16,
+      "keys": [
+        {
+          "id": "press-45",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.1304
+        },
+        {
+          "id": "press-46",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.3478
+        },
+        {
+          "id": "press-47",
+          "label": "s",
+          "ariaLabel": "s",
+          "at": 0.5652
+        },
+        {
+          "id": "press-48",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "four-transitions",
+      "spoken": "Enter T to the fourth power. Press Right to leave the exponent, then times S and Enter. Read zero point six two five after four transitions. Do not take the fourth power of each entry.",
+      "coach": "Enter t⁴ × s. Press Right to leave the exponent before multiplying.",
+      "end": 74.334,
+      "hold": 4.78,
+      "keys": [
+        {
+          "id": "press-49",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.0789
+        },
+        {
+          "id": "press-50",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.2105
+        },
+        {
+          "id": "press-51",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3421
+        },
+        {
+          "id": "press-52",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.4737
+        },
+        {
+          "id": "press-53",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6053
+        },
+        {
+          "id": "press-54",
+          "label": "s",
+          "ariaLabel": "s",
+          "at": 0.7368
+        },
+        {
+          "id": "press-55",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8684
+        }
+      ]
+    },
+    {
+      "chapter": "long-run",
+      "spoken": "Repeat with exponent twenty-four. It is very close to zero point six for Ready. For these positive transitions the model tends to a unique steady state.",
+      "coach": "Repeat with 24 transitions. Ready is close to 0.6, not exactly 0.6.",
+      "end": 85.004,
+      "hold": 5.32,
+      "keys": [
+        {
+          "id": "press-56",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.0698
+        },
+        {
+          "id": "press-57",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.186
+        },
+        {
+          "id": "press-58",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3023
+        },
+        {
+          "id": "press-59",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.4186
+        },
+        {
+          "id": "press-60",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.5349
+        },
+        {
+          "id": "press-61",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6512
+        },
+        {
+          "id": "press-62",
+          "label": "s",
+          "ariaLabel": "s",
+          "at": 0.7674
+        },
+        {
+          "id": "press-63",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "equilibrium",
+      "spoken": "At equilibrium, flow from Ready to In Use equals flow back. Zero point two times p equals zero point three times the quantity one minus p. So p is three fifths. That is exact; a finite power is only an approximation.",
+      "coach": "At equilibrium, balance the two flows: 0.2p = 0.3(1 − p). Ready has exact probability 3/5.",
+      "end": 103.885,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
