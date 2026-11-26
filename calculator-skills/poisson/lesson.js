@@ -1,202 +1,10 @@
 "use strict";
 (function(){
- const $=id=>document.getElementById(id), M=CT42Math, T=CT42Tape, S=CT42Screen, media=CT42Media;
- const watch=$("watch"), stage=$("watch-stage"), surface=$("watch-surface"), pane=$("watch-device-pane");
- const play=$("play"), seek=$("seek"), overlay=$("play-feedback"), speed=$("play-rate"), steps=$("steps");
- const lcd=$("watch-lcd"), screen=S.screen($("drawing")), tryLcd=$("try-lcd"), command=$("command");
- const watchKeys=HandheldShell.mount({host:$("watch-host"),screen:lcd,label:"TI-Nspire CX II-T Watch",interactive:false});
- const tryKeys=HandheldShell.mount({host:$("try-host"),screen:tryLcd,label:"TI-Nspire CX II-T Try",onKey:(key,e)=>press(key,e.detail===0)});
- const transport=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>!watch.hidden});
- const keyNames={lparen:"(",rparen:")",comma:",",minus:"−",enter:"Enter",dot:".",up:"↑",down:"↓",left:"←",right:"→",del:"Del",menu:"Menu",esc:"Esc"};
- const problems=["3 per 10 min → 20 min","λ = 6 · P(X = 6)","λ = 6 · P(3 ≤ X ≤ 6)","λ = 6 · P(X > 6)","λ = 6 · P(X ≥ 6)"];
- const cap=s=>s.replace(/poisspdf/i,"poissPdf").replace(/poisscdf/i,"poissCdf");
- const timecode=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
- const clamp=t=>M.clamp(Number(t)||0,0,tape.duration);
- const frameKey="qb-calculator-watch-frame";
- let framePref="screen", now=0, rate=1, stamp=-1, activeClip=-1, activeBeat=-1, raf=0, reference=0, running=false;
- try{if(localStorage.getItem(frameKey)==="full")framePref="full";}catch{}
- const manifest=$("ct42-narration-manifest"), recording=manifest?media.decode(manifest.textContent,T):null;
- let tape=T, audio=null, mediaReady=false, pending=false, generation=0, startTimer=0;
- const visibleTry=()=>watch.hidden;
-
- function frame(next,save=false){
-  framePref=next;stage.dataset.frame=next;pane.scrollTop=0;
-  if(save)try{localStorage.setItem(frameKey,next);}catch{}
-  $("view-screen").setAttribute("aria-pressed",String(next==="screen"));
-  $("view-full").setAttribute("aria-pressed",String(next==="full"));
-  fit();
- }
- $("view-screen").onclick=()=>frame("screen",true);
- $("view-full").onclick=()=>frame("full",true);
- function fit(){
-  if(watch.hidden)return;
-  const fullStage=stage.matches(":fullscreen,.watch-fullscreen-fallback");
-  const max=(window.visualViewport?.height||innerHeight)-surface.getBoundingClientRect().top-(fullStage?0:window.scrollY);
-  const nav=fullStage?0:(document.querySelector(".tabbar")?.offsetHeight||0);
-  const available=max-$("watch-player").offsetHeight-nav-$("key-strip").offsetHeight-surface.querySelector(".worked-prompt").offsetHeight-23;
-  const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
-  const scroll=framePref==="full"&&Math.ceil(full*1168/558)>available+2;
-  $("full-fit-note").hidden=!scroll;pane.tabIndex=scroll?0:-1;
-  if(scroll)pane.setAttribute("aria-label","Full calculator. Scroll to see the keypad.");
-  else pane.removeAttribute("aria-label");
-  stage.style.setProperty("--normal-full-fit",full+"px");
-  stage.style.setProperty("--normal-full-max-h",scroll?Math.max(134,available-17)+"px":"none");
-  stage.style.setProperty("--normal-screen-fit",Math.min(402,Math.max(184,Math.floor(available*4/3)))+"px");
- }
- const resize=new ResizeObserver(fit);
- [$("watch-player"),surface.querySelector(".worked-prompt"),document.querySelector("main>.header")].forEach(el=>resize.observe(el));
- window.addEventListener("resize",fit);
- window.visualViewport?.addEventListener("resize",fit);
- document.addEventListener("fullscreenchange",fit);
- $("fullscreen").addEventListener("click",()=>requestAnimationFrame(fit));
- const fullResize=new MutationObserver(fit);
- fullResize.observe(stage,{attributes:true,attributeFilter:["class"]});
-
- function render(t){
-  seek.value=String(t);seek.setAttribute("aria-valuetext",timecode(t)+" of "+timecode(tape.duration));
-  $("clock").textContent=timecode(t)+" / "+timecode(tape.duration);
-  const beat=tape.starts.findLastIndex(x=>t>=x), clip=tape.clips.findLastIndex(([x])=>t>=x);
-  const keyIndex=tape.keys.findLastIndex(q=>q.at<=t), key=tape.keys[keyIndex], current=key&&key.at>=tape.starts[beat]?key:null;
-  $("active-key").textContent=current?(keyNames[current.key]||current.key.toUpperCase()):"—";
-  watchKeys.setKeys(current&&t-current.at<(current.key==="enter"?.42:.23)?[current.key]:[]);
-  if(stamp!==keyIndex||activeBeat!==beat){
-   const state={draft:"",history:[],error:""};
-   let active=null;
-   for(let i=0;i<=keyIndex;i++){
-    const item=tape.keys[i];
-    if(item.type==="evaluate"){
-     const result=M.calculator(state.draft);state.history.push(result);state.draft="";
-     if(item.at>=tape.starts[beat])active=result;
-    }else state.draft=cap(state.draft+item.char);
-   }
-   screen.draw(state);lcd.dataset.result=active?M.fmt(active.value):"";
-   $("lcd-text").textContent="Calculator. "+(state.history.at(-1)?state.history.at(-1).expression+" = "+M.fmt(state.history.at(-1).value)+". ":"")+"Entry: "+(state.draft||"blank")+".";
-   stamp=keyIndex;
-  }
-  if(clip!==activeClip){
-   $("caption").textContent=tape.clips[clip][1];
-   $("worked-event").textContent=clip===1?"3 × (20 ÷ 10) → λ = 6":problems[beat];activeClip=clip;
-  }
-  if(beat!==activeBeat){
-   [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===beat)));
-   activeBeat=beat;
-  }
- }
- T.titles.forEach((title,i)=>{
-  const li=document.createElement("li"), b=document.createElement("button"), no=document.createElement("span");
-  b.type="button";no.textContent=String(i+1).padStart(2,"0");b.append(no,document.createTextNode(title));
-  b.onclick=()=>go(tape.starts[i]);li.append(b);steps.append(li);
- });
- $("transcript").textContent=T.clips.map(x=>x[1]).join(" ");
- function configure(next){
-  now=media.remap(now,tape,next);tape=next;seek.max=String(tape.duration);
-  stamp=-2;activeClip=-1;activeBeat=-1;
-  $("transcript").textContent=tape.clips.map(x=>x[1]).join(" ");
-  render(now);label();
- }
- function label(){
-  const text=running||pending?"Pause":now>=tape.duration-.002?"Replay":"Play";
-  play.setAttribute("aria-label",text);play.title=text;play.dataset.playing=String(running);
-  play.querySelector(".play-icon").hidden=running||pending;play.querySelector(".pause-icon").hidden=!running&&!pending;
-  if(now<=.005&&!running&&!pending&&overlay.dataset.initial==="true"){overlay.dataset.action="play";overlay.hidden=false;}
- }
- function audioSeek(){
-  if(audio&&mediaReady&&Math.abs(audio.currentTime-now)>.0005)audio.currentTime=now;
- }
- function go(t){
-  now=clamp(t);reference=performance.now()-now*1000/rate;audioSeek();
-  if(now>.005&&overlay.dataset.initial==="true"){overlay.dataset.initial="false";transport.clear();}
-  render(now);label();fit();
- }
- function stampNow(ts=performance.now()){
-  return running?clamp(audio&&mediaReady?audio.currentTime:(ts-reference)*rate/1000):now;
- }
- function stop(capture=true){
-  if(capture)now=stampNow();
-  generation++;pending=false;running=false;clearTimeout(startTimer);cancelAnimationFrame(raf);
-  audio?.pause();render(now);label();
- }
- function finish(){
-  now=tape.duration;stop(false);
- }
- function tick(ts){
-  if(!running||watch.hidden)return;
-  now=stampNow(ts);
-  if(now>=tape.duration){finish();return;}
-  render(now);raf=requestAnimationFrame(tick);
- }
- function status(message=""){
-  $("audio-state").textContent=message;$("audio-state").hidden=!message;
- }
- function playCaptions(){
-  reference=performance.now()-now*1000/rate;running=true;pending=false;label();raf=requestAnimationFrame(tick);
- }
- function fallback(message){
-  const continuePlayback=!watch.hidden&&(pending||running);
-  stop();
-  const rejected=audio;audio=null;mediaReady=false;
-  if(rejected){rejected.remove();rejected.removeAttribute("src");rejected.load();}
-  configure(T);watch.dataset.clock="caption";$("caption-beta").hidden=false;
-  status(message+" Using captions instead.");
-  if(continuePlayback&&now<tape.duration-.002)playCaptions();
- }
- function adopt(){
-  if(!audio||audio.readyState<2)return false;
-  const actual=media.actual(recording,audio.duration);
-  if(!actual){fallback("Narration does not match its measured cues.");return false;}
-  if(!mediaReady){
-   mediaReady=true;configure(actual);audioSeek();watch.dataset.clock="audio";$("caption-beta").hidden=true;status();
-  }else if(Math.abs(tape.duration-actual.duration)>.001){
-   now=stampNow();configure(actual);audioSeek();
-  }
-  return true;
- }
- function setupAudio(){
-  if(!manifest)return;
-  if(!recording){status("Invalid local narration cues. Using captions.");return;}
-  const el=document.createElement("audio");audio=el;el.hidden=true;el.preload="auto";el.id="narration";
-  el.addEventListener("loadedmetadata",()=>{if(audio===el&&!media.actual(recording,el.duration))fallback("Narration does not match its measured cues.");});
-  el.addEventListener("loadeddata",()=>{if(audio===el)adopt();});
-  el.addEventListener("durationchange",()=>{if(audio===el&&el.readyState>=2)adopt();});
-  el.addEventListener("ended",()=>{if(audio===el&&running){now=stampNow();if(now<tape.duration-.12)fallback("Narration ended before its measured cues.");else finish();}});
-  el.addEventListener("error",()=>{if(audio===el)fallback("Narration could not load or decode.");});
-  el.playbackRate=rate;el.src=recording.audio;$("watch-player").append(el);
- }
- function startPlayback(){
-  if(watch.hidden||running||pending)return;
-  if(now>=tape.duration-.002)go(0);
-  if(!audio){playCaptions();return;}
-  const el=audio,ticket=++generation;pending=true;el.playbackRate=rate;label();audioSeek();
-  startTimer=setTimeout(()=>{if(ticket===generation&&pending)fallback("Narration did not start.");},8000);
-  const fail=()=>{if(ticket===generation&&audio===el)fallback("Narration could not play.");};
-  try{
-   Promise.resolve(el.play()).then(()=>{
-    if(ticket!==generation||watch.hidden||audio!==el)return;
-    if(!adopt()||ticket!==generation||audio!==el)return;
-    clearTimeout(startTimer);pending=false;running=true;
-    now=stampNow();render(now);label();raf=requestAnimationFrame(tick);
-   },fail);
-  }catch{fail();}
- }
- play.onclick=()=>{
-  if(watch.hidden)return;
-  const stopping=running||pending;
-  overlay.dataset.initial="false";transport.clear();
-  if(stopping)stop();else startPlayback();
-  transport.flash(!stopping);
- };
- seek.oninput=()=>go(seek.value);
- speed.onchange=()=>{
-  now=stampNow();rate=Number(speed.value);reference=performance.now()-now*1000/rate;
-  if(audio)audio.playbackRate=rate;
-  render(now);
- };
- document.addEventListener("visibilitychange",()=>{if(document.hidden&&(running||pending))stop();});
- $("cc").onclick=()=>{
-  const band=$("caption-band");band.hidden=!band.hidden;
-  $("cc").setAttribute("aria-pressed",String(!band.hidden));$("cc").setAttribute("aria-label",band.hidden?"Show captions":"Hide captions");fit();
- };
-
+ const $=id=>document.getElementById(id), M=CT42Math;
+ const panel=$("try"), host=$("try-host"), dock=host.parentElement, tryLcd=$("try-lcd"), command=$("command"), view=$("watch-command");
+ let shown=false,stamp=-1,returnToWatch;
+ const visibleTry=()=>shown;
+ const tryKeys=CalculatorLessonHandset.mount(host,{screen:tryLcd,label:"TI-Nspire CX II-T",interactive:false,onKey:(key,e)=>press(key,e?.detail===0)});
  const params=new URLSearchParams(location.search), names=["lambda","event","a","b"], typed=names.some(k=>params.has(k));
  function validEvent(l,kind,a,b=""){
   const lambda=M.number(l), low=M.integer(a), upper=kind==="between"?M.integer(b):null;
@@ -332,31 +140,41 @@
   draft("",0);setError();updateHistory();setForm(exercise);paintEvent();announce("Calculator and practice question reset.");
   $("try-host").focus({preventScroll:true});
  };
- const tabs=[$("watch-tab"),$("try-tab")];
- function tab(i,focus){
-  if(i){if(running||pending)stop();void transport.exit();}
-  tabs.forEach((el,k)=>{el.tabIndex=i===k?0:-1;el.setAttribute("aria-selected",String(i===k));$(el.getAttribute("aria-controls")).hidden=i!==k;});
-  clearTimeout(light);tryKeys.setKeys([]);
-  if(i){paintEvent();updateHistory(false);}
-  else{window.scrollTo({top:0,left:0,behavior:"instant"});fit();}
-  if(focus)(i?$("try-host"):play).focus({preventScroll:true});
- }
- $("try-host").tabIndex=0;
- tabs.forEach((el,i)=>{
-  el.onclick=()=>tab(i,true);
-  el.onkeydown=e=>{
-   if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
-   e.preventDefault();const j=e.key==="Home"?0:e.key==="End"?1:1-i;tab(j,false);tabs[j].focus();
-  };
- });
- $("to-try").onclick=()=>tab(1,true);
- $("return-watch").onclick=()=>tab(0,true);
  $("try-host").addEventListener("keydown",e=>{
-  if(e.altKey||e.ctrlKey||e.metaKey||e.isComposing||e.target.closest("input,textarea,select,a,summary")||e.target.closest("button")&&[" ","Enter"].includes(e.key))return;
+  if(!shown||e.altKey||e.ctrlKey||e.metaKey||e.isComposing||e.target.closest("input,textarea,select,a,summary")||e.target.closest("button")&&[" ","Enter"].includes(e.key))return;
   const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowUp:"up",ArrowDown:"down",ArrowLeft:"left",ArrowRight:"right",".":"dot",",":"comma","(":"lparen",")":"rparen","-":"minus","+":"plus"};
   const k=keys[e.key]||(/^[a-z0-9]$/i.test(e.key)?e.key.toLowerCase():"");
   if(k){e.preventDefault();press(k,true);}
  });
- watch.dataset.clock="caption";setForm(exercise);frame(framePref);render(now);label();
- tab(params.get("mode")==="try"?1:0,false);setupAudio();
+
+ const action=p=>({"(":"lparen",")":"rparen",",":"comma","-":"minus",Enter:"enter"})[p.label]||p.label.toLowerCase();
+ const format=x=>x.replace(/poisspdf/i,"poissPdf").replace(/poisscdf/i,"poissCdf").replace(/-/g,"−");
+ function renderWatch(device,{beat,point,crossed,key}){
+  if(host.parentElement!==device)device.append(host);
+  command.hidden=true;view.hidden=false;
+  const lit=key&&!point.speaking&&key.beat===beat&&(point.fraction-key.at)*(point.span.end-point.span.voiceEnd)<.44;
+  tryKeys.setKeys(lit?[action(key)]:[]);
+  if(crossed.length===stamp)return;
+  stamp=crossed.length;
+  let raw="";const results=[];
+  for(const p of crossed){if(p.label==="Enter"){results.push(M.calculator(raw));raw="";}else raw+=p.label.toLowerCase();}
+  hist.replaceChildren();
+  for(const result of results.slice(-2)){
+   const row=document.createElement("div"), answer=document.createElement("strong");
+   row.append(document.createTextNode(result.expression),answer);answer.textContent=M.fmt(result.value);hist.append(row);
+  }
+  hist.scrollTop=hist.scrollHeight;view.textContent=format(raw)+"▏";
+  $("keypad-result").hidden=true;tryLcd.dataset.result=results.length?M.fmt(results.at(-1).value):"";
+ }
+ function enterTry(device,actions){
+  shown=true;returnToWatch=actions.returnToWatch;device.prepend(panel);dock.prepend(host);
+  panel.hidden=false;command.hidden=false;view.hidden=true;tryKeys.setInteractive(true);tryKeys.setKeys([]);
+  paintEvent();updateHistory(false);$("keypad-result").hidden=!error;host.focus({preventScroll:true});
+ }
+ function exitTry(){
+  shown=false;panel.hidden=true;stamp=-1;clearTimeout(light);tryKeys.setKeys([]);tryKeys.setInteractive(false);
+ }
+ $("return-watch").onclick=()=>returnToWatch?.();
+ setForm(exercise);
+ window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"?"try":"watch",renderWatch,enterTry,exitTry});
 })();

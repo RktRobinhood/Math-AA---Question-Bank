@@ -1,0 +1,547 @@
+{
+  "id": "CT42",
+  "title": "Poisson probabilities",
+  "intro": "Choose one count, an inclusive range, or a right tail.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "2241d3b4cac86e9fa63a150f90801de6ce2845a7e982a4fb84374b4297f00da8",
+    "scriptSha256": "0940dc678b569b49fc5700fe97d6bdbf66406f23e0850053b72b5fa05be13eff"
+  },
+  "chapters": [
+    {
+      "id": "interval",
+      "title": "Scale the mean to the interval"
+    },
+    {
+      "id": "exact",
+      "title": "Calculate exactly six"
+    },
+    {
+      "id": "range",
+      "title": "Include both CDF bounds"
+    },
+    {
+      "id": "strict",
+      "title": "Find more than six"
+    },
+    {
+      "id": "inclusive",
+      "title": "Find at least six"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "interval",
+      "spoken": "The Poisson model averages three events per ten minutes. We are counting in twenty minutes.",
+      "coach": "Three events per 10 minutes; the question asks about 20 minutes.",
+      "end": 6.58,
+      "hold": 0.7,
+      "keys": []
+    },
+    {
+      "chapter": "interval",
+      "spoken": "Double the mean. Use lambda equals six for this interval.",
+      "coach": "Double the mean: use λ = 6.",
+      "end": 11.31,
+      "hold": 0.8,
+      "keys": []
+    },
+    {
+      "chapter": "exact",
+      "spoken": "For exactly six events, type the Poisson P D F command on a Calculator page. Enter six for the mean and six for the count.",
+      "coach": "Type poissPdf(6,6). The first 6 is the mean; the second is the count.",
+      "end": 21.01,
+      "hold": 8.75,
+      "keys": [
+        {
+          "id": "b3-k1",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.0571
+        },
+        {
+          "id": "b3-k2",
+          "label": "O",
+          "ariaLabel": "O",
+          "at": 0.1286
+        },
+        {
+          "id": "b3-k3",
+          "label": "I",
+          "ariaLabel": "I",
+          "at": 0.2
+        },
+        {
+          "id": "b3-k4",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.2714
+        },
+        {
+          "id": "b3-k5",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.3429
+        },
+        {
+          "id": "b3-k6",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.4143
+        },
+        {
+          "id": "b3-k7",
+          "label": "D",
+          "ariaLabel": "D",
+          "at": 0.4857
+        },
+        {
+          "id": "b3-k8",
+          "label": "F",
+          "ariaLabel": "F",
+          "at": 0.5571
+        },
+        {
+          "id": "b3-k9",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.6286
+        },
+        {
+          "id": "b3-k10",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.7
+        },
+        {
+          "id": "b3-k11",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.7714
+        },
+        {
+          "id": "b3-k12",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.8429
+        },
+        {
+          "id": "b3-k13",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.9143
+        }
+      ]
+    },
+    {
+      "chapter": "exact",
+      "spoken": "Press Enter once to evaluate a typed command.",
+      "coach": "Enter evaluates the typed command.",
+      "end": 24.8,
+      "hold": 1.8,
+      "keys": [
+        {
+          "id": "b4-k1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4
+        }
+      ]
+    },
+    {
+      "chapter": "exact",
+      "spoken": "Exactly six has probability about zero point one six one.",
+      "coach": "Exactly six events: 0.161 to three significant figures.",
+      "end": 30.35,
+      "hold": 0.7,
+      "keys": []
+    },
+    {
+      "chapter": "range",
+      "spoken": "For three to six events inclusive, use the Poisson C D F command with mean six, lower bound three, and upper bound six.",
+      "coach": "Type poissCdf(6,3,6) and press Enter.",
+      "end": 39.25,
+      "hold": 9.5,
+      "keys": [
+        {
+          "id": "b6-k1",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.0471
+        },
+        {
+          "id": "b6-k2",
+          "label": "O",
+          "ariaLabel": "O",
+          "at": 0.1059
+        },
+        {
+          "id": "b6-k3",
+          "label": "I",
+          "ariaLabel": "I",
+          "at": 0.1647
+        },
+        {
+          "id": "b6-k4",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.2235
+        },
+        {
+          "id": "b6-k5",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.2824
+        },
+        {
+          "id": "b6-k6",
+          "label": "C",
+          "ariaLabel": "C",
+          "at": 0.3412
+        },
+        {
+          "id": "b6-k7",
+          "label": "D",
+          "ariaLabel": "D",
+          "at": 0.4
+        },
+        {
+          "id": "b6-k8",
+          "label": "F",
+          "ariaLabel": "F",
+          "at": 0.4588
+        },
+        {
+          "id": "b6-k9",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.5176
+        },
+        {
+          "id": "b6-k10",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.5765
+        },
+        {
+          "id": "b6-k11",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.6353
+        },
+        {
+          "id": "b6-k12",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6941
+        },
+        {
+          "id": "b6-k13",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.7529
+        },
+        {
+          "id": "b6-k14",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.8118
+        },
+        {
+          "id": "b6-k15",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8706
+        },
+        {
+          "id": "b6-k16",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9294
+        }
+      ]
+    },
+    {
+      "chapter": "range",
+      "spoken": "PDF takes one count. CDF adds every count between its two bounds.",
+      "coach": "Include 3, 4, 5 and 6. The bounds themselves count.",
+      "end": 45.58,
+      "hold": 0.8,
+      "keys": []
+    },
+    {
+      "chapter": "range",
+      "spoken": "Counts three, four, five and six together have probability about zero point five four four.",
+      "coach": "Three through six: 0.544 to three significant figures.",
+      "end": 53.17,
+      "hold": 0.7,
+      "keys": []
+    },
+    {
+      "chapter": "strict",
+      "spoken": "More than six excludes six. Its complement includes every count from zero through six.",
+      "coach": "More than six excludes 6. Subtract P(X ≤ 6) from 1.",
+      "end": 60.62,
+      "hold": 0.8,
+      "keys": []
+    },
+    {
+      "chapter": "strict",
+      "spoken": "Type one minus Poisson C D F, with mean six, lower bound zero and upper bound six. Press Enter.",
+      "coach": "Type 1 − poissCdf(6,0,6), then Enter.",
+      "end": 69.54,
+      "hold": 10.55,
+      "keys": [
+        {
+          "id": "b10-k1",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0421
+        },
+        {
+          "id": "b10-k2",
+          "label": "-",
+          "ariaLabel": "Minus",
+          "at": 0.0947
+        },
+        {
+          "id": "b10-k3",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.1474
+        },
+        {
+          "id": "b10-k4",
+          "label": "O",
+          "ariaLabel": "O",
+          "at": 0.2
+        },
+        {
+          "id": "b10-k5",
+          "label": "I",
+          "ariaLabel": "I",
+          "at": 0.2526
+        },
+        {
+          "id": "b10-k6",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.3053
+        },
+        {
+          "id": "b10-k7",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.3579
+        },
+        {
+          "id": "b10-k8",
+          "label": "C",
+          "ariaLabel": "C",
+          "at": 0.4105
+        },
+        {
+          "id": "b10-k9",
+          "label": "D",
+          "ariaLabel": "D",
+          "at": 0.4632
+        },
+        {
+          "id": "b10-k10",
+          "label": "F",
+          "ariaLabel": "F",
+          "at": 0.5158
+        },
+        {
+          "id": "b10-k11",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.5684
+        },
+        {
+          "id": "b10-k12",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.6211
+        },
+        {
+          "id": "b10-k13",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.6737
+        },
+        {
+          "id": "b10-k14",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7263
+        },
+        {
+          "id": "b10-k15",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.7789
+        },
+        {
+          "id": "b10-k16",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.8316
+        },
+        {
+          "id": "b10-k17",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8842
+        },
+        {
+          "id": "b10-k18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9368
+        }
+      ]
+    },
+    {
+      "chapter": "strict",
+      "spoken": "More than six has probability about zero point three nine four.",
+      "coach": "More than six: 0.394 to three significant figures.",
+      "end": 74.94,
+      "hold": 0.7,
+      "keys": []
+    },
+    {
+      "chapter": "inclusive",
+      "spoken": "At least six includes six. Its complement now stops at five.",
+      "coach": "At least six includes 6. The complement stops at 5.",
+      "end": 80.8,
+      "hold": 0.8,
+      "keys": []
+    },
+    {
+      "chapter": "inclusive",
+      "spoken": "Type one minus Poisson C D F, with mean six, lower bound zero and upper bound five. Press Enter.",
+      "coach": "Type 1 − poissCdf(6,0,5), then Enter.",
+      "end": 90.26,
+      "hold": 10.55,
+      "keys": [
+        {
+          "id": "b13-k1",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0421
+        },
+        {
+          "id": "b13-k2",
+          "label": "-",
+          "ariaLabel": "Minus",
+          "at": 0.0947
+        },
+        {
+          "id": "b13-k3",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.1474
+        },
+        {
+          "id": "b13-k4",
+          "label": "O",
+          "ariaLabel": "O",
+          "at": 0.2
+        },
+        {
+          "id": "b13-k5",
+          "label": "I",
+          "ariaLabel": "I",
+          "at": 0.2526
+        },
+        {
+          "id": "b13-k6",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.3053
+        },
+        {
+          "id": "b13-k7",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.3579
+        },
+        {
+          "id": "b13-k8",
+          "label": "C",
+          "ariaLabel": "C",
+          "at": 0.4105
+        },
+        {
+          "id": "b13-k9",
+          "label": "D",
+          "ariaLabel": "D",
+          "at": 0.4632
+        },
+        {
+          "id": "b13-k10",
+          "label": "F",
+          "ariaLabel": "F",
+          "at": 0.5158
+        },
+        {
+          "id": "b13-k11",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.5684
+        },
+        {
+          "id": "b13-k12",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.6211
+        },
+        {
+          "id": "b13-k13",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.6737
+        },
+        {
+          "id": "b13-k14",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7263
+        },
+        {
+          "id": "b13-k15",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.7789
+        },
+        {
+          "id": "b13-k16",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8316
+        },
+        {
+          "id": "b13-k17",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8842
+        },
+        {
+          "id": "b13-k18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9368
+        }
+      ]
+    },
+    {
+      "chapter": "inclusive",
+      "spoken": "At least six has probability about zero point five five four. The two answers differ by the probability of exactly six.",
+      "coach": "At least six: 0.554. The difference is the probability of exactly six.",
+      "end": 100.499,
+      "hold": 1.9,
+      "keys": []
+    }
+  ]
+}

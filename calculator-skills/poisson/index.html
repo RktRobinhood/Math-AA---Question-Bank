@@ -12,56 +12,30 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="../normal/lesson.css?v=native-bank-1">
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../normal/watch.css?v=ct39-watch-1">
-<link rel="stylesheet" href="lesson.css?v=ct42-watch-1">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-player.js?v=ct39-watch-1" defer></script>
-<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><script src="watch-media.js" defer></script><script src="lesson.js?v=ct42-watch-1&amp;caption-overlay=1" defer></script>
-<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
-<link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="math.js" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head>
-<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page calculator-bank-lesson normal-watch poisson-watch"><main class="qb-calculator-lesson">
-<header class="header"><div><p class="tag"><a href="../skills.html">Calculator Skills</a> · <a href="../scratchpad/index.html">Open calculator</a></p><h1>Poisson probabilities</h1><p class="subtitle">Choose one count, a range, or a right tail. · AI HL</p></div></header>
-<div class="calc-tabs tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" type="button" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" type="button" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
-<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="0">
-<div class="watch-grid">
-<div class="viewer modern-watch" id="watch-stage" tabindex="0" aria-label="Watch Poisson probabilities">
-<div class="watch-surface" id="watch-surface">
-<div id="key-strip"><span>Last key</span> <kbd id="active-key">—</kbd><span id="caption-beta" class="legacy-watch-status" role="status">Caption-only rehearsal</span></div>
-<div id="watch-device-pane"><div id="watch-host"><div class="ct42-lcd" id="watch-lcd"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><p id="lcd-text" class="sr"></p></div></div></div>
-<div class="worked-prompt"><span>Watch example</span><strong id="worked-event">3 per 10 min → 20 min</strong></div>
-<p id="full-fit-note" hidden>Scroll the calculator to see the keypad.</p>
-<span id="play-feedback" aria-hidden="true" hidden data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
-</div>
-<div class="player legacy-watch-caption-host" id="watch-player" role="group" aria-label="Playback controls">
- <div id="caption-band" class="legacy-watch-caption-display"><p id="caption" class="caption"></p></div>
-<button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
-<div id="view-pick" role="group" aria-label="Calculator framing">
- <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
- <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
-</div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="83.5" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 1:23</span>
-<button id="cc" type="button" aria-label="Hide captions" title="Captions" aria-pressed="true">CC</button>
-<label class="watch-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
-<button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
-
-<p id="audio-state" role="status" hidden class="legacy-watch-status"></p>
-</div>
-
-</div>
-<aside class="director" aria-label="Demonstration steps"><h2>Walkthrough</h2><p>3 events per 10 minutes. Count over 20 minutes.</p><ol id="steps" class="steps"></ol>
-<button class="plain-link" type="button" id="to-try">Try a probability <span aria-hidden="true">→</span></button>
-<details class="transcript"><summary>Transcript</summary><p id="transcript"></p></details></aside>
-</div></section>
-<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
-<div class="try-grid">
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page calculator-bank-lesson poisson-watch ct42-shared-watch"><main class="qb-calculator-lesson">
+<nav class="ct42-resources"><a href="../skills.html">Calculator Skills</a></nav>
+<div data-calculator-watch></div>
+<section id="try" aria-label="Try on your calculator" hidden>
+<div class="ct42-try-grid try-grid">
 <header class="ct42-try-task"><p class="tag">Your turn · AI HL</p><h2 id="challenge-title">Choose the count boundary</h2><p id="keypad-problem"></p><p id="event-warning" class="feedback" role="status" hidden></p></header>
 <section class="try-device" aria-label="Practise on the handheld">
-<div id="try-host"><div class="ct42-lcd ct42-live-lcd" id="try-lcd" aria-label="TI-Nspire Calculator display">
+<div id="try-host" tabindex="0"><div class="ct42-lcd ct42-live-lcd" id="try-lcd" aria-label="TI-Nspire Calculator display">
 <div class="ct42-status"><span>1.1</span><span>Calculator · RAD <span aria-hidden="true">▰</span></span></div>
 <div class="ct42-history" id="history" aria-label="Calculator history"></div>
 <p id="keypad-result" class="ct42-lcd-message" hidden></p>
-<form id="command-form"><label class="sr" for="command">Calculator entry</label><input id="command" type="text" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" enterkeyhint="done" placeholder="Type a command" aria-describedby="keypad-hint"></form>
+<form id="command-form"><label class="sr" for="command">Calculator entry</label><input id="command" type="text" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" enterkeyhint="done" placeholder="Type a command" aria-describedby="keypad-hint"><span id="watch-command" hidden></span></form>
 </div></div>
 <p id="lcd-announcement" class="sr" role="status"></p>
 <p id="keypad-hint">Type in the display or use the handheld keys. Press Enter to calculate. ↑ and Enter recall a previous entry.</p>
@@ -83,5 +57,9 @@
 </details>
 </div>
 </div></section>
-</main><script type="application/json" id="ct42-narration-manifest">{"version":1,"lesson":"CT42","timing":"measured-playback","audio":"narration.mp3","audioSha256":"2241d3b4cac86e9fa63a150f90801de6ce2845a7e982a4fb84374b4297f00da8","durationMs":100499,"measurement":"FAL-1695 local George clone (VoxCPM2). Each cue is its own checked take, so cue starts are sample-exact in the composed file. Each key is placed at the measured onset of the word that names it in the take (faster-whisper word timestamps), with authored spacing inside a key group, capped at 400 ms; the Watch holds when speech runs long. Minimum 500 ms between cues.","cues":[{"id":"watch-01","startMs":0,"text":"The Poisson model averages three events per ten minutes. We are counting in twenty minutes."},{"id":"watch-02","startMs":6853,"text":"Double the mean. Use λ = 6 for this interval."},{"id":"watch-03","startMs":11567,"text":"For exactly six events, type poissPdf(6,6) on a Calculator page."},{"id":"watch-04","startMs":21295,"text":"Press Enter once to evaluate a typed command."},{"id":"watch-05","startMs":25095,"text":"Exactly six has probability about 0.161."},{"id":"watch-06","startMs":30646,"text":"For three to six events inclusive, type poissCdf(6,3,6)."},{"id":"watch-07","startMs":39554,"text":"PDF takes one count. CDF adds every count between its two bounds."},{"id":"watch-08","startMs":45861,"text":"Counts 3, 4, 5 and 6 together have probability about 0.544."},{"id":"watch-09","startMs":53501,"text":"More than six excludes six. Its complement includes every count from zero through six."},{"id":"watch-10","startMs":60920,"text":"Type 1 − poissCdf(6,0,6) and press Enter."},{"id":"watch-11","startMs":69843,"text":"More than six has probability about 0.394."},{"id":"watch-12","startMs":75195,"text":"At least six includes six. Its complement now stops at five."},{"id":"watch-13","startMs":81195,"text":"Type 1 − poissCdf(6,0,5) and press Enter."},{"id":"watch-14","startMs":90550,"text":"At least six has probability about 0.554. The two answers differ by the probability of exactly six."}],"keyTimesMs":{"key-01":14187,"key-02":14527,"key-03":14867,"key-04":15207,"key-05":15547,"key-06":15887,"key-07":16227,"key-08":16567,"key-09":16907,"key-10":17987,"key-11":19047,"key-12":19527,"key-13":20617,"key-14":21975,"key-15":33546,"key-16":33886,"key-17":34226,"key-18":34566,"key-19":34906,"key-20":35246,"key-21":35586,"key-22":35926,"key-23":36266,"key-24":36416,"key-25":36566,"key-26":36866,"key-27":37826,"key-28":38386,"key-29":38876,"key-30":45144,"key-31":61780,"key-32":62120,"key-33":62600,"key-34":62940,"key-35":63280,"key-36":63620,"key-37":63960,"key-38":64300,"key-39":64640,"key-40":64980,"key-41":65320,"key-42":65470,"key-43":65620,"key-44":66140,"key-45":66920,"key-46":67480,"key-47":68340,"key-48":68660,"key-49":82075,"key-50":82395,"key-51":82875,"key-52":83215,"key-53":83555,"key-54":83895,"key-55":84235,"key-56":84575,"key-57":84915,"key-58":85255,"key-59":85595,"key-60":85745,"key-61":86075,"key-62":86615,"key-63":87395,"key-64":87915,"key-65":88895,"key-66":89255}}</script>
+
+<nav class="ct42-resources" aria-label="Lesson resources"><a href="../paperclip-audio/lessons/CT42.txt">Transcript</a> · <a href="../scratchpad/index.html">Open calculator</a></nav>
+</main>
+<!-- Inert original signed timing evidence. -->
+<script type="application/json" id="ct42-narration-manifest">{"version":1,"lesson":"CT42","timing":"measured-playback","audio":"narration.mp3","audioSha256":"2241d3b4cac86e9fa63a150f90801de6ce2845a7e982a4fb84374b4297f00da8","durationMs":100499,"measurement":"FAL-1695 local George clone (VoxCPM2). Each cue is its own checked take, so cue starts are sample-exact in the composed file. Each key is placed at the measured onset of the word that names it in the take (faster-whisper word timestamps), with authored spacing inside a key group, capped at 400 ms; the Watch holds when speech runs long. Minimum 500 ms between cues.","cues":[{"id":"watch-01","startMs":0,"text":"The Poisson model averages three events per ten minutes. We are counting in twenty minutes."},{"id":"watch-02","startMs":6853,"text":"Double the mean. Use λ = 6 for this interval."},{"id":"watch-03","startMs":11567,"text":"For exactly six events, type poissPdf(6,6) on a Calculator page."},{"id":"watch-04","startMs":21295,"text":"Press Enter once to evaluate a typed command."},{"id":"watch-05","startMs":25095,"text":"Exactly six has probability about 0.161."},{"id":"watch-06","startMs":30646,"text":"For three to six events inclusive, type poissCdf(6,3,6)."},{"id":"watch-07","startMs":39554,"text":"PDF takes one count. CDF adds every count between its two bounds."},{"id":"watch-08","startMs":45861,"text":"Counts 3, 4, 5 and 6 together have probability about 0.544."},{"id":"watch-09","startMs":53501,"text":"More than six excludes six. Its complement includes every count from zero through six."},{"id":"watch-10","startMs":60920,"text":"Type 1 − poissCdf(6,0,6) and press Enter."},{"id":"watch-11","startMs":69843,"text":"More than six has probability about 0.394."},{"id":"watch-12","startMs":75195,"text":"At least six includes six. Its complement now stops at five."},{"id":"watch-13","startMs":81195,"text":"Type 1 − poissCdf(6,0,5) and press Enter."},{"id":"watch-14","startMs":90550,"text":"At least six has probability about 0.554. The two answers differ by the probability of exactly six."}],"keyTimesMs":{"key-01":14187,"key-02":14527,"key-03":14867,"key-04":15207,"key-05":15547,"key-06":15887,"key-07":16227,"key-08":16567,"key-09":16907,"key-10":17987,"key-11":19047,"key-12":19527,"key-13":20617,"key-14":21975,"key-15":33546,"key-16":33886,"key-17":34226,"key-18":34566,"key-19":34906,"key-20":35246,"key-21":35586,"key-22":35926,"key-23":36266,"key-24":36416,"key-25":36566,"key-26":36866,"key-27":37826,"key-28":38386,"key-29":38876,"key-30":45144,"key-31":61780,"key-32":62120,"key-33":62600,"key-34":62940,"key-35":63280,"key-36":63620,"key-37":63960,"key-38":64300,"key-39":64640,"key-40":64980,"key-41":65320,"key-42":65470,"key-43":65620,"key-44":66140,"key-45":66920,"key-46":67480,"key-47":68340,"key-48":68660,"key-49":82075,"key-50":82395,"key-51":82875,"key-52":83215,"key-53":83555,"key-54":83895,"key-55":84235,"key-56":84575,"key-57":84915,"key-58":85255,"key-59":85595,"key-60":85745,"key-61":86075,"key-62":86615,"key-63":87395,"key-64":87915,"key-65":88895,"key-66":89255}}</script>
 </body></html>
