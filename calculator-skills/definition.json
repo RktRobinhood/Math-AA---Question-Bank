@@ -1,0 +1,213 @@
+{
+  "id": "CT12",
+  "title": "Find a graph minimum",
+  "intro": "Use the minimum to choose when a pump starts and calculate its least energy use.",
+  "recording": {
+    "file": "minimum.mp3",
+    "audioSha256": "8512bc36bb5eb129779767a0a8bde13e560385484bf2bfb1defab1f4a2fa0c27",
+    "scriptSha256": "70e385aad46b522de924aa9a13649d9207b6e30c305c8354ea5dcdd82e7826b4"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the model"
+    },
+    {
+      "id": "tool",
+      "title": "Choose Minimum"
+    },
+    {
+      "id": "lower",
+      "title": "Set the lower bound"
+    },
+    {
+      "id": "upper",
+      "title": "Set the upper bound"
+    },
+    {
+      "id": "read",
+      "title": "Interpret the result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "On a Graphs page, enter the function you want to investigate and press Enter.",
+      "coach": "A greenhouse can start its pump x hours after sunrise (0 ≤ x ≤ 6). The model gives daily energy E = x² − 6x + 13 kWh. When should it start, and what is the least energy use?",
+      "end": 4.85,
+      "hold": 10.6,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.156
+        },
+        {
+          "id": "press-1",
+          "label": "x²",
+          "ariaLabel": "Squared",
+          "at": 0.242
+        },
+        {
+          "id": "press-2",
+          "label": "−",
+          "ariaLabel": "Minus",
+          "at": 0.328
+        },
+        {
+          "id": "press-3",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.414
+        },
+        {
+          "id": "press-4",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.5
+        },
+        {
+          "id": "press-5",
+          "label": "+",
+          "ariaLabel": "Plus",
+          "at": 0.586
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.672
+        },
+        {
+          "id": "press-7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.758
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.844
+        }
+      ]
+    },
+    {
+      "chapter": "tool",
+      "spoken": "Open Menu, choose Analyze Graph, and select Minimum.",
+      "coach": "The question asks for the lowest output, not where E is zero. Open Menu → 6: Analyze Graph → 2: Minimum.",
+      "end": 9.63,
+      "hold": 6.8,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.285
+        },
+        {
+          "id": "press-10",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.5
+        },
+        {
+          "id": "press-11",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.715
+        }
+      ]
+    },
+    {
+      "chapter": "tool",
+      "spoken": "We're looking for the lowest point in the interval you choose.",
+      "coach": "The pump can start from 0 to 6 hours after sunrise. Choose narrower search bounds around the valley, not the entire allowed time by default.",
+      "end": 13.2,
+      "hold": 4.4,
+      "keys": []
+    },
+    {
+      "chapter": "lower",
+      "spoken": "To set the lower bound, move the cursor to the left of the minimum, then press Enter.",
+      "coach": "Place the lower bound to the left of the valley and press Enter. You are bracketing a visible turning point, not estimating its coordinate yet.",
+      "end": 18.85,
+      "hold": 8.2,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "←",
+          "ariaLabel": "Left arrow",
+          "at": 0.09023529
+        },
+        {
+          "id": "press-13",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.88345882
+        }
+      ]
+    },
+    {
+      "chapter": "upper",
+      "spoken": "For the upper bound, move to the right of the minimum and press Enter again.",
+      "coach": "Place the upper bound to the right of the same valley and press Enter. The shaded band should enclose just that valley.",
+      "end": 23.62,
+      "hold": 8.2,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.26833948
+        },
+        {
+          "id": "press-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.87922509
+        }
+      ]
+    },
+    {
+      "chapter": "read",
+      "spoken": "Bracket just one turning point.",
+      "coach": "There is one valley in the band. The curve opens upward and the valley lies inside the allowed interval, so neither endpoint can give a lower energy use.",
+      "end": 26.4,
+      "hold": 3.5,
+      "keys": []
+    },
+    {
+      "chapter": "read",
+      "spoken": "The calculator marks the minimum and shows its coordinates.",
+      "coach": "Read the two coordinates beside the marker: (3, 4). They describe the best start time and the energy use at that time.",
+      "end": 30,
+      "hold": 2.8,
+      "keys": []
+    },
+    {
+      "chapter": "read",
+      "spoken": "The x-coordinate tells you where it occurs.",
+      "coach": "The first coordinate is a time: start the pump 3 hours after sunrise.",
+      "end": 33,
+      "hold": 2.1,
+      "keys": []
+    },
+    {
+      "chapter": "read",
+      "spoken": "The y-coordinate is the minimum value.",
+      "coach": "The second coordinate is the least energy use: 4 kWh. Enter again only if you want to pin the coordinate label.",
+      "end": 35.788,
+      "hold": 4.9,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "Enter*",
+          "ariaLabel": "Optional: Enter to pin the label",
+          "at": 0.5
+        }
+      ]
+    }
+  ]
+}

@@ -5,6 +5,7 @@
 const sha = /^[a-f0-9]{64}$/;
 const token = /^[a-z0-9][a-z0-9-]{0,47}$/;
 const frameStorage = 'qb-calculator-watch-frame';
+const endTolerance=.012;
 const validText = (text, max) => typeof text === 'string' && text.trim() === text && text.length > 0 && text.length <= max;
 
 function validate(spec) {
@@ -53,6 +54,12 @@ function stateAt(layout, authored, time) {
  const point = layout.at(time);
  const crossed = authored.events.filter(k => k.beat<point.span.i || (k.beat===point.span.i&&!point.speaking&&k.at<=point.fraction));
  return {point,crossed,key:crossed.at(-1)??null};
+}
+
+function normalizeSeekTime(seconds,duration) {
+ const bounded=Math.min(duration,Math.max(0,Number(seconds)||0));
+ // A range with a 5 ms step can report just below its actual maximum.
+ return duration-bounded<endTolerance?duration:bounded;
 }
 
 async function recordingFor(spec, win) {
@@ -200,7 +207,7 @@ function mount(host, input, adapter) {
    adapter.renderWatch(device,{beat:point.span.i,chapter:beat.chapter,t,point,key,crossed,framing});
  }
  function label(){
-   const name=playing?'Pause':t>=layout.duration-.012?'Replay':'Play';
+   const name=playing?'Pause':t>=layout.duration-endTolerance?'Replay':'Play';
    play.setAttribute('aria-label',name);play.title=name;
    iconPlay.toggleAttribute('hidden',playing);iconPause.toggleAttribute('hidden',!playing);
  }
@@ -208,7 +215,7 @@ function mount(host, input, adapter) {
    epoch++;pending=false;playing=false;phase='';activeMedia?.audio.pause();win.cancelAnimationFrame(frameRequest);label();
  }
  function seekTo(next){
-   const resume=playing||pending;halt();t=Math.min(layout.duration,Math.max(0,Number(next)||0));update();label();
+   const resume=playing||pending;halt();t=normalizeSeekTime(next,layout.duration);update();label();
    if(resume&&t<layout.duration)void start(false);
  }
  function loseMedia(){
@@ -251,7 +258,7 @@ function mount(host, input, adapter) {
  }
  async function start(flash=true){
    if(mode!=='watch'||disposed)return;
-   if(t>=layout.duration-.012)t=0;
+   if(t>=layout.duration-endTolerance)t=0;
    initiated=true;feedback.dataset.initial='false';feedback.hidden=true;
    pending=true;const ticket=++epoch;
    if(!await enter(ticket))return;
@@ -319,6 +326,6 @@ function mount(host, input, adapter) {
  }
  return Object.freeze({destroy,seekTo,setMode:changeMode});
 }
-const api=Object.freeze({validate,stateAt,mount});
+const api=Object.freeze({validate,stateAt,normalizeSeekTime,mount});
 if(typeof module==='object'&&module.exports)module.exports=api;else root.CalculatorWatchLesson=api;
 })(globalThis);
