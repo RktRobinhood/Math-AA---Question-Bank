@@ -125,9 +125,11 @@ body.watch-fullscreen-open{overflow:hidden}
 @media(min-width:781px){
  .lw-stage[data-mode=watch] .lw-surface>.lw-guide{max-height:var(--lw-scene-height,none);overflow:auto;scrollbar-width:thin}
 }
-@media(max-width:780px) and (max-height:670px){
+@media(max-width:780px){
  .lw-stage:has(>.lw-guide) .lw-surface{gap:0;padding:5px 8px}
  .lw-stage>.lw-guide .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:780px) and (max-height:670px){
  /* In a very short fullscreen, a dense chapter rail must scroll rather than
     shrink the handheld to a thumbnail. The full rail stays keyboard reachable. */
  .lw-stage:is(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide{

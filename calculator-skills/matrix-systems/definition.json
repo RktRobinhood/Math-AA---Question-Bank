@@ -1,0 +1,573 @@
+{
+  "id": "CT23",
+  "title": "Solve linear systems using matrices",
+  "intro": "Use the inverse for a unique solution and reduced row-echelon form to check singular cases.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "ece0d50ec88887eef200bbecac386cb7c4ff3a57a0e0b03c229e57107a35ee72",
+    "scriptSha256": "c4ac9f765de2458ce0b5a29f3422326acb97516a07308fb59cd844af6f718c95"
+  },
+  "chapters": [
+    {
+      "id": "name",
+      "title": "Set the variable order"
+    },
+    {
+      "id": "template",
+      "title": "Set the matrix size"
+    },
+    {
+      "id": "coefficients",
+      "title": "Fill the coefficient rows"
+    },
+    {
+      "id": "rhs",
+      "title": "Make the constants column"
+    },
+    {
+      "id": "multiply",
+      "title": "Multiply in this order"
+    },
+    {
+      "id": "verify",
+      "title": "Read and check"
+    },
+    {
+      "id": "augmented",
+      "title": "What if there is no inverse?"
+    },
+    {
+      "id": "rref",
+      "title": "Reduce the augmented rows"
+    },
+    {
+      "id": "interpret",
+      "title": "Read the contradiction"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "name",
+      "spoken": "Solve two x plus y equals seven, and x minus y equals two. Use x, y in that order. Store the coefficients as A using Control and Template for the assignment symbol.",
+      "coach": "Keep x, y in that order throughout.",
+      "end": 13.673,
+      "hold": 2.62,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.1667
+        },
+        {
+          "id": "press-2",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.4444
+        },
+        {
+          "id": "press-3",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "template",
+      "spoken": "On a Calculator page choose Menu then seven: Matrix and Vector then one: Create then one: Matrix. Use two rows and two columns.",
+      "coach": "Open Matrix & Vector → Create → Matrix; choose 2 × 2.",
+      "end": 23.965,
+      "hold": 5.86,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0625
+        },
+        {
+          "id": "press-5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.1667
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2708
+        },
+        {
+          "id": "press-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.375
+        },
+        {
+          "id": "press-8",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4792
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5833
+        },
+        {
+          "id": "press-10",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6875
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7917
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "coefficients",
+      "spoken": "Enter two, one in the first row and one, minus one in the second. Tab moves to the next cell. Press Enter to store a.",
+      "coach": "Store A row by row: (2, 1) and (1, −1).",
+      "end": 34.497,
+      "hold": 5.86,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0625
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1667
+        },
+        {
+          "id": "press-15",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2708
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.375
+        },
+        {
+          "id": "press-17",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4792
+        },
+        {
+          "id": "press-18",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5833
+        },
+        {
+          "id": "press-19",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.6875
+        },
+        {
+          "id": "press-20",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7917
+        },
+        {
+          "id": "press-21",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "rhs",
+      "spoken": "Store b the same way, but use two rows and one column. Enter seven above two to match the original equation order.",
+      "coach": "Store b as a 2 × 1 column: 7 above 2.",
+      "end": 45.124,
+      "hold": 9.64,
+      "keys": [
+        {
+          "id": "press-22",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.0361
+        },
+        {
+          "id": "press-23",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0964
+        },
+        {
+          "id": "press-24",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.1566
+        },
+        {
+          "id": "press-25",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.2169
+        },
+        {
+          "id": "press-26",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2771
+        },
+        {
+          "id": "press-27",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3373
+        },
+        {
+          "id": "press-28",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3976
+        },
+        {
+          "id": "press-29",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4578
+        },
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5181
+        },
+        {
+          "id": "press-31",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5783
+        },
+        {
+          "id": "press-32",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6386
+        },
+        {
+          "id": "press-33",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6988
+        },
+        {
+          "id": "press-34",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.759
+        },
+        {
+          "id": "press-35",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8193
+        },
+        {
+          "id": "press-36",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.8795
+        },
+        {
+          "id": "press-37",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "multiply",
+      "spoken": "Type A, then the power key, the negative key and one. Press Right to leave the exponent, then the times key, B, and Enter. The inverse of A multiplies B on the left.",
+      "coach": "Use Right to leave the exponent; then multiply A⁻¹ × b.",
+      "end": 62.289,
+      "hold": 5.32,
+      "keys": [
+        {
+          "id": "press-38",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.0698
+        },
+        {
+          "id": "press-39",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.186
+        },
+        {
+          "id": "press-40",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.3023
+        },
+        {
+          "id": "press-41",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4186
+        },
+        {
+          "id": "press-42",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.5349
+        },
+        {
+          "id": "press-43",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6512
+        },
+        {
+          "id": "press-44",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.7674
+        },
+        {
+          "id": "press-45",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "verify",
+      "spoken": "Read x equals three above y equals one. In the original equations, twice three plus one is seven, and three minus one is two.",
+      "coach": "The result gives x = 3, y = 1. Check both equations.",
+      "end": 72.936,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "augmented",
+      "spoken": "For x plus two y equals four, and two x plus four y equals nine, enter a two by three matrix, M. Keep x, y first; put the constants in the final column.",
+      "coach": "With a singular system, build the 2 × 3 augmented matrix M.",
+      "end": 88.531,
+      "hold": 13.96,
+      "keys": [
+        {
+          "id": "press-46",
+          "label": "m",
+          "ariaLabel": "m",
+          "at": 0.0244
+        },
+        {
+          "id": "press-47",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.065
+        },
+        {
+          "id": "press-48",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.1057
+        },
+        {
+          "id": "press-49",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1463
+        },
+        {
+          "id": "press-50",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.187
+        },
+        {
+          "id": "press-51",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2276
+        },
+        {
+          "id": "press-52",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2683
+        },
+        {
+          "id": "press-53",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3089
+        },
+        {
+          "id": "press-54",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3496
+        },
+        {
+          "id": "press-55",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3902
+        },
+        {
+          "id": "press-56",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4309
+        },
+        {
+          "id": "press-57",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4715
+        },
+        {
+          "id": "press-58",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5122
+        },
+        {
+          "id": "press-59",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5528
+        },
+        {
+          "id": "press-60",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5935
+        },
+        {
+          "id": "press-61",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6341
+        },
+        {
+          "id": "press-62",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.6748
+        },
+        {
+          "id": "press-63",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7154
+        },
+        {
+          "id": "press-64",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7561
+        },
+        {
+          "id": "press-65",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7967
+        },
+        {
+          "id": "press-66",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.8374
+        },
+        {
+          "id": "press-67",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.878
+        },
+        {
+          "id": "press-68",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.9187
+        },
+        {
+          "id": "press-69",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9593
+        }
+      ]
+    },
+    {
+      "chapter": "rref",
+      "spoken": "Open Menu, then seven for Matrix and Vector, then five for Reduced Row-Echelon Form. Enter M as the argument and press Enter.",
+      "coach": "Menu → 7 → 5: Reduced Row-Echelon Form, then M.",
+      "end": 100.446,
+      "hold": 3.7,
+      "keys": [
+        {
+          "id": "press-70",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1071
+        },
+        {
+          "id": "press-71",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2857
+        },
+        {
+          "id": "press-72",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4643
+        },
+        {
+          "id": "press-73",
+          "label": "m",
+          "ariaLabel": "m",
+          "at": 0.6429
+        },
+        {
+          "id": "press-74",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "interpret",
+      "spoken": "The last row means zero times x plus zero times y equals one, so there is no solution. A zero row instead leaves one variable free here. For these cases, the inverse method does not apply.",
+      "coach": "A row [0, 0, 1] contradicts the equations. A zero row instead leaves a free variable here.",
+      "end": 116.481,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}

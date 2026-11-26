@@ -1,28 +1,42 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Simultaneous equations with matrices · Calculator Skills | IB Math Question Bank</title>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Solve linear systems using matrices · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT23" data-cue-sha="fa6fe082cfad5ad3080d0953999f3f56257259774eaea3a987ce0115e24e1186" data-transcript-sha="c4ac9f765de2458ce0b5a29f3422326acb97516a07308fb59cd844af6f718c95" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>Simultaneous equations with matrices</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
-<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
-<div id="watch-message" class="message"><p id="caption"></p></div>
-<div id="try-message" class="message" hidden><p id="task"></p><div id="target-wrap" class="exercise"></div><div class="try-actions"><button id="return" aria-label="Return to Watch">Watch</button><button id="reset" aria-label="Reset practice calculator">Reset</button></div></div>
-<div class="deck">
-<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 20 20"><path d="M5 3l12 7-12 7z" fill="currentColor"/></svg></button></div></div>
-<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><div class="chapters-wrap"><h2>Chapters</h2><ol id="chapters"></ol></div></aside>
-<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Calculator steps</h2>
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT23</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="ct23-try" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire matrix practice" hidden>
+<div id="try-message" class="message"><p id="task"></p><div id="target-wrap" class="exercise"></div><div class="try-actions"><button id="return" aria-label="Return to Watch">Watch</button><button id="reset" aria-label="Reset practice calculator">Reset Try</button></div></div>
+<div class="deck" id="try-deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div></div></div>
+
+<aside id="try" aria-label="matrix practice"><h2>Calculator steps</h2>
 <p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
 <form id="answer" hidden>
 <div id="status-field"><label>Number of solutions <select id="classification"><option value="">Choose</option><option value="unique">One solution</option><option value="none">No solution</option><option value="many">Infinitely many</option></select></label></div>
@@ -31,6 +45,5 @@
 <details id="edit"><summary>Edit practice values</summary><form id="edit-form"><p id="edit-copy"></p><div id="edit-values"></div><button>Apply</button><p id="edit-error" class="feedback bad" role="status" hidden></p></form></details>
 <details><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu. Type <kbd>:</kbd> then <kbd>=</kbd> for assignment, <kbd>*</kbd> for multiply, <kbd>^</kbd> for a power, <kbd>→</kbd> to exit an exponent, and use <kbd>Tab</kbd> to move between cells.</p></details></aside>
 </div>
-<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="69" step=".005"></label><span>Captions only</span></div></div>
 </section>
 </main></body></html>
