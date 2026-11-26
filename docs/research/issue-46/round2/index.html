@@ -1,0 +1,117 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Question Studio • Issue #46</title>
+<style>
+:root{color-scheme:light;--ink:#1d1930;--muted:#57526e;--bg:#eeedf3;--paper:#fff;--soft:#f6f5fa;--line:#d9d6e5;--accent:#4e0dba;--violet:#eee6fc;--pass:#135a43;--passbg:#eaf5ee;--hold:#884111;--holdbg:#fff1d9;--fail:#8e2a3e;--failbg:#fcebf0}
+:root[data-dark=true]{color-scheme:dark;--ink:#f5eefb;--muted:#c3b8d4;--bg:#211a2e;--paper:#302641;--soft:#292135;--line:#4a3d5d;--accent:#c5a6ff;--violet:#3d2c59;--pass:#a0e6c1;--passbg:#194233;--hold:#ffcd91;--holdbg:#4b3020;--fail:#ffb7c4;--failbg:#4f2636}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.43 Arial,Helvetica,sans-serif}button,select,input,textarea{font:inherit;color:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:2px}header{background:var(--paper);border-bottom:1px solid var(--line)}header div{max-width:1370px;margin:auto;padding:9px 24px;display:flex;gap:10px;align-items:center}header select{margin-left:auto;padding:6px;background:var(--soft);border:1px solid var(--line);border-radius:5px}header b{font-weight:800}small,.muted{color:var(--muted)}.sigma{font:700 22px Georgia;color:var(--accent)}main{max-width:1370px;margin:auto;padding:23px 24px 34px}h1{font-size:36px;letter-spacing:-1.45px;line-height:1.03;margin:4px 0 7px}h2{font-size:20px;line-height:1.22;letter-spacing:-.35px;margin:0 0 10px}h3{font-size:15px;margin:0}.lead{display:flex;justify-content:space-between;align-items:end;margin-bottom:15px;gap:10px}.stamp{font-size:12px;color:var(--accent);font-weight:700}.tag{border:1px solid var(--line);border-radius:99px;padding:4px 8px;background:var(--paper);font:700 12px Arial;white-space:nowrap}.grid{display:grid;grid-template-columns:245px minmax(0,1fr) 355px;gap:13px;align-items:start}.pane{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:15px;min-width:0}.pane-title{display:flex;align-items:center;justify-content:space-between;gap:6px}.pane p{margin:5px 0}.panediv{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.field{display:block;font-size:12px;font-weight:700;margin-bottom:9px}.field input,.field select,.field textarea{display:block;width:100%;margin-top:4px;border-radius:5px;border:1px solid var(--line);padding:8px;background:var(--soft)}textarea{min-height:78px;resize:vertical}.tile{border-bottom:1px solid var(--line);padding:10px 0}.tile:last-child{border:0}.tile-head{display:flex;gap:7px;justify-content:space-between;align-items:center}.tile small,.tiny{font-size:12px;line-height:1.32;display:block}.btn{border:1px solid var(--line);border-radius:5px;padding:7px 9px;background:var(--soft);min-height:36px;font-size:12px;font-weight:700}.btn:hover:not([disabled]){border-color:var(--accent);color:var(--accent)}.btn[disabled]{cursor:default;opacity:.65}.btn.pri{background:var(--accent);color:var(--paper);border-color:var(--accent)}.btn.pri:hover:not([disabled]){color:var(--paper)}.pair,.trip{display:flex;gap:8px;align-items:end}.pair .field{flex:1;margin:0}.coefficients{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:6px;align-items:end}.coefficients .field{margin:0}.formula{padding:10px 12px;margin:12px 0 8px;background:var(--violet);border-radius:5px;font:22px Georgia}.formula small{display:block;font:700 11px Arial;margin-bottom:4px}.row{display:grid;grid-template-columns:18px minmax(0,1fr) auto auto;gap:8px;align-items:center;border-bottom:1px solid var(--line);padding:8px 0}.row input{accent-color:var(--accent);height:17px;width:17px}.row small{display:block;font-size:11px}.row .tag{margin-left:2px}.row .btn{font-size:11px;min-height:28px;padding:4px 7px}.mark{font:700 12px ui-monospace,monospace;color:var(--muted)}.editing{margin:8px 0;border-left:3px solid var(--accent);padding-left:9px}.editing textarea{min-height:51px}.stat{font:700 15px ui-monospace,monospace}.check{padding:7px 8px;border-radius:5px;margin:7px 0;font-size:12px}.check b{display:block}.check.ok{background:var(--passbg);color:var(--pass)}.check.bad{background:var(--failbg);color:var(--fail)}.check.warn{background:var(--holdbg);color:var(--hold)}.tabs{display:flex;gap:5px;margin:10px 0 8px}.tabs button{min-height:35px}.tabs button[aria-pressed=true]{background:var(--violet);color:var(--accent);border-color:var(--accent)}.preview{background:#fff;color:#241d32;border:1px solid #d9d6e5;border-radius:5px;padding:12px 10px;font:15px/1.43 Georgia,serif}.preview p{margin:6px 0}.preview .sheetcheck{font:700 11px Arial;color:#60536c;display:flex;justify-content:space-between;border-bottom:1px solid #e4dfea;padding-bottom:5px}.p-row{display:grid;grid-template-columns:20px 1fr 23px;gap:3px;padding:4px 0}.foot{display:flex;align-items:start;justify-content:space-between;margin-top:13px;gap:8px}.label{font-size:12px;font-weight:750;text-transform:uppercase;color:var(--muted)}.ft{padding:9px;background:var(--soft);border:1px solid var(--line);border-radius:5px;margin-top:9px;font-size:12px}.ft input{accent-color:var(--accent)}.ft h3{font-size:13px;margin-bottom:5px}.ft output{display:block;margin-top:4px;font-weight:700}.ft-label{white-space:nowrap}.empty{font-style:italic;color:#625376}.field input[aria-invalid=true]{border-color:var(--fail)}
+@media(max-width:1050px){.grid{grid-template-columns:202px minmax(0,1fr) 285px}.pane{padding:11px}.row{gap:4px}h1{font-size:32px}}
+@media(max-width:840px){.grid{grid-template-columns:205px minmax(0,1fr)}.result{grid-column:2}.lead{align-items:start}}
+@media(max-width:580px){header div{padding:8px 12px}header small{display:none}main{padding:16px 12px}.grid{display:flex;flex-direction:column}.pane{width:100%}.result{order:2}.studio{order:1}.toolbox{order:3}.lead{align-items:start}.lead .tag{display:none}h1{font-size:31px}.row{gap:6px}.tile .btn{min-height:40px}}
+</style>
+<header><div><span class=sigma>∑</span><b>IB Math Question Bank</b><small> / Test authoring research</small><select id=theme aria-label="Appearance"><option value=system>System</option><option value=light>Light</option><option value=dark>Dark</option></select></div></header>
+<main>
+<div class=lead><div><div class=stamp>ISSUE #46 · DESIGN STUDY 2</div><h1>Question Studio</h1><div class=muted>Build the parts, edit the maths, and check the paper against its key.</div></div><span class=tag>Original material · Not deployed</span></div>
+<div class=grid>
+<aside class="pane toolbox"><div class=pane-title><h2>Block library</h2></div><label class=field>Find a skill<select id=filter><option value=all>Quadratics · all skills</option><option value=reason>Reason about roots</option><option value=solve>Solve an equation</option><option value=graph>Connect to the graph</option></select></label><div id=tools></div><p class="muted tiny">A block carries its inputs, required earlier results, check, solution and marking draft.</p></aside>
+<section class="pane studio"><div class=pane-title><h2>Question document</h2><span class=tag>Quadratic · AA example</span></div>
+<label class=field for=stem>Editable introduction<textarea id=stem>Consider the quadratic equation below.</textarea></label>
+<div class=coefficients id=parameters><label class=field>Coefficient a<input id=a type=number min=-20 max=20 step=1 value=1></label><label class=field>Coefficient b<input id=b type=number min=-20 max=20 step=1 value=-6></label><label class=field>Constant c<input id=c type=number min=-20 max=20 step=1 value=8></label><button class=btn id=reroll>Reroll valid</button></div>
+<div class=formula><small>GENERATED EQUATION</small><span id=formula></span></div>
+<div class=panediv><div class=pane-title><h3>Keep and edit parts</h3><span id=total class=mark></span></div><div id=rows></div><div id=edit></div></div>
+<div class=foot><div class=tiny id=draftnote aria-live=polite></div><button class="btn pri" id=pin>Fix demo version</button></div>
+</section>
+<section class="pane result"><div class=pane-title><h2>Live checks</h2><span id=verdict class=tag></span></div><p class="muted tiny">Deterministic rules, not an AI judgment of the wording.</p><div id=validation aria-live=polite></div><div class=tabs aria-label="Output view"><button class=btn id=paper>Student paper</button><button class=btn id=key>Teacher key</button></div><div class=preview id=preview></div><div id=follow></div></section>
+</div></main>
+<script>
+const $=id=>document.getElementById(id);
+const H=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const parts={
+  claim:{name:'Justify two roots',skill:'reason',mark:2,summary:'Δ > 0',prompt:'Show that the equation has two distinct real roots.'},
+  solve:{name:'Solve for the roots',skill:'solve',mark:3,summary:'Provides the two roots',prompt:'Find the two real roots of the equation.'},
+  distance:{name:'Compare the roots',skill:'solve',mark:1,need:'solve',summary:'Uses the roots from Solve',prompt:'Using your roots from part ({part:solve}), find the distance between them.'},
+  vertex:{name:'Find the vertex',skill:'graph',mark:2,summary:'Uses the common equation',prompt:'Find the coordinates of the vertex of the graph of the quadratic.'},
+  classify:{name:'Classify the roots',skill:'reason',mark:2,summary:'Works for any valid quadratic',prompt:'Use the discriminant to determine the number of real roots.'}
+};
+let flags=['claim','solve','distance'], selected=new Set(flags), edits={},edit=null,ft=true,view='paper',pinned=false,wordReview=true,snapshot=null, prior=["1","4"];
+function theme(){document.documentElement.dataset.dark=String($('theme').value==='dark'||$('theme').value==='system'&&matchMedia('(prefers-color-scheme: dark)').matches);}
+try{$('theme').value=localStorage.getItem('question46-theme')||'system'}catch{}theme();
+$('theme').onchange=()=>{theme();try{localStorage.setItem('question46-theme',$('theme').value)}catch{}};matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);
+const query=new URLSearchParams(location.search);
+if(query.get('demo')==='invalid')$('c').value=9;if(query.get('demo')==='dependency')selected.delete('solve');
+if(query.get('tab')==='key')view='key';
+const f=x=>Number.isInteger(x)?String(x):Number(x.toFixed(5)).toString();
+function read(){
+ const list=['a','b','c'].map(k=>($(k).value.trim()===''?NaN:Number($(k).value)));
+ const [a,b,c]=list,valid=list.every(v=>Number.isInteger(v)&&Math.abs(v)<=20),d=b*b-4*a*c;
+ const sign=(n,s)=>n<0?' − '+(Math.abs(n)===1&&s?'':Math.abs(n))+s:n===0?'':' + '+(n===1&&s?'':n)+s;
+ const eq=valid?(a===1?'':a===-1?'−':String(a))+'x²'+sign(b,'x')+sign(c,'')+' = 0':'—';
+ const roots=d>=0&&a!==0?[(-b-Math.sqrt(d))/(2*a),(-b+Math.sqrt(d))/(2*a)].sort((x,y)=>x-y):[];
+ const vx=a===0?NaN:-b/(2*a),vy=a*vx*vx+b*vx+c;
+ return {list,a,b,c,d,valid,eq,roots,vx,vy};
+}
+function maths(m){
+ let checking=[];
+ if(!m.valid||m.a===0)checking.push(['bad','Not a valid quadratic','Use integer coefficients from −20 to 20 and a nonzero leading coefficient.']);
+ else if(('claim solve distance'.split(' ').some(k=>selected.has(k))) && m.d<=0)checking.push(['bad','Two distinct real roots required',m.d===0?'Δ = 0. These coefficients give one repeated real root.':'Δ = '+m.d+'. These coefficients give no real roots.']);
+ else checking.push(['ok','Mathematics passes','Δ = '+m.d+'. '+(m.d>0?'There are two distinct real roots.':m.d===0?'There is one repeated real root.':'There are no real roots.')]);
+ const lost=flags.filter(k=>selected.has(k)&&parts[k].need&&!selected.has(parts[k].need));
+ if(lost.length)checking.push(['bad','A kept part has lost its input','Compare the roots needs Solve. Restore Solve or remove Compare.']);
+ else checking.push(['ok','Part links pass','Required earlier results are still present.']);
+ if(selected.size===0)checking.push(['bad','No parts selected','Choose at least one question part.']);
+ if(!wordReview)checking.push(['warn','Wording review needed','The rules do not infer what an edited sentence now asks. Review it against the checks and the key.']);
+ return checking;
+}
+function phrase(s,letters){return H(s).replace(/\{part:([a-z]+)\}/g,(_,k)=>letters[k]||'missing part');}
+function body(m){
+ let n=0,letters={},total=0;
+ flags.forEach(k=>{if(selected.has(k)){letters[k]=String.fromCharCode(97+n++);total+=parts[k].mark}});
+ const checks=maths(m),bad=checks.some(x=>x[0]==='bad'),hold=bad||!wordReview;
+ return {letters,total,checks,bad,hold};
+}
+function keyLine(k,m){
+ const [a,b]=m.roots; if(k==='claim')return 'Δ = '+m.d+' > 0, so two distinct real roots.';
+ if(k==='solve')return 'Roots: '+f(a)+' and '+f(b)+(Math.sqrt(m.d)%1?' (approximations).':' (exact).');
+ if(k==='distance')return 'Distance: |'+f(b)+' − '+f(a)+'| = '+f(Math.abs(b-a))+'.';
+ if(k==='vertex')return 'Vertex: ('+f(m.vx)+', '+f(m.vy)+').';
+ return 'Δ = '+m.d+', so '+(m.d>0?'two distinct real roots.':m.d===0?'one repeated real root.':'no real roots.');
+}
+function tools(){
+ const f=$('filter').value;
+ $('tools').innerHTML=Object.entries(parts).filter(([,p])=>f==='all'||p.skill===f).map(([k,p])=>'<div class=tile><div class=tile-head><h3>'+p.name+'</h3><button type=button class=btn data-add="'+k+'" '+(flags.includes(k)?'disabled':'')+'>'+(flags.includes(k)?'In document':'+ Add')+'</button></div><small>'+(p.need?'Requires Solve · ':'')+p.summary+'</small></div>').join('');
+}
+function result(){
+ const m=read(),d=body(m);
+ $('formula').textContent=m.eq;
+ $('total').textContent=d.total+' marks';
+ $('verdict').textContent=d.bad?'Blocked':d.hold?'Review':'Pass';
+ $('validation').innerHTML=d.checks.map(([s,n,t])=>'<div class="check '+s+'"><b>'+n+'</b>'+H(t)+'</div>').join('');
+ $('pin').disabled=d.hold;
+ $('pin').textContent=pinned?'Fixed in demo ✓':'Fix demo version';
+ $('draftnote').textContent=pinned?'Fixed in this session · version '+snapshot.id+' · '+snapshot.total+' marks.':'Preview only. Review the task and rubric before approval.';
+ $('paper').setAttribute('aria-pressed',String(view==='paper'));$('key').setAttribute('aria-pressed',String(view==='key'));
+ let head='<div class=sheetcheck><span>'+(view==='paper'?'ORIGINAL QUESTION':'ANSWERS · TEACHER ONLY')+'</span><span>['+d.total+' marks]</span></div>';
+ let out=view==='key'&&d.bad?'':flags.filter(k=>selected.has(k)).map(k=>'<div class=p-row><b>('+d.letters[k]+')</b><span>'+ (view==='paper'?phrase(edits[k]??parts[k].prompt,d.letters):H(keyLine(k,m)))+'</span><span>['+parts[k].mark+']</span></div>').join('');
+ $('preview').innerHTML=head+(view==='key'&&d.bad?'<p class=empty>Withheld until the mathematical and dependency checks pass.</p>':(view==='paper'?'<p>'+H($('stem').value)+'</p><p><strong>'+H(m.eq)+'</strong></p>':'')+out);
+ $('follow').innerHTML=selected.has('distance')?'<div class=ft><label><input type=checkbox id=ft '+(ft?'checked':'')+'> Allow follow-through on Compare</label><p>'+ (ft?'Draft rule: use the student’s two earlier values if admissible. A teacher still decides the method mark.':'Compare is graded against the approved answer only.')+'</p>'+ (ft&&view==='key'&&!d.bad?'<h3>Try a student’s earlier values</h3><div class=pair><label class="field ft-label">First root<input type=number step=any id=first value="'+H(prior[0])+'"></label><label class="field ft-label">Second root<input type=number step=any id=second value="'+H(prior[1])+'"></label></div><output id=ftresult aria-live=polite></output>':'')+'</div>':'';
+ const ch=$('ft');if(ch)ch.onchange=()=>{ft=ch.checked;pinned=false;result();$('ft')?.focus()};
+ const updatePrior=()=>{const a=Number(prior[0]),b=Number(prior[1]),usable=prior.every(v=>v.trim()!=='')&&Number.isFinite(a)&&Number.isFinite(b)&&a!==b&&Math.abs(a)<=100&&Math.abs(b)<=100;$('ftresult').textContent=usable?'Follow-through distance: '+f(Math.abs(b-a))+' · canonical key unchanged.':'Not admissible here: enter two distinct finite values from −100 to 100.';};
+ if($('first')){updatePrior();['first','second'].forEach((k,i)=>{$(k).oninput=()=>{prior[i]=$(k).value;updatePrior()}});}
+ if(!pinned&&d.bad)$('draftnote').textContent=d.checks.find(x=>x[0]==='bad')[1]+'. Fix it before approving.';
+}
+function rebuild(){
+ tools();
+ $('rows').innerHTML=flags.map(k=>{const p=parts[k];return '<div class=row><input type=checkbox data-keep="'+k+'" aria-label="Keep '+p.name+'" '+(selected.has(k)?'checked':'')+'><div><b>'+p.name+'</b><small>'+(p.need?'↳ Takes two roots from Solve':p.summary)+'</small></div><span class=mark>['+p.mark+']</span><button class=btn data-edit="'+k+'" aria-label="Edit wording: '+p.name+'">Edit</button></div>'}).join('');
+ $('edit').innerHTML=edit?'<div class=editing><label class=field>Teacher wording<textarea id=word>'+H(edits[edit]??parts[edit].prompt)+'</textarea></label><p class=tiny>Keep <code>{part:solve}</code> as a smart reference in the dependent block.</p><button type=button class=btn id=review>Confirm wording matches task</button> <button type=button class=btn id=close>Close</button></div>':'';
+ if(edit){$('word').oninput=()=>{edits[edit]=$('word').value;wordReview=false;pinned=false;result()};$('review').onclick=()=>{wordReview=true;pinned=false;result()};$('close').onclick=()=>{edit=null;rebuild()};}
+ result();
+}
+$('tools').onclick=e=>{const b=e.target.closest('[data-add]');if(b&&!flags.includes(b.dataset.add)){flags.push(b.dataset.add);selected.add(b.dataset.add);pinned=false;rebuild()}};
+$('rows').onchange=e=>{const k=e.target.dataset.keep;if(!k)return;e.target.checked?selected.add(k):selected.delete(k);pinned=false;result()};
+$('rows').onclick=e=>{const b=e.target.closest('[data-edit]');if(b){edit=b.dataset.edit;rebuild();$('word').focus()}};
+$('filter').onchange=tools;
+$('stem').oninput=()=>{wordReview=false;pinned=false;edit=edit??flags[0];if(!$('review'))rebuild();else result()};
+['a','b','c'].forEach(k=>$(k).oninput=()=>{pinned=false;result()});
+$('reroll').onclick=()=>{const trials=[[1,-6,8],[1,-8,15],[2,-6,4],[-1,6,-8],[1,1,-6]].filter(v=>v.join(',')!==read().list.join(','));const v=trials[(Math.random()*trials.length)|0];['a','b','c'].forEach((k,i)=>$(k).value=v[i]);pinned=false;result()};
+$('pin').onclick=()=>{const m=read(),b=body(m);if(!b.hold){const partsKept=flags.filter(k=>selected.has(k));snapshot=Object.freeze({schema:1,id:Date.now().toString(36),template:'quadratic-roots-v1',parameters:m.list.slice(),introduction:$('stem').value,parts:partsKept.map(k=>({id:k,prompt:edits[k]??parts[k].prompt,label:b.letters[k],marks:parts[k].mark,key:keyLine(k,m)})),total:b.total,followThrough:ft});pinned=true;result()}};
+$('paper').onclick=()=>{view='paper';result()};$('key').onclick=()=>{view='key';result()};rebuild();
+</script>
+</html>
