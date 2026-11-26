@@ -83,5 +83,5 @@
   }
   return null;
  }
- root.TICalcTools=Object.freeze({evaluate});
+ root.TICalcTools=Object.freeze({evaluate,argumentsFor:args});
 })(globalThis);

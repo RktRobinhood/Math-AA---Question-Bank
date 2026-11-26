@@ -23,9 +23,10 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  glass.style.position='relative';
  const graph=html('section','np-graphs');graph.hidden=true;graph.setAttribute('aria-label','Graphs workspace');
  const svg=document.createElementNS(SVG,'svg');svg.setAttribute('viewBox','0 0 240 115');svg.setAttribute('preserveAspectRatio','none');svg.setAttribute('role','img');svg.setAttribute('aria-label','Graph display');
+ const plane=html('div','np-graph-plane');plane.append(svg);
  const label=html('label','np-entry-label'), caption=html('span',null,'f1(x)='), ginput=html('input','np-input'), status=html('div','np-readout');
  ginput.type='text';ginput.inputMode='none';ginput.spellcheck=false;ginput.autocomplete='off';ginput.maxLength=128;
- status.setAttribute('role','status');label.append(caption,ginput);graph.append(svg,label,status);glass.append(graph);
+ status.setAttribute('role','status');label.append(caption,ginput);graph.append(plane,label,status);glass.append(graph);
  const menu=html('div','np-menu');menu.hidden=true;menu.setAttribute('role','group');glass.append(menu);
  const dialog=html('form','np-dialog');dialog.hidden=true;dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Window Settings');
  const dialogTitle=html('div','np-dialog-title','Window Settings'),fields=html('div','np-dialog-fields'),buttons=html('div','np-dialog-actions'),warn=html('div','np-dialog-warning');
@@ -43,9 +44,12 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  dialog.addEventListener('submit',e=>{e.preventDefault();commitWindow();});
  cancel.addEventListener('click',()=>closeDialog(false));
  const fmt=x=>Math.abs(x)<1e-8?'0':String(Number(x.toPrecision(8)));
- const focusGraph=()=>ginput.focus({preventScroll:true});
- const focusPage=()=>current==='calc'?focusCalc():focusGraph();
+ const focusGraph=()=>{table.blur();ginput.focus({preventScroll:true});};
+ const focusPage=()=>current==='calc'?focusCalc():table.focused()?table.focus():focusGraph();
  const numeric=(s)=>F.evaluate(s,{mode,ans:calc.getState().ans});
+ const table=root.NspireFunctionTable.mount({plane,glass,graph,head,models:()=>models,evaluate:numeric,onGraph:focusGraph,notify:msg=>{status.textContent=msg;}});
+ svg.addEventListener('pointerdown',()=>{if(table.focused())focusGraph();});
+ ginput.addEventListener('focus',()=>table.blur());
  const menuStatus=(message)=>notify(message||'');
  function labelMenu(title,items){return {title,items};}
  function path(node, title){
@@ -110,12 +114,15 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   branch(1,'Actions',[leaf(1,'Edit f1(x)',()=>edit(0)),leaf(2,'Edit f2(x)',()=>edit(1))]),
   branch(4,'Window / Zoom',[leaf(1,'Window Settings',setWindow),leaf(5,'Zoom Standard',()=>{win=[-10,10,-10,10];scale=[null,null];mark=null;draw();})]),
   branch(5,'Trace',[leaf(1,'Graph Trace',()=>start('Trace'))]),
-  branch(6,'Analyze Graph',analyze)
+  branch(6,'Analyze Graph',analyze),
+  branch(7,'Table',[leaf(1,'Split-screen Table',()=>table.show()),leaf(2,'Remove Table',()=>table.hide())])
  ];
+ const tableMenu=[branch(2,'Table',[leaf(1,'Remove Table',()=>table.hide()),leaf(5,'Edit Table Settings',()=>table.settings())])];
  function plot(){
   try{
    const raw=ginput.value.trim();
-   models[editable]=raw?G.parse(raw,{angle:mode}):null;sources[editable]=raw;
+   models[editable]=raw?root.NspireFunctionTable.parseRelation(raw,mode):null;sources[editable]=raw;
+   if(table.shown()&&!models.some(Boolean))table.hide();else table.render();
    mark=null;trace=null;bounds=null;draw();
    status.textContent=raw?'':'Function cleared';
   }catch(e){status.textContent=e.message;}
@@ -136,7 +143,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
  function setMode(m){
   if(m===mode)return;
   mode=m;
-  models=sources.map(s=>s?G.parse(s,{angle:mode}):null);mark=null;
+  models=sources.map(s=>s?root.NspireFunctionTable.parseRelation(s,mode):null);mark=null;table.render(table.focused());
   if(current==='graph')draw();
  }
  function shape(name,attrs){
@@ -158,6 +165,14 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
    if(xl<=0&&xr>=0)svg.append(shape('line',{x1:X(0)-2,y1:Y(i*ytick),x2:X(0)+2,y2:Y(i*ytick),class:'np-axis'}));
   models.forEach((f,i)=>{
    if(!f)return;
+   if(f.discrete){
+    const low=Math.ceil(xl),high=Math.floor(xr),stride=Math.max(1,Math.ceil((high-low+1)/90));
+    for(let x=low;x<=high;x+=stride){
+     const y=f.evaluate(x);
+     if(Number.isFinite(y)&&y>=yb&&y<=yt)svg.append(shape('circle',{cx:X(x),cy:Y(y),r:2.2,class:'np-curve np-dot np-curve-'+i}));
+    }
+    return;
+   }
    const segments=G.sampleCurve(f,{x0:xl,x1:xr},300);
    for(const seg of segments){
     const path=seg.map((p,n)=>(n?'L':'M')+X(p.x).toFixed(2)+','+Math.max(-1000,Math.min(1000,Y(p.y))).toFixed(2)).join(' ');
@@ -217,6 +232,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(name==='Intersection'&&(!models[0]||!models[1])){status.textContent='Plot two functions first. Tab switches f1 and f2.';return;}
   if(!models[editable]&&!models[0]&&!models[1]){status.textContent='Plot a function first.';return;}
   if(!models[editable])editable=models[0]?0:1;
+  if(name!=='Trace'&&(models[editable].discrete||(name==='Intersection'&&models.some(m=>m?.discrete)))){status.textContent='Use the table to inspect discrete values.';return;}
   useField=name==='Trace'?'trace':'bound';mark=null;trace=name==='Trace'?0:null;
   if(useField==='trace'){caption.textContent='x=';ginput.setAttribute('aria-label','Trace x');ginput.value='0';status.textContent='Graph Trace';}
   else{
@@ -264,8 +280,9 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   return false;
  }
  function key(k){
+  if(table.isDialog())return table.dialogKey(k);
   if(dialogOpen)return dialogKey(k);
-  if(k==='menu'){if(menus.length)closeMenu();else popup(current==='calc'?'Calculator menu':'Graphs menu',current==='calc'?calcMenu:graphMenu);return true;}
+  if(k==='menu'){if(menus.length)closeMenu();else popup(current==='calc'?'Calculator menu':'Graphs menu',current==='calc'?calcMenu:table.focused()?tableMenu:graphMenu);return true;}
   if(k==='scratchpad'){closeMenu();switchApp(current==='calc'?'graph':'calc');return true;}
   if(k==='home'||k==='doc'){popup(k==='home'?'Home · Scratchpad':'Document · pages',[go(1,'Calculator','calc'),go(2,'Graphs','graph')]);return true;}
   if(menus.length){
@@ -278,6 +295,9 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
     const matched=m.items.find(x=>x.k===k);if(matched){pick(matched);return true;}
     return true;
   }
+  if(current==='graph'&&k==='toggle-table'){table.toggle();return true;}
+  if(current==='graph'&&k==='switch-pane'&&table.shown()&&!table.focused()){table.focus();return true;}
+  if(current==='graph'&&table.focused()){table.key(k);return true;}
   const graphInsert=(lead,tail='')=>{
     const at=ginput.selectionStart,end=ginput.selectionEnd;
     ginput.setRangeText(lead+tail,at,end,'end');ginput.setSelectionRange(at+lead.length,at+lead.length);focusGraph();
@@ -345,7 +365,7 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(useField==='trace')tracePoint(v);
   focusGraph();
  });
- return Object.freeze({key,setMode,focusPage,isGraph:()=>current==='graph',contains:t=>menu.contains(t)||graph.contains(t),isMenu:()=>menus.length>0,isDialog:()=>dialogOpen,dialogKey,wantsArrows:()=>useField==='trace',graphInput:ginput});
+ return Object.freeze({key,setMode,focusPage,isGraph:()=>current==='graph',contains:t=>menu.contains(t)||graph.contains(t),isMenu:()=>menus.length>0,isDialog:()=>dialogOpen||table.isDialog(),dialogKey:(k,e)=>table.isDialog()?table.dialogKey(k,e):dialogKey(k,e),isTable:()=>table.focused(),wantsArrows:()=>useField==='trace',graphInput:ginput});
 }
 root.NspireApplet=Object.freeze({mount});
 })(window);

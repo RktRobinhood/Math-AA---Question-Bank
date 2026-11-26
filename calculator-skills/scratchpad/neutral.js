@@ -78,7 +78,7 @@
       if(['menu','doc','home','scratchpad','esc'].includes(k))pointer.hide();
       if(k==='ctrl'){ctrl=!ctrl;clearTimeout(flashTimer);shell.setKeys(ctrl?['ctrl']:[]);say(ctrl?'Ctrl selected. Tap ÷ for a fraction, x² for √, or Enter for a decimal result.':'');return;}
       if(ctrl&&!bypassCtrl){
-        const primary=k, next=shifted[k];ctrl=false;flash(['ctrl',primary]);
+        const primary=k, next=ui.isGraph()&&!ui.isMenu()&&!ui.isDialog()&&(k==='t'||k==='tab')?(k==='t'?'toggle-table':'switch-pane'):shifted[k];ctrl=false;flash(['ctrl',primary]);
         if(!next){say(k==='trig'?'Press trig by itself for inverse sine, cosine or tangent.':'That Ctrl shortcut is not simulated. Press the key without Ctrl for its main function.');return;}
         say('');k=next;
       }
@@ -168,6 +168,9 @@
       if(e.ctrlKey&&e.key==='Enter'&&!ui.isGraph()&&!ui.isDialog()&&!ui.isMenu()){
         e.preventDefault();e.stopPropagation();ctrl=false;flash(['ctrl','enter']);press('approx',undefined,true);return;
       }
+      if(e.ctrlKey&&e.key.toLowerCase()==='t'&&ui.isGraph()&&!ui.isDialog()&&!ui.isMenu()){
+        e.preventDefault();e.stopPropagation();ctrl=false;flash(['ctrl','t']);press('toggle-table',undefined,true);return;
+      }
       if(e.ctrlKey&&['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Enter'].includes(e.key)){
        e.preventDefault();e.stopPropagation();
        if(e.key==='Enter')pointer.press();
@@ -195,9 +198,9 @@
        if(ui.dialogKey(root.HandheldShell.normalizeKey(e.key),e)){e.preventDefault();e.stopPropagation();}
        return;
       }
-      if(ui.isMenu()||e.target===ui.graphInput){
+      if(ui.isMenu()||ui.isTable()||e.target===ui.graphInput){
         const k=root.HandheldShell.normalizeKey(e.key);
-        if(ui.isMenu()||['enter','esc','tab','up','down'].includes(k)||(['left','right'].includes(k)&&ui.wantsArrows())){
+        if(ui.isMenu()||ui.isTable()&&['left','right','up','down','esc','tab','enter','select'].includes(k)||['enter','esc','tab','up','down'].includes(k)||(['left','right'].includes(k)&&ui.wantsArrows())){
           e.preventDefault();e.stopPropagation();press(k);return;
         }
         return;

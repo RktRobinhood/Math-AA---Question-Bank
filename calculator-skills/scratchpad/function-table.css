@@ -1,0 +1,15 @@
+.np-graph-plane{display:grid;grid-template-columns:minmax(0,1fr);min-width:0;min-height:0}
+.np-graph-plane[data-split=true]{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.np-graph-plane>svg{min-width:0;min-height:0}
+.np-table{min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;border-left:1px solid #66819a;background:#fafdf7;color:#172028;font-size:max(8px,3.5cqw);font-variant-numeric:tabular-nums}
+.np-table table{width:100%;table-layout:fixed;border-spacing:0;text-align:right}
+.np-table th{position:sticky;top:0;z-index:1;padding:1px 2px;background:#d9e5ef;border-bottom:1px solid #8298aa}
+.np-table[data-active=true] th{background:#a9c5e0}
+.np-table td{padding:0;border-bottom:1px solid #c8d1d4}
+.np-table th+th,.np-table td+td{border-left:1px solid #b1c0c8}
+.neutral-calc .np-table-cell{display:block;box-sizing:border-box;width:100%;min-height:0;border:0;border-radius:0;padding:2px;color:inherit;background:transparent;font:inherit;line-height:1.1;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer}
+.np-table[data-active=true] .np-table-cell[data-selected=true]{background:#244a77;color:white}
+.neutral-calc .np-table-cell:focus-visible{outline:1px solid currentColor;outline-offset:-2px}
+.np-dialog[aria-label="Table Settings"] .np-dialog-field{grid-template-columns:47% minmax(0,1fr)}
+.np-curve.np-dot{stroke:none;fill:#2757aa}
+.np-curve.np-dot.np-curve-1{fill:#ad452a}
