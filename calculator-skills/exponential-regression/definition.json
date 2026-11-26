@@ -1,0 +1,173 @@
+{
+  "id": "CT33",
+  "title": "Exponential regression",
+  "intro": "Fit positive paired data and tell interpolation from extrapolation.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "111ed5de330a3eff328f732c52eef0458137e8bf9f0f15c92578eb665c25e778",
+    "scriptSha256": "2500d439ca7bf164161c3a5cdcdb1a81eca84c8c6e41e6d66ae6c7dbd0aed640"
+  },
+  "chapters": [
+    {
+      "id": "pairs",
+      "title": "Check positive paired readings"
+    },
+    {
+      "id": "menu",
+      "title": "Open the method"
+    },
+    {
+      "id": "lists",
+      "title": "Choose X and Y"
+    },
+    {
+      "id": "run",
+      "title": "Check settings and run"
+    },
+    {
+      "id": "output",
+      "title": "Read the fitted model"
+    },
+    {
+      "id": "predict",
+      "title": "Judge both predictions"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "pairs",
+      "spoken": "Each row records dough volume at one hour. Every volume must be positive because exponential regression fits the natural log of y.",
+      "coach": "Lists xval and yval are already named. Time is x and dough volume is y. ExpReg fits ln(y), so every y must be positive.",
+      "end": 10.396,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "Open Statistics, then Stat Calculations. Press the letter A, even if the option is below the visible list.",
+      "coach": "Menu → 4 Statistics → 1 Stat Calculations → A Exponential Regression. A selects it even if it is below the visible menu.",
+      "end": 19.296,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "A",
+          "ariaLabel": "A",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "lists",
+      "spoken": "Use the right arrow and Tab. Set the list called x val as the X List and y val as the Y List.",
+      "coach": "From X List: Right to open; Tab confirms xval and moves to Y. Right to open Y, Right again to select yval, then Tab.",
+      "end": 27.119,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.2167
+        },
+        {
+          "id": "press-5",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-6",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-7",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "run",
+      "spoken": "Use each pair once. Save to f one and keep the results in C and D. Press Enter.",
+      "coach": "Check Frequency List 1, fit stored to f1 and results starting in C. Press Enter to calculate.",
+      "end": 34.852,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        }
+      ]
+    },
+    {
+      "chapter": "output",
+      "spoken": "Read a and b. The value a is the estimate at x equals zero. It need not equal the measurement there.",
+      "coach": "In ŷ = a·bˣ, a ≈ 24.294 is the model at x = 0. It need not equal the actual reading of 24.",
+      "end": 44.815,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "output",
+      "spoken": "A one-unit rise in x multiplies the estimate by b. Here that is about a fifty point seven percent increase.",
+      "coach": "b ≈ 1.50682 is a multiplier: an extra hour adds about 50.7% to the prediction, not 50.7 units.",
+      "end": 53.343,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "output",
+      "spoken": "The r and r squared rows assess the line fitted to x and the natural log of y, not the raw readings.",
+      "coach": "r and r² describe the fit on the log scale (x, ln(y)), not the raw readings.",
+      "end": 61.124,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "predict",
+      "spoken": "At x equals two point five the input is inside the observed span. Substituting gives an interpolation.",
+      "coach": "x = 2.5 lies inside [0, 4]: interpolate with the unrounded fitted coefficients to obtain ŷ ≈ 67.7.",
+      "end": 70.168,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "predict",
+      "spoken": "At x equals six the input is outside the observed span. The model can predict, but the trend may not continue.",
+      "coach": "x = 6 lies outside [0, 4]: extrapolation gives ŷ ≈ 284.4, but the observed trend may not continue.",
+      "end": 79.947,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}

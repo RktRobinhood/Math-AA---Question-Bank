@@ -1,0 +1,165 @@
+{
+  "id": "CT31",
+  "title": "Linear regression and Pearson r",
+  "intro": "Fit y on x, then read direction and make a prediction.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "7cf0ff8bc7831e84ee2ade0da64fc0d69e5158d46f71a95bc146c85b14972c6f",
+    "scriptSha256": "49864d893b1349cad82f94532ba9be96bb97c540726116546c2cbf143a901864"
+  },
+  "chapters": [
+    {
+      "id": "pairs",
+      "title": "Check paired rows"
+    },
+    {
+      "id": "menu",
+      "title": "Open the method"
+    },
+    {
+      "id": "lists",
+      "title": "Choose X and Y"
+    },
+    {
+      "id": "run",
+      "title": "Check settings and run"
+    },
+    {
+      "id": "output",
+      "title": "Read coefficients and correlation"
+    },
+    {
+      "id": "predict",
+      "title": "Make a prediction"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "pairs",
+      "spoken": "Start with two named lists. Values on the same row belong to the same observation.",
+      "coach": "Lists xval and yval are already named. Each row is one observation: for example, x = 1 is paired with y = 2.",
+      "end": 6.878,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "In Lists and Spreadsheet, open Statistics, then Stat Calculations. Choose the m x plus b form.",
+      "coach": "Menu → 4 Statistics → 1 Stat Calculations → 3 Linear Regression (mx+b).",
+      "end": 15.495,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "lists",
+      "spoken": "Use the right arrow to choose the list named x val for X, then Tab. Choose the list named y val for Y.",
+      "coach": "From X List: Right to open; Tab confirms xval and moves to Y. Right to open Y, Right again to select yval, then Tab.",
+      "end": 24.619,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.2167
+        },
+        {
+          "id": "press-5",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-6",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-7",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "run",
+      "spoken": "Use each pair once. Keep the fitted equation in f one and the results starting in C.",
+      "coach": "Check Frequency List 1, store to f1 and results in C. Press Enter to calculate.",
+      "end": 31.849,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        }
+      ]
+    },
+    {
+      "chapter": "output",
+      "spoken": "Read m and b. The slope is the change in predicted y per extra unit of x.",
+      "coach": "m = 1.4 and b = 0.5, so ŷ = 1.4x + 0.5. Each extra unit of x adds 1.4 to the prediction.",
+      "end": 39.009,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "output",
+      "spoken": "Read the two rows separately. r is positive here and gives the upward direction.",
+      "coach": "Pearson r ≈ 0.990 gives the positive direction; r² = 0.98 is a separate output.",
+      "end": 45.704,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "output",
+      "spoken": "A falling pattern can have the same r squared. Use the unsquared r to tell which way the pattern goes.",
+      "coach": "Squaring removes the sign: a falling fit can have this same r².",
+      "end": 53.401,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "predict",
+      "spoken": "For a prediction, substitute x into the fitted line. Do not use r or r squared as the slope.",
+      "coach": "Substitute into the fitted line: at x = 3.5, ŷ = 1.4(3.5) + 0.5 = 5.4. Both numbers are exact for these data.",
+      "end": 61.832,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}
