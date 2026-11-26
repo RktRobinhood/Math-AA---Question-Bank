@@ -1,0 +1,226 @@
+{
+  "id": "CT16",
+  "title": "Find a model threshold",
+  "intro": "Find when the graph reaches a target, then check which whole-day observation first meets it.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "77fe17a182b1bfdbe5c36a805aa8c6abc9d674650c0bad8d8caea830a8a1123f",
+    "scriptSha256": "ae82fa6b2dc1dc647b5bc855abba218435c46566dc74ede5c920e3238f0975f4"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the growth model"
+    },
+    {
+      "id": "target",
+      "title": "Add the horizontal target"
+    },
+    {
+      "id": "intersection",
+      "title": "Open Intersection"
+    },
+    {
+      "id": "bounds",
+      "title": "Bracket the crossing"
+    },
+    {
+      "id": "crossing",
+      "title": "Read the continuous time"
+    },
+    {
+      "id": "whole-days",
+      "title": "Check both whole days"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "A culture is ready at twelve units. How soon?",
+      "coach": "The target is 12 units; x is time in days. Work in 0 ≤ x ≤ 8.",
+      "end": 4.403,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "plot",
+      "spoken": "Enter the growth model in f one.",
+      "coach": "Enter f₁(x) = 5 × 1.5ˣ. Press Enter to plot.",
+      "end": 8.185,
+      "hold": 5.16,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "5",
+          "at": 0.0698
+        },
+        {
+          "id": "press-2",
+          "label": "×",
+          "at": 0.186
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "at": 0.3023
+        },
+        {
+          "id": "press-4",
+          "label": ".",
+          "at": 0.4186
+        },
+        {
+          "id": "press-5",
+          "label": "5",
+          "at": 0.5349
+        },
+        {
+          "id": "press-6",
+          "label": "^",
+          "at": 0.6512
+        },
+        {
+          "id": "press-7",
+          "label": "x",
+          "at": 0.7674
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "target",
+      "spoken": "In f two, enter twelve for the horizontal target.",
+      "coach": "Press Tab to enter f₂; set it to 12 and plot the horizontal line.",
+      "end": 13.54,
+      "hold": 3.08,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "at": 0.1304
+        },
+        {
+          "id": "press-10",
+          "label": "1",
+          "at": 0.3478
+        },
+        {
+          "id": "press-11",
+          "label": "2",
+          "at": 0.5652
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "intersection",
+      "spoken": "Press Menu, six: Analyze Graph, four: Intersection.",
+      "coach": "Menu → 6: Analyze Graph → 4: Intersection.",
+      "end": 19.41,
+      "hold": 2.56,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "Menu",
+          "at": 0.1667
+        },
+        {
+          "id": "press-14",
+          "label": "6",
+          "at": 0.4444
+        },
+        {
+          "id": "press-15",
+          "label": "4",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Put the lower bound at day two. Press Enter.",
+      "coach": "Bracket the crossing: enter 2 for the lower x-bound.",
+      "end": 23.829,
+      "hold": 2.04,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "2",
+          "at": 0.2308
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "at": 0.6154
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Put the upper bound at day three. Press Enter.",
+      "coach": "Use 3 for the upper x-bound; select the same crossing.",
+      "end": 28.424,
+      "hold": 2.04,
+      "keys": [
+        {
+          "id": "press-18",
+          "label": "3",
+          "at": 0.2308
+        },
+        {
+          "id": "press-19",
+          "label": "Enter",
+          "at": 0.6154
+        }
+      ]
+    },
+    {
+      "chapter": "crossing",
+      "spoken": "The x-coordinate is the continuous time: about two point one six days.",
+      "coach": "Read the x-coordinate. 2.159… days is the continuous answer.",
+      "end": 34.505,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "whole-days",
+      "spoken": "If you can check only once per whole day, don't round to the nearest day.",
+      "coach": "For whole-day checks, test the days either side of the crossing.",
+      "end": 40.125,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "whole-days",
+      "spoken": "At day two, the model is only eleven point two five units.",
+      "coach": "At day 2: 5 × 1.5² = 11.25 < 12.",
+      "end": 45.488,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "whole-days",
+      "spoken": "At day three, it is sixteen point eight seven five units. That meets the target.",
+      "coach": "At day 3: 5 × 1.5³ = 16.875 ≥ 12.",
+      "end": 52.761,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "whole-days",
+      "spoken": "The model rises, so day three is the first eligible whole day.",
+      "coach": "Day 3 is the first eligible whole day. It is not the result of rounding 2.16.",
+      "end": 58.525,
+      "hold": 1.65,
+      "keys": []
+    }
+  ]
+}
