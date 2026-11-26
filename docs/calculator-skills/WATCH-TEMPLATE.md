@@ -36,6 +36,8 @@ lessons can adopt it in reviewed batches without replacing their math or audio.
    page owns only the data and calculator adapter. The shared files own the
    grouped steps, Play/Pause, scrub, captions, pause preference, frame memory,
    fullscreen and try-mode switch. Do not fork the player for new lessons.
+   A lesson explicitly teaching physical key locations may use `"initialFraming":"full"`
+   to start in Full calculator on each visit without altering the student’s website preference.
 4. Ask Paperclip for voice after the steps and script pass. For this template,
    `recording` has a same-origin MP3 `file`, `audioSha256`, and
    `scriptSha256`. The script file whose digest is used contains each nonempty

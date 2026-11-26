@@ -1,6 +1,7 @@
 {
   "id": "SUP-HANDSET-KEYS",
   "title": "Handset keys",
+  "initialFraming": "full",
   "intro": "Find keys in Full calculator.",
   "chapters": [
     {

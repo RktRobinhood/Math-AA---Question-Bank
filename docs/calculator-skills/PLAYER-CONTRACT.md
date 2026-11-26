@@ -22,14 +22,18 @@ move to shared pieces in verified batches without changing their audio or maths.
   restart or Take over buttons.
 - Watch starts in the larger LCD view unless the student saved Full calculator.
   Persist the chosen framing under browser key `qb-calculator-watch-frame`
-  with values `screen` or `full`. Both views show the same playhead,
+  with values `screen` or `full`. Handset keys starts in Full calculator on
+  every new visit, because key locations are the lesson. Switching its frame
+  stays local to that visit and does not change other lessons. Both views show the same playhead,
   calculation and audio; Try always shows the full interactive handset.
   Returning to Watch should preserve the playhead/preferred framing.
 - Show the ordered keys beneath each concise step label, not in a single
   unstructured row. Keep these groups readable before playback and when
   paused; active step and key follow the playhead on a rewind. In Full also light the actual
   physical key. Keep the chosen frame steady; no automatic zoom. Spoken CC
-  is separate from keys. Keep recorded speech at 1×; only the deliberate
+  is separate from keys. Captions overlay the lower scene and must not change
+  the size of the handset, LCD or transport. The player follows site Light, Dark
+  or System; live LCD colors stay authentic and captions keep strong contrast. Keep recorded speech at 1×; only the deliberate
   teaching holds vary. Use measured narration timing and reject mismatched
   recordings. If audio is unavailable, use a clearly labeled captioned
   walkthrough.

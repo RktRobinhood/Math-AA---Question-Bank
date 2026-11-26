@@ -5,7 +5,7 @@
 .key-tour-calc[data-lane=watch]{pointer-events:none}
 .key-tour-calc .np-scope,.key-tour-calc[data-lane=watch] .np-notice{display:none!important}
 .key-tour-calc[data-lane=watch] .neutral-handheld{--neutral-handheld-width:var(--lw-full-fit,230px)}
-.key-tour-calc[data-lane=try]{width:min(100%,450px);margin:0 auto;color:var(--lw-ink,#edf9f3)}
+.key-tour-calc[data-lane=try]{width:min(100%,450px);margin:0 auto;color:var(--lw-text,#edf9f3)}
 .key-tour-calc[data-lane=try] .neutral-handheld{--neutral-handheld-width:clamp(166px,calc((100svh - 187px)*.4777),292px)}
 .key-tour-task{font:650 .83rem/1.3 system-ui;margin:.15rem .15rem .45rem}
 .key-tour-calc .hh-key.key-tour-held{outline:2px solid #82ffd0;background:#baffd7!important;color:#17382b!important}

@@ -11,6 +11,7 @@ function validate(spec) {
  const fail = message => { throw new Error('Watch lesson: ' + message); };
  if (!spec || !/^(?:CT\d{2}(?:-[a-z]+)?|SUP-[A-Z0-9-]+)$/.test(spec.id) ||
      !validText(spec.title,100) || !validText(spec.intro,220)) fail('invalid lesson identity');
+ if (spec.initialFraming !== undefined && !['full','screen'].includes(spec.initialFraming)) fail('invalid opening framing');
  if (!Array.isArray(spec.chapters) || !spec.chapters.length || !Array.isArray(spec.beats) || !spec.beats.length)
    fail('supply chapters and beats');
  const chapters = new Map(), keys = new Set();
@@ -114,7 +115,8 @@ function mount(host, input, adapter) {
  feedback.append(glyph(triangle,'lw-play-glyph'),glyph(bars,'lw-pause-glyph'));
  devicePanel.append(device,feedback);surface.append(devicePanel,side);
  const compactCoach=el('div',undefined,'lw-compact-coach');compactCoach.hidden=true;
- const caption=el('p',undefined,'lw-caption');caption.hidden=true;
+ const caption=el('p',undefined,'lw-caption'),captionAnchor=el('div',undefined,'lw-caption-anchor');
+ caption.hidden=true;captionAnchor.append(caption);
  const bar=el('div',undefined,'lw-transport');bar.setAttribute('role','group');bar.setAttribute('aria-label','Playback controls');
  const play=btn('Play',undefined,'lw-play'),iconPlay=glyph(triangle),iconPause=glyph(bars);
  play.append(iconPlay,iconPause);
@@ -134,11 +136,11 @@ function mount(host, input, adapter) {
  const pace=el('label',undefined,'lw-pace');pace.append(el('span','Pauses'),scale);
  expand.append(glyph(fullscreen));bar.append(seek,clock,play,sound,frames,cc,pace,expand);
  const mediaNote=el('p','Captioned walkthrough','lw-media-status');mediaNote.setAttribute('role','status');
- stage.append(surface,compactCoach,caption,bar,mediaNote);host.replaceChildren(header,stage);
+ stage.append(surface,compactCoach,captionAnchor,bar,mediaNote);host.replaceChildren(header,stage);
  let lastEnd=0;
  const beats=spec.beats.map(b=>{const row=[lastEnd,b.end,b.hold];lastEnd=b.end;return row;});
- let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing='screen',ccOn=false,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false,restorePlayFocus=false;
- try { if(win.localStorage.getItem(frameStorage)==='full')framing='full'; } catch {}
+ let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing=spec.initialFraming??'screen',ccOn=false,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false,restorePlayFocus=false;
+ try { if(!spec.initialFraming&&win.localStorage.getItem(frameStorage)==='full')framing='full'; } catch {}
  const basePlayer=win.CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand,feedback,active:()=>mode==='watch'});
  const chapterNav=win.CalculatorWatchChapters.mount(groups,authored.groups,{onChapter:id=>{
    seekTo(layout.spans[spec.beats.findIndex(b=>b.chapter===id)].start);
@@ -162,12 +164,12 @@ function mount(host, input, adapter) {
    const nav=expanded?0:doc.querySelector('.tabbar')?.offsetHeight||0;
    const styles=win.getComputedStyle(surface);
    const gap=stacked.matches&&!railBelow?side.offsetHeight+parseFloat(styles.rowGap||'0'):0;
-   const room=h-start-nav-bar.offsetHeight-caption.offsetHeight-mediaNote.offsetHeight-
+   const room=h-start-nav-bar.offsetHeight-mediaNote.offsetHeight-
      compactCoach.offsetHeight-gap-parseFloat(styles.paddingTop||'0')-parseFloat(styles.paddingBottom||'0')-4;
    stage.style.setProperty('--lw-scene-height',Math.floor(Math.max(105,room))+'px');
  }
  const fitObserver=new win.ResizeObserver(fitPresentation);
- [header,side,caption,bar,mediaNote,compactCoach].forEach(e=>fitObserver.observe(e));
+ [header,side,bar,mediaNote,compactCoach].forEach(e=>fitObserver.observe(e));
  const fullscreenObserver=new win.MutationObserver(fitPresentation);
  fullscreenObserver.observe(stage,{attributes:true,attributeFilter:['class']});
  win.addEventListener('resize',fitPresentation);win.visualViewport?.addEventListener('resize',fitPresentation);
@@ -277,7 +279,7 @@ function mount(host, input, adapter) {
    const a=activeMedia.audio;a.muted=!a.muted;sound.setAttribute('aria-label',a.muted?'Unmute narration':'Mute narration');
    waves.toggleAttribute('hidden',a.muted);muted.toggleAttribute('hidden',!a.muted);
  };
- function choose(next){framing=next;try{win.localStorage.setItem(frameStorage,next);}catch{}update();}
+ function choose(next){framing=next;try{if(!spec.initialFraming)win.localStorage.setItem(frameStorage,next);}catch{}update();}
  screen.onclick=()=>choose('screen');full.onclick=()=>choose('full');
  watch.onclick=()=>changeMode('watch');tryButton.onclick=()=>changeMode('try');
  function hide(){if(doc.hidden)halt();}

@@ -27,6 +27,8 @@ for(const t of [0,1,2,3,5,7,9,10]){
  assert.equal(stateAt(slowed,a,next).key?.id,stateAt(h,a,t).key?.id);
 }
 function bad(mut){const x=structuredClone(spec);mut(x);assert.throws(()=>validate(x),/Watch lesson/);}
+assert.doesNotThrow(()=>validate({...spec,initialFraming:'full'}));
+bad(x=>x.initialFraming='fullscreen');
 bad(x=>delete x.chapters[0].id);
 bad(x=>x.chapters[1].id='entry');
 bad(x=>x.beats[1].keys[0].id=x.beats[0].keys[0].id);
