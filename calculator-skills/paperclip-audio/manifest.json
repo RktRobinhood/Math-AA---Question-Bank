@@ -577,9 +577,17 @@
       "cueMap": "lessons/CT42.cues.json",
       "status": "draft-from-original-watch",
       "transcriptSha256": "0940dc678b569b49fc5700fe97d6bdbf66406f23e0850053b72b5fa05be13eff",
-      "cueMapSha256": "0abd563ba67a8bae8d52aca64daf7c170cd5074df4db2a4719ebe652a560e1a2",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "cueMapSha256": "996cb982bec7b7462f7a9a9dbd40e85dca300307f8ddb54e44d3e1db20c0de71",
+      "integrationStatus": "inline-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "inlineManifestId": "ct42-narration-manifest",
+        "audioDestination": "poisson/narration.mp3",
+        "cueIds": "watch-01 to watch-14, in cue-map order",
+        "keyIds": "key-01 to key-66, in poisson/key-tape.js keys array order (1-based, including each Enter)",
+        "resultCueRule": "Each stage's Enter must occur before its next spoken result cue.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT43": {
       "id": "CT43",

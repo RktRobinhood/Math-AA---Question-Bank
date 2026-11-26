@@ -83,393 +83,319 @@
     }
   ],
   "watch": {
-    "timingBasis": "Runtime Watch seek-port scan at 75 ms with transitions refined to 1 ms; this is editorial/display clock, never measured speech. Very brief lights can be missed; authoredTape, where supplied, is authoritative.",
-    "sliderEndAtExtractionMs": 50500,
+    "timingBasis": "Authored caption rehearsal. Each cue and key is timed for screen reading; never use these times as measured speech.",
+    "sliderEndAtExtractionMs": 83500,
     "captionCues": [
       {
         "id": "watch-01",
         "startMs": 0,
         "text": "The Poisson model averages three events per ten minutes. We are counting in twenty minutes.",
-        "endMs": 3100
+        "endMs": 6200
       },
       {
         "id": "watch-02",
-        "startMs": 3100,
+        "startMs": 6200,
         "text": "Double the mean. Use λ = 6 for this interval.",
-        "endMs": 5700
+        "endMs": 10900
       },
       {
         "id": "watch-03",
-        "startMs": 5700,
+        "startMs": 10900,
         "text": "For exactly six events, type poissPdf(6,6) on a Calculator page.",
-        "endMs": 11100
+        "endMs": 17200
       },
       {
         "id": "watch-04",
-        "startMs": 11100,
+        "startMs": 17200,
         "text": "Press Enter once to evaluate a typed command.",
-        "endMs": 12200
+        "endMs": 21000
       },
       {
         "id": "watch-05",
-        "startMs": 12200,
+        "startMs": 21000,
         "text": "Exactly six has probability about 0.161.",
-        "endMs": 15500
+        "endMs": 25300
       },
       {
         "id": "watch-06",
-        "startMs": 15500,
+        "startMs": 25300,
         "text": "For three to six events inclusive, type poissCdf(6,3,6).",
-        "endMs": 21650
+        "endMs": 31400
       },
       {
         "id": "watch-07",
-        "startMs": 21650,
+        "startMs": 31400,
         "text": "PDF takes one count. CDF adds every count between its two bounds.",
-        "endMs": 22800
-      },
-      {
-        "id": "watch-08",
-        "startMs": 22800,
-        "text": "Counts 3, 4, 5 and 6 together have probability about 0.544.",
-        "endMs": 24700
-      },
-      {
-        "id": "watch-09",
-        "startMs": 24700,
-        "text": "More than six excludes six. Its complement includes every count from zero through six.",
-        "endMs": 27900
-      },
-      {
-        "id": "watch-10",
-        "startMs": 27900,
-        "text": "Type 1 − poissCdf(6,0,6) and press Enter.",
-        "endMs": 35150
-      },
-      {
-        "id": "watch-11",
-        "startMs": 35150,
-        "text": "More than six has probability about 0.394.",
         "endMs": 36500
       },
       {
-        "id": "watch-12",
+        "id": "watch-08",
         "startMs": 36500,
+        "text": "Counts 3, 4, 5 and 6 together have probability about 0.544.",
+        "endMs": 42000
+      },
+      {
+        "id": "watch-09",
+        "startMs": 42000,
+        "text": "More than six excludes six. Its complement includes every count from zero through six.",
+        "endMs": 49400
+      },
+      {
+        "id": "watch-10",
+        "startMs": 49400,
+        "text": "Type 1 − poissCdf(6,0,6) and press Enter.",
+        "endMs": 56700
+      },
+      {
+        "id": "watch-11",
+        "startMs": 56700,
+        "text": "More than six has probability about 0.394.",
+        "endMs": 61400
+      },
+      {
+        "id": "watch-12",
+        "startMs": 61400,
         "text": "At least six includes six. Its complement now stops at five.",
-        "endMs": 39250
+        "endMs": 67400
       },
       {
         "id": "watch-13",
-        "startMs": 39250,
+        "startMs": 67400,
         "text": "Type 1 − poissCdf(6,0,5) and press Enter.",
-        "endMs": 46600
+        "endMs": 74700
       },
       {
         "id": "watch-14",
-        "startMs": 46600,
+        "startMs": 74700,
         "text": "At least six has probability about 0.554. The two answers differ by the probability of exactly six.",
-        "endMs": 50500
+        "endMs": 83500
       }
     ],
     "displayKeyStateChanges": [
       {
-        "timeMs": 6350,
+        "timeMs": 12000,
         "keys": [
           "p"
         ]
       },
       {
-        "timeMs": 6550,
+        "timeMs": 12230,
+        "keys": []
+      },
+      {
+        "timeMs": 12340,
         "keys": [
           "o"
         ]
       },
       {
-        "timeMs": 6800,
+        "timeMs": 12570,
         "keys": []
       },
       {
-        "timeMs": 6850,
+        "timeMs": 12680,
         "keys": [
           "i"
         ]
       },
       {
-        "timeMs": 7050,
+        "timeMs": 12910,
         "keys": []
       },
       {
-        "timeMs": 7100,
+        "timeMs": 13020,
         "keys": [
           "s"
         ]
       },
       {
-        "timeMs": 7550,
+        "timeMs": 13250,
         "keys": []
       },
       {
-        "timeMs": 7600,
+        "timeMs": 13360,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 13590,
+        "keys": []
+      },
+      {
+        "timeMs": 13700,
         "keys": [
           "p"
         ]
       },
       {
-        "timeMs": 7800,
+        "timeMs": 13930,
         "keys": []
       },
       {
-        "timeMs": 7850,
+        "timeMs": 14040,
         "keys": [
           "d"
         ]
       },
       {
-        "timeMs": 8050,
+        "timeMs": 14270,
+        "keys": []
+      },
+      {
+        "timeMs": 14380,
         "keys": [
           "f"
         ]
       },
       {
-        "timeMs": 8300,
+        "timeMs": 14610,
         "keys": []
       },
       {
-        "timeMs": 8350,
+        "timeMs": 14720,
         "keys": [
           "lparen"
         ]
       },
       {
-        "timeMs": 8550,
+        "timeMs": 14950,
         "keys": []
       },
       {
-        "timeMs": 8600,
+        "timeMs": 15060,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 8800,
+        "timeMs": 15290,
+        "keys": []
+      },
+      {
+        "timeMs": 15400,
         "keys": [
           "comma"
         ]
       },
       {
-        "timeMs": 9050,
+        "timeMs": 15630,
         "keys": []
       },
       {
-        "timeMs": 9100,
+        "timeMs": 15740,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 9300,
+        "timeMs": 15970,
         "keys": []
       },
       {
-        "timeMs": 9350,
+        "timeMs": 16080,
         "keys": [
           "rparen"
         ]
       },
       {
-        "timeMs": 9550,
+        "timeMs": 16310,
         "keys": []
       },
       {
-        "timeMs": 11650,
+        "timeMs": 19400,
         "keys": [
           "enter"
         ]
       },
       {
-        "timeMs": 11850,
+        "timeMs": 19820,
         "keys": []
       },
       {
-        "timeMs": 16200,
+        "timeMs": 26500,
         "keys": [
           "p"
         ]
       },
       {
-        "timeMs": 16400,
+        "timeMs": 26730,
         "keys": []
       },
       {
-        "timeMs": 16450,
+        "timeMs": 26840,
         "keys": [
           "o"
         ]
       },
       {
-        "timeMs": 16650,
+        "timeMs": 27070,
         "keys": []
       },
       {
-        "timeMs": 16700,
+        "timeMs": 27180,
         "keys": [
           "i"
         ]
       },
       {
-        "timeMs": 16900,
+        "timeMs": 27410,
+        "keys": []
+      },
+      {
+        "timeMs": 27520,
         "keys": [
           "s"
         ]
       },
       {
-        "timeMs": 17150,
+        "timeMs": 27750,
         "keys": []
       },
       {
-        "timeMs": 17200,
+        "timeMs": 27860,
         "keys": [
           "s"
         ]
       },
       {
-        "timeMs": 17400,
+        "timeMs": 28090,
         "keys": []
       },
       {
-        "timeMs": 17450,
+        "timeMs": 28200,
         "keys": [
           "c"
         ]
       },
       {
-        "timeMs": 17650,
+        "timeMs": 28430,
+        "keys": []
+      },
+      {
+        "timeMs": 28540,
         "keys": [
           "d"
         ]
       },
       {
-        "timeMs": 17900,
+        "timeMs": 28770,
         "keys": []
       },
       {
-        "timeMs": 17950,
+        "timeMs": 28880,
         "keys": [
           "f"
         ]
       },
       {
-        "timeMs": 18150,
+        "timeMs": 29110,
         "keys": []
       },
       {
-        "timeMs": 18200,
+        "timeMs": 29220,
         "keys": [
           "lparen"
-        ]
-      },
-      {
-        "timeMs": 18400,
-        "keys": [
-          "6"
-        ]
-      },
-      {
-        "timeMs": 18650,
-        "keys": []
-      },
-      {
-        "timeMs": 18700,
-        "keys": [
-          "comma"
-        ]
-      },
-      {
-        "timeMs": 18900,
-        "keys": []
-      },
-      {
-        "timeMs": 18950,
-        "keys": [
-          "3"
-        ]
-      },
-      {
-        "timeMs": 19150,
-        "keys": [
-          "comma"
-        ]
-      },
-      {
-        "timeMs": 19400,
-        "keys": []
-      },
-      {
-        "timeMs": 19450,
-        "keys": [
-          "6"
-        ]
-      },
-      {
-        "timeMs": 19650,
-        "keys": []
-      },
-      {
-        "timeMs": 19700,
-        "keys": [
-          "rparen"
-        ]
-      },
-      {
-        "timeMs": 19900,
-        "keys": []
-      },
-      {
-        "timeMs": 22350,
-        "keys": [
-          "enter"
-        ]
-      },
-      {
-        "timeMs": 22550,
-        "keys": []
-      },
-      {
-        "timeMs": 28250,
-        "keys": [
-          "1"
-        ]
-      },
-      {
-        "timeMs": 28450,
-        "keys": [
-          "minus"
-        ]
-      },
-      {
-        "timeMs": 28700,
-        "keys": []
-      },
-      {
-        "timeMs": 28750,
-        "keys": [
-          "p"
-        ]
-      },
-      {
-        "timeMs": 28950,
-        "keys": []
-      },
-      {
-        "timeMs": 29000,
-        "keys": [
-          "o"
-        ]
-      },
-      {
-        "timeMs": 29200,
-        "keys": [
-          "i"
         ]
       },
       {
@@ -477,259 +403,843 @@
         "keys": []
       },
       {
-        "timeMs": 29500,
-        "keys": [
-          "s"
-        ]
-      },
-      {
-        "timeMs": 29700,
-        "keys": []
-      },
-      {
-        "timeMs": 29750,
-        "keys": [
-          "s"
-        ]
-      },
-      {
-        "timeMs": 29950,
-        "keys": [
-          "c"
-        ]
-      },
-      {
-        "timeMs": 30200,
-        "keys": []
-      },
-      {
-        "timeMs": 30250,
-        "keys": [
-          "d"
-        ]
-      },
-      {
-        "timeMs": 30450,
-        "keys": []
-      },
-      {
-        "timeMs": 30500,
-        "keys": [
-          "f"
-        ]
-      },
-      {
-        "timeMs": 30700,
-        "keys": [
-          "lparen"
-        ]
-      },
-      {
-        "timeMs": 30950,
-        "keys": []
-      },
-      {
-        "timeMs": 31000,
+        "timeMs": 29560,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 31200,
+        "timeMs": 29790,
         "keys": []
       },
       {
-        "timeMs": 31250,
+        "timeMs": 29900,
         "keys": [
           "comma"
         ]
       },
       {
-        "timeMs": 31450,
-        "keys": [
-          "0"
-        ]
-      },
-      {
-        "timeMs": 31700,
+        "timeMs": 30130,
         "keys": []
       },
       {
-        "timeMs": 31750,
+        "timeMs": 30240,
+        "keys": [
+          "3"
+        ]
+      },
+      {
+        "timeMs": 30470,
+        "keys": []
+      },
+      {
+        "timeMs": 30580,
         "keys": [
           "comma"
         ]
       },
       {
-        "timeMs": 31950,
+        "timeMs": 30810,
         "keys": []
       },
       {
-        "timeMs": 32000,
+        "timeMs": 30920,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 32200,
+        "timeMs": 31150,
+        "keys": []
+      },
+      {
+        "timeMs": 31260,
         "keys": [
           "rparen"
         ]
       },
       {
-        "timeMs": 32450,
+        "timeMs": 31490,
         "keys": []
       },
       {
-        "timeMs": 34650,
+        "timeMs": 35600,
         "keys": [
           "enter"
         ]
       },
       {
-        "timeMs": 34850,
+        "timeMs": 36020,
         "keys": []
       },
       {
-        "timeMs": 39700,
+        "timeMs": 50000,
         "keys": [
           "1"
         ]
       },
       {
-        "timeMs": 39901,
+        "timeMs": 50230,
+        "keys": []
+      },
+      {
+        "timeMs": 50340,
         "keys": [
           "minus"
         ]
       },
       {
-        "timeMs": 40151,
+        "timeMs": 50570,
+        "keys": []
+      },
+      {
+        "timeMs": 50680,
         "keys": [
           "p"
         ]
       },
       {
-        "timeMs": 40401,
+        "timeMs": 50910,
         "keys": []
       },
       {
-        "timeMs": 40450,
+        "timeMs": 51020,
         "keys": [
           "o"
         ]
       },
       {
-        "timeMs": 40651,
+        "timeMs": 51250,
+        "keys": []
+      },
+      {
+        "timeMs": 51360,
         "keys": [
           "i"
         ]
       },
       {
-        "timeMs": 40901,
-        "keys": [
-          "s"
-        ]
-      },
-      {
-        "timeMs": 41151,
+        "timeMs": 51590,
         "keys": []
       },
       {
-        "timeMs": 41200,
+        "timeMs": 51700,
         "keys": [
           "s"
         ]
       },
       {
-        "timeMs": 41401,
+        "timeMs": 51930,
+        "keys": []
+      },
+      {
+        "timeMs": 52040,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 52270,
+        "keys": []
+      },
+      {
+        "timeMs": 52380,
         "keys": [
           "c"
         ]
       },
       {
-        "timeMs": 41651,
+        "timeMs": 52610,
+        "keys": []
+      },
+      {
+        "timeMs": 52720,
         "keys": [
           "d"
         ]
       },
       {
-        "timeMs": 41901,
+        "timeMs": 52950,
         "keys": []
       },
       {
-        "timeMs": 41950,
+        "timeMs": 53060,
         "keys": [
           "f"
         ]
       },
       {
-        "timeMs": 42151,
+        "timeMs": 53290,
+        "keys": []
+      },
+      {
+        "timeMs": 53400,
         "keys": [
           "lparen"
         ]
       },
       {
-        "timeMs": 42401,
+        "timeMs": 53630,
+        "keys": []
+      },
+      {
+        "timeMs": 53740,
         "keys": [
           "6"
         ]
       },
       {
-        "timeMs": 42651,
+        "timeMs": 53970,
         "keys": []
       },
       {
-        "timeMs": 42700,
+        "timeMs": 54080,
         "keys": [
           "comma"
         ]
       },
       {
-        "timeMs": 42901,
+        "timeMs": 54310,
+        "keys": []
+      },
+      {
+        "timeMs": 54420,
         "keys": [
           "0"
         ]
       },
       {
-        "timeMs": 43151,
+        "timeMs": 54650,
+        "keys": []
+      },
+      {
+        "timeMs": 54760,
         "keys": [
           "comma"
         ]
       },
       {
-        "timeMs": 43401,
+        "timeMs": 54990,
         "keys": []
       },
       {
-        "timeMs": 43450,
+        "timeMs": 55100,
         "keys": [
-          "5"
+          "6"
         ]
       },
       {
-        "timeMs": 43651,
+        "timeMs": 55330,
+        "keys": []
+      },
+      {
+        "timeMs": 55440,
         "keys": [
           "rparen"
         ]
       },
       {
-        "timeMs": 43901,
+        "timeMs": 55670,
         "keys": []
       },
       {
-        "timeMs": 46000,
+        "timeMs": 55950,
         "keys": [
           "enter"
         ]
       },
       {
-        "timeMs": 46200,
+        "timeMs": 56370,
+        "keys": []
+      },
+      {
+        "timeMs": 68000,
+        "keys": [
+          "1"
+        ]
+      },
+      {
+        "timeMs": 68230,
+        "keys": []
+      },
+      {
+        "timeMs": 68340,
+        "keys": [
+          "minus"
+        ]
+      },
+      {
+        "timeMs": 68570,
+        "keys": []
+      },
+      {
+        "timeMs": 68680,
+        "keys": [
+          "p"
+        ]
+      },
+      {
+        "timeMs": 68910,
+        "keys": []
+      },
+      {
+        "timeMs": 69020,
+        "keys": [
+          "o"
+        ]
+      },
+      {
+        "timeMs": 69250,
+        "keys": []
+      },
+      {
+        "timeMs": 69360,
+        "keys": [
+          "i"
+        ]
+      },
+      {
+        "timeMs": 69590,
+        "keys": []
+      },
+      {
+        "timeMs": 69700,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 69930,
+        "keys": []
+      },
+      {
+        "timeMs": 70040,
+        "keys": [
+          "s"
+        ]
+      },
+      {
+        "timeMs": 70270,
+        "keys": []
+      },
+      {
+        "timeMs": 70380,
+        "keys": [
+          "c"
+        ]
+      },
+      {
+        "timeMs": 70610,
+        "keys": []
+      },
+      {
+        "timeMs": 70720,
+        "keys": [
+          "d"
+        ]
+      },
+      {
+        "timeMs": 70950,
+        "keys": []
+      },
+      {
+        "timeMs": 71060,
+        "keys": [
+          "f"
+        ]
+      },
+      {
+        "timeMs": 71290,
+        "keys": []
+      },
+      {
+        "timeMs": 71400,
+        "keys": [
+          "lparen"
+        ]
+      },
+      {
+        "timeMs": 71630,
+        "keys": []
+      },
+      {
+        "timeMs": 71740,
+        "keys": [
+          "6"
+        ]
+      },
+      {
+        "timeMs": 71970,
+        "keys": []
+      },
+      {
+        "timeMs": 72080,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 72310,
+        "keys": []
+      },
+      {
+        "timeMs": 72420,
+        "keys": [
+          "0"
+        ]
+      },
+      {
+        "timeMs": 72650,
+        "keys": []
+      },
+      {
+        "timeMs": 72760,
+        "keys": [
+          "comma"
+        ]
+      },
+      {
+        "timeMs": 72990,
+        "keys": []
+      },
+      {
+        "timeMs": 73100,
+        "keys": [
+          "5"
+        ]
+      },
+      {
+        "timeMs": 73330,
+        "keys": []
+      },
+      {
+        "timeMs": 73440,
+        "keys": [
+          "rparen"
+        ]
+      },
+      {
+        "timeMs": 73670,
+        "keys": []
+      },
+      {
+        "timeMs": 74000,
+        "keys": [
+          "enter"
+        ]
+      },
+      {
+        "timeMs": 74420,
         "keys": []
       }
     ],
-    "authoredTape": []
+    "authoredTape": [
+      {
+        "id": "key-01",
+        "timeMs": 12000,
+        "key": "p",
+        "type": "type"
+      },
+      {
+        "id": "key-02",
+        "timeMs": 12340,
+        "key": "o",
+        "type": "type"
+      },
+      {
+        "id": "key-03",
+        "timeMs": 12680,
+        "key": "i",
+        "type": "type"
+      },
+      {
+        "id": "key-04",
+        "timeMs": 13020,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-05",
+        "timeMs": 13360,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-06",
+        "timeMs": 13700,
+        "key": "p",
+        "type": "type"
+      },
+      {
+        "id": "key-07",
+        "timeMs": 14040,
+        "key": "d",
+        "type": "type"
+      },
+      {
+        "id": "key-08",
+        "timeMs": 14380,
+        "key": "f",
+        "type": "type"
+      },
+      {
+        "id": "key-09",
+        "timeMs": 14720,
+        "key": "lparen",
+        "type": "type"
+      },
+      {
+        "id": "key-10",
+        "timeMs": 15060,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-11",
+        "timeMs": 15400,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-12",
+        "timeMs": 15740,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-13",
+        "timeMs": 16080,
+        "key": "rparen",
+        "type": "type"
+      },
+      {
+        "id": "key-14",
+        "timeMs": 19400,
+        "key": "enter",
+        "type": "evaluate"
+      },
+      {
+        "id": "key-15",
+        "timeMs": 26500,
+        "key": "p",
+        "type": "type"
+      },
+      {
+        "id": "key-16",
+        "timeMs": 26840,
+        "key": "o",
+        "type": "type"
+      },
+      {
+        "id": "key-17",
+        "timeMs": 27180,
+        "key": "i",
+        "type": "type"
+      },
+      {
+        "id": "key-18",
+        "timeMs": 27520,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-19",
+        "timeMs": 27860,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-20",
+        "timeMs": 28200,
+        "key": "c",
+        "type": "type"
+      },
+      {
+        "id": "key-21",
+        "timeMs": 28540,
+        "key": "d",
+        "type": "type"
+      },
+      {
+        "id": "key-22",
+        "timeMs": 28880,
+        "key": "f",
+        "type": "type"
+      },
+      {
+        "id": "key-23",
+        "timeMs": 29220,
+        "key": "lparen",
+        "type": "type"
+      },
+      {
+        "id": "key-24",
+        "timeMs": 29560,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-25",
+        "timeMs": 29900,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-26",
+        "timeMs": 30240,
+        "key": "3",
+        "type": "type"
+      },
+      {
+        "id": "key-27",
+        "timeMs": 30580,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-28",
+        "timeMs": 30920,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-29",
+        "timeMs": 31260,
+        "key": "rparen",
+        "type": "type"
+      },
+      {
+        "id": "key-30",
+        "timeMs": 35600,
+        "key": "enter",
+        "type": "evaluate"
+      },
+      {
+        "id": "key-31",
+        "timeMs": 50000,
+        "key": "1",
+        "type": "type"
+      },
+      {
+        "id": "key-32",
+        "timeMs": 50340,
+        "key": "minus",
+        "type": "type"
+      },
+      {
+        "id": "key-33",
+        "timeMs": 50680,
+        "key": "p",
+        "type": "type"
+      },
+      {
+        "id": "key-34",
+        "timeMs": 51020,
+        "key": "o",
+        "type": "type"
+      },
+      {
+        "id": "key-35",
+        "timeMs": 51360,
+        "key": "i",
+        "type": "type"
+      },
+      {
+        "id": "key-36",
+        "timeMs": 51700,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-37",
+        "timeMs": 52040,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-38",
+        "timeMs": 52380,
+        "key": "c",
+        "type": "type"
+      },
+      {
+        "id": "key-39",
+        "timeMs": 52720,
+        "key": "d",
+        "type": "type"
+      },
+      {
+        "id": "key-40",
+        "timeMs": 53060,
+        "key": "f",
+        "type": "type"
+      },
+      {
+        "id": "key-41",
+        "timeMs": 53400,
+        "key": "lparen",
+        "type": "type"
+      },
+      {
+        "id": "key-42",
+        "timeMs": 53740,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-43",
+        "timeMs": 54080,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-44",
+        "timeMs": 54420,
+        "key": "0",
+        "type": "type"
+      },
+      {
+        "id": "key-45",
+        "timeMs": 54760,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-46",
+        "timeMs": 55100,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-47",
+        "timeMs": 55440,
+        "key": "rparen",
+        "type": "type"
+      },
+      {
+        "id": "key-48",
+        "timeMs": 55950,
+        "key": "enter",
+        "type": "evaluate"
+      },
+      {
+        "id": "key-49",
+        "timeMs": 68000,
+        "key": "1",
+        "type": "type"
+      },
+      {
+        "id": "key-50",
+        "timeMs": 68340,
+        "key": "minus",
+        "type": "type"
+      },
+      {
+        "id": "key-51",
+        "timeMs": 68680,
+        "key": "p",
+        "type": "type"
+      },
+      {
+        "id": "key-52",
+        "timeMs": 69020,
+        "key": "o",
+        "type": "type"
+      },
+      {
+        "id": "key-53",
+        "timeMs": 69360,
+        "key": "i",
+        "type": "type"
+      },
+      {
+        "id": "key-54",
+        "timeMs": 69700,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-55",
+        "timeMs": 70040,
+        "key": "s",
+        "type": "type"
+      },
+      {
+        "id": "key-56",
+        "timeMs": 70380,
+        "key": "c",
+        "type": "type"
+      },
+      {
+        "id": "key-57",
+        "timeMs": 70720,
+        "key": "d",
+        "type": "type"
+      },
+      {
+        "id": "key-58",
+        "timeMs": 71060,
+        "key": "f",
+        "type": "type"
+      },
+      {
+        "id": "key-59",
+        "timeMs": 71400,
+        "key": "lparen",
+        "type": "type"
+      },
+      {
+        "id": "key-60",
+        "timeMs": 71740,
+        "key": "6",
+        "type": "type"
+      },
+      {
+        "id": "key-61",
+        "timeMs": 72080,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-62",
+        "timeMs": 72420,
+        "key": "0",
+        "type": "type"
+      },
+      {
+        "id": "key-63",
+        "timeMs": 72760,
+        "key": "comma",
+        "type": "type"
+      },
+      {
+        "id": "key-64",
+        "timeMs": 73100,
+        "key": "5",
+        "type": "type"
+      },
+      {
+        "id": "key-65",
+        "timeMs": 73440,
+        "key": "rparen",
+        "type": "type"
+      },
+      {
+        "id": "key-66",
+        "timeMs": 74000,
+        "key": "enter",
+        "type": "evaluate"
+      }
+    ]
   },
   "existingAudio": null,
-  "nativeMediaAdapter": null,
-  "integrationStatus": "requires-player-hook"
+  "nativeMediaAdapter": {
+    "inlineManifestId": "ct42-narration-manifest",
+    "audioDestination": "poisson/narration.mp3",
+    "cueIds": "watch-01 to watch-14, in cue-map order",
+    "keyIds": "key-01 to key-66, in poisson/key-tape.js keys array order (1-based, including each Enter)",
+    "resultCueRule": "Each stage's Enter must occur before its next spoken result cue.",
+    "decoderToleranceMs": 120
+  },
+  "integrationStatus": "inline-json"
 }

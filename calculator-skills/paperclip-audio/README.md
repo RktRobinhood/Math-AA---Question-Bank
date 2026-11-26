@@ -14,7 +14,7 @@ each other's tracks.
    approved lesson, not an instruction to re-record. Do not rename, replace,
    upscale or duplicate these assets.
 2. Start with **CT39 Normal CDF → CT40 Inverse Normal → CT37 Binomial PDF →
-   CT41 unknown normal parameter**. Their tested players accept an optional
+   CT41 unknown normal parameter → CT42 Poisson**. Their tested players accept an optional
    measured manifest. `nativeMediaAdapter` gives exact cue IDs, physical
    key IDs, ordering and destination. The text is the original reviewed
    recording sheet, not legacy rehearsal copy.
@@ -60,6 +60,7 @@ exact `spokenCues` array order from its `CTxx.cues.json`.
 | CT39 | `normal/narration.mp3`; replace the empty `normal/measured-cues.js` with the validated `window.NormalMeasuredCues = <strict JSON>;` assignment |
 | CT40 | `inverse-normal/narration.mp3`, inline inert `ct40-narration-manifest` in `inverse-normal/index.html`; also measure `markersMs.tailContext` |
 | CT41 | `normal-parameter/narration.mp3`, inline inert `ct41-measured-recording` in `normal-parameter/index.html` |
+| CT42 | `poisson/narration.mp3`, inline inert `ct42-narration-manifest` in `poisson/index.html`. Keep the existing transcript and measure all typed keys; see lesson hold rules below. |
 | Other new recordings | Existing runtime needs a verified local player hook first. A committed MP3 alone does not add narration. Use the same per-route convention after integrating it; do not add a player to bank exam pages. |
 
 Inert tags are `type="application/json"`. Escape `<` in inline data as
@@ -72,6 +73,13 @@ CT39's wrapper shape is `{format:"ct39-measured-cues-v1",lesson:"CT39",media,cue
 first/second Enter, intro/tail transitions and final result hold. Keep the
 browser audio metadata within the route's documented 120/125 ms padding
 tolerance.
+
+CT42 reuses the inert version-1 shape with the 14 `watch-01`…`watch-14` cues.
+Use `key-01`…`key-66` in the one-based authored `CT42Tape.keys` order;
+every key is timed explicitly, and each typed Enter precedes its spoken result.
+The final cue must have at least 300 ms of remaining declared recording.
+The fallback remains caption-only until a matching file decodes, and the
+lesson never guesses speech timing from the rehearsal.
 
 Inspect with **ffprobe**, run a whole-file decode
 (`ffmpeg -v error -i narration.mp3 -f null -`), listen to the actual take,
