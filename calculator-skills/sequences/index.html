@@ -1,41 +1,64 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
 <title>Sequences and finite sums · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
-<script src="math.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT04" data-cue-sha="8f260d875969bd9ae73251aeae467eb0d0d0d4b253cd3932eab5209b78ca4a9e" data-transcript-sha="5a528e1cbdd408556ab5d36a7a69b406d28035c394188f459846b72dade4450b" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><p class="calc-crumb"><a href="../skills.html">Calculator Skills</a> / CT04</p><h1>Sequences and finite sums</h1><p class="sub">Get one term, a list of terms, or their total.</p><p><a href="../threshold/index.html">For a continuous crossing, use a graph intersection.</a></p></div>
-</header>
-<nav class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-pane">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-pane" tabindex="-1">Try</button></nav>
-<section id="stage" data-mode="watch" aria-label="TI-Nspire CX II-T handheld and controls">
-<div id="watch-pane" role="tabpanel" aria-labelledby="watch-tab"><p id="caption" class="caption"></p><p id="equation" class="equation"></p></div>
-<div id="try-pane" role="tabpanel" aria-labelledby="try-tab" hidden><div class="try-bar"><button type="button" id="return">Return to Watch</button><button type="button" id="edit-inputs">Edit inputs</button><button type="button" id="new-practice" hidden>Open fresh Try</button></div><p id="taskline" class="try-task"></p></div>
-<div class="stage-grid">
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="../handheld/transport.js"></script>
+<script defer src="math.js"></script>
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / Sequences and finite sums</nav>
+<div data-calculator-watch></div>
+<section class="seq-try" data-mode="try" id="stage" aria-label="Independent TI-Nspire CX II-T sequence practice" tabindex="0" hidden>
+<div id="try-pane"><div class="try-bar"><button type="button" id="return">Return to Watch</button><button type="button" id="edit-inputs">Edit inputs</button></div><p id="taskline" class="try-task"></p></div>
+<div class="stage-grid" id="try-grid">
 <div id="handheld-host"><div id="lcd" class="screen" aria-label="Recreated TI-Nspire Calculator display">
 <div class="lcd-status"><b>1.1</b><span>Calculator</span><i></i></div><div id="lcd-work"></div>
-<button type="button" id="stage-play" aria-label="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button>
+
 </div></div>
 <div class="stage-side">
-<aside id="watch-side"><h2>Watch one rule three ways</h2><p class="demo-rule">u<sub>n</sub> = 3 × 2<sup>n−1</sup></p><ol id="chapters" aria-label="Worked example chapters"></ol></aside>
-<aside id="try-side" hidden><h2 id="try-title">Work on the calculator</h2><p id="key-hint" class="calc-hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
+
+<aside id="try-side"><h2 id="try-title">Work on the calculator</h2><p id="key-hint" class="calc-hint"></p><p id="output" role="status" hidden></p><p id="link-status" class="error" role="status" hidden></p>
+<div class="sequence-presets" id="presets" aria-label="Try another part of the same problem">
+<button type="button" data-seq-part="total">First five days</button>
+<button type="button" data-seq-part="one">Day 5</button>
+<button type="button" data-seq-part="list">List alternate days</button>
+<button type="button" data-seq-part="stepped">Total alternate days</button>
+<button type="button" data-seq-part="threshold">First day at 50</button>
+</div>
 <form id="fields" novalidate>
 <label for="rule">Rule in <var>n</var></label><input id="rule" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. 2*n+1">
 <div class="form-grid"><label for="task">Output<select id="task"><option value="sum">Sum</option><option value="list">List of terms</option><option value="term">Nth term</option></select></label><label for="lower" id="lower-label">Lower index<input id="lower" maxlength="6" inputmode="numeric"></label><label for="upper"><span id="upper-label">Upper index</span><input id="upper" maxlength="6" inputmode="numeric"></label><label for="step" id="step-label">Step<input id="step" maxlength="6" inputmode="numeric"></label></div>
-<div class="field-actions"><button id="load" type="submit">Load on calculator</button><button id="run" type="button" class="primary" hidden>Enter</button><button type="button" id="reset">Reset calculator</button></div>
+<div class="field-actions"><button id="load" type="submit">Load on calculator</button><button id="run" type="button" class="primary" hidden>Enter</button><button type="button" id="reset">Reset Try</button></div>
+</form>
+<form id="threshold-form" hidden>
+<p>Use the day-number field above to compare two neighboring days. Then record the first day.</p>
+<label for="threshold-day">First day at or above 50 cartons</label>
+<div class="answer-row"><input id="threshold-day" inputmode="numeric" maxlength="2" autocomplete="off" required><button type="submit">Check day</button></div>
+<p id="threshold-feedback" role="status"></p>
 </form>
 <form id="answer-form" hidden novalidate><label for="answer" id="answer-label">Your answer</label><div class="answer-row"><input id="answer" maxlength="900" autocomplete="off" spellcheck="false"><button type="submit">Check answer</button></div><p id="feedback" role="status"></p></form>
 </aside></div></div>
-<div id="player" aria-label="Playback controls"><div class="controls"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from the start">↺</button><button type="button" id="focus" aria-label="Focused view" aria-pressed="false">⛶</button><button type="button" id="take-over">Take over</button></div>
-<div class="time"><span id="clock" aria-hidden="true"></span><label class="seek"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" max="57" value="0" step=".005"></label><span class="captioned">Captioned</span></div></div>
-</section>
-</main></body></html>
+</section></main></body></html>
