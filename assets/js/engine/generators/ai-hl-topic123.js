@@ -1134,4 +1134,72 @@
         P(`Vertex ${vx(0)} is deleted. Find the weight of the minimum spanning tree of the remaining graph.`, 2, ans.int(mst), [`Using Prim's algorithm from ${vx(1)}, the edges are ${fmt.list(order.map((e) => `${ed(e)} ($${D[e[0]][e[1]]}$)`))}.`, `Weight $= ${order.map(([a, b]) => D[a][b]).join(" + ")} = ${mst}$`]),
         P("Hence find a lower bound for the length of the shortest tour.", 2, ans.int(lower), [`Add the two shortest edges from ${vx(0)}: $${two[0]}$ and $${two[1]}$.`, `Lower bound $= ${mst} + ${two[0]} + ${two[1]} = ${lower}\\text{ km}$`])] };
     } });
+
+  // Original contrast problem: a feasible tour and a lower bound need not prove optimality.
+  const compareTsp = (D) => {
+    const route = [0], unvisited = [1, 2, 3, 4];
+    while (unvisited.length) {
+      const at = route.at(-1);
+      unvisited.sort((a, b) => D[at][a] - D[at][b]);
+      route.push(unvisited.shift());
+    }
+    route.push(0);
+    const legs = route.slice(1).map((b, i) => D[route[i]][b]);
+    const tree = prim(D, [1, 2, 3, 4], 1).map(([a, b]) => D[a][b]);
+    const links = D[0].slice(1).sort((a, b) => a - b).slice(0, 2);
+    return { route, legs, tree, links, upper: legs.reduce((a, b) => a + b, 0),
+      lower: [...tree, ...links].reduce((a, b) => a + b, 0) };
+  };
+  const boundSituation = (rng) => {
+    const equal = rng.bool();
+    if (equal) {
+      // Build a five-stop ring with varied edge lengths. Adjacent stops
+      // are closer than any non-adjacent pair, so the tour and bound can meet.
+      for (let attempt = 0; attempt < 22; attempt++) {
+        const ring = [0, ...rng.sample([1, 2, 3, 4], 4)];
+        const legs = rng.sample([12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22], 5);
+        const arc = [0];
+        legs.forEach(v => arc.push(arc.at(-1) + v));
+        const lap = arc.at(-1);
+        const D = Array.from({ length: 5 }, (_, i) => Array.from({ length: 5 }, (_, j) => {
+          const x = Math.abs(arc[ring.indexOf(i)] - arc[ring.indexOf(j)]);
+          return Math.min(x, lap - x);
+        }));
+        if (new Set(D.flatMap((row, i) => row.slice(i + 1))).size === 10) return D;
+      }
+      return [[0,14,38,31,36],[14,0,45,42,41],[38,45,0,15,7],[31,42,15,0,20],[36,41,7,20,0]];
+    }
+    for (let attempt = 0; attempt < 12; attempt++) {
+      const { D } = tableSit(rng), x = compareTsp(D);
+      if (x.upper > x.lower) return D;
+    }
+    return [[0,9,25,34,11],[9,0,22,41,15],[25,22,0,33,17],[34,41,33,0,26],[11,15,17,26,0]];
+  };
+  reg({ ...GA, unknown: "tsp-bound-inference", representation: "table", format: "mcq", levels: [4], calculator: true,
+    skills: ["AI-AHL3.16.tsp-upper-bound", "AI-AHL3.16.tsp-lower-bound", "AI-AHL3.16.prim"],
+    title: "Do the bounds prove that a tour is shortest?",
+    build({ rng }) {
+      const D = boundSituation(rng), x = compareTsp(D), tight = x.upper === x.lower;
+      const who = rng.pick(["A courier must visit five collection points", "A technician must visit five monitoring stations", "A driver must visit five depots"]);
+      const outcomes = {
+        proved: { text: "The nearest-neighbour tour is a shortest tour.", value: "proved", why: "A feasible tour is known to be shortest only if the given lower bound reaches its length." },
+        undecided: { text: "The two bounds alone do not show whether the nearest-neighbour tour is shortest.", value: "undecided", why: "A gap leaves the shortest length undetermined; equal bounds fix it exactly." },
+        lowerIsTour: { text: "A tour of length equal to the lower bound must exist.", value: "lowerIsTour", why: "A lower bound is a limit, not necessarily the length of an actual tour." }
+      };
+      const correct = tight ? "proved" : "undecided";
+      // In the tight case a tour attaining the lower bound does exist. Offer
+      // a different incorrect conclusion so there is precisely one answer.
+      if (tight) outcomes.lowerIsTour = { text: "The bounds prove that there is only one shortest tour.", value: "unique", why: "Matching bounds determine the length but not how many shortest tours have that length." };
+      return { params: {}, table: distTable(D), stem: `${who}, ${names(5)}, once each, starting and finishing at ${vx(0)}. The table gives the least distances between points in kilometres.`, parts: [
+        P(`Use the nearest neighbour algorithm from ${vx(0)} to find an upper bound.`, 3, ans.int(x.upper),
+          [`The tour is $${x.route.map(i => "\\mathrm{" + VN[i] + "}").join(" \\to ")}$.`, `Length $= ${x.legs.join(" + ")} = ${x.upper}$ km.`]),
+        P(`Use the deleted vertex algorithm, deleting ${vx(0)}, to find a lower bound.`, 3, ans.int(x.lower),
+          [`The minimum spanning tree of the remaining vertices weighs $${x.tree.join(" + ")} = ${x.tree.reduce((a, b) => a + b, 0)}$ km.`, `Add the two lightest edges incident to ${vx(0)}: the lower bound is $${[...x.tree, ...x.links].join(" + ")} = ${x.lower}$ km.`]),
+        P("Which conclusion follows from the two bounds alone?", 1,
+          ans.choice(rng, outcomes[correct], Object.keys(outcomes).filter(k => k !== correct).map(k => outcomes[k])),
+          [tight ? `A tour of length $${x.upper}$ km exists, and no tour can be shorter than $${x.lower}$ km. The nearest-neighbour tour is therefore a shortest tour.`
+            : `The shortest length is between $${x.lower}$ and $${x.upper}$ km, inclusive. A gap does not prove there is a shorter tour, and it does not prove the given tour is shortest.`])
+      ] };
+    } });
+
 })(typeof globalThis !== "undefined" ? globalThis : this);
