@@ -1,0 +1,392 @@
+{
+  "id": "CT53",
+  "title": "Displacement and total distance",
+  "intro": "Split the velocity integral only where motion reverses.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "596702b185a82c8f2f4c98ad093f9410f8d269fdbb505609b3eb1c19ee7da0b2",
+    "scriptSha256": "fc24fdb3be61a7bd2e9f7c893986b173ff479a08d341d1c34aaca7c31119685c"
+  },
+  "chapters": [
+    {
+      "id": "velocity",
+      "title": "Plot the velocity"
+    },
+    {
+      "id": "displacement",
+      "title": "Measure displacement"
+    },
+    {
+      "id": "reversal",
+      "title": "Locate the reversal"
+    },
+    {
+      "id": "signed-pieces",
+      "title": "Measure both pieces"
+    },
+    {
+      "id": "compare",
+      "title": "Compare the two totals"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "velocity",
+      "spoken": "Enter three minus two x in Graphs. The calculator's x is time t, measured in seconds.",
+      "coach": "v(t) = 3 − 2t   ·   0 ≤ t ≤ 4",
+      "end": 8.09,
+      "hold": 3.55,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1119
+        },
+        {
+          "id": "press-2",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.2895
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4671
+        },
+        {
+          "id": "press-4",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.6448
+        },
+        {
+          "id": "press-5",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8224
+        }
+      ]
+    },
+    {
+      "chapter": "displacement",
+      "spoken": "For displacement, take one signed integral. Choose Menu then six: Analyze Graph then six: Integral.",
+      "coach": "Displacement keeps the signs.",
+      "end": 17.093,
+      "hold": 2.53,
+      "keys": [
+        {
+          "id": "press-6",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1736
+        },
+        {
+          "id": "press-7",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.449
+        },
+        {
+          "id": "press-8",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.7245
+        }
+      ]
+    },
+    {
+      "chapter": "displacement",
+      "spoken": "Type zero and press Enter for the lower bound. Type four and press Enter for the upper bound.",
+      "coach": "Bounds: 0 to 4 s",
+      "end": 23.879,
+      "hold": 3.04,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1361
+        },
+        {
+          "id": "press-10",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3521
+        },
+        {
+          "id": "press-11",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.568
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.784
+        }
+      ]
+    },
+    {
+      "chapter": "displacement",
+      "spoken": "The signed result is negative four metres. The cart finishes four metres behind its starting point.",
+      "coach": "Displacement = −4 m",
+      "end": 31.041,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "reversal",
+      "spoken": "The distance needs the reversal time. Choose Menu then six: Analyze Graph then one: Zero.",
+      "coach": "Zero locates the candidate reversal.",
+      "end": 40.085,
+      "hold": 2.53,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1736
+        },
+        {
+          "id": "press-14",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.449
+        },
+        {
+          "id": "press-15",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7245
+        }
+      ]
+    },
+    {
+      "chapter": "reversal",
+      "spoken": "Move the cursor to either side of the crossing, confirming each bound with Enter.",
+      "coach": "Lower bound left of 1.5; upper bound right",
+      "end": 45.847,
+      "hold": 4.57,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "←",
+          "ariaLabel": "Left arrow",
+          "at": 0.0826
+        },
+        {
+          "id": "press-17",
+          "label": "←",
+          "ariaLabel": "Left arrow",
+          "at": 0.2136
+        },
+        {
+          "id": "press-18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3447
+        },
+        {
+          "id": "press-19",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.4758
+        },
+        {
+          "id": "press-20",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6068
+        },
+        {
+          "id": "press-21",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.7379
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8689
+        }
+      ]
+    },
+    {
+      "chapter": "reversal",
+      "spoken": "Press Enter to mark the zero. Velocity is positive before one point five seconds and negative after it.",
+      "coach": "Split at t = 1.5 s",
+      "end": 54.051,
+      "hold": 1.6,
+      "keys": [
+        {
+          "id": "press-23",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3865
+        }
+      ]
+    },
+    {
+      "chapter": "signed-pieces",
+      "spoken": "Repeat Integral from zero to one point five. This positive part is the forward travel.",
+      "coach": "First interval: 0 to 1.5 s",
+      "end": 61.215,
+      "hold": 5.59,
+      "keys": [
+        {
+          "id": "press-24",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0654
+        },
+        {
+          "id": "press-25",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.1693
+        },
+        {
+          "id": "press-26",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.2731
+        },
+        {
+          "id": "press-27",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3769
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4808
+        },
+        {
+          "id": "press-29",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5846
+        },
+        {
+          "id": "press-30",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.6885
+        },
+        {
+          "id": "press-31",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.7923
+        },
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8962
+        }
+      ]
+    },
+    {
+      "chapter": "signed-pieces",
+      "spoken": "The forward piece is positive two point two five metres.",
+      "coach": "Forward: +2.25 m",
+      "end": 65.556,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "signed-pieces",
+      "spoken": "Repeat Integral from one point five to four. The second result is negative because motion was backward.",
+      "coach": "Second interval: 1.5 to 4 s",
+      "end": 73.011,
+      "hold": 5.59,
+      "keys": [
+        {
+          "id": "press-33",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0654
+        },
+        {
+          "id": "press-34",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.1693
+        },
+        {
+          "id": "press-35",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.2731
+        },
+        {
+          "id": "press-36",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3769
+        },
+        {
+          "id": "press-37",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.4808
+        },
+        {
+          "id": "press-38",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5846
+        },
+        {
+          "id": "press-39",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6885
+        },
+        {
+          "id": "press-40",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.7923
+        },
+        {
+          "id": "press-41",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8962
+        }
+      ]
+    },
+    {
+      "chapter": "signed-pieces",
+      "spoken": "The second signed piece is negative six point two five metres, so the cart travelled six point two five metres backward.",
+      "coach": "Backward: −6.25 m signed",
+      "end": 82.241,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "compare",
+      "spoken": "Add magnitudes for distance. Taking the absolute value of the net result would lose the forward travel.",
+      "coach": "Distance = 2.25 + 6.25 = 8.5 m",
+      "end": 89.814,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "compare",
+      "spoken": "If the graph only touches zero and stays on the same side, the cart stops but does not reverse. Try a fresh model.",
+      "coach": "Displacement −4 m · Distance 8.5 m",
+      "end": 99.108,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
