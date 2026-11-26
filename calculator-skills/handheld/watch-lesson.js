@@ -81,6 +81,12 @@ async function recordingFor(spec, win) {
 
 function mount(host, input, adapter) {
  if(!host||typeof adapter?.renderWatch!=='function')throw new Error('Watch template needs a calculator adapter');
+ const hasTry=typeof adapter.enterTry==='function', initial=adapter.initialMode===undefined?'watch':adapter.initialMode;
+ function validateMode(next){
+   if(next!=='watch'&&next!=='try')throw new RangeError('Watch lesson mode must be watch or try');
+   if(next==='try'&&!hasTry)throw new Error('Watch lesson has no Try adapter');
+ }
+ validateMode(initial);
  const spec=JSON.parse(JSON.stringify(input)), authored=validate(spec);
  const doc=host.ownerDocument, win=doc.defaultView, ns='http://www.w3.org/2000/svg';
  if(!win.TeachingHolds||!win.CalculatorWatchPlayer||!win.CalculatorWatchChapters)throw new Error('Load the central Watch modules first');
@@ -97,15 +103,17 @@ function mount(host, input, adapter) {
  const header=el('header',undefined,'lw-header'),title=el('div'), h1=el('h1',spec.title), intro=el('p',spec.intro);
  title.append(h1,intro);header.append(title);
  const choice=el('div',undefined,'lw-mode'),watch=btn('Watch','Watch'),tryButton=btn('Try','Try');
- if(typeof adapter.enterTry==='function'){choice.append(watch,tryButton);header.append(choice);}
+ if(hasTry){choice.append(watch,tryButton);header.append(choice);}
  const stage=el('section',undefined,'lw-stage');stage.tabIndex=0;stage.setAttribute('aria-label',spec.title+' player');
- const surface=el('div',undefined,'lw-surface'), device=el('div',undefined,'lw-device'), side=el('aside',undefined,'lw-guide'),
+ const surface=el('div',undefined,'lw-surface'), devicePanel=el('div',undefined,'lw-device-panel'),
+       device=el('div',undefined,'lw-device'), side=el('aside',undefined,'lw-guide'),
        coach=el('p',undefined,'lw-coach'), groups=el('div',undefined,'lw-groups');
  device.setAttribute('aria-label','Calculator display');
  side.append(coach,groups);
  const feedback=el('span',undefined,'lw-feedback');feedback.dataset.action='play';feedback.dataset.initial='true';feedback.setAttribute('aria-hidden','true');
  feedback.append(glyph(triangle,'lw-play-glyph'),glyph(bars,'lw-pause-glyph'));
- surface.append(device,side,feedback);
+ devicePanel.append(device,feedback);surface.append(devicePanel,side);
+ const compactCoach=el('div',undefined,'lw-compact-coach');compactCoach.hidden=true;
  const caption=el('p',undefined,'lw-caption');caption.hidden=true;
  const bar=el('div',undefined,'lw-transport');bar.setAttribute('role','group');bar.setAttribute('aria-label','Playback controls');
  const play=btn('Play',undefined,'lw-play'),iconPlay=glyph(triangle),iconPause=glyph(bars);
@@ -126,15 +134,44 @@ function mount(host, input, adapter) {
  const pace=el('label',undefined,'lw-pace');pace.append(el('span','Pauses'),scale);
  expand.append(glyph(fullscreen));bar.append(seek,clock,play,sound,frames,cc,pace,expand);
  const mediaNote=el('p','Captioned walkthrough','lw-media-status');mediaNote.setAttribute('role','status');
- stage.append(surface,caption,bar,mediaNote);host.replaceChildren(header,stage);
+ stage.append(surface,compactCoach,caption,bar,mediaNote);host.replaceChildren(header,stage);
  let lastEnd=0;
  const beats=spec.beats.map(b=>{const row=[lastEnd,b.end,b.hold];lastEnd=b.end;return row;});
- let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing='screen',ccOn=false,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false;
+ let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing='screen',ccOn=false,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false,restorePlayFocus=false;
  try { if(win.localStorage.getItem(frameStorage)==='full')framing='full'; } catch {}
  const basePlayer=win.CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand,feedback,active:()=>mode==='watch'});
  const chapterNav=win.CalculatorWatchChapters.mount(groups,authored.groups,{onChapter:id=>{
    seekTo(layout.spans[spec.beats.findIndex(b=>b.chapter===id)].start);
  }});
+ const compactRail=win.matchMedia('(max-width:780px) and (max-height:670px)');
+ const stacked=win.matchMedia('(max-width:780px)');
+ function fitPresentation(){
+   if(disposed)return;
+   const expanded=doc.fullscreenElement===stage||stage.classList.contains('watch-fullscreen-fallback');
+   const railBelow=compactRail.matches&&!expanded;
+   if((side.parentElement===stage)!==railBelow){
+     const focused=side.contains(doc.activeElement)?doc.activeElement:null;
+     if(railBelow){mediaNote.after(side);compactCoach.append(coach);}
+     else {surface.append(side);side.prepend(coach);}
+     if(focused)focused.focus({preventScroll:true});
+   }
+   compactCoach.hidden=mode!=='watch'||!railBelow;
+   if(mode!=='watch')return;
+   const h=win.visualViewport?.height||win.innerHeight;
+   const start=expanded?0:Math.max(0,stage.getBoundingClientRect().top+win.scrollY);
+   const nav=expanded?0:doc.querySelector('.tabbar')?.offsetHeight||0;
+   const styles=win.getComputedStyle(surface);
+   const gap=stacked.matches&&!railBelow?side.offsetHeight+parseFloat(styles.rowGap||'0'):0;
+   const room=h-start-nav-bar.offsetHeight-caption.offsetHeight-mediaNote.offsetHeight-
+     compactCoach.offsetHeight-gap-parseFloat(styles.paddingTop||'0')-parseFloat(styles.paddingBottom||'0')-4;
+   stage.style.setProperty('--lw-scene-height',Math.floor(Math.max(105,room))+'px');
+ }
+ const fitObserver=new win.ResizeObserver(fitPresentation);
+ [header,side,caption,bar,mediaNote,compactCoach].forEach(e=>fitObserver.observe(e));
+ const fullscreenObserver=new win.MutationObserver(fitPresentation);
+ fullscreenObserver.observe(stage,{attributes:true,attributeFilter:['class']});
+ win.addEventListener('resize',fitPresentation);win.visualViewport?.addEventListener('resize',fitPresentation);
+ doc.addEventListener('fullscreenchange',fitPresentation);
  const fmt=n=>Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');
  function update(){
    if(mode!=='watch')return;
@@ -209,13 +246,24 @@ function mount(host, input, adapter) {
    if(!await enter(ticket))return;
    pending=false;playing=true;label();update();if(flash)basePlayer.flash(true);frameRequest=win.requestAnimationFrame(step);
  }
- function changeMode(next){
-   if(next===mode||disposed)return;
+ function focusMode(){
+   restorePlayFocus=mode==='watch'&&play.disabled;
+   const target=mode==='watch'?(restorePlayFocus?watch:play):tryButton;
+   target.focus({preventScroll:true});
+ }
+ function changeMode(next,{focus=false}={}){
+   validateMode(next);
+   if(disposed)return;
+   if(next===mode){if(focus)focusMode();return;}
    halt();basePlayer.clear();void basePlayer.exit();mode=next;stage.dataset.mode=mode;
    watch.setAttribute('aria-pressed',String(mode==='watch'));tryButton.setAttribute('aria-pressed',String(mode==='try'));
    bar.hidden=side.hidden=mode==='try';mediaNote.hidden=mode==='try'||!!activeMedia;
-   if(mode==='try'){caption.hidden=true;feedback.hidden=true;stage.dataset.framing='full';adapter.enterTry(device);}
-   else {adapter.exitTry?.(device);update();}
+   if(mode==='try'){
+     caption.hidden=true;feedback.hidden=true;stage.dataset.framing='full';
+     adapter.enterTry(device,{returnToWatch:()=>changeMode('watch',{focus:true})});
+   }else {adapter.exitTry?.(device);update();}
+   fitPresentation();
+   if(focus)focusMode();
  }
  play.onclick=()=>{if(playing||pending){halt();basePlayer.flash(false);}else void start();};
  seek.oninput=()=>seekTo(seek.value);
@@ -237,23 +285,28 @@ function mount(host, input, adapter) {
  function destroy(){
    if(disposed)return;disposed=true;halt();chapterNav.destroy();
    doc.removeEventListener('visibilitychange',hide);win.removeEventListener('pagehide',unload);
+   fitObserver.disconnect();fullscreenObserver.disconnect();
+   win.removeEventListener('resize',fitPresentation);win.visualViewport?.removeEventListener('resize',fitPresentation);
+   doc.removeEventListener('fullscreenchange',fitPresentation);
    if(activeMedia){activeMedia.audio.remove();activeMedia.release();activeMedia=null;}
  }
  doc.addEventListener('visibilitychange',hide);win.addEventListener('pagehide',unload);
  watch.setAttribute('aria-pressed','true');tryButton.setAttribute('aria-pressed','false');
  stage.dataset.mode='watch';cc.setAttribute('aria-pressed','false');muted.setAttribute('hidden','');
- label();update();
+ label();if(initial==='try')changeMode('try');else{update();fitPresentation();}
  if(spec.recording){
    play.disabled=true;mediaNote.textContent='Checking narration…';
    void recordingFor(spec,win).catch(()=>null).then(verified=>{
      if(disposed){verified?.release();return;}
      play.disabled=false;
+     if(restorePlayFocus && mode==='watch' && doc.activeElement===watch)play.focus({preventScroll:true});
+     restorePlayFocus=false;
      if(!verified){mediaNote.textContent='Captioned walkthrough';return;}
      activeMedia=verified;stage.append(verified.audio);verified.audio.addEventListener('error',loseMedia,{once:true});
      sound.hidden=false;mediaNote.hidden=true;update();
    });
  }
- return Object.freeze({destroy,seekTo});
+ return Object.freeze({destroy,seekTo,setMode:changeMode});
 }
 const api=Object.freeze({validate,stateAt,mount});
 if(typeof module==='object'&&module.exports)module.exports=api;else root.CalculatorWatchLesson=api;

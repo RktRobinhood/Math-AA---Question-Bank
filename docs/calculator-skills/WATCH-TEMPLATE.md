@@ -22,8 +22,15 @@ lessons can adopt it in reviewed batches without replacing their math or audio.
    the display from `crossed` (including on backward seeks). Adapter code can
    update the LCD and highlight physical keys; it must never create its own
    transport or use a second playback clock. If Try is supported, add
-   `enterTry(host)` and optional `exitTry(host)`. Try is full handset and
+   `enterTry(host, {returnToWatch})` and optional `exitTry(host)`. The adapter
+   can declare `initialMode: "try"` after validating a direct link. The player
+   also offers `setMode(mode, {focus})` for external controls. Try is full handset and
    independent; it doesn’t get a worked answer from Watch.
+   Mount one physical device with
+   `CalculatorLessonHandset.mount(host, {screen, onKey})`; pass a single LCD.
+   Screen view crops this LCD from the same device; Full reveals that device
+   unchanged. The helper owns the real handset buttons and their highlighting.
+   Do not create a second screen, transport, or keypad for any view.
 3. Run `node scripts/scaffold-calculator-watch.mjs <slug> <definition.json>
    <adapter.js>`. It refuses to overwrite an existing lesson. The generated
    page owns only the data and calculator adapter. The shared files own the

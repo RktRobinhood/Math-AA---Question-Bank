@@ -43,8 +43,17 @@ for(const x of lessons){
    assert(["inline-json","strict-json-assignment"].includes(x.integrationStatus),x.id+" missing narration adapter");
    counts.native++;continue;
  }
- for(const p of [`data-lesson="${x.id}"`,`data-transcript-sha="${x.transcriptSha256}"`,`data-cue-sha="${x.cueMapSha256}"`])assert(html.includes(p),x.id+" route binding");
- if(x.id==="CT28"&&html.includes('src="watch-media.js?')){
+ const sharedTemplate=html.includes('watch-bootstrap.js?')&&html.includes('data-calculator-watch');
+ if(!sharedTemplate)for(const p of [`data-lesson="${x.id}"`,`data-transcript-sha="${x.transcriptSha256}"`,`data-cue-sha="${x.cueMapSha256}"`])assert(html.includes(p),x.id+" route binding");
+ if(sharedTemplate){
+  const spec=load(at(route,"definition.json")), template=require("../calculator-skills/handheld/watch-lesson.js");
+  const sync=load(at(route,"narration.sync.json"));
+  template.validate(spec);assert.equal(spec.id,x.id);
+  assert.equal(hash(Buffer.from(spec.beats.map(b=>b.spoken).filter(Boolean).join("\n")+"\n")),x.transcriptSha256,x.id+" exact templated spoken script");
+  assert.equal(spec.recording?.scriptSha256,x.transcriptSha256,x.id+" template script digest");
+  assert.equal(spec.recording?.audioSha256,sync.audioSha256,x.id+" template audio digest");
+  assert.equal(spec.recording?.file,sync.audio,x.id+" template audio route");
+ }else if(x.id==="CT28"&&html.includes('src="watch-media.js?')){
   const media=html.indexOf('src="watch-media.js?'),lesson=html.indexOf('src="lesson.js');
   assert(media>=0&&lesson>media,x.id+" dedicated 1× transport script order");
   assert(fs.readFileSync(at(route,"lesson.js"),"utf8").includes("CT28Media.load("),x.id+" dedicated media binding");

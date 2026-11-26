@@ -26,7 +26,7 @@ const html=`<!doctype html>
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
 <link rel="stylesheet" href="../handheld/shell.css">
 <link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
-<link rel="stylesheet" href="../handheld/watch-lesson.css?v=1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=mode-bridge-1">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=theme-3" defer></script>
@@ -34,11 +34,12 @@ const html=`<!doctype html>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 <script src="../handheld/shell.js" defer></script>
+<script src="../handheld/watch-handset.js?v=1" defer></script>
 <script src="../handheld/freecalc.js" defer></script>
 <script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
 <script src="../handheld/hold-timeline.js?v=1" defer></script>
 <script src="../handheld/watch-chapters.js?v=1" defer></script>
-<script src="../handheld/watch-lesson.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=mode-bridge-1" defer></script>
 <script src="adapter.js" defer></script>
 <script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head>
