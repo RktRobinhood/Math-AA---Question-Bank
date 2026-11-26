@@ -9,9 +9,8 @@ const menus={
  listOps:["1: Sort Ascending","2: Sort Descending","3: Dimension","4: Fill","5: Sequence"]
 };
 const menuDefault={main:0,calculus:0,stats:0,listMath:0,listOps:0};
-const duration=57, example={rule:"3*2^(n-1)",lower:"1",upper:"5",step:"1",task:"sum"};
-const fresh={rule:"2*n+3",lower:"2",upper:"6",step:"1",task:"sum"};
-const allKeys=["rule","lower","upper","step","task"], formInputs=allKeys.map($);
+const fresh={rule:"2*2^(n-1)",lower:"1",upper:"5",step:"1",task:"sum"};
+const allKeys=["rule","lower","upper","step","task"];
 const params=new URLSearchParams(location.search), isTyped=allKeys.some(k=>params.has(k));
 let problem={...fresh},badLink=false;
 if(isTyped)try{
@@ -107,46 +106,6 @@ function pressOn(s,k){
  else s.raw=next(s.raw);
  s.error="";
 }
-const keyNames={"*":"mul","/":"div","^":"power","-":"minus","(":"lparen",")":"rparen",",":"comma","+":"plus",".":"dot"};
-const events=[];
-const add=(t,...ks)=>ks.forEach((key,i)=>events.push({t:t+i*.39,key:keyNames[key]||key}));
-const write=(t,x)=>add(t,...x);
-add(.7,"home","1","1");
-write(3,"3*2^(5-1)"); add(6.85,"enter");
-add(9.45,"menu","4","3");add(13,"n","tab","1","tab","5","tab");write(16.75,example.rule);add(21,"enter");
-add(25,"menu","6","4","5");add(27.05,...example.rule,"right",...",n,2,8,2");add(34.7,"enter");
-add(38,"menu","6","3","5");add(40.15,"menu","6","4","5");add(42.2,...example.rule,"right",...",n,2,8,2");add(49.8,"enter");
-const chapters=[
- [0,"One term"],
- [8.5,"Consecutive sum"],
- [23.5,"Every second term"],
- [36.7,"Sum a stepped list"],
- [51.5,"Choose the right output"]
-];
-const cues=[
- [0,"Find one term first: substitute n = 5 into the rule.","uₙ = 3 × 2^(n−1)"],
- [2.5,"For the fifth term, replace n with 5. Keep the exponent in brackets.","One index → one term"],
- [6.85,"The fifth term is 48. That is not the total of the first five terms.","u₅ = 48"],
- [8.5,"For a total of consecutive terms, open Menu → 4: Calculus → 3: Sum.","Consecutive indices: 1, 2, 3, 4, 5"],
- [12,"Type n, then Tab to the lower index, upper index and rule.","Index letter → lower → upper → rule"],
- [16.4,"Enter the original rule in n. The template automatically steps by one.","uₙ = 3 × 2^(n−1)"],
- [21,"Enter gives 93: the total of all five terms, including both endpoints.","3 + 6 + 12 + 24 + 48 = 93"],
- [23.5,"Need every second index? Insert seq from Statistics → List Operations → Sequence.","Indices: 2, 4, 6, 8"],
- [27,"Type the rule, then press Right to leave the exponent before typing the comma.","seq(rule, n, lower, upper, step)"],
- [30.95,"Enter n, the lower and upper indices, then the step. That last 2 is not the number of terms.","seq(rule, n, 2, 8, 2)"],
- [34.7,"This produces a list of four terms, not their sum.","{6, 24, 96, 384}"],
- [36.7,"For the total, first insert sum from Statistics → List Math → Sum of Elements.","sum( … )"],
- [40,"Inside sum, insert seq again. Keep the last argument: step 2.","sum(seq(rule, n, 2, 8, 2))"],
- [49.8,"Enter gives 510. The outer sum adds only the terms created by seq.","6 + 24 + 96 + 384 = 510"],
- [51.5,"For a first threshold, find the first integer index whose term passes the target, not the first total that does.","If using a continuous crossing, test neighboring integers."]
-];
-function snapshot(t){
- const s=make();let key="";
- for(const e of events){
-  if(e.t>t+.000001)break;pressOn(s,e.key);key=t<e.t+.34?e.key:"";
- }
- return {s,key};
-}
 function node(tag,klass,value){const el=document.createElement(tag);if(klass)el.className=klass;if(value!==undefined)el.textContent=value;return el;}
 function mathText(target,str){
  const raw=pretty(str);let i=0;
@@ -184,80 +143,12 @@ function renderLCD(s){
  }
  screen.replaceChildren(frag);
 }
-let clock=0, playing=false, tickId=0, origin=0, started=false, mode="watch", track="practice", cache="", focused=false, focusPreference=null;
-let practice=make(), experiment={...problem}, draft=null,forkAt=null,forkInputs={...example};
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:k=>handle(k)});
-const play=$("play"),seek=$("seek"),tabs=[$("watch-tab"),$("try-tab")];
-for(const [i,[t,label]] of chapters.entries()){
- const li=node("li"),b=node("button",""),n=node("span","","0"+(i+1));b.type="button";
- b.append(n,label);b.addEventListener("click",()=>jump(t));li.append(b);$("chapters").append(li);
-}
-const clamp=t=>Math.max(0,Math.min(t,duration)),time=t=>"0:"+String(Math.floor(t)).padStart(2,"0");
-function renderWatch(){
- if(mode!=="watch")return;
- const cue=cues.findLastIndex(c=>c[0]<=clock+.000001),chapter=chapters.findLastIndex(c=>c[0]<=clock+.000001),snap=snapshot(clock);
- $("stage-play").hidden=started||clock>.05;
- seek.value=String(clock);seek.setAttribute("aria-valuetext",time(clock)+" of "+time(duration));
- $("clock").textContent=time(clock)+" / "+time(duration);
- shell.setKeys(snap.key?[snap.key]:[]);
- const sig=JSON.stringify([cue,chapter,snap.s]);
- if(cache===sig)return;cache=sig;
- $("caption").textContent=cues[cue][1];$("equation").replaceChildren();mathText($("equation"),cues[cue][2]);
- [...$("chapters").children].forEach((e,i)=>e.firstElementChild.setAttribute("aria-current",String(i===chapter)));
- renderLCD(snap.s);
-}
-function label(){
- const name=playing?"Pause":clock>=duration-.02?"Replay":"Play";
- play.textContent=name;play.setAttribute("aria-label",name);play.dataset.playing=String(playing);
- const tryNext=clock>=duration-.02||isTyped||params.has("case");$("take-over").textContent=tryNext?"Open Try":"Take over";
- $("take-over").setAttribute("aria-label",tryNext?"Open independent Try exercise":"Take over the calculator");
-}
-function jump(t){clock=clamp(Number(t)||0);origin=performance.now()-clock*1000;label();renderWatch();}
-function pause(){
- if(playing)clock=clamp((performance.now()-origin)/1000);
- playing=false;cancelAnimationFrame(tickId);label();renderWatch();
-}
-function tick(now){
- if(!playing||mode!=="watch")return;
- clock=clamp((now-origin)/1000);
- if(clock>=duration){pause();return;}
- renderWatch();tickId=requestAnimationFrame(tick);
-}
-function start(){
- if(mode!=="watch")return;
- if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});
- started=true;if(clock>=duration-.02)jump(0);
- maybeFocus();
- playing=true;origin=performance.now()-clock*1000;label();renderWatch();tickId=requestAnimationFrame(tick);
-}
-function nativeBottom(){return (window.visualViewport?.height||innerHeight)-(document.querySelector(".tabbar")?.getBoundingClientRect().height||0);}
-function fit(){
- if(mode!=="watch")return;
- const Ht=nativeBottom();
- const top=Math.max(0,stage.getBoundingClientRect().top);
- const reserved=$("watch-pane").offsetHeight+$("player").offsetHeight+22;
- const w=Math.max(120,Math.min(300,Math.floor((Ht-top-reserved)*558/1168)));
- stage.style.setProperty("--watch-width",w+"px");
-}
-function focus(on){
- focused=on;stage.classList.toggle("focused",on);document.body.classList.toggle("focus-open",on);
- const b=$("focus");b.setAttribute("aria-pressed",String(on));b.setAttribute("aria-label",on?"Exit focused view":"Focused view");b.textContent=on?"Exit":"⛶";
- if(on)stage.scrollTop=0;fit();
-}
-function maybeFocus(){
- fit();
- if(mode==="watch"&&!focused&&focusPreference!==false&&
-    (focusPreference===true||shell.body.getBoundingClientRect().width<173||$("player").getBoundingClientRect().bottom>nativeBottom()+1))
-  focus(true);
-}
-const resize=new ResizeObserver(fit);for(const e of [$("watch-pane"),$("player"),document.querySelector(".qb-calculator-lesson > header")])resize.observe(e);
-window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
-const toggle=()=>playing?pause():start();
-play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);
-seek.addEventListener("input",()=>jump(seek.value));
-$("back").addEventListener("click",()=>jump(clock-10));$("forward").addEventListener("click",()=>jump(clock+10));
-$("replay").addEventListener("click",()=>{pause();jump(0);start();});
-$("focus").addEventListener("click",()=>{focusPreference=!focused;focus(focusPreference);});
+const keys=[["press-1", "home"], ["press-2", "1"], ["press-3", "1"], ["press-4", "3"], ["press-5", "mul"], ["press-6", "2"], ["press-7", "power"], ["press-8", "lparen"], ["press-9", "5"], ["press-10", "minus"], ["press-11", "1"], ["press-12", "rparen"], ["press-13", "enter"], ["press-14", "menu"], ["press-15", "4"], ["press-16", "3"], ["press-17", "n"], ["press-18", "tab"], ["press-19", "1"], ["press-20", "tab"], ["press-21", "5"], ["press-22", "tab"], ["press-23", "3"], ["press-24", "mul"], ["press-25", "2"], ["press-26", "power"], ["press-27", "lparen"], ["press-28", "n"], ["press-29", "minus"], ["press-30", "1"], ["press-31", "rparen"], ["press-32", "enter"], ["press-33", "menu"], ["press-34", "6"], ["press-35", "4"], ["press-36", "5"], ["press-37", "3"], ["press-38", "mul"], ["press-39", "2"], ["press-40", "power"], ["press-41", "lparen"], ["press-42", "n"], ["press-43", "minus"], ["press-44", "1"], ["press-45", "rparen"], ["press-46", "right"], ["press-47", "comma"], ["press-48", "n"], ["press-49", "comma"], ["press-50", "2"], ["press-51", "comma"], ["press-52", "8"], ["press-53", "comma"], ["press-54", "2"], ["press-55", "enter"], ["press-56", "menu"], ["press-57", "6"], ["press-58", "3"], ["press-59", "5"], ["press-60", "menu"], ["press-61", "6"], ["press-62", "4"], ["press-63", "5"], ["press-64", "3"], ["press-65", "mul"], ["press-66", "2"], ["press-67", "power"], ["press-68", "lparen"], ["press-69", "n"], ["press-70", "minus"], ["press-71", "1"], ["press-72", "rparen"], ["press-73", "right"], ["press-74", "comma"], ["press-75", "n"], ["press-76", "comma"], ["press-77", "2"], ["press-78", "comma"], ["press-79", "8"], ["press-80", "comma"], ["press-81", "2"], ["press-82", "enter"], ["press-83", "esc"], ["press-84", "3"], ["press-85", "mul"], ["press-86", "2"], ["press-87", "power"], ["press-88", "lparen"], ["press-89", "6"], ["press-90", "minus"], ["press-91", "1"], ["press-92", "rparen"], ["press-93", "enter"]];
+const keyNames={"*":"mul","/":"div","^":"power","-":"minus","(":"lparen",")":"rparen",",":"comma","+":"plus",".":"dot"};
+
+let mode="watch",cache="",returnToWatch,practice=make(),experiment={...problem},counterpart=!isTyped||badLink, threshold=false;
+const host=$("handheld-host");
+const shell=CalculatorLessonHandset.mount(host,{screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:handle});
 const fields=() => Object.fromEntries(allKeys.map(k=>[k,$(k).value]));
 function refill(values){allKeys.forEach(k=>{$(k).value=values[k];});}
 let checked=null;
@@ -269,51 +160,36 @@ function inputState(){
  $("lower-label").hidden=$("step-label").hidden=term;
  $("upper-label").textContent=term?"Index n":"Upper index";
 }
-function state(){return track==="fork"?draft:practice;}
+
 function feedback(text="",cls=""){
  const v=$("feedback");v.textContent=text;v.className=cls;
 }
 function renderTry(){
- const s=state(),isPractice=track==="practice";renderLCD(s);inputState();
- $("try-title").textContent=isPractice?"Try it yourself":"Explore the paused example";
- $("taskline").textContent=isPractice?describe(experiment):"Watch stays paused while you use this copy.";
- $("new-practice").hidden=isPractice;
+ const s=practice;renderLCD(s);inputState();
+ $("try-title").textContent="Try it yourself";
+ $("taskline").textContent=threshold?"The second line packs 2 × 2ⁿ⁻¹ cartons on day n. On which day does it first pack at least 50 cartons? Compare neighboring days before answering.":counterpart?"A second packing line fills uₙ = 2 × 2ⁿ⁻¹ cartons on day n. "+describePacking(experiment):describe(experiment);
+ $("presets").hidden=isTyped&&!badLink;
  $("run").hidden=!s.loaded;
- $("link-status").hidden=!badLink||!isPractice;
+ $("link-status").hidden=!badLink;
  $("link-status").textContent=badLink?"This link did not supply a valid exercise. The fresh practice is shown instead.":"";
  const hint=s.menu?"Use the numbered menu key, or arrows and Enter.":s.loaded?"The calculation is loaded. Press Enter to run it.":s.style==="sigma"?"Type in the current box; use Tab to move between boxes.":s.style==="seq"||s.style==="sumseq"?"Type rule, n, lower, upper, step.":"Use the keypad, or edit the problem and load it.";
  $("key-hint").textContent=hint;
  const msg=$("output");msg.hidden=!s.error&&!s.out;msg.textContent=s.error||s.out;msg.className=s.error?"error":"right";
- $("answer-form").hidden=!isPractice||!checked;
+ $("answer-form").hidden=!checked||threshold;
+ $("threshold-form").hidden=!threshold;
  const isList=checked?.task==="list";
  $("answer-label").textContent=isList?"Your list (in order, separated by commas)":"Your answer";
  $("answer").inputMode=isList?"text":"decimal";
 }
 function checkInputs(p){checked=null;try{checked=M.calculate(p,p.task);}catch(e){return e.message;}return "";}
-function enterMode(next,variant){
- if(mode==="watch")pause();
- if(focused)focus(false);
- mode=next;stage.dataset.mode=next;
- for(const [i,button] of tabs.entries()){const active=(i===0)===(next==="watch");button.tabIndex=active?0:-1;button.setAttribute("aria-selected",String(active));}
- $("watch-pane").hidden=$("watch-side").hidden=$("player").hidden=next==="try";
- $("try-pane").hidden=$("try-side").hidden=next!=="try";
- shell.setInteractive(next==="try");
- if(next==="watch"){cache="";label();renderWatch();maybeFocus();if(!focused&&stage.getBoundingClientRect().top<0)window.scrollTo(0,0);return;}
- if(variant==="fork"){
-  if(forkAt!==clock){forkAt=clock;draft=snapshot(clock).s;forkInputs={...example};}
-  track=variant;refill(forkInputs);
- }
- else{track="practice";refill(experiment);checkInputs(experiment);}
- feedback();$("answer").value="";shell.setKeys([]);$("stage-play").hidden=true;renderTry();
-}
 function handle(k){
  if(mode!=="try")return;
- const s=state();pressOn(s,k);if(k==="enter"||k==="home"||k==="esc"||k==="menu")s.loaded=false;renderTry();
+ const s=practice;pressOn(s,k);if(k==="enter"||k==="home"||k==="esc"||k==="menu")s.loaded=false;renderTry();
 }
 function load(e){
  e.preventDefault();const p=fields();const error=checkInputs(p);
- if(track==="practice"){experiment=p;feedback();$("answer").value="";}
- const s=state();s.out="";s.prior="";s.error=error;
+ experiment=p;feedback();$("answer").value="";
+ const s=practice;s.out="";s.prior="";s.error=error;
  if(error){s.loaded=false;renderTry();return;}
  s.setup="calc";s.menu="";s.loaded=true;
  if(p.task==="term"){s.style="plain";s.raw=p.rule.toLowerCase().replace(/n/g,"("+p.upper+")");}
@@ -326,35 +202,61 @@ $("fields").addEventListener("submit",load);
 $("run").addEventListener("click",()=>handle("enter"));
 $("task").addEventListener("change",inputState);
 $("fields").addEventListener("input",()=>{
- const s=state();s.loaded=false;s.out="";s.prior="";s.error="";s.raw="";s.style="plain";s.menu="";
- if(track==="practice"){experiment=fields();checkInputs(experiment);feedback();$("answer").value="";}else forkInputs=fields();
+ const s=practice;s.loaded=false;s.out="";s.prior="";s.error="";s.raw="";s.style="plain";s.menu="";
+ if(!threshold||$("rule").value!==fresh.rule||$("task").value!=="term"){threshold=false;counterpart=false;}experiment=fields();checkInputs(experiment);feedback();$("answer").value="";
  renderTry();
 });
 $("answer-form").addEventListener("submit",e=>{
- e.preventDefault();if(!checked||track!=="practice")return;
+ e.preventDefault();if(!checked)return;
  if(!$("answer").value.trim()){feedback("Enter a value before checking.","wrong");return;}
  const right=M.compare($("answer").value,checked);
- feedback(right?"Correct. The requested output matches.":checked.task==="list"?"Not quite. Check the first index, the step and the order of your list.":"Not quite. Check whether the problem asks for one term or a total.",""+(right?"right":"wrong"));
+ feedback(right?(counterpart?"Correct. This is the output in cartons for the days you selected.":"Correct. The requested output matches."):checked.task==="list"?"Not quite. Check the first index, the step and the order of your list.":"Not quite. Check whether the problem asks for one term or a total.",""+(right?"right":"wrong"));
 });
-$("take-over").addEventListener("click",()=>{const open=$("take-over").textContent==="Open Try";enterMode("try",open?"practice":"fork");$("return").focus({preventScroll:true});});
-$("new-practice").addEventListener("click",()=>{enterMode("try","practice");$("rule").focus({preventScroll:true});});
-$("return").addEventListener("click",()=>{enterMode("watch");play.focus({preventScroll:true});});
-$("reset").addEventListener("click",()=>{if(track==="fork"){draft=snapshot(clock).s;forkInputs={...example};refill(forkInputs);}else{practice=make();experiment={...problem};refill(experiment);checkInputs(experiment);}
- $("answer").value="";renderTry();feedback();});
-tabs[0].addEventListener("click",()=>enterMode("watch"));
-tabs[1].addEventListener("click",()=>enterMode("try","practice"));
-tabs.forEach((b,i)=>b.addEventListener("keydown",e=>{
- if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
- e.preventDefault();const n=e.key==="Home"?0:e.key==="End"?1:1-i;tabs[n].click();tabs[n].focus();
-}));
 document.addEventListener("keydown",e=>{
- if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
- if(e.key==="Escape"&&focused){focusPreference=false;focus(false);$("focus").focus({preventScroll:true});return;}
- if(e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target.closest("input,textarea,select,button,a,summary,[contenteditable]"))return;
- if(mode==="watch"){if(e.repeat)return;if(e.key===" "||e.key==="k")toggle();else if(e.key==="j")jump(clock-10);else if(e.key==="l")jump(clock+10);else return;e.preventDefault();return;}
+ if(mode!=="try"||!stage.contains(e.target)||e.defaultPrevented||e.ctrlKey||e.altKey||e.metaKey||e.target.closest("input,textarea,select,button,a,summary,[contenteditable]"))return;
+ if(e.key==="Tab"&&practice.style==="sigma"){e.preventDefault();handle(e.shiftKey?"left":"tab");return;}
  const k={Backspace:"del",Enter:"enter",Escape:"esc",ArrowRight:"right",ArrowLeft:"left",ArrowUp:"up",ArrowDown:"down"}[e.key]??keyNames[e.key]??e.key.toLowerCase();
  if(shell.keyId(k)){e.preventDefault();handle(k);}
 });
-if(params.get("mode")==="try")enterMode("try","practice");else {label();renderWatch();maybeFocus();}
-window.QBRecordedWatch?.bind(pause);
+
+function renderWatch(device,{beat,point,key,crossed}){
+ if(host.parentElement!==device)device.append(host);
+ const s=make();
+ for(const [i,e] of crossed.entries())pressOn(s,keys[i][1]);
+ const last=key?.beat===beat&&keys[crossed.length-1]?.[1],hold=point.span.end-point.span.voiceEnd;
+ shell.setKeys(last&&!point.speaking&&(point.fraction-key.at)*hold<.50?[last]:[]);
+ const signature=beat+":"+crossed.length;
+ if(signature!==cache){cache=signature;renderLCD(s);}
+}
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;
+ device.prepend(stage);$("try-grid").prepend(host);stage.hidden=false;
+ shell.setKeys([]);shell.setInteractive(true);renderTry();stage.focus({preventScroll:true});
+}
+function exitTry(){mode="watch";cache="";stage.hidden=true;shell.setKeys([]);shell.setInteractive(false);}
+$("return").addEventListener("click",()=>returnToWatch?.());
+function restore(p){practice=make();experiment={...p};refill(experiment);checkInputs(experiment);$("answer").value="";feedback();renderTry();}
+$("reset").addEventListener("click",()=>{counterpart=!isTyped||badLink;threshold=false;restore(problem);});
+const preset={total:{},one:{task:"term"},list:{task:"list",lower:"2",upper:"8",step:"2"},stepped:{lower:"2",upper:"8",step:"2"},threshold:{task:"term"}};
+$("presets").querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
+ counterpart=true;threshold=button.dataset.seqPart==="threshold";
+ $("threshold-day").value="";$("threshold-feedback").textContent="";
+ restore({...fresh,...preset[button.dataset.seqPart]});
+}));
+$("threshold-form").addEventListener("submit",e=>{
+ e.preventDefault();if(!threshold)return;
+ const day=Number($("threshold-day").value);
+ const feedback=$("threshold-feedback");
+ if(!Number.isInteger(day)||day<1||day>20){feedback.textContent="Enter a whole day from 1 to 20.";return;}
+ const output=n=>M.calculate({...fresh,upper:String(n)},"term").value;
+ const valid=output(day)>=50&&(day===1||output(day-1)<50);
+ feedback.textContent=valid?"Correct. Day 5 gives 32 cartons and day 6 gives 64 cartons, so day 6 is first.":"Not yet. The first day meets the target, but the previous day does not.";
+});
+function describePacking(p){
+ if(p.task==="term")return "How many cartons are packed on day "+p.upper+"?";
+ if(p.step==="2")return p.task==="list"?"How many cartons are packed on each of days 2, 4, 6 and 8?":"How many cartons in total on days 2, 4, 6 and 8?";
+ return "How many cartons in total are packed on days 1 to 5?";
+}
+refill(experiment);checkInputs(experiment);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"||isTyped&&!badLink?"try":"watch",renderWatch,enterTry,exitTry});
 })();

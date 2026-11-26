@@ -1,0 +1,642 @@
+{
+  "id": "CT04",
+  "title": "Sequences and finite sums",
+  "intro": "Compare one day’s packing output, a five-day total, and the output on alternate days.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "93b8e433af365bf9f4abc2980cac75cbbf1c1812fcd4468aeb207c9bca82292b",
+    "scriptSha256": "5a528e1cbdd408556ab5d36a7a69b406d28035c394188f459846b72dade4450b"
+  },
+  "chapters": [
+    {
+      "id": "one",
+      "title": "Find one day’s output"
+    },
+    {
+      "id": "consecutive",
+      "title": "Total five consecutive days"
+    },
+    {
+      "id": "step",
+      "title": "List alternate days"
+    },
+    {
+      "id": "total",
+      "title": "Total alternate days"
+    },
+    {
+      "id": "threshold",
+      "title": "Check a whole-day threshold"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "one",
+      "spoken": "Find one term first: substitute n equals five into the rule.",
+      "coach": "A test packing line fills uₙ = 3 × 2ⁿ⁻¹ cartons on day n. Start with the number packed on day 5.",
+      "end": 5.3,
+      "hold": 3,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Home",
+          "at": 0.1421
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "at": 0.4153
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "at": 0.6885
+        }
+      ]
+    },
+    {
+      "chapter": "one",
+      "spoken": "For the fifth term, replace n with five. Keep the exponent in brackets.",
+      "coach": "Substitute 5 for n. Keep the exponent (5 − 1) together.",
+      "end": 11.345,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "3",
+          "at": 0.0538
+        },
+        {
+          "id": "press-5",
+          "label": "×",
+          "at": 0.1573
+        },
+        {
+          "id": "press-6",
+          "label": "2",
+          "at": 0.2609
+        },
+        {
+          "id": "press-7",
+          "label": "^",
+          "at": 0.3644
+        },
+        {
+          "id": "press-8",
+          "label": "(",
+          "at": 0.4679
+        },
+        {
+          "id": "press-9",
+          "label": "5",
+          "at": 0.5714
+        },
+        {
+          "id": "press-10",
+          "label": "−",
+          "at": 0.6749
+        },
+        {
+          "id": "press-11",
+          "label": "1",
+          "at": 0.7785
+        },
+        {
+          "id": "press-12",
+          "label": ")",
+          "at": 0.882
+        }
+      ]
+    },
+    {
+      "chapter": "one",
+      "spoken": "The fifth term is forty-eight. That is not the total of the first five terms.",
+      "coach": "48 cartons on day 5. That is one day, not the five-day total.",
+      "end": 17.644,
+      "hold": 2.5,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "Enter",
+          "at": 0.3133
+        }
+      ]
+    },
+    {
+      "chapter": "consecutive",
+      "spoken": "For a total of consecutive terms, open Menu then four: Calculus then three: Sum.",
+      "coach": "To total the first five days, use Menu → 4: Calculus → 3: Sum.",
+      "end": 25.444,
+      "hold": 3.5,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": "Menu",
+          "at": 0.1421
+        },
+        {
+          "id": "press-15",
+          "label": "4",
+          "at": 0.4153
+        },
+        {
+          "id": "press-16",
+          "label": "3",
+          "at": 0.6885
+        }
+      ]
+    },
+    {
+      "chapter": "consecutive",
+      "spoken": "Type n, then Tab to the lower index, upper index and rule.",
+      "coach": "Use n for the day number, with start day 1 and end day 5. Both are included.",
+      "end": 31.315,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-17",
+          "label": "n",
+          "at": 0.0781
+        },
+        {
+          "id": "press-18",
+          "label": "Tab",
+          "at": 0.2282
+        },
+        {
+          "id": "press-19",
+          "label": "1",
+          "at": 0.3784
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "at": 0.5285
+        },
+        {
+          "id": "press-21",
+          "label": "5",
+          "at": 0.6787
+        },
+        {
+          "id": "press-22",
+          "label": "Tab",
+          "at": 0.8288
+        }
+      ]
+    },
+    {
+      "chapter": "consecutive",
+      "spoken": "Enter the original rule in n. The template automatically steps by one.",
+      "coach": "Enter 3 × 2ⁿ⁻¹ in the expression box. The Sum template goes forward one day at a time.",
+      "end": 37.891,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-23",
+          "label": "3",
+          "at": 0.0538
+        },
+        {
+          "id": "press-24",
+          "label": "×",
+          "at": 0.1573
+        },
+        {
+          "id": "press-25",
+          "label": "2",
+          "at": 0.2609
+        },
+        {
+          "id": "press-26",
+          "label": "^",
+          "at": 0.3644
+        },
+        {
+          "id": "press-27",
+          "label": "(",
+          "at": 0.4679
+        },
+        {
+          "id": "press-28",
+          "label": "n",
+          "at": 0.5714
+        },
+        {
+          "id": "press-29",
+          "label": "−",
+          "at": 0.6749
+        },
+        {
+          "id": "press-30",
+          "label": "1",
+          "at": 0.7785
+        },
+        {
+          "id": "press-31",
+          "label": ")",
+          "at": 0.882
+        }
+      ]
+    },
+    {
+      "chapter": "consecutive",
+      "spoken": "Enter gives ninety-three: the total of all five terms, including both endpoints.",
+      "coach": "The total for days 1 to 5 is 93 cartons.",
+      "end": 45.208,
+      "hold": 2.5,
+      "keys": [
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "at": 0.3133
+        }
+      ]
+    },
+    {
+      "chapter": "step",
+      "spoken": "Need every second index? Open Statistics, List Operations, then Sequence to insert the sequence command.",
+      "coach": "Now examine days 2, 4, 6 and 8. Use Statistics → List Operations → Sequence.",
+      "end": 54.083,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-33",
+          "label": "Menu",
+          "at": 0.1116
+        },
+        {
+          "id": "press-34",
+          "label": "6",
+          "at": 0.3262
+        },
+        {
+          "id": "press-35",
+          "label": "4",
+          "at": 0.5408
+        },
+        {
+          "id": "press-36",
+          "label": "5",
+          "at": 0.7554
+        }
+      ]
+    },
+    {
+      "chapter": "step",
+      "spoken": "Type the rule, then press Right to leave the exponent before typing the comma.",
+      "coach": "Enter the rule in n, then leave the exponent before starting the comma-separated arguments.",
+      "end": 59.965,
+      "hold": 6.5,
+      "keys": [
+        {
+          "id": "press-37",
+          "label": "3",
+          "at": 0.0488
+        },
+        {
+          "id": "press-38",
+          "label": "×",
+          "at": 0.1426
+        },
+        {
+          "id": "press-39",
+          "label": "2",
+          "at": 0.2364
+        },
+        {
+          "id": "press-40",
+          "label": "^",
+          "at": 0.3302
+        },
+        {
+          "id": "press-41",
+          "label": "(",
+          "at": 0.424
+        },
+        {
+          "id": "press-42",
+          "label": "n",
+          "at": 0.5178
+        },
+        {
+          "id": "press-43",
+          "label": "−",
+          "at": 0.6116
+        },
+        {
+          "id": "press-44",
+          "label": "1",
+          "at": 0.7054
+        },
+        {
+          "id": "press-45",
+          "label": ")",
+          "at": 0.7992
+        },
+        {
+          "id": "press-46",
+          "label": "Right",
+          "at": 0.8931
+        }
+      ]
+    },
+    {
+      "chapter": "step",
+      "spoken": "Enter n, the lower and upper indices, then the step. That last two is not the number of terms.",
+      "coach": "The final 2 is the step from one day to the next, not the number of days.",
+      "end": 68.313,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-47",
+          "label": ",",
+          "at": 0.06
+        },
+        {
+          "id": "press-48",
+          "label": "n",
+          "at": 0.1755
+        },
+        {
+          "id": "press-49",
+          "label": ",",
+          "at": 0.291
+        },
+        {
+          "id": "press-50",
+          "label": "2",
+          "at": 0.4065
+        },
+        {
+          "id": "press-51",
+          "label": ",",
+          "at": 0.5219
+        },
+        {
+          "id": "press-52",
+          "label": "8",
+          "at": 0.6374
+        },
+        {
+          "id": "press-53",
+          "label": ",",
+          "at": 0.7529
+        },
+        {
+          "id": "press-54",
+          "label": "2",
+          "at": 0.8684
+        }
+      ]
+    },
+    {
+      "chapter": "step",
+      "spoken": "This produces a list of four terms, not their sum.",
+      "coach": "The selected days produce 6, 24, 96 and 384 cartons respectively.",
+      "end": 73.235,
+      "hold": 2.5,
+      "keys": [
+        {
+          "id": "press-55",
+          "label": "Enter",
+          "at": 0.3133
+        }
+      ]
+    },
+    {
+      "chapter": "total",
+      "spoken": "For the total, first open Statistics, List Math, then Sum of Elements to insert the sum command.",
+      "coach": "For only those four days, start with Sum of Elements from Statistics → List Math.",
+      "end": 81.118,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-56",
+          "label": "Menu",
+          "at": 0.1116
+        },
+        {
+          "id": "press-57",
+          "label": "6",
+          "at": 0.3262
+        },
+        {
+          "id": "press-58",
+          "label": "3",
+          "at": 0.5408
+        },
+        {
+          "id": "press-59",
+          "label": "5",
+          "at": 0.7554
+        }
+      ]
+    },
+    {
+      "chapter": "total",
+      "spoken": "Inside the sum command, insert the sequence command again. Keep the last argument, a step of two.",
+      "coach": "Nest Sequence inside that sum, keeping the step at 2.",
+      "end": 89.926,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-60",
+          "label": "Menu",
+          "at": 0.0229
+        },
+        {
+          "id": "press-61",
+          "label": "6",
+          "at": 0.0671
+        },
+        {
+          "id": "press-62",
+          "label": "4",
+          "at": 0.1112
+        },
+        {
+          "id": "press-63",
+          "label": "5",
+          "at": 0.1553
+        },
+        {
+          "id": "press-64",
+          "label": "3",
+          "at": 0.1995
+        },
+        {
+          "id": "press-65",
+          "label": "×",
+          "at": 0.2436
+        },
+        {
+          "id": "press-66",
+          "label": "2",
+          "at": 0.2877
+        },
+        {
+          "id": "press-67",
+          "label": "^",
+          "at": 0.3319
+        },
+        {
+          "id": "press-68",
+          "label": "(",
+          "at": 0.376
+        },
+        {
+          "id": "press-69",
+          "label": "n",
+          "at": 0.4201
+        },
+        {
+          "id": "press-70",
+          "label": "−",
+          "at": 0.4643
+        },
+        {
+          "id": "press-71",
+          "label": "1",
+          "at": 0.5084
+        },
+        {
+          "id": "press-72",
+          "label": ")",
+          "at": 0.5525
+        },
+        {
+          "id": "press-73",
+          "label": "Right",
+          "at": 0.5966
+        },
+        {
+          "id": "press-74",
+          "label": ",",
+          "at": 0.6408
+        },
+        {
+          "id": "press-75",
+          "label": "n",
+          "at": 0.6849
+        },
+        {
+          "id": "press-76",
+          "label": ",",
+          "at": 0.729
+        },
+        {
+          "id": "press-77",
+          "label": "2",
+          "at": 0.7732
+        },
+        {
+          "id": "press-78",
+          "label": ",",
+          "at": 0.8173
+        },
+        {
+          "id": "press-79",
+          "label": "8",
+          "at": 0.8614
+        },
+        {
+          "id": "press-80",
+          "label": ",",
+          "at": 0.9056
+        },
+        {
+          "id": "press-81",
+          "label": "2",
+          "at": 0.9497
+        }
+      ]
+    },
+    {
+      "chapter": "total",
+      "spoken": "Enter gives five hundred and ten. The outer sum adds only the terms created by the sequence command.",
+      "coach": "510 cartons were packed across the four selected days.",
+      "end": 99.18,
+      "hold": 2.5,
+      "keys": [
+        {
+          "id": "press-82",
+          "label": "Enter",
+          "at": 0.3133
+        }
+      ]
+    },
+    {
+      "chapter": "threshold",
+      "spoken": "For a first threshold, find the first integer index whose term passes the target, not the first total that does.",
+      "coach": "When does output first reach at least 80 cartons? Day 5 gave 48. Use the rule to check day 6.",
+      "end": 107.36,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-83",
+          "label": "esc",
+          "at": 0.0446
+        },
+        {
+          "id": "press-84",
+          "label": "3",
+          "at": 0.1304
+        },
+        {
+          "id": "press-85",
+          "label": "×",
+          "at": 0.2161
+        },
+        {
+          "id": "press-86",
+          "label": "2",
+          "at": 0.3019
+        },
+        {
+          "id": "press-87",
+          "label": "^",
+          "at": 0.3877
+        },
+        {
+          "id": "press-88",
+          "label": "(",
+          "at": 0.4734
+        },
+        {
+          "id": "press-89",
+          "label": "6",
+          "at": 0.5592
+        },
+        {
+          "id": "press-90",
+          "label": "−",
+          "at": 0.6449
+        },
+        {
+          "id": "press-91",
+          "label": "1",
+          "at": 0.7307
+        },
+        {
+          "id": "press-92",
+          "label": ")",
+          "at": 0.8165
+        },
+        {
+          "id": "press-93",
+          "label": "Enter",
+          "at": 0.9022
+        }
+      ]
+    },
+    {
+      "chapter": "threshold",
+      "spoken": "",
+      "coach": "Day 6 gives 96 cartons. Because the daily outputs are increasing, day 6 is the first day to reach 80.",
+      "end": 107.628,
+      "hold": 3.5,
+      "keys": []
+    }
+  ]
+}
