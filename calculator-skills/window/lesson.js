@@ -121,7 +121,7 @@
  function labelPlay(){
   const monitor=playing||pending,label=monitor?"Pause":t>=duration-.015?"Replay":"Play";
   play.setAttribute("aria-label",label);play.title=label;play.dataset.playing=String(playing);
-  play.querySelector(".play-icon").hidden=monitor;play.querySelector(".pause-icon").hidden=!monitor;
+  play.querySelector(".play-icon").toggleAttribute('hidden',monitor);play.querySelector(".pause-icon").toggleAttribute('hidden',!monitor);
  }
  function pause(){
   playEpoch++;pending=false;if(playing&&useAudio&&Number.isFinite(audio.currentTime))t=audio.currentTime;
@@ -166,6 +166,8 @@
  $("sound").addEventListener("click",()=>{
   audio.muted=!audio.muted;const label=audio.muted?"Unmute narration":"Mute narration";
   $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",label);$("sound").title=label;
+  $("sound").querySelector(".sound-waves").toggleAttribute("hidden",audio.muted);
+  $("sound").querySelector(".sound-off").toggleAttribute("hidden",!audio.muted);
  });
  speedSelect.addEventListener("change",()=>{
   if(playing&&!useAudio)t=M.clamp((performance.now()-origin)*speed/1000,0,duration);
@@ -318,8 +320,8 @@
   const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
   const pads=getComputedStyle(surface);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
-  stage.style.setProperty("--ct08-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?370:296,room*558/1168)))+"px");
-  stage.style.setProperty("--ct08-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,room*4/3)))+"px");
+  stage.style.setProperty("--ct08-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?620:296,room*558/1168)))+"px");
+  stage.style.setProperty("--ct08-lcd-fit",Math.floor(Math.max(142,Math.min(full?1160:600,room*4/3)))+"px");
   stage.style.setProperty("--ct08-scene-room",Math.floor(Math.max(140,room))+"px");
  }
  const bankWatchSizing=new ResizeObserver(fitBankWatch);
@@ -327,5 +329,6 @@
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);
+new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
  fitBankWatch();
 })();

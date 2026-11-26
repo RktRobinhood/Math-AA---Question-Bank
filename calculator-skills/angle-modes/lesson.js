@@ -152,7 +152,7 @@
  function readPlay(){
   const title=playing?'Pause':time>=T.duration-.015?'Replay':'Play';
   play.setAttribute('aria-label',title);play.title=title;
-  play.querySelector('.play-icon').hidden=playing;play.querySelector('.pause-icon').hidden=!playing;
+  play.querySelector('.play-icon').toggleAttribute('hidden',playing);play.querySelector('.pause-icon').toggleAttribute('hidden',!playing);
  }
  function placeCursor(){
   const p=T.pointer(time);
@@ -224,8 +224,8 @@
   const recorded=stage.querySelector('.recorded-watch');
   const room=Math.max(170,space-captionBand.offsetHeight-(recorded?.offsetHeight||$('watch-player').offsetHeight));
   const side=innerWidth>710;
-  const fullW=Math.min(expanded?360:286,Math.max(96,Math.floor((room-48)*558/1168)));
-  const lcdW=Math.min(545,Math.max(198,Math.floor((room-48)*4/3)));
+  const fullW=Math.min(expanded?620:286,Math.max(96,Math.floor((room-48)*558/1168)));
+  const lcdW=Math.min(expanded?1160:545,Math.max(198,Math.floor((room-48)*4/3)));
   stage.style.setProperty('--ct02-handset-fit',fullW+'px');
   stage.style.setProperty('--ct02-lcd-fit',lcdW+'px');
   stage.style.setProperty('--ct02-scene-room',Math.max(120,room-(side?43:38))+'px');

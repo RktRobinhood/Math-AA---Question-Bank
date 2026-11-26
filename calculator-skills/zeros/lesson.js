@@ -127,6 +127,8 @@
  $("sound").addEventListener("click",()=>{
   audio.muted=!audio.muted;$("sound").setAttribute("aria-pressed",String(audio.muted));
   const label=audio.muted?"Unmute narration":"Mute narration";$("sound").setAttribute("aria-label",label);$("sound").title=label;
+  $("sound").querySelector(".sound-waves").toggleAttribute("hidden",audio.muted);
+  $("sound").querySelector(".sound-off").toggleAttribute("hidden",!audio.muted);
  });
  audio.playbackRate=rate;audio.preservesPitch=true;
  $("play-rate").addEventListener("change",e=>{
@@ -289,13 +291,14 @@ function fitBankWatch(){
  const vh=window.visualViewport?.height||innerHeight;
  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
- stage.style.setProperty("--ct10-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?370:296,(room-28)*558/1168)))+"px");
- stage.style.setProperty("--ct10-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,(room-31)*4/3)))+"px");
+ stage.style.setProperty("--ct10-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?620:296,(room-28)*558/1168)))+"px");
+ stage.style.setProperty("--ct10-lcd-fit",Math.floor(Math.max(142,Math.min(full?1160:600,(room-31)*4/3)))+"px");
 }
 const bankWatchSizing=new ResizeObserver(fitBankWatch);
 [$("watch-player"),$("caption-band"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
 window.addEventListener("resize",fitBankWatch);
 document.addEventListener("fullscreenchange",fitBankWatch);
+new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
 fitBankWatch();
  modeTo(params.get("mode")==="try"?"try":"watch");
 })();
