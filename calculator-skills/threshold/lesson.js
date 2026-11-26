@@ -2,7 +2,7 @@
 (function(){
  const $=id=>document.getElementById(id);
  const M=window.CT16Math,S=window.CT16Screen,T=window.CT16Tape,H=window.HandheldTransport;
- const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption");
+ const stage=$("stage");
  const lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),fields=[$("expression-1"),$("expression-2")],bound=$("bound");
  const pair=(f,g)=>[M.parse(f),M.parse(g,"target")];
  const watchPair=pair("5*1.5^x","12"),defaultTry=pair("60*0.8^x","30"),params=new URLSearchParams(location.search);
@@ -22,21 +22,10 @@
  const describe=(q,end,r)=>"For 0 to "+end+" days, "+(q===defaultTry?"stock":"the quantity")+" follows "+M.displayExpr(q[0].raw)+". Find when it first reaches "+(r.increasing?"at least ":"at most ")+M.pretty(q[1].T)+" units.";
  const prompt=describe(exercise,exerciseEnd,goal);
  const sameCurve=(a,b)=>a.A===b.A&&a.B===b.B&&a.T===b.T;
- let mode="watch",state=initial(exercise.map(q=>q.raw),exerciseEnd),edited=false,focused=false,focusConsidered=false,started=false,fresh=true;
- let t=0,playing=false,raf=0,origin=0,cache="",watchFocus=false,watchScroll=0;
- const forks=new Map(),MAX_FORKS=24;
- let activeFork=null,assigned=null;
- function capture(){const display=$("keypad-result");return {state,edited,fresh,answers:answer.map(a=>a.value),feedback:feedback.textContent,gradeClass:feedback.className,status:{text:display.textContent,cls:display.className,hidden:display.hidden}};}
- function restore(d){({state,edited,fresh}=d);answer.forEach((a,i)=>a.value=d.answers[i]);feedback.textContent=d.feedback;feedback.className=d.gradeClass;syncFields();}
- function saveLane(){const d=capture();if(activeFork===null){assigned=d;return;}
-  forks.delete(activeFork);forks.set(activeFork,d);
-  if(forks.size>MAX_FORKS)forks.delete(forks.keys().next().value);
- }
- function newFork(){return {state:{...snapshot(t).s,fromWatch:true},edited:true,fresh:false,answers:["",""],feedback:"",gradeClass:"feedback"};}
- function restoreStatus(d){if(!d?.status)return;const e=$("keypad-result");e.textContent=d.status.text;e.className=d.status.cls;e.hidden=d.status.hidden;}
-
- const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>press(key)});
- const tabs=[$("watch-tab"),$("try-tab")],steps=$("steps"),hot=$("hotspots");
+ let mode="watch",state=initial(exercise.map(q=>q.raw),exerciseEnd),edited=false,fresh=true,returnToWatch,stamp="";
+ const handheld=$("handheld-host");
+ const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>{press(key);stage.focus({preventScroll:true});}});
+ const hot=$("hotspots");
  const hints={entry:"Enter a function and press Enter to plot. Use the handheld Tab to open the other line.",plotted:"Two curves are needed. Press Menu when both are plotted.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 4: Intersection.",lower:"Place the lower bound just left of one crossing. Type an x-value or move the cursor.",upper:"Choose the upper bound just right of the same crossing.",result:"Read the x-coordinate for the time. Test which whole day first meets the threshold."};
  const syncFields=()=>{fields.forEach((el,i)=>{el.value=state.raw[i];el.setSelectionRange(el.value.length,el.value.length);});bound.value=state.typed;};
  const getWindow=()=>state.windows||M.windowFor(state.q,state.end);
@@ -46,74 +35,6 @@
   if(s.state==="entry")graphs.push("Function entry "+(s.active+1)+": "+M.displayExpr(s.raw[s.active]));
   $("lcd-text").textContent=[...graphs,hints[s.state],s.low!=null?"Lower: "+M.pretty(s.low):"",s.typed?"Typed bound: "+s.typed:"",s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Intersection "+fmtPair(s.mark):"",s.error||""].filter(Boolean).join(". ");
  }
- function snapshot(time){
-  const v={state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false}, key="";
-  let lit=key;
-  for(const e of T.keys){
-   if(time<e.time)break;
-   Object.assign(v,e.delta);lit=time<e.time+.30?e.key:"";
-  }
-  const s={...initial([v.first,v.second],watchEnd),...v,q:[v.firstPlot?watchPair[0]:null,v.secondPlot?watchPair[1]:null],windows:knownWindow};
-  return{s,key:lit};
- }
- T.titles.forEach((title,i)=>{
-  const li=document.createElement("li"),b=document.createElement("button"),no=document.createElement("span");
-  b.type="button";no.textContent="0"+(i+1);b.append(no,document.createTextNode(title));
-  b.addEventListener("click",()=>go(T.starts[i]));li.append(b);steps.append(li);
- });
- const duration=T.duration,clock=(x)=>Math.floor(x/60)+":"+String(Math.floor(x)%60).padStart(2,"0"),endClock=clock(Math.round(duration));
- function renderWatch(){
-  if(mode!=="watch")return;
-  const chapter=T.starts.findLastIndex(start=>t>=start), phrase=T.captionStarts.findLastIndex(start=>t>=start), {s,key}=snapshot(t);
-  const keyStamp=[s.state,...s.raw,s.cursor,s.typed,s.low,s.high,chapter,phrase].join("|");
-  seek.value=t;seek.setAttribute("aria-valuetext",clock(t)+" of "+endClock);$("clock").textContent=(t>=duration?endClock:clock(t))+" / "+endClock;
-  const take=$("take-over"),done=t>=duration-.015;
-  take.textContent=done?"Open Try":"Take over";take.setAttribute("aria-label",done?"Open the independent Try exercise":"Take over this calculator scene");
-  shell.setKeys(key?[key]:[]);
-  $("stage-play").hidden=started||t>0;
-  if(cache===keyStamp)return;cache=keyStamp;
-  screen.draw(s);labelGraph(s);
-  cap.textContent=T.captions[phrase];
-  const strip=phrase>=10?"Continuous: 2.16 days · First whole day: 3":phrase===9?"Day 2: 11.25 < 12 · Day 3: 16.875 ≥ 12":phrase===8?"Day 2: 5 · 1.5² = 11.25 < 12":phrase>=6?"Crossing: (2.159…, 12) · x is the time":"Model: 5 · 1.5ˣ · Target: 12 · 0 ≤ x ≤ 8";
-  const v=$("watch-equation");v.dataset.visible="true";v.setAttribute("aria-hidden","false");v.textContent=strip;
-  [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
-  fitWatch();
- }
- function go(v){t=M.clamp(Number(v)||0,0,duration);origin=performance.now()-t*1000;renderWatch();labelPlay();}
- function labelPlay(){const label=playing?"Pause":t>=duration-.015?"Replay":"Play";play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(playing);}
- function pause(){if(playing)t=M.clamp((performance.now()-origin)/1000,0,duration);playing=false;cancelAnimationFrame(raf);labelPlay();renderWatch();}
- function tick(now){if(!playing||mode!=="watch")return;t=M.clamp((now-origin)/1000,0,duration);if(t>=duration){pause();return;}renderWatch();raf=requestAnimationFrame(tick);}
- function fitWatch(){
-  if(mode!=="watch")return;
-  const h=window.visualViewport?.height||innerHeight,top=Math.max(0,stage.getBoundingClientRect().top)+(document.querySelector(".tabbar")?.offsetHeight||0);
-  const occupied=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
-  const w=Math.max(82,Math.min(focused?338:304,Math.floor((h-top-occupied-24)*558/1168)));
-  stage.style.setProperty("--watch-fit-width",w+"px");
- }
- function focus(v){
-  focused=Boolean(v);stage.classList.toggle("ct16-focused",focused);stage.dataset.focused=String(focused);document.body.classList.toggle("ct16-focus-open",focused);
-  const b=$("focus-view"),name=focused?"Exit focused view":"Focused view";
-  b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",name);b.title=name;b.textContent=focused?"Exit":"⛶";
-  document.querySelectorAll(".header,.calc-tabs,.notes,#watch,#try").forEach(e=>e.inert=focused);
-  if(focused)stage.scrollTop=0;fitWatch();
- }
- function fitAtEntry(){fitWatch();if(mode==="watch"&&!focused&&shell.body.getBoundingClientRect().width<156)focus(true);}
- const observer=new ResizeObserver(fitWatch);
- for(const e of [$("watch-message"),$("watch-player"),document.querySelector(".header")])observer.observe(e);
- window.addEventListener("resize",fitWatch);
- function start(){
-  if(mode!=="watch")return;
-  if(!focusConsidered){focusConsidered=true;fitWatch();const r=shell.body.getBoundingClientRect();if(!focused&&(r.width<185||r.top<0))focus(true);}
-  if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});
-  started=true;$("stage-play").hidden=true;
-  if(t>=duration-.015)go(0);
-  playing=true;origin=performance.now()-t*1000;labelPlay();raf=requestAnimationFrame(tick);
- }
- function toggle(){if(playing)pause();else start();}
- play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);
- $("back").addEventListener("click",()=>go(t-10));$("next").addEventListener("click",()=>go(t+10));
- $("replay").addEventListener("click",()=>{pause();go(0);start();});seek.addEventListener("input",()=>go(seek.value));
- $("focus-view").addEventListener("click",()=>focus(!focused));
  function jumpMenu(panel,index,action){
   const b=document.createElement("button");
   b.type="button";b.setAttribute("aria-label",panel.rows[index]);b.style.left=panel.x/3.2+"%";
@@ -126,20 +47,9 @@
  function isExercise(){
   try{
    const typed=pair(...state.raw);
-   return activeFork===null&&!state.fromWatch&&state.end===exerciseEnd&&sameCurve(typed[0],exercise[0])&&sameCurve(typed[1],exercise[1]);
+   return state.end===exerciseEnd&&sameCurve(typed[0],exercise[0])&&sameCurve(typed[1],exercise[1]);
   }catch{return false;}
  }
- function fitTry(){
-  if(mode!=="try")return;
-  const h=window.visualViewport?.height||innerHeight,phone=innerWidth<=700;
-  const top=Math.max(0,$("handheld-host").getBoundingClientRect().top+scrollY);
-  const width=Math.min(phone?267:302,Math.max(phone?158:155,Math.floor((h-top-10)*558/1168)));
-  stage.style.setProperty("--retro-try-width",width+"px");
- }
- const tryLayout=new ResizeObserver(fitTry);
- for(const el of [document.querySelector("header"),$("try-player")])tryLayout.observe(el);
- window.addEventListener("resize",fitTry);
- window.visualViewport?.addEventListener("resize",fitTry);
  function renderTry(){
   if(mode!=="try")return;
   screen.draw(state);labelGraph(state);hot.replaceChildren();
@@ -147,9 +57,9 @@
   $("answer-form").hidden=!inExercise;
   $("checker-context").hidden=inExercise;
   if(!inExercise)$("feedback").textContent="";
-  $("reset-keypad").textContent=activeFork===null?"Reset calculator":"Return to assigned Try";
-  $("checker-context").textContent=activeFork===null?"Exploration only. Reset the calculator to return to the set exercise.":"Explore the paused example here. Return to assigned Try to use its answer check.";
-  $("keypad-problem").textContent=inExercise?prompt:activeFork!==null?"You took over the Watch example. Fit the target within 0 to "+state.end+" days.":info.ok?describe(state.q,state.end,info):"Explore a different model and horizontal target, from 0 to "+state.end+" days.";
+  $("reset-keypad").textContent="Reset calculator";
+  $("checker-context").textContent="Exploration only. Reset the calculator to return to the set exercise.";
+  $("keypad-problem").textContent=inExercise?prompt:info.ok?describe(state.q,state.end,info):"Explore a different model and horizontal target, from 0 to "+state.end+" days.";
   $("try-line").textContent=$("keypad-problem").textContent;
   const b=state.state==="lower"||state.state==="upper";lcd.classList.toggle("pick",b);
   $("bound-form").hidden=!b;$("retry-bounds").hidden=state.state!=="result";
@@ -239,8 +149,7 @@
   $("answer-x").value="";$("answer-day").value="";$("feedback").textContent="";renderTry();
  }
  $("reset-keypad").addEventListener("click",()=>{
-  if(activeFork!==null){saveLane();activeFork=null;restore(assigned);renderTry();restoreStatus(assigned);}
-  else restoreExercise();
+  restoreExercise();
   stage.focus({preventScroll:true});
  });
  function pointer(ev){
@@ -255,41 +164,28 @@
   if(mode!=="try"||!lcd.classList.contains("pick"))return;
   const x=pointer(e);if(x!==null)confirm(x);
  });
- function modeTo(next,steal=false){
-  let restored=null;
-  if(mode==="try"&&next==="try"&&!steal&&activeFork!==null){
-   saveLane();activeFork=null;restored=assigned;restore(restored);
-  }else if(mode==="try"&&next==="watch"){saveLane();activeFork=null;}
-  else if(next==="try"&&mode==="watch"){
-   pause();watchFocus=focused;watchScroll=scrollY;if(focused)focus(false);
-   if(!assigned){assigned=capture();delete assigned.status;}
-   activeFork=steal?String(Math.round(t*1000)):null;
-   restored=activeFork===null?assigned:forks.get(activeFork)||newFork();
-   restore(restored);
-  }
-  mode=next;stage.dataset.mode=mode;cache="";
-  const watch=mode==="watch";
-  tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
-  for(const n of ["watch","watch-side","watch-player","watch-message"])$(n).hidden=!watch;
-  for(const n of ["try","try-side","try-player"])$(n).hidden=watch;
-  shell.setKeys([]);shell.setInteractive(!watch);
-  if(watch){hot.replaceChildren();lcd.classList.remove("pick");window.scrollTo(0,watchScroll);renderWatch();if(watchFocus)focus(true);else fitAtEntry();}
-  else{$("stage-play").hidden=true;renderTry();restoreStatus(restored);fitTry();}
+ const watchStates=[{state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false}];
+ for(const e of T.keys)watchStates.push({...watchStates.at(-1),...e.delta});
+ function renderWatch(device,{beat,point,crossed,key}){
+  if(handheld.parentElement!==device)device.append(handheld);
+  const n=crossed.length,lit=n&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*(point.span.end-point.span.voiceEnd)<.62;
+  shell.setKeys(lit?[T.keys[n-1].key]:[]);
+  if(stamp===n)return;
+  stamp=n;const v=watchStates[n],s={...initial([v.first,v.second],watchEnd),...v,q:[v.firstPlot?watchPair[0]:null,v.secondPlot?watchPair[1]:null],windows:knownWindow};
+  screen.draw(s);labelGraph(s);
  }
- tabs.forEach((b,i)=>{
-  b.addEventListener("click",()=>{modeTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
-  b.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const next=e.key==="Home"?0:e.key==="End"?1:1-i;modeTo(next?"try":"watch");tabs[next].focus();});
- });
- $("take-over").addEventListener("click",()=>{const done=t>=duration-.015;modeTo("try",!done);stage.focus({preventScroll:true});});
- $("return-watch").addEventListener("click",()=>{modeTo("watch");play.focus({preventScroll:true});});
+ function enterTry(device,actions){
+  mode="try";returnToWatch=actions.returnToWatch;device.prepend(stage);$("try-deck").prepend(handheld);stage.hidden=false;
+  shell.setKeys([]);shell.setInteractive(true);syncFields();renderTry();stage.focus({preventScroll:true});
+ }
+ function exitTry(){
+  mode="watch";stage.hidden=true;stamp="";hot.replaceChildren();lcd.classList.remove("pick");shell.setKeys([]);shell.setInteractive(false);
+ }
+ $("return-watch").onclick=()=>returnToWatch?.();
  document.addEventListener("keydown",e=>{
   if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
-  if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
   if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
-  if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
-   const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(t+(k==="j"?-10:10));}
-   return;
-  }
+  if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
   if(mode!=="try"||!stage.contains(e.target)&&e.target!==document.body||e.target.closest("button")&&(e.key==="Enter"||e.key===" "))return;
   const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",m:"menu",M:"menu",".":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
   const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");
@@ -306,6 +202,5 @@
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?"Both correct. Day "+goal.day+" is the first checkpoint that meets the threshold.":timeRight?"The continuous time is correct. Test the adjacent whole days against the target rather than rounding.":dayRight?"The whole day is correct. Read the x-coordinate at the intersection for the continuous time.":"Use Intersection for the continuous time, then test the adjacent whole days against the target.";
  });
- modeTo(params.get("mode")==="try"?"try":"watch");
-window.QBRecordedWatch?.bind(pause);
+ window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"||customLink?"try":"watch",renderWatch,enterTry,exitTry});
 })();
