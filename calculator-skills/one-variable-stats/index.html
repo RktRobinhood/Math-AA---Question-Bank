@@ -1,36 +1,46 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>One-variable statistics · Calculator Skills | IB Math Question Bank</title>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>One-variable statistics and standard deviation · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT29" data-cue-sha="85b73b29d17336d365c7272a60910e934b87fd286f2561733e63c377967defc2" data-transcript-sha="48c5ed2df01fcc68d0a67431c16bd46af74d334b27f3c8b0e9e43bc897c17321" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>One-variable statistics</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
-<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
-<div id="watch-message" class="message"><p id="caption"></p></div>
-<div id="try-message" class="message" hidden><p id="task"></p><div><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
-<div class="deck">
-<div id="handheld-host"><div id="lcd" aria-label="Recreated Lists & Spreadsheet display"><div class="lcd-bar"><b>1.1</b> Lists &amp; Spreadsheet <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal">▶</button></div></div>
-<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>Readings and counts</h2>
-<p>Each value is a reading. Its frequency tells you how many times it occurs.</p><ol id="chapters"></ol></aside>
-<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Read the results</h2><p id="hint"></p><p id="error" class="feedback" role="status" hidden></p>
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT29</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="ct29-try" tabindex="0" aria-label="Independent TI-Nspire CX II-T practice" hidden>
+<div id="try-message" class="message"><p id="task"></p><div><button id="return">Return to Watch</button> <button id="reset">Reset Try</button></div></div>
+<div class="deck" id="try-grid">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Lists & Spreadsheet display"><div class="lcd-bar"><b>1.1</b> Lists &amp; Spreadsheet <i>RAD</i></div><div id="screen"></div></div></div>
+<aside id="try" aria-label="Statistics practice"><h2>Read the results</h2><p id="hint"></p><p id="error" class="feedback" role="status" hidden></p>
 <p class="keys">Keyboard: <kbd>M</kbd>, then <kbd>4</kbd>, <kbd>1</kbd>, <kbd>1</kbd>. Tab moves between wizard fields; arrows open or move through lists.</p>
 <form id="answer"><label for="mean">Mean</label><input id="mean" inputmode="decimal" type="number" step="any" required>
 <label for="sd">Standard deviation</label><input id="sd" inputmode="decimal" type="number" step="any" min="0" required>
 <label for="kind">LCD row used</label><select id="kind" required><option value="">Choose a row</option><option value="population">σx</option><option value="sample">sx</option></select>
-<button type="submit">Check</button></form><p class="feedback" id="feedback" role="status" hidden></p></aside>
+<button type="submit">Check</button></form><p class="feedback" id="feedback" role="status" hidden></p><details><summary>Sample or population?</summary><p>Use <b>σx</b> for the standard deviation of the whole collection and <b>sx</b> when the question specifies the sample standard deviation. A frequency of zero excludes that value. Keep result columns separate from the source lists.</p></details></aside>
 </div>
-<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="34" step=".005"></label><span>Captions only</span></div></div>
 </section>
-<details><summary>Sample or population?</summary><p>Use <b>σx</b> (divide by n) for the standard deviation of the whole collection being described. Use <b>sx</b> (divide by n−1) when the task asks for the sample standard deviation. Both are in the original units. Frequency List <b>1</b> uses each row once. Counts of zero exclude those rows. Keep the result columns separate from the named source lists.</p><p><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/31931">TI handheld menu and SD reference</a> · <a href="https://education.ti.com/-/media/ti/education/images/product-resources/aus/maths-teachers-vic/vce-gm-trb.pdf">TI named-list frequency example (p. 9)</a></p></details>
 </main></body></html>
