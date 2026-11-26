@@ -1,0 +1,294 @@
+{
+  "id": "CT29",
+  "title": "One-variable statistics and standard deviation",
+  "intro": "Find the mean and standard deviation from a named list, then compare a frequency run.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "77e5e96321376d0d32a03f6f1f91d9ac5a52d90ebefb62f4642572fc91616b42",
+    "scriptSha256": "48c5ed2df01fcc68d0a67431c16bd46af74d334b27f3c8b0e9e43bc897c17321"
+  },
+  "chapters": [
+    {
+      "id": "read-list",
+      "title": "Read a named list"
+    },
+    {
+      "id": "open-wizard",
+      "title": "Open One-Variable Statistics"
+    },
+    {
+      "id": "select-list",
+      "title": "Set X1 List and Frequency List"
+    },
+    {
+      "id": "read-results",
+      "title": "Read x̄, sx and σx"
+    },
+    {
+      "id": "set-frequency",
+      "title": "Open a frequency run"
+    },
+    {
+      "id": "read-weighted",
+      "title": "Calculate with frequency"
+    },
+    {
+      "id": "transfer",
+      "title": "Transfer to a new example"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-list",
+      "spoken": "Column A is named values. For the first run, use each row once.",
+      "coach": "Column A is named values. For the first run, use each row once.",
+      "end": 5.947,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "open-wizard",
+      "spoken": "Menu then four: Statistics then one: Stat Calculations then one: One-Variable Statistics. Confirm one list.",
+      "coach": "Menu → 4: Statistics → 1: Stat Calculations → 1: One-Variable Statistics. Confirm one list.",
+      "end": 17.079,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.085
+        },
+        {
+          "id": "press-2",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.2157
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3464
+        },
+        {
+          "id": "press-4",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4771
+        },
+        {
+          "id": "press-5",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6078
+        },
+        {
+          "id": "press-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7386
+        },
+        {
+          "id": "press-7",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8693
+        }
+      ]
+    },
+    {
+      "chapter": "select-list",
+      "spoken": "Choose the list named values for the first X list. Leave Frequency List at one. Send the results to column C.",
+      "coach": "Choose values as X1 List. Leave Frequency List at 1. Send the results to c[].",
+      "end": 26.469,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-8",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.0751
+        },
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.1908
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3064
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.422
+        },
+        {
+          "id": "press-12",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5376
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6532
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7688
+        },
+        {
+          "id": "press-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8844
+        }
+      ]
+    },
+    {
+      "chapter": "read-results",
+      "spoken": "Read the result names in C and values in D. Use sigma x for the whole collection, or s sub x for sample standard deviation.",
+      "coach": "Read the result names in C and values in D. Use σx for the whole collection, or sx for sample SD.",
+      "end": 35.989,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "set-frequency",
+      "spoken": "Run the same menu. Keep the list named values for the first X list. Instead of one, choose the list named freq for Frequency List.",
+      "coach": "Run the same menu. Keep values for X1 List; choose freq instead of 1 for Frequency List.",
+      "end": 46.409,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0514
+        },
+        {
+          "id": "press-17",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1304
+        },
+        {
+          "id": "press-18",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2095
+        },
+        {
+          "id": "press-19",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2885
+        },
+        {
+          "id": "press-20",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3676
+        },
+        {
+          "id": "press-21",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4466
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5257
+        },
+        {
+          "id": "press-23",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6047
+        },
+        {
+          "id": "press-24",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6838
+        },
+        {
+          "id": "press-25",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.7628
+        },
+        {
+          "id": "press-26",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.8419
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9209
+        }
+      ]
+    },
+    {
+      "chapter": "read-weighted",
+      "spoken": "Confirm and read the new mean and sigma x. Now n is the sum of the frequencies, not the number of rows.",
+      "coach": "Confirm and read the new mean and σx. Now n is the sum of frequencies, not the number of rows.",
+      "end": 54.853,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-28",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.115
+        },
+        {
+          "id": "press-29",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.292
+        },
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.469
+        },
+        {
+          "id": "press-31",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.646
+        },
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.823
+        }
+      ]
+    },
+    {
+      "chapter": "transfer",
+      "spoken": "Check that n counts observations, not rows. Open Try for a different collection.",
+      "coach": "Check that n counts observations, not rows. Open Try for a different collection.",
+      "end": 62.045,
+      "hold": 2,
+      "keys": []
+    }
+  ]
+}
