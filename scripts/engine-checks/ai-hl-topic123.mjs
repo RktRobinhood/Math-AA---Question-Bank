@@ -91,6 +91,26 @@ function bestTree(n, edges, w, T) {
   return best;
 }
 
+function verifyTspBounds(q, T) {
+    const D = readTable(q, T), n = D.length;
+    T.require(new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size === (n * (n - 1)) / 2, "all the distances are different, so the nearest neighbour is never tied");
+    T.require(D.every((row, i) => row.every((v, j) =>
+      v === D[j][i] && D.every((_, k) => v <= D[i][k] + D[k][j]))),
+      "the table gives symmetric least distances, never shortened by an intermediate stop");
+    let at = 0, upper = 0; const left = new Set([...Array(n).keys()].slice(1));
+    while (left.size) { let nxt = null; for (const j of left) if (nxt === null || D[at][j] < D[at][nxt]) nxt = j; upper += D[at][nxt]; left.delete(nxt); at = nxt; }
+    upper += D[at][0];
+    const edges = [], w = [];
+    for (let i = 1; i < n; i++) for (let j = i + 1; j < n; j++) { edges.push([i - 1, j - 1]); w.push(D[i][j]); }
+    const mst = bestTree(n - 1, edges, w, T).total, two = D[0].slice(1).sort((a, b) => a - b), lower = mst + two[0] + two[1];
+    // the true shortest tour, by trying every order, must lie between the bounds
+    let opt = Infinity;
+    const perm = (rest, route, len) => { if (!rest.length) { opt = Math.min(opt, len + D[route[route.length - 1]][0]); return; } rest.forEach((v, i) => perm(rest.filter((_, k) => k !== i), [...route, v], len + D[route[route.length - 1]][v])); };
+    perm([...Array(n).keys()].slice(1), [0], 0);
+    T.require(lower <= opt && opt <= upper, "lower bound <= shortest tour <= upper bound");
+    return { upper, mst, lower, opt };
+}
+
 export default {
   // ---------------- 1.9 ----------------
   "t1-ai-log-laws/combine/equation": (q, T) => { const { a, b, c } = q.params; return { a: ap(T, Math.exp(Math.log(a) + Math.log(b) - Math.log(c))) }; },
@@ -538,22 +558,12 @@ export default {
     return { a: total, b: odd.length, c: total + extra };
   },
   "t3-ai-graph-algorithms/tsp-bounds/table": (q, T) => {
-    const D = readTable(q, T), n = D.length;
-    T.require(new Set(D.flatMap((r, i) => r.filter((_, j) => j > i))).size === (n * (n - 1)) / 2, "all the distances are different, so the nearest neighbour is never tied");
-    T.require(D.every((row, i) => row.every((v, j) =>
-      v === D[j][i] && D.every((_, k) => v <= D[i][k] + D[k][j]))),
-      "the table gives symmetric least distances, never shortened by an intermediate stop");
-    let at = 0, upper = 0; const left = new Set([...Array(n).keys()].slice(1));
-    while (left.size) { let nxt = null; for (const j of left) if (nxt === null || D[at][j] < D[at][nxt]) nxt = j; upper += D[at][nxt]; left.delete(nxt); at = nxt; }
-    upper += D[at][0];
-    const edges = [], w = [];
-    for (let i = 1; i < n; i++) for (let j = i + 1; j < n; j++) { edges.push([i - 1, j - 1]); w.push(D[i][j]); }
-    const mst = bestTree(n - 1, edges, w, T).total, two = D[0].slice(1).sort((a, b) => a - b), lower = mst + two[0] + two[1];
-    // the true shortest tour, by trying every order, must lie between the bounds
-    let opt = Infinity;
-    const perm = (rest, route, len) => { if (!rest.length) { opt = Math.min(opt, len + D[route[route.length - 1]][0]); return; } rest.forEach((v, i) => perm(rest.filter((_, k) => k !== i), [...route, v], len + D[route[route.length - 1]][v])); };
-    perm([...Array(n).keys()].slice(1), [0], 0);
-    T.require(lower <= opt && opt <= upper, "lower bound <= shortest tour <= upper bound");
+    const { upper, mst, lower } = verifyTspBounds(q, T);
     return { a: upper, b: mst, c: lower };
+  },
+  "t3-ai-graph-algorithms/tsp-bound-inference/table": (q, T) => {
+    const { upper, lower, opt } = verifyTspBounds(q, T);
+    T.require(lower !== upper || opt === upper, "matching bounds pin the actual optimum");
+    return { a: upper, b: lower, c: T.option(lower === upper ? "proved" : "undecided") };
   },
 };
