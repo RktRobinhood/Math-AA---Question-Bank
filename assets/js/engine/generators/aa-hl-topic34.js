@@ -739,10 +739,11 @@
       do { d = rvec(rng, -5, 5); e = rvec(rng, -5, 5); if (dot(d, e) > 0 && rng.bool(0.6)) e = vmul(-1, e); th = (Math.acos(Math.abs(dot(d, e)) / (norm(d) * norm(e))) * 180) / Math.PI; } while (zeros(d) + zeros(e) > 1 || isZeroV(d) || isZeroV(e) || !(th > 10 && th < 85) || Math.abs(th - Math.round(th)) < 0.02);
       const a = rvec(rng, -6, 6), b = rvec(rng, -6, 6), dd = dot(d, e);
       return { params: { d, e }, stem: `The line $L_{1}$ has equation $${lineT(a, d)}$ and the line $L_{2}$ has equation $${lineT(b, e, "\\mu")}$.`, parts: [
-        P("Find the scalar product of the direction vectors of $L_{1}$ and $L_{2}$.", 1, ans.int(dd), [`$${col(d)} \\cdot ${col(e)} = ${dotW(d, e)} = ${dd}$`]),
+        P("Find the scalar product of the direction vectors as written in the two equations.", 1, ans.int(dd), [`$${col(d)} \\cdot ${col(e)} = ${dotW(d, e)} = ${dd}$`]),
         P("Find the acute angle between $L_{1}$ and $L_{2}$, in degrees.", 3, ans.sf(th, 3, { unit: "$^\\circ$", misconceptions: dd < 0 ? [{ value: 180 - th, text: "This is the obtuse angle between the direction vectors. The acute angle between the lines is asked for." }] : [] }), [
-          `$\\cos\\theta = \\dfrac{|${dd}|}{\\sqrt{${n2(d)}}\\sqrt{${n2(e)}}}$, using the size of the scalar product to get the acute angle`,
-          `$\\theta = ${sf(th)}^\\circ$`])] };
+          `$\\cos\\theta = \\dfrac{|${dd}|}{\\sqrt{${n2(d)}}\\sqrt{${n2(e)}}}$, using the absolute value of the scalar product to get the acute angle`,
+          "Reversing either direction vector changes the sign of the scalar product, but it does not change the acute angle between the lines.",
+          `$\\theta \\approx ${sf(th)}^\\circ$`])] };
     } });
 
   reg({ type: "t3-ahl-line", unknown: "foot-of-perpendicular", representation: "equation", format: "value", levels: [3], syllabus: ["3.14", "3.13"],
@@ -1129,8 +1130,9 @@
       return { params: { n1, n2: n2v }, stem: `The plane $\\Pi_{1}$ has equation $${planeT(n1, d1)}$ and the plane $\\Pi_{2}$ has equation $${planeT(n2v, d2)}$.`, parts: [
         P("Find the scalar product of the normal vectors of $\\Pi_{1}$ and $\\Pi_{2}$ that are read from the equations.", 1, ans.int(dd), [`$${col(n1)} \\cdot ${col(n2v)} = ${dotW(n1, n2v)} = ${dd}$`]),
         P("Find the acute angle between $\\Pi_{1}$ and $\\Pi_{2}$, in degrees.", 3, ans.sf(th, 3, { unit: "$^\\circ$", misconceptions: dd < 0 ? [{ value: 180 - th, text: "This is the obtuse angle between the normals. The acute angle between the planes is asked for." }] : [] }), [
-          "The angle between two planes is the angle between their normals.",
-          `$\\cos\\theta = \\dfrac{|${dd}|}{\\sqrt{${n2(n1)}}\\sqrt{${n2(n2v)}}}$`, `$\\theta = ${sf(th)}^\\circ$`])] };
+          "The acute angle between the planes is the smaller of the angle between the displayed normals and its supplement. Reversing a normal does not change the plane.",
+          ...(dd < 0 ? [`The displayed normals make an obtuse angle of approximately $${sf(180 - th)}^\\circ$. Take the acute angle instead: use the absolute value of the scalar product.`] : []),
+          `$\\cos\\theta = \\dfrac{|${dd}|}{\\sqrt{${n2(n1)}}\\sqrt{${n2(n2v)}}}$`, `$\\theta \\approx ${sf(th)}^\\circ$`])] };
     } });
 
   reg({ type: "t3-ahl-line-plane", unknown: "line-plane-chain", representation: "equation", format: "value", levels: [4], syllabus: ["3.18"], calculator: true,
