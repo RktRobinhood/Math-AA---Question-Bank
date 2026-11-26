@@ -1,32 +1,44 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
 <title>Finance Solver · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT05" data-cue-sha="e1a09a1a434f9f06d10e7926e748cad42f4de8b4ff100d18315a24660d33daef" data-transcript-sha="2dcc41e54032a61c5af01cfcfcc7ae93c40071e5f879e52421b94c5589bfb5da" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>Finance Solver</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
-<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
-<div id="watch-message" class="message"><p id="caption"></p></div>
-<div id="try-message" class="message" hidden><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
-<div class="deck">
-<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.5 3.5v17l13-8.5z"/></svg></button></div></div>
-<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>One deposit, one balance</h2>
-<p>Use the same cash-flow perspective throughout.</p><ol id="chapters"></ol></aside>
-<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Find the balance</h2>
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT05</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="ct05-try" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire Finance Solver practice" hidden>
+<div id="try-message" class="message"><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset Try</button></div></div>
+<div class="deck" id="try-deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div></div></div>
+
+<aside id="try" aria-label="Finance Solver practice"><h2>Find the balance</h2>
 <p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
 <details><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu. Enter selects the current menu row or calculates the highlighted field. Use Tab and Shift+Tab to move around the solver.</p></details></aside>
 </div>
-<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="40.5" step=".005"></label><span>Captions only</span></div></div>
 </section>
 </main></body></html>

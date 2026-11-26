@@ -1,0 +1,277 @@
+{
+  "id": "CT05",
+  "title": "Finance Solver",
+  "intro": "Use a consistent cash-flow direction and solve for the balance of one deposit.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "b7b146143d7b3e234f036491c9a7a6fd41acd455b527303b10317fd9430e5a0a",
+    "scriptSha256": "2dcc41e54032a61c5af01cfcfcc7ae93c40071e5f879e52421b94c5589bfb5da"
+  },
+  "chapters": [
+    {
+      "id": "direction",
+      "title": "Choose a cash-flow direction"
+    },
+    {
+      "id": "menu",
+      "title": "Open Finance Solver"
+    },
+    {
+      "id": "periods",
+      "title": "Enter periods and annual rate"
+    },
+    {
+      "id": "cashflows",
+      "title": "Enter the two cash flows"
+    },
+    {
+      "id": "frequency",
+      "title": "Set the monthly frequency"
+    },
+    {
+      "id": "solve",
+      "title": "Solve for future value"
+    },
+    {
+      "id": "balance",
+      "title": "Read the positive balance"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "direction",
+      "spoken": "Deposit one thousand for two years at six percent nominal interest, compounded monthly. There are no later payments.",
+      "coach": "Track the money from your point of view.",
+      "end": 8.358,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page, press Menu then eight: Finance then one: Finance Solver.",
+      "coach": "Menu → 8: Finance → 1: Finance Solver.",
+      "end": 16.007,
+      "hold": 2.62,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1667
+        },
+        {
+          "id": "press-2",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.4444
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "periods",
+      "spoken": "Two years times twelve months gives twenty-four payment periods. Enter six for the annual percentage rate.",
+      "coach": "N = 24 monthly periods; I(%) = 6, the annual rate.",
+      "end": 23.63,
+      "hold": 3.7,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1071
+        },
+        {
+          "id": "press-5",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.2857
+        },
+        {
+          "id": "press-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4643
+        },
+        {
+          "id": "press-7",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.6429
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "cashflows",
+      "spoken": "Present value is negative one thousand: the deposit leaves you now. Payment is zero because there are no recurring payments.",
+      "coach": "PV = −1,000; Pmt = 0. Use the (−) key for the deposit.",
+      "end": 32.472,
+      "hold": 5.32,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.0698
+        },
+        {
+          "id": "press-10",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.186
+        },
+        {
+          "id": "press-11",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3023
+        },
+        {
+          "id": "press-12",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.4186
+        },
+        {
+          "id": "press-13",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5349
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6512
+        },
+        {
+          "id": "press-15",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7674
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "frequency",
+      "spoken": "Skip future value. To count periods in months, set payments per year and compounding periods per year to twelve. Leave payment timing at End; it has no effect without recurring payments.",
+      "coach": "PpY = CpY = 12. Leave PmtAt at END.",
+      "end": 46.264,
+      "hold": 4.78,
+      "keys": [
+        {
+          "id": "press-17",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.0789
+        },
+        {
+          "id": "press-18",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2105
+        },
+        {
+          "id": "press-19",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3421
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4737
+        },
+        {
+          "id": "press-21",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6053
+        },
+        {
+          "id": "press-22",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7368
+        },
+        {
+          "id": "press-23",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8684
+        }
+      ]
+    },
+    {
+      "chapter": "solve",
+      "spoken": "Move back to FV, then press Enter to solve for the highlighted field.",
+      "coach": "Highlight FV before pressing Enter.",
+      "end": 52.101,
+      "hold": 4.24,
+      "keys": [
+        {
+          "id": "press-24",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.0909
+        },
+        {
+          "id": "press-25",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2424
+        },
+        {
+          "id": "press-26",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3939
+        },
+        {
+          "id": "press-27",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5455
+        },
+        {
+          "id": "press-28",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.697
+        },
+        {
+          "id": "press-29",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "balance",
+      "spoken": "A positive future value is money you receive at the end. Rounded to two decimal places, the balance is one thousand, one hundred and twenty-seven point one six.",
+      "coach": "FV ≈ 1,127.16 to two decimal places.",
+      "end": 64.075,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
