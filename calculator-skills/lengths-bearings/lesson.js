@@ -1,23 +1,20 @@
 (function(){
 "use strict";
-const M=CT17,T=CT17Tape,$=id=>document.getElementById(id),stage=$("stage"),seek=$("seek"),overlay=$("start-overlay"),play=$("play");
+const M=CT17,$=id=>document.getElementById(id),stage=$("stage");
 const p=new URLSearchParams(location.search),link=M.request(p),original=link.d;
-const tabs=[$("watch-tab"),$("try-tab")],scope=["watch-message","watch-player","watch-panel"],tryScope=["try-header","try-panel"];
 const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!=null)e.textContent=text;if(cls)e.className=cls;return e;};
 const button=(text,fn,active=false,watch=false)=>{const b=node("button",text,active?"calc-active":"");b.type="button";b.disabled=watch||!fn;if(!b.disabled)b.onclick=fn;return b;};
-const clockText=t=>Math.floor(t/60)+":"+String(Math.floor(t)%60).padStart(2,"0");
+let mode="watch",light=0,returnToWatch;
+let current=M.initial(),problem={...original},warning=link.error,assess="";
+const handheld=$("handheld-host");
+const shell=CalculatorLessonHandset.mount(handheld,{screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T Calculator",onKey:physical});
 const label={east:"East component (km)",north:"North component (km)",up:"Vertical component (km)"};
 const answers={horizontal:"Horizontal distance (km)",bearing:"Clockwise bearing (°)",elevation:"Signed elevation (°)",diagonal:"Sloping distance (km)"};
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T calculator rehearsal",onKey:physical});
 const refs={};
 // Align the shared shell's decorative square-root legend with the official real key.
 const powerLegend=shell.body.querySelector('[data-hh-key="power"] + .hh-secondary');
 if(powerLegend)shell.body.querySelector('[data-hh-key="square"]').after(powerLegend);
 
-let mode="watch",time=0,playing=false,origin=0,frame=0,started=false,stamp="",focused=false,focusMemory=false,focusChoice=null,light=0;
-let current=M.initial(), problem={...original}, lane=null, warning=link.error, assess="";
-let independent=current;
-const forks=new Map();
 function addFields(def,host,prefix){
  for(const [k,txt] of Object.entries(def)){
   const lab=node("label",txt),input=node("input");
@@ -31,7 +28,7 @@ function fill(){for(const k in label)refs["problem-"+k].value=sign(problem[k]);}
 fill();
 
 function compass(host,d){
- const target=$(host);target.replaceChildren();
+ const target=typeof host==="string"?$(host):host;target.replaceChildren();
  const uri="http://www.w3.org/2000/svg",el=(tag,attributes,text)=>{const g=document.createElementNS(uri,tag);Object.entries(attributes).forEach(([k,v])=>g.setAttribute(k,v));if(text)g.textContent=text;return g;};
  const s=el("svg",{viewBox:"0 0 220 149",role:"img","aria-label":"Top view from the base, north up, east right; "+M.direction(d).word+" displacement. Horizontal plan only."});
  const X=107,Y=73,scale=50/Math.max(Math.abs(d.east),Math.abs(d.north)),x=X+d.east*scale,y=Y-d.north*scale;
@@ -47,7 +44,6 @@ function compass(host,d){
  s.append(el("text",{x:X-5,y:Y-5,"text-anchor":"end",class:"point-label"},"O"));
  target.append(s,node("p","Plan only · O is the base, P is the horizontal projection.","comp-note"));
 }
-compass("watch-sketch",M.demo);
 compass("try-sketch",problem);
 const pretty=str=>str.replaceAll("sqrt","√").replaceAll("asin","sin⁻¹").replaceAll("acos","cos⁻¹").replaceAll("atan","tan⁻¹").replaceAll("^2","²").replaceAll("*","×").replaceAll("/","÷").replaceAll("-","−");
 function expression(target,raw,cursor=null){
@@ -115,117 +111,68 @@ function draw(s,watch){
  }
  $("lcd-text").textContent=mirror;
 }
-const chapterBtns=T.chapters.map(([time,title],i)=>{const li=node("li"),b=button("",()=>jump(time));b.append(node("span",String(i+1).padStart(2,"0")),document.createTextNode(title));li.append(b);$("chapters").append(li);return b;});
-seek.max=T.duration;
-function paintWatch(){
- if(mode!=="watch")return;
- const {state,key,chapter}=T.snapshot(time),id=JSON.stringify([chapter,state]);
- seek.value=time;seek.setAttribute("aria-valuetext",clockText(time)+" of "+clockText(T.duration));$("clock").textContent=clockText(time)+" / "+clockText(T.duration);
- shell.setKeys(key&&key!=="point-ok"?[key]:[]);overlay.hidden=started||time>0;
- $("take").textContent=time>0&&time<T.duration-.02?"Take over":"Open Try";
- if(id===stamp)return;stamp=id;
- draw(state,true);
- $("caption").textContent=T.chapters[chapter][2];$("takeaway").textContent=T.chapters[chapter][3];chapterBtns.forEach((b,i)=>b.setAttribute("aria-current",String(i===chapter)));
-}
 function paintTry(){
  const active=document.activeElement?.closest?.("#lcd-body");
  draw(current,false);
  if(active)stage.focus({preventScroll:true});
- const pick=lane!==null?M.demo:problem;
- const h=k=>sign(pick[k]);
- $("try-context").textContent=(lane!==null?"Watch copy. ":"Find the lengths, bearing and signed elevation. ")+"E "+h("east")+" · N "+h("north")+" · up "+h("up")+" km";
- $("edit-details").hidden=lane!==null;$("answer").hidden=lane!==null;$("try-sketch").hidden=lane!==null;
- $("reset").textContent=lane===null?"Reset Try":"Open independent Try";
- $("tool-status").textContent=current.error||(lane===null?warning:"");$("tool-status").dataset.error=String(Boolean(current.error||lane===null&&warning));
+ const h=k=>sign(problem[k]);
+ $("try-context").textContent="Find the lengths, bearing and signed elevation. E "+h("east")+" · N "+h("north")+" · up "+h("up")+" km";
+ $("tool-status").textContent=current.error||warning;$("tool-status").dataset.error=String(Boolean(current.error||warning));
  $("assess-feedback").textContent=assess;
 }
-function stash(){if(lane===null)independent=current;else{forks.set(lane,current);if(forks.size>30)forks.delete(forks.keys().next().value);}}
-function update(s){current=s;stash();if(mode==="try")paintTry();}
+function update(s){current=s;if(mode==="try")paintTry();}
 function physical(key){
  if(mode!=="try")return;
  if(document.activeElement!==stage)stage.focus({preventScroll:true});
- clearTimeout(light);shell.setKeys([key]);light=setTimeout(()=>shell.setKeys([]),180);
- if(lane===null){warning="";assess="";}
+ clearTimeout(light);shell.setKeys(current.ctrl?["ctrl",key]:[key]);light=setTimeout(()=>shell.setKeys([]),180);
+ warning="";assess="";
  update(M.press(current,key));
 }
 $("data-form").onsubmit=e=>{
- e.preventDefault();if(lane!==null)return;
+ e.preventDefault();
  const d=Object.fromEntries(M.ids.map(k=>[k,M.number(refs["problem-"+k].value)])),err=M.validate(d);
  if(err){warning=err;paintTry();return;}
- problem=d;warning="";assess="";current=M.initial();stash();showAnswers();compass("try-sketch",problem);$("edit-details").open=false;paintTry();stage.focus({preventScroll:true});};
+ problem=d;warning="";assess="";current=M.initial();showAnswers();compass("try-sketch",problem);$("edit-details").open=false;paintTry();stage.focus({preventScroll:true});};
 $("answer").onsubmit=e=>{
- e.preventDefault();if(lane!==null)return;
+ e.preventDefault();
  const msg=M.grade(problem,Object.fromEntries(Object.keys(answers).map(k=>[k,refs["answer-"+k].value])),current.hist);
  assess=msg||"Correct. The bearing uses the horizontal plan; the elevation and sloping distance also use the height.";
  $("assess-feedback").dataset.error=String(Boolean(msg));paintTry();
 };
 $("answer").oninput=()=>{assess="";$("assess-feedback").textContent="";};
 
-function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
-
-function size(){
- if(mode==="try"){
-  const h=window.visualViewport?.height||innerHeight, top=$("handheld-host").getBoundingClientRect().top+window.scrollY;
-  const width=Math.floor((h-Math.max(0,top)-9)*558/1168);
-  stage.style.setProperty("--try-fit",Math.min(307,Math.max(154,width))+"px");
-  return;
+const physicalLabel={"Home":"home","Enter":"enter","x²":"square","−":"minus","+":"plus","÷":"div","Ctrl":"ctrl","Tab":"tab","→":"right","↓":"down","trig":"trig","Centre click":"select"};
+const frames=[M.initial()];let previousAction=-1;
+const board=node("figure",undefined,"watch-map compass");board.hidden=true;board.setAttribute("aria-label","Compass plan. Not the calculator screen");
+function renderWatch(device,{beat,chapter,point,crossed,key}){
+ if(handheld.parentElement!==device)device.append(handheld);
+ if(board.parentElement!==device.parentElement)device.after(board);
+ for(let i=frames.length-1;i<crossed.length;i++){
+   const k=physicalLabel[crossed[i].label]||crossed[i].label;
+   frames.push(M.press(k==="select"?M.press(frames[i],"point-ok"):frames[i],k));
  }
- const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
- const landscape=focused&&innerWidth>710&&avail<=600;
- const fixed=landscape?22:$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
- stage.style.setProperty("--watch-fit",Math.max(94,Math.min(focused?340:295,Math.floor((avail-fixed)*558/1168)))+"px");
+ const n=crossed.length,k=key&&(physicalLabel[key.label]||key.label);
+ const lit=n&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*(point.span.end-point.span.voiceEnd)<.62;
+ shell.setKeys(lit?(frames[n-1].ctrl?["ctrl",k]:[k]):[]);
+ const aiming=chapter==="degree"&&n===7&&!point.speaking&&point.fraction>=.72;
+ const stamp=n+"-"+chapter+"-"+aiming;
+ if(previousAction===stamp)return;
+ previousAction=stamp;draw(aiming?M.press(frames[n],"point-ok"):frames[n],true);
+ const show=chapter==="plan"||chapter==="rounded";
+ if(show&&board.hidden)compass(board,M.demo);
+ board.hidden=!show;
 }
-const ro=new ResizeObserver(size);for(const e of [$("watch-message"),$("watch-player"),$("try-header"),document.querySelector(".head")])ro.observe(e);
-window.addEventListener("resize",size);window.visualViewport?.addEventListener("resize",size);
-function focus(on){
- focused=on;stage.classList.toggle("focus-open",on);document.body.classList.toggle("stats-focus",on);
- for(const el of document.querySelectorAll("main > .head, main > .calc-tabs, main > .notes"))el.inert=on;
- const b=$("focus");b.setAttribute("aria-label",on?"Exit focused view":"Focused view");b.setAttribute("aria-pressed",String(on));b.textContent=on?"Exit":"Focus";if(on)stage.scrollTop=0;size();
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;device.prepend(stage);$("try-deck").prepend(handheld);stage.hidden=false;board.hidden=true;
+ shell.setKeys([]);shell.setInteractive(true);paintTry();stage.focus({preventScroll:true});
 }
-function autofit(){
- size();
- if(focusChoice!==false&&(focusMemory||shell.body.getBoundingClientRect().width<169||$("watch-player").getBoundingClientRect().bottom>innerHeight-2))focus(true);
+function exitTry(){
+ mode="watch";stage.hidden=true;previousAction=-1;clearTimeout(light);shell.setKeys([]);shell.setInteractive(false);
 }
-function labelPlay(){const v=playing?"Pause":time>=T.duration-.015?"Replay":"Play";play.textContent=v;play.setAttribute("aria-label",v);}
-function jump(x){time=Math.max(0,Math.min(T.duration,Number(x)||0));origin=performance.now()-time*1000;paintWatch();labelPlay();}
-function stop(){playing=false;cancelAnimationFrame(frame);paintWatch();labelPlay();}
-function tick(now){if(!playing||mode!=="watch")return;time=Math.min(T.duration,Math.max(0,(now-origin)/1000));paintWatch();if(time>=T.duration){stop();return;}frame=requestAnimationFrame(tick);}
-function start(){
- if(mode!=="watch")return;
- autofit();if(document.activeElement===overlay)play.focus({preventScroll:true});
- if(time>=T.duration-.015)jump(0);
- started=true;playing=true;origin=performance.now()-time*1000;paintWatch();labelPlay();frame=requestAnimationFrame(tick);
-}
-function toggle(){if(playing)stop();else start();}
-play.onclick=overlay.onclick=toggle;seek.oninput=()=>jump(seek.value);$("back").onclick=()=>jump(time-10);$("forward").onclick=()=>jump(time+10);
-$("replay").onclick=()=>{stop();jump(0);start();};
-$("focus").onclick=()=>{focusChoice=!focused;focus(!focused);};
-function modeTo(to,take=false){
- if(to==="try"){
-  if(mode==="watch"){
-   stop();focusMemory=focused;if(focused)focus(false);
-   lane=take&&time>0&&time<T.duration-.02?String(Math.round(time*1000)):null;
-   current=lane===null?independent:(forks.get(lane)||{...T.snapshot(time).state,fromWatch:true});
-   stash();
-  }else if(!take&&lane!==null){lane=null;current=independent;}
- }
- mode=to;const w=to==="watch";
- stage.dataset.mode=mode;stage.dataset.tryLane=w?"":lane===null?"practice":"fork";document.body.classList.toggle("stats-try",!w);
- scope.forEach(id=>$(id).hidden=!w);tryScope.forEach(id=>$(id).hidden=w);
- tabs.forEach((el,i)=>{const v=(i===0)===w;el.setAttribute("aria-selected",String(v));el.tabIndex=v?0:-1;});
- clearTimeout(light);shell.setKeys([]);shell.setInteractive(!w);stamp="";window.scrollTo(0,0);
- if(w){paintWatch();labelPlay();autofit();}
- else{overlay.hidden=true;paintTry();size();}
-}
-tabs.forEach((b,i)=>{
- b.onclick=()=>{modeTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});};
- b.onkeydown=e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const k=e.key==="Home"?0:e.key==="End"?1:1-i;modeTo(k?"try":"watch");tabs[k].focus();};
-});
-$("take").onclick=()=>{modeTo("try",true);stage.focus({preventScroll:true});};
-$("return").onclick=()=>{modeTo("watch");play.focus({preventScroll:true});};
+$("return").onclick=()=>returnToWatch?.();
 $("reset").onclick=()=>{
- if(lane!==null){modeTo("try");stage.focus({preventScroll:true});return;}
- problem={...original};current=M.initial();stash();warning="";assess="";fill();showAnswers();compass("try-sketch",problem);$("edit-details").open=false;paintTry();stage.focus({preventScroll:true});
+ problem={...original};current=M.initial();warning="";assess="";fill();showAnswers();compass("try-sketch",problem);
+ $("edit-details").open=false;paintTry();stage.focus({preventScroll:true});
 };
 const map={Home:"home",Escape:"esc",Backspace:"del",Delete:"del",Enter:"enter",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",
  "-":"minus","+":"plus","/":"div","*":"mul","^":"power",".":"dot","(":"lparen",")":"rparen",s:"square",t:"trig",c:"ctrl"};
@@ -233,18 +180,11 @@ document.addEventListener("keydown",e=>{
  if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
  const el=e.target;
  if(e.altKey||e.metaKey||e.ctrlKey||e.isComposing||el.closest?.("input,textarea,select,a,summary,[contenteditable]"))return;
- if(e.key==="Escape"&&focused){e.preventDefault();focusChoice=false;focus(false);$("focus").focus({preventScroll:true});return;}
  if(!stage.contains(el)&&el!==document.body)return;
- if(mode==="watch"){
-  if(el.closest?.("button")||e.repeat)return;
-  const key=e.key.toLowerCase();if(key===" "||key==="k"){e.preventDefault();toggle();}else if(key==="j"||key==="l"){e.preventDefault();jump(time+(key==="j"?-10:10));}
-  return;
- }
+ if(mode!=="try"||e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(el.closest?.("button")&&["Enter"," "].includes(e.key))return;
  const key=map[e.key]||(/^[0-9]$/.test(e.key)?e.key:e.key==="Tab"&&current.view==="settings"&&!current.drop&&!e.shiftKey&&current.field!==7?"tab":null);
  if(key){e.preventDefault();physical(key);}
 });
-document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
-modeTo(p.get("mode")==="try"?"try":"watch");
-window.QBRecordedWatch?.bind(stop);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:p.get("mode")==="try"||link.valid||link.error?"try":"watch",renderWatch,enterTry,exitTry});
 })();

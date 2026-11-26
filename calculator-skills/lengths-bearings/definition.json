@@ -1,0 +1,439 @@
+{
+  "id": "CT17",
+  "title": "Lengths, angles and bearings",
+  "intro": "Calculate horizontal range, clockwise bearing, elevation and sloping distance from three perpendicular displacements.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "9b2802e283b0833231bb808fbbcc94179588674011a588441764caec326f92f4",
+    "scriptSha256": "62f339240f0b9200dde9e15dbdc2cc05e35a0ec8aa8573ffffab60a7285fbe0b"
+  },
+  "chapters": [
+    {
+      "id": "plan",
+      "title": "Read the displacements"
+    },
+    {
+      "id": "degree",
+      "title": "Set Degree mode"
+    },
+    {
+      "id": "horizontal",
+      "title": "Measure the horizontal run"
+    },
+    {
+      "id": "bearing",
+      "title": "Find the true bearing"
+    },
+    {
+      "id": "elevation",
+      "title": "Find the angle of elevation"
+    },
+    {
+      "id": "diagonal",
+      "title": "Measure the sloping line"
+    },
+    {
+      "id": "rounded",
+      "title": "Report answers with units"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plan",
+      "spoken": "Start at the base. The drone is six kilometres west, eight kilometres south, and five kilometres above it.",
+      "coach": "North is up. West and south put P in the south-west quadrant. Height is five kilometres.",
+      "end": 7.618,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "degree",
+      "spoken": "From Calculator, press Home then five: Settings then two: Document Settings. Set Angle to Degree.",
+      "coach": "Home → 5: Settings → 2: Document Settings. Set Degree; move the pointer onto OK and centre-click. Choose Current.",
+      "end": 16.8345,
+      "hold": 5.5,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.0625
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1667
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.2708
+        },
+        {
+          "id": "press-4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.375
+        },
+        {
+          "id": "press-5",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.4792
+        },
+        {
+          "id": "press-6",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.5833
+        },
+        {
+          "id": "press-7",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6875
+        },
+        {
+          "id": "press-8",
+          "label": "Centre click",
+          "ariaLabel": "Centre click",
+          "at": 0.7917
+        },
+        {
+          "id": "press-9",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "horizontal",
+      "spoken": "Press Control, then the x squared key, to insert a square root. Square the east and north distances and add them inside the root.",
+      "coach": "Use Ctrl + x² for √. Enter 6² + 8² inside the root. Leave out height.",
+      "end": 27.599,
+      "hold": 5.5,
+      "keys": [
+        {
+          "id": "press-10",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0625
+        },
+        {
+          "id": "press-11",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.1667
+        },
+        {
+          "id": "press-12",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.2708
+        },
+        {
+          "id": "press-13",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.375
+        },
+        {
+          "id": "press-14",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4792
+        },
+        {
+          "id": "press-15",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.5833
+        },
+        {
+          "id": "press-16",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.6875
+        },
+        {
+          "id": "press-17",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.7917
+        },
+        {
+          "id": "press-18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "bearing",
+      "spoken": "Measure clockwise from north. In the south-west, add the acute angle west of south to one hundred and eighty degrees.",
+      "coach": "Bearings are clockwise from north. In the south-west quadrant enter 180 + tan⁻¹(6 ÷ 8).",
+      "end": 38.075,
+      "hold": 8.0,
+      "keys": [
+        {
+          "id": "press-19",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0411
+        },
+        {
+          "id": "press-20",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.1096
+        },
+        {
+          "id": "press-21",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1781
+        },
+        {
+          "id": "press-22",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2466
+        },
+        {
+          "id": "press-23",
+          "label": "trig",
+          "ariaLabel": "trig",
+          "at": 0.3151
+        },
+        {
+          "id": "press-24",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.3836
+        },
+        {
+          "id": "press-25",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.4521
+        },
+        {
+          "id": "press-26",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.5205
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.589
+        },
+        {
+          "id": "press-28",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.6575
+        },
+        {
+          "id": "press-29",
+          "label": "÷",
+          "ariaLabel": "÷",
+          "at": 0.726
+        },
+        {
+          "id": "press-30",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.7945
+        },
+        {
+          "id": "press-31",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.863
+        },
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "elevation",
+      "spoken": "Compare the rise with the horizontal distance, not the sloping line.",
+      "coach": "Compare the upward displacement to the horizontal run: tan⁻¹(5 ÷ 10).",
+      "end": 47.622,
+      "hold": 6.5,
+      "keys": [
+        {
+          "id": "press-33",
+          "label": "trig",
+          "ariaLabel": "trig",
+          "at": 0.0517
+        },
+        {
+          "id": "press-34",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.1379
+        },
+        {
+          "id": "press-35",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.2241
+        },
+        {
+          "id": "press-36",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.3103
+        },
+        {
+          "id": "press-37",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3966
+        },
+        {
+          "id": "press-38",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4828
+        },
+        {
+          "id": "press-39",
+          "label": "÷",
+          "ariaLabel": "÷",
+          "at": 0.569
+        },
+        {
+          "id": "press-40",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6552
+        },
+        {
+          "id": "press-41",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7414
+        },
+        {
+          "id": "press-42",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.8276
+        },
+        {
+          "id": "press-43",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9138
+        }
+      ]
+    },
+    {
+      "chapter": "diagonal",
+      "spoken": "For the straight-line distance, all three perpendicular displacements contribute.",
+      "coach": "Use all three perpendicular displacements: √(6² + 8² + 5²). Ctrl + Enter gives a decimal.",
+      "end": 59.171,
+      "hold": 7.5,
+      "keys": [
+        {
+          "id": "press-44",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0441
+        },
+        {
+          "id": "press-45",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.1176
+        },
+        {
+          "id": "press-46",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.1912
+        },
+        {
+          "id": "press-47",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.2647
+        },
+        {
+          "id": "press-48",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3382
+        },
+        {
+          "id": "press-49",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.4118
+        },
+        {
+          "id": "press-50",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.4853
+        },
+        {
+          "id": "press-51",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.5588
+        },
+        {
+          "id": "press-52",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6324
+        },
+        {
+          "id": "press-53",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.7059
+        },
+        {
+          "id": "press-54",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.7794
+        },
+        {
+          "id": "press-55",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.8529
+        },
+        {
+          "id": "press-56",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9265
+        }
+      ]
+    },
+    {
+      "chapter": "rounded",
+      "spoken": "The bearing is two hundred and seventeen degrees to the nearest degree. The sloping distance is eleven point two kilometres to three significant figures.",
+      "coach": "Keep full working precision; report the bearing as 217° and the distance as 11.2 km.",
+      "end": 71.978,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
