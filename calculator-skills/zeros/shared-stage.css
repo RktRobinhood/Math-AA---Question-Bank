@@ -1,0 +1,14 @@
+/* CT10 only places its native Graphs app and independent Try in the shared player. */
+.ct10-trail{margin:0 auto .25rem;max-width:1130px;font:700 .76rem/1.25 var(--mono)}
+.ct10-common .lw-lesson{width:100%;margin-top:0}
+.ct10-common .lw-device #handheld-host{width:100%;min-width:0}
+.ct10-common #lcd{display:block;position:relative;overflow:hidden;background:#fff;color:#1b2635}
+.ct10-common #drawing{display:block;width:100%;height:100%;image-rendering:auto}
+.ct10-common #stage #handheld-host{
+ --handheld-width:clamp(165px,calc((100svh - 174px)*.47774),286px)
+}
+.ct10-common #try{margin-top:0}
+@media(max-width:700px){
+ .ct10-common .ct10-trail{margin-bottom:.28rem}
+ .ct10-common #stage #handheld-host{--handheld-width:clamp(160px,calc((100svh - 155px)*.47774),280px)}
+}
