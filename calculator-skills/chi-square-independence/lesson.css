@@ -89,3 +89,9 @@ button:where(.qb-calculator-lesson, .qb-calculator-lesson *),input:where(.qb-cal
   .qb-calculator-lesson #stage.focused #caption{font-size:.8rem;line-height:1.3}
   .qb-calculator-lesson #stage.focused .deck{padding-block:5px}
 }
+
+/* Common Watch determines the size; the native Try deck retains its existing layout. */
+.chi-trail{margin:0 0 .55rem;color:var(--dim);font-size:.81rem}
+.chi-worked{margin:.7rem 0;padding-inline:.35rem}
+.chi-worked .context-table{max-width:22rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}

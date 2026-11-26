@@ -10,24 +10,29 @@
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT47" data-cue-sha="35d41886b7069455979f708f39e23d95a8644dbdd30fbe82c434db3cbb1e39e1" data-transcript-sha="1c3fdfa4d40e927f6e74302d52edcaaacc6e017c9b34cc85857463a88b266682" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="model.js" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>Chi-square independence</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
-<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
-<div id="watch-message" class="message"><p id="caption"></p></div>
-<div id="try-message" class="message" hidden><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
-<div class="deck">
-<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.5 3.5v17l13-8.5z"/></svg></button></div></div>
-<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><h2>Commute mode and arrival</h2>
-<table class="context-table"><caption class="sr">Observed counts, excluding totals</caption><thead><tr><th scope="col">Mode</th><th scope="col">On time</th><th scope="col">Late</th></tr></thead><tbody><tr><th scope="row">Walk</th><td>30</td><td>10</td></tr><tr><th scope="row">Cycle</th><td>32</td><td>8</td></tr><tr><th scope="row">Bus</th><td>18</td><td>22</td></tr></tbody></table>
-<ol id="chapters"></ol></aside>
-<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Test the association</h2>
+<nav class="chi-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT47</nav>
+<div data-calculator-watch></div>
+<details id="watch-table" class="chi-worked"><summary>Worked example counts</summary><table class="context-table"><caption class="sr">Observed counts, excluding totals</caption><thead><tr><th scope="col">Mode</th><th scope="col">On time</th><th scope="col">Late</th></tr></thead><tbody><tr><th scope="row">Walk</th><td>30</td><td>10</td></tr><tr><th scope="row">Cycle</th><td>32</td><td>8</td></tr><tr><th scope="row">Bus</th><td>18</td><td>22</td></tr></tbody></table></details>
+<section id="stage" data-mode="try" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld" hidden>
+<div id="try-message" class="message"><p id="task"></p><div class="try-actions"><button id="return">Return to Watch</button> <button id="reset">Reset</button></div></div>
+<div class="deck" id="try-deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div></div></div>
+
+<aside id="try" aria-label="Independent practice"><h2>Test the association</h2>
 <p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
 <details class="keyboard"><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu unless typing stat.expmat; <kbd>F2</kbd> also opens Menu. Tab moves between cells and wizard fields. Enter stores the matrix or confirms a menu or wizard. Click/tap a cell, then use the physical or desktop number keys to replace its count.</p></details></aside>
 </div>
-<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="56.5" step=".005"></label><span>Captions only</span></div></div>
 </section>
 </main></body></html>

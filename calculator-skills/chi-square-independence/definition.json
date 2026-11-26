@@ -1,0 +1,394 @@
+{
+  "id": "CT47",
+  "title": "Chi-square independence",
+  "intro": "Test whether two categorical variables are associated.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "cfacad7f6bb19650a7465734992ae27da8a5ca2983508b45883c6a81ac36e396",
+    "scriptSha256": "1c3fdfa4d40e927f6e74302d52edcaaacc6e017c9b34cc85857463a88b266682"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Set up an independence test"
+    },
+    {
+      "id": "matrix",
+      "title": "Create a named matrix"
+    },
+    {
+      "id": "counts",
+      "title": "Enter the observed counts"
+    },
+    {
+      "id": "test",
+      "title": "Run the two-way test"
+    },
+    {
+      "id": "expected",
+      "title": "Check expected counts"
+    },
+    {
+      "id": "decide",
+      "title": "Decide in context"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "A random sample records each student once: how they commute and whether they arrive on time. Test for association.",
+      "coach": "Each student is counted once. The rows are Walk, Cycle and Bus; columns are On time and Late.",
+      "end": 8.439,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "setup",
+      "spoken": "The null hypothesis says commute mode and arrival status are independent. The alternative is that they are associated. Choose a five percent significance level before testing.",
+      "coach": "H₀: commute mode and arrival status are independent. Hₐ: they are associated. Use α = 0.05.",
+      "end": 20.995,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "matrix",
+      "spoken": "Type A, then Control and Template for the assignment symbol. Use Menu, Matrix and Vector, Create, Matrix. Choose three rows and two columns.",
+      "coach": "Type a and use Ctrl + Template for :=. Then Menu → 7 Matrix & Vector → 1 Create → 1 Matrix. Set 3 rows and 2 columns.",
+      "end": 33.911,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "A",
+          "ariaLabel": "A",
+          "at": 0.1431
+        },
+        {
+          "id": "press-1",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.2062
+        },
+        {
+          "id": "press-2",
+          "label": "Template",
+          "ariaLabel": "Template (with Ctrl)",
+          "at": 0.2692
+        },
+        {
+          "id": "press-3",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.3323
+        },
+        {
+          "id": "press-4",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.3954
+        },
+        {
+          "id": "press-5",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4585
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5215
+        },
+        {
+          "id": "press-7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5846
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6477
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7108
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7738
+        },
+        {
+          "id": "press-11",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8369
+        }
+      ]
+    },
+    {
+      "chapter": "counts",
+      "spoken": "Enter the Walk, Cycle and Bus counts, row by row. Use Tab between cells and Enter to store a. Leave out totals and percentages.",
+      "coach": "On time / Late: Walk 30 / 10, Cycle 32 / 8, Bus 18 / 22. Tab between cells and press Enter to store a. Do not enter marginal totals.",
+      "end": 45.206,
+      "hold": 14,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1256
+        },
+        {
+          "id": "press-13",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1711
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2167
+        },
+        {
+          "id": "press-15",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2622
+        },
+        {
+          "id": "press-16",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3078
+        },
+        {
+          "id": "press-17",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-18",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3989
+        },
+        {
+          "id": "press-19",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4444
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.49
+        },
+        {
+          "id": "press-21",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.5356
+        },
+        {
+          "id": "press-22",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5811
+        },
+        {
+          "id": "press-23",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6267
+        },
+        {
+          "id": "press-24",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.6722
+        },
+        {
+          "id": "press-25",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7178
+        },
+        {
+          "id": "press-26",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7633
+        },
+        {
+          "id": "press-27",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.8089
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8544
+        }
+      ]
+    },
+    {
+      "chapter": "test",
+      "spoken": "Open Menu, Statistics, Stat Tests, then the chi squared two-way test. Enter A as the observed matrix and confirm.",
+      "coach": "Menu → 6 Statistics → 7 Stat Tests → 8 χ² 2-way Test. Enter a as Observed Matrix, then Tab to OK and press Enter.",
+      "end": 55.904,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1825
+        },
+        {
+          "id": "press-30",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.285
+        },
+        {
+          "id": "press-31",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.3875
+        },
+        {
+          "id": "press-32",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.49
+        },
+        {
+          "id": "press-33",
+          "label": "A",
+          "ariaLabel": "A",
+          "at": 0.5925
+        },
+        {
+          "id": "press-34",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.695
+        },
+        {
+          "id": "press-35",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7975
+        }
+      ]
+    },
+    {
+      "chapter": "test",
+      "spoken": "Read chi squared, the p value and the degrees of freedom. The p value is an upper-tail probability under the null hypothesis, not the probability that the null hypothesis is true.",
+      "coach": "Read χ² ≈ 12.9, df = 2 and p ≈ 0.00158. This is an upper-tail probability assuming independence.",
+      "end": 69.614,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "expected",
+      "spoken": "On the next input line, enter stat dot exp mat. Expected counts are the counts predicted under independence. Here all are greater than five.",
+      "coach": "On the next input line, enter stat.expmat. Every expected count is above 5; these are not the original observations.",
+      "end": 80.519,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-36",
+          "label": "S",
+          "ariaLabel": "S",
+          "at": 0.1431
+        },
+        {
+          "id": "press-37",
+          "label": "T",
+          "ariaLabel": "T",
+          "at": 0.2062
+        },
+        {
+          "id": "press-38",
+          "label": "A",
+          "ariaLabel": "A",
+          "at": 0.2692
+        },
+        {
+          "id": "press-39",
+          "label": "T",
+          "ariaLabel": "T",
+          "at": 0.3323
+        },
+        {
+          "id": "press-40",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.3954
+        },
+        {
+          "id": "press-41",
+          "label": "E",
+          "ariaLabel": "E",
+          "at": 0.4585
+        },
+        {
+          "id": "press-42",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.5215
+        },
+        {
+          "id": "press-43",
+          "label": "P",
+          "ariaLabel": "P",
+          "at": 0.5846
+        },
+        {
+          "id": "press-44",
+          "label": "M",
+          "ariaLabel": "M",
+          "at": 0.6477
+        },
+        {
+          "id": "press-45",
+          "label": "A",
+          "ariaLabel": "A",
+          "at": 0.7108
+        },
+        {
+          "id": "press-46",
+          "label": "T",
+          "ariaLabel": "T",
+          "at": 0.7738
+        },
+        {
+          "id": "press-47",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8369
+        }
+      ]
+    },
+    {
+      "chapter": "decide",
+      "spoken": "The p value is about zero point zero zero one five eight, below zero point zero five. Reject the null hypothesis. The sample gives evidence of association between commute mode and arrival status, not causation.",
+      "coach": "p ≈ 0.00158 < 0.05, so reject independence. There is evidence of association, not necessarily causation. The LCD now shows the expected matrix.",
+      "end": 96.895,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}
