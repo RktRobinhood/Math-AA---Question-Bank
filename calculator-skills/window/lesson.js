@@ -361,7 +361,7 @@
   const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
   const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("compact-teaching").offsetHeight;
+  const occupied=$("watch-player").offsetHeight+$("compact-teaching").offsetHeight;
   const pads=getComputedStyle(surface);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
   stage.style.setProperty("--ct08-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?620:296,room*558/1168)))+"px");
@@ -369,7 +369,7 @@
   stage.style.setProperty("--ct08-scene-room",Math.floor(Math.max(140,room))+"px");
  }
  const bankWatchSizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),$("compact-teaching"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+ [$("watch-player"),$("compact-teaching"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  function fitPresentation(){placeChapterRail();fitBankWatch();}

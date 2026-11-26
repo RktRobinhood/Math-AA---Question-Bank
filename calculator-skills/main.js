@@ -412,7 +412,7 @@ modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
   const chapterHeight=matchMedia("(max-width:700px)").matches?$("watch-chapters").offsetHeight:0;
   stage.style.setProperty("--ct12-chapters-height",chapterHeight+"px");
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(chapterHeight?chapterHeight+7:0);
+  const occupied=$("watch-player").offsetHeight+(chapterHeight?chapterHeight+7:0);
   const pads=getComputedStyle(surface);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
   stage.style.setProperty("--ct12-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?370:296,room*558/1168)))+"px");
@@ -420,7 +420,7 @@ modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   stage.style.setProperty("--ct12-scene-room",Math.floor(Math.max(140,room))+"px");
  }
  const bankWatchSizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),$("watch-chapters"),document.querySelector("main>.title")].forEach(el=>bankWatchSizing.observe(el));
+ [$("watch-player"),$("watch-chapters"),document.querySelector("main>.title")].forEach(el=>bankWatchSizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);

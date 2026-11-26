@@ -337,13 +337,13 @@ function fitBankWatch(){
  const nav=full?0:document.querySelector(".tabbar").getBoundingClientRect().height;
  const box=stage.getBoundingClientRect();
  const vh=window.visualViewport?.height||innerHeight;
- const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(innerWidth<=700?$("watch-panel").offsetHeight+10:0);
+ const occupied=$("watch-player").offsetHeight+(innerWidth<=700?$("watch-panel").offsetHeight+10:0);
  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
  stage.style.setProperty("--ct01-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?620:296,(room-28)*558/1168)))+"px");
  stage.style.setProperty("--ct01-lcd-fit",Math.floor(Math.max(142,Math.min(full?1160:600,(room-31)*4/3)))+"px");
 }
 const bankWatchSizing=new ResizeObserver(fitBankWatch);
-[$("watch-player"),$("caption-band"),$("watch-panel"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+[$("watch-player"),$("watch-panel"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
 window.addEventListener("resize",fitBankWatch);
 document.addEventListener("fullscreenchange",fitBankWatch);
 new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});

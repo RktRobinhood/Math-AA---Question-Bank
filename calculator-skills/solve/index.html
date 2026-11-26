@@ -24,7 +24,8 @@
 <script src="../handheld/transport.js" defer></script>
 <script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
 <script src="../handheld/hold-timeline.js?v=1" defer></script>
-<script type="module" src="main.js?v=solve-key-steps-1"></script>
+<script type="module" src="main.js?v=solve-key-steps-1&amp;caption-overlay=1"></script>
+<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=1">
 </head>
 <body data-base="../../" data-nav="calculator-skills" class="solve-lesson">
 <main class="wrap">
@@ -55,8 +56,8 @@
         </aside>
         <span id="play-feedback" aria-hidden="true" hidden><svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
       </div>
-      <p class="caption" id="caption" hidden></p>
-      <div id="watch-controls" class="transport" role="group" aria-label="Playback controls">
+      <div id="watch-controls" class="transport legacy-watch-caption-host" role="group" aria-label="Playback controls">
+       <p class="caption legacy-watch-caption-display" id="caption" hidden></p>
         <button id="play" class="play" type="button" aria-label="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z" fill="currentColor"/></svg></button>
         <button id="sound" type="button" aria-label="Mute" title="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z"/><path class="sound-waves" d="M16 9a4 4 0 0 1 0 6m2.5-8.5a7.5 7.5 0 0 1 0 11"/><path class="sound-off" hidden d="m16 9 5 6m0-6-5 6"/></svg></button>
         <div id="view-pick" role="group" aria-label="Calculator framing">

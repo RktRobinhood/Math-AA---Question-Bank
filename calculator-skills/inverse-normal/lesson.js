@@ -358,7 +358,7 @@ function fitWatch(){
  if($('watch').hidden)return;
  const expanded=stage.matches(':fullscreen,.watch-fullscreen-fallback');
  const max=(window.visualViewport?.height||innerHeight)-surface.getBoundingClientRect().top-(expanded?0:window.scrollY);
- const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+(expanded?0:(document.querySelector('.tabbar')?.offsetHeight||0));
+ const footer=$('watch-player').offsetHeight+(expanded?0:(document.querySelector('.tabbar')?.offsetHeight||0));
  const overhead=footer+$('pace-tip').offsetHeight+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
  const available=max-overhead;
  const full=Math.min(expanded?350:267,Math.max(142,Math.floor(available*558/1168)));
@@ -372,7 +372,7 @@ function fitWatch(){
  stage.style.setProperty('--normal-screen-fit',Math.min(expanded?620:420,Math.max(160,Math.floor(available*4/3)))+'px');
 }
 const resize=new ResizeObserver(fitWatch);
-[$('caption-band'),$('pace-tip'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
+[$('pace-tip'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
 frame(framing);

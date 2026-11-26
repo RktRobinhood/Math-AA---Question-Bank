@@ -24,7 +24,8 @@
 <script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script>
 <script src="watch-plan.js?v=ct38-holds-1" defer></script>
 <script src="../handheld/watch-chapters.js?v=1" defer></script>
-<script src="lesson.js?v=ct38-template-1" defer></script>
+<script src="lesson.js?v=ct38-template-1&amp;caption-overlay=1" defer></script>
+<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=1">
 </head>
 <body class="calculator-bank-lesson ct38-binomial" data-base="../../" data-nav="calculator-skills">
 <main>
@@ -62,8 +63,8 @@
 <span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
 <p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p><p id="teaching-tip" class="ct38-tip"></p>
-<div id="caption-band" hidden><p id="caption" class="caption"></p></div>
-<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<div class="player legacy-watch-caption-host" id="watch-player" role="group" aria-label="Playback controls">
+ <div id="caption-band" class="legacy-watch-caption-display" hidden><p id="caption" class="caption"></p></div>
 <button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
 <div id="view-pick" role="group" aria-label="Calculator framing">
  <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>

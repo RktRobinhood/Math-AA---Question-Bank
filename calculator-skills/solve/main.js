@@ -99,9 +99,7 @@ function fitWatch(){
  if(mode!=='watch')return;
  const h=window.innerHeight, top=scene.getBoundingClientRect().top+window.scrollY;
  const tab=document.querySelector('.tabbar'), nav=tab?.getBoundingClientRect().height||0;
- const captionHeight=caption.getBoundingClientRect().height;
- const room=h-top-nav-$('watch-controls').getBoundingClientRect().height-captionHeight;
- player.style.setProperty('--watch-caption-height',captionHeight+'px');
+ const room=h-top-nav-$('watch-controls').getBoundingClientRect().height;
  const stacked=matchMedia('(max-width:735px) and (min-height:701px)').matches;
  const beatH=stacked?scene.querySelector('.beat').getBoundingClientRect().height+8:0;
  player.style.setProperty('--watch-handheld-fit',Math.floor(Math.max(126,Math.min(300,(room-beatH-25)*558/1168)))+'px');
@@ -110,7 +108,7 @@ function fitWatch(){
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
 const stageObserver=new ResizeObserver(fitWatch);
-[document.querySelector('main>.title'),$('watch-controls'),caption,scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
+[document.querySelector('main>.title'),$('watch-controls'),scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
 
 function viewState(){
  const screenMode=mode==='watch'&&screenOnly;
