@@ -1,5 +1,131 @@
 {
-  "version": 1,
-  "lesson": "CT31",
-  "status": "awaiting-recording"
+ "version": 1,
+ "lesson": "CT31",
+ "status": "measured",
+ "audio": "narration.mp3",
+ "audioSha256": "7cf0ff8bc7831e84ee2ade0da64fc0d69e5158d46f71a95bc146c85b14972c6f",
+ "durationMs": 61832,
+ "transcriptSha256": "49864d893b1349cad82f94532ba9be96bb97c540726116546c2cbf143a901864",
+ "cueMapSha256": "3df5c68f96720a879d17f11ce95d9fc39a6b185c153723cf54d38dab71506b3d",
+ "measurement": "FAL-1673 local George clone (VoxCPM2). Each cue is its own checked take, so caption starts and ends are sample-exact in the composed file. Each cue starts at its authored caption start; key, display and pointer events keep their authored 1:1 offsets from it (never scaled). Where speech runs past the authored window, the Watch holds on its last frame until the next cue; where speech is shorter, silence fills the window. Minimum 500 ms between cues.",
+ "anchors": [
+  {
+   "editorialMs": 0,
+   "audioMs": 0
+  },
+  {
+   "editorialMs": 4800,
+   "audioMs": 7128
+  },
+  {
+   "editorialMs": 5100,
+   "audioMs": 7428
+  },
+  {
+   "editorialMs": 6050,
+   "audioMs": 8378
+  },
+  {
+   "editorialMs": 7100,
+   "audioMs": 9428
+  },
+  {
+   "editorialMs": 8450,
+   "audioMs": 10778
+  },
+  {
+   "editorialMs": 11000,
+   "audioMs": 15745
+  },
+  {
+   "editorialMs": 11500,
+   "audioMs": 16245
+  },
+  {
+   "editorialMs": 12650,
+   "audioMs": 17395
+  },
+  {
+   "editorialMs": 14100,
+   "audioMs": 18845
+  },
+  {
+   "editorialMs": 15250,
+   "audioMs": 19995
+  },
+  {
+   "editorialMs": 16350,
+   "audioMs": 21095
+  },
+  {
+   "editorialMs": 17400,
+   "audioMs": 24869
+  },
+  {
+   "editorialMs": 19900,
+   "audioMs": 27369
+  },
+  {
+   "editorialMs": 22000,
+   "audioMs": 32099
+  },
+  {
+   "editorialMs": 28000,
+   "audioMs": 39259
+  },
+  {
+   "editorialMs": 32700,
+   "audioMs": 45954
+  },
+  {
+   "editorialMs": 36000,
+   "audioMs": 53651
+  },
+  {
+   "editorialMs": 43000,
+   "audioMs": 61832
+  }
+ ],
+ "captions": [
+  {
+   "id": "watch-01",
+   "startMs": 0,
+   "endMs": 6628
+  },
+  {
+   "id": "watch-02",
+   "startMs": 7128,
+   "endMs": 15245
+  },
+  {
+   "id": "watch-03",
+   "startMs": 15745,
+   "endMs": 24369
+  },
+  {
+   "id": "watch-04",
+   "startMs": 24869,
+   "endMs": 31599
+  },
+  {
+   "id": "watch-05",
+   "startMs": 32099,
+   "endMs": 38759
+  },
+  {
+   "id": "watch-06",
+   "startMs": 39259,
+   "endMs": 45454
+  },
+  {
+   "id": "watch-07",
+   "startMs": 45954,
+   "endMs": 53151
+  },
+  {
+   "id": "watch-08",
+   "startMs": 53651,
+   "endMs": 61332
+  }
+ ]
 }
