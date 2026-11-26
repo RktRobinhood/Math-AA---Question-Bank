@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
-const {validate,stateAt}=require('../calculator-skills/handheld/watch-lesson.js');
+const {validate,stateAt,normalizeSeekTime}=require('../calculator-skills/handheld/watch-lesson.js');
 require('../calculator-skills/handheld/hold-timeline.js');
 
 const spec={
@@ -15,6 +15,13 @@ const spec={
 };
 const a=validate(spec), h=TeachingHolds.make([[0,2,4],[2,4,2]]);
 assert.equal(h.duration,10);
+const awkwardDuration=87.088;
+assert.equal(normalizeSeekTime(87.085,awkwardDuration),awkwardDuration,'range last 5 ms step maps to actual end');
+assert.equal(normalizeSeekTime(awkwardDuration,awkwardDuration),awkwardDuration);
+assert.equal(normalizeSeekTime(100,awkwardDuration),awkwardDuration);
+assert.equal(normalizeSeekTime(87.075,awkwardDuration),87.075,'ordinary end-near seek can still play');
+assert.equal(normalizeSeekTime('bad',awkwardDuration),0);
+assert.equal(normalizeSeekTime(-1,awkwardDuration),0);
 assert.deepEqual(a.groups.map(g=>g.keys.length),[3,1]);
 assert.equal(stateAt(h,a,2).key,null);
 assert.equal(stateAt(h,a,3).key.id,'two');

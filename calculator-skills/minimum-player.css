@@ -1,159 +1,77 @@
-/* CT12 only. The two framings share the same live TI LCD and replay. */
-.ct12-shared[data-watch-mode=watch]{--tape-bg:#182621;--tape-line:#425c4d;--tape-ink:#f0f7f2;--tape-soft:#c1d3c5;--tape-on:#bfead0;background:var(--tape-bg);color:var(--tape-ink);color-scheme:dark;isolation:isolate}
-.ct12-shared[data-watch-mode=watch] #workspace{position:relative;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;justify-content:center;gap:clamp(10px,3vw,30px);padding:39px clamp(9px,2vw,24px) 8px;min-width:0;cursor:pointer}
-.ct12-shared[data-watch-mode=watch] #handheld-host{--handheld-width:var(--ct12-handset-fit,200px);min-width:0;align-self:center}
-.ct12-shared[data-watch-mode=watch] #beat{color:var(--tape-ink);background:transparent;align-self:center}
-.ct12-shared #play-feedback{position:absolute;z-index:8;pointer-events:none;left:50%;top:50%;translate:-50% -50%;width:62px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d1615e9;color:#fff;box-shadow:0 1px 10px #0009}
-.ct12-shared #play-feedback svg{width:36px;height:36px;fill:currentColor}
-.ct12-shared #play-feedback[data-action=play] .pause-glyph,.ct12-shared #play-feedback[data-action=pause] .play-glyph{display:none}
-.ct12-shared[data-watch-mode=watch] #caption-band{border-top:1px solid var(--tape-line);background:#090f0d;color:var(--tape-ink)}
-.ct12-shared[data-watch-mode=watch] #caption{margin:0;padding:6px 9px;min-height:0;text-align:center;max-width:none;color:inherit;font:650 clamp(.76rem,2.8vw,.93rem)/1.25 system-ui;overflow-wrap:anywhere}
-.ct12-shared[data-watch-mode=watch] #watch-player{position:static;display:grid;grid-template-columns:auto auto minmax(30px,1fr) repeat(5,auto);align-items:center;gap:4px;padding:4px 8px;border:0;border-top:1px solid var(--tape-line);background:var(--tape-bg);color:var(--tape-ink)}
-.ct12-shared #watch-player :is(button,select){margin:0;min-width:36px;min-height:40px;height:40px;padding:0 5px;border:1px solid transparent;border-radius:5px;background:transparent;color:inherit;font:700 .8rem/1 system-ui;white-space:nowrap}
-.ct12-shared #watch-player select{border-color:var(--tape-line);padding:0 2px;max-width:76px;color-scheme:dark}
-.ct12-shared #watch-player select option{background:var(--tape-bg);color:var(--tape-ink)}
-.ct12-shared #watch-player .player-icon{display:grid;place-items:center;padding:0;width:39px}
-.ct12-shared #watch-player .player-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ct12-shared #watch-player #play svg{width:24px;height:24px;fill:currentColor;stroke:none}
-.ct12-shared #watch-player :is(button:hover,button[aria-pressed=true]){background:#31463b;color:#fff}
-.ct12-shared #watch-player :is(button:focus-visible,select:focus-visible,input:focus-visible){outline-color:#bde5ff;outline-offset:-2px}
-.ct12-shared #view-pick{display:flex;align-items:center;border:1px solid #647c6d;border-radius:6px}
-.ct12-shared #view-pick .player-icon{min-width:33px;width:33px}
-.ct12-shared #watch-player .timeline,.ct12-shared #seek{width:100%;margin:0;min-width:0}
-.ct12-shared #seek{height:23px;accent-color:var(--tape-on);cursor:pointer}
-.ct12-shared #clock{color:var(--tape-soft);font:600 .73rem/1.2 var(--mono);white-space:nowrap}
-.ct12-shared #media-status{grid-column:1/-1;color:var(--tape-soft);font-size:.73rem}
-.ct12-shared[data-watch-mode=watch].ct12-screen-view #handheld-host{width:min(100%,var(--ct12-lcd-fit,360px));justify-self:center}
-.ct12-shared[data-watch-mode=watch].ct12-screen-view .hh-body{width:100%;aspect-ratio:4/3;overflow:hidden;border:4px solid #486054;border-radius:8px;box-shadow:none;margin:auto}
-.ct12-shared[data-watch-mode=watch].ct12-screen-view .hh-body>*:not(.hh-lcd){display:none!important}
-.ct12-shared[data-watch-mode=watch].ct12-screen-view .hh-lcd{left:0;right:0;top:0;bottom:0;width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
-.ct12-shared:is(:fullscreen,.watch-fullscreen-fallback){height:100dvh;width:100%;max-height:none;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;align-items:stretch;overflow:auto;overscroll-behavior:contain}
-.ct12-shared.watch-fullscreen-fallback{position:fixed;inset:0;z-index:80}
-body.watch-fullscreen-open{overflow:hidden}
-.ct12-shared:is(:fullscreen,.watch-fullscreen-fallback) #workspace{width:100%;max-width:1100px;flex:1;min-height:0;margin:0 auto}
-.ct12-shared:is(:fullscreen,.watch-fullscreen-fallback) #watch-player{flex:none;position:sticky;bottom:0;z-index:9;padding-bottom:max(4px,env(safe-area-inset-bottom))}
-@media(max-width:700px){
- .ct12-shared[data-watch-mode=watch] #workspace{grid-template-columns:minmax(0,1fr);padding:34px 6px 8px;gap:0}
- .ct12-shared[data-watch-mode=watch] #workspace .ct12-stage-side{display:none}
- .ct12-shared[data-watch-mode=watch].ct12-screen-view #handheld-host{max-width:calc(100vw - 48px)}
- .ct12-shared[data-watch-mode=watch] #watch-player{grid-template-columns:auto auto auto 1fr auto auto;gap:0 2px;padding:2px 4px}
- .ct12-shared #watch-player .timeline{grid-row:1;grid-column:1/-2}
- .ct12-shared #clock{grid-row:1;grid-column:-2;justify-self:end;font-size:.68rem}
- .ct12-shared #watch-player :is(#play,#view-pick,#cc,.ct12-rate,#sound,#fullscreen){grid-row:2}
- .ct12-shared #watch-player #play{grid-column:1}
- .ct12-shared #watch-player #view-pick{grid-column:2}
- .ct12-shared #watch-player #cc{grid-column:3}
- .ct12-shared #watch-player .ct12-rate{grid-column:4}
- .ct12-shared #watch-player #sound{grid-column:5}
- .ct12-shared #watch-player #fullscreen{grid-column:6}
- .ct12-shared #watch-player :is(button,select){height:37px;min-height:37px;min-width:32px}
- .ct12-shared #watch-player .player-icon{width:33px}
- .ct12-shared #view-pick .player-icon{min-width:28px;width:28px}
+/* CT12 supplies one LCD and a Try workspace. The Watch shell owns transport and framing. */
+.ct12-main{max-width:1154px;margin:0 auto;padding:0 0 18px}
+.ct12-main [hidden]{display:none!important}
+.ct12-trail,.ct12-resources{margin:10px 12px;color:var(--muted);font-size:.8rem}
+.ct12-trail a,.ct12-resources a{color:var(--accent);text-underline-offset:.16em}
+.ct12-resources{display:flex;gap:.75rem;flex-wrap:wrap;align-items:baseline}
+.ct12-resources details[open]{flex-basis:100%;max-width:65ch}
+.ct12-resources details p{margin:.45rem 0}
+.ct12-main .lw-lesson{margin-block:.55rem}
+/* Try has its own live shell below the shared mode control. */
+.ct12-main .lw-stage[data-mode=try]{display:none;}
+.ct12-lcd>canvas{display:block;width:100%;height:100%}
+.ct12-lcd #hotspots{position:absolute;inset:0;pointer-events:none}
+.ct12-lcd .hot{position:absolute;pointer-events:auto;background:transparent;border:0;padding:0;cursor:pointer}
+.ct12-lcd .hot:focus-visible{outline:2px solid #173f9a;outline-offset:-2px}
+.ct12-lcd.pick{cursor:crosshair}
+.ct12-lcd #expression-form{
+ position:absolute;inset:auto 0 0;height:9.6%;border-top:1px solid #8298ab;display:flex;
+ align-items:center;gap:.8cqw;padding:0 1.4cqw;background:#e6f0f8;color:#111a24;z-index:4;
+ font:700 clamp(8px,4.1cqw,17px)/1 system-ui
 }
-@media(prefers-reduced-motion:no-preference){.ct12-shared #play-feedback[data-initial=false]{animation:ct12-feedback-in .15s ease-out}@keyframes ct12-feedback-in{from{opacity:.45;scale:.88}to{opacity:1;scale:1}}}
-.ct12-shared[data-watch-mode=watch]:not(:fullscreen,.watch-fullscreen-fallback) #watch-player { position:static; }
-.ct12-shared[data-watch-mode=watch] #beat { min-width:0; }
-.ct12-shared[data-watch-mode=watch] #beat .tag { margin-block-end:4px; }
-.ct12-shared[data-watch-mode=watch] #caption { border:0; }
-.ct12-shared[data-watch-mode=watch] #sound[aria-pressed=true]::after {
-  content:"";position:absolute;width:20px;height:1.5px;transform:rotate(-43deg);background:#ffd1c5;pointer-events:none;
+.ct12-lcd #expression{border:0;height:100%;padding:0;background:transparent;color:inherit;font:inherit;flex:1;min-width:0;box-shadow:none}
+.ct12-lcd #expression:focus{outline:1px solid #17538d;outline-offset:-1px}
+.ct12-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.ct12-try{
+ width:calc(100% - 24px);margin:.55rem auto;border:1px solid var(--line,#a1adb8);border-radius:12px;padding:clamp(9px,2vw,20px);
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(246px,.9fr);align-items:start;gap:10px 28px;
+ color:var(--text);background:var(--card,var(--surface));
 }
-.ct12-shared #watch-player #sound { position:relative; }
-
-.ct12-shared #watch-player .timeline{display:block}
-.ct12-shared #watch-player #play-rate{min-width:57px}
-.ct12-shared #watch-player #play::before{content:none}
-.ct12-shared[data-watch-mode=watch] #handheld-host{width:100%;max-width:none}
-.ct12-shared[data-watch-mode=watch] #beat{margin:0;max-height:var(--ct12-scene-room,none);overflow:auto;scrollbar-width:thin}
-.ct12-shared[data-watch-mode=watch] #caption-band:not([hidden]){min-height:43px;display:grid;place-items:center}
-.ct12-shared[data-watch-mode=watch] #caption-band:not([hidden]) #caption{border:0;line-height:1.25;background:transparent}
-@media(max-width:700px){
- .ct12-shared[data-watch-mode=watch] #workspace{display:grid;padding-top:30px}
- .ct12-shared[data-watch-mode=watch] #workspace #beat{display:none}
- .ct12-shared #watch-player .timeline{grid-column:1/-3}
- .ct12-shared #watch-player #clock{grid-column:-3/-1;font-size:.65rem}
- .ct12-shared[data-watch-mode=watch].ct12-screen-view #handheld-host{max-width:calc(100vw - 34px)}
+.ct12-task,.ct12-check{grid-column:2}
+.ct12-try-device{grid-column:1;grid-row:1/3;min-width:0}
+.ct12-try-device #handheld-host{--handheld-width:clamp(160px,calc((100dvh - 135px)*.47774),310px)}
+.ct12-task h2{font-size:1rem;margin:0 0 .35rem}
+.ct12-task p,.ct12-check p{margin:.3rem 0;color:var(--muted);font-size:.9rem;overflow-wrap:anywhere}
+.ct12-check [role=status]{padding:.35rem .55rem;border:1px solid var(--line,#a1adb8);border-radius:6px}
+.ct12-check [data-kind=wrong]{color:#8e2525;border-color:currentColor}
+.ct12-check [data-kind=right]{color:#116138;border-color:currentColor}
+:root[data-theme=dark] .ct12-check [data-kind=wrong]{color:#ffb6b5}
+:root[data-theme=dark] .ct12-check [data-kind=right]{color:#b6efcb}
+.ct12-answer-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:7px;align-items:end}
+.ct12-answer-row label{font-size:.79rem;color:var(--muted)}
+.ct12-answer-row input,.ct12-check button{
+ min-height:38px;border:1px solid var(--line,#83939f);border-radius:6px;padding:5px 8px;background:var(--card,var(--surface));
+ color:inherit;font:600 .83rem system-ui;
 }
-@media(max-height:680px){
- body.ct12-minimum[data-cx-mode=watch] #lesson-intro{display:none}
- body.ct12-minimum[data-cx-mode=watch] main>.title{margin-block:8px}
- body.ct12-minimum[data-cx-mode=watch] main>.title h1{font-size:clamp(1.38rem,4vw,3rem)}
- .ct12-shared[data-watch-mode=watch] #workspace{padding-top:26px;padding-bottom:5px}
+.ct12-answer-row input{display:block;width:100%;margin-top:3px}
+.ct12-check button{cursor:pointer;padding-inline:.65rem}
+#reset-try{margin-top:.45rem}
+@media(max-width:780px){
+ .ct12-main .lw-lesson,.ct12-try{width:calc(100% - 16px)}
+ .ct12-trail,.ct12-resources{margin:5px 8px}
+ .ct12-try{display:block}
+ .ct12-try-device{margin:8px auto}
+ .ct12-try-device #handheld-host{--handheld-width:clamp(155px,calc((100dvh - 284px)*.47774),266px)}
 }
-@media(max-width:380px){
- body.ct12-minimum[data-cx-mode=watch] main>.title .context{font-size:.68rem}
- body.ct12-minimum main>.title .modes button{min-height:36px}
+/* Keep the whole replay transport in the first screen on compact handsets.
+   The opening coach already contains the full question, so the mobile
+   title need not repeat its introductory strapline. */
+@media(max-width:430px){
+ .ct12-main .lw-header{margin-bottom:.35rem;gap:.35rem}
+ .ct12-main .lw-header h1{font-size:clamp(1.3rem,5.9vw,1.5rem)}
+ .ct12-main .lw-header p{display:none}
+ .ct12-main .lw-coach{max-width:none}
+ .ct12-main .lw-guide .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
-@media(max-width:450px){
- body.ct12-minimum[data-cx-mode=watch] main>.title{display:block;position:relative}
- body.ct12-minimum[data-cx-mode=watch] main>.title .context{max-width:calc(100% - 109px);min-height:27px;padding-top:5px;margin-block:0 5px}
- body.ct12-minimum[data-cx-mode=watch] main>.title #context:not([hidden]){min-height:0;padding:0}
- body.ct12-minimum[data-cx-mode=watch] main>.title .modes{position:absolute;top:0;right:0;padding:2px}
- body.ct12-minimum[data-cx-mode=watch] main>.title .modes button{min-height:33px}
- body.ct12-minimum[data-cx-mode=watch] main>.title h1{font-size:clamp(1.62rem,7.5vw,2.1rem);padding-top:7px}
+@media(max-width:430px) and (max-height:670px){
+ .ct12-main .lw-compact-coach .lw-coach{min-height:4lh}
+ .ct12-main .ct12-trail{margin-block:2px;font-size:.69rem}
+ .ct12-main .lw-lesson{margin-block:.3rem}
+ .ct12-main .lw-transport{padding-block:2px}
+ .ct12-main .lw-transport button,.ct12-main .lw-transport select{min-height:34px}
 }
-
-/* CT12 teaching pass: a non-scrolling, ordered key trail and one bottom bar. */
-.ct12-shared[data-watch-mode=watch] #workspace{padding-top:8px;row-gap:4px}
-.ct12-shared #watch-player .player-icon [hidden]{display:none}
-.watch-synopsis{margin:8px 0;padding:0;color:var(--ink,inherit)}
-.watch-synopsis summary{cursor:pointer;font-weight:650;font-size:.88rem}
-.watch-synopsis p{font-size:.89rem;line-height:1.45;margin:6px 0}
-@media(max-width:700px){
- .ct12-shared[data-watch-mode=watch] #workspace{padding-top:6px}
-}
-.ct12-shared .hh-lcd{container-type:inline-size}
-.ct12-shared .ct12-lcd-entry{position:absolute;inset:auto 0 0;min-height:9.6%;height:9.6%;border-top:1px solid #8298ab;display:flex;align-items:center;gap:.8cqw;padding:0 1.4cqw;background:#e6f0f8;color:#111a24;z-index:4;font:700 clamp(8px,4.1cqw,17px)/1 system-ui}
-.ct12-shared .ct12-lcd-entry input{border:0;height:100%;padding:0;background:transparent;color:inherit;font:inherit;flex:1;min-width:0;box-shadow:none}
-.ct12-shared .ct12-lcd-entry input:focus{outline:1px solid #17538d;outline-offset:-1px}
-.ct12-minimum .ct12-try-instructions{font-size:.88rem;margin:0}
-.ct12-minimum[data-cx-mode=try] #beat{display:none}
-.ct12-minimum[data-cx-mode=try] #workspace{display:block}
-.ct12-shared .ct12-rate{display:flex;align-items:center;gap:4px;font:600 .73rem/1 system-ui;white-space:nowrap}
-.ct12-shared #watch-player #play-rate{min-width:57px;max-width:65px}
-@media(max-width:350px){
- .ct12-shared .ct12-rate{gap:2px;font-size:.64rem}
- .ct12-shared #watch-player #play-rate{min-width:54px;font-size:.72rem}
- .ct12-shared #watch-player :is(#sound,#fullscreen){min-width:28px;width:28px}
-}
-.ct12-shared #watch-player #play-rate{appearance:none;width:63px;min-width:63px;padding-inline:4px 11px;background:linear-gradient(45deg,transparent 50%,currentColor 0) right 8px center/4px 4px no-repeat,linear-gradient(135deg,currentColor 50%,transparent 0) right 4px center/4px 4px no-repeat}
-@media(max-width:350px){.ct12-shared #watch-player #play-rate{width:58px;min-width:58px}}
-
-.ct12-shared[data-watch-mode=watch] #beat{display:none}
-.ct12-shared #watch-chapters{min-width:0;width:100%;max-width:22rem;justify-self:center;color:var(--tape-ink)}
-.ct12-shared #key-steps,.ct12-shared .ct12-trail-row{list-style:none;margin:0;padding:0}
-.ct12-shared #key-steps{display:grid;gap:3px}
-.ct12-shared #key-steps>li{min-width:0}
-.ct12-shared #key-steps button{display:flex;align-items:center;gap:7px;width:100%;min-height:26px;padding:3px 6px;text-align:left;border:1px solid #435c4e;border-radius:5px;background:transparent;color:inherit;font:680 .78rem/1.15 system-ui;cursor:pointer}
-.ct12-shared #key-steps button span{color:var(--tape-soft);font:650 .66rem/1 var(--mono)}
-.ct12-shared #key-steps button[aria-current],.ct12-shared #key-steps button:hover{background:#31463b;border-color:#87a795}
-.ct12-shared #key-steps button:focus-visible{outline:2px solid #bde5ff;outline-offset:-2px}
-.ct12-shared .ct12-trail-row{display:flex;flex-wrap:wrap;align-items:center;gap:3px;padding:2px 6px 3px}
-.ct12-shared .ct12-trail-row kbd{display:inline-grid;place-items:center;min-width:19px;min-height:19px;padding:1px 4px;border:1px solid #637d6f;border-radius:4px;font:670 .69rem/1 var(--mono);color:#eef5ef;background:#1b3027;white-space:nowrap}
-.ct12-shared .ct12-trail-row kbd[data-progress=done]{background:#476658;border-color:#91aa99}
-.ct12-shared .ct12-trail-row kbd[data-progress=current]{color:#09251b;background:#bbefcc;border-color:#edfff3;box-shadow:inset 0 -2px #347351}
-.ct12-shared .ct12-pin-note{font:600 .66rem/1 system-ui;color:var(--tape-soft)}
-.ct12-shared #hold-note{min-height:1em;margin:3px 0 0;color:var(--tape-soft);font:600 .73rem/1 system-ui}
-@media(max-width:700px){
- .ct12-shared #watch-chapters{max-width:31rem;padding-inline:2px}
- .ct12-shared #key-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 4px}
- .ct12-shared #key-steps>li:first-child{grid-column:1/-1}
- .ct12-shared #key-steps button{min-height:21px;padding:2px 4px;font-size:.68rem}
- .ct12-shared #key-steps button span{display:none}
- .ct12-shared .ct12-trail-row{padding:1px 3px 2px}
- .ct12-shared .ct12-trail-row kbd{min-width:17px;min-height:17px;font-size:.64rem;padding:1px 3px}
- .ct12-shared #hold-note{font-size:.68rem;margin-block:2px 0}
-}
-.ct12-shared .ct12-trail-row>li{line-height:1}
-@media(max-width:700px){
- .ct12-shared #key-steps{grid-template-columns:repeat(3,minmax(0,1fr))}
- .ct12-shared #key-steps>li:first-child{grid-column:span 2}
- .ct12-shared .ct12-trail-row{gap:2px}
- .ct12-shared .ct12-pin-note{font-size:.57rem}
-}
-.ct12-shared .ct12-trail-row>li{display:flex;align-items:center}
-@media(max-width:700px){
- .ct12-shared #key-steps button{white-space:nowrap;font-size:.65rem}
- .ct12-shared .ct12-trail-row kbd{min-width:16px;padding-inline:2px}
- .ct12-shared #play-feedback{top:calc((100% - var(--ct12-chapters-height,0px))/2)}
+@media(min-width:781px) and (max-height:650px){
+ .ct12-main .lw-header h1{font-size:2rem}
+ .ct12-main .lw-surface{padding-block:12px}
+ .ct12-main .ct12-trail{margin-block:4px}
 }
