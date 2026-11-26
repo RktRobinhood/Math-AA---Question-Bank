@@ -33,7 +33,7 @@
 .settings-footer{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:1cqw;margin:auto 1.6cqw 1.1cqw;line-height:1}
 .settings-footer span{padding:1cqw;background:#f5f8fa;border:1px solid #8796a0;border-radius:1.2cqw;font-size:3.1cqw}
 .settings-footer span:first-child{margin-right:auto}
-.settings-footer .settings-pointer{position:absolute;bottom:-.8cqw;right:14cqw;padding:0;border:none;background:none;font-size:5cqw;color:#174c7e;z-index:3}
+.settings-footer .settings-pointer{position:absolute;bottom:-1.6cqw;right:11.8cqw;padding:0;border:none;background:none;font-size:4.1cqw;color:#174c7e;z-index:3}
 .settings-options{position:absolute;padding:.3cqw;left:54.5%;min-width:39%;z-index:2;display:grid;background:#fff;border:1px solid #536b7b;box-shadow:0 1px 4px #172a4650;font-size:3.8cqw}
 .settings-options[data-kind=digits]{top:22%}
 .settings-options[data-kind=angle]{top:35%}

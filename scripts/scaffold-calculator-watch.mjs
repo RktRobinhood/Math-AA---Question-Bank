@@ -26,7 +26,7 @@ const html=`<!doctype html>
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
 <link rel="stylesheet" href="../handheld/shell.css">
 <link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
-<link rel="stylesheet" href="../handheld/watch-lesson.css?v=mode-bridge-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=compact-rail-2">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>

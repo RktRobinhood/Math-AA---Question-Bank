@@ -131,7 +131,7 @@
     {
       "chapter": "angle",
       "spoken": "In A A, start in Radian. The A I higher level exam also assumes radians unless the question indicates otherwise. Switch units whenever the question tells you to.",
-      "coach": "AA SL/HL and AI HL exams: Radian unless indicated. AI sinusoidal models also default to radians unless shown in degrees.",
+      "coach": "AA SL/HL and AI HL exams: Radian unless indicated. AI HL sinusoidal models also default to radians unless shown in degrees.",
       "end": 33.0,
       "hold": 6.5,
       "keys": [
