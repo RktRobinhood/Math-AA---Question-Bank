@@ -1,0 +1,222 @@
+{
+  "id": "CT57",
+  "title": "Volumes of revolution",
+  "intro": "Set up a washer integral and evaluate it on the calculator.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "6f19f7f265ec32996c437cc0f8daf4e51e4e110922e4b45c90cf932bcfac724f",
+    "scriptSha256": "0546239fe87c3ead0f2e7fdc2e9a45c1793fd2d2e8777397a8f2b8eace0144d5"
+  },
+  "chapters": [
+    {
+      "id": "radii",
+      "title": "Choose the two radii"
+    },
+    {
+      "id": "washer",
+      "title": "Build a washer"
+    },
+    {
+      "id": "integral",
+      "title": "Open the numerical integral"
+    },
+    {
+      "id": "bounds",
+      "title": "Fill the bounds"
+    },
+    {
+      "id": "area",
+      "title": "Enter the area without π"
+    },
+    {
+      "id": "answer",
+      "title": "Report cubic units"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "radii",
+      "spoken": "Rotate the region from y equals one to y equals two x, with x from one to two inclusive, about the x axis. Each slice has a hole.",
+      "coach": "Rotate the region from y = 1 to y = 2x, for 1 ≤ x ≤ 2, about the x-axis. Each slice has a hole.",
+      "end": 11.15,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "washer",
+      "spoken": "The outer radius is two x and the inner radius is one. Enter pi outside the integral. Use a difference of squares, not the square of the gap.",
+      "coach": "The outer radius is 2x and the inner radius is 1. Enter π outside the integral. Use a difference of squares, not the square of the gap.",
+      "end": 21.881,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "π",
+          "ariaLabel": "Pi symbols",
+          "at": 0.1667
+        },
+        {
+          "id": "press-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4444
+        },
+        {
+          "id": "press-3",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "integral",
+      "spoken": "On Calculator, choose Menu then four: Calculus then two: Numerical Definite Integral.",
+      "coach": "On Calculator, choose Menu → 4: Calculus → 2: Numerical Definite Integral.",
+      "end": 29.671,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1667
+        },
+        {
+          "id": "press-5",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.4444
+        },
+        {
+          "id": "press-6",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Tab moves from the lower bound one to the upper bound two, then into the integrand.",
+      "coach": "Tab moves from the lower bound 1 to the upper bound 2, then into the integrand.",
+      "end": 36.024,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.1304
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3478
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5652
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "area",
+      "spoken": "Enter the square of two times x, minus one squared. The pi outside multiplies every slice. Tab to the differential, type x, then Enter.",
+      "coach": "Enter (2 × x)² − 1². The π outside multiplies every slice. Tab to the differential, type x, then Enter.",
+      "end": 48.5015,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "press-11",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.0476
+        },
+        {
+          "id": "press-12",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.127
+        },
+        {
+          "id": "press-13",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.2063
+        },
+        {
+          "id": "press-14",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.2857
+        },
+        {
+          "id": "press-15",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.3651
+        },
+        {
+          "id": "press-16",
+          "label": "x²",
+          "ariaLabel": "Square key",
+          "at": 0.4444
+        },
+        {
+          "id": "press-17",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.5238
+        },
+        {
+          "id": "press-18",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6032
+        },
+        {
+          "id": "press-19",
+          "label": "x²",
+          "ariaLabel": "Square key",
+          "at": 0.6825
+        },
+        {
+          "id": "press-20",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7619
+        },
+        {
+          "id": "press-21",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.8413
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9206
+        }
+      ]
+    },
+    {
+      "chapter": "answer",
+      "spoken": "The solid has volume about twenty-six point one eight zero cubic units. For a disk touching the axis, the inner radius is zero.",
+      "coach": "The solid has volume about 26.180 cubic units. For a disk touching the axis, the inner radius is zero.",
+      "end": 59.062,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}
