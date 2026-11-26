@@ -1,5 +1,108 @@
 {
-  "version": 1,
-  "lesson": "CT02",
-  "status": "awaiting-recording"
+ "version": 1,
+ "lesson": "CT02",
+ "status": "measured",
+ "audio": "narration.mp3",
+ "audioSha256": "55380d83493dd7bb002147862a5e5bbd71b16f9f1b13c315e5e6f08083385b26",
+ "durationMs": 42729,
+ "transcriptSha256": "b02dd83ecdfa33ac55409abbc4e8f83f8510dc96ff648c285d5ed72067db8f8b",
+ "cueMapSha256": "0c06d77657d590152a4e3cdc630c3509d084e395aa170bde41049dd2f956808b",
+ "measurement": "FAL-1673 local George clone (VoxCPM2). Each cue is its own checked take, so caption starts and ends are sample-exact in the composed file. Each cue starts at its authored caption start; key, display and pointer events keep their authored 1:1 offsets from it (never scaled). Where speech runs past the authored window, the Watch holds on its last frame until the next cue; where speech is shorter, silence fills the window. Minimum 500 ms between cues.",
+ "anchors": [
+  {
+   "editorialMs": 0,
+   "audioMs": 0
+  },
+  {
+   "editorialMs": 3400,
+   "audioMs": 8609
+  },
+  {
+   "editorialMs": 4200,
+   "audioMs": 9409
+  },
+  {
+   "editorialMs": 5680,
+   "audioMs": 10889
+  },
+  {
+   "editorialMs": 6050,
+   "audioMs": 11259
+  },
+  {
+   "editorialMs": 7900,
+   "audioMs": 13109
+  },
+  {
+   "editorialMs": 8600,
+   "audioMs": 16166
+  },
+  {
+   "editorialMs": 9300,
+   "audioMs": 16866
+  },
+  {
+   "editorialMs": 10950,
+   "audioMs": 18516
+  },
+  {
+   "editorialMs": 12020,
+   "audioMs": 19586
+  },
+  {
+   "editorialMs": 14300,
+   "audioMs": 25229
+  },
+  {
+   "editorialMs": 15000,
+   "audioMs": 25929
+  },
+  {
+   "editorialMs": 15460,
+   "audioMs": 26389
+  },
+  {
+   "editorialMs": 15950,
+   "audioMs": 26879
+  },
+  {
+   "editorialMs": 17250,
+   "audioMs": 28179
+  },
+  {
+   "editorialMs": 21700,
+   "audioMs": 32629
+  },
+  {
+   "editorialMs": 31800,
+   "audioMs": 42729
+  }
+ ],
+ "captions": [
+  {
+   "id": "watch-01",
+   "startMs": 0,
+   "endMs": 8109
+  },
+  {
+   "id": "watch-02",
+   "startMs": 8609,
+   "endMs": 15666
+  },
+  {
+   "id": "watch-03",
+   "startMs": 16166,
+   "endMs": 24729
+  },
+  {
+   "id": "watch-04",
+   "startMs": 25229,
+   "endMs": 32063
+  },
+  {
+   "id": "watch-05",
+   "startMs": 32629,
+   "endMs": 41691
+  }
+ ]
 }
