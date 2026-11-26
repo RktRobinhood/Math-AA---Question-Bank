@@ -98,27 +98,32 @@ add("decay-gap-matching","2.9","SL2.9.exp-model",4,"words","Match two exponentia
  ]};
 });
 
-add("reciprocal-asymptote-absent-output","2.8","SL2.8.asymptotes",1,"equation","Identify the horizontal asymptote as the missing output",({rng})=>{
+add("reciprocal-asymptote-absent-output","2.8","SL2.8.asymptotes",1,"equation","Write down the horizontal asymptote",({rng})=>{
  const h=rng.int(2,14),k=rng.nonzero(-14,14),a=rng.nonzero(-9,9);
  const f=num(k)+(a>0?"+":"-")+"\\dfrac{"+Math.abs(a)+"}{"+lin(1,-h)+"}";
- return{params:{h,k,a},stem:"Let "+m("f(x)="+f)+" on its natural domain.",parts:[
-  P("Which output does the graph approach as the input grows, but never attain?",2,ans.int(k),"The reciprocal term approaches zero when the magnitude of the input grows. It never equals zero for any finite allowed input.")
+ return{params:{h,k,a},stem:"Let "+m("f(x)="+f)+". The horizontal asymptote of the graph of "+m("f")+" has equation "+m("y=c")+".",parts:[
+  P("Write down the value of "+m("c")+".",2,ans.int(k),"As "+m("x")+" gets larger, the fraction gets closer to zero. The horizontal asymptote is "+m("y="+num(k))+".")
  ]};
 });
 
-add("refine-bracket","2.10","SL2.10.solve-gdc",2,"table","Refine a numerical root bracket using one new test value",({rng})=>{
+add("refine-bracket","2.10","SL2.10.solve-gdc",2,"table","Locate an intersection between two values",({rng})=>{
  const l=rng.int(1,9),d=rng.int(1,6),L=l*2,R=L+4*d,mid=(L+R)/2,seek=mid+rng.pick([-1,1])*d/3,F=x=>Math.round(3*(x-seek));
- return{params:{L,R,seek,mid},stem:"The difference "+m("D(x)=f(x)-g(x)")+" is continuous and strictly increasing on the interval below. You are solving "+m("f(x)=g(x)")+".",table:{head:[m("x"),N(L),N(mid),N(R)],rows:[[m("D(x)"),N(F(L)),N(F(mid)),N(F(R))]]},parts:[
-  P("Give the lower endpoint of the half-interval that still brackets the solution.",2,ans.int(seek<mid?L:mid),"Choose the half containing the change of sign of the difference."),
-  P("Give the upper endpoint of that half-interval.",1,ans.int(seek<mid?mid:R),"Strict increase and continuity guarantee one crossing in the bracket.")
+ const xs=[L,mid,R],g=xs.map(x=>2*x+1),f=g.map((val,i)=>val+F(xs[i]));
+ return{params:{L,R,seek,mid},stem:"The graphs of "+m("f")+" and "+m("g")+" have no breaks and cross once between "+N(L)+" and "+N(R)+". Use the table to find which two consecutive "+m("x")+"-values lie on either side of the intersection.",table:{head:[m("x"),...xs.map(N)],rows:[[m("f(x)"),...f.map(N)],[m("g(x)"),...g.map(N)]]},parts:[
+  P("Write down the smaller of the two values.",2,ans.int(seek<mid?L:mid),"Compare the two rows in each column. At one value, "+m("f(x)<g(x)")+"; at the next, "+m("f(x)>g(x)")+"."),
+  P("Write down the larger of the two values.",1,ans.int(seek<mid?mid:R),"The graphs intersect between those consecutive values of "+m("x")+".")
  ]};
 });
 
-add("unit-chain-ready","2.5","SL2.5.composite-expression",0,"words","Match the output units of one step to the input units of another",({rng})=>{
- const rate=rng.int(3,13),cases=[["minutes","litres","euros"],["hours","kilometres","points"],["days","kilograms","credits"]];
- const [a,b,c]=rng.pick(cases);
- return{params:{a,b,c,rate},stem:"A two-step calculator converts "+a+" to "+b+" at a rate of "+N(rate)+" "+b+" per "+(a==="minutes"?"minute":a==="hours"?"hour":"day")+". Its next step converts "+b+" to "+c+".",parts:[
-  P("What must be passed from the first step to the second?",1,C(rng,item(b,"middle"),item(a,"first"),item(c,"final")),"The first output must have the units required as input by the second step.")
+add("unit-chain-ready","2.5","SL2.5.composite-expression",0,"words","Choose the quantity needed for the next calculation",({rng})=>{
+ const rate=rng.int(3,13),cases=[
+  ["minutes","pages","euros","A printer prints "+N(rate)+" pages per minute. Printing costs "+N(10)+" cents per page."],
+  ["minutes","litres","euros","A tap delivers "+N(rate)+" litres of water per minute. Each litre costs "+N(2)+" cents."],
+  ["hours","boxes","euros","A machine packs "+N(rate)+" boxes per hour. It costs "+N(2)+" euros to send each box."]
+ ];
+ const [a,b,c,stem]=rng.pick(cases);
+ return{params:{a,b,c,rate},stem,parts:[
+  P("Which quantity do you need to find before you can work out the total cost?",1,C(rng,item(b,"middle"),item(a,"first"),item(c,"final")),"First find how many "+b+" there are. Multiply that number by the cost for one to find the total.")
  ]};
 },{supports:["SL2.5.composite-value","SL2.5.composite-expression"]});
 

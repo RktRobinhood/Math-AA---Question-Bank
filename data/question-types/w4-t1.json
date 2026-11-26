@@ -148,7 +148,7 @@
     {
       "id": "w4-t1-repair-geometric-record",
       "home": "aa-sl",
-      "name": "Repair a suspect reading using two confirmed readings",
+      "name": "Find a missing term of a geometric sequence",
       "topic": 1,
       "kind": "skill",
       "source": "extension",
@@ -162,7 +162,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Repair a suspect reading using two confirmed readings",
+          "asked": "Find a missing term of a geometric sequence",
           "level": 2
         }
       ],

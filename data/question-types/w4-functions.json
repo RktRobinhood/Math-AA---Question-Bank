@@ -211,7 +211,7 @@
     },
     {
       "id": "w4-fn-reciprocal-asymptote-absent-output",
-      "name": "Identify the horizontal asymptote as the missing output",
+      "name": "Write down the horizontal asymptote",
       "source": "extension",
       "kind": "skill",
       "topic": 2,
@@ -225,7 +225,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Identify the horizontal asymptote as the missing output",
+          "asked": "Write down the horizontal asymptote",
           "level": 1
         }
       ],
@@ -237,7 +237,7 @@
     },
     {
       "id": "w4-fn-refine-bracket",
-      "name": "Refine a numerical root bracket using one new test value",
+      "name": "Locate an intersection between two values",
       "source": "extension",
       "kind": "skill",
       "topic": 2,
@@ -251,7 +251,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Refine a numerical root bracket using one new test value",
+          "asked": "Locate an intersection between two values",
           "level": 2
         }
       ],
@@ -263,7 +263,7 @@
     },
     {
       "id": "w4-fn-unit-chain-ready",
-      "name": "Match the output units of one step to the input units of another",
+      "name": "Choose the quantity needed for the next calculation",
       "source": "extension",
       "kind": "prior-learning",
       "topic": 2,
@@ -281,7 +281,7 @@
       "unknowns": [
         {
           "id": "reasoning",
-          "asked": "Match the output units of one step to the input units of another",
+          "asked": "Choose the quantity needed for the next calculation",
           "level": 0
         }
       ],

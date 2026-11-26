@@ -27,11 +27,11 @@ add("pascal-mirror-position","equation",({n,k},T)=>{
  T.require(hits.length===1,"exactly one distinct position has that coefficient");
  return {a:hits[0]};
 });
-add("repair-geometric-record","table",({x,y,wrong},T)=>{
+add("repair-geometric-record","table",({x,y},T,q)=>{
  const alternatives=[-4,-3,-2,-1,1,2,3,4];
  const r=alternatives.find(z=>x*z===y);
  let input=-20;while(input<21&&input*r!==x)input++;
- T.require(input<=20&&wrong!==input,"given first reading differs from the only corrected value");
+ T.require(input<=20&&q.table.rows[0][1]==="Not given","the inferred term is blank and unique");
  return {a:r,b:input};
 });
 add("reroute-infinite-pool","words",({p,q,allocated},T)=>{

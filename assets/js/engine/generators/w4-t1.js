@@ -39,12 +39,12 @@ add("pascal-mirror-position",AA,"1.9","SL1.9.ncr-pascal SL1.9.specific-term",1,"
  return Q({n,k},T`In the expansion of $(1+x)^{${n}}$, the coefficient of $${k===1?"x":"x^{"+k+"}"}$ appears at exactly one other power of $x$.`,
   P("Give the exponent of that other power.",2,I(j),T`Choosing $${k}$ of the $${n}$ factors to contribute $x$ is equivalent to choosing which $${k}$ factors are left out at the complementary position. The symmetric coefficient occurs at exponent $${n}-${k}=${j}$.`));
 });
-add("repair-geometric-record",AA,"1.3","SL1.3.find-r-u1 SL1.3.nth-term",2,"table","Repair a suspect reading using two confirmed readings",({rng:r})=>{
- const j=r.int(1,12),u=r.int(3,17),b=r.pick([-4,-3,-2,2,3,4]),x=u*b,y=x*b,wrong=u+(u%2?2:-2);
- const q=Q({j,u,b,x,y,wrong},"The table contains three consecutive terms of a geometric sequence. Only the first reading is corrupt; the other two are correct. The indices are correct.",
-  P("Find the common ratio.",1,I(b),T`Use the consecutive reliable terms: divide $${y}$ by $${T`\left(${x}\right)`}$ to obtain $${b}$.`),
-  P(T`Find the corrected value of $u_{${j}}$.`,2,I(u),T`Reverse one multiplication by the common ratio. This gives $${x}\div${T`\left(${b}\right)`}=${u}$.`));
- q.table={head:["Index",...([j,j+1,j+2].map(M))],rows:[["Recorded term",...([wrong,x,y].map(M))]]};
+add("repair-geometric-record",AA,"1.3","SL1.3.find-r-u1 SL1.3.nth-term",2,"table","Find a missing term of a geometric sequence",({rng:r})=>{
+ const j=r.int(1,12),u=r.int(3,17),b=r.pick([-4,-3,-2,2,3,4]),x=u*b,y=x*b;
+ const q=Q({j,u,b,x,y},"The table shows three consecutive terms of a geometric sequence.",
+  P("Find the common ratio.",1,I(b),T`Divide the third term shown by the second: divide $${y}$ by $${T`\left(${x}\right)`}$ to obtain $${b}$.`),
+  P(T`Find the value of $u_{${j}}$.`,2,I(u),T`Reverse one multiplication by the common ratio. This gives $${x}\div${T`\left(${b}\right)`}=${u}$.`));
+ q.table={head:["Term",...([j,j+1,j+2].map(i=>M("u_{"+i+"}")))],rows:[["Value","Not given",M(x),M(y)]]};
  return q;
 });
 add("reroute-infinite-pool",AA,"1.8","SL1.8.sum-to-infinity SL1.8.find-unknown",2,"words","Move part of a fixed infinite sum to an up-front allocation",({rng:r})=>{

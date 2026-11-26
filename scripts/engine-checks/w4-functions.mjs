@@ -55,7 +55,7 @@ export default {
   return{a:T.approx(v,1e-10)};
  },
  [id("refine-bracket","table")]:({params:{L,R,seek,mid},table},T)=>{
-  const values=table.rows[0].slice(1).map(x=>Number(x.slice(1,-1)));
+  const values=table.rows[0].slice(1).map((x,i)=>Number(x.slice(1,-1))-Number(table.rows[1][i+1].slice(1,-1)));
   const bracket=values[0]*values[1]<0?[L,mid]:[mid,R];
   T.require(values[0]<0&&values[2]>0&&values[1]!==0&&bracket[0]<seek&&seek<bracket[1],"nonzero midpoint and exactly one preserved sign bracket");
   return{a:bracket[0],b:bracket[1]};
