@@ -1,0 +1,367 @@
+{
+  "id": "CT15",
+  "title": "Restricted and piecewise graphs",
+  "intro": "Enter two piecewise rules, graph their restrictions, and check which rule owns an endpoint.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "8179a2461d0eb1dca356e1fc1e05bb611311217e5d48d2c468be772033250f6d",
+    "scriptSha256": "8058480791e1d12dbf6b1a3e2b84e3be50b74d41861522a1df165509e94d603c"
+  },
+  "chapters": [
+    {
+      "id": "template",
+      "title": "Choose the template"
+    },
+    {
+      "id": "two-pieces",
+      "title": "Set two pieces"
+    },
+    {
+      "id": "first-rule",
+      "title": "Enter the first rule"
+    },
+    {
+      "id": "second-rule",
+      "title": "Enter the second rule"
+    },
+    {
+      "id": "graph",
+      "title": "Plot the graph"
+    },
+    {
+      "id": "join",
+      "title": "Read the join and domain"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "template",
+      "spoken": "In Graphs, press the template key. Select the n-piece function template.",
+      "coach": "Open the Graphs templates. Move across the top row to the n-piece function template.",
+      "end": 6.172,
+      "hold": 5.68,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Templates",
+          "at": 0.0625
+        },
+        {
+          "id": "press-2",
+          "label": "→",
+          "at": 0.1667
+        },
+        {
+          "id": "press-3",
+          "label": "→",
+          "at": 0.2708
+        },
+        {
+          "id": "press-4",
+          "label": "→",
+          "at": 0.375
+        },
+        {
+          "id": "press-5",
+          "label": "→",
+          "at": 0.4792
+        },
+        {
+          "id": "press-6",
+          "label": "→",
+          "at": 0.5833
+        },
+        {
+          "id": "press-7",
+          "label": "→",
+          "at": 0.6875
+        },
+        {
+          "id": "press-8",
+          "label": "→",
+          "at": 0.7917
+        },
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "two-pieces",
+      "spoken": "Set the number of pieces to two and press Enter.",
+      "coach": "Set two pieces and press Enter to open the two-row editor.",
+      "end": 10.278,
+      "hold": 2.04,
+      "keys": [
+        {
+          "id": "press-10",
+          "label": "2",
+          "at": 0.2308
+        },
+        {
+          "id": "press-11",
+          "label": "Enter",
+          "at": 0.6154
+        }
+      ]
+    },
+    {
+      "chapter": "first-rule",
+      "spoken": "Type the first expression. Move right to its condition. Control plus the equals key opens the inequality symbols.",
+      "coach": "Enter x² in the first row. Move right, then use Ctrl + = for the inequality symbols.",
+      "end": 18.87,
+      "hold": 7.76,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "x",
+          "at": 0.0441
+        },
+        {
+          "id": "press-13",
+          "label": "x²",
+          "at": 0.1176
+        },
+        {
+          "id": "press-14",
+          "label": "→",
+          "at": 0.1912
+        },
+        {
+          "id": "press-15",
+          "label": "(−)",
+          "at": 0.2647
+        },
+        {
+          "id": "press-16",
+          "label": "2",
+          "at": 0.3382
+        },
+        {
+          "id": "press-17",
+          "label": "Ctrl",
+          "at": 0.4118
+        },
+        {
+          "id": "press-18",
+          "label": "=",
+          "at": 0.4853
+        },
+        {
+          "id": "press-19",
+          "label": "→",
+          "at": 0.5588
+        },
+        {
+          "id": "press-20",
+          "label": "→",
+          "at": 0.6324
+        },
+        {
+          "id": "press-21",
+          "label": "→",
+          "at": 0.7059
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "at": 0.7794
+        },
+        {
+          "id": "press-23",
+          "label": "x",
+          "at": 0.8529
+        },
+        {
+          "id": "press-24",
+          "label": "Ctrl",
+          "at": 0.9265
+        }
+      ]
+    },
+    {
+      "chapter": "first-rule",
+      "spoken": "Less than or equal to includes an endpoint. Strictly less than leaves it out. The first rule does not include x equals one.",
+      "coach": "Use −2 ≤ x < 1. The first rule is closed at −2 but does not include x = 1.",
+      "end": 29.22,
+      "hold": 3.08,
+      "keys": [
+        {
+          "id": "press-25",
+          "label": "=",
+          "at": 0.1304
+        },
+        {
+          "id": "press-26",
+          "label": "→",
+          "at": 0.3478
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "at": 0.5652
+        },
+        {
+          "id": "press-28",
+          "label": "1",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "second-rule",
+      "spoken": "Move down to the second row. Enter its expression, then move right to its condition.",
+      "coach": "Move down to the second row. Enter x + 2, then move to its condition.",
+      "end": 36.4655,
+      "hold": 9.32,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "↓",
+          "at": 0.0361
+        },
+        {
+          "id": "press-30",
+          "label": "←",
+          "at": 0.0964
+        },
+        {
+          "id": "press-31",
+          "label": "x",
+          "at": 0.1566
+        },
+        {
+          "id": "press-32",
+          "label": "+",
+          "at": 0.2169
+        },
+        {
+          "id": "press-33",
+          "label": "2",
+          "at": 0.2771
+        },
+        {
+          "id": "press-34",
+          "label": "→",
+          "at": 0.3373
+        },
+        {
+          "id": "press-35",
+          "label": "1",
+          "at": 0.3976
+        },
+        {
+          "id": "press-36",
+          "label": "Ctrl",
+          "at": 0.4578
+        },
+        {
+          "id": "press-37",
+          "label": "=",
+          "at": 0.5181
+        },
+        {
+          "id": "press-38",
+          "label": "→",
+          "at": 0.5783
+        },
+        {
+          "id": "press-39",
+          "label": "→",
+          "at": 0.6386
+        },
+        {
+          "id": "press-40",
+          "label": "→",
+          "at": 0.6988
+        },
+        {
+          "id": "press-41",
+          "label": "Enter",
+          "at": 0.759
+        },
+        {
+          "id": "press-42",
+          "label": "x",
+          "at": 0.8193
+        },
+        {
+          "id": "press-43",
+          "label": "Ctrl",
+          "at": 0.8795
+        },
+        {
+          "id": "press-44",
+          "label": "=",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "second-rule",
+      "spoken": "Include x equals one in the second condition, so only one rule owns the join.",
+      "coach": "Use 1 ≤ x ≤ 3. The second rule alone owns x = 1.",
+      "end": 44.042,
+      "hold": 3.6,
+      "keys": [
+        {
+          "id": "press-45",
+          "label": "→",
+          "at": 0.1071
+        },
+        {
+          "id": "press-46",
+          "label": "→",
+          "at": 0.2857
+        },
+        {
+          "id": "press-47",
+          "label": "→",
+          "at": 0.4643
+        },
+        {
+          "id": "press-48",
+          "label": "Enter",
+          "at": 0.6429
+        },
+        {
+          "id": "press-49",
+          "label": "3",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "graph",
+      "spoken": "Press Enter to graph. The graph only exists where the conditions allow it.",
+      "coach": "Graph both rules. The study circles mark where each rule includes or excludes an endpoint.",
+      "end": 49.886,
+      "hold": 1.65,
+      "keys": [
+        {
+          "id": "press-50",
+          "label": "Enter",
+          "at": 0.375
+        }
+      ]
+    },
+    {
+      "chapter": "join",
+      "spoken": "At the join, read the inequality before using the expression.",
+      "coach": "At x = 1 the second rule gives f(1) = 3. The hollow circle is not the value.",
+      "end": 54.8235,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "join",
+      "spoken": "Both outer endpoints are included. Outside the restricted domain the function is undefined.",
+      "coach": "The outer endpoints −2 and 3 are included. Outside the two restrictions the function is undefined.",
+      "end": 62.513,
+      "hold": 1.65,
+      "keys": []
+    }
+  ]
+}
