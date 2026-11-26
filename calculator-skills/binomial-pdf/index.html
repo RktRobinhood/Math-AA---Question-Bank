@@ -1,10 +1,8 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Binomial PDF · Calculator Skills | IB Math Question Bank</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Binomial PDF: exactly one count · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
@@ -14,85 +12,40 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=native-bank-1">
-<link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script>
-<script src="key-tape.js" defer></script>
-<script src="watch-media.js" defer></script>
-<script src="lesson.js?v=native-bank-1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head>
-<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header class="header">
-<div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT37</span></p><h1>Binomial PDF: exactly one count</h1><p class="subtitle">Find the probability of exactly k successes in n trials.</p><p><a href="../binomial/index.html">For a range of counts, use Binomial CDF.</a></p></div>
-
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode">
-<button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button>
-<button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button>
-</div>
-<section class="ct37-shared" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
-<div id="watch-message"><p id="caption" class="caption"></p>
-<p class="feedback" id="media-notice" hidden role="status"></p>
-<p class="ct37-bounds" id="watch-bounds"></p>
-</div>
-<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Restart keypad</button><p class="ct37-taskline" id="keypad-problem"></p><p id="prefill-notice" class="feedback is-wrong" role="status" hidden></p></div>
-<div class="ct37-stage-grid">
-<div class="ct37-calc-anchor" id="handheld-host">
-<button class="stage-play" id="stage-play" type="button" aria-label="Play caption rehearsal"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4v16l13-8z"/></svg></button>
-  <div class="screen" id="lcd" aria-label="Calculator LCD"><div class="status"><span>1.1</span><span>Calculator &nbsp; <small>RAD</small></span><span class="battery" aria-label="Battery"></span></div><div class="screen-work" id="screen-work"></div></div>
-</div>
-<div class="ct37-stage-side">
-<div id="watch-side"><aside class="director" aria-label="Demonstration steps">
-<p class="tag">Worked example</p>
-<h2>Exactly three</h2>
-<p>Eight independent seeds have a 0.30 chance each of sprouting in a trial. Find the probability that exactly three sprout.</p>
-<ol id="steps" class="steps"></ol>
-
-</aside>
-</div>
-<aside id="try-side" class="director ct37-try-help" hidden>
-<p class="tag">Calculator practice</p><h2>Run a Binomial Pdf</h2>
-<p id="keypad-hint" role="status">Press Menu to begin.</p>
-<p class="ct37-keyboard">On a keyboard: <kbd>M</kbd> opens Menu. Use the same digits, <kbd>D</kbd> or arrow keys, <kbd>Tab</kbd> in the wizard, and <kbd>Enter</kbd>. Tab from OK leaves the keypad.</p>
-<p id="keypad-result" class="feedback" role="status" hidden></p>
-</aside>
-</div>
-</div>
-<div class="player" id="watch-player" aria-label="Playback controls">
-<div class="player-top"><button id="play" type="button" class="primary" aria-label="Play">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Open Try</button></div>
-<div class="ct37-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="23.8" step="0.005"></label><span class="ct37-rehearsal" id="media-status">Captions only</span></div>
-</div>
+<body class="calculator-bank-lesson ct37-shared-watch qb-calculator-page" data-base="../../" data-nav="calculator-skills"><main class="qb-calculator-lesson">
+<nav class="ct37-resources" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT37</nav>
+<div data-calculator-watch></div>
+<section id="try" aria-label="Try on your calculator" hidden>
+  <div class="ct37-try-grid">
+    <section class="ct37-try-device" aria-label="Practice on the handheld">
+      <div id="try-host" tabindex="0" aria-label="Practice calculator. M opens Menu. In the wizard, Tab changes fields and Escape closes it."><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="try-work"></div></div></div>
+      <p id="try-feedback" role="status"></p>
+      <button id="reset-try" type="button">Reset Try</button>
+      <button id="return-watch" type="button">Return to Watch</button>
+    </section>
+    <section class="ct37-material" aria-labelledby="challenge-title">
+      <p id="link-notice" role="status" hidden></p>
+      <h2 id="challenge-title">Your turn</h2>
+      <p id="challenge-prompt"></p>
+      <form id="answer-form"><label for="answer">Your probability (3 significant figures)</label><div class="ct37-answer-row"><input type="text" required inputmode="decimal" id="answer" autocomplete="off"><button>Check</button></div></form>
+      <p id="feedback" role="status"></p>
+      <details><summary>Hint</summary><p>Use Menu → Probability → Distributions → Binomial Pdf. Use the single count as X Value. To explore another example, change the entries on the handheld.</p></details>
+    </section>
+  </div>
 </section>
-<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="-1" class="ct37-watch-panel"><p class="sr">The Watch player is above.</p></section>
-<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
-<div class="try-grid">
-<section class="exercise" aria-labelledby="challenge-title">
-<p class="tag">Your turn</p><h2 id="challenge-title">Exactly two</h2>
-<p id="challenge-description">A robot takes 10 independent shots with a 0.40 chance of hitting on each shot. What is the probability that exactly 2 hit?</p>
-<form id="answer-form">
-<label for="answer">Your probability <small>(3 significant figures)</small></label>
-<div class="answer-row"><input type="number" inputmode="decimal" step="any" min="0" max="1" required id="answer" placeholder="e.g. 0.250"><button class="primary">Check</button></div>
-</form>
-<p class="feedback" id="feedback" role="status"></p>
-<details><summary>Hint</summary><p id="answer-hint">“Exactly 2” includes only 2. Which function takes a single X Value?</p></details>
-</section>
-<section class="workbench" aria-labelledby="bench-title">
-<h2 id="bench-title">Change the question</h2>
-<p>Load new givens into your calculator practice. Nothing is calculated for you.</p>
-<form id="model">
-<div class="model-fields">
-<label>Trials <i>n</i><input required type="number" id="trials" min="1" max="500" step="1" value="10" inputmode="numeric"></label>
-<label>Success probability <i>p</i><input required type="number" id="chance" min="0" max="1" step="any" value="0.4" inputmode="decimal"></label>
-</div>
-<label>Exact count <i>k</i><input required type="number" min="0" max="500" step="1" value="2" id="count" inputmode="numeric"></label>
-<p class="event-line" id="event-line"></p>
-<button class="primary">Use these inputs</button>
-</form>
-<div class="result" id="result" hidden role="status"></div>
-</section>
-</div>
-</section>
+<nav class="ct37-resources" aria-label="Lesson resources"><a href="../paperclip-audio/lessons/CT37.txt">Transcript</a> · <a href="../scratchpad/index.html">Open calculator</a></nav>
 </main>
+<!-- Original signed measured package retained for the provenance audit; the shared definition owns playback. -->
 <script type="application/json" id="ct37-narration-manifest">{"version":1,"lesson":"CT37","timing":"measured-playback","audio":"narration.mp3","audioSha256":"f832c8e860bf9b0ee24e473a013fd3758f12abdc8bcf59f89f0c5a1d2d494829","durationMs":48090,"measurement":"FAL-1695 local George clone (VoxCPM2). Each cue is its own checked take, so cue starts are sample-exact in the composed file. Each key is placed at the measured onset of the word that names it in the take (faster-whisper word timestamps), with authored spacing inside a key group, capped at 400 ms; the Watch holds when speech runs long. Minimum 500 ms between cues.","cues":[{"id":"37.01","startMs":0,"text":"We want exactly three seeds to sprout. That means one count, not a range."},{"id":"37.02","startMs":6845,"text":"On a Calculator page, press Menu. Choose five for Probability, five for Distributions, then the letter D for Binomial P D F."},{"id":"37.03","startMs":16724,"text":"Enter eight for the number of trials. Tab to the success probability, zero point three. Tab to X Value and enter three."},{"id":"37.04","startMs":27021,"text":"Press Enter to insert the command. Press Enter again to calculate. The probability of exactly three is about zero point two five four."},{"id":"37.05","startMs":37531,"text":"At most three would include zero, one, two and three. That’s a cumulative probability. This calculation is for exactly three only."}],"keyTimesMs":{"menu":8485,"choose-probability":9885,"choose-distributions":11525,"choose-binomial-pdf":13825,"type-n-8":17624,"tab-probability":19904,"type-p-0":22044,"decimal-p":22344,"type-p-3":22644,"tab-x-value":23464,"type-k-3":25884,"insert-command":27701,"evaluate-result":30401}}</script>
-</body>
-</html>
+</body></html>
