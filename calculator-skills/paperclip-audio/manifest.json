@@ -34,8 +34,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "b02dd83ecdfa33ac55409abbc4e8f83f8510dc96ff648c285d5ed72067db8f8b",
       "cueMapSha256": "0c06d77657d590152a4e3cdc630c3509d084e395aa170bde41049dd2f956808b",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "angle-modes/narration.sync.json",
+        "audioDestination": "angle-modes/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT03": {
       "id": "CT03",
@@ -47,8 +54,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "bc90b15fe1c8906a151ad443ee80e581b9a09356aa016daa8d95a5036e03741f",
       "cueMapSha256": "7d6ff1f1c57ba109144309901f85937beb2048e7628c21d8f1d4bd821f4cf42b",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "counting/narration.sync.json",
+        "audioDestination": "counting/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT04": {
       "id": "CT04",
@@ -60,8 +74,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "5a528e1cbdd408556ab5d36a7a69b406d28035c394188f459846b72dade4450b",
       "cueMapSha256": "8f260d875969bd9ae73251aeae467eb0d0d0d4b253cd3932eab5209b78ca4a9e",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "sequences/narration.sync.json",
+        "audioDestination": "sequences/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT05": {
       "id": "CT05",
@@ -73,8 +94,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "2dcc41e54032a61c5af01cfcfcc7ae93c40071e5f879e52421b94c5589bfb5da",
       "cueMapSha256": "e1a09a1a434f9f06d10e7926e748cad42f4de8b4ff100d18315a24660d33daef",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "finance-solver/narration.sync.json",
+        "audioDestination": "finance-solver/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT06": {
       "id": "CT06",
@@ -103,8 +131,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "a2cf91a278aafefa8a6b3314e4ab7954bbde0f1d06f0489f270e9c491464dcf9",
       "cueMapSha256": "303a71652eaddbe7adb8e025ea3f3a116583c33f9fad094fd5b6c62cebb207d6",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "linear-system/narration.sync.json",
+        "audioDestination": "linear-system/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT08": {
       "id": "CT08",
@@ -133,8 +168,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "23732ada4637410f74167b421339109986739669eed847f9fce9dfea5b68f8b3",
       "cueMapSha256": "9470479809b00483ff5f06c299ef1fcef1475c1800bfc5356ed8cf41ed310ed3",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "trace-table/narration.sync.json",
+        "audioDestination": "trace-table/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT10": {
       "id": "CT10",
@@ -197,8 +239,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "a42bd37d4d17f9e8fd0b71e124b2a13712644e9fa2315d20d15ea2d91b3f2fcf",
       "cueMapSha256": "b6d52126b423cee24f8f0858db0925636d58b42966bf460d1700a356f64d10f5",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "inequalities/narration.sync.json",
+        "audioDestination": "inequalities/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT14": {
       "id": "CT14",
@@ -210,8 +259,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "76886763d9a54688cc5fb7d68940bb75907af626c9944f43165ae0624fb376af",
       "cueMapSha256": "6a0eac7bfc037a0912e60f05bb5c6cae60df96c9494e956baf786cbb1bf92066",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "trig-interval/narration.sync.json",
+        "audioDestination": "trig-interval/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT15": {
       "id": "CT15",
@@ -223,8 +279,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "8058480791e1d12dbf6b1a3e2b84e3be50b74d41861522a1df165509e94d603c",
       "cueMapSha256": "9c9d065502243392dc2c1be5404b3c66a7abad603ff5ab3613acb1200ab0b05f",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "piecewise/narration.sync.json",
+        "audioDestination": "piecewise/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT16": {
       "id": "CT16",
@@ -236,8 +299,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "ae82fa6b2dc1dc647b5bc855abba218435c46566dc74ede5c920e3238f0975f4",
       "cueMapSha256": "98c83cc079751516a78f154704e37742390d9d2663dbc0164f64ad79532f1f4b",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "threshold/narration.sync.json",
+        "audioDestination": "threshold/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT17": {
       "id": "CT17",
@@ -249,8 +319,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "62f339240f0b9200dde9e15dbdc2cc05e35a0ec8aa8573ffffab60a7285fbe0b",
       "cueMapSha256": "be2e7d014343b2360649dd1405f8fea56a0a0270d29f52aedddd7bc63cd16e6b",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "lengths-bearings/narration.sync.json",
+        "audioDestination": "lengths-bearings/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT18": {
       "id": "CT18",
@@ -262,8 +339,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "161a51334275df667a35f6da67dddaaf09008c9538da5f3df609cc8fd47a012a",
       "cueMapSha256": "a8ea691d0909e5f075d153f69cc5dad0c7aede59e807df66f02bde0da3d4af47",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "voronoi/narration.sync.json",
+        "audioDestination": "voronoi/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT19": {
       "id": "CT19",
@@ -275,8 +359,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "51ba327650b069518f44c3cc229be48ddce1a5bd81efa33e19c8c6c64c5a67b7",
       "cueMapSha256": "6addcd54dc294969438c00036f9be4abf6a614c3a0177471aa49d605ea0b93b8",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "vectors/narration.sync.json",
+        "audioDestination": "vectors/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT20": {
       "id": "CT20",
@@ -288,8 +379,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "cee31f02a935a40aacae9d1d1aa087d02b585e09f902f684e2a57a3718acdaec",
       "cueMapSha256": "6f2b482497ae7b42a3fd15501b785d54c98e02a3a94f54a7dd278295f9fc0fb2",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "complex/narration.sync.json",
+        "audioDestination": "complex/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT21": {
       "id": "CT21",
@@ -301,8 +399,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "4f547ce6251ed78d0e5378982be453b7d80d3466249387f1e3f77f743f5cf444",
       "cueMapSha256": "e95870269708830f8950ee8bc43c47c086a4b1ab109b1717ea47074d7e5d2ea0",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "matrices/narration.sync.json",
+        "audioDestination": "matrices/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT22": {
       "id": "CT22",
@@ -314,8 +419,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "06926e2aaaae6de40bbdd2b987a5274a02674d8fcbcbcbebf37d18e5504cfcb7",
       "cueMapSha256": "e0ad0c2e7552ac1b05c92d2c06da215f74072bf510c508cd8cf2b124da690e53",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "matrix-transformations/narration.sync.json",
+        "audioDestination": "matrix-transformations/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT23": {
       "id": "CT23",
@@ -327,8 +439,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "c4ac9f765de2458ce0b5a29f3422326acb97516a07308fb59cd844af6f718c95",
       "cueMapSha256": "fa6fe082cfad5ad3080d0953999f3f56257259774eaea3a987ce0115e24e1186",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "matrix-systems/narration.sync.json",
+        "audioDestination": "matrix-systems/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT24": {
       "id": "CT24",
@@ -340,8 +459,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "0a5dacb25874eae64018b759e016c0f7e779681010dba9eb15a957cfa0dba57e",
       "cueMapSha256": "d4d3f00b3bdbd0354f1af7590ae4100cbbbf618f4602eb5e131ac5cafe5ffc7f",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "markov-chains/narration.sync.json",
+        "audioDestination": "markov-chains/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT25": {
       "id": "CT25",
@@ -353,8 +479,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "dbf6a762cd558bfc15d3602c41e5af527f0bf8e7d4230ef792c52d473ad7d721",
       "cueMapSha256": "112dab0d81fb3be2eaf3ed2208c636954122943b8c0b93da03ab08e32ddaa276",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "eigenvalues/narration.sync.json",
+        "audioDestination": "eigenvalues/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT26": {
       "id": "CT26",
@@ -366,8 +499,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "f6e4a2cfc674961b8baf9e2f1bb2ef9d0f0946b969d21df7051427c592d5969a",
       "cueMapSha256": "dca8b1b0d871b54a1cd9e7a9ae48e4e4229d32b6501d4b1b263c5afa5061a054",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "adjacency-walks/narration.sync.json",
+        "audioDestination": "adjacency-walks/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT27": {
       "id": "CT27",
@@ -379,8 +519,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "aacca5fc7d3d489cf78d61dcfb29d7a09f662747093aecb124b1eebdb48492bc",
       "cueMapSha256": "eafaa1b4b19180775ab1128eb2c492ae0618c9517498ea187404070137c1e26e",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "minimum-route-table/narration.sync.json",
+        "audioDestination": "minimum-route-table/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT28": {
       "id": "CT28",
@@ -392,8 +539,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "ea9cab8b9f0e9916eda801f3a29e4c5724903b3e24eff5c1d31e49cea75eb05a",
       "cueMapSha256": "13578afe41780e93e6550ba8d5d584be079d6de9e70e319d513f26e1a1c3a54e",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "named-lists/narration.sync.json",
+        "audioDestination": "named-lists/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT29": {
       "id": "CT29",
@@ -405,8 +559,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "48c5ed2df01fcc68d0a67431c16bd46af74d334b27f3c8b0e9e43bc897c17321",
       "cueMapSha256": "85b73b29d17336d365c7272a60910e934b87fd286f2561733e63c377967defc2",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "one-variable-stats/narration.sync.json",
+        "audioDestination": "one-variable-stats/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT30": {
       "id": "CT30",
@@ -418,8 +579,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "158f08a50c2b2f78941ec938bb3b5ac8e31a5664707a54aa478950382adfe747",
       "cueMapSha256": "6fb25270d1ae6a032f920b5aef950d1ebf55649f99116019959147f1a16cfce3",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "boxplots/narration.sync.json",
+        "audioDestination": "boxplots/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT31": {
       "id": "CT31",
@@ -431,8 +599,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "49864d893b1349cad82f94532ba9be96bb97c540726116546c2cbf143a901864",
       "cueMapSha256": "3df5c68f96720a879d17f11ce95d9fc39a6b185c153723cf54d38dab71506b3d",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "linear-regression/narration.sync.json",
+        "audioDestination": "linear-regression/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT32": {
       "id": "CT32",
@@ -444,8 +619,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "671fcdfd16a92ed4539fcaf82dd9ef69ed7fc13ac41bfd08077fa4d4dd926ed6",
       "cueMapSha256": "9da7bc145acaa0b4fbe6951a27e63b404156d1e1bd55274685663580cdeeb1f6",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "quadratic-regression/narration.sync.json",
+        "audioDestination": "quadratic-regression/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT33": {
       "id": "CT33",
@@ -457,8 +639,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "2500d439ca7bf164161c3a5cdcdb1a81eca84c8c6e41e6d66ae6c7dbd0aed640",
       "cueMapSha256": "18e648c1aa14a9e028fee387fdc66c4ea94d875ccbbcd232a328c9f763d1106f",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "exponential-regression/narration.sync.json",
+        "audioDestination": "exponential-regression/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT34": {
       "id": "CT34",
@@ -470,8 +659,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "339bd41e52c7ea38dca35f1d771f5908e59249cc6ae4554b59acedc946d66d90",
       "cueMapSha256": "ae0c70429ad04fdae9853bd58bf1fb6a23e4711cd32500e008168c9af1958d15",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "log-linearization/narration.sync.json",
+        "audioDestination": "log-linearization/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT35": {
       "id": "CT35",
@@ -483,8 +679,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "76b63ffaa7e45abeee78ccab89f3f2ef75d78880853c87b466bc924484faa22d",
       "cueMapSha256": "b0ddecc91f480fafb32591c54b97c43012289f188258107dcc104ff2420a8011",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "spearman/narration.sync.json",
+        "audioDestination": "spearman/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT36": {
       "id": "CT36",
@@ -496,8 +699,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "a08144dec5c0b92b04ad095230473acb0349f2ca3f2192822dfae987748647c2",
       "cueMapSha256": "1eca581824eec698b4a06026916ff4db5c1bf7e73e8e2df8cfcf7bc12d3ac8e5",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "expectation/narration.sync.json",
+        "audioDestination": "expectation/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT37": {
       "id": "CT37",
@@ -599,8 +809,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "d01864bae214346ce484868319d472c84f33c19ba759bbfdaf87f3a915a16358",
       "cueMapSha256": "c73e49811c5887346f4aa3ec811d0f81ed98b83d85c4ba693dc562569b0b072a",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "sampling-means/narration.sync.json",
+        "audioDestination": "sampling-means/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT44": {
       "id": "CT44",
@@ -612,8 +829,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "5d3869deede73380263ccd76b85939a69268878d8c2f21489c0080b68c0d5bde",
       "cueMapSha256": "922dee312c1141bc15d3e2fbc23c23cf584d0588993cbf183a9b8609a475332c",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "random-simulation/narration.sync.json",
+        "audioDestination": "random-simulation/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT45": {
       "id": "CT45",
@@ -625,8 +849,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "e3a8a92788b70cacee1c72798110e082c5dc982daa60f26d7ed56b4dcc5c16e8",
       "cueMapSha256": "4a5aa52bda7f1b504aa8c240b0e7638c56682a4bbd7558f545b076ca44b64ead",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "z-test/narration.sync.json",
+        "audioDestination": "z-test/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT46": {
       "id": "CT46",
@@ -638,8 +869,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "fa2e8a1a3b053fe57e24d44de4b270f8857ee99ca4ca2e56c1bc73e8d7964a19",
       "cueMapSha256": "e95b104112665cd85b045bad855aa0a1b9be8d822bb90b899533050237377bcd",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "t-tests/narration.sync.json",
+        "audioDestination": "t-tests/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT47": {
       "id": "CT47",
@@ -651,8 +889,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "1c3fdfa4d40e927f6e74302d52edcaaacc6e017c9b34cc85857463a88b266682",
       "cueMapSha256": "35d41886b7069455979f708f39e23d95a8644dbdd30fbe82c434db3cbb1e39e1",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "chi-square-independence/narration.sync.json",
+        "audioDestination": "chi-square-independence/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT48": {
       "id": "CT48",
@@ -664,8 +909,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "a9ea55b298028178e946637fb4be5161eaf6eefbb00d8812925b0401982d148e",
       "cueMapSha256": "97bcb7bf2e14ef66426427394767729ccde4bfc142699d3c7885a088f3706cdb",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "chi-square-goodness-of-fit/narration.sync.json",
+        "audioDestination": "chi-square-goodness-of-fit/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT49": {
       "id": "CT49",
@@ -677,8 +929,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "077e00497da1c1530c8f8b084e58ae1817faa305629396f54a09a27ce38bad5d",
       "cueMapSha256": "523e9fcff1f11a96d794e6127ba9f858de60beb4fedab72ab99b25bd0791c8d3",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "confidence-intervals/narration.sync.json",
+        "audioDestination": "confidence-intervals/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT50": {
       "id": "CT50",
@@ -690,8 +949,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "a3eadb457c540b7bd99e9c92daf2ee09a28bb317fcba113d62670b3056b66f6b",
       "cueMapSha256": "190873eaec3a71235c0372a4f11521c4bd7745ce3916b147ac0d3820572860c3",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "binomial-test/narration.sync.json",
+        "audioDestination": "binomial-test/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT51": {
       "id": "CT51",
@@ -703,8 +969,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "b46be9f7b5bc703927c831556905deafeb427ece5d9b61d0641545a972a68b6b",
       "cueMapSha256": "37dc3106dc69ec54b3b3a59ccfae0af3f476fc04c9b16e0976d4747ba9030b4e",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "derivative/narration.sync.json",
+        "audioDestination": "derivative/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT52": {
       "id": "CT52",
@@ -716,8 +989,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "fb8a44dd33ee79e6634b80ad3cd981185c3c02288e8eb20d1a9d3ee825a51675",
       "cueMapSha256": "c58040e01d90caebc6a5e21ca90058bfd4c1f885ac51cab887fed4ac128f9a3a",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "stationary/narration.sync.json",
+        "audioDestination": "stationary/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT53": {
       "id": "CT53",
@@ -729,8 +1009,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "fc24fdb3be61a7bd2e9f7c893986b173ff479a08d341d1c34aaca7c31119685c",
       "cueMapSha256": "900ce035351d865dc6b664ab22e1c370766d3ebbe419510192ae27ea0c22baa5",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "displacement-distance/narration.sync.json",
+        "audioDestination": "displacement-distance/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT54": {
       "id": "CT54",
@@ -742,8 +1029,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "39d3f8912d6c0204ce23a4a50b8849405732901f6a17dbb68f8dcd80537f6b96",
       "cueMapSha256": "2097643197d354a04ae6b4f30228e6412543b47c7a5a782c20d21adc9c8b86a2",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "integral/narration.sync.json",
+        "audioDestination": "integral/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT55": {
       "id": "CT55",
@@ -755,8 +1049,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "0a182d36dcb3bd0f3cc19a95d9696a4859a8ee1f9121a2112ceae6f2c48f64be",
       "cueMapSha256": "f45ed4c2f589832e04c4e26c66572d9ddfc6eba08e147d43e538d0d5027379bb",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "area-between/narration.sync.json",
+        "audioDestination": "area-between/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT56": {
       "id": "CT56",
@@ -768,8 +1069,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "0bae43c0eb7b79ad7d085bb38a7709380250e964a13872d0ad66c5038d524688",
       "cueMapSha256": "9e58a93ab40ae797cf2c7c2a86fe6d3fd272fff31a5d57acd1ec7453659a8ce0",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "trapezoidal/narration.sync.json",
+        "audioDestination": "trapezoidal/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT57": {
       "id": "CT57",
@@ -781,8 +1089,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "0546239fe87c3ead0f2e7fdc2e9a45c1793fd2d2e8777397a8f2b8eace0144d5",
       "cueMapSha256": "12b28dc884858d7ebadbc6221f3244edca805c5a85a7848b20b2af9e43f248c9",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "volume-revolution/narration.sync.json",
+        "audioDestination": "volume-revolution/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT58": {
       "id": "CT58",
@@ -794,8 +1109,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "c757dcc961127194faf5f01edfdb59178be74159e4525f0f81db86d89872cae2",
       "cueMapSha256": "a05e6c3c1109d540bc45ff2cac827fa17b55c4d20ed3fc6577225a9c36915b20",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "euler-method/narration.sync.json",
+        "audioDestination": "euler-method/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     "CT59": {
       "id": "CT59",
@@ -807,8 +1129,15 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "8d2a32ebb80a08fb1073036b826d121e879f9a8f2b3a7adb80491a4dc2d838b3",
       "cueMapSha256": "c6bcca6832013b19c9bcfd8672450685165494b88a7cc03be6129d3c63e90cd8",
-      "integrationStatus": "requires-player-hook",
-      "existingAudio": null
+      "integrationStatus": "shared-measured-json",
+      "existingAudio": null,
+      "nativeMediaAdapter": {
+        "syncDestination": "coupled-euler/narration.sync.json",
+        "audioDestination": "coupled-euler/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     }
   },
   "supplements": [
@@ -822,9 +1151,16 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "37165e1a00243a15e7a69295c6ef209f216796f39219ec23ea55b5c540cfdef2",
       "cueMapSha256": "fd9cb6b8240c6c45f90ceb2a6297a52adc56992ea775c5a822bf1442b24ec5b3",
-      "integrationStatus": "requires-player-hook",
+      "integrationStatus": "shared-measured-json",
       "existingAudio": null,
-      "parentId": "CT12"
+      "parentId": "CT12",
+      "nativeMediaAdapter": {
+        "syncDestination": "maximum/narration.sync.json",
+        "audioDestination": "maximum/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     },
     {
       "id": "SUP-HIST-01",
@@ -836,9 +1172,16 @@
       "status": "draft-from-original-watch",
       "transcriptSha256": "65a763f8aedc321530684df08e9c095a42bbd4d6af96850895010e1a994bfc05",
       "cueMapSha256": "bb314c647e517df75de222be08afd527b28f26e0d09a4517161b4a18d03d00fa",
-      "integrationStatus": "requires-player-hook",
+      "integrationStatus": "shared-measured-json",
       "existingAudio": null,
-      "parentId": "CT30"
+      "parentId": "CT30",
+      "nativeMediaAdapter": {
+        "syncDestination": "histogram/narration.sync.json",
+        "audioDestination": "histogram/narration.mp3",
+        "shape": "qb-recorded-watch-v1",
+        "authoredTimeSource": "The signed cue-map keys plus caption, visible key and pointer milestones.",
+        "decoderToleranceMs": 120
+      }
     }
   ]
 }

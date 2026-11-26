@@ -232,4 +232,5 @@ const $=id=>document.getElementById(id),M=CT15Math,S=CT15Screen,T=CT15Tape,E=CT1
  });
  seek.max=T.duration;sync(task.slots);
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

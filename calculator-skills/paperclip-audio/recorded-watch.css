@@ -1,0 +1,22 @@
+.recorded-replaced,.recorded-watch [hidden],.recorded-watch[hidden]{display:none!important}
+.has-recorded-watch :is(#start-overlay,#stage-play,#overlay,#play-feedback){display:none!important}
+.qb-calculator-lesson .recorded-watch{min-width:0;background:var(--page,var(--card,#fff));color:var(--ink,#17251e);border-top:1px solid var(--line,#b8c9bf);padding:.38rem .6rem .54rem}
+.qb-calculator-lesson .recorded-caption{min-height:2.5em;line-height:1.33;font-size:.89rem;margin:.05rem 0 .3rem;padding:.25rem .45rem;border-inline-start:2px solid var(--accent,#1f5f43)}
+.qb-calculator-lesson .recorded-controls{display:flex;align-items:center;gap:.23rem;flex-wrap:wrap}
+.qb-calculator-lesson .recorded-controls :is(button,select){min-height:40px;min-width:34px;padding:.24rem .32rem;font:600 .83rem/1.1 system-ui,sans-serif}
+.qb-calculator-lesson .recorded-controls button[aria-pressed=true]{text-decoration:underline;text-underline-offset:.2em}
+.qb-calculator-lesson .recorded-controls input{flex:1 1 7rem;min-width:4rem;max-width:none;margin:0;min-height:34px;accent-color:var(--accent,#1f5f43)}
+.qb-calculator-lesson .recorded-time{white-space:nowrap;font:.73rem/1.1 ui-monospace,monospace}
+.qb-calculator-lesson .recorded-status{font-size:.85rem}
+@media(max-width:440px){.qb-calculator-lesson .recorded-controls input{order:-1;flex-basis:100%}.qb-calculator-lesson .recorded-controls :is(button,select){min-height:36px}}
+/* On the modern angle lesson keep the transport in the dark video frame. */
+.qb-calculator-lesson .ct02-shared .recorded-watch{background:var(--tape-bg);color:var(--tape-ink);border-color:var(--tape-line)}
+.qb-calculator-lesson .ct02-shared .recorded-caption{border-color:var(--tape-on);margin:0 0 .18rem}
+.qb-calculator-lesson .ct02-shared .recorded-controls :is(button,select){background:#24382e;border:1px solid var(--tape-line);color:var(--tape-ink)}
+.qb-calculator-lesson .ct02-shared .recorded-controls input{accent-color:var(--tape-on)}
+.ct02-shared:is(:fullscreen,.watch-fullscreen-fallback) .recorded-watch{position:sticky;bottom:0;z-index:9}
+@media(max-width:420px) and (max-height:660px){
+ .qb-calculator-lesson .ct02-shared .recorded-watch{padding:.26rem .4rem}
+ .qb-calculator-lesson .ct02-shared .recorded-caption{font-size:.8rem}
+ .qb-calculator-lesson .ct02-shared .recorded-controls input{min-height:23px}
+}

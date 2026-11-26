@@ -384,4 +384,5 @@ const $=id=>document.getElementById(id),M=window.CT09Math,S=window.CT09Screen,T=
  });
  seek.max=T.duration;
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

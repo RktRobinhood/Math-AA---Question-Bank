@@ -336,4 +336,5 @@ document.addEventListener("keydown",e=>{
  if(shell.keyId(k)){e.preventDefault();handle(k);}
 });
 if(params.get("mode")==="try")enterMode("try","practice");else {label();renderWatch();maybeFocus();}
+window.QBRecordedWatch?.bind(pause);
 })();

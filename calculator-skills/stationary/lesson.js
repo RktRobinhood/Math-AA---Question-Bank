@@ -244,4 +244,5 @@ const $=id=>document.getElementById(id),M=CT52Math,E=CT52Editor,S=CT52Screen,T=C
  });
  seek.max=T.duration;expr.value=task.q.raw;exact.value=task.x===null?"":String(task.x);
  change(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

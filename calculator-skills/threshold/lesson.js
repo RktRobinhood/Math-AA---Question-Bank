@@ -307,4 +307,5 @@
   feedback.textContent=yes?"Both correct. Day "+goal.day+" is the first checkpoint that meets the threshold.":timeRight?"The continuous time is correct. Test the adjacent whole days against the target rather than rounding.":dayRight?"The whole day is correct. Read the x-coordinate at the intersection for the continuous time.":"Use Intersection for the continuous time, then test the adjacent whole days against the target.";
  });
  modeTo(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

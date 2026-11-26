@@ -218,4 +218,5 @@ $("answer-form").addEventListener("submit",e=>{
  f.textContent=ok?"Correct. That pair satisfies both equations.":!x||!y?"Enter exact numbers or fractions for both x and y.":swapped?"The two values are swapped. Check the variable list before assigning x and y.":"Check your pair in both equations. Keep exact fractions if needed.";
 });
 sync(task);switchTo(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

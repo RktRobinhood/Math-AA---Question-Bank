@@ -217,4 +217,5 @@ document.addEventListener("keydown",e=>{
  }
 });
 rawTable($("watch-picture"),M.demo);switchMode(params.get("mode")==="try"||request.linked?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

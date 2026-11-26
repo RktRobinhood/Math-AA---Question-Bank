@@ -214,4 +214,5 @@ document.addEventListener("keydown",e=>{
 });
 if(new URLSearchParams(location.search).get("mode")==="try"||request.linked)change("try",false,true);
 else{paintWatch();labelPlay();requestAnimationFrame(fitWatch);}
+window.QBRecordedWatch?.bind(pause);
 })();

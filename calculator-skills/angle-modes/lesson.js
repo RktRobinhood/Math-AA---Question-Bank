@@ -221,7 +221,8 @@
   if(mode!=='watch')return;
   const expanded=document.fullscreenElement===stage||stage.classList.contains('watch-fullscreen-fallback');
   const space=(window.visualViewport?.height||innerHeight)-(expanded?0:Math.max(0,stage.getBoundingClientRect().top+window.scrollY)+navigationInset());
-  const room=Math.max(170,space-captionBand.offsetHeight-$('watch-player').offsetHeight);
+  const recorded=stage.querySelector('.recorded-watch');
+  const room=Math.max(170,space-captionBand.offsetHeight-(recorded?.offsetHeight||$('watch-player').offsetHeight));
   const side=innerWidth>710;
   const fullW=Math.min(expanded?360:286,Math.max(96,Math.floor((room-48)*558/1168)));
   const lcdW=Math.min(545,Math.max(198,Math.floor((room-48)*4/3)));
@@ -363,4 +364,5 @@
  document.addEventListener('visibilitychange',()=>{if(document.hidden)halt();});
  paintFraming();watch();readPlay();size();
  if(params.get('mode')==='try' || entry.linked || entry.error)change('try');
+window.QBRecordedWatch?.bind(halt,size);
 })();

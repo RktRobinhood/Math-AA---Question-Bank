@@ -224,7 +224,7 @@ function focus(f){
 function showPlay(){const label=running?"Pause":t>=T.duration-.01?"Replay":"Play";play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(running);}
 function seekAt(v){t=Math.max(0,Math.min(T.duration,Number(v)||0));origin=performance.now()-t*1000;watchRender();showPlay();}
 function stop(sample=true){if(sample&&running)t=Math.min(T.duration,(performance.now()-origin)/1000);running=false;cancelAnimationFrame(raf);watchRender();showPlay();}
-function loop(ts){if(!running)return;t=Math.min(T.duration,(ts-origin)/1000);if(t>=T.duration){stop(false);return;}watchRender();raf=requestAnimationFrame(loop);}
+function loop(ts){if(!running)return;t=Math.max(0,Math.min(T.duration,(ts-origin)/1000));if(t>=T.duration){stop(false);return;}watchRender();raf=requestAnimationFrame(loop);}
 function start(){
  if(tab!=="watch")return;
  if(!started){const actual=shell.body.getBoundingClientRect();if(!focused&&actual.width<190)focus(true);}
@@ -269,4 +269,5 @@ T.captions.forEach(([at,name],i)=>{
 });
 window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
 mode(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(stop);
 })();

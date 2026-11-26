@@ -220,4 +220,5 @@ document.addEventListener("keydown",e=>{
  if(k){e.preventDefault();physical(k);}
 });
 fillInputs();switchMode(req.mode);
+window.QBRecordedWatch?.bind(pause);
 })();

@@ -246,4 +246,5 @@ document.addEventListener("keydown",e=>{
 });
 document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
 modeTo(p.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(stop);
 })();

@@ -199,4 +199,5 @@ $("answer-form").addEventListener("submit",e=>{
  f.dataset.error=String(!ok);f.textContent=ok?"Correct. That is the exact count.":value===null?"Enter one whole-number count.":task.op==="fact"?"Not yet. Check that the factorial uses the whole number before !.":"Not yet. Enter the total first and the number chosen second. Do not count orders separately.";
 });
 sync(task);practice=captureTry();switchTo(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

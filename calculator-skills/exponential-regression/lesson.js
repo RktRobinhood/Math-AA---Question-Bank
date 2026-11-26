@@ -222,4 +222,5 @@ document.addEventListener("keydown",e=>{
  }
 });
 switchMode(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

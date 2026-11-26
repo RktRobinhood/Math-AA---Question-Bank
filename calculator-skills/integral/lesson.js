@@ -269,4 +269,5 @@
   v.textContent=yes?"Both are correct. The integral keeps the signs; geometric area adds magnitudes.":verdict[0]?"Signed integral correct. For geometric area, add the magnitudes of the pieces.":verdict[1]?"Geometric area correct. For the integral, keep negative pieces negative.":"Check both bounds and whether you should keep the signs.";
  });
  modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
+window.QBRecordedWatch?.bind(pause);
 })();

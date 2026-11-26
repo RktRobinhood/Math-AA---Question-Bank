@@ -247,4 +247,5 @@ document.addEventListener("keydown",e=>{
 });
 stage.dataset.mode="watch";draw();labelPlay();if(params.get("mode")==="try"||request.linked)change("try",false,true);
 requestAnimationFrame(ensureFit);
+window.QBRecordedWatch?.bind(pause);
 })();

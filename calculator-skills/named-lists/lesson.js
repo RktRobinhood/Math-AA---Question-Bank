@@ -163,4 +163,5 @@ document.addEventListener("keydown",e=>{
  const k=keys[e.key]||(/^[a-z0-9]$/i.test(e.key)?e.key.toLowerCase():"");if(k){e.preventDefault();press(k);}
 });
 switchTo(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

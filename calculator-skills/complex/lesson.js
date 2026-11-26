@@ -192,4 +192,5 @@ document.addEventListener('keydown',e=>{
 stage.dataset.mode='watch';draw();controls();
 if(params.get('mode')==='try'||request.linked)change('try',false,true);
 requestAnimationFrame(ensureFit);
+window.QBRecordedWatch?.bind(pause);
 })();

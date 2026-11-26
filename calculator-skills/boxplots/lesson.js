@@ -232,4 +232,5 @@
   if(k){e.preventDefault();press(k);}
  });
  modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
+window.QBRecordedWatch?.bind(pause);
 })();

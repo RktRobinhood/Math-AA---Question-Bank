@@ -235,4 +235,5 @@ $("answer-form").addEventListener("submit",e=>{
 });
 sync();change(query.get("mode")==="try"?"try":"watch");
 if(mode==="watch"&&$("watch-player").getBoundingClientRect().bottom>lessonEnd()+2)focus(true);
+window.QBRecordedWatch?.bind(pause);
 })();

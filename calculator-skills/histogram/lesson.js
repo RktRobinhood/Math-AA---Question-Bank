@@ -318,4 +318,5 @@ $("reset").addEventListener("click",()=>{
 });
 fields();
 if(q.get("mode")==="try")openTry(false,false);else switchTab("watch",false);
+window.QBRecordedWatch?.bind(pause);
 })();

@@ -194,4 +194,5 @@ document.addEventListener("keydown",e=>{
  const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");if(k){e.preventDefault();physical(k);}
 });
 switchMode(params.get("mode")==="try"?"try":"watch");
+window.QBRecordedWatch?.bind(pause);
 })();

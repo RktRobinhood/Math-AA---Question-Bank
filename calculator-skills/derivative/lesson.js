@@ -282,4 +282,5 @@ const $=id=>document.getElementById(id);
    focusChecked=true;focus(true);
   }
  }
+window.QBRecordedWatch?.bind(pause);
 })();

@@ -326,4 +326,5 @@
   v.textContent=correct?"Correct. You found the total area between the curves.":"Not quite. Check the original bounds and add the area of every region.";
  });
  modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
+window.QBRecordedWatch?.bind(pause);
 })();

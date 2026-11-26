@@ -320,4 +320,5 @@
   v.className="feedback "+(yes?"is-right":"is-wrong");
  });
  modeTo(params.get("mode")==="try"?"try":"watch");fitAtEntry();
+window.QBRecordedWatch?.bind(pause);
 })();
