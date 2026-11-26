@@ -150,7 +150,9 @@ function mount(host, input, adapter) {
  function fitPresentation(){
    if(disposed)return;
    const expanded=doc.fullscreenElement===stage||stage.classList.contains('watch-fullscreen-fallback');
-   const railBelow=compactRail.matches&&!expanded;
+   // Keep transport in the first screen on phones even for a long chapter list.
+   const railBelow=!expanded&&(compactRail.matches||
+     (stacked.matches&&authored.groups.length>=8));
    if((side.parentElement===stage)!==railBelow){
      const focused=side.contains(doc.activeElement)?doc.activeElement:null;
      if(railBelow){bar.after(side);compactCoach.append(coach);}
