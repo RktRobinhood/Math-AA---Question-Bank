@@ -38,6 +38,7 @@
 .settings-options[data-kind=digits]{top:22%}
 .settings-options[data-kind=angle]{top:35%}
 .settings-options[data-kind=calc]{top:64%}
+.settings-options[data-kind=exact]{top:77%}
 .settings-options>span{padding:.65cqw 1cqw}
 .settings-option-current{color:white;background:#286aaf}
 .settings-notes{width:calc(100% - 24px);max-width:1130px;margin:.8rem auto 5.6rem;font:500 .9rem/1.42 system-ui}

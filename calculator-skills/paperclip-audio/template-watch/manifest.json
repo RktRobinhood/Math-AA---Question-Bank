@@ -12,7 +12,7 @@
       "id": "SUP-HANDSET-SETTINGS",
       "definition": "../../handset-settings/definition.json",
       "transcript": "SUP-HANDSET-SETTINGS.txt",
-      "transcriptSha256": "a33660c89f9643bcf06933741226c8e849a18477c2b1a72671dc36a9e6d300a8",
+      "transcriptSha256": "4c409e2140eef05fc98009571f03c6c311bdb5680af81aafd0548da23ed53ecf",
       "audioDestination": "../../handset-settings/narration.mp3"
     },
     {
