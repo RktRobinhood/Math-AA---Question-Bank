@@ -39,8 +39,10 @@
     return null;
   }
 
-  const source = 'calculator-skills/scratchpad/index.html?v=mathprint-1';
+  const source = 'calculator-skills/scratchpad/index.html?v=practice-applet-1';
   const wide = win?.matchMedia('(min-width: 900px)');
+  const phoneTouch = win?.matchMedia('(any-pointer: coarse) and (max-width: 1023px), (any-pointer: coarse) and (max-device-width: 700px), (any-pointer: coarse) and (max-device-height: 600px)');
+  const useApplet = () => !wide.matches || phoneTouch.matches;
   let current = null, owner = null;
   function create() {
     if (!win) return null;
@@ -77,10 +79,25 @@
     frame.src = new URL((d.body.dataset.base || './') + source, d.baseURI).href;
     panel.append(frame); layout.append(panel);
     const syncTheme = () => frame.contentWindow?.postMessage({ type: 'qb-scratchpad-theme', theme: d.documentElement.dataset.theme }, '*');
+    let factor = null;
+    const syncPresentation = (force = false) => {
+      const next = panel.dataset.mode === 'applet' ? Math.max(1, Math.min(3, 1 / (win.visualViewport?.scale || 1))) : null;
+      if (!force && next === factor) return;
+      factor = next;
+      if (factor === null) panel.style.removeProperty('--applet-scale');
+      else panel.style.setProperty('--applet-scale', String(factor));
+      frame.contentWindow?.postMessage({ type: 'qb-scratchpad-presentation', factor }, '*');
+    };
     const onMessage = event => {
-      if (event.source !== frame.contentWindow || event.data?.type !== 'qb-scratchpad-ready') return;
-      status.hidden = true;
-      syncTheme();
+      if (event.source !== frame.contentWindow) return;
+      if (event.data?.type === 'qb-scratchpad-ready') {
+        status.hidden = true;
+        syncTheme();
+        syncPresentation(true);
+      } else if (event.data?.type === 'qb-scratchpad-return' && panel.open && !session.help) {
+        // An explicit shortcut; ordinary Escape inside the handheld stays a TI key.
+        close();
+      }
     };
     win.addEventListener('message', onMessage);
     const observer = new win.MutationObserver(syncTheme);
@@ -88,23 +105,29 @@
     const timer = win.setTimeout(() => {
       if (!status.hidden) status.textContent = 'The calculator did not start. You can go back to your question.';
     }, 4000);
-    const session = { panel, back, helpButton, layout, edge, opened: null, help: null, dispose() {
+    const session = { panel, back, helpButton, layout, edge, syncPresentation, opened: null, help: null, dispose() {
       closeHelp(session, false);
       win.removeEventListener('message', onMessage);
       observer.disconnect(); win.clearTimeout(timer);
       wide.removeEventListener('change', switchView);
+      phoneTouch.removeEventListener('change', switchView);
+      win.removeEventListener('resize', switchView);
+      win.visualViewport?.removeEventListener('resize', switchView);
       panel.remove();
     } };
     panel.id = 'practice-calc';
     panel.addEventListener('close', () => { if (!panel.open) finish(session); });
     panel.addEventListener('cancel', event => { event.preventDefault(); close(); });
     panel.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && wide.matches && !session.help) { event.preventDefault(); close(); }
+      if (event.key === 'Escape' && !useApplet() && !session.help) { event.preventDefault(); close(); }
     });
     back.addEventListener('click', () => close());
     helpButton.addEventListener('click', () => openHelp(session, helpFor(owner)));
     const switchView = () => fitCalculator(session);
     wide.addEventListener('change', switchView);
+    phoneTouch.addEventListener('change', switchView);
+    win.addEventListener('resize', switchView);
+    win.visualViewport?.addEventListener('resize', switchView);
     return session;
   }
 
@@ -164,7 +187,8 @@
 
   function fitCalculator(session) {
     const { panel } = session;
-    if (!session.opened || !panel.open || session.help || panel.matches(':modal') === !wide.matches) return;
+    if (!session.opened || !panel.open || session.help) return;
+    if (panel.matches(':modal') === useApplet()) { session.syncPresentation(); return; }
     panel.close();
     show(session);
   }
@@ -174,7 +198,7 @@
     const session = current || create();
     if (!session) return;
     current = session;
-    session.opened = { from, title: from.title, placeholder: null, scroll: win.scrollY, mobile: !wide.matches };
+    session.opened = { from, title: from.title, placeholder: null, scroll: win.scrollY, mobile: useApplet() };
     markTrigger(session.opened);
     session.layout.classList.add('with-practice-calc');
     show(session);
@@ -193,12 +217,19 @@
     if (!opened?.placeholder) return;
     if (opened.placeholder.isConnected) opened.placeholder.replaceWith(opened.from);
     else opened.from.remove(); // This card's render replaced both its button and placeholder.
+    if (opened.labelNode) opened.labelNode.data = opened.originalLabel;
+    opened.labelNode = null;
+    if (opened.arrow) opened.arrow.node.setAttribute('d', opened.arrow.original);
+    opened.arrow = null;
+    opened.from.setAttribute('aria-label', 'Hide calculator');
+    opened.from.removeAttribute('aria-keyshortcuts');
+    opened.from.title = 'Hide the on-screen calculator';
     opened.placeholder = null;
     session.edge.hidden = true;
   }
 
   function positionTrigger(session) {
-    if (wide.matches) { restoreTrigger(session); return; }
+    if (!useApplet()) { restoreTrigger(session); return; }
     const opened = session.opened;
     if (!opened || opened.placeholder) return;
     // The question is inert behind a mobile modal. Move its actual toggle
@@ -206,14 +237,32 @@
     opened.placeholder = win.document.createComment('calculator toggle position');
     opened.from.before(opened.placeholder);
     session.edge.append(opened.from);
+    const lead = opened.from.querySelector('svg:first-child path');
+    if (lead) {
+      opened.arrow = { node: lead, original: lead.getAttribute('d') };
+      lead.setAttribute('d', 'M19 12H5m0 0 6-6m-6 6 6 6');
+    }
+    opened.labelNode = [...opened.from.childNodes].find(node => node.nodeType === 3);
+    if (opened.labelNode) {
+      opened.originalLabel = opened.labelNode.data;
+      opened.labelNode.data = 'Back to question';
+    }
+    opened.from.setAttribute('aria-label', 'Back to question');
+    opened.from.setAttribute('aria-keyshortcuts', 'Escape Shift+Escape');
+    opened.from.title = 'Back to question';
     session.edge.hidden = false;
   }
 
   function show(session) {
+    const applet = useApplet(), mode = applet ? 'applet' : 'dock';
+    session.panel.dataset.mode = mode;
+    session.layout.dataset.practiceCalcMode = mode;
+    session.opened.mobile ||= applet;
     positionTrigger(session);
-    if (wide.matches) session.panel.show();
-    else session.panel.showModal();
-    session.back.focus({ preventScroll: true });
+    session.syncPresentation();
+    if (applet) session.panel.showModal();
+    else session.panel.show();
+    (applet ? session.opened.from : session.back).focus({ preventScroll: true });
   }
 
   function finish(session, restore = true) {
@@ -222,6 +271,7 @@
     restoreTrigger(session);
     session.opened = null;
     session.layout.classList.remove('with-practice-calc');
+    delete session.layout.dataset.practiceCalcMode;
     opened.from.removeAttribute('aria-controls');
     opened.from.setAttribute('aria-expanded', 'false');
     opened.from.setAttribute('aria-label', 'Open calculator');
