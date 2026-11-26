@@ -1,6 +1,6 @@
 /* shell.js — the top bar every page shares, the phone tab bar and the site appearance menu.
    Loaded on every page after courses.js and course.js. The page says which section it is with
-   <body data-nav="questions|statistics|syllabus|practice"> and where the site root is with
+   <body data-nav="questions|statistics|syllabus|practice|calculator-skills"> and where the site root is with
    data-base. The theme is set before first paint by a one-line script in each page's <head>;
    this file owns the toggle and remembers the choice.
 */
@@ -74,17 +74,40 @@
     n.append(...kids.filter(Boolean));
     return n;
   }
+  // One section table for the desktop header and the phone tab bar. Archived
+  // question and exam-year views retain the original four-link profile: these
+  // routes are already identified by their Questions nav without an app tab.
+  const fullNavigation = Boolean(document.body.dataset.initialTab) ||
+    nav === 'practice' || nav === 'calculator-skills';
   const LINKS = [
-    ['questions', '', 'Questions', 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z'],
-    ['statistics', 'statistics/', 'Statistics', 'M5 20V11M12 20V4M19 20v-6'],
-    ['syllabus', 'syllabus/', 'Syllabus', 'M5 6h14M5 12h14M5 18h9'],
-    ['practice', 'practice.html', 'Practice', 'M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3'],
+    { id: 'questions', href: '', label: 'Questions', icon: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z' },
+    { id: 'statistics', href: 'statistics/', label: 'Statistics', icon: 'M5 20V11M12 20V4M19 20v-6' },
+    { id: 'syllabus', href: 'syllabus/', label: 'Syllabus', icon: 'M5 6h14M5 12h14M5 18h9' },
+    { id: 'practice', href: 'practice.html', label: 'Practice', beta: true, icon: 'M4 20l4-1L19 8l-3-3L5 16zM14 7l3 3' },
+    { id: 'calculator-skills', href: 'calculator-skills/skills.html', label: 'Calculator Skills',
+      short: 'Calc skills', beta: true, appOnly: true,
+      icon: 'M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 7h6M9 11h1m4 0h1m-6 4h1m4 0h1m-6 3h1m4 0h1' },
   ];
+  const sections = LINKS.filter(link => fullNavigation || !link.appOnly);
+  const barClass = name => name + (fullNavigation ? ' with-calc-skills' : '');
 
   function svgIcon(d) {
     const i = h('i', { 'aria-hidden': 'true' });
     i.innerHTML = `<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
     return i;
+  }
+
+  function sectionLink(section, compact = false) {
+    const { id, href, label, icon, short } = section;
+    const beta = fullNavigation && section.beta;
+    const classes = [id === nav && 'on', id === 'calculator-skills' && 'calc-skills-nav', beta && 'nav-preview'];
+    return h('a', { href: base + href, class: classes.filter(Boolean).join(' '),
+      'aria-current': id === nav ? 'page' : null,
+      'aria-label': compact && short ? label : null,
+      'aria-description': beta ? 'Beta' : null,
+      title: beta ? label + ' (beta)' : null,
+    }, compact && svgIcon(icon), compact && short ? short : label,
+    beta && h('span', { class: 'nav-beta', 'aria-hidden': 'true', text: 'Beta' }));
   }
 
   function buildThemeControl() {
@@ -149,15 +172,14 @@
     const top = h('header', { class: 'top' },
       h('a', { class: 'brand', href: base }, h('i', { text: '∑', 'aria-hidden': 'true' }), h('span', { text: 'IB Math Question Bank' })),
       seg, pick,
-      h('nav', { class: 'nav', 'aria-label': 'Main' },
-        ...LINKS.map(([id, href, text]) => h('a', { href: base + href, class: id === nav ? 'on' : '', 'aria-current': id === nav ? 'page' : null, text })),
+      h('nav', { class: barClass('nav'), 'aria-label': 'Main' },
+        ...sections.map(link => sectionLink(link)),
         h('a', { href: '#', target: '_blank', rel: 'noopener', 'data-formula-booklet': true, text: 'Formula booklet ↗' })),
       h('span', { class: 'sp' }),
       buildThemeControl(),
       h('button', { class: 'paperbtn', type: 'button', 'data-paper-toggle': true, 'aria-label': 'Your paper' }, 'Your paper ', h('b', { 'data-paper-count': true, text: '0' })));
-    const tabs = h('nav', { class: 'tabbar', 'aria-label': 'Sections' },
-      ...LINKS.map(([id, href, text, icon]) => h('a', { href: base + href, class: id === nav ? 'on' : '', 'aria-current': id === nav ? 'page' : null },
-        svgIcon(icon), text)),
+    const tabs = h('nav', { class: barClass('tabbar'), 'aria-label': 'Sections' },
+      ...sections.map(link => sectionLink(link, true)),
       h('button', { type: 'button', 'data-paper-toggle': true }, h('i', {}, h('b', { 'data-paper-count': true, text: '0' })), 'Paper'));
     document.body.prepend(top);
     document.body.append(tabs);

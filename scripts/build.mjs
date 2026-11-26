@@ -324,8 +324,7 @@ function page({ base, baseHref = "", title, nav = "questions", head = "", body, 
 ${body}
     <script src="${base}assets/js/courses.js"></script>
     <script src="${base}assets/js/course.js"></script>
-    <script src="${base}assets/js/shell.js${calcNav ? "?v=theme-3" : ""}"></script>${calcNav ? `
-    <script src="${base}assets/js/calculator-nav.js?v=beta-1"></script>` : ""}
+    <script src="${base}assets/js/shell.js${calcNav ? "?v=nav-4" : ""}"></script>
 ${scripts.map((s) => `    ${s}`).join("\n")}
   </body>
 </html>
@@ -338,7 +337,7 @@ const SITE_DESC = "Searchable IB Mathematics exam question bank and statistics f
 function appPage(file, base, tab, { topic = null, title = SITE_TITLE } = {}) {
   write(file, page({
     // <base> lets the app use the same site-relative links from every address it is served at.
-    base: "./", baseHref: base, title, nav: tab, description: SITE_DESC, calcNav: file === "index.html",
+    base: "./", baseHref: base, title, nav: tab, description: SITE_DESC, calcNav: true,
     head: katex("./"),
     bodyAttrs: ` data-initial-tab="${tab}"${topic === null ? "" : ` data-topic="${topic}"`}`,
     body: `    <div id="app"><div class="loading">Loading the question bank…</div></div>`,

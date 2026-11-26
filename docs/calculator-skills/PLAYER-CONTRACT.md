@@ -10,6 +10,9 @@ move to shared pieces in verified batches without changing their audio or maths.
   System is the default; do not initialize or save a second lesson theme.
   A standalone calculator has the same header. A Practice iframe gets only
   the blank handset, with no question data, answers or outer navigation.
+  Desktop and mobile navigation draw labels and Beta flags from the same
+  link list in `assets/js/shell.js`. Keep app routes and new lessons on that
+  shell; exam archive detail pages keep their limited navigation profile.
 - Watch has one video-shaped scene. Clicking or tapping its noninteractive
   surface toggles Play/Pause, with brief feedback in the center of the whole
   scene. Keep one transport below: scrub, Play/Pause (Replay at end), time,

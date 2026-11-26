@@ -23,8 +23,8 @@
     doc.body.dataset.nav = 'calculator-skills';
     // Non-async dynamic scripts execute in insertion order, like the site's
     // static defer list; only these two entry modes differ.
-    for (const path of ['courses.js', 'course.js', 'shell.js?v=theme-3',
-      'calculator-nav.js?v=beta-1', 'basket.js', 'generate.js']) {
+    for (const path of ['courses.js', 'course.js', 'shell.js?v=nav-4',
+      'basket.js', 'generate.js']) {
       const script = doc.createElement('script');
       script.async = false;
       script.src = new URL('assets/js/' + path, base);

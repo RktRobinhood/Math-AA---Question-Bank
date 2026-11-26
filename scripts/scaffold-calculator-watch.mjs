@@ -29,8 +29,7 @@ const html=`<!doctype html>
 <link rel="stylesheet" href="../handheld/watch-lesson.css?v=mode-bridge-1">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
-<script src="../../assets/js/shell.js?v=theme-3" defer></script>
-<script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
+<script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 <script src="../handheld/shell.js" defer></script>
