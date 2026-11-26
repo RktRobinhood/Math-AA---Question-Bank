@@ -300,3 +300,10 @@ h1:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-family:Georgia,"Ti
 .ct30-shared[data-mode=watch] #watch-side h2:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin-bottom:.4em}
 .ct30-shared[data-mode=watch] #watch-side .calc-formula:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin-bottom:.35em}
 .ct30-shared #watch-equation:where(.qb-calculator-lesson, .qb-calculator-lesson *){white-space:normal;overflow-wrap:anywhere}
+
+/* The shared player owns Watch; keep plotting surface and Try layout local. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+#stage[data-mode=try] #handheld-host{--handheld-width:min(307px,100%)}
+.ct30-stage-grid :is(input,textarea){min-width:0}
+@media(max-height:760px){#stage[data-mode=try] #handheld-host{--handheld-width:min(235px,100%)}}
