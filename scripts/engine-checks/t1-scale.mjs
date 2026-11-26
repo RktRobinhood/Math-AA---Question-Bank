@@ -63,9 +63,21 @@ set('geometric-sums-to-terms','recover-from-three-partial-totals','equation',(q,
 });
 set('indices-nested-powers','solve-and-verify-power','equation',(q,T)=>{
   const {b,h,k,offset,p}=q.params;
-  const w=T.range(-10,10).filter(x=>b**(k*x-offset)/b**(-h)===1);
-  const exponent=T.range(-10,0).find(a=>b**a===1/b**p);
-  T.require(w.length===1&&b>1&&p>0,'unique real x and admissible logarithm base');
+  T.require(b>1&&k>0&&p>0,'admissible logarithm base and strictly increasing left-hand side');
+  const base=BigInt(b);
+  function fractionPower(n){
+    return n<0?[1n,base**BigInt(-n)]:[base**BigInt(n),1n];
+  }
+  function sameValue([an,ad],[bn,bd]){
+    return an*bd===bn*ad;
+  }
+  // Negative powers and reciprocals can round differently across Node/V8 builds.
+  // Compare exact rational values; do not loosen the answer check.
+  const denominator=fractionPower(-h);
+  const w=T.range(-10,10).filter(x=>sameValue(fractionPower(k*x-offset),denominator));
+  const reciprocal=[1n,base**BigInt(p)];
+  const exponent=T.range(-10,0).find(a=>sameValue(fractionPower(a),reciprocal));
+  T.require(w.length===1&&exponent!==undefined,'verify both solutions independently');
   return{a:w[0],b:exponent};
 });
 set('log-reject-root','product-log-domain','equation',(q,T)=>{
