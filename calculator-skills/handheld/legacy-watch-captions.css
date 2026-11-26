@@ -1,0 +1,37 @@
+/* Only the opted-in legacy transports position captions. No caption enters layout. */
+.legacy-watch-caption-host,.qb-calculator-lesson .recorded-watch{
+ position:relative!important
+}
+:is(:fullscreen,.watch-fullscreen-fallback)>.legacy-watch-caption-host{
+ position:sticky!important;bottom:0;z-index:9
+}
+.legacy-watch-caption-host>.legacy-watch-caption-display,
+.qb-calculator-lesson .recorded-watch>.recorded-caption{
+ position:absolute!important;inset:auto auto calc(100% + 6px) 50%!important;
+ translate:-50% 0!important;z-index:10;pointer-events:none;
+ width:min(calc(100% - 14px),44rem)!important;min-height:0!important;
+ margin:0!important;border:0!important;
+}
+.legacy-watch-caption-host>div.legacy-watch-caption-display{
+ background:transparent!important;padding:0!important;text-align:center
+}
+.legacy-watch-caption-host>div.legacy-watch-caption-display>p,
+.legacy-watch-caption-host>p.legacy-watch-caption-display,
+.qb-calculator-lesson .recorded-watch>.recorded-caption{
+ box-sizing:border-box;max-width:100%!important;min-height:0!important;
+ padding:.34rem .6rem!important;margin:0 auto!important;border:0!important;
+ border-radius:5px;background:#101616ed!important;color:#fff!important;
+ text-align:center;font:600 clamp(.76rem,2.4vw,.94rem)/1.28 system-ui,sans-serif!important;
+ overflow-wrap:anywhere
+}
+.legacy-watch-caption-host>div.legacy-watch-caption-display>p{width:fit-content}
+.legacy-watch-caption-host>.legacy-watch-caption-display[hidden],
+.qb-calculator-lesson .recorded-watch>.recorded-caption:is([hidden],:empty){display:none!important}
+
+/* Media diagnostics remain in the accessibility tree, not the transport. */
+.legacy-watch-status,.qb-calculator-lesson .recorded-watch>.recorded-status{
+ position:absolute!important;width:1px!important;min-width:0!important;
+ height:1px!important;min-height:0!important;padding:0!important;
+ margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);
+ white-space:nowrap!important;border:0!important
+}

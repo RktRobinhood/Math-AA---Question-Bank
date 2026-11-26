@@ -443,7 +443,7 @@
   const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
   const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("watch-bounds").offsetHeight+$("teaching-tip").offsetHeight;
+  const occupied=$("watch-player").offsetHeight+$("watch-bounds").offsetHeight+$("teaching-tip").offsetHeight;
   const pads=getComputedStyle(workspace);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-4;
   stage.style.setProperty("--ct38-body-fit",Math.floor(Math.max(innerHeight<680?78:98,Math.min(full?365:288,room*558/1168)))+"px");
@@ -451,7 +451,7 @@
   stage.style.setProperty("--ct38-scene-room",Math.floor(Math.max(126,room))+"px");
  }
  const sizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),$("watch-bounds"),$("teaching-tip"),document.querySelector("main>.header"),document.querySelector("main>.tabs")].forEach(el=>sizing.observe(el));
+ [$("watch-player"),$("watch-bounds"),$("teaching-tip"),document.querySelector("main>.header"),document.querySelector("main>.tabs")].forEach(el=>sizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);

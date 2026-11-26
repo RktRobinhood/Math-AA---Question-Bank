@@ -24,7 +24,9 @@
 <script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script>
 <script src="watch-plan.js?v=ct38-holds-1" defer></script>
 <script src="../handheld/watch-chapters.js?v=1" defer></script>
-<script src="lesson.js?v=ct38-template-1" defer></script>
+<script src="lesson.js?v=ct38-template-1&amp;caption-overlay=1" defer></script>
+<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
+<link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
 </head>
 <body class="calculator-bank-lesson ct38-binomial" data-base="../../" data-nav="calculator-skills">
 <main>
@@ -62,8 +64,8 @@
 <span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
 <p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p><p id="teaching-tip" class="ct38-tip"></p>
-<div id="caption-band" hidden><p id="caption" class="caption"></p></div>
-<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<div class="player legacy-watch-caption-host" id="watch-player" role="group" aria-label="Playback controls">
+ <div id="caption-band" class="legacy-watch-caption-display" hidden><p id="caption" class="caption"></p></div>
 <button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
 <div id="view-pick" role="group" aria-label="Calculator framing">
  <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
@@ -74,7 +76,7 @@
 <label class="ct38-rate"><span class="sr">Time to follow each step</span><select id="play-rate" aria-label="Time to follow each step"><option value=".75">Brief holds</option><option value="1" selected>Follow along</option><option value="1.5">Long holds</option></select></label>
 <button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4zm11 0c1.5 1.7 1.5 4.3 0 6m2-8c3 3 3 7 0 10"/></svg></button>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
-<p id="media-status" role="status" hidden></p>
+<p id="media-status" role="status" hidden class="legacy-watch-status"></p>
 <audio id="narration" preload="metadata" src="narration.mp3"></audio>
 </div>
 </section>
@@ -111,7 +113,6 @@
 </section>
 </div>
 </section>
-<details class="notes"><summary>Keep in your notes</summary><p><strong>CDF</strong> adds the probabilities of all integer counts in a range, including both bounds. The possible counts are 0 through <i>n</i>.</p><ul><li>At least <i>k</i>: <i>k</i> to <i>n</i>. At most <i>k</i>: 0 to <i>k</i>.</li><li>More than <i>k</i>: start at <i>k</i> + 1. Fewer than <i>k</i>: end at <i>k</i> − 1.</li><li>Complement: subtract the probability of the counts <em>outside</em> your event from 1.</li></ul><p class="note-source"><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29570">TI’s button sequence</a> · <a href="https://rktrobinhood.github.io/Math-AA---Question-Bank/questions/ai-sl-2022-may-tz2-p1-q05/">Exam reference: May 2022 AI SL P1 TZ2 Q5(c)</a></p></details>
 <details class="notes ct38-mobile-transcript"><summary>Transcript</summary><p id="transcript-mobile"></p></details>
 </main>
 </body>

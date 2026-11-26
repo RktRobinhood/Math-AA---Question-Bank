@@ -1,3 +1,4 @@
+@import url("../handheld/legacy-watch-captions.css?v=2");
 .recorded-replaced,.recorded-watch [hidden],.recorded-watch[hidden]{display:none!important}
 .has-recorded-watch :is(#start-overlay,#stage-play,#overlay,#play-feedback){display:none!important}
 .qb-calculator-lesson .recorded-watch{min-width:0;background:var(--page,var(--card,#fff));color:var(--ink,#17251e);border-top:1px solid var(--line,#b8c9bf);padding:.38rem .6rem .54rem}

@@ -99,9 +99,7 @@ function fitWatch(){
  if(mode!=='watch')return;
  const h=window.innerHeight, top=scene.getBoundingClientRect().top+window.scrollY;
  const tab=document.querySelector('.tabbar'), nav=tab?.getBoundingClientRect().height||0;
- const captionHeight=caption.getBoundingClientRect().height;
- const room=h-top-nav-$('watch-controls').getBoundingClientRect().height-captionHeight;
- player.style.setProperty('--watch-caption-height',captionHeight+'px');
+ const room=h-top-nav-$('watch-controls').getBoundingClientRect().height;
  const stacked=matchMedia('(max-width:735px) and (min-height:701px)').matches;
  const beatH=stacked?scene.querySelector('.beat').getBoundingClientRect().height+8:0;
  player.style.setProperty('--watch-handheld-fit',Math.floor(Math.max(126,Math.min(300,(room-beatH-25)*558/1168)))+'px');
@@ -110,7 +108,7 @@ function fitWatch(){
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
 const stageObserver=new ResizeObserver(fitWatch);
-[document.querySelector('main>.title'),$('watch-controls'),caption,scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
+[document.querySelector('main>.title'),$('watch-controls'),scene.querySelector('.beat')].forEach(e=>stageObserver.observe(e));
 
 function viewState(){
  const screenMode=mode==='watch'&&screenOnly;
@@ -329,7 +327,7 @@ function setMode(m){
  pause();mode=m;frameSig='';lcdSig='';trail.hidden=m!=='watch';hotspots.replaceChildren();
  document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');
  watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
- $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('watch-example').hidden=m!=='watch';$('audio-notice').hidden=!(m==='watch'&&silent);
+ $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('audio-notice').hidden=!(m==='watch'&&silent);
  if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;drawTry()}
 }
 let targetField=0,lastField=-1;

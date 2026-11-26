@@ -306,7 +306,7 @@ function fitWatch(){
  if(preferredFocus||!focusDismissed&&(footer.bottom>lessonEnd()+1||footer.top<watchShell.body.getBoundingClientRect().bottom+4||innerHeight<660||innerWidth<=375))focusButton.click();
 }
 const frameEl=focusStage.querySelector('.inverse-frame');
-const focusOutside=[document.querySelector('.header'),document.querySelector('.calc-tabs'),$('watch').querySelector('.director'),document.querySelector('.notes')];
+const focusOutside=[document.querySelector('.header'),document.querySelector('.calc-tabs'),$('watch').querySelector('.director')];
 function syncFocus(){
  const focused=!$('watch').hidden&&focusStage.classList.contains('cx-focused');
  focusOutside.forEach(el=>{el.inert=focused;});

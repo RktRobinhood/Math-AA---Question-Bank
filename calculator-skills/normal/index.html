@@ -11,7 +11,9 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css?v=ct39-holds-1"><script src="../handheld/shell.js" defer></script><link rel="stylesheet" href="watch.css?v=ct39-holds-1"><script src="../handheld/watch-player.js?v=ct39-holds-1" defer></script><script src="narration.js" defer></script><script src="measured-cues.js" defer></script><script src="voice-profile.js" defer></script><script src="math.js" defer></script><script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script><script src="watch-plan.js?v=1" defer></script><script src="lesson.js?v=ct39-holds-1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css?v=ct39-holds-1"><script src="../handheld/shell.js" defer></script><link rel="stylesheet" href="watch.css?v=ct39-holds-1"><script src="../handheld/watch-player.js?v=ct39-holds-1" defer></script><script src="narration.js" defer></script><script src="measured-cues.js" defer></script><script src="voice-profile.js" defer></script><script src="math.js" defer></script><script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script><script src="watch-plan.js?v=1" defer></script><script src="lesson.js?v=ct39-holds-1&amp;caption-overlay=1" defer></script>
+<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
+<link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
 </head>
 <body class="calculator-bank-lesson normal-watch ct39-paced" data-base="../../" data-nav="calculator-skills"><main>
 <header class="header">
@@ -22,14 +24,14 @@
 <div class="watch-grid">
 <div class="viewer modern-watch" id="watch-stage">
 <div class="watch-surface" id="watch-surface">
-<div id="key-strip"><span id="key-label">Keys</span><ol id="key-steps" aria-label="Keys in this step"></ol><span id="caption-beta">Captions only</span></div>
+<div id="key-strip"><span id="key-label">Keys</span><ol id="key-steps" aria-label="Keys in this step"></ol><span id="caption-beta" class="legacy-watch-status" role="status">Captions only</span></div>
 <div id="watch-device-pane"><div id="watch-host"><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="screen-work"></div></div></div></div>
 <div class="worked-prompt"><div><span>Watch example</span> <i>X</i> ∼ N(20, 2²) · <strong id="worked-event">P(18 &lt; X &lt; 23)</strong></div><div id="compact-curve" class="curve"></div></div>
 <p id="pace-tip"></p><p id="full-fit-note" hidden>Scroll the calculator to see the keypad.</p>
 <span id="play-feedback" aria-hidden="true" hidden data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
-<div id="caption-band"><p id="caption" class="caption"></p></div>
-<div class="player" id="watch-player" role="group" aria-label="Playback controls">
+<div class="player legacy-watch-caption-host" id="watch-player" role="group" aria-label="Playback controls">
+ <div id="caption-band" class="legacy-watch-caption-display"><p id="caption" class="caption"></p></div>
 <button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
 <div id="view-pick" role="group" aria-label="Calculator framing">
  <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
@@ -39,7 +41,7 @@
 <button id="cc" type="button" aria-label="Hide captions" title="Captions" aria-pressed="true">CC</button>
 <label class="watch-rate"><span class="sr">Time to follow each step</span><select id="play-rate" aria-label="Time to follow each step"><option value=".75">Brief holds</option><option value="1" selected>Follow along</option><option value="1.5">Long holds</option></select></label>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
-<p id="audio-state" role="status" hidden></p>
+<p id="audio-state" role="status" hidden class="legacy-watch-status"></p>
 <audio id="narration" preload="metadata"></audio>
 </div>
 
@@ -78,5 +80,4 @@
 </div>
 </div>
 </section>
-<details class="notes"><summary>Keep in your notes</summary><p><strong>Normal Cdf</strong> gives an area, not the height of the curve. Enter <code>normCdf(lower, upper, mean, SD)</code>. Enter the standard deviation, not the variance.</p><ul><li>Below a bound: use −∞ for the lower endpoint.</li><li>Above a bound: use +∞ for the upper endpoint, or subtract the probability below the bound from 1.</li><li>The normal curve is continuous: a single endpoint has probability zero, so including it does not change the result.</li></ul><p class="note-source"><a href="https://education.ti.com/-/media/files/activities/us/math/statistics/is-it-normal/nspire-isitnormal-teacher-pdf.pdf">Texas Instruments: Probability menu route</a> · <a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/36294">TI alternative via Statistics menu</a></p></details>
 </main></body></html>

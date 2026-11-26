@@ -36,10 +36,20 @@ _Avoid_: “Variant” without saying whether the form changed or only the numbe
 
 **Practice scope**: The **Course** and **Syllabus codes** selected for study, with optional restrictions on the **Question types** to include.
 
-**Calculator Skills**: The standalone library of lessons on specific TI-Nspire CX II-T workflows. Each lesson has **Watch** and **Try** modes.
+**Calculator Skills**: The standalone library of lessons on specific TI-Nspire CX II-T workflows. Lessons have **Watch**, and **Try** where the relevant calculator workflow can be practised.
 _Avoid_: “Scratchpad” or “full emulator” for the lessons.
 
 **Watch**: The demonstration of a worked example in a **Calculator Skills** lesson.
+
+**Watch player**: The shared **Watch** surface and its controls. A lesson supplies a worked example, chapters, and key presses, not a new player. The same player can also open from eligible **Practice**.
+
+**Calculator framing**: **Full calculator** shows the handset and its keys. **Screen only** crops to its LCD. Both are distinct from **Fullscreen**, which expands the entire player.
+
+**Captions (CC)**: On-screen text of the spoken guidance. Captions can be shown or hidden without resizing the calculator; they are not the key-press trail or notes.
+
+**Playback pacing**: The control for the time between spoken steps. It changes the **Teaching hold**, not the speed or pitch of a recording.
+
+**Teaching hold**: The part after a spoken step where the learner can see the calculator actions, read the result or follow along.
 
 **Try**: The independent exercise in a **Calculator Skills** lesson.
 

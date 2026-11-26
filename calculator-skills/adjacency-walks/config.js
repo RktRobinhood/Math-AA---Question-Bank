@@ -22,8 +22,6 @@ return {
   return "";
  },
  success:"Correct. A matrix power counts exact-length walks; read the start row and destination column.",
- notes:"Each entry is the number of directed arrows, not a distance. A walk may revisit a vertex or edge. To count any positive length through k, add corresponding entries of a, a², …, aᵏ; include the identity only when zero-edge walks are wanted. This trainer uses a 3×3 nonnegative integer matrix, counts 0–3, and exponents 2–6.",
- refs:[["TI matrix entry and storage (KB 31331)","https://education.ti.com/en/customer-support/knowledge-base/sofware-apps/computer-software-installation-activation/31331"],["TI matrix power reference","https://education.ti.com/html/webhelp/EG_TINspireCode/EN/Subsystems/RG_Nspire_EN/Content/M_RefGuide/RG_Symbols.htm"],["IB AI guide (AHL 3.15)","https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=55"]],
  chapters:["Read the arrow counts","Read a parallel-arrow count","Open the matrix template","Set dimensions and enter counts","Store the matrix","Calculate a²","Read the start row and end column","Change the walk length","Allow repeated vertices"],
  captions:[
  [0,"Enter the directed arrow counts. Rows are where a walk starts; columns are where it goes.","Vertex order: A · B · C"],

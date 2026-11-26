@@ -33,7 +33,7 @@
   const fullStage=stage.matches(":fullscreen,.watch-fullscreen-fallback");
   const max=(window.visualViewport?.height||innerHeight)-surface.getBoundingClientRect().top-(fullStage?0:window.scrollY);
   const nav=fullStage?0:(document.querySelector(".tabbar")?.offsetHeight||0);
-  const available=max-$("watch-player").offsetHeight-$("caption-band").offsetHeight-nav-$("key-strip").offsetHeight-surface.querySelector(".worked-prompt").offsetHeight-23;
+  const available=max-$("watch-player").offsetHeight-nav-$("key-strip").offsetHeight-surface.querySelector(".worked-prompt").offsetHeight-23;
   const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
   const scroll=framePref==="full"&&Math.ceil(full*1168/558)>available+2;
   $("full-fit-note").hidden=!scroll;pane.tabIndex=scroll?0:-1;
@@ -44,7 +44,7 @@
   stage.style.setProperty("--normal-screen-fit",Math.min(402,Math.max(184,Math.floor(available*4/3)))+"px");
  }
  const resize=new ResizeObserver(fit);
- [$("caption-band"),$("watch-player"),surface.querySelector(".worked-prompt"),document.querySelector("main>.header")].forEach(el=>resize.observe(el));
+ [$("watch-player"),surface.querySelector(".worked-prompt"),document.querySelector("main>.header")].forEach(el=>resize.observe(el));
  window.addEventListener("resize",fit);
  window.visualViewport?.addEventListener("resize",fit);
  document.addEventListener("fullscreenchange",fit);

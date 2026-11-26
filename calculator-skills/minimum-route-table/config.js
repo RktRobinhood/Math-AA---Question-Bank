@@ -20,8 +20,6 @@ return {
   return "";
  },
  success:"Correct. The cell records the smallest complete route distance; different routes can tie.",
- notes:"All roads are undirected and strictly positive. An optimal route never benefits from a repeated vertex here, so the four eligible simple routes are exhaustive. Fill row A, column D (and D,A in a symmetric table). This is neither a spanning tree nor a tour visiting every place. The Calculator only adds the road lengths; this lesson does not require Dijkstra’s algorithm or simulate a route button.",
- refs:[["TI Calculator arithmetic","https://education.ti.com/html/webhelp/nspire/3.9/SS/TI-NspireStudentSoftwareHelp_EN/Content/M_Calculator/CA_Entering_and_Evaluating_Math_Expressions.htm"],["IB AI guide (AHL 3.16)","https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=56"]],
  chapters:["Read the table cell","List all candidate routes","Add A–B–D","Add A–C–D","Add A–B–C–D","Add A–C–B–D","Enter the minimum","Reflect the distance"],
  captions:[
  [0,"Find row A, column D: the shortest A–D distance, not a full tour.","Roads (km): AB 2 · AC 5 · BC 4 · BD 9 · CD 2"],

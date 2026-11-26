@@ -39,9 +39,8 @@ let practiceState=initial(problem),state=practiceState,forkKey=null;
 const forkDrafts=new Map();
 function keepFork(){forkDrafts.set(forkKey,state);if(forkDrafts.size>24)forkDrafts.delete(forkDrafts.keys().next().value);}
 seek.max=C.duration;
-$("title").textContent=C.name;$("intro").textContent=C.intro;$("lcd-app").textContent=C.app;$("notes").textContent=C.notes;
+$("title").textContent=C.name;$("intro").textContent=C.intro;$("lcd-app").textContent=C.app;
 $("keys-help").textContent="Keyboard: M → "+C.path.join(" → ")+". Use Tab between fields, arrows to choose, and Enter to confirm.";
-C.refs.forEach(([title,url],i)=>{if(i)$("references").append(document.createTextNode(" · "));const a=node("a",title);a.href=url;$("references").append(a);});
 function inputs(spec,host,prefix,blank=false){
  for(const [k,text,opts] of spec){
   const lab=node("label",text),el=node(opts?"select":"input");lab.htmlFor=el.id=prefix+k;
