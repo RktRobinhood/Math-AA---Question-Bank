@@ -129,17 +129,17 @@ function mount(host, input, adapter) {
  full.append(glyph('M7 2h10v20H7zm2 2v6h6V4zm0 8v2h2v-2zm4 0v2h2v-2zm-4 4v2h2v-2zm4 0v2h2v-2z'));
  screen.append(glyph('M2 5h20v14H2zm2 2v10h16V7z'));frames.append(full,screen);
  const cc=btn('Show captions','CC','lw-cc'),scale=el('select'),expand=btn('Fullscreen',undefined,'lw-expand');
- scale.setAttribute('aria-label','Teaching pauses');
+ scale.setAttribute('aria-label','Playback pacing');
  for(const [value,label] of [[.7,'Short'],[1,'Normal'],[1.4,'Long']]){
    const option=el('option',label);option.value=String(value);scale.append(option);
  } scale.value='1';
- const pace=el('label',undefined,'lw-pace');pace.append(el('span','Pauses'),scale);
+ const pace=el('div',undefined,'lw-pace');pace.append(scale);
  expand.append(glyph(fullscreen));bar.append(seek,clock,play,sound,frames,cc,pace,expand);
- const mediaNote=el('p','Captioned walkthrough','lw-media-status');mediaNote.setAttribute('role','status');
- stage.append(surface,compactCoach,captionAnchor,bar,mediaNote);host.replaceChildren(header,stage);
+ const mediaAlert=el('span',undefined,'lw-sr-only');mediaAlert.setAttribute('role','status');
+ stage.append(surface,compactCoach,captionAnchor,bar,mediaAlert);host.replaceChildren(header,stage);
  let lastEnd=0;
  const beats=spec.beats.map(b=>{const row=[lastEnd,b.end,b.hold];lastEnd=b.end;return row;});
- let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing=spec.initialFraming??'screen',ccOn=false,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false,restorePlayFocus=false;
+ let layout=win.TeachingHolds.make(beats),t=0,mode='watch',framing=spec.initialFraming??'screen',captionChoice=null,clockOrigin=0,playing=false,pending=false,phase='',epoch=0,frameRequest=0,activeMedia=null,disposed=false,initiated=false,restorePlayFocus=false;
  try { if(!spec.initialFraming&&win.localStorage.getItem(frameStorage)==='full')framing='full'; } catch {}
  const basePlayer=win.CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand,feedback,active:()=>mode==='watch'});
  const chapterNav=win.CalculatorWatchChapters.mount(groups,authored.groups,{onChapter:id=>{
@@ -153,7 +153,7 @@ function mount(host, input, adapter) {
    const railBelow=compactRail.matches&&!expanded;
    if((side.parentElement===stage)!==railBelow){
      const focused=side.contains(doc.activeElement)?doc.activeElement:null;
-     if(railBelow){mediaNote.after(side);compactCoach.append(coach);}
+     if(railBelow){bar.after(side);compactCoach.append(coach);}
      else {surface.append(side);side.prepend(coach);}
      if(focused)focused.focus({preventScroll:true});
    }
@@ -164,17 +164,18 @@ function mount(host, input, adapter) {
    const nav=expanded?0:doc.querySelector('.tabbar')?.offsetHeight||0;
    const styles=win.getComputedStyle(surface);
    const gap=stacked.matches&&!railBelow?side.offsetHeight+parseFloat(styles.rowGap||'0'):0;
-   const room=h-start-nav-bar.offsetHeight-mediaNote.offsetHeight-
+   const room=h-start-nav-bar.offsetHeight-
      compactCoach.offsetHeight-gap-parseFloat(styles.paddingTop||'0')-parseFloat(styles.paddingBottom||'0')-4;
    stage.style.setProperty('--lw-scene-height',Math.floor(Math.max(105,room))+'px');
  }
  const fitObserver=new win.ResizeObserver(fitPresentation);
- [header,side,bar,mediaNote,compactCoach].forEach(e=>fitObserver.observe(e));
+ [header,side,bar,compactCoach].forEach(e=>fitObserver.observe(e));
  const fullscreenObserver=new win.MutationObserver(fitPresentation);
  fullscreenObserver.observe(stage,{attributes:true,attributeFilter:['class']});
  win.addEventListener('resize',fitPresentation);win.visualViewport?.addEventListener('resize',fitPresentation);
  doc.addEventListener('fullscreenchange',fitPresentation);
  const fmt=n=>Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');
+ const captionsEnabled=()=>captionChoice??!activeMedia;
  function update(){
    if(mode!=='watch')return;
    const {point,crossed,key}=stateAt(layout,authored,t),beat=spec.beats[point.span.i];
@@ -183,8 +184,11 @@ function mount(host, input, adapter) {
    coach.textContent=beat.coach;
    chapterNav.setState({chapterId:beat.chapter,keyId:key?.chapter===beat.chapter?key.id:null});
    caption.textContent=point.speaking?beat.spoken:'';
-   caption.hidden=!(point.speaking&&beat.spoken&&(ccOn||!activeMedia));
-   cc.hidden=!activeMedia;
+   const captions=captionsEnabled();
+   caption.hidden=!(point.speaking&&beat.spoken&&captions);
+   cc.setAttribute('aria-pressed',String(captions));
+   cc.setAttribute('aria-label',captions?'Hide captions':'Show captions');
+   cc.title=cc.getAttribute('aria-label');
    full.setAttribute('aria-pressed',String(framing==='full'));screen.setAttribute('aria-pressed',String(framing==='screen'));
    seek.max=layout.duration;seek.value=t;
    seek.setAttribute('aria-valuetext',fmt(t)+' of '+fmt(layout.duration));
@@ -205,7 +209,7 @@ function mount(host, input, adapter) {
  }
  function loseMedia(){
    activeMedia?.audio.pause();activeMedia?.audio.remove();activeMedia?.release();activeMedia=null;sound.hidden=true;
-   mediaNote.hidden=false;mediaNote.textContent='Narration unavailable. Follow the captions.';
+   mediaAlert.textContent='Audio unavailable.';
    clockOrigin=win.performance.now()-t*1000;update();
  }
  async function enter(ticket){
@@ -259,7 +263,7 @@ function mount(host, input, adapter) {
    if(next===mode){if(focus)focusMode();return;}
    halt();basePlayer.clear();void basePlayer.exit();mode=next;stage.dataset.mode=mode;
    watch.setAttribute('aria-pressed',String(mode==='watch'));tryButton.setAttribute('aria-pressed',String(mode==='try'));
-   bar.hidden=side.hidden=mode==='try';mediaNote.hidden=mode==='try'||!!activeMedia;
+   bar.hidden=side.hidden=mode==='try';
    if(mode==='try'){
      caption.hidden=true;feedback.hidden=true;stage.dataset.framing='full';
      adapter.enterTry(device,{returnToWatch:()=>changeMode('watch',{focus:true})});
@@ -273,7 +277,7 @@ function mount(host, input, adapter) {
    const resume=playing||pending,old=layout;halt();layout=win.TeachingHolds.make(beats,Number(scale.value));
    t=layout.remap(old,t);update();if(resume)void start(false);
  };
- cc.onclick=()=>{ccOn=!ccOn;cc.setAttribute('aria-pressed',String(ccOn));cc.setAttribute('aria-label',ccOn?'Hide captions':'Show captions');cc.title=cc.getAttribute('aria-label');update();};
+ cc.onclick=()=>{captionChoice=!captionsEnabled();update();};
  sound.onclick=()=>{
    if(!activeMedia)return;
    const a=activeMedia.audio;a.muted=!a.muted;sound.setAttribute('aria-label',a.muted?'Unmute narration':'Mute narration');
@@ -294,18 +298,18 @@ function mount(host, input, adapter) {
  }
  doc.addEventListener('visibilitychange',hide);win.addEventListener('pagehide',unload);
  watch.setAttribute('aria-pressed','true');tryButton.setAttribute('aria-pressed','false');
- stage.dataset.mode='watch';cc.setAttribute('aria-pressed','false');muted.setAttribute('hidden','');
+ stage.dataset.mode='watch';muted.setAttribute('hidden','');
  label();if(initial==='try')changeMode('try');else{update();fitPresentation();}
  if(spec.recording){
-   play.disabled=true;mediaNote.textContent='Checking narration…';
+   play.disabled=true;
    void recordingFor(spec,win).catch(()=>null).then(verified=>{
      if(disposed){verified?.release();return;}
      play.disabled=false;
      if(restorePlayFocus && mode==='watch' && doc.activeElement===watch)play.focus({preventScroll:true});
      restorePlayFocus=false;
-     if(!verified){mediaNote.textContent='Captioned walkthrough';return;}
+     if(!verified){update();return;}
      activeMedia=verified;stage.append(verified.audio);verified.audio.addEventListener('error',loseMedia,{once:true});
-     sound.hidden=false;mediaNote.hidden=true;update();
+     sound.hidden=false;update();
    });
  }
  return Object.freeze({destroy,seekTo,setMode:changeMode});

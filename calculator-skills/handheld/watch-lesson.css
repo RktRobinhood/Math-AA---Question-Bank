@@ -88,7 +88,7 @@
 .lw-transport .lw-cc{grid-area:2/5}
 .lw-pace{display:flex;gap:2px;align-items:center;grid-area:2/6;font-size:.64rem}
 .lw-transport .lw-expand{grid-area:2/7}
-.lw-media-status{margin:.2rem .75rem .4rem;color:var(--lw-soft-ink);font-size:.72rem}
+.lw-sr-only{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden;white-space:nowrap}
 .lw-stage[data-mode=try] .lw-surface{grid-template-columns:1fr;cursor:default}
 .lw-stage[data-mode=try] .lw-device-panel{max-width:none}
 .lw-stage:is(:fullscreen,.watch-fullscreen-fallback){

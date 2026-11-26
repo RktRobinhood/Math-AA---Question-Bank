@@ -16,7 +16,8 @@ move to shared pieces in verified batches without changing their audio or maths.
 - Watch has one video-shaped scene. Clicking or tapping its noninteractive
   surface toggles Play/Pause, with brief feedback in the center of the whole
   scene. Keep one transport below: scrub, Play/Pause (Replay at end), time,
-  captions, teaching pauses and fullscreen. The visible icon must be Pause
+  captions, pacing and fullscreen. Keep the selector compact, without a visible
+  “Pauses” label. The visible icon must be Pause
   while running and Play while paused. Fullscreen refits the display, text
   and keys; exiting preserves the playhead. Arrow keys seek; no extra jump,
   restart or Take over buttons.
@@ -31,12 +32,13 @@ move to shared pieces in verified batches without changing their audio or maths.
   unstructured row. Keep these groups readable before playback and when
   paused; active step and key follow the playhead on a rewind. In Full also light the actual
   physical key. Keep the chosen frame steady; no automatic zoom. Spoken CC
-  is separate from keys. Captions overlay the lower scene and must not change
+  is separate from keys and can be toggled even when a lesson has no recording.
+  Captions overlay the lower scene and must not change
   the size of the handset, LCD or transport. The player follows site Light, Dark
   or System; live LCD colors stay authentic and captions keep strong contrast. Keep recorded speech at 1×; only the deliberate
   teaching holds vary. Use measured narration timing and reject mismatched
-  recordings. If audio is unavailable, use a clearly labeled captioned
-  walkthrough.
+  recordings. If audio is unavailable, start with captions on. Keep recording
+  state out of the visible player controls.
 - Show every spoken calculator action on the device. If narration advises a
   distinct method, animate its actual menu/key path and readout. Add a short
   why at a useful decision or likely mistake, not a separate maths lesson. Keep examples
