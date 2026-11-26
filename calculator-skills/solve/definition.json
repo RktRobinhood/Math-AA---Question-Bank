@@ -1,0 +1,256 @@
+{
+  "id": "CT06",
+  "title": "Solve an equation numerically",
+  "intro": "Find where two curves meet using two Numerical Solve searches.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "f8587931ebc439cada549aba5812b9c11a7de43b6c464ba37af9fd17ece33034",
+    "scriptSha256": "f27ffb90ed37176c9d020d3a5fa8f72ef542f5b99f228020535e4fac80300c25"
+  },
+  "chapters": [
+    {
+      "id": "open",
+      "title": "Open Numerical Solve"
+    },
+    {
+      "id": "enter",
+      "title": "Enter the equation"
+    },
+    {
+      "id": "bound",
+      "title": "Choose two bounds"
+    },
+    {
+      "id": "first",
+      "title": "Read the first solution"
+    },
+    {
+      "id": "second",
+      "title": "Find the other solution"
+    },
+    {
+      "id": "interpret",
+      "title": "Report both answers"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open",
+      "spoken": "On a Calculator page, open Menu, choose Algebra, then Numerical Solve.",
+      "coach": "Two model curves, y = 2ˣ and y = x + 4, may cross twice on −4 ≤ x ≤ 3. Find both x-values to 3 significant figures. From Calculator, press Menu → 3: Algebra → 1: Numerical Solve.",
+      "end": 6.02,
+      "hold": 8.2,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "at": 0.1524
+        },
+        {
+          "id": "press-2",
+          "label": "3",
+          "at": 0.4294
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "at": 0.7064
+        }
+      ]
+    },
+    {
+      "chapter": "enter",
+      "spoken": "Enter the equation, then a comma and the variable you’re solving for.",
+      "coach": "Enter 2ˣ = x + 4. Press Right to leave the exponent before the equals sign. Then enter a comma and x.",
+      "end": 10.43,
+      "hold": 13.5,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "2",
+          "at": 0.0518
+        },
+        {
+          "id": "press-5",
+          "label": "^",
+          "at": 0.1461
+        },
+        {
+          "id": "press-6",
+          "label": "x",
+          "at": 0.2403
+        },
+        {
+          "id": "press-7",
+          "label": "→",
+          "at": 0.3346
+        },
+        {
+          "id": "press-8",
+          "label": "=",
+          "at": 0.4288
+        },
+        {
+          "id": "press-9",
+          "label": "x",
+          "at": 0.5231
+        },
+        {
+          "id": "press-10",
+          "label": "+",
+          "at": 0.6173
+        },
+        {
+          "id": "press-11",
+          "label": "4",
+          "at": 0.7116
+        },
+        {
+          "id": "press-12",
+          "label": ",",
+          "at": 0.8058
+        },
+        {
+          "id": "press-13",
+          "label": "x",
+          "at": 0.9001
+        }
+      ]
+    },
+    {
+      "chapter": "bound",
+      "spoken": "To limit the search to an interval, add a comma, then enter the lower and upper bounds separated by another comma.",
+      "coach": "Start with 2 < x < 3. In the command, enter a comma, 2, a comma, then 3. The bounds are x-values, in increasing order.",
+      "end": 17.63,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": ",",
+          "at": 0.1193
+        },
+        {
+          "id": "press-15",
+          "label": "2",
+          "at": 0.3362
+        },
+        {
+          "id": "press-16",
+          "label": ",",
+          "at": 0.5531
+        },
+        {
+          "id": "press-17",
+          "label": "3",
+          "at": 0.7701
+        }
+      ]
+    },
+    {
+      "chapter": "first",
+      "spoken": "Close the bracket and press Enter. The calculator gives one numerical solution.",
+      "coach": "Close the bracket and press Enter. One interval returns one numerical solution. Keep the positive result unrounded.",
+      "end": 23.29,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-18",
+          "label": ")",
+          "at": 0.2107
+        },
+        {
+          "id": "press-19",
+          "label": "Enter",
+          "at": 0.5939
+        }
+      ]
+    },
+    {
+      "chapter": "second",
+      "spoken": "If the equation may have more than one solution, use separate intervals and check each result.",
+      "coach": "Press Up twice and Enter to copy the command. Replace the bounds with −4 and −3 using the negative key, then press Enter.",
+      "end": 29.14,
+      "hold": 18,
+      "keys": [
+        {
+          "id": "press-20",
+          "label": "↑",
+          "at": 0.0376
+        },
+        {
+          "id": "press-21",
+          "label": "↑",
+          "at": 0.1061
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "at": 0.1745
+        },
+        {
+          "id": "press-23",
+          "label": "←",
+          "at": 0.243
+        },
+        {
+          "id": "press-24",
+          "label": "Del",
+          "at": 0.3114
+        },
+        {
+          "id": "press-25",
+          "label": "Del",
+          "at": 0.3799
+        },
+        {
+          "id": "press-26",
+          "label": "Del",
+          "at": 0.4483
+        },
+        {
+          "id": "press-27",
+          "label": "(−)",
+          "at": 0.5168
+        },
+        {
+          "id": "press-28",
+          "label": "4",
+          "at": 0.5852
+        },
+        {
+          "id": "press-29",
+          "label": ",",
+          "at": 0.6537
+        },
+        {
+          "id": "press-30",
+          "label": "(−)",
+          "at": 0.7221
+        },
+        {
+          "id": "press-31",
+          "label": "3",
+          "at": 0.7906
+        },
+        {
+          "id": "press-32",
+          "label": "→",
+          "at": 0.859
+        },
+        {
+          "id": "press-33",
+          "label": "Enter",
+          "at": 0.9274
+        }
+      ]
+    },
+    {
+      "chapter": "interpret",
+      "spoken": "Keep the calculator’s full precision while you work, then round the final answer as the question asks.",
+      "coach": "The curves meet at x ≈ −3.93 and x ≈ 2.76 to 3 significant figures. These are the x-values, not the heights.",
+      "end": 35.553,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}

@@ -1,46 +1,44 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Numerical Solve · Calculator Skills | IB Math Question Bank</title>
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("qb-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Solve an equation numerically · Calculator Skills | IB Math Question Bank</title>
+<script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <script>if(window.parent!==window&&new URLSearchParams(location.search).get('embed')==='practice')document.documentElement.dataset.practiceWatch='true';</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
-<link rel="stylesheet" href="styles.css">
-
-<link rel="stylesheet" href="../handheld/shell.css">
-<link rel="stylesheet" href="../handheld/integration.css">
-<link rel="stylesheet" href="player.css?v=solve-key-steps-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<script src="../handheld/shell.js" defer></script>
-<script src="../handheld/key-cues.js" defer></script>
-<script src="../handheld/transport.js" defer></script>
-<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
-<script src="../handheld/hold-timeline.js?v=1" defer></script>
-<script type="module" src="main.js?v=solve-key-steps-1&amp;caption-overlay=1&amp;focused-notes=1"></script>
-<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
-<link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="player.css?v=shared-try-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="../handheld/key-cues.js"></script>
+<script defer src="../handheld/transport.js"></script>
+<link rel="modulepreload" href="../handheld/watch-bootstrap.js?v=1">
+<script type="module" src="main.js?v=shared-1"></script>
 </head>
-<body data-base="../../" data-nav="calculator-skills" class="solve-lesson">
-<main class="wrap">
-  <header class="title">
-    <div><p class="context"><a href="../skills.html">Calculator Skills</a> <span aria-hidden="true">/</span> <span id="context">CT06</span></p><h1>Solve an equation numerically</h1><p>Use <code>nSolve</code> to find one solution in an interval.</p></div>
-    <div class="modes" aria-label="Lesson mode"><button class="mode active" data-mode="watch" aria-pressed="true">Watch</button><button class="mode" data-mode="try" aria-pressed="false">Try</button></div>
-  </header>
-  <section aria-label="Calculator walkthrough">
-    <div id="player" class="player cx-handheld-stage" tabindex="0" aria-label="Numerical Solve player">
-      <div class="scene" id="watch-surface">
-        <div class="lcd-group">
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page solve-lesson"><main class="qb-calculator-lesson qb-calculator-canvas">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / Numerical Solve</nav>
+<div data-calculator-watch></div>
+<section class="cx-handheld-stage solve-try" id="player" data-mode="try" aria-label="Independent Numerical Solve practice" tabindex="0" hidden>
+<div id="try-grid">        <div class="lcd-group" id="handheld-host">
           <div class="device-label"><span>TI-Nspire CX II</span><span>CALCULATOR · RECREATED SCREEN</span></div>
           <div class="lcd" id="lcd" aria-label="Simulated TI-Nspire Calculator screen">
             <canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas>
+<p id="lcd-text" class="sr" aria-live="polite"></p>
             <div id="hotspots"></div>
             <form id="solver-form" class="solve-lcd-form" aria-label="Numerical Solve calculator entry" hidden novalidate>
               <p aria-hidden="true">Calculator · nSolve(</p>
@@ -50,47 +48,16 @@
             </form>
           </div>
         </div>
-        <aside class="beat">
-          <div id="beat-number" class="beat-no" aria-hidden="true">01</div>
-          <div><p id="beat-title" class="beat-title">Open Numerical Solve</p><p id="beat-tip" class="beat-tip">Start on a Calculator page.</p></div>
-          <div id="key-trail" aria-label="Ordered key presses"><span class="key-trail-label">Steps and keys</span><ol id="key-steps"></ol></div>
-        </aside>
-        <span id="play-feedback" aria-hidden="true" hidden><svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
-      </div>
-      <div id="watch-controls" class="transport legacy-watch-caption-host" role="group" aria-label="Playback controls">
-       <p class="caption legacy-watch-caption-display" id="caption" hidden></p>
-        <button id="play" class="play" type="button" aria-label="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z" fill="currentColor"/></svg></button>
-        <button id="sound" type="button" aria-label="Mute" title="Mute"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z"/><path class="sound-waves" d="M16 9a4 4 0 0 1 0 6m2.5-8.5a7.5 7.5 0 0 1 0 11"/><path class="sound-off" hidden d="m16 9 5 6m0-6-5 6"/></svg></button>
-        <div id="view-pick" role="group" aria-label="Calculator framing">
-          <button id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
-          <button id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
-        </div>
-        <label class="seek"><span class="sr">Seek walkthrough</span><input type="range" id="seek" min="0" max="97.12" step=".001" value="0"></label>
-        <span class="time" id="time">0:00 / 1:37</span>
-        <button id="captions" class="cc" type="button" aria-label="Show captions" aria-pressed="false">CC</button>
-        <label class="watch-speed"><select id="watch-speed" aria-label="Teaching pauses"><option value=".7">−</option><option value="1" selected>Normal</option><option value="1.4">+</option></select></label>
-        <button id="fullscreen" type="button" aria-label="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
-      </div>
-      <p class="audio-notice legacy-watch-status" id="audio-notice" role="status" hidden>Narration is unavailable in this copy. You can still watch with captions.</p>
-      <audio id="voice" preload="metadata" src="narration.mp3"></audio>
-    </div>
-
-    <section class="practice" id="practice" aria-label="Calculator practice" hidden>
-      <div class="practice-head"><p>Find both solutions of <strong><var>x</var>² = 5</strong> using two separate intervals.</p><button type="button" class="quiet" id="restart" hidden>Restart steps</button></div>
+    <section class="practice" id="practice" aria-label="Calculator practice">
+      <button type="button" id="return-watch">Return to Watch</button><div class="practice-head"><p id="try-task">Find where <strong>y = x²</strong> and <strong>y = 5</strong> meet. Use a different interval for each x-value.</p><button type="button" class="quiet" id="restart" hidden>Restart steps</button></div>
       <div class="case-row" id="case-row" aria-label="Practice presets">
         <button type="button" class="quiet" data-case="positive">Positive interval</button>
         <button type="button" class="quiet" data-case="negative">Negative interval</button>
       </div>
-      <div id="try-summary" class="try-summary" aria-live="polite"></div>
+      <p id="try-tip" role="status"></p><div id="try-summary" class="try-summary" aria-live="polite"></div>
       <button type="button" class="quiet" id="edit-entry" hidden>Edit calculator entry</button>
       <p id="feedback" class="feedback" role="status" hidden></p>
       <p id="answer" class="answer" role="status" hidden></p>
-    </section>
-  </section>
-  <div class="resource-bar">
-    <a href="numerical-solve.mp4">Earlier screen-only video</a>
-    <details><summary>Transcript</summary><p id="transcript"></p></details>
-  </div>
-</main>
-</body>
-</html>
+    </section></div>
+</section>
+</main></body></html>
