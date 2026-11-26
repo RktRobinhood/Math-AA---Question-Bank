@@ -1,0 +1,178 @@
+{
+  "id": "CT30",
+  "title": "Box plots and outliers",
+  "intro": "Read quartiles, fences and modified whiskers. Compare with a standard box plot.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "7ee829b392314e1c04a29f9ced649b2cbdcd668e0b56f91fb9569cb1d1cd37f3",
+    "scriptSha256": "158f08a50c2b2f78941ec938bb3b5ac8e31a5664707a54aa478950382adfe747"
+  },
+  "chapters": [
+    {
+      "id": "named-list",
+      "title": "Start with a named list"
+    },
+    {
+      "id": "box-plot",
+      "title": "Choose Box Plot"
+    },
+    {
+      "id": "read-box",
+      "title": "Read the box"
+    },
+    {
+      "id": "fences",
+      "title": "Calculate two fences"
+    },
+    {
+      "id": "inside",
+      "title": "Compare fences and whiskers"
+    },
+    {
+      "id": "standard",
+      "title": "Extend whiskers"
+    },
+    {
+      "id": "modified",
+      "title": "Restore the modified plot"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "named-list",
+      "spoken": "Start in Data and Statistics with the numeric list reading on the horizontal axis.",
+      "coach": "Start in Data & Statistics with the numeric list reading on the horizontal axis.",
+      "end": 6.228,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "box-plot",
+      "spoken": "Open Menu then one: Plot Type then two: Box Plot. It starts as a modified box plot.",
+      "coach": "Open Menu → 1: Plot Type → 2: Box Plot. It starts as a modified box plot.",
+      "end": 14.978,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "at": 0.1781
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "at": 0.4521
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "at": 0.726
+        }
+      ]
+    },
+    {
+      "chapter": "read-box",
+      "spoken": "Point at the box edges and the line inside. The first quartile is two. The median is four. The third quartile is six.",
+      "coach": "Point at the box edges and the line inside: Q₁ = 2, median = 4, Q₃ = 6.",
+      "end": 25.315,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "fences",
+      "spoken": "The interquartile range is six minus two, or four. Subtract one point five times this range from the first quartile, and add it to the third quartile.",
+      "coach": "IQR = 6 − 2 = 4. Subtract 1.5 × IQR from Q₁; add it to Q₃.",
+      "end": 36.625,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "fences",
+      "spoken": "The fences are minus four and twelve. These are calculated cutoffs, not necessarily data points.",
+      "coach": "The fences are −4 and 12. These are calculated cutoffs, not necessarily data points.",
+      "end": 44.39,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "inside",
+      "spoken": "There is no observation at minus four. The left whisker stops at zero, the smallest value inside.",
+      "coach": "There is no observation at −4. The left whisker stops at 0, the smallest value inside.",
+      "end": 52.5,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "inside",
+      "spoken": "By the mathematical rule, twelve is on the fence and stays in. thirteen is strictly beyond it.",
+      "coach": "By the mathematical rule, 12 is on the fence and stays in. 13 is strictly beyond it.",
+      "end": 59.729,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "standard",
+      "spoken": "In Plot Properties, choose Extend Box Plot Whiskers. This makes a standard box plot.",
+      "coach": "In Plot Properties, choose Extend Box Plot Whiskers. This makes a standard box plot.",
+      "end": 66.851,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-11",
+          "label": "Menu",
+          "at": 0.1781
+        },
+        {
+          "id": "press-12",
+          "label": "2",
+          "at": 0.4521
+        },
+        {
+          "id": "press-13",
+          "label": "Enter",
+          "at": 0.726
+        }
+      ]
+    },
+    {
+      "chapter": "standard",
+      "spoken": "The whiskers now run from zero to thirteen. The quartiles stay the same; thirteen is not marked separately.",
+      "coach": "The whiskers now run from 0 to 13. The quartiles stay the same; 13 is not marked separately.",
+      "end": 75.121,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "modified",
+      "spoken": "Choose Show Box Plot Outliers to return to the modified plot.",
+      "coach": "Choose Show Box Plot Outliers to return to the modified plot.",
+      "end": 80.399,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-15",
+          "label": "Menu",
+          "at": 0.1781
+        },
+        {
+          "id": "press-16",
+          "label": "2",
+          "at": 0.4521
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "at": 0.726
+        }
+      ]
+    },
+    {
+      "chapter": "modified",
+      "spoken": "Report the fence and the observed whisker separately.",
+      "coach": "Report the fence and the observed whisker separately.",
+      "end": 84.23,
+      "hold": 2,
+      "keys": []
+    }
+  ]
+}
