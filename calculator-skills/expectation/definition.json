@@ -1,0 +1,299 @@
+{
+  "id": "CT36",
+  "title": "Discrete expectation",
+  "intro": "Find the weighted mean of a probability distribution.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "6bb69010f92ca79328d9705c96ed9177485d9a6dd6af2036a46c3073959b7d49",
+    "scriptSha256": "a08144dec5c0b92b04ad095230473acb0349f2ca3f2192822dfae987748647c2"
+  },
+  "chapters": [
+    {
+      "id": "table",
+      "title": "Check the table"
+    },
+    {
+      "id": "check-probabilities",
+      "title": "Check the probabilities"
+    },
+    {
+      "id": "products",
+      "title": "Multiply each matched pair"
+    },
+    {
+      "id": "sum",
+      "title": "Add all contributions"
+    },
+    {
+      "id": "interpret",
+      "title": "Interpret the result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "table",
+      "spoken": "The possible outcomes are minus two, one and four. Their respective probabilities are zero point two five, zero point three five and zero point four zero.",
+      "coach": "Match each outcome to its probability: −2 → 0.25, 1 → 0.35, 4 → 0.40.",
+      "end": 11.149,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "check-probabilities",
+      "spoken": "First add just the probabilities. A valid distribution gives a total of one.",
+      "coach": "Check 0.25 + 0.35 + 0.40 = 1 before finding the mean.",
+      "end": 19.198,
+      "hold": 16,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1313
+        },
+        {
+          "id": "press-1",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.1825
+        },
+        {
+          "id": "press-2",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.2338
+        },
+        {
+          "id": "press-3",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.285
+        },
+        {
+          "id": "press-4",
+          "label": "+",
+          "ariaLabel": "plus",
+          "at": 0.3362
+        },
+        {
+          "id": "press-5",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3875
+        },
+        {
+          "id": "press-6",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.4387
+        },
+        {
+          "id": "press-7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.49
+        },
+        {
+          "id": "press-8",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5413
+        },
+        {
+          "id": "press-9",
+          "label": "+",
+          "ariaLabel": "plus",
+          "at": 0.5925
+        },
+        {
+          "id": "press-10",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6437
+        },
+        {
+          "id": "press-11",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.695
+        },
+        {
+          "id": "press-12",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.7462
+        },
+        {
+          "id": "press-13",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7975
+        },
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8487
+        }
+      ]
+    },
+    {
+      "chapter": "products",
+      "spoken": "Type the outcome, times , and its own probability. A negative outcome gives a negative contribution.",
+      "coach": "Pair each outcome with its own probability. The first product is negative.",
+      "end": 30.231,
+      "hold": 18,
+      "keys": [
+        {
+          "id": "press-15",
+          "label": "(−)",
+          "ariaLabel": "negative sign",
+          "at": 0.1347
+        },
+        {
+          "id": "press-16",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1893
+        },
+        {
+          "id": "press-17",
+          "label": "×",
+          "ariaLabel": "multiply",
+          "at": 0.244
+        },
+        {
+          "id": "press-18",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2987
+        },
+        {
+          "id": "press-19",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.3533
+        },
+        {
+          "id": "press-20",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.408
+        },
+        {
+          "id": "press-21",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4627
+        },
+        {
+          "id": "press-22",
+          "label": "+",
+          "ariaLabel": "plus",
+          "at": 0.5173
+        },
+        {
+          "id": "press-23",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-24",
+          "label": "×",
+          "ariaLabel": "multiply",
+          "at": 0.6267
+        },
+        {
+          "id": "press-25",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6813
+        },
+        {
+          "id": "press-26",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.736
+        },
+        {
+          "id": "press-27",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.7907
+        },
+        {
+          "id": "press-28",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8453
+        }
+      ]
+    },
+    {
+      "chapter": "sum",
+      "spoken": "Join the three products with plus signs. Press Enter; do not simply average the outcomes.",
+      "coach": "Add the three products. Do not divide by the number of rows.",
+      "end": 39.26,
+      "hold": 16,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "+",
+          "ariaLabel": "plus",
+          "at": 0.1711
+        },
+        {
+          "id": "press-30",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.2622
+        },
+        {
+          "id": "press-31",
+          "label": "×",
+          "ariaLabel": "multiply",
+          "at": 0.3533
+        },
+        {
+          "id": "press-32",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.4444
+        },
+        {
+          "id": "press-33",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.5356
+        },
+        {
+          "id": "press-34",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.6267
+        },
+        {
+          "id": "press-35",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7178
+        },
+        {
+          "id": "press-36",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8089
+        }
+      ]
+    },
+    {
+      "chapter": "interpret",
+      "spoken": "The expectation is one point four five: a long-run average, not a value that must occur on any individual trial.",
+      "coach": "E(X) = 1.45. This is the long-run average; no single outcome must equal it.",
+      "end": 49.238,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}
