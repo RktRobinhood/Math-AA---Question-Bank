@@ -38,15 +38,24 @@ $('theme').onchange=()=>{theme();try{localStorage.setItem('question46-theme',$('
 const query=new URLSearchParams(location.search);
 if(query.get('demo')==='invalid')$('c').value=9;if(query.get('demo')==='dependency')selected.delete('solve');
 if(query.get('tab')==='key')view='key';
-const f=x=>Number.isInteger(x)?String(x):Number(x.toFixed(5)).toString();
+const f=x=>Number.isInteger(x)?String(x):'≈ '+Number(x.toFixed(5)).toString();
+function gcd(x,y){x=Math.abs(x);y=Math.abs(y);while(y)[x,y]=[y,x%y];return x||1}
+function frac(n,d){if(d<0){n=-n;d=-d}if(!n)return '0';const g=gcd(n,d);return d===g?String(n/g):n/g+'/'+d/g}
+function radical(d){let k=Math.floor(Math.sqrt(d));while(k>1&&d%(k*k)!==0)k--;return [k,d/(k*k)]}
+function exactRoots(m){
+ const [k,n]=radical(m.d),den=Math.abs(2*m.a),mid=m.a>0?-m.b:m.b;
+ if(n===1)return {left:frac(mid-k,den),right:frac(mid+k,den),distance:frac(2*k,den)};
+ const g=gcd(gcd(mid,k),den),x=mid/g,y=k/g,q=den/g;
+ const term=(p,r)=>{const a=(p===0?(r<0?'−':''):p+(r<0?' − ':' + '))+(Math.abs(r)===1?'':Math.abs(r))+'√'+n;return q===1?a:(p===0?a:'('+a+')')+'/'+q};
+ const gd=gcd(2*k,den),kd=2*k/gd,dd=den/gd;
+ return {left:term(x,-y),right:term(x,y),distance:(kd===1?'':kd)+'√'+n+(dd===1?'':'/'+dd)};
+}
 function read(){
  const list=['a','b','c'].map(k=>($(k).value.trim()===''?NaN:Number($(k).value)));
  const [a,b,c]=list,valid=list.every(v=>Number.isInteger(v)&&Math.abs(v)<=20),d=b*b-4*a*c;
  const sign=(n,s)=>n<0?' − '+(Math.abs(n)===1&&s?'':Math.abs(n))+s:n===0?'':' + '+(n===1&&s?'':n)+s;
  const eq=valid?(a===1?'':a===-1?'−':String(a))+'x²'+sign(b,'x')+sign(c,'')+' = 0':'—';
- const roots=d>=0&&a!==0?[(-b-Math.sqrt(d))/(2*a),(-b+Math.sqrt(d))/(2*a)].sort((x,y)=>x-y):[];
- const vx=a===0?NaN:-b/(2*a),vy=a*vx*vx+b*vx+c;
- return {list,a,b,c,d,valid,eq,roots,vx,vy};
+ return {list,a,b,c,d,valid,eq};
 }
 function maths(m){
  let checking=[];
@@ -68,10 +77,14 @@ function body(m){
  return {letters,total,checks,bad,hold};
 }
 function keyLine(k,m){
- const [a,b]=m.roots; if(k==='claim')return 'Δ = '+m.d+' > 0, so two distinct real roots.';
- if(k==='solve')return 'Roots: '+f(a)+' and '+f(b)+(Math.sqrt(m.d)%1?' (approximations).':' (exact).');
- if(k==='distance')return 'Distance: |'+f(b)+' − '+f(a)+'| = '+f(Math.abs(b-a))+'.';
- if(k==='vertex')return 'Vertex: ('+f(m.vx)+', '+f(m.vy)+').';
+ if(k==='claim')return 'Δ = '+m.d+' > 0, so two distinct real roots.';
+ if(k==='solve'||k==='distance'){
+  const {left,right,distance}=exactRoots(m);
+  if(k==='solve')return 'Roots: '+ left+' and '+right+' (exact).';
+  if(/^-?\d+(?:\/\d+)?$/.test(left)&&/^-?\d+(?:\/\d+)?$/.test(right))return 'Distance: |'+right+' − '+(left.startsWith('-')?'('+left+')':left)+'| = '+distance+'.';
+  return 'Distance between the roots: '+distance+' (exact).';
+ }
+ if(k==='vertex')return 'Vertex: ('+frac(-m.b,2*m.a)+', '+frac(-m.d,4*m.a)+').';
  return 'Δ = '+m.d+', so '+(m.d>0?'two distinct real roots.':m.d===0?'one repeated real root.':'no real roots.');
 }
 function tools(){

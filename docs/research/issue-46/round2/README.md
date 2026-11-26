@@ -12,3 +12,5 @@ Try the four states:
 Chromium tested 12 mode/viewport/theme combinations, the dependency and math blockers, wording review, relabeling, snapshot, variant rolling and both prior-response cases. The mock-up uses plain JavaScript for this one narrowly scoped example. The suggested rich maths editor and optional proof tooling are not installed. The pin stores a demo-session snapshot only. This does not export student papers, provide security separation, grant licensing rights, or turn free-form prose into verifiable maths.
 
 [Browser engines and licensing comparison](technical-note.md)
+
+Exactness check: with 3, −4, 1, the key and fixed snapshot retain roots `1/3` and `1`, and distance `2/3`. With 1, −6, 7, the general solve block gives exact surds. This is not an integer-factorisation block. Browser regressions exercised both forms, and a separate arithmetic oracle checked displayed root/distance equivalence on all 41,752 in-bounds integer coefficient sets with two distinct real roots.
