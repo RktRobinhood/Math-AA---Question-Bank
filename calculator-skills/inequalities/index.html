@@ -1,30 +1,45 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Graphical inequalities and exclusions · Calculator Skills | IB Math Question Bank</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
+<title>Graphical inequalities · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
-<link rel="stylesheet" href="../lesson-shell.css?v=canvas-1">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=bank-shell-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
-<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT13" data-cue-sha="b6d52126b423cee24f8f0858db0925636d58b42966bf460d1700a356f64d10f5" data-transcript-sha="a42bd37d4d17f9e8fd0b71e124b2a13712644e9fa2315d20d15ea2d91b3f2fcf" defer></script><script src="lesson.js?v=bank-shell-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
-<header class="header"><div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT13</span></p><h1>Graphical inequalities</h1><p class="subtitle">Find where one graph lies above or below another. Keep undefined points out.</p></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
-<section class="ct13-shared" id="stage" aria-label="TI-Nspire CX II-T Graphs lesson and calculator" tabindex="0">
-<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct13-bounds" data-visible="false" aria-hidden="true"></p></div>
-<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
-<div class="ct13-stage-grid"><div class="ct13-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play worked example" title="Play worked example"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="../handheld/transport.js"></script>
+<script defer src="math.js"></script>
+<script defer src="lcd.js"></script>
+<script defer src="key-tape.js"></script>
+
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT13</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="ct13-try" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire Graphs practice" hidden>
+<div id="try-player" class="player-top"><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct13-stage-grid" id="try-deck"><div class="ct13-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div></div>
 <div class="ct13-stage-side">
-<aside id="watch-side" class="director" aria-label="Demonstration steps"><h2>Where is f₁(x) ≤ f₂(x)?</h2><p class="calc-formula">f₁(x) = (x² − 4)/(x − 1)<br>f₂(x) = 0<br>−4 ≤ x ≤ 4</p><ol id="steps" class="steps"></ol></aside>
-<aside id="try-side" class="director" hidden><h2>Write the solution set</h2>
+
+<aside id="try-side" class="director"><h2>Write the solution set</h2>
 <p id="keypad-problem" class="ct13-taskline"></p><p id="keypad-hint"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
 <form id="expression-form"><div class="curve-fields"><label for="curve-f"><span class="curve-one">f₁(x)</span><input type="text" id="curve-f" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label><label for="curve-g"><span class="curve-two">f₂(x)</span><input type="text" id="curve-g" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"></label></div>
 <div class="scope-fields"><label for="op">Compare<select id="op"><option value="lt">&lt;</option><option value="le">≤</option><option value="gt">&gt;</option><option value="ge">≥</option></select></label>
@@ -37,10 +52,5 @@
 <form id="answer-form"><label for="solution">Solution set<input id="solution" maxlength="200" autocomplete="off" spellcheck="false" required placeholder="e.g. (1, 3] U [5, 6]"></label><p class="checker-precision">Use U for union, {a} for a single point, or “empty”. Round endpoints to at least 6 significant figures.</p><button type="submit">Check intervals</button></form>
 <p id="feedback" class="feedback" role="status"></p>
 </aside></div></div>
-<div class="player" id="watch-player" aria-label="Playback controls"><div class="player-top">
-<button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
-<div class="ct13-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek worked example</span><input type="range" id="seek" min="0" value="0" max="51" step="0.005"></label><span class="ct13-rehearsal" id="media-status">Captioned</span></div>
-</div></section>
-<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct13-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
-<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
+</section>
 </main></body></html>

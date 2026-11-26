@@ -1,0 +1,322 @@
+{
+  "id": "CT13",
+  "title": "Graphical inequalities",
+  "intro": "Find crossings, exclude undefined points, and test each interval before writing the solution.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "54f2c64563ae82dc67a01fece95e1487ee27ad7d22516746a751774d9d6dad10",
+    "scriptSha256": "a42bd37d4d17f9e8fd0b71e124b2a13712644e9fa2315d20d15ea2d91b3f2fcf"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot both sides"
+    },
+    {
+      "id": "first-crossing",
+      "title": "Bracket the first crossing"
+    },
+    {
+      "id": "second-crossing",
+      "title": "Bracket the second crossing"
+    },
+    {
+      "id": "undefined",
+      "title": "Find the undefined point"
+    },
+    {
+      "id": "test-intervals",
+      "title": "Test each interval"
+    },
+    {
+      "id": "solution",
+      "title": "Write the solution set"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "In Graphs, plot f one of x equals x squared minus four, divided by x minus one. Put each expression in its own brackets.",
+      "coach": "Plot f₁(x) = (x² − 4) ÷ (x − 1); put both parts in brackets.",
+      "end": 10.495,
+      "hold": 8.28,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "(",
+          "at": 0.0411
+        },
+        {
+          "id": "press-2",
+          "label": "x",
+          "at": 0.1096
+        },
+        {
+          "id": "press-3",
+          "label": "^",
+          "at": 0.1781
+        },
+        {
+          "id": "press-4",
+          "label": "2",
+          "at": 0.2466
+        },
+        {
+          "id": "press-5",
+          "label": "−",
+          "at": 0.3151
+        },
+        {
+          "id": "press-6",
+          "label": "4",
+          "at": 0.3836
+        },
+        {
+          "id": "press-7",
+          "label": ")",
+          "at": 0.4521
+        },
+        {
+          "id": "press-8",
+          "label": "÷",
+          "at": 0.5205
+        },
+        {
+          "id": "press-9",
+          "label": "(",
+          "at": 0.589
+        },
+        {
+          "id": "press-10",
+          "label": "x",
+          "at": 0.6575
+        },
+        {
+          "id": "press-11",
+          "label": "−",
+          "at": 0.726
+        },
+        {
+          "id": "press-12",
+          "label": "1",
+          "at": 0.7945
+        },
+        {
+          "id": "press-13",
+          "label": ")",
+          "at": 0.863
+        },
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "plot",
+      "spoken": "Press Tab. Plot f two of x equals zero. We want f one of x to be less than or equal to f two of x, with x from negative four to four inclusive.",
+      "coach": "Tab to f₂(x) = 0. Compare on −4 ≤ x ≤ 4.",
+      "end": 23.038,
+      "hold": 2.56,
+      "keys": [
+        {
+          "id": "press-15",
+          "label": "Tab",
+          "at": 0.1667
+        },
+        {
+          "id": "press-16",
+          "label": "0",
+          "at": 0.4444
+        },
+        {
+          "id": "press-17",
+          "label": "Enter",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "first-crossing",
+      "spoken": "Open Menu then six: Analyze Graph then four: Intersection.",
+      "coach": "Menu → 6: Analyze Graph → 4: Intersection.",
+      "end": 29.968,
+      "hold": 2.56,
+      "keys": [
+        {
+          "id": "press-18",
+          "label": "Menu",
+          "at": 0.1667
+        },
+        {
+          "id": "press-19",
+          "label": "6",
+          "at": 0.4444
+        },
+        {
+          "id": "press-20",
+          "label": "4",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "first-crossing",
+      "spoken": "Bracket the first crossing from minus three to minus one. Confirm each bound.",
+      "coach": "Set the lower bound to −3 and the upper to −1; confirm each.",
+      "end": 36.655,
+      "hold": 4.12,
+      "keys": [
+        {
+          "id": "press-21",
+          "label": "(−)",
+          "at": 0.0909
+        },
+        {
+          "id": "press-22",
+          "label": "3",
+          "at": 0.2424
+        },
+        {
+          "id": "press-23",
+          "label": "Enter",
+          "at": 0.3939
+        },
+        {
+          "id": "press-24",
+          "label": "(−)",
+          "at": 0.5455
+        },
+        {
+          "id": "press-25",
+          "label": "1",
+          "at": 0.697
+        },
+        {
+          "id": "press-26",
+          "label": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "first-crossing",
+      "spoken": "The first crossing is x equals minus two. Record it.",
+      "coach": "The first crossing is (−2, 0).",
+      "end": 41.859,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "second-crossing",
+      "spoken": "Run Intersection again. Bracket the second crossing from one point five to three.",
+      "coach": "Open Intersection again and bracket the second crossing from 1.5 to 3.",
+      "end": 47.9355,
+      "hold": 5.68,
+      "keys": [
+        {
+          "id": "press-27",
+          "label": "Menu",
+          "at": 0.0625
+        },
+        {
+          "id": "press-28",
+          "label": "6",
+          "at": 0.1667
+        },
+        {
+          "id": "press-29",
+          "label": "4",
+          "at": 0.2708
+        },
+        {
+          "id": "press-30",
+          "label": "1",
+          "at": 0.375
+        },
+        {
+          "id": "press-31",
+          "label": ".",
+          "at": 0.4792
+        },
+        {
+          "id": "press-32",
+          "label": "5",
+          "at": 0.5833
+        },
+        {
+          "id": "press-33",
+          "label": "Enter",
+          "at": 0.6875
+        },
+        {
+          "id": "press-34",
+          "label": "3",
+          "at": 0.7917
+        },
+        {
+          "id": "press-35",
+          "label": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "second-crossing",
+      "spoken": "The second crossing is x equals two. Record it.",
+      "coach": "The second crossing is (2, 0).",
+      "end": 52.611,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "undefined",
+      "spoken": "The denominator x minus one is zero at x equals one. That point is undefined, not an intersection.",
+      "coach": "The denominator vanishes at x = 1. Leave that value out, not in the list of intersections.",
+      "end": 61.361,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "undefined",
+      "spoken": "Split the domain at minus two, one and two. Check one value in each interval.",
+      "coach": "Split the domain at −2, 1 and 2. Test each open interval.",
+      "end": 67.676,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "test-intervals",
+      "spoken": "At x equals minus three, f one is below f two. At x equals zero, it is above.",
+      "coach": "At x = −3, f₁ = −1.25 < 0. At x = 0, f₁ = 4 > 0.",
+      "end": 76.175,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "test-intervals",
+      "spoken": "At x equals one point five, f one is below f two again. At x equals three, it is above.",
+      "coach": "At x = 1.5, f₁ = −3.5 < 0. At x = 3, f₁ = 2.5 > 0.",
+      "end": 84.855,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "solution",
+      "spoken": "Include the equal points at negative two and two because the inequality includes equality. Leave x equals one out.",
+      "coach": "Include the two equalities because the inequality includes equality. Still exclude x = 1.",
+      "end": 94.582,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "solution",
+      "spoken": "At the domain edge x equals minus four, f one is below f two, so include minus four too.",
+      "coach": "At x = −4, f₁ = −2.4. The solution is [−4, −2] ∪ (1, 2].",
+      "end": 103.227,
+      "hold": 1.65,
+      "keys": []
+    }
+  ]
+}
