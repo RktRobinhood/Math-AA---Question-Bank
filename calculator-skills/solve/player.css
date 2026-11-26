@@ -278,3 +278,15 @@ html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
   display:none /* The active step already supplies the same heading on phones. */
  }
 }
+
+/* Prevent the transport's clock from widening the fullscreen button column. */
+@media(max-width:430px){
+ .solve-lesson #player #watch-controls{
+  grid-template-columns:30px 30px auto minmax(0,1fr) 28px auto 30px;gap:0 2px;padding-inline:4px
+ }
+ .solve-lesson #player #watch-controls :is(#play,#sound,#captions,#fullscreen){width:30px;min-width:0}
+ .solve-lesson #player #watch-controls #view-pick button{width:27px;min-width:0;padding-inline:3px}
+ .solve-lesson #player #watch-controls .time{grid-column:5/-1}
+ .solve-lesson #player #watch-controls .seek{grid-column:1/5}
+ .solve-lesson #player #watch-controls .watch-speed select{width:3.9rem;font-size:.66rem}
+}

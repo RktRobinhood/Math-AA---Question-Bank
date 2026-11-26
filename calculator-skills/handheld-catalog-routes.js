@@ -8,12 +8,12 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT02": {
       "path": "angle-modes/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT03": {
       "path": "counting/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT04": {
@@ -33,7 +33,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT07": {
       "path": "linear-system/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT08": {
@@ -43,7 +43,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT09": {
       "path": "trace-table/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT10": {
@@ -68,7 +68,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT14": {
       "path": "trig-interval/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT15": {
@@ -78,12 +78,12 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT16": {
       "path": "threshold/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT17": {
       "path": "lengths-bearings/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": true
     },
     "CT18": {
@@ -103,7 +103,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT21": {
       "path": "matrices/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT22": {
@@ -138,7 +138,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT28": {
       "path": "named-lists/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT29": {
@@ -178,7 +178,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT36": {
       "path": "expectation/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": true
     },
     "CT37": {
@@ -218,7 +218,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT44": {
       "path": "random-simulation/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": true
     },
     "CT45": {
@@ -248,12 +248,12 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT50": {
       "path": "binomial-test/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": true
     },
     "CT51": {
       "path": "derivative/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT52": {
@@ -268,7 +268,7 @@ window.HANDHELD_CATALOG_ROUTES={
     },
     "CT54": {
       "path": "integral/index.html",
-      "narrated": false,
+      "narrated": true,
       "reference": false
     },
     "CT55": {
@@ -301,13 +301,13 @@ window.HANDHELD_CATALOG_ROUTES={
     "CT12": [
       {
         "path": "maximum/index.html",
-        "label": "Maximum example"
+        "label": "Maximum example · narrated"
       }
     ],
     "CT30": [
       {
         "path": "histogram/index.html",
-        "label": "Frequency histograms (AI SL/HL)"
+        "label": "Frequency histograms (AI SL/HL) · narrated"
       }
     ]
   }
