@@ -119,7 +119,8 @@ document.addEventListener('keydown',e=>{
  tryHost.focus({preventScroll:true});
  if(key)key.click();else interact(norm);
 });
-const voice=window.CT39Voice,fallback=voice.rehearsal(window.NormalNarration);
+const voice=window.CT39Voice,plan=window.CT39WatchPlan;
+let fallback=plan.make(1);
 const timecode=t=>Math.floor(t/60)+':'+String(Math.floor(t)%60).padStart(2,'0');
 const seek=$('seek'),play=$('play'),steps=$('steps'),audio=$('narration'),notice=$('audio-state');
 const stage=$('watch-stage'),surface=$('watch-surface'),overlay=$('play-feedback'),speed=$('play-rate'),devicePane=$('watch-device-pane');
@@ -137,7 +138,9 @@ function frame(next,save=false){
 }
 $('view-screen').addEventListener('click',()=>frame('screen',true));
 $('view-full').addEventListener('click',()=>frame('full',true));
-let track=fallback,duration=track.duration,now=0,rate=1,running=false,raf=0,reference=0,last=-2,active=-2,phase='';
+let track=fallback,duration=track.duration,now=0,running=false,raf=0,reference=0,last=-2,active=-2,phase='';
+const trail=$('key-steps');let chips=[],compact=[],shownTrail=-2;
+function keyName(key){return ({menu:'Menu',tab:'Tab',enter:'Enter',dot:'.'})[key]??key;}
 let mediaState='rehearsal',pending=false,generation=0,loadingTimeout=0,playTimeout=0;
 function snapshotAt(t){
  const snapshot=base();
@@ -148,15 +151,36 @@ function snapshotAt(t){
 function render(t){
  seek.value=String(t);seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));$('clock').textContent=timecode(t)+' / '+timecode(duration);
  const frame=voice.frameAt(track,t);
- watchShell.setKeys(frame.highlight?[frame.highlight]:[]);
- // LCD mode keeps the most recent real key visible between flashes.
- const key=track.keys[frame.lastKey]?.[1];
- $('active-key').textContent=key?({menu:'Menu',tab:'Tab',enter:'Enter'}[key]??key):'—';
+ const stale=frame.phase==='tail'&&track.keys[frame.lastKey]?.[0]<track.states['tail-context'];
+ watchShell.setKeys(frame.highlight&&!stale?[frame.highlight]:[]);
+ const chapter=(track.chapters??track.captions).findLastIndex(c=>c.t<=t);
+ if(shownTrail!==frame.lastKey||active!==chapter){
+  shownTrail=frame.lastKey;
+  for(const [i,v] of chips.entries()){
+   const state=i===shownTrail?'current':i<shownTrail?'done':'next';v.dataset.progress=state;
+   if(state==='current')v.setAttribute('aria-current','step');else v.removeAttribute('aria-current');
+   compact[i].firstElementChild.dataset.progress=state;compact[i].hidden=Number(compact[i].dataset.chapter)!==chapter;
+  }
+  $('key-label').textContent=chapter<0?'Keys':'Keys '+String(chapter+1).padStart(2,'0');
+  const any=compact.some(n=>!n.hidden);
+  trail.classList.toggle('no-keys',!any);const activeCell=compact[shownTrail];
+  if(activeCell&&!activeCell.hidden)trail.scrollLeft=Math.max(0,activeCell.offsetLeft+activeCell.offsetWidth-trail.clientWidth);
+  else trail.scrollLeft=0;
+ }
  if(last!==frame.lastKey||phase!==frame.phase){
    $('screen-work').innerHTML=LCD(snapshotAt(t));last=frame.lastKey;
  }
- if(active!==frame.caption){
-   active=frame.caption;$('caption').textContent=track.captions[active]?.text??'';
+ const cue=track.captions[frame.caption];
+ let text=cue&&t<(cue.until??Infinity)?cue.text:'';
+ // Measured assets use the same pre-Enter disclosure rule as rehearsal.
+ if(track.measured&&((frame.caption===4&&t<track.states['range-result'])||(frame.caption===7&&t<track.states['tail-result'])))
+  text=text.split(/\bThe (?:upper-tail )?probability is about\b/)[0].trimEnd();
+ if($('caption').textContent!==text)$('caption').textContent=text;
+ stage.dataset.phase=track.layout?(track.layout.at(t).speaking?'read':'hold'):'voice';
+ $('pace-tip').textContent=track.why?.[chapter]??'';
+ $('pace-tip').hidden=!track.why;
+ if(active!==chapter){
+   active=chapter;
    [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute('aria-current',String(i===active)));
  }
  // Scene time is independent of caption and LCD caches; seek both directions.
@@ -170,8 +194,8 @@ function render(t){
 function updatePlay(){
  const name=pending?'Pause':running?'Pause':now>=duration-.02?'Replay':'Play';
  play.dataset.playing=String(running);play.title=name;play.setAttribute('aria-label',name);
- play.querySelector('.play-icon').hidden=running||pending;
- play.querySelector('.pause-icon').hidden=!running&&!pending;
+ play.querySelector('.play-icon').toggleAttribute('hidden',running||pending);
+ play.querySelector('.pause-icon').toggleAttribute('hidden',!running&&!pending);
  if(!running&&!pending&&now<=.005&&mediaState!=='loading'){
    overlay.dataset.action='play';overlay.dataset.initial='true';overlay.hidden=false;
  }
@@ -180,12 +204,25 @@ function configure(profile,secs=profile.duration,position=0){
  track=profile;duration=secs;last=profile.measured?-2:-1;active=-2;phase='';
  $('screen-work').replaceChildren();
  steps.replaceChildren();
- track.captions.forEach(({title,t},i)=>{
+ const chapters=track.chapters??track.captions;
+ chips=[];compact=[];
+ chapters.forEach(({title,t},i)=>{
   const li=document.createElement('li'), b=document.createElement('button'), num=document.createElement('span');
   b.type='button';num.textContent=String(i+1).padStart(2,'0');b.append(num,document.createTextNode(title));
   b.addEventListener('click',()=>go(t));li.append(b);steps.append(li);
+  const group=document.createElement('div');group.className='step-chips';group.setAttribute('aria-label',title+' keys');group.setAttribute('role','list');
+  track.keys.forEach(([at,key],j)=>{
+   if(at<t||at>=(chapters[i+1]?.t??Infinity))return;
+   const chip=document.createElement('kbd');chip.textContent=keyName(key);chip.setAttribute('role','listitem');group.append(chip);chips[j]=chip;
+   const cell=document.createElement('li');cell.dataset.chapter=i;const clone=chip.cloneNode(true);clone.removeAttribute('role');cell.append(clone);compact[j]=cell;
+  });
+  if(group.children.length)li.append(group);
  });
- $('transcript').textContent=track.captions.map(c=>c.text).join(' ');
+ trail.replaceChildren(...compact);shownTrail=-2;
+ $('transcript').textContent=track.transcript??track.captions.map(c=>c.text).join(' ');
+ speed.disabled=profile.measured;
+ speed.title=profile.measured?'The approved narration plays at normal speed.':'';
+
  seek.step=profile.measured?'.001':'.01';seek.max=String(duration);
  $('caption-beta').hidden=profile.measured;go(position);updatePlay();
 }
@@ -194,13 +231,13 @@ function go(t){
  now=clampTime(t);
  if(mediaState==='ready'){
    if(Math.abs(audio.currentTime-now)>.0005)audio.currentTime=now;
- }else reference=performance.now()-now*1000/rate;
+ }else reference=performance.now()-now*1000;
  if(!running&&now>.005&&overlay.dataset.initial==='true'){overlay.dataset.initial='false';player.clear();}
- render(now);
+ render(now);fitWatch();
  if(!running)updatePlay();
 }
 function stop(capture=true){
- if(capture&&running)now=clampTime(mediaState==='ready'?audio.currentTime:(performance.now()-reference)*rate/1000);
+ if(capture&&running)now=clampTime(mediaState==='ready'?audio.currentTime:(performance.now()-reference)/1000);
  generation++;clearTimeout(playTimeout);pending=false;running=false;audio.pause();cancelAnimationFrame(raf);render(now);updatePlay();
 }
 function tick(ts){
@@ -209,14 +246,14 @@ function tick(ts){
    if(audio.ended){now=duration;stop(false);return;}
    now=clampTime(audio.currentTime);
  }else{
-   now=clampTime((ts-reference)*rate/1000);
+   now=clampTime((ts-reference)/1000);
    if(now>=duration){stop(false);return;}
  }
  render(now);raf=requestAnimationFrame(tick);
 }
 function explain(msg){notice.textContent=msg;notice.hidden=!msg;}
 function startCaptionClock(){
- pending=false;reference=performance.now()-now*1000/rate;running=true;updatePlay();
+ pending=false;reference=performance.now()-now*1000;running=true;updatePlay();
  raf=requestAnimationFrame(tick);
 }
 function fallbackFromAudio(msg){
@@ -238,7 +275,7 @@ function prepare(profile){
      fallbackFromAudio('Narration does not match its measured cues.');return;
    }
    clearTimeout(loadingTimeout);mediaState='ready';
-   audio.playbackRate=rate;configure(profile,audio.duration);play.disabled=false;explain('');
+   audio.playbackRate=1;configure(profile,audio.duration);play.disabled=false;explain('');
  });
  audio.addEventListener('durationchange',()=>{
    if(mediaState!=='ready')return;
@@ -288,10 +325,15 @@ if(window.NormalMeasuredCues!==undefined){
 }
 seek.addEventListener('input',()=>go(Number(seek.value)));
 speed.addEventListener('change',()=>{
- const next=Number(speed.value);
- if(running&&mediaState!=='ready')now=clampTime((performance.now()-reference)*rate/1000);
- rate=next;audio.playbackRate=rate;reference=performance.now()-now*1000/rate;render(now);
+ if(mediaState==='ready')return;
+ const resume=running;
+ if(resume)stop();
+ const previous=fallback;
+ fallback=plan.make(Number(speed.value));
+ configure(fallback,fallback.duration,fallback.layout.remap(previous.layout,now));
+ if(resume)startCaptionClock();
 });
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||pending))stop();});
 $('cc').addEventListener('click',()=>{
  const hide=!$('caption-band').hidden;
  $('caption-band').hidden=hide;
@@ -301,22 +343,23 @@ $('cc').addEventListener('click',()=>{
 });
 function fitWatch(){
  if($('watch').hidden)return;
- const max=stage.matches(':fullscreen,.watch-fullscreen-fallback')?innerHeight-surface.getBoundingClientRect().top:innerHeight-surface.getBoundingClientRect().top-window.scrollY;
- const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+document.querySelector('.tabbar').offsetHeight;
- const overhead=footer+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
+ const expanded=stage.matches(':fullscreen,.watch-fullscreen-fallback');
+ const max=(window.visualViewport?.height||innerHeight)-surface.getBoundingClientRect().top-(expanded?0:window.scrollY);
+ const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+(expanded?0:(document.querySelector('.tabbar')?.offsetHeight||0));
+ const overhead=footer+$('pace-tip').offsetHeight+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
  const available=max-overhead;
- const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
+ const full=Math.min(expanded?350:267,Math.max(142,Math.floor(available*558/1168)));
  const needsScroll=framing==='full'&&Math.ceil(full*1168/558)>available+2;
  $('full-fit-note').hidden=!needsScroll;
  devicePane.tabIndex=needsScroll?0:-1;
  if(needsScroll)devicePane.setAttribute('aria-label','Full calculator. Scroll to see the keypad.');
  else devicePane.removeAttribute('aria-label');
  stage.style.setProperty('--normal-full-fit',full+'px');
- stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(135,available-17)+'px':'none');
- stage.style.setProperty('--normal-screen-fit',Math.min(420,Math.max(188,Math.floor(available*4/3)))+'px');
+ stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(108,available-27)+'px':'none');
+ stage.style.setProperty('--normal-screen-fit',Math.min(expanded?620:420,Math.max(160,Math.floor(available*4/3)))+'px');
 }
 const resize=new ResizeObserver(fitWatch);
-[$('caption-band'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
+[$('caption-band'),$('pace-tip'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
 frame(framing);

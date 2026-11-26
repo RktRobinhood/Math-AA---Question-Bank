@@ -30,3 +30,33 @@
 .try-device:focus-within{overflow:visible}
 #try-work :is([data-menu-item],[data-field],[data-dialog]){cursor:pointer}
 #try-work :is([data-menu-item],[data-field],[data-dialog]):hover{background-color:#d5e5f4;color:#112c53}
+
+/* Teaching mode key trail and notes: scoped to CT39 only. */
+.ct39-paced #key-steps{display:flex;gap:3px;min-width:0;flex:1;overflow:auto;scrollbar-width:none;margin:0;padding:1px 0;list-style:none;white-space:nowrap}
+.ct39-paced #key-steps::-webkit-scrollbar{display:none}
+.ct39-paced #key-steps li{flex:none}
+.ct39-paced #key-steps .group-start{margin-inline-start:4px}
+.ct39-paced #key-steps kbd{display:block;min-width:1.05rem;text-align:center;background:#243931;color:#e9f3ea;border:1px solid #5a7667;border-radius:4px;padding:2px 4px}
+.ct39-paced #key-label{white-space:nowrap}
+.ct39-paced #key-steps.no-keys::before{content:'—';color:var(--muted-video)}
+.ct39-paced #key-steps kbd[data-progress=done]{background:#476658;border-color:#91aa99}
+.ct39-paced #key-steps kbd[data-progress=current]{background:#bfead0;color:#102e20}
+.ct39-paced .director .step-chips{display:flex;flex-wrap:wrap;gap:4px;padding:1px 8px 5px}
+.ct39-paced .director .step-chips kbd{min-width:1.05rem;text-align:center;border:1px solid var(--line);border-radius:4px;font:650 .72rem/1.2 var(--mono);padding:2px 4px;color:var(--muted);background:var(--page)}
+.ct39-paced .director .step-chips kbd[data-progress=done]{color:var(--green);background:var(--mint)}
+.ct39-paced .director .step-chips kbd[data-progress=current]{color:#09251b;background:#bbefcc;border-color:#347351}
+.ct39-paced #caption-beta{flex:none;font-size:.63rem;white-space:nowrap}
+.ct39-paced #pace-tip{font:580 clamp(.63rem,2.6vw,.82rem)/1.2 system-ui;text-align:center;max-width:none;color:var(--muted-video);margin:0;padding:0 5px 2px}
+.ct39-paced #watch-player select{min-width:104px;max-width:132px}
+@media(max-width:375px){.ct39-paced #watch-player select{min-width:88px;width:88px;font-size:.70rem}}
+@media(max-width:700px){
+ .ct39-paced .modern-watch #watch-player{grid-template-columns:auto auto auto minmax(0,1fr) auto;}
+ .ct39-paced .modern-watch #watch-player .watch-rate{width:100%;min-width:0;}
+ .ct39-paced .modern-watch #watch-player select{width:min(100%,116px);min-width:0;}
+ .ct39-paced .modern-watch #clock{grid-column:4/-1;}
+}
+
+.ct39-paced .modern-watch .watch-surface{grid-template-columns:minmax(0,1fr)}
+.ct39-paced .modern-watch #key-strip{min-width:0;max-width:100%}
+.ct39-paced .modern-watch .worked-prompt>div:first-child{min-width:0;overflow-wrap:anywhere}
+.ct39-paced .modern-watch #key-steps{position:relative}

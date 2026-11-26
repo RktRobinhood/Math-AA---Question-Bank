@@ -116,14 +116,19 @@ document.addEventListener('keydown',e=>{if(e.target!==document.body&&!e.target.c
  if(!tryShell.getKey(k)&&k!=='shift-tab')return;
  e.preventDefault();interact(k);
 });
-const media=window.InverseNormalMedia,rehearsal=media.compose(window.InverseNormalRehearsal);
+const media=window.InverseNormalMedia,plan=window.CT40WatchPlan;
+let rehearsal=plan.make(1);
 const manifest=$('ct40-narration-manifest'),recording=manifest?media.decode(manifest.textContent,rehearsal):null;
 const timecode=t=>Math.floor(t/60)+':'+String(Math.floor(t)%60).padStart(2,'0');
 const seek=$('seek'),play=$('play'),steps=$('steps'),player=play.closest('.player'),watch=$('watch');
-let timeline=rehearsal,audio=null,mediaReady=false,now=0,rate=1,active=-1,curveSignature='',running=false,raf=0,reference=0,last='',pending=false,generation=0,startTimer=0;
+let timeline=rehearsal,audio=null,mediaReady=false,now=0,active=-1,curveSignature='',running=false,raf=0,reference=0,last='',pending=false,generation=0,startTimer=0;
 const stage=$('watch-stage'),surface=$('watch-surface'),overlay=$('play-feedback'),speed=$('play-rate'),devicePane=$('watch-device-pane');
 const transport=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$('fullscreen'),feedback:overlay,active:()=>!watch.hidden});
 const frameKey='qb-calculator-watch-frame';
+const trail=$('key-steps'),chips=[],compact=[];
+let activeGroup="",shownTrail=-2;
+const keyName=k=>({menu:'Menu',tab:'Tab',enter:'Enter',dot:'.'})[k]??k;
+
 let framing='screen';
 try{if(localStorage.getItem(frameKey)==='full')framing='full';}catch{}
 function frame(next,save=false){
@@ -162,16 +167,40 @@ function render(t){
  const cue=tape.findLastIndex(e=>e.timeMs/1000<=t),event=tape[cue];
  const tail=t*1000>=markersMs.tailContext, current=event&&(!tail||event.timeMs>=markersMs.tailContext)?event:null;
  watchShell.setKeys(current&&t-current.timeMs/1000<(current.key==='tab'?.38:.31)?[current.key]:[]);
- $('active-key').textContent=current?({menu:'Menu',tab:'Tab',enter:'Enter',dot:'.'}[current.key]??current.key):'—';
  const beat=starts.findLastIndex(u=>u<=t);
+ const tailMenu=beat===5&&t<timing['right-inverse-normal']+.38;
+ const group=String(beat)+(beat===5?(tailMenu?'a':'b'):'');
+ if(activeGroup!==group||shownTrail!==cue){
+   shownTrail=cue;activeGroup=group;
+   for(const [i,v] of chips.entries()){
+    const progress=i===cue?'current':i<cue?'done':'next';v.dataset.progress=progress;
+    if(progress==='current')v.setAttribute('aria-current','step');else v.removeAttribute('aria-current');
+    compact[i].firstElementChild.dataset.progress=progress;compact[i].hidden=compact[i].dataset.chapter!==group;
+   }
+   $('key-label').textContent=beat<0?'Keys':'Keys '+String(beat+1).padStart(2,'0')+(beat===5?(tailMenu?'a':'b'):'');
+   trail.classList.toggle('no-keys',!compact.some(x=>!x.hidden));const activeCell=compact[shownTrail];
+  if(activeCell&&!activeCell.hidden)trail.scrollLeft=Math.max(0,activeCell.offsetLeft+activeCell.offsetWidth-trail.clientWidth);
+  else trail.scrollLeft=0;
+ }
+ stage.dataset.phase=timeline.layout?(timeline.layout.at(t).speaking?'read':'hold'):'voice';
+ $('pace-tip').textContent=timeline.tips?.[beat]??'';
+ $('pace-tip').hidden=!timeline.tips;
+
  const keyState=String(tail)+':'+cue;
  if(last!==keyState){$('screen-work').innerHTML=LCD(snapshotAt(t));last=keyState;}
  // The question switches independently of the cue and keyboard caches.
  const isTail=tail,model=isTail?tailDemo:demo;
  const revealed=t>=(isTail?timing['right-evaluate']:timing['left-evaluate']);
+ let words=captionAt(cues[beat],revealed);
+ if(timeline.layout&&!timeline.layout.at(t).speaking){
+  const evaluate=isTail?timing['right-evaluate']:timing['left-evaluate'];
+  if((beat!==3&&beat!==6)||!revealed||t<evaluate+.35)words='';
+  else words=words.replace(/^(?:Confirm\. Press Enter again to calculate\.|Confirm, then press Enter again\.)\s*/, '');
+ }
+ if($('caption').textContent!==words)$('caption').textContent=words;
  const captionState=beat+':'+revealed;
  if(active!==captionState){
-   active=captionState;$('caption').textContent=captionAt(cues[beat],revealed);
+   active=captionState;
    [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute('aria-current',String(i===beat)));
  }
  const cs=String(isTail)+':'+String(revealed);
@@ -185,19 +214,32 @@ rehearsal.cues.forEach(({title},i)=>{
  const li=document.createElement('li'), b=document.createElement('button'), num=document.createElement('span');
  b.type='button';num.textContent=String(i+1).padStart(2,'0');b.append(num,document.createTextNode(title));
  b.addEventListener('click',()=>go(timeline.starts[i]));li.append(b);steps.append(li);
+ const baseGroup=document.createElement('div');baseGroup.className='step-chips';baseGroup.setAttribute('aria-label',i===5?'Open Inverse Normal again':title+' keys');baseGroup.setAttribute('role','list');
+ const fieldsGroup=baseGroup.cloneNode(false);fieldsGroup.setAttribute('aria-label','Enter 0.90, 50 and 8');
+ let inside=0;
+ rehearsal.tape.forEach(({phase,key},j)=>{
+  if(phase!==i)return;
+  const isMenu=inside++<4, group=i===5&&!isMenu?fieldsGroup:baseGroup;
+  const chip=document.createElement('kbd');chip.textContent=keyName(key);chip.setAttribute('role','listitem');group.append(chip);chips[j]=chip;
+  const cell=document.createElement('li');cell.dataset.chapter=i+(i===5?(isMenu?'a':'b'):'');const clone=chip.cloneNode(true);clone.removeAttribute('role');cell.append(clone);compact[j]=cell;
+ });
+ if(baseGroup.children.length)li.append(baseGroup);
+ if(fieldsGroup.children.length)li.append(fieldsGroup);
 });
+trail.replaceChildren(...compact);
 function label(){
  const text=running||pending?'Pause':now>=timeline.duration-.002?'Replay':'Play';
  play.title=text;play.setAttribute('aria-label',text);play.dataset.playing=String(running);
- play.querySelector('.play-icon').hidden=running||pending;
- play.querySelector('.pause-icon').hidden=!running&&!pending;
+ play.querySelector('.play-icon').toggleAttribute('hidden',running||pending);
+ play.querySelector('.pause-icon').toggleAttribute('hidden',!running&&!pending);
  if(!running&&!pending&&now<=.005){
    overlay.dataset.action='play';overlay.dataset.initial='true';overlay.hidden=false;
  }
 }
 function configure(next){
- now=media.remap(now,timeline,next);timeline=next;
- seek.max=String(timeline.duration);last='';active=-1;curveSignature='';
+ now=timeline.layout&&next.layout?next.layout.remap(timeline.layout,now):media.remap(now,timeline,next);timeline=next;
+ seek.max=String(timeline.duration);last='';active=-1;curveSignature='';activeGroup='';shownTrail=-2;
+ speed.disabled=!timeline.layout;speed.title=speed.disabled?'The approved narration plays at normal speed.':'';
  $('transcript').textContent=timeline.cues.map(c=>c.text).join(' ');
  render(now);label();
 }
@@ -206,13 +248,13 @@ function mediaSeek(){
 }
 function go(t){
  now=clamp(t);
- if(mediaReady)mediaSeek();else reference=performance.now()-now*1000/rate;
+ if(mediaReady)mediaSeek();else reference=performance.now()-now*1000;
  if(!running&&now>.005&&overlay.dataset.initial==='true'){overlay.dataset.initial='false';transport.clear();}
  render(now);label();fitWatch();
 }
 function readTime(at=performance.now()){
  if(!running)return now;
- return clamp(mediaReady&&audio?audio.currentTime:(at-reference)*rate/1000);
+ return clamp(mediaReady&&audio?audio.currentTime:(at-reference)/1000);
 }
 function stop(capture=true){
  if(capture)now=readTime();
@@ -232,7 +274,7 @@ function tick(ts){
  render(now);raf=requestAnimationFrame(tick);
 }
 function captionPlay(){
- reference=performance.now()-now*1000/rate;running=true;pending=false;label();raf=requestAnimationFrame(tick);
+ reference=performance.now()-now*1000;running=true;pending=false;label();raf=requestAnimationFrame(tick);
 }
 function status(message=''){
  $('audio-state').textContent=message;$('audio-state').hidden=!message;
@@ -269,7 +311,7 @@ function setupAudio(){
  el.addEventListener('durationchange',()=>{if(audio===el&&el.readyState>=2)adopt();});
  el.addEventListener('ended',()=>{if(audio===el&&running){now=readTime();if(now<timeline.duration-.12)fallback('Narration ended before its measured cues.');else end();}});
  el.addEventListener('error',()=>{if(audio===el)fallback('Narration could not load or decode.');});
- el.playbackRate=rate;el.src=recording.audio;player.append(el);
+ el.playbackRate=1;el.src=recording.audio;player.append(el);
 }
 function start(){
  if(watch.hidden||running||pending)return;
@@ -277,7 +319,7 @@ function start(){
  fitWatch();
  if(!audio){captionPlay();return;}
  const el=audio,ticket=++generation;
- pending=true;el.playbackRate=rate;label();mediaSeek();
+ pending=true;el.playbackRate=1;label();mediaSeek();
  startTimer=setTimeout(()=>{if(ticket===generation&&pending)fallback('Narration did not start.');},8000);
  const fail=()=>{if(ticket===generation&&audio===el)fallback('Narration could not play.');};
  try{
@@ -297,10 +339,12 @@ play.addEventListener('click',()=>{
 });
 seek.addEventListener('input',()=>go(Number(seek.value)));
 speed.addEventListener('change',()=>{
- now=readTime();rate=Number(speed.value);
- if(audio)audio.playbackRate=rate;
- reference=performance.now()-now*1000/rate;
- render(now);fitWatch();
+ if(mediaReady)return;
+ const resume=running;
+ if(resume)stop();
+ rehearsal=plan.make(Number(speed.value));configure(rehearsal);
+ reference=performance.now()-now*1000;fitWatch();
+ if(resume)captionPlay();
 });
 $('cc').addEventListener('click',()=>{
  const hide=!$('caption-band').hidden;
@@ -312,22 +356,23 @@ $('cc').addEventListener('click',()=>{
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||pending))stop();});
 function fitWatch(){
  if($('watch').hidden)return;
- const max=stage.matches(':fullscreen,.watch-fullscreen-fallback')?innerHeight-surface.getBoundingClientRect().top:innerHeight-surface.getBoundingClientRect().top-window.scrollY;
- const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+(document.querySelector('.tabbar')?.offsetHeight||0);
- const overhead=footer+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
+ const expanded=stage.matches(':fullscreen,.watch-fullscreen-fallback');
+ const max=(window.visualViewport?.height||innerHeight)-surface.getBoundingClientRect().top-(expanded?0:window.scrollY);
+ const footer=$('watch-player').offsetHeight+$('caption-band').offsetHeight+(expanded?0:(document.querySelector('.tabbar')?.offsetHeight||0));
+ const overhead=footer+$('pace-tip').offsetHeight+$('key-strip').offsetHeight+surface.querySelector('.worked-prompt').offsetHeight+22;
  const available=max-overhead;
- const full=Math.min(267,Math.max(142,Math.floor(available*558/1168)));
+ const full=Math.min(expanded?350:267,Math.max(142,Math.floor(available*558/1168)));
  const needsScroll=framing==='full'&&Math.ceil(full*1168/558)>available+2;
  $('full-fit-note').hidden=!needsScroll;
  devicePane.tabIndex=needsScroll?0:-1;
  if(needsScroll)devicePane.setAttribute('aria-label','Full calculator. Scroll to see the keypad.');
  else devicePane.removeAttribute('aria-label');
  stage.style.setProperty('--normal-full-fit',full+'px');
- stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(135,available-17)+'px':'none');
- stage.style.setProperty('--normal-screen-fit',Math.min(420,Math.max(188,Math.floor(available*4/3)))+'px');
+ stage.style.setProperty('--normal-full-max-h',needsScroll?Math.max(108,available-27)+'px':'none');
+ stage.style.setProperty('--normal-screen-fit',Math.min(expanded?620:420,Math.max(160,Math.floor(available*4/3)))+'px');
 }
 const resize=new ResizeObserver(fitWatch);
-[$('caption-band'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
+[$('caption-band'),$('pace-tip'),$('watch-player'),surface.querySelector('.worked-prompt'),document.querySelector('main>.header')].forEach(el=>resize.observe(el));
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
 frame(framing);
