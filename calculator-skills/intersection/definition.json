@@ -1,0 +1,244 @@
+{
+  "id": "CT11",
+  "title": "Find an intersection",
+  "intro": "Find the crossings of two graphs one at a time on a TI-Nspire CX II-T.",
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot both functions"
+    },
+    {
+      "id": "intersection",
+      "title": "Open Intersection"
+    },
+    {
+      "id": "bounds",
+      "title": "Bracket one crossing"
+    },
+    {
+      "id": "read",
+      "title": "Read the ordered pair"
+    },
+    {
+      "id": "left",
+      "title": "Find the left crossing"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "end": 2.67,
+      "hold": 16,
+      "coach": "Plot f₁(x) = x². Press Tab to enter and plot f₂(x) = 2x + 3.",
+      "spoken": "Plot both functions on the same page.",
+      "keys": [
+        {
+          "id": "key-1",
+          "label": "x",
+          "at": 0.06
+        },
+        {
+          "id": "key-2",
+          "label": "x²",
+          "at": 0.1522,
+          "ariaLabel": "Squared"
+        },
+        {
+          "id": "key-3",
+          "label": "Enter",
+          "at": 0.2444
+        },
+        {
+          "id": "key-4",
+          "label": "Tab",
+          "at": 0.3367
+        },
+        {
+          "id": "key-5",
+          "label": "2",
+          "at": 0.4289
+        },
+        {
+          "id": "key-6",
+          "label": "x",
+          "at": 0.5211
+        },
+        {
+          "id": "key-7",
+          "label": "+",
+          "at": 0.6133
+        },
+        {
+          "id": "key-8",
+          "label": "3",
+          "at": 0.7056
+        },
+        {
+          "id": "key-9",
+          "label": "Enter",
+          "at": 0.7978
+        }
+      ]
+    },
+    {
+      "chapter": "plot",
+      "end": 5.88,
+      "hold": 8.1,
+      "coach": "Start with the crossing to the right of the y-axis.",
+      "spoken": "Look for the crossing that matches the requested point.",
+      "keys": []
+    },
+    {
+      "chapter": "intersection",
+      "end": 7.73,
+      "hold": 8.6,
+      "coach": "Menu → 6: Analyze Graph → 4: Intersection.",
+      "spoken": "Choose Intersection.",
+      "keys": [
+        {
+          "id": "key-10",
+          "label": "Menu",
+          "at": 0.06
+        },
+        {
+          "id": "key-11",
+          "label": "6",
+          "at": 0.3367
+        },
+        {
+          "id": "key-12",
+          "label": "4",
+          "at": 0.6133
+        }
+      ]
+    },
+    {
+      "chapter": "intersection",
+      "end": 10.47,
+      "hold": 3.6,
+      "coach": "With these two graphs the calculator opens the lower-bound prompt directly.",
+      "spoken": "Select the relevant graphs if prompted.",
+      "keys": []
+    },
+    {
+      "chapter": "bounds",
+      "end": 14.6,
+      "hold": 17.5,
+      "coach": "Put one bound on each side of the same crossing. Confirm each with Enter.",
+      "spoken": "Bracket one crossing at a time with the lower and upper bounds.",
+      "keys": [
+        {
+          "id": "key-13",
+          "label": "→",
+          "at": 0.06,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-14",
+          "label": "Enter",
+          "at": 0.1786
+        },
+        {
+          "id": "key-15",
+          "label": "→",
+          "at": 0.2971,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-16",
+          "label": "→",
+          "at": 0.4157,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-17",
+          "label": "→",
+          "at": 0.5343,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-18",
+          "label": "→",
+          "at": 0.6529,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-19",
+          "label": "Enter",
+          "at": 0.7714
+        }
+      ]
+    },
+    {
+      "chapter": "read",
+      "end": 16.32,
+      "hold": 5,
+      "coach": "Read the exact point (3, 9).",
+      "spoken": "Read the coordinates.",
+      "keys": []
+    },
+    {
+      "chapter": "read",
+      "end": 20.17,
+      "hold": 8.4,
+      "coach": "Both functions give the same output: 3² = 2(3) + 3 = 9.",
+      "spoken": "At the intersection, both expressions give the same y-value.",
+      "keys": []
+    },
+    {
+      "chapter": "left",
+      "end": 20.28,
+      "hold": 18,
+      "coach": "Now bracket the left crossing between −2 and 0. Read the point from the calculator.",
+      "spoken": "",
+      "keys": [
+        {
+          "id": "key-20",
+          "label": "Menu",
+          "at": 0.06
+        },
+        {
+          "id": "key-21",
+          "label": "6",
+          "at": 0.1638
+        },
+        {
+          "id": "key-22",
+          "label": "4",
+          "at": 0.2675
+        },
+        {
+          "id": "key-23",
+          "label": "(−)",
+          "at": 0.3712,
+          "ariaLabel": "Negative key"
+        },
+        {
+          "id": "key-24",
+          "label": "2",
+          "at": 0.475
+        },
+        {
+          "id": "key-25",
+          "label": "Enter",
+          "at": 0.5787
+        },
+        {
+          "id": "key-26",
+          "label": "0",
+          "at": 0.6825
+        },
+        {
+          "id": "key-27",
+          "label": "Enter",
+          "at": 0.7862
+        }
+      ]
+    }
+  ],
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "e44fcd1e794ed48d11341e504592d80b7befb1760828d1655e919715e481313e",
+    "scriptSha256": "bc32b726af4a7c292ad2d6c8cf9df5649338b71cf069b94c4854fc9c546c3b19"
+  }
+}

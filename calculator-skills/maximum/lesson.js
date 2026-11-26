@@ -1,6 +1,5 @@
 "use strict";
 (function(){
-function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
 const $=id=>document.getElementById(id), M=CT12MaxMath,S=CT12MaxScreen,T=CT12MaxTape,H=HandheldTransport;
 const stage=$("stage"),canvas=$("drawing"),lcd=$("lcd"),panel=$("hotspots"),screen=S.screen(canvas);
 const expression=$("expression"),left=$("allowed-left"),right=$("allowed-right"),bound=$("bound");
@@ -13,15 +12,27 @@ if(["expr","left","right"].some(k=>query.has(k))){
   linked={f:M.parse(query.get("expr")),allowed:M.interval(M.readNumber(query.get("left")),M.readNumber(query.get("right")))};
  }catch{badLink=true;}
 }
-const challenge=linked||defaultTry, goals=M.compare(challenge.f,challenge.allowed), fixed=Boolean(linked)||badLink||query.get("case")==="maximum-demo";
+const challenge=linked||defaultTry, goals=M.compare(challenge.f,challenge.allowed);
 const pair=z=>"("+M.pretty(z.x)+", "+M.pretty(z.y)+")", limits=a=>"["+a.map(M.pretty).join(", ")+"]";
 const taskText="Find the maximum value of f(x) = "+M.displayExpr(challenge.f.raw)+" on "+limits(challenge.allowed)+". Give an x-coordinate where it occurs.";
 $("challenge").textContent=taskText;
 const initial=()=>({state:"entry",raw:challenge.f.raw,q:null,allowed:challenge.allowed.slice(),low:null,high:null,cursor:null,mark:null,error:null,typed:"",checked:null});
-let mode="watch",state=initial(),edited=false,forked=false,fresh=true,focused=false,looked=false;
-let clock=0,origin=0,frame=0,playing=false,started=false,cache="";
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T, Graphs application",interactive:false,onKey:press});
-const tabs=[$("watch-tab"),$("try-tab")],seek=$("seek"),play=$("play");
+let mode="watch",state=initial(),edited=false,fresh=true;
+let watchStamp="",returnToWatch=null;
+ const handheld=$("handheld-host");
+ const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",onKey:physical});
+ function physical(k){
+  if(mode!=="try")return;
+  if(!document.activeElement?.matches("input,textarea,select"))stage.focus({preventScroll:true});
+  press(k);
+ }
+ function drawWatchFrame(beat,point,crossed,key,paint){
+  const count=crossed.length,hold=point.span.end-point.span.voiceEnd;
+  const current=key?.beat===beat&&!point.speaking&&(point.fraction-key.at)*hold<.66;
+  const physical=current&&(T.keys[count-1]?.key||T.keys[count-1]?.[1]);
+  shell.setKeys(physical?(physical==="t"&&T.keys[count-2]?.key==="ctrl"?["ctrl","t"]:[physical]):[]);
+  paint(count);
+ }
 const hints={
  entry:"Enter a function, then plot it.",
  plotted:"Choose Menu → 6 Analyze Graph → 3 Maximum.",
@@ -35,7 +46,7 @@ function tag(s){
  $("lcd-text").textContent=[
  s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry: "+M.displayExpr(s.raw),
  hints[s.state],s.low!==null?"Lower: "+M.pretty(s.low):"",s.typed?"Typed bound: "+s.typed:"",
- s.cursor!==null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Local maximum "+pair(s.mark):"",s.error||"",
+ s.cursor!==null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Local maximum "+pair(s.mark):"",s.error||"",s.endpointMarks?.map(c=>"Endpoint "+pair(c)).join(". ")||"",
  s.checked?"Compared allowed interval "+limits(s.allowed)+". Maximum value: "+M.pretty(s.checked.maxY):""
  ].filter(Boolean).map(t=>t.replace(/[.!?]$/, "")).join(". ")+". ";
 }
@@ -48,47 +59,22 @@ function snapshot(t){
  if(t>=36)s.checked=cmpWatch;
  return {key,s};
 }
-const timeStr=s=>Math.floor(s/60)+":"+String(Math.floor(s)%60).padStart(2,"0");
-T.titles.forEach((title,i)=>{
- const li=document.createElement("li"),button=document.createElement("button"),number=document.createElement("span");
- number.textContent="0"+(i+1);button.type="button";button.append(number,document.createTextNode(title));
- button.addEventListener("click",()=>go(T.starts[i]));li.append(button);$("steps").append(li);
-});
-function paintWatch(){
- if(mode!=="watch")return;
- const i=T.captions.findLastIndex(([t])=>t<=clock),chapter=T.starts.findLastIndex(t=>t<=clock),{s,key}=snapshot(clock);
- const stamp=[i,chapter,s.state,s.cursor,s.high].join("|");
- seek.value=clock;seek.setAttribute("aria-valuetext",timeStr(clock)+" of "+timeStr(T.duration));$("clock").textContent=timeStr(clock)+" / "+timeStr(T.duration);
- shell.setKeys(key?[key]:[]);$("stage-play").hidden=started||clock>0;
- if(stamp===cache)return;cache=stamp;
- screen.draw(s);tag(s);$("caption").textContent=T.captions[i][1];$("readout").hidden=false;$("readout").textContent=T.captions[i][2];
- [...$("steps").children].forEach((li,k)=>li.firstElementChild.setAttribute("aria-current",String(k===chapter)));
-}
-function labelPlay(){const t=playing?"Pause":clock>=T.duration-.015?"Replay":"Play";play.textContent=t;play.setAttribute("aria-label",t);play.dataset.playing=String(playing);}
-function go(t){clock=M.clamp(Number(t)||0,0,T.duration);origin=performance.now()-clock*1000;paintWatch();labelPlay();}
-function pause(){playing=false;cancelAnimationFrame(frame);labelPlay();paintWatch();}
-function tick(t){if(!playing||mode!=="watch")return;clock=Math.min(T.duration,Math.max(0,(t-origin)/1000));paintWatch();if(clock>=T.duration){pause();return;}frame=requestAnimationFrame(tick);}
-function start(){
- if(mode!=="watch")return;
- if(!looked){looked=true;const h=lessonEnd();if($("watch-player").getBoundingClientRect().bottom>h+3)focus(true);}
- started=true;if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});
- if(clock>=T.duration-.015)go(0);
- origin=performance.now()-clock*1000;playing=true;labelPlay();paintWatch();frame=requestAnimationFrame(tick);
-}
-function toggle(){if(playing)pause();else start();}
-function focus(v){
- focused=v;stage.classList.toggle("ct12max-focused",v);document.body.classList.toggle("ct12max-focus-open",v);
- const b=$("focus-view");b.textContent=v?"Exit":"Focus";b.setAttribute("aria-pressed",String(v));b.setAttribute("aria-label",v?"Exit focused view":"Focused view");
- if(v)stage.scrollTop=0;
-}
-play.addEventListener("click",toggle);$("stage-play").addEventListener("click",toggle);
-$("back").addEventListener("click",()=>go(clock-10));$("next").addEventListener("click",()=>go(clock+10));
-$("replay").addEventListener("click",()=>{pause();go(0);start();});$("focus-view").addEventListener("click",()=>focus(!focused));seek.addEventListener("input",()=>go(seek.value));
+
+ function renderWatch(device,{beat,point,crossed,key}){
+  if(handheld.parentElement!==device)device.append(handheld);
+  drawWatchFrame(beat,point,crossed,key,count=>{
+   const compareStep=beat>=4?beat-(point.speaking||point.fraction<.30?1:0):3;
+   const nextStamp=count+":"+compareStep;
+   if(watchStamp===nextStamp)return;watchStamp=nextStamp;
+   const before=count?(T.keys[count-1][0]+1e-7):0;
+   const editorial=compareStep>=4?30+3*(compareStep-4):before;
+   const m=snapshot(editorial).s;screen.draw(m);tag(m);
+  });
+ }
 function sync(){
  expression.value=state.raw;left.value=String(state.allowed[0]);right.value=String(state.allowed[1]);
 }
 function isExercise(){
- if(state.fromWatch)return false;
  try{return M.parse(expression.value).raw===challenge.f.raw&&M.readNumber(left.value)===challenge.allowed[0]&&M.readNumber(right.value)===challenge.allowed[1];}
  catch{return false;}
 }
@@ -114,7 +100,7 @@ function paintTry(){
  if(mode!=="try")return;
  screen.draw(state);tag(state);panel.replaceChildren();
  const skill=isExercise();$("answer-form").hidden=!skill;$("exercise-inactive").hidden=skill;if(!skill)$("feedback").textContent="";
- $("keypad-problem").textContent=state.fromWatch?"Continuing Watch. Reset to load the Try question.":skill?"Find the absolute maximum on "+limits(challenge.allowed)+".":"Explore a different function or interval.";
+ $("keypad-problem").textContent=skill?"Find the absolute maximum on "+limits(challenge.allowed)+".":"Explore a different function or interval.";
  const placing=["lower","upper"].includes(state.state);lcd.classList.toggle("pick",placing);
  $("bound-form").hidden=!placing;$("bound-label").textContent=state.state==="lower"?"Lower search bound x":"Upper search bound x";
  $("retry-bounds").hidden=state.state!=="result";
@@ -129,7 +115,7 @@ function plot(){
  edited=true;
  try{
   const q=M.parse(expression.value),a=M.interval(M.readNumber(left.value),M.readNumber(right.value));
-  state={...initial(),state:"plotted",raw:q.raw,q,allowed:a,fromWatch:false};sync();paintTry();
+  state={...initial(),state:"plotted",raw:q.raw,q,allowed:a};sync();paintTry();
  }catch(e){state.error=e.message;paintTry();}
 }
 function analyze(){
@@ -194,36 +180,26 @@ lcd.addEventListener("pointermove",e=>{
  if(p!==null){state.cursor=p;screen.draw(state);tag(state);}
 });
 lcd.addEventListener("click",e=>{if(mode==="try"&&lcd.classList.contains("pick")){const p=position(e);if(p!==null)confirm(p);}});
-function change(next,take=false){
- if(next==="try"&&mode==="watch"){
-  pause();if(focused)focus(false);
-  if(take&&!fixed&&!edited&&!forked){state={...snapshot(clock).s,fromWatch:true};bound.value="";fresh=false;forked=true;sync();}
- }
- mode=next;stage.dataset.mode=mode;cache="";const watch=mode==="watch";
- tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
- ["watch","watch-side","watch-player","watch-message"].forEach(n=>$(n).hidden=!watch);
- ["try","try-side","try-player"].forEach(n=>$(n).hidden=watch);
- shell.setKeys([]);shell.setInteractive(!watch);
- if(watch){panel.replaceChildren();lcd.classList.remove("pick");paintWatch();}
- else{$("stage-play").hidden=true;paintTry();}
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;
+ device.append(stage);$("try-grid").prepend(handheld);stage.hidden=false;$("try").hidden=false;
+ document.body.classList.add("graph-try");shell.setInteractive(true);shell.setKeys([]);
+ sync();paintTry();stage.focus({preventScroll:true});
 }
-tabs.forEach((el,i)=>{
- el.addEventListener("click",()=>{change(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
- el.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const j=e.key==="Home"?0:e.key==="End"?1:1-i;change(j?"try":"watch");tabs[j].focus();});
-});
-$("take-over").addEventListener("click",()=>{change("try",true);stage.focus({preventScroll:true});});
-$("return-watch").addEventListener("click",()=>{change("watch");play.focus({preventScroll:true});});
-document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
- if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
- if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
- if(mode==="watch"&&!e.target.closest("button")&&!e.repeat){
-  const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(clock+(k==="j"?-10:10));}
-  return;
- }
- if(mode!=="try"||(!stage.contains(e.target)&&e.target!==document.body)||(e.target.closest("button")&&["Enter"," "].includes(e.key)))return;
- const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",m:"menu",M:"menu",".":"dot",",":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
- const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");if(k){e.preventDefault();press(k);}
-});
+function exitTry(){
+ mode="watch";stage.hidden=true;$("try").hidden=true;watchStamp="";
+ document.body.classList.remove("graph-try");shell.setInteractive(false);shell.setKeys([]);
+ $("hotspots").replaceChildren();lcd.classList.remove("pick");
+
+}
+$("return-watch").addEventListener("click",()=>returnToWatch?.());
+
+ document.addEventListener("keydown",e=>{
+  if(mode!=="try"||e.defaultPrevented||e.isComposing||e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable],.top,.tabbar"))return;
+  if((!stage.contains(e.target)&&e.target!==document.body)||(e.target.closest("button")&&["Enter"," "].includes(e.key)))return;
+  const keys={Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",m:"menu",M:"menu",".":"dot",",":"dot","^":"power","+":"plus","-":"minus","*":"mul","/":"div","(":"lparen",")":"rparen","²":"square"};
+  const k=keys[e.key]||(/^[0-9xX]$/.test(e.key)?e.key.toLowerCase():"");if(k){e.preventDefault();physical(k);}
+ });
 const xField=$("answer-x"),yField=$("answer-y"),feedback=$("feedback");
 [xField,yField].forEach(el=>el.addEventListener("input",()=>{edited=true;feedback.textContent="";}));
 $("answer-form").addEventListener("submit",e=>{
@@ -233,7 +209,5 @@ $("answer-form").addEventListener("submit",e=>{
  feedback.className="feedback"+(okX&&okY?"is-right":"is-wrong");
  feedback.textContent=okX&&okY?"Correct. No allowed point has a larger y-value.":!Number.isFinite(x)||!Number.isFinite(y)?"Enter a numerical x-coordinate and value.":okX?"The x-coordinate is right. Check its y-value.":"Not yet. Compare the peak and both allowed endpoints.";
 });
-sync();change(query.get("mode")==="try"?"try":"watch");
-if(mode==="watch"&&$("watch-player").getBoundingClientRect().bottom>lessonEnd()+2)focus(true);
-window.QBRecordedWatch?.bind(pause);
+window.CalculatorLessonAdapter=Object.freeze({initialMode:query.get("mode")==="try"?"try":"watch",renderWatch,enterTry,exitTry});
 })();
