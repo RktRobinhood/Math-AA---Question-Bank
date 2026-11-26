@@ -103,7 +103,7 @@ function taskMode(){$("task").textContent="Test one claimed categorical distribu
 function enterTry(device,actions){
  mode="try";returnToWatch=actions.returnToWatch;document.body.classList.add("in-try");
  device.prepend(stage);$("try-deck").prepend(handheld);stage.hidden=false;
- clearTimeout(light);shell.setKeys([]);shell.setInteractive(true);taskMode();render(s,false);
+ clearTimeout(light);shell.setKeys([]);shell.setInteractive(true);taskMode();render(s,false);stage.focus({preventScroll:true});
 }
 function exitTry(){
  mode="watch";stage.hidden=true;stamp=-1;document.body.classList.remove("in-try");
