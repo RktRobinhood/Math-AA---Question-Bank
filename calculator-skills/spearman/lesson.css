@@ -198,3 +198,11 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 
 .lcd-status:where(.qb-calculator-lesson, .qb-calculator-lesson *){white-space:nowrap}.lcd-status>span:nth-child(2):where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:max(5px,2.65cqw);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}.lcd-status strong:where(.qb-calculator-lesson, .qb-calculator-lesson *),.lcd-status .battery:where(.qb-calculator-lesson, .qb-calculator-lesson *){flex:none}
 .lcd-alert:where(.qb-calculator-lesson, .qb-calculator-lesson *){position:absolute;inset:18px 3px auto;z-index:5;border:1px solid #a24532;padding:3px;background:#fff2e9;color:#852412;line-height:1.15}.wizard:has(~.lcd-alert) .actions:where(.qb-calculator-lesson, .qb-calculator-lesson *){visibility:visible}
+
+/* Shared Watch is the sole transport and owns layout. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.reg-study{margin-top:.65rem;padding-inline:.45rem}
+#watch-picture{max-width:290px}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.lw-device .lcd-sheet.result td:nth-child(2){width:38%}
+.stage[data-mode=try] #handheld-host{--handheld-width:min(307px,100%)}

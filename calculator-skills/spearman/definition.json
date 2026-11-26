@@ -1,0 +1,325 @@
+{
+  "id": "CT35",
+  "title": "Spearman rank correlation",
+  "intro": "Find Pearson r on two lists of ranks while keeping the original observations paired.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "60747f2f4bcab03193c00447f38d2b2c311a1be8e517c65d23148f954187e9c3",
+    "scriptSha256": "76b63ffaa7e45abeee78ccab89f3f2ef75d78880853c87b466bc924484faa22d"
+  },
+  "chapters": [
+    {
+      "id": "pairs",
+      "title": "Keep the original rows paired"
+    },
+    {
+      "id": "rank-x",
+      "title": "Enter x ranks"
+    },
+    {
+      "id": "tie",
+      "title": "Average the tied y ranks"
+    },
+    {
+      "id": "rank-y",
+      "title": "Enter y ranks"
+    },
+    {
+      "id": "menu",
+      "title": "Open linear regression"
+    },
+    {
+      "id": "lists",
+      "title": "Select the two rank lists"
+    },
+    {
+      "id": "r",
+      "title": "Read r, not r²"
+    },
+    {
+      "id": "meaning",
+      "title": "Interpret the association"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "pairs",
+      "spoken": "The paired rows are x: twenty-one, seven, fifteen, eleven and y: seven, twelve, five, seven.",
+      "coach": "Rank each column from smallest to largest. Keep the original rows.",
+      "end": 8.66,
+      "hold": 1.5,
+      "keys": []
+    },
+    {
+      "chapter": "rank-x",
+      "spoken": "The x ranks in the original row order are four, one, three, two. Enter these in the list named r x.",
+      "coach": "Do not reorder the observations.",
+      "end": 17.765,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.0514
+        },
+        {
+          "id": "press-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.1304
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2095
+        },
+        {
+          "id": "press-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2885
+        },
+        {
+          "id": "press-5",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3676
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4466
+        },
+        {
+          "id": "press-7",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5257
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6047
+        },
+        {
+          "id": "press-9",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6838
+        },
+        {
+          "id": "press-10",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.7628
+        },
+        {
+          "id": "press-11",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.8419
+        },
+        {
+          "id": "press-12",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.9209
+        }
+      ]
+    },
+    {
+      "chapter": "tie",
+      "spoken": "The two sevens would occupy ranks two and three. Give each two point five.",
+      "coach": "The next rank is 4, not 3.",
+      "end": 23.432,
+      "hold": 2.5,
+      "keys": []
+    },
+    {
+      "chapter": "rank-y",
+      "spoken": "Enter the y-ranks in the original row order: two point five, four, one, two point five.",
+      "coach": "ry and rx must still match by row.",
+      "end": 30.818,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0476
+        },
+        {
+          "id": "press-14",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.1209
+        },
+        {
+          "id": "press-15",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1941
+        },
+        {
+          "id": "press-16",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2674
+        },
+        {
+          "id": "press-17",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3407
+        },
+        {
+          "id": "press-18",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4139
+        },
+        {
+          "id": "press-19",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4872
+        },
+        {
+          "id": "press-20",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5604
+        },
+        {
+          "id": "press-21",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6337
+        },
+        {
+          "id": "press-22",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.707
+        },
+        {
+          "id": "press-23",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.7802
+        },
+        {
+          "id": "press-24",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8535
+        },
+        {
+          "id": "press-25",
+          "label": "←",
+          "ariaLabel": "Left arrow",
+          "at": 0.9267
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "Open Menu, then four for Statistics, one for Stat Calculations, and four for Linear Regression in the a plus b x form.",
+      "coach": "This is a Pearson r command, not a Spearman menu.",
+      "end": 40.642,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-26",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1398
+        },
+        {
+          "id": "press-27",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3548
+        },
+        {
+          "id": "press-28",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5699
+        },
+        {
+          "id": "press-29",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.7849
+        }
+      ]
+    },
+    {
+      "chapter": "lists",
+      "spoken": "Use the rank lists rx and ry. Run the calculation, then look for r.",
+      "coach": "Do not use the original measurements or the r² row.",
+      "end": 48.3705,
+      "hold": 6.5,
+      "keys": [
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.115
+        },
+        {
+          "id": "press-31",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.292
+        },
+        {
+          "id": "press-32",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.469
+        },
+        {
+          "id": "press-33",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.646
+        },
+        {
+          "id": "press-34",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.823
+        }
+      ]
+    },
+    {
+      "chapter": "r",
+      "spoken": "Pearson r on the paired ranks equals Spearman's rank correlation. Here it is about negative zero point six three two.",
+      "coach": "The ranks tend to run in opposite directions.",
+      "end": 58.539,
+      "hold": 1.6,
+      "keys": [
+        {
+          "id": "press-35",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.3939
+        }
+      ]
+    },
+    {
+      "chapter": "meaning",
+      "spoken": "The number describes monotonic association, not proof that a change in one variable causes the other.",
+      "coach": "Here rₛ ≈ −0.632. A constant rank list gives undefined rₛ.",
+      "end": 66.32,
+      "hold": 2,
+      "keys": []
+    }
+  ]
+}

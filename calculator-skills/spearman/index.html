@@ -13,26 +13,35 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-shell-1">
-<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="key-tape.js"></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT35" data-cue-sha="b0ddecc91f480fafb32591c54b97c43012289f188258107dcc104ff2420a8011" data-transcript-sha="76b63ffaa7e45abeee78ccab89f3f2ef75d78880853c87b466bc924484faa22d" defer></script><script src="lesson.js?v=bank-shell-1&amp;narration=1" defer></script>
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+<script defer src="key-tape.js"></script>
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
 </head>
 <body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header class="head"><div><p class="trail"><a href="../skills.html">Calculator Skills</a></p><h1>Spearman rank correlation</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode">
-<button id="watch-tab" type="button" role="tab" aria-controls="watch-panel" aria-selected="true">Watch</button>
-<button id="try-tab" type="button" role="tab" aria-controls="try-panel" aria-selected="false" tabindex="-1">Try</button></div>
-<section class="stage" id="stage" data-mode="watch" tabindex="0" aria-label="TI-Nspire CX II-T handheld">
-<div id="watch-message"><p id="caption"></p><p id="takeaway"></p></div>
-<div id="try-header" hidden><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Return to Watch</button><button type="button" id="back-to-data">Back to data</button><button type="button" id="reset">Reset Try</button></nav>
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT35</nav>
+<div data-calculator-watch></div>
+<details id="watch-study" class="reg-study"><summary>Original paired observations</summary><div id="watch-picture" class="plot"></div></details>
+<section class="stage" id="stage" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire CX II-T practice" hidden>
+<div id="try-header"><nav class="try-nav" aria-label="Try controls"><button type="button" id="return">Return to Watch</button><button type="button" id="back-to-data">Back to data</button><button type="button" id="reset">Reset Try</button></nav>
 <p id="try-context"></p><div id="try-picture"></div></div>
-<div class="stage-grid">
+<div class="stage-grid" id="try-grid">
 <div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span>1.1</span><span>Lists &amp; Spreadsheet</span><strong>RAD</strong><span class="battery"></span></div><div class="lcd-body" id="lcd-body"></div><span id="lcd-text" class="sr" aria-live="off"></span></div>
-<button class="stage-play" id="start-overlay" type="button" aria-label="Play caption rehearsal"><svg width="23" height="25" viewBox="0 0 23 25" aria-hidden="true"><path fill="currentColor" d="M4 2l16 10.5L4 23z"/></svg></button></div>
+</div>
 <aside class="calc-side" id="watch-panel" role="tabpanel" aria-labelledby="watch-tab"><p class="eyebrow">Lists &amp; Spreadsheet</p>
 <p class="context">AI SL and HL · Rate monotonic association using paired ranks.</p>
 <div id="watch-picture" class="plot"></div><ol id="chapters"></ol></aside>
-<aside class="calc-side" id="try-panel" role="tabpanel" aria-labelledby="try-tab" hidden>
+<aside class="calc-side" id="try-panel" aria-label="Spearman practice">
 <p id="tool-status" class="feedback" role="status"></p>
 <p class="keys" id="keys-help">Enter your ranks in named lists <code>rx</code> and <code>ry</code>. Then open <kbd>Menu</kbd> → 4 → 1 → 4. Select the two rank lists; read the result labelled <strong>r</strong>, not r².</p>
 <details><summary>How do I handle a tie?</summary><p>Rank the values in each list separately, smallest first. If two values occupy ranks 2 and 3, both get 2.5. The next value has rank 4. Enter the ranks on their original paired rows. Do not sort one column independently.</p></details>
@@ -40,8 +49,5 @@
 <label for="y-input">Observed y values, in matching order</label><input id="y-input" autocomplete="off"><button type="submit">Use these pairs</button></form></details>
 <form id="answer" aria-label="Check Spearman correlation"><label for="answer-r">Spearman’s rₛ, to at least three significant figures, or “undefined”</label><input id="answer-r" spellcheck="false" autocomplete="off"><button type="submit" id="assess">Check</button><p class="feedback" id="assess-feedback" role="status"></p></form>
 </aside></div>
-<div id="watch-player" class="player" aria-label="Playback controls">
-<div class="transport"><button type="button" id="play" class="primary">Play</button><button type="button" id="back" aria-label="Back ten seconds">−10</button><button type="button" id="forward" aria-label="Forward ten seconds">+10</button><button type="button" id="replay" aria-label="Replay from start">↺</button><button type="button" id="focus" aria-pressed="false">Focus</button><button type="button" id="take">Open Try</button></div>
-<div class="timeline"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input id="seek" type="range" min="0" step=".005" value="0"></label><span class="rehearsal">Captions only</span></div>
-</div></section>
+</section>
 </main></body></html>
