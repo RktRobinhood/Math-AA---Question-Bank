@@ -1,0 +1,203 @@
+{
+  "id": "SUP-HIST-01",
+  "title": "Frequency histograms",
+  "intro": "Set equal bins, trace a class and count below a cutoff.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "49eea9ef94d7e97f82dbb407ad4ffefc099991206387dd404aedbe57acc3ee76",
+    "scriptSha256": "65a763f8aedc321530684df08e9c095a42bbd4d6af96850895010e1a994bfc05"
+  },
+  "chapters": [
+    {
+      "id": "named-list",
+      "title": "Select the named list"
+    },
+    {
+      "id": "plot-type",
+      "title": "Make a frequency histogram"
+    },
+    {
+      "id": "class-grid",
+      "title": "Open the bin settings"
+    },
+    {
+      "id": "width-alignment",
+      "title": "Set width and alignment"
+    },
+    {
+      "id": "trace",
+      "title": "Trace a class"
+    },
+    {
+      "id": "edges",
+      "title": "Read the class boundary"
+    },
+    {
+      "id": "cumulative",
+      "title": "Count below the cutoff"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "named-list",
+      "spoken": "On Data and Statistics, press Tab. Select the prepared list reading on the horizontal axis.",
+      "coach": "On Data & Statistics, press Tab. Select the prepared list reading on the horizontal axis.",
+      "end": 6.862,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Tab",
+          "at": 0.2239
+        },
+        {
+          "id": "press-2",
+          "label": "Select",
+          "at": 0.597
+        }
+      ]
+    },
+    {
+      "chapter": "plot-type",
+      "spoken": "Menu, Plot Type, Histogram. The vertical scale counts observations.",
+      "coach": "Menu, Plot Type, Histogram. The vertical scale counts observations.",
+      "end": 14.0565,
+      "hold": 3,
+      "keys": [
+        {
+          "id": "press-3",
+          "label": "Menu",
+          "at": 0.163
+        },
+        {
+          "id": "press-4",
+          "label": "1",
+          "at": 0.4348
+        },
+        {
+          "id": "press-5",
+          "label": "3",
+          "at": 0.7065
+        }
+      ]
+    },
+    {
+      "chapter": "class-grid",
+      "spoken": "Open Plot Properties, Histogram Properties, Bin Settings, Equal Bin Width. Width is the interval size; alignment sets a boundary.",
+      "coach": "Open Plot Properties, Histogram Properties, Bin Settings, Equal Bin Width. Width is the interval size; alignment sets a boundary.",
+      "end": 25.685,
+      "hold": 5.5,
+      "keys": [
+        {
+          "id": "press-6",
+          "label": "Menu",
+          "at": 0.1056
+        },
+        {
+          "id": "press-7",
+          "label": "2",
+          "at": 0.2817
+        },
+        {
+          "id": "press-8",
+          "label": "2",
+          "at": 0.4577
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "at": 0.6338
+        },
+        {
+          "id": "press-10",
+          "label": "1",
+          "at": 0.8099
+        }
+      ]
+    },
+    {
+      "chapter": "width-alignment",
+      "spoken": "Type ten for width. Tab to Alignment and type ten again. Confirm the settings.",
+      "coach": "Type ten for width. Tab to Alignment and type ten again. Confirm the settings.",
+      "end": 35.024,
+      "hold": 5.5,
+      "keys": [
+        {
+          "id": "press-11",
+          "label": "1",
+          "at": 0.0898
+        },
+        {
+          "id": "press-12",
+          "label": "0",
+          "at": 0.2395
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "at": 0.3892
+        },
+        {
+          "id": "press-14",
+          "label": "1",
+          "at": 0.5389
+        },
+        {
+          "id": "press-15",
+          "label": "0",
+          "at": 0.6886
+        },
+        {
+          "id": "press-16",
+          "label": "Enter",
+          "at": 0.8383
+        }
+      ]
+    },
+    {
+      "chapter": "trace",
+      "spoken": "Use Analyze, Graph Trace. Press Right until you reach the class from twenty up to, but not including, thirty.",
+      "coach": "Use Analyze, Graph Trace. Press Right until you reach the class from twenty up to, but not including, thirty.",
+      "end": 45.873,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-17",
+          "label": "Menu",
+          "at": 0.1282
+        },
+        {
+          "id": "press-18",
+          "label": "4",
+          "at": 0.3419
+        },
+        {
+          "id": "press-19",
+          "label": "A",
+          "at": 0.5556
+        },
+        {
+          "id": "press-20",
+          "label": "Right",
+          "at": 0.7692
+        }
+      ]
+    },
+    {
+      "chapter": "edges",
+      "spoken": "Five observations fall here. Twenty belongs here; thirty starts the next bin.",
+      "coach": "Five observations fall here. Twenty belongs here; thirty starts the next bin.",
+      "end": 53.5775,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "cumulative",
+      "spoken": "Add the bins that end at or below forty. The reading at forty is not included.",
+      "coach": "Below 40: add the three bins ending at 20, 30 and 40. 4 + 5 + 3 = 12. A reading of 40 starts the next bin.",
+      "end": 63.123,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}

@@ -1,33 +1,44 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
 <title>Frequency histograms · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
+<link rel="stylesheet" href="../lesson-shell.css">
 <script src="../../assets/js/courses.js" defer></script>
 <script src="../../assets/js/course.js" defer></script>
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=native-bank-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script defer src="../handheld/shell.js"></script><script defer src="model.js"></script><script defer src="tape.js"></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="SUP-HIST-01" data-cue-sha="bb314c647e517df75de222be08afd527b28f26e0d09a4517161b4a18d03d00fa" data-transcript-sha="65a763f8aedc321530684df08e9c095a42bbd4d6af96850895010e1a994bfc05" defer></script><script src="lesson.js?v=native-bank-1&amp;narration=1" defer></script>
-</head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><p class="trail"><a href="../skills.html">Calculator Skills</a> / AI SL &amp; HL</p><h1>Frequency histograms</h1><p class="subtitle">Set equal bins. Read the edges. Count below a cutoff.</p><p><a href="../named-lists/">Enter your own named list.</a></p></div>
-</header>
-<nav class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></nav>
-<section id="stage" class="stage" data-mode="watch" tabindex="0" aria-label="Interactive TI-Nspire CX II-T calculator">
- <div id="watch-message"><p id="caption" class="caption"></p><p id="takeaway" hidden></p></div>
- <div class="stage-grid">
-  <div id="try-brief" hidden>
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+<script defer src="tape.js"></script>
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / Frequency histograms</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="stage hist-try" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire CX II-T histogram practice" hidden>
+  <div id="try-brief">
    <p id="link-notice" role="status" hidden></p><h2 id="try-title">Try a new histogram</h2><p id="try-data" class="list-strip"></p><p id="prompt"></p>
-   <div id="try-player"><button id="return-watch" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button><p id="lane" role="status"></p></div>
+   <div id="try-player"><button id="return-watch" type="button">Return to Watch</button><button id="reset" type="button">Reset Try</button></div>
   </div>
-  <div id="host"><div id="lcd" class="screen"><div class="status"><span>1.2</span><span>Data &amp; Statistics · RAD</span><span aria-hidden="true">▰</span></div><div id="screen"></div><p id="screen-text" class="sr" aria-live="polite"></p><button id="stage-play" aria-label="Play captioned walkthrough" title="Play captioned walkthrough" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 4v16l13-8z"/></svg></button></div></div>
-  <div class="calc-side">
-   <aside id="watch-side"><h2>From list to class counts</h2><p>Already entered in <code>reading</code>:</p><p id="worked-list" class="list-strip"></p><ol id="steps"></ol></aside>
-   <aside id="try-side" hidden>
+<div class="stage-grid" id="try-grid">
+  <div id="host"><div id="lcd" class="screen"><div class="status"><span>1.2</span><span>Data &amp; Statistics · RAD</span><span aria-hidden="true">▰</span></div><div id="screen"></div><p id="screen-text" class="sr" aria-live="polite"></p></div></div>
+<div class="calc-side">   <aside id="try-side">
     <p id="instruction">Select the horizontal variable, then open Menu.</p><p id="error" class="feedback" role="status"></p>
     <form id="answer-form"><div class="touch-grid"><label>Class frequency <input id="frequency" inputmode="numeric" required autocomplete="off"></label><label>Readings below cutoff <input id="cumulative" inputmode="numeric" required autocomplete="off"></label></div><button type="submit" class="primary">Check answers</button></form><p id="feedback" class="feedback" role="status"></p>
     <details id="hint"><summary>Hint</summary><p>Check the width and alignment under Plot Properties. Trace the requested class. Add all whole classes with upper endpoints at or below the cutoff. A reading at the cutoff does not count.</p></details>
@@ -37,9 +48,5 @@
    </aside>
   </div>
  </div>
- <div id="watch-player" aria-label="Playback controls"><div class="control-row"><button id="play" class="primary" type="button">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false">⛶</button><button id="take-over" type="button">Take over</button></div>
- <div class="seek-row"><span id="clock" aria-hidden="true">0:00</span><label><span class="sr">Seek worked example</span><input id="seek" type="range" min="0" max="62" step=".005" value="0"></label><span>Captioned</span></div></div>
 </section>
-<section role="tabpanel" id="watch" aria-labelledby="watch-tab"><p class="sr">Watch player above.</p></section><section role="tabpanel" id="try" aria-labelledby="try-tab" hidden><p class="sr">Try calculator and exercise above.</p></section>
-<details class="notes"><summary>Transcript</summary><p>Watch observations: <span id="transcript-data"></span>.</p><ol id="transcript"></ol></details>
 </main></body></html>
