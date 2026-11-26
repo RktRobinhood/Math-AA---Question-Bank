@@ -1,0 +1,238 @@
+{
+  "id": "CT58",
+  "title": "Euler method for a first-order ODE",
+  "intro": "Advance x, then use the new pair to find the next slope. The calculator does the arithmetic, not the method.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "46b2cd3169242dac1f654a6790302028176b5fda647540abce03270586bcea35",
+    "scriptSha256": "c757dcc961127194faf5f01edfdb59178be74159e4525f0f81db86d89872cae2"
+  },
+  "chapters": [
+    {
+      "id": "start",
+      "title": "Start at the known point"
+    },
+    {
+      "id": "first-slope",
+      "title": "Find the old-point slope"
+    },
+    {
+      "id": "first-update",
+      "title": "Enter the first update"
+    },
+    {
+      "id": "new-point",
+      "title": "Move to the new point"
+    },
+    {
+      "id": "next-slope",
+      "title": "Recalculate the slope"
+    },
+    {
+      "id": "second-update",
+      "title": "Enter the second update"
+    },
+    {
+      "id": "estimate",
+      "title": "Interpret the estimate"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "start",
+      "spoken": "Estimate y at x equals one in two steps. Start at the known point zero, two.",
+      "coach": "dy/dx = x − y · h = 0.5",
+      "end": 6.88,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "first-slope",
+      "spoken": "Use the starting pair for the slope: zero minus two equals minus two. Multiply the slope by the step size.",
+      "coach": "y(next) = y + h · slope at (x, y)",
+      "end": 16.27,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "first-update",
+      "spoken": "On a Calculator page, type two, plus zero point five times the quantity zero minus two, then press Enter.",
+      "coach": "Update y with the slope at (0, 2).",
+      "end": 24.9485,
+      "hold": 6.5,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.055
+        },
+        {
+          "id": "press-2",
+          "label": "+",
+          "ariaLabel": "Add",
+          "at": 0.1409
+        },
+        {
+          "id": "press-3",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.2268
+        },
+        {
+          "id": "press-4",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3127
+        },
+        {
+          "id": "press-5",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.3986
+        },
+        {
+          "id": "press-6",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.4845
+        },
+        {
+          "id": "press-7",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5704
+        },
+        {
+          "id": "press-8",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.6564
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7423
+        },
+        {
+          "id": "press-10",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8282
+        },
+        {
+          "id": "press-11",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9141
+        }
+      ]
+    },
+    {
+      "chapter": "new-point",
+      "spoken": "The new y is one, and the new x is zero point five. Keep that pair together.",
+      "coach": "(0, 2) → (0.5, 1)",
+      "end": 31.94,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "next-slope",
+      "spoken": "Now find the slope from the new pair: zero point five minus one equals minus zero point five. The previous slope is no longer used.",
+      "coach": "Use (0.5, 1), not (0, 2).",
+      "end": 42.925,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "second-update",
+      "spoken": "Type one, plus zero point five times the quantity zero point five minus one. Then press Enter. This is the second update.",
+      "coach": "Take one more step of width 0.5.",
+      "end": 54.483,
+      "hold": 7.0,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0506
+        },
+        {
+          "id": "press-13",
+          "label": "+",
+          "ariaLabel": "Add",
+          "at": 0.1297
+        },
+        {
+          "id": "press-14",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.2089
+        },
+        {
+          "id": "press-15",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.288
+        },
+        {
+          "id": "press-16",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.3671
+        },
+        {
+          "id": "press-17",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.4462
+        },
+        {
+          "id": "press-18",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.5253
+        },
+        {
+          "id": "press-19",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6044
+        },
+        {
+          "id": "press-20",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.6835
+        },
+        {
+          "id": "press-21",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7627
+        },
+        {
+          "id": "press-22",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8418
+        },
+        {
+          "id": "press-23",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9209
+        }
+      ]
+    },
+    {
+      "chapter": "estimate",
+      "spoken": "At x equals one the Euler estimate is zero point seven five. Two tangent steps give an approximation, not an exact solution.",
+      "coach": "(0, 2) → (0.5, 1) → (1, 0.75)",
+      "end": 65.381,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
