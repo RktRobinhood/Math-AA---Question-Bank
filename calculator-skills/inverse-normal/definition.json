@@ -1,0 +1,305 @@
+{
+  "id": "CT40",
+  "title": "Inverse Normal",
+  "intro": "Use a known probability to find a cutoff, not another area.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "91c1e043ce04a2419f24e6df3f0dcd3f86dbb7a337f18d1e246d2e2134b3ea73",
+    "scriptSha256": "0107cf3e1187782ecd8e076d3c4dcd6523370551303477e03157ab3b1829189f"
+  },
+  "chapters": [
+    {
+      "id": "cutoff",
+      "title": "Ask for a cutoff"
+    },
+    {
+      "id": "menu",
+      "title": "Open Inverse Normal"
+    },
+    {
+      "id": "fields",
+      "title": "Enter left area, mean and SD"
+    },
+    {
+      "id": "left-answer",
+      "title": "Evaluate the left cutoff"
+    },
+    {
+      "id": "tail",
+      "title": "Convert the right tail"
+    },
+    {
+      "id": "right-fields",
+      "title": "Run Inverse Normal again"
+    },
+    {
+      "id": "right-answer",
+      "title": "Evaluate the right cutoff"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "cutoff",
+      "spoken": "This time we know the probability, not the cutoff. The seventy-fifth percentile has zero point seven five of the area to its left.",
+      "coach": "The 75th percentile leaves 0.75 of the area to its left. Find the cutoff.",
+      "end": 9.35,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal.",
+      "coach": "Menu → 5 Probability → 5 Distributions → 3 Inverse Normal.",
+      "end": 17.41,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "fields",
+      "spoken": "In Area, enter zero point seven five. Enter fifty for the mean and eight for the standard deviation.",
+      "coach": "In Area, enter 0.75. Use μ = 50 and σ = 8. Area always means area to the left.",
+      "end": 26.9,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1545
+        },
+        {
+          "id": "press-5",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.2291
+        },
+        {
+          "id": "press-6",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.3036
+        },
+        {
+          "id": "press-7",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3782
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4527
+        },
+        {
+          "id": "press-9",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5273
+        },
+        {
+          "id": "press-10",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6018
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6764
+        },
+        {
+          "id": "press-12",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.7509
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8255
+        }
+      ]
+    },
+    {
+      "chapter": "left-answer",
+      "spoken": "",
+      "coach": "Enter once to insert the command, then Enter again to evaluate.",
+      "end": 27.6,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3533
+        },
+        {
+          "id": "press-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "left-answer",
+      "spoken": "Confirm. Press Enter again to calculate. The cutoff is about fifty-five point four, above the mean of fifty.",
+      "coach": "The cutoff is about 55.4, above the mean of 50. It is a value of X.",
+      "end": 36.45,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "tail",
+      "spoken": "For the top ten percent, zero point one is on the right. Subtract from one: zero point nine is on the left.",
+      "coach": "Top 10% means 0.10 to the right. Enter the left area: 1 − 0.10 = 0.90.",
+      "end": 45.21,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "right-fields",
+      "spoken": "Open Menu, Probability, Distributions, and Inverse Normal again. Enter zero point nine for Area. Keep fifty for the mean and eight for the standard deviation.",
+      "coach": "Open Inverse Normal again. Enter 0.90, keeping μ = 50 and σ = 8.",
+      "end": 58.1,
+      "hold": 14,
+      "keys": [
+        {
+          "id": "press-16",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1386
+        },
+        {
+          "id": "press-17",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1971
+        },
+        {
+          "id": "press-18",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.2557
+        },
+        {
+          "id": "press-19",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3143
+        },
+        {
+          "id": "press-20",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3729
+        },
+        {
+          "id": "press-21",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.4314
+        },
+        {
+          "id": "press-22",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.49
+        },
+        {
+          "id": "press-23",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5486
+        },
+        {
+          "id": "press-24",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6071
+        },
+        {
+          "id": "press-25",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6657
+        },
+        {
+          "id": "press-26",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7243
+        },
+        {
+          "id": "press-27",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.7829
+        },
+        {
+          "id": "press-28",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8414
+        }
+      ]
+    },
+    {
+      "chapter": "right-answer",
+      "spoken": "",
+      "coach": "Enter to insert the command, and Enter again to evaluate.",
+      "end": 58.35,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3533
+        },
+        {
+          "id": "press-30",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6267
+        }
+      ]
+    },
+    {
+      "chapter": "right-answer",
+      "spoken": "Confirm, then press Enter again. The cutoff is about sixty point three, in the original measurement units.",
+      "coach": "The cutoff is about 60.3, in the original units. It leaves 0.10 to the right.",
+      "end": 66.566,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}

@@ -48,3 +48,30 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.
 
 /* Shared navigation is behind the lesson when its existing Focus player opens. */
 body.calculator-bank-lesson:has(.cx-focused) > :is(.top,.tabbar){visibility:hidden}
+
+/* Shared Watch framing. The separate diagram is educational, not firmware LCD output. */
+.normal-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device>#try-host{width:100%;padding:0;--handheld-width:100%;pointer-events:none}
+.normal-watch-sketch{
+ position:absolute;z-index:1;inset:50% auto auto 50%;translate:-50% -50%;
+ width:min(84%,23rem);margin:0;padding:.38em .55em;
+ border:1px solid var(--lw-line);border-radius:8px;background:var(--lw-base);color:var(--lw-text);pointer-events:none
+}
+.normal-watch-sketch figcaption{font-size:clamp(.7rem,2.6vw,.89rem);font-weight:650;text-align:center}
+.normal-watch-sketch .curve{margin:.2em 0 0}
+.normal-watch-sketch svg{width:100%;height:auto;border:0}
+.normal-watch-sketch .shade{fill:var(--lw-scrub);opacity:.32}
+.normal-watch-sketch .complement{fill:var(--lw-soft-ink);opacity:.14}
+@media(max-width:420px){
+ .normal-watch .lw-header h1{font-size:1.45rem}
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-coach{min-block-size:3lh}
+}
+@media(max-width:780px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide .lw-groups{max-height:clamp(125px,22dvh,185px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
+@media(max-width:350px){
+ .normal-watch>main{padding-inline:8px}
+ .normal-watch .lw-header{gap:.42em}
+ .normal-watch .lw-header h1{font-size:1.36rem}
+}
+.normal-resources{margin:.65rem 0;color:var(--muted);font-size:.81rem}

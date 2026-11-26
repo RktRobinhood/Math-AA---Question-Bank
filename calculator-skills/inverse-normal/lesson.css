@@ -46,3 +46,30 @@ h1:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-family:Georgia,"Ti
 .curve:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin:.7em 0 .35em;color:var(--green)}.curve svg:where(.qb-calculator-lesson, .qb-calculator-lesson *){display:block;width:min(100%,440px);height:auto;border-bottom:1px solid var(--line)}.curve text:where(.qb-calculator-lesson, .qb-calculator-lesson *){fill:var(--text);font-size:10px;font-family:var(--mono)}.curve .bell:where(.qb-calculator-lesson, .qb-calculator-lesson *){stroke:var(--green);stroke-width:2;fill:none}.curve .shade:where(.qb-calculator-lesson, .qb-calculator-lesson *){fill:var(--primary);opacity:.22}.curve .axis:where(.qb-calculator-lesson, .qb-calculator-lesson *){stroke:var(--muted);stroke-width:1}.curve .cut:where(.qb-calculator-lesson, .qb-calculator-lesson *){stroke:var(--green);stroke-dasharray:3 2;stroke-width:1}.transcript:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin-top:1em;font-size:.86rem}.transcript p:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin-top:.5em;color:var(--muted)}.plain-link:where(.qb-calculator-lesson, .qb-calculator-lesson *){max-width:100%}.status:where(.qb-calculator-lesson, .qb-calculator-lesson *){background:linear-gradient(#acc7e0,#6c9cc9);color:#0e253b}.event-fields select:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:.92rem}
 @media(max-width:435px){main:where(.qb-calculator-lesson, .qb-calculator-lesson *){padding:14px}.header:where(.qb-calculator-lesson, .qb-calculator-lesson *){gap:8px}.bezel>span:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:.57rem}}
 @media(max-width:480px){.event-fields:where(.qb-calculator-lesson, .qb-calculator-lesson *){grid-template-columns:repeat(2,minmax(0,1fr))}.event-fields>label:first-child:where(.qb-calculator-lesson, .qb-calculator-lesson *){grid-column:1/-1}}
+
+/* Shared Watch framing. The separate diagram is educational, not firmware LCD output. */
+.normal-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device>#try-host{width:100%;padding:0;--handheld-width:100%;pointer-events:none}
+.normal-watch-sketch{
+ position:absolute;z-index:1;inset:50% auto auto 50%;translate:-50% -50%;
+ width:min(84%,23rem);margin:0;padding:.38em .55em;
+ border:1px solid var(--lw-line);border-radius:8px;background:var(--lw-base);color:var(--lw-text);pointer-events:none
+}
+.normal-watch-sketch figcaption{font-size:clamp(.7rem,2.6vw,.89rem);font-weight:650;text-align:center}
+.normal-watch-sketch .curve{margin:.2em 0 0}
+.normal-watch-sketch svg{width:100%;height:auto;border:0}
+.normal-watch-sketch .shade{fill:var(--lw-scrub);opacity:.32}
+.normal-watch-sketch .complement{fill:var(--lw-soft-ink);opacity:.14}
+@media(max-width:420px){
+ .normal-watch .lw-header h1{font-size:1.45rem}
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-coach{min-block-size:3lh}
+}
+@media(max-width:780px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide .lw-groups{max-height:clamp(125px,22dvh,185px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
+@media(max-width:350px){
+ .normal-watch>main{padding-inline:8px}
+ .normal-watch .lw-header{gap:.42em}
+ .normal-watch .lw-header h1{font-size:1.36rem}
+}
+.normal-resources{margin:.65rem 0;color:var(--muted);font-size:.81rem}
