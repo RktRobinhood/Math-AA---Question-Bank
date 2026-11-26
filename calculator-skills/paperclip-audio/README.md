@@ -127,3 +127,9 @@ exam text.
 [CT01 v2: Enter and round a calculation](expanded/CT01-v2.md) is the first expanded
 script. Preserve the existing CT01 MP3 and signed cue map. The new take needs
 its own measured alignment and student-facing check before replacing audio.
+
+[CT06 v2: Solve an equation numerically](expanded/CT06-v2.md) adds the exponent
+cursor, history recall, separate bounds, and rounding. The live Watch version
+continues to use the signed original recording with additional teaching holds.
+Use each script's production cues with the learner's chosen framing, not an
+automatic camera cut. Record and measure new takes separately.

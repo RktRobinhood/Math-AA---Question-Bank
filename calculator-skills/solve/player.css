@@ -28,8 +28,6 @@
  font:620 clamp(.77rem,2.5vw,.94rem)/1.22 system-ui;text-align:center;text-wrap:pretty
 }
 @media(max-width:380px){.solve-lesson .player .caption:not([hidden]){min-height:51px}}
-.solve-lesson #key-overlay{color:var(--video-quiet);font-size:.85rem}
-.solve-lesson #key-overlay kbd{display:inline-block;padding:.18em .42em;border:1px solid #7d9a88;border-radius:4px;background:#283c32;color:#fff}
 .solve-lesson .solve-screen-only .scene{min-height:245px}
 .solve-lesson .solve-screen-only .hh-body{width:min(100%,580px);max-width:100%;aspect-ratio:4/3;overflow:hidden;border:4px solid #40574b;border-radius:9px;margin:auto}
 .solve-lesson .solve-screen-only .hh-body>*:not(.hh-lcd){display:none!important}
@@ -54,7 +52,6 @@
  .solve-lesson .player .scene .beat .beat-no{display:none}
  .solve-lesson .player .scene .beat .beat-title{font-size:.95rem}
  .solve-lesson .player .scene .beat .beat-tip{font-size:.79rem;max-width:none;min-height:0;margin-top:0}
- .solve-lesson .player #key-overlay{position:absolute;top:9px;right:8px;background:#141f1be8;padding:3px 5px;border-radius:4px}
  .solve-lesson .player .scene .lcd-group{--handheld-width:clamp(152px,calc((100svh - 295px)*.4777),276px)}
  .solve-lesson #watch-controls #fullscreen{justify-self:end;width:37px}
  .solve-lesson .player:is(:fullscreen,.watch-fullscreen-fallback) .scene{grid-template-rows:minmax(0,1fr) auto}
@@ -129,3 +126,19 @@
  .solve-lesson #watch-controls .seek{grid-column:1/-3}
  .solve-lesson #watch-controls .time{grid-column:-3/-1;font-size:.64rem}
 }
+
+.solve-lesson #watch-controls .watch-speed{display:flex;align-items:center;gap:.2rem;color:#e3ede7;font:600 .68rem system-ui}
+.solve-lesson #watch-controls .watch-speed select{width:4.65rem}
+.solve-lesson #key-steps{list-style:none;display:flex;flex-wrap:wrap;gap:3px;margin:.38rem 0 0;padding:0}
+.solve-lesson #key-steps li{display:flex;min-width:1.14rem;justify-content:center;align-items:center;border-radius:4px;border:1px solid currentColor;line-height:1.04;min-height:1rem}
+.solve-lesson #key-steps kbd{font:650 .66rem system-ui;padding:0 .18rem}
+.solve-lesson #key-steps li[data-progress="next"]{color:#b8c5bd}
+.solve-lesson #key-steps li[data-progress="done"]{color:#dff2e5;background:#39564a;border-color:#638573}
+.solve-lesson #key-steps li[data-progress="current"]{color:#16281f;background:#a9f0c0;border-color:#a9f0c0;box-shadow:0 0 0 1px #16281f inset}
+@media(max-width:430px){
+ .solve-lesson #watch-controls .watch-speed{font-size:.6rem}
+ .solve-lesson #watch-controls .watch-speed select{width:4.05rem}
+}
+
+.solve-lesson .key-trail-label{display:block;margin-top:.42rem;font:640 .68rem system-ui;color:var(--video-quiet)}
+.solve-lesson #key-steps .key-group-start{margin-inline-start:.24rem}

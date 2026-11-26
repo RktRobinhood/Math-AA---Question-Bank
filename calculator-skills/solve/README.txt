@@ -1,5 +1,5 @@
 CT06 Numerical Solve · TI-Nspire CX II non-CAS
-Open index.html online or offline. Watch uses a narrated original example;
+Open index.html on the live site or through a local static HTTP server. Watch uses a narrated original example;
 Try is independent and lets you edit equations and bounds.
 
 Routes relative to site root:
@@ -15,12 +15,12 @@ bases, sin/cos (radians), exp, and division by nonzero constants. It can miss
 touching roots and multiple closely spaced crossings. An answer is one root,
 not a proof there are no others. It is not TI's solver algorithm.
 
-The Watch visuals respond to the narration clock. Captions are included. Deep
-links do not change the Watch example. The Watch entry shows leaving the
-exponent with Right before typing the equals sign. New George voice from
-ElevenLabs; no speech/browser service is required during playback.
+Watch keeps the original voice at 1× and gives each group of key actions
+its own adjustable teaching pause. Captions follow the recorded lines as heard,
+not the keys. The key trail works without audio and follows rewinds. Full and
+Screen-only are manual and remembered. Deep links do not change the example.
 
-Files: index.html, styles.css, app.js, narration.mp3 are sufficient for use.
-main.js controls the player/steps; solver.js and screen.js are editable sources.
-Build with: esbuild main.js --bundle --minify --outfile=app.js --format=iife --target=es2022
-Three.js r180 (MIT) is bundled; the Canvas renderer works without WebGL.
+main.js is the live module; watch-plan.js maps audio cuts to action groups;
+solver.js and screen.js are shared within this lesson. The historical app.js
+bundle and video are not the live Watch player. Three.js r180 (MIT) is served
+locally; the Canvas renderer works without WebGL.

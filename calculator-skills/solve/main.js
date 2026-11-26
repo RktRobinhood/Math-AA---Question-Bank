@@ -3,7 +3,8 @@ import {WATCH,TRY_CASES,solveInBounds} from './solver.js';
 
 const $=id=>document.getElementById(id);
 const media=$('voice'),play=$('play'),seek=$('seek'),cc=$('captions'),caption=$('caption'),lcd=$('lcd');
-import narration from './narration-cues.json';
+import {makeLayout,demoTime,keyName} from './watch-plan.js?v=1';
+const narration=await fetch(new URL('./narration-cues.json', import.meta.url)).then(r=>r.json());
 const CAPTIONS=narration.cues;
 const TOPICS=[
  ['01','Open Numerical Solve','On a Calculator page, choose Menu → 3: Algebra → 1: Numerical Solve.'],
@@ -29,30 +30,38 @@ const SCREEN=surface($('drawing'));
 lcd.dataset.renderer=SCREEN.backend;
 const watchers=[...document.querySelectorAll('[data-mode]')];
 const hotspots=$('hotspots');
-let mode=null,time=0,duration=35.553,running=false,rafId=0,prevFrame=0,ccOn=false,silent=false,silentOrigin=0,pendingSeek=null,frameSig='';
+let layout=makeLayout(),duration=layout.duration;
+let mode=null,time=0,running=false,rafId=0,ccOn=false,silent=false,origin=0,phase='',frameSig='',lcdSig='',trailIndex=-2;
 let step='idle', values={equation:chosen.equation,lower:chosen.lower,upper:chosen.upper}, activeResult=null;
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
-const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen'),keyOverlay=$('key-overlay');
+const player=$('player'),fullButton=$('view-full'),screenButton=$('view-screen');
 const playerUI=window.CalculatorWatchPlayer.mount({player, surface:$('watch-surface'), play,seek,expand:$('fullscreen'),
  feedback:$('play-feedback'),active:()=>mode==='watch'});
 const FRAME_PREF='qb-calculator-watch-frame';
 function readFrame(){try{return localStorage.getItem(FRAME_PREF)!=='full'}catch(_){return true}}
-let screenOnly=readFrame(),willPlay=false;
+let screenOnly=readFrame(),willPlay=false,playTicket=0;
 function selectFrame(screen){
  screenOnly=screen;
  try{localStorage.setItem(FRAME_PREF,screen?'screen':'full')}catch(_){}
  viewState();
 }
 const scene=$('watch-surface'), rateControl=$('watch-speed'), sound=$('sound');
-let speed=Number(rateControl.value);
-media.playbackRate=speed;
-const silenceTime=()=>clamp((performance.now()-silentOrigin)*speed/1000,0,duration);
-function alignSilent(){silentOrigin=performance.now()-time*1000/speed;}
+const tape=window.HandheldKeyCues.CT06;
+const trail=$('key-trail');
+const changes=new Set([3,13,17,19]);
+const chips=tape.map((event,i)=>{
+ const item=document.createElement('li'), key=document.createElement('kbd');
+ if(changes.has(i))item.classList.add('key-group-start');
+ key.textContent=keyName(event.key);item.append(key);$('key-steps').append(item);return item;
+});
+seek.max=duration;media.playbackRate=1;media.preservesPitch=true;
 rateControl.addEventListener('change',()=>{
- if(silent&&running)time=silenceTime();
- speed=Number(rateControl.value);
- media.playbackRate=speed;
- if(silent)alignSilent();
+ const resume=running||willPlay;
+ if(resume)pause();
+ const old=layout;
+ layout=makeLayout(Number(rateControl.value));duration=layout.duration;seek.max=duration;
+ time=layout.remap(old,time);paint(time);playing(false);
+ if(resume)void start(false);
 });
 sound.addEventListener('click',()=>{
  media.muted=!media.muted;
@@ -107,75 +116,117 @@ function frame(t){
 }
 const timecode=t=>Math.floor(Math.max(0,t)/60)+':'+String(Math.floor(Math.max(0,t))%60).padStart(2,'0');
 function paint(t){
- const keys=window.HandheldTransport?.lightAt(shell,'CT06',t)||[];
- let f=frame(t);
- const tape=window.HandheldKeyCues?.CT06||[], ms=t*1000;
- const past=tape.filter(e=>e.timeMs<=ms);
- const cmdCue=past.filter(e=>typeof e.cmdAfter==='string').at(-1);
- if(t>=23.58&&t<24.18){f={state:'result',n:4,...first,historyFocus:past.filter(e=>e.historyFocus).at(-1)?.historyFocus,keys:[]};}
+ if(mode!=='watch')return;
+ const point=layout.at(t),demo=demoTime(point),ms=demo*1000;
+ const keys=window.HandheldTransport?.lightAt(shell,'CT06',demo)||[];
+ let f=frame(demo);
+ const index=tape.findLastIndex(e=>e.timeMs<=ms);
+ const past=tape.slice(0,index+1);
+ const cmdCue=past.findLast(e=>typeof e.cmdAfter==='string');
+ if(demo>=23.58&&demo<24.18){f={state:'result',n:4,...first,historyFocus:past.findLast(e=>e.historyFocus)?.historyFocus,keys:[]};}
  else if(f.state==='entry'&&cmdCue){f.cmd=cmdCue.cmdAfter;f.cursorFromEnd=cmdCue.cursorFromEnd??0;f.exponentOpen=!!cmdCue.exponentOpen;}
- SCREEN.draw(f);beat(f.n,f.keys,f.tip);
- const cap=CAPTIONS.find(c=>ms>=c.startMs&&ms<c.endMs)?.text||'';
+ // Carry the completed LCD state into narration without relighting its key.
+ if(point.speaking||!keys.length)shell?.setKeys([]);
+ if(index!==trailIndex){
+  trailIndex=index;
+  chips.forEach((n,i)=>{
+   n.dataset.progress=i<index?'done':i===index?'current':'next';
+   if(i===index)n.setAttribute('aria-current','step');else n.removeAttribute('aria-current');
+  });
+ }
+ const stage=Math.min(5,point.span.i===4?3:point.span.i>=5?point.span.i-1:point.span.i);
+ const holdNote=[
+  'Press Menu just below and to the right of the touchpad. Choose 3 for Algebra, then 1 for Numerical Solve.',
+  'Use the power key for the exponent. Press → to leave the exponent before typing =. After the equation, enter a comma and x.',
+  'Enter a comma, 2, a comma, then 3. These are x-values, with the lower bound first.',
+  'Close the bracket and press Enter. Only the interval from 2 to 3 is searched.',
+  'Read the positive solution. Keep these digits for your working.',
+  'Press ↑ twice and Enter to copy the expression. Edit the bounds to −4 and −3 with the negative key, then press Enter.',
+  'To 3 significant figures: x ≈ '+prettify(wNeg.rounded)+' or '+wPos.rounded+'.'
+ ][point.span.i];
+ const sig=JSON.stringify([f.state,f.cmd,f.result,f.historyFocus,f.cursorFromEnd,f.exponentOpen,!!f.cursor,!!f.history]);
+ if(sig!==lcdSig){lcdSig=sig;SCREEN.draw(f);}
+ beat(stage,[],holdNote);
+ const audioMs=point.audioTime*1000;
+ const cap=point.speaking?(CAPTIONS.find(c=>audioMs>=c.startMs&&audioMs<c.endMs)?.text||''):'';
  if(caption.textContent!==cap)caption.textContent=cap;
  caption.hidden=!ccOn||!cap;
- const recent=past.at(-1),shownKey=keys[0]||(recent&&ms-recent.timeMs<=850?recent.key:'');
- keyOverlay.hidden=!shownKey;
- if(shownKey)keyOverlay.querySelector('kbd').textContent=({right:'→',left:'←',up:'↑',down:'↓',enter:'Enter',menu:'Menu',power:'^',delete:'Del',neg:'(−)',eq:'=',comma:',',plus:'+',minus:'−'})[shownKey]||shownKey;
- player.dataset.step=f.state;
+ player.dataset.step=f.state;player.dataset.phase=point.speaking?'voice':'hold';
  seek.value=t;
- seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(duration));
- $('time').textContent=timecode(t)+' / '+timecode(duration);
+ seek.setAttribute('aria-valuetext',timecode(t)+' of '+timecode(Math.round(duration)));
+ $('time').textContent=timecode(t>=duration-.015?Math.round(duration):t)+' / '+timecode(Math.round(duration));
 }
 function playing(v){
- running=v;willPlay=false;play.setAttribute('aria-label',v?'Pause':time>=duration-.04?'Replay':'Play');play.querySelector('.play-icon').hidden=v;play.querySelector('.pause-icon').hidden=!v;
+ running=v;willPlay=false;
+ play.setAttribute('aria-label',v?'Pause':time>=duration-.015?'Replay':'Play');
+ play.querySelector('.play-icon').hidden=v;
+ play.querySelector('.pause-icon').hidden=!v;
  cancelAnimationFrame(rafId);if(v)rafId=requestAnimationFrame(tick);
 }
 function tick(now){
  if(!running||mode!=='watch')return;
- if(now-prevFrame>=31){
-  prevFrame=now;time=silent?clamp((now-silentOrigin)*speed/1000,0,duration):media.currentTime;
-  paint(time);
-  if(time>=duration-.015){end();return}
+ const p=layout.at(time),s=p.span;
+ if(phase==='voice'){
+  time=silent?Math.min(s.voiceEnd,(now-origin)/1000):
+   Math.min(s.voiceEnd,s.start+Math.max(0,media.currentTime-s.from));
+  if(time>=s.voiceEnd-.014||(!silent&&media.ended)){
+   media.pause();time=s.voiceEnd;phase='hold';origin=performance.now()-time*1000;
+  }
+ }else{
+  time=Math.min(s.end,(now-origin)/1000);
+  if(time>=duration){time=duration;pause();return;}
+  if(time>=s.end){
+   const token=playTicket;paint(time);
+   void enterPhase(token).then(ok=>{if(ok&&running)rafId=requestAnimationFrame(tick);});
+   return;
+  }
  }
- rafId=requestAnimationFrame(tick)
+ paint(time);rafId=requestAnimationFrame(tick);
 }
-function end(){time=duration;playing(false);media.pause();if(mode==='watch')paint(time)}
 function pause(){
- if(!silent&&running&&Number.isFinite(media.currentTime))time=media.currentTime;
- media.pause();playing(false);if(mode==='watch')paint(time);
+ playTicket++;media.pause();playing(false);phase='';paint(time);
 }
-function captionsState(v){ccOn=v;cc.setAttribute('aria-pressed',String(v));cc.setAttribute('aria-label',v?'Hide captions':'Show captions');if(mode==='watch')paint(time)}
+function captionsState(v){
+ ccOn=v;cc.setAttribute('aria-pressed',String(v));cc.setAttribute('aria-label',v?'Hide captions':'Show captions');paint(time);
+}
 function useSilent(){
- silent=true;alignSilent();$('audio-notice').hidden=mode!=='watch';captionsState(true)
+ if(silent)return;
+ silent=true;media.pause();origin=performance.now()-time*1000;
+ $('audio-notice').hidden=mode!=='watch';sound.hidden=true;captionsState(true);
 }
-media.addEventListener('loadedmetadata',()=>{
- if(Number.isFinite(media.duration))duration=media.duration;seek.max=duration;
- if(pendingSeek!==null){media.currentTime=pendingSeek;pendingSeek=null}
- if(mode==='watch')paint(time);
-});
+async function enterPhase(token){
+ const p=layout.at(time);origin=performance.now()-time*1000;phase=p.speaking?'voice':'hold';
+ if(!p.speaking||silent){media.pause();return token===playTicket&&mode==='watch';}
+ let deadline;
+ try{
+  media.currentTime=p.audioTime;media.playbackRate=1;
+  await Promise.race([media.play(),new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error('Audio unavailable')),4500);})]);
+ }catch{if(token===playTicket)useSilent();}
+ finally{clearTimeout(deadline);}
+ return token===playTicket&&mode==='watch';
+}
+async function start(manual=true){
+ if(mode!=='watch')return;
+ if(time>=duration-.015)time=0;
+ const token=++playTicket;willPlay=true;
+ if(!await enterPhase(token))return;
+ playing(true);if(manual)playerUI.flash(true);
+}
 media.addEventListener('error',useSilent);
-media.addEventListener('ended',end);
-media.addEventListener('pause',()=>{if(!silent&&running&&media.paused)pause()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&(running||willPlay))pause();});
 cc.addEventListener('click',()=>captionsState(!ccOn));
 fullButton.addEventListener('click',()=>selectFrame(false));
 screenButton.addEventListener('click',()=>selectFrame(true));
 seek.addEventListener('input',()=>{
- time=clamp(Number(seek.value),0,duration);
- if(silent)alignSilent();
- else if(Number.isFinite(media.duration))media.currentTime=time;
- else pendingSeek=time;
- if(mode==='watch'){paint(time);if(!running)play.setAttribute('aria-label',time>=duration-.04?'Replay':'Play');}
+ const next=Number(seek.value),resume=running||willPlay;
+ if(resume)pause();
+ time=clamp(next,0,duration);paint(time);playing(false);
+ if(resume)void start(false);
 });
-let playTicket=0;
-play.addEventListener('click',async()=>{
+play.addEventListener('click',()=>{
  if(mode!=='watch')return;
- if(running||willPlay){playTicket++;pause();playerUI.flash(false);return}
- if(time>=duration-.04)time=0;
- if(silent||media.error){useSilent();playing(true);playerUI.flash(true);return}
- const token=++playTicket;willPlay=true;
- if(Number.isFinite(media.duration))media.currentTime=time;else pendingSeek=time;
- try{await media.play();if(mode==='watch'&&token===playTicket){playing(true);playerUI.flash(true)}else if(!willPlay&&!running)media.pause()}
- catch(e){if(e.name!=='AbortError'&&mode==='watch'&&token===playTicket){useSilent();playing(true);playerUI.flash(true)}}
+ if(running||willPlay){pause();playerUI.flash(false);}
+ else void start();
 });
 const input=$('equation'),lo=$('lower'),hi=$('upper'),form=$('solver-form');
 const feedback=$('feedback'),answer=$('answer');
@@ -243,11 +294,11 @@ form.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();form.
 
 function setMode(m){
  if(mode===m)return;
- playTicket++;pause();mode=m;frameSig='';hotspots.replaceChildren();
+ pause();mode=m;frameSig='';lcdSig='';trail.hidden=m!=='watch';hotspots.replaceChildren();
  document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');
  watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
  $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('watch-example').hidden=m!=='watch';$('audio-notice').hidden=!(m==='watch'&&silent);
- if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;keyOverlay.hidden=true;drawTry()}
+ if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;drawTry()}
 }
 let targetField=0,lastField=-1;
 fields.forEach((field,i)=>field.addEventListener('focus',()=>{targetField=i;lastField=i}));
