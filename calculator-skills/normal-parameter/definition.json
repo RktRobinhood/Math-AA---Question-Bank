@@ -1,0 +1,399 @@
+{
+  "id": "CT41",
+  "title": "Unknown normal parameter",
+  "intro": "Use an inverse normal percentile and the stored answer to find the mean or standard deviation.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "760d1b5a37abb6767c36353a20ef17530a21c1510cfa6de730c1b3443e855f1a",
+    "scriptSha256": "a8469cd9f6990417be03991240abaa8098eecde7db5e8c954553ad22d9017dcf"
+  },
+  "chapters": [
+    {
+      "id": "start",
+      "title": "Match a percentile"
+    },
+    {
+      "id": "mean-z",
+      "title": "Find z for the mean"
+    },
+    {
+      "id": "mean",
+      "title": "Use stored Ans to find the mean"
+    },
+    {
+      "id": "sd-z",
+      "title": "Find z for the standard deviation"
+    },
+    {
+      "id": "sd",
+      "title": "Use stored Ans to find the spread"
+    },
+    {
+      "id": "right-tail",
+      "title": "Convert a right tail"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "start",
+      "spoken": "Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve.",
+      "coach": "A percentile links the cutoff x = 20 to a position z on the standard normal curve.",
+      "end": 10.22,
+      "hold": 1,
+      "keys": []
+    },
+    {
+      "chapter": "mean-z",
+      "spoken": "On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal.",
+      "coach": "Menu → 5 Probability → 5 Distributions → 3 Inverse Normal.",
+      "end": 18.02,
+      "hold": 4.5,
+      "keys": [
+        {
+          "id": "b2-k1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.12
+        },
+        {
+          "id": "b2-k2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.32
+        },
+        {
+          "id": "b2-k3",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.52
+        },
+        {
+          "id": "b2-k4",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.72
+        }
+      ]
+    },
+    {
+      "chapter": "mean-z",
+      "spoken": "Enter zero point one for the left area, zero for the mean, and one for the standard deviation.",
+      "coach": "Enter left area 0.1 with μ = 0 and σ = 1.",
+      "end": 25.23,
+      "hold": 7.5,
+      "keys": [
+        {
+          "id": "b3-k1",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.0667
+        },
+        {
+          "id": "b3-k2",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.1778
+        },
+        {
+          "id": "b3-k3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2889
+        },
+        {
+          "id": "b3-k4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4
+        },
+        {
+          "id": "b3-k5",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5111
+        },
+        {
+          "id": "b3-k6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6222
+        },
+        {
+          "id": "b3-k7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7333
+        },
+        {
+          "id": "b3-k8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8444
+        }
+      ]
+    },
+    {
+      "chapter": "mean-z",
+      "spoken": "Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value.",
+      "coach": "Enter inserts the command, then Enter evaluates. Keep the negative z in Ans.",
+      "end": 34.62,
+      "hold": 2.2,
+      "keys": [
+        {
+          "id": "b4-k1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2
+        },
+        {
+          "id": "b4-k2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5333
+        }
+      ]
+    },
+    {
+      "chapter": "mean",
+      "spoken": "The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four.",
+      "coach": "Type 20 − 5 × Ans. Ctrl then (−) inserts the full stored value.",
+      "end": 50.91,
+      "hold": 7.2,
+      "keys": [
+        {
+          "id": "b5-k1",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0667
+        },
+        {
+          "id": "b5-k2",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1778
+        },
+        {
+          "id": "b5-k3",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.2889
+        },
+        {
+          "id": "b5-k4",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4
+        },
+        {
+          "id": "b5-k5",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.5111
+        },
+        {
+          "id": "b5-k6",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.6222
+        },
+        {
+          "id": "b5-k7",
+          "label": "(−)",
+          "ariaLabel": "Negative key, not subtraction",
+          "at": 0.7333
+        },
+        {
+          "id": "b5-k8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8444
+        }
+      ]
+    },
+    {
+      "chapter": "sd-z",
+      "spoken": "Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again.",
+      "coach": "For 90% below 63 with mean 52, find a new z using Inverse Normal.",
+      "end": 64.76,
+      "hold": 4.5,
+      "keys": [
+        {
+          "id": "b6-k1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.12
+        },
+        {
+          "id": "b6-k2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.32
+        },
+        {
+          "id": "b6-k3",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.52
+        },
+        {
+          "id": "b6-k4",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.72
+        }
+      ]
+    },
+    {
+      "chapter": "sd-z",
+      "spoken": "Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive.",
+      "coach": "Enter left area 0.9 with μ = 0 and σ = 1. The second Enter evaluates.",
+      "end": 78.65,
+      "hold": 8.5,
+      "keys": [
+        {
+          "id": "b7-k1",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.0545
+        },
+        {
+          "id": "b7-k2",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.1455
+        },
+        {
+          "id": "b7-k3",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.2364
+        },
+        {
+          "id": "b7-k4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3273
+        },
+        {
+          "id": "b7-k5",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.4182
+        },
+        {
+          "id": "b7-k6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5091
+        },
+        {
+          "id": "b7-k7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6
+        },
+        {
+          "id": "b7-k8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6909
+        },
+        {
+          "id": "b7-k9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7818
+        },
+        {
+          "id": "b7-k10",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8727
+        }
+      ]
+    },
+    {
+      "chapter": "sd",
+      "spoken": "Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be.",
+      "coach": "Type (63 − 52) ÷ Ans. Use Ctrl then (−) again; the result is positive.",
+      "end": 97.34,
+      "hold": 10.1,
+      "keys": [
+        {
+          "id": "b8-k1",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.05
+        },
+        {
+          "id": "b8-k2",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.1333
+        },
+        {
+          "id": "b8-k3",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.2167
+        },
+        {
+          "id": "b8-k4",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.3
+        },
+        {
+          "id": "b8-k5",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3833
+        },
+        {
+          "id": "b8-k6",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4667
+        },
+        {
+          "id": "b8-k7",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.55
+        },
+        {
+          "id": "b8-k8",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.6333
+        },
+        {
+          "id": "b8-k9",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.7167
+        },
+        {
+          "id": "b8-k10",
+          "label": "(−)",
+          "ariaLabel": "Negative key, not subtraction",
+          "at": 0.8
+        },
+        {
+          "id": "b8-k11",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8833
+        }
+      ]
+    },
+    {
+      "chapter": "right-tail",
+      "spoken": "If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left.",
+      "coach": "If given a right-tail area, subtract it from 1 first. Area in Inverse Normal is always left of the cutoff.",
+      "end": 108.385,
+      "hold": 2,
+      "keys": []
+    }
+  ]
+}

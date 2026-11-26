@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Unknown Normal Parameter · Calculator Skills | IB Math Question Bank</title>
+<title>Unknown normal parameter · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
@@ -12,51 +12,33 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=native-bank-1"><link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="../handheld/integration.css"><link rel="stylesheet" href="handheld.css?v=native-bank-1"><script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script><script src="narration.js" defer></script><script src="watch-media.js" defer></script><script src="../normal/math.js" defer></script><script src="../inverse-normal/inverse.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="lesson.js?v=native-bank-1&amp;focused-notes=1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="../normal/math.js" defer></script><script src="../inverse-normal/inverse.js" defer></script><script src="../handheld/freecalc.js" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head>
-<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header class="header">
-<div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT41</span><span id="caption-beta" class="rehearsal-tag"> · Caption-only rehearsal</span></p><h1>Unknown normal parameter</h1><p class="subtitle">Find the mean or standard deviation from a percentile.</p></div>
-
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
-<section role="tabpanel" id="watch" aria-labelledby="watch-tab" tabindex="0">
-<div class="watch-grid">
-<div class="viewer cx-handheld-stage">
-<p id="caption" class="caption"></p><p id="audio-state" class="audio-state" role="status" hidden></p>
-<div class="worked-prompt"><div><span>Watch example</span> <strong id="worked-event">P(X &lt; 20) = 0.10 · σ = 5 · find μ</strong></div><div id="compact-curve" class="curve"></div></div>
-<div class="inverse-frame">
-<div id="watch-host"><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="screen-work"></div></div></div>
-<button type="button" id="stage-play" class="stage-play" aria-label="Play the demonstration"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M2 1l17 10L2 21Z" fill="currentColor"/></svg></button>
-</div>
-<div class="player transport" aria-label="Playback controls">
-<div class="player-top"><button id="play" type="button" aria-label="Play" class="primary">Play</button><label><input type="checkbox" id="captions" checked> CC</label><button id="take-over" type="button" class="cx-watch-try">Try a new problem</button></div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="62" step=".001"><span id="clock" aria-hidden="true">0:00</span></label>
-<audio id="narration" preload="none"></audio>
-</div>
-
-
-</div>
-<aside class="director" aria-label="Demonstration steps">
-<h2>Walkthrough</h2>
-<div id="watch-curve" class="curve" aria-label="Normal curve with the selected area shaded"></div>
-<ol id="steps" class="steps"></ol>
-<button class="plain-link" type="button" id="to-try">Try a new problem <span aria-hidden="true">→</span></button>
-<details class="transcript"><summary>Transcript</summary><p id="transcript"></p></details>
-</aside>
-</div>
-</section>
-<section role="tabpanel" id="try" aria-labelledby="try-tab" tabindex="0" hidden>
-<div class="try-grid">
-<section class="try-device" aria-label="Practice on the handheld">
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page calculator-bank-lesson ct41-shared-watch"><main class="qb-calculator-lesson">
+<nav class="ct41-resources" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav>
+<div data-calculator-watch></div>
+<details id="watch-model" class="workbench ct41-watch-model"><summary>See the area on the normal curve</summary><div id="watch-curve" class="curve"></div></details>
+<section id="try" aria-label="Try on your calculator" hidden>
+<div class="ct41-try-grid">
+<section class="ct41-try-device" aria-label="Practice on the handheld">
 <div id="try-host" tabindex="0" aria-label="Practice calculator. M opens Menu. In the wizard, Tab changes fields and Escape closes it."><div class="screen"><div class="status"><span>1.1</span><span>Calculator · RAD</span><span aria-hidden="true">▰</span></div><div class="screen-work" id="try-work"></div></div></div>
 <p id="try-feedback" class="feedback" role="status"></p>
 <p id="key-help">Start with <b>Menu</b>. Select a field with <b>Tab</b>. Find <b>z</b> with <b>μ = 0, σ = 1</b>. Use <b>ctrl</b> then <b>(−)</b> to insert Ans.</p>
 <button id="reset-try" type="button" class="plain-link">Start blank</button>
-<button id="return-assigned" type="button" class="plain-link" hidden>Return to assigned Try</button>
+
 <button id="return-watch" type="button" class="plain-link">Return to Watch</button>
 </section>
-<div class="try-material">
+<div class="ct41-material">
 <section class="exercise" aria-labelledby="challenge-title">
 <p class="tag" id="try-context">Your turn</p><h2 id="challenge-title">Find the mean</h2>
 <p id="challenge">A normal distribution has standard deviation 4, and 75% of its values are above 37. Find its mean.</p>
@@ -87,5 +69,8 @@
 </div>
 </div>
 </section>
-</main><script type="application/json" id="ct41-measured-recording">{"version":1,"lesson":"CT41","timing":"measured-playback","audio":"narration.mp3","audioSha256":"760d1b5a37abb6767c36353a20ef17530a21c1510cfa6de730c1b3443e855f1a","durationMs":108385,"measurement":"FAL-1695 local George clone (VoxCPM2). Each cue is its own checked take, so cue starts are sample-exact in the composed file. Each key is placed at the measured onset of the word that names it in the take (faster-whisper word timestamps), with authored spacing inside a key group, capped at 400 ms; the Watch holds when speech runs long. Minimum 500 ms between cues.","cues":[{"id":"41.01","startMs":0,"text":"Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve."},{"id":"41.02","startMs":10532,"text":"On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."},{"id":"41.03","startMs":18313,"text":"Enter zero point one for the left area, zero for the mean, and one for the standard deviation."},{"id":"41.04","startMs":25523,"text":"Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value."},{"id":"41.05","startMs":34913,"text":"The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four."},{"id":"41.06","startMs":51208,"text":"Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again."},{"id":"41.07","startMs":65049,"text":"Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive."},{"id":"41.08","startMs":78928,"text":"Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be."},{"id":"41.09","startMs":97598,"text":"If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left."}],"keyTimesMs":{"mean-menu-open":12172,"mean-menu-probability":13592,"mean-menu-distributions":15012,"mean-menu-inverse-normal":16472,"mean-input-area-0":19193,"mean-input-area-decimal":19493,"mean-input-area-1":19803,"mean-input-to-mu":21733,"mean-input-mu-0":22133,"mean-input-to-sigma":23153,"mean-input-sigma-1":23553,"mean-input-to-ok":24803,"mean-z-insert":25583,"mean-z-evaluate":27403,"mean-calc-cutoff-2":39333,"mean-calc-cutoff-0":39613,"mean-calc-subtract":40053,"mean-calc-sigma-5":40203,"mean-calc-multiply":40773,"mean-calc-control":42193,"mean-calc-recall-ans":43273,"mean-calc-evaluate":46793,"sd-menu-open":59588,"sd-menu-probability":60348,"sd-menu-distributions":61368,"sd-menu-inverse-normal":62688,"sd-input-area-0":66769,"sd-input-area-decimal":67069,"sd-input-area-9":67369,"sd-input-to-mu":69789,"sd-input-mu-0":70189,"sd-input-to-sigma":71449,"sd-input-sigma-1":71849,"sd-input-to-ok":73629,"sd-z-insert":74029,"sd-z-evaluate":75149,"sd-calc-open-bracket":79968,"sd-calc-cutoff-6":80928,"sd-calc-cutoff-3":81228,"sd-calc-subtract":81748,"sd-calc-mu-5":81898,"sd-calc-mu-2":82198,"sd-calc-close-bracket":83748,"sd-calc-divide":85048,"sd-calc-control":87068,"sd-calc-recall-ans":88308,"sd-calc-evaluate":90068}}</script>
+
+<nav class="ct41-resources" aria-label="Lesson resources"><a href="../paperclip-audio/lessons/CT41.txt">Transcript</a> · <a href="../scratchpad/index.html">Open calculator</a></nav>
+</main>
+<script type="application/json" id="ct41-measured-recording">{"version":1,"lesson":"CT41","timing":"measured-playback","audio":"narration.mp3","audioSha256":"760d1b5a37abb6767c36353a20ef17530a21c1510cfa6de730c1b3443e855f1a","durationMs":108385,"measurement":"FAL-1695 local George clone (VoxCPM2). Each cue is its own checked take, so cue starts are sample-exact in the composed file. Each key is placed at the measured onset of the word that names it in the take (faster-whisper word timestamps), with authored spacing inside a key group, capped at 400 ms; the Watch holds when speech runs long. Minimum 500 ms between cues.","cues":[{"id":"41.01","startMs":0,"text":"Ten percent is below twenty. The standard deviation is five. To find the mean, first match that percentile on the standard normal curve."},{"id":"41.02","startMs":10532,"text":"On a Calculator page, press Menu. Choose Probability, then Distributions, then Inverse Normal."},{"id":"41.03","startMs":18313,"text":"Enter zero point one for the left area, zero for the mean, and one for the standard deviation."},{"id":"41.04","startMs":25523,"text":"Confirm, then press Enter again. The standard normal z-score is negative. Keep the calculator’s stored value."},{"id":"41.05","startMs":34913,"text":"The mean is twenty minus five times that z-score. Type twenty minus five times. Press Control, then the negative key, to insert the previous answer. Press Enter. The mean is about twenty-six point four."},{"id":"41.06","startMs":51208,"text":"Now ninety percent is below sixty-three, and the mean is fifty-two. We’re finding the standard deviation. Open Menu, Probability, Distributions, and Inverse Normal again."},{"id":"41.07","startMs":65049,"text":"Use the left area, zero point nine. Again enter zero for the mean and one for the standard deviation. Confirm, then press Enter again. This z-score is positive."},{"id":"41.08","startMs":78928,"text":"Open a bracket. Enter sixty-three minus fifty-two, then close the bracket. Divide by the previous answer: Control, then the negative key. Press Enter. The standard deviation is about eight point five eight. It’s positive, as a spread must be."},{"id":"41.09","startMs":97598,"text":"If the question gives the right tail, subtract its probability from one before using Inverse Normal. The Area field takes the area to the left."}],"keyTimesMs":{"mean-menu-open":12172,"mean-menu-probability":13592,"mean-menu-distributions":15012,"mean-menu-inverse-normal":16472,"mean-input-area-0":19193,"mean-input-area-decimal":19493,"mean-input-area-1":19803,"mean-input-to-mu":21733,"mean-input-mu-0":22133,"mean-input-to-sigma":23153,"mean-input-sigma-1":23553,"mean-input-to-ok":24803,"mean-z-insert":25583,"mean-z-evaluate":27403,"mean-calc-cutoff-2":39333,"mean-calc-cutoff-0":39613,"mean-calc-subtract":40053,"mean-calc-sigma-5":40203,"mean-calc-multiply":40773,"mean-calc-control":42193,"mean-calc-recall-ans":43273,"mean-calc-evaluate":46793,"sd-menu-open":59588,"sd-menu-probability":60348,"sd-menu-distributions":61368,"sd-menu-inverse-normal":62688,"sd-input-area-0":66769,"sd-input-area-decimal":67069,"sd-input-area-9":67369,"sd-input-to-mu":69789,"sd-input-mu-0":70189,"sd-input-to-sigma":71449,"sd-input-sigma-1":71849,"sd-input-to-ok":73629,"sd-z-insert":74029,"sd-z-evaluate":75149,"sd-calc-open-bracket":79968,"sd-calc-cutoff-6":80928,"sd-calc-cutoff-3":81228,"sd-calc-subtract":81748,"sd-calc-mu-5":81898,"sd-calc-mu-2":82198,"sd-calc-close-bracket":83748,"sd-calc-divide":85048,"sd-calc-control":87068,"sd-calc-recall-ans":88308,"sd-calc-evaluate":90068}}</script>
 </body></html>
