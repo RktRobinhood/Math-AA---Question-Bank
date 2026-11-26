@@ -1104,9 +1104,18 @@
       const sum = s.w.reduce((a, b) => a + b, 0), pairs = odd.length === 2 ? [[[odd[0], odd[1]]]] : [[[odd[0], odd[1]], [odd[2], odd[3]]], [[odd[0], odd[2]], [odd[1], odd[3]]], [[odd[0], odd[3]], [odd[1], odd[2]]]];
       const cost = (pr) => pr.reduce((t, [a, b]) => t + d[a][b], 0), best = pairs.reduce((m, pr) => (cost(pr) < cost(m) ? pr : m));
       const S = rng.pick([{ who: "A postal worker", does: "walk along every street", u: "minutes", w: "times, in minutes, to walk along the streets" }, { who: "A gritting lorry", does: "drive along every road", u: "kilometres", w: "lengths, in kilometres, of the roads" }, { who: "An inspector", does: "check every pipeline", u: "kilometres", w: "lengths, in kilometres, of the pipelines" }]);
-      const work = [`The vertices of odd degree are ${fmt.list(odd.map(vx))}, so some edges must be used twice.`];
-      if (odd.length === 2) work.push(`The shortest route between them is ${path(odd[0], odd[1])}, of weight $${d[odd[0]][odd[1]]}$; its edges are repeated.`);
-      else { for (const pr of pairs) work.push(`Pair ${pr.map(([a, b]) => `${vx(a)} with ${vx(b)} (shortest route ${path(a, b)}, $${d[a][b]}$)`).join(" and ")}: total $${cost(pr)}$.`); work.push(`The least total is $${cost(best)}$, so those routes are repeated.`); }
+      const work = [
+        `The vertices of odd degree are ${fmt.list(odd.map(vx))}.`,
+        "A closed route must enter and leave each vertex equally often. Repeating a path changes the parity at its two endpoints, so pair the odd vertices and choose the shortest path for each pair."
+      ];
+      if (odd.length === 2) work.push(`One shortest route between them is ${path(odd[0], odd[1])}, of weight $${d[odd[0]][odd[1]]}$; repeat the edges on such a route.`);
+      else {
+        for (const pr of pairs) work.push(`Pair ${pr.map(([a, b]) => `${vx(a)} with ${vx(b)} (one shortest path ${path(a, b)}, $${d[a][b]}$)`).join(" and ")}: total $${cost(pr)}$.`);
+        const tied = pairs.filter(pr => cost(pr) === cost(best)).length;
+        work.push(tied > 1
+          ? `There are $${tied}$ pairings with the least extra weight, $${cost(best)}$. Any one of them gives the same minimum total route weight.`
+          : `Only one pairing has the least extra weight, $${cost(best)}$; repeat the edges of a shortest path for each of its pairs.`);
+      }
       work.push(`Least total $= ${sum} + ${cost(best)} = ${sum + cost(best)}$ ${S.u}.`);
       return { params: {}, graph: netFig(s.L, s.edges, s.w), stem: `The diagram shows a weighted graph with vertices ${names(n)}. The weights are the ${S.w}. ${S.who} must ${S.does} at least once, starting and finishing at ${vx(0)}.`, parts: [
         P("Find the sum of the weights of all the edges.", 1, ans.int(sum), [`$${s.w.join(" + ")} = ${sum}$`]),
