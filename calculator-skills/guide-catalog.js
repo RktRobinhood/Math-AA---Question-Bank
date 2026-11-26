@@ -33,13 +33,20 @@
     return [{id:parent.id,href,title:part.title,family:parent.family,scopeNote:part.note||'',companion:true,
       tag:companionTitles[href.split('/')[0]]||'',direct:part.direct}];
   }));
+  const foundations=Object.entries(scope?.foundations??{}).flatMap(([route,row])=>{
+    const href=safeRoute(route);
+    return href?[{id:row.id,href,title:row.title,family:row.family,scopeNote:row.note,
+      companion:true,direct:row.direct}]:[];
+  });
   function rowsFor(id){
     const primary=rows.flatMap(r=>{
       const entry=scope?.skills?.[r.id], limited=entry?.scoped?.[id];
       if(!entry?.direct?.includes(id)&&!limited)return [];
       return [{...r,title:limited?.title||r.title,scopeNote:limited?.note||r.scopeNote,limited}];
     });
-    return [...primary,...companionRows.filter(c=>c.direct.includes(id))].sort((a,b)=>a.id.localeCompare(b.id)||Number(!!a.companion)-Number(!!b.companion));
+    const curriculum=[...primary,...companionRows.filter(c=>c.direct.includes(id))];
+    curriculum.sort((a,b)=>a.id.localeCompare(b.id)||Number(!!a.companion)-Number(!!b.companion));
+    return [...foundations.filter(c=>c.direct.includes(id)),...curriculum];
   }
   function withCourse(href,id,params={}){
     const url=new URL(href,document.baseURI);

@@ -62,4 +62,7 @@ window.CALCULATOR_COURSE_SCOPE={skills:{
 },companions:{
   "maximum/index.html":{"parent":"CT12","title":"Find a graph maximum","direct":["aa-sl","aa-hl","ai-sl","ai-hl"]},
   "histogram/index.html":{"parent":"CT30","title":"Frequency histograms","direct":["ai-sl","ai-hl"],"note":"Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph."}
+},foundations:{
+  "handset-keys/index.html":{"id":"SUP-HANDSET-KEYS","title":"Find your way around the keypad","family":"Getting started","direct":["aa-sl","aa-hl","ai-sl","ai-hl"],"note":"Find trig, equals, minus and fractions. Try exact and decimal answers."},
+  "handset-settings/index.html":{"id":"SUP-HANDSET-SETTINGS","title":"Set up your TI-Nspire","family":"Getting started","direct":["aa-sl","aa-hl","ai-sl","ai-hl"],"note":"Find Display Digits, Angle and Calculation Mode."}
 }};

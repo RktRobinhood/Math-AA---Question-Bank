@@ -7,6 +7,19 @@ adapters and 49 use the shared measured JSON bridge. Availability of a
 recording destination is not a claim that the lesson is narrated. The
 companions are Graph Maximum (CT12-max) and Frequency Histograms (SUP-HIST-01).
 
+## New Watch template lessons
+
+The [template Watch queue](template-watch/manifest.json) lists foundation and
+extension lessons authored directly in the common player. Each entry links
+the exact script, SHA-256, live data file and audio destination. Record only
+the linked lines, in order. Measure each speech boundary from the recording
+and update the beat `end` values in `definition.json`. Leave the extra teaching
+`hold` for seeing the keys. Add the measured MP3 and the matching
+`recording.file`, `recording.audioSha256` and `recording.scriptSha256` together.
+Do not use the legacy cue map or invent timing for these lessons. Verify the
+audio at normal voice speed and test captions and seeks in the common player.
+Watch remains captioned until the signed recording is in place.
+
 ## Recording queue
 
 1. **Preserve existing recordings** for CT01, CT06, CT08, CT10, CT11, CT12,

@@ -1,0 +1,9 @@
+Find trig on the left, beside the equals key. It opens a choice of functions, not a calculation.
+With sine highlighted, press Enter. Put zero inside the brackets, then evaluate.
+The equals key writes the symbol into the line. It doesn't run anything. Enter is the key that evaluates.
+For nine minus four, use the subtraction key on the right. That key goes between two numbers.
+Start a fresh entry. To write negative four on its own, choose the key marked minus in brackets. It's down by Enter.
+To put five over six, use Control and Divide. Type five in the top box. Move down and type six.
+Enter evaluates. With these whole numbers in Auto mode, this example stays as the exact fraction five sixths.
+Enter the same division again. This time use Control and Enter to request a decimal approximation. Keep the fraction if the question asks for an exact answer.
+Your turn. Try seven over nine both ways. What changes, and what stays the same?

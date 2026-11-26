@@ -1,0 +1,6 @@
+On the TI-Nspire CX II-T, press Home, then five for Settings, then two for Document Settings.
+Display Digits changes what you see, not the stored value. Float six shows up to six significant digits. Fix two shows two decimal places.
+Tab to Angle. Choose the unit the question uses. For thirty degrees, choose Degree. For an angle written with pi, check whether radians are intended.
+Calculation Mode controls how results are returned. Auto can keep a fraction; Approximate returns a decimal. Exact Arithmetic is a separate setting on the non-CAS CX II-T.
+Back in Calculator, the status bar should now say DEG for this example. Seven divided by three with Enter gives a fraction. Control Enter requests a decimal for just that result.
+A stacked fraction template is an input tool, not a document mode. Press Control and Divide to see the two boxes. MathPrint is a TI-84 setting; there is no MathPrint switch here.

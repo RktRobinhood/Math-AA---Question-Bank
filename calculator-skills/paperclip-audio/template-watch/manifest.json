@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "lessons": [
+    {
+      "id": "SUP-HANDSET-KEYS",
+      "definition": "../../handset-keys/definition.json",
+      "transcript": "SUP-HANDSET-KEYS.txt",
+      "transcriptSha256": "74baa422c561522a5aafef8d3cc58b8338cbc0ed3be38dcba36b8393c6f4e461",
+      "audioDestination": "../../handset-keys/narration.mp3"
+    },
+    {
+      "id": "SUP-HANDSET-SETTINGS",
+      "definition": "../../handset-settings/definition.json",
+      "transcript": "SUP-HANDSET-SETTINGS.txt",
+      "transcriptSha256": "a33660c89f9643bcf06933741226c8e849a18477c2b1a72671dc36a9e6d300a8",
+      "audioDestination": "../../handset-settings/narration.mp3"
+    }
+  ]
+}

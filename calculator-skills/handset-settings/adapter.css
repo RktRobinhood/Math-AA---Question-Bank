@@ -1,0 +1,45 @@
+/* Only the authored TI LCD artwork; watch-lesson.css owns the player. */
+.settings-lcd{container-type:inline-size;color-scheme:light}
+.settings-lcd-art{position:absolute;inset:0;overflow:hidden;background:#fff;color:#111c27;font:500 4.1cqw/1.15 Arial,sans-serif}
+.settings-status{height:9%;display:flex;align-items:center;gap:2.2cqw;padding:0 2cqw;background:linear-gradient(#293846,#19232d);color:#f0f4f8;border-bottom:1px solid #518ea5;font-size:3.6cqw}
+.settings-status b{color:#0f2b43;background:#d4e4f2;padding:.35cqw 1cqw}
+.settings-status small{margin-left:auto;color:#fff;font-size:2.65cqw}
+.settings-battery{width:4.3cqw;height:1.8cqw;background:#94d665;box-shadow:0 0 0 1px #587f88}
+.settings-results{position:absolute;inset:9% 0 auto}
+.settings-result-row{display:flex;align-items:center;justify-content:space-between;min-height:15cqw;border-bottom:1px solid #d3dfe8;padding:1cqw 2.7cqw;font-size:4.6cqw}
+.settings-ratio{display:inline-grid;grid-template-rows:auto auto;text-align:center;vertical-align:middle;line-height:1}
+.settings-ratio span:first-child{border-bottom:1px solid currentColor}
+.settings-ratio span{min-width:3.8cqw;padding:.35cqw .55cqw}
+.settings-entry{position:absolute;inset:auto 0 0;min-height:9.5%;padding:1.2cqw 2cqw;border-top:1px solid #8fa5b6;background:#eff5fa;font-size:4.8cqw}
+.settings-caret{display:inline-block;width:.5cqw;height:5cqw;background:#102533;vertical-align:middle}
+.settings-slot{font-size:4.8cqw}
+.settings-slot span:first-child{color:#225e9a}
+.settings-home-head{padding:2cqw 3cqw;color:#eaeff7;background:linear-gradient(#344451,#233039);font-weight:700}
+.settings-home-cols{display:grid;grid-template-columns:1fr 1fr;gap:1cqw;padding:3cqw 2.4cqw;background:#eef2f7;min-height:85%}
+.settings-home-cols>div{padding:.8cqw;border:1px solid #758fa2;background:#f8fafc}
+.settings-home-cols b{display:block;background:#d1dde7;padding:1.6cqw;font-size:4.65cqw}
+.settings-home-cols p,.settings-home-menu p{margin:0;padding:1.45cqw 1.1cqw}
+.settings-home-cols>div:nth-child(2) p:last-child{background:#d7e7f6}
+.settings-home-menu{position:absolute;top:36%;left:24%;min-width:59%;padding:.6cqw;border:1px solid #637584;box-shadow:0 1px 4px #172a4650;background:#fafbfc}
+.settings-home-menu p:nth-child(2){color:white;background:#286aaf}
+.settings-dialog{position:absolute;inset:3% 4% 4%;display:flex;flex-direction:column;border:1px solid #657581;background:#e6ebf0}
+.settings-title{padding:1.25cqw 1.8cqw;background:linear-gradient(#34434f,#212b34);color:#fff;font-weight:700}
+.settings-fields{position:relative;display:grid;gap:1.05cqw;min-height:0;margin:.9cqw 3.2cqw .5cqw 1.5cqw}
+.settings-field{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);align-items:center;gap:.9cqw;font-size:3.8cqw}
+.settings-value{display:flex;justify-content:space-between;align-items:center;padding:.5cqw .75cqw;background:#f5f8fa;border:1px solid #778996;border-radius:1.2cqw;white-space:nowrap}
+.settings-value i{font-style:normal;color:#294156}
+.settings-value.settings-selected{border:1.6px solid #16508b;box-shadow:inset 0 0 0 .4px #16508b}
+.settings-scroll{position:absolute;right:-2.1cqw;top:1%;bottom:0;width:1.35cqw;background:linear-gradient(#94a9bb 0 35%,#d2dde6 35%);border:1px solid #a7b7c4}
+.settings-footer{position:relative;display:flex;align-items:flex-end;justify-content:flex-end;gap:1cqw;margin:auto 1.6cqw 1.1cqw;line-height:1}
+.settings-footer span{padding:1cqw;background:#f5f8fa;border:1px solid #8796a0;border-radius:1.2cqw;font-size:3.1cqw}
+.settings-footer span:first-child{margin-right:auto}
+.settings-footer .settings-pointer{position:absolute;bottom:-.8cqw;right:14cqw;padding:0;border:none;background:none;font-size:5cqw;color:#174c7e;z-index:3}
+.settings-options{position:absolute;padding:.3cqw;left:54.5%;min-width:39%;z-index:2;display:grid;background:#fff;border:1px solid #536b7b;box-shadow:0 1px 4px #172a4650;font-size:3.8cqw}
+.settings-options[data-kind=digits]{top:22%}
+.settings-options[data-kind=angle]{top:35%}
+.settings-options[data-kind=calc]{top:64%}
+.settings-options>span{padding:.65cqw 1cqw}
+.settings-option-current{color:white;background:#286aaf}
+.settings-notes{width:calc(100% - 24px);max-width:1130px;margin:.8rem auto 5.6rem;font:500 .9rem/1.42 system-ui}
+.settings-notes h2{font-size:1rem;margin:0 0 .25rem}
+.settings-notes p{margin:.25rem 0}

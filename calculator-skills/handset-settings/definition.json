@@ -1,0 +1,371 @@
+{
+  "id": "SUP-HANDSET-SETTINGS",
+  "title": "Set up the TI-Nspire CX II-T",
+  "intro": "Know what changes the display, the angle unit and the form of an answer on the non-CAS handheld.",
+  "chapters": [
+    {
+      "id": "open",
+      "title": "Open settings"
+    },
+    {
+      "id": "digits",
+      "title": "Display digits"
+    },
+    {
+      "id": "angle",
+      "title": "Angle units"
+    },
+    {
+      "id": "answers",
+      "title": "Answers"
+    },
+    {
+      "id": "templates",
+      "title": "Templates"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open",
+      "spoken": "On the TI-Nspire CX II-T, press Home, then five for Settings, then two for Document Settings.",
+      "coach": "Start on a Calculator page in an open document. Home → 5: Settings → 2: Document Settings.",
+      "end": 5.8,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "b0-k0",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.2675,
+          "physical": "home",
+          "action": "home"
+        },
+        {
+          "id": "b0-k1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.465,
+          "physical": "5",
+          "action": "menu"
+        },
+        {
+          "id": "b0-k2",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6625,
+          "physical": "2",
+          "action": "dialog"
+        }
+      ]
+    },
+    {
+      "chapter": "digits",
+      "spoken": "Display Digits changes what you see, not the stored value. Float six shows up to six significant digits. Fix two shows two decimal places.",
+      "coach": "On Display Digits, press →. Move from Float 6 to Fix 2, then press Enter. Round your written answer only as requested.",
+      "end": 13.8,
+      "hold": 9,
+      "keys": [
+        {
+          "id": "b1-k0",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.1358,
+          "physical": "right",
+          "action": "drop-digits"
+        },
+        {
+          "id": "b1-k1",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.2017,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k2",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.2675,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k3",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.3333,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k4",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.3992,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k5",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.465,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k6",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.5308,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k7",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.5967,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k8",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.6625,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k9",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.7283,
+          "physical": "down",
+          "action": "next-digit"
+        },
+        {
+          "id": "b1-k10",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7942,
+          "physical": "enter",
+          "action": "select-digit"
+        }
+      ]
+    },
+    {
+      "chapter": "angle",
+      "spoken": "Tab to Angle. Choose the unit the question uses. For thirty degrees, choose Degree. For an angle written with pi, check whether radians are intended.",
+      "coach": "Choose Degree for a degree question, not by default. The full Angle list also includes Radian and Gradian.",
+      "end": 21.5,
+      "hold": 5.4,
+      "keys": [
+        {
+          "id": "b2-k0",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.228,
+          "physical": "tab",
+          "action": "angle"
+        },
+        {
+          "id": "b2-k1",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.386,
+          "physical": "right",
+          "action": "drop-angle"
+        },
+        {
+          "id": "b2-k2",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.544,
+          "physical": "down",
+          "action": "next-angle"
+        },
+        {
+          "id": "b2-k3",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.702,
+          "physical": "enter",
+          "action": "select-angle"
+        }
+      ]
+    },
+    {
+      "chapter": "answers",
+      "spoken": "Calculation Mode controls how results are returned. Auto can keep a fraction; Approximate returns a decimal. Exact Arithmetic is a separate setting on the non-CAS CX II-T.",
+      "coach": "Tab to Calculation Mode. Open its options and leave Auto selected. The non-CAS CX II-T has a separate Exact Arithmetic row, not the CAS Exact option.",
+      "end": 32,
+      "hold": 8.2,
+      "keys": [
+        {
+          "id": "b3-k0",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1829,
+          "physical": "tab",
+          "action": "exp"
+        },
+        {
+          "id": "b3-k1",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2957,
+          "physical": "tab",
+          "action": "complex"
+        },
+        {
+          "id": "b3-k2",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4086,
+          "physical": "tab",
+          "action": "calc-mode"
+        },
+        {
+          "id": "b3-k3",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.5214,
+          "physical": "right",
+          "action": "drop-calc"
+        },
+        {
+          "id": "b3-k4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6343,
+          "physical": "enter",
+          "action": "select-calc"
+        },
+        {
+          "id": "b3-k5",
+          "label": "Click",
+          "ariaLabel": "Touchpad centre click",
+          "at": 0.7471,
+          "physical": "select",
+          "action": "ok"
+        }
+      ]
+    },
+    {
+      "chapter": "answers",
+      "spoken": "Back in Calculator, the status bar should now say DEG for this example. Seven divided by three with Enter gives a fraction. Control Enter requests a decimal for just that result.",
+      "coach": "Open 4: Current from Home. Enter 7 ÷ 3 normally, then enter it again with Ctrl + Enter. Fix 2 changes only the decimal display.",
+      "end": 39.5,
+      "hold": 12.5,
+      "keys": [
+        {
+          "id": "b4-k0",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1418,
+          "physical": "4",
+          "action": "current"
+        },
+        {
+          "id": "b4-k1",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2136,
+          "physical": "7",
+          "action": "seven"
+        },
+        {
+          "id": "b4-k2",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.2855,
+          "physical": "div",
+          "action": "divide"
+        },
+        {
+          "id": "b4-k3",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3573,
+          "physical": "3",
+          "action": "three"
+        },
+        {
+          "id": "b4-k4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4291,
+          "physical": "enter",
+          "action": "auto-result"
+        },
+        {
+          "id": "b4-k5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.5009,
+          "physical": "7",
+          "action": "seven"
+        },
+        {
+          "id": "b4-k6",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.5727,
+          "physical": "div",
+          "action": "divide"
+        },
+        {
+          "id": "b4-k7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6445,
+          "physical": "3",
+          "action": "three"
+        },
+        {
+          "id": "b4-k8",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.7164,
+          "physical": "ctrl",
+          "action": "control"
+        },
+        {
+          "id": "b4-k9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7882,
+          "physical": "enter",
+          "action": "approx-result"
+        }
+      ]
+    },
+    {
+      "chapter": "templates",
+      "spoken": "A stacked fraction template is an input tool, not a document mode. Press Control and Divide to see the two boxes. MathPrint is a TI-84 setting; there is no MathPrint switch here.",
+      "coach": "Ctrl + ÷ opens a stacked fraction in the entry line. On the Nspire, use the templates when needed, not a TI-84 MathPrint setting.",
+      "end": 48.9,
+      "hold": 3.6,
+      "keys": [
+        {
+          "id": "b5-k0",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.3333,
+          "physical": "ctrl",
+          "action": "control"
+        },
+        {
+          "id": "b5-k1",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.5967,
+          "physical": "div",
+          "action": "template"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "id": "SUP-HANDSET-KEYS",
+  "title": "Handset keys",
+  "intro": "Find keys in Full calculator.",
+  "chapters": [
+    {
+      "id": "trig",
+      "title": "Open the trig palette"
+    },
+    {
+      "id": "equals",
+      "title": "Find equals"
+    },
+    {
+      "id": "minus",
+      "title": "Subtract or use a negative"
+    },
+    {
+      "id": "fraction",
+      "title": "Build a fraction"
+    },
+    {
+      "id": "result",
+      "title": "Exact or decimal?"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "trig",
+      "end": 7.5,
+      "hold": 4.3,
+      "spoken": "Find trig on the left, beside the equals key. It opens a choice of functions, not a calculation.",
+      "coach": "Look left of 7. The trig key opens the palette.",
+      "keys": [
+        {
+          "id": "open-trig-1",
+          "label": "trig",
+          "ariaLabel": "Trigonometry",
+          "at": 0.42,
+          "physical": "trig"
+        }
+      ]
+    },
+    {
+      "chapter": "trig",
+      "end": 12.8,
+      "hold": 6.7,
+      "spoken": "With sine highlighted, press Enter. Put zero inside the brackets, then evaluate.",
+      "coach": "Select sin. Enter 0 between the brackets.",
+      "keys": [
+        {
+          "id": "use-sine-1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.12,
+          "physical": "enter"
+        },
+        {
+          "id": "use-sine-2",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.36,
+          "physical": "0"
+        },
+        {
+          "id": "use-sine-3",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6,
+          "physical": "right"
+        },
+        {
+          "id": "use-sine-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8400000000000001,
+          "physical": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "equals",
+      "end": 19.3,
+      "hold": 6.5,
+      "spoken": "The equals key writes the symbol into the line. It doesn't run anything. Enter is the key that evaluates.",
+      "coach": "Press = between the two sides. Clear this example before the next one.",
+      "keys": [
+        {
+          "id": "write-eq-1",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.12,
+          "physical": "2"
+        },
+        {
+          "id": "write-eq-2",
+          "label": "=",
+          "ariaLabel": "Equals",
+          "at": 0.3,
+          "physical": "eq"
+        },
+        {
+          "id": "write-eq-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.48,
+          "physical": "2"
+        },
+        {
+          "id": "write-eq-4",
+          "label": "Ctrl",
+          "ariaLabel": "Control",
+          "at": 0.66,
+          "physical": "ctrl"
+        },
+        {
+          "id": "write-eq-5",
+          "label": "Del",
+          "ariaLabel": "Delete",
+          "at": 0.84,
+          "physical": "del"
+        }
+      ]
+    },
+    {
+      "chapter": "minus",
+      "end": 24.7,
+      "hold": 5.2,
+      "spoken": "For nine minus four, use the subtraction key on the right. That key goes between two numbers.",
+      "coach": "Use − on the right, between 9 and 4.",
+      "keys": [
+        {
+          "id": "subtract-1",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.12,
+          "physical": "9"
+        },
+        {
+          "id": "subtract-2",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.36,
+          "physical": "minus"
+        },
+        {
+          "id": "subtract-3",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.6,
+          "physical": "4"
+        },
+        {
+          "id": "subtract-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8400000000000001,
+          "physical": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "minus",
+      "end": 30.6,
+      "hold": 6.4,
+      "spoken": "Start a fresh entry. To write negative four on its own, choose the key marked minus in brackets. It's down by Enter.",
+      "coach": "Clear the entry, then use the separate (−) key before 4.",
+      "keys": [
+        {
+          "id": "negative-1",
+          "label": "Ctrl",
+          "ariaLabel": "Control",
+          "at": 0.12,
+          "physical": "ctrl"
+        },
+        {
+          "id": "negative-2",
+          "label": "Del",
+          "ariaLabel": "Delete",
+          "at": 0.3,
+          "physical": "del"
+        },
+        {
+          "id": "negative-3",
+          "label": "(−)",
+          "ariaLabel": "Negative sign",
+          "at": 0.48,
+          "physical": "neg"
+        },
+        {
+          "id": "negative-4",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.66,
+          "physical": "4"
+        },
+        {
+          "id": "negative-5",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.84,
+          "physical": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "fraction",
+      "end": 37.8,
+      "hold": 8,
+      "spoken": "To put five over six, use Control and Divide. Type five in the top box. Move down and type six.",
+      "coach": "Ctrl + ÷ opens the fraction boxes. Fill the top before the bottom.",
+      "keys": [
+        {
+          "id": "fill-fraction-1",
+          "label": "Ctrl",
+          "ariaLabel": "Control",
+          "at": 0.12,
+          "physical": "ctrl"
+        },
+        {
+          "id": "fill-fraction-2",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.3,
+          "physical": "div"
+        },
+        {
+          "id": "fill-fraction-3",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.48,
+          "physical": "5"
+        },
+        {
+          "id": "fill-fraction-4",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.66,
+          "physical": "down"
+        },
+        {
+          "id": "fill-fraction-5",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.84,
+          "physical": "6"
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "end": 45.2,
+      "hold": 4.5,
+      "spoken": "Enter evaluates. With these whole numbers in Auto mode, this example stays as the exact fraction five sixths.",
+      "coach": "Enter evaluates using the current settings.",
+      "keys": [
+        {
+          "id": "keep-exact-1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.39,
+          "physical": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "end": 54,
+      "hold": 8,
+      "spoken": "Enter the same division again. This time use Control and Enter to request a decimal approximation. Keep the fraction if the question asks for an exact answer.",
+      "coach": "Same value, different form. Ctrl + Enter requests a decimal just this once.",
+      "keys": [
+        {
+          "id": "get-decimal-1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.12,
+          "physical": "5"
+        },
+        {
+          "id": "get-decimal-2",
+          "label": "÷",
+          "ariaLabel": "Divide",
+          "at": 0.3,
+          "physical": "div"
+        },
+        {
+          "id": "get-decimal-3",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.48,
+          "physical": "6"
+        },
+        {
+          "id": "get-decimal-4",
+          "label": "Ctrl",
+          "ariaLabel": "Control",
+          "at": 0.66,
+          "physical": "ctrl"
+        },
+        {
+          "id": "get-decimal-5",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.84,
+          "physical": "enter"
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "end": 59,
+      "hold": 3.5,
+      "spoken": "Your turn. Try seven over nine both ways. What changes, and what stays the same?",
+      "coach": "5/6 is exact; 0.833333… is approximate. Try a new calculation without rounding early.",
+      "keys": []
+    }
+  ]
+}

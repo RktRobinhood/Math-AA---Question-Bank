@@ -83,3 +83,32 @@ for(const x of lessons){
 assert.equal(counts.preserved,7);assert.equal(counts.native,5);
 assert.equal(counts.sharedAwaiting+counts.sharedRecorded,49);
 console.log("Calculator narration: 61 dedicated lessons checked",counts);
+
+// Template-native authoring has a separate queue; the legacy manifest stays intact.
+const templateQueue=at(handoff,"template-watch/manifest.json");
+const fresh=load(templateQueue);
+assert.equal(fresh.version,1);
+const template=require("../calculator-skills/handheld/watch-lesson.js");
+let templateAwaiting=0,templateRecorded=0;
+for(const row of fresh.lessons){
+ assert(!seen.has(row.id),row.id);seen.add(row.id);
+ const definition=at(templateQueue,row.definition);
+ const spec=load(definition);assert.equal(spec.id,row.id);template.validate(spec);
+ const text=fs.readFileSync(at(templateQueue,row.transcript));
+ assert.equal(hash(text),row.transcriptSha256,row.id+" exact handoff digest");
+ assert.equal(text.toString(),spec.beats.filter(b=>b.spoken).map(b=>b.spoken).join("\n")+"\n",row.id+" exact template spoken lines");
+ const dest=at(templateQueue,row.audioDestination);
+ assert.equal(dest.href,at(definition,"narration.mp3").href,row.id+" audio destination");
+ if(!spec.recording){assert(!fs.existsSync(dest),row.id+" unexpected loose recording");templateAwaiting++;continue;}
+ assert.equal(spec.recording.scriptSha256,row.transcriptSha256,row.id);
+ assert.equal(at(definition,spec.recording.file).href,dest.href,row.id);
+ assert.equal(hash(fs.readFileSync(dest)),spec.recording.audioSha256,row.id);
+ if(process.argv.includes("--decode-audio")){
+  const filename=decodeURIComponent(dest.pathname);
+  const duration=Number(execFileSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",filename],{encoding:"utf8"}));
+  assert(Number.isFinite(duration)&&Math.abs(duration-spec.beats.at(-1).end)<=.12,row.id+" template audio duration");
+  execFileSync("ffmpeg",["-v","error","-i",filename,"-f","null","-"]);
+ }
+ templateRecorded++;
+}
+console.log("Template-native narration:",{templateAwaiting,templateRecorded});
