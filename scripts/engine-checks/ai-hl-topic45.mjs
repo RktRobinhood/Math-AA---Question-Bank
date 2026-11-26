@@ -43,6 +43,15 @@ const SURVEY_FLAW = ["leading", "double", "vague", "overlap", "negative"];
 function chi(q, T) {
   const s = q.params.sit, o = s.obs.slice(), e = s.exp.slice();
   T.require(Math.abs(sum(o) - s.n) < 1e-9 && Math.abs(sum(e) - s.n) < 0.011, "frequencies add up to the sample size");
+  if (s.est) {
+    // Construct a concrete raw-data witness for the grouped right tail.
+    let remaining = Math.round(s.lam * s.n) - sum(o.map((count, k) => count * k));
+    const hidden = Array.from({ length: o[s.K] }, () => {
+      const increase = Math.max(0, Math.min(3, remaining)); remaining -= increase; return s.K + increase;
+    });
+    T.require(remaining === 0 && sum(hidden) + sum(o.slice(0, s.K).map((count,k) => count * k)) === Math.round(s.lam * s.n),
+      "at least one credible ungrouped sample gives the stated estimated mean");
+  }
   // merge from whichever end is too small until none is
   for (;;) {
     if (e[e.length - 1] <= 5) { e.splice(-2, 2, e[e.length - 2] + e[e.length - 1]); o.splice(-2, 2, o[o.length - 2] + o[o.length - 1]); }

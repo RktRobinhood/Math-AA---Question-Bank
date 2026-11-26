@@ -156,8 +156,21 @@
     while (e.length > 2 && e[0] <= 5) { const a = e.shift(), b = o.shift(); e[0] += a; o[0] += b; }
     return { o, e: e.map(r2) };
   }
+  // A grouped sample still has to admit the estimated mean. The upper bin is
+  // unbounded in the model; for generated observations we can always construct
+  // its hidden counts between K and K+3, without imposing that cap on the model.
+  function consistentChiEstimate(obs, lam, n, K) {
+    const minimum = sum(obs.map((count, k) => count * k)), target = Math.round(lam * n);
+    return target >= minimum && target <= minimum + 3 * obs[K];
+  }
+  function chiFinalize(ctx, n, lam, K, est, exp, obs) {
+    const c = chiCombine(obs, exp);
+    const df = c.e.length - 1 - (est ? 1 : 0);
+    const stat = sum(c.e.map((e, i) => ((c.o[i] - e) * (c.o[i] - e)) / e)), p = chiSf(stat, df);
+    return { ctx, n, lam, K, est, exp, obs, co: c.o, ce: c.e, df, stat, p };
+  }
   function sitChi(rng) {
-    for (;;) {
+    for (let attempt = 0; attempt < 300; attempt++) {
       const ctx = rng.pick(CHI_CTX), n = rng.pick([80, 100, 120, 150, 200]), lam = rng.int(12, 34) / 10, K = rng.pick([5, 6]), est = rng.bool();
       const exp = [];
       for (let k = 0; k < K; k++) exp.push(r2(n * poisPmf(lam, k)));
@@ -166,20 +179,22 @@
       const obs = exp.map((e) => Math.max(0, Math.round(e + (rng.next() * 2.6 - 1.3) * Math.sqrt(e))));
       const big = exp.indexOf(Math.max(...exp));
       obs[big] += n - sum(obs);
-      if (obs[big] < 1) continue;
-      const c = chiCombine(obs, exp);
-      if (c.e.length === exp.length || c.e.length < 3 + (est ? 1 : 0) || c.e.some((e) => Math.abs(e - 5) < 0.3)) continue;
-      const df = c.e.length - 1 - (est ? 1 : 0);
-      const stat = sum(c.e.map((e, i) => ((c.o[i] - e) * (c.o[i] - e)) / e)), p = chiSf(stat, df);
-      if (p < 0.002 || p > 0.95 || (p > 0.04 && p < 0.0625)) continue;
-      return { ctx, n, lam, K, est, exp, obs, co: c.o, ce: c.e, df, stat, p };
+      if (obs[big] < 1 || (est && !consistentChiEstimate(obs, lam, n, K))) continue;
+      const out = chiFinalize(ctx, n, lam, K, est, exp, obs);
+      if (out.ce.length === exp.length || out.ce.length < 3 + (est ? 1 : 0) || out.ce.some((e) => e <= 5 || Math.abs(e - 5) < 0.3)) continue;
+      if (out.p < 0.002 || out.p > 0.95 || (out.p > 0.04 && out.p < 0.0625)) continue;
+      return out;
     }
+    // Original vetted fixture (80 matches, observed total 240 ungrouped).
+    return chiFinalize(CHI_CTX[0], 80, 3, 5, true,
+      [3.98, 11.95, 17.92, 17.92, 13.44, 14.79], [4, 10, 26, 19, 9, 12]);
   }
   const chiTable = (s) => ({ head: ["Number of " + s.ctx.thing.split(" ")[0]].concat(s.exp.map((e, k) => (k === s.K ? `$${k}$ or more` : `$${k}$`))),
     rows: [["Observed frequency"].concat(s.obs.map((o) => m(num(o)))), ["Expected frequency"].concat(s.exp.map((e) => m(num(e))))] });
-  const chiStem = (s) => `${s.ctx.who} records the number of ${s.ctx.thing} for $${s.n}$ ${s.ctx.per}. ` +
-    (s.est ? `The mean of the data is $${num(s.lam)}$, and this estimate is used to fit a Poisson distribution to the data. ` : `It is claimed in advance that this number follows a Poisson distribution with mean $${num(s.lam)}$. `) +
-    "The table shows the observed frequencies and the expected frequencies under the Poisson model. A $\\chi^{2}$ goodness of fit test is to be carried out, and categories are combined where necessary so that every expected frequency is greater than $5$.";
+  const chiStem = (s, guided = false) => `${s.ctx.who} records the number of ${s.ctx.thing} across $${s.n}$ ${s.ctx.per}. ` +
+    (s.est ? `The mean of the ungrouped data is $${num(s.lam)}$, and this estimate is used to fit a Poisson distribution to the data. ` : `It is claimed in advance that this number follows a Poisson distribution with mean $${num(s.lam)}$. `) +
+    "Use the expected frequencies shown. Combine as few neighbouring categories as possible so that every expected frequency is greater than $5$." +
+    (guided ? " Start at each end: if the end category has expected frequency $5$ or less, combine it with its neighbour." : "");
   const chiWork = (s) => [
     `Combine neighbouring categories until every expected frequency is greater than $5$: the expected frequencies become $${listTex(s.ce)}$.`,
     `That leaves $${s.ce.length}$ categories.`,
@@ -189,7 +204,7 @@
     title: "Combine categories and count the degrees of freedom", situationKey: "chi-group", situation: sitChi,
     build({ sit: s }) {
       const w = chiWork(s);
-      return { params: {}, stem: chiStem(s), table: chiTable(s), parts: [
+      return { params: {}, stem: chiStem(s, true), table: chiTable(s), parts: [
         P("Find the number of categories after combining.", 2, ans.int(s.ce.length), w.slice(0, 2)),
         P("Find the number of degrees of freedom for the test.", 2, ans.int(s.df, { misconceptions: [{ value: s.ce.length - 1 - (s.est ? 0 : 1), text: "Subtract one more only for each parameter estimated from the data." }, { value: s.exp.length - 1 - (s.est ? 1 : 0), text: "Count the categories after combining, not before." }] }), [w[2]])] };
     } });
@@ -197,12 +212,12 @@
     title: "Goodness of fit after combining categories", situationKey: "chi-group", situation: sitChi,
     build({ rng, sit: s }) {
       const w = chiWork(s);
-      return { params: {}, stem: chiStem(s) + " The test uses the $5\\%$ significance level.", table: chiTable(s), parts: [
+      return { params: {}, stem: chiStem(s) + " Carry out a $\\chi^{2}$ goodness of fit test at the $5\\%$ significance level. Give numerical approximations to three significant figures.", table: chiTable(s), parts: [
         P("Find the number of degrees of freedom for the test.", 2, ans.int(s.df), w),
         P("Find the value of the $\\chi^{2}$ test statistic.", 3, ans.sf(s.stat), [
           `After combining, the observed frequencies are $${listTex(s.co)}$ and the expected frequencies are $${listTex(s.ce)}$.`,
           "Add up $\\dfrac{(O - E)^{2}}{E}$ over the categories.", `$\\chi^{2} = ${sf(s.stat)}$`]),
-        P("Find the $p$-value for the test.", 1, ans.sf(s.p), [`With $${s.df}$ degrees of freedom, $\\mathrm{P}(\\chi^{2} > ${sf(s.stat)}) = ${sf(s.p)}$.`]),
+        P("Find the $p$-value for the test.", 1, ans.sf(s.p), [`Use the unrounded test statistic with $${s.df}$ degrees of freedom to find the right-tail probability: $p = ${sf(s.p)}$.`]),
         P("State the conclusion of the test.", 1, conclusion(rng, s.p < 0.05, "the Poisson model does not fit the data"), [compare(s.p, 0.05), s.p < 0.05 ? `Reject $${H0}$: the data do not fit the Poisson model.` : `Do not reject $${H0}$: the data are consistent with the Poisson model.`])] };
     } });
 
