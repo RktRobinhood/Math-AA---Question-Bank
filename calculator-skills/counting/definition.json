@@ -1,0 +1,167 @@
+{
+  "id": "CT03",
+  "title": "Combinations and factorials",
+  "intro": "Count line-ups or choose groups on the TI-Nspire CX II-T.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "4c00f3aaa305d65eec7895526a93a98b1b856262d359688b9ff9fffec10b3c7e",
+    "scriptSha256": "bc90b15fe1c8906a151ad443ee80e581b9a09356aa016daa8d95a5036e03741f"
+  },
+  "chapters": [
+    {
+      "id": "decision",
+      "title": "Decide if order matters"
+    },
+    {
+      "id": "factorial",
+      "title": "Enter a factorial"
+    },
+    {
+      "id": "line-ups",
+      "title": "Read the line-up count"
+    },
+    {
+      "id": "combinations",
+      "title": "Choose Combinations"
+    },
+    {
+      "id": "arguments",
+      "title": "Enter total, then chosen"
+    },
+    {
+      "id": "groups",
+      "title": "Read the exact group count"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "decision",
+      "end": 7.315,
+      "hold": 4.8,
+      "spoken": "Start on a Calculator page. The same five badges can be lined up or chosen for a display.",
+      "coach": "Five badges: does swapping positions make a new outcome? Yes for a line-up. No for a group without roles.",
+      "keys": []
+    },
+    {
+      "chapter": "factorial",
+      "end": 15.2,
+      "hold": 14.4,
+      "spoken": "For a line-up of all five, type the number first. Choose Factorial to put the exclamation mark after it.",
+      "coach": "Type 5. Menu → 5: Probability → 1: Factorial adds ! after it. Press Enter.",
+      "keys": [
+        {
+          "id": "fact-five",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.14
+        },
+        {
+          "id": "fact-menu",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.29
+        },
+        {
+          "id": "fact-prob",
+          "label": "5",
+          "ariaLabel": "5, Probability",
+          "at": 0.44
+        },
+        {
+          "id": "fact-command",
+          "label": "1",
+          "ariaLabel": "1, Factorial",
+          "at": 0.6
+        },
+        {
+          "id": "fact-enter",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8
+        }
+      ]
+    },
+    {
+      "chapter": "line-ups",
+      "end": 22.093,
+      "hold": 6.8,
+      "spoken": "The factorial counts complete line-ups. Change the order and you have a different line-up.",
+      "coach": "5! = 5 × 4 × 3 × 2 × 1 = 120 exactly. Swapping two badges changes the line-up.",
+      "keys": []
+    },
+    {
+      "chapter": "combinations",
+      "end": 29.223,
+      "hold": 8.95,
+      "spoken": "This time choose two badges for a display with no roles. Swapping them does not make a new group.",
+      "coach": "Swapping two badges leaves the same group. Menu → 5: Probability → 3: Combinations inserts nCr(.",
+      "keys": [
+        {
+          "id": "choose-menu",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.16
+        },
+        {
+          "id": "choose-prob",
+          "label": "5",
+          "ariaLabel": "5, Probability",
+          "at": 0.38
+        },
+        {
+          "id": "choose-command",
+          "label": "3",
+          "ariaLabel": "3, Combinations",
+          "at": 0.66
+        }
+      ]
+    },
+    {
+      "chapter": "arguments",
+      "end": 37.416,
+      "hold": 14.65,
+      "spoken": "Enter the total first, then a comma and the number chosen. Close the parenthesis and press Enter.",
+      "coach": "Enter 5, a comma, 2, then the closing parenthesis. Press Enter. The total available goes first.",
+      "keys": [
+        {
+          "id": "total",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.12
+        },
+        {
+          "id": "comma",
+          "label": ",",
+          "ariaLabel": "comma",
+          "at": 0.26
+        },
+        {
+          "id": "chosen",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4
+        },
+        {
+          "id": "close",
+          "label": ")",
+          "ariaLabel": "right parenthesis",
+          "at": 0.56
+        },
+        {
+          "id": "choose-enter",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.77
+        }
+      ]
+    },
+    {
+      "chapter": "groups",
+      "end": 44.985,
+      "hold": 6,
+      "spoken": "Read the exact number of groups. It is not a probability or a count of ordered choices.",
+      "coach": "The exact count is 10 groups. This is not a probability or a count of ordered pairs.",
+      "keys": []
+    }
+  ]
+}

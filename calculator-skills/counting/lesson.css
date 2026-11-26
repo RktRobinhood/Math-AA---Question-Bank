@@ -102,3 +102,10 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 @media(max-height:560px) and (orientation:landscape){.stage[data-mode=watch] #watch-panel:where(.qb-calculator-lesson, .qb-calculator-lesson *){display:none}}
 @media(prefers-reduced-motion:reduce){*:where(.qb-calculator-lesson, .qb-calculator-lesson *),*:where(.qb-calculator-lesson, .qb-calculator-lesson *)::before,*:where(.qb-calculator-lesson, .qb-calculator-lesson *)::after{transition:none!important}}
 @media print{#stage:where(.qb-calculator-lesson, .qb-calculator-lesson *),.calc-tabs:where(.qb-calculator-lesson, .qb-calculator-lesson *){display:none!important}}
+
+/* CT03 calculator adapter: the common Watch shell owns its separate layout. */
+.ct03-page #ct03-shell{margin:.35rem 0 .85rem;width:100%;max-width:none}
+.ct03-page .lw-stage[data-mode=try]{background:none;border:0;overflow:visible}
+.ct03-page .lw-stage[data-mode=try] .lw-surface{padding:0}
+.ct03-page .lw-stage[data-mode=try] .lw-device{width:100%;max-width:none}
+.ct03-page .lw-device #handheld-host{min-width:0}
