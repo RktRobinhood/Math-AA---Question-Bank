@@ -1,0 +1,163 @@
+{
+  "id": "CT37",
+  "title": "Binomial PDF: exactly one count",
+  "intro": "Find a binomial probability for one exact count.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "f832c8e860bf9b0ee24e473a013fd3758f12abdc8bcf59f89f0c5a1d2d494829",
+    "scriptSha256": "19a2e7c17f0241d8bfb816099b88389070b06d982ed30089f65b0ca16d534722"
+  },
+  "chapters": [
+    {
+      "id": "one-count",
+      "title": "Pick the exact count"
+    },
+    {
+      "id": "menu",
+      "title": "Find Binomial Pdf"
+    },
+    {
+      "id": "fields",
+      "title": "Fill the three fields"
+    },
+    {
+      "id": "result",
+      "title": "Calculate"
+    },
+    {
+      "id": "compare",
+      "title": "Compare with at most"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "one-count",
+      "spoken": "We want exactly three seeds to sprout. That means one count, not a range.",
+      "coach": "Exactly three is one count: X = 3.",
+      "end": 6.57,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page, press Menu. Choose five for Probability, five for Distributions, then the letter D for Binomial P D F.",
+      "coach": "Menu → 5 Probability → 5 Distributions → D Binomial Pdf.",
+      "end": 16.68,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "binom-1-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.16
+        },
+        {
+          "id": "binom-1-1",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.36
+        },
+        {
+          "id": "binom-1-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.56
+        },
+        {
+          "id": "binom-1-3",
+          "label": "D",
+          "ariaLabel": "D for Binomial Pdf",
+          "at": 0.76
+        }
+      ]
+    },
+    {
+      "chapter": "fields",
+      "spoken": "Enter eight for the number of trials. Tab to the success probability, zero point three. Tab to X Value and enter three.",
+      "coach": "Enter 8 trials, 0.3 success probability, and 3 as X Value.",
+      "end": 26.725,
+      "hold": 16,
+      "keys": [
+        {
+          "id": "binom-2-0",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.09
+        },
+        {
+          "id": "binom-2-1",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.22
+        },
+        {
+          "id": "binom-2-2",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.36
+        },
+        {
+          "id": "binom-2-3",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.43
+        },
+        {
+          "id": "binom-2-4",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5
+        },
+        {
+          "id": "binom-2-5",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.65
+        },
+        {
+          "id": "binom-2-6",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.79
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "spoken": "",
+      "coach": "Enter inserts the command. Enter again evaluates it.",
+      "end": 27.195,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "binom-3-0",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.22
+        },
+        {
+          "id": "binom-3-1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.59
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "spoken": "Press Enter to insert the command. Press Enter again to calculate. The probability of exactly three is about zero point two five four.",
+      "coach": "The LCD shows P(X = 3), about 0.254.",
+      "end": 37.48,
+      "hold": 0,
+      "keys": []
+    },
+    {
+      "chapter": "compare",
+      "spoken": "At most three would include zero, one, two and three. That’s a cumulative probability. This calculation is for exactly three only.",
+      "coach": "The LCD result is only P(X = 3). At most three would also include 0, 1 and 2.",
+      "end": 48.09,
+      "hold": 5,
+      "keys": []
+    }
+  ]
+}
