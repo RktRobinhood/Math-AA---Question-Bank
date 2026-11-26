@@ -10,24 +10,30 @@
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=compact-native-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="model.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT46" data-cue-sha="e95b104112665cd85b045bad855aa0a1b9be8d822bb90b899533050237377bcd" data-transcript-sha="fa2e8a1a3b053fe57e24d44de4b270f8857ee99ca4ca2e56c1bc73e8d7964a19" defer></script><script src="lesson.js?v=compact-native-1&amp;narration=1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="model.js" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
-<header><div><nav aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a></nav><h1>One- and two-sample t-tests</h1></div>
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try" tabindex="-1">Try</button></div>
-<section id="stage" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld">
-<div id="watch-message" class="message"><p id="caption"></p></div>
-<div id="try-message" class="message" hidden><p id="task"></p><div id="target-wrap" class="exercise"></div><div class="try-actions"><button id="return" aria-label="Return to Watch">Watch</button> <button id="reset" aria-label="Reset practice calculator">Reset</button></div></div>
-<div class="deck">
-<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div><button type="button" id="stage-play" aria-label="Play caption rehearsal"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 4.5 20 12 8 19.5z"/></svg></button></div></div>
-<aside id="watch" role="tabpanel" aria-labelledby="watch-tab"><div class="chapters-wrap"><h2>Choose the right test</h2><ol id="chapters"></ol></div></aside>
-<aside id="try" role="tabpanel" aria-labelledby="try-tab" hidden><h2>Calculator steps</h2>
+<nav class="inference-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT46</nav>
+<div data-calculator-watch></div>
+<section id="stage" data-mode="try" tabindex="0" aria-label="TI-Nspire CX II-T practice handheld" hidden>
+<div id="try-message" class="message"><p id="task"></p><div id="target-wrap" class="exercise"></div><div class="try-actions"><button id="return" aria-label="Return to Watch">Watch</button> <button id="reset" aria-label="Reset practice calculator">Reset</button></div></div>
+<div class="deck" id="try-deck">
+<div id="handheld-host"><div id="lcd" aria-label="Recreated Calculator display"><div class="lcd-bar"><b>1.1</b> Calculator <i>RAD</i></div><div id="screen"></div></div></div>
+
+<aside id="try" aria-label="Independent practice"><h2>Calculator steps</h2>
 <p id="hint"></p><p id="error" class="feedback bad" role="status" hidden></p><p id="progress" class="feedback" role="status" hidden></p>
 <form id="decision" hidden><label>At the given α, what is your decision? <select id="decision-value"><option value="">Choose</option><option value="yes">Reject H₀</option><option value="no">Do not reject H₀</option></select></label> <button>Check</button><p id="decision-feedback" class="feedback" role="status" hidden></p></form>
 <details id="edit"><summary>Edit practice values</summary><form id="edit-form"><label>Test <select id="edit-test"><option value="one">One sample</option><option value="two">Two independent samples</option></select></label><div id="edit-values"></div><label>Alternative <select id="edit-alt"><option value="ne">Not equal (two-sided)</option><option value="lt">Less than</option><option value="gt">Greater than</option></select></label><label id="edit-pool-wrap">Pooled <select id="edit-pooled"><option value="yes">Yes (equal variance)</option><option value="no">No (Welch)</option></select></label><label>Significance <select id="edit-alpha"><option value="0.01">0.01</option><option value="0.05">0.05</option><option value="0.10">0.10</option></select></label><button>Apply</button><p id="edit-error" class="feedback bad" role="status" hidden></p></form></details>
 <details><summary>Keyboard shortcuts</summary><p><kbd>M</kbd> opens Menu. Use digits to choose menu items. Use <kbd>Tab</kbd> for the next field and <kbd>→</kbd> to open a list of choices.</p></details></aside>
 </div>
-<div id="watch-player" aria-label="Playback controls"><div class="transport"><button id="play">Play</button><button id="back" aria-label="Back 10 seconds">−10</button><button id="next" aria-label="Forward 10 seconds">+10</button><button id="replay" aria-label="Replay">↺</button><button id="focus" aria-pressed="false" aria-label="Focus">⛶</button><button id="takeover">Take over</button></div><div class="seek-row"><span id="clock"></span><label><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="58" step=".005"></label><span>Captions only</span></div></div>
 </section>
 </main></body></html>

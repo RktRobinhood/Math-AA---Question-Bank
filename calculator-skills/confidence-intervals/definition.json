@@ -1,0 +1,378 @@
+{
+  "id": "CT49",
+  "title": "Confidence intervals",
+  "intro": "Known population σ: z. Sample SD: t.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "cd6506d01e2987dc0e9539fdb71c69ddce8266dca780755287f91fd47240a59e",
+    "scriptSha256": "077e00497da1c1530c8f8b084e58ae1817faa305629396f54a09a27ce38bad5d"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Distinguish population and sample SD"
+    },
+    {
+      "id": "z-menu",
+      "title": "Open z Interval with Stats"
+    },
+    {
+      "id": "z-data",
+      "title": "Enter known population σ first"
+    },
+    {
+      "id": "z-read",
+      "title": "Read both z bounds"
+    },
+    {
+      "id": "t-menu",
+      "title": "Open t Interval with Stats"
+    },
+    {
+      "id": "t-data",
+      "title": "Enter sample mean first"
+    },
+    {
+      "id": "t-read",
+      "title": "Read both t bounds and interpret"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "Estimate the mean of a normal population. The sample mean is forty and the sample size is thirty-six. First suppose we know the population standard deviation is six.",
+      "coach": "Estimate the mean of a normal population. x̄ = 40 and n = 36. First take σ = 6 as a known population standard deviation.",
+      "end": 12.658,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "z-menu",
+      "spoken": "On a Calculator page, choose Menu then Statistics then Confidence Intervals then z Interval. Select Stats rather than Data.",
+      "coach": "Calculator: Menu → 6 Statistics → 6 Confidence Intervals → 1 z Interval. Choose Stats rather than Data.",
+      "end": 23.031,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-1",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-2",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.326
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.408
+        },
+        {
+          "id": "press-4",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-5",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.654
+        },
+        {
+          "id": "press-7",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.736
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "z-data",
+      "spoken": "Enter six for the population standard deviation, forty for the sample mean, thirty-six for the sample size, and zero point nine five for C Level. Enter a proportion, not ninety-five.",
+      "coach": "Enter σ = 6, x̄ = 40, n = 36, and C Level = 0.95, a proportion. Tab to OK and run.",
+      "end": 36.85,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.1347
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1893
+        },
+        {
+          "id": "press-11",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.244
+        },
+        {
+          "id": "press-12",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2987
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-14",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.408
+        },
+        {
+          "id": "press-15",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.4627
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5173
+        },
+        {
+          "id": "press-17",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.572
+        },
+        {
+          "id": "press-18",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.6267
+        },
+        {
+          "id": "press-19",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.6813
+        },
+        {
+          "id": "press-20",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.736
+        },
+        {
+          "id": "press-21",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7907
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8453
+        }
+      ]
+    },
+    {
+      "chapter": "z-read",
+      "spoken": "Read the lower and upper confidence bounds: about thirty-eight point zero four and forty-one point nine six. The margin of error is half the width, not an endpoint.",
+      "coach": "CLower ≈ 38.04, CUpper ≈ 41.96. The margin of error is half the interval width.",
+      "end": 49.101,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "t-menu",
+      "spoken": "Now suppose six is only the sample standard deviation. Use t Interval with Stats. The distinction is whether the population standard deviation is known, not whether the sample size exceeds thirty.",
+      "coach": "Now 6 is only the sample SD, so choose t Interval (Menu → 6 → 6 → 2) with Stats. Sample size alone does not decide.",
+      "end": 63.117,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-23",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-24",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-25",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.326
+        },
+        {
+          "id": "press-26",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.408
+        },
+        {
+          "id": "press-27",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-28",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-29",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.654
+        },
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.736
+        },
+        {
+          "id": "press-31",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "t-data",
+      "spoken": "For t, enter the sample mean first and the sample standard deviation second. Keep the sample size at thirty-six and C Level at zero point nine five.",
+      "coach": "For t, enter x̄ = 40 first, then sx = 6. Keep n = 36 and C Level = 0.95; run.",
+      "end": 75.347,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-32",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1347
+        },
+        {
+          "id": "press-33",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1893
+        },
+        {
+          "id": "press-34",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.244
+        },
+        {
+          "id": "press-35",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.2987
+        },
+        {
+          "id": "press-36",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-37",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.408
+        },
+        {
+          "id": "press-38",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.4627
+        },
+        {
+          "id": "press-39",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5173
+        },
+        {
+          "id": "press-40",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.572
+        },
+        {
+          "id": "press-41",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.6267
+        },
+        {
+          "id": "press-42",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.6813
+        },
+        {
+          "id": "press-43",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.736
+        },
+        {
+          "id": "press-44",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7907
+        },
+        {
+          "id": "press-45",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8453
+        }
+      ]
+    },
+    {
+      "chapter": "t-read",
+      "spoken": "About thirty-seven point nine seven to forty-two point zero three for the population mean. Over many repeated samples, this method would capture the true mean about ninety-five percent of the time.",
+      "coach": "The interval is approximately (37.97, 42.03). In repeated sampling, about 95% of intervals from this method would contain the true mean.",
+      "end": 89.524,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}

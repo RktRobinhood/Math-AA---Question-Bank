@@ -110,3 +110,13 @@ button:where(.qb-calculator-lesson, .qb-calculator-lesson *),input:where(.qb-cal
   .qb-calculator-lesson #stage.focused #caption{font-size:.8rem;line-height:1.3}
   .qb-calculator-lesson #stage.focused .deck{padding-block:5px}
 }
+
+/* Common Watch determines the size; the native Try deck retains its existing layout. */
+.inference-trail{margin:0 0 .55rem;color:var(--dim);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+@media(max-width:340px){.lw-header h1{font-size:1.48rem}.lw-header{margin-bottom:.45rem}}
+/* These two-step wizards have a long physical key rail. Keep the LCD readable
+   on tall phones; the scrollable chapter region remains fully keyboard reachable. */
+@media(max-width:780px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide .lw-groups{max-height:clamp(132px,24dvh,210px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
