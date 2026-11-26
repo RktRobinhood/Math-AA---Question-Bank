@@ -1,0 +1,193 @@
+{
+  "id": "CT38",
+  "title": "Binomial CDF: inclusive bounds",
+  "intro": "Translate a probability event into the first and last counts it includes.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "a3adc13dddb24f6079ea812bbafd7297960f649c5f04819928ca7896826afd57",
+    "scriptSha256": "e16574ef1b4daf562f873d99322b7cbc1005c1f9998f185a9fb700a513c1d572"
+  },
+  "chapters": [
+    {
+      "id": "event",
+      "title": "Identify the event"
+    },
+    {
+      "id": "menu",
+      "title": "Find Binomial Cdf"
+    },
+    {
+      "id": "bounds",
+      "title": "Enter the four fields"
+    },
+    {
+      "id": "calculate",
+      "title": "Calculate"
+    },
+    {
+      "id": "compare",
+      "title": "Read inclusive and strict bounds"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "event",
+      "spoken": "Before opening the calculator, identify the first and last whole-number counts that belong in the event.",
+      "coach": "With 12 independent trials and success probability 0.25, at least five means 5 through 12.",
+      "end": 6.4,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F.",
+      "coach": "Menu → 5 Probability → 5 Distributions → E Binomial Cdf.",
+      "end": 14.2,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "menu-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.2
+        },
+        {
+          "id": "menu-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4
+        },
+        {
+          "id": "menu-3",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6
+        },
+        {
+          "id": "menu-4",
+          "label": "E",
+          "ariaLabel": "E for Binomial Cdf",
+          "at": 0.8
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "spoken": "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds.",
+      "coach": "Enter 12, 0.25, 5 and 12. The lower and upper counts are both included.",
+      "end": 23.1,
+      "hold": 22,
+      "keys": [
+        {
+          "id": "bounds-1",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0769
+        },
+        {
+          "id": "bounds-2",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1538
+        },
+        {
+          "id": "bounds-3",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2308
+        },
+        {
+          "id": "bounds-4",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3077
+        },
+        {
+          "id": "bounds-5",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.3846
+        },
+        {
+          "id": "bounds-6",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4615
+        },
+        {
+          "id": "bounds-7",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5385
+        },
+        {
+          "id": "bounds-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6154
+        },
+        {
+          "id": "bounds-9",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6923
+        },
+        {
+          "id": "bounds-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7692
+        },
+        {
+          "id": "bounds-11",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.8462
+        },
+        {
+          "id": "bounds-12",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.9231
+        }
+      ]
+    },
+    {
+      "chapter": "calculate",
+      "spoken": "",
+      "coach": "The first Enter inserts the command. The second Enter evaluates it.",
+      "end": 23.2,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "calculate-1",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3333
+        },
+        {
+          "id": "calculate-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6667
+        }
+      ]
+    },
+    {
+      "chapter": "compare",
+      "spoken": "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero.",
+      "coach": "At least five includes 5 through 12. At most five includes 0 through 5.",
+      "end": 31.55,
+      "hold": 6,
+      "keys": []
+    },
+    {
+      "chapter": "compare",
+      "spoken": "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds.",
+      "coach": "More than five starts at 6: the count 5 does not belong in the event.",
+      "end": 39.079,
+      "hold": 6,
+      "keys": []
+    }
+  ]
+}
