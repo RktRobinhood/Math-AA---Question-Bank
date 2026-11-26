@@ -1,0 +1,283 @@
+{
+  "id": "CT21",
+  "title": "Determinant and inverse",
+  "intro": "Store a matrix once, then check its determinant and use it to find the inverse.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "987342d71f48e1d04e94f610a9a3e0fbff3db1f9a2d03b1904702ef20278a928",
+    "scriptSha256": "4f547ce6251ed78d0e5378982be453b7d80d3466249387f1e3f77f743f5cf444"
+  },
+  "chapters": [
+    {
+      "id": "assignment",
+      "title": "Set up the matrix"
+    },
+    {
+      "id": "template",
+      "title": "Open the entry template"
+    },
+    {
+      "id": "enter-cells",
+      "title": "Fill the cells"
+    },
+    {
+      "id": "det",
+      "title": "Find its determinant"
+    },
+    {
+      "id": "inverse",
+      "title": "Find its inverse"
+    },
+    {
+      "id": "read-result",
+      "title": "Check the result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "assignment",
+      "spoken": "Start on a Calculator page. Type A, then Control and Template, to name the matrix with the assignment symbol.",
+      "coach": "A followed by Ctrl + Templates inserts the assignment symbol.",
+      "end": 9.032,
+      "hold": 2.62,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.1667
+        },
+        {
+          "id": "press-2",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.4444
+        },
+        {
+          "id": "press-3",
+          "label": "Templates",
+          "ariaLabel": "Templates",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "template",
+      "spoken": "Open Menu then seven: Matrix and Vector then one: Create then one: Matrix. Set the number of rows and columns.",
+      "coach": "Menu → 7: Matrix & Vector → 1: Create → 1: Matrix. Choose 2 rows and 2 columns.",
+      "end": 20.439,
+      "hold": 5.86,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0625
+        },
+        {
+          "id": "press-5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.1667
+        },
+        {
+          "id": "press-6",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2708
+        },
+        {
+          "id": "press-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.375
+        },
+        {
+          "id": "press-8",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.4792
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5833
+        },
+        {
+          "id": "press-10",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6875
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7917
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    },
+    {
+      "chapter": "enter-cells",
+      "spoken": "Fill the matrix from left to right, row by row. Use Tab to move between cells. Press Enter to store it.",
+      "coach": "Read across each row; Tab advances one cell.",
+      "end": 29.295,
+      "hold": 5.32,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0698
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.186
+        },
+        {
+          "id": "press-15",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3023
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4186
+        },
+        {
+          "id": "press-17",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5349
+        },
+        {
+          "id": "press-18",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6512
+        },
+        {
+          "id": "press-19",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7674
+        },
+        {
+          "id": "press-20",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "det",
+      "spoken": "Type the determinant command with A in brackets, then press Enter. The determinant is a single number.",
+      "coach": "det(a) returns a single number: 1.",
+      "end": 37.028,
+      "hold": 4.78,
+      "keys": [
+        {
+          "id": "press-21",
+          "label": "d",
+          "ariaLabel": "d",
+          "at": 0.0789
+        },
+        {
+          "id": "press-22",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.2105
+        },
+        {
+          "id": "press-23",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.3421
+        },
+        {
+          "id": "press-24",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.4737
+        },
+        {
+          "id": "press-25",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.6053
+        },
+        {
+          "id": "press-26",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7368
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8684
+        }
+      ]
+    },
+    {
+      "chapter": "inverse",
+      "spoken": "For a square matrix with nonzero determinant, type A, press the power key, then the negative key and one. Press Enter.",
+      "coach": "Enter a raised to −1. Use the negative key for the exponent.",
+      "end": 46.401,
+      "hold": 3.7,
+      "keys": [
+        {
+          "id": "press-28",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.1071
+        },
+        {
+          "id": "press-29",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.2857
+        },
+        {
+          "id": "press-30",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.4643
+        },
+        {
+          "id": "press-31",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6429
+        },
+        {
+          "id": "press-32",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "read-result",
+      "spoken": "The inverse is another matrix. If the determinant is zero, the matrix is singular and has no inverse.",
+      "coach": "An inverse exists for this square matrix because its determinant is nonzero.",
+      "end": 54.916,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
