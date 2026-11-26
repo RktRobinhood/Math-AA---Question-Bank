@@ -166,3 +166,11 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 .lcd-sheet.data-sheet:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:max(6px,3.43cqw)}
 .lcd-sheet.data-sheet :is(th,td):where(.qb-calculator-lesson, .qb-calculator-lesson *){padding:.15cqw .95cqw}
 .lcd-note.result-store:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:max(6px,3.0cqw);min-height:0;padding:.3cqw 1cqw}
+
+/* Size comes from the common Watch frame; the native Try stage keeps a full keypad. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.reg-study{margin-top:.65rem;padding-inline:.45rem}
+#watch-picture{max-width:290px}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.lw-device .lcd-sheet.result td:nth-child(2){width:38%}
+.stage[data-mode=try] #handheld-host{--handheld-width:min(307px,100%)}

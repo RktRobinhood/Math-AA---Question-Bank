@@ -1,0 +1,165 @@
+{
+  "id": "CT32",
+  "title": "Quadratic regression",
+  "intro": "Fit a quadratic, then distinguish the model’s peak from the greatest reading.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "b26193cf7a1468cf57fa1f3aa54e415744e3b0c71cbd9ab5403cc50dc52b0231",
+    "scriptSha256": "671fcdfd16a92ed4539fcaf82dd9ef69ed7fc13ac41bfd08077fa4d4dd926ed6"
+  },
+  "chapters": [
+    {
+      "id": "pairs",
+      "title": "Check paired rows"
+    },
+    {
+      "id": "menu",
+      "title": "Open the method"
+    },
+    {
+      "id": "lists",
+      "title": "Choose X and Y"
+    },
+    {
+      "id": "run",
+      "title": "Check settings and run"
+    },
+    {
+      "id": "output",
+      "title": "Read the fit and predict"
+    },
+    {
+      "id": "maxima",
+      "title": "Compare model and data"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "pairs",
+      "spoken": "Start with two named columns. Each row is one paired observation.",
+      "coach": "Lists xval and yval are already named. Keep every predictor and its matching response on the same row.",
+      "end": 5.248,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "In Lists and Spreadsheet, choose Statistics, Stat Calculations, then Quadratic Regression.",
+      "coach": "Menu → 4 Statistics → 1 Stat Calculations → 6 Quadratic Regression.",
+      "end": 12.554,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.244
+        },
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.572
+        },
+        {
+          "id": "press-3",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "lists",
+      "spoken": "Use the right arrow and Tab to choose the lists x val for X and y val for Y.",
+      "coach": "From X List: Right to open; Tab confirms xval and moves to Y. Right to open Y, Right again to select yval, then Tab.",
+      "end": 19.163,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "press-4",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.2167
+        },
+        {
+          "id": "press-5",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3533
+        },
+        {
+          "id": "press-6",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-7",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "run",
+      "spoken": "Store the fit to f one. Keep each pair once and the results in C. Press Enter.",
+      "coach": "Check store to f1, Frequency List 1 and results in C. Press Enter to calculate.",
+      "end": 26.252,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        }
+      ]
+    },
+    {
+      "chapter": "output",
+      "spoken": "Read a, b and c in order. R squared summarises this fit; it is not another coefficient in the equation.",
+      "coach": "Read a = −2, b = 8 and c = 10: f₁(x) = −2x² + 8x + 10. R² is not a coefficient.",
+      "end": 35.642,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "output",
+      "spoken": "Predict at x equals one point five by substituting it into the fitted equation, not reading a nearby data row.",
+      "coach": "Substitute x = 1.5: −2(1.5)² + 8(1.5) + 10 = 17.5 exactly. A measured row is not a model prediction.",
+      "end": 44.232,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "maxima",
+      "spoken": "The curve bends down. Its vertex lies inside the observed interval and is higher than both endpoints.",
+      "coach": "The fitted curve opens down. Its vertex x = −b/(2a) = 2 is inside [0, 4], and f₁(2) = 18.",
+      "end": 51.763,
+      "hold": 4,
+      "keys": []
+    },
+    {
+      "chapter": "maxima",
+      "spoken": "At x equals two the recorded value was nineteen point five. The fitted curve predicts eighteen there. The model need not pass through any observation.",
+      "coach": "The largest observation is 19.5 at x = 2. The fitted value there is 18; the fit need not run through that observation.",
+      "end": 63.742,
+      "hold": 4,
+      "keys": []
+    }
+  ]
+}

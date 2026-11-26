@@ -190,3 +190,11 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
  .ct33-try .try-nav:where(.qb-calculator-lesson, .qb-calculator-lesson *){gap:.27rem}
  .ct33-try .try-nav button:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:.75rem;padding-inline:6px}
 }
+
+/* Size comes from the common Watch frame; the native Try stage keeps a full keypad. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.reg-study{margin-top:.65rem;padding-inline:.45rem}
+#watch-picture{max-width:290px}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.lw-device .lcd-sheet.result td:nth-child(2){width:38%}
+.stage[data-mode=try] #handheld-host{--handheld-width:min(307px,100%)}

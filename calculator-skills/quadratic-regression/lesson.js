@@ -1,12 +1,15 @@
 (function(){"use strict";
-const M=window.CT32,T=window.CT32Tape,$=id=>document.getElementById(id),stage=$("stage"),seek=$("seek"),overlay=$("start-overlay"),play=$("play");
-const params=new URLSearchParams(location.search),request=M.request(params),tabs=[$("watch-tab"),$("try-tab")];
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,label:"TI-Nspire CX II-T quadratic regression handheld",onKey:k=>physical(k)});
+const M=window.CT32,T=window.CT32Tape,$=id=>document.getElementById(id),stage=$("stage");
+const params=new URLSearchParams(location.search),request=M.request(params);
+const handheld=$("handheld-host");
+const shell=CalculatorLessonHandset.mount(handheld,{screen:$("lcd"),label:"TI-Nspire CX II-T regression handheld",
+ onKey:k=>{physical(k);stage.focus({preventScroll:true});}});
 const node=(tag,text,cls)=>{const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;};
 const btn=(text,active,click)=>{const b=node("button",text,active?"calc-active":"");b.type="button";if(click)b.addEventListener("click",click);else b.disabled=true;return b;};
-const format=v=>v===null?"":M.display(v), timed=t=>"0:"+String(Math.floor(t)).padStart(2,"0");
-let mode="watch",clock=0,playing=false,frame=0,origin=0,stamped="",started=false,focusOn=false,preferFocus=false,considered=false,firstWatch=true,hasOwnTry=false,taken=false,light=0,state=M.init(request.data);
-seek.max=T.duration;
+const format=v=>v===null?"":M.display(v);
+let mode="watch",stamp="",light=0,state=M.init(request.data),touched=false,entered=false,returnToWatch;
+const frames=[M.init(M.demo)];
+for(const [,key] of T.keys)frames.push(M.press(frames.at(-1),key));
 function keyOf(k){return ({esc:"escape",del:"backspace",neg:"negative",dot:"."})[k]||k;}
 function dataSheet(s,watch){
  const t=node("table",undefined,"lcd-sheet data-sheet"),head=t.createTHead(),body=t.createTBody();
@@ -72,7 +75,7 @@ function lcd(s,watch,c){
  if(s.page==="result")description=statsRows(s).map(([a,b])=>a+" "+b).join("; ")+"; Equation stored to "+s.run.store;
  if(s.edit!==null)description+=". Editing "+s.edit;
  $("lcd-text").textContent=description;
- stage.dataset.scene=s.page;
+ handheld.dataset.scene=stage.dataset.scene=s.page;
 }
 function chart(where,d,r=null,mark=false){
  const v="http://www.w3.org/2000/svg",svg=document.createElementNS(v,"svg"),add=(tag,a)=>{const e=document.createElementNS(v,tag);Object.entries(a).forEach(([k,x])=>e.setAttribute(k,x));svg.append(e);return e;};
@@ -92,35 +95,33 @@ function chart(where,d,r=null,mark=false){
  const cap=node("small",mark?"Dots: readings · diamond: fitted peak":r?"Dots: readings · dashed curve: fitted":"Study chart · one dot per pair");
  where.replaceChildren(svg,cap);
 }
-function snapshot(t){let s=M.init(M.demo),key="";for(const [at,k] of T.keys){if(at>t)break;s=M.press(s,k);key=t<at+.36?k:"";}return {s,key};}
-T.chapters.forEach(([s,title],i)=>{const li=node("li"),b=btn("",false,()=>seekTo(s));b.append(node("span",String(i+1).padStart(2,"0")),document.createTextNode(title));li.append(b);$("chapters").append(li);});
-const canFork=()=>clock>0&&clock<T.duration-.015;
-function paintWatch(){
- if(mode!=="watch")return;
- const {s,key}=snapshot(clock),c=T.captions.findLastIndex(x=>x[0]<=clock),j=T.chapters.findLastIndex(x=>x[0]<=clock);
- seek.value=clock;seek.setAttribute("aria-valuetext",timed(clock)+" of "+timed(T.duration));$("clock").textContent=timed(clock)+" / "+timed(T.duration);
- shell.setKeys(key?[key]:[]);overlay.hidden=started||clock>0;$("take").textContent=canFork()?"Take over":"Open Try";
- const stamp=JSON.stringify([c,j,s]);if(stamped===stamp)return;stamped=stamp;
- lcd(s,true,c);$("caption").textContent=T.captions[c][1];$("takeaway").textContent=T.captions[c][2];
- [...$("chapters").children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===j)));
+function renderWatch(device,{beat,point,crossed,key}){
+ if(handheld.parentElement!==device)device.append(handheld);
+ const count=crossed.length,physicalKey=T.keys[count-1]?.[1];
+ const hold=point.span.end-point.span.voiceEnd;
+ const lit=physicalKey&&!point.speaking&&key?.beat===beat&&(point.fraction-key.at)*hold<.65;
+ shell.setKeys(lit?[physicalKey]:[]);
+ const next=beat+":"+count;if(stamp===next)return;stamp=next;
+ const s=frames[count],c=beat;
+ lcd(s,true,c);
  chart($("watch-picture"),M.demo,c>=4?s.run:null,c>=6);
 }
 function shown(id,v){$(id).hidden=!v;}
 function status(id,text,bad=false){const e=$(id);e.textContent=text;e.dataset.error=String(bad);}
-function paintTry(){
+function paintTry(writeData=true){
  lcd(state,false,-1);
  const data=M.readings(state),r=state.run,correct=r&&r.provenance[0]===0&&r.provenance[1]===1&&state.page==="result";
- $("try-context").textContent=state.fromWatch?"Continue from the frozen Watch frame. Reset Try for different pairs.":"Fit yval on xval and predict at x = "+M.display(data.at)+". Compare the fitted maximum over the observed x-range with the largest reading.";
- status("tool-status",state.error||(request.error&&!hasOwnTry?request.error:"")||(r&&state.page==="result"?"Equation stored to "+r.store+".":""),Boolean(state.error||request.error&&!hasOwnTry));
- for(const [id,v] of [["x-input",data.x],["y-input",data.y],["at-input",data.at]])if(document.activeElement!==$(id))$(id).value=Array.isArray(v)?v.map(x=>x??"").join(", "):v;
+ $("try-context").textContent="Fit yval on xval and predict at x = "+M.display(data.at)+". Compare the fitted maximum over the observed x-range with the largest reading.";
+ status("tool-status",state.error||(request.error&&!touched?request.error:"")||(r&&state.page==="result"?"Equation stored to "+r.store+".":""),Boolean(state.error||request.error&&!touched));
+ for(const [id,v] of [["x-input",data.x],["y-input",data.y],["at-input",data.at]])if(writeData&&document.activeElement!==$(id))$(id).value=Array.isArray(v)?v.map(x=>x??"").join(", "):v;
  shown("back-to-data",state.page!=="sheet"||!!r);$("back-to-data").textContent=state.page==="sheet"?"Show fit":"Show data";
- shown("answer",!state.fromWatch);shown("try-picture",Boolean(correct));
+ shown("try-picture",Boolean(correct));
  if(correct)chart($("try-picture"),data,r);else $("try-picture").replaceChildren();
- shown("transfer",Boolean(correct&&!state.fromWatch));
- if(correct&&!state.fromWatch)$("transfer").textContent="The dashed curve is the model. Use the data rows for the observed maximum.";
+ shown("transfer",Boolean(correct));
+ if(correct)$("transfer").textContent="The dashed curve is the model. Use the data rows for the observed maximum.";
 
 }
-function update(next){state=next;if(!state.fromWatch)hasOwnTry=true;status("assess-feedback","");paintTry();}
+function update(next){state=next;touched=true;status("assess-feedback","");paintTry();}
 function physical(k){
  if(mode!=="try")return;
  clearTimeout(light);shell.setKeys([k]);light=setTimeout(()=>shell.setKeys([]),160);update(M.press(state,keyOf(k)));
@@ -136,69 +137,32 @@ $("answer").addEventListener("submit",e=>{
  status("assess-feedback",msg||"Correct. The fitted maximum comes from the curve; the observed maximum comes from the data.",Boolean(msg));
 });
 $("answer").addEventListener("input",()=>status("assess-feedback",""));
-function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
-function size(){
- if(mode!=="watch")return;
- const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
- const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
- stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
+function enterTry(device,actions){
+ mode="try";returnToWatch=actions.returnToWatch;
+ device.prepend(stage);$("try-grid").prepend(handheld);stage.hidden=false;$("watch-study").hidden=true;
+ clearTimeout(light);shell.setKeys([]);shell.setInteractive(true);paintTry(!entered);entered=true;
 }
-const obs=new ResizeObserver(size);for(const x of [$("watch-message"),$("watch-player"),document.querySelector(".head")])obs.observe(x);
-window.addEventListener("resize",size);window.visualViewport?.addEventListener("resize",size);
-function focus(v){
- focusOn=v;stage.classList.toggle("focus-open",v);document.body.classList.toggle("ct32-focus",v);
- const f=$("focus");f.textContent=v?"Exit":"Focus";f.setAttribute("aria-pressed",String(v));f.setAttribute("aria-label",v?"Exit focused view":"Focused view");if(v)stage.scrollTop=0;size();
+function exitTry(){
+ mode="watch";stage.hidden=true;$("watch-study").hidden=false;stamp="";
+ clearTimeout(light);shell.setKeys([]);shell.setInteractive(false);
 }
-function labelPlay(){const t=playing?"Pause":clock>=T.duration-.015?"Replay":"Play";play.textContent=t;play.setAttribute("aria-label",t);}
-function seekTo(t){clock=Math.min(T.duration,Math.max(0,Number(t)||0));origin=performance.now()-clock*1000;paintWatch();labelPlay();}
-function pause(){playing=false;cancelAnimationFrame(frame);paintWatch();labelPlay();}
-function tick(t){if(!playing||mode!=="watch")return;clock=Math.min(T.duration,Math.max(0,(t-origin)/1000));paintWatch();if(clock>=T.duration){pause();return;}frame=requestAnimationFrame(tick);}
-function start(){
- if(mode!=="watch")return;
- if(!considered){considered=true;const h=window.visualViewport?.height||innerHeight;if($("watch-player").getBoundingClientRect().bottom>h-3||shell.body.getBoundingClientRect().width<185)focus(true);}
- if(document.activeElement===overlay)play.focus({preventScroll:true});
- started=true;if(clock>=T.duration-.015)seekTo(0);
- playing=true;origin=performance.now()-clock*1000;paintWatch();labelPlay();frame=requestAnimationFrame(tick);
-}
-function toggle(){if(playing)pause();else start();}
-play.onclick=overlay.onclick=toggle;
-$("back").onclick=()=>seekTo(clock-10);$("forward").onclick=()=>seekTo(clock+10);
-$("replay").onclick=()=>{pause();seekTo(0);start();};seek.oninput=()=>seekTo(seek.value);
-$("focus").onclick=()=>{considered=true;focus(!focusOn);};
-function reset(){
- state=M.init(request.data);hasOwnTry=true;$("answer").reset();$("edit-details").open=false;status("assess-feedback","");
-}
-function switchMode(to,take=false){
- if(to==="try"&&mode==="watch"){
-  pause();preferFocus=focusOn;if(focusOn)focus(false);
-  if(take&&!canFork()&&state.fromWatch)reset();
-  else if(take&&canFork()&&!request.linked&&!request.error&&!hasOwnTry&&!taken){state={...snapshot(clock).s,fromWatch:true};taken=true;}
- }
- mode=to;stage.dataset.mode=mode;stamped="";const w=mode==="watch";
- ["watch-message","watch-player","watch-panel"].forEach(id=>shown(id,w));["try-header","try-panel"].forEach(id=>shown(id,!w));
- tabs.forEach((e,i)=>{const yes=w===(i===0);e.tabIndex=yes?0:-1;e.setAttribute("aria-selected",String(yes));});
- clearTimeout(light);shell.setKeys([]);shell.setInteractive(!w);
- if(w){paintWatch();size();if(preferFocus||firstWatch&&shell.body.getBoundingClientRect().width<156)focus(true);firstWatch=false;}
- else{overlay.hidden=true;paintTry();}
-}
-tabs.forEach((b,i)=>{
- b.onclick=()=>{switchMode(i?"try":"watch");if(i){hasOwnTry=!state.fromWatch;stage.focus({preventScroll:true});}};
- b.onkeydown=e=>{if(["ArrowLeft","ArrowRight","Home","End"].includes(e.key)){e.preventDefault();const k=e.key==="Home"?0:e.key==="End"?1:1-i;switchMode(k?"try":"watch");if(k&&!state.fromWatch)hasOwnTry=true;tabs[k].focus();}};
-});
-$("take").onclick=()=>{switchMode("try",true);stage.focus({preventScroll:true});};
-$("return").onclick=()=>{switchMode("watch");play.focus({preventScroll:true});};
-$("reset").onclick=()=>{reset();paintTry();stage.focus({preventScroll:true});};
+$("return").onclick=()=>returnToWatch?.();
+$("reset").onclick=()=>{
+ state=M.init(request.data);touched=true;$("answer").reset();$("edit-details").open=false;status("assess-feedback","");
+ paintTry();stage.focus({preventScroll:true});
+};
 $("back-to-data").onclick=()=>{update({...state,page:state.page==="sheet"&&state.run?"result":"sheet",dropdown:null,error:"",edit:null});stage.focus({preventScroll:true});};
 document.addEventListener("keydown",e=>{
- if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
- if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus({preventScroll:true});return;}
- const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
- if(mode==="watch"){if(el.closest("button")||e.repeat)return;const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();seekTo(clock+(k==="j"?-10:10));}return;}
+ const el=e.target;
+ if(mode!=="try"||e.defaultPrevented||e.isComposing||e.altKey||e.metaKey||e.ctrlKey||
+    el.closest("input,textarea,select,a,summary,[contenteditable],.top,.tabbar"))return;
  if((!stage.contains(el)&&el!==document.body)||(el.closest("button")&&["Enter"," "].includes(e.key)))return;
  if(e.key==="Tab"&&!e.shiftKey&&el===stage&&state.page==="wizard"){e.preventDefault();physical("tab");return;}
  const keys={m:"menu",M:"menu",Escape:"esc",Enter:"enter",Backspace:"del",Delete:"del",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down","-":"neg",".":"dot"};
- const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");if(k){e.preventDefault();physical(k);}
+ const k=keys[e.key]||(/^[0-9]$/.test(e.key)?e.key:"");if(k){e.preventDefault();if(el===document.body)stage.focus({preventScroll:true});physical(k);}
 });
-switchMode(params.get("mode")==="try"?"try":"watch");
-window.QBRecordedWatch?.bind(pause);
+window.CalculatorLessonAdapter=Object.freeze({
+ initialMode:params.get("mode")==="try"||request.linked?"try":"watch",
+ renderWatch,enterTry,exitTry
+});
 })();
