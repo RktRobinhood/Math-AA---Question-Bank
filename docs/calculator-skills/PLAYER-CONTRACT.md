@@ -2,6 +2,10 @@
 
 Enter and round a calculation (CT01) is the reference for the visible teaching steps and key groups. Numerical Solve (CT06) is the reference for fixed-rate voice, teaching pauses, and the Practice popup. Match these inside the bank, not a separate brand or player layout.
 
+
+Start new lessons from the [shared Watch template](WATCH-TEMPLATE.md). Supply a
+lesson definition and a calculator adapter, not another player. Existing lessons
+move to shared pieces in verified batches without changing their audio or maths.
 - Use the bank's own header, course switcher and System/Light/Dark preference.
   System is the default; do not initialize or save a second lesson theme.
   A standalone calculator has the same header. A Practice iframe gets only

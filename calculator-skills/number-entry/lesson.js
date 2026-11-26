@@ -46,7 +46,7 @@ const teaching=[
 ];
 const keyNames={ctrl:"Ctrl",div:"÷",ee:"EE",neg:"(−)",mul:"×",enter:"Enter",down:"↓",home:"Home"};
 let mode="watch",state=M.pristine("calc",task.expr),t=0,playing=false,pending=false,epoch=0,raf=0,base=0,phase="",sound=true,stamp="",showCaptions=false,initiated=false;
-let layout=TeachingHolds.make(beats), duration=layout.duration,activeFrame="",trailIndex=-2;
+let layout=TeachingHolds.make(beats), duration=layout.duration,activeFrame="";
 const framingKey="qb-calculator-watch-frame";
 function readFrame(){try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}}
 let framing=readFrame();
@@ -147,13 +147,9 @@ function renderWatch(){
  seek.setAttribute("aria-valuetext",fmt(t>=duration-.015?Math.round(duration):t)+" of "+fmt(Math.round(duration)));
  $("clock").textContent=fmt(t>=duration-.015?Math.round(duration):t)+" / "+fmt(Math.round(duration));
  paintFraming();
- if(f.eventIndex!==trailIndex){
-  trailIndex=f.eventIndex;
-  for(const [i,chip] of keysOnPage.entries()){
-   chip.dataset.progress=i===trailIndex?"current":i<trailIndex?"done":"next";
-   if(i===trailIndex)chip.setAttribute("aria-current","step");else chip.removeAttribute("aria-current");
-  }
- }
+ const active=railGroups[c];
+ const latest=railEvents[f.eventIndex];
+ chapterRail.setState({chapterId:active.id,keyId:latest?.chapter===active.id?latest.id:null});
  shell.setKeys([f.prev,f.key].filter(Boolean));
  $("active-key").textContent=f.last?f.last.split("+").map(k=>keyNames[k]||k).join(" + "):"—";
  if(!initiated){overlay.hidden=t>.04;overlay.dataset.initial="true";}
@@ -165,7 +161,7 @@ function renderWatch(){
  if(next===stamp)return;stamp=next;
  renderLCD(f.s);
  const note=$("takeaway");note.hidden=false;note.textContent=teaching[a];
- [...$("steps").children].forEach((n,i)=>n.firstElementChild.setAttribute("aria-current",String(i===c)));
+
 
 }
 function renderTry(){
@@ -249,7 +245,7 @@ function toggle(){if(playing||pending){pause();chrome.flash(false);}else void st
 function setMode(next){
  if(next===mode)return;
  pause();chrome.clear();void chrome.exit();
- mode=next;stage.dataset.mode=mode;stamp="";trailIndex=-2;paintFraming();captions(showCaptions);
+ mode=next;stage.dataset.mode=mode;stamp="";paintFraming();captions(showCaptions);
  for(const [i,n] of names.entries()){const selected=(i===0)===(mode==="watch");n.setAttribute("aria-selected",String(selected));n.tabIndex=selected?0:-1;}
  for(const id of ["try-panel","try-player","challenge"])$(id).hidden=next!=="try";
  for(const id of ["watch-panel","watch-player","key-strip"])$(id).hidden=next!=="watch";
@@ -319,26 +315,15 @@ document.addEventListener("keydown",e=>{
  const match=keyMap[k]??keyMap[z]??(/^[0-9]$/.test(k)?k:null);
  if(match){e.preventDefault();doKey(match);shell.setKeys([match]);setTimeout(()=>{if(mode==="try")shell.setKeys([]);},125);}
 });
-const keysOnPage=[];
 const keyTrailName={down:"Down arrow",neg:"Negative key",ee:"E E",div:"Divide",mul:"Multiply"};
-const taughtLabels=["Open Calculator","Fraction template","Start numerator","Finish & evaluate"];
-let preceding=null;
-for(const [chapter,name] of chapters){
- const li=node("li"),b=node("button");b.type="button";b.append(node("span","",String(1+$("steps").children.length).padStart(2,"0")),document.createTextNode(name));
- b.addEventListener("click",()=>go(layout.spans[chapter].start));li.append(b);$("steps").append(li);
- if(actions[chapter].length){
-  li.className="ct01-trail-group";
-  const row=node("div","ct01-trail-row");row.setAttribute("role","list");row.setAttribute("aria-label",taughtLabels[chapter]+" key trail");
-  li.append(row);
-  for(const [,key] of actions[chapter]){
-   const chip=node("kbd","ct01-trail-key",keyNames[key]||key);
-   chip.setAttribute("role","listitem");
-   chip.setAttribute("aria-label",(keysOnPage.length+1)+". "+(keyTrailName[key]||keyNames[key]||key));
-   if(preceding==="ctrl"&&key==="div")chip.title="Press Divide after Ctrl to open the fraction template";
-   row.append(chip);keysOnPage.push(chip);preceding=key;
-  }
- }
-}
+const railGroups=chapters.map(([beat,title],i)=>{
+ const id="step-"+(i+1);
+ return {id,title,keys:actions[beat].map(([,key],j)=>({id:id+"-"+(j+1),label:keyNames[key]||key,ariaLabel:keyTrailName[key]||keyNames[key]||key,chapter:id}))};
+});
+const railEvents=railGroups.flatMap(g=>g.keys);
+const chapterRail=CalculatorWatchChapters.mount($("steps"),railGroups,{label:"Steps and calculator keys",
+ onChapter:id=>go(layout.spans[chapters[railGroups.findIndex(g=>g.id===id)][0]].start)
+});
 const sup={"-":"⁻","+":"⁺","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
 const written=task.expr.replace(/(\d+(?:\.\d+)?)[eE]([+-]?\d+)/g,(_,c,e)=>c+" × 10"+[...e].map(v=>sup[v]).join("")).replace(/\*/g," × ").replace(/\//g," ÷ ").replace(/-/g,"−");
 $("question").textContent="Evaluate "+written+". "+(task.explicitPrecision ? "Give the answer to "+task.sf+" significant figure"+(task.sf===1?"":"s")+"." : "Give the exact answer if you can, or round to three significant figures.");

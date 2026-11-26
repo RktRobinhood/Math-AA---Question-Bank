@@ -1,0 +1,49 @@
+/* Scope only the declarative Watch chapter rail. The page owns stage layout. */
+.qb-watch-chapters{
+ list-style:none;display:grid;grid-template-columns:minmax(0,1fr);
+ align-items:stretch;gap:4px;margin:0;padding:0;min-width:0
+}
+.qb-watch-chapters__row{min-width:0;margin:0;padding:0;display:flex}
+.qb-watch-chapters .qb-watch-chapters__button{
+ appearance:none;width:100%;min-width:0;min-height:40px;display:grid;
+ grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto 1fr;align-content:start;
+ align-items:start;gap:3px 6px;margin:0;padding:6px 7px;text-align:start;
+ border:1px solid transparent;border-radius:6px;background:transparent;
+ color:var(--watch-chapters-ink,#e5f3ed);cursor:pointer;white-space:normal
+}
+.qb-watch-chapters .qb-watch-chapters__button:is(:hover,[aria-current=step]){
+ background:var(--watch-chapters-selected,#2e483d);border-color:var(--watch-chapters-edge,#678479)
+}
+.qb-watch-chapters .qb-watch-chapters__button:focus-visible{
+ outline:2px solid var(--watch-chapters-focus,#a9d8ff);outline-offset:1px
+}
+.qb-watch-chapters__index{
+ font:650 .67rem/1.3 ui-monospace,monospace;
+ color:var(--watch-chapters-soft,#bbd2c7)
+}
+.qb-watch-chapters__title{font:700 .83rem/1.2 system-ui,sans-serif;overflow-wrap:anywhere}
+.qb-watch-chapters__keys{grid-column:2;display:flex;flex-wrap:wrap;gap:3px;min-width:0}
+.qb-watch-chapters .qb-watch-chapters__key{
+ display:inline-block;min-width:1.02rem;max-width:100%;margin:0;padding:2px 4px;
+ border:1px solid var(--watch-chapters-edge,#678479);border-radius:4px;box-shadow:none;
+ background:var(--watch-chapters-tile,#263b33);
+ color:var(--watch-chapters-ink,#e5f3ed);text-align:center;
+ font:700 .68rem/1 ui-monospace,monospace;overflow-wrap:anywhere
+}
+.qb-watch-chapters .qb-watch-chapters__key[data-progress=done]{
+ background:var(--watch-chapters-selected,#2e483d);color:var(--watch-chapters-soft,#bbd2c7)
+}
+.qb-watch-chapters .qb-watch-chapters__key[data-progress=current]{
+ background:var(--watch-chapters-active,#c8ffd5);color:var(--watch-chapters-active-ink,#132c22);
+ border-color:var(--watch-chapters-active,#c8ffd5)
+}
+.qb-watch-chapters__tip{
+ margin:5px 0 0;color:var(--watch-chapters-soft,#bbd2c7);font:650 .81rem/1.32 system-ui,sans-serif
+}
+.qb-watch-chapters__tip[hidden],.qb-watch-chapters__description[hidden]{display:none!important}
+@media(max-width:430px){
+ .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}
+ .qb-watch-chapters .qb-watch-chapters__button{min-height:44px;gap:3px 4px;padding:5px}
+ .qb-watch-chapters__title{font-size:.75rem}
+ .qb-watch-chapters .qb-watch-chapters__key{font-size:.65rem;padding-inline:3px}
+}

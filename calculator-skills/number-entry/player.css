@@ -100,19 +100,16 @@ body.watch-fullscreen-open{overflow:hidden}
  .ct01-stage[data-mode=watch] #watch-panel .ct01-takeaway{margin:0;min-height:2.75em;font:600 .79rem/1.35 var(--text-font,system-ui,sans-serif);text-align:center}
  .ct01-stage #watch-player .ct01-rate select{max-width:100%;width:100%;font-size:.66rem}
 }
-.ct01-stage .ct01-trail-row{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:0 7px 6px}
-.ct01-stage .ct01-trail-key{display:inline-grid;place-items:center;min-width:19px;min-height:19px;padding:1px 4px;border:1px solid #637d6f;border-radius:4px;font:670 .69rem/1 var(--mono);color:#eef5ef;background:#1b3027;white-space:nowrap}
-.ct01-stage .ct01-trail-key[data-progress=done]{background:#476658;border-color:#91aa99}
-.ct01-stage .ct01-trail-key[data-progress=current]{color:#09251b;background:#bbefcc;border-color:#edfff3;box-shadow:inset 0 -2px #347351}
-.ct01-stage[data-mode=watch] #watch-panel .steps button{min-height:28px;padding-block:4px}
-@media(max-width:700px){
- .ct01-stage[data-mode=watch] #watch-panel .steps{display:grid;grid-template-columns:1fr 1fr;gap:.25rem .45rem;margin:0 0 .3rem;padding:0}
- .ct01-stage[data-mode=watch] #watch-panel .steps>li:not(.ct01-trail-group){display:none}
- .ct01-stage[data-mode=watch] #watch-panel .steps button{min-height:23px;font-size:.68rem;width:100%;padding:2px 3px}
- .ct01-stage[data-mode=watch] #watch-panel .steps button span{display:none}
- .ct01-stage .ct01-trail-row{gap:3px;padding:1px 0 0}
- .ct01-stage .ct01-trail-key{min-width:17px;min-height:17px;font-size:.64rem;padding:1px 3px}
-}
-@media(max-width:370px){
- .ct01-stage[data-mode=watch] #watch-panel .ct01-takeaway{font-size:.73rem}
+/* The reference uses the same chapter presenter as new Watch lessons. */
+.ct01-stage #steps .qb-watch-chapters{gap:3px}
+.ct01-stage #steps .qb-watch-chapters__button{min-height:27px;padding:4px 6px}
+.ct01-stage #steps .qb-watch-chapters__title{font-size:.77rem}
+@media(max-width:735px){
+ .ct01-stage[data-mode=watch] #watch-panel #steps{display:block;margin:.2rem 0 .35rem;padding:0}
+ .ct01-stage #steps .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px}
+ .ct01-stage #steps .qb-watch-chapters__button{padding:3px;min-height:23px;gap:2px}
+ .ct01-stage #steps .qb-watch-chapters__index{display:none}
+ .ct01-stage #steps :is(.qb-watch-chapters__title,.qb-watch-chapters__keys){grid-column:1/-1}
+ .ct01-stage #steps .qb-watch-chapters__title{font-size:.69rem}
+ .ct01-stage #steps .qb-watch-chapters__key{padding:1px 3px;font-size:.61rem}
 }
