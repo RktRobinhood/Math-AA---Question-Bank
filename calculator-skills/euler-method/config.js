@@ -30,8 +30,6 @@ return {
   return "";
  },
  success:"Correct. Each new slope comes from the updated point, not from the starting point.",
- notes:"This is the Calculator-page arithmetic workflow, not a firmware emulator or a built-in ODE solver. Use y(next) = y + h·f(x,y) and x(next) = x + h, evaluating f with the old pair before updating either coordinate. Enter a fresh numerical expression for each step. The trainer accepts affine slopes ax + by + c, positive forward steps, and ordinary arithmetic with brackets; Graphs and spreadsheet approaches are separate.",
- refs:[["TI CX guide: Calculator application","https://education.ti.com/html/eguides/nspire/EG_Nspire/EN/content/m_calculator/m_calculator.HTML"],["TI guidance: Euler’s local-linear steps","https://education.ti.com/en/activity/detail/eulers-method"],["IB AI guide (AHL 5.16)","https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=75"]],
  chapters:["Start at the known point","Find the old-point slope","Enter the first update","Move to the new point","Recalculate the slope","Enter the second update","Interpret the estimate"],
  captions:[
  [0,"Estimate y at x = 1 in two steps. Start at the known point (0, 2).","dy/dx = x − y · h = 0.5"],

@@ -327,7 +327,7 @@ function setMode(m){
  pause();mode=m;frameSig='';lcdSig='';trail.hidden=m!=='watch';hotspots.replaceChildren();
  document.body.dataset.cxMode=m;viewState();shell?.setKeys([]);shell?.setInteractive(m==='try');
  watchers.forEach(b=>{const yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
- $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('watch-example').hidden=m!=='watch';$('audio-notice').hidden=!(m==='watch'&&silent);
+ $('watch-controls').hidden=m!=='watch';$('practice').hidden=m!=='try';$('audio-notice').hidden=!(m==='watch'&&silent);
  if(m==='watch'){form.hidden=true;paint(time)}else{playerUI.clear();playerUI.exit();caption.hidden=true;drawTry()}
 }
 let targetField=0,lastField=-1;

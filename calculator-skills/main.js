@@ -47,7 +47,6 @@ try{if(preloadExpr)parseGraph(preloadExpr)}catch{formulaOk=false}
 const contextEl=$('context');
 if(context||preloadExpr){contextEl.textContent=context||'Linked practice';contextEl.hidden=false}
 if(validSource||queryRef){const a=$('return-question');a.href=validSource||BANK;a.hidden=false;a.textContent='Back to '+bankName+' ↗'}
-$('example-expr').textContent=displayExpr(watchQ.raw);
 $('transcript').textContent=spokenCues.map(c=>c[1]).join(' ');
 const render=screen($('drawing'));
 const lcd=$('lcd');
@@ -347,7 +346,7 @@ function setMode(m){
  document.body.dataset.cxMode=m;stage.dataset.watchMode=m;
  shell?.setKeys([]);shell?.setInteractive(m==='try');
  if(m==='try'){void chrome.exit();chrome.clear();}
- $('watch-chapters').hidden=m!=='watch';$('watch-synopsis').hidden=m!=='watch';
+ $('watch-chapters').hidden=m!=='watch';
  modeButtons.forEach(b=>{let yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
  $('watch-player').hidden=m!=='watch';$('practice').hidden=m!=='try';
  $('media-status').hidden=useAudio||m!=='watch';

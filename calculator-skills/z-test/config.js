@@ -35,8 +35,6 @@ return {
   return "";
  },
  success:"Correct. This is a decision about evidence against H₀, not proof that either hypothesis is true.",
- notes:"This is the one-sample mean test using known population σ and an independent sample from a normal population. The wizard uses the raw list. It is not a one-proportion z test or a substitute for the t test when only sample s is available. Significance level α is used to interpret output, not typed into the TI z Test wizard.",
- refs:[["TI handheld KB 29150","https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29150"],["IB AI guide (AHL 4.18)","https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf"]],
  captions:[
  [0,"A normal population has known standard deviation 4. Test whether its mean is below 50 using an independent sample.","H₀: μ = 50 · Hₐ: μ < 50"],
  [6,"Use a z test because population σ is known. Choose the less-than alternative before seeing the test result.","Known σ = 4 · α = 0.05"],

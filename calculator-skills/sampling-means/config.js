@@ -43,8 +43,6 @@ return {
   return "";
  },
  success:"Correct. The centre stays μ; the spread of the sample mean is σ/√n.",
- notes:"Normal population → exact normal sample mean (for independent observations). For a non-normal population with finite variance, the CLT is an approximation and convergence depends on shape; the current IB guide takes n > 30 as sufficient in exams. Enter standard deviation σ/√n into Normal Cdf, not variance σ²/n. For a one-sided event, leave its unused bound at the calculator’s infinity default.",
- refs:[["TI CX II-T workbook (p. 69)","https://education.ti.com/-/media/ti/education/images/products/product-details/ti-nspire/au-qld-cx-ii-t/qce-mm-trb-for-cx-ii-t-2025.pdf"],["IB AI guide (AHL 4.15)","https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf"]],
  captions:[
  [0,"We want an average, not one observation. Independent population readings have mean 80 and standard deviation 12.","n = 36 · population is mildly skewed"],
  [6,"The sample mean keeps the same centre. Its spread is the standard error: 12 divided by the square root of 36.","μ = 80 · σ/√n = 2"],

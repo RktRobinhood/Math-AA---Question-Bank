@@ -30,8 +30,6 @@ return {
   return "";
  },
  success:"Correct. The observation and all results more extreme in the chosen direction are included.",
- notes:"Assume a fixed number of independent binary trials with the same probability under H₀. The current IB AI HL guide assesses exact binomial tests one-sided only. For a strict critical region, this lesson rejects when the unrounded p-value is below α; equality is not below. A large p-value is not proof that H₀ is true. There is no continuity correction for an exact binomial calculation.",
- refs:[["TI Binomial Cdf (KB 29570)","https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29570"],["IB AI guide (AHL 4.18)","https://ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=68"]],
  chapters:["Choose hypotheses","Select the upper tail","Open Binomial Cdf","Use the null probability","Enter inclusive bounds","Calculate p","Make the decision","Transfer to a lower tail"],
  captions:[
  [0,"Eight of 16 independent checks pass. Does the pass rate exceed the usual 25%?","H₀: p = 0.25 · Hₐ: p > 0.25"],

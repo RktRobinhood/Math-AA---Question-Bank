@@ -28,8 +28,6 @@ return {
   return "";
  },
  success:"Correct. Both updates use the old pair; the phase sketch shows the two numerical steps in order.",
- notes:"Calculator arithmetic only: this trainer is not a built-in ODE solver, phase-portrait emulator, or spreadsheet. It accepts editable linear systems for two forward Euler steps. TI documents a native euler() command; this walkthrough uses individual calculations to show how the two updates work. IB AHL 5.16 also includes nonlinear coupled updates. For the worked system, set y = x′ to reduce x″ + x′ + 2x = 0 (AHL 5.18). The exact continuous system has distinct nonzero eigenvalues (−1 ± i√7)/2 and approaches the origin in a spiral (AHL 5.17); two Euler steps alone do not establish this, and a larger step may distort the path.",
- refs:[["TI CX guide: Calculator application","https://education.ti.com/html/eguides/nspire/EG_Nspire/EN/content/m_calculator/m_calculator.HTML"],["TI CX guide: euler()","https://education.ti.com/html/webhelp/EG_TINspire/EN_GB/Subsystems/EG_RefGuide/Content/M_RefGuide/RG_alpha_E.HTML"],["IB AI guide, AHL 5.16–5.18","https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=75"]],
  chapters:["Keep the old pair","First x update","First y update","Second x update","Second y update","Read the phase path"],
  captions:[
  [0,"Start with (1, 0). In each step, find both slopes from the same old point.","x′ = y; y′ = −2x − y; h = 0.25"],
