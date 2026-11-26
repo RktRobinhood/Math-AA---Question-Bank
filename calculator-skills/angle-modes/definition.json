@@ -1,0 +1,125 @@
+{
+  "id": "CT02",
+  "title": "Angle modes and inverse trig",
+  "intro": "Use a TI-Nspire CX II-T to find one inverse-trig angle in the unit the question asks for.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "55380d83493dd7bb002147862a5e5bbd71b16f9f1b13c315e5e6f08083385b26",
+    "scriptSha256": "b02dd83ecdfa33ac55409abbc4e8f83f8510dc96ff648c285d5ed72067db8f8b"
+  },
+  "chapters": [
+    {
+      "id": "units",
+      "title": "Check the requested unit"
+    },
+    {
+      "id": "degrees",
+      "title": "Switch RAD to DEG"
+    },
+    {
+      "id": "inverse",
+      "title": "Choose inverse sine"
+    },
+    {
+      "id": "argument",
+      "title": "Enter the ratio"
+    },
+    {
+      "id": "verify",
+      "title": "Read the principal angle"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "units",
+      "end": 8.359,
+      "hold": 5,
+      "spoken": "Find the principal angle for sine theta equals zero point six, in degrees. Check the top-right rad or deg label.",
+      "coach": "The question asks for degrees. Check the mode in the top-right of the calculator screen before you calculate.",
+      "keys": []
+    },
+    {
+      "chapter": "degrees",
+      "end": 15.916,
+      "hold": 12,
+      "spoken": "Use the touchpad to move the pointer to rad. Click the touchpad centre. Rad changes to deg.",
+      "coach": "Move the touchpad pointer to RAD, then click the centre of the touchpad. Check that the label changes to DEG.",
+      "keys": [
+        {
+          "id": "change-unit",
+          "label": "Touchpad click",
+          "ariaLabel": "Click touchpad centre",
+          "at": 0.58
+        }
+      ]
+    },
+    {
+      "chapter": "inverse",
+      "end": 24.979,
+      "hold": 11,
+      "spoken": "Press trig. Move down to inverse sine and press Enter. The minus one means inverse, not reciprocal.",
+      "coach": "Press trig, move down to sin⁻¹, then press Enter. Here the exponent notation means inverse sine, not a reciprocal.",
+      "keys": [
+        {
+          "id": "open-trig",
+          "label": "trig",
+          "ariaLabel": "trig",
+          "at": 0.2
+        },
+        {
+          "id": "down-to-inverse",
+          "label": "↓",
+          "ariaLabel": "down arrow",
+          "at": 0.48
+        },
+        {
+          "id": "choose-inverse",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.77
+        }
+      ]
+    },
+    {
+      "chapter": "argument",
+      "end": 32.346,
+      "hold": 13,
+      "spoken": "Type zero point six and press Enter. Inverse sine takes a ratio and gives an angle.",
+      "coach": "Type 0.6 and press Enter. The argument is the ratio, not an angle.",
+      "keys": [
+        {
+          "id": "type-zero",
+          "label": "0",
+          "ariaLabel": "zero",
+          "at": 0.13
+        },
+        {
+          "id": "decimal-point",
+          "label": ".",
+          "ariaLabel": "decimal point",
+          "at": 0.29
+        },
+        {
+          "id": "type-six",
+          "label": "6",
+          "ariaLabel": "six",
+          "at": 0.45
+        },
+        {
+          "id": "evaluate",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.72
+        }
+      ]
+    },
+    {
+      "chapter": "verify",
+      "end": 42.729,
+      "hold": 10,
+      "spoken": "About thirty-six point eight seven degrees. That is one principal angle. If asked for all solutions, check the whole interval.",
+      "coach": "The display gives about 36.87° in DEG mode. This is the principal angle. If asked for all solutions, check the full interval.",
+      "keys": []
+    }
+  ]
+}

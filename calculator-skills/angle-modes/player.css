@@ -1,110 +1,14 @@
-/* CT02 only. The two framings share the same live TI LCD and replay. */
-.ct02-shared[data-mode=watch]{--tape-bg:#182621;--tape-line:#425c4d;--tape-ink:#f0f7f2;--tape-soft:#c1d3c5;--tape-on:#bfead0;background:var(--tape-bg);color:var(--tape-ink);color-scheme:dark;isolation:isolate}
-.ct02-shared[data-mode=watch] #workspace{position:relative;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;justify-content:center;gap:clamp(10px,3vw,30px);padding:32px clamp(9px,2vw,24px) 8px;min-width:0;cursor:pointer}
-.ct02-shared[data-mode=watch] #handheld-host{--handheld-width:var(--ct02-handset-fit,200px);min-width:0;align-self:center}
-.ct02-shared[data-mode=watch] #watch-work{color:var(--tape-ink);background:transparent;align-self:center}
-
-.ct02-shared #play-feedback{position:absolute;z-index:8;pointer-events:none;left:50%;top:50%;translate:-50% -50%;width:62px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d1615e9;color:#fff;box-shadow:0 1px 10px #0009}
-.ct02-shared #play-feedback svg{width:36px;height:36px;fill:currentColor}
-.ct02-shared #play-feedback[data-action=play] .pause-glyph,.ct02-shared #play-feedback[data-action=pause] .play-glyph{display:none}
-.ct02-shared #key-strip{position:absolute;top:6px;left:9px;right:9px;min-height:23px;display:flex;align-items:center;gap:6px;white-space:nowrap;font:600 .72rem/1.2 var(--mono);color:var(--tape-soft);pointer-events:none}
-.ct02-shared #active-key{display:inline-block;min-width:2rem;text-align:center;font:700 .77rem/1.15 var(--mono);border:1px solid #7b9888;border-radius:4px;padding:3px 6px;background:#283e33;color:#fff}
-.ct02-shared[data-mode=watch] #caption-band{border-top:1px solid var(--tape-line);background:#090f0d;color:var(--tape-ink)}
-.ct02-shared[data-mode=watch] #caption{margin:0;padding:6px 9px;min-height:0;text-align:center;max-width:none;color:inherit;font:650 clamp(.76rem,2.8vw,.93rem)/1.25 system-ui;overflow-wrap:anywhere}
-.ct02-shared[data-mode=watch] #watch-player{position:static;display:grid;grid-template-columns:auto auto minmax(30px,1fr) repeat(4,auto);align-items:center;gap:4px;padding:4px 8px;border:0;border-top:1px solid var(--tape-line);background:var(--tape-bg);color:var(--tape-ink)}
-.ct02-shared #watch-player :is(button,select){margin:0;min-width:36px;min-height:40px;height:40px;padding:0 5px;border:1px solid transparent;border-radius:5px;background:transparent;color:inherit;font:700 .8rem/1 system-ui;white-space:nowrap}
-.ct02-shared #watch-player select{border-color:var(--tape-line);padding:0 2px;max-width:76px;color-scheme:dark}
-.ct02-shared #watch-player select option{background:var(--tape-bg);color:var(--tape-ink)}
-.ct02-shared #watch-player .player-icon{display:grid;place-items:center;padding:0;width:39px}
-.ct02-shared #watch-player .player-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.ct02-shared #watch-player #play svg{width:24px;height:24px;fill:currentColor;stroke:none}
-.ct02-shared #watch-player :is(button:hover,button[aria-pressed=true]){background:#31463b;color:#fff}
-.ct02-shared #watch-player :is(button:focus-visible,select:focus-visible,input:focus-visible){outline-color:#bde5ff;outline-offset:-2px}
-.ct02-shared #view-pick{display:flex;align-items:center;border:1px solid #647c6d;border-radius:6px}
-.ct02-shared #view-pick .player-icon{min-width:33px;width:33px}
-.ct02-shared #watch-player .timeline,.ct02-shared #seek{width:100%;margin:0;min-width:0}
-.ct02-shared #seek{height:23px;accent-color:var(--tape-on);cursor:pointer}
-.ct02-shared #clock{color:var(--tape-soft);font:600 .73rem/1.2 var(--mono);white-space:nowrap}
-.ct02-shared[data-mode=watch].ct02-screen-view #handheld-host{width:min(100%,var(--ct02-lcd-fit,360px));justify-self:center}
-.ct02-shared[data-mode=watch].ct02-screen-view .hh-body{width:100%;aspect-ratio:4/3;overflow:hidden;border:4px solid #486054;border-radius:8px;box-shadow:none;margin:auto}
-.ct02-shared[data-mode=watch].ct02-screen-view .hh-body>*:not(.hh-lcd){display:none!important}
-.ct02-shared[data-mode=watch].ct02-screen-view .hh-lcd{left:0;right:0;top:0;bottom:0;width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
-.ct02-shared:is(:fullscreen,.watch-fullscreen-fallback){height:100dvh;width:100%;max-height:none;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;align-items:stretch;overflow:auto;overscroll-behavior:contain}
-.ct02-shared.watch-fullscreen-fallback{position:fixed;inset:0;z-index:80}
-body.watch-fullscreen-open{overflow:hidden}
-.ct02-shared:is(:fullscreen,.watch-fullscreen-fallback) #workspace{width:100%;max-width:1100px;flex:1;min-height:0;margin:0 auto}
-.ct02-shared:is(:fullscreen,.watch-fullscreen-fallback) #watch-player{flex:none;position:sticky;bottom:0;z-index:9;padding-bottom:max(4px,env(safe-area-inset-bottom))}
-@media(max-width:700px){
- .ct02-shared[data-mode=watch] #workspace{grid-template-columns:minmax(0,1fr);padding:34px 6px 8px;gap:0}
- .ct02-shared[data-mode=watch] #workspace .calc-side{display:none}
- .ct02-shared[data-mode=watch].ct02-screen-view #handheld-host{max-width:calc(100vw - 48px)}
- .ct02-shared[data-mode=watch] #watch-player{grid-template-columns:auto auto auto 1fr auto;gap:0 2px;padding:2px 4px}
- .ct02-shared #watch-player .timeline{grid-row:1;grid-column:1/-2}
- .ct02-shared #clock{grid-row:1;grid-column:-2/-1;justify-self:end;font-size:.64rem}
- .ct02-shared #watch-player :is(#play,#view-pick,#cc,.ct02-rate,#fullscreen){grid-row:2}
- .ct02-shared #watch-player #play{grid-column:1}
- .ct02-shared #watch-player #view-pick{grid-column:2}
- .ct02-shared #watch-player #cc{grid-column:3}
- .ct02-shared #watch-player .ct02-rate{grid-column:4}
- .ct02-shared #watch-player #fullscreen{grid-column:5}
- .ct02-shared #watch-player :is(button,select){height:37px;min-height:37px;min-width:32px}
- .ct02-shared #watch-player .player-icon{width:33px}
- .ct02-shared #view-pick .player-icon{min-width:28px;width:28px}
+/* CT02 calculator display adapter. Playback controls and Watch layout are shared. */
+.ct02-page #ct02-shell{margin:.35rem 0 .85rem;width:100%;max-width:none}
+.ct02-page #stage[data-mode=try] #angle-toggle{padding-inline:1.4cqw;min-width:15cqw}
+.ct02-page #stage[data-mode=try] #angle-toggle::after{content:none}
+.ct02-page #lcd-cursor{
+ position:absolute;z-index:6;width:clamp(10px,7cqw,22px);height:auto;overflow:visible;
+ pointer-events:none;filter:drop-shadow(0 0 1px #fff);fill:#101625;stroke:#fff;stroke-width:1.35
 }
-@media(prefers-reduced-motion:no-preference){.ct02-shared #play-feedback[data-initial=false]{animation:ct02-feedback-in .15s ease-out}@keyframes ct02-feedback-in{from{opacity:.45;scale:.88}to{opacity:1;scale:1}}}
-.ct02-shared #watch-player #play::before{content:none}
-.ct02-shared #watch-player #play-rate{min-width:57px}
-@media(max-width:380px) and (max-height:659px){
- body.ct02-page main{padding-top:7px}
- body.ct02-page main>.head{margin-bottom:4px}
- body.ct02-page main>.head h1{font-size:1.26rem}
- .ct02-shared[data-mode=watch] #workspace{padding-top:26px;padding-bottom:5px}
-}
-.ct02-shared[data-mode=watch] #watch-work{padding-block:0}
-@media(min-width:701px) and (max-height:620px){
- .ct02-shared[data-mode=watch] #watch-work h2{font-size:1.15rem}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]){padding-top:11px}
-}
-@media(min-width:850px) and (max-height:620px){
- body.ct02-page main:has(.ct02-shared[data-mode=watch]){position:relative}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]) > .head{padding-inline-end:205px;margin-bottom:8px}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]) > .calc-tabs{position:absolute;top:17px;right:clamp(17px,4vw,45px);margin:0;border:0}
-}
-
-.ct02-shared[data-mode=watch]:not(:fullscreen,.watch-fullscreen-fallback) #watch-player { position:static; }
-.ct02-shared[data-mode=watch] #watch-work { min-width:0; }
-.ct02-shared[data-mode=watch] #watch-work .tag { margin-block-end:4px; }
-.ct02-shared[data-mode=watch] #watch-work>p:not(.tag) { margin-bottom:4px; }
-.ct02-shared[data-mode=watch] #caption { border:0; }
-.ct02-shared[data-mode=watch] #key-strip { padding-inline-start:2px; }
-
-/* Keep a viewable full handset as well as captions on the shortest phone. */
-@media(max-width:420px) and (max-height:660px){
- body.ct02-page main:has(.ct02-shared[data-mode=watch]){position:relative}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]) > .head{padding-top:8px;margin-bottom:7px!important}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]) > .calc-tabs{position:absolute;top:9px;right:clamp(10px,4vw,17px);margin:0;border:0}
- body.ct02-page main:has(.ct02-shared[data-mode=watch]) > .calc-tabs button{min-width:48px;min-height:31px;font-size:.79rem;padding:2px 7px}
-}
-.ct02-shared[data-mode=watch] #watch-work{max-height:var(--ct02-scene-room,none);overflow:auto;scrollbar-width:thin}
-
-
-.ct02-shared[data-mode=watch] .lcd button {pointer-events:none;}
-.ct02-shared[data-mode=watch] #caption {min-block-size:43px;display:grid;place-items:center;}
-.ct02-shared #lcd-cursor {position:absolute;z-index:6;width:clamp(10px,7cqw,22px);height:auto;overflow:visible;pointer-events:none;filter:drop-shadow(0 0 1px #fff);fill:#101625;stroke:#fff;stroke-width:1.35;}
-.ct02-shared[data-mode=watch] #lcd-mode {padding:.28em .44em;border-radius:2px;}
-.ct02-shared[data-mode=watch] #lcd-mode[data-pointed=true] {background:#f0da90;outline:1px solid #85682c;color:#152438;}
-.ct02-shared[data-mode=watch] #beat {font-size:.91rem;color:var(--tape-soft);min-block-size:2.5em;}
-.ct02-shared[data-mode=watch] .mathline {color:var(--tape-ink);}
-.ct02-shared[data-mode=try] #angle-toggle {padding-inline:1.4cqw;min-width:15cqw;}
-.ct02-shared[data-mode=try] #angle-toggle::after {content:none!important;}
-.ct02-shared #watch-player .timeline {display:block;}
-.ct02-shared #watch-player .timeline #seek {display:block;}
-.ct02-page main:has(.ct02-shared[data-mode=watch]) .head {margin-bottom:7px;}
-@media(max-width:420px) and (max-height:660px){
- .ct02-page main:has(.ct02-shared[data-mode=watch]) > .head{padding-top:2px;}
- .ct02-page main:has(.ct02-shared[data-mode=watch]) > .head nav{max-width:57%;margin-bottom:7px;}
- .ct02-page main:has(.ct02-shared[data-mode=watch]) > .head h1{font-size:1.33rem;}
-}
-
-.ct02-shared[data-mode=watch] #watch-work .eyebrow {color:var(--tape-on)}
-@media(min-width:701px) and (max-height:620px){.ct02-shared[data-mode=watch] #workspace{padding-top:31px}}
+.ct02-page .lw-device #lcd-mode{padding:.28em .44em;border-radius:2px}
+.ct02-page .lw-device #lcd-mode[data-pointed=true]{background:#f0da90;outline:1px solid #85682c;color:#152438}
+.ct02-page .lw-device #handheld-host{min-width:0}
+.ct02-page .lw-stage[data-mode=try]{background:none;border:0;overflow:visible}
+.ct02-page .lw-stage[data-mode=try] .lw-surface{padding:0}
+.ct02-page .lw-stage[data-mode=try] .lw-device{width:100%;max-width:none}
