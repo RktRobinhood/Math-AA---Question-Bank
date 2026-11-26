@@ -66,7 +66,9 @@
     helpButton.setAttribute('aria-haspopup', 'dialog');
     helpButton.title = 'Calculator help';
     helpButton.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.2 9a2.8 2.8 0 0 1 5.6.4c0 2-2.8 2.2-2.8 4M12 16.5h.01"/></svg>';
-    panel.append(back, helpButton, status);
+    const edge = el('div', 'practice-calc-edge practice-calc-modal-edge');
+    edge.hidden = true;
+    panel.append(back, helpButton, status, edge);
     panel.setAttribute('aria-label', 'Calculator');
     const frame = el('iframe', 'practice-calc-frame');
     frame.title = 'Blank TI-Nspire calculator';
@@ -86,7 +88,7 @@
     const timer = win.setTimeout(() => {
       if (!status.hidden) status.textContent = 'The calculator did not start. You can go back to your question.';
     }, 4000);
-    const session = { panel, back, helpButton, layout, opened: null, help: null, dispose() {
+    const session = { panel, back, helpButton, layout, edge, opened: null, help: null, dispose() {
       closeHelp(session, false);
       win.removeEventListener('message', onMessage);
       observer.disconnect(); win.clearTimeout(timer);
@@ -172,14 +174,43 @@
     const session = current || create();
     if (!session) return;
     current = session;
-    session.opened = { from, scroll: win.scrollY, mobile: !wide.matches };
-    from.setAttribute('aria-expanded', 'true');
-    from.setAttribute('aria-controls', 'practice-calc');
+    session.opened = { from, title: from.title, placeholder: null, scroll: win.scrollY, mobile: !wide.matches };
+    markTrigger(session.opened);
     session.layout.classList.add('with-practice-calc');
     show(session);
   }
 
+  function markTrigger(opened) {
+    const { from } = opened;
+    from.setAttribute('aria-expanded', 'true');
+    from.setAttribute('aria-controls', 'practice-calc');
+    from.setAttribute('aria-label', 'Hide calculator');
+    from.title = 'Hide the on-screen calculator';
+  }
+
+  function restoreTrigger(session) {
+    const opened = session.opened;
+    if (!opened?.placeholder) return;
+    if (opened.placeholder.isConnected) opened.placeholder.replaceWith(opened.from);
+    else opened.from.remove(); // This card's render replaced both its button and placeholder.
+    opened.placeholder = null;
+    session.edge.hidden = true;
+  }
+
+  function positionTrigger(session) {
+    if (wide.matches) { restoreTrigger(session); return; }
+    const opened = session.opened;
+    if (!opened || opened.placeholder) return;
+    // The question is inert behind a mobile modal. Move its actual toggle
+    // into the dialog, then put it back on close. Do not duplicate the control.
+    opened.placeholder = win.document.createComment('calculator toggle position');
+    opened.from.before(opened.placeholder);
+    session.edge.append(opened.from);
+    session.edge.hidden = false;
+  }
+
   function show(session) {
+    positionTrigger(session);
     if (wide.matches) session.panel.show();
     else session.panel.showModal();
     session.back.focus({ preventScroll: true });
@@ -188,10 +219,13 @@
   function finish(session, restore = true) {
     const opened = session?.opened;
     if (!opened) return;
+    restoreTrigger(session);
     session.opened = null;
     session.layout.classList.remove('with-practice-calc');
     opened.from.removeAttribute('aria-controls');
     opened.from.setAttribute('aria-expanded', 'false');
+    opened.from.setAttribute('aria-label', 'Open calculator');
+    opened.from.title = opened.title;
     if (restore && opened.from.isConnected) {
       opened.from.focus({ preventScroll: true });
       if (opened.mobile && win.scrollY !== opened.scroll) win.scrollTo(0, opened.scroll);
@@ -205,16 +239,23 @@
     finish(current, restore);
   }
 
+  function toggle(from) {
+    if (current?.panel.open && current.opened?.from === from) close();
+    else open(from);
+  }
+
   // The parent uses identity only. No question, seed, draft or answers are sent to
   // the iframe. Reopening this question restores the student's scratchpad, while a
   // different question or leaving Practice destroys its in-memory calculations.
   function bind(nextOwner, trigger) {
     if (owner === nextOwner) {
       // Grading and answer help may redraw controls without changing the question.
-      if (current?.opened && trigger) {
+      if (current?.opened && trigger && current.opened.from !== trigger) {
+        restoreTrigger(current);
         current.opened.from = trigger;
-        trigger.setAttribute('aria-expanded', 'true');
-        trigger.setAttribute('aria-controls', 'practice-calc');
+        current.opened.title = trigger.title;
+        markTrigger(current.opened);
+        positionTrigger(current);
       }
       return;
     }
@@ -225,5 +266,5 @@
     current = null;
   }
 
-  return Object.freeze({ eligible, helpFor, open, close, bind });
+  return Object.freeze({ eligible, helpFor, open, toggle, close, bind });
 });

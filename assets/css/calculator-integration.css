@@ -150,3 +150,13 @@
  .practice-lesson-content iframe{height:min(446px,calc(100dvh - 74px))}
 }
 @media print{.practice-lesson,.practice-calc-help{display:none!important}}
+
+/* The same question toggle stays reachable inside the full-screen mobile calculator. */
+.practice-calc-modal-edge[hidden]{display:none}
+@media(max-width:899px){
+ .practice-calc-modal-edge{
+  position:absolute;z-index:2;top:env(safe-area-inset-top,0px);
+  left:max(9px,env(safe-area-inset-left,0px));margin:0;
+ }
+ .practice-calc-modal-edge .practice-calc-trigger{min-height:40px;border-radius:8px}
+}
