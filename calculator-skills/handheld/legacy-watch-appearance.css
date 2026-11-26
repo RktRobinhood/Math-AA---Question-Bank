@@ -1,0 +1,178 @@
+/* Optional legacy Watch palette. Link after the route player CSS. The site
+   shell writes the resolved light/dark theme (also in System mode). Leave
+   dark and the calculator's native LCD and body untouched. */
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch,
+  .solve-lesson[data-cx-mode=watch] #player.player
+){
+ --legacy-watch-bg:#f2f5fa;
+ --legacy-watch-ink:#1b2a3e;
+ --legacy-watch-soft:#43556c;
+ --legacy-watch-line:#b9c5d5;
+ --legacy-watch-edge:#7d91aa;
+ --legacy-watch-tile:#fbfdff;
+ --legacy-watch-control:#e2eaf5;
+ --legacy-watch-active:#d6e4f8;
+ --legacy-watch-focus:#2556b2;
+ --legacy-watch-accent:#3157be;
+ --legacy-watch-lit:#2146d0;
+ color-scheme:light;
+}
+
+/* CT01/08/10/11/12/38: route player, grouped trail and older chapter cards. */
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch]
+){
+ --tape-bg:var(--legacy-watch-bg);
+ --tape-ink:var(--legacy-watch-ink);
+ --tape-soft:var(--legacy-watch-soft);
+ --tape-line:var(--legacy-watch-line);
+ --tape-on:var(--legacy-watch-accent);
+ border-color:var(--legacy-watch-line);
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch]
+) :is(#steps,#watch-chapters){
+ --watch-chapters-ink:var(--legacy-watch-ink);
+ --watch-chapters-soft:var(--legacy-watch-soft);
+ --watch-chapters-selected:var(--legacy-watch-active);
+ --watch-chapters-edge:var(--legacy-watch-edge);
+ --watch-chapters-focus:var(--legacy-watch-focus);
+ --watch-chapters-tile:var(--legacy-watch-tile);
+ --watch-chapters-active:var(--legacy-watch-lit);
+ --watch-chapters-active-ink:#fff;
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch]
+) :is(#watch-panel,#watch-side) .steps button:is(:hover,[aria-current=true]),
+:root:not([data-theme=dark]) .ct12-shared[data-watch-mode=watch] #key-steps button:is(:hover,[aria-current]){
+ background:var(--legacy-watch-active);
+ border-color:var(--legacy-watch-edge);
+ color:var(--legacy-watch-ink);
+}
+:root:not([data-theme=dark]) .ct12-shared[data-watch-mode=watch] #key-steps button{
+ border-color:var(--legacy-watch-line);
+}
+:root:not([data-theme=dark]) .ct12-shared[data-watch-mode=watch] .ct12-trail-row kbd{
+ background:var(--legacy-watch-tile);
+ border-color:var(--legacy-watch-edge);
+ color:var(--legacy-watch-ink);
+}
+:root:not([data-theme=dark]) .ct12-shared[data-watch-mode=watch] .ct12-trail-row kbd[data-progress=done]{
+ background:var(--legacy-watch-active);
+ color:var(--legacy-watch-soft);
+}
+:root:not([data-theme=dark]) .ct12-shared[data-watch-mode=watch] .ct12-trail-row kbd[data-progress=current]{
+ background:var(--legacy-watch-lit);
+ border-color:var(--legacy-watch-lit);
+ color:#fff;
+ box-shadow:none;
+}
+:root:not([data-theme=dark]) .ct08-shared[data-mode=watch] #watch-side .ct08-takeaway,
+:root:not([data-theme=dark]) .ct08-shared[data-mode=watch] :is(#compact-note,#window-readout){
+ color:var(--legacy-watch-soft);
+}
+:root:not([data-theme=dark]) .ct11-shared[data-mode=watch] .sample-f1{color:#205a91}
+:root:not([data-theme=dark]) .ct11-shared[data-mode=watch] .sample-f2{color:#a13f35}
+
+/* Normal, inverse normal and Poisson use normal/watch.css. */
+:root:not([data-theme=dark]) .modern-watch{
+ --video:var(--legacy-watch-bg);
+ --border:var(--legacy-watch-line);
+ --ink:var(--legacy-watch-ink);
+ --muted-video:var(--legacy-watch-soft);
+ --key:var(--legacy-watch-accent);
+}
+:root:not([data-theme=dark]) .modern-watch .worked-prompt .curve :is(.bell,.cut){
+ stroke:var(--legacy-watch-accent);
+}
+:root:not([data-theme=dark]) .modern-watch .worked-prompt .curve .axis{
+ stroke:var(--legacy-watch-soft);
+}
+:root:not([data-theme=dark]) .modern-watch .worked-prompt .curve .shade{
+ fill:#6199d3;
+}
+
+/* Numerical Solve's original player uses video and stage aliases. */
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player.player{
+ --video:var(--legacy-watch-bg);
+ --video-ink:var(--legacy-watch-ink);
+ --video-quiet:var(--legacy-watch-soft);
+ --video-line:var(--legacy-watch-line);
+ --video-progress:var(--legacy-watch-accent);
+ --stage-ink:var(--legacy-watch-ink);
+ --stage-soft:var(--legacy-watch-soft);
+ --stage-line:var(--legacy-watch-line);
+ border-color:var(--legacy-watch-line);
+}
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player :is(.beat-no,.watch-speed){
+ color:var(--legacy-watch-soft);
+}
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player .solve-trail-step:is(:hover,:focus-visible,[aria-current]){
+ background:var(--legacy-watch-active);
+ color:var(--legacy-watch-ink);
+}
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player #key-steps .solve-trail-key{
+ background:var(--legacy-watch-tile);
+ border-color:var(--legacy-watch-edge);
+ color:var(--legacy-watch-ink);
+}
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player #key-steps .solve-trail-key[data-progress=done]{
+ background:var(--legacy-watch-active);
+ color:var(--legacy-watch-soft);
+}
+:root:not([data-theme=dark]) .solve-lesson[data-cx-mode=watch] #player #key-steps .solve-trail-key[data-progress=current]{
+ background:var(--legacy-watch-lit);
+ border-color:var(--legacy-watch-lit);
+ color:#fff;
+ box-shadow:none;
+}
+
+/* The transport, chip and focus colors shared by the three legacy families.
+   Caption backdrops and the central Play/Pause affordance stay video-dark. */
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch,
+  .solve-lesson[data-cx-mode=watch] #player.player
+) :is(#watch-player,#watch-controls) select{
+ color:var(--legacy-watch-ink);
+ border-color:var(--legacy-watch-line);
+ background-color:var(--legacy-watch-control);
+ color-scheme:light;
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch,
+  .solve-lesson[data-cx-mode=watch] #player.player
+) :is(#watch-player,#watch-controls) :is(button:hover,button[aria-pressed=true],select:hover){
+ background-color:var(--legacy-watch-active);
+ color:var(--legacy-watch-ink);
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch,
+  .solve-lesson[data-cx-mode=watch] #player.player
+) :is(#watch-player,#watch-controls) :is(button,input,select):focus-visible{
+ outline:2px solid var(--legacy-watch-focus);
+ outline-offset:-2px;
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch,
+  .solve-lesson[data-cx-mode=watch] #player.player
+) :is(#view-pick,#active-key){border-color:var(--legacy-watch-edge)}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch
+) #active-key{
+ color:var(--legacy-watch-ink);
+ background:var(--legacy-watch-tile);
+}
+:root:not([data-theme=dark]) :is(
+  :is(.ct01-stage,.ct08-shared,.ct10-player,.ct11-shared,.ct38-shared)[data-mode=watch],
+  .ct12-shared[data-watch-mode=watch],.modern-watch
+) #caption-band #caption{color:#f5fbf8}
