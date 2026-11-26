@@ -1,5 +1,234 @@
 {
-  "version": 1,
-  "lesson": "CT14",
-  "status": "awaiting-recording"
+ "version": 1,
+ "lesson": "CT14",
+ "status": "measured",
+ "audio": "narration.mp3",
+ "audioSha256": "3f50a34711c9d53627bf5aa18ba24fac62f28595949f0174eff59cdbd2183344",
+ "durationMs": 59480,
+ "transcriptSha256": "76886763d9a54688cc5fb7d68940bb75907af626c9944f43165ae0624fb376af",
+ "cueMapSha256": "6a0eac7bfc037a0912e60f05bb5c6cae60df96c9494e956baf786cbb1bf92066",
+ "measurement": "FAL-1673 local George clone (VoxCPM2). Each cue is its own checked take, so caption starts and ends are sample-exact in the composed file. Each cue starts at its authored caption start; key, display and pointer events keep their authored 1:1 offsets from it (never scaled). Where speech runs past the authored window, the Watch holds on its last frame until the next cue; where speech is shorter, silence fills the window. Minimum 500 ms between cues.",
+ "anchors": [
+  {
+   "editorialMs": 0,
+   "audioMs": 0
+  },
+  {
+   "editorialMs": 950,
+   "audioMs": 950
+  },
+  {
+   "editorialMs": 2200,
+   "audioMs": 2200
+  },
+  {
+   "editorialMs": 3100,
+   "audioMs": 3100
+  },
+  {
+   "editorialMs": 4110,
+   "audioMs": 4110
+  },
+  {
+   "editorialMs": 5050,
+   "audioMs": 5050
+  },
+  {
+   "editorialMs": 6040,
+   "audioMs": 6040
+  },
+  {
+   "editorialMs": 7050,
+   "audioMs": 7050
+  },
+  {
+   "editorialMs": 7310,
+   "audioMs": 7310
+  },
+  {
+   "editorialMs": 7570,
+   "audioMs": 7570
+  },
+  {
+   "editorialMs": 7830,
+   "audioMs": 7830
+  },
+  {
+   "editorialMs": 8090,
+   "audioMs": 8090
+  },
+  {
+   "editorialMs": 8350,
+   "audioMs": 8350
+  },
+  {
+   "editorialMs": 8610,
+   "audioMs": 8610
+  },
+  {
+   "editorialMs": 8870,
+   "audioMs": 8870
+  },
+  {
+   "editorialMs": 9130,
+   "audioMs": 9130
+  },
+  {
+   "editorialMs": 9550,
+   "audioMs": 9550
+  },
+  {
+   "editorialMs": 10000,
+   "audioMs": 10000
+  },
+  {
+   "editorialMs": 14400,
+   "audioMs": 18244
+  },
+  {
+   "editorialMs": 14510,
+   "audioMs": 18354
+  },
+  {
+   "editorialMs": 15020,
+   "audioMs": 18864
+  },
+  {
+   "editorialMs": 15610,
+   "audioMs": 19454
+  },
+  {
+   "editorialMs": 16620,
+   "audioMs": 20464
+  },
+  {
+   "editorialMs": 16940,
+   "audioMs": 20784
+  },
+  {
+   "editorialMs": 17260,
+   "audioMs": 21104
+  },
+  {
+   "editorialMs": 17680,
+   "audioMs": 21524
+  },
+  {
+   "editorialMs": 18680,
+   "audioMs": 22524
+  },
+  {
+   "editorialMs": 19000,
+   "audioMs": 22844
+  },
+  {
+   "editorialMs": 19320,
+   "audioMs": 23164
+  },
+  {
+   "editorialMs": 19770,
+   "audioMs": 23614
+  },
+  {
+   "editorialMs": 23000,
+   "audioMs": 26844
+  },
+  {
+   "editorialMs": 30000,
+   "audioMs": 35434
+  },
+  {
+   "editorialMs": 32220,
+   "audioMs": 37654
+  },
+  {
+   "editorialMs": 32720,
+   "audioMs": 38154
+  },
+  {
+   "editorialMs": 33220,
+   "audioMs": 38654
+  },
+  {
+   "editorialMs": 34070,
+   "audioMs": 39504
+  },
+  {
+   "editorialMs": 34550,
+   "audioMs": 39984
+  },
+  {
+   "editorialMs": 34820,
+   "audioMs": 40254
+  },
+  {
+   "editorialMs": 35120,
+   "audioMs": 40554
+  },
+  {
+   "editorialMs": 36000,
+   "audioMs": 45677
+  },
+  {
+   "editorialMs": 36200,
+   "audioMs": 45877
+  },
+  {
+   "editorialMs": 36480,
+   "audioMs": 46157
+  },
+  {
+   "editorialMs": 36760,
+   "audioMs": 46437
+  },
+  {
+   "editorialMs": 37240,
+   "audioMs": 46917
+  },
+  {
+   "editorialMs": 37300,
+   "audioMs": 50890
+  },
+  {
+   "editorialMs": 41000,
+   "audioMs": 59480
+  }
+ ],
+ "captions": [
+  {
+   "id": "watch-01",
+   "startMs": 0,
+   "endMs": 5016
+  },
+  {
+   "id": "watch-02",
+   "startMs": 10000,
+   "endMs": 17744
+  },
+  {
+   "id": "watch-03",
+   "startMs": 18244,
+   "endMs": 24955
+  },
+  {
+   "id": "watch-04",
+   "startMs": 26844,
+   "endMs": 34934
+  },
+  {
+   "id": "watch-05",
+   "startMs": 35434,
+   "endMs": 45177
+  },
+  {
+   "id": "watch-06",
+   "startMs": 45677,
+   "endMs": 50390
+  },
+  {
+   "id": "watch-07",
+   "startMs": 50890,
+   "endMs": 58980
+  }
+ ]
 }

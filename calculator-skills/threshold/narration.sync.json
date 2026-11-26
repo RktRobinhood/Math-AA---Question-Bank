@@ -1,5 +1,206 @@
 {
-  "version": 1,
-  "lesson": "CT16",
-  "status": "awaiting-recording"
+ "version": 1,
+ "lesson": "CT16",
+ "status": "measured",
+ "audio": "narration.mp3",
+ "audioSha256": "77fe17a182b1bfdbe5c36a805aa8c6abc9d674650c0bad8d8caea830a8a1123f",
+ "durationMs": 58525,
+ "transcriptSha256": "ae82fa6b2dc1dc647b5bc855abba218435c46566dc74ede5c920e3238f0975f4",
+ "cueMapSha256": "98c83cc079751516a78f154704e37742390d9d2663dbc0164f64ad79532f1f4b",
+ "measurement": "FAL-1673 local George clone (VoxCPM2). Each cue is its own checked take, so caption starts and ends are sample-exact in the composed file. Each cue starts at its authored caption start; key, display and pointer events keep their authored 1:1 offsets from it (never scaled). Where speech runs past the authored window, the Watch holds on its last frame until the next cue; where speech is shorter, silence fills the window. Minimum 500 ms between cues.",
+ "anchors": [
+  {
+   "editorialMs": 0,
+   "audioMs": 0
+  },
+  {
+   "editorialMs": 1900,
+   "audioMs": 4653
+  },
+  {
+   "editorialMs": 2030,
+   "audioMs": 4783
+  },
+  {
+   "editorialMs": 2330,
+   "audioMs": 5083
+  },
+  {
+   "editorialMs": 2390,
+   "audioMs": 5143
+  },
+  {
+   "editorialMs": 2740,
+   "audioMs": 5493
+  },
+  {
+   "editorialMs": 3040,
+   "audioMs": 5793
+  },
+  {
+   "editorialMs": 3060,
+   "audioMs": 5813
+  },
+  {
+   "editorialMs": 3390,
+   "audioMs": 6143
+  },
+  {
+   "editorialMs": 3690,
+   "audioMs": 6443
+  },
+  {
+   "editorialMs": 3720,
+   "audioMs": 6473
+  },
+  {
+   "editorialMs": 4120,
+   "audioMs": 6873
+  },
+  {
+   "editorialMs": 4620,
+   "audioMs": 7373
+  },
+  {
+   "editorialMs": 6200,
+   "audioMs": 8953
+  },
+  {
+   "editorialMs": 6240,
+   "audioMs": 8993
+  },
+  {
+   "editorialMs": 6620,
+   "audioMs": 9373
+  },
+  {
+   "editorialMs": 7010,
+   "audioMs": 9763
+  },
+  {
+   "editorialMs": 7680,
+   "audioMs": 10433
+  },
+  {
+   "editorialMs": 9400,
+   "audioMs": 13790
+  },
+  {
+   "editorialMs": 9450,
+   "audioMs": 13840
+  },
+  {
+   "editorialMs": 10670,
+   "audioMs": 15060
+  },
+  {
+   "editorialMs": 12090,
+   "audioMs": 16480
+  },
+  {
+   "editorialMs": 13500,
+   "audioMs": 19660
+  },
+  {
+   "editorialMs": 13720,
+   "audioMs": 19880
+  },
+  {
+   "editorialMs": 15090,
+   "audioMs": 21250
+  },
+  {
+   "editorialMs": 16300,
+   "audioMs": 24079
+  },
+  {
+   "editorialMs": 16820,
+   "audioMs": 24599
+  },
+  {
+   "editorialMs": 18950,
+   "audioMs": 26729
+  },
+  {
+   "editorialMs": 20600,
+   "audioMs": 28674
+  },
+  {
+   "editorialMs": 24000,
+   "audioMs": 34755
+  },
+  {
+   "editorialMs": 26800,
+   "audioMs": 40375
+  },
+  {
+   "editorialMs": 30400,
+   "audioMs": 45738
+  },
+  {
+   "editorialMs": 34100,
+   "audioMs": 53011
+  },
+  {
+   "editorialMs": 37500,
+   "audioMs": 58525
+  }
+ ],
+ "captions": [
+  {
+   "id": "watch-01",
+   "startMs": 0,
+   "endMs": 4153
+  },
+  {
+   "id": "watch-02",
+   "startMs": 4653,
+   "endMs": 7417
+  },
+  {
+   "id": "watch-03",
+   "startMs": 8953,
+   "endMs": 13290
+  },
+  {
+   "id": "watch-04",
+   "startMs": 13790,
+   "endMs": 19160
+  },
+  {
+   "id": "watch-05",
+   "startMs": 19660,
+   "endMs": 23579
+  },
+  {
+   "id": "watch-06",
+   "startMs": 24079,
+   "endMs": 28174
+  },
+  {
+   "id": "watch-07",
+   "startMs": 28674,
+   "endMs": 34255
+  },
+  {
+   "id": "watch-08",
+   "startMs": 34755,
+   "endMs": 39875
+  },
+  {
+   "id": "watch-09",
+   "startMs": 40375,
+   "endMs": 45238
+  },
+  {
+   "id": "watch-10",
+   "startMs": 45738,
+   "endMs": 52511
+  },
+  {
+   "id": "watch-11",
+   "startMs": 53011,
+   "endMs": 58025
+  }
+ ]
 }
