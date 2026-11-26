@@ -48,11 +48,36 @@ function selectFrame(screen){
 const scene=$('watch-surface'), rateControl=$('watch-speed'), sound=$('sound');
 const tape=window.HandheldKeyCues.CT06;
 const trail=$('key-trail');
-const changes=new Set([3,13,17,19]);
-const chips=tape.map((event,i)=>{
- const item=document.createElement('li'), key=document.createElement('kbd');
- if(changes.has(i))item.classList.add('key-group-start');
- key.textContent=keyName(event.key);item.append(key);$('key-steps').append(item);return item;
+// Each key belongs to one student-facing step, not one undifferentiated tape.
+const chapters=[
+ ['Open Numerical Solve',0,3],
+ ['Enter the equation',1,13],
+ ['Set the bounds',2,17],
+ ['Read the first solution',3,19],
+ ['Try another interval',5,33],
+ ['Round at the end',6,33],
+];
+let chapterIndex=-1,tapeStart=0;
+const chips=[];
+const stepButtons=chapters.map(([name,span,tapeEnd],i)=>{
+ const group=document.createElement('li'),button=document.createElement('button');
+ group.className='solve-trail-group';button.type='button';button.className='solve-trail-step';
+ button.textContent=(i+1)+'. '+name;group.append(button);
+ button.addEventListener('click',()=>{
+  seek.value=layout.spans[span].start;
+  seek.dispatchEvent(new Event('input',{bubbles:true}));
+ });
+ if(tapeEnd>tapeStart){
+  const row=document.createElement('ol');row.className='solve-trail-row';
+  row.setAttribute('aria-label',name+' keys');
+  tape.slice(tapeStart,tapeEnd).forEach(event=>{
+   const item=document.createElement('li'),key=document.createElement('kbd');
+   item.className='solve-trail-key';key.textContent=keyName(event.key);
+   item.append(key);row.append(item);chips.push(item);
+  });
+  group.append(row);
+ }
+ tapeStart=tapeEnd;$('key-steps').append(group);return button;
 });
 seek.max=duration;media.playbackRate=1;media.preservesPitch=true;
 rateControl.addEventListener('change',()=>{
@@ -80,7 +105,7 @@ function fitWatch(){
  const stacked=matchMedia('(max-width:735px) and (min-height:701px)').matches;
  const beatH=stacked?scene.querySelector('.beat').getBoundingClientRect().height+8:0;
  player.style.setProperty('--watch-handheld-fit',Math.floor(Math.max(126,Math.min(300,(room-beatH-25)*558/1168)))+'px');
- player.style.setProperty('--watch-lcd-fit',Math.floor(Math.max(198,Math.min(570,(room-beatH-81)*4/3)))+'px');
+ player.style.setProperty('--watch-lcd-fit',Math.floor(Math.max(198,Math.min(570,(room-beatH-(stacked?35:81))*4/3)))+'px');
 }
 window.addEventListener('resize',fitWatch);
 document.addEventListener('fullscreenchange',fitWatch);
@@ -135,6 +160,12 @@ function paint(t){
   });
  }
  const stage=Math.min(5,point.span.i===4?3:point.span.i>=5?point.span.i-1:point.span.i);
+ if(stage!==chapterIndex){
+  chapterIndex=stage;
+  stepButtons.forEach((button,i)=>{
+   if(i===stage)button.setAttribute('aria-current','true');else button.removeAttribute('aria-current');
+  });
+ }
  const holdNote=[
   'Press Menu just below and to the right of the touchpad. Choose 3 for Algebra, then 1 for Numerical Solve.',
   'Use the power key for the exponent. Press → to leave the exponent before typing =. After the equation, enter a comma and x.',

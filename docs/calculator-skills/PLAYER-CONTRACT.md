@@ -1,7 +1,6 @@
 # Calculator Skills player contract
 
-Numerical Solve (CT06) is the reference for voiced Watch playback. Match the
-student-facing behavior, not a separate brand, navigation or theme.
+Enter and round a calculation (CT01) is the reference for the visible teaching steps and key groups. Numerical Solve (CT06) is the reference for fixed-rate voice, teaching pauses, and the Practice popup. Match these inside the bank, not a separate brand or player layout.
 
 - Use the bank's own header, course switcher and System/Light/Dark preference.
   System is the default; do not initialize or save a second lesson theme.
@@ -10,22 +9,30 @@ student-facing behavior, not a separate brand, navigation or theme.
 - Watch has one video-shaped scene. Clicking or tapping its noninteractive
   surface toggles Play/Pause, with brief feedback in the center of the whole
   scene. Keep one transport below: scrub, Play/Pause (Replay at end), time,
-  captions, speed down to 0.5× and fullscreen. Use keyboard arrows for short
-  seeks; don't add visible jump/restart controls or a Take over button.
+  captions, teaching pauses and fullscreen. The visible icon must be Pause
+  while running and Play while paused. Fullscreen refits the display, text
+  and keys; exiting preserves the playhead. Arrow keys seek; no extra jump,
+  restart or Take over buttons.
 - Watch starts in the larger LCD view unless the student saved Full calculator.
   Persist the chosen framing under browser key `qb-calculator-watch-frame`
   with values `screen` or `full`. Both views show the same playhead,
   calculation and audio; Try always shows the full interactive handset.
   Returning to Watch should preserve the playhead/preferred framing.
-- Show real key presses automatically. In LCD view show the key label; in Full
-  also light the physical key. Spoken CC is separate and must not cover the
-  handset or keys. For audio that is unavailable use a labeled captioned
-  walkthrough, not a promise of narration. Prefer the actual audio clock for
-  cue lookup, including while scrubbing and at slower speed.
+- Show the ordered keys beneath each concise step label, not in a single
+  unstructured row. Keep these groups readable before playback and when
+  paused; active step and key follow the playhead on a rewind. In Full also light the actual
+  physical key. Keep the chosen frame steady; no automatic zoom. Spoken CC
+  is separate from keys. Keep recorded speech at 1×; only the deliberate
+  teaching holds vary. Use measured narration timing and reject mismatched
+  recordings. If audio is unavailable, use a clearly labeled captioned
+  walkthrough.
 - Show every spoken calculator action on the device. If narration advises a
-  distinct method, animate its actual menu/key path and readout. Keep examples
+  distinct method, animate its actual menu/key path and readout. Add a short
+  why at a useful decision or likely mistake, not a separate maths lesson. Keep examples
   and original narrations intact unless a verified correction needs a new
-  Paperclip transcript. Do not show answers in the blank Practice calculator.
+  Paperclip transcript. Do not show answers in the blank Practice calculator. In written guidance,
+  keep an exact value exact (e.g. 6) and round an approximate final value
+  to three significant figures by default; follow explicit question instructions.
 
 - Contextual help in Practice uses the same Watch route in an approved embedded
   presentation, not a new lesson or a link to another tab. Only reviewed

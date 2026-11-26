@@ -130,18 +130,18 @@
 .solve-lesson #watch-controls .watch-speed{display:flex;align-items:center;gap:.2rem;color:#e3ede7;font:600 .68rem system-ui}
 .solve-lesson #watch-controls .watch-speed select{width:4.65rem}
 .solve-lesson #key-steps{list-style:none;display:flex;flex-wrap:wrap;gap:3px;margin:.38rem 0 0;padding:0}
-.solve-lesson #key-steps li{display:flex;min-width:1.14rem;justify-content:center;align-items:center;border-radius:4px;border:1px solid currentColor;line-height:1.04;min-height:1rem}
+.solve-lesson #key-steps .solve-trail-key{display:flex;min-width:1.14rem;justify-content:center;align-items:center;border-radius:4px;border:1px solid currentColor;line-height:1.04;min-height:1rem}
 .solve-lesson #key-steps kbd{font:650 .66rem system-ui;padding:0 .18rem}
-.solve-lesson #key-steps li[data-progress="next"]{color:#b8c5bd}
-.solve-lesson #key-steps li[data-progress="done"]{color:#dff2e5;background:#39564a;border-color:#638573}
-.solve-lesson #key-steps li[data-progress="current"]{color:#16281f;background:#a9f0c0;border-color:#a9f0c0;box-shadow:0 0 0 1px #16281f inset}
+.solve-lesson #key-steps .solve-trail-key[data-progress="next"]{color:#b8c5bd}
+.solve-lesson #key-steps .solve-trail-key[data-progress="done"]{color:#dff2e5;background:#39564a;border-color:#638573}
+.solve-lesson #key-steps .solve-trail-key[data-progress="current"]{color:#16281f;background:#a9f0c0;border-color:#a9f0c0;box-shadow:0 0 0 1px #16281f inset}
 @media(max-width:430px){
  .solve-lesson #watch-controls .watch-speed{font-size:.6rem}
  .solve-lesson #watch-controls .watch-speed select{width:4.05rem}
 }
 
 .solve-lesson .key-trail-label{display:block;margin-top:.42rem;font:640 .68rem system-ui;color:var(--video-quiet)}
-.solve-lesson #key-steps .key-group-start{margin-inline-start:.24rem}
+
 
 /* Practice shows this very same Watch player without its standalone routes. */
 html[data-practice-watch] :is(.top,.tabbar,main>.title,.resource-bar,#practice){display:none!important}
@@ -219,7 +219,7 @@ html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
 .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps kbd{
  font-size:clamp(.72rem,calc(.61rem + .37vw),1.13rem)
 }
-.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps li{
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) #key-steps .solve-trail-key{
  min-width:1.35rem;min-height:1.15rem
 }
 @media(max-width:700px) and (orientation:portrait){
@@ -241,4 +241,40 @@ html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
  .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene{padding:8px 12px;gap:12px}
  .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-title{font-size:1.2rem}
  .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .scene .beat-tip{font-size:.86rem}
+}
+
+
+/* Learnable steps: preserve the full sequence without an unstructured key dump. */
+.solve-lesson #key-steps{display:grid;gap:2px;margin:.25rem 0 0}
+.solve-lesson #key-steps .solve-trail-group{min-width:0}
+.solve-lesson .solve-trail-step{
+ display:block;width:100%;text-align:left;min-height:24px;padding:3px 5px;border:0;border-radius:4px;
+ background:none;color:var(--video-quiet);font:650 .75rem/1.12 system-ui;cursor:pointer
+}
+.solve-lesson .solve-trail-step:is([aria-current],:hover,:focus-visible){
+ background:#30463a;color:#fff
+}
+.solve-lesson .solve-trail-row{
+ display:flex;flex-wrap:wrap;gap:3px;margin:1px 0 2px;padding:0 5px;list-style:none
+}
+.solve-lesson #key-steps .solve-trail-key{min-width:1.13rem;min-height:1rem}
+.solve-lesson .player .scene .beat{max-width:34ch}
+.solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .solve-trail-step{
+ font-size:clamp(.76rem,calc(.66rem + .41vw),1.2rem)
+}
+@media(max-width:735px){
+ .solve-lesson #key-steps{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:3px 8px}
+ .solve-lesson .solve-trail-step{font-size:.65rem;padding-inline:3px}
+ .solve-lesson .solve-trail-row{gap:2px;margin:0;padding:1px 3px}
+ .solve-lesson #key-steps .solve-trail-key{min-width:.93rem;min-height:.94rem}
+ .solve-lesson #key-steps kbd{font-size:.61rem}
+ .solve-lesson #player:is(:fullscreen,.watch-fullscreen-fallback) .solve-trail-step{font-size:.73rem}
+}
+@media(max-width:480px){
+ html[data-practice-watch] #player.solve-screen-only:not(:fullscreen,.watch-fullscreen-fallback) .scene .lcd-group{width:min(100%,242px)}
+}
+@media(max-width:735px){
+ .solve-lesson[data-cx-mode=watch] #player:not(:is(:fullscreen,.watch-fullscreen-fallback)) #beat-title{
+  display:none /* The active step already supplies the same heading on phones. */
+ }
 }

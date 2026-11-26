@@ -59,7 +59,7 @@ const seek=$('seek');
 const play=$('play');
 const cap=$('caption');
 let mode=p.get('mode')==='try'?'try':'watch', tryState={state:'entry',q:null,raw:preloadExpr||'2(x+1)^2-3',low:null,high:null,cursor:null,error:null};
-let layout=makeLayout(),t=0,duration=layout.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute('src'),playEpoch=0,lastWatchStamp='',phase='',trailIndex=-2;
+let layout=makeLayout(),t=0,duration=layout.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute('src'),playEpoch=0,lastWatchStamp='',phase='',trailIndex=-2,chapterIndex=-1;
 let initialUpdate=true,lastBeat='';
 const holdNotes=[
  'Type the function, then press Enter.',
@@ -73,12 +73,35 @@ const holdNotes=[
  'Second coordinate: the minimum value.'
 ];
 const readable={x:'x',square:'x²',enter:'Enter',minus:'−',plus:'+',menu:'Menu',left:'←',right:'→'};
-const chips=tape.map((event,i)=>{
- const li=document.createElement('li'),key=document.createElement('kbd');
- key.textContent=event===pin?'Enter*':readable[event.key]||event.key;
- key.title=event===pin?'Optional: Enter to pin':event.note||'';
- if([9,12,14,16].includes(i))li.className='key-group-start';
- li.append(key);$('key-steps').append(li);return li;
+// The chapter boundaries follow the existing teaching timeline; key rows
+// are only a presentation of the existing immutable physical tape.
+const chapters=[
+ {span:0,name:'Plot the function',until:9},
+ {span:1,name:'Find Minimum',until:12},
+ {span:3,name:'Lower bound',until:14},
+ {span:4,name:'Upper bound',until:16},
+ {span:5,name:'Read result',until:17}
+];
+const keyA11y={square:'Squared',left:'Left arrow',right:'Right arrow',minus:'Minus',plus:'Plus'};
+const chips=[];
+const chapterButtons=chapters.map(({span,name,until},chapter)=>{
+ const li=document.createElement('li'),button=document.createElement('button'),number=document.createElement('span');
+ button.type='button';number.textContent=String(chapter+1).padStart(2,'0');number.setAttribute('aria-hidden','true');
+ button.append(number,document.createTextNode(name));
+ button.addEventListener('click',()=>seekWatch(layout.spans[span].start));
+ const row=document.createElement('ol');row.className='ct12-trail-row';row.setAttribute('aria-label',name+' key presses');
+ for(let i=chips.length;i<until;i++){
+   const event=tape[i],item=document.createElement('li'),key=document.createElement('kbd');
+   key.textContent=event===pin?'Enter*':readable[event.key]||event.key;
+   key.setAttribute('aria-label',event===pin?'Optional: Enter to pin the label':keyA11y[event.key]||key.textContent);
+   key.title=event===pin?'Optional: Enter to pin the label':event.note||'';
+   item.append(key);row.append(item);chips.push({key,chapter});
+ }
+ if(tape[until-1]===pin){
+   const pinNote=document.createElement('li');pinNote.className='ct12-pin-note';pinNote.textContent='optional';row.append(pinNote);
+ }
+ li.append(button,row);$('key-steps').append(li);
+ return button;
 });
  const surface=$("workspace"),overlay=$("play-feedback"),cc=$("cc"),speedSelect=$("play-rate");
  const framingKey="qb-calculator-watch-frame";
@@ -141,10 +164,16 @@ function renderWatch(){
  const timeLabel=fmtTime(t>=duration-.015?Math.round(duration):t)+' / '+fmtTime(Math.round(duration));
  seek.value=t;seek.setAttribute('aria-valuetext',timeLabel.replace('/','of'));$('clock').textContent=timeLabel;
  shell?.setKeys(key?[key]:[]);
- if(i!==trailIndex){
-   trailIndex=i;chips.forEach((el,j)=>{
-     el.dataset.progress=j<i?'done':j===i?'current':'next';
-     if(j===i)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current');
+ const chapter=chapters.findLastIndex(c=>c.span<=point.span.i);
+ if(i!==trailIndex||chapter!==chapterIndex){
+   trailIndex=i;chapterIndex=chapter;
+   chapterButtons.forEach((button,n)=>{
+     if(n===chapter)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+   });
+   chips.forEach(({key,chapter:group},j)=>{
+     const current=j===i&&group===chapter;
+     key.dataset.progress=current?'current':j<=i?'done':'next';
+     if(current)key.setAttribute('aria-current','true');else key.removeAttribute('aria-current');
    });
  }
  if(!initiated){overlay.dataset.initial='true';overlay.hidden=t>.04;}
@@ -228,10 +257,11 @@ function renderWatch(){
   t=layout.remap(old,t);renderWatch();labelPlay();if(resume)void start(false);
  });
  play.addEventListener('click',toggle);
- seek.addEventListener('input',()=>{
-  const next=Number(seek.value),resume=playing||pending;if(resume)pause();
+ function seekWatch(next){
+  const resume=playing||pending;if(resume)pause();
   t=clamp(next,0,duration);renderWatch();labelPlay();if(resume)void start(false);
- });
+ }
+ seek.addEventListener('input',()=>seekWatch(Number(seek.value)));
 
 $('download-video').hidden=false;
 
@@ -317,7 +347,7 @@ function setMode(m){
  document.body.dataset.cxMode=m;stage.dataset.watchMode=m;
  shell?.setKeys([]);shell?.setInteractive(m==='try');
  if(m==='try'){void chrome.exit();chrome.clear();}
- $('key-strip').hidden=m!=='watch';$('watch-synopsis').hidden=m!=='watch';
+ $('watch-chapters').hidden=m!=='watch';$('watch-synopsis').hidden=m!=='watch';
  modeButtons.forEach(b=>{let yes=b.dataset.mode===m;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
  $('watch-player').hidden=m!=='watch';$('practice').hidden=m!=='try';
  $('media-status').hidden=useAudio||m!=='watch';
@@ -380,7 +410,9 @@ modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
   const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("key-strip").offsetHeight+7;
+  const chapterHeight=matchMedia("(max-width:700px)").matches?$("watch-chapters").offsetHeight:0;
+  stage.style.setProperty("--ct12-chapters-height",chapterHeight+"px");
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(chapterHeight?chapterHeight+7:0);
   const pads=getComputedStyle(surface);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
   stage.style.setProperty("--ct12-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?370:296,room*558/1168)))+"px");
@@ -388,7 +420,7 @@ modeButtons.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   stage.style.setProperty("--ct12-scene-room",Math.floor(Math.max(140,room))+"px");
  }
  const bankWatchSizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),document.querySelector("main>.title")].forEach(el=>bankWatchSizing.observe(el));
+ [$("watch-player"),$("caption-band"),$("watch-chapters"),document.querySelector("main>.title")].forEach(el=>bankWatchSizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);
