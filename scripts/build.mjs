@@ -280,8 +280,9 @@ const data = {
   courses: courseInfo.map((c) => ({
     ...c,
     // ahl: the statement is additional higher level, i.e. not in the same subject's SL course.
+    // subtags: the statement's sub-tags in syllabus order, ids unchanged (AA SL's are Wasteland Academy's skill ids).
     statements: courseStatements(courseById[c.id]).map((s) => ({ code: s.code, id: s.id, topic: s.topic, title: s.title, content: s.content,
-      ahl: !s.courses.includes(`${c.subject}-sl`) })),
+      ahl: !s.courses.includes(`${c.subject}-sl`), subtags: s.subtags.map((t) => ({ id: t.id, name: t.name })) })),
   })),
   topics,
   syllabusDocs: { aa: docs.topics, "aa-hl": docsAaHl.topics, ai: docsAi.topics },

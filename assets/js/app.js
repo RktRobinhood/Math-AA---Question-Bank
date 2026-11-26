@@ -32,7 +32,7 @@
     q: "", paper: "", section: "", session: "", tz: "", marks: "", topic: "",
     years: new Set(), and: new Set(), or: new Set(), not: new Set(),
     sort: "new", view: "grid", find: "", openTopic: "", shown: PAGE,
-    recent: false, statSort: "mpe", statDir: -1, statAll: false, statFilters: false,
+    recent: false, statSort: "mpe", statDir: -1, statAll: false, statFilters: false, statOpen: new Set(),
     sylTopic: document.body.dataset.topic || "", sylQuery: "",
   };
 
@@ -514,6 +514,9 @@
   //   exam      one paper set a candidate sits: year + session + time zone (Paper 1, 2 and 3 together)
   //   marks     exact, from the per-part tags: a part's marks are shared between its subtopics
   //   weighting "Count recent years more" multiplies each exam by exp(1.5 × how recent its year is)
+  //   sub-tags  each subtopic row also counts its sub-tags (the parts' `sub` ids, unchanged). A part's
+  //             share of a subtopic is split equally between that part's sub-tags of the subtopic,
+  //             so a subtopic's sub-tag marks add up to its own marks.
   function computeAnalytics(questions) {
     const years = [...new Set(questions.map(q => q.year))].sort((a, b) => a - b);
     const weight = year => {
@@ -529,7 +532,12 @@
     const rows = new Map(statements.map(s => [s.code, {
       code: s.code, title: s.title, topic: s.topic, exams: new Set(), questions: 0, marks: 0, wMarks: 0,
       papers: new Map(), last: -1, lastLabel: "", bySession: new Map(),
+      subs: new Map((s.subtags || []).map(t => [t.id, {
+        id: t.id, name: t.name, exams: new Set(), questions: new Set(), parts: 0, marks: 0, wMarks: 0, last: -1, lastLabel: "",
+      }])),
     }]));
+    // A sub-tag id starts with its statement's id ("SL2.7.discriminant" belongs to SL2.7).
+    const subOwner = new Map(statements.flatMap(s => (s.subtags || []).map(t => [t.id, s.code])));
     const topicCounts = new Map(), paperCounts = new Map(), sectionCounts = new Map();
     let totalMarks = 0;
 
@@ -543,6 +551,27 @@
       const tagged = (q.parts || []).filter(p => p.syllabus?.length);
       if (tagged.length) for (const p of tagged) for (const s of p.syllabus) bump(share, codeOf(s), p.marks / p.syllabus.length);
       else for (const c of q.codes) bump(share, c, q.marks / q.codes.length);
+
+      for (const p of tagged) {
+        const byStatement = new Map();
+        for (const t of p.sub || []) {
+          const c = subOwner.get(t.id);
+          if (c) (byStatement.get(c) || byStatement.set(c, []).get(c)).push(t.id);
+        }
+        for (const [c, ids] of byStatement) {
+          const each = p.marks / p.syllabus.length / ids.length;
+          for (const id of ids) {
+            const t = rows.get(c)?.subs.get(id);
+            if (!t) continue;
+            t.exams.add(q.exam);
+            t.questions.add(q.id);
+            t.parts += 1;
+            t.marks += each;
+            t.wMarks += each * weight(q.year);
+            if (q.when > t.last) { t.last = q.when; t.lastLabel = `${q.session} ${q.year}`; }
+          }
+        }
+      }
 
       for (const c of q.codes) {
         const r = rows.get(c);
@@ -561,6 +590,7 @@
       r.examCount = r.exams.size;
       r.mpe = r.wMarks / examWeight;
       r.share = totalMarks ? r.marks / totalMarks : 0;
+      for (const t of r.subs.values()) { t.examCount = t.exams.size; t.questionCount = t.questions.size; t.mpe = t.wMarks / examWeight; }
     }
     // Subtopics absent from the two most recent sessions in view.
     const cutoff = sessionList.length > 2 ? sessions.get(sessionList[sessionList.length - 2]) : -1;
@@ -604,11 +634,40 @@
         el("div", { class: "nums", text: parts.map(x => `${x.p.id} ${x.n}`).join(" · ") }));
     };
 
+    // Sub-tags of a subtopic: a toggle in its row, and a row below it listing every sub-tag, examined
+    // ones by marks per exam, then the ones not examined in the questions in view.
+    const subToggle = r => {
+      if (!r.subs.size) return null;
+      const open = state.statOpen.has(r.code);
+      const seen = [...r.subs.values()].filter(t => t.questionCount).length;
+      return el("button", {
+        type: "button", class: "link subtog", "aria-expanded": String(open), "aria-controls": `subtags-${r.code}`,
+        title: `${open ? "Hide" : "Show"} how often each sub-tag of ${r.code} is examined`,
+        onclick: () => { open ? state.statOpen.delete(r.code) : state.statOpen.add(r.code); render(); },
+      }, `${open ? "▾" : "▸"} ${r.subs.size} sub-tag${r.subs.size === 1 ? "" : "s"}${seen < r.subs.size ? `, ${seen} examined` : ""}`);
+    };
+    const subRows = r => {
+      const subs = [...r.subs.values()].sort((x, y) => y.mpe - x.mpe || y.questionCount - x.questionCount || x.name.localeCompare(y.name));
+      const max = Math.max(1e-9, ...subs.map(t => t.mpe));
+      return el("tr", { class: "subtags", id: `subtags-${r.code}` }, el("td", {}), el("td", { colspan: String(STAT_COLS.length + 1) },
+        el("table", { class: "subtbl" },
+          el("thead", {}, el("tr", {}, ...["Sub-tag", "Exams", "Marks per exam", "Questions", "Parts", "Last seen"].map((t, k) => el("th", { class: `cap${k ? " num" : ""}`, text: t })))),
+          el("tbody", {}, ...subs.map(t => el("tr", { class: t.questionCount ? "" : "dull", title: t.id },
+            el("td", { class: "sn", text: t.name }),
+            el("td", { class: "num", "data-l": "Exams", text: `${t.examCount} / ${a.exams}` }),
+            el("td", { class: "num", "data-l": "Marks per exam" }, el("div", { class: "mbar" },
+              el("span", { text: t.mpe.toFixed(1), title: `${Math.round(t.marks * 10) / 10} marks in total` }),
+              el("span", { class: "track" }, el("i", { class: `bg${r.topic}`, style: `width:${(t.mpe / max * 100).toFixed(1)}%` })))),
+            el("td", { class: "num", "data-l": "Questions", text: String(t.questionCount) }),
+            el("td", { class: "num", "data-l": "Parts", text: String(t.parts) }),
+            el("td", { class: "mono num", "data-l": "Last seen", text: t.lastLabel || "—" })))))));
+    };
+
     const table = el("table", { class: "tbl" },
       el("thead", {}, el("tr", {}, el("th", { class: "cap", text: "#" }), ...STAT_COLS.map(th), el("th", {}))),
-      el("tbody", {}, ...shown.map((r, i) => el("tr", {},
+      el("tbody", {}, ...shown.flatMap((r, i) => [el("tr", { class: state.statOpen.has(r.code) ? "open" : "" },
         el("td", { class: "rank", text: String(i + 1) }),
-        el("td", { class: "name" }, chip(r.code), r.title),
+        el("td", { class: "name" }, chip(r.code), r.title, subToggle(r)),
         el("td", { class: "num", "data-l": "Exams", text: `${r.examCount} / ${a.exams}` }),
         el("td", { class: "num", "data-l": "Marks per exam" }, el("div", { class: "mbar" },
           el("span", { text: r.mpe.toFixed(1), title: `${Math.round(r.marks)} marks in total, ${(r.share * 100).toFixed(1)}% of all marks` }),
@@ -616,7 +675,8 @@
         el("td", { class: "num", "data-l": "Questions", text: String(r.questions) }),
         el("td", { "data-l": "Paper split" }, split(r)),
         el("td", { class: "mono", "data-l": "Last seen", text: r.lastLabel || "—" }),
-        el("td", { class: "go" }, r.questions ? el("a", { href: linkParams(r.code), text: "See questions →" }) : null)))));
+        el("td", { class: "go" }, r.questions ? el("a", { href: linkParams(r.code), text: "See questions →" }) : null)),
+        state.statOpen.has(r.code) ? subRows(r) : null].filter(Boolean))));
 
     const view = state.statSort === "mpe" ? (state.statDir < 0 ? "most" : "least") : "";
     const setView = v => { state.statSort = "mpe"; state.statDir = v === "most" ? -1 : 1; render(); };
