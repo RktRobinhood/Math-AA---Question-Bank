@@ -43,6 +43,28 @@ for (const [page, active] of appPages) {
   }
   assert.match(html, /<noscript>[\s\S]*?href="[^"]*calculator-skills\/skills\.html"/, page + ' must keep the text-only fallback link');
 }
+const headerSource = readFileSync(join(site, 'assets/js/shell.js'), 'utf8');
+const baseStyles = readFileSync(join(site, 'assets/css/styles.css'), 'utf8');
+assert.doesNotMatch(headerSource, /fullNavigation|appOnly/, 'no divergent archive navigation profile');
+assert.match(baseStyles, /\.tabbar\.with-calc-skills/, 'shared base stylesheet must fit the complete phone header');
+for (const group of ['questions', 'exams']) {
+  const dirs = readdirSync(join(site, group), {withFileTypes:true}).filter(e => e.isDirectory());
+  assert.ok(dirs.length > 0, group + ' archive routes exist');
+  for (const entry of dirs) {
+    const url = join(site, group, entry.name, 'index.html');
+    if (!existsSync(url)) continue;
+    const doc = readFileSync(url,'utf8');
+    // A shared-paper alias redirects to the canonical question, which is checked below.
+    if (group==='questions' && /http-equiv="refresh"/.test(doc)) {
+      const redirect = doc.match(/rel="canonical" href="\.\.\/([a-z0-9-]+)\//i);
+      assert.ok(redirect && existsSync(join(site, group, redirect[1], 'index.html')),entry.name+' shared alias has a real canonical destination');
+      continue;
+    }
+    assert.equal((doc.match(sharedShell) || []).length,1,entry.name+' uses the same header script');
+    assert.match(doc, /href="[^"]*assets\/css\/styles\.css(?:\?[^"]*)?"/,entry.name+' uses the shared stylesheet');
+    assert.doesNotMatch(doc, /practice-(?:formulas|calculator)\.js|data-calculator-watch/,entry.name+' must not acquire inline Practice tools');
+  }
+}
 const scratchpad = readFileSync(join(root, 'scratchpad', 'index.html'), 'utf8');
 const bankShell = readFileSync(join(root, 'scratchpad', 'bank-shell.js'), 'utf8');
 assert.match(scratchpad, /src="bank-shell\.js\?v=nav-4"/);
