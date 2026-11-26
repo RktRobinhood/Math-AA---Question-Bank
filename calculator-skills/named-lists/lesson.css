@@ -128,3 +128,14 @@ summary:where(.qb-calculator-lesson, .qb-calculator-lesson *){min-height:43px;pa
 .home-keys:where(.qb-calculator-lesson, .qb-calculator-lesson *){list-style:none;padding:.5cqw;margin:1cqw 2cqw;font:550 max(7px,3.65cqw)/1.1 Arial,sans-serif;background:#f1f5fa;border:1px solid #8ca5bd}
 .home-keys li:where(.qb-calculator-lesson, .qb-calculator-lesson *){padding:.35cqw .7cqw}
 @media(max-width:710px){#source-table:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin-bottom:.55rem}.stage[data-mode=try] .calc-side:where(.qb-calculator-lesson, .qb-calculator-lesson *){padding:.15rem .3rem}}
+
+/* Shared Watch owns playback and the device framing; only the LCD model is local. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.ct28-try #handheld-host{--handheld-width:min(307px,100%)}
+@media(max-height:760px){.ct28-try #handheld-host{--handheld-width:min(235px,100%)}}
+/* This lesson has 52 actions. Keep the full keyboard-readable rail, but let
+   it scroll on phones rather than shrinking the LCD or covering transport. */
+@media(max-width:780px){
+ .lw-stage[data-mode=watch] .lw-guide{max-height:clamp(90px,24svh,176px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}

@@ -1,0 +1,417 @@
+{
+  "id": "CT28",
+  "title": "Create lists and frequency tables",
+  "intro": "Enter paired values and frequencies, then see how the same data look as a raw list.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "2501743d9c21c524009d6cdc98c4734df45cedd72dc292d5ae6f092aabb39020",
+    "scriptSha256": "ea9cab8b9f0e9916eda801f3a29e4c5724903b3e24eff5c1d31e49cea75eb05a"
+  },
+  "chapters": [
+    {
+      "id": "open-sheet",
+      "title": "Open the spreadsheet"
+    },
+    {
+      "id": "first-name",
+      "title": "Name column A"
+    },
+    {
+      "id": "first-values",
+      "title": "Enter the lap values"
+    },
+    {
+      "id": "second-name",
+      "title": "Pair each value with its count"
+    },
+    {
+      "id": "explicit-zero",
+      "title": "Enter zero, not a blank"
+    },
+    {
+      "id": "read-across",
+      "title": "Read across, then down"
+    },
+    {
+      "id": "raw-readings",
+      "title": "Raw readings: keep repeats"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open-sheet",
+      "spoken": "To record laps for a group, start a new Lists and Spreadsheet page.",
+      "coach": "Use Lists & Spreadsheet to keep values and counts side by side.",
+      "end": 5.4325,
+      "hold": 5,
+      "keys": [
+        {
+          "id": "key-1-1",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.1667
+        },
+        {
+          "id": "key-1-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4444
+        },
+        {
+          "id": "key-1-3",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.7222
+        }
+      ]
+    },
+    {
+      "chapter": "first-name",
+      "spoken": "Name column A in its top name cell. Leave the formula row blank and go to numbered row one.",
+      "coach": "Tab to the name cell. Leave the = formula row empty.",
+      "end": 13.531,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "key-2-1",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.0909
+        },
+        {
+          "id": "key-2-2",
+          "label": "l",
+          "ariaLabel": "l",
+          "at": 0.2424
+        },
+        {
+          "id": "key-2-3",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.3939
+        },
+        {
+          "id": "key-2-4",
+          "label": "p",
+          "ariaLabel": "p",
+          "at": 0.5455
+        },
+        {
+          "id": "key-2-5",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.697
+        },
+        {
+          "id": "key-2-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "first-values",
+      "spoken": "Enter the measured values down column A. Enter stores each value and moves down.",
+      "coach": "Enter stores a value and moves down: 2, 4, 7.",
+      "end": 20.446,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "key-3-1",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0909
+        },
+        {
+          "id": "key-3-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2424
+        },
+        {
+          "id": "key-3-3",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3939
+        },
+        {
+          "id": "key-3-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5455
+        },
+        {
+          "id": "key-3-5",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.697
+        },
+        {
+          "id": "key-3-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "second-name",
+      "spoken": "Name column B separately. Enter the counts on the same numbered rows as the values.",
+      "coach": "Keep each count beside its value so rows still match.",
+      "end": 27.8655,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "key-4-1",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.0566
+        },
+        {
+          "id": "key-4-2",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.1509
+        },
+        {
+          "id": "key-4-3",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.2453
+        },
+        {
+          "id": "key-4-4",
+          "label": "r",
+          "ariaLabel": "r",
+          "at": 0.3396
+        },
+        {
+          "id": "key-4-5",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.434
+        },
+        {
+          "id": "key-4-6",
+          "label": "q",
+          "ariaLabel": "q",
+          "at": 0.5283
+        },
+        {
+          "id": "key-4-7",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6226
+        },
+        {
+          "id": "key-4-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.717
+        },
+        {
+          "id": "key-4-9",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.8113
+        },
+        {
+          "id": "key-4-10",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9057
+        }
+      ]
+    },
+    {
+      "chapter": "explicit-zero",
+      "spoken": "A count of zero is data. Do not leave that cell blank.",
+      "coach": "0 means nobody ran four laps. A blank is not a recorded count.",
+      "end": 33.976,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "key-5-1",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.0909
+        },
+        {
+          "id": "key-5-2",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2424
+        },
+        {
+          "id": "key-5-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3939
+        },
+        {
+          "id": "key-5-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5455
+        },
+        {
+          "id": "key-5-5",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.697
+        },
+        {
+          "id": "key-5-6",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "read-across",
+      "spoken": "Read across a row: the measured value seven occurred twice. Read down the counts for the total.",
+      "coach": "7 laps belongs with 2 people. Total people: 3 + 0 + 2 = 5.",
+      "end": 41.632,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "key-6-1",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.375
+        }
+      ]
+    },
+    {
+      "chapter": "raw-readings",
+      "spoken": "If you start from raw readings instead, give the list one name and enter every observation, including repeats.",
+      "coach": "One row per person: 2, 2, 2, 7, 7. No frequency column.",
+      "end": 49.713,
+      "hold": 19,
+      "keys": [
+        {
+          "id": "key-7-1",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.0291
+        },
+        {
+          "id": "key-7-2",
+          "label": "Doc",
+          "ariaLabel": "Doc",
+          "at": 0.0777
+        },
+        {
+          "id": "key-7-3",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1262
+        },
+        {
+          "id": "key-7-4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1748
+        },
+        {
+          "id": "key-7-5",
+          "label": "r",
+          "ariaLabel": "r",
+          "at": 0.2233
+        },
+        {
+          "id": "key-7-6",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.2718
+        },
+        {
+          "id": "key-7-7",
+          "label": "w",
+          "ariaLabel": "w",
+          "at": 0.3204
+        },
+        {
+          "id": "key-7-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.3689
+        },
+        {
+          "id": "key-7-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4175
+        },
+        {
+          "id": "key-7-10",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.466
+        },
+        {
+          "id": "key-7-11",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.5146
+        },
+        {
+          "id": "key-7-12",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5631
+        },
+        {
+          "id": "key-7-13",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6117
+        },
+        {
+          "id": "key-7-14",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6602
+        },
+        {
+          "id": "key-7-15",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7087
+        },
+        {
+          "id": "key-7-16",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.7573
+        },
+        {
+          "id": "key-7-17",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8058
+        },
+        {
+          "id": "key-7-18",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.8544
+        },
+        {
+          "id": "key-7-19",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9029
+        },
+        {
+          "id": "key-7-20",
+          "label": "↑",
+          "ariaLabel": "Up arrow",
+          "at": 0.9515
+        }
+      ]
+    }
+  ]
+}

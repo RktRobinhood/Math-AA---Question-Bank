@@ -1,4 +1,7 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark">
 <title>Create lists and frequency tables · Calculator Skills | IB Math Question Bank</title>
 <script>try{const t=localStorage.getItem("qb-theme");document.documentElement.dataset.theme=t==="dark"||t==="light"?t:(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
@@ -9,41 +12,35 @@
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=ct28-watch-2">
-<link rel="stylesheet" href="watch.css?v=ct28-play-state-1">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-player.js" defer></script><script src="../handheld/hold-timeline.js" defer></script>
-<script src="model.js?v=ct28-watch-2" defer></script><script src="key-tape.js?v=ct28-watch-2" defer></script>
-<script src="watch-media.js?v=ct28-watch-2" data-lesson="CT28" data-cue-sha="13578afe41780e93e6550ba8d5d584be079d6de9e70e319d513f26e1a1c3a54e" data-transcript-sha="ea9cab8b9f0e9916eda801f3a29e4c5724903b3e24eff5c1d31e49cea75eb05a" defer></script><script src="lesson.js?v=ct28-play-state-1" defer></script></head>
-<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson"><header class="head"><div><p class="trail"><a href="../skills.html">Calculator Skills</a> / CT28</p><h1>Create lists and frequency tables</h1></div></header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-selected="true" aria-controls="watch-panel">Watch</button><button id="try-tab" role="tab" aria-selected="false" aria-controls="try-panel" tabindex="-1">Try</button></div>
-<section id="stage" class="stage" tabindex="0" aria-label="TI-Nspire CX II-T Lists &amp; Spreadsheet">
- <div id="try-header" hidden><div class="try-nav"><button id="return" type="button">Return to Watch</button><button id="reset" type="button">Reset calculator</button></div><p id="try-context"></p></div>
- <div class="stage-grid" id="watch-surface">
+
+<link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script defer src="../handheld/shell.js"></script>
+<script defer src="../handheld/watch-handset.js?v=1"></script>
+<script defer src="model.js"></script>
+<script defer src="key-tape.js"></script>
+<script defer src="../handheld/watch-player.js?v=solve-player-2"></script>
+<script defer src="../handheld/hold-timeline.js?v=1"></script>
+<script defer src="../handheld/watch-chapters.js?v=1"></script>
+<script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
+<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="../handheld/watch-bootstrap.js?v=1"></script>
+</head>
+<body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson">
+<nav class="reg-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT28</nav>
+<div data-calculator-watch></div>
+<section id="stage" class="stage ct28-try" data-mode="try" tabindex="0" aria-label="Independent TI-Nspire CX II-T Lists and Spreadsheet practice" hidden>
+ <div id="try-header"><div class="try-nav"><button id="return" type="button">Return to Watch</button><button id="reset" type="button">Reset Try</button></div><p id="try-context"></p></div>
+ <div class="stage-grid" id="try-grid">
   <div id="handheld-host"><div id="lcd" class="lcd"><div class="lcd-status"><span id="lcd-title"></span><span class="battery" aria-hidden="true"></span></div><div id="lcd-body" class="lcd-body"></div><div id="lcd-entryline" class="lcd-row-entry"><b id="selection"></b><span id="lcd-value"></span>
    <form id="typed" novalidate hidden><label class="sr" for="cell-text">Calculator cell entry</label><input id="cell-text" type="text" maxlength="12" autocomplete="off" autocapitalize="off" spellcheck="false"></form></div><p id="lcd-text" class="sr"></p></div></div>
-  <aside id="watch-panel" class="calc-side" role="tabpanel" aria-labelledby="watch-tab">
-   <p id="beat-title"></p><p id="takeaway"></p>
-   <div id="key-trail" aria-label="Ordered keys by step"><b id="key-group"></b><ol id="key-steps" aria-labelledby="key-group"></ol></div>
-  </aside>
-  <aside id="try-panel" class="calc-side" role="tabpanel" aria-labelledby="try-tab" hidden><p class="eyebrow">Your turn</p><table id="source-table"></table>
+
+  <aside id="try-panel" class="calc-side" aria-label="Work with this dataset"><p class="eyebrow">Your turn</p><table id="source-table"></table>
    <p id="tool-status" class="feedback" role="status"></p>
    <button id="assess" class="primary" type="button">Check the lists</button><p id="assess-feedback" class="feedback" role="status"></p>
   </aside>
-  <span id="play-feedback" aria-hidden="true" hidden><svg class="watch-play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="watch-pause-icon" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
- </div>
- <p id="caption" hidden></p>
- <div class="player" id="watch-player" role="group" aria-label="Playback controls">
-  <button id="play" class="primary" type="button" aria-label="Play"><svg class="watch-play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="watch-pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
-  <div id="frame-modes" role="group" aria-label="Calculator framing">
-   <button id="view-screen" type="button" title="Screen only" aria-label="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
-   <button id="view-full" type="button" title="Full calculator" aria-label="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h5"/></svg></button>
   </div>
-  <label id="seek-label"><span class="sr">Seek walkthrough</span><input id="seek" type="range" min="0" max="104" value="0" step=".001"></label><span id="clock">0:00 / 1:44</span>
-  <button id="captions" type="button" aria-label="Hide captions" aria-pressed="true">CC</button>
-  <button id="sound" type="button" aria-label="Mute narration" hidden>Mute</button>
-  <label id="pause-label"><span>Pauses</span><select id="pauses" aria-label="Teaching pauses"><option value=".7">−</option><option value="1" selected>Normal</option><option value="1.4">+</option></select></label>
-  <button id="fullscreen" type="button" aria-label="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
- </div>
- <p id="media-state">Caption rehearsal · no narration</p>
 </section>
 </main></body></html>
