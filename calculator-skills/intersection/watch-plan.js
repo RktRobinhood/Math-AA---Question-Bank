@@ -9,7 +9,9 @@
   [7.73,10.47,3.6,6.86,10.80],
   [10.47,14.60,17.5,10.80,14.42],
   [14.60,16.32,5.0,14.42,15.20],
-  [16.32,20.17,8.4,15.20,16.60]
+  [16.32,20.17,8.4,15.20,16.60],
+  // The last 0.11 s is only a timeline anchor; this chapter never plays audio.
+  [20.17,20.28,18.0,16.60,21.0]
  ];
  const keys=root.CT11Tape.keys;
  const bands=beats.map(([,,,from,to])=>[
@@ -22,5 +24,5 @@
   const step=(marks.length-1)*bounded,i=Math.min(Math.floor(step),marks.length-2),f=step-i;
   return {time:marks[i].time+(marks[i+1].time-marks[i].time)*f,lit:f<.54?marks[i].index:-1};
  }
- root.CT11Plan=Object.freeze({make:scale=>root.TeachingHolds.make(beats,scale),position});
+ root.CT11Plan=Object.freeze({make:scale=>root.TeachingHolds.make(beats,scale),position,isOptional:p=>p.span.i===beats.length-1});
 })(globalThis);

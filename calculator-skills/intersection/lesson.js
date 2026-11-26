@@ -53,7 +53,7 @@
  }
  cc.addEventListener("click",()=>captions(!showCaptions));
  $("transcript").textContent=T.captions.join(" ");
- const readable={x:"x",square:"x²",enter:"Enter",tab:"Tab",plus:"+",menu:"Menu",right:"→"};
+ const readable={x:"x",square:"x²",enter:"Enter",tab:"Tab",plus:"+",menu:"Menu",right:"→",neg:"(−)"};
  const tabs=[$("watch-tab"),$("try-tab")],steps=$("steps"),hot=$("hotspots");
  const hints={entry:"Enter a function and press Enter to plot. The handheld Tab key switches lines.",plotted:"Two curves are needed. Press Menu when both are plotted.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 4: Intersection.",lower:"Place the lower bound just left of one crossing. Type an x-value or move the cursor.",upper:"Choose the upper bound just right of the same crossing.",result:"Read the x-coordinate and the common y-coordinate."};
  const syncFields=()=>fields.forEach((el,i)=>{el.value=state.raw[i]});
@@ -64,7 +64,7 @@
  function labelGraph(s){
   const graphs=s.q.flatMap((p,i)=>p?["f"+(i+1)+" of x = "+M.displayExpr(p.raw)]:[]);
   if(s.state==="entry")graphs.push("Function entry "+(s.active+1)+": "+M.displayExpr(s.raw[s.active]));
-  $("lcd-text").textContent=[...graphs,hints[s.state],s.low!=null?"Lower: "+M.pretty(s.low):"",s.typed?"Typed bound: "+s.typed:"",s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Intersection "+fmtPair(s.mark):"",s.error||""].filter(Boolean).join(". ");
+  $("lcd-text").textContent=[...graphs,hints[s.state],s.low!=null?"Lower: "+M.pretty(s.low):"",s.high!=null?"Upper: "+M.pretty(s.high):"",s.typed?"Typed bound: "+s.typed:"",s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Intersection "+fmtPair(s.mark):"",s.error||""].filter(Boolean).join(". ");
  }
  function snapshot(time){
   const v={state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false};
@@ -74,20 +74,26 @@
    Object.assign(v,e.delta);last=i;
   }
   const s={...initial([v.first,v.second]),...v,q:[v.firstPlot?watchPair[0]:null,v.secondPlot?watchPair[1]:null],windows:knownWindow};
+  if(last===T.keys.length-1){
+   const result=M.solve(s.q,s.low,s.high);
+   s.mark=result.ok?{x:result.x,y:result.y}:null;
+   s.error=result.message||null;
+  }
   return{s,last};
  }
- const keyName={right:"Right arrow",square:"Squared",plus:"Plus"};
+ const keyName={right:"Right arrow",square:"Squared",plus:"Plus",neg:"Negative key"};
  const chapters=[
   {id:"plot",span:0,title:"Plot both functions",first:0,end:9},
   {id:"intersection",span:2,title:"Intersection",first:9,end:12},
   {id:"bounds",span:4,title:"Bracket one crossing",first:12,end:19},
-  {id:"read",span:5,title:"Read result",first:19,end:19}
+  {id:"read",span:5,title:"Read the right crossing",first:19,end:19},
+  {id:"left",span:7,title:"Repeat for the left crossing",first:19,end:T.keys.length}
  ];
  const rail=CalculatorWatchChapters.mount(steps,chapters.map(({id,title,first,end})=>({
   id,title,
   keys:T.keys.slice(first,end).map((step,index)=>{
    const n=first+index,label=readable[step.key]||step.key;
-   const ariaLabel=n===13?"Enter to confirm the lower bound":n===18?"Enter to confirm the upper bound":keyName[step.key]||label;
+   const ariaLabel=(n===13||n===24)?"Enter to confirm the lower bound":(n===18||n===26)?"Enter to confirm the upper bound":keyName[step.key]||label;
    return {id:"key-"+n,label,ariaLabel};
   })
  })),{
@@ -97,19 +103,19 @@
  const sec=x=>Math.floor(x),clock=x=>Math.floor(x/60)+":"+String(sec(x)%60).padStart(2,"0");
  function renderWatch(){
   if(mode!=="watch")return;
-  const point=layout.at(t),span=point.span.i,pos=P.position(point),{s,last}=snapshot(pos.time);
+  const point=layout.at(t),span=point.span.i,optional=P.isOptional(point),spoken=point.speaking&&!optional,pos=P.position(point),{s,last}=snapshot(pos.time);
   const chapter=chapters.findLast(c=>c.span<=span);
   // Tab can change the editable formula without changing either raw string.
-  const keyStamp=JSON.stringify([s.state,s.active,s.raw,s.q.map(q=>q?.raw??null),s.cursor,s.low,s.typed,s.mark,s.error]);
+  const keyStamp=JSON.stringify([s.state,s.active,s.raw,s.q.map(q=>q?.raw??null),s.cursor,s.low,s.high,s.typed,s.mark,s.error]);
   const timeLabel=clock(t>=duration-.015?Math.round(duration):t)+" / "+clock(Math.round(duration));
   seek.value=t;seek.setAttribute("aria-valuetext",timeLabel.replace("/","of"));$("clock").textContent=timeLabel;
   shell.setKeys(pos.lit>=0?[T.keys[pos.lit].key]:[]);
   rail.setState({chapterId:chapter.id,keyId:last>=chapter.first&&last<chapter.end?"key-"+last:null});
   if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
-  const line=point.speaking?T.captions[span]:"";
+  const line=spoken?T.captions[span]:"";
   if(cap.textContent!==line)cap.textContent=line;
   $("caption-band").hidden=!showCaptions||!line;
-  stage.dataset.phase=point.speaking?"voice":"hold";
+  stage.dataset.phase=spoken?"voice":"hold";
   const shortHints=[
    "Plot f₁, then press Tab to enter and plot f₂.",
    "Find the crossing on the right of the y-axis.",
@@ -119,14 +125,18 @@
    "Read both coordinates: (3, 9).",
    "Same output: 3² = 2(3) + 3 = 9."
   ];
-  const guide=!point.speaking||span===3||span>=5?shortHints[span]:"";
+  const optionalHint=s.state==="lower"?"Type −2 with the negative key, then Enter. This bound is left of the crossing.":
+   s.state==="upper"?"Type 0 and press Enter. The new bracket excludes the right crossing.":
+   s.mark&&s.state==="result"&&last>=chapter.first?"Both intersections: (−1, 1) and (3, 9).":
+   "Same graphs. Open Menu → 6: Analyze Graph → 4: Intersection again.";
+  const guide=optional?optionalHint:(!spoken||span===3||span>=5?shortHints[span]:"");
   if($("readout").textContent!==guide)$("readout").textContent=guide;
   if(cache!==keyStamp){cache=keyStamp;screen.draw(s);labelGraph(s);}
  }
  function setOrigin(){origin=performance.now()-t*1000;}
  function go(v){
   const resume=playing||pending;if(resume)pause();
-  t=M.clamp(Number(v)||0,0,duration);renderWatch();labelPlay();if(resume)void start(false);
+  t=M.clamp(Number(v)||0,0,duration);renderWatch();labelPlay();if(resume&&t<duration-.015)void start(false);
  }
  function labelPlay(){
   const monitor=playing||pending,label=monitor?"Pause":t>=duration-.015?"Replay":"Play";
@@ -154,8 +164,8 @@
   renderWatch();raf=requestAnimationFrame(tick);
  }
  async function enterPhase(token){
-  const point=layout.at(t);setOrigin();phase=point.speaking?"voice":"hold";
-  if(!point.speaking||!useAudio){audio.pause();return token===playEpoch&&mode==="watch";}
+  const point=layout.at(t),spoken=point.speaking&&!P.isOptional(point);setOrigin();phase=spoken?"voice":"hold";
+  if(!spoken||!useAudio){audio.pause();return token===playEpoch&&mode==="watch";}
   let deadline;
   try{
    audio.currentTime=point.audioTime;

@@ -19,6 +19,13 @@ window.CT11Tape=Object.freeze({
   [5.81,"menu",{state:"menu"}],[6.21,"6",{state:"submenu"}],[6.76,"4",{state:"lower",cursor:1.5}],
   [11.52,"right",{cursor:2}],[12.74,"enter",{state:"upper",low:2}],
   [12.99,"right",{cursor:2.5}],[13.23,"right",{cursor:3}],[13.47,"right",{cursor:3.5}],[13.71,"right",{cursor:4}],
-  [14.07,"enter",{state:"result",high:4,mark:{x:3,y:9}}]
+  [14.07,"enter",{state:"result",high:4,mark:{x:3,y:9}}],
+  // Optional unvoiced chapter: re-run Intersection on a disjoint bracket.
+  [17.05,"menu",{state:"menu",cursor:null,low:null,high:null,mark:null,typed:""}],
+  [17.52,"6",{state:"submenu"}],[17.99,"4",{state:"lower",cursor:1}],
+  [18.48,"neg",{typed:"-"}],[18.92,"2",{typed:"-2"}],
+  [19.39,"enter",{state:"upper",low:-2,cursor:-2,typed:""}],
+  [19.87,"0",{typed:"0"}],
+  [20.34,"enter",{state:"result",cursor:0,high:0,typed:""}]
  ].map(([time,key,delta])=>Object.freeze({time,key,delta:Object.freeze(delta)})))
 });
