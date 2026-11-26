@@ -1,5 +1,231 @@
 {
-  "version": 1,
-  "lesson": "CT35",
-  "status": "awaiting-recording"
+ "version": 1,
+ "lesson": "CT35",
+ "status": "measured",
+ "audio": "narration.mp3",
+ "audioSha256": "60747f2f4bcab03193c00447f38d2b2c311a1be8e517c65d23148f954187e9c3",
+ "durationMs": 66320,
+ "transcriptSha256": "76b63ffaa7e45abeee78ccab89f3f2ef75d78880853c87b466bc924484faa22d",
+ "cueMapSha256": "b0ddecc91f480fafb32591c54b97c43012289f188258107dcc104ff2420a8011",
+ "measurement": "FAL-1673 local George clone (VoxCPM2). Each cue is its own checked take, so caption starts and ends are sample-exact in the composed file. Each cue starts at its authored caption start; key, display and pointer events keep their authored 1:1 offsets from it (never scaled). Where speech runs past the authored window, the Watch holds on its last frame until the next cue; where speech is shorter, silence fills the window. Minimum 500 ms between cues.",
+ "anchors": [
+  {
+   "editorialMs": 0,
+   "audioMs": 0
+  },
+  {
+   "editorialMs": 6200,
+   "audioMs": 8910
+  },
+  {
+   "editorialMs": 6650,
+   "audioMs": 9360
+  },
+  {
+   "editorialMs": 7100,
+   "audioMs": 9810
+  },
+  {
+   "editorialMs": 7630,
+   "audioMs": 10340
+  },
+  {
+   "editorialMs": 8090,
+   "audioMs": 10800
+  },
+  {
+   "editorialMs": 8610,
+   "audioMs": 11320
+  },
+  {
+   "editorialMs": 9120,
+   "audioMs": 11830
+  },
+  {
+   "editorialMs": 9630,
+   "audioMs": 12340
+  },
+  {
+   "editorialMs": 10120,
+   "audioMs": 12830
+  },
+  {
+   "editorialMs": 11200,
+   "audioMs": 13910
+  },
+  {
+   "editorialMs": 11700,
+   "audioMs": 14410
+  },
+  {
+   "editorialMs": 12200,
+   "audioMs": 14910
+  },
+  {
+   "editorialMs": 12700,
+   "audioMs": 15410
+  },
+  {
+   "editorialMs": 13400,
+   "audioMs": 18015
+  },
+  {
+   "editorialMs": 17500,
+   "audioMs": 23682
+  },
+  {
+   "editorialMs": 17620,
+   "audioMs": 23802
+  },
+  {
+   "editorialMs": 18020,
+   "audioMs": 24202
+  },
+  {
+   "editorialMs": 18420,
+   "audioMs": 24602
+  },
+  {
+   "editorialMs": 18820,
+   "audioMs": 25002
+  },
+  {
+   "editorialMs": 19290,
+   "audioMs": 25472
+  },
+  {
+   "editorialMs": 19700,
+   "audioMs": 25882
+  },
+  {
+   "editorialMs": 20190,
+   "audioMs": 26372
+  },
+  {
+   "editorialMs": 20600,
+   "audioMs": 26782
+  },
+  {
+   "editorialMs": 21070,
+   "audioMs": 27252
+  },
+  {
+   "editorialMs": 21480,
+   "audioMs": 27662
+  },
+  {
+   "editorialMs": 21890,
+   "audioMs": 28072
+  },
+  {
+   "editorialMs": 22300,
+   "audioMs": 28482
+  },
+  {
+   "editorialMs": 23300,
+   "audioMs": 29482
+  },
+  {
+   "editorialMs": 25000,
+   "audioMs": 31182
+  },
+  {
+   "editorialMs": 25500,
+   "audioMs": 31682
+  },
+  {
+   "editorialMs": 26500,
+   "audioMs": 32682
+  },
+  {
+   "editorialMs": 27480,
+   "audioMs": 33662
+  },
+  {
+   "editorialMs": 28440,
+   "audioMs": 34622
+  },
+  {
+   "editorialMs": 31000,
+   "audioMs": 40892
+  },
+  {
+   "editorialMs": 31200,
+   "audioMs": 41092
+  },
+  {
+   "editorialMs": 32150,
+   "audioMs": 42042
+  },
+  {
+   "editorialMs": 33060,
+   "audioMs": 42952
+  },
+  {
+   "editorialMs": 34020,
+   "audioMs": 43912
+  },
+  {
+   "editorialMs": 36000,
+   "audioMs": 45892
+  },
+  {
+   "editorialMs": 39500,
+   "audioMs": 49392
+  },
+  {
+   "editorialMs": 39620,
+   "audioMs": 49512
+  },
+  {
+   "editorialMs": 43000,
+   "audioMs": 58789
+  },
+  {
+   "editorialMs": 47000,
+   "audioMs": 66320
+  }
+ ],
+ "captions": [
+  {
+   "id": "watch-01",
+   "startMs": 0,
+   "endMs": 8410
+  },
+  {
+   "id": "watch-02",
+   "startMs": 8910,
+   "endMs": 17515
+  },
+  {
+   "id": "watch-03",
+   "startMs": 18015,
+   "endMs": 23182
+  },
+  {
+   "id": "watch-04",
+   "startMs": 23682,
+   "endMs": 30454
+  },
+  {
+   "id": "watch-05",
+   "startMs": 31182,
+   "endMs": 40392
+  },
+  {
+   "id": "watch-06",
+   "startMs": 40892,
+   "endMs": 47349
+  },
+  {
+   "id": "watch-07",
+   "startMs": 49392,
+   "endMs": 58289
+  },
+  {
+   "id": "watch-08",
+   "startMs": 58789,
+   "endMs": 65820
+  }
+ ]
 }
