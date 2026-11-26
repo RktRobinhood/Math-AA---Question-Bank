@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import {createHash} from "node:crypto";
 import {createRequire} from "node:module";
+import {fileURLToPath} from "node:url";
 import {execFileSync} from "node:child_process";
 import vm from "node:vm";
 const root=new URL("../calculator-skills/",import.meta.url), handoff=new URL("paperclip-audio/",root);
@@ -26,6 +27,36 @@ if(process.argv[2]==="--draft"){
  process.exit(0);
 }
 const decodeAudio=process.argv.includes("--decode-audio");
+const args=process.argv.slice(2), json=args.includes("--queue")||args.includes("--audit");
+assert(args.every(a=>["--decode-audio","--queue","--audit"].includes(a))&&!(args.includes("--queue")&&args.includes("--audit")),
+ "Use --queue or --audit, optionally with --decode-audio.");
+const repo=new URL("../",import.meta.url);
+const printable=url=>path.relative(fileURLToPath(repo),fileURLToPath(url)).split(path.sep).join("/");
+const entries=[];
+const missing=(row,reason,action="repair")=>Object.assign(row,{status:"missing",action,reason});
+function matched(row){return Object.assign(row,{status:"matched",action:"preserve"});}
+function record(row,check){
+ try{check();}
+ catch(error){
+  row.status=error.name==="MissingRecording"?"missing":"stale";
+  row.action="repair";
+  row.reason=error.message.replaceAll(fileURLToPath(repo),"").split("\n")[0];
+ }
+ entries.push(row);
+}
+function requireRecording(url){
+ if(fs.existsSync(url))return;
+ const error=new Error("Missing established audio: "+printable(url));
+ error.name="MissingRecording";throw error;
+}
+function verifyBytes(url,expected,id){
+ requireRecording(url);
+ assert.equal(hash(fs.readFileSync(url)),expected,id+" recording bytes");
+}
+function player(row,html){
+ row.player=html.includes("watch-bootstrap.js?")&&html.includes("data-calculator-watch")
+  &&html.includes("watch-lesson.js?")?"shared-watch":"legacy-watch";
+}
 const probe=f=>{
  const duration=Number(execFileSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",f],{encoding:"utf8"}));
  execFileSync("ffmpeg",["-v","error","-i",f,"-f","null","-"]);
@@ -55,7 +86,7 @@ function checkNative(x,cue,route,html){
   const voice=require("../calculator-skills/normal/voice-profile.js");
   const profile=voice.validate(JSON.parse(JSON.stringify(box.NormalMeasuredCues)));
   const media=at(route,profile.file);
-  assert.equal(hash(fs.readFileSync(media)),profile.sha256,x.id+" recording bytes");
+  verifyBytes(media,profile.sha256,x.id);
   if(decodeAudio)assert(voice.mediaDurationMatches(profile,probe(decodeURIComponent(media.pathname))),x.id+" audio duration");
   return true;
  }
@@ -65,36 +96,58 @@ function checkNative(x,cue,route,html){
  const spec=routeScripts[x.id], w=sandbox(route,spec.files), recording=spec.decode(w,m[1]);
  assert(recording,x.id+" measured manifest rejected by the route's own decoder");
  const pkg=JSON.parse(m[1]), media=at(route,pkg.audio);
- assert.equal(hash(fs.readFileSync(media)),pkg.audioSha256,x.id+" recording bytes");
+ verifyBytes(media,pkg.audioSha256,x.id);
  const duration=decodeAudio?probe(decodeURIComponent(media.pathname)):pkg.durationMs/1000;
  assert(spec.actual(w,recording,duration),x.id+" audio duration");
  return true;
 }
+const template=require("../calculator-skills/handheld/watch-lesson.js");
 const counts={preserved:0,native:0,nativeRecorded:0,sharedAwaiting:0,sharedRecorded:0};
 const seen=new Set();
 for(const x of lessons){
  assert(!seen.has(x.id),x.id);seen.add(x.id);
+ const route=at(root,x.route), transcript=at(handoff,x.transcript), cueMap=at(handoff,x.cueMap);
+ const attachment=x.existingAudio?route:at(root,x.nativeMediaAdapter?.syncDestination??x.route);
+ const audio=x.existingAudio?at(root,x.existingAudio.src):at(root,x.nativeMediaAdapter?.audioDestination??new URL("narration.mp3",route).href);
+ const row={id:x.id,title:x.title,route:printable(route),script:printable(transcript),scriptSha256:x.transcriptSha256,
+  attachment:printable(attachment),audio:printable(audio),contract:x.integrationStatus,player:"unknown"};
+ record(row,()=>{
+ const html=fs.readFileSync(route,"utf8");player(row,html);
  const nt=fs.readFileSync(at(handoff,x.transcript)), nc=fs.readFileSync(at(handoff,x.cueMap));
  assert.equal(hash(nt),x.transcriptSha256,x.id+" transcript hash");
  assert.equal(hash(nc),x.cueMapSha256,x.id+" cue map hash");
  const cue=JSON.parse(nc);
+ if(cue.nativeMediaAdapter?.file)row.attachment=printable(at(root,cue.nativeMediaAdapter.file));
  assert.equal(cue.id,x.id);
  assert.deepEqual(nt.toString().trim().split(/\r?\n/),cue.spokenCues.map(q=>q.text),x.id+" exact spoken script lines");
- const route=at(root,x.route), html=fs.readFileSync(route,"utf8");
  if(x.integrationStatus==="already-wired-preserve"){
-   assert.equal(hash(fs.readFileSync(at(root,x.existingAudio.src))),x.existingAudio.sha256,x.id+" original bytes");
-   counts.preserved++;continue;
+   counts.preserved++;
+   if(row.player==="shared-watch"){
+    const definition=at(route,"definition.json"),spec=load(definition);
+    template.validate(spec);assert.equal(spec.id,x.id);
+    assert.equal(at(definition,spec.recording?.file??"").href,audio.href,x.id+" original recording route");
+    assert.equal(spec.recording?.audioSha256,x.existingAudio.sha256,x.id+" original recording digest");
+    row.attachment=printable(definition);
+   }else{
+    const source=html.match(/<audio\b[^>]*\bsrc="([^"]+)"/i)?.[1];
+    assert(source&&at(route,source).href===audio.href,x.id+" original audio tag binding");
+   }
+   verifyBytes(audio,x.existingAudio.sha256,x.id);
+   if(decodeAudio)assert(Math.abs(probe(fileURLToPath(audio))*1000-x.existingAudio.streamDurationMs)<=125,x.id+" original audio duration");
+   return matched(row);
  }
  if(x.integrationStatus!=="shared-measured-json"){
    assert(["inline-json","strict-json-assignment"].includes(x.integrationStatus),x.id+" missing narration adapter");
    counts.native++;
-   if(checkNative(x,cue,route,html))counts.nativeRecorded++;
-   continue;
+   if(checkNative(x,cue,route,html)){counts.nativeRecorded++;return matched(row);}
+   assert(!fs.existsSync(audio),x.id+" unexpected audio with no valid measured attachment");
+   return missing(row,"No valid measured native attachment; review the legacy handoff before repair.");
  }
- const sharedTemplate=html.includes('watch-bootstrap.js?')&&html.includes('data-calculator-watch');
+ const sharedTemplate=row.player==="shared-watch";
+ if(sharedTemplate)row.attachment=printable(at(route,"definition.json"));
  if(!sharedTemplate)for(const p of [`data-lesson="${x.id}"`,`data-transcript-sha="${x.transcriptSha256}"`,`data-cue-sha="${x.cueMapSha256}"`])assert(html.includes(p),x.id+" route binding");
  if(sharedTemplate){
-  const spec=load(at(route,"definition.json")), template=require("../calculator-skills/handheld/watch-lesson.js");
+  const spec=load(at(route,"definition.json"));
   const sync=load(at(route,"narration.sync.json"));
   template.validate(spec);assert.equal(spec.id,x.id);
   assert.equal(hash(Buffer.from(spec.beats.map(b=>b.spoken).filter(Boolean).join("\n")+"\n")),x.transcriptSha256,x.id+" exact templated spoken script");
@@ -116,45 +169,66 @@ for(const x of lessons){
  const sync=load(at(route,"narration.sync.json"));
  if(sync.status==="awaiting-recording"){
   assert.deepEqual(sync,{version:1,lesson:x.id,status:"awaiting-recording"});
-  counts.sharedAwaiting++;continue;
+  counts.sharedAwaiting++;
+  assert(!fs.existsSync(audio),x.id+" unexpected audio with an unmeasured attachment");
+  return missing(row,"No reviewed measured legacy package; review the handoff before repair.");
  }
  assert(decode(sync,cue,config(x,cue)),x.id+" measured timing format");
- assert.equal(hash(fs.readFileSync(at(route,sync.audio))),sync.audioSha256,x.id+" recording bytes");
+ verifyBytes(at(route,sync.audio),sync.audioSha256,x.id);
  if(decodeAudio){
   const duration=probe(decodeURIComponent(at(route,sync.audio).pathname));
   assert(Number.isFinite(duration)&&Math.abs(1000*duration-sync.durationMs)<=120,x.id+" audio duration");
  }
- counts.sharedRecorded++;
+ counts.sharedRecorded++;return matched(row);
+ });
 }
-assert.equal(counts.preserved,7);assert.equal(counts.native,5);
-assert.equal(counts.sharedAwaiting+counts.sharedRecorded,49);
-console.log("Calculator narration: 61 dedicated lessons checked",counts);
 
 // Template-native authoring has a separate queue; the legacy manifest stays intact.
 const templateQueue=at(handoff,"template-watch/manifest.json");
 const fresh=load(templateQueue);
 assert.equal(fresh.version,1);
-const template=require("../calculator-skills/handheld/watch-lesson.js");
 let templateAwaiting=0,templateRecorded=0;
-for(const row of fresh.lessons){
- assert(!seen.has(row.id),row.id);seen.add(row.id);
- const definition=at(templateQueue,row.definition);
- const spec=load(definition);assert.equal(spec.id,row.id);template.validate(spec);
- const text=fs.readFileSync(at(templateQueue,row.transcript));
- assert.equal(hash(text),row.transcriptSha256,row.id+" exact handoff digest");
- assert.equal(text.toString(),spec.beats.filter(b=>b.spoken).map(b=>b.spoken).join("\n")+"\n",row.id+" exact template spoken lines");
- const dest=at(templateQueue,row.audioDestination);
- assert.equal(dest.href,at(definition,"narration.mp3").href,row.id+" audio destination");
- if(!spec.recording){assert(!fs.existsSync(dest),row.id+" unexpected loose recording");templateAwaiting++;continue;}
- assert.equal(spec.recording.scriptSha256,row.transcriptSha256,row.id);
- assert.equal(at(definition,spec.recording.file).href,dest.href,row.id);
- assert.equal(hash(fs.readFileSync(dest)),spec.recording.audioSha256,row.id);
- if(process.argv.includes("--decode-audio")){
-  const filename=decodeURIComponent(dest.pathname);
-  const duration=Number(execFileSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",filename],{encoding:"utf8"}));
-  assert(Number.isFinite(duration)&&Math.abs(duration-spec.beats.at(-1).end)<=.12,row.id+" template audio duration");
-  execFileSync("ffmpeg",["-v","error","-i",filename,"-f","null","-"]);
- }
- templateRecorded++;
+for(const item of fresh.lessons){
+ assert(!seen.has(item.id),item.id);seen.add(item.id);
+ const definition=at(templateQueue,item.definition), route=at(definition,"index.html");
+ const transcript=at(templateQueue,item.transcript), dest=at(templateQueue,item.audioDestination);
+ const row={id:item.id,route:printable(route),script:printable(transcript),scriptSha256:item.transcriptSha256,
+  attachment:printable(definition),audio:printable(dest),contract:"shared-watch-definition",player:"unknown"};
+ record(row,()=>{
+  const html=fs.readFileSync(route,"utf8");player(row,html);
+  assert.equal(row.player,"shared-watch",item.id+" template player binding");
+  const spec=load(definition);assert.equal(spec.id,item.id);template.validate(spec);
+  row.title=spec.title;
+  const text=fs.readFileSync(transcript);
+  assert.equal(hash(text),item.transcriptSha256,item.id+" exact handoff digest");
+  assert.equal(text.toString(),spec.beats.filter(b=>b.spoken).map(b=>b.spoken).join("\n")+"\n",item.id+" exact template spoken lines");
+  assert.equal(dest.href,at(definition,"narration.mp3").href,item.id+" audio destination");
+  if(!spec.recording){
+   assert(!fs.existsSync(dest),item.id+" unexpected loose recording: review it instead of generating");
+   templateAwaiting++;return missing(row,"Verified signed script; no attached or loose MP3.","generate");
+  }
+  assert.equal(spec.recording.scriptSha256,item.transcriptSha256,item.id+" signed script");
+  assert.equal(at(definition,spec.recording.file).href,dest.href,item.id+" signed recording path");
+  verifyBytes(dest,spec.recording.audioSha256,item.id);
+  if(decodeAudio)assert(Math.abs(probe(fileURLToPath(dest))-spec.beats.at(-1).end)<=.12,item.id+" template audio duration");
+  templateRecorded++;return matched(row);
+ });
 }
-console.log("Template-native narration:",{templateAwaiting,templateRecorded});
+assert.equal(entries.length,lessons.length+fresh.lessons.length);
+assert.equal(new Set(entries.map(r=>r.route)).size,entries.length,"Audio queue routes must be unique.");
+const summary={routes:entries.length,matched:0,missing:0,stale:0,generate:0,repair:0,sharedPlayer:0};
+for(const row of entries){
+ summary[row.status]++;
+ if(row.action!=="preserve")summary[row.action]++;
+ if(row.player==="shared-watch")summary.sharedPlayer++;
+}
+const generationQueue=entries.filter(row=>row.action==="generate"), attention=entries.filter(row=>row.action==="repair");
+if(json)console.log(JSON.stringify({version:1,audioCheck:decodeAudio?"sha256-decode-duration":"sha256",
+ summary,generationQueue,attention,...(args.includes("--audit")?{routes:entries}:{})},null,2));
+else{
+ console.log("Calculator narration: "+lessons.length+" legacy-manifest routes checked",counts);
+ console.log("Template-native narration:",{templateAwaiting,templateRecorded});
+ console.log("Combined:",summary);
+ for(const row of attention)console.error(row.id+": "+row.reason);
+}
+if(attention.length)process.exitCode=1;

@@ -1,48 +1,30 @@
-# Calculator Coach narration handoff for Paperclip
+# Calculator Coach narration: Claude / Paperclip handoff
 
-Start at [manifest.json](manifest.json). **All 59 catalogue lessons and two
-companions are live. Seven have existing recordings; the other 54 play with
-captions and have recording destinations.** Five use their existing custom
-adapters and 49 use the shared measured JSON bridge. Availability of a
-recording destination is not a claim that the lesson is narrated. The
-companions are Graph Maximum (CT12-max) and Frequency Histograms (SUP-HIST-01).
+Tracker: [audio rollout #48](https://github.com/RktRobinhood/Math-AA---Question-Bank/issues/48). From a fresh checkout of main, run:
 
-## New Watch template lessons
+    node scripts/check-calculator-narration.mjs --queue
 
-The [template Watch queue](template-watch/manifest.json) lists foundation and
-extension lessons authored directly in the common player. Each entry links
-the exact script, SHA-256, live data file and audio destination. Record only
-the linked lines, in order. Measure each speech boundary from the recording
-and update the beat `end` values in `definition.json`. Leave the extra teaching
-`hold` for seeing the keys. Add the measured MP3 and the matching
-`recording.file`, `recording.audioSha256` and `recording.scriptSha256` together.
-Do not use the legacy cue map or invent timing for these lessons. Verify the
-audio at normal voice speed and test captions and seeks in the common player.
-Watch remains captioned until the signed recording is in place.
+**Record only entries in generationQueue.** Each entry names the exact lesson, student route, signed script and SHA-256, audio destination, and definition to update. Use --audit instead of --queue for all routes and their separate player status. Add --decode-audio to decode the existing files and compare duration to the recorded metadata.
 
-## Recording queue
+| Queue status and action | What Claude should do |
+|---|---|
+| matched / preserve | The route's attachment and source have been verified. Do not regenerate, rename, or re-export. |
+| missing / generate | The source script matches the shared Watch definition and there is neither a signed attachment nor a loose MP3. This is the only new-generation work. |
+| missing / repair | An established recording is absent or a legacy attachment needs review. Recover the approved take or investigate before recording. |
+| stale / repair | A binding, script, audio hash or decode is invalid, or a loose MP3 needs review. Investigate; do not overwrite. |
 
-1. **Preserve existing recordings** for CT01, CT06, CT08, CT10, CT11, CT12,
-   and CT38. Reuse the exact path/bytes in `existingAudio` (there are
-   byte-identical guide copies for four). The text and cue maps document the
-   approved lesson, not an instruction to re-record. Do not rename, replace,
-   upscale or duplicate these assets.
-2. Start with **CT39 Normal CDF → CT40 Inverse Normal → CT37 Binomial PDF →
-   CT41 unknown normal parameter → CT42 Poisson**. Their tested players accept an optional
-   measured manifest. `nativeMediaAdapter` gives exact cue IDs, physical
-   key IDs, ordering and destination. The text is the original reviewed
-   recording sheet, not legacy rehearsal copy.
-3. The other lessons have speech-normalized original Watch captions.
-   Treat them as **recording drafts**. Review each while watching the
-   default route (no query or linked question). A single line is one cue,
-   and no headings or staging notes are spoken. Never synthesize Try text,
-   personal data, linked inputs/answers or exam content.
+A nonempty attention list exits 1 but still emits valid JSON with affected routes and reasons. Stop if your intended ID is in attention. The queue uses the existing [legacy recording manifest](manifest.json) and [template Watch handoffs](template-watch/manifest.json), not a separately maintained list. Their baseline counts and draft designations are historical. **Migrating a player does not mean new audio is needed.**
 
-Keep the accepted George quality if Paperclip's own approved access supports
-it; no substitute or charge is authorized by this file. Allow space to see
-every field/key land. Read named keys deliberately, with C D F and P D F as
-individual letters. Pause briefly between the Enter that inserts a wizard
-command and the Enter that evaluates it. Match labels and numbers by ear.
+## Record and attach a queued take
+
+1. Verify the ID is still in generationQueue on your branch. Review its default Watch (no query or linked question); compare the exact SHA-256 of the listed UTF-8 script. Read only those lines, one spoken segment per line. Do not speak headings, coaching or teaching holds, Try questions/answers, exam content, or student data.
+2. Use the approved George voice and authorized recording setup. This handoff authorizes neither a substitute voice nor spend. Listen to every cue at natural speed. Read C D F and P D F letter-by-letter and distinguish Enter to insert a wizard command from Enter to evaluate.
+3. Measure each segment in the same final reviewed MP3, with ffprobe and listening. Set each beat's end to its **measured cumulative source time in seconds**; the last end must match the decoded duration. Preserve the text, physical key order, and separate authored hold durations. Do not scale the spoken audio, derive timings from the silent rehearsal, or put visual holds into the recording.
+4. Add the reviewed MP3 and recording.file, recording.audioSha256 and recording.scriptSha256 to its linked definition together. Run the command below and verify this ID changes to matched, with no new attention. Play and seek in the real Watch, check exact spoken CC, 1× speech, mobile/desktop and independent Try. Do not claim a staged attachment is live before checking the deployed route.
+
+       node scripts/check-calculator-narration.mjs --audit --decode-audio
+
+## Legacy attachment reference (not a recording queue)
 
 ## Machine contract
 
@@ -101,13 +83,9 @@ The final cue must have at least 300 ms of remaining declared recording.
 The fallback remains caption-only until a matching file decodes, and the
 lesson never guesses speech timing from the rehearsal.
 
-### Shared measured JSON (49 lessons)
+### Shared measured JSON (legacy recovery only)
 
-Run `node scripts/check-calculator-narration.mjs --draft CT28` (substitute the
-exact lesson ID) for its data-entry template. The lesson's existing
-`narration.sync.json` stays `awaiting-recording` until a recording has been
-reviewed. Do not commit a template or fabricated timing. In the reviewed
-package:
+For explicitly authorized legacy recovery, passing --draft with the exact lesson ID prints an unmeasured skeleton. It is not a generation or replacement signal. Use the queue above first; do not commit a skeleton or fabricated timing. In a reviewed package:
 
 - Set `status: "measured"`, the actual `audioSha256` and decoded
   `durationMs`. Keep the template's lesson ID and transcript/cue-map hashes
