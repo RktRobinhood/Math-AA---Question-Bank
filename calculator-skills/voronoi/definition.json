@@ -1,0 +1,475 @@
+{
+  "id": "CT18",
+  "title": "Voronoi sites and nearest neighbours",
+  "intro": "Compare squared distances and use the nearest site’s reading. A boundary point can be a genuine tie.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "7f8fe23ded5123c09b502f73e789b251868571781b07bddbd8c3e0f31a5189fa",
+    "scriptSha256": "161a51334275df667a35f6da67dddaaf09008c9538da5f3df609cc8fd47a012a"
+  },
+  "chapters": [
+    {
+      "id": "read-map",
+      "title": "Read the map"
+    },
+    {
+      "id": "distance-a",
+      "title": "Square differences for A"
+    },
+    {
+      "id": "distance-b",
+      "title": "Compare with B"
+    },
+    {
+      "id": "distance-c",
+      "title": "Check the third site"
+    },
+    {
+      "id": "copy-reading",
+      "title": "Copy one reading"
+    },
+    {
+      "id": "check-boundary",
+      "title": "Move P to the boundary"
+    },
+    {
+      "id": "check-farther",
+      "title": "Check that C is farther"
+    },
+    {
+      "id": "no-unique",
+      "title": "Do not average a tie"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-map",
+      "spoken": "Point P is at three, two. Site A is at one, one; B is at seven, one; and C is at five, six. Their readings are fifteen, thirty-two and forty-eight. Which site's reading estimates P?",
+      "coach": "P = (3, 2). A (1, 1) gives 15, B (7, 1) gives 32, and C (5, 6) gives 48.",
+      "end": 17.932,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "distance-a",
+      "spoken": "On the Calculator page, enter the square of three minus one, plus the square of two minus one. Close each bracket and press the x squared key, then press Enter. No square root is needed.",
+      "coach": "Enter (3 − 1)² + (2 − 1)². A square root is not needed to compare distances.",
+      "end": 32.346,
+      "hold": 8.0,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0411
+        },
+        {
+          "id": "press-2",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1096
+        },
+        {
+          "id": "press-3",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.1781
+        },
+        {
+          "id": "press-4",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2466
+        },
+        {
+          "id": "press-5",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.3151
+        },
+        {
+          "id": "press-6",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.3836
+        },
+        {
+          "id": "press-7",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4521
+        },
+        {
+          "id": "press-8",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.5205
+        },
+        {
+          "id": "press-9",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.589
+        },
+        {
+          "id": "press-10",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.6575
+        },
+        {
+          "id": "press-11",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.726
+        },
+        {
+          "id": "press-12",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7945
+        },
+        {
+          "id": "press-13",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.863
+        },
+        {
+          "id": "press-14",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "distance-b",
+      "spoken": "Use the same P, but subtract B's coordinates. Square three minus seven, then add the square of two minus one. A negative difference becomes positive when squared.",
+      "coach": "Enter (3 − 7)² + (2 − 1)². Square the whole bracket.",
+      "end": 46.307,
+      "hold": 8.0,
+      "keys": [
+        {
+          "id": "press-15",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0411
+        },
+        {
+          "id": "press-16",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1096
+        },
+        {
+          "id": "press-17",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.1781
+        },
+        {
+          "id": "press-18",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.2466
+        },
+        {
+          "id": "press-19",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.3151
+        },
+        {
+          "id": "press-20",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.3836
+        },
+        {
+          "id": "press-21",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4521
+        },
+        {
+          "id": "press-22",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.5205
+        },
+        {
+          "id": "press-23",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.589
+        },
+        {
+          "id": "press-24",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.6575
+        },
+        {
+          "id": "press-25",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.726
+        },
+        {
+          "id": "press-26",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7945
+        },
+        {
+          "id": "press-27",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.863
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "distance-c",
+      "spoken": "Now use C. Square three minus five, then add the square of two minus six. Compare all the results, not just A and B.",
+      "coach": "Enter (3 − 5)² + (2 − 6)². Compare all three sites.",
+      "end": 58.934,
+      "hold": 8.0,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0411
+        },
+        {
+          "id": "press-30",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1096
+        },
+        {
+          "id": "press-31",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.1781
+        },
+        {
+          "id": "press-32",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.2466
+        },
+        {
+          "id": "press-33",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.3151
+        },
+        {
+          "id": "press-34",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.3836
+        },
+        {
+          "id": "press-35",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4521
+        },
+        {
+          "id": "press-36",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.5205
+        },
+        {
+          "id": "press-37",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.589
+        },
+        {
+          "id": "press-38",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.6575
+        },
+        {
+          "id": "press-39",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.726
+        },
+        {
+          "id": "press-40",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7945
+        },
+        {
+          "id": "press-41",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.863
+        },
+        {
+          "id": "press-42",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "copy-reading",
+      "spoken": "The squared distances are A: five, B: seventeen, C: twenty. Site A is nearest. The estimate at P is A's reading, fifteen, not an average.",
+      "coach": "Squared distances: 5, 17, 20. A is nearest, so use A’s reading of 15.",
+      "end": 75.9,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "check-boundary",
+      "spoken": "Now move P to four, two. Its offsets from A are three and one; from B they are negative three and one. Enter three squared plus one squared to check both.",
+      "coach": "Move P to (4, 2). A and B have horizontal offsets +3 and −3, so the same 3² + 1² checks both.",
+      "end": 89.089,
+      "hold": 4.0,
+      "keys": [
+        {
+          "id": "press-43",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.0909
+        },
+        {
+          "id": "press-44",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.2424
+        },
+        {
+          "id": "press-45",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3939
+        },
+        {
+          "id": "press-46",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5455
+        },
+        {
+          "id": "press-47",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.697
+        },
+        {
+          "id": "press-48",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8485
+        }
+      ]
+    },
+    {
+      "chapter": "check-farther",
+      "spoken": "For C, the offsets are negative one and negative four. Enter negative one squared plus negative four squared, using the negative key inside each pair of brackets.",
+      "coach": "Enter (−1)² + (−4)² for C. The negative sign starts each bracket.",
+      "end": 101.0175,
+      "hold": 7.0,
+      "keys": [
+        {
+          "id": "press-49",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0476
+        },
+        {
+          "id": "press-50",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.127
+        },
+        {
+          "id": "press-51",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2063
+        },
+        {
+          "id": "press-52",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.2857
+        },
+        {
+          "id": "press-53",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.3651
+        },
+        {
+          "id": "press-54",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4444
+        },
+        {
+          "id": "press-55",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.5238
+        },
+        {
+          "id": "press-56",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.6032
+        },
+        {
+          "id": "press-57",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.6825
+        },
+        {
+          "id": "press-58",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7619
+        },
+        {
+          "id": "press-59",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.8413
+        },
+        {
+          "id": "press-60",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9206
+        }
+      ]
+    },
+    {
+      "chapter": "no-unique",
+      "spoken": "A and B tie at ten; C is farther at seventeen. This point lies on their cell boundary. With readings fifteen and thirty-two, no unique estimate exists unless a tie-break rule is given.",
+      "coach": "A and B tie at 10; C is farther at 17. Do not average 15 and 32 without a stated rule.",
+      "end": 116.13,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
