@@ -10,22 +10,27 @@
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="lesson.css?v=bank-shell-1"><link rel="stylesheet" href="../handheld/shell.css">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
-<script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script><link rel="stylesheet" href="../paperclip-audio/recorded-watch.css?v=1"><script src="../paperclip-audio/recorded-watch.js?v=1" data-lesson="CT54" data-cue-sha="2097643197d354a04ae6b4f30228e6412543b47c7a5a782c20d21adc9c8b86a2" data-transcript-sha="39d3f8912d6c0204ce23a4a50b8849405732901f6a17dbb68f8dcd80537f6b96" defer></script><script src="lesson.js?v=bank-shell-1&amp;narration=1" defer></script>
+<link rel="stylesheet" href="lesson.css?v=shared-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="../handheld/transport.js" defer></script><script src="math.js" defer></script><script src="lcd.js" defer></script><script src="key-tape.js" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="lesson.js?v=shared-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head><body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
-<header class="header"><div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT54</span></p><h1>Definite integral and signed area</h1><p class="subtitle">See what cancels below the axis on a TI-Nspire CX II-T.</p></div>
-
-</header>
-<div class="calc-tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
-<section class="ct54-shared" id="stage" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
-<div id="watch-message"><p id="caption" class="caption"></p><p id="watch-equation" class="ct54-bounds" data-visible="false" aria-hidden="true"></p></div>
-<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><button type="button" id="open-independent" hidden>Open Try</button><button type="button" id="jump-input" class="retro-jump">Edit function</button><button type="button" id="jump-answer" class="retro-jump">Enter answers</button><p id="try-line" class="mobile-task"></p></div>
-<div class="ct54-stage-grid">
-<div class="ct54-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p><button type="button" id="stage-play" aria-label="Play caption rehearsal" title="Play caption rehearsal"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4v16l13-8z" fill="currentColor"/></svg></button></div></div>
+<nav class="quad-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT54</nav>
+<div data-calculator-watch></div>
+<section class="ct54-shared" id="stage" data-mode="try" aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0" hidden>
+<div id="try-player" class="player-top"><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button><button type="button" id="jump-input" class="retro-jump">Edit function</button><button type="button" id="jump-answer" class="retro-jump">Enter answers</button><p id="try-line" class="mobile-task"></p></div>
+<div class="ct54-stage-grid" id="try-grid">
+<div class="ct54-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div></div>
 <div class="ct54-stage-side">
-<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example · Caption rehearsal</p><h2>Read the signed result</h2><p class="calc-formula">f(x) = x − 3</p><ol id="steps" class="steps"></ol></aside>
-<aside id="try-side" class="director ct54-try-help" hidden><p class="tag">Your turn</p><h2>Distinguish the two totals</h2>
+
+<aside id="try-side" class="director ct54-try-help"><p class="tag">Your turn</p><h2>Distinguish the two totals</h2>
 <p id="keypad-problem" class="ct54-taskline"></p><p id="keypad-hint" role="status"></p>
 <p id="keypad-result" class="feedback" role="status" hidden></p><p id="color-key" hidden><b class="below-mark">− Below the axis</b> <b class="above-mark">+ Above the axis</b><span>Teaching colors</span></p>
 <div id="try-tools"><form id="expression-form"><label for="expression">Polynomial in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
@@ -37,11 +42,5 @@
 <details><summary>Hint</summary><p>Use the graph to find each change of sign. For geometric area, repeat Integral on the separate intervals and add the magnitudes.</p></details>
 <p class="ct54-keyboard"><kbd>M</kbd>, <kbd>6</kbd>, <kbd>6</kbd> opens Integral. Type a bound or move with <kbd>←</kbd> <kbd>→</kbd>. Confirm each with <kbd>Enter</kbd>.</p>
 </aside></div></div>
-<div class="player" id="watch-player" aria-label="Playback controls">
-<div class="player-top"><button id="play" type="button" class="primary">Play</button><button id="back" type="button" aria-label="Back ten seconds">−10</button><button id="next" type="button" aria-label="Forward ten seconds">+10</button><button id="replay" type="button" aria-label="Replay from the start">↺</button><button id="focus-view" type="button" aria-label="Focused view" aria-pressed="false" title="Focused view">⛶</button><button class="takeover" type="button" id="take-over">Take over</button></div>
-<div class="ct54-time-row"><span id="clock" aria-hidden="true">0:00</span><label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="27.8" step="0.005"></label><span class="ct54-rehearsal" id="media-status">Captions only</span></div>
-</div>
 </section>
-<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct54-watch-panel"><p class="sr">The Watch player is in the stage above.</p></section>
-<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><p class="sr">The Try calculator and answer check are in the stage above.</p></section>
 </main></body></html>

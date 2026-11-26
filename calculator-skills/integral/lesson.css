@@ -280,3 +280,11 @@ h1:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-family:Georgia,"Ti
  main:has(#stage[data-mode="try"]) h1:where(.qb-calculator-lesson, .qb-calculator-lesson *){font-size:clamp(1.4rem,4vw,2rem)}
  #stage[data-mode="try"] #try-player:where(.qb-calculator-lesson, .qb-calculator-lesson *){padding-block:5px}
 }
+
+/* Let the Watch template frame the existing LCD; keep the independent Try deck. */
+.quad-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+@media(max-width:340px){.lw-header h1{font-size:1.48rem}.lw-header{margin-bottom:.45rem}}
+@media(max-width:780px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide .lw-groups{max-height:clamp(132px,24dvh,210px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
