@@ -1,0 +1,361 @@
+{
+  "id": "CT26",
+  "title": "Adjacency matrices and walks",
+  "intro": "Rows are the starting vertices, columns are the destinations. A matrix power counts walks of one specified length.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "cf30c13648e6d6ad0971016de0f696a36ef0ee10723cf440aae1aa23f24c9668",
+    "scriptSha256": "f6e4a2cfc674961b8baf9e2f1bb2ef9d0f0946b969d21df7051427c592d5969a"
+  },
+  "chapters": [
+    {
+      "id": "read-rows",
+      "title": "Read the arrow counts"
+    },
+    {
+      "id": "parallel-arrows",
+      "title": "Read a parallel-arrow count"
+    },
+    {
+      "id": "template",
+      "title": "Open the matrix template"
+    },
+    {
+      "id": "enter-counts",
+      "title": "Set dimensions and enter counts"
+    },
+    {
+      "id": "store",
+      "title": "Store the matrix"
+    },
+    {
+      "id": "square",
+      "title": "Calculate a²"
+    },
+    {
+      "id": "read-walks",
+      "title": "Read the start row and end column"
+    },
+    {
+      "id": "cube",
+      "title": "Change the walk length"
+    },
+    {
+      "id": "repeated-vertices",
+      "title": "Allow repeated vertices"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-rows",
+      "spoken": "Enter the directed arrow counts. Rows are where a walk starts; columns are where it goes.",
+      "coach": "Fix A, B, C in that order. The row is the start; the column is the destination.",
+      "end": 6.872,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "parallel-arrows",
+      "spoken": "Two arrows go from A to B, so the entry in row A, column B is two. An absent arrow gives zero.",
+      "coach": "A → B has two arrows; put 2 at row A, column B. Use 0 where there is no arrow.",
+      "end": 15.765,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "template",
+      "spoken": "Open Matrix and Vector, then Create, then Matrix.",
+      "coach": "Open Menu → 7: Matrix & Vector → 1: Create → 1: Matrix.",
+      "end": 21.8005,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1304
+        },
+        {
+          "id": "press-2",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.3478
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5652
+        },
+        {
+          "id": "press-4",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "enter-counts",
+      "spoken": "Set three rows and three columns. Fill each count, then press Tab.",
+      "coach": "Choose 3 rows and 3 columns. Enter 0,2,1 / 0,0,1 / 1,0,0 in row order, using Tab to move.",
+      "end": 32.582,
+      "hold": 12.66,
+      "keys": [
+        {
+          "id": "press-5",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.0265
+        },
+        {
+          "id": "press-6",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.0708
+        },
+        {
+          "id": "press-7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.115
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1593
+        },
+        {
+          "id": "press-9",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2035
+        },
+        {
+          "id": "press-10",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2478
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.292
+        },
+        {
+          "id": "press-12",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3363
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3805
+        },
+        {
+          "id": "press-14",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4248
+        },
+        {
+          "id": "press-15",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.469
+        },
+        {
+          "id": "press-16",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5133
+        },
+        {
+          "id": "press-17",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5575
+        },
+        {
+          "id": "press-18",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6018
+        },
+        {
+          "id": "press-19",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.646
+        },
+        {
+          "id": "press-20",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6903
+        },
+        {
+          "id": "press-21",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7345
+        },
+        {
+          "id": "press-22",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7788
+        },
+        {
+          "id": "press-23",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.823
+        },
+        {
+          "id": "press-24",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.8673
+        },
+        {
+          "id": "press-25",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.9115
+        },
+        {
+          "id": "press-26",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.9558
+        }
+      ]
+    },
+    {
+      "chapter": "store",
+      "spoken": "From after the last cell, press Control and Var to insert the store arrow, type A, then Enter.",
+      "coach": "Tab beyond the last cell. Ctrl + Var inserts the store arrow. Type A and Enter.",
+      "end": 44.124,
+      "hold": 3.65,
+      "keys": [
+        {
+          "id": "press-27",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1071
+        },
+        {
+          "id": "press-28",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.2857
+        },
+        {
+          "id": "press-29",
+          "label": "Var",
+          "ariaLabel": "Var",
+          "at": 0.4643
+        },
+        {
+          "id": "press-30",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.6429
+        },
+        {
+          "id": "press-31",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "square",
+      "spoken": "Type a raised to power two, then Enter. This uses matrix multiplication.",
+      "coach": "Compute a² using the calculator’s matrix power; each entry counts exactly two edges.",
+      "end": 50.589,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-32",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.1304
+        },
+        {
+          "id": "press-33",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.3478
+        },
+        {
+          "id": "press-34",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5652
+        },
+        {
+          "id": "press-35",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "read-walks",
+      "spoken": "From A to C, read row A, column C: two. The two parallel arrows from A to B each allow a walk through B. Read the reverse entry: zero.",
+      "coach": "Read row A, column C for two walks. Row C, column A has none.",
+      "end": 63.339,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "cube",
+      "spoken": "For exactly three edges, use a cubed instead. Do not add shorter lengths to it.",
+      "coach": "Enter a³ for walks of exactly three edges, not up to three.",
+      "end": 70.109,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-36",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.1304
+        },
+        {
+          "id": "press-37",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.3478
+        },
+        {
+          "id": "press-38",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5652
+        },
+        {
+          "id": "press-39",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "repeated-vertices",
+      "spoken": "There is one three-edge walk: A to C, back to A, then to C. Repeated vertices are allowed in a walk.",
+      "coach": "The one walk A → C → A → C repeats vertices, which is allowed.",
+      "end": 79.334,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
