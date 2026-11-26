@@ -16,7 +16,7 @@ header{background:#142c4a;color:white;padding:17px 26px;display:flex;align-items
 .viewTabs{display:flex;gap:4px;margin-inline-end:7px}.viewTabs [aria-pressed=true]{font-weight:700;background:var(--blueBg);border-color:var(--blue)}
 [hidden]{display:none!important}.ctag{font-size:.71rem;color:var(--blue);font-weight:650;overflow-wrap:anywhere}.cardTitle{min-width:70px}
 .cardTitle input{border:1px solid transparent;padding:2px 3px;font-weight:700;background:transparent}.cardTitle input:hover,.cardTitle input:focus{border-color:var(--blue)}
-.card textarea{display:block;min-height:72px;line-height:1.35;margin:4px 0 0;resize:vertical;font-weight:450;color:var(--text)}.card .markTag{display:grid;grid-template-columns:58px minmax(0,1fr);gap:6px;margin-top:8px}.markTag select{font-size:.73rem;width:100%}.token{margin-top:5px}.work.graph{height:800px}.profile{font-size:13px;color:var(--sub);margin-top:8px}
+.card textarea{display:block;min-height:72px;line-height:1.35;margin:4px 0 0;resize:vertical;font-weight:450;color:var(--text);field-sizing:content;overflow-wrap:anywhere}.card .markTag{display:grid;grid-template-columns:58px minmax(0,1fr);gap:6px;margin-top:8px}.markTag select{font-size:.73rem;width:100%}.token{margin-top:5px}.work.graph{height:800px}.profile{font-size:13px;color:var(--sub);margin-top:8px}
 .plan{max-width:1250px;margin:auto;display:grid;grid-template-columns:minmax(300px,1fr) minmax(310px,1fr);gap:16px;padding:16px 20px}.plan>section{margin-bottom:0}
 .plan .content{padding:15px}.fit{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fit select{width:100%}
 .queued{border-top:1px solid var(--edge);padding:11px 0}.queued label{display:flex;align-items:center;gap:9px}.queued input[type=checkbox]{width:19px;height:19px}
@@ -162,14 +162,15 @@ function draw(){
 function render(focus){const w=$('work'),q=constraints(), scroll=w.scrollTop;
  $('example').value=k; $('workTitle').textContent=mode==='stack'?'Paper stack':'Node canvas';
  $('workHint').textContent=mode==='stack'?'Block order is the paper order.':'Position cards freely. Arrows set paper order.';
- $('workNote').textContent=changed||(mode==='stack'?'Drag a library block or click +. Reorder with the grip or arrows.':'Drag blocks by their headers. Connect a purple output to an input.');
+ $('workNote').textContent=changed||(mode==='stack'?'Drag a library block or click +. Reorder with the grip or arrows.':'Drag each grip to position a block. Connect a purple output to an input.');
  for(const x of ['stack','graph'])$(x).setAttribute('aria-pressed',String(x===mode));
  $('blank').textContent=st().blankUndo?'Restore prior draft':'Start blank';
  w.className='work '+mode;w.innerHTML=st().blocks.map((b,i)=>card(b,i,q)).join('')||'<div class="empty"><strong>Drop the first block here</strong><p class="hint">Start with an introduction or the model. Click + in the library to add without dragging.</p></div>';
  w.scrollTop=scroll; showLibrary(); refresh();
  if(focus)w.querySelector(focus)?.focus({preventScroll:true});
 }
-function refresh(){const q=constraints(),c=cfg(),s=st(),m=q.m;
+function expandText(el){if(!el||CSS.supports('field-sizing','content'))return;el.style.height='auto';el.style.height=(el.scrollHeight+2)+'px'}
+function refresh(){for(const el of document.querySelectorAll('#work textarea'))expandText(el);const q=constraints(),c=cfg(),s=st(),m=q.m;
  const formula=document.querySelector('[data-formula]');if(formula)formula.textContent=Number.isFinite(Object.values(m).reduce((a,b)=>a+b,0))?c.formula(m):'Enter the model values';
  for(const p of document.querySelectorAll('[data-prompt]'))p.textContent=usePrompt(by(p.dataset.prompt),q.map);
  const checks=$('checks'),old=document.activeElement?.dataset?.trial; const selection=old!=null?[document.activeElement.selectionStart,document.activeElement.selectionEnd]:null;
