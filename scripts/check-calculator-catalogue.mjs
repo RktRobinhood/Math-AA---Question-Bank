@@ -14,13 +14,13 @@ assert.deepEqual(Object.keys(audit.courses),courses);
 // Only audited limited uses with a working, honestly named path appear.
 const scoped={
  'CT03':{
-  'ai-sl':{title:'Calculate a binomial coefficient with nCr',note:'Use the combinations step for binomial coefficients. Standalone factorial and counting exercises are beyond this use.'},
-  'ai-hl':{title:'Calculate a binomial coefficient with nCr',note:'Use the combinations step for binomial coefficients. Standalone factorial and counting exercises are beyond this use.'}
+  'ai-sl':{title:'Calculate a binomial coefficient with nCr',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'},
+  'ai-hl':{title:'Calculate a binomial coefficient with nCr',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'}
  },
- 'CT07':{'aa-sl':{note:'Use this to solve or check two equations in an applied problem. The formal three-variable method is AA HL.'}},
+ 'CT07':{'aa-sl':{note:'Solve or check a pair of linear equations in an applied problem.'}},
  'CT15':{'ai-sl':{title:'Graph a model on a restricted domain',note:'Follow the interval restrictions and check which expression applies at the boundary.'}},
- 'CT46':{'ai-sl':{title:'Pooled two-sample t-test',note:'Opens Try for two independent samples with Pooled: Yes. The one-sample Watch example is AI HL.',params:{mode:'try'}}},
- 'CT54':{'ai-sl':{title:'Area under a positive curve',note:'Opens a positive-curve Try example. Use the Watch steps to locate the Integral tool; signed-area comparisons are outside this AI SL use.',params:{mode:'try',expr:'x+1',lower:'0',upper:'4'}}}
+ 'CT46':{'ai-sl':{title:'Pooled two-sample t-test',note:'Compare two independent means using the pooled option in Try.',params:{mode:'try'}}},
+ 'CT54':{'ai-sl':{title:'Area under a positive curve',note:'Find the area between a positive curve and the x-axis.',params:{mode:'try',expr:'x+1',lower:'0',upper:'4'}}}
 };
 const omitted={
  'CT13':{'ai-sl':'The worked and default Try examples use rational graphs with denominator exclusions. CT16 covers a model threshold.'},
@@ -32,8 +32,19 @@ const skills={};
 const markCounts=Object.fromEntries(courses.map(c=>[c,{D:0,L:0,'-':0}]));
 const scopedCounts=Object.fromEntries(courses.map(c=>[c,0]));
 const used=new Set(), sourceRows=new Set();
+const copy=JSON.parse(read('docs/calculator-skills/catalogue-copy.json'));
+const topicIds=new Set(['1','2','3','4','5','start']);
+const crossTopic={
+ 'CT01':['start'],'CT02':['start'],'CT06':['1'],'CT07':['1'],'CT08':['start'],
+ 'CT09':['1'],'CT12':['2'],'CT16':['1'],'CT24':['1'],'CT31':['2'],
+ 'CT32':['4'],'CT33':['4'],'CT34':['4']
+};
+const validTopics=(ids,label)=>{
+ assert(ids.length>0&&ids.every(v=>topicIds.has(v))&&new Set(ids).size===ids.length,label+' topic tags');
+ return ids;
+};
 
-for(const {id,coverage} of audit.entries){
+for(const {id,topic,coverage} of audit.entries){
  assert.match(id,/^CT\d{2}$/);assert(!sourceRows.has(id),id);sourceRows.add(id);
  assert.deepEqual(Object.keys(coverage),courses,id+' course columns');
  const direct=[];
@@ -45,12 +56,14 @@ for(const {id,coverage} of audit.entries){
   if(v==='L'){
    assert(Boolean(special)!==Boolean(reason),id+' limited case must declare a decision: '+c);
    used.add(id+'/'+c);
-   if(special)scopedCounts[c]++;
+   if(special){scopedCounts[c]++;if(special.topics)validTopics(special.topics,id+'/'+c);}
   }
  }
- skills[id]={direct,...(scoped[id]?{scoped:scoped[id]}:{})};
+ assert(typeof copy[id]==='string'&&copy[id].length>=15&&copy[id].length<135,id+' concise student description');
+ skills[id]={direct,topics:validTopics([String(topic),...(crossTopic[id]??[])],id),description:copy[id],...(scoped[id]?{scoped:scoped[id]}:{})};
 }
 assert.equal(sourceRows.size,audit.library.canonicalSkills);
+assert.deepEqual(Object.keys(copy),[...sourceRows]);
 for(const c of courses){
  assert.deepEqual(markCounts[c],{D:audit.courses[c].direct,L:audit.courses[c].limited,'-':audit.courses[c].notMapped});
 }
@@ -58,15 +71,16 @@ for(const reviews of [scoped,omitted])for(const [id,exceptions] of Object.entrie
 
 // These are separate teaching routes, not permission inherited from the parent card.
 const companions={
- 'linear-system-three/index.html':{parent:'CT07',title:'Solve a 3×3 linear system',direct:['aa-hl','ai-sl','ai-hl'],keywords:'linsolve simultaneous three equations three unknowns'},
- 'maximum/index.html':{parent:'CT12',title:'Find a graph maximum',direct:[...courses]},
- 'histogram/index.html':{parent:'CT30',title:'Frequency histograms',direct:['ai-sl','ai-hl'],note:'Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph.'}
+ 'linear-system-three/index.html':{parent:'CT07',title:'Solve a 3×3 linear system',topics:['1','2'],description:'Use LinSolve with three equations in x, y and z.',direct:['aa-hl','ai-sl','ai-hl'],keywords:'linsolve simultaneous three equations three unknowns'},
+ 'maximum/index.html':{parent:'CT12',title:'Find a graph maximum',topics:['5','2'],description:'Check the highest point and compare it with the endpoints.',direct:[...courses]},
+ 'histogram/index.html':{parent:'CT30',title:'Frequency histograms',topics:['4'],description:'Use equal-width bars to display and compare frequencies.',direct:['ai-sl','ai-hl'],note:'Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph.'}
 };
 const foundations={
- 'handset-keys/index.html':{id:'SUP-HANDSET-KEYS',title:'Find your way around the keypad',family:'Getting started',direct:[...courses],note:'Find trig, equals, minus and fractions. Try exact and decimal answers.'},
- 'handset-settings/index.html':{id:'SUP-HANDSET-SETTINGS',title:'Set up your TI-Nspire',family:'Getting started',direct:[...courses],note:'Find Display Digits, Angle and Calculation Mode.'}
+ 'handset-keys/index.html':{id:'SUP-HANDSET-KEYS',title:'Find your way around the keypad',topics:['start'],direct:[...courses],note:'Find trig, equals, minus and fractions. Try exact and decimal answers.'},
+ 'handset-settings/index.html':{id:'SUP-HANDSET-SETTINGS',title:'Set up your TI-Nspire',topics:['start'],direct:[...courses],note:'Find Display Digits, Angle and Calculation Mode.'}
 };
 for(const [route,entry] of Object.entries(foundations)){
+ validTopics(entry.topics,entry.id);
  const definition=JSON.parse(read('calculator-skills/'+route.replace('index.html','definition.json')));
  assert.equal(definition.id,entry.id,route+' shared Watch ID');
  assert.match(read('calculator-skills/'+route),/watch-bootstrap\.js/,route+' must use shared Watch bootstrap');
@@ -84,6 +98,7 @@ for(const [id,rows] of Object.entries(registry.companions)){
  }
 }
 assert.deepEqual([...paths],Object.keys(companions));
+for(const [route,entry] of Object.entries(companions))validTopics(entry.topics,route);
 
 const lines=record=>Object.entries(record).map(([k,v])=>'  '+JSON.stringify(k)+':'+JSON.stringify(v)).join(',\n');
 const out='/* Generated by scripts/check-calculator-catalogue.mjs --write from the audited 2021 teaching matrix. */\n'+

@@ -1,9 +1,22 @@
 /* Calculator Skills uses the Questions shell, sidebar, sheet, and layout buttons. */
-.skills-shell .skills-topic{display:grid;gap:var(--s1)}
+/* Use the native topic rows and the same five topic colors as Questions. */
+.skills-shell{--topic-start:#3e6d94}
+[data-theme=dark] .skills-shell{--topic-start:#92b9e1}
+.skills-shell .bg-start{background:var(--topic-start)}
+.skills-shell .side-fixed{padding-bottom:var(--s2)}
+.skills-shell .skills-topics .trow{display:block;padding:0}
+.skills-shell .skills-topics :is(.topen,.skills-topic-all){width:100%;min-height:42px;text-align:left;padding:6px var(--s4);border-bottom:1px solid var(--line)}
+.skills-shell .skills-topics .topen{border-bottom:0}
+.skills-shell .skills-topic-all{font-weight:650}
+.skills-shell .skills-topics button:hover{background:var(--sunk)}
+.skills-shell .skills-topics button[aria-pressed=true]{background:var(--accent-soft);color:var(--accent);box-shadow:inset 3px 0 var(--accent);font-weight:700}
+.skills-shell .skills-topics [data-skill-topic=start] .dot{margin-right:1px}
+.skills-shell .grid[data-view=grid]{grid-auto-rows:1fr}
+.skills-shell .grid[data-view=grid] .catalog-entry{min-height:90px}
 .skills-shell .catalog-entry .cb{padding:var(--s3) var(--s4);gap:var(--s1)}
-.skills-shell .catalog-entry h2{font-size:var(--fs-md);font-weight:680;line-height:1.3;overflow-wrap:anywhere}
+.skills-shell .catalog-entry h2{display:flex;align-items:baseline;gap:var(--s2);font-size:var(--fs-md);font-weight:680;line-height:1.3;overflow-wrap:anywhere}
 .skills-shell .catalog-entry h2 a{color:var(--accent)}
-.skills-shell .catalog-scope{color:var(--muted);font-size:var(--fs-sm);line-height:1.45;max-width:70ch}
+.skills-shell .catalog-scope{padding-inline-start:calc(9px + var(--s2));color:var(--muted);font-size:var(--fs-sm);line-height:1.45;max-width:70ch}
 .skills-shell .grid[data-view=list]{grid-template-columns:1fr;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
 .skills-shell .grid[data-view=list] .catalog-entry{border:0;border-radius:0}
 .skills-shell .grid[data-view=list] .catalog-entry+.catalog-entry{border-top:1px solid var(--line)}
@@ -11,6 +24,8 @@
 .skills-shell .grid>.hint{grid-column:1/-1;margin:0}
 @media(max-width:860px){
  .skills-shell .side{height:auto;max-height:min(84vh,720px);overflow:auto}
+ .skills-shell .skills-topics{flex-shrink:0;}
+ .skills-shell .grid[data-view=grid] .catalog-entry{min-height:75px}
  .skills-shell .vt{display:flex}
  .skills-shell .vt button{min-width:34px}
  .skills-shell .rbar{gap:var(--s2)}
@@ -26,3 +41,7 @@
  .skills-shell .rbar{gap:5px}
  .skills-shell :is(.skills-open-calc,.filters-btn){font-size:var(--fs-sm);padding-inline:8px}
 }
+
+/* One link per card: the whole card is a tap target, not a second control. */
+.skills-shell .catalog-entry h2 a::after{content:"";position:absolute;inset:0}
+.skills-shell .catalog-entry:focus-within{outline:2px solid var(--accent);outline-offset:-2px}
