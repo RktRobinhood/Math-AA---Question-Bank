@@ -30,6 +30,8 @@ Counts are **direct existing workflow + limited/transfer existing workflow**, no
 
 The [full 59-row syllabus/route matrix](full-matrix.md) and [machine-readable census](course-topic-audit.json) specify the scope and representative actions. They make newer recommendations separately from the legacy four-course metadata; the historical inventory has 48 direct and 11 related reference pointers, not verified live exam placements or a source of Practice inputs.
 
+The student catalogue uses the native course selector and shows direct rows plus limited cases with a clearly scoped example or practice path. Enrichment alone is not listed for that course. Companions have independent scope: Graph Maximum is shared; Frequency Histograms is AI SL/HL. When updating the matrix or a companion, run `node scripts/check-calculator-catalogue.mjs --write` to refresh the shipped standalone filter, then run the check without `--write`. This filter does not control Practice placement or block direct lesson URLs.
+
 ## Scope corrections before making a broad public claim
 
 - **CT46 t-tests:** has an independent, pooled two-sample branch using summary statistics. This is a legitimate AI SL 4.11 method; the additional one-sample/matched-difference branch is AI HL 4.18. Stock Watch demos one-sample, so signpost that honestly or defer an AI SL deep-link until it can open the correct branch. Use Pooled: Yes for the specified AI SL exam convention. [IB AI guide, printed pp. 57–58 and 61](https://www.ibo.org/globalassets/new-structure/university-admission/pdfs/dp-mathematics-applications-and-interpretation-guide-en.pdf#page=63); [TI two-sample t-test instructions, p. 3](https://education.ti.com/-/media/files/activities/us/math/statistics/t-test/t-test_teacher_nspire.pdf).

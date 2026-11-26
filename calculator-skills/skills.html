@@ -7,7 +7,7 @@
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("qb-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../assets/css/calculator-integration.css?v=beta-fit-2">
-<link rel="stylesheet" href="skills-page.css?v=shared-header-1">
+<link rel="stylesheet" href="skills-page.css?v=course-layout-1">
 <script src="../assets/js/courses.js" defer></script>
 <script src="../assets/js/course.js" defer></script>
 <script src="../assets/js/shell.js?v=theme-3" defer></script>
@@ -17,21 +17,39 @@
 <script src="guide-links.js" defer></script>
 <script src="lessons-data.js" defer></script>
 <script src="handheld-catalog-routes.js?v=verified-voice-batch-1" defer></script>
-<script src="guide-launch-scope.js?v=histogram-1" defer></script>
-<script src="guide-catalog.js" defer></script>
+<script src="guide-launch-scope.js?v=course-layout-1" defer></script>
+<script src="guide-course-scope.js?v=2021-1" defer></script>
+<script src="guide-catalog.js?v=course-layout-1" defer></script>
 </head>
 <body data-base="../" data-nav="calculator-skills">
-<main class="skills-page">
-<header><p class="eyebrow"><span>AA Paper 2 · AI calculator papers</span></p>
-<div class="skills-launch"><div><h1>Calculator Skills</h1><p class="intro">Watch a walkthrough, then practise with an original example. Simulator lessons use the onscreen handheld. For guides, follow along on your own calculator.</p></div><a class="btn skills-open-calc" href="scratchpad/index.html?v=mathprint-1">Open calculator</a></div></header>
-<div class="filters">
-<label>Search skills<input class="input" type="search" id="search" placeholder="e.g. regression or CT12"></label>
-<label>Topic<select class="select" id="topic"><option value="">All topics</option></select></label>
+<div class="shell skills-shell">
+  <aside class="side" id="skills-filters" aria-label="Filters">
+    <div class="side-fixed">
+      <div class="search">
+        <input class="input" type="search" id="search" aria-label="Search skills" placeholder="Search calculator skills…">
+        <kbd aria-hidden="true">/</kbd>
+      </div>
+      <label class="skills-topic" for="topic"><span class="cap">Topic</span>
+        <select class="select" id="topic"><option value="">All topics</option></select>
+      </label>
+    </div>
+    <div class="sheet-foot"><button class="btn" id="filters-done" type="button">Show skills</button></div>
+  </aside>
+  <main class="main">
+    <div class="rbar">
+      <h1>Calculator Skills</h1>
+      <span class="sp"></span>
+      <button id="skills-filter-toggle" class="btn ghost filters-btn" type="button" aria-controls="skills-filters" aria-expanded="false">Filters</button>
+      <div class="vt" role="group" aria-label="Layout">
+        <button type="button" data-view="grid" title="Cards" aria-label="Cards" aria-pressed="true">▦</button>
+        <button type="button" data-view="list" title="List" aria-label="List" aria-pressed="false">☰</button>
+      </div>
+      <a class="btn skills-open-calc" href="scratchpad/index.html?v=mathprint-1">Open calculator</a>
+    </div>
+    <section id="results" class="grid" aria-label="Matching skills"></section>
+    <noscript><p class="hint">Turn on JavaScript to search and open the calculator lessons.</p></noscript>
+  </main>
 </div>
-<p id="count" role="status"></p>
-<section id="results" class="catalog-list" aria-label="Matching skills"></section>
-<footer class="lower print-hide"><a href="../practice.html">Back to Practice</a></footer>
-<noscript><p>Turn on JavaScript to search and open the calculator lessons.</p></noscript>
-</main>
+<div id="skills-scrim" class="sheet-scrim" aria-hidden="true"></div>
 </body>
 </html>
