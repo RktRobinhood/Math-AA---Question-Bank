@@ -1,0 +1,354 @@
+{
+  "id": "CT52",
+  "title": "Stationary points",
+  "intro": "Find where the slope is zero, then use its signs to classify.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "96a98b1b7c36b2b108915c82d815ba19467b1f6b30871cacdca859dafd7fe093",
+    "scriptSha256": "fb8a44dd33ee79e6634b80ad3cd981185c3c02288e8eb20d1a9d3ee825a51675"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the original"
+    },
+    {
+      "id": "derivative",
+      "title": "Plot the derivative"
+    },
+    {
+      "id": "bracket",
+      "title": "Find a zero of f₂"
+    },
+    {
+      "id": "maximum",
+      "title": "Classify the first point"
+    },
+    {
+      "id": "second",
+      "title": "Find the second zero"
+    },
+    {
+      "id": "minimum",
+      "title": "Classify the second point"
+    },
+    {
+      "id": "check",
+      "title": "Check same-sign cases"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "On a Graphs page, enter f one of x and press Enter.",
+      "coach": "In Graphs, enter f₁(x) = x³ − 3x. The original graph supplies the heights.",
+      "end": 4.545,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.1711
+        },
+        {
+          "id": "press-1",
+          "label": "^",
+          "ariaLabel": "Exponent",
+          "at": 0.2622
+        },
+        {
+          "id": "press-2",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3533
+        },
+        {
+          "id": "press-3",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.4444
+        },
+        {
+          "id": "press-4",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.5356
+        },
+        {
+          "id": "press-5",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6267
+        },
+        {
+          "id": "press-6",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.7178
+        },
+        {
+          "id": "press-7",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8089
+        }
+      ]
+    },
+    {
+      "chapter": "derivative",
+      "spoken": "Press Control and G for f two. Shift and subtraction opens the first derivative template.",
+      "coach": "Ctrl + G opens the next graph entry. Shift + subtraction inserts the first derivative template.",
+      "end": 11.869,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-8",
+          "label": "Ctrl",
+          "ariaLabel": "Control",
+          "at": 0.244
+        },
+        {
+          "id": "press-9",
+          "label": "G",
+          "ariaLabel": "G",
+          "at": 0.408
+        },
+        {
+          "id": "press-10",
+          "label": "Shift",
+          "ariaLabel": "Shift",
+          "at": 0.572
+        },
+        {
+          "id": "press-11",
+          "label": "−",
+          "ariaLabel": "Subtract",
+          "at": 0.736
+        }
+      ]
+    },
+    {
+      "chapter": "derivative",
+      "spoken": "Enter x in the denominator box and f one of x in the expression box. Press Enter to graph f two.",
+      "coach": "Put x in the denominator box and f₁(x) in the expression box. The derivative is plotted as a separate graph, f₂.",
+      "end": 20.932,
+      "hold": 7,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.1711
+        },
+        {
+          "id": "press-13",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.2622
+        },
+        {
+          "id": "press-14",
+          "label": "F",
+          "ariaLabel": "F",
+          "at": 0.3533
+        },
+        {
+          "id": "press-15",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4444
+        },
+        {
+          "id": "press-16",
+          "label": "(",
+          "ariaLabel": "Open parentheses",
+          "at": 0.5356
+        },
+        {
+          "id": "press-17",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.6267
+        },
+        {
+          "id": "press-18",
+          "label": ")",
+          "ariaLabel": "Close parentheses",
+          "at": 0.7178
+        },
+        {
+          "id": "press-19",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8089
+        }
+      ]
+    },
+    {
+      "chapter": "bracket",
+      "spoken": "Choose Menu then six: Analyze Graph then one: Zero. Select f two, the derivative, not f one.",
+      "coach": "Menu → 6 Analyze Graph → 1 Zero. Choose the derivative, f₂, rather than the original curve.",
+      "end": 32.772,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-20",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.2167
+        },
+        {
+          "id": "press-21",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.3533
+        },
+        {
+          "id": "press-22",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.49
+        },
+        {
+          "id": "press-23",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-24",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "bracket",
+      "spoken": "Bracket one crossing of f two with bounds on either side. The zero gives an x-coordinate.",
+      "coach": "Use −2 and 0 as the first pair of bounds. Read x at the crossing; the derivative’s y-coordinate is zero, not the original height.",
+      "end": 40.037,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-25",
+          "label": "(−)",
+          "ariaLabel": "Negative",
+          "at": 0.2167
+        },
+        {
+          "id": "press-26",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3533
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        },
+        {
+          "id": "press-28",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6267
+        },
+        {
+          "id": "press-29",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "maximum",
+      "spoken": "Substitute that x into f one. The derivative changes from positive to negative.",
+      "coach": "At x = −1, f₁(−1) = 2. The derivative is positive at −1.25 and negative at −0.75: local maximum (−1, 2).",
+      "end": 46.337,
+      "hold": 6,
+      "keys": []
+    },
+    {
+      "chapter": "second",
+      "spoken": "Repeat Zero on f two with a separate bracket around the second crossing.",
+      "coach": "Run Zero again on f₂. Bracket the other crossing separately with bounds 0 and 2.",
+      "end": 52.152,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-30",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-31",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-32",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.326
+        },
+        {
+          "id": "press-33",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.408
+        },
+        {
+          "id": "press-34",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.49
+        },
+        {
+          "id": "press-35",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.572
+        },
+        {
+          "id": "press-36",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.654
+        },
+        {
+          "id": "press-37",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.736
+        },
+        {
+          "id": "press-38",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "minimum",
+      "spoken": "Evaluate the original function again. This time the derivative changes from negative to positive.",
+      "coach": "At x = 1, f₁(1) = −2. The derivative is negative at 0.75 and positive at 1.25: local minimum (1, −2).",
+      "end": 60.309,
+      "hold": 6,
+      "keys": []
+    },
+    {
+      "chapter": "check",
+      "spoken": "A derivative can touch zero without changing sign. A crossing search may miss it; verify a candidate separately.",
+      "coach": "If the derivative is zero but has the same sign on both sides, check for a stationary inflection separately.",
+      "end": 69.177,
+      "hold": 6,
+      "keys": []
+    }
+  ]
+}

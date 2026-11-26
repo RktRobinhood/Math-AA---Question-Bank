@@ -1,0 +1,167 @@
+{
+  "id": "CT51",
+  "title": "Find a derivative and tangent",
+  "intro": "Read the slope at one point, then use it to write the tangent.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "b6cbae8c6da44e230571732ec71e1d21aa3a4bd423ceab351e65999d660f68fe",
+    "scriptSha256": "b46be9f7b5bc703927c831556905deafeb427ece5d9b61d0641545a972a68b6b"
+  },
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the function"
+    },
+    {
+      "id": "menu",
+      "title": "Open dy/dx"
+    },
+    {
+      "id": "point",
+      "title": "Select one point"
+    },
+    {
+      "id": "slope",
+      "title": "Read slope and height"
+    },
+    {
+      "id": "tangent",
+      "title": "Write the tangent"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "spoken": "On a Graphs page, plot f of x equals x cubed plus x.",
+      "coach": "In Graphs, enter f₁(x) = x³ + x. After the exponent, press Right to return to the regular entry line.",
+      "end": 5.704,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.1825
+        },
+        {
+          "id": "press-1",
+          "label": "^",
+          "ariaLabel": "Exponent",
+          "at": 0.285
+        },
+        {
+          "id": "press-2",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3875
+        },
+        {
+          "id": "press-3",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-4",
+          "label": "+",
+          "ariaLabel": "Plus",
+          "at": 0.5925
+        },
+        {
+          "id": "press-5",
+          "label": "X",
+          "ariaLabel": "X",
+          "at": 0.695
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7975
+        }
+      ]
+    },
+    {
+      "chapter": "menu",
+      "spoken": "Open Menu, six for Analyze Graph, then five for d y by d x.",
+      "coach": "Menu → 6 Analyze Graph → 5 dy/dx. This tool measures the slope at one point.",
+      "end": 11.975,
+      "hold": 6,
+      "keys": [
+        {
+          "id": "press-7",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.285
+        },
+        {
+          "id": "press-8",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.49
+        },
+        {
+          "id": "press-9",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.695
+        }
+      ]
+    },
+    {
+      "chapter": "point",
+      "spoken": "Move to the point on the curve at x equals two, then click. You select one point, not two bounds.",
+      "coach": "Move to x = 2 and click the touchpad. There are no upper or lower bounds.",
+      "end": 20.257,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-10",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.2167
+        },
+        {
+          "id": "press-11",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.3533
+        },
+        {
+          "id": "press-12",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-13",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-14",
+          "label": "Click",
+          "ariaLabel": "Click the touchpad",
+          "at": 0.7633
+        }
+      ]
+    },
+    {
+      "chapter": "slope",
+      "spoken": "The graph reports the slope. Evaluate f of two separately to find the point on the curve.",
+      "coach": "The LCD gives the slope: 13. The height is a separate calculation: f(2) = 2³ + 2 = 10, so the point is (2, 10).",
+      "end": 26.951,
+      "hold": 13,
+      "keys": []
+    },
+    {
+      "chapter": "tangent",
+      "spoken": "Put the slope and the point into point-slope form.",
+      "coach": "Use slope 13 through (2, 10). Point–slope form: y − 10 = 13(x − 2). Simplify exactly to y = 13x − 16.",
+      "end": 31.501,
+      "hold": 15,
+      "keys": []
+    }
+  ]
+}

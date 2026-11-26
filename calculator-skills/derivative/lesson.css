@@ -209,3 +209,17 @@ body.ct51-focus-open.qb-calculator-page{overflow:hidden}
 .qb-calculator-lesson{--lesson-tab-inset:var(--practice-bottom-dock,0px)}
 @media(max-width:860px){.qb-calculator-lesson{--lesson-tab-inset:calc(var(--tab-h) + env(safe-area-inset-bottom,0px))}}
 .qb-calculator-lesson #stage.ct51-focused{inset:var(--top-h) 0 var(--lesson-tab-inset);height:auto;max-height:none;z-index:35}
+
+/* The Watch template frames the same rendered LCD; Try keeps its native deck. */
+.quad-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+@media(max-width:340px){.lw-header h1{font-size:1.48rem}.lw-header{margin-bottom:.45rem}}
+@media(max-width:780px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-surface>.lw-guide .lw-groups{max-height:clamp(132px,24dvh,210px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
+.lw-device #lcd{display:block;overflow:hidden}
+.lw-device #drawing{display:block;width:100%;height:100%}
+/* Reserve the same coaching space throughout narrow Watch: chapters must not zoom the calculator. */
+@media(max-width:420px){
+ .lw-stage:not(:fullscreen,.watch-fullscreen-fallback) .lw-coach{min-block-size:3lh}
+}
