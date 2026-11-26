@@ -1,0 +1,288 @@
+{
+  "id": "CT14",
+  "title": "Find all trig solutions",
+  "intro": "Find crossings, check interval endpoints, and use an extremum when the graphs touch instead of crossing.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "3f50a34711c9d53627bf5aa18ba24fac62f28595949f0174eff59cdbd2183344",
+    "scriptSha256": "76886763d9a54688cc5fb7d68940bb75907af626c9944f43165ae0624fb376af"
+  },
+  "chapters": [
+    {
+      "id": "angle-mode",
+      "title": "Set the graph’s angle mode"
+    },
+    {
+      "id": "both-curves",
+      "title": "Read both curves"
+    },
+    {
+      "id": "intersection",
+      "title": "Bracket an interior crossing"
+    },
+    {
+      "id": "endpoints",
+      "title": "Check the two endpoints"
+    },
+    {
+      "id": "touch-search",
+      "title": "Find the touching point"
+    },
+    {
+      "id": "touch-result",
+      "title": "Verify the maximum height"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "angle-mode",
+      "spoken": "The equation is in degrees. Check Graphing Angle in the Graphs settings.",
+      "coach": "Menu → 9: Settings. Graphing Angle must be Degree; confirm with OK.",
+      "end": 7.508,
+      "hold": 9.32,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "at": 0.0361
+        },
+        {
+          "id": "press-2",
+          "label": "9",
+          "at": 0.0964
+        },
+        {
+          "id": "press-3",
+          "label": "Tab",
+          "at": 0.1566
+        },
+        {
+          "id": "press-4",
+          "label": "→",
+          "at": 0.2169
+        },
+        {
+          "id": "press-5",
+          "label": "↓",
+          "at": 0.2771
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "at": 0.3373
+        },
+        {
+          "id": "press-7",
+          "label": "Tab",
+          "at": 0.3976
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "at": 0.4578
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "at": 0.5181
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "at": 0.5783
+        },
+        {
+          "id": "press-11",
+          "label": "Tab",
+          "at": 0.6386
+        },
+        {
+          "id": "press-12",
+          "label": "Tab",
+          "at": 0.6988
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "at": 0.759
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "at": 0.8193
+        },
+        {
+          "id": "press-15",
+          "label": "Tab",
+          "at": 0.8795
+        },
+        {
+          "id": "press-16",
+          "label": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "both-curves",
+      "spoken": "The blue graph is the sine of x; the red line is zero point five. The window already covers the whole interval.",
+      "coach": "Read the graph of sin x and the horizontal target 0.5. The window covers 30° ≤ x < 390°.",
+      "end": 17.994,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "intersection",
+      "spoken": "Use Intersection. Put a lower and an upper bound around the crossing near one hundred and fifty degrees.",
+      "coach": "Open Intersection. Bracket the interior crossing with 100° and 200°.",
+      "end": 25.8995,
+      "hold": 6.72,
+      "keys": [
+        {
+          "id": "press-17",
+          "label": "Menu",
+          "at": 0.0517
+        },
+        {
+          "id": "press-18",
+          "label": "6",
+          "at": 0.1379
+        },
+        {
+          "id": "press-19",
+          "label": "4",
+          "at": 0.2241
+        },
+        {
+          "id": "press-20",
+          "label": "1",
+          "at": 0.3103
+        },
+        {
+          "id": "press-21",
+          "label": "0",
+          "at": 0.3966
+        },
+        {
+          "id": "press-22",
+          "label": "0",
+          "at": 0.4828
+        },
+        {
+          "id": "press-23",
+          "label": "Enter",
+          "at": 0.569
+        },
+        {
+          "id": "press-24",
+          "label": "2",
+          "at": 0.6552
+        },
+        {
+          "id": "press-25",
+          "label": "0",
+          "at": 0.7414
+        },
+        {
+          "id": "press-26",
+          "label": "0",
+          "at": 0.8276
+        },
+        {
+          "id": "press-27",
+          "label": "Enter",
+          "at": 0.9138
+        }
+      ]
+    },
+    {
+      "chapter": "endpoints",
+      "spoken": "thirty degrees counts. three hundred and ninety degrees also makes the equation true, but the interval excludes it.",
+      "coach": "Read 150°; also include 30° from the closed endpoint. Exclude 390° from the open endpoint.",
+      "end": 35.184,
+      "hold": 1.65,
+      "keys": []
+    },
+    {
+      "chapter": "touch-search",
+      "spoken": "Now the target is one, with x strictly between zero and one hundred and eighty degrees. The curves touch; there is no sign change.",
+      "coach": "For sin x = 1 there is no crossing. Choose Analyze Graph → Maximum, select the sine curve and set a lower bound.",
+      "end": 45.427,
+      "hold": 4.64,
+      "keys": [
+        {
+          "id": "press-28",
+          "label": "Menu",
+          "at": 0.0789
+        },
+        {
+          "id": "press-29",
+          "label": "6",
+          "at": 0.2105
+        },
+        {
+          "id": "press-30",
+          "label": "3",
+          "at": 0.3421
+        },
+        {
+          "id": "press-31",
+          "label": "Centre click",
+          "at": 0.4737
+        },
+        {
+          "id": "press-32",
+          "label": "6",
+          "at": 0.6053
+        },
+        {
+          "id": "press-33",
+          "label": "0",
+          "at": 0.7368
+        },
+        {
+          "id": "press-34",
+          "label": "Enter",
+          "at": 0.8684
+        }
+      ]
+    },
+    {
+      "chapter": "touch-search",
+      "spoken": "Enter the upper bound, then compare the maximum height with the target.",
+      "coach": "Use an upper bound of 120°. Verify the maximum really has the required height.",
+      "end": 50.64,
+      "hold": 3.08,
+      "keys": [
+        {
+          "id": "press-35",
+          "label": "1",
+          "at": 0.1304
+        },
+        {
+          "id": "press-36",
+          "label": "2",
+          "at": 0.3478
+        },
+        {
+          "id": "press-37",
+          "label": "0",
+          "at": 0.5652
+        },
+        {
+          "id": "press-38",
+          "label": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "touch-result",
+      "spoken": "The maximum is at ninety degrees, with a height of one. It touches the target, so count ninety degrees once.",
+      "coach": "The maximum is (90°, 1). Count 90° only once.",
+      "end": 59.48,
+      "hold": 1.65,
+      "keys": []
+    }
+  ]
+}

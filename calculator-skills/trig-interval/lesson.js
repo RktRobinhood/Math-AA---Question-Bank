@@ -1,7 +1,6 @@
 "use strict";
 (function(){
-function lessonEnd(){return (window.visualViewport?.height||innerHeight)-(document.querySelector("body > .tabbar")?.offsetHeight||0);}
-const $=id=>document.getElementById(id),M=CT14Math,T=CT14Tape,stage=$("stage"),lcd=$("lcd"),canvas=$("drawing"),ctx=canvas.getContext("2d"),seek=$("seek"),play=$("play");
+const $=id=>document.getElementById(id),M=CT14Math,T=CT14Tape,stage=$("stage"),lcd=$("lcd"),canvas=$("drawing"),ctx=canvas.getContext("2d");
 const RAD="rad",DEG="deg",P=M.make("sin",".5",DEG,"30","390",true,false),Q=M.make("sin","1",DEG,"0","180",false,false);
 const preset=M.make("cos","-1",RAD,"0","3pi",true,true),params=new URLSearchParams(location.search);
 let exercise=preset,badLink=false;const names=["fn","level","unit","left","right","lc","rc"],hasLink=names.some(k=>params.has(k));
@@ -11,8 +10,9 @@ if(hasLink)try{
  exercise=M.make(params.get("fn"),params.get("level"),params.get("unit"),params.get("left"),params.get("right"),flag("lc"),flag("rc"));
 }catch{badLink=true;}
 const create=(problem,mode=RAD,plot=false)=>({problem,mode,pendingMode:mode,stage:plot?"graphs":"entry",plot,field:0,low:null,high:null,typed:"",which:"intersection",mark:null,msg:"",cursor:null,selected:false,fork:false});
-let state=create(exercise),tab="watch",t=0,raf=0,stamp="",started=false,running=false,origin=0,focused=false,prevFocus=false,touched=false,forked=false;
-const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:k=>key(k)});
+let state=create(exercise),tab="watch",stamp="",touched=false,returnToWatch,light=0;
+const handheld=$("handheld-host");
+const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:k=>{key(k);stage.focus({preventScroll:true});}});
 const menu=["1: Actions","2: View","3: Graph Entry/Edit","4: Window/Zoom","5: Trace","6: Analyze Graph","7: Table","8: Geometry","9: Settings…"];
 const analysis=["1: Zero","2: Minimum","3: Maximum","4: Intersection","5: dy/dx","6: Integral"];
 const fields=["Display Digits","Graphing Angle","Geometry Angle","Grid","Hide plot labels","Show axis end values","Show function tool tips","Find points of interest","Force integer triangle angles","Label points","OK","Cancel"];
@@ -133,37 +133,13 @@ function draw(s){
  const screen=[(s.mode==="gra"?"GRAD":plotUnit(s).toUpperCase()),s.plot?s.problem.fn+"(x), horizontal target "+fmt(s.problem.c):"Empty Graphs",s.stage==="settings"?fields[s.field]+" "+modeName(s.pendingMode):"",s.stage==="angle"?"Graphing Angle list: "+modeName(s.pendingMode):"",hints[s.stage],Number.isFinite(s.low)?"Lower bound "+fmt(s.low):"",s.typed?"Typed "+s.typed:"",markLabel(s),s.msg];
  $("lcd-text").textContent=screen.filter(Boolean).join(". ");
 }
-const snapshot=sec=>{
- const second=sec>=30;
- const s=create(second?Q:P,second?DEG:RAD,second);
- let lit="";
- for(const e of T.keys){
-  if(e.t>sec)break;
-  if(second!==(e.t>=30))continue;
-  if(!second&&e.t>=10&&!s.plot){s.plot=true;s.stage="graphs";}
-  apply(s,e.key);lit=sec<e.t+.245?e.key:"";
- }
- if(!second&&sec>=10&&!s.plot){s.plot=true;s.stage="graphs";}
- return{s,lit};
-};
 function htmlHot(x,y,w,h,label,fn){
  const b=document.createElement("button");b.type="button";b.setAttribute("aria-label",label);
  Object.assign(b.style,{left:x/W*100+"%",top:y/H*100+"%",width:w/W*100+"%",height:h/H*100+"%"});
  b.addEventListener("click",fn);$("hotspots").append(b);
 }
-function watchRender(){
- if(tab!=="watch")return;
- const {s,lit}=snapshot(t),i=T.captions.findLastIndex(row=>row[0]<=t),phase=String(i),key=[i,t>=37.3,s.stage,s.field,s.mode,s.low,s.high,s.typed,s.pendingMode,s.mark?.x].join("|");
- shell.setKeys(lit?[lit]:[]);seek.value=t;$("clock").textContent="0:"+String(Math.floor(t)).padStart(2,"0")+" / 0:41";
- $("stage-play").hidden=started||t>0;
- $("take-over").textContent=t>=T.duration-.01?"Open Try":"Take over";
- if(stamp===key)return;stamp=key;draw(s);
- const row=T.captions[i];$("caption").textContent=t>=37.3?"The maximum is (90°, 1). It touches the target, so count 90° once.":i===5?"Enter the upper bound, then compare the maximum height with the target.":row[2];
- const eq=$("watch-equation");eq.textContent=t>=37.3?"Touch: 90° only · no sign change":t>=30?"New example: sin x = 1 · 0° < x < 180°":t>=23?"Include 30°, 150° · exclude 390°":t>=19.77?"Interior intersection: 150° · endpoints still to check":"sin x = 0.5 · 30° ≤ x < 390°";
- [...$("steps").children].forEach((b,j)=>b.firstElementChild.setAttribute("aria-current",String(j===+phase)));fit();
-}
 function syncFields(){$("function").value=state.problem.fn;$("level").value=String(state.problem.c);$("bound").value=state.typed;}
-function eligible(){return !state.fork&&same(state.problem,exercise);}
+function eligible(){return same(state.problem,exercise);}
 function tryRender(){
  if(tab!=="try")return;
  draw(state);$("hotspots").replaceChildren();
@@ -186,12 +162,12 @@ function tryRender(){
  }
  if(state.stage==="angle")angleModes.forEach((n,i)=>htmlHot(166,73+15*i,112,15,n,()=>{state.pendingMode=["auto","rad","deg","gra"][i];key("enter");}));
 }
-function key(k){if(tab!=="try")return;touched=true;apply(state,k);$("bound").value=state.typed;tryRender();}
+function key(k){if(tab!=="try")return;clearTimeout(light);shell.setKeys([k]);light=setTimeout(()=>shell.setKeys([]),175);touched=true;apply(state,k);$("bound").value=state.typed;tryRender();}
 function reset(){state=create(exercise);touched=true;syncFields();$("answer").value="";$("feedback").textContent="";tryRender();}
 $("reset-keypad").onclick=()=>{reset();stage.focus({preventScroll:true});};
 $("expression-form").onsubmit=e=>{
  e.preventDefault();touched=true;
- try{const q=state.problem,model=M.make($("function").value,$("level").value,q.unit,q.l,q.r,q.lc,q.rc);const old=state;state=create(model,old.mode,true);state.fork=old.fork;syncFields();}
+ try{const q=state.problem,model=M.make($("function").value,$("level").value,q.unit,q.l,q.r,q.lc,q.rc);const old=state;state=create(model,old.mode,true);syncFields();}
  catch(err){state.msg=err.message;}tryRender();
 };
 $("bound-form").onsubmit=e=>{e.preventDefault();state.typed=$("bound").value;key("enter");};
@@ -211,63 +187,37 @@ $("answer-form").onsubmit=e=>{
  out.textContent=ok?"Correct. Those are all the distinct solutions in the stated interval.":"Check the angle units, every crossing or touch, and which endpoints count. List each angle once.";
 };
 $("answer").oninput=()=>{$("feedback").textContent="";touched=true;};
-function fit(){
- if(tab!=="watch")return;
- const h=lessonEnd(),top=Math.max(0,stage.getBoundingClientRect().top);
- const used=$("watch-message").offsetHeight+$("watch-player").offsetHeight;
- stage.style.setProperty("--watch-fit-width",Math.max(80,Math.min(focused?338:304,Math.floor((h-top-used-24)*558/1168)))+"px");
+function renderWatch(device,{beat,point,crossed,key:e}){
+ if(handheld.parentElement!==device)device.append(handheld);
+ const n=crossed.length,k=n&&T.keys[n-1].key;
+ const lit=n&&!point.speaking&&e?.beat===beat&&(point.fraction-e.at)*(point.span.end-point.span.voiceEnd)<.62;
+ shell.setKeys(lit?[k]:[]);
+ const tag=beat+"-"+n;if(stamp===tag)return;stamp=tag;
+ const second=beat>=4,s=create(second?Q:P,second?DEG:RAD,second);
+ for(const action of T.keys.slice(0,n)){
+  if(second!==(action.t>=30))continue;
+  if(!second&&action.t>=10&&!s.plot){s.plot=true;s.stage="graphs";}
+  apply(s,action.key);
+ }
+ if(!second&&beat>=1&&!s.plot){s.plot=true;s.stage="graphs";}
+ draw(s);
 }
-function focus(f){
- focused=Boolean(f);stage.classList.toggle("ct14-focused",focused);document.body.classList.toggle("ct14-focus-open",focused);
- const b=$("focus-view");b.setAttribute("aria-pressed",String(focused));b.setAttribute("aria-label",focused?"Exit focused view":"Focused view");b.textContent=focused?"Exit":"⛶";fit();
+function enterTry(device,actions){
+ tab="try";returnToWatch=actions.returnToWatch;device.prepend(stage);$("try-deck").prepend(handheld);stage.hidden=false;
+ shell.setKeys([]);shell.setInteractive(true);tryRender();stage.focus({preventScroll:true});
 }
-function showPlay(){const label=running?"Pause":t>=T.duration-.01?"Replay":"Play";play.textContent=label;play.setAttribute("aria-label",label);play.dataset.playing=String(running);}
-function seekAt(v){t=Math.max(0,Math.min(T.duration,Number(v)||0));origin=performance.now()-t*1000;watchRender();showPlay();}
-function stop(sample=true){if(sample&&running)t=Math.min(T.duration,(performance.now()-origin)/1000);running=false;cancelAnimationFrame(raf);watchRender();showPlay();}
-function loop(ts){if(!running)return;t=Math.max(0,Math.min(T.duration,(ts-origin)/1000));if(t>=T.duration){stop(false);return;}watchRender();raf=requestAnimationFrame(loop);}
-function start(){
- if(tab!=="watch")return;
- if(!started){const actual=shell.body.getBoundingClientRect();if(!focused&&actual.width<190)focus(true);}
- if(document.activeElement===$("stage-play"))play.focus({preventScroll:true});started=true;$("stage-play").hidden=true;
- if(t>=T.duration-.01)seekAt(0);running=true;origin=performance.now()-t*1000;showPlay();raf=requestAnimationFrame(loop);
+function exitTry(){
+ tab="watch";stage.hidden=true;stamp="";clearTimeout(light);$("hotspots").replaceChildren();lcd.classList.remove("pick");shell.setKeys([]);shell.setInteractive(false);
 }
-function toggle(){if(running)stop();else start();}
-play.onclick=toggle;$("stage-play").onclick=toggle;seek.oninput=()=>seekAt(seek.value);
-$("back").onclick=()=>seekAt(t-10);$("next").onclick=()=>seekAt(t+10);$("replay").onclick=()=>{stop();seekAt(0);start();};
-$("focus-view").onclick=()=>focus(!focused);
-const tabs=[$("watch-tab"),$("try-tab")];
-function mode(next,steal=false){
- if(tab==="watch"&&next==="try"){stop();prevFocus=focused;if(focused)focus(false);}
- if(steal&&!hasLink&&!touched&&!forked){state=snapshot(t).s;state.fork=true;forked=true;}
- tab=next;stage.dataset.mode=next;stamp="";
- const w=next==="watch";
- tabs.forEach((n,i)=>{const yes=w===(i===0);n.setAttribute("aria-selected",String(yes));n.tabIndex=yes?0:-1;});
- for(const i of ["watch","watch-player","watch-message","watch-side"])$(i).hidden=!w;
- for(const i of ["try","try-player","try-side"])$(i).hidden=w;
- $("hotspots").replaceChildren();lcd.classList.remove("pick");shell.setInteractive(!w);shell.setKeys([]);
- if(w){window.scrollTo(0,0);watchRender();if(prevFocus||shell.body.getBoundingClientRect().width<156)focus(true);fit();}
- else{$("stage-play").hidden=true;syncFields();tryRender();}
-}
-tabs.forEach((b,i)=>{
- b.onclick=()=>{mode(i?"try":"watch");if(i)stage.focus({preventScroll:true});};
- b.onkeydown=e=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;e.preventDefault();const j=e.key==="Home"?0:e.key==="End"?1:1-i;mode(j?"try":"watch");tabs[j].focus();};
-});
-$("return-watch").onclick=()=>{mode("watch");play.focus({preventScroll:true});};
-$("take-over").onclick=()=>{const done=t>=T.duration-.01;if(done&&state.fork)reset();mode("try",!done);stage.focus({preventScroll:true});};
+$("return-watch").onclick=()=>returnToWatch?.();
 document.addEventListener("keydown",e=>{if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
- if(e.key==="Escape"&&focused){e.preventDefault();focus(false);$("focus-view").focus();return;}
  if(e.metaKey||e.ctrlKey||e.altKey||e.target.closest("input,textarea,select,a,summary,[contenteditable]"))return;
- if(tab==="watch"){if(!e.target.closest("button")&&["k"," "].includes(e.key)){e.preventDefault();toggle();}return;}
+ if(tab!=="try"||e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
  if(e.target!==document.body&&!stage.contains(e.target)||e.target.closest("button")&&["Enter"," "].includes(e.key))return;
  const keys={m:"menu",M:"menu",Enter:"enter",Escape:"esc",Tab:"tab",ArrowLeft:"left",ArrowRight:"right",ArrowUp:"up",ArrowDown:"down",Backspace:"del",Delete:"del",".":"dot","-":"neg"};
  if(e.key==="Tab"&&!["angle","settings"].includes(state.stage))return;
  const k=keys[e.key]||(/^\d$/.test(e.key)?e.key:"");if(k){e.preventDefault();key(k);}
 });
-T.captions.forEach(([at,name],i)=>{
- const li=document.createElement("li"),b=document.createElement("button"),n=document.createElement("span");n.textContent="0"+(i+1);
- b.type="button";b.append(n,document.createTextNode(name));b.onclick=()=>seekAt(at);li.append(b);$("steps").append(li);
-});
-window.addEventListener("resize",fit);window.visualViewport?.addEventListener("resize",fit);
-mode(params.get("mode")==="try"?"try":"watch");
-window.QBRecordedWatch?.bind(stop);
+syncFields();
+window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"||hasLink?"try":"watch",renderWatch,enterTry,exitTry});
 })();
