@@ -1,14 +1,13 @@
 "use strict";
 (function(){
 const $=id=>document.getElementById(id),M=CT07,T=CT07Tape;
-const stage=$("stage"),seek=$("seek"),play=$("play"),overlay=$("start-overlay"),typed=[$("eq1"),$("eq2")], answers=[$("answer-x"),$("answer-y")];
+const stage=$("stage"),play=$("play"),typed=[$("eq1"),$("eq2")], answers=[$("answer-x"),$("answer-y")];
 const params=new URLSearchParams(location.search),original=["3x+y=14","x-y=2"].map(M.equation);
 let task=original,linked=false,invalid=false,goal;
 try{const p=M.link(params);if(p){M.solve(...p);task=p;linked=true;}}catch{invalid=true;}
 goal=M.solve(...task);
-const fmt=x=>Math.floor(x/60)+":"+String(Math.floor(x)%60).padStart(2,"0");
 const node=(tag,cls,value)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=value;return e;};
-let mode="watch",state=M.base(),worked=false,forked=false,focusOn=false,considered=false,clock=0,origin=0,frame=0,playing=false,started=false,stamp="",typedNote="";
+let mode="watch",state=M.base(),worked=false,forked=false,clock=0,stamp="",typedNote="";
 const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),label:"TI-Nspire CX II-T Calculator",interactive:false,onKey:press});
 const tabs=[$("watch-tab"),$("try-tab")];
 $("question").textContent=(goal.kind==="unique"?"Solve for x and y: ":"Use the calculator to classify this system: ")+task.map(x=>M.disp(x.raw)).join(" and ")+".";
@@ -94,23 +93,38 @@ function lcd(s,isTry=false){
  $("lcd-text").textContent=lines.join(". ")+".";
 }
 function snapshot(t){
- let s=M.base(),highlight="";
- for(const [at,key] of T.keys){if(at>t)break;s=M.key(s,key);highlight=t<at+.34?key:"";}
- return {s,highlight};
+ let s=M.base();
+ for(const [at,key] of T.keys){if(at>t)break;s=M.key(s,key);}
+ return {s};
 }
-T.chapters.forEach(([at,title],i)=>{
- const li=node("li",""),b=node("button",""),serial=node("span","","0"+(i+1));
- b.append(serial,document.createTextNode(title));b.type="button";b.addEventListener("click",()=>go(at));li.append(b);$("chapters").append(li);
+const title=["Open the linear solver","Keep two variables","Enter the first equation","Enter the second equation","Read the ordered pair","Check both equations"];
+const tips=["Calculator → Menu → 3: Algebra → 2: Solve System of Linear Equations.","Use two equations in x, y order. Enter confirms the setup.","Type 2x + y = 11. Tab selects the next line.","Type y = x − 1. Enter evaluates.","The first value is x; the second is y.","Substitute the values into both original equations."];
+const pretty={menu:"Menu",enter:"Enter",tab:"Tab",eq:"=",plus:"+",minus:"−"};
+const showKey=k=>pretty[k]||k;
+T.chapters.forEach(([at,name],i)=>{
+ const li=node("li",""),b=node("button","",""),serial=node("span","","0"+(i+1));
+ b.append(serial,document.createTextNode(name));b.type="button";b.addEventListener("click",()=>watch.goBeat(i));li.append(b);$("chapters").append(li);
 });
 const canFork=()=>clock>0&&clock<T.duration-.025;
-function paintWatch(){
+function paintWatch(f){
  if(mode!=="watch")return;
- const {s,highlight}=snapshot(clock),c=T.captions.findLastIndex(x=>x[0]<=clock),j=T.chapters.findLastIndex(x=>x[0]<=clock);
- seek.value=clock;seek.setAttribute("aria-valuetext",fmt(clock)+" of "+fmt(T.duration));$("clock").textContent=fmt(clock)+" / "+fmt(T.duration);
- shell.setKeys(highlight?[highlight]:[]);overlay.hidden=started||clock>0;$("take").textContent=canFork()?"Take over":"Open Try";
- const next=JSON.stringify([c,j,s],(k,v)=>typeof v==="bigint"?String(v):v);if(next===stamp)return;stamp=next;
- lcd(s);$("caption").textContent=T.captions[c][1];$("takeaway").textContent=T.captions[c][2];
- [...$("chapters").children].forEach((e,i)=>e.firstElementChild.setAttribute("aria-current",String(i===j)));
+ const {i,words,key,led,keys,active}=f;clock=f.clock;
+ const s=snapshot(clock).s;
+ if($("caption").textContent!==words)$("caption").textContent=words;
+ $("active-key").textContent=key?showKey(key):"—";
+ shell.setKeys(led?[led]:[]);
+ $("take").textContent=canFork()?"Continue this example in Try":"Open Try";
+ const next=JSON.stringify([i,active,s],(k,v)=>typeof v==="bigint"?String(v):v);if(next===stamp)return;stamp=next;
+ lcd(s);
+ $("beat-count").textContent="Step "+(i+1)+" of "+title.length;
+ $("beat-title").textContent=title[i];$("takeaway").toggleAttribute("data-result",i>=4);$("takeaway").textContent=i===4?T.captions[4][2]:i===5?T.captions[5][2]:tips[i];
+ $("key-steps").replaceChildren(...keys.map(({key},j)=>{
+  const li=node("li","",showKey(key));
+  li.dataset.progress=j===active?"current":j<active?"done":"next";
+  if(j===active)li.setAttribute("aria-current","step");
+  return li;
+ }));
+ [...$("chapters").children].forEach((e,j)=>e.firstElementChild.setAttribute("aria-current",String(j===Math.min(i,4))));
 }
 function paintTry(){
  if(mode!=="try")return;
@@ -127,52 +141,20 @@ function press(key){
  if(mode!=="try")return;
  worked=true;typedNote="";state=M.key(state,key);paintTry();
 }
-function label(){const t=playing?"Pause":clock>=T.duration-.015?"Replay":"Play";play.textContent=t;play.setAttribute("aria-label",t);}
-function go(t){clock=Math.min(T.duration,Math.max(0,Number(t)||0));origin=performance.now()-clock*1000;paintWatch();label();}
-function pause(){playing=false;cancelAnimationFrame(frame);paintWatch();label();}
-function tick(t){if(!playing||mode!=="watch")return;clock=Math.min(T.duration,Math.max(0,(t-origin)/1000));paintWatch();if(clock>=T.duration){pause();return;}frame=requestAnimationFrame(tick);}
-function navigationInset(){return document.querySelector(".tabbar")?.offsetHeight||0;}
-function size(){
- if(mode!=="watch")return;
- const avail=(window.visualViewport?.height||innerHeight)-(Math.max(0,stage.getBoundingClientRect().top)+navigationInset());
- const fixed=$("watch-message").offsetHeight+$("watch-player").offsetHeight+20;
- stage.style.setProperty("--watch-fit",Math.max(96,Math.min(focusOn?350:297,Math.floor((avail-fixed)*558/1168)))+"px");
-}
-const observer=new ResizeObserver(size);
-for(const x of [$("watch-message"),$("watch-player"),document.querySelector(".head")])observer.observe(x);
-window.addEventListener("resize",size);window.visualViewport?.addEventListener("resize",size);
-function focus(v){
- focusOn=v;stage.classList.toggle("focus-open",v);document.body.classList.toggle("ct03-focus",v);
- const f=$("focus");f.textContent=v?"Exit":"Focus";f.setAttribute("aria-pressed",String(v));f.setAttribute("aria-label",v?"Exit focused view":"Focused view");if(v)stage.scrollTop=0;size();
-}
-function start(){
- if(mode!=="watch")return;
- if(!considered){considered=true;const h=window.visualViewport?.height||innerHeight;if($("watch-player").getBoundingClientRect().bottom>h-3||shell.body.getBoundingClientRect().width<185)focus(true);}
- if(document.activeElement===overlay)play.focus({preventScroll:true});
- started=true;if(clock>=T.duration-.015)go(0);
- playing=true;origin=performance.now()-clock*1000;paintWatch();label();frame=requestAnimationFrame(tick);
-}
-function toggle(){if(playing)pause();else start();}
-play.addEventListener("click",toggle);overlay.addEventListener("click",toggle);
-$("back").addEventListener("click",()=>go(clock-10));$("forward").addEventListener("click",()=>go(clock+10));
-$("replay").addEventListener("click",()=>{pause();go(0);start();});
-seek.addEventListener("input",()=>go(seek.value));$("focus").addEventListener("click",()=>{considered=true;focus(!focusOn);});
+const watch=CT07Watch.mount({tape:T,stage,render:paintWatch,inWatch:()=>mode==="watch"});
 function switchTo(next,take=false){
  if(next==="try"&&mode==="watch"){
-  pause();if(focusOn)focus(false);
+  watch.leave();
   if(take&&!canFork()&&clock>0&&state.fromWatch){
    state=M.base();worked=true;typedNote="";sync(task);answers.forEach(e=>e.value="");clearFeedback();
   }else if(take&&canFork()&&!linked&&!invalid&&!worked&&!forked){state={...snapshot(clock).s,fromWatch:true};forked=true;}
  }
- mode=next;stage.dataset.mode=mode;stamp="";const watch=mode==="watch";
- ["watch-message","watch-player","watch-panel"].forEach(id=>$(id).hidden=!watch);
- ["try-header","try-panel","exercise"].forEach(id=>$(id).hidden=watch);
- tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
- shell.setKeys([]);shell.setInteractive(!watch);
- if(watch){
-  paintWatch();size();
-  if(!focusOn&&(shell.body.getBoundingClientRect().width<156||$("watch-player").getBoundingClientRect().bottom>innerHeight+1))focus(true);
- }else{overlay.hidden=true;paintTry();}
+ mode=next;stage.dataset.mode=mode;stamp="";const isWatch=mode==="watch";
+ ["watch-message","watch-player","watch-panel","watch-extra"].forEach(id=>$(id).hidden=!isWatch);
+ ["try-header","try-panel","exercise"].forEach(id=>$(id).hidden=isWatch);
+ tabs.forEach((b,i)=>{const yes=isWatch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
+ shell.setKeys([]);shell.setInteractive(!isWatch);
+ if(isWatch)watch.draw();else{$("start-overlay").hidden=true;paintTry();}
 }
 tabs.forEach((b,i)=>{
  b.addEventListener("click",()=>{switchTo(i?"try":"watch");if(i)stage.focus({preventScroll:true});});
@@ -194,11 +176,7 @@ $("typed").addEventListener("submit",e=>{
 });
 document.addEventListener("keydown",e=>{
  if(e.target!==document.body&&!e.target.closest?.(".qb-calculator-lesson"))return;
- if(e.key==="Escape"&&focusOn){e.preventDefault();considered=true;focus(false);$("focus").focus();return;}
  const el=e.target;if(e.altKey||e.metaKey||e.ctrlKey||el.closest("input,textarea,select,a,summary,[contenteditable]"))return;
- if(mode==="watch"&&!el.closest("button")&&!e.repeat){
-  const k=e.key.toLowerCase();if(k==="k"||k===" "){e.preventDefault();toggle();}else if(k==="j"||k==="l"){e.preventDefault();go(clock+(k==="j"?-10:10));}return;
- }
  if(mode!=="try"||(!stage.contains(el)&&el!==document.body)||(el.closest("button")&&["Enter"," "].includes(e.key)))return;
  if(e.key==="Tab"&&el===stage){
   if((state.page==="entry"||state.page==="setup")&&(e.shiftKey?state.field>0:state.field<(state.page==="entry"?1:3))){
@@ -218,5 +196,5 @@ $("answer-form").addEventListener("submit",e=>{
  f.textContent=ok?"Correct. That pair satisfies both equations.":!x||!y?"Enter exact numbers or fractions for both x and y.":swapped?"The two values are swapped. Check the variable list before assigning x and y.":"Check your pair in both equations. Keep exact fractions if needed.";
 });
 sync(task);switchTo(params.get("mode")==="try"||linked&&params.get("mode")!=="watch"?"try":"watch");
-window.QBRecordedWatch?.bind(pause);
+window.QBRecordedWatch?.bind(watch.pause,null,watch.attach);
 })();

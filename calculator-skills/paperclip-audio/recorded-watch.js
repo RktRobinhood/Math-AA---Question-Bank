@@ -59,7 +59,7 @@
  if(!/^(?:CT\d{2}(?:-max)?|SUP-HIST-01)$/.test(id)||!sha.test(cueHash)||!sha.test(textHash))return;
  const cueURL=new URL("lessons/"+id+".cues.json",script.src);
  let bound=false;
- root.QBRecordedWatch=Object.freeze({bind(stop,onLayout){
+ root.QBRecordedWatch=Object.freeze({bind(stop,onLayout,renderer){
   if(bound||typeof stop!=="function")return;
   bound=true;
   const $=s=>document.getElementById(s), watchTab=$("watch-tab"), stage=$("stage"), slider=$("seek"), old=$("watch-player")||$("player"), oldCaption=$("caption");
@@ -71,6 +71,8 @@
    requested=true;
    load().catch(()=>{}); // Absent, invalid and offline all retain caption mode.
   }
+  const optIn=typeof renderer==="function";
+  const hexDigest=async bytes=>Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",bytes)),v=>v.toString(16).padStart(2,"0")).join("");
   async function load(){
    const packageURL=new URL("narration.sync.json",document.baseURI);
    const response=await fetch(packageURL,{cache:"no-cache"});
@@ -80,14 +82,46 @@
    const cueResponse=await fetch(cueURL);
    if(!cueResponse.ok)return;
    const bytes=await cueResponse.arrayBuffer();
-   const digest=Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",bytes)),v=>v.toString(16).padStart(2,"0")).join("");
-   if(digest!==cueHash)return;
+   if(await hexDigest(bytes)!==cueHash)return;
    const cue=JSON.parse(new TextDecoder().decode(bytes));
-   const deck=decode(raw,cue,{id,transcript:textHash,cue:cueHash,duration:Math.round(Number(slider.max)*1000)});
+   const deck=decode(raw,cue,{id,transcript:textHash,cue:cueHash,duration:Math.round(Number(optIn?slider.dataset.editorialSeconds:slider.max)*1000)});
    if(!deck)return;
    const audio=document.createElement("audio");
    audio.preload="metadata";audio.hidden=true;audio.dataset.recordedWatch=id;
-   audio.src=new URL(deck.audio,packageURL).href;stage.append(audio);
+   const mediaURL=new URL(deck.audio,packageURL);
+   if(optIn){
+    // Verified bytes, not a second request to a mutable media URL. Only the
+    // opted-in renderer buffers the file; legacy range streaming is unchanged.
+    const response=await fetch(mediaURL,{cache:"no-cache"});
+    if(!response.ok)return;
+    const recording=await response.arrayBuffer();
+    if(await hexDigest(recording)!==raw.audioSha256)return;
+    const type={mp3:"audio/mpeg",ogg:"audio/ogg",m4a:"audio/mp4",wav:"audio/wav"}[deck.audio.split(".").at(-1)];
+    const url=URL.createObjectURL(new Blob([recording],{type}));
+    let disposed=false;
+    const dispose=()=>{
+     if(disposed)return;
+     disposed=true;
+     root.removeEventListener("pagehide",exit);
+     audio.pause();
+     audio.removeAttribute("src");
+     audio.load();
+     audio.remove();
+     URL.revokeObjectURL(url);
+    };
+    const exit=e=>{if(!e.persisted)dispose();};
+    root.addEventListener("pagehide",exit);
+    audio.addEventListener("error",dispose,{once:true});
+    audio.addEventListener("loadedmetadata",()=>{
+     if(disposed)return;
+     if(!Number.isFinite(audio.duration)||Math.abs(audio.duration*1000-deck.durationMs)>120){dispose();return;}
+     try{renderer(deck,audio,dispose);}catch{dispose();}
+    },{once:true});
+    audio.src=url;
+    stage.append(audio);
+    return;
+   }
+   audio.src=mediaURL.href;stage.append(audio);
    audio.addEventListener("error",()=>audio.remove(),{once:true});
    audio.addEventListener("loadedmetadata",()=>{
     if(!Number.isFinite(audio.duration)||Math.abs(audio.duration*1000-deck.durationMs)>120){audio.remove();return;}
