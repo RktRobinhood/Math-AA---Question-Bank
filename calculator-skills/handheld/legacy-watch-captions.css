@@ -27,3 +27,11 @@
 .legacy-watch-caption-host>div.legacy-watch-caption-display>p{width:fit-content}
 .legacy-watch-caption-host>.legacy-watch-caption-display[hidden],
 .qb-calculator-lesson .recorded-watch>.recorded-caption:is([hidden],:empty){display:none!important}
+
+/* Media diagnostics remain in the accessibility tree, not the transport. */
+.legacy-watch-status,.qb-calculator-lesson .recorded-watch>.recorded-status{
+ position:absolute!important;width:1px!important;min-width:0!important;
+ height:1px!important;min-height:0!important;padding:0!important;
+ margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);
+ white-space:nowrap!important;border:0!important
+}

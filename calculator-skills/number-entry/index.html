@@ -12,7 +12,7 @@
 <script src="../../assets/js/generate.js" defer></script>
 <link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="../handheld/watch-chapters.css?v=1"><link rel="stylesheet" href="player.css?v=ct01-template-2"> <link rel="stylesheet" href="../handheld/watch-presentation.css?v=2">
 <script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js?v=ct01-exact-1" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="../handheld/hold-timeline.js?v=ct01-pauses-1" defer></script><script src="../handheld/watch-chapters.js?v=1" defer></script><script src="lesson.js?v=ct01-template-1&amp;caption-overlay=1" defer></script>
-<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=1">
+<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
 <link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
 </head><body class="calculator-bank-lesson" data-base="../../" data-nav="calculator-skills"><main>
 <header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT01</span></p><h1>Enter and round a calculation</h1><p class="subtitle">Scientific notation and significant figures on a TI-Nspire CX II-T.</p></div>
@@ -43,10 +43,10 @@
 </div>
 <label class="timeline"><span class="sr-only">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="95.974" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 1:36</span>
 <button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
-<label class="ct01-rate"><span class="sr-only">Teaching pauses</span><select id="play-rate" aria-label="Teaching pauses" title="Change the time between steps, not the narration speed"><option value="0.75">Pauses −</option><option value="1" selected>Pauses</option><option value="1.3">Pauses +</option></select></label>
+<label class="ct01-rate"><span class="sr-only">Teaching pauses</span><select id="play-rate" aria-label="Teaching pauses" title="Change the time between steps, not the narration speed"><option value="0.75">Shorter</option><option value="1" selected>Normal</option><option value="1.3">Longer</option></select></label>
 <button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4z"/><path class="sound-waves" d="M15 8c2 2 2 6 0 8m3-11c3.5 3.5 3.5 10.5 0 14"/><path class="sound-off" d="m16 10 5 5m0-5-5 5" hidden/></svg></button>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
-<p id="media-status" role="status" hidden></p>
+<p id="media-status" role="status" hidden class="legacy-watch-status"></p>
 <audio id="narration" preload="metadata" src="narration.mp3"></audio>
 </div>
 </section>
