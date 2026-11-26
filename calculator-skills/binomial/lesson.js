@@ -1,15 +1,8 @@
 "use strict";
 (function(){
  const $=id=>document.getElementById(id);
- const captions=[
-  "Before opening the calculator, identify the first and last whole-number counts that belong in the event.",
-  "On a Calculator page, open Probability, then Distributions, and choose Binomial C D F.",
-  "Enter the trial count and success probability, followed by the lower and upper success counts. The calculator includes both bounds.",
-  "For an at-least question, the upper bound is the total number of trials. For an at-most question, the lower bound is zero.",
-  "A strict inequality leaves its boundary out. Move to the next included whole number before you enter the bounds."
- ];
- const stages=["Interpret the event","Find Binomial Cdf","Enter the four inputs","Read the result","Check the boundary"];
- const starts=[0,6.868,14.647,23.361,31.851], tape=window.HandheldKeyCues.CT38;
+ const plan=window.CT38WatchPlan, tape=plan.tape;
+ const stages=["Interpret the event","Find Binomial Cdf","Enter the four inputs","Read and compare bounds","Check the strict boundary"];
  const watchExample={n:12,p:.25,lower:5,upper:12}, practiceExample={n:9,p:.35,event:"lt",k:3,upper:5};
  const menuA=["1: Actions","2: Number","3: Algebra","4: Calculus","5: Probability","6: Statistics","7: Matrix & Vector","8: Finance"];
  const menuB=["1: Factorial","2: Permutations","3: Combinations","4: Random","5: Distributions"];
@@ -22,11 +15,18 @@
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:$("lcd"),interactive:false,onKey:key=>press(key)});
  const framingKey="qb-calculator-watch-frame", workspace=$("workspace"), cc=$("cc"), overlay=$("play-feedback"), rate=$("play-rate");
  const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen"}catch{return "screen"}};
- let mode="watch",duration=39.079,time=0,raf=0,playing=false,pending=false,useAudio=audio.hasAttribute("src"),epoch=0,sig="",chapter=0,origin=0;
- let speed=Number(rate.value),framing=readFrame(),captionsOn=false,initiated=false,awaitingSeek=false;
- audio.playbackRate=speed;audio.preservesPitch=true;
+ let layout=plan.make(1),duration=layout.duration;
+ let mode="watch",time=0,raf=0,playing=false,pending=false,useAudio=!!audio.getAttribute("src"),epoch=0,sig="",chapter=0,origin=0,phase="",lastTrail=-2;
+ let framing=readFrame(),captionsOn=false,initiated=false;
+ audio.playbackRate=1;audio.preservesPitch=true;
  const player=CalculatorWatchPlayer.mount({player:stage,surface:workspace,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
- const keyNames={menu:"Menu",down:"↓",enter:"Enter",tab:"Tab",decimal:".",e:"E"};
+ const trail=$("key-steps"), chips=tape.map((event,i)=>{
+  const li=document.createElement("li"), key=document.createElement("kbd");
+  if([4,7,12,14,17].includes(i))li.className="group-start";
+  key.textContent=plan.name(event.key);li.hidden=true;li.append(key);trail.append(li);return li;
+ });
+ for(const id of ["transcript","transcript-mobile"])$(id).textContent=plan.words.join(" ");
+ seek.max=String(duration);
  // The original key tape is acted once. Later narration compares settings, not keystrokes.
  const boundsCards=[
   {label:"At least 5", range:"5 ≤ X ≤ 12 · inclusive"},
@@ -55,36 +55,48 @@
  const lcdEntry=x=>'<div class="lcd-entry"><p>'+escape(x||"\u00a0")+'</p></div>';
  const activate=(b,v)=>{b.setAttribute("aria-current",String(v));};
 
- function watchSnapshot(t){
-  const ms=t*1000,values=["","","",""];let state="idle",field=0,key=null,lastKey=null;
-  for(const e of tape){
-   if(e.timeMs>ms)break;
+ function watchSnapshot(index){
+  const values=["","","",""];let state="idle",field=0;
+  for(let i=0;i<=index;i++){
+   const e=tape[i];
    if(e.state)state=e.state;
    if(e.field!==undefined)field=e.field;
    if(e.fieldAfter!==undefined)values[e.field]=e.fieldAfter;
-   lastKey=e.key;key=ms<e.timeMs+Math.max(170,e.durationMs)?e.key:null;
   }
-  return {state,field,key,lastKey,values};
+  return {state,field,values};
  }
  function renderWatch(t){
   if(mode!=="watch")return;
-  chapter=0;for(let i=1;i<starts.length;i++){if(t>=starts[i])chapter=i;else break}
-  seek.value=t;seek.setAttribute("aria-valuetext",timecode(t)+" of "+timecode(duration));
+  const point=layout.at(t), frame=plan.visual(point), {i,last,current,example}=frame;
+  chapter=plan.chapter[i];
+  seek.value=String(t);seek.setAttribute("aria-valuetext",timecode(t)+" of "+timecode(duration));
   $("clock").textContent=timecode(t)+" / "+timecode(duration);
-  const {state,field,key,lastKey,values}=watchSnapshot(t);
-  const example=t>=35.192?2:t>=28.089?1:0;
-  shell.setKeys(!example&&key?[key]:[]);
-  $("key-strip").hidden=!lastKey||!!example;
-  $("active-key").textContent=keyNames[lastKey]||lastKey||"";
+  stage.dataset.phase=point.speaking?"voice":"hold";
+  stage.dataset.watchBeat=String(i);
+  shell.setKeys(current&&!example?[current]:[]);
+  if(lastTrail!==last){
+   lastTrail=last;
+   chips.forEach((item,j)=>{item.hidden=j>last;item.classList.toggle("current",j===last);});
+   trail.scrollLeft=trail.scrollWidth;
+  }
   if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
-  const clip=t>=20.641&&t<23.361;
-  const nextSig=[chapter,state,field,values.join("|"),example,clip].join("/");
+  const spoken=point.speaking&&point.audioTime>=plan.spokenAt[i]-.03?plan.words[i]:"";
+  if($("caption").textContent!==spoken)$("caption").textContent=spoken;
+  $("caption-band").hidden=!captionsOn||!spoken;
+  const {state,field,values}=watchSnapshot(last);
+  const nextSig=[i,state,field,values.join("|"),example,point.speaking].join("/");
   if(nextSig===sig)return;
   sig=nextSig;
   $("bounds-case").textContent=boundsCards[example].label;
-  $("bounds-range").textContent=clip?"5 ≤ X ≤ 12 · both ends count":boundsCards[example].range;
+  $("bounds-range").textContent=boundsCards[example].range;
+  const tips={
+   wizard:field===4?"OK is selected. The first Enter accepts the four values.":"Fill "+labels[field].toLowerCase()+". Tab moves to the next field.",
+   entry:"The command is ready on the entry line. Press Enter again to calculate.",
+   result:"All eight counts from 5 through 12 are included in this result."
+  };
+  $("teaching-tip").textContent=!point.speaking&&!example&&i>=2&&i<=3&&tips[state]?tips[state]:plan.tips[i];
   let html="";
-  if(state==="probability-menu")html='<div class="menu-stack">'+mkMenu(menuA,4,"a",false)+"</div>";
+  if(state==="probability-menu")html='<div class="menu-stack">'+mkMenu(menuA,0,"a",false)+"</div>";
   if(state==="probability-submenu")html='<div class="menu-stack">'+mkMenu(menuA,4,"a",false)+mkMenu(menuB,4,"b",false)+"</div>";
   if(state==="distributions-submenu"||state==="cdf-selected")html='<div class="menu-stack">'+mkMenu(menuB,4,"b",false)+mkMenu(menuC,state==="cdf-selected"?2:1,"c",false)+"</div>";
   if(state==="wizard")html=wizard(values,field,false);
@@ -92,12 +104,11 @@
   if(state==="result")html=example?wizard(boundsCards[example].values,-1,false,true):lcdResult({command,value:watchedResult})+lcdEntry("");
   if(!html)html=lcdEntry("");
   work.innerHTML=html;
-  $("caption").textContent=captions[chapter];
-  [...steps.children].forEach((li,i)=>activate(li.firstElementChild,i===chapter));
+  [...steps.children].forEach((li,j)=>activate(li.firstElementChild,j===chapter));
  }
- stages.forEach((s,i)=>{
+ stages.forEach((name,i)=>{
   const li=document.createElement("li"),b=document.createElement("button"),num=document.createElement("span");
-  b.type="button";num.textContent="0"+(i+1);b.append(num,document.createTextNode(s));b.addEventListener("click",()=>go(starts[i]));li.append(b);steps.append(li);
+  b.type="button";num.textContent="0"+(i+1);b.append(num,document.createTextNode(name));b.addEventListener("click",()=>go(layout.spans[plan.entry[i]].start));li.append(b);steps.append(li);
  });
  function paintFrame(){
   stage.classList.toggle("ct38-screen-view",mode==="watch"&&framing==="screen");
@@ -115,78 +126,90 @@
  function paintCaptions(value){
   captionsOn=value;cc.setAttribute("aria-pressed",String(value));
   cc.setAttribute("aria-label",value?"Hide captions":"Show captions");
-  $("caption-band").hidden=mode!=="watch"||!value;
+  if(mode==="watch")renderWatch(time);else $("caption-band").hidden=true;
   fitBankWatch();
  }
  cc.addEventListener("click",()=>paintCaptions(!captionsOn));
- function setOrigin(){origin=performance.now()-time*1000/speed}
- function syncAudio(){
-  if(!useAudio)return;
-  if(Number.isFinite(audio.duration)){
-   audio.currentTime=Math.min(time,audio.duration);awaitingSeek=false;
-  }else awaitingSeek=true;
- }
- function go(t){
-  time=Math.max(0,Math.min(Number(t)||0,duration));
-  setOrigin();syncAudio();renderWatch(time);
-  if(!playing)labelPlay();
- }
  function labelPlay(){
   const active=playing||pending,name=active?"Pause":time>=duration-.015?"Replay":"Play";
   play.title=name;play.setAttribute("aria-label",name);
-  play.querySelector(".play-icon").hidden=active;
-  play.querySelector(".pause-icon").hidden=!active;
+  play.querySelector(".play-icon").toggleAttribute("hidden",active);
+  play.querySelector(".pause-icon").toggleAttribute("hidden",!active);
+ }
+ function go(t){
+  const resume=playing||pending;
+  if(resume)pause();
+  time=Math.max(0,Math.min(Number(t)||0,duration));
+  renderWatch(time);labelPlay();
+  if(resume)void start(false);
  }
  function pause(){
-  epoch++;pending=false;
-  if(playing&&useAudio&&Number.isFinite(audio.currentTime))time=Math.min(duration,audio.currentTime);
-  playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch(time);
+  epoch++;pending=false;playing=false;phase="";audio.pause();
+  cancelAnimationFrame(raf);labelPlay();renderWatch(time);
  }
- function end(){pause();time=duration;labelPlay();renderWatch(time)}
- function tick(now){
-  if(!playing||mode!=="watch")return;
-  time=useAudio?audio.currentTime:Math.max(0,(now-origin)*speed/1000);
-  if(time>=duration-.002){end();return}
-  renderWatch(time);raf=requestAnimationFrame(tick);
- }
- async function start(){
-  if(mode!=="watch")return;
-  initiated=true;overlay.hidden=true;overlay.dataset.initial="false";
-  if(time>=duration-.015)go(0);
-  const stamp=++epoch;pending=true;setOrigin();labelPlay();
-  if(useAudio){
-   try{syncAudio();await audio.play()}
-   catch(error){if(stamp!==epoch)return;silentMedia()}
-  }
-  if(stamp!==epoch||mode!=="watch"){if(!playing&&!pending)audio.pause();return}
-  if(!useAudio)setOrigin();
-  pending=false;playing=true;labelPlay();player.flash(true);raf=requestAnimationFrame(tick);
- }
- function toggle(){if(playing||pending){pause();player.flash(false)}else void start()}
  function silentMedia(){
-  useAudio=false;awaitingSeek=false;setOrigin();
+  if(!useAudio)return;
+  useAudio=false;audio.pause();origin=performance.now()-time*1000;
   $("media-status").textContent="Narration unavailable. Captions only.";
-  $("media-status").hidden=mode!=="watch";
-  $("sound").hidden=true;paintCaptions(true);
+  $("media-status").hidden=mode!=="watch";$("sound").hidden=true;paintCaptions(true);
  }
  function metadata(){
   if(!useAudio||!Number.isFinite(audio.duration)||audio.duration<=0)return;
-  duration=audio.duration;seek.max=String(duration);time=Math.min(time,duration);
-  if(awaitingSeek)syncAudio();
-  renderWatch(time);labelPlay();
+  if(Math.abs(audio.duration-39.079)>.14)silentMedia();
  }
+ async function enterPhase(token){
+  const point=layout.at(time);
+  phase=point.speaking?"voice":"hold";origin=performance.now()-time*1000;
+  if(!point.speaking||!useAudio){audio.pause();return token===epoch&&mode==="watch";}
+  let deadline;
+  try{
+   audio.currentTime=point.audioTime;audio.playbackRate=1;
+   await Promise.race([audio.play(),new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error("Audio unavailable")),4500);})]);
+  }catch{if(token===epoch)silentMedia();}
+  finally{clearTimeout(deadline);}
+  return token===epoch&&mode==="watch";
+ }
+ function tick(now){
+  if(!playing||mode!=="watch")return;
+  const span=layout.at(time).span;
+  if(phase==="voice"){
+   time=useAudio?Math.min(span.voiceEnd,span.start+Math.max(0,audio.currentTime-span.from)):Math.min(span.voiceEnd,Math.max(span.start,(now-origin)/1000));
+   if(time>=span.voiceEnd-.008||(useAudio&&audio.ended)){audio.pause();time=span.voiceEnd;phase="hold";origin=performance.now()-time*1000;}
+  }else{
+   time=Math.min(span.end,Math.max(span.voiceEnd,(now-origin)/1000));
+   if(time>=duration){time=duration;pause();return;}
+   if(time>=span.end){
+    const token=epoch;renderWatch(time);
+    void enterPhase(token).then(ok=>{if(ok&&playing)raf=requestAnimationFrame(tick);});
+    return;
+   }
+  }
+  renderWatch(time);raf=requestAnimationFrame(tick);
+ }
+ async function start(manual=true){
+  if(mode!=="watch"||playing||pending)return;
+  initiated=true;overlay.hidden=true;overlay.dataset.initial="false";
+  if(time>=duration-.015){time=0;renderWatch(time);}
+  const token=++epoch;pending=true;labelPlay();
+  if(!await enterPhase(token)){if(!pending&&!playing)audio.pause();return;}
+  pending=false;playing=true;labelPlay();if(manual)player.flash(true);raf=requestAnimationFrame(tick);
+ }
+ function toggle(){if(playing||pending){pause();player.flash(false)}else void start();}
  audio.addEventListener("loadedmetadata",metadata);
- audio.addEventListener("ended",()=>{if(mode==="watch")end()});
  audio.addEventListener("error",silentMedia);
- audio.addEventListener("pause",()=>{if(useAudio&&playing&&audio.paused&&!audio.ended)pause()});
+ document.addEventListener("visibilitychange",()=>{if(document.hidden&&(playing||pending))pause();});
  $("sound").addEventListener("click",()=>{
   audio.muted=!audio.muted;
   const name=audio.muted?"Unmute narration":"Mute narration";
   $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",name);$("sound").title=name;
  });
  rate.addEventListener("change",()=>{
-  if(playing&&!useAudio)time=Math.max(0,Math.min(duration,(performance.now()-origin)*speed/1000));
-  speed=Number(rate.value);audio.playbackRate=speed;setOrigin();
+  const resume=playing||pending;
+  if(resume)pause();
+  const old=layout;
+  layout=plan.make(Number(rate.value));duration=layout.duration;seek.max=duration;
+  time=layout.remap(old,time);renderWatch(time);labelPlay();
+  if(resume)void start(false);
  });
  play.addEventListener("click",toggle);
  seek.addEventListener("input",()=>go(seek.value));
@@ -307,16 +330,16 @@
  function onMode(next,focus=false){
   if(next!=="watch"&&next!=="try")return;
   if(mode==="watch"&&next==="try"){pause();void player.exit();player.clear()}
-  mode=next;stage.dataset.mode=next;sig="";clearTimeout(blink);shell.setKeys([]);shell.setInteractive(next==="try");
+  mode=next;stage.dataset.mode=next;$("key-strip").hidden=next!=="watch";sig="";clearTimeout(blink);shell.setKeys([]);shell.setInteractive(next==="try");
   tabs.forEach((el,i)=>{
    const yes=(i===0)===(next==="watch");el.tabIndex=yes?0:-1;el.setAttribute("aria-selected",String(yes));$(el.getAttribute("aria-controls")).hidden=!yes;
   });
-  $("watch-side").hidden=$("watch-player").hidden=$("watch-bounds").hidden=next!=="watch";
+  $("watch-side").hidden=$("watch-player").hidden=$("watch-bounds").hidden=$("teaching-tip").hidden=next!=="watch";
   $("try-side").hidden=$("try-player").hidden=next!=="try";
   $("media-status").hidden=useAudio||next!=="watch";
   paintFrame();paintCaptions(captionsOn);
   if(next==="watch"){renderWatch(time);if(focus)play.focus({preventScroll:true})}
-  else{$("key-strip").hidden=true;renderTry();if(focus)stage.focus({preventScroll:true})}
+  else{renderTry();if(focus)stage.focus({preventScroll:true})}
  }
  tabs.forEach((el,i)=>{
   el.addEventListener("click",()=>onMode(i?"try":"watch",Boolean(i)));
@@ -400,7 +423,7 @@
   const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
   const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("watch-bounds").offsetHeight;
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+$("watch-bounds").offsetHeight+$("teaching-tip").offsetHeight;
   const pads=getComputedStyle(workspace);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-4;
   stage.style.setProperty("--ct38-body-fit",Math.floor(Math.max(innerHeight<680?78:98,Math.min(full?365:288,room*558/1168)))+"px");
@@ -408,7 +431,7 @@
   stage.style.setProperty("--ct38-scene-room",Math.floor(Math.max(126,room))+"px");
  }
  const sizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),$("watch-bounds"),document.querySelector("main>.header"),document.querySelector("main>.tabs")].forEach(el=>sizing.observe(el));
+ [$("watch-player"),$("caption-band"),$("watch-bounds"),$("teaching-tip"),document.querySelector("main>.header"),document.querySelector("main>.tabs")].forEach(el=>sizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);

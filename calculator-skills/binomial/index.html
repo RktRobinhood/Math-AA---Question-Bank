@@ -15,13 +15,15 @@
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
 
-<link rel="stylesheet" href="lesson.css?v=ct38-watch-1">
+<link rel="stylesheet" href="lesson.css?v=ct38-holds-1">
 <link rel="stylesheet" href="../handheld/shell.css">
-<link rel="stylesheet" href="watch.css?v=ct38-watch-1">
+<link rel="stylesheet" href="watch.css?v=ct38-holds-1">
 <script src="../handheld/shell.js" defer></script>
 <script src="../handheld/key-cues.js" defer></script>
-<script src="../handheld/watch-player.js?v=ct38-watch-1" defer></script>
-<script src="lesson.js?v=ct38-watch-1" defer></script>
+<script src="../handheld/watch-player.js?v=ct38-holds-1" defer></script>
+<script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script>
+<script src="watch-plan.js?v=ct38-holds-1" defer></script>
+<script src="lesson.js?v=ct38-holds-1" defer></script>
 </head>
 <body class="calculator-bank-lesson ct38-binomial" data-base="../../" data-nav="calculator-skills">
 <main>
@@ -44,6 +46,7 @@
 <h2>At least five</h2>
 <p>Across 12 independent trials, the chance of success each time is 0.25. What is the probability of at least 5 successes?</p>
 <ol id="steps" class="steps"></ol>
+<details class="ct38-transcript"><summary>Transcript</summary><p id="transcript"></p></details>
 
 </aside>
 </div>
@@ -55,10 +58,10 @@
 <p id="keypad-result" class="feedback" role="status" hidden></p>
 </aside>
 </div>
-<div id="key-strip" hidden><span>Last key</span> <kbd id="active-key">—</kbd></div>
+<div id="key-strip" aria-label="Demonstrated keys"><span>Keys</span><ol id="key-steps"></ol></div>
 <span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
-<p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p>
+<p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p><p id="teaching-tip" class="ct38-tip"></p>
 <div id="caption-band" hidden><p id="caption" class="caption"></p></div>
 <div class="player" id="watch-player" role="group" aria-label="Playback controls">
 <button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
@@ -66,9 +69,9 @@
  <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
  <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
 </div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="39.079" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:39</span>
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="84.379" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 1:24</span>
 <button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
-<label class="ct38-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9">0.9×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+<label class="ct38-rate"><span class="sr">Time to follow each step</span><select id="play-rate" aria-label="Time to follow each step"><option value=".75">Brief holds</option><option value="1" selected>Follow along</option><option value="1.5">Long holds</option></select></label>
 <button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4zm11 0c1.5 1.7 1.5 4.3 0 6m2-8c3 3 3 7 0 10"/></svg></button>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
 <p id="media-status" role="status" hidden></p>
@@ -109,6 +112,7 @@
 </div>
 </section>
 <details class="notes"><summary>Keep in your notes</summary><p><strong>CDF</strong> adds the probabilities of all integer counts in a range, including both bounds. The possible counts are 0 through <i>n</i>.</p><ul><li>At least <i>k</i>: <i>k</i> to <i>n</i>. At most <i>k</i>: 0 to <i>k</i>.</li><li>More than <i>k</i>: start at <i>k</i> + 1. Fewer than <i>k</i>: end at <i>k</i> − 1.</li><li>Complement: subtract the probability of the counts <em>outside</em> your event from 1.</li></ul><p class="note-source"><a href="https://education.ti.com/en/customer-support/knowledge-base/ti-nspire-family/product-usage/29570">TI’s button sequence</a> · <a href="https://rktrobinhood.github.io/Math-AA---Question-Bank/questions/ai-sl-2022-may-tz2-p1-q05/">Exam reference: May 2022 AI SL P1 TZ2 Q5(c)</a></p></details>
+<details class="notes ct38-mobile-transcript"><summary>Transcript</summary><p id="transcript-mobile"></p></details>
 </main>
 </body>
 </html>

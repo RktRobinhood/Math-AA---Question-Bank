@@ -95,3 +95,39 @@ body.watch-fullscreen-open{overflow:hidden}
  body.ct12-minimum[data-cx-mode=watch] main>.title .modes button{min-height:33px}
  body.ct12-minimum[data-cx-mode=watch] main>.title h1{font-size:clamp(1.62rem,7.5vw,2.1rem);padding-top:7px}
 }
+
+/* CT12 teaching pass: a non-scrolling, ordered key trail and one bottom bar. */
+.ct12-shared[data-watch-mode=watch] #key-strip{position:static;grid-column:1/-1;grid-row:1;min-width:0;min-height:0;padding:0;margin:0 0 4px;align-items:start;white-space:normal}
+.ct12-shared #key-steps{list-style:none;display:flex;flex-wrap:wrap;gap:3px;margin:0;padding:0;align-items:center}
+.ct12-shared #key-steps kbd{display:block;font:650 .72rem/1 system-ui;border:1px solid #647c6d;padding:4px 4px;border-radius:4px;background:#23392f;color:#f1f6f2}
+.ct12-shared #key-steps li[data-progress=next] kbd{background:transparent;color:#c1d3c5}
+.ct12-shared #key-steps li[data-progress=current] kbd{background:#dbefe4;color:#15241e;border-color:#dbefe4}
+.ct12-shared #key-steps .key-group-start{margin-inline-start:3px}
+.ct12-shared .key-trail-label{padding-top:5px}
+.ct12-shared[data-watch-mode=watch] #workspace{padding-top:8px;row-gap:4px}
+.ct12-shared #watch-player .player-icon [hidden]{display:none}
+.watch-synopsis{margin:8px 0;padding:0;color:var(--ink,inherit)}
+.watch-synopsis summary{cursor:pointer;font-weight:650;font-size:.88rem}
+.watch-synopsis p{font-size:.89rem;line-height:1.45;margin:6px 0}
+@media(max-width:700px){
+ .ct12-shared #key-steps kbd{font-size:.69rem;padding:3px}
+ .ct12-shared[data-watch-mode=watch] #workspace{padding-top:6px}
+}
+.ct12-shared .hh-lcd{container-type:inline-size}
+.ct12-shared .ct12-lcd-entry{position:absolute;inset:auto 0 0;min-height:9.6%;height:9.6%;border-top:1px solid #8298ab;display:flex;align-items:center;gap:.8cqw;padding:0 1.4cqw;background:#e6f0f8;color:#111a24;z-index:4;font:700 clamp(8px,4.1cqw,17px)/1 system-ui}
+.ct12-shared .ct12-lcd-entry input{border:0;height:100%;padding:0;background:transparent;color:inherit;font:inherit;flex:1;min-width:0;box-shadow:none}
+.ct12-shared .ct12-lcd-entry input:focus{outline:1px solid #17538d;outline-offset:-1px}
+.ct12-minimum .ct12-try-instructions{font-size:.88rem;margin:0}
+.ct12-minimum[data-cx-mode=try] #beat{display:none}
+.ct12-minimum[data-cx-mode=try] #workspace{display:block}
+.ct12-shared[data-watch-mode=watch] #key-strip{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 6px}
+.ct12-shared #hold-note{grid-column:1/-1;min-height:1em;margin:0;color:inherit;font:600 .75rem/1 system-ui}
+.ct12-shared .ct12-rate{display:flex;align-items:center;gap:4px;font:600 .73rem/1 system-ui;white-space:nowrap}
+.ct12-shared #watch-player #play-rate{min-width:57px;max-width:65px}
+@media(max-width:350px){
+ .ct12-shared .ct12-rate{gap:2px;font-size:.64rem}
+ .ct12-shared #watch-player #play-rate{min-width:54px;font-size:.72rem}
+ .ct12-shared #watch-player :is(#sound,#fullscreen){min-width:28px;width:28px}
+}
+.ct12-shared #watch-player #play-rate{appearance:none;width:63px;min-width:63px;padding-inline:4px 11px;background:linear-gradient(45deg,transparent 50%,currentColor 0) right 8px center/4px 4px no-repeat,linear-gradient(135deg,currentColor 50%,transparent 0) right 4px center/4px 4px no-repeat}
+@media(max-width:350px){.ct12-shared #watch-player #play-rate{width:58px;min-width:58px}}

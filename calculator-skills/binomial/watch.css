@@ -91,3 +91,21 @@ body.ct38-binomial.watch-fullscreen-open{overflow:hidden;}
  .ct38-shared #play-feedback[data-initial=false]{animation:ct38-feedback-in .15s ease-out;}
  @keyframes ct38-feedback-in{from{opacity:.45;scale:.88}to{opacity:1;scale:1}}
 }
+
+/* Teaching holds expose the ordered key trail in either manual framing. */
+.ct38-shared #key-strip{font-size:.69rem;pointer-events:auto;}
+.ct38-shared #key-steps{display:flex;align-items:center;gap:3px;flex:1 1 auto;min-width:0;overflow:auto;scrollbar-width:none;margin:0;padding:1px 0;list-style:none;}
+.ct38-shared #key-steps::-webkit-scrollbar{display:none}
+.ct38-shared #key-steps li{flex:none}
+.ct38-shared #key-steps .group-start{margin-inline-start:4px}
+.ct38-shared #key-steps kbd{display:block;border:1px solid #5a7667;border-radius:4px;color:#dbe6de;background:#243931;padding:2px 4px;min-width:1.05rem;text-align:center}
+.ct38-shared #key-steps .current kbd{background:#bfead0;color:#102e20;border-color:#d2f5dd}
+.ct38-shared[data-mode=watch] .ct38-tip{color:var(--tape-soft);min-height:1.7em;margin:0;padding:0 8px 4px;text-align:center;font:580 clamp(.64rem,2.7vw,.84rem)/1.2 system-ui;max-width:none;}
+.ct38-shared #watch-player select{min-width:113px;max-width:145px;}
+.ct38-shared .ct38-transcript{font-size:.76rem;margin-top:.4rem;color:var(--tape-soft)}
+.ct38-mobile-transcript{display:none}
+@media(max-width:700px){.ct38-mobile-transcript{display:block}}
+@media(max-width:375px){
+ .ct38-shared #watch-player select{width:88px;min-width:88px;max-width:88px;font-size:.70rem;}
+ .ct38-shared #clock{grid-column:5/-1;}
+}
