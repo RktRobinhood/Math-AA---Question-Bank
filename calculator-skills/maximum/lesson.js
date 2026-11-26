@@ -184,7 +184,7 @@ function enterTry(device,actions){
  mode="try";returnToWatch=actions.returnToWatch;
  device.append(stage);$("try-grid").prepend(handheld);stage.hidden=false;$("try").hidden=false;
  document.body.classList.add("graph-try");shell.setInteractive(true);shell.setKeys([]);
- sync();paintTry();stage.focus({preventScroll:true});
+ paintTry();stage.focus({preventScroll:true});
 }
 function exitTry(){
  mode="watch";stage.hidden=true;$("try").hidden=true;watchStamp="";
@@ -209,5 +209,6 @@ $("answer-form").addEventListener("submit",e=>{
  feedback.className="feedback"+(okX&&okY?"is-right":"is-wrong");
  feedback.textContent=okX&&okY?"Correct. No allowed point has a larger y-value.":!Number.isFinite(x)||!Number.isFinite(y)?"Enter a numerical x-coordinate and value.":okX?"The x-coordinate is right. Check its y-value.":"Not yet. Compare the peak and both allowed endpoints.";
 });
+sync();
 window.CalculatorLessonAdapter=Object.freeze({initialMode:query.get("mode")==="try"?"try":"watch",renderWatch,enterTry,exitTry});
 })();
