@@ -11,8 +11,8 @@
 <script src="../../assets/js/calculator-nav.js?v=beta-1" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="player.css?v=ct01-player-1-clock-1">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="lesson.js?v=ct01-player-1" defer></script>
+<link rel="stylesheet" href="../handheld/shell.css"><link rel="stylesheet" href="lesson.css?v=bank-banner-1"><link rel="stylesheet" href="player.css?v=ct01-pauses-1">
+<script src="../handheld/shell.js" defer></script><script src="../handheld/freecalc.js" defer></script><script src="math.js" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="../handheld/hold-timeline.js?v=ct01-pauses-1" defer></script><script src="lesson.js?v=ct01-pauses-1" defer></script>
 </head><body class="calculator-bank-lesson" data-base="../../" data-nav="calculator-skills"><main>
 <header class="header"><div><p class="tag"><a href="../index.html">Calculator Coach</a> / <a href="../skills.html">All skills</a> / <span>CT01</span></p><h1>Enter and round a calculation</h1><p class="subtitle">Scientific notation and significant figures on a TI-Nspire CX II-T.</p></div>
 </header>
@@ -40,9 +40,9 @@
  <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
  <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
 </div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="26.974" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:27</span>
+<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="95.974" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 1:36</span>
 <button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
-<label class="ct01-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9" selected>0.9×</option><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
+<label class="ct01-rate"><span class="sr">Teaching pauses</span><select id="play-rate" aria-label="Teaching pauses" title="Change the time between steps, not the narration speed"><option value="0.75">Shorter pauses</option><option value="1" selected>Standard pauses</option><option value="1.3">Longer pauses</option></select></label>
 <button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4zm11 0c1.5 1.7 1.5 4.3 0 6m2-8c3 3 3 7 0 10"/></svg></button>
 <button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
 <p id="media-status" role="status" hidden></p>

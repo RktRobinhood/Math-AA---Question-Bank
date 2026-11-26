@@ -121,3 +121,9 @@ previously independent Try state. Report which tracks truly play, not how
 many scripts exist. This overlay does not modify any calculator, catalogue,
 Practice, question, or exam page and does not add biographic/protected
 exam text.
+
+### Expanded teaching takes (separate from the legacy queue)
+
+[CT01 v2: Enter and round a calculation](expanded/CT01-v2.md) is the first expanded
+script. Preserve the existing CT01 MP3 and signed cue map. The new take needs
+its own measured alignment and student-facing check before replacing audio.

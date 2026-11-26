@@ -13,6 +13,8 @@ jobs:
           node-version: 22
       # KaTeX (devDependency) is needed by check-engine.mjs to prove every string renders.
       - run: npm ci
+      - name: Check teaching holds and narration clocks
+        run: node scripts/check-teaching-holds.mjs
       - name: Check Scratchpad MathPrint expressions
         run: node scripts/check-graph-mathprint.mjs
       - name: Check Scratchpad table calculations

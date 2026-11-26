@@ -92,3 +92,11 @@ body.watch-fullscreen-open{overflow:hidden}
  .ct01-stage #watch-player .timeline{grid-column:1/-3}
  .ct01-stage #watch-player #clock{grid-column:-3/-1;font-size:.64rem}
 }
+/* Keep the current teaching sentence visible on small screens during holds. */
+@media(max-width:700px){
+ .ct01-stage[data-mode=watch] #workspace .ct10-stage-side{display:block;width:min(100%,31rem);margin:0 auto}
+ .ct01-stage[data-mode=watch] #watch-panel{display:block;padding:0 .45rem;margin:.25rem 0 0;background:transparent;border:0;box-shadow:none}
+ .ct01-stage[data-mode=watch] #watch-panel :is(.tag,h2,.math-example,.steps){display:none}
+ .ct01-stage[data-mode=watch] #watch-panel .ct01-takeaway{margin:0;min-height:2.75em;font:600 .79rem/1.35 var(--text-font,system-ui,sans-serif);text-align:center}
+ .ct01-stage #watch-player .ct01-rate select{max-width:100%;width:100%;font-size:.66rem}
+}

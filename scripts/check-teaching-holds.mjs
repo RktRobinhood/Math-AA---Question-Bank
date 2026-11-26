@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {createContext,runInContext} from 'node:vm';
+import {readFileSync} from 'node:fs';
+const c=createContext({});runInContext(readFileSync(new URL('../calculator-skills/handheld/hold-timeline.js',import.meta.url),'utf8'),c);
+const {make}=c.TeachingHolds;
+const a=make([[0,2,8],[2,6,2]]),b=make([[0,2,8],[2,6,2]],1.5);
+assert.equal(a.duration,16);assert.equal(b.duration,21);
+assert.equal(a.at(1.2).audioTime,b.at(1.2).audioTime);
+assert.equal(a.at(4).speaking,false);assert.equal(a.at(4).audioTime,2);
+assert.equal(b.remap(a,5),6.5);assert.equal(b.remap(a,11),15);
+assert.equal(a.at(10).span.i,1);assert.equal(a.at(10).audioTime,2);
+assert.equal(a.at(16).audioTime,6);assert.equal(b.remap(a,a.duration),b.duration);
+assert.throws(()=>make([[0,2,1],[2.1,6,2]]));
+console.log('Teaching holds: 12 fixed-rate audio, cut, seek and pause-scale checks pass.');

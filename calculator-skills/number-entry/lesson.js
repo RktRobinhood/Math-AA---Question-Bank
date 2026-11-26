@@ -18,25 +18,54 @@ const cue=[
  [20.099,"Show the requested precision in your written answer."],
  [23.450,"6.00 has three significant figures."]
 ];
-const keys=[[.03,"home"],[.53,"1"],[1.12,"enter"],[2.36,"ctrl"],[3.02,"div"],[6.45,"4"],[6.96,"ee"],[7.49,"5"],[7.97,"mul"],[8.41,"3"],[9.06,"ee"],[10.52,"neg"],[11.00,"2"],[11.54,"down"],[11.91,"2"],[12.33,"ee"],[12.77,"3"],[13.23,"enter"]];
-const checkpoints=[[0,"Open Calculator"],[2.152,"Group a fraction"],[6.44,"Use EE and (−)"],[13.32,"Read the value"],[20.06,"Write three significant figures"]];
-let mode="watch",state=M.pristine("calc",task.expr),t=0,duration=26.974,playing=false,pending=false,epoch=0,raf=0,base=0,speed=.9,sound=true,stamp="",showCaptions=false,initiated=false;
+// Measured cuts inside each quiet gap (FFmpeg silencedetect -39 dB, dwell .18 s).
+// The existing George file stays at 1×. Only the separate teaching holds vary.
+const beats=[
+ [0,1.78,6], [1.78,6.08,8], [6.08,9.80,12], [9.80,12.96,12],
+ [12.96,15.68,8], [15.68,19.70,7], [19.70,23.09,9], [23.09,26.974,7]
+];
+const actions=[
+ [[.12,"home"],[.40,"1"],[.67,"enter"]],
+ [[.21,"ctrl"],[.46,"div"]],
+ [[.10,"4"],[.23,"ee"],[.36,"5"],[.49,"mul"],[.62,"3"],[.78,"ee"]],
+ [[.09,"neg"],[.21,"2"],[.34,"down"],[.47,"2"],[.59,"ee"],[.71,"3"],[.85,"enter"]],
+ [],[],[],[]
+];
+const chapters=[[0,"Open Calculator"],[1,"Set up the fraction"],[2,"Find EE"],[3,"Enter the negative exponent"],[4,"Read the result"],[6,"Round on paper"]];
+const teaching=[
+ "Press Home. Choose 1: New, then Enter on Add Calculator.",
+ "Press Ctrl, then ÷. The top box is for the numerator; the bottom box is for the denominator.",
+ "Find EE at the far left of the letter keys. Type 4, EE, 5, then ×. Start the next factor with 3, EE.",
+ "Use (−), just left of Enter, for a negative exponent. Type 2, then ↓ to the denominator. Type 2, EE, 3, then Enter.",
+ "Read the result from the Calculator history. Keep it unrounded until the last step.",
+ "E means “times ten to the power of”. In the entry, 3E−2 means 3 × 10⁻².",
+ "For three significant figures, start at the first non-zero digit. Write the rounded value in your answer.",
+ "Here, write 6.00. Both zeros count after the decimal point, so the answer has three significant figures."
+];
+const keyNames={ctrl:"Ctrl",div:"÷",ee:"EE",neg:"(−)",mul:"×",enter:"Enter",down:"↓",home:"Home"};
+let mode="watch",state=M.pristine("calc",task.expr),t=0,playing=false,pending=false,epoch=0,raf=0,base=0,phase="",sound=true,stamp="",showCaptions=false,initiated=false;
+let layout=TeachingHolds.make(beats), duration=layout.duration,frameOverride=null,activeFrame="";
 const framingKey="qb-calculator-watch-frame";
 function readFrame(){try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}}
 let framing=readFrame();
 const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
 function paintFraming(){
- stage.classList.toggle("ct01-screen-view",mode==="watch"&&framing==="screen");
- $("view-full").setAttribute("aria-pressed",String(framing==="full"));
- $("view-screen").setAttribute("aria-pressed",String(framing==="screen"));
+ const beat=layout.at(t)?.span.i??0;
+ const next=mode!=="watch"?"full":frameOverride??(initiated&&beat<=3?"full":framing);
+ if(activeFrame===next)return;
+ activeFrame=next;
+ stage.classList.toggle("ct01-screen-view",mode==="watch"&&next==="screen");
+ $("view-full").setAttribute("aria-pressed",String(next==="full"));
+ $("view-screen").setAttribute("aria-pressed",String(next==="screen"));
+ fitBankWatch();
 }
 function chooseFrame(value){
- framing=value;try{localStorage.setItem(framingKey,value);}catch{}
- paintFraming();fitBankWatch();
+ framing=frameOverride=value;try{localStorage.setItem(framingKey,value);}catch{}
+ paintFraming();
 }
 $("view-full").addEventListener("click",()=>chooseFrame("full"));
 $("view-screen").addEventListener("click",()=>chooseFrame("screen"));
-window.addEventListener("storage",e=>{if(!e.key||e.key===framingKey){framing=readFrame();paintFraming();fitBankWatch();}});
+window.addEventListener("storage",e=>{if(!e.key||e.key===framingKey){framing=readFrame();paintFraming();}});
 function captions(v){
  showCaptions=v;
  $("cc").setAttribute("aria-pressed",String(v));
@@ -96,33 +125,39 @@ function renderLCD(s){
 }
 function snapshot(time){
  let s=M.pristine("off"),key="",prev="",last="";
- for(const [when,k] of keys){
-  if(when>time)break;
-  const held=s.ctrl;
-  s=M.pressed(s,k);
-  last=held&&k!=="ctrl"?"ctrl+"+k:k;
-  if(time<when+.25){key=k;prev=held&&k!=="ctrl"?"ctrl":"";}
-  else {key="";prev="";}
+ for(const [i,row] of actions.entries()){
+  const span=layout.spans[i];
+  for(const [position,k] of row){
+   const when=span.voiceEnd+(span.end-span.voiceEnd)*position;
+   if(when>time)break;
+   const held=s.ctrl;
+   s=M.pressed(s,k);
+   last=held&&k!=="ctrl"?"ctrl+"+k:k;
+   if(time<when+.45){key=k;prev=held&&k!=="ctrl"?"ctrl":"";}
+   else{key="";prev="";}
+  }
  }
  return {s,key,prev,last};
 }
 function renderWatch(){
  if(mode!=="watch")return;
- const a=cue.findLastIndex(x=>x[0]<=t), c=checkpoints.findLastIndex(x=>x[0]<=t), f=snapshot(t);
+ const point=layout.at(t), a=point.span.i,c=chapters.findLastIndex(x=>x[0]<=a), f=snapshot(t);
  seek.value=t;
  seek.setAttribute("aria-valuetext",fmt(t>=duration-.015?Math.round(duration):t)+" of "+fmt(Math.round(duration)));
  $("clock").textContent=fmt(t>=duration-.015?Math.round(duration):t)+" / "+fmt(Math.round(duration));
+ paintFraming();
  shell.setKeys([f.prev,f.key].filter(Boolean));
- const readable={ctrl:"Ctrl",div:"÷",ee:"EE",neg:"(−)",mul:"×",enter:"Enter",down:"↓",home:"Home"};
- $("active-key").textContent=f.last?f.last.split("+").map(k=>readable[k]||k).join(" + "):"—";
+ $("active-key").textContent=f.last?f.last.split("+").map(k=>keyNames[k]||k).join(" + "):"—";
  if(!initiated){overlay.hidden=t>.04;overlay.dataset.initial="true";}
+ const source=point.audioTime,end=Number.isFinite(beats[a+1]?.[0])?beats[a][1]-.16:26.77;
+ const caption=point.speaking&&source>=cue[a][0]&&source<end?cue[a][1]:"";
+ $("caption").textContent=caption;
  const next=JSON.stringify([a,c,f.s]);
  if(next===stamp)return;stamp=next;
- renderLCD(f.s);$("caption").textContent=cue[a][1];
- const note=$("takeaway");
- note.hidden=t<2.1||(t>=13.32&&t<16.02);
- note.textContent=t<6.44?"Use the fraction template to keep the numerator and denominator separate.":t<13.32?"EE enters the power of ten. Use (−), not subtraction, for a negative exponent.":t>=23.45?"Written answer: 6.00 · three significant figures":t>=20.06?"Calculator: 6   →   Written to 3 s.f.: 6.00":"In the entry above: 3E−2 means 3 × 10⁻².";
+ renderLCD(f.s);
+ const note=$("takeaway");note.hidden=false;note.textContent=teaching[a];
  [...$("steps").children].forEach((n,i)=>n.firstElementChild.setAttribute("aria-current",String(i===c)));
+
 }
 function renderTry(){
  if(mode!=="try")return;
@@ -139,36 +174,62 @@ function label(){
  play.querySelector(".play-icon").toggleAttribute("hidden",playing);play.querySelector(".pause-icon").toggleAttribute("hidden",!playing);
 }
 function pause(){
- epoch++;pending=false;if(playing&&sound)t=audio.currentTime;
- playing=false;audio.pause();cancelAnimationFrame(raf);label();renderWatch();
+ epoch++;pending=false;playing=false;phase="";audio.pause();cancelAnimationFrame(raf);label();renderWatch();
 }
 function go(time){
- t=Math.max(0,Math.min(duration,Number(time)||0));base=performance.now()-t*1000/speed;
- if(sound&&Number.isFinite(audio.duration))audio.currentTime=t;
- renderWatch();label();
+ const resume=playing||pending;
+ if(resume)pause();
+ t=Math.max(0,Math.min(duration,Number(time)||0));
+ if(sound&&Number.isFinite(audio.duration))audio.currentTime=Math.min(audio.duration,layout.at(t).audioTime);
+ renderWatch();label();if(resume)void start(false);
 }
 function finish(){pause();t=duration;renderWatch();label();}
+function fallback(){
+ if(!sound)return;
+ sound=false;audio.pause();base=performance.now()-t*1000;
+ $("media-status").textContent="Captions only";$("media-status").hidden=false;$("sound").hidden=true;captions(true);
+}
+async function enterPhase(id){
+ const p=layout.at(t);base=performance.now()-t*1000;
+ phase=p.speaking?"voice":"hold";
+ if(sound&&p.speaking){
+  try{
+   audio.currentTime=Math.min(Number.isFinite(audio.duration)?audio.duration:p.audioTime,p.audioTime);
+   audio.playbackRate=1;await audio.play();
+  } catch {if(id!==epoch)return false;fallback();}
+ }else audio.pause();
+ return id===epoch&&mode==="watch";
+}
 function step(now){
  if(!playing||mode!=="watch")return;
- t=sound?audio.currentTime:(now-base)*speed/1000;
- if(t>=duration){finish();return;}
+ const p=layout.at(t),s=p.span;
+ if(phase==="voice"&&sound){
+  t=Math.min(s.voiceEnd,s.start+Math.max(0,audio.currentTime-s.from));
+  if(audio.currentTime>=s.to-.014||audio.ended){
+   audio.pause();t=s.voiceEnd;phase="hold";base=performance.now()-t*1000;
+  }
+ }else if(phase==="voice"){
+  t=Math.min(s.voiceEnd,(now-base)/1000);
+  if(t>=s.voiceEnd){phase="hold";base=performance.now()-t*1000;}
+ }else{
+  t=Math.min(s.end,(now-base)/1000);
+  if(t>=duration){finish();return;}
+  if(t>=s.end){
+   const id=epoch;
+   renderWatch();
+   void enterPhase(id).then(ok=>{if(ok&&playing)raf=requestAnimationFrame(step);});
+   return;
+  }
+ }
  renderWatch();raf=requestAnimationFrame(step);
 }
-function fallback(){
- sound=false;base=performance.now()-t*1000/speed;$("media-status").textContent="Captions only";$("media-status").hidden=false;$("sound").hidden=true;captions(true);
-}
-async function start(){
+async function start(manual=true){
  if(mode!=="watch")return;
  initiated=true;overlay.dataset.initial="false";
- if(t>=duration-.015)go(0);
- const id=++epoch;pending=true;base=performance.now()-t*1000/speed;
- if(sound){
-  try{audio.currentTime=t;await audio.play();}
-  catch {if(id!==epoch)return;fallback();}
- }
- if(id!==epoch||mode!=="watch")return;
- pending=false;playing=true;
- renderWatch();label();chrome.flash(true);raf=requestAnimationFrame(step);
+ if(t>=duration-.015)t=0;
+ const id=++epoch;pending=true;
+ if(!await enterPhase(id))return;
+ pending=false;playing=true;renderWatch();label();if(manual)chrome.flash(true);raf=requestAnimationFrame(step);
 }
 function toggle(){if(playing||pending){pause();chrome.flash(false);}else void start();}
 function setMode(next){
@@ -187,22 +248,22 @@ for(const [i,n] of names.entries()){
  n.addEventListener("click",()=>setMode(i===0?"watch":"try"));
  n.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"||e.key==="ArrowRight"){e.preventDefault();const other=names[1-i];other.click();other.focus();}});
 }
-audio.addEventListener("loadedmetadata",()=>{
- if(!sound||!Number.isFinite(audio.duration)||audio.duration<=0)return;
- duration=audio.duration;seek.max=duration;renderWatch();
-});
-audio.addEventListener("error",fallback);audio.addEventListener("ended",finish);
+audio.addEventListener("error",fallback);
+document.addEventListener("visibilitychange",()=>{if(document.hidden&&(playing||pending))pause();});
 $("sound").addEventListener("click",()=>{
  audio.muted=!audio.muted; $("sound").setAttribute("aria-pressed",String(audio.muted));
  const name=audio.muted?"Unmute narration":"Mute narration";
  $("sound").setAttribute("aria-label",name);$("sound").title=name;
 });
-audio.playbackRate=speed;
+audio.playbackRate=1;
 audio.preservesPitch=true;
 $("play-rate").addEventListener("change",e=>{
- speed=Number(e.target.value);
- audio.playbackRate=speed;
- base=performance.now()-t*1000/speed;
+ const resume=playing||pending;
+ if(resume)pause();
+ const previous=layout;
+ layout=TeachingHolds.make(beats,Number(e.target.value));duration=layout.duration;
+ t=layout.remap(previous,t);seek.max=duration;
+ renderWatch();label();if(resume)void start(false);
 });
 
 play.addEventListener("click",toggle);
@@ -242,15 +303,15 @@ document.addEventListener("keydown",e=>{
  const match=keyMap[k]??keyMap[z]??(/^[0-9]$/.test(k)?k:null);
  if(match){e.preventDefault();doKey(match);shell.setKeys([match]);setTimeout(()=>{if(mode==="try")shell.setKeys([]);},125);}
 });
-for(const [when,name] of checkpoints){
+for(const [chapter,name] of chapters){
  const li=node("li"),b=node("button");b.type="button";b.append(node("span","",String(1+$("steps").children.length).padStart(2,"0")),document.createTextNode(name));
- b.addEventListener("click",()=>go(when));li.append(b);$("steps").append(li);
+ b.addEventListener("click",()=>go(layout.spans[chapter].start));li.append(b);$("steps").append(li);
 }
 const sup={"-":"⁻","+":"⁺","0":"⁰","1":"¹","2":"²","3":"³","4":"⁴","5":"⁵","6":"⁶","7":"⁷","8":"⁸","9":"⁹"};
 const written=task.expr.replace(/(\d+(?:\.\d+)?)[eE]([+-]?\d+)/g,(_,c,e)=>c+" × 10"+[...e].map(v=>sup[v]).join("")).replace(/\*/g," × ").replace(/\//g," ÷ ").replace(/-/g,"−");
 $("question").textContent="Evaluate "+written+". Give the written answer to "+task.sf+" significant figure"+(task.sf===1?"":"s")+".";
 if(invalidLink)$("question").prepend("The linked expression could not be loaded. Default example: ");
-stage.dataset.mode="watch";paintFraming();renderWatch();label();
+seek.max=duration;stage.dataset.mode="watch";paintFraming();renderWatch();label();
 if(approach.get("mode")==="try")setMode("try");
 
 function fitBankWatch(){
@@ -259,7 +320,7 @@ function fitBankWatch(){
  const nav=full?0:document.querySelector(".tabbar").getBoundingClientRect().height;
  const box=stage.getBoundingClientRect();
  const vh=window.visualViewport?.height||innerHeight;
- const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
+ const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(innerWidth<=700?$("takeaway").offsetHeight+10:0);
  const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-25;
  stage.style.setProperty("--ct01-handset-fit",Math.floor(Math.max(!full&&innerHeight<660&&innerWidth<381?75:120,Math.min(full?370:296,(room-28)*558/1168)))+"px");
  stage.style.setProperty("--ct01-lcd-fit",Math.floor(Math.max(142,Math.min(full?680:600,(room-31)*4/3)))+"px");
