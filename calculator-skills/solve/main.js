@@ -337,4 +337,16 @@ document.addEventListener('keydown',e=>{
 });
 watchers.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
 sync(values);
-setMode(params.get('mode')==='try'?'try':'watch');
+const practiceWatch=document.documentElement.dataset.practiceWatch==='true';
+setMode(!practiceWatch&&params.get('mode')==='try'?'try':'watch');
+if(media.error)useSilent(); // Metadata preload can fail before the module binds listeners.
+if(practiceWatch){
+ const tellParent=type=>window.parent.postMessage({type},location.origin);
+ tellParent('qb-practice-watch-ready');
+ document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&!event.defaultPrevented&&!document.fullscreenElement){
+    event.preventDefault();
+    tellParent('qb-practice-watch-exit');
+  }
+ });
+}

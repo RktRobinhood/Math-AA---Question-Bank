@@ -108,3 +108,45 @@
 @media(max-width:700px){
  .practice-calc-edge{margin-inline-end:calc(-1 * var(--s3))}
 }
+
+/* Contextual Watch replaces the Scratchpad visually, not its saved work. */
+.practice-calc-help{
+  position:absolute;z-index:2;right:44px;top:-10px;width:44px;height:44px;padding:0;
+  border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--muted);
+  display:grid;place-items:center;cursor:pointer
+}
+.practice-calc-help[hidden]{display:none}
+.practice-calc-help svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.practice-calc-help:is(:hover,:focus-visible){color:var(--accent);border-color:var(--accent)}
+.practice-calc-panel[data-watching]>*{visibility:hidden}
+.practice-lesson[open]{
+  box-sizing:border-box;display:flex;flex-direction:column;gap:0;margin:auto;padding:0;
+  width:min(848px,calc(100% - 24px));max-width:none;max-height:calc(100dvh - 20px);
+  border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);
+  box-shadow:0 16px 48px #101d2e38;overflow:hidden
+}
+.practice-lesson::backdrop{background:#111c2870}
+.practice-lesson header{
+ display:flex;flex:none;min-height:52px;justify-content:space-between;align-items:center;gap:12px;
+ padding:0 7px 0 15px;font:700 .9rem var(--ui,system-ui)
+}
+.practice-lesson header button{
+  flex:none;width:44px;height:44px;padding:0;border:0;border-radius:8px;background:none;color:inherit;
+  font:400 1.45rem/1 var(--ui,system-ui);cursor:pointer
+}
+.practice-lesson header button:is(:hover,:focus-visible){background:var(--sunk);color:var(--accent)}
+.practice-lesson-content{position:relative;min-height:0;background:#182621}
+.practice-lesson-content p[role=status]{
+  position:absolute;inset:0;display:grid;place-items:center;padding:16px;color:#edf7ef;text-align:center
+}
+.practice-lesson-content p[hidden]{display:none}
+.practice-lesson-content iframe{
+  display:block;width:100%;height:min(466px,calc(100dvh - 74px));border:0;background:#182621
+}
+@media(max-width:899px){
+ .practice-calc-help{top:calc(6px + env(safe-area-inset-top,0px));right:59px}
+}
+@media(max-width:510px){
+ .practice-lesson-content iframe{height:min(446px,calc(100dvh - 74px))}
+}
+@media print{.practice-lesson,.practice-calc-help{display:none!important}}

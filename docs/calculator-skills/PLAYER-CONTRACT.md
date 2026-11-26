@@ -27,6 +27,14 @@ student-facing behavior, not a separate brand, navigation or theme.
   and original narrations intact unless a verified correction needs a new
   Paperclip transcript. Do not show answers in the blank Practice calculator.
 
+- Contextual help in Practice uses the same Watch route in an approved embedded
+  presentation, not a new lesson or a link to another tab. Only reviewed
+  generated forms may open it. Loads and dismissals are scoped to the
+  lesson frame and its origin. Hide the in-frame navigation and Try, pass
+  no question data, and keep Watch separate from the exercise. Closing,
+  including during playback, restores focus to the calculator help button.
+  See [ADR-0003](../adr/0003-reuse-watch-for-contextual-practice-help.md).
+
 Check the published catalogue entry, direct Watch and linked Try on a small
 phone, a short laptop, and a roomy desktop. Test change of framing while
 playing, persistence after reload, captions with the densest keys, seek and

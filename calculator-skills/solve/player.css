@@ -142,3 +142,46 @@
 
 .solve-lesson .key-trail-label{display:block;margin-top:.42rem;font:640 .68rem system-ui;color:var(--video-quiet)}
 .solve-lesson #key-steps .key-group-start{margin-inline-start:.24rem}
+
+/* Practice shows this very same Watch player without its standalone routes. */
+html[data-practice-watch] :is(.top,.tabbar,main>.title,.resource-bar,#practice){display:none!important}
+html[data-practice-watch],html[data-practice-watch] body{background:#182621}
+html[data-practice-watch] body{margin:0;padding:0}
+html[data-practice-watch] main.wrap{width:100%;max-width:none;margin:0;padding:0}
+html[data-practice-watch] #player{
+ border:0;border-radius:0;box-shadow:none;display:flex;flex-direction:column;min-height:100dvh
+}
+html[data-practice-watch] #player .scene{
+ flex:1 0 auto;min-height:0;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);padding:12px 15px;gap:15px
+}
+html[data-practice-watch] #player.solve-screen-only .scene .lcd-group{width:100%;max-width:min(100%,390px)}
+html[data-practice-watch] #player.solve-screen-only .scene .hh-body{width:100%;max-width:100%}
+html[data-practice-watch] #player:not(.solve-screen-only) .scene .lcd-group{width:max-content;max-width:100%;--handheld-width:126px}
+html[data-practice-watch] #player .scene .beat{max-width:none;display:block;justify-self:stretch}
+html[data-practice-watch] #player .scene .beat-no{display:none}
+html[data-practice-watch] #player .scene .beat-title{font-size:clamp(1rem,2.8vw,1.42rem)}
+html[data-practice-watch] #player .scene .beat-tip{margin-top:.4rem;font-size:clamp(.78rem,1.75vw,.98rem);min-height:0}
+html[data-practice-watch] #player #key-steps{row-gap:4px}
+html[data-practice-watch] #player #watch-controls{padding:2px 7px 4px;flex:none}
+@media(max-width:480px){
+ html[data-practice-watch] #player .scene{grid-template-columns:minmax(0,1fr);padding:10px;gap:6px}
+ html[data-practice-watch] #player.solve-screen-only .scene .lcd-group{width:min(100%,286px);justify-self:center}
+ html[data-practice-watch] #player .scene .beat-tip,html[data-practice-watch] .key-trail-label{display:none}
+ html[data-practice-watch] #player .scene .beat{padding:0 4px}
+ html[data-practice-watch] #player .scene .beat-title{font-size:.94rem}
+ html[data-practice-watch] #player #key-steps{gap:3px}
+ html[data-practice-watch] #player #watch-controls .watch-speed select{width:4.2rem}
+}
+@media(max-width:345px){
+ html[data-practice-watch] #player #watch-controls{column-gap:2px;padding-inline:3px}
+ html[data-practice-watch] #player #watch-controls .watch-speed select{width:3.8rem;font-size:.65rem}
+}
+@media(max-width:345px){
+ html[data-practice-watch] #player #watch-controls{
+  grid-template-columns:28px 28px auto minmax(0,1fr) 27px auto 28px;
+ }
+ html[data-practice-watch] #player #watch-controls :is(#play,#sound,#captions,#fullscreen){width:28px;min-width:0}
+ html[data-practice-watch] #player #watch-controls #view-pick button{width:26px;min-width:0;padding-inline:3px}
+ html[data-practice-watch] #player #watch-controls .time{grid-column:5/-1}
+ html[data-practice-watch] #player #watch-controls .seek{grid-column:1/5}
+}
