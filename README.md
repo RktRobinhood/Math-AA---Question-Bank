@@ -11,6 +11,8 @@ All four courses are complete from 2021 to May 2026, with every question tagged 
 
 ## 🔗 [Open the Question Bank](https://rktrobinhood.github.io/Math-AA---Question-Bank/)
 
+Working on the bank? Start with the [glossary](GLOSSARY.md), [architecture decisions](docs/adr/README.md), and [contributor checklist](AGENTS.md).
+
 ---
 
 ## Manual
