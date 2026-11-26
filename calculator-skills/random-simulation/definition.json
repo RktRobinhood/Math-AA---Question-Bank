@@ -1,0 +1,233 @@
+{
+  "id": "CT44",
+  "title": "Random simulation and repeated trials",
+  "intro": "Simulate spins, count the outcomes, then compare two samples with the exact probability.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "392c74b9b59c26b8be8ce2a3e9355309a5220a6b4039336abbf1fbd4066e9f57",
+    "scriptSha256": "5d3869deede73380263ccd76b85939a69268878d8c2f21489c0080b68c0d5bde"
+  },
+  "chapters": [
+    {
+      "id": "code-model",
+      "title": "Code the model"
+    },
+    {
+      "id": "random-menu",
+      "title": "Find random integers"
+    },
+    {
+      "id": "enter-spin-count",
+      "title": "Set the trial count"
+    },
+    {
+      "id": "count-first-run",
+      "title": "Count from the actual list"
+    },
+    {
+      "id": "simulate-again",
+      "title": "Run the same model again"
+    },
+    {
+      "id": "compare-model",
+      "title": "Compare estimate with model"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "code-model",
+      "spoken": "A fair five-sector spinner has blue sectors one and two. Use one random integer from one to five for each spin.",
+      "coach": "5 equal sectors · 2 blue",
+      "end": 9.14,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "random-menu",
+      "spoken": "On a Calculator page open Probability, Random, then Integer.",
+      "coach": "Menu → 5 → 4 → 2",
+      "end": 15.575,
+      "hold": 4,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.1304
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3478
+        },
+        {
+          "id": "press-3",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.5652
+        },
+        {
+          "id": "press-4",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "enter-spin-count",
+      "spoken": "Enter the first label, last label, and number of spins. Both labels are included.",
+      "coach": "randInt(1,5,12)",
+      "end": 25.383,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-5",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0698
+        },
+        {
+          "id": "press-6",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.186
+        },
+        {
+          "id": "press-7",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3023
+        },
+        {
+          "id": "press-8",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.4186
+        },
+        {
+          "id": "press-9",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5349
+        },
+        {
+          "id": "press-10",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6512
+        },
+        {
+          "id": "press-11",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.7674
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "count-first-run",
+      "spoken": "Count every blue result, including repeats. Here one or two appears five times in the twelve observed outcomes.",
+      "coach": "First run: 5 ÷ 12 ≈ 0.417",
+      "end": 35.538,
+      "hold": 3,
+      "keys": []
+    },
+    {
+      "chapter": "simulate-again",
+      "spoken": "Choose the same command with the same inputs. Press Enter again after entering those inputs; the new run uses fresh draws.",
+      "coach": "Same model and trial count, new sample",
+      "end": 45.2815,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0476
+        },
+        {
+          "id": "press-14",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.127
+        },
+        {
+          "id": "press-15",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.2063
+        },
+        {
+          "id": "press-16",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.2857
+        },
+        {
+          "id": "press-17",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3651
+        },
+        {
+          "id": "press-18",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.4444
+        },
+        {
+          "id": "press-19",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5238
+        },
+        {
+          "id": "press-20",
+          "label": ",",
+          "ariaLabel": "Comma",
+          "at": 0.6032
+        },
+        {
+          "id": "press-21",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6825
+        },
+        {
+          "id": "press-22",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7619
+        },
+        {
+          "id": "press-23",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8413
+        },
+        {
+          "id": "press-24",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9206
+        }
+      ]
+    },
+    {
+      "chapter": "compare-model",
+      "spoken": "The next list gives three blues in twelve spins. The estimates differ; the exact two divided by five stays the same.",
+      "coach": "0.417 and 0.250 are estimates · 0.400 is exact",
+      "end": 55.018,
+      "hold": 4,
+      "keys": []
+    }
+  ]
+}
