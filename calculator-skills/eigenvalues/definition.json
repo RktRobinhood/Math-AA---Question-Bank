@@ -1,0 +1,629 @@
+{
+  "id": "CT25",
+  "title": "Eigenvalues and long-run behaviour",
+  "intro": "Find the two roots, match each with its own eigenvector, and compare magnitudes rather than signed values.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "104638640ba5685bdebbb8d3aba92ca7ad0b227faee303deec4517afe74cf17d",
+    "scriptSha256": "dbf6a762cd558bfc15d3602c41e5af527f0bf8e7d4230ef792c52d473ad7d721"
+  },
+  "chapters": [
+    {
+      "id": "read-matrix",
+      "title": "Read the matrix"
+    },
+    {
+      "id": "trace",
+      "title": "Find the trace"
+    },
+    {
+      "id": "determinant",
+      "title": "Find the determinant"
+    },
+    {
+      "id": "characteristic",
+      "title": "Form the quadratic"
+    },
+    {
+      "id": "radical",
+      "title": "Take the square root"
+    },
+    {
+      "id": "lower-root",
+      "title": "Find the lower root"
+    },
+    {
+      "id": "upper-root",
+      "title": "Find the upper root"
+    },
+    {
+      "id": "vector-five-first",
+      "title": "Verify the first row"
+    },
+    {
+      "id": "vector-five-second",
+      "title": "Verify the second row"
+    },
+    {
+      "id": "vector-two",
+      "title": "Match the other eigendirection"
+    },
+    {
+      "id": "dominant",
+      "title": "Distinguish long-run behaviour"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read-matrix",
+      "spoken": "Start from a two-by-two matrix. We will use its characteristic equation, not an eigenvalue menu.",
+      "coach": "Read A row by row: (4, 1), then (2, 3). Use Calculator arithmetic, not an eigenvalue command.",
+      "end": 7.86,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "trace",
+      "spoken": "Add the main diagonal entries for the trace.",
+      "coach": "Add the two main diagonal entries: trace = 4 + 3 = 7.",
+      "end": 12.706,
+      "hold": 3.12,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.1304
+        },
+        {
+          "id": "press-2",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3478
+        },
+        {
+          "id": "press-3",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5652
+        },
+        {
+          "id": "press-4",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7826
+        }
+      ]
+    },
+    {
+      "chapter": "determinant",
+      "spoken": "For the determinant, subtract the product off the diagonal from the product on it.",
+      "coach": "Compute (4 × 3) − (1 × 2) = 10. That is the determinant.",
+      "end": 21.0435,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-5",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.0698
+        },
+        {
+          "id": "press-6",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.186
+        },
+        {
+          "id": "press-7",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3023
+        },
+        {
+          "id": "press-8",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.4186
+        },
+        {
+          "id": "press-9",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5349
+        },
+        {
+          "id": "press-10",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6512
+        },
+        {
+          "id": "press-11",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7674
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "characteristic",
+      "spoken": "The characteristic equation is lambda squared minus seven lambda plus ten. Find its discriminant.",
+      "coach": "Use Δ = trace² − 4 × det. Enter 7² − 4 × 10.",
+      "end": 30.6555,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-13",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.0698
+        },
+        {
+          "id": "press-14",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.186
+        },
+        {
+          "id": "press-15",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.3023
+        },
+        {
+          "id": "press-16",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.4186
+        },
+        {
+          "id": "press-17",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.5349
+        },
+        {
+          "id": "press-18",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6512
+        },
+        {
+          "id": "press-19",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.7674
+        },
+        {
+          "id": "press-20",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "radical",
+      "spoken": "For the square root, press Control and the x squared key. Enter nine, then press Right to leave the slot.",
+      "coach": "Hold Ctrl, press x², and enter 9 in the root. Right exits the radical.",
+      "end": 38.699,
+      "hold": 3.65,
+      "keys": [
+        {
+          "id": "press-21",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.1071
+        },
+        {
+          "id": "press-22",
+          "label": "x²",
+          "ariaLabel": "x²",
+          "at": 0.2857
+        },
+        {
+          "id": "press-23",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.4643
+        },
+        {
+          "id": "press-24",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.6429
+        },
+        {
+          "id": "press-25",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8214
+        }
+      ]
+    },
+    {
+      "chapter": "lower-root",
+      "spoken": "The discriminant is nine. Take its square root, three, and subtract it from the trace before dividing by two.",
+      "coach": "Subtract √9 from 7 first. The parentheses give (7 − 3) ÷ 2 = 2.",
+      "end": 47.228,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-26",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0698
+        },
+        {
+          "id": "press-27",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.186
+        },
+        {
+          "id": "press-28",
+          "label": "−",
+          "ariaLabel": "−",
+          "at": 0.3023
+        },
+        {
+          "id": "press-29",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4186
+        },
+        {
+          "id": "press-30",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.5349
+        },
+        {
+          "id": "press-31",
+          "label": "÷",
+          "ariaLabel": "÷",
+          "at": 0.6512
+        },
+        {
+          "id": "press-32",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7674
+        },
+        {
+          "id": "press-33",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "upper-root",
+      "spoken": "Use plus three instead. The matching upper root is five.",
+      "coach": "Add √9 in the numerator instead: (7 + 3) ÷ 2 = 5.",
+      "end": 54.627,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-34",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.0698
+        },
+        {
+          "id": "press-35",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.186
+        },
+        {
+          "id": "press-36",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3023
+        },
+        {
+          "id": "press-37",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4186
+        },
+        {
+          "id": "press-38",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.5349
+        },
+        {
+          "id": "press-39",
+          "label": "÷",
+          "ariaLabel": "÷",
+          "at": 0.6512
+        },
+        {
+          "id": "press-40",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7674
+        },
+        {
+          "id": "press-41",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "vector-five-first",
+      "spoken": "For lambda equals five, the first row of the eigenvector equation gives y equals x. Set x equal to one; use the vector with entries one, one.",
+      "coach": "Try v = (1, 1): the first row gives 4(1) + 1(1) = 5.",
+      "end": 68.997,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-42",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.0698
+        },
+        {
+          "id": "press-43",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.186
+        },
+        {
+          "id": "press-44",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3023
+        },
+        {
+          "id": "press-45",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4186
+        },
+        {
+          "id": "press-46",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5349
+        },
+        {
+          "id": "press-47",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6512
+        },
+        {
+          "id": "press-48",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7674
+        },
+        {
+          "id": "press-49",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "vector-five-second",
+      "spoken": "The second entry is also five, so A times the vector gives five, five, or five times the whole vector. Any nonzero multiple of the eigenvector works.",
+      "coach": "Now the second row: 2(1) + 3(1) = 5. Both entries give A v = 5 v.",
+      "end": 81.066,
+      "hold": 5.24,
+      "keys": [
+        {
+          "id": "press-50",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0698
+        },
+        {
+          "id": "press-51",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.186
+        },
+        {
+          "id": "press-52",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3023
+        },
+        {
+          "id": "press-53",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4186
+        },
+        {
+          "id": "press-54",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5349
+        },
+        {
+          "id": "press-55",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.6512
+        },
+        {
+          "id": "press-56",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7674
+        },
+        {
+          "id": "press-57",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8837
+        }
+      ]
+    },
+    {
+      "chapter": "vector-two",
+      "spoken": "For lambda equals two, the first row gives y equals negative two x. For the vector with entries one, negative two, the product gives two, negative four.",
+      "coach": "Try v = (1, −2) and check both rows. A v = (2, −4) = 2 v.",
+      "end": 93.105,
+      "hold": 12.66,
+      "keys": [
+        {
+          "id": "press-58",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.0265
+        },
+        {
+          "id": "press-59",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.0708
+        },
+        {
+          "id": "press-60",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.115
+        },
+        {
+          "id": "press-61",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.1593
+        },
+        {
+          "id": "press-62",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2035
+        },
+        {
+          "id": "press-63",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.2478
+        },
+        {
+          "id": "press-64",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.292
+        },
+        {
+          "id": "press-65",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.3363
+        },
+        {
+          "id": "press-66",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3805
+        },
+        {
+          "id": "press-67",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.4248
+        },
+        {
+          "id": "press-68",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.469
+        },
+        {
+          "id": "press-69",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.5133
+        },
+        {
+          "id": "press-70",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.5575
+        },
+        {
+          "id": "press-71",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6018
+        },
+        {
+          "id": "press-72",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.646
+        },
+        {
+          "id": "press-73",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.6903
+        },
+        {
+          "id": "press-74",
+          "label": "×",
+          "ariaLabel": "×",
+          "at": 0.7345
+        },
+        {
+          "id": "press-75",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.7788
+        },
+        {
+          "id": "press-76",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.823
+        },
+        {
+          "id": "press-77",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.8673
+        },
+        {
+          "id": "press-78",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.9115
+        },
+        {
+          "id": "press-79",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9558
+        }
+      ]
+    },
+    {
+      "chapter": "dominant",
+      "spoken": "Five has the larger magnitude. Its direction dominates only if the starting vector has a component there.",
+      "coach": "Compare |5| and |2|. The direction for 5 dominates only when it is present in the starting vector.",
+      "end": 100.755,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}
