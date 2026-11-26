@@ -16,7 +16,7 @@ window.CALCULATOR_LAUNCH_SCOPE = {
   },
   "CT32": {
     "title": "Quadratic regression",
-    "scopeNote": "Fit a quadratic model and read its coefficients and residuals. Other models are not part of this simulator."
+    "scopeNote": "Fit a quadratic model and read its coefficients and residuals."
   },
   "CT34": {
     "title": "Linearize exponential data with logarithms",
