@@ -3,7 +3,7 @@
   "private": true,
   "description": "Development tooling only. The site itself is static and needs none of this.",
   "scripts": {
-    "check": "node scripts/build.mjs --check && node scripts/check-calculator-shell.mjs && node scripts/check-practice-calculator-help.mjs && node scripts/check-calculator-watch-template.mjs && node scripts/check-calculator-narration.mjs && node scripts/check-calculator-catalogue.mjs && node scripts/check-engine.mjs"
+    "check": "node scripts/build.mjs --check && node scripts/check-calculator-shell.mjs && node scripts/check-practice-formulas.mjs && node scripts/check-practice-calculator-help.mjs && node scripts/check-calculator-watch-template.mjs && node scripts/check-calculator-narration.mjs && node scripts/check-calculator-catalogue.mjs && node scripts/check-engine.mjs"
   },
   "devDependencies": {
     "katex": "0.16.11"

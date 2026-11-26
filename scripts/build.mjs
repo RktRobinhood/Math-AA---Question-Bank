@@ -358,14 +358,29 @@ for (const [topic, name] of Object.entries(topics)) {
 // The engine files load in the order docs/practice-engine.md gives; every generator file in the
 // folder is included, so adding a topic file needs no change here.
 const generatorFiles = fs.readdirSync(path.join(ROOT, "assets/js/engine/generators")).filter((f) => f.endsWith(".js")).sort();
+const practiceGeneratorVersions = {
+  "aa-hl-topic34.js": "20261126-plane-direction-1",
+  "ai-hl-topic123.js": "tsp-bound-inference-1",
+  "ai-hl-topic45.js": "20261126-correlation-assumptions-1",
+  "ai-sl-own.js": "practice-exam-style-1",
+  "t1-scale.js": "20261125-b1",
+  "t5-scale.js": "20261126-easier-1",
+  "topic5.js": "20261125-a1",
+  "w3-number.js": "49785a1",
+  "w3-statistics.js": "20261126-easier-1",
+  "w4-functions.js": "20261126-plane-direction-1",
+  "w4-t1.js": "20261126-plane-direction-1",
+  "w4-t5.js": "20261125-a1",
+  "wave6-functions.js": "20261126-easier-1"
+};
 write("practice.html", page({
   base: "./", title: "Practice | IB Math Question Bank", nav: "practice", calcNav: true, calcCssVersion: "practice-applet-1",
   description: "Adaptive IB Mathematics practice for AA and AI, SL and HL: generated questions with worked solutions, by subtopic.",
-  head: `\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
+  head: `\n    <link rel="stylesheet" href="./assets/css/practice-formulas.css?v=1">\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
-    "vendor/katex/katex.min.js", "js/question-types.js?v=49785a1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
-    ...generatorFiles.map((f) => `js/engine/generators/${f}${f === "w3-number.js" ? "?v=49785a1" : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice.js?v=practice-dock-1",
+    "vendor/katex/katex.min.js", "js/question-types.js?v=20261126-plane-direction-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-formulas-1",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));
 
