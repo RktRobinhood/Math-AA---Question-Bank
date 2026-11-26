@@ -1,0 +1,250 @@
+{
+  "id": "CT10",
+  "title": "Find a graph zero",
+  "intro": "Use bounds to isolate an x-intercept, then use Graph Trace to find the y-intercept.",
+  "chapters": [
+    {
+      "id": "plot",
+      "title": "Plot the function"
+    },
+    {
+      "id": "zero",
+      "title": "Open Zero"
+    },
+    {
+      "id": "bounds",
+      "title": "Bracket one crossing"
+    },
+    {
+      "id": "read",
+      "title": "Read the x-coordinate"
+    },
+    {
+      "id": "trace",
+      "title": "Trace the y-intercept"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "plot",
+      "end": 1.38,
+      "hold": 12,
+      "spoken": "Plot the function.",
+      "coach": "Enter x² − 5x + 6. Press Enter to plot it.",
+      "keys": [
+        {
+          "id": "key-1",
+          "label": "x",
+          "at": 0.08
+        },
+        {
+          "id": "key-2",
+          "label": "x²",
+          "at": 0.1788,
+          "ariaLabel": "Squared"
+        },
+        {
+          "id": "key-3",
+          "label": "−",
+          "at": 0.2775,
+          "ariaLabel": "Minus"
+        },
+        {
+          "id": "key-4",
+          "label": "5",
+          "at": 0.3763
+        },
+        {
+          "id": "key-5",
+          "label": "x",
+          "at": 0.475
+        },
+        {
+          "id": "key-6",
+          "label": "+",
+          "at": 0.5737,
+          "ariaLabel": "Plus"
+        },
+        {
+          "id": "key-7",
+          "label": "6",
+          "at": 0.6725
+        },
+        {
+          "id": "key-8",
+          "label": "Enter",
+          "at": 0.7712
+        }
+      ]
+    },
+    {
+      "chapter": "plot",
+      "end": 5.11,
+      "hold": 4,
+      "spoken": "A zero is an x value for which the function is zero.",
+      "coach": "The graph crosses the x-axis twice. Start with the left-hand crossing.",
+      "keys": []
+    },
+    {
+      "chapter": "zero",
+      "end": 8.42,
+      "hold": 7,
+      "spoken": "Open Analyze Graph and choose Zero.",
+      "coach": "On a Graphs page, press Menu → 6: Analyze Graph → 1: Zero.",
+      "keys": [
+        {
+          "id": "key-9",
+          "label": "Menu",
+          "at": 0.08
+        },
+        {
+          "id": "key-10",
+          "label": "6",
+          "at": 0.3433
+        },
+        {
+          "id": "key-11",
+          "label": "1",
+          "at": 0.6067
+        }
+      ]
+    },
+    {
+      "chapter": "zero",
+      "end": 11.46,
+      "hold": 2,
+      "spoken": "If prompted, select the curve to analyze.",
+      "coach": "Only one curve is plotted here, so the handheld goes straight to the lower bound.",
+      "keys": []
+    },
+    {
+      "chapter": "bounds",
+      "end": 14.51,
+      "hold": 9,
+      "spoken": "Place one bound on each side of the crossing.",
+      "coach": "Place the lower bound to the left of the crossing you want. Press Enter.",
+      "keys": [
+        {
+          "id": "key-12",
+          "label": "←",
+          "at": 0.08,
+          "ariaLabel": "Left arrow"
+        },
+        {
+          "id": "key-13",
+          "label": "←",
+          "at": 0.238,
+          "ariaLabel": "Left arrow"
+        },
+        {
+          "id": "key-14",
+          "label": "←",
+          "at": 0.396,
+          "ariaLabel": "Left arrow"
+        },
+        {
+          "id": "key-15",
+          "label": "←",
+          "at": 0.554,
+          "ariaLabel": "Left arrow"
+        },
+        {
+          "id": "key-16",
+          "label": "Enter",
+          "at": 0.712
+        }
+      ]
+    },
+    {
+      "chapter": "bounds",
+      "end": 17.54,
+      "hold": 10,
+      "spoken": "Keep other zeros outside those bounds.",
+      "coach": "Place the upper bound just to the right of the same crossing. Keep the second crossing outside. Press Enter.",
+      "keys": [
+        {
+          "id": "key-17",
+          "label": "→",
+          "at": 0.08,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-18",
+          "label": "→",
+          "at": 0.238,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-19",
+          "label": "→",
+          "at": 0.396,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-20",
+          "label": "→",
+          "at": 0.554,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-21",
+          "label": "Enter",
+          "at": 0.712
+        }
+      ]
+    },
+    {
+      "chapter": "read",
+      "end": 19.53,
+      "hold": 7,
+      "spoken": "Read the x-coordinate.",
+      "coach": "The point is (2, 0). The zero is x = 2; the output is 0.",
+      "keys": []
+    },
+    {
+      "chapter": "trace",
+      "end": 24.616,
+      "hold": 12,
+      "spoken": "For a y-intercept, evaluate the function at x equal to zero instead.",
+      "coach": "Menu → 5: Trace → 1: Graph Trace. Type 0 and press Enter. Read the point on the y-axis.",
+      "keys": [
+        {
+          "id": "key-22",
+          "label": "Menu",
+          "at": 0.08
+        },
+        {
+          "id": "key-23",
+          "label": "5",
+          "at": 0.2117
+        },
+        {
+          "id": "key-24",
+          "label": "1",
+          "at": 0.3433
+        },
+        {
+          "id": "key-25",
+          "label": "→",
+          "at": 0.475,
+          "ariaLabel": "Right arrow"
+        },
+        {
+          "id": "key-26",
+          "label": "0",
+          "at": 0.6067
+        },
+        {
+          "id": "key-27",
+          "label": "Enter",
+          "at": 0.7383
+        }
+      ]
+    }
+  ],
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "3e092089855cae2cd75df1617171f773a3b1aeef31434294166de25be4048077",
+    "scriptSha256": "bcbfde42a40c961672a60987a9a77fa164820128e3fa3f00d266265fda560063"
+  }
+}

@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark">
-<title>Find a graph zero · Calculator Coach</title><link rel="stylesheet" href="lesson.css"><link rel="stylesheet" href="../handheld/shell.css">
+<title>Find a graph zero · Calculator Skills | IB Math Question Bank</title><link rel="stylesheet" href="lesson.css?v=common-watch-1"><link rel="stylesheet" href="../handheld/shell.css">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("qb-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <link rel="stylesheet" href="../../assets/css/styles.css?v=theme-3">
 <link rel="stylesheet" href="../../assets/css/calculator-integration.css?v=beta-fit-2">
@@ -9,49 +9,39 @@
 <script src="../../assets/js/shell.js?v=nav-4" defer></script>
 <script src="../../assets/js/basket.js" defer></script>
 <script src="../../assets/js/generate.js" defer></script>
-<link rel="stylesheet" href="bank-scope.css?v=zero-bank-1"><link rel="stylesheet" href="player.css?v=zero-player-1-clock-1"> <link rel="stylesheet" href="../handheld/watch-presentation.css?v=2">
-<script src="../handheld/shell.js" defer></script><script src="../handheld/transport.js" defer></script>
-<script src="math.js" defer></script><script src="lcd.js?v=trace-1" defer></script><script src="key-tape.js?v=zero-player-1" defer></script><script src="../handheld/watch-player.js?v=solve-player-1" defer></script><script src="lesson.js?v=zero-player-1-chrome-2&amp;caption-overlay=1" defer></script>
-<link rel="stylesheet" href="../handheld/legacy-watch-captions.css?v=2">
-<link rel="stylesheet" href="../handheld/legacy-watch-appearance.css?v=1">
-</head><body class="calculator-bank-lesson" data-base="../../" data-nav="calculator-skills"><main>
-<header class="header"><div><p class="tag"><a href="../skills.html">Calculator Skills</a> / <span>CT10</span></p><h1>Find a graph zero</h1><p class="subtitle">Bracket one crossing on a TI-Nspire CX II-T.</p></div>
-</header>
-<div class="tabs" role="tablist" aria-label="Lesson mode"><button id="watch-tab" role="tab" aria-controls="watch" aria-selected="true">Watch</button><button id="try-tab" role="tab" aria-controls="try" aria-selected="false" tabindex="-1">Try</button></div>
-<section class="ct10-shared ct10-player" id="stage" data-watch-presentation aria-label="TI-Nspire CX II-T lesson and keypad" tabindex="0">
-<div id="try-player" class="player-top" hidden><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
-<div class="ct10-stage-grid" id="workspace">
+
+<link rel="stylesheet" href="bank-scope.css?v=zero-bank-1">
+<link rel="stylesheet" href="../handheld/watch-lesson.css?v=clean-controls-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<link rel="stylesheet" href="shared-stage.css?v=common-watch-1">
+<script src="../handheld/shell.js" defer></script>
+<script src="../handheld/watch-handset.js?v=1" defer></script>
+<script src="../handheld/transport.js" defer></script>
+<script src="math.js" defer></script>
+<script src="lcd.js?v=trace-1" defer></script>
+<script src="key-tape.js?v=zero-player-1" defer></script>
+<script src="../handheld/watch-player.js?v=solve-player-2" defer></script>
+<script src="../handheld/hold-timeline.js?v=1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
+<script src="lesson.js?v=common-watch-1" defer></script>
+<script src="../handheld/watch-bootstrap.js?v=1" defer></script>
+</head><body class="calculator-bank-lesson ct10-common" data-base="../../" data-nav="calculator-skills"><main>
+<nav class="ct10-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT10</nav>
+<div data-calculator-watch></div>
+<section class="ct10-shared" id="stage" data-mode="try" aria-label="Independent TI-Nspire CX II-T practice" tabindex="0" hidden>
+<div id="try-player" class="player-top"><button type="button" id="return-watch">Return to Watch</button><button type="button" id="reset-keypad">Reset calculator</button></div>
+<div class="ct10-stage-grid" id="try-grid">
 <div class="ct10-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div></div>
 <div class="ct10-stage-side">
-<aside id="watch-side" class="director" aria-label="Demonstration steps"><p class="tag">Worked example</p><h2>Isolate the smaller zero</h2><p>Use Zero on <span class="formula">f(x) = x² − 5x + 6</span>. Keep the other crossing outside the bounds. Then use Graph Trace to read the y-intercept.</p><ol id="steps" class="steps"></ol></aside>
-<aside id="try-side" class="director ct10-try-help" hidden><p class="tag">Calculator practice</p><h2>Find one crossing</h2><p id="keypad-problem" class="ct10-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<aside id="try-side" class="director ct10-try-help"><p class="tag">Calculator practice</p><h2>Find one crossing</h2><p id="keypad-problem" class="ct10-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
 <div id="try-tools">
 <form id="expression-form"><label for="expression">Function in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
 <form id="bound-form" hidden><label for="bound" id="bound-label"></label><div class="inputline"><input id="bound" type="number" step="any" inputmode="decimal" required><button type="submit" class="primary">Enter</button></div></form>
 <button id="retry-bounds" type="button" hidden>Try new bounds</button>
 </div>
 <p class="ct10-keyboard">Keyboard: <kbd>M</kbd>, <kbd>6</kbd>, <kbd>1</kbd>; arrows move the cursor and <kbd>Enter</kbd> confirms. <kbd>Tab</kbd> moves between page controls.</p>
-</aside></div>
-<div id="key-strip"><span>Last key</span> <kbd id="active-key">—</kbd><p id="zero-readout" class="contrast" hidden>Zero: <strong>x = 2</strong></p><p id="intercept-contrast" class="contrast" hidden></p></div>
-<span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
-</div>
-<div class="player legacy-watch-caption-host" id="watch-player" role="group" aria-label="Playback controls">
- <div id="caption-band" class="legacy-watch-caption-display" hidden><p id="caption" class="caption"></p></div>
-<button id="play" class="player-icon" type="button" aria-label="Play" title="Play"><svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg><svg class="pause-icon" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></button>
-<div id="view-pick" role="group" aria-label="Calculator framing">
- <button class="player-icon" id="view-full" type="button" aria-label="Full calculator" title="Full calculator" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M9 9h6m-5.5 4h1m3 0h1m-5 3h1m3 0h1m-5 3h5"/></svg></button>
- <button class="player-icon" id="view-screen" type="button" aria-label="Screen only" title="Screen only" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M6 8h12m-10 7h8"/></svg></button>
-</div>
-<label class="timeline"><span class="sr">Seek demonstration</span><input type="range" id="seek" min="0" value="0" max="26.974" step="0.005"></label><span id="clock" aria-hidden="true">0:00 / 0:27</span>
-<button id="cc" type="button" aria-label="Show captions" title="Captions" aria-pressed="false">CC</button>
-<label class="ct10-rate"><span class="sr">Playback speed</span><select id="play-rate" aria-label="Playback speed"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="0.9" selected>0.9×</option><option value="1">1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option></select></label>
-<button id="sound" class="player-icon" type="button" aria-label="Mute narration" title="Mute narration" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l4 4V5L8 9H4z"/><path class="sound-waves" d="M15 8c2 2 2 6 0 8m3-11c3.5 3.5 3.5 10.5 0 14"/><path class="sound-off" d="m16 10 5 5m0-5-5 5" hidden/></svg></button>
-<button id="fullscreen" class="player-icon" type="button" aria-label="Fullscreen" title="Fullscreen" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg></button>
-<p id="media-status" role="status" hidden class="legacy-watch-status"></p>
-<audio id="narration" preload="metadata" src="narration.mp3"></audio>
-</div>
-</section>
-<section id="watch" role="tabpanel" aria-labelledby="watch-tab" class="ct10-watch-panel"><p class="sr">The Watch player is above.</p></section>
-<section id="try" role="tabpanel" aria-labelledby="try-tab" hidden><section class="exercise"><p class="tag">Your turn</p><h2 id="challenge-title">Find the larger zero</h2><p id="challenge"></p><form id="answer-form"><label for="answer">x-coordinate <small>(to three significant figures if needed)</small></label><div class="answer-row"><input type="number" step="any" inputmode="decimal" required id="answer"><button class="primary">Check</button></div></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Look for the curve crossing the x-axis. Put one bound on each side of just that crossing.</p></details></section></section>
+</aside></div></div></section>
+<section id="try" hidden><section class="exercise"><p class="tag">Your turn</p><h2 id="challenge-title">Find the larger zero</h2><p id="challenge"></p><form id="answer-form"><label for="answer">x-coordinate <small>(to three significant figures if needed)</small></label><div class="answer-row"><input type="number" step="any" inputmode="decimal" required id="answer"><button class="primary">Check</button></div></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Look for the curve crossing the x-axis. Put one bound on each side of just that crossing.</p></details></section></section>
 <details id="transcript-details" class="notes"><summary>Transcript</summary><p id="transcript"></p></details>
 </main></body></html>
