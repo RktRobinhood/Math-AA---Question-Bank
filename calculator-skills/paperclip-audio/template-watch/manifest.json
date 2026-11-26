@@ -21,6 +21,13 @@
       "transcript": "../../linear-system-three/narration-script.txt",
       "transcriptSha256": "2107ffbf59a2c8abcbfb63f44b6f0f1c534965b8f38945322c0ba224d02dc93d",
       "audioDestination": "../../linear-system-three/narration.mp3"
+    },
+    {
+      "id": "CT03-ai",
+      "definition": "../../counting-ai/definition.json",
+      "transcript": "CT03-ai.txt",
+      "transcriptSha256": "f17d82d39c3e9aebf406810f28170ff2ed6db03da69b8d20bf90f24b3106b807",
+      "audioDestination": "../../counting-ai/narration.mp3"
     }
   ]
 }

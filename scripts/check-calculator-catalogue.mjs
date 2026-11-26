@@ -14,8 +14,8 @@ assert.deepEqual(Object.keys(audit.courses),courses);
 // Only audited limited uses with a working, honestly named path appear.
 const scoped={
  'CT03':{
-  'ai-sl':{title:'Calculate a binomial coefficient with nCr',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'},
-  'ai-hl':{title:'Calculate a binomial coefficient with nCr',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'}
+  'ai-sl':{title:'Calculate a binomial coefficient with nCr',path:'counting-ai/index.html',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'},
+  'ai-hl':{title:'Calculate a binomial coefficient with nCr',path:'counting-ai/index.html',topics:['4'],note:'Use the combinations key to find a binomial coefficient.'}
  },
  'CT07':{'aa-sl':{note:'Solve or check a pair of linear equations in an applied problem.'}},
  'CT15':{'ai-sl':{title:'Graph a model on a restricted domain',note:'Follow the interval restrictions and check which expression applies at the boundary.'}},
@@ -56,7 +56,16 @@ for(const {id,topic,coverage} of audit.entries){
   if(v==='L'){
    assert(Boolean(special)!==Boolean(reason),id+' limited case must declare a decision: '+c);
    used.add(id+'/'+c);
-   if(special){scopedCounts[c]++;if(special.topics)validTopics(special.topics,id+'/'+c);}
+   if(special){
+    scopedCounts[c]++;
+    if(special.topics)validTopics(special.topics,id+'/'+c);
+    if(special.path){
+     assert.match(special.path,/^[a-z][a-z0-9-]*\/index\.html$/);
+     assert.match(read('calculator-skills/'+special.path),/watch-bootstrap\.js/,id+'/'+c+' uses the shared Watch template');
+     const spec=JSON.parse(read('calculator-skills/'+special.path.replace('index.html','definition.json')));
+     assert.equal(spec.id,id+'-ai',id+'/'+c+' dedicated AI lesson');
+    }
+   }
   }
  }
  assert(typeof copy[id]==='string'&&copy[id].length>=15&&copy[id].length<135,id+' concise student description');

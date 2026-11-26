@@ -39,7 +39,7 @@
     const primary=rows.flatMap(r=>{
       const entry=scope?.skills?.[r.id], limited=entry?.scoped?.[id];
       if(!entry?.direct?.includes(id)&&!limited)return [];
-      return [{...r,title:limited?.title||r.title,topics:limited?.topics||entry.topics,description:limited?.note||entry.description,limited}];
+      return [{...r,title:limited?.title||r.title,topics:limited?.topics||entry.topics,description:limited?.note||entry.description,href:safeRoute(limited?.path)||r.href,limited}];
     });
     const curriculum=[...primary,...companionRows.filter(c=>c.direct.includes(id))];
     curriculum.sort((a,b)=>a.id.localeCompare(b.id)||Number(!!a.companion)-Number(!!b.companion));

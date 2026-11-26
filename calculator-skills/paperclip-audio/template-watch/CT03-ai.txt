@@ -1,0 +1,4 @@
+In eight independent attempts, exactly three succeed. The binomial coefficient counts which three of the eight positions are successes.
+On a Calculator page, press Menu. Choose five for Probability, then three for Combinations. This opens the n C r command.
+Type eight for the total number of trials. Then type a comma and three for the number of successes. Close the parenthesis and press Enter.
+The calculator gives fifty-six. That counts the success patterns. It is an exact integer, not the probability of three successes.

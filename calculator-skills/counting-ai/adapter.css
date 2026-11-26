@@ -1,0 +1,15 @@
+/* Native LCD and Try only. Every Watch control comes from the shared player. */
+.ai-coefficient-page #ai-watch{width:100%;max-width:none;margin:.35rem 0 .85rem}
+.ai-coefficient-page .lw-stage[data-mode=try]{background:none;border:0;overflow:visible}
+.ai-coefficient-page .lw-stage[data-mode=try] .lw-surface{padding:0}
+.ai-coefficient-page .lw-stage[data-mode=try] .lw-device{width:100%;max-width:none}
+.ai-coefficient-page #ai-handheld{min-width:0}
+.ai-coefficient-page #ai-try #ai-handheld{--handheld-width:min(295px,100%)}
+.ai-coefficient-page .ai-try-head{padding:.55rem .75rem;border-bottom:1px solid var(--line)}
+.ai-coefficient-page .ai-try-head>p{font-weight:670}
+.ai-coefficient-page .ai-answer{margin-top:.5rem}
+.ai-coefficient-page .ai-answer label{font-size:.84rem;font-weight:670}
+.ai-coefficient-page .answer-line input{display:block;width:100%;min-width:0}
+@media(max-width:710px){
+ .ai-coefficient-page #ai-try #ai-handheld{--handheld-width:min(235px,100%)}
+}

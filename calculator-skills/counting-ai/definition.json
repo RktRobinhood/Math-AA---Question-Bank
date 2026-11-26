@@ -1,0 +1,101 @@
+{
+  "id": "CT03-ai",
+  "title": "Binomial coefficient",
+  "intro": "Count success patterns with nCr.",
+  "chapters": [
+    {
+      "id": "coefficient",
+      "title": "What the coefficient counts"
+    },
+    {
+      "id": "open-ncr",
+      "title": "Open Combinations"
+    },
+    {
+      "id": "arguments",
+      "title": "Enter total, then successes"
+    },
+    {
+      "id": "result",
+      "title": "Read the exact count"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "coefficient",
+      "end": 8.5,
+      "hold": 8,
+      "spoken": "In eight independent attempts, exactly three succeed. The binomial coefficient counts which three of the eight positions are successes.",
+      "coach": "What does nCr count?",
+      "keys": []
+    },
+    {
+      "chapter": "open-ncr",
+      "end": 17,
+      "hold": 13,
+      "spoken": "On a Calculator page, press Menu. Choose five for Probability, then three for Combinations. This opens the n C r command.",
+      "coach": "Menu → 5: Probability → 3: Combinations opens nCr(.",
+      "keys": [
+        {
+          "id": "menu",
+          "label": "Menu",
+          "at": 0.14
+        },
+        {
+          "id": "probability",
+          "label": "5",
+          "at": 0.39
+        },
+        {
+          "id": "combinations",
+          "label": "3",
+          "at": 0.67
+        }
+      ]
+    },
+    {
+      "chapter": "arguments",
+      "end": 28,
+      "hold": 20,
+      "spoken": "Type eight for the total number of trials. Then type a comma and three for the number of successes. Close the parenthesis and press Enter.",
+      "coach": "Use nCr(8,3): total trials first, successes second.",
+      "keys": [
+        {
+          "id": "total",
+          "label": "8",
+          "at": 0.13
+        },
+        {
+          "id": "comma",
+          "label": ",",
+          "at": 0.28,
+          "ariaLabel": "comma"
+        },
+        {
+          "id": "successes",
+          "label": "3",
+          "at": 0.44
+        },
+        {
+          "id": "close",
+          "label": ")",
+          "at": 0.59,
+          "ariaLabel": "right parenthesis"
+        },
+        {
+          "id": "evaluate",
+          "label": "Enter",
+          "at": 0.77
+        }
+      ]
+    },
+    {
+      "chapter": "result",
+      "end": 38,
+      "hold": 11,
+      "spoken": "The calculator gives fifty-six. That counts the success patterns. It is an exact integer, not the probability of three successes.",
+      "coach": "56 success patterns. The coefficient is a count, not a probability.",
+      "keys": []
+    }
+  ]
+}
