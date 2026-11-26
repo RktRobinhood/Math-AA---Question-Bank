@@ -497,7 +497,7 @@
       const AB = vsub(B, A);
       return { params: { A, B }, stem: `The points $\\mathrm{A}$ and $\\mathrm{B}$ have coordinates $${coords(A)}$ and $${coords(B)}$ respectively.`, parts: [
         P(`Find $${arrow("AB")}$.`, 1, ans.choice(rng, vopt(AB), [
-          vopt(vsub(A, B), `This is $${arrow("BA")}$: subtract the position vector of $\\mathrm{A}$ from that of $\\mathrm{B}$.`),
+          vopt(vsub(A, B), `This is $${arrow("BA")}$, from $\\mathrm{B}$ to $\\mathrm{A}$. For $${arrow("AB")}$, subtract the starting position from the ending position: $${arrow("OB")} - ${arrow("OA")}$.`),
           vopt(vadd(A, B), "The position vectors have been added instead of subtracted."),
           vopt([AB[0], -AB[1], AB[2]], "One component has a sign error."),
           vopt(A.map((x, i) => x * B[i]), "The coordinates have been multiplied.")]), [
@@ -780,8 +780,8 @@
         D0 = vsub(b, a); Dv = vsub(w, v); ts = -dot(D0, Dv) / n2(Dv); dmin = Math.sqrt(Math.max(0, n2(vadd(D0, vmul(ts, Dv))))); t0 = rng.int(1, 3);
       } while (!(ts > 3.5 && ts < 12) || dmin < 1.5 || Number.isInteger(ts * 4) || isSq(n2(v)));
       const what = rng.pick(["drones", "model aircraft", "helicopters"]), Dt = vadd(D0, vmul(t0, Dv));
-      const A2 = n2(Dv), B2 = 2 * dot(D0, Dv), C2 = n2(D0), rA = `${bv("r")}_{A}`, rB = `${bv("r")}_{B}`;
-      return { params: { a, b, v, w, t0 }, stem: `Two ${what}, $A$ and $B$, move in straight lines with constant velocity. At time $t$ seconds, their position vectors relative to a fixed point on the ground are $${lineT(a, v, "t", rA)}$ and $${lineT(b, w, "t", rB)}$, where distances are in metres.`, parts: [
+      const A2 = n2(Dv), B2 = 2 * dot(D0, Dv), C2 = n2(D0), exactTime = rat.tex(rat.Q(-B2, 2 * A2)), rA = `${bv("r")}_{A}`, rB = `${bv("r")}_{B}`;
+      return { params: { a, b, v, w, t0 }, stem: `Two ${what}, $A$ and $B$, move in straight lines with constant velocity for the first $12$ seconds. Their position vectors at time $t$ seconds, measured from a fixed reference point, are $${lineT(a, v, "t", rA)}$ and $${lineT(b, w, "t", rB)}$, where distances are in metres.`, parts: [
         P("Find the speed of $A$.", 2, ans.sf(norm(v), 3, { unit: "$\\text{m s}^{-1}$" }), [
           `The velocity of $A$ is $${col(v)}$.`, `Its speed is $${normW(v)} = \\sqrt{${n2(v)}} = ${sf(norm(v))}\\text{ m s}^{-1}$.`]),
         P(`Find the distance between $A$ and $B$ when $t = ${t0}$.`, 2, ans.sf(norm(Dt), 3, { unit: "$\\text{m}$" }), [
@@ -789,8 +789,8 @@
         P("Find the value of $t$ at which $A$ and $B$ are closest to each other.", 2, ans.sf(ts), [
           `If $D$ is the distance between them, $D^{2} = ${[0, 1, 2].map((i) => `(${expr([[D0[i], ""], [Dv[i], "t"]])})^{2}`).join(" + ")}$.`,
           `$D^{2} = ${expr([[A2, "t^{2}"], [B2, "t"], [C2, ""]])}$`,
-          `This is least at the vertex of the quadratic (or from its graph on a GDC): $t = ${sf(ts)}$`]),
-        P("Find the least distance between $A$ and $B$.", 1, ans.sf(dmin, 3, { unit: "$\\text{m}$" }), [`Substituting $t = ${sf(ts)}$ gives $D = ${sf(dmin)}\\text{ m}$.`])] };
+          `This quadratic opens upwards. Its minimum on the time interval is at $t = -\\dfrac{${paren(B2)}}{2 \\times ${A2}} = ${exactTime} \\approx ${sf(ts)}$ seconds.`]),
+        P("Find the least distance between $A$ and $B$.", 1, ans.sf(dmin, 3, { unit: "$\\text{m}$" }), [`Use the unrounded time $t = ${exactTime}$ in the expression for $D^{2}$, then take the positive square root: $D \\approx ${sf(dmin)}\\text{ m}$.`])] };
     } });
 
   reg({ type: "t3-ahl-line", unknown: "kinematics-ship", representation: "words", format: "value", levels: [2], syllabus: ["3.14"],

@@ -132,6 +132,9 @@ export default {
   // ======================= 3.12 =======================
   "t3-ahl-vector-basics/displacement/equation": (q, T) => {
     const { A, B } = q.params;
+    const wrong = q.parts[0].answer.values.findIndex(v => same(add(B, v), A));
+    T.require(wrong >= 0 && q.parts[0].answer.misconceptions[wrong].includes("from $\\mathrm{B}$ to $\\mathrm{A}$"),
+      "the reversed displacement is diagnosed as travelling from B to A");
     return { a: T.optionWhere(q, "a", (v) => same(add(A, v), B)) };          // going from A by the vector arrives at B
   },
   "t3-ahl-vector-basics/magnitude/equation": (q, T) => ({ a: Math.hypot(...q.params.v) }),
@@ -217,8 +220,9 @@ export default {
   },
   "t3-ahl-line/kinematics-closest/words": (q, T) => {
     const { a, b, v, w, t0 } = q.params, D = (t) => len(sub(add(a, mul(t, v)), add(b, mul(t, w))));
-    const best = T.extremum(D, 0, 60, "min", 6000);
-    T.require(best.x > 1 && best.x < 59 && best.value > 1, "the closest approach is after the start and is not a collision");
+    const best = T.extremum(D, 0, 12, "min", 6000);
+    T.require(best.x > 1 && best.x < 12 && best.value > 1, "the closest approach is within the stated interval and is not a collision");
+    T.require(q.parts[3].working.some(line => line.includes("unrounded time")), "distance uses the unrounded time");
     // speed: distance travelled in one second
     return { a: len(sub(add(a, v), a)), b: D(t0), c: T.approx(best.x, 1e-4), d: T.approx(best.value, 1e-6) };
   },
