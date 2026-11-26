@@ -17,13 +17,15 @@
 
 <link rel="stylesheet" href="lesson.css?v=ct38-holds-1">
 <link rel="stylesheet" href="../handheld/shell.css">
-<link rel="stylesheet" href="watch.css?v=ct38-holds-1">
+<link rel="stylesheet" href="../handheld/watch-chapters.css?v=1">
+<link rel="stylesheet" href="watch.css?v=ct38-template-1">
 <script src="../handheld/shell.js" defer></script>
 <script src="../handheld/key-cues.js" defer></script>
 <script src="../handheld/watch-player.js?v=ct38-holds-1" defer></script>
 <script src="../handheld/hold-timeline.js?v=teaching-holds-1" defer></script>
 <script src="watch-plan.js?v=ct38-holds-1" defer></script>
-<script src="lesson.js?v=ct38-holds-1" defer></script>
+<script src="../handheld/watch-chapters.js?v=1" defer></script>
+<script src="lesson.js?v=ct38-template-1" defer></script>
 </head>
 <body class="calculator-bank-lesson ct38-binomial" data-base="../../" data-nav="calculator-skills">
 <main>
@@ -45,7 +47,7 @@
 <p class="tag">Worked example</p>
 <h2>At least five</h2>
 <p>Across 12 independent trials, the chance of success each time is 0.25. What is the probability of at least 5 successes?</p>
-<ol id="steps" class="steps"></ol>
+<div id="key-strip" aria-label="Steps and keys"><div id="steps"></div></div>
 <details class="ct38-transcript"><summary>Transcript</summary><p id="transcript"></p></details>
 
 </aside>
@@ -58,7 +60,6 @@
 <p id="keypad-result" class="feedback" role="status" hidden></p>
 </aside>
 </div>
-<div id="key-strip" aria-label="Demonstrated keys"><span>Keys</span><ol id="key-steps"></ol></div>
 <span id="play-feedback" aria-hidden="true" data-initial="true" data-action="play"><svg class="play-glyph" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="pause-glyph" viewBox="0 0 24 24"><path d="M8 5h3v14H8zm6 0h3v14h-3z"/></svg></span>
 </div>
 <p class="ct38-bounds" id="watch-bounds"><strong id="bounds-case">At least 5</strong> <span id="bounds-range">5 ≤ X ≤ 12 · inclusive</span> <span class="bounds-model">n = 12 · p = 0.25</span></p><p id="teaching-tip" class="ct38-tip"></p>

@@ -2,7 +2,15 @@
 (function(){
  const $=id=>document.getElementById(id);
  const plan=window.CT38WatchPlan, tape=plan.tape;
- const stages=["Interpret the event","Find Binomial Cdf","Enter the four inputs","Read and compare bounds","Check the strict boundary"];
+ const groups=[
+  {id:"read-event",title:"Read the event",part:0},
+  {id:"open-cdf",title:"Open Binomial Cdf",part:1,range:[0,4]},
+  {id:"set-model",title:"Set n and p",part:2,range:[4,11]},
+  {id:"set-bounds",title:"Set the bounds",part:2,range:[11,17],fromKey:11},
+  {id:"evaluate",title:"Insert and calculate",part:3,range:[17,19]},
+  {id:"at-most",title:"Compare at most",part:5},
+  {id:"more-than",title:"Check more than",part:6}
+ ];
  const watchExample={n:12,p:.25,lower:5,upper:12}, practiceExample={n:9,p:.35,event:"lt",k:3,upper:5};
  const menuA=["1: Actions","2: Number","3: Algebra","4: Calculus","5: Probability","6: Statistics","7: Matrix & Vector","8: Finance"];
  const menuB=["1: Factorial","2: Permutations","3: Combinations","4: Random","5: Distributions"];
@@ -16,15 +24,23 @@
  const framingKey="qb-calculator-watch-frame", workspace=$("workspace"), cc=$("cc"), overlay=$("play-feedback"), rate=$("play-rate");
  const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen"}catch{return "screen"}};
  let layout=plan.make(1),duration=layout.duration;
- let mode="watch",time=0,raf=0,playing=false,pending=false,useAudio=!!audio.getAttribute("src"),epoch=0,sig="",chapter=0,origin=0,phase="",lastTrail=-2;
+ let mode="watch",time=0,raf=0,playing=false,pending=false,useAudio=!!audio.getAttribute("src"),epoch=0,sig="",origin=0,phase="";
  let framing=readFrame(),captionsOn=false,initiated=false;
  audio.playbackRate=1;audio.preservesPitch=true;
  const player=CalculatorWatchPlayer.mount({player:stage,surface:workspace,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
- const trail=$("key-steps"), chips=tape.map((event,i)=>{
-  const li=document.createElement("li"), key=document.createElement("kbd");
-  if([4,7,12,14,17].includes(i))li.className="group-start";
-  key.textContent=plan.name(event.key);li.hidden=true;li.append(key);trail.append(li);return li;
- });
+ const occurrence=i=>"press-"+(i+1);
+ function groupTime(g){
+  const span=layout.spans[g.part];
+  if(g.fromKey===undefined)return span.start;
+  // Start between the Tab that selects Lower Bound and the first
+  // count key, using the existing teaching tape unchanged.
+  let lo=span.voiceEnd,hi=span.end;
+  for(let q=0;q<23;q++){const mid=(lo+hi)/2;if(plan.visual(layout.at(mid)).last<g.fromKey)lo=mid;else hi=mid;}
+  return Math.min(span.end,hi+.12);
+ }
+ function activeGroup(i,last){
+  return i===0?0:i===1?1:i===2?(last>=11?3:2):i<=4?4:i===5?5:6;
+ }
  for(const id of ["transcript","transcript-mobile"])$(id).textContent=plan.words.join(" ");
  seek.max=String(duration);
  // The original key tape is acted once. Later narration compares settings, not keystrokes.
@@ -53,7 +69,6 @@
  const wizard=(values,field,live,preview=false)=>'<div class="lcd-dialog"><strong>Binomial Cdf</strong>'+labels.map((n,i)=>'<div class="lcd-field'+((i===field||(preview&&i>=2))?' active':'')+(live?' kbd-action" data-field="'+i:'')+'"><span>'+n+':</span><span>'+escape(values[i]||"\u00a0")+'</span></div>').join("")+(preview?'<p class="lcd-preview-note">Bounds preview · not calculated</p>':'<div class="lcd-ok"><span'+(field===4?' class="active"':'')+(live?' data-field="4"':'')+'>OK</span> <span'+(live?' data-field="5"':'')+'>Cancel</span></div>')+'</div>';
  const lcdResult=h=>'<div class="lcd-history"><p>'+escape(h.command)+'</p><p class="answers"><strong>'+escape(h.value)+'</strong></p></div>';
  const lcdEntry=x=>'<div class="lcd-entry"><p>'+escape(x||"\u00a0")+'</p></div>';
- const activate=(b,v)=>{b.setAttribute("aria-current",String(v));};
 
  function watchSnapshot(index){
   const values=["","","",""];let state="idle",field=0;
@@ -68,17 +83,14 @@
  function renderWatch(t){
   if(mode!=="watch")return;
   const point=layout.at(t), frame=plan.visual(point), {i,last,current,example}=frame;
-  chapter=plan.chapter[i];
+  const group=groups[activeGroup(i,last)];
   seek.value=String(t);seek.setAttribute("aria-valuetext",timecode(t)+" of "+timecode(duration));
   $("clock").textContent=timecode(t)+" / "+timecode(duration);
   stage.dataset.phase=point.speaking?"voice":"hold";
   stage.dataset.watchBeat=String(i);
   shell.setKeys(current&&!example?[current]:[]);
-  if(lastTrail!==last){
-   lastTrail=last;
-   chips.forEach((item,j)=>{item.hidden=j>last;item.classList.toggle("current",j===last);});
-   trail.scrollLeft=trail.scrollWidth;
-  }
+  const inGroup=group.range&&last>=group.range[0]&&last<group.range[1];
+  chapterRail.setState({chapterId:group.id,keyId:inGroup?occurrence(last):null});
   if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
   const spoken=point.speaking&&point.audioTime>=plan.spokenAt[i]-.03?plan.words[i]:"";
   if($("caption").textContent!==spoken)$("caption").textContent=spoken;
@@ -104,11 +116,19 @@
   if(state==="result")html=example?wizard(boundsCards[example].values,-1,false,true):lcdResult({command,value:watchedResult})+lcdEntry("");
   if(!html)html=lcdEntry("");
   work.innerHTML=html;
-  [...steps.children].forEach((li,j)=>activate(li.firstElementChild,j===chapter));
  }
- stages.forEach((name,i)=>{
-  const li=document.createElement("li"),b=document.createElement("button"),num=document.createElement("span");
-  b.type="button";num.textContent="0"+(i+1);b.append(num,document.createTextNode(name));b.addEventListener("click",()=>go(layout.spans[plan.entry[i]].start));li.append(b);steps.append(li);
+ // Retain this episode's exact audio/key plan and calculator state
+ // engine. The shared presentation owns accessible buttons and key tiles.
+ const railData=groups.map(g=>({
+  id:g.id,title:g.title,
+  keys:g.range?tape.slice(...g.range).map((event,j)=>({
+   id:occurrence(g.range[0]+j),label:plan.name(event.key),
+   ariaLabel:event.key==="decimal"?"Decimal point":plan.name(event.key)
+  })):[]
+ }));
+ const chapterRail=CalculatorWatchChapters.mount(steps,railData,{
+  label:"Steps and calculator keys",
+  onChapter:id=>{const g=groups.find(chapter=>chapter.id===id);if(g)go(groupTime(g));}
  });
  function paintFrame(){
   stage.classList.toggle("ct38-screen-view",mode==="watch"&&framing==="screen");

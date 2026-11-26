@@ -76,5 +76,12 @@ function readX(s){
  if(typeof s!=="string"||!s.trim()||s.length>19||!/^[+−-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(s.trim()))return null;
  const n=Number(s.replace("−","-").trim());return Number.isFinite(n)&&Math.abs(n)<=100?n:null;
 }
-global.CT51Math=Object.freeze({parse,derivative,windowFor,equivalent,readX,displayExpr,pretty,prettyX,clamp});
+function exactInput(raw){
+ const text=String(raw??"").trim().replaceAll("−","-");
+ const frac=text.match(/^([+-]?\d+)\s*\/\s*([+-]?\d+)$/);
+ if(frac)return Number(frac[1])/Number(frac[2]);
+ if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/.test(text))return NaN;
+ return Number(text);
+}
+global.CT51Math=Object.freeze({parse,derivative,windowFor,equivalent,readX,displayExpr,pretty,prettyX,clamp,exactInput});
 })(typeof module==='object'&&module.exports?module.exports:globalThis);

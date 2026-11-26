@@ -6,15 +6,9 @@
 .ct38-shared[data-mode=watch] #watch-side .director{padding:0 3px;}
 .ct38-shared[data-mode=watch] #watch-side .director p{color:var(--tape-soft);margin-bottom:6px;font-size:.85rem;}
 .ct38-shared[data-mode=watch] #watch-side .director h2{font-size:1.18rem;margin-bottom:4px;letter-spacing:-.02em;}
-.ct38-shared[data-mode=watch] #watch-side .steps{margin:6px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:2px;}
-.ct38-shared[data-mode=watch] #watch-side .steps button{min-height:35px;color:var(--tape-soft);font-size:.73rem;line-height:1.18;padding:4px;gap:4px;}
-.ct38-shared[data-mode=watch] #watch-side .steps button span{color:var(--tape-soft);flex:0 0 16px;}
-.ct38-shared[data-mode=watch] #watch-side .steps button:is(:hover,[aria-current=true]){background:#31463b;border-color:var(--tape-line);color:#fff;}
 .ct38-shared #play-feedback{position:absolute;z-index:8;pointer-events:none;left:50%;top:50%;translate:-50% -50%;width:62px;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0d1615e9;color:#fff;box-shadow:0 1px 10px #0009;}
 .ct38-shared #play-feedback svg{width:36px;height:36px;fill:currentColor;}
 .ct38-shared #play-feedback[data-action=play] .pause-glyph,.ct38-shared #play-feedback[data-action=pause] .play-glyph{display:none}
-.ct38-shared #key-strip{position:absolute;top:4px;left:11px;right:9px;min-height:23px;display:flex;align-items:center;gap:6px;white-space:nowrap;font:600 .72rem/1.2 var(--mono);color:var(--tape-soft);pointer-events:none;}
-.ct38-shared #active-key{display:inline-block;min-width:2rem;text-align:center;font:700 .77rem/1.15 var(--mono);border:1px solid #7b9888;border-radius:4px;padding:3px 6px;background:#283e33;color:#fff;}
 .ct38-shared[data-mode=watch] #watch-bounds{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:center;gap:3px 9px;min-height:25px;max-width:none;margin:0;padding:3px 7px 4px;color:var(--tape-on);font:650 clamp(.64rem,2.7vw,.84rem)/1.25 system-ui;}
 .ct38-shared[data-mode=watch] #bounds-case{font-weight:770;color:var(--tape-ink);}
 .ct38-shared[data-mode=watch] .bounds-model{color:var(--tape-soft);font-weight:560;}
@@ -92,14 +86,34 @@ body.ct38-binomial.watch-fullscreen-open{overflow:hidden;}
  @keyframes ct38-feedback-in{from{opacity:.45;scale:.88}to{opacity:1;scale:1}}
 }
 
-/* Teaching holds expose the ordered key trail in either manual framing. */
-.ct38-shared #key-strip{font-size:.69rem;pointer-events:auto;}
-.ct38-shared #key-steps{display:flex;align-items:center;gap:3px;flex:1 1 auto;min-width:0;overflow:auto;scrollbar-width:none;margin:0;padding:1px 0;list-style:none;}
-.ct38-shared #key-steps::-webkit-scrollbar{display:none}
-.ct38-shared #key-steps li{flex:none}
-.ct38-shared #key-steps .group-start{margin-inline-start:4px}
-.ct38-shared #key-steps kbd{display:block;border:1px solid #5a7667;border-radius:4px;color:#dbe6de;background:#243931;padding:2px 4px;min-width:1.05rem;text-align:center}
-.ct38-shared #key-steps .current kbd{background:#bfead0;color:#102e20;border-color:#d2f5dd}
+/* CT38 only fits the centrally rendered rail into its existing stage. */
+.ct38-shared[data-mode=watch] #workspace{padding-top:8px}
+.ct38-shared #steps{
+ --watch-chapters-ink:var(--tape-ink);
+ --watch-chapters-soft:var(--tape-soft);
+ --watch-chapters-selected:#31483d;
+ --watch-chapters-edge:#688575;
+}
+.ct38-shared #steps .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 5px;}
+.ct38-shared #steps .qb-watch-chapters__button{min-height:27px;padding:3px 4px;gap:2px 4px;}
+.ct38-shared #steps .qb-watch-chapters__title{font-size:.74rem}
+.ct38-shared #steps .qb-watch-chapters__key{padding:1px 3px;font-size:.66rem}
+@media(max-width:700px){
+ .ct38-shared[data-mode=watch] #workspace{grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);padding:6px 6px 4px;gap:5px}
+ .ct38-shared[data-mode=watch] #workspace .ct38-stage-side{display:block;align-self:center;}
+ .ct38-shared[data-mode=watch] #watch-side .director>:not(#key-strip){display:none}
+ .ct38-shared #steps .qb-watch-chapters{grid-template-columns:minmax(0,1fr);gap:2px}
+ .ct38-shared #steps .qb-watch-chapters__row:not(:has(.qb-watch-chapters__keys)){display:none}
+ .ct38-shared #steps .qb-watch-chapters__button{min-height:27px;padding:2px 1px}
+ .ct38-shared #steps .qb-watch-chapters__index{display:none}
+ .ct38-shared #steps :is(.qb-watch-chapters__title,.qb-watch-chapters__keys){grid-column:1/-1}
+ .ct38-shared #steps .qb-watch-chapters__title{font-size:.64rem}
+ .ct38-shared #steps .qb-watch-chapters__keys{gap:2px}
+ .ct38-shared #steps .qb-watch-chapters__key{min-width:.86rem;padding:1px 2px;font-size:.575rem}
+}
+@media(max-height:600px){
+ .ct38-shared[data-mode=watch] #watch-side .director>:not(#key-strip){display:none}
+}
 .ct38-shared[data-mode=watch] .ct38-tip{color:var(--tape-soft);min-height:1.7em;margin:0;padding:0 8px 4px;text-align:center;font:580 clamp(.64rem,2.7vw,.84rem)/1.2 system-ui;max-width:none;}
 .ct38-shared #watch-player select{min-width:113px;max-width:145px;}
 .ct38-shared .ct38-transcript{font-size:.76rem;margin-top:.4rem;color:var(--tape-soft)}
@@ -108,4 +122,8 @@ body.ct38-binomial.watch-fullscreen-open{overflow:hidden;}
 @media(max-width:375px){
  .ct38-shared #watch-player select{width:88px;min-width:88px;max-width:88px;font-size:.70rem;}
  .ct38-shared #clock{grid-column:5/-1;}
+}
+@media(max-width:700px){
+ .ct38-shared #play-feedback{width:44px}
+ .ct38-shared #play-feedback svg{width:27px;height:27px}
 }

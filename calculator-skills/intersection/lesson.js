@@ -1,9 +1,9 @@
 "use strict";
 (function(){
  const $=id=>document.getElementById(id);
- const M=window.CT11Math,S=window.CT11Screen,T=window.CT11Tape,H=window.HandheldTransport;
+ const M=window.CT11Math,S=window.CT11Screen,T=window.CT11Tape,H=window.HandheldTransport,P=window.CT11Plan;
  const stage=$("stage"),play=$("play"),seek=$("seek"),cap=$("caption"),audio=$("narration");
- const lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),fields=[$("expression-1"),$("expression-2")],bound=$("bound");
+ const lcd=$("lcd"),canvas=$("drawing"),screen=S.screen(canvas),fields=[$("expression-1"),$("expression-2")],expressionForm=$("expression-form");
  const watchPair=[M.parse("x^2"),M.parse("2x+3")],defaultTry=[M.parse("x^2"),M.parse("x+6")],params=new URLSearchParams(location.search);
  const knownWindow={x0:-4,x1:6,y0:-6,y1:16};
  const initial=raw=>({state:"entry",raw:raw.slice(),q:[null,null],active:0,low:null,high:null,cursor:null,mark:null,error:null,typed:"",windows:null});
@@ -24,13 +24,13 @@
  const prompt=points.length>1?"Find both coordinates of the intersection with the "+where+".":"Find both coordinates of the intersection.";
  const sameCurve=(a,b)=>["a","b","c"].every(k=>a[k]===b[k]);
  let mode="watch",state=initial(challenge.map(q=>q.raw)),edited=false,fresh=true;
- let t=0,duration=T.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="";
+ let layout=P.make(),t=0,duration=layout.duration,playing=false,pending=false,raf=0,origin=0,useAudio=audio.hasAttribute("src"),playEpoch=0,cache="",phase="";
  const shell=HandheldShell.mount({host:$("handheld-host"),screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:key=>press(key)});
  const surface=$("workspace"),overlay=$("play-feedback"),cc=$("cc"),speedSelect=$("play-rate");
  const framingKey="qb-calculator-watch-frame";
  const readFrame=()=>{try{return localStorage.getItem(framingKey)==="full"?"full":"screen";}catch{return "screen";}};
- let framing=readFrame(),speed=Number(speedSelect.value),showCaptions=false,initiated=false,pendingSeek=null;
- audio.playbackRate=speed;audio.preservesPitch=true;
+ let framing=readFrame(),showCaptions=false,initiated=false;
+ seek.max=duration.toFixed(3);audio.playbackRate=1;audio.preservesPitch=true;
  const chrome=CalculatorWatchPlayer.mount({player:stage,surface,play,seek,expand:$("fullscreen"),feedback:overlay,active:()=>mode==="watch"});
  function paintFraming(){
   stage.classList.toggle("ct11-screen-view",mode==="watch"&&framing==="screen");
@@ -48,7 +48,7 @@
  function captions(value){
   showCaptions=value;cc.setAttribute("aria-pressed",String(value));
   cc.setAttribute("aria-label",value?"Hide captions":"Show captions");
-  $("caption-band").hidden=mode!=="watch"||!value;
+  $("caption-band").hidden=mode!=="watch"||!value||!cap.textContent;
   fitBankWatch();
  }
  cc.addEventListener("click",()=>captions(!showCaptions));
@@ -68,92 +68,120 @@
  }
  function snapshot(time){
   const v={state:"entry",active:0,first:"",second:"",firstPlot:false,secondPlot:false};
-  let lit="",last="";
-  for(const e of T.keys){
-   if(time<e.time)break;
-   Object.assign(v,e.delta);last=e.key;lit=time<e.time+.185?e.key:"";
+  let last=-1;
+  for(const [i,e] of T.keys.entries()){
+   if(time+1e-8<e.time)break;
+   Object.assign(v,e.delta);last=i;
   }
   const s={...initial([v.first,v.second]),...v,q:[v.firstPlot?watchPair[0]:null,v.secondPlot?watchPair[1]:null],windows:knownWindow};
-  return{s,key:lit,last};
+  return{s,last};
  }
- T.titles.forEach((title,i)=>{
-  const li=document.createElement("li"),b=document.createElement("button"),no=document.createElement("span");
-  b.type="button";no.textContent="0"+(i+1);b.append(no,document.createTextNode(title));
-  b.addEventListener("click",()=>go(T.starts[i]));li.append(b);steps.append(li);
+ const keyName={right:"Right arrow",square:"Squared",plus:"Plus"};
+ const chapters=[
+  {id:"plot",span:0,title:"Plot both functions",first:0,end:9},
+  {id:"intersection",span:2,title:"Intersection",first:9,end:12},
+  {id:"bounds",span:4,title:"Bracket one crossing",first:12,end:19},
+  {id:"read",span:5,title:"Read result",first:19,end:19}
+ ];
+ const rail=CalculatorWatchChapters.mount(steps,chapters.map(({id,title,first,end})=>({
+  id,title,
+  keys:T.keys.slice(first,end).map((step,index)=>{
+   const n=first+index,label=readable[step.key]||step.key;
+   const ariaLabel=n===13?"Enter to confirm the lower bound":n===18?"Enter to confirm the upper bound":keyName[step.key]||label;
+   return {id:"key-"+n,label,ariaLabel};
+  })
+ })),{
+  label:"Lesson steps and calculator key trail",
+  onChapter:id=>go(layout.spans[chapters.find(c=>c.id===id).span].start)
  });
  const sec=x=>Math.floor(x),clock=x=>Math.floor(x/60)+":"+String(sec(x)%60).padStart(2,"0");
  function renderWatch(){
   if(mode!=="watch")return;
-  const chapter=T.starts.findLastIndex(start=>t>=start),phrase=T.captionStarts.findLastIndex(start=>t>=start),{s,key,last}=snapshot(t);
-  // A seek can skip across Tab without changing the raw strings or chapter.
-  const keyStamp=JSON.stringify([s.state,s.active,s.raw,s.q.map(q=>q?.raw??null),s.cursor,s.low,s.typed,s.mark,s.error,chapter,phrase]);
+  const point=layout.at(t),span=point.span.i,pos=P.position(point),{s,last}=snapshot(pos.time);
+  const chapter=chapters.findLast(c=>c.span<=span);
+  // Tab can change the editable formula without changing either raw string.
+  const keyStamp=JSON.stringify([s.state,s.active,s.raw,s.q.map(q=>q?.raw??null),s.cursor,s.low,s.typed,s.mark,s.error]);
   const timeLabel=clock(t>=duration-.015?Math.round(duration):t)+" / "+clock(Math.round(duration));
   seek.value=t;seek.setAttribute("aria-valuetext",timeLabel.replace("/","of"));$("clock").textContent=timeLabel;
-  shell.setKeys(key?[key]:[]);
-  const keyLabel=readable[last]||last||"—";
-  if($("active-key").textContent!==keyLabel)$("active-key").textContent=keyLabel;
+  shell.setKeys(pos.lit>=0?[T.keys[pos.lit].key]:[]);
+  rail.setState({chapterId:chapter.id,keyId:last>=chapter.first&&last<chapter.end?"key-"+last:null});
   if(!initiated){overlay.dataset.initial="true";overlay.hidden=t>.04;}
-  if(cache===keyStamp)return;cache=keyStamp;
-  screen.draw(s);labelGraph(s);
-  cap.textContent=T.captions[phrase];
-  const guide=phrase===0?"Enter f₁(x), press Enter, then Tab to open f₂(x).":phrase===3?"With these two curves, the lower-bound prompt opens directly.":phrase===5?"Intersection: (3, 9).":phrase===6?"Same output: 3² = 2(3) + 3 = 9.":"";
-  $("readout").hidden=!guide;$("readout").textContent=guide;
-  [...steps.children].forEach((li,i)=>li.firstElementChild.setAttribute("aria-current",String(i===chapter)));
+  const line=point.speaking?T.captions[span]:"";
+  if(cap.textContent!==line)cap.textContent=line;
+  $("caption-band").hidden=!showCaptions||!line;
+  stage.dataset.phase=point.speaking?"voice":"hold";
+  const shortHints=[
+   "Plot f₁, then press Tab to enter and plot f₂.",
+   "Find the crossing on the right of the y-axis.",
+   "Menu → 6: Analyze Graph → 4: Intersection.",
+   "Two graphs here: the bound prompt opens directly.",
+   s.state==="upper"?"Set a bound right of the crossing. Press Enter.":s.state==="result"?"The bracket contains one crossing.":"Set a bound left of the crossing. Press Enter.",
+   "Read both coordinates: (3, 9).",
+   "Same output: 3² = 2(3) + 3 = 9."
+  ];
+  const guide=!point.speaking||span===3||span>=5?shortHints[span]:"";
+  if($("readout").textContent!==guide)$("readout").textContent=guide;
+  if(cache!==keyStamp){cache=keyStamp;screen.draw(s);labelGraph(s);}
  }
- function setOrigin(){origin=performance.now()-t*1000/speed;}
- function audioSeek(){
-  if(!useAudio)return;
-  if(Number.isFinite(audio.duration)){audio.currentTime=t;pendingSeek=null;}
-  else pendingSeek=t;
- }
+ function setOrigin(){origin=performance.now()-t*1000;}
  function go(v){
-  t=M.clamp(Number(v)||0,0,duration);setOrigin();audioSeek();renderWatch();if(!playing)labelPlay();
+  const resume=playing||pending;if(resume)pause();
+  t=M.clamp(Number(v)||0,0,duration);renderWatch();labelPlay();if(resume)void start(false);
  }
  function labelPlay(){
   const monitor=playing||pending,label=monitor?"Pause":t>=duration-.015?"Replay":"Play";
   play.setAttribute("aria-label",label);play.title=label;play.dataset.playing=String(playing);
-  play.querySelector(".play-icon").toggleAttribute('hidden',monitor);play.querySelector(".pause-icon").toggleAttribute('hidden',!monitor);
+  play.querySelector(".play-icon").toggleAttribute("hidden",monitor);
+  play.querySelector(".pause-icon").toggleAttribute("hidden",!monitor);
  }
  function pause(){
-  playEpoch++;pending=false;if(playing&&useAudio&&Number.isFinite(audio.currentTime))t=audio.currentTime;
-  playing=false;audio.pause();cancelAnimationFrame(raf);labelPlay();renderWatch();
+  playEpoch++;pending=false;playing=false;audio.pause();cancelAnimationFrame(raf);phase="";labelPlay();renderWatch();
  }
- function finish(){pause();t=duration;labelPlay();renderWatch();}
  function tick(now){
   if(!playing||mode!=="watch")return;
-  t=useAudio?audio.currentTime:(now-origin)*speed/1000;
-  if(t>=duration-.002){finish();return;}
+  const span=layout.at(t).span;
+  if(phase==="voice"){
+   t=useAudio?Math.min(span.voiceEnd,span.start+Math.max(0,audio.currentTime-span.from)):Math.min(span.voiceEnd,(now-origin)/1000);
+   if(t>=span.voiceEnd-.012||useAudio&&audio.ended){audio.pause();t=span.voiceEnd;phase="hold";setOrigin();}
+  }else{
+   t=Math.min(span.end,(now-origin)/1000);
+   if(t>=duration){t=duration;pause();return;}
+   if(t>=span.end){
+    const token=playEpoch;renderWatch();
+    void enterPhase(token).then(ok=>{if(ok&&playing)raf=requestAnimationFrame(tick);});return;
+   }
+  }
   renderWatch();raf=requestAnimationFrame(tick);
  }
- async function start(){
+ async function enterPhase(token){
+  const point=layout.at(t);setOrigin();phase=point.speaking?"voice":"hold";
+  if(!point.speaking||!useAudio){audio.pause();return token===playEpoch&&mode==="watch";}
+  let deadline;
+  try{
+   audio.currentTime=point.audioTime;
+   await Promise.race([audio.play(),new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error("Audio unavailable")),4500);})]);
+  }catch{if(token===playEpoch)silentMedia();}
+  finally{clearTimeout(deadline);}
+  return token===playEpoch&&mode==="watch";
+ }
+ async function start(manual=true){
   if(mode!=="watch")return;
   initiated=true;overlay.dataset.initial="false";overlay.hidden=true;
-  if(t>=duration-.015)go(0);
-  const stamp=++playEpoch;
-  pending=true;setOrigin();labelPlay();
-  if(useAudio){
-   try{audioSeek();await audio.play();}
-   catch(error){if(stamp!==playEpoch)return;silentMedia();}
-  }
-  if(stamp!==playEpoch||mode!=="watch"){if(!playing&&!pending)audio.pause();return;}
-  if(!useAudio)setOrigin();
-  pending=false;playing=true;labelPlay();chrome.flash(true);raf=requestAnimationFrame(tick);
+  if(t>=duration-.015)t=0;
+  const token=++playEpoch;
+  pending=true;labelPlay();
+  if(!await enterPhase(token))return;
+  pending=false;playing=true;labelPlay();if(manual)chrome.flash(true);raf=requestAnimationFrame(tick);
  }
  function toggle(){if(playing||pending){pause();chrome.flash(false);}else void start();}
  function silentMedia(){
-  useAudio=false;pendingSeek=null;setOrigin();
+  if(!useAudio)return;
+  useAudio=false;audio.pause();setOrigin();
   $("media-status").textContent="Narration unavailable. Captions only.";
-  $("media-status").hidden=mode!=="watch";$("sound").hidden=true;
-  captions(true);
+  $("media-status").hidden=mode!=="watch";$("sound").hidden=true;captions(true);renderWatch();
  }
- audio.addEventListener("loadedmetadata",()=>{
-  if(!useAudio||!Number.isFinite(audio.duration)||audio.duration<=0)return;
-  duration=audio.duration;seek.max=duration;t=M.clamp(t,0,duration);
-  if(pendingSeek!==null)audioSeek();
-  renderWatch();labelPlay();
- });
- audio.addEventListener("error",silentMedia);audio.addEventListener("ended",finish);
- audio.addEventListener("pause",()=>{if(useAudio&&playing&&audio.paused&&!audio.ended)pause();});
+ audio.addEventListener("error",silentMedia);
+ document.addEventListener("visibilitychange",()=>{if(document.hidden&&(pending||playing))pause();});
  $("sound").addEventListener("click",()=>{
   audio.muted=!audio.muted;const label=audio.muted?"Unmute narration":"Mute narration";
   $("sound").setAttribute("aria-pressed",String(audio.muted));$("sound").setAttribute("aria-label",label);$("sound").title=label;
@@ -161,8 +189,9 @@
   $("sound").querySelector(".sound-off").toggleAttribute("hidden",!audio.muted);
  });
  speedSelect.addEventListener("change",()=>{
-  if(playing&&!useAudio)t=M.clamp((performance.now()-origin)*speed/1000,0,duration);
-  speed=Number(speedSelect.value);audio.playbackRate=speed;setOrigin();
+  const resume=playing||pending;if(resume)pause();
+  const old=layout;layout=P.make(Number(speedSelect.value));duration=layout.duration;seek.max=duration.toFixed(3);
+  t=layout.remap(old,t);renderWatch();labelPlay();if(resume)void start(false);
  });
  play.addEventListener("click",toggle);seek.addEventListener("input",()=>go(seek.value));
  function jumpMenu(panel,index,action){
@@ -189,15 +218,16 @@
   $("exercise-inactive").hidden=inExercise;
   $("keypad-problem").textContent=inExercise?prompt:"Explore intersections for your own functions.";
   const b=state.state==="lower"||state.state==="upper";lcd.classList.toggle("pick",b);
-  $("bound-form").hidden=!b;$("retry-bounds").hidden=state.state!=="result";
-  $("bound-label").textContent=state.state==="lower"?"Lower bound x":"Upper bound x";
+  expressionForm.hidden=state.state!=="entry";
+  fields.forEach((el,i)=>{el.closest("label").hidden=i!==state.active;el.disabled=i!==state.active;});
+  $("retry-bounds").hidden=state.state!=="result";
   $("keypad-hint").textContent=state.state==="plotted"?state.q.every(Boolean)?"Press Menu on the handheld.":"Press the handheld Tab key to enter the other function.":hints[state.state];
   show(state.error||(state.mark?"Intersection: "+fmtPair(state.mark)+".":"")|| (unsafe&&!edited?"The linked functions were invalid. An original practice pair is shown instead.":""),Boolean(state.error||unsafe&&!edited));
   if(state.state==="menu")jumpMenu(S.PANEL.main,5,()=>press("6"));
   if(state.state==="submenu")jumpMenu(S.PANEL.sub,3,()=>press("4"));
  }
  function select(next,properties={}){
-  state={...state,state:next,error:null,typed:"",...properties};bound.value="";renderTry();
+  state={...state,state:next,error:null,typed:"",...properties};renderTry();
  }
  function plot(indices){
   const q=state.q.slice(),raw=state.raw.slice();
@@ -229,7 +259,7 @@
   else if(k==="dot"){if(!v.includes("."))v+=".";}
   else if(v.length<18&&/^\d$/.test(k))v+=k;
   else return;
-  state.typed=v;bound.value=v;labelGraph(state);screen.draw(state);show();
+  state.typed=v;labelGraph(state);screen.draw(state);show();
  }
  function press(k){
   if(mode!=="try")return;
@@ -247,7 +277,7 @@
    if(k==="enter"||k==="select"){confirm(state.typed?readBound(state.typed):state.cursor);return;}
    if(k==="left"||k==="right"){
     edited=true;const {x0,x1}=getWindow(),step=(x1-x0)/64;
-    state.typed="";bound.value="";state.cursor=M.clamp(state.cursor+(k==="left"?-step:step),x0,x1);
+    state.typed="";state.cursor=M.clamp(state.cursor+(k==="left"?-step:step),x0,x1);
     screen.draw(state);labelGraph(state);show();
     return;
    }
@@ -260,17 +290,16 @@
    H.modify(fields[state.active],k,{replace});
   }
  }
- $("expression-form").addEventListener("submit",e=>{e.preventDefault();edited=true;plot([0,1]);});
+ expressionForm.addEventListener("submit",e=>{e.preventDefault();edited=true;plot([state.active]);if(state.state==="plotted")stage.focus({preventScroll:true});});
  fields.forEach((el,i)=>{
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();expressionForm.requestSubmit();}});
   el.addEventListener("focus",()=>{if(mode==="try")state.active=i;});
   el.addEventListener("input",()=>{if(mode!=="try")return;edited=true;fresh=false;
    const raw=state.raw.slice(),q=state.q.slice();raw[i]=el.value;q[i]=null;state={...initial(raw),q,active:i};renderTry();
   });
  });
- $("bound-form").addEventListener("submit",e=>{e.preventDefault();confirm(readBound(bound.value));});
- bound.addEventListener("input",()=>{if(mode!=="try")return;edited=true;state.typed=bound.value;labelGraph(state);screen.draw(state);});
  $("retry-bounds").addEventListener("click",()=>{edited=true;analyze();});
- $("reset-keypad").addEventListener("click",()=>{edited=true;fresh=true;state=initial(challenge.map(q=>q.raw));syncFields();bound.value="";renderTry();stage.focus({preventScroll:true});});
+ $("reset-keypad").addEventListener("click",()=>{edited=true;fresh=true;state=initial(challenge.map(q=>q.raw));syncFields();renderTry();stage.focus({preventScroll:true});});
  function pointer(ev){
   const r=canvas.getBoundingClientRect(),xp=(ev.clientX-r.left)*320/r.width,yp=(ev.clientY-r.top)*240/r.height;
   return xp>=S.SCREEN_X.l&&xp<=S.SCREEN_X.r&&yp>=26&&yp<=226?S.pointAt(state.q,xp,state.windows):null;
@@ -288,11 +317,11 @@
   mode=next;stage.dataset.mode=mode;cache="";
   const watch=mode==="watch";
   tabs.forEach((b,i)=>{const yes=watch===(i===0);b.tabIndex=yes?0:-1;b.setAttribute("aria-selected",String(yes));});
-  for(const n of ["watch","watch-side","watch-player","key-strip"])$(n).hidden=!watch;
+  for(const n of ["watch","watch-side","watch-player"])$(n).hidden=!watch;
   for(const n of ["try","try-side","try-player"])$(n).hidden=watch;
   shell.setKeys([]);shell.setInteractive(!watch);paintFraming();captions(showCaptions);
   $("media-status").hidden=!watch||useAudio;
-  if(watch){hot.replaceChildren();lcd.classList.remove("pick");renderWatch();labelPlay();}
+  if(watch){expressionForm.hidden=true;hot.replaceChildren();lcd.classList.remove("pick");renderWatch();labelPlay();}
   else {overlay.hidden=true;renderTry();}
  }
  tabs.forEach((b,i)=>{
@@ -314,11 +343,10 @@
   const values=answer.map(a=>a.valueAsNumber),goals=[target.x,target.y];
   if(!values.every(Number.isFinite))return;
   const equal=(v,n)=>n===0?v===0:Math.abs(v-n)<=1e-10*Math.abs(n);
-  const atThree=values.map((v,i)=>equal(v,Number(goals[i].toPrecision(3))));
   const hits=values.map((v,i)=>[3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].some(sf=>equal(v,Number(goals[i].toPrecision(sf)))));
   const yes=hits.every(Boolean);
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
-  feedback.textContent=yes?(atThree.every(Boolean)?"Correct. Both functions have that y-value at your x.":"Correct. Round to three significant figures in your written answer if requested."):hits[0]?"The x-coordinate is right. Check the common y-value.":"Check that your bounds isolated the requested crossing.";
+  feedback.textContent=yes?"Correct. Both functions have that y-value at your x.":hits[0]?"The x-coordinate is right. Check the common y-value.":"Check that your bounds isolated the requested crossing.";
  });
  modeTo(params.get("mode")==="try"?"try":"watch");
  if(audio.error)silentMedia();
@@ -329,7 +357,9 @@
   const full=document.fullscreenElement===stage||stage.classList.contains("watch-fullscreen-fallback");
   const nav=full?0:(document.querySelector(".tabbar")?.offsetHeight||0);
   const box=stage.getBoundingClientRect(),vh=window.visualViewport?.height||innerHeight;
-  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight;
+  const chapterHeight=matchMedia("(max-width:700px)").matches?$("watch-side").offsetHeight:0;
+  stage.style.setProperty("--ct11-chapters-height",chapterHeight+"px");
+  const occupied=$("watch-player").offsetHeight+$("caption-band").offsetHeight+(chapterHeight?chapterHeight+10:0);
   const pads=getComputedStyle(surface);
   const room=vh-nav-(full?0:box.top+window.scrollY)-occupied-parseFloat(pads.paddingTop)-parseFloat(pads.paddingBottom)-3;
   stage.style.setProperty("--ct11-handset-fit",Math.floor(Math.max(innerHeight<680?78:101,Math.min(full?620:296,room*558/1168)))+"px");
@@ -337,10 +367,11 @@
   stage.style.setProperty("--ct11-scene-room",Math.floor(Math.max(140,room))+"px");
  }
  const bankWatchSizing=new ResizeObserver(fitBankWatch);
- [$("watch-player"),$("caption-band"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
+ [$("watch-player"),$("caption-band"),$("watch-side"),document.querySelector("main>.header")].forEach(el=>bankWatchSizing.observe(el));
  window.addEventListener("resize",fitBankWatch);
  window.visualViewport?.addEventListener("resize",fitBankWatch);
  document.addEventListener("fullscreenchange",fitBankWatch);
+ new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
 new MutationObserver(fitBankWatch).observe(stage,{attributes:true,attributeFilter:["class"]});
  fitBankWatch();
 })();

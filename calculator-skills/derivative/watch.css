@@ -1,0 +1,204 @@
+/* CT51 Watch skin; Try markup/model and the native site header are unchanged. */
+#stage[data-mode=watch] {
+ --tape:#10241b;--tape-ink:#f6fbf5;--tape-dim:#c4dacc;--tape-line:#4b6d58;--tape-accent:#b8f2cd;
+ --lcd-fit:min(100%,clamp(285px,calc((100svh - 232px)*1.333),565px));
+ color:var(--tape-ink);background:var(--tape);border-color:var(--tape-line);
+}
+#stage[data-mode=watch] #watch-surface {grid-template-columns:minmax(0,1.38fr) minmax(0,1fr);gap:clamp(.4rem,2vw,1.2rem);align-items:center;padding:clamp(8px,2vw,18px);cursor:pointer}
+#stage[data-mode=watch] #watch-side {display:block;align-self:center;min-width:0}
+#stage[data-mode=watch] #handheld-host {--handheld-width:min(100%,clamp(115px,calc((100svh - 255px)*.473),283px));width:100%;margin:auto}
+#stage[data-mode=watch][data-framing=screen] #handheld-host {--handheld-width:var(--lcd-fit)}
+#stage[data-mode=watch][data-framing=screen] .hh-body {aspect-ratio:4/3;background:#101d16;border:4px solid #273d30;border-radius:9px;overflow:hidden}
+#stage[data-mode=watch][data-framing=screen] .hh-body>*:not(.hh-lcd){display:none!important}
+#stage[data-mode=watch][data-framing=screen] .hh-lcd {inset:0;height:100%;width:100%;border:0;border-radius:0;box-shadow:none}
+#stage[data-mode=watch] .stage-play {top:21.4%}
+#stage[data-mode=watch][data-framing=screen] .stage-play {top:50%}
+#stage[data-mode=watch] :focus-visible {outline-color:var(--tape-accent)}
+.watch-kicker,.watch-keyline {font:650 .76rem/1.18 var(--mono);color:var(--tape-dim)}
+#beat-title {font-size:clamp(1.1rem,2.5vw,2rem);color:var(--tape-ink);margin:.25rem 0}
+#stage[data-mode=watch] #takeaway {padding:0;font:500 .88rem/1.26 system-ui;color:var(--tape-dim)}
+.watch-keyline {display:flex;align-items:center;gap:.4rem;margin-top:.55rem}
+.watch-keyline kbd,#key-steps li {display:inline-block;border:1px solid var(--tape-line);border-radius:4px;padding:.15em .38em;font:600 .78rem/1.14 var(--mono);color:var(--tape-ink);background:#24382c}
+#key-steps {list-style:none;padding:0;margin:.37rem 0 0;display:flex;gap:4px;flex-wrap:wrap}
+#key-steps li[data-progress=done]{color:var(--tape-dim);background:transparent}
+#key-steps li[data-progress=current],.watch-keyline kbd{background:var(--tape-accent);color:#14291e;border-color:var(--tape-accent)}
+#stage[data-mode=watch] #watch-message {border-color:var(--tape-line);min-height:2.65rem;padding:.25rem clamp(8px,2vw,18px)}
+#stage[data-mode=watch] #caption {border-color:var(--tape-accent);padding:.22rem .44rem;font:500 .88rem/1.25 system-ui}
+#stage[data-mode=watch] #caption:empty{border-color:transparent}
+#stage[data-mode=watch] #watch-player{border-color:var(--tape-line);padding:.26rem .55rem .36rem}
+#stage[data-mode=watch] .transport{flex-wrap:nowrap;min-width:0;gap:.24rem}
+#stage[data-mode=watch] .transport button {display:grid;place-items:center;border:0;color:var(--tape-ink);background:transparent;min-width:42px;min-height:42px;padding:.16rem;font-size:.8rem}
+#stage[data-mode=watch] .transport button:hover,#stage[data-mode=watch] .transport button[aria-pressed=true]{background:#30543e}
+#stage[data-mode=watch] .transport svg {width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.5}
+#stage[data-mode=watch] #play svg,#stage[data-mode=watch] #sound svg path:first-child{fill:currentColor;stroke:none}
+#stage[data-mode=watch] #view-pick {display:flex;white-space:nowrap}
+.watch-seek{flex:1;min-width:1rem}
+.watch-seek input{width:100%;margin:0;min-height:24px;accent-color:var(--tape-accent)}
+#stage[data-mode=watch] #clock{font:650 .74rem/1.16 var(--mono);white-space:nowrap;color:var(--tape-dim)}
+.watch-speed{display:flex;gap:.25rem;align-items:center;color:var(--tape-dim);font-size:.69rem;white-space:nowrap}
+#stage[data-mode=watch] #pace{background:#213c2d;color:var(--tape-ink);border-color:var(--tape-line);min-height:36px;padding:.12rem .22rem}
+#media-status{color:var(--tape-dim);font:.72rem/1.1 system-ui;margin:.25rem .25rem 0}
+#play-feedback {position:absolute;z-index:3;pointer-events:none;left:50%;top:40%;transform:translate(-50%,-50%);border-radius:50%;background:#14291ebf;padding:.55rem}
+#play-feedback svg {width:28px;height:28px;fill:#fff;display:block}
+#play-feedback[data-action=play] .pause-icon,#play-feedback[data-action=pause] .play-icon{display:none}
+#stage:is(:fullscreen,.watch-fullscreen-fallback){position:fixed;inset:0;z-index:90;width:100%;height:100dvh;max-width:none;max-height:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;overscroll-behavior:contain;overflow:auto}
+body.watch-fullscreen-open{overflow:hidden}
+#stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] {--lcd-fit:min(100%,clamp(285px,calc((100svh - 117px)*1.333),1060px))}
+#stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-surface {flex:1;width:min(100%,1500px);margin-inline:auto;min-height:0}
+#stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #handheld-host {--handheld-width:min(100%,clamp(132px,calc((100svh - 120px)*.473),510px))}
+#stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch][data-framing=screen] #handheld-host {--handheld-width:var(--lcd-fit)}
+#stage:is(:fullscreen,.watch-fullscreen-fallback) #beat-title {font-size:clamp(1.3rem,3.4vw,3.15rem)}
+#stage:is(:fullscreen,.watch-fullscreen-fallback) #takeaway {font-size:clamp(.92rem,1.5vw,1.32rem)}
+#stage:is(:fullscreen,.watch-fullscreen-fallback) #caption {font-size:clamp(.87rem,1.35vw,1.18rem)}
+#stage:is(:fullscreen,.watch-fullscreen-fallback) #watch-player {position:sticky;bottom:0;flex:none;padding-bottom:max(.32rem,env(safe-area-inset-bottom))}
+@media(max-width:720px){
+ #stage[data-mode=watch] #watch-surface{grid-template-columns:minmax(0,1fr);gap:.5rem}
+ #stage[data-mode=watch] #beat-title{margin:.12rem 0;font-size:clamp(1.08rem,4.95vw,1.55rem)}
+ #stage[data-mode=watch] #takeaway{font-size:.79rem}
+ #stage[data-mode=watch] #caption{font-size:.8rem}
+ #stage[data-mode=watch] #watch-message{min-height:2.2rem}
+ .watch-keyline{margin-top:.3rem;font-size:.69rem}
+ #key-steps{margin-top:.22rem;gap:3px}
+ #key-steps li{font-size:.71rem}
+ #stage[data-mode=watch] .transport{display:grid;grid-template-columns:auto auto auto auto 1fr auto;column-gap:.11rem;row-gap:.12rem}
+ #stage[data-mode=watch] .transport button{min-width:37px;min-height:40px}
+ #stage[data-mode=watch] #play{min-width:35px}
+ #stage[data-mode=watch] #view-pick{grid-column:3}
+ .watch-seek{grid-column:1/6;grid-row:2}
+ #stage[data-mode=watch] #clock{grid-column:6;grid-row:2;justify-self:end;font-size:.69rem}
+ .watch-speed{justify-self:end}
+ #stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-surface{align-content:center;min-height:auto}
+ #stage:is(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #beat-title{font-size:clamp(1.28rem,5.5vw,1.62rem)}
+}
+@media(max-width:375px){
+ #stage[data-mode=watch] .transport button{min-width:31px;padding:.12rem}
+ #stage[data-mode=watch] #play{min-width:30px}
+ .watch-speed{font-size:0}
+ #stage[data-mode=watch] #pace{font-size:.72rem}
+}
+@media(prefers-reduced-motion:reduce){#play-feedback{display:none!important}}
+#stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch]{position:relative}
+@media(max-width:720px){
+ #stage[data-mode=watch] .transport{grid-template-columns:auto auto auto auto minmax(0,1fr) auto}
+ #stage[data-mode=watch] #play{grid-column:1;grid-row:1}
+ #stage[data-mode=watch] #sound{grid-column:2;grid-row:1}
+ #stage[data-mode=watch] #view-pick{grid-column:3;grid-row:1}
+ #stage[data-mode=watch] #cc{grid-column:4;grid-row:1}
+ #stage[data-mode=watch] .watch-speed{grid-column:5;grid-row:1;justify-self:end}
+ #stage[data-mode=watch] #fullscreen{grid-column:6;grid-row:1;justify-self:end}
+ #stage[data-mode=watch] #clock{grid-column:5/7}
+ #stage[data-mode=watch] .watch-seek{grid-column:1/5}
+}
+@media(max-width:410px){.watch-speed>span{display:none}}
+/* Keep the first screen and real controls above the site navigation on short displays. */
+@media(max-height:740px){
+ .qb-calculator-lesson:has(#stage[data-mode=watch]){padding-top:8px}
+ .qb-calculator-lesson:has(#stage[data-mode=watch])>.header{margin-bottom:4px}
+ .qb-calculator-lesson:has(#stage[data-mode=watch])>.header h1{font-size:clamp(1.13rem,3.5vw,2.12rem)}
+ .qb-calculator-lesson:has(#stage[data-mode=watch])>.header .trail{margin:0 0 .2rem}
+ .qb-calculator-lesson:has(#stage[data-mode=watch])>.calc-tabs{margin-bottom:5px}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch]{--lcd-fit:min(100%,clamp(205px,calc((100svh - 318px)*1.333),500px))}
+}
+@media(max-width:720px) and (max-height:740px){
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch]{--lcd-fit:min(100%,clamp(180px,calc((100svh - 374px)*1.333),450px))}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-surface{padding:7px;gap:.35rem}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #takeaway{font-size:.75rem}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #caption{font-size:.75rem}
+}
+@media(max-width:720px) and (max-height:600px){
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch]{--lcd-fit:min(100%,clamp(168px,calc((100svh - 419px)*1.333),270px))}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #handheld-host{--handheld-width:min(100%,clamp(116px,calc((100svh - 308px)*.473),148px))}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch][data-framing=screen] #handheld-host{--handheld-width:var(--lcd-fit)}
+}
+@media(max-width:420px) and (max-height:650px){
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-side {display:grid;grid-template-columns:auto minmax(0,1fr);gap:.18rem .45rem;align-items:center}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #beat-count {position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] :is(#beat-title,#takeaway){grid-column:1/-1}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] :is(.watch-keyline,#key-steps){margin:0}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch]:has(#caption:not(:empty,[hidden])) #takeaway:not([data-result]){display:none}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-message:has(#caption:is(:empty,[hidden])){display:none}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #caption {padding:.15rem .4rem}
+}
+#stage #watch-surface{position:relative}
+#stage[data-mode=watch] .ct51-stage-side{display:block;min-width:0}
+#stage[data-mode=watch] #watch-side{padding:0}
+#stage[data-mode=watch] .sample-f1{font:700 .89rem/1.25 var(--mono);color:#b8f2cd;margin:0 0 .35rem}
+#stage[data-mode=watch] #steps{
+ --watch-chapters-ink:var(--tape-ink);--watch-chapters-soft:var(--tape-dim);
+ --watch-chapters-edge:var(--tape-line);--watch-chapters-selected:#30543e;
+ --watch-chapters-active:var(--tape-accent);
+}
+#stage[data-mode=watch] #steps .qb-watch-chapters{grid-template-columns:minmax(0,1fr);gap:2px}
+#stage[data-mode=watch] #steps .qb-watch-chapters__button{min-height:24px;padding:2px 5px;row-gap:2px}
+#stage[data-mode=watch] #steps .qb-watch-chapters__title{font-size:.74rem}
+#stage[data-mode=watch] #readout{margin:.25rem 0 0;padding:.25rem .38rem;background:#213f30;color:#f0fff6;font:700 .82rem/1.2 system-ui;border-radius:4px;min-height:1.7rem}
+#stage[data-mode=watch] #watch-message{min-height:2.6rem;padding:.17rem .55rem;border-top:1px solid var(--tape-line);border-bottom:0}
+#stage[data-mode=watch] #caption{min-height:0;border:0;color:var(--tape-ink);padding:.13rem .2rem;margin:0 auto;text-align:center}
+#stage[data-mode=watch] #watch-player{border-top:1px solid var(--tape-line)}
+#stage[data-mode=watch] .transport{padding:0}
+#stage[data-mode=watch] #start-overlay{position:absolute;left:50%;top:50%;translate:-50% -50%;width:64px;min-height:64px;padding:0;z-index:3;background:#14291ee8;border:1px solid #a9c5ae;border-radius:50%;display:grid;place-items:center}
+#stage[data-mode=watch] #start-overlay svg{width:33px;height:33px;fill:#fff}
+#play-feedback{top:50%}
+#stage[data-mode=watch] #handheld-host{--handheld-width:var(--ct51-full-fit,217px)}
+#stage[data-mode=watch][data-framing=screen] #handheld-host{--handheld-width:var(--ct51-screen-fit,350px)}
+#stage[data-mode=try] #expression-form{position:absolute;inset:auto 0 0;display:flex;align-items:center;gap:.3ch;min-height:11%;background:#e5ebf0;color:#19334d;border-top:1px solid #879aac;padding:0 1.25cqw;z-index:2;font:650 max(8px,4.1cqw)/1.13 Arial,sans-serif;}
+#stage[data-mode=try] #expression-form input{min-height:0;font:inherit;min-width:0;width:100%;padding:0 .25em;color:inherit;background:none;border:0;border-radius:0}
+#stage[data-mode=try] #expression-form input:focus-visible{outline-offset:0}
+#stage[data-mode=try] #expression-form label{font:inherit;flex:none}
+@media(max-width:720px){
+ #stage[data-mode=watch] #steps .qb-watch-chapters__row:not(:has(.qb-watch-chapters__keys)){display:none}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__button{grid-template-columns:auto minmax(0,6.65rem) minmax(0,1fr);grid-template-rows:auto;align-items:center;min-height:18px;padding-block:2px}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__keys{grid-column:3;gap:2px}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__key{font-size:.62rem;padding:1px 3px}
+ #stage[data-mode=watch] .sample-f1{font-size:.73rem;margin-bottom:.17rem}
+ #stage[data-mode=watch] #readout{font-size:.73rem}
+}
+@media(max-height:680px){
+ main:has(#stage[data-mode=watch]){padding-block-start:7px}
+ main:has(#stage[data-mode=watch])>.header{margin-bottom:5px}
+ main:has(#stage[data-mode=watch])>.header .subtitle{display:none}
+ main:has(#stage[data-mode=watch]) .calc-tabs button{min-height:33px;padding-block:3px}
+ #stage[data-mode=watch] .transport button{min-height:35px}
+ #stage[data-mode=watch] .watch-speed select{min-height:33px}
+}
+#stage[data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback) #handheld-host{--handheld-width:var(--ct51-full-fit,217px)}
+#stage[data-mode=watch]:is(:fullscreen,.watch-fullscreen-fallback)[data-framing=screen] #handheld-host{--handheld-width:var(--ct51-screen-fit,350px)}
+@media(max-width:420px) and (max-height:660px){
+ #stage[data-mode=watch] #watch-surface{grid-template-columns:minmax(0,1.22fr) minmax(0,1fr);gap:5px;padding:6px}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__button{grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-items:start;min-height:16px;padding:1px 3px;gap:2px}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__title{font-size:.7rem}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__keys{grid-column:1/-1}
+ #stage[data-mode=watch] #steps .qb-watch-chapters__key{padding:1px 2px;min-width:.78rem}
+ #stage[data-mode=watch] .sample-f1{font-size:.71rem}
+ #stage[data-mode=watch] #watch-player .transport{row-gap:1px}
+ #stage[data-mode=watch] #watch-message{min-height:33px}
+}
+@media(max-width:420px) and (max-height:660px){
+ #stage[data-mode=watch] #watch-surface{grid-template-columns:minmax(0,1.52fr) minmax(0,1fr)}
+ #stage:not(:fullscreen,.watch-fullscreen-fallback)[data-mode=watch] #watch-side{display:block}
+}
+@media(max-height:660px){
+ #stage[data-mode=watch] #watch-player{padding-block:1px}
+}
+#stage[data-mode=watch] #play::before{content:none}
+#stage[data-mode=watch] #play svg{grid-area:1/1}
+#stage[data-mode=watch] #readout span{display:block}
+#stage[data-mode=watch] #readout .ct51-equation{white-space:nowrap;font-variant-numeric:lining-nums}
+@media(min-width:721px) and (max-height:660px){
+ #stage[data-mode=watch] #steps .qb-watch-chapters__button{min-height:20px;padding-block:1px}
+ #stage[data-mode=watch] #steps .qb-watch-chapters{gap:1px}
+}
+@media(max-width:720px) and (max-height:780px){
+ #stage[data-mode=watch] #watch-player{padding-block:1px}
+}
+@media(max-width:420px) and (max-height:660px){
+ #stage[data-mode=watch] #readout .ct51-equation{font-size:.68rem;letter-spacing:-.014em}
+}
+@media(min-width:721px) and (max-height:660px){
+ main:has(#stage[data-mode=watch])>.header h1{font-size:1.93rem}
+ #stage[data-mode=watch] .transport button{min-height:32px}
+ #stage[data-mode=watch] #pace{min-height:32px}
+}
+@media(min-width:721px) and (max-height:660px){
+ #stage[data-mode=watch] #watch-message{min-height:32px!important}
+}
