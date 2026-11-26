@@ -1,0 +1,831 @@
+{
+  "id": "CT20",
+  "title": "Complex numbers",
+  "intro": "Enter the imaginary unit, find modulus and principal argument, then display the same value in rectangular and polar form.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "9c429e7588f00e8fbeec7a351b53cbb2970f834e891a699bc8377fa20cd00483",
+    "scriptSha256": "cee31f02a935a40aacae9d1d1aa087d02b585e09f902f684e2a57a3718acdaec"
+  },
+  "chapters": [
+    {
+      "id": "settings",
+      "title": "Set the document"
+    },
+    {
+      "id": "imaginary-unit",
+      "title": "Use the imaginary unit"
+    },
+    {
+      "id": "modulus",
+      "title": "Find the modulus"
+    },
+    {
+      "id": "argument",
+      "title": "Find the argument"
+    },
+    {
+      "id": "polar-mode",
+      "title": "Switch the display"
+    },
+    {
+      "id": "both-units",
+      "title": "Read both forms"
+    },
+    {
+      "id": "principal-range",
+      "title": "Use the question’s range"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "settings",
+      "spoken": "Use z equals negative eight plus fifteen times the imaginary unit. Set Angle to Degree and Real or Complex to Rectangular.",
+      "coach": "Set Degree and Rectangular in Home → Settings → Document Settings. Then return via Current.",
+      "end": 10.42,
+      "hold": 8.99,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.0341
+        },
+        {
+          "id": "press-2",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.0909
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1477
+        },
+        {
+          "id": "press-4",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2045
+        },
+        {
+          "id": "press-5",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.2614
+        },
+        {
+          "id": "press-6",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.3182
+        },
+        {
+          "id": "press-7",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.375
+        },
+        {
+          "id": "press-8",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4318
+        },
+        {
+          "id": "press-9",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4886
+        },
+        {
+          "id": "press-10",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.5455
+        },
+        {
+          "id": "press-11",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.6023
+        },
+        {
+          "id": "press-12",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6591
+        },
+        {
+          "id": "press-13",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7159
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7727
+        },
+        {
+          "id": "press-15",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8295
+        },
+        {
+          "id": "press-16",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8864
+        },
+        {
+          "id": "press-17",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.9432
+        }
+      ]
+    },
+    {
+      "chapter": "imaginary-unit",
+      "spoken": "Type the real and imaginary coefficients. Press pi and choose the imaginary unit, not the letter i.",
+      "coach": "The π palette contains the italic imaginary unit. Press Right twice and Enter to choose it.",
+      "end": 18.391,
+      "hold": 6.17,
+      "keys": [
+        {
+          "id": "press-18",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.0517
+        },
+        {
+          "id": "press-19",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.1379
+        },
+        {
+          "id": "press-20",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2241
+        },
+        {
+          "id": "press-21",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.3103
+        },
+        {
+          "id": "press-22",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3966
+        },
+        {
+          "id": "press-23",
+          "label": "π",
+          "ariaLabel": "π",
+          "at": 0.4828
+        },
+        {
+          "id": "press-24",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.569
+        },
+        {
+          "id": "press-25",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.6552
+        },
+        {
+          "id": "press-26",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7414
+        },
+        {
+          "id": "press-27",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.8276
+        },
+        {
+          "id": "press-28",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9138
+        }
+      ]
+    },
+    {
+      "chapter": "modulus",
+      "spoken": "Use the absolute-value command on negative eight plus fifteen i. Control and Enter give a decimal where needed. Modulus is distance.",
+      "coach": "Enter abs(−8 + 15𝑖). Ctrl + Enter gives 17, the distance from the origin.",
+      "end": 29.176,
+      "hold": 8.52,
+      "keys": [
+        {
+          "id": "press-29",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.0361
+        },
+        {
+          "id": "press-30",
+          "label": "b",
+          "ariaLabel": "b",
+          "at": 0.0964
+        },
+        {
+          "id": "press-31",
+          "label": "s",
+          "ariaLabel": "s",
+          "at": 0.1566
+        },
+        {
+          "id": "press-32",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.2169
+        },
+        {
+          "id": "press-33",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.2771
+        },
+        {
+          "id": "press-34",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.3373
+        },
+        {
+          "id": "press-35",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3976
+        },
+        {
+          "id": "press-36",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4578
+        },
+        {
+          "id": "press-37",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5181
+        },
+        {
+          "id": "press-38",
+          "label": "π",
+          "ariaLabel": "π",
+          "at": 0.5783
+        },
+        {
+          "id": "press-39",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.6386
+        },
+        {
+          "id": "press-40",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.6988
+        },
+        {
+          "id": "press-41",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.759
+        },
+        {
+          "id": "press-42",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.8193
+        },
+        {
+          "id": "press-43",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.8795
+        },
+        {
+          "id": "press-44",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9398
+        }
+      ]
+    },
+    {
+      "chapter": "argument",
+      "spoken": "Use the angle command on negative eight plus fifteen i. The point is in quadrant two; the principal angle is obtuse.",
+      "coach": "Enter angle(−8 + 15𝑖). In quadrants II and III, the signs matter; here the principal angle is positive and obtuse.",
+      "end": 38.222,
+      "hold": 9.46,
+      "keys": [
+        {
+          "id": "press-45",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.0323
+        },
+        {
+          "id": "press-46",
+          "label": "n",
+          "ariaLabel": "n",
+          "at": 0.086
+        },
+        {
+          "id": "press-47",
+          "label": "g",
+          "ariaLabel": "g",
+          "at": 0.1398
+        },
+        {
+          "id": "press-48",
+          "label": "l",
+          "ariaLabel": "l",
+          "at": 0.1935
+        },
+        {
+          "id": "press-49",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.2473
+        },
+        {
+          "id": "press-50",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.3011
+        },
+        {
+          "id": "press-51",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.3548
+        },
+        {
+          "id": "press-52",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.4086
+        },
+        {
+          "id": "press-53",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4624
+        },
+        {
+          "id": "press-54",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5161
+        },
+        {
+          "id": "press-55",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5699
+        },
+        {
+          "id": "press-56",
+          "label": "π",
+          "ariaLabel": "π",
+          "at": 0.6237
+        },
+        {
+          "id": "press-57",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.6774
+        },
+        {
+          "id": "press-58",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.7312
+        },
+        {
+          "id": "press-59",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.7849
+        },
+        {
+          "id": "press-60",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.8387
+        },
+        {
+          "id": "press-61",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.8925
+        },
+        {
+          "id": "press-62",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9462
+        }
+      ]
+    },
+    {
+      "chapter": "polar-mode",
+      "spoken": "Open Document Settings again. Change Real or Complex to Polar. The number itself does not change.",
+      "coach": "Change Rectangular to Polar under Document Settings. The display changes, not the number.",
+      "end": 46.513,
+      "hold": 7.58,
+      "keys": [
+        {
+          "id": "press-63",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.0411
+        },
+        {
+          "id": "press-64",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1096
+        },
+        {
+          "id": "press-65",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1781
+        },
+        {
+          "id": "press-66",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2466
+        },
+        {
+          "id": "press-67",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3151
+        },
+        {
+          "id": "press-68",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3836
+        },
+        {
+          "id": "press-69",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.4521
+        },
+        {
+          "id": "press-70",
+          "label": "↓",
+          "ariaLabel": "↓",
+          "at": 0.5205
+        },
+        {
+          "id": "press-71",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.589
+        },
+        {
+          "id": "press-72",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6575
+        },
+        {
+          "id": "press-73",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.726
+        },
+        {
+          "id": "press-74",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7945
+        },
+        {
+          "id": "press-75",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.863
+        },
+        {
+          "id": "press-76",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.9315
+        }
+      ]
+    },
+    {
+      "chapter": "both-units",
+      "spoken": "Re-enter the same value. In Degree mode, the polar display has magnitude seventeen and angle one hundred and eighteen point zero seven two degrees. In Radian mode it uses exponential form.",
+      "coach": "Compare 17∠118.072° to its exponential display. Use Document Settings to change Degree to Radian; re-enter the same number.",
+      "end": 61.13,
+      "hold": 17.92,
+      "keys": [
+        {
+          "id": "press-77",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.0164
+        },
+        {
+          "id": "press-78",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.0437
+        },
+        {
+          "id": "press-79",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.071
+        },
+        {
+          "id": "press-80",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.0984
+        },
+        {
+          "id": "press-81",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1257
+        },
+        {
+          "id": "press-82",
+          "label": "π",
+          "ariaLabel": "π",
+          "at": 0.153
+        },
+        {
+          "id": "press-83",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.1803
+        },
+        {
+          "id": "press-84",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.2077
+        },
+        {
+          "id": "press-85",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.235
+        },
+        {
+          "id": "press-86",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.2623
+        },
+        {
+          "id": "press-87",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.2896
+        },
+        {
+          "id": "press-88",
+          "label": "Home",
+          "ariaLabel": "Home",
+          "at": 0.3169
+        },
+        {
+          "id": "press-89",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.3443
+        },
+        {
+          "id": "press-90",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.3716
+        },
+        {
+          "id": "press-91",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3989
+        },
+        {
+          "id": "press-92",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.4262
+        },
+        {
+          "id": "press-93",
+          "label": "↑",
+          "ariaLabel": "↑",
+          "at": 0.4536
+        },
+        {
+          "id": "press-94",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.4809
+        },
+        {
+          "id": "press-95",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5082
+        },
+        {
+          "id": "press-96",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5355
+        },
+        {
+          "id": "press-97",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5628
+        },
+        {
+          "id": "press-98",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5902
+        },
+        {
+          "id": "press-99",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6175
+        },
+        {
+          "id": "press-100",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.6448
+        },
+        {
+          "id": "press-101",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.6721
+        },
+        {
+          "id": "press-102",
+          "label": "(−)",
+          "ariaLabel": "Negative sign key",
+          "at": 0.6995
+        },
+        {
+          "id": "press-103",
+          "label": "8",
+          "ariaLabel": "8",
+          "at": 0.7268
+        },
+        {
+          "id": "press-104",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.7541
+        },
+        {
+          "id": "press-105",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7814
+        },
+        {
+          "id": "press-106",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8087
+        },
+        {
+          "id": "press-107",
+          "label": "π",
+          "ariaLabel": "π",
+          "at": 0.8361
+        },
+        {
+          "id": "press-108",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.8634
+        },
+        {
+          "id": "press-109",
+          "label": "→",
+          "ariaLabel": "→",
+          "at": 0.8907
+        },
+        {
+          "id": "press-110",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.918
+        },
+        {
+          "id": "press-111",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.9454
+        },
+        {
+          "id": "press-112",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9727
+        }
+      ]
+    },
+    {
+      "chapter": "principal-range",
+      "spoken": "The argument shown is principal. Only change the range if the question asks. Zero has no argument.",
+      "coach": "Use the question’s angle range only if it asks for a different one. Check angle(0): its argument is undefined.",
+      "end": 69.573,
+      "hold": 5.23,
+      "keys": [
+        {
+          "id": "press-113",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.0625
+        },
+        {
+          "id": "press-114",
+          "label": "n",
+          "ariaLabel": "n",
+          "at": 0.1667
+        },
+        {
+          "id": "press-115",
+          "label": "g",
+          "ariaLabel": "g",
+          "at": 0.2708
+        },
+        {
+          "id": "press-116",
+          "label": "l",
+          "ariaLabel": "l",
+          "at": 0.375
+        },
+        {
+          "id": "press-117",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.4792
+        },
+        {
+          "id": "press-118",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.5833
+        },
+        {
+          "id": "press-119",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.6875
+        },
+        {
+          "id": "press-120",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.7917
+        },
+        {
+          "id": "press-121",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8958
+        }
+      ]
+    }
+  ]
+}
