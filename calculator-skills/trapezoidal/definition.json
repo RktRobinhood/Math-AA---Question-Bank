@@ -1,0 +1,785 @@
+{
+  "id": "CT56",
+  "title": "Trapezoidal approximation",
+  "intro": "Reuse function values, weight the interior ordinates, and compare four and eight strips.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "cc82bbd5ab3516a1f319706447494b349615df05766f645bff0406ec5affdc5a",
+    "scriptSha256": "0bae43c0eb7b79ad7d085bb38a7709380250e964a13872d0ad66c5038d524688"
+  },
+  "chapters": [
+    {
+      "id": "function",
+      "title": "Define the function"
+    },
+    {
+      "id": "ordinates",
+      "title": "Count strips & ordinates"
+    },
+    {
+      "id": "weighted-sum",
+      "title": "Enter the weighted sum"
+    },
+    {
+      "id": "eight-strips",
+      "title": "Use eight strips"
+    },
+    {
+      "id": "compare",
+      "title": "Compare the estimates"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "function",
+      "spoken": "Store the curve on a Calculator page so you can reuse its heights.",
+      "coach": "f(x) = x^2   on   [0, 4]",
+      "end": 4.984,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "function",
+      "spoken": "Open Menu, then one for Actions, then one for Define. Type f of x equals x squared, then press Enter.",
+      "coach": "Calculator → Actions → Define",
+      "end": 14.824,
+      "hold": 6.61,
+      "keys": [
+        {
+          "id": "press-1",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.0542
+        },
+        {
+          "id": "press-2",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.1402
+        },
+        {
+          "id": "press-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2261
+        },
+        {
+          "id": "press-4",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.3121
+        },
+        {
+          "id": "press-5",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.3981
+        },
+        {
+          "id": "press-6",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.4841
+        },
+        {
+          "id": "press-7",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.5701
+        },
+        {
+          "id": "press-8",
+          "label": "=",
+          "ariaLabel": "Equals",
+          "at": 0.6561
+        },
+        {
+          "id": "press-9",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.742
+        },
+        {
+          "id": "press-10",
+          "label": "x²",
+          "ariaLabel": "Square key",
+          "at": 0.828
+        },
+        {
+          "id": "press-11",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.914
+        }
+      ]
+    },
+    {
+      "chapter": "function",
+      "spoken": "Done means the function is stored. Now f of one, for example, means the height at x equals one.",
+      "coach": "f(1) = 1",
+      "end": 22.855,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "ordinates",
+      "spoken": "Four equal strips have width one. Count their edges: there are five ordinates.",
+      "coach": "4 strips → 5 ordinates • h = 1",
+      "end": 29.219,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "ordinates",
+      "spoken": "The first and last heights belong to one strip each. The interior heights belong to two.",
+      "coach": "Weights: 1 · 2 · 2 · 2 · 1",
+      "end": 35.909,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "weighted-sum",
+      "spoken": "Type half the width, times the bracket. Enter each end height once.",
+      "coach": "0.5 × [f(0) + 2(f(1) + f(2) + f(3)) + f(4)]",
+      "end": 41.7785,
+      "hold": 8.65,
+      "keys": [
+        {
+          "id": "press-12",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.0403
+        },
+        {
+          "id": "press-13",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1043
+        },
+        {
+          "id": "press-14",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.1683
+        },
+        {
+          "id": "press-15",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.2322
+        },
+        {
+          "id": "press-16",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.2962
+        },
+        {
+          "id": "press-17",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.3602
+        },
+        {
+          "id": "press-18",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.4242
+        },
+        {
+          "id": "press-19",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.4882
+        },
+        {
+          "id": "press-20",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.5521
+        },
+        {
+          "id": "press-21",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6161
+        },
+        {
+          "id": "press-22",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.6801
+        },
+        {
+          "id": "press-23",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.7441
+        },
+        {
+          "id": "press-24",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.8081
+        },
+        {
+          "id": "press-25",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.872
+        },
+        {
+          "id": "press-26",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.936
+        }
+      ]
+    },
+    {
+      "chapter": "weighted-sum",
+      "spoken": "Group the interior heights so the factor of two applies to all three.",
+      "coach": "Interior heights × 2",
+      "end": 48.124,
+      "hold": 10.69,
+      "keys": [
+        {
+          "id": "press-27",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.0321
+        },
+        {
+          "id": "press-28",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.083
+        },
+        {
+          "id": "press-29",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.134
+        },
+        {
+          "id": "press-30",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.1849
+        },
+        {
+          "id": "press-31",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.2359
+        },
+        {
+          "id": "press-32",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.2868
+        },
+        {
+          "id": "press-33",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.3377
+        },
+        {
+          "id": "press-34",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.3887
+        },
+        {
+          "id": "press-35",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.4396
+        },
+        {
+          "id": "press-36",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4906
+        },
+        {
+          "id": "press-37",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.5415
+        },
+        {
+          "id": "press-38",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.5925
+        },
+        {
+          "id": "press-39",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.6434
+        },
+        {
+          "id": "press-40",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.6943
+        },
+        {
+          "id": "press-41",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.7453
+        },
+        {
+          "id": "press-42",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.7962
+        },
+        {
+          "id": "press-43",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8472
+        },
+        {
+          "id": "press-44",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8981
+        },
+        {
+          "id": "press-45",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9491
+        }
+      ]
+    },
+    {
+      "chapter": "weighted-sum",
+      "spoken": "Enter returns twenty-two. Each ordinate is a function value; only the sum estimates the integral.",
+      "coach": "4 strips → 22",
+      "end": 57.577,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "eight-strips",
+      "spoken": "Double the number of strips. The width halves, but there are now nine ordinates.",
+      "coach": "8 strips → 9 ordinates • h = 0.5",
+      "end": 63.476,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "eight-strips",
+      "spoken": "Keep both endpoints; double the seven interior heights. Multiply by zero point two five.",
+      "coach": "Weights: 1·2·2·2·2·2·2·2·1",
+      "end": 72.608,
+      "hold": 18.85,
+      "keys": [
+        {
+          "id": "press-46",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.0177
+        },
+        {
+          "id": "press-47",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.0457
+        },
+        {
+          "id": "press-48",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.0738
+        },
+        {
+          "id": "press-49",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.1019
+        },
+        {
+          "id": "press-50",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.1299
+        },
+        {
+          "id": "press-51",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.158
+        },
+        {
+          "id": "press-52",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.1861
+        },
+        {
+          "id": "press-53",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.2141
+        },
+        {
+          "id": "press-54",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.2422
+        },
+        {
+          "id": "press-55",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2703
+        },
+        {
+          "id": "press-56",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.2983
+        },
+        {
+          "id": "press-57",
+          "label": "×",
+          "ariaLabel": "Multiply",
+          "at": 0.3264
+        },
+        {
+          "id": "press-58",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.3545
+        },
+        {
+          "id": "press-59",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.3825
+        },
+        {
+          "id": "press-60",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.4106
+        },
+        {
+          "id": "press-61",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.4387
+        },
+        {
+          "id": "press-62",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.4667
+        },
+        {
+          "id": "press-63",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.4948
+        },
+        {
+          "id": "press-64",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.5229
+        },
+        {
+          "id": "press-65",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.5509
+        },
+        {
+          "id": "press-66",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.579
+        },
+        {
+          "id": "press-67",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6071
+        },
+        {
+          "id": "press-68",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.6351
+        },
+        {
+          "id": "press-69",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.6632
+        },
+        {
+          "id": "press-70",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.6913
+        },
+        {
+          "id": "press-71",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.7193
+        },
+        {
+          "id": "press-72",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.7474
+        },
+        {
+          "id": "press-73",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.7755
+        },
+        {
+          "id": "press-74",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8035
+        },
+        {
+          "id": "press-75",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8316
+        },
+        {
+          "id": "press-76",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.8597
+        },
+        {
+          "id": "press-77",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.8877
+        },
+        {
+          "id": "press-78",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.9158
+        },
+        {
+          "id": "press-79",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.9439
+        },
+        {
+          "id": "press-80",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.9719
+        }
+      ]
+    },
+    {
+      "chapter": "eight-strips",
+      "spoken": "Use the half-step x-values (zero point five, one point five, two point five and three point five) as well as the original x-values.",
+      "coach": "Consecutive x-values differ by 0.5.",
+      "end": 84.395,
+      "hold": 14.77,
+      "keys": [
+        {
+          "id": "press-81",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.0228
+        },
+        {
+          "id": "press-82",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.059
+        },
+        {
+          "id": "press-83",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.0952
+        },
+        {
+          "id": "press-84",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.1314
+        },
+        {
+          "id": "press-85",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.1676
+        },
+        {
+          "id": "press-86",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.2038
+        },
+        {
+          "id": "press-87",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.24
+        },
+        {
+          "id": "press-88",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.2761
+        },
+        {
+          "id": "press-89",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.3123
+        },
+        {
+          "id": "press-90",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.3485
+        },
+        {
+          "id": "press-91",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.3847
+        },
+        {
+          "id": "press-92",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.4209
+        },
+        {
+          "id": "press-93",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.4571
+        },
+        {
+          "id": "press-94",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.4933
+        },
+        {
+          "id": "press-95",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.5295
+        },
+        {
+          "id": "press-96",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.5657
+        },
+        {
+          "id": "press-97",
+          "label": ".",
+          "ariaLabel": "Decimal point",
+          "at": 0.6019
+        },
+        {
+          "id": "press-98",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.6381
+        },
+        {
+          "id": "press-99",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.6743
+        },
+        {
+          "id": "press-100",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.7105
+        },
+        {
+          "id": "press-101",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.7467
+        },
+        {
+          "id": "press-102",
+          "label": "f",
+          "ariaLabel": "f",
+          "at": 0.7828
+        },
+        {
+          "id": "press-103",
+          "label": "(",
+          "ariaLabel": "Open parenthesis",
+          "at": 0.819
+        },
+        {
+          "id": "press-104",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.8552
+        },
+        {
+          "id": "press-105",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.8914
+        },
+        {
+          "id": "press-106",
+          "label": ")",
+          "ariaLabel": "Close parenthesis",
+          "at": 0.9276
+        },
+        {
+          "id": "press-107",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.9638
+        }
+      ]
+    },
+    {
+      "chapter": "eight-strips",
+      "spoken": "Enter returns twenty-one point five. On this convex curve, the tops of the strips lie above the curve.",
+      "coach": "8 strips → 21.5",
+      "end": 93.163,
+      "hold": 1.6,
+      "keys": []
+    },
+    {
+      "chapter": "compare",
+      "spoken": "The exact integral is sixty-four thirds, about twenty-one point three three three. Eight strips are closer here; that is not a guarantee for every function.",
+      "coach": "22 → 21.5   |   exact: 64/3",
+      "end": 105.47,
+      "hold": 1.6,
+      "keys": []
+    }
+  ]
+}

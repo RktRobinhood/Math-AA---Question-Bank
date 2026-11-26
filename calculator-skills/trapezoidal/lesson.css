@@ -118,3 +118,15 @@ figure:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin:0}figcaption
 @media(max-width:860px){.qb-calculator-page{--lesson-tab-inset:calc(var(--tab-h) + env(safe-area-inset-bottom,0px))}}
 .qb-calculator-lesson #stage.focused{inset:var(--top-h) 0 var(--lesson-tab-inset);height:auto;max-height:none}
 .qb-calculator-lesson{min-height:calc(100svh - var(--top-h) - var(--lesson-tab-inset))}
+
+/* Dense original keyboard tape stays visible through a scrollable shared guide. */
+.reg-trail{margin:0 0 .55rem;color:var(--muted);font-size:.81rem}
+.lw-device #handheld-host{width:100%;--handheld-width:100%}
+.ct56-try #handheld-host{--handheld-width:min(307px,100%)}
+.reg-study{margin-top:.6rem}
+.reg-study figure{width:min(100%,300px);margin:.3rem 0}
+.reg-study #strips{display:block;width:100%;height:auto}
+@media(max-height:760px){.ct56-try #handheld-host{--handheld-width:min(235px,100%)}}
+@media(max-width:780px){
+ .lw-stage[data-mode=watch] .lw-guide{max-height:clamp(90px,24svh,176px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
+}
