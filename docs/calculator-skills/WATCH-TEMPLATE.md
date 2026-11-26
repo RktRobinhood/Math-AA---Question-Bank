@@ -51,7 +51,11 @@ identified visual-context pass; the full contextual script needs matching audio.
    spoken line separated by a newline, with a trailing newline. If a script
    or audio digest fails, the player keeps the honest captioned version.
    Use the measured audio boundaries and keep speech at 1×. Existing
-   recordings and adapters are not rewritten by this contract.
+   recordings and adapters are not rewritten by this contract. For a verified
+   legacy take with explicitly retired speech, set `"silent": true` only on a
+   beat with `"spoken": ""`. Its interval uses the lesson clock without ever
+   playing the retired source audio. Sign only the retained speech and verify
+   the retired beat mechanically, including when seeking into it.
 5. Test the actual rendered lesson at 320/390 px and short desktop: all labeled
    key groups visible at rest, chapter click and backward seek reproducible,
    screen and body stay in the chosen frame, fullscreen makes content
