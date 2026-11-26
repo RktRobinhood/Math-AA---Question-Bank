@@ -1155,6 +1155,58 @@
           `The shortest distance is this length times $\\sin\\phi$: $\\dfrac{${top}}{\\sqrt{${n2(n)}}} = ${sf(dist)}$`])] };
     } });
 
+  reg({ type: "t3-ahl-line-plane", unknown: "direction-change", representation: "equation", format: "value", levels: [4],
+    syllabus: ["3.18"], calculator: true, notFor: ["aa-sl", "ai-sl", "ai-hl"],
+    skills: ["AHL3.18.line-meets-plane", "AHL3.18.angle-line-plane"],
+    title: "A changing line direction: parallel, intersecting, then angle",
+    build({ rng }) {
+      let a, n, tail, D, parallelQ, comparisonQ, d, angle, lambda;
+      do {
+        a = rvec(rng, -5, 5);
+        n = rvec(rng, -4, 4);
+        tail = [rng.nonzero(-5, 5), rng.nonzero(-5, 5)];
+        D = rng.int(-12, 12);
+        if (zeros(n) > 0 || !sameV(n, prim(n)) || D === dot(n, a)) continue;
+        parallelQ = -(n[1] * tail[0] + n[2] * tail[1]) / n[0];
+        if (!Number.isInteger(parallelQ) || Math.abs(parallelQ) > 7) continue;
+        comparisonQ = parallelQ + rng.pick([-4, -3, -2, 2, 3, 4]);
+        if (comparisonQ === 0 || Math.abs(comparisonQ) > 10) continue;
+        d = [comparisonQ, ...tail];
+        angle = Math.asin(Math.abs(dot(d, n)) / (norm(d) * norm(n))) * 180 / Math.PI;
+        lambda = rat.Q(D - dot(n, a), dot(n, d));
+        if (angle > 10 && angle < 77 && lambda.d >= 2 && lambda.d <= 12 && Math.abs(lambda.n / lambda.d) <= 9) break;
+      } while (true);
+      const normalProduct = dot(n, d), pointTest = dot(n, a), constantTerm = n[1] * tail[0] + n[2] * tail[1];
+      const line = `${bv("r")} = ${col(a)} + \\lambda\\begin{pmatrix}k\\\\${tail[0]}\\\\${tail[1]}\\end{pmatrix}`;
+      return {
+        params: { a, n, tail, D, comparisonQ },
+        stem: `The plane $\\Pi$ has equation $${planeT(n, D)}$. The line $L$ has vector equation $${line}$, where $k$ is a constant.`,
+        parts: [
+          P("Find the value of $k$ for which the direction of $L$ is parallel to $\\Pi$.", 2, ans.int(parallelQ), [
+            `A normal to $\\Pi$ is $${col(n)}$. A direction parallel to the plane is perpendicular to this normal.`,
+            `Set the scalar product equal to zero: $${expr([[n[0], "k"], [constantTerm, ""]])} = 0$.`,
+            `Therefore $k = ${parallelQ}$.`]),
+          P("For this value of $k$, which statement correctly describes $L$ and $\\Pi$?", 1, ans.choice(rng,
+            { text: "The line does not meet the plane. Its direction is parallel, but the point given in its equation is not in the plane.", value: "disjoint" },
+            [{ text: "The line lies entirely in the plane because every parallel direction lies in the plane.", value: "contained", why: "A parallel direction is not enough. Check a point on the line." },
+             { text: "The line meets the plane at exactly one point because its direction is perpendicular to the normal.", value: "once", why: "A perpendicular direction to the normal cannot produce a single crossing." },
+             { text: "The line is perpendicular to the plane because its direction is perpendicular to the normal.", value: "normal", why: "A direction perpendicular to the plane would be parallel to its normal." }]), [
+            `The point on $L$ with $\\lambda=0$ has position vector $${col(a)}$.`,
+            `Substituting this point into the plane's left side gives $${pointTest} \\ne ${D}$.`,
+            "The line has a direction parallel to the plane and does not lie in it, so there is no intersection."]),
+          P(`Now let $k=${comparisonQ}$. Find the value of $\\lambda$ at the point where $L$ meets $\\Pi$.`, 2, ans.frac(lambda.n, lambda.d), [
+            `Substitute the line into the plane: $${expr([[pointTest, ""], [normalProduct, "\\lambda"]])} = ${D}$.`,
+            `Hence $\\lambda = ${rat.tex(lambda)}$.`]),
+          P(`For $k=${comparisonQ}$, find the acute angle between $L$ and $\\Pi$, in degrees.`, 2, ans.sf(angle, 3, {
+            unit: "$^\\circ$", misconceptions: [{ value: 90 - angle, text: "That is the acute angle with the normal, not the angle with the plane." }]
+          }), [
+            `The direction of $L$ is now $${col(d)}$, and the absolute value of its scalar product with the normal is $${Math.abs(normalProduct)}$.`,
+            `If $\\theta$ is the acute angle with the plane, $\\sin\\theta = \\dfrac{${Math.abs(normalProduct)}}{\\sqrt{${n2(d)}}\\sqrt{${n2(n)}}}$.`,
+            `The angle is $\\theta \\approx ${sf(angle)}^\\circ$.`]),
+        ],
+      };
+    } });
+
   const PLANES3 = { line: "The three planes meet in a line.", none: "The three planes have no common point.", point: "The three planes meet at exactly one point.", same: "The three planes are the same plane." };
   reg({ type: "t3-ahl-line-plane", unknown: "three-planes", representation: "equation", format: "value", levels: [3], syllabus: ["3.18"],
     skills: ["AHL3.18.three-planes"], title: "Three planes with a parameter: when there is no unique common point",

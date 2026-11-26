@@ -337,6 +337,19 @@ export default {
     const { n1, n2 } = q.params, th = angleDeg(n1, n2);
     return { a: (dot(add(n1, n2), add(n1, n2)) - dot(sub(n1, n2), sub(n1, n2))) / 4, b: Math.min(th, 180 - th) };
   },
+  "t3-ahl-line-plane/direction-change/equation": (q, T) => {
+    const { a, n, tail, D, comparisonQ } = q.params;
+    const resides = (x) => dot(x, n) - D;
+    const direction = (k) => [k, ...tail];
+    const parallel = T.bisect((k) => resides(add(a, direction(k))) - resides(a), -8, 8);
+    T.require(!zero(direction(parallel)) && Math.abs(resides(a)) > 0, "the parallel line is genuinely disjoint");
+    const other = direction(comparisonQ);
+    T.require(Math.abs(dot(other, n)) > 0, "the changed line has one intersection");
+    const intersection = T.bisect((u) => resides(add(a, mul(u, other))), -10, 10);
+    const angle = linePlaneAngle(other, n);
+    T.require(Math.abs(resides(add(a, mul(intersection, other)))) < 1e-7, "substitute intersection back into the plane");
+    return { a: Math.round(parallel), b: T.optionWhere(q, "b", (x) => x === "disjoint"), c: intersection, d: angle };
+  },
   "t3-ahl-line-plane/line-plane-chain/equation": (q, T) => {
     const { a, d, n, D } = q.params, lam = T.bisect((l) => dot(n, add(a, mul(l, d))) - D, -500, 500), phi = linePlaneAngle(d, n);
     // distance from A to the plane: along the line to the meeting point, then the component perpendicular to the plane
