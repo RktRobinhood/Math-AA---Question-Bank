@@ -26,11 +26,13 @@
   const E = window.QBEngine;
   const TYPES = window.QB_TYPES;
   const CALC = window.QBPracticeCalculator;
+  const FORMULAS = window.QBPracticeFormulas;
   const app = document.getElementById('app');
   if (!E || !TYPES) { app.textContent = 'Practice could not load. Run node scripts/build.mjs.'; return; }
   const practiceContent = document.createElement('div');
   practiceContent.className = 'practice-content';
   app.replaceChildren(practiceContent);
+  const formulaPanel = FORMULAS?.mount(app, mx);
 
   const L = E.learner;
   const SCOPE_KEY = 'qb-practice-scope';
@@ -270,6 +272,8 @@
       ...(state.tab === 'practice' ? practiceView() : state.tab === 'progress' ? progressView() : worksheetView())));
     const active = !state.picking && CALC?.eligible({ item: state.item, question: state.question, course: C.id, tab: state.tab });
     CALC?.bind(active ? state.question : null, practiceContent.querySelector('.practice-calc-trigger'));
+    const formulaTrigger = practiceContent.querySelector('.practice-formula-trigger');
+    formulaPanel?.bind(formulaTrigger ? state.question : null, formulaTrigger, formulaTrigger ? relevantFormulas() : []);
   }
 
   // ── scope: what's the test on? ───────────────────────────────────────────
@@ -567,6 +571,9 @@
     return h('span', { class: `chip${q.calculator ? '' : ' on'}`, text: label, title });
   }
 
+  function relevantFormulas() {
+    return FORMULAS?.forQuestion({ item: state.item, question: state.question, course: C.id, tab: state.tab }) || [];
+  }
   function generatedView() {
     const q = state.question, item = state.item;
     const name = E.levelName(q.level, C.id);
@@ -594,6 +601,10 @@
       calculatorButton.append(document.createTextNode('Calculator'));
       addIcon('M5 5h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Zm9 0v14m-7-7h4m-2-2 2 2-2 2', true);
     }
+    const formulas = relevantFormulas().length ? h('button', {
+      class: 'practice-formula-trigger no-print', type: 'button', text: 'Relevant formulas',
+      'aria-haspopup': 'dialog', 'aria-expanded': 'false', onclick: () => formulaPanel.toggle(),
+    }) : null;
     const calculatorStatus = useCalculator && q.calculator
       ? h('span', { class: 'chip practice-calc-status-chip', text: 'Calculator allowed' })
       : calcChip(q);
@@ -601,7 +612,9 @@
       h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), settled ? h('span', { text: q.title }) : null, h('span', { class: 'sp' }),
         h('span', { class: 'chip', text: `Level ${q.level}${name ? ` · ${name}` : ''}` }),
         calculatorStatus, h('span', { class: 'mono', text: `[${q.marks}]` })),
-      calculatorButton ? h('div', { class: 'practice-calc-edge no-print' }, calculatorButton) : null,
+      formulas || calculatorButton ? h('div', { class: 'practice-question-tools no-print' },
+        formulas ? h('div', { class: 'practice-formula-edge' }, formulas) : null,
+        calculatorButton ? h('div', { class: 'practice-calc-edge no-print' }, calculatorButton) : null) : null,
       state.extra ? h('div', { class: 'verdict info', text: 'Extra practice. It does not change your level.' })
         : item.reason === 'refresh' ? h('div', { class: 'verdict info', text: `A refresher for ${item.refreshFor} ${C.byCode.get(item.refreshFor)?.title || ''}.` })
         : item.reason === 'review' ? h('div', { class: 'verdict info', text: 'A review, to check this is still secure.' }) : null,

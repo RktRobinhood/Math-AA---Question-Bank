@@ -27,6 +27,12 @@ The engine is plain JavaScript with no DOM access, no `Math.random()` and no net
 | `scripts/check-engine.mjs` | Every automated check. The independent answer verifiers are in `scripts/engine-checks/`: every `.mjs` file there except `tools.mjs` is loaded (`topicN.mjs` and any file added beside them). |
 | `scripts/sample-engine.mjs` | Prints sample questions: `node scripts/sample-engine.mjs fn-composite --seed 3`. |
 
+## Relevant formulas
+
+Generated Practice can show a reference for a reviewed skill tag, independently of calculator permission. The formula registry in `assets/js/practice-formulas.js` maps exact skill IDs to the general equation and any essential convention; references never take values, worked steps, or answers from the current question. If there is no reviewed match, omit the control. Keep the formula booklet in navigation as the full reference. Real exam fallback/review, progress and worksheets never inherit this panel.
+
+On a wide desktop the formula reference docks to the left of the question, leaving the calculator on the right. Smaller layouts use an on-demand dialog. Closing it or switching questions does not change the student's answers. Add a tested exact tag when adding reference coverage; do not use a broad topic or a keyword match.
+
 ## Courses
 
 The bank serves four courses: `aa-sl`, `aa-hl`, `ai-sl`, `ai-hl`. Generators are written once, for a **home course**, and name its syllabus codes. The home course is `aa-sl` unless the generator says otherwise with `home: "aa-hl"`, `"ai-sl"` or `"ai-hl"` (content that AA SL does not have). Every syllabus statement also has a permanent id (`SL1.8`), the same in every course that contains it, while its code differs: `SL1.8` is 1.8 in AA and 1.11 in AI HL. `data/syllabus-ai.json` lists under `shared` the AI statements that are an AA statement; that list is the judgement the engine trusts.
