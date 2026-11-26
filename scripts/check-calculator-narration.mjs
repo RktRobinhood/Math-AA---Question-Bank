@@ -44,8 +44,16 @@ for(const x of lessons){
    counts.native++;continue;
  }
  for(const p of [`data-lesson="${x.id}"`,`data-transcript-sha="${x.transcriptSha256}"`,`data-cue-sha="${x.cueMapSha256}"`])assert(html.includes(p),x.id+" route binding");
- assert(html.indexOf("recorded-watch.js")<html.indexOf('src="lesson.js'),x.id+" script order");
- assert(fs.readFileSync(at(route,"lesson.js"),"utf8").includes("QBRecordedWatch?.bind("),x.id+" pause binding");
+ if(x.id==="CT28"&&html.includes('src="watch-media.js?')){
+  const media=html.indexOf('src="watch-media.js?'),lesson=html.indexOf('src="lesson.js');
+  assert(media>=0&&lesson>media,x.id+" dedicated 1× transport script order");
+  assert(fs.readFileSync(at(route,"lesson.js"),"utf8").includes("CT28Media.load("),x.id+" dedicated media binding");
+  const loader=fs.readFileSync(at(route,"watch-media.js"),"utf8");
+  for(const k of ["pack.audioSha256","cfg.transcriptSha","cfg.cueSha","pack.captions","pack.anchors"])assert(loader.includes(k),x.id+" signed media fields");
+ }else{
+  assert(html.indexOf("recorded-watch.js")<html.indexOf('src="lesson.js'),x.id+" script order");
+  assert(fs.readFileSync(at(route,"lesson.js"),"utf8").includes("QBRecordedWatch?.bind("),x.id+" pause binding");
+ }
  assert.equal(at(root,x.nativeMediaAdapter.syncDestination).href,at(route,"narration.sync.json").href,x.id);
  assert.equal(at(root,x.nativeMediaAdapter.audioDestination).href,at(route,"narration.mp3").href,x.id);
  const sync=load(at(route,"narration.sync.json"));

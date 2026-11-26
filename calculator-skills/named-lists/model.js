@@ -34,7 +34,7 @@ function link(q){
 const original=data([1,3,6],[2,5,1],"score","freq");
 const example=data([2,4,7],[3,0,2],"lap","freq");
 const defaultColumn=()=>({name:"",v:Array(N).fill(null)});
-const init=(page="sheet")=>({page,c:0,row:0,cols:[defaultColumn(),defaultColumn()],buf:null,err:"",fromWatch:false});
+const init=(page="sheet")=>({page,sheet:1,ctrl:false,c:0,row:0,cols:[defaultColumn(),defaultColumn()],buf:null,err:"",fromWatch:false});
 const clone=s=>({...s,cols:s.cols.map(x=>({name:x.name,v:x.v.slice()}))});
 const nextRow=r=>Math.min(N-1,r+1);
 const label=(c,r)=>"AB"[c]+(r===-2?" name":r===-1?" formula":r+1);
@@ -60,9 +60,11 @@ function commit(s,raw,how="down"){
 function typed(old,raw){const s=clone(old);return s.page==="sheet"?commit(s,raw):s;}
 function step(old,k){
  let s=clone(old);s.err="";
+ if(k==="ctrl"){s.ctrl=!s.ctrl;return s;}
+ if(s.ctrl){s.ctrl=false;if(k==="doc"&&s.page==="sheet"){s.page="insert";s.buf=null;return s;}}
  if(k==="home"){s.page="home";s.buf=null;return s;}
  if(s.page==="home"){if(k==="1"||k==="enter")s.page="new";return s;}
- if(s.page==="new"){if(k==="4"){return {...init(),fromWatch:s.fromWatch};}if(k==="esc")s.page="home";return s;}
+ if(s.page==="new"||s.page==="insert"){if(k==="4"){return {...init(),sheet:s.page==="insert"?s.sheet+1:1,fromWatch:s.fromWatch};}if(k==="esc")s.page=s.page==="insert"?"sheet":"home";return s;}
  if(k==="esc"){s.buf=null;return s;}
  if(k==="enter"){
   if(s.buf!==null)return commit(s,s.buf);
@@ -75,7 +77,7 @@ function step(old,k){
   return move(s,s.c,s.row>=0?-2:0);
  }
  if(k==="left"||k==="right")return move(s,Math.max(0,Math.min(1,s.c+(k==="left"?-1:1))),s.row);
- if(k==="up"||k==="down")return move(s,s.c,Math.max(-2,Math.min(N-1,s.row+(k==="up"?-1:1))));
+ if(k==="up"||k==="down"){const low=s.row<0?-2:0,high=s.row<0?-1:N-1;return move(s,s.c,Math.max(low,Math.min(high,s.row+(k==="up"?-1:1))));}
  if(k==="del"){
   if(s.buf!==null)s.buf=s.buf.slice(0,-1);
   else if(s.row>=0)s.cols[s.c].v[s.row]=null;
