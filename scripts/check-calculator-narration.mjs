@@ -4,6 +4,7 @@ import path from "node:path";
 import {createHash} from "node:crypto";
 import {createRequire} from "node:module";
 import {execFileSync} from "node:child_process";
+import vm from "node:vm";
 const root=new URL("../calculator-skills/",import.meta.url), handoff=new URL("paperclip-audio/",root);
 const require=createRequire(import.meta.url);
 const {decode,requiredPoints}=require("../calculator-skills/paperclip-audio/recorded-watch.js");
@@ -24,7 +25,52 @@ if(process.argv[2]==="--draft"){
   captions:cue.spokenCues.map(c=>({id:c.id,startMs:null,endMs:null}))},null,2));
  process.exit(0);
 }
-const counts={preserved:0,native:0,sharedAwaiting:0,sharedRecorded:0};
+const decodeAudio=process.argv.includes("--decode-audio");
+const probe=f=>{
+ const duration=Number(execFileSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",f],{encoding:"utf8"}));
+ execFileSync("ffmpeg",["-v","error","-i",f,"-f","null","-"]);
+ return duration;
+};
+// Native players (CT37, CT39 to CT42) read their own measured manifest. Run each route's own
+// decoder on it, exactly as the page does, so a recording only counts if that page would accept it.
+const routeScripts={
+ CT37:{files:["key-tape.js","watch-media.js"],decode:(w,t)=>w.BinomialPdfMedia.decode(t,w.BinomialPdfTape),
+  actual:(w,r,d)=>w.BinomialPdfMedia.decodedTimeline(r,d)},
+ CT40:{files:["narration.js","watch-media.js"],decode:(w,t)=>w.InverseNormalMedia.decode(t,w.InverseNormalMedia.compose(w.InverseNormalRehearsal)),
+  actual:(w,r,d)=>w.InverseNormalMedia.decodedTimeline(r,d)},
+ CT41:{files:["narration.js","watch-media.js"],decode:(w,t)=>w.NormalParameterMedia.decode(t,w.NormalNarration),
+  actual:(w,r,d)=>w.NormalParameterMedia.decodedTimeline(r,d)},
+ CT42:{files:["key-tape.js","watch-media.js"],decode:(w,t)=>w.CT42Media.decode(t,w.CT42Tape),actual:(w,r,d)=>w.CT42Media.actual(r,d)}
+};
+function sandbox(route,files){
+ const box={};box.window=box;box.globalThis=box;vm.createContext(box);
+ for(const f of files)vm.runInContext(fs.readFileSync(at(route,f),"utf8"),box,{filename:f});
+ return box;
+}
+function checkNative(x,cue,route,html){
+ const ad=cue.nativeMediaAdapter;
+ if(x.id==="CT39"){
+  const box=sandbox(route,[path.basename(ad.file)]);
+  if(box.NormalMeasuredCues===undefined)return false;
+  const voice=require("../calculator-skills/normal/voice-profile.js");
+  const profile=voice.validate(JSON.parse(JSON.stringify(box.NormalMeasuredCues)));
+  const media=at(route,profile.file);
+  assert.equal(hash(fs.readFileSync(media)),profile.sha256,x.id+" recording bytes");
+  if(decodeAudio)assert(voice.mediaDurationMatches(profile,probe(decodeURIComponent(media.pathname))),x.id+" audio duration");
+  return true;
+ }
+ const id=ad.elementId??ad.inlineManifestId, m=html.match(new RegExp(`<script type="application/json" id="${id}">([\\s\\S]*?)</script>`));
+ if(!m){assert(!html.includes(`id="${id}"`),x.id+" manifest tag must be inert application/json");return false;}
+ assert(!m[1].includes("<"),x.id+" inline manifest must escape <");
+ const spec=routeScripts[x.id], w=sandbox(route,spec.files), recording=spec.decode(w,m[1]);
+ assert(recording,x.id+" measured manifest rejected by the route's own decoder");
+ const pkg=JSON.parse(m[1]), media=at(route,pkg.audio);
+ assert.equal(hash(fs.readFileSync(media)),pkg.audioSha256,x.id+" recording bytes");
+ const duration=decodeAudio?probe(decodeURIComponent(media.pathname)):pkg.durationMs/1000;
+ assert(spec.actual(w,recording,duration),x.id+" audio duration");
+ return true;
+}
+const counts={preserved:0,native:0,nativeRecorded:0,sharedAwaiting:0,sharedRecorded:0};
 const seen=new Set();
 for(const x of lessons){
  assert(!seen.has(x.id),x.id);seen.add(x.id);
@@ -41,7 +87,9 @@ for(const x of lessons){
  }
  if(x.integrationStatus!=="shared-measured-json"){
    assert(["inline-json","strict-json-assignment"].includes(x.integrationStatus),x.id+" missing narration adapter");
-   counts.native++;continue;
+   counts.native++;
+   if(checkNative(x,cue,route,html))counts.nativeRecorded++;
+   continue;
  }
  const sharedTemplate=html.includes('watch-bootstrap.js?')&&html.includes('data-calculator-watch');
  if(!sharedTemplate)for(const p of [`data-lesson="${x.id}"`,`data-transcript-sha="${x.transcriptSha256}"`,`data-cue-sha="${x.cueMapSha256}"`])assert(html.includes(p),x.id+" route binding");
@@ -72,11 +120,9 @@ for(const x of lessons){
  }
  assert(decode(sync,cue,config(x,cue)),x.id+" measured timing format");
  assert.equal(hash(fs.readFileSync(at(route,sync.audio))),sync.audioSha256,x.id+" recording bytes");
- if(process.argv.includes("--decode-audio")){
-  const f=decodeURIComponent(at(route,sync.audio).pathname);
-  const duration=Number(execFileSync("ffprobe",["-v","error","-show_entries","format=duration","-of","csv=p=0",f],{encoding:"utf8"}));
+ if(decodeAudio){
+  const duration=probe(decodeURIComponent(at(route,sync.audio).pathname));
   assert(Number.isFinite(duration)&&Math.abs(1000*duration-sync.durationMs)<=120,x.id+" audio duration");
-  execFileSync("ffmpeg",["-v","error","-i",f,"-f","null","-"]);
  }
  counts.sharedRecorded++;
 }
