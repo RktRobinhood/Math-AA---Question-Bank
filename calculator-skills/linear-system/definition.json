@@ -1,0 +1,184 @@
+{
+  "id": "CT07",
+  "title": "Solve simultaneous equations",
+  "intro": "Adult tickets cost 2 tokens and student tickets cost 1. A group pays 11 tokens and buys one fewer student ticket than adult tickets. How many of each?",
+  "chapters": [
+    {
+      "id": "open",
+      "title": "Open the linear solver"
+    },
+    {
+      "id": "setup",
+      "title": "Confirm two equations"
+    },
+    {
+      "id": "first",
+      "title": "Enter the first equation"
+    },
+    {
+      "id": "second",
+      "title": "Enter the second equation"
+    },
+    {
+      "id": "read",
+      "title": "Read the ordered pair"
+    },
+    {
+      "id": "check",
+      "title": "Check both equations"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "open",
+      "end": 7.861,
+      "hold": 5.4,
+      "coach": "Let x be the number of adult tickets and y the number of student tickets. The two equations are 2x + y = 11 and y = x − 1. Open Menu → 3: Algebra → 2: Solve System of Linear Equations.",
+      "spoken": "On a Calculator page, open Menu then three: Algebra then two: Solve System of Linear Equations.",
+      "keys": [
+        {
+          "id": "key-1",
+          "label": "Menu",
+          "at": 0.08
+        },
+        {
+          "id": "key-2",
+          "label": "3",
+          "at": 0.3433
+        },
+        {
+          "id": "key-3",
+          "label": "2",
+          "at": 0.6067
+        }
+      ]
+    },
+    {
+      "chapter": "setup",
+      "end": 15.085,
+      "hold": 3.2,
+      "coach": "Keep 2 equations and the variable order x, y. Press Enter to insert the template.",
+      "spoken": "Use two equations and keep the variables in x, y order. Confirm to insert the template.",
+      "keys": [
+        {
+          "id": "key-4",
+          "label": "Enter",
+          "at": 0.4
+        }
+      ]
+    },
+    {
+      "chapter": "first",
+      "end": 22.392,
+      "hold": 9.1,
+      "coach": "The 11-token total gives 2x + y = 11. Include the equals sign, then press Tab for the second row.",
+      "spoken": "Enter the first equation, including its equals sign. Then press Tab for the second line.",
+      "keys": [
+        {
+          "id": "key-5",
+          "label": "2",
+          "at": 0.08
+        },
+        {
+          "id": "key-6",
+          "label": "x",
+          "at": 0.1788
+        },
+        {
+          "id": "key-7",
+          "label": "+",
+          "at": 0.2775,
+          "ariaLabel": "Plus"
+        },
+        {
+          "id": "key-8",
+          "label": "y",
+          "at": 0.3763
+        },
+        {
+          "id": "key-9",
+          "label": "=",
+          "at": 0.475,
+          "ariaLabel": "Equals"
+        },
+        {
+          "id": "key-10",
+          "label": "1",
+          "at": 0.5737
+        },
+        {
+          "id": "key-11",
+          "label": "1",
+          "at": 0.6725
+        },
+        {
+          "id": "key-12",
+          "label": "Tab",
+          "at": 0.7712
+        }
+      ]
+    },
+    {
+      "chapter": "second",
+      "end": 29.942,
+      "hold": 7.6,
+      "coach": "One fewer student than adult gives y = x − 1. Type it in the second row and press Enter to solve.",
+      "spoken": "Enter the second equation. It can be in a different linear form. Press Enter to solve.",
+      "keys": [
+        {
+          "id": "key-13",
+          "label": "y",
+          "at": 0.08
+        },
+        {
+          "id": "key-14",
+          "label": "=",
+          "at": 0.2117,
+          "ariaLabel": "Equals"
+        },
+        {
+          "id": "key-15",
+          "label": "x",
+          "at": 0.3433
+        },
+        {
+          "id": "key-16",
+          "label": "−",
+          "at": 0.475,
+          "ariaLabel": "Minus"
+        },
+        {
+          "id": "key-17",
+          "label": "1",
+          "at": 0.6067
+        },
+        {
+          "id": "key-18",
+          "label": "Enter",
+          "at": 0.7383
+        }
+      ]
+    },
+    {
+      "chapter": "read",
+      "end": 35.092,
+      "hold": 3.3,
+      "coach": "The output {4, 3} follows the variable order {x, y}: 4 adult tickets and 3 student tickets.",
+      "spoken": "The order, x then y, tells you what each list entry means.",
+      "keys": []
+    },
+    {
+      "chapter": "check",
+      "end": 40.242,
+      "hold": 7,
+      "coach": "Substitute x = 4 and y = 3 into both equations.\nCost: 2(4) + 3 = 11.\nOne fewer student: 3 = 4 − 1.",
+      "spoken": "Substitute the pair into both equations to check.",
+      "keys": []
+    }
+  ],
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "b07221decb5f16f8324f369d32186c11c54d5f0d131dda1def491dd9de2304c3",
+    "scriptSha256": "a2cf91a278aafefa8a6b3314e4ab7954bbde0f1d06f0489f270e9c491464dcf9"
+  }
+}

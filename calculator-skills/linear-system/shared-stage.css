@@ -1,0 +1,39 @@
+/* Route-local Calculator and Try layout; Watch transport belongs to the shared player. */
+.ct07-trail{margin:0 auto .35rem;max-width:1130px;font:700 .76rem/1.25 ui-monospace,monospace}
+.qb-calculator-lesson:has(.ct07-trail){max-width:1180px}
+.ct07-trail + .lw-lesson{width:100%;margin:0 auto .7rem}
+.ct07-try .stage-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.lw-stage[data-mode=try]:has(.ct07-try) .lw-device-panel{max-width:none}
+.lw-stage[data-mode=try]:has(.ct07-try) .lw-surface{grid-template-columns:minmax(0,1fr)}
+.ct07-try #handheld-host{min-width:0;--handheld-width:clamp(160px,calc((100svh - 154px)*.47774),286px)}
+.ct07-try{outline-offset:-2px}
+.lw-stage:has(.ct07-try) .lw-coach,.ct07-trail + .lw-lesson .lw-coach{white-space:pre-line}
+@media(max-width:700px){
+ .ct07-try .stage-grid{grid-template-columns:minmax(0,1fr)}
+ .ct07-try #handheld-host{--handheld-width:clamp(158px,calc((100svh - 156px)*.47774),279px)}
+}
+@media(max-width:430px){
+ .qb-calculator-lesson:has(.ct07-trail){padding:7px 10px}
+ .ct07-trail{margin-bottom:.24rem}
+ .ct07-trail + .lw-lesson .lw-header{gap:.4rem;margin-bottom:.45rem}
+ .ct07-trail + .lw-lesson .lw-header h1{font-size:clamp(1.25rem,5.3vw,1.55rem);letter-spacing:-.026em}
+}
+@media(max-width:430px){
+ .ct07-trail + .lw-lesson .lw-header{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"title modes" "question question";align-items:center;row-gap:.13rem}
+ .ct07-trail + .lw-lesson .lw-header > div:first-child{display:contents}
+ .ct07-trail + .lw-lesson .lw-header h1{grid-area:title}
+ .ct07-trail + .lw-lesson .lw-header p{grid-area:question;margin:.1rem 0}
+ .ct07-trail + .lw-lesson .lw-mode{grid-area:modes}
+}
+/* Keep both equation rows and the ordered output above the next-entry strip
+   when Full view is miniaturized. Screen mode uses the same LCD at full size. */
+@container (max-width:198px){
+ #lcd .lcd-status{font-size:3.25cqw}
+ #lcd .lcd-formula{margin:2.3cqw 1.1cqw 0;gap:.84cqw;font-size:4.05cqw}
+ #lcd .lcd-equations .lcd-eq{padding-inline:.45cqw;font-size:inherit;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #lcd .lcd-equations .lcd-caret{display:inline-block}
+ #lcd .lcd-result{margin:1cqw 2cqw 0;font-size:5.8cqw}
+ #lcd .lcd-entry{min-height:11%;padding-block:.65cqw;font-size:5.1cqw}
+ #lcd .menu-stack :is(li>span,li>button){font-size:3.1cqw}
+ #lcd .lcd-body,#lcd .setup-title{font-size:3.55cqw}
+}
