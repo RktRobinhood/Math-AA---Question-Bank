@@ -1,0 +1,426 @@
+{
+  "id": "CT46",
+  "title": "t tests",
+  "intro": "Paired differences or independent samples.",
+  "recording": {
+    "file": "narration.mp3",
+    "audioSha256": "230734224daa7adfd6b8e5adf4698c61f1c106a3392293250a320d7b412ae205",
+    "scriptSha256": "fa2e8a1a3b053fe57e24d44de4b270f8857ee99ca4ca2e56c1bc73e8d7964a19"
+  },
+  "chapters": [
+    {
+      "id": "setup",
+      "title": "Identify the paired differences"
+    },
+    {
+      "id": "paired-menu",
+      "title": "Open t Test with Stats"
+    },
+    {
+      "id": "paired-data",
+      "title": "Enter the differences’ summaries"
+    },
+    {
+      "id": "paired-read",
+      "title": "Read the paired-test decision"
+    },
+    {
+      "id": "independent-menu",
+      "title": "Open 2-Sample t Test"
+    },
+    {
+      "id": "independent-data",
+      "title": "Enter group summaries and pool"
+    },
+    {
+      "id": "independent-read",
+      "title": "Read the independent-test decision"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "setup",
+      "spoken": "For the same items measured twice, first compute one difference per item. Here use the nine differences, not two independent lists.",
+      "coach": "For matched data, subtract within each pair in the same direction. The nine differences give one sample; its summaries are already calculated.",
+      "end": 9.811,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "paired-menu",
+      "spoken": "Population standard deviation is unknown. On Calculator, choose Menu then six Statistics then seven Stat Tests then two t Test. Switch Data Input Method to Stats.",
+      "coach": "The population SD is unknown. Calculator: Menu → 6 Statistics → 7 Stat Tests → 2 t Test. Use Stats.",
+      "end": 27.036,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-0",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-1",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-2",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.326
+        },
+        {
+          "id": "press-3",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.408
+        },
+        {
+          "id": "press-4",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-5",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-6",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.654
+        },
+        {
+          "id": "press-7",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.736
+        },
+        {
+          "id": "press-8",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "paired-data",
+      "spoken": "Use zero for the hypothesised mean, three for the sample mean, four for the sample standard deviation, and nine for the sample size. The claim is an increase. Choose mean greater than the hypothesised mean, and confirm.",
+      "coach": "Enter μ₀ = 0, x̄ = 3, sx = 4 and n = 9. Select μ > μ₀, Tab to OK and run.",
+      "end": 43.574,
+      "hold": 11,
+      "keys": [
+        {
+          "id": "press-9",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.1347
+        },
+        {
+          "id": "press-10",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.1893
+        },
+        {
+          "id": "press-11",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.244
+        },
+        {
+          "id": "press-12",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2987
+        },
+        {
+          "id": "press-13",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.3533
+        },
+        {
+          "id": "press-14",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.408
+        },
+        {
+          "id": "press-15",
+          "label": "9",
+          "ariaLabel": "9",
+          "at": 0.4627
+        },
+        {
+          "id": "press-16",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5173
+        },
+        {
+          "id": "press-17",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-18",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.6267
+        },
+        {
+          "id": "press-19",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.6813
+        },
+        {
+          "id": "press-20",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.736
+        },
+        {
+          "id": "press-21",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.7907
+        },
+        {
+          "id": "press-22",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8453
+        }
+      ]
+    },
+    {
+      "chapter": "paired-read",
+      "spoken": "The t statistic is two point two five, with eight degrees of freedom. The one-sided p value is about zero point zero two seven two eight. At five percent, reject the null hypothesis. There is evidence the mean difference is positive.",
+      "coach": "t = 2.25 and df = 8. The one-sided p ≈ 0.02728 < 0.05. Reject H₀: evidence that the mean difference is positive.",
+      "end": 60.808,
+      "hold": 2,
+      "keys": []
+    },
+    {
+      "chapter": "independent-menu",
+      "spoken": "For independent normal groups with equal population variances, choose Stat Tests, then option four for the two-sample t test. Switch to Stats.",
+      "coach": "Now the samples are independent, from normal populations whose variances are assumed equal. Use Menu → 6 → 7 → 4 and choose Stats.",
+      "end": 71.799,
+      "hold": 8,
+      "keys": [
+        {
+          "id": "press-23",
+          "label": "Menu",
+          "ariaLabel": "Menu",
+          "at": 0.162
+        },
+        {
+          "id": "press-24",
+          "label": "6",
+          "ariaLabel": "6",
+          "at": 0.244
+        },
+        {
+          "id": "press-25",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.326
+        },
+        {
+          "id": "press-26",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.408
+        },
+        {
+          "id": "press-27",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.49
+        },
+        {
+          "id": "press-28",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.572
+        },
+        {
+          "id": "press-29",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.654
+        },
+        {
+          "id": "press-30",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.736
+        },
+        {
+          "id": "press-31",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.818
+        }
+      ]
+    },
+    {
+      "chapter": "independent-data",
+      "spoken": "Group one: sample mean thirty-five, sample standard deviation four, sample size ten. Group two: sample mean thirty-one, sample standard deviation five, sample size twelve. Choose the not-equal alternative and set Pooled to Yes.",
+      "coach": "Use (35, 4, 10) for group one and (31, 5, 12) for group two (mean, SD, n). Choose μ₁ ≠ μ₂ and Pooled Yes, then run.",
+      "end": 90.809,
+      "hold": 16,
+      "keys": [
+        {
+          "id": "press-32",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.1157
+        },
+        {
+          "id": "press-33",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.1513
+        },
+        {
+          "id": "press-34",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.187
+        },
+        {
+          "id": "press-35",
+          "label": "4",
+          "ariaLabel": "4",
+          "at": 0.2226
+        },
+        {
+          "id": "press-36",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.2583
+        },
+        {
+          "id": "press-37",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.2939
+        },
+        {
+          "id": "press-38",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.3296
+        },
+        {
+          "id": "press-39",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.3652
+        },
+        {
+          "id": "press-40",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.4009
+        },
+        {
+          "id": "press-41",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.4365
+        },
+        {
+          "id": "press-42",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.4722
+        },
+        {
+          "id": "press-43",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.5078
+        },
+        {
+          "id": "press-44",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.5435
+        },
+        {
+          "id": "press-45",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5791
+        },
+        {
+          "id": "press-46",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.6148
+        },
+        {
+          "id": "press-47",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6504
+        },
+        {
+          "id": "press-48",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.6861
+        },
+        {
+          "id": "press-49",
+          "label": "→",
+          "ariaLabel": "Right arrow",
+          "at": 0.7217
+        },
+        {
+          "id": "press-50",
+          "label": "↓",
+          "ariaLabel": "Down arrow",
+          "at": 0.7574
+        },
+        {
+          "id": "press-51",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.793
+        },
+        {
+          "id": "press-52",
+          "label": "Tab",
+          "ariaLabel": "Tab",
+          "at": 0.8287
+        },
+        {
+          "id": "press-53",
+          "label": "Enter",
+          "ariaLabel": "Enter",
+          "at": 0.8643
+        }
+      ]
+    },
+    {
+      "chapter": "independent-read",
+      "spoken": "The two-sided p value is about zero point zero five four seven, above zero point zero five. Do not reject the null hypothesis. That is not evidence the two means are equal.",
+      "coach": "The two-sided p ≈ 0.0547 > 0.05. Do not reject H₀. That does not prove the means are equal.",
+      "end": 104.769,
+      "hold": 3,
+      "keys": []
+    }
+  ]
+}
