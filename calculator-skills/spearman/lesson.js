@@ -97,7 +97,7 @@ function shown(id,v){$(id).hidden=!v;}
 function status(id,text,bad=false){const e=$(id);e.textContent=text;e.dataset.error=String(bad);}
 function paintTry(writeData=true){
  lcd(state,false,-1);rawTable($('try-picture'),state.raw);
- $('try-context').textContent='Rank the two lists separately. Enter the ranks on the original paired rows.';
+ $('try-context').textContent='Find Spearman’s rank correlation for these paired scores. Rank each list separately and put the ranks back on their original rows.';
  $('reset').textContent='Reset Try';
  status('tool-status',state.error||(request.error&&!hasOwnTry?request.error:'')||(state.run&&!state.run.matchX?'Check the rx ranks against the original x rows.':state.run&&!state.run.matchY?'Check the ry ranks against the original y rows.':''),Boolean(state.error||request.error&&!hasOwnTry||state.run&&(!state.run.matchX||!state.run.matchY)));
  for(const [id,v] of [['x-input',state.raw.x],['y-input',state.raw.y]])if(writeData&&document.activeElement!==$(id))$(id).value=v.join(', ');
