@@ -1,7 +1,7 @@
 {
   "id": "CT35",
   "title": "Spearman rank correlation",
-  "intro": "Find Pearson r on two lists of ranks while keeping the original observations paired.",
+  "intro": "Four paired scores (x, y) are (21, 7), (7, 12), (15, 5), and (11, 7). Find Spearman’s rank correlation and describe what its sign means.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "60747f2f4bcab03193c00447f38d2b2c311a1be8e517c65d23148f954187e9c3",
@@ -134,7 +134,7 @@
     {
       "chapter": "tie",
       "spoken": "The two sevens would occupy ranks two and three. Give each two point five.",
-      "coach": "The next rank is 4, not 3.",
+      "coach": "The sevens occupy ranks 2 and 3. Each gets (2 + 3) ÷ 2 = 2.5; the next rank is 4. Return those ranks to the original rows.",
       "end": 23.432,
       "hold": 2.5,
       "keys": []
@@ -301,7 +301,7 @@
     {
       "chapter": "r",
       "spoken": "Pearson r on the paired ranks equals Spearman's rank correlation. Here it is about negative zero point six three two.",
-      "coach": "The ranks tend to run in opposite directions.",
+      "coach": "Read r ≈ −0.632. The squared-rank-difference shortcut assumes each rank from 1 to n occurs once per list. Averaging ties changes that spread.",
       "end": 58.539,
       "hold": 1.6,
       "keys": [
@@ -316,7 +316,7 @@
     {
       "chapter": "meaning",
       "spoken": "The number describes monotonic association, not proof that a change in one variable causes the other.",
-      "coach": "Here rₛ ≈ −0.632. A constant rank list gives undefined rₛ.",
+      "coach": "Higher x ranks tend to go with lower y ranks. This is a negative monotonic association, not evidence that one score causes the other.",
       "end": 66.32,
       "hold": 2,
       "keys": []
