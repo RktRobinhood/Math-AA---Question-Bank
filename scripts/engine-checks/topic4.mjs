@@ -36,6 +36,15 @@ export default {
     for (let k = 0; k <= n; k++) e += k * Math.exp(lnBinom(n, k) + k * Math.log(p) + (n - k) * Math.log(1 - p));
     return { a: T.approx(e, 1e-6), b: T.approx(n - e, 1e-6) };
   },
+  "t4-expected-occurrences/interpret-a-decimal-expectation/words": (q,T) => {
+    const match=/is \$(0\.[135])\$\. Consider a group of \$(\d+)\$/.exec(q.stem);
+    T.require(Boolean(match),"the chance and group size are given explicitly");
+    const p=Number(match[1]), n=Number(match[2]);
+    let e=0;
+    for(let k=1;k<=n;k++)e+=k*T.binomPmf(n,p,k);
+    T.require(Math.abs(Math.round(e)-e)>0.05,"the expected count is not a whole number");
+    return {a:T.approx(e,1e-6),b:T.option("average")};
+  },
   "t4-conditional-probability/reverse-from-tree/words": (q, T) => {
     const { pD, sens, fp } = q.params;
     T.require([pD, sens, fp].every((p) => p > 0 && p < 1), "probabilities between 0 and 1");

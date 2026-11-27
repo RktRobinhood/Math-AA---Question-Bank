@@ -1303,6 +1303,23 @@
         table: { head: [c.x].concat(ys.map((y, i) => m(i * h))), rows: [[c.y].concat(ys.map((y) => m(num(y))))] }, parts: [
           P(`Use the trapezoidal rule with all the values in the table to estimate ${c.q}.`, 3, ans.sf(est), [`There are $${n}$ intervals of width $h = ${h}$.`, `Area $\\approx \\dfrac{h}{2}\\left(y_{0} + y_{n} + 2(y_{1} + \\dots + y_{n-1})\\right) = ${trapLine(ys, h).slice(1, -1)}$`, `Area $\\approx ${sf(est)}$`])] };
     } });
+  reg({ ...TR, unknown: "missing-interior-reading", representation: "table", format: "value", levels: [2],
+    skills: ["AI-SL5.8.from-table", "AI-SL5.8.interval-width"], title: "Find a missing reading using the trapezoidal rule",
+    build({rng}) {
+      const h=rng.pick([2,4,6]), a=rng.int(3,9), b=rng.int(10,17), c=rng.int(18,25);
+      const estimated=h*(a+2*b+c)/2;
+      return { params:{h,a,b,c,estimated},
+        stem:`The table shows the widths of a pond measured across it at three positions. The trapezoidal rule gives an estimate of ${m(estimated)} square metres for the area of the pond over this section.`,
+        table:{head:["Distance along the pond (m)",m(0),m(h),m(2*h)],rows:[["Width across the pond (m)",m(a),m("w"),m(c)]]},
+        parts:[
+          P("State the distance between consecutive measuring positions, in metres.",1,ans.int(h),[`Consecutive positions are ${m(h)} metres apart.`]),
+          P("Find the missing width $w$, in metres.",2,ans.int(b),[
+            `The middle width is used in both trapezoids, so it is counted twice: $${h===2?"":h/2}(${a}+2w+${c})=${estimated}$.`,
+            `After subtracting the two outside widths from the sum inside the brackets, $2w=${2*b}$, so $w=${b}$.`
+          ])
+        ]
+      };
+    } });
   // a curve that is positive and bends one way only on [a, b], with values that are short decimals at the points used
   function curveSit(rng) {
     let a, n, h, cs, ys, xs, down;

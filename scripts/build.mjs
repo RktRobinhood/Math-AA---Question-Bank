@@ -362,11 +362,12 @@ const practiceGeneratorVersions = {
   "aa-hl-topic34.js": "20261126-plane-direction-1",
   "ai-hl-topic123.js": "tsp-bound-inference-1",
   "ai-hl-topic45.js": "20261126-correlation-assumptions-1",
-  "ai-sl-own.js": "practice-exam-style-1",
+  "ai-sl-own.js": "practice-ai-trapezoidal-interior-1",
   "t1-scale.js": "real-compounding-1",
   "t5-scale.js": "20261126-easier-1",
   "topic5.js": "20261125-a1",
   "topic1.js": "geometric-graph-alt-1",
+  "topic4.js": "decimal-expectation-1",
   "w3-number.js": "49785a1",
   "w3-statistics.js": "20261126-easier-1",
   "w4-functions.js": "20261126-plane-direction-1",
@@ -380,7 +381,7 @@ write("practice.html", page({
   head: `\n    <link rel="stylesheet" href="./assets/css/practice-formulas.css?v=1">\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
-    "vendor/katex/katex.min.js", "js/question-types.js?v=20261126-plane-direction-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
+    "vendor/katex/katex.min.js", "js/question-types.js?v=20261127-transfer-pack-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
     ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-formulas-1",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));

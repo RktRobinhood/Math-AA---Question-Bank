@@ -553,6 +553,16 @@ export default {
     return { a: ap(T, h), b: count };
   },
   "t5-ai-trapezoidal/area-from-a-table/table": (q, T) => ({ a: ap(T, polygonArea(T, q.params.ys, q.params.h)) }),
+  "t5-ai-trapezoidal/missing-interior-reading/table": (q,T) => {
+    const n = s => Number(s.replaceAll("$",""));
+    const [,x0,x1,x2]=q.table.head, [,left,blank,right]=q.table.rows[0];
+    const h=n(x1)-n(x0), area=Number(/estimate of \$(\d+)\$/.exec(q.stem)?.[1]);
+    T.require(blank==="$w$" && h>0 && n(x2)-n(x1)===h && Number.isFinite(area),"a single missing middle width with equal intervals and a given estimate");
+    const areaAt=w=>polygonArea(T,[n(left),w,n(right)],h);
+    const width=T.bisect(w=>areaAt(w)-area,0,100);
+    T.require(width>0 && Math.abs(areaAt(2*width)-area)>1,"doubling the width cannot produce the given estimate");
+    return {a:h,b:Math.round(width)};
+  },
   "t5-ai-trapezoidal/estimate-from-a-function/equation": (q, T) => {
     const { cs, a, n, h, k } = q.params, f = (x) => T.poly(cs, x), ys = Array.from({ length: n + 1 }, (v, i) => f(a + i * h));
     T.require(ys.every((y) => y > 0), "the curve is above the axis at the points used");
