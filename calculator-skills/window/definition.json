@@ -1,7 +1,7 @@
 {
   "id": "CT08",
   "title": "Choose a graph window",
-  "intro": "Find a skate ramp’s lowest point when the default window misses it.",
+  "intro": "A skate ramp has height h(x) = (x − 12)² + 3 metres, where x is the distance in metres from a marker (0 ≤ x ≤ 20). Find where the ramp is lowest and its height there. Choose a graph window that shows the turn.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "fe48a5582f8cd3d27a7c95e2a45eb476929831c2ecd439a85f84627d7ce85574",
@@ -37,7 +37,7 @@
     {
       "chapter": "plot",
       "spoken": "Enter the function in the Graphs application and press Enter.",
-      "coach": "A ramp’s height is h(x) = (x − 12)² + 3 metres, with distance x from 0 to 20 m. Where is it lowest? Enter the model and press Enter.",
+      "coach": "Enter (x − 12)² + 3 into the function line. Square the whole bracket, then press Enter.",
       "end": 3.8,
       "hold": 14,
       "keys": [
@@ -104,7 +104,7 @@
     {
       "chapter": "open-window",
       "spoken": "Here the vertex lies beyond the usual central view.",
-      "coach": "The vertex is at x = 12. Press Menu → 4: Window/Zoom → 1: Window Settings.",
+      "coach": "At x = 12 the squared bracket is zero, so the lowest point must be there. Press Menu → 4: Window/Zoom → 1: Window Settings.",
       "end": 11.2,
       "hold": 8,
       "keys": [
@@ -211,7 +211,7 @@
     {
       "chapter": "check",
       "spoken": "This window contains the vertex with space on both sides.",
-      "coach": "Read the vertex (12, 3). The ramp is lowest 12 m from the marker, at a height of 3 m.",
+      "coach": "The turn is at (12, 3). Check the height: h(12) = 0² + 3 = 3. The ramp is lowest 12 m from the marker and its height there is 3 m.",
       "end": 21.98,
       "hold": 5,
       "keys": []
