@@ -1,0 +1,17 @@
+The depth in each tank is measured in centimetres. The models describe only the first six minutes.
+Find a time when the depths are equal, and find the shared depth at that time.
+Here we are in Graphs. The horizontal variable x represents time in minutes.
+Enter twelve plus three x, then press Enter to plot it.
+Press Tab for the second function. Enter thirty minus zero point five x squared. Press Enter to plot it.
+Equal depths at one time appear as a crossing. The wider window also shows times outside the model.
+Open Menu, choose Analyze Graph, then Intersection.
+Find the crossing between three and five minutes. These bounds tell the calculator where to look.
+At lower bound, type three and press Enter. At upper bound, type five and press Enter.
+The first coordinate is time. Read the common depth from the LCD’s second coordinate.
+There is also a crossing on the left. To check it, rerun Intersection.
+Use the negation key, not subtraction. Type minus ten, then press Enter for the lower bound.
+Type minus nine for the upper bound. Press Enter again.
+The calculator finds a negative time. Our models describe only zero through six minutes, so reject that crossing.
+Use the LCD’s second coordinate for depth. Round both values at the end. Don't substitute a rounded time.
+After about three point seven one minutes, the tanks are both twenty-three point one centimetres deep.
+In Try the models are different. Again, report an allowed time and the common depth, with units.
