@@ -13,9 +13,11 @@
   }catch{unsafe=true;}
  }
  const challenge=linked||M.parse(seedTry);
- $("try-line").textContent="Plot f(x) = "+M.displayExpr(challenge.raw)+". Frame the vertex.";
- $("keypad-problem").textContent=linked?$("try-line").textContent:
-   "A different ramp has height h(x) = "+M.displayExpr(challenge.raw)+" metres for 0 ≤ x ≤ 24. Use a graph to locate its lowest point, then use Check my window to check your viewing bounds.";
+ const tryProblem=linked
+  ?"Plot f(x) = "+M.displayExpr(challenge.raw)+". Set a window that shows the turn and both arms. Record the coordinates of the turning point."
+  :"A different ramp has height h(x) = "+M.displayExpr(challenge.raw)+" metres, where x is the distance in metres from a marker (0 ≤ x ≤ 24). Choose a window that shows the turn. How far from the marker is the lowest point, and how high is it?";
+ $("try-line").textContent=$("keypad-problem").textContent=tryProblem;
+ if(linked){$("answer-x-label").textContent="x-coordinate";$("answer-y-label").textContent="y-coordinate";}
  let state=create(challenge.raw),mode="watch",edited=false,replaceActive=true;
  let cache="", returnToWatch;
  const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",interactive:false,onKey:press});
@@ -156,9 +158,12 @@
   if(!Number.isFinite(dx)||!Number.isFinite(dy)){out.textContent="Enter two numbers.";return;}
   if(!M.assess(state.q,state.bounds).good){out.textContent="First bring the vertex and both arms into view.";return;}
   const close=(a,b)=>Math.abs(a-b)<=Math.max(.0005,Math.abs(b)*.0005);
-  out.textContent=close(dx,state.q.x)&&close(dy,state.q.y)?
-    (linked||state.raw!==seedTry?"Correct. That is the turning point.":"Correct. The lowest point is 15 m from the marker and 2 m high."):
-    "Not yet. Read the horizontal position and then the height at the turn.";
+  if(!close(dx,state.q.x)||!close(dy,state.q.y)){out.textContent="Not yet. Read the x-coordinate first, then the y-coordinate at the turn.";return;}
+  if(!["a","b","c"].every(k=>state.q[k]===challenge[k])){
+   out.textContent="Correct for the function you plotted. To finish the task, plot the function in the question.";return;
+  }
+  out.textContent=linked?"Correct. That is the turning point.":
+   "Correct. The lowest point is 15 m from the marker and 2 m high. The new window does not change the ramp’s 0 to 24 m domain.";
  });
  for(const id of ["answer-x","answer-y"])$(id).addEventListener("input",()=>$("vertex-feedback").textContent="");
  $("reset-keypad").addEventListener("click",()=>{stopPan();edited=true;state=create(challenge.raw);expr.value=state.raw;$("vertex-answer").reset();renderTry();stage.focus({preventScroll:true});});
