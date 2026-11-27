@@ -383,7 +383,7 @@ write("practice.html", page({
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
     "vendor/katex/katex.min.js", "js/question-types.js?v=20261127-transfer-pack-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
-    ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-sidebar-2",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-sidebar-review-3",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));
 
