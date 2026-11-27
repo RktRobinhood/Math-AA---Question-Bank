@@ -1,0 +1,85 @@
+/* Practice uses the Questions shell and syllabus tree without its Boolean operators. */
+.practice-work.prac{width:100%;max-width:min(900px,100%);min-width:0;margin-inline:auto;padding-inline:var(--s4)}
+.practice-work .page-head{gap:var(--s2) var(--s3);margin-bottom:0}
+.practice-filter-trigger,.practice-drawer-close,.practice-filter-done,.practice-drawer-message{display:none}
+.practice-filter-status{margin:0;padding:8px 12px;border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);color:var(--muted);font-size:var(--fs-sm)}
+.practice-side .side-fixed{gap:var(--s2)}
+.practice-side .side-fixed .syl-head em{margin-inline-start:auto}
+.practice-side .side-fixed input[type=search]{width:100%;min-width:0}
+.practice-side .mode-pick{display:flex;align-items:center;gap:var(--s2)}
+.practice-side .mode-pick select{min-width:0;flex:1}
+.practice-side .scope-topic{border-top:0}
+.practice-side .scope-topic>summary{flex-wrap:nowrap;padding:0 var(--s3);gap:6px}
+.practice-side .scope-topic>summary .tn{flex:1;white-space:normal;line-height:1.25}
+.practice-side .scope-topic>summary .n{white-space:nowrap}
+.practice-side .scope-topic>summary .whole{border:0;padding:0 4px;background:none;color:var(--accent);min-height:36px}
+.practice-side .scope-row{display:grid;grid-template-columns:minmax(0,1fr) auto;padding:6px var(--s3);gap:4px 8px;cursor:default}
+.practice-side .scope-row .scope-main{grid-column:1/3;min-height:32px;min-width:0}
+.practice-side .scope-exp{grid-column:1;justify-self:start;margin-left:27px;min-height:30px}
+.practice-side .scope-row>.lv{grid-column:2;max-width:140px}
+.practice-side .scope-row .t{display:block;overflow:visible;line-height:1.25}
+.practice-side .scope-types{padding:4px var(--s3) 6px var(--s5)}
+.practice-side .type-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 8px;padding-block:8px}
+.practice-side .type-row[hidden]{display:none}
+.practice-side .type-row>.lv{grid-column:2;padding:0;white-space:normal}
+.practice-side .scope-note{padding-top:var(--s3)}
+.practice-picked-tools{display:flex;gap:var(--s3);align-items:center;min-height:0}
+.practice-picked-tools:has(>[hidden]):not(:has(>:not([hidden]))){display:none}
+.practice-side .scope-picked{padding:0;border:0;max-height:76px;overflow:auto;overscroll-behavior:contain}
+.practice-side .scope-picked [aria-label^="Remove"]{min-height:25px;min-width:22px}
+.practice-side-foot{flex:none;border-top:1px solid var(--line);padding:var(--s3) var(--s4);display:grid;gap:var(--s2)}
+.practice-side-foot p{font-size:var(--fs-sm);margin:0}
+.practice-side input[type=checkbox]{min-width:16px;min-height:16px}
+.practice-filter-dialog:not([open]),.practice-repeat-row>[hidden]{display:none}
+
+@media (min-width:861px){
+ /* Expose the sidebar and work area as grid siblings of the existing tool docks.
+    The tools keep their modal/dock and state logic; only the available room changes. */
+ #app.practice-with-sidebar{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);width:100%;gap:0;align-items:start}
+ #app.practice-with-sidebar>.practice-content,
+ #app.practice-with-sidebar .practice-shell{display:contents}
+ #app.practice-with-sidebar .practice-side{grid-column:1;grid-row:1}
+ #app.practice-with-sidebar .practice-work{grid-column:2;grid-row:1}
+}
+@media (min-width:900px){
+ #app.practice-with-sidebar.with-practice-calc[data-practice-calc-mode=dock]{
+  --side-w:clamp(240px,27vw,330px);
+  --calc-width-budget:calc(100vw - var(--side-w) - 390px);
+  width:100%;grid-template-columns:var(--side-w) minmax(0,1fr) minmax(0,var(--calc-frame-w));gap:0
+ }
+ #app.practice-with-sidebar>.practice-calc-panel[open][data-mode=dock]{grid-column:3}
+}
+@media (min-width:1200px){
+ #app.practice-with-sidebar.with-practice-formulas:not(:has(.practice-formula-panel:modal)){
+  --formula-rail:clamp(185px,15vw,240px);
+  width:100%;padding:0;grid-template-columns:var(--side-w) var(--formula-rail) minmax(0,1fr);gap:0
+ }
+ #app.practice-with-sidebar.with-practice-formulas:not(:has(.practice-formula-panel:modal)) .practice-work{grid-column:3}
+ #app.practice-with-sidebar>.practice-formula-panel[open]:not(:modal){grid-column:2;margin-inline:10px 0;width:calc(100% - 10px)}
+ #app.practice-with-sidebar.with-practice-formulas.with-practice-calc[data-practice-calc-mode=dock]:not(:has(.practice-formula-panel:modal)){
+  --calc-width-budget:calc(100vw - var(--side-w) - var(--formula-rail) - 390px);
+  grid-template-columns:var(--side-w) var(--formula-rail) minmax(0,1fr) minmax(0,var(--calc-frame-w))
+ }
+ #app.practice-with-sidebar.with-practice-formulas:has(.practice-calc-panel[open][data-mode=dock]):not(:has(.practice-formula-panel:modal))>.practice-calc-panel{grid-column:4}
+}
+@media (max-width:860px){
+ .practice-work.prac{padding-inline:var(--s3)}
+ .practice-filter-trigger,.practice-drawer-close{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+ .practice-filter-trigger{margin-inline-start:auto;border-radius:var(--r-pill)}
+ .practice-drawer-close{font-size:24px;width:44px}
+ .practice-filter-done{display:block;width:100%;min-height:44px}
+ .practice-drawer-message:not([hidden]){display:block;color:var(--accent)}
+ .practice-work .prac-tabs{overflow-x:auto;white-space:nowrap}
+ .practice-shell>.practice-side{display:none}
+ .practice-filter-dialog:modal{box-sizing:border-box;inset:auto 0 0;width:100%;max-width:none;height:min(82dvh,720px);max-height:none;margin:0;padding:0;
+  border:1px solid var(--line);border-bottom:0;border-radius:var(--r-lg) var(--r-lg) 0 0;background:var(--surface);color:var(--ink)}
+ .practice-filter-dialog::backdrop{background:var(--scrim)}
+ .practice-filter-dialog .practice-side{
+  position:static;transform:none;visibility:visible;inset:auto;height:100%;border:0;border-radius:0;
+ }
+ .practice-filter-dialog .side-fixed::before{display:none}
+ .practice-filter-dialog .practice-side-foot{padding-bottom:calc(var(--s3) + env(safe-area-inset-bottom,0px))}
+ .practice-filter-dialog .scope-row{min-height:44px}
+ .practice-filter-dialog .scope-row .scope-exp{min-height:40px}
+ html:has(.practice-filter-dialog:modal){overflow:hidden;overscroll-behavior:none}
+}

@@ -6,7 +6,8 @@
    Filter state lives in the URL query string, so a filtered view can be bookmarked, shared and
    returned to from a question page:
      q, paper, section, session, tz, years=2024,2025, marks=lo|mid|hi, topic,
-     and=3.4  or=3.2,3.5  not=3.8  (syllabus codes), sort, view, recent=1 (statistics), course
+     and=3.4  or=t1,3.5  not=t5  (syllabus codes; t1–t5 are whole topics in Questions),
+     sort, view, recent=1 (statistics), course
    Older links keep working: ?year=2024, ?topic=3, ?mode=recency.
 */
 (() => {
@@ -57,6 +58,7 @@
     row.alsoIn = (q.appearances || []).filter(a => a.course !== courseId);
     row.codes = (q.syllabus || []).map(codeOf);
     row.codeSet = new Set(row.codes);
+    row.topicSet = new Set(row.codes.map(topicOf));
     row.exam = `${row.year} ${row.session} ${row.timezone}`;
     row.sitting = `${row.year} ${row.session}`;
     row.when = row.year * 2 + (row.session === "May" ? 0 : 1);
@@ -66,6 +68,8 @@
 
   const codeOf = label => String(label).split(" ")[0];
   const topicOf = code => String(code).split(".")[0];
+  const wholeTopic = key => /^t[1-5]$/.test(key);
+  const topicForKey = key => wholeTopic(key) ? key.slice(1) : topicOf(key);
   const courseShort = id => courses.find(c => c.id === id)?.short || id;
   const hasSections = () => course.papers.some(p => p.sections);
   const paperInfo = id => course.papers.find(p => p.id === id);
@@ -89,13 +93,15 @@
     if (!MARKS.some(m => m[0] === state.marks)) state.marks = "";
     if (!/^[1-5]$/.test(state.topic)) state.topic = "";
     state.years = new Set(`${p.get("years") || ""},${p.get("year") || ""}`.split(",").map(Number).filter(y => allYears.includes(y)));
-    for (const k of LISTS) state[k] = new Set((p.get(k) || "").split(",").filter(c => byCode.has(c)));
+    const allowed = key => byCode.has(key) || (TAB === "questions" && wholeTopic(key) &&
+      statements.some(s => s.topic === topicForKey(key)));
+    for (const k of LISTS) state[k] = new Set((p.get(k) || "").split(",").filter(allowed));
     state.sort = SORTS.some(s => s[0] === p.get("sort")) ? p.get("sort") : "new";
     state.view = p.get("view") === "list" ? "list" : "grid";
     state.recent = p.get("recent") === "1" || p.get("mode") === "recency";
     if (TAB === "syllabus" && !document.body.dataset.topic) state.sylTopic = p.get("topic") || "";
-    const chosen = [...state.and, ...state.or, ...state.not];
-    state.openTopic = chosen.length ? topicOf(chosen[0]) : "";
+    const chosen = [...state.and, ...state.or, ...state.not].find(key => !wholeTopic(key));
+    state.openTopic = chosen ? topicForKey(chosen) : "";
   }
 
   function filterParams() {
@@ -127,8 +133,8 @@
   }
 
   // ── filtering ────────────────────────────────────────────────────────────
-  // AND / OR / NOT: a question matches if it has every AND subtopic, at least one OR subtopic
-  // (when any OR is set) and no NOT subtopic.
+  // A whole-topic operand is one predicate over the union of a question's part
+  // tags, not a list of subtopics. Both scopes use the same AND / OR / NOT groups.
   function passesBasics(q, matcher) {
     if (state.topic && !(q.topicNumbers || []).includes(state.topic)) return false;
     if (state.session && q.session !== state.session) return false;
@@ -140,12 +146,15 @@
     return matcher(q.text);
   }
 
+  const matchesSyllabus = (q, key) => wholeTopic(key)
+    ? q.topicSet.has(topicForKey(key)) : q.codeSet.has(key);
+
   function passesSyllabus(q, and, or, not) {
-    for (const c of and) if (!q.codeSet.has(c)) return false;
-    for (const c of not) if (q.codeSet.has(c)) return false;
+    for (const key of and) if (!matchesSyllabus(q, key)) return false;
+    for (const key of not) if (matchesSyllabus(q, key)) return false;
     if (or.size) {
       let any = false;
-      for (const c of or) if (q.codeSet.has(c)) { any = true; break; }
+      for (const key of or) if (matchesSyllabus(q, key)) { any = true; break; }
       if (!any) return false;
     }
     return true;
@@ -216,7 +225,7 @@
         el("div", { class: "cap syl-head" }, el("span", { text: "Syllabus" }), refs.chosen = el("em", {})),
         refs.selbox = el("div", { class: "selbox" }),
         el("input", {
-          class: "input", type: "search", value: state.find, placeholder: "Find a subtopic…", "aria-label": "Find a subtopic",
+          class: "input", type: "search", value: state.find, placeholder: "Find a topic or subtopic…", "aria-label": "Find a topic or subtopic",
           oninput: e => { state.find = e.target.value; renderTree(); },
         })),
       refs.tree = el("div", { class: "tree" }),
@@ -326,40 +335,59 @@
   }
   const chip = code => el("span", { class: `st c${topicOf(code)}`, text: code, title: byCode.get(code)?.title || "" });
 
+  const filterChip = key => wholeTopic(key)
+    ? el("span", { class: `st scope-topic c${topicForKey(key)}`, text: `Topic ${topicForKey(key)}`, title: topicName(topicForKey(key)) })
+    : chip(key);
+
   function renderSelbox() {
-    const n = state.and.size + state.or.size + state.not.size;
-    refs.chosen.textContent = n ? `${n} chosen` : "";
+    const chosen = LISTS.flatMap(group => [...state[group]]);
+    const topics = chosen.filter(wholeTopic).length;
+    const subtopics = chosen.length - topics;
+    refs.chosen.textContent = topics
+      ? [`${topics} topic${topics === 1 ? "" : "s"}`, subtopics && `${subtopics} subtopic${subtopics === 1 ? "" : "s"}`].filter(Boolean).join(" · ")
+      : subtopics ? `${subtopics} chosen` : "";
     const line = (label, set) => el("div", {}, el("b", { text: label }),
-      ...(set.size ? [...set].sort(natural).map(chip) : [el("span", { class: "none", text: "—" })]));
+      ...(set.size ? [...set].sort(natural).map(filterChip) : [el("span", { class: "none", text: "—" })]));
     refs.selbox.replaceChildren(line("MUST HAVE", state.and), line("ANY OF", state.or), line("NOT", state.not));
+  }
+
+  function syllabusControls(key, label) {
+    const current = stateOf(key);
+    return el("span", { class: "tri", role: "group", "aria-label": label },
+      ...LISTS.map(op => el("button", {
+        type: "button", "data-v": op, "data-syllabus-key": key, text: op.toUpperCase(),
+        "aria-pressed": String(current === op), onclick: () => setCode(key, op),
+      })));
   }
 
   function renderTree() {
     const top = refs.tree.scrollTop;
+    const focus = refs.tree.contains(document.activeElement) ? document.activeElement.dataset : {};
     const needle = state.find.trim().toLowerCase();
     const reach = reachCounts();
     const rows = [];
     for (const t of Object.keys(DATA.topics)) {
       const subs = statements.filter(s => s.topic === t);
       if (!subs.length) continue;
-      const shown = needle ? subs.filter(s => `${s.code} ${s.title}`.toLowerCase().includes(needle)) : subs;
-      if (needle && !shown.length) continue;
-      const open = needle ? true : state.openTopic === t;
-      const total = allQuestions.filter(q => (q.topicNumbers || []).includes(t)).length;
-      rows.push(el("div", { class: "trow" },
+      const name = topicName(t);
+      const topicHit = name.toLowerCase().includes(needle);
+      const shown = needle && !topicHit
+        ? subs.filter(s => `${s.code} ${s.title}`.toLowerCase().includes(needle)) : subs;
+      if (!shown.length) continue;
+      const open = !!needle || state.openTopic === t;
+      const key = `t${t}`;
+      const total = allQuestions.filter(q => q.topicSet.has(t)).length;
+      rows.push(el("div", { class: `trow ${stateOf(key)}` },
         el("button", {
-          class: "topen", type: "button", "aria-expanded": String(open),
+          class: "topen", type: "button", "aria-expanded": String(open), "data-syllabus-key": key,
           onclick: () => { state.openTopic = open ? "" : t; renderTree(); },
         },
-          el("span", { class: "car", text: open ? "▾" : "▸" }),
+          el("span", { class: "car", text: open ? "▾" : "▸", "aria-hidden": "true" }),
           el("span", { class: `dot bg${t}` }),
           el("b", { text: t }),
-          el("span", { class: "tname", text: topicName(t) })),
-        open ? el("button", {
-          class: "all", type: "button", text: `Any of topic ${t}`, title: `Set OR on every topic ${t} subtopic`,
-          onclick: () => { for (const s of subs) { for (const k of LISTS) state[k].delete(s.code); state.or.add(s.code); } changed(); },
-        }) : null,
-        el("span", { class: "n", text: String(total) })));
+          el("span", { class: "tname", text: name })),
+        el("span", { class: "n", text: String(total), title: `${total} tagged questions in topic ${t}` }),
+        syllabusControls(key, `Whole topic ${t}: ${name}`)));
       if (!open) continue;
       for (const s of shown) {
         const v = stateOf(s.code);
@@ -368,14 +396,15 @@
           el("span", { class: "c", text: s.code }),
           el("span", { class: "t", text: s.title, title: s.title }),
           el("span", { class: "k", text: String(k), title: `${k} matching question${k === 1 ? "" : "s"} have this subtopic` }),
-          el("span", { class: "tri", role: "group", "aria-label": `${s.code} ${s.title}` },
-            ...["and", "or", "not"].map(x => el("button", {
-              type: "button", "data-v": x, text: x.toUpperCase(), "aria-pressed": String(v === x),
-              onclick: () => setCode(s.code, x),
-            })))));
+          syllabusControls(s.code, `${s.code} ${s.title}`)));
       }
     }
     refs.tree.replaceChildren(...rows);
+    if (focus.syllabusKey) {
+      [...refs.tree.querySelectorAll("[data-syllabus-key]")]
+        .find(b => b.dataset.syllabusKey === focus.syllabusKey && b.dataset.v === focus.v)
+        ?.focus({ preventScroll: true });
+    }
     refs.tree.scrollTop = top;
   }
 
@@ -392,7 +421,11 @@
     for (const y of [...state.years].sort()) plain(String(y), () => { state.years.delete(y); });
     if (state.marks) plain(`${MARKS.find(m => m[0] === state.marks)[1]} marks`, () => { state.marks = ""; });
     for (const [k, group, cls] of [["and", "MUST HAVE", "inc"], ["or", "ANY OF", "or"], ["not", "NOT", "exc"]]) {
-      for (const c of [...state[k]].sort(natural)) out.push({ group, cls, text: `${c} ${byCode.get(c).title}`, clear: () => { state[k].delete(c); } });
+      for (const key of [...state[k]].sort(natural)) {
+        const text = wholeTopic(key) ? `Whole topic ${topicForKey(key)}: ${topicName(topicForKey(key))}` : `${key} ${byCode.get(key).title}`;
+        const short = wholeTopic(key) ? `Topic ${topicForKey(key)}` : key;
+        out.push({ group, cls, text, short, clear: () => { state[k].delete(key); } });
+      }
     }
     return out;
   }
@@ -500,7 +533,7 @@
     try {
       sessionStorage.setItem("qb-list", JSON.stringify({
         url: location.href, ids: results.map(q => q.id),
-        label: activeFilters().map(f => (f.group === "NOT" ? "not " : "") + (f.group ? f.text.split(" ")[0] : f.text)).join(" · "),
+        label: activeFilters().map(f => (f.group === "NOT" ? "not " : "") + (f.short || f.text)).join(" · "),
       }));
     } catch (_) {}
   }
