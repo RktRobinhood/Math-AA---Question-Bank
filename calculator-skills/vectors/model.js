@@ -2,7 +2,8 @@
 (function(root){
 'use strict';
 const worked=Object.freeze({a:Object.freeze(['2','-1','2']),b:Object.freeze(['1','2','-2']),unit:'deg'});
-const practice=Object.freeze({a:Object.freeze(['1','2','2']),b:Object.freeze(['3','0','4']),unit:'deg'});
+const namedPractice=Object.freeze({a:Object.freeze(['1','2','2']),b:Object.freeze(['3','0','4']),unit:'deg'});
+const practice=Object.freeze({...namedPractice,b:Object.freeze(['-3','0','4'])});
 const menu=[
  [['1','Actions'],['2','Number'],['3','Algebra'],['4','Calculus'],['5','Probability'],['6','Statistics'],['7','Matrix & Vector',1],['8','Finance']],
  [['1','Create',2],['2','Transpose'],['3','Determinant'],['4','Row-Echelon Form'],['5','Reduced Row-Echelon Form'],['6','Simultaneous'],['7','Norms',4],['8','Dimensions'],['9','Row Operations'],['a','Element Operations'],['b','Advanced'],['c','Vector',3]],
@@ -42,7 +43,7 @@ function measure(x,y){
 function request(params){
  const fields=['a','b','unit'], any=fields.some(k=>params.has(k)), named=['case','example'].filter(k=>params.has(k));
  if(!any&&!named.length)return {target:practice,linked:false,error:''};
- if(!any&&named.length===1&&params.getAll(named[0]).length===1&&['demo','vectors-demo'].includes(params.get(named[0])))return {target:practice,linked:true,error:''};
+ if(!any&&named.length===1&&params.getAll(named[0]).length===1&&['demo','vectors-demo'].includes(params.get(named[0])))return {target:namedPractice,linked:true,error:''};
  try{
   if(named.length||['a','b'].some(k=>params.getAll(k).length!==1)||params.getAll('unit').length>1)throw 0;
   const raw=['a','b'].map(k=>params.get(k));
@@ -81,6 +82,7 @@ function log(s,entry){
  return reset(s,{entries:[...s.entries,entry].slice(-4),milestones:ok?{...s.milestones,[entry.kind]:true}:s.milestones});
 }
 function store(s){
+ if(s.cells.some(value=>value===''))return fail(s,'Fill every component. Enter 0 for a zero component; do not leave its cell blank.');
  try{
   const key=s.input[0],row=vector(s.cells);
   // Replacing either row invalidates all recorded results for that pair.
