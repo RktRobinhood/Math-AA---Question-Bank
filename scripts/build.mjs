@@ -366,6 +366,7 @@ const practiceGeneratorVersions = {
   "t1-scale.js": "20261125-b1",
   "t5-scale.js": "20261126-easier-1",
   "topic5.js": "20261125-a1",
+  "topic1.js": "geometric-graph-alt-1",
   "w3-number.js": "49785a1",
   "w3-statistics.js": "20261126-easier-1",
   "w4-functions.js": "20261126-plane-direction-1",

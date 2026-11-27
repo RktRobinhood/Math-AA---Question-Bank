@@ -355,7 +355,7 @@
   reg({ ...GS, unknown: "term-from-u1-r", representation: "graph", format: "graph", levels: [1], skills: ["SL1.3.nth-term"], title: "Pick the graph of a geometric sequence",
     build({ rng }) {
       const T = rng.pick([16, 12, 8]), kind = rng.pick(["decay", "growth", "alternating", "swinging"]), K = GKIND[kind], ys = K.ys(T);
-      const dots = (v) => ({ x: [0, 6], y: [-10, 18], xStep: 1, yStep: 2, points: v.map((y, i) => ({ x: i + 1, y })), xLabel: "n", yLabel: "u", alt: "Five marked points, one for each of the first five terms" });
+      const dots = (v) => ({ x: [0, 6], y: [-10, 18], xStep: 1, yStep: 2, points: v.map((y, i) => ({ x: i + 1, y })), xLabel: "n", yLabel: "u", alt: `First five term values in order: ${v.join(", ")}.` });
       const wrongs = rng.shuffle(Object.keys(GKIND).filter((x) => x !== kind)).map((x) => ({ graph: dots(GKIND[x].ys(T)), value: GKIND[x].ys(T), why: GKIND[x].why }));
       return { params: { u1: ys[0], rn: K.r[0], rd: K.r[1] }, stem: `A geometric sequence has first term $u_{1} = ${frac(ys[0] * 16, 16)}$ and common ratio $r = ${frac(K.r[0], K.r[1])}$. The terms $u_{n}$ are plotted against $n$.`, parts: [
         P("Which graph shows the first five terms of the sequence?", 2, ans.graph(rng, { graph: dots(ys), value: ys }, wrongs), [
