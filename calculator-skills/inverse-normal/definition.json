@@ -1,7 +1,7 @@
 {
   "id": "CT40",
   "title": "Inverse Normal",
-  "intro": "Use a known probability to find a cutoff, not another area.",
+  "intro": "Plant heights are normally distributed with mean 50 cm and standard deviation 8 cm. Find the 75th percentile and the height that only the tallest 10% exceed.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "91c1e043ce04a2419f24e6df3f0dcd3f86dbb7a337f18d1e246d2e2134b3ea73",
@@ -41,7 +41,7 @@
     {
       "chapter": "cutoff",
       "spoken": "This time we know the probability, not the cutoff. The seventy-fifth percentile has zero point seven five of the area to its left.",
-      "coach": "The 75th percentile leaves 0.75 of the area to its left. Find the cutoff.",
+      "coach": "Let c be the target height. For the 75th percentile, 75% of plant heights are below c. Enter 0.75 as the left area.",
       "end": 9.35,
       "hold": 3,
       "keys": []
@@ -172,7 +172,7 @@
     {
       "chapter": "left-answer",
       "spoken": "Confirm. Press Enter again to calculate. The cutoff is about fifty-five point four, above the mean of fifty.",
-      "coach": "The cutoff is about 55.4, above the mean of 50. It is a value of X.",
+      "coach": "The 75th percentile is about 55.4 cm. It is above the mean, as more than half the heights lie below it.",
       "end": 36.45,
       "hold": 4,
       "keys": []
@@ -180,7 +180,7 @@
     {
       "chapter": "tail",
       "spoken": "For the top ten percent, zero point one is on the right. Subtract from one: zero point nine is on the left.",
-      "coach": "Top 10% means 0.10 to the right. Enter the left area: 1 − 0.10 = 0.90.",
+      "coach": "The tallest 10% lie above the new cutoff. Inverse Normal takes area below it, so use 1 − 0.10 = 0.90.",
       "end": 45.21,
       "hold": 4,
       "keys": []
@@ -296,7 +296,7 @@
     {
       "chapter": "right-answer",
       "spoken": "Confirm, then press Enter again. The cutoff is about sixty point three, in the original measurement units.",
-      "coach": "The cutoff is about 60.3, in the original units. It leaves 0.10 to the right.",
+      "coach": "About 60.3 cm leaves 90% of plant heights below it and 10% above it. The output is a height, not a probability.",
       "end": 66.566,
       "hold": 5,
       "keys": []

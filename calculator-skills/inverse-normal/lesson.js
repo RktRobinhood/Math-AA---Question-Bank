@@ -167,6 +167,7 @@ function curve(el,{mean,sd,area,side='left'},reveal){
 }
 if(request.linked){
  $('challenge-title').textContent='Linked cutoff';
+ $('answer-format').textContent='(2 decimal places)';
  $('challenge').textContent='Mean '+show(target.mean)+', standard deviation '+show(target.sd)+'. Find the cutoff with probability '+show(target.p)+' to its '+target.side+'.';
 }
 $('link-warning').textContent=request.error;$('link-warning').hidden=!request.error;
@@ -179,7 +180,10 @@ $('answer-form').onsubmit=e=>{
    if(!Number.isFinite(v))el.textContent='Enter a numerical cutoff.';
    else if(rounded&&fixed)el.textContent='Correct. This cutoff leaves the requested area on the '+target.side+'.';
    else if(rounded)el.textContent='The value is right. Give it to two decimal places.';
-   else el.textContent='Not yet. Inverse Normal needs area to the left. Check your tail and standard deviation.';
+   else if(target.side==='right'&&target.p!==.5&&((target.p<.5&&v<target.mean)||(target.p>.5&&v>target.mean))){
+     const position=target.p<.5?'above':'below';
+     el.textContent='Not yet. This cutoff should be '+position+' the mean. Change the given right area into left area before using Inverse Normal.';
+   }else el.textContent='Not yet. Inverse Normal needs area to the left. Check your tail and standard deviation.';
    el.classList.toggle('correct',rounded&&fixed);
  }catch(err){el.textContent=err.message;el.classList.remove('correct');}
 };
