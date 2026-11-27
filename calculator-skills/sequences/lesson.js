@@ -158,7 +158,7 @@ function describe(p){
 function inputState(){
  const term=$("task").value==="term";
  $("lower-label").hidden=$("step-label").hidden=term;
- $("upper-label").textContent=term?"Index n":"Upper index";
+ $("upper-label").textContent=term?(threshold?"Day number":"Index n"):"Upper index";
 }
 
 function feedback(text="",cls=""){
@@ -167,7 +167,7 @@ function feedback(text="",cls=""){
 function renderTry(){
  const s=practice;renderLCD(s);inputState();
  $("try-title").textContent="Try it yourself";
- $("taskline").textContent=threshold?"The second line packs 2 × 2ⁿ⁻¹ cartons on day n. On which day does it first pack at least 50 cartons? Compare neighboring days before answering.":counterpart?"A second packing line fills uₙ = 2 × 2ⁿ⁻¹ cartons on day n. "+describePacking(experiment):describe(experiment);
+ $("taskline").textContent=threshold?"The second line packs 2 × 2ⁿ⁻¹ cartons on day n. On which day does it first pack at least 64 cartons? Show the output on that day and the day before.":counterpart?"A second packing line fills uₙ = 2 × 2ⁿ⁻¹ cartons on day n. "+describePacking(experiment):describe(experiment);
  $("presets").hidden=isTyped&&!badLink;
  $("run").hidden=!s.loaded;
  $("link-status").hidden=!badLink;
@@ -236,21 +236,31 @@ function enterTry(device,actions){
 function exitTry(){mode="watch";cache="";stage.hidden=true;shell.setKeys([]);shell.setInteractive(false);}
 $("return").addEventListener("click",()=>returnToWatch?.());
 function restore(p){practice=make();experiment={...p};refill(experiment);checkInputs(experiment);$("answer").value="";feedback();renderTry();}
-$("reset").addEventListener("click",()=>{counterpart=!isTyped||badLink;threshold=false;restore(problem);});
-const preset={total:{},one:{task:"term"},list:{task:"list",lower:"2",upper:"8",step:"2"},stepped:{lower:"2",upper:"8",step:"2"},threshold:{task:"term"}};
+function clearThreshold(){
+ for(const id of ["threshold-day","threshold-before","threshold-current"])$(id).value="";
+ $("threshold-feedback").textContent="";
+}
+$("reset").addEventListener("click",()=>{counterpart=!isTyped||badLink;threshold=false;clearThreshold();restore(problem);});
+const preset={total:{},one:{task:"term"},list:{task:"list",lower:"2",upper:"8",step:"2"},stepped:{lower:"2",upper:"8",step:"2"},threshold:{task:"term",upper:""}};
 $("presets").querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{
  counterpart=true;threshold=button.dataset.seqPart==="threshold";
- $("threshold-day").value="";$("threshold-feedback").textContent="";
+ clearThreshold();
  restore({...fresh,...preset[button.dataset.seqPart]});
 }));
+$("threshold-form").addEventListener("input",()=>$("threshold-feedback").textContent="");
 $("threshold-form").addEventListener("submit",e=>{
  e.preventDefault();if(!threshold)return;
  const day=Number($("threshold-day").value);
  const feedback=$("threshold-feedback");
- if(!Number.isInteger(day)||day<1||day>20){feedback.textContent="Enter a whole day from 1 to 20.";return;}
+ if(!/^\d{1,2}$/.test($("threshold-day").value.trim())||day<1||day>20){feedback.textContent="Enter a whole day from 1 to 20.";return;}
+ const beforeText=$("threshold-before").value.trim(),currentText=$("threshold-current").value.trim();
+ if(!/^\d+$/.test(beforeText)||!/^\d+$/.test(currentText)){feedback.textContent="Enter both calculator outputs as whole numbers of cartons.";return;}
  const output=n=>M.calculate({...fresh,upper:String(n)},"term").value;
- const valid=output(day)>=50&&(day===1||output(day-1)<50);
- feedback.textContent=valid?"Correct. Day 5 gives 32 cartons and day 6 gives 64 cartons, so day 6 is first.":"Not yet. The first day meets the target, but the previous day does not.";
+ const current=output(day),before=day>1?output(day-1):null;
+ if(current<64){feedback.textContent="Not yet. The output on your chosen day is below 64. Try a later day.";return;}
+ if(before!==null&&before>=64){feedback.textContent="Not quite. The previous day already meets the target. Try an earlier day.";return;}
+ if(Number(beforeText)!==before||Number(currentText)!==current){feedback.textContent="The day is right. Recheck which calculator value goes with each day.";return;}
+ feedback.textContent="Correct. Day "+(day-1)+" gives "+before+" cartons and day "+day+" gives "+current+". Exactly 64 counts because the task says at least 64.";
 });
 function describePacking(p){
  if(p.task==="term")return "How many cartons are packed on day "+p.upper+"?";

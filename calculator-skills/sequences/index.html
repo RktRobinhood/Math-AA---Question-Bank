@@ -25,7 +25,7 @@
 <script defer src="../handheld/hold-timeline.js?v=1"></script>
 <script defer src="../handheld/watch-chapters.js?v=1"></script>
 <script defer src="../handheld/watch-lesson.js?v=clean-controls-1"></script>
-<script defer src="lesson.js?v=shared-watch-1"></script>
+<script defer src="lesson.js?v=threshold-evidence-1"></script>
 <script defer src="../handheld/watch-bootstrap.js?v=1"></script>
 </head>
 <body data-base="../../" data-nav="calculator-skills" class="qb-calculator-page"><main class="qb-calculator-lesson qb-calculator-canvas">
@@ -46,17 +46,20 @@
 <button type="button" data-seq-part="one">Day 5</button>
 <button type="button" data-seq-part="list">List alternate days</button>
 <button type="button" data-seq-part="stepped">Total alternate days</button>
-<button type="button" data-seq-part="threshold">First day at 50</button>
+<button type="button" data-seq-part="threshold">First day at least 64</button>
 </div>
 <form id="fields" novalidate>
 <label for="rule">Rule in <var>n</var></label><input id="rule" maxlength="100" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. 2*n+1">
 <div class="form-grid"><label for="task">Output<select id="task"><option value="sum">Sum</option><option value="list">List of terms</option><option value="term">Nth term</option></select></label><label for="lower" id="lower-label">Lower index<input id="lower" maxlength="6" inputmode="numeric"></label><label for="upper"><span id="upper-label">Upper index</span><input id="upper" maxlength="6" inputmode="numeric"></label><label for="step" id="step-label">Step<input id="step" maxlength="6" inputmode="numeric"></label></div>
 <div class="field-actions"><button id="load" type="submit">Load on calculator</button><button id="run" type="button" class="primary" hidden>Enter</button><button type="button" id="reset">Reset Try</button></div>
 </form>
-<form id="threshold-form" hidden>
-<p>Use the day-number field above to compare two neighboring days. Then record the first day.</p>
-<label for="threshold-day">First day at or above 50 cartons</label>
-<div class="answer-row"><input id="threshold-day" inputmode="numeric" maxlength="2" autocomplete="off" required><button type="submit">Check day</button></div>
+<form id="threshold-form" hidden novalidate>
+<p id="threshold-instructions">Use the keypad, or use the day-number field above, to find the output on two consecutive days. Record the first qualifying day and both calculator values below.</p>
+<label for="threshold-day">First day at or above 64 cartons</label>
+<input id="threshold-day" inputmode="numeric" maxlength="2" autocomplete="off" aria-describedby="threshold-instructions" required>
+<div class="form-grid"><label for="threshold-before">Previous day’s output (cartons)<input id="threshold-before" inputmode="numeric" maxlength="8" autocomplete="off" required></label>
+<label for="threshold-current">That day’s output (cartons)<input id="threshold-current" inputmode="numeric" maxlength="8" autocomplete="off" required></label></div>
+<div class="field-actions"><button type="submit">Check threshold</button></div>
 <p id="threshold-feedback" role="status"></p>
 </form>
 <form id="answer-form" hidden novalidate><label for="answer" id="answer-label">Your answer</label><div class="answer-row"><input id="answer" maxlength="900" autocomplete="off" spellcheck="false"><button type="submit">Check answer</button></div><p id="feedback" role="status"></p></form>
