@@ -1,7 +1,7 @@
 {
   "id": "CT32",
   "title": "Quadratic regression",
-  "intro": "Fit a quadratic, then distinguish the model’s peak from the greatest reading.",
+  "intro": "At x = 0, 1, 2, 3, 4 the readings are 10.25, 15, 19.5, 15, 10.25 in order. Fit a quadratic. Predict at x = 1.5; compare the fitted and observed maxima.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "b26193cf7a1468cf57fa1f3aa54e415744e3b0c71cbd9ab5403cc50dc52b0231",
@@ -132,7 +132,7 @@
     {
       "chapter": "output",
       "spoken": "Read a, b and c in order. R squared summarises this fit; it is not another coefficient in the equation.",
-      "coach": "Read a = −2, b = 8 and c = 10: f₁(x) = −2x² + 8x + 10. R² is not a coefficient.",
+      "coach": "Read a = −2, b = 8 and c = 10: f₁(x) = −2x² + 8x + 10. R² describes fit to these readings; it is not a coefficient or a prediction guarantee.",
       "end": 35.642,
       "hold": 4,
       "keys": []
@@ -156,7 +156,7 @@
     {
       "chapter": "maxima",
       "spoken": "At x equals two the recorded value was nineteen point five. The fitted curve predicts eighteen there. The model need not pass through any observation.",
-      "coach": "The largest observation is 19.5 at x = 2. The fitted value there is 18; the fit need not run through that observation.",
+      "coach": "At x = 2, the highest measured y is 19.5 but the model peaks at 18. The recorded value is 1.5 above the fitted value, even at the same x.",
       "end": 63.742,
       "hold": 4,
       "keys": []
