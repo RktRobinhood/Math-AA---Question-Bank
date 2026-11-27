@@ -16,7 +16,14 @@
   }catch{unsafe=true;}
  }
  const challenge=linked||M.parse(defaultTry),target=M.roots(challenge).at(-1).x;
- const prompt="Find the "+(M.roots(challenge).length===2?"larger ":"")+"zero of f(x) = "+M.displayExpr(challenge.raw)+".";
+ const zeroRequest=M.roots(challenge).length===2?"the larger zero":"the zero";
+ const prompt="For f(x) = "+M.displayExpr(challenge.raw)+", find "+zeroRequest+". As a follow-up, find the y-intercept.";
+ const matchesAssigned=()=>{
+  try{
+   const q=state.q||M.parse(state.raw);
+   return ["a","b","c"].every(k=>q[k]===challenge[k]||Math.abs(q[k]-challenge[k])<=4*Number.EPSILON*Math.max(Math.abs(q[k]),Math.abs(challenge[k])));
+  }catch{return false;}
+ };
  let mode="watch",state=initial(challenge.raw),edited=false;
  let frameStamp=-1,returnToWatch=null;
  $("transcript").textContent=T.captions.join(" ");
@@ -27,7 +34,6 @@
  }
  const shell=CalculatorLessonHandset.mount(handheld,{screen:lcd,label:"TI-Nspire CX II-T Graphs",onKey:physical});
  const hints={"trace-menu":"Choose 1: Graph Trace.",trace:"Type an x-coordinate, then press Enter to jump to it.",entry:"Enter a line or quadratic, then press Enter to plot.",plotted:"Press Menu on the handheld.",menu:"Choose 6: Analyze Graph.",submenu:"Choose 1: Zero.",lower:"Put the lower bound to the left of the crossing. Move with the arrows, tap the graph, or enter x below.",upper:"Put the upper bound to the right of the same crossing, then confirm.",result:"Read the x-coordinate. To find another zero, choose new bounds."};
- $("challenge-title").textContent=M.roots(challenge).length===2?"Find the larger zero":"Find the zero";
  $("keypad-problem").textContent=prompt;$("challenge").textContent=prompt;
  function stepHint(s){return s.state==="menu"&&s.menuPick===4?"Choose 5: Trace.":hints[s.state];}
  function labelGraph(s){$("lcd-text").textContent=[s.q?"Graph of "+M.displayExpr(s.q.raw):"Function entry "+M.displayExpr(s.raw),stepHint(s),s.low!=null?"Lower: "+M.pretty(s.low):"",s.state==="trace"&&s.traceEntry!==null?"x = "+s.traceEntry:s.state==="trace"&&s.q&&s.cursor!=null?"f₁: ("+M.pretty(s.cursor)+", "+M.pretty(s.cursor===0?s.q.c:s.q.f(s.cursor))+")":s.cursor!=null?"Cursor: "+M.pretty(s.cursor):"",s.mark?"Zero at x = "+M.pretty(s.mark.x):"",s.error||""].filter(Boolean).join(". ");}
@@ -60,7 +66,8 @@
   const b=state.state==="lower"||state.state==="upper";lcd.classList.toggle("pick",b);
   $("bound-form").hidden=!b;$("retry-bounds").hidden=state.state!=="result";
   $("bound-label").textContent=state.state==="lower"?"Lower bound x":"Upper bound x";
-  $("keypad-hint").textContent=stepHint(state);
+  $("keypad-hint").textContent=state.state==="trace"&&state.traceResult&&state.cursor===0?"At x = 0, read the y-coordinate in the lower right.":stepHint(state);
+  const assigned=matchesAssigned();$("assigned-checks").hidden=!assigned;$("custom-graph").hidden=assigned;
   show(state.error||(state.mark?"Zero: ("+M.pretty(state.mark.x)+", 0).":"")|| (unsafe&&!edited?"The linked function was invalid. The original practice problem is shown instead.":""),Boolean(state.error||unsafe&&!edited));
   if(state.state==="menu"){jumpMenu(S.PANEL.main,4,()=>press("5"));jumpMenu(S.PANEL.main,5,()=>press("6"));}
   if(state.state==="submenu")jumpMenu(S.PANEL.sub,0,()=>press("1"));
@@ -86,12 +93,21 @@
   const r=M.zero(state.q,state.low,x);
   select("result",{cursor:x,high:x,mark:r.ok?{x:r.x,y:0}:null,error:r.message||null});
  }
+ function traceInterceptView(q,view){
+  // Try only: a typed x = 0 can pan the Graph Trace window like the handheld.
+  function pan(v,lo,hi){
+   const width=hi-lo;
+   return v>=lo+.04*width&&v<=hi-.04*width?[lo,hi]:[v-width/2,v+width/2];
+  }
+  const [x0,x1]=pan(0,view.x0,view.x1),[y0,y1]=pan(q.c,view.y0,view.y1);
+  return {x0,x1,y0,y1};
+ }
  function press(k){
   if(mode!=="try")return;
   const w=state.state;
-  if(k==="esc"){edited=true;state.q?select(["submenu","trace-menu"].includes(w)?"menu":"plotted",{low:null,high:null,cursor:null,mark:null,menuPick:w==="trace-menu"?4:5,traceEntry:null,traceResult:false}):select("entry");return;}
+  if(k==="esc"){edited=true;state.q?select(["submenu","trace-menu"].includes(w)?"menu":"plotted",{low:null,high:null,cursor:null,mark:null,menuPick:w==="trace-menu"?4:5,traceEntry:null,traceResult:false,view:null}):select("entry");return;}
   if(k==="tab"){edited=true;select("entry",{q:null,raw:expr.value,low:null,high:null,cursor:null,mark:null});return;}
-  if(k==="menu"&&state.q){edited=true;select("menu",{low:null,high:null,cursor:null,mark:null,menuPick:5,traceEntry:null,traceResult:false});return;}
+  if(k==="menu"&&state.q){edited=true;select("menu",{low:null,high:null,cursor:null,mark:null,menuPick:5,traceEntry:null,traceResult:false,view:null});return;}
   if(w==="menu"){
    if(k==="up"||k==="down"){edited=true;select("menu",{menuPick:k==="up"?4:5});return;}
    if(k==="5"||state.menuPick===4&&["enter","right","select"].includes(k)){edited=true;select("trace-menu");}
@@ -106,12 +122,12 @@
    return;
   }
   if(w==="trace"){
-   const {x0,x1}=state.view||M.windowFor(state.q);
+   const view=state.view||M.windowFor(state.q),{x0,x1}=view;
    if((k==="enter"||k==="select")&&state.traceEntry!==null){
     const raw=state.traceEntry,x=Number(raw);
     if(!/^-?(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw)||!Number.isFinite(x)){show("Enter a valid x-coordinate.",true);return;}
-    if(x<x0||x>x1){show("That x-coordinate is outside this window.",true);return;}
-    edited=true;select("trace",{cursor:x,traceEntry:null,traceResult:true});return;
+    if(x!==0&&(x<x0||x>x1)){show("That x-coordinate is outside this window.",true);return;}
+    edited=true;select("trace",{cursor:x,traceEntry:null,traceResult:true,view:x===0?traceInterceptView(state.q,view):state.view});return;
    }
    if(k==="left"||k==="right"){
     edited=true;select("trace",{cursor:M.clamp(state.cursor+(k==="left"?-1:1)*(x1-x0)/56,x0,x1),traceEntry:null,traceResult:false});return;
@@ -181,11 +197,27 @@
  const answer=$("answer"),feedback=$("feedback");
  answer.addEventListener("input",()=>{edited=true;feedback.textContent="";});
  $("answer-form").addEventListener("submit",e=>{
-  e.preventDefault();edited=true;const x=answer.valueAsNumber,correct=Number(target.toPrecision(3));
+  e.preventDefault();if(!matchesAssigned())return;edited=true;const x=answer.valueAsNumber,correct=Number(target.toPrecision(3));
   if(!Number.isFinite(x))return;
   const yes=correct===0?x===0:Math.abs(x-correct)<=1e-10*Math.abs(correct);
   feedback.className="feedback "+(yes?"is-right":"is-wrong");
   feedback.textContent=yes?"Correct. That x-coordinate gives a zero output.":"Not yet. Check that you chose the requested crossing and reported its x-coordinate.";
+ });
+ const answerY=$("answer-y"),feedbackY=$("feedback-y");
+ answerY.addEventListener("input",()=>{edited=true;feedbackY.textContent="";});
+ $("answer-y-form").addEventListener("submit",e=>{
+  e.preventDefault();if(!matchesAssigned())return;edited=true;
+  const fields=answerY.value.trim().replace(/−/g,"-").split("/").map(v=>v.trim());
+  const numeric=/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?$/i;
+  const values=fields.map(v=>numeric.test(v)?Number(v):NaN);
+  const y=values.length<=2&&values.every(Number.isFinite)?values[0]/(values[1]??1):NaN;
+  const exactZero=/^[+-]?(?:0+(?:\.0*)?|\.0+)(?:e[+-]?\d+)?$/i.test(fields[0]);
+  if(!Number.isFinite(y)||y===0&&!exactZero){feedbackY.className="feedback is-wrong";feedbackY.textContent="Enter a number or a fraction, such as 1/3.";return;}
+  const targetY=challenge.c,rounded=Number(targetY.toPrecision(3));
+  const same=(v,w)=>v===w||Math.abs(v-w)<=1e-10*Math.max(Math.abs(v),Math.abs(w));
+  const yes=same(y,targetY)||same(y,rounded);
+  feedbackY.className="feedback "+(yes?"is-right":"is-wrong");
+  feedbackY.textContent=yes?"Correct. The y-intercept is the y-coordinate at x = 0.":"Not yet. In Graph Trace, enter x = 0 and report the y-coordinate, not the x-coordinate.";
  });
 window.CalculatorLessonAdapter=Object.freeze({initialMode:params.get("mode")==="try"?"try":"watch",renderWatch,enterTry,exitTry});
 })();

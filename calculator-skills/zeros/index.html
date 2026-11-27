@@ -24,7 +24,7 @@
 <script src="../handheld/hold-timeline.js?v=1" defer></script>
 <script src="../handheld/watch-chapters.js?v=1" defer></script>
 <script src="../handheld/watch-lesson.js?v=clean-controls-1" defer></script>
-<script src="lesson.js?v=common-watch-1" defer></script>
+<script src="lesson.js?v=try-intercepts-1" defer></script>
 <script src="../handheld/watch-bootstrap.js?v=1" defer></script>
 </head><body class="calculator-bank-lesson ct10-common" data-base="../../" data-nav="calculator-skills"><main>
 <nav class="ct10-trail" aria-label="Calculator Skills"><a href="../skills.html">Calculator Skills</a> / CT10</nav>
@@ -34,14 +34,29 @@
 <div class="ct10-stage-grid" id="try-grid">
 <div class="ct10-calc-anchor" id="handheld-host"><div class="screen" id="lcd" aria-label="Recreated TI-Nspire Graphs display"><canvas id="drawing" width="640" height="480" aria-hidden="true"></canvas><div id="hotspots"></div><p id="lcd-text" class="sr"></p></div></div>
 <div class="ct10-stage-side">
-<aside id="try-side" class="director ct10-try-help"><p class="tag">Calculator practice</p><h2>Find one crossing</h2><p id="keypad-problem" class="ct10-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
+<aside id="try-side" class="director ct10-try-help"><p class="tag">Calculator practice</p><h2>Read both axes</h2><p id="keypad-problem" class="ct10-taskline"></p><p id="keypad-hint" role="status"></p><p id="keypad-result" class="feedback" role="status" hidden></p>
 <div id="try-tools">
 <form id="expression-form"><label for="expression">Function in x</label><div class="inputline"><input type="text" id="expression" maxlength="80" required spellcheck="false" autocomplete="off" autocapitalize="off"><button type="submit" class="primary">Plot</button></div></form>
 <form id="bound-form" hidden><label for="bound" id="bound-label"></label><div class="inputline"><input id="bound" type="number" step="any" inputmode="decimal" required><button type="submit" class="primary">Enter</button></div></form>
 <button id="retry-bounds" type="button" hidden>Try new bounds</button>
 </div>
-<p class="ct10-keyboard">Keyboard: <kbd>M</kbd>, <kbd>6</kbd>, <kbd>1</kbd>; arrows move the cursor and <kbd>Enter</kbd> confirms. <kbd>Tab</kbd> moves between page controls.</p>
+<p class="ct10-keyboard"><strong>Zero:</strong> <kbd>Menu</kbd> → <kbd>6</kbd> → <kbd>1</kbd>. Set one bound on either side of the crossing. <strong>Y-intercept:</strong> <kbd>Menu</kbd> → <kbd>5</kbd> → <kbd>1</kbd>, then type <kbd>0</kbd> and press <kbd>Enter</kbd>.</p>
 </aside></div></div></section>
-<section id="try" hidden><section class="exercise"><p class="tag">Your turn</p><h2 id="challenge-title">Find the larger zero</h2><p id="challenge"></p><form id="answer-form"><label for="answer">x-coordinate <small>(to three significant figures if needed)</small></label><div class="answer-row"><input type="number" step="any" inputmode="decimal" required id="answer"><button class="primary">Check</button></div></form><p class="feedback" id="feedback" role="status"></p><details><summary>Hint</summary><p>Look for the curve crossing the x-axis. Put one bound on each side of just that crossing.</p></details></section></section>
+<section id="try" hidden><section class="exercise">
+<p class="tag">Your turn</p><h2 id="challenge-title">Read the intercepts</h2><p id="challenge"></p>
+<p id="custom-graph" hidden>You're exploring a different function. Reset the calculator or plot the assigned function to check these answers.</p>
+<div id="assigned-checks">
+ <form id="answer-form">
+  <label for="answer">Zero: x-coordinate <small>(to three significant figures if needed)</small></label>
+  <div class="answer-row"><input type="number" step="any" inputmode="decimal" required id="answer"><button class="primary">Check zero</button></div>
+ </form>
+ <p class="feedback" id="feedback" role="status"></p>
+ <form id="answer-y-form">
+  <label for="answer-y">Y-intercept: y-coordinate <small>(optional; exact value or three significant figures)</small></label>
+  <div class="answer-row"><input type="text" inputmode="text" maxlength="48" autocomplete="off" spellcheck="false" required id="answer-y"><button class="primary">Check y-intercept</button></div>
+ </form>
+ <p class="feedback" id="feedback-y" role="status"></p>
+</div>
+</section></section>
 <details id="transcript-details" class="notes"><summary>Transcript</summary><p id="transcript"></p></details>
 </main></body></html>
