@@ -1,7 +1,7 @@
 {
   "id": "CT17",
   "title": "Lengths, angles and bearings",
-  "intro": "Calculate horizontal range, clockwise bearing, elevation and sloping distance from three perpendicular displacements.",
+  "intro": "A drone is 6 km west, 8 km south and 5 km above base. Find its bearing, elevation angle, and horizontal and straight-line distances.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "9b2802e283b0833231bb808fbbcc94179588674011a588441764caec326f92f4",
@@ -41,7 +41,7 @@
     {
       "chapter": "plan",
       "spoken": "Start at the base. The drone is six kilometres west, eight kilometres south, and five kilometres above it.",
-      "coach": "North is up. West and south put P in the south-west quadrant. Height is five kilometres.",
+      "coach": "North is at the top of the plan, not above the ground. The drone’s projection P is south-west of the base O. The plan does not show height.",
       "end": 7.618,
       "hold": 1.6,
       "keys": []
@@ -268,7 +268,7 @@
     {
       "chapter": "elevation",
       "spoken": "Compare the rise with the horizontal distance, not the sloping line.",
-      "coach": "Compare the upward displacement to the horizontal run: tan⁻¹(5 ÷ 10).",
+      "coach": "Use the 10 km horizontal distance as the adjacent side: tan⁻¹(5 ÷ 10). The result is about 26.6° above the horizontal.",
       "end": 47.622,
       "hold": 6.5,
       "keys": [
@@ -430,7 +430,7 @@
     {
       "chapter": "rounded",
       "spoken": "The bearing is two hundred and seventeen degrees to the nearest degree. The sloping distance is eleven point two kilometres to three significant figures.",
-      "coach": "Keep full working precision; report the bearing as 217° and the distance as 11.2 km.",
+      "coach": "From the base: 10 km horizontally, bearing 217°, elevation 26.6°, and straight-line distance 11.2 km. Keep full precision until the end.",
       "end": 71.978,
       "hold": 1.6,
       "keys": []

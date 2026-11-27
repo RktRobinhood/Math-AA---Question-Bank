@@ -24,6 +24,16 @@ function addFields(def,host,prefix){
 }
 addFields(label,"data-fields","problem-");addFields(answers,"answer-fields","answer-");
 const sign=n=>String(n).replace("-","−"), showAnswers=()=>{for(const k in answers)refs["answer-"+k].value="";};
+function describeTry({east,north,up}){
+ const directions=[east&&Math.abs(east)+" km "+(east>0?"east":"west"),north&&Math.abs(north)+" km "+(north>0?"north":"south")].filter(Boolean);
+ return "A drone is "+directions.join(" and ")+" of the base and "+(up?Math.abs(up)+" km "+(up>0?"above":"below")+" it":"at the same height")+
+  ". From the base, find the horizontal distance, three-figure bearing, signed elevation (negative below the horizontal) and straight-line distance.";
+}
+function bearingHint(d){
+ const dir=M.direction(d);
+ if(dir.cardinal)return "The drone is due "+dir.word+" of the base. Start at north and turn clockwise as far as that compass direction. Do not use the vertical change.";
+ return "Start at north and turn clockwise. Find the acute angle from the north–south line using tan⁻¹(east–west distance ÷ north–south distance). For the "+dir.word+" quadrant, use "+dir.base+"° "+dir.op+" that angle.";
+}
 function fill(){for(const k in label)refs["problem-"+k].value=sign(problem[k]);}
 fill();
 
@@ -115,8 +125,8 @@ function paintTry(){
  const active=document.activeElement?.closest?.("#lcd-body");
  draw(current,false);
  if(active)stage.focus({preventScroll:true});
- const h=k=>sign(problem[k]);
- $("try-context").textContent="Find the lengths, bearing and signed elevation. E "+h("east")+" · N "+h("north")+" · up "+h("up")+" km";
+ $("try-context").textContent=describeTry(problem);
+ $("bearing-hint").textContent=bearingHint(problem);
  $("tool-status").textContent=current.error||warning;$("tool-status").dataset.error=String(Boolean(current.error||warning));
  $("assess-feedback").textContent=assess;
 }
