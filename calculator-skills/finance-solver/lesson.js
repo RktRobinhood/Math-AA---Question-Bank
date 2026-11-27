@@ -79,7 +79,7 @@ function taskMode(){
  const d=request.target, names={1:"annually",2:"semiannually",4:"quarterly",12:"monthly",365:"daily"};
  const freq=names[d.frequency]||d.frequency+" times a year";
  const y=d.years===1?"1 year":num(d.years)+" years";
- $("task").textContent="Deposit "+num(d.deposit)+" for "+y+" at "+num(d.rate)+"% nominal, compounded "+freq+". No later payments. Find FV.";
+ $("task").textContent="Deposit "+num(d.deposit)+" for "+y+" at "+num(d.rate)+"% nominal annual interest, compounded "+freq+". No later payments. What is the account balance at the end of that time? Give it to two decimal places.";
 }
 const tape=M.tape.map(x=>x[1]),frames=[M.start()];
 for(const k of tape)frames.push(M.choose(frames.at(-1),k));

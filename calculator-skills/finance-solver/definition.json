@@ -1,7 +1,7 @@
 {
   "id": "CT05",
   "title": "Finance Solver",
-  "intro": "Use a consistent cash-flow direction and solve for the balance of one deposit.",
+  "intro": "You deposit 1,000 at a nominal annual interest rate of 6%, compounded monthly, with no further deposits or withdrawals. What is your account balance after two years? Give it to two decimal places.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "b7b146143d7b3e234f036491c9a7a6fd41acd455b527303b10317fd9430e5a0a",
