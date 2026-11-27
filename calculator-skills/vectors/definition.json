@@ -1,7 +1,7 @@
 {
   "id": "CT19",
   "title": "Vectors: dot product and angle",
-  "intro": "Find the dot product between two stored row vectors, then use their lengths and inverse cosine to find the angle.",
+  "intro": "Given a = [2, −1, 2] and b = [1, 2, −2], find their scalar product and the angle between these vectors in degrees.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "8240f003e45ea0daf160282ceceb39ae64e83e54c9fd8640a54d708e7fce625d",
@@ -45,7 +45,7 @@
     {
       "chapter": "read-vectors",
       "spoken": "Find the dot product and angle for vector A, with components two, negative one, two, and vector B, with components one, two, negative two. The example is in degrees.",
-      "coach": "Use a = [2, −1, 2] and b = [1, 2, −2]. The example uses degrees.",
+      "coach": "Keep the signs and positions of all three components. The scalar product is a number; the angle compares the two directions. Use degrees.",
       "end": 13.05,
       "hold": 1.6,
       "keys": []
@@ -560,7 +560,7 @@
     {
       "chapter": "read-angle",
       "spoken": "The dot product is negative four. Both lengths are three, so cosine theta is negative four ninths. The negative cosine gives an obtuse angle.",
-      "coach": "The dot product is −4, and both lengths are 3: cos θ = −4/9. The negative cosine means an obtuse angle.",
+      "coach": "The dot product −4 is not the angle. Both lengths are 3, so cos θ = −4/9. Keep the obtuse angle: the question asks about vectors, not the acute angle between lines.",
       "end": 79.242,
       "hold": 1.6,
       "keys": []

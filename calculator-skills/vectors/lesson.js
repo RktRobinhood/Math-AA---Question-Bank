@@ -80,7 +80,7 @@ const hints={
  calc:'Store each vector as its own row. For the scalar use dotP; for the angle use inverse cosine with both norms.',
  menu:'For row entry: Matrix & Vector → Create → Matrix. For calculation: Vector → Dot Product, or Norms → Norm.',
  dims:'Set 1 row and 2 or 3 columns. Tab or tap to move. Confirm with Enter.',
- cells:'Type a signed value in each cell. Tab, the touchpad, or a click selects the next cell. Enter stores the row.',
+ cells:'Fill every component, including 0. Use (−) for a negative component. Tab or the touchpad moves to the next cell. Enter stores the row.',
  trig:'Select cos⁻¹. Then press Ctrl + ÷ for the two parts of the fraction.'
 };
 function render(s,watch){
@@ -115,7 +115,7 @@ function physical(key){
  set(M.press(s,key));render(edit(),false);
 }
 function taskMessage(){
- $("task").textContent="Find the dot product and the angle "+(request.target.unit==="rad"?"in radians.":"in degrees.");
+ $("task").textContent="Find the scalar product and the angle between these vectors, if defined, "+(request.target.unit==="rad"?"in radians.":"in degrees.");
  const target=$("target-wrap");target.replaceChildren();
  for(const k of ["a","b"]){const r=elt("span",undefined,"target-row");r.append(elt("var",k)," = ",row(request.target[k]));target.append(r);}
 }
