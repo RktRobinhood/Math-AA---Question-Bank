@@ -113,6 +113,29 @@
         P(`Find the expected number of ${what[2]} for which this happens.`, 2, ans.dec(e), [`Expected number $= np = ${n} \\times ${num(p)}$`, `Expected number $= ${num(e)}$`]),
         P(`Find the expected number of ${what[2]} for which this does not happen.`, 2, ans.dec(n - e), [`The probability of the complement is $1 - ${num(p)} = ${num(1 - p)}$.`, `Expected number $= ${n} \\times ${num(1 - p)} = ${num(n - e)}$`])] };
     } });
+  reg({
+    type:"t4-expected-occurrences",unknown:"interpret-a-decimal-expectation",representation:"words",
+    format:"value",levels:[2],syllabus:["4.5"],skills:["SL4.5.expected-occurrences"],
+    title:"Interpret an expected number that is not a whole number",
+    build({rng}){
+      const n=2*rng.int(11,29)+1, p10=rng.pick([1,3,5]), tenths=n*p10;
+      const p=p10/10, e=tenths/10;
+      const contexts=[
+        ["On each spin, the probability of landing on blue", "spins", "blue results"],
+        ["For each seed sown, the probability of germination", "seeds", "seeds that germinate"]
+      ];
+      const [event,plural,happens]=rng.pick(contexts);
+      const why=ans.choice(rng,
+        {text:"One group gives a whole number. The expected number is a long-run average across groups of this size.",value:"average"},
+        [{text:"Round the expected number to a whole number because one group can only give a whole number.",value:"round",why:"A single count is whole, but the average of many counts need not be."},
+         {text:"A group must give exactly the expected number whenever the probability stays the same.",value:"always",why:"Keeping the same probability does not force the same result in each group."}],3);
+      return {params:{n,p10},stem:`${event} is $${fmt.num(p)}$. Consider a group of $${n}$ ${plural}.`, parts:[
+        P(`Find the expected number of ${happens}. Give your answer as an exact decimal.`,2,ans.dec(e),[`Multiply the number of ${plural} by the probability: $${n} \\times ${fmt.num(p)} = ${fmt.num(e)}$.`]),
+        P("Which statement correctly interprets your answer?",1,why,["An actual count is a whole number. An expected count describes the long-run average if the same group size and probability are used repeatedly. Do not round it just because the outcomes are counted."])
+      ]};
+    }
+  });
+
   reg({ type: "t4-conditional-probability", syllabus: ["4.6", "4.11"], representation: "words", format: "value", unknown: "reverse-from-tree", levels: [4], calculator: true,
     skills: ["SL4.6.tree", "SL4.11.reverse-conditional", "SL4.11.conditional-formula"], title: "A test for a condition: total and reverse conditional probability", source: "conditional-tree-section-b",
     build({ rng }) {

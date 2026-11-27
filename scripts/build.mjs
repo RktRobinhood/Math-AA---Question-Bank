@@ -309,7 +309,7 @@ const THEME = `<script>try{document.documentElement.dataset.theme=localStorage.g
 
 // Every page has the same frame. shell.js draws the top bar (course switch, sections, theme,
 // Your paper) and the phone tab bar; the links in <noscript> are for readers without scripts.
-function page({ base, baseHref = "", title, nav = "questions", head = "", body, scripts = [], bodyAttrs = "", description = "", calcNav = false, calcCssVersion = "beta-fit-2" }) {
+function page({ base, baseHref = "", title, nav = "questions", head = "", body, scripts = [], bodyAttrs = "", description = "", calcNav = false, calcCssVersion = "beta-fit-2", sharedCssVersion = "theme-3" }) {
   return `<!doctype html>
 <html lang="en">
   <head>
@@ -317,7 +317,7 @@ function page({ base, baseHref = "", title, nav = "questions", head = "", body, 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${esc(title)}</title>${description ? `\n    <meta name="description" content="${esc(description)}">` : ""}
     ${THEME}
-    <link rel="stylesheet" href="${base}assets/css/styles.css${calcNav ? "?v=theme-3" : ""}">${calcNav ? `
+    <link rel="stylesheet" href="${base}assets/css/styles.css${calcNav ? `?v=${sharedCssVersion}` : ""}">${calcNav ? `
     <link rel="stylesheet" href="${base}assets/css/calculator-integration.css?v=${calcCssVersion}">` : ""}${head}
   </head>
   <body data-base="${base}" data-nav="${nav}"${bodyAttrs}>
@@ -342,7 +342,8 @@ function appPage(file, base, tab, { topic = null, title = SITE_TITLE } = {}) {
     head: katex("./"),
     bodyAttrs: ` data-initial-tab="${tab}"${topic === null ? "" : ` data-topic="${topic}"`}`,
     body: `    <div id="app"><div class="loading">Loading the question bank…</div></div>`,
-    scripts: ["data.js", "basket.js", "generate.js", "app.js"].map((f) => `<script src="assets/js/${f}"></script>`),
+    sharedCssVersion: tab === "questions" ? "questions-topics-1" : "theme-3",
+    scripts: ["data.js", "basket.js", "generate.js", tab === "questions" ? "app.js?v=questions-topics-1" : "app.js"].map((f) => `<script src="assets/js/${f}"></script>`),
   }));
 }
 appPage("index.html", "./", "questions");
@@ -362,11 +363,12 @@ const practiceGeneratorVersions = {
   "aa-hl-topic34.js": "20261126-plane-direction-1",
   "ai-hl-topic123.js": "tsp-bound-inference-1",
   "ai-hl-topic45.js": "20261126-correlation-assumptions-1",
-  "ai-sl-own.js": "practice-exam-style-1",
+  "ai-sl-own.js": "practice-ai-trapezoidal-interior-1",
   "t1-scale.js": "real-compounding-1",
   "t5-scale.js": "20261126-easier-1",
   "topic5.js": "20261125-a1",
   "topic1.js": "geometric-graph-alt-1",
+  "topic4.js": "decimal-expectation-1",
   "w3-number.js": "49785a1",
   "w3-statistics.js": "20261126-easier-1",
   "w4-functions.js": "20261126-plane-direction-1",
@@ -377,11 +379,11 @@ const practiceGeneratorVersions = {
 write("practice.html", page({
   base: "./", title: "Practice | IB Math Question Bank", nav: "practice", calcNav: true, calcCssVersion: "practice-applet-1",
   description: "Adaptive IB Mathematics practice for AA and AI, SL and HL: generated questions with worked solutions, by subtopic.",
-  head: `\n    <link rel="stylesheet" href="./assets/css/practice-formulas.css?v=1">\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
+  head: `\n    <link rel="stylesheet" href="./assets/css/practice-formulas.css?v=1">\n    <link rel="stylesheet" href="./assets/css/practice-sidebar.css?v=2">\n    <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">`,
   body: `    <div id="app"><div class="loading">Loading practice…</div></div>`,
   scripts: [
-    "vendor/katex/katex.min.js", "js/question-types.js?v=20261126-plane-direction-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
-    ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-formulas-1",
+    "vendor/katex/katex.min.js", "js/question-types.js?v=20261127-transfer-pack-1", "js/engine/engine.js", "js/engine/graph.js", "js/engine/learner.js",
+    ...generatorFiles.map((f) => `js/engine/generators/${f}${practiceGeneratorVersions[f] ? "?v=" + practiceGeneratorVersions[f] : ""}`), "js/basket.js", "js/generate.js", "js/practice-calculator.js?v=practice-applet-1", "js/practice-formulas.js?v=1", "js/practice.js?v=practice-sidebar-review-3",
   ].map((f) => `<script src="assets/${f}"></script>`),
 }));
 

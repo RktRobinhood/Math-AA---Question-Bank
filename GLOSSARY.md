@@ -21,6 +21,8 @@ _Avoid_: “Practice question” on its own when the item's origin matters.
 **Syllabus code**: The statement's number in a particular **Course**. For example, AA `1.8` and AI HL `1.11` refer to the same **Syllabus statement**.
 _Avoid_: “statement ID” for a course's printed number.
 
+**Whole-topic filter**: One Boolean selection on the Questions page. A question matches a topic if any of its tagged parts carries a code in that topic. AND requires the topic, OR puts it in the same “Any of” group as other OR selections, and NOT also excludes questions where it appears as a secondary tag. Subtopics remain independent.
+
 ## Practice and Calculator Skills
 
 **Practice**: The learner's study area for **Generated exercises** and, where allowed, **Exam question** fallback and review. The two origins stay distinct.

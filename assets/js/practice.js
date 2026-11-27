@@ -133,7 +133,7 @@
   }
   const state = {
     tab: params.get('ws') ? 'worksheet' : 'practice',
-    scope: new Set(), types: new Map(), openTypes: new Set(), title: '', picking: true, mode: 'adapt', filter: '', closed: new Set(),
+    scope: new Set(), types: new Map(), openTypes: new Set(), title: '', autoStart: false, plan: null, itemTitle: '', filterNotice: '', mode: 'adapt', filter: '', closed: new Set(),
     item: null, itemMode: null, question: null, extra: false, responses: {}, results: null, selfLeft: 0, change: null, startedAt: 0,
     showMs: false, realImages: null, hint: '', note: '',
     ws: parseWs(params.get('ws')), sheet: null,
@@ -143,7 +143,7 @@
     return { count: [5, 10, 15, 20].includes(+count) ? +count : 10, mix: MIXES[mix] ? mix : 'mixed', seed: Math.max(1, parseInt(seed, 10) || 1) };
   }
   function clearQuestion() {
-    Object.assign(state, { item: null, itemMode: null, question: null, extra: false, responses: {}, results: null, selfLeft: 0, change: null, showMs: false, realImages: null, hint: '' });
+    Object.assign(state, { item: null, itemMode: null, question: null, extra: false, responses: {}, results: null, selfLeft: 0, change: null, showMs: false, realImages: null, hint: '', plan: null, itemTitle: '', filterNotice: '' });
   }
   // Switches the page to a course: its syllabus, its learner, and the scope last used for it.
   function useCourse(id, link) {
@@ -153,9 +153,9 @@
     state.scope = new Set(fromLink.length ? fromLink : saved);
     setTypes(fromLink.length ? parseTypes(link.get('types')) : savedTypes()[C.id]);
     state.title = fromLink.length ? (link.get('title') || '') : '';
-    state.picking = !fromLink.length;
+    state.autoStart = Boolean(fromLink.length);
     state.mode = link && MODES[link.get('level')] ? link.get('level') : 'adapt';
-    state.filter = ''; state.closed = new Set(); state.sheet = null; state.note = '';
+    state.filter = ''; state.closed = new Set(C.topics.filter(t => !scopeList().some(c => c.split('.')[0] === t))); state.sheet = null; state.note = '';
     clearQuestion();
   }
 
@@ -263,14 +263,73 @@
       ...Object.entries(MODES).map(([k, [text]]) => h('option', { value: k, text, selected: k === state.mode }))));
 
   // ── render ───────────────────────────────────────────────────────────────
+  const mobileFilters = matchMedia('(max-width: 860px)');
+  let openFilters = () => {}, closeFilters = () => {}, updateFilterStatus = () => {}, updateRepeatChoices = () => {};
+  const activeItem = () => Boolean(state.item && state.item.kind !== 'none');
+  const plan = () => JSON.stringify([state.mode, scopeList().map(code => [code, [...(narrowed(code) || [])].sort()])]);
+  function returnToScope() {
+    state.tab = 'practice';
+    state.autoStart = false;
+    render();
+    openFilters();
+  }
+
   function render() {
+    closeFilters(false);
+    openFilters = () => {}; closeFilters = () => {}; updateFilterStatus = () => {}; updateRepeatChoices = () => {};
     const tab = (id, text) => h('button', { type: 'button', class: state.tab === id ? 'on' : '', role: 'tab', 'aria-selected': String(state.tab === id), text, onclick: () => { state.tab = id; render(); } });
-    practiceContent.replaceChildren(h('main', { class: 'prac' },
-      h('div', { class: 'page-head no-print' }, h('h1', { text: 'Practice' }), h('span', { class: 'muted', text: `${C.short} · your progress is saved in this browser` })),
+    const onPractice = state.tab === 'practice';
+    const body = onPractice ? practiceView() : state.tab === 'progress' ? progressView() : worksheetView();
+    const filterButton = h('button', { class: 'btn ghost practice-filter-trigger', type: 'button', 'aria-haspopup': 'dialog',
+      'aria-controls': 'practice-filter-dialog', 'aria-expanded': 'false', text: 'Filters', onclick: () => openFilters() });
+    const pending = h('p', { class: 'practice-filter-status no-print', role: 'status', hidden: true });
+    const drawerNotice = h('p', { class: 'practice-drawer-message', role: 'status', hidden: true });
+    const main = h('main', { class: onPractice ? 'prac practice-work' : 'prac' },
+      h('div', { class: 'page-head no-print' }, h('h1', { text: 'Practice' }), h('span', { class: 'muted', text: (onPractice ? state.itemTitle || state.title : '') || C.short }), onPractice ? filterButton : null),
       firstLoad === 'unreadable' ? h('p', { class: 'verdict no no-print', text: 'Your saved progress could not be read. It has been kept aside, not deleted, and a fresh record was started.' }) : null,
       h('div', { class: 'prac-tabs no-print', role: 'tablist' }, tab('practice', 'Practise'), tab('progress', 'Progress'), tab('worksheet', 'Print a worksheet')),
-      ...(state.tab === 'practice' ? practiceView() : state.tab === 'progress' ? progressView() : worksheetView())));
-    const active = !state.picking && CALC?.eligible({ item: state.item, question: state.question, course: C.id, tab: state.tab });
+      onPractice ? pending : null,
+      ...body);
+    if (onPractice) {
+      updateFilterStatus = () => {
+        const text = state.filterNotice || (activeItem() && state.plan !== plan() ? 'Filters updated. They apply to the next question.' : '');
+        if (pending.textContent !== text) pending.textContent = text;
+        pending.hidden = !text;
+        if (drawerNotice.textContent !== state.filterNotice) drawerNotice.textContent = state.filterNotice;
+        drawerNotice.hidden = !state.filterNotice;
+        const name = state.scope.size ? `Filters (${state.scope.size})` : 'Filters';
+        if (filterButton.textContent !== name) filterButton.textContent = name;
+        updateRepeatChoices();
+      };
+      const side = scopeView(drawerNotice);
+      const drawer = h('dialog', { id: 'practice-filter-dialog', class: 'practice-filter-dialog no-print', 'aria-label': 'Practice filters' });
+      const shell = h('div', { class: 'shell practice-shell' }, side, main, drawer);
+      const returnSidebar = () => {
+        if (side.parentNode !== shell) shell.prepend(side);
+        filterButton.setAttribute('aria-expanded', 'false');
+      };
+      closeFilters = (restore = true) => {
+        if (!drawer.open) return;
+        drawer.close();
+        returnSidebar();
+        if (restore && mobileFilters.matches) filterButton.focus({ preventScroll: true });
+      };
+      openFilters = () => {
+        if (!mobileFilters.matches) { side.querySelector('input[type=search]').focus(); return; }
+        if (drawer.open) return;
+        drawer.append(side);
+        drawer.showModal();
+        filterButton.setAttribute('aria-expanded', 'true');
+        side.querySelector('.practice-drawer-close').focus({ preventScroll: true });
+      };
+      drawer.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); closeFilters(); } }, true);
+      drawer.addEventListener('cancel', e => { e.preventDefault(); closeFilters(); });
+      drawer.addEventListener('click', e => { if (e.target === drawer) closeFilters(); });
+      drawer.addEventListener('close', () => { if (!drawer.open) returnSidebar(); });
+      practiceContent.replaceChildren(shell);
+    } else practiceContent.replaceChildren(main);
+    app.classList.toggle('practice-with-sidebar', onPractice);
+    const active = CALC?.eligible({ item: state.item, question: state.question, course: C.id, tab: state.tab });
     CALC?.bind(active ? state.question : null, practiceContent.querySelector('.practice-calc-trigger'));
     const formulaTrigger = practiceContent.querySelector('.practice-formula-trigger');
     formulaPanel?.bind(formulaTrigger ? state.question : null, formulaTrigger, formulaTrigger ? relevantFormulas() : []);
@@ -290,38 +349,37 @@
   }
   // The chooser updates itself in place (ticks, counts, the bar), so a tick or a keystroke in the
   // filter never loses the focus or the scroll position.
-  function scopeView() {
+  function scopeView(drawerNotice) {
     const rows = new Map(C.learner.summary(C.statements.map(s => s.code)).map(r => [r.code, r]));
-    const inSession = () => Boolean(state.item && state.item.kind !== 'none' && state.scope.has(state.item.unit));
     const groups = C.topics.map(t => {
       const subs = C.statements.filter(s => String(s.topic) === t);
       const can = subs.filter(s => pickable(s.code)).map(s => s.code);
       const g = { t, subs, can, rows: [] };
-      g.all = h('input', { type: 'checkbox', onchange: e => toggle(can, e.target.checked) });
+      g.all = h('input', { type: 'checkbox', 'aria-label': `Select all of ${topicName(t)}`, onchange: e => toggle(can, e.target.checked) });
       g.count = h('span', { class: 'n' });
       g.node = h('details', { class: 'scope-topic', open: !state.closed.has(t),
         ontoggle: e => { if (state.filter) return; e.target.open ? state.closed.delete(t) : state.closed.add(t); } },
-        h('summary', {},
+        h('summary', { class: 'trow' },
           h('span', { class: `dot bg${t}` }), h('b', { text: t }), h('span', { class: 'tn', text: topicName(t) }), g.count,
-          h('label', { class: 'whole', title: `Tick or clear every subtopic of topic ${t}`, onclick: e => e.stopPropagation() }, g.all, h('span', { text: 'Whole topic' }))),
+          h('label', { class: 'whole', title: `Tick or clear every subtopic of topic ${t}`, onclick: e => e.stopPropagation() }, g.all, h('span', { text: 'All' }))),
         ...subs.map(s => {
           const types = C.typesOf(s.code);
           const input = h('input', { type: 'checkbox', disabled: !pickable(s.code), onchange: e => toggle([s.code], e.target.checked) });
           const r = { s, input, types, own: `${s.code} ${s.title}`.toLowerCase() };
-          r.text = `${r.own} ${types.map(t => t.name).join(' ')}`.toLowerCase();
           // Below the subtopic: its question types, each with a tick.
           if (types.length) {
             r.tins = types.map(t => h('input', { type: 'checkbox', onchange: e => toggleType(s.code, t.id, e.target.checked) }));
+            r.entries = types.map((t, i) => h('label', { class: 'type-row' }, r.tins[i], h('span', { class: 't', text: t.name }),
+              h('span', { class: 'lv', text: `${plural(t.generators, 'way')} to ask · ${levelsText(t.levels)}` })));
             r.list = h('div', { class: 'scope-types', id: `types-${C.id}-${s.code}`, hidden: !state.openTypes.has(s.code) },
-              ...types.map((t, i) => h('label', { class: 'type-row' }, r.tins[i], h('span', { class: 't', text: t.name }),
-                h('span', { class: 'lv', text: `${plural(t.generators, 'way')} to ask · ${levelsText(t.levels)}` }))),
+              ...r.entries,
               h('p', { class: 'type-note', text: types.length > 1 ? 'Untick what you do not want yet. Exam questions and reviews cover the whole subtopic.' : 'This subtopic has one question type so far.' }));
             r.setOpen = open => { r.list.hidden = !open; r.exp.setAttribute('aria-expanded', String(open)); };
             r.exp = h('button', { class: 'scope-exp', type: 'button', 'aria-expanded': String(state.openTypes.has(s.code)), 'aria-controls': r.list.id,
               title: `Choose question types within ${s.code}`,
               onclick: () => { const open = r.list.hidden; open ? state.openTypes.add(s.code) : state.openTypes.delete(s.code); r.setOpen(open); } });
           }
-          r.row = h('div', { class: `scope-row${pickable(s.code) ? '' : ' off'}` },
+          r.row = h('div', { class: `scope-row sub${pickable(s.code) ? '' : ' off'}` },
             h('label', { class: 'scope-main' }, input, chip(s.code), h('span', { class: 't', text: s.title })),
             r.exp, h('span', { class: 'lv', text: statusText(rows.get(s.code)) }));
           r.node = h('div', { class: 'scope-sub' }, r.row, r.list);
@@ -331,16 +389,17 @@
       return g;
     });
     const none = h('p', { class: 'scope-none', hidden: true, text: 'No subtopic matches. Try a code such as 2.7 or a word from its title.' });
-    const bar = h('div', { class: 'scope-bar scope-go' });
+    const start = h('button', { class: 'btn practice-start', type: 'button', onclick: nextQuestion });
+    const count = h('em', {});
     const note = h('p', { class: 'scope-note' });
     const picked = h('div', { class: 'scope-picked' });
-    const more = h('span', { class: 'scope-more' });
+    const clear = h('button', { class: 'link', type: 'button', text: 'Clear', onclick: () => toggle([...state.scope], false) });
+    const copyScope = h('button', { class: 'link', type: 'button', text: 'Copy link', onclick: e => copy(scopeLink(), e.target) });
 
     // The subtopic's own tick means everything in it: it clears any choice of types.
     function toggle(codes, on) {
       for (const c of codes) { on ? state.scope.add(c) : state.scope.delete(c); state.types.delete(c); }
-      state.title = ''; state.sheet = null;
-      saveScope(); sync();
+      scopeChanged();
     }
     // A type's tick: the subtopic is in the scope while one of its types is ticked, and it is
     // narrowed while some but not all of them are.
@@ -351,7 +410,10 @@
       state.types.delete(code);
       if (!cur.size) state.scope.delete(code);
       else { state.scope.add(code); if (cur.size < all.length) state.types.set(code, cur); }
-      state.title = ''; state.sheet = null;
+      scopeChanged();
+    }
+    function scopeChanged() {
+      state.title = ''; state.sheet = null; state.filterNotice = '';
       saveScope(); sync();
     }
     function applyFilter() {
@@ -360,11 +422,16 @@
       for (const g of groups) {
         let n = 0;
         for (const r of g.rows) {
-          const hit = words.every(w => r.text.includes(w));
+          const ownHit = words.every(w => r.own.includes(w));
+          const typeHits = r.types.map(t => words.every(w => `${r.own} ${t.name.toLowerCase()}`.includes(w)));
+          const hit = ownHit || typeHits.some(Boolean);
           r.node.hidden = !hit;
           if (hit) n++;
-          // found by the name of one of its question types: show them
-          if (r.list) r.setOpen(state.openTypes.has(r.s.code) || (hit && words.length > 0 && !words.every(w => r.own.includes(w))));
+          // The search changes visibility only; it never changes the selected mix.
+          if (r.list) {
+            r.entries.forEach((entry, i) => { entry.hidden = !ownHit && !typeHits[i]; });
+            r.setOpen(state.openTypes.has(r.s.code) || (hit && !ownHit));
+          }
         }
         g.node.hidden = n === 0;
         g.node.open = words.length ? true : !state.closed.has(g.t);
@@ -378,7 +445,8 @@
         g.all.checked = n > 0 && n === g.can.length;
         g.all.indeterminate = n > 0 && n < g.can.length;
         g.all.disabled = !g.can.length;
-        g.count.textContent = n ? `${n} of ${g.subs.length} picked` : plural(g.subs.length, 'subtopic');
+        g.count.textContent = n ? `${n}/${g.subs.length}` : '';
+        g.count.title = n ? `${n} of ${g.subs.length} selected` : '';
         g.count.classList.toggle('on', n > 0);
         for (const r of g.rows) {
           const on = state.scope.has(r.s.code), sel = narrowed(r.s.code);
@@ -397,59 +465,31 @@
       const text = coverageNote(n ? scopeList() : C.statements.map(s => s.code), n > 0);
       note.textContent = text || '';
       note.hidden = !text;
-      picked.replaceChildren(...(!n ? [] : [h('span', { class: 'cap', text: `Picked (${n})` }),
-        ...scopeList().map(c => h('span', { class: `st c${c.split('.')[0]} pick`, title: pickTitle(c) }, pickText(c),
-          h('button', { type: 'button', 'aria-label': `Remove ${c} ${C.byCode.get(c).title}`, title: `Remove ${c} ${C.byCode.get(c).title}`, text: '×', onclick: () => toggle([c], false) }))),
-        h('span', { class: 'sp' }), more]));
+      count.textContent = n ? `${n} selected` : '';
+      picked.replaceChildren(...scopeList().map(c => h('span', { class: `st c${c.split('.')[0]} pick`, title: pickTitle(c) }, pickText(c),
+        h('button', { type: 'button', 'aria-label': `Remove ${c} ${C.byCode.get(c).title}`, onclick: () => toggle([c], false) }))));
       picked.hidden = !n;
-      bar.replaceChildren(...[
-        modeSelect(v => { state.mode = v; saveScope(); }),
-        h('button', { class: 'btn', type: 'button', disabled: !n,
-          text: !n ? 'Tick at least one subtopic' : inSession() ? `Back to practice (${plural(n, 'subtopic')})` : n === 1 ? 'Start practice on 1 subtopic' : `Start mixed practice on ${n} subtopics`,
-          onclick: () => { state.picking = false; resume(); } })]);
-      more.replaceChildren(...[
-        n ? h('button', { class: 'btn ghost small', type: 'button', text: 'Copy link to this scope', title: 'A link that opens Practice on exactly these subtopics, to share with a class',
-          onclick: e => copy(scopeLink(), e.target) }) : null,
-        n ? h('button', { class: 'link', type: 'button', text: 'Clear', onclick: () => toggle([...state.scope], false) }) : null].filter(Boolean));
+      clear.hidden = !n;
+      copyScope.hidden = !n;
+      start.disabled = !n;
+      start.textContent = n === 1 ? 'Start practice on 1 subtopic' : n ? `Start mixed practice on ${n} subtopics` : 'Start practice';
+      updateFilterStatus();
     }
-    const setAll = open => { state.closed = new Set(open ? [] : C.topics); for (const g of groups) g.node.open = open || Boolean(state.filter); };
     sync(); applyFilter();
-    return h('section', { class: 'block scope' },
-      h('div', { class: 'block-head' }, h('h2', { text: "What's the test on?" }),
-        h('p', { text: 'Tick a whole topic or just the subtopics you need, from as many topics as you like. Questions are mixed across everything you tick. To go finer, open a subtopic\'s types and untick what has not been taught yet.' })),
-      h('div', { class: 'scope-tools' },
-        h('input', { class: 'input', type: 'search', placeholder: 'Find a subtopic, e.g. 2.7 or logarithms', 'aria-label': 'Find a subtopic', value: state.filter,
+    return h('aside', { class: 'side practice-side no-print', 'aria-label': 'Practice filters' },
+      h('div', { class: 'side-fixed' },
+        h('div', { class: 'cap syl-head' }, h('span', { text: 'Syllabus' }), count,
+          h('button', { class: 'practice-drawer-close', type: 'button', 'aria-label': 'Close filters', text: '×', onclick: () => closeFilters() })),
+        h('input', { class: 'input', type: 'search', placeholder: 'Find a subtopic or question type…', 'aria-label': 'Find a subtopic', value: state.filter,
           oninput: e => { state.filter = e.target.value; applyFilter(); } }),
-        h('button', { class: 'link', type: 'button', text: 'Open all', onclick: () => setAll(true) }),
-        h('button', { class: 'link', type: 'button', text: 'Close all', onclick: () => setAll(false) })),
-      note,
-      ...groups.map(g => g.node), none,
-      picked, bar);
-  }
-  function scopeSummary() {
-    const list = scopeList();
-    const remove = code => {
-      state.scope.delete(code); state.types.delete(code); state.title = ''; state.sheet = null;
-      saveScope();
-      if (!state.scope.size) { state.picking = true; clearQuestion(); render(); return; }
-      // The question on screen stays unless it belongs to the subtopic just removed and is unanswered.
-      if (state.item && state.item.unit === code && !state.results) nextQuestion(); else render();
-    };
-    const text = coverageNote(list, true), fine = narrowNote();
-    return h('div', { class: 'block scope-now' },
-      h('div', { class: 'scope-bar' },
-        h('span', { class: 'cap', text: state.title || 'Practising' }),
-        h('span', { class: 'muted', text: list.length === 1 ? '1 subtopic' : `mixed across ${list.length} subtopics` }),
-        h('span', { class: 'sp' }),
-        modeSelect(v => { state.mode = v; saveScope(); if (state.results) render(); else nextQuestion(); }),
-        h('button', { class: 'link', type: 'button', text: 'Copy link', onclick: e => copy(scopeLink(), e.target) })),
-      h('div', { class: 'scope-bar chips' },
-        ...list.map(c => h('span', { class: `st c${c.split('.')[0]} pick`, title: pickTitle(c) }, pickText(c),
-          h('button', { type: 'button', 'aria-label': `Stop practising ${c} ${C.byCode.get(c).title}`, title: `Stop practising ${c} ${C.byCode.get(c).title}`, text: '×', onclick: () => remove(c) }))),
-        h('button', { class: 'btn ghost small', type: 'button', text: '+ Add or change', title: 'Tick more subtopics or choose question types. The question on screen stays.', onclick: () => { state.picking = true; render(); } })),
-      state.mode !== 'adapt' ? h('p', { class: 'scope-note', text: `Fixed level: ${MODES[state.mode][0].toLowerCase()}. These answers are logged but do not move your own level.` }) : null,
-      fine ? h('p', { class: 'scope-note', text: fine }) : null,
-      text ? h('p', { class: 'scope-note', text }) : null);
+        modeSelect(v => { state.mode = v; state.filterNotice = ''; saveScope(); sync(); }),
+        h('div', { class: 'practice-picked-tools' }, clear, copyScope),
+        picked),
+      h('div', { class: 'tree practice-filter-tree' }, ...groups.map(g => g.node), none, note),
+      h('div', { class: 'practice-side-foot' },
+        drawerNotice,
+        activeItem() ? h('p', { class: 'muted', text: 'New selections apply to the next question.' }) : start,
+        h('button', { class: 'btn practice-filter-done', type: 'button', text: 'Done', onclick: () => closeFilters() })));
   }
 
   // ── session ──────────────────────────────────────────────────────────────
@@ -458,30 +498,51 @@
       () => { if (state.item === item) { state.realImages = false; render(); } });
   }
   function setQuestion(item, question, extra) {
-    Object.assign(state, { item, itemMode: state.mode, question, extra: Boolean(extra), responses: {}, results: null, selfLeft: 0, change: null, startedAt: Date.now(), showMs: false, realImages: null, hint: '' });
+    Object.assign(state, { item, itemMode: extra ? state.itemMode : state.mode, plan: extra ? state.plan : plan(), itemTitle: extra ? state.itemTitle : state.title, filterNotice: '', question, extra: Boolean(extra), responses: {}, results: null, selfLeft: 0, change: null, startedAt: Date.now(), showMs: false, realImages: null, hint: '' });
     render();
     window.scrollTo(0, 0);
     if (item && item.kind === 'real') showReal(item);
   }
   function nextQuestion() {
+    if (!state.scope.size) {
+      state.filterNotice = 'Select a subtopic or question type for the next question.';
+      updateFilterStatus();
+      openFilters();
+      return;
+    }
     const item = C.learner.next(scopeList(), nextOpts());
+    if (item.kind === 'none') {
+      state.filterNotice = 'No questions match these filters. Change the selection or level.';
+      updateFilterStatus();
+      openFilters();
+      return;
+    }
+    closeFilters(false);
     setQuestion(item, item.kind === 'generated' ? item.question : null, false);
+    practiceContent.querySelector('.qcard')?.focus({ preventScroll: true });
   }
-  // Back from the chooser: keep the question on screen when it still belongs to the scope.
-  function resume() {
-    const it = state.item;
-    // ... and, for a subtopic narrowed meanwhile, when it is of a type still chosen.
-    const sel = it && narrowed(it.unit);
-    const offType = Boolean(sel && state.question && !['refresh', 'synoptic'].includes(it.reason) && !sel.has(state.question.type));
-    const keep = it && it.kind !== 'none' && state.scope.has(it.unit) && (state.results || (state.itemMode === state.mode && !offType));
-    if (keep) { render(); window.scrollTo(0, 0); } else nextQuestion();
+  // Extras begin a new exercise, even though they do not contribute to mastery.
+  // Do not let them start a generated type the learner has just deselected.
+  function canRepeat() {
+    const { item, question } = state;
+    if (!question || !item || !state.scope.has(item.unit)) return false;
+    if (item.reason === 'synoptic' && question.syllabus.some(code => !state.scope.has(code) || narrowed(code))) return false;
+    const sel = narrowed(item.unit);
+    if (!sel || sel.has(question.type)) return true;
+    // An existing prerequisite refresher may not itself be a selectable type.
+    // Keep its extras only while the parent subtopic's original selection is intact.
+    return item.reason === 'refresh' && item.types?.length === sel.size && item.types.every(type => sel.has(type));
   }
   let extraSeed = 0;
   function another() {
+    if (!canRepeat()) return;
     const q = E.make(Object.assign({}, state.question.request, { seed: `again-${Date.now().toString(36)}-${++extraSeed}` }));
     setQuestion(state.item, q, true);
   }
-  function anotherWay(request) { setQuestion(state.item, E.make(request), true); }
+  function anotherWay(request) {
+    if (!canRepeat() || request.type !== state.question.type) return;
+    setQuestion(state.item, E.make(request), true);
+  }
 
   function finish(correct, selfMarked) {
     if (state.extra) return;   // extra practice does not move the level
@@ -552,16 +613,21 @@
   }
 
   function afterBar() {
-    const variants = state.question ? E.variants(state.question, MODES[state.mode][1] || undefined) : [];
+    const variants = state.question ? E.variants(state.question, MODES[state.itemMode || state.mode][1] || undefined) : [];
     const way = variants.length === 0 ? null : variants.length === 1
       ? h('button', { class: 'btn ghost', type: 'button', text: 'Ask it another way', title: variants[0].title, onclick: () => anotherWay(variants[0].request) })
       : h('select', { class: 'select way-pick', 'aria-label': 'Ask it another way', onchange: e => { if (e.target.value !== '') anotherWay(variants[+e.target.value].request); } },
         h('option', { value: '', text: 'Ask it another way…' }),
         ...variants.map((v, i) => h('option', { value: String(i), text: `${v.title}${v.sameSituation ? ' (same numbers)' : ''}` })));
-    return h('div', { class: 'next-row' },
-      h('button', { class: 'btn', type: 'button', text: 'Next question →', onclick: nextQuestion }),
-      state.question ? h('button', { class: 'btn ghost', type: 'button', text: 'Another like this', onclick: another }) : null,
-      way);
+    const again = h('button', { class: 'btn ghost', type: 'button', text: 'Another like this', onclick: another });
+    updateRepeatChoices = () => {
+      const hidden = !canRepeat();
+      again.hidden = hidden;
+      if (way) way.hidden = hidden;
+    };
+    updateRepeatChoices();
+    return h('div', { class: 'next-row practice-repeat-row' },
+      h('button', { class: 'btn', type: 'button', text: 'Next question →', onclick: nextQuestion }), again, way);
   }
   // "No calculator" is a rule only where the course has a paper without one; elsewhere a
   // by-hand question says what it expects instead.
@@ -608,7 +674,7 @@
     const calculatorStatus = useCalculator && q.calculator
       ? h('span', { class: 'chip practice-calc-status-chip', text: 'Calculator allowed' })
       : calcChip(q);
-    return h('section', { class: 'block qcard' },
+    return h('section', { class: 'block qcard', tabindex: '-1' },
       h('div', { class: 'qmeta' }, ...q.syllabus.slice(0, 2).map(chip), settled ? h('span', { text: q.title }) : null, h('span', { class: 'sp' }),
         h('span', { class: 'chip', text: `Level ${q.level}${name ? ` · ${name}` : ''}` }),
         calculatorStatus, h('span', { class: 'mono', text: `[${q.marks}]` })),
@@ -647,11 +713,11 @@
     const answered = Boolean(state.results);
     const verdict = ok => { state.results = { real: { correct: ok } }; finish(ok, true); render(); };
     const paper = q ? (C.info.papers || []).find(p => p.id === q.paper) : null;
-    const whole = narrowed(item.unit) ? ' Exam questions cover the whole subtopic, not only the question types you chose.' : '';
+    const whole = item.types?.length ? ' Exam questions cover the whole subtopic, not only the question types you chose.' : '';
     const why = item.reason === 'review' ? 'A review with a real exam question. Mark it yourself with the markscheme.' + whole
       : item.reason === 'exam' ? 'You are at exam level here: a real exam question. Mark it yourself with the markscheme.' + whole
       : `There is no generated practice for ${item.unit} in ${C.short} yet, so here is a real exam question. Mark it yourself with the markscheme.`;
-    return h('section', { class: 'block qcard' },
+    return h('section', { class: 'block qcard', tabindex: '-1' },
       h('div', { class: 'qmeta' }, chip(item.unit), h('span', { text: q ? `Past-paper question · ${realTitle(q)}` : 'Past-paper question' }), h('span', { class: 'sp' }),
         paper ? h('span', { class: 'chip', text: paper.name }) : null,
         q ? h('span', { class: `chip${q.calculator ? '' : ' on'}`, text: q.calculator ? 'Calculator' : 'No calculator' }) : null,
@@ -664,17 +730,7 @@
         h('div', { class: 'real-q' }, ...q.markschemeImages.map((src, i) => h('img', { src: base + src, alt: `Markscheme, page ${i + 1}` })))) : null,
       q && !state.showMs ? h('div', { class: 'next-row' },
         h('button', { class: 'btn', type: 'button', text: 'Show the markscheme', onclick: () => { state.showMs = true; render(); } }),
-        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion }),
-        q.parts.some(p => p.answer.kind === 'number') ? h('button', { class: 'info-btn', type: 'button', text: 'i', title: 'How to type answers', 'aria-label': 'How to type answers', 'aria-expanded': String(Boolean(state.help)),
-          onclick: () => { state.help = !state.help; render(); } }) : null) : null,
-      !state.results && state.help && q.parts.some(p => p.answer.kind === 'number') ? h('div', { class: 'verdict info typing-help' },
-        h('b', { text: 'Typing answers' }),
-        h('ul', null,
-          h('li', { text: 'Whole numbers, decimals and negatives: 12, 0.75, -3.' }),
-          h('li', { text: 'Fractions: type 3/4 or -7/2. An exact fraction is always accepted.' }),
-          h('li', { text: 'When the box says "to 3 s.f.", round to three significant figures, for example 2.47.' }),
-          h('li', { text: 'Leave out units: they are shown beside the box.' }),
-          h('li', { text: 'Press Enter to check.' }))) : null,
+        h('button', { class: 'link', type: 'button', text: 'Skip', onclick: nextQuestion })) : null,
       q === false ? h('div', { class: 'next-row' }, h('button', { class: 'btn', type: 'button', text: 'Next question →', onclick: nextQuestion })) : null,
       state.showMs && !answered ? h('div', { class: 'next-row' },
         h('span', { class: 'muted', style: 'align-self:center', text: 'Mark your work:' }),
@@ -686,17 +742,18 @@
   }
 
   function practiceView() {
-    if (state.picking || !state.scope.size) return [scopeView()];
-    if (!state.item) {
+    if (state.autoStart) {
+      state.autoStart = false;
       const item = C.learner.next(scopeList(), nextOpts());
-      Object.assign(state, { item, itemMode: state.mode, question: item.kind === 'generated' ? item.question : null, startedAt: Date.now() });
-      if (item.kind === 'real') showReal(item);
+      if (item.kind !== 'none') {
+        Object.assign(state, { item, itemMode: state.mode, plan: plan(), itemTitle: state.title, question: item.kind === 'generated' ? item.question : null, startedAt: Date.now() });
+        if (item.kind === 'real') showReal(item);
+      } else state.filterNotice = 'No questions match these filters. Change the selection or level.';
     }
-    const item = state.item;
-    const body = item.kind === 'none'
-      ? h('section', { class: 'block qcard' }, h('p', { text: 'There is nothing to practise in this scope yet. Choose different subtopics.' }))
-      : item.kind === 'real' ? realView() : generatedView();
-    return [scopeSummary(), body];
+    if (!activeItem()) return [h('section', { class: 'block qcard practice-empty' },
+      h('h2', { text: 'What are you practising?' }),
+      h('p', { class: 'muted', text: 'Choose topics, subtopics or question types in the syllabus filters, then start practice. Your progress is saved in this browser.' }))];
+    return [state.item.kind === 'real' ? realView() : generatedView()];
   }
 
   // ── progress ─────────────────────────────────────────────────────────────
@@ -805,8 +862,8 @@
       h('p', { style: 'font-size:11px;margin-top:16px', text: `Worksheet ${state.ws.seed} · ${C.short} · generated practice in the style of IB questions, not IB questions${reals ? `, with ${plural(reals, 'real past-paper question')} where a subtopic has no generated practice` : ''}.` }));
   }
   function worksheetView() {
-    if (!state.scope.size) return [h('section', { class: 'block qcard' }, h('p', { text: 'Choose what the worksheet is on first.' }),
-      h('div', {}, h('button', { class: 'btn', type: 'button', text: 'Choose subtopics', onclick: () => { state.tab = 'practice'; state.picking = true; render(); } })))];
+    if (!state.scope.size) return [h('section', { class: 'block qcard', tabindex: '-1' }, h('p', { text: 'Choose what the worksheet is on first.' }),
+      h('div', {}, h('button', { class: 'btn', type: 'button', text: 'Choose subtopics', onclick: returnToScope })))];
     if (!state.sheet) makeSheet();
     const set = (k, v) => { state.ws[k] = v; state.sheet = null; render(); };
     const text = coverageNote(scopeList(), true), fine = narrowNote();
@@ -814,7 +871,7 @@
       h('div', { class: 'block-head' }, h('h2', { text: 'Print a worksheet' }), h('p', { text: 'A fixed set of questions mixed across your scope, with an answer key of worked solutions on a new page.' })),
       h('div', { class: 'scope-bar' }, h('span', { class: 'cap', text: 'On' }), ...scopeList().slice(0, 14).map(c => h('span', { class: `st c${c.split('.')[0]}`, text: pickText(c), title: pickTitle(c) })),
         state.scope.size > 14 ? h('span', { class: 'muted', text: `+${state.scope.size - 14} more` }) : null,
-        h('button', { class: 'link', type: 'button', text: 'Change', onclick: () => { state.tab = 'practice'; state.picking = true; render(); } })),
+        h('button', { class: 'link', type: 'button', text: 'Change', onclick: returnToScope })),
       fine ? h('p', { class: 'scope-note', text: fine.replace(' Exam questions and reviews cover the whole subtopic.', '') }) : null,
       text ? h('p', { class: 'scope-note', text }) : null,
       h('div', { class: 'ws-opts' },
@@ -834,5 +891,6 @@
   window.QB_PRACTICE = { state, get learner() { return C.learner; }, get course() { return C.id; } };   // for tests and debugging
   // The course switch in the top bar: the same page, the other course's scope and progress.
   if (window.QB_COURSE) window.QB_COURSE.onChange(id => { if (id === C.id) return; useCourse(id, null); saveScope(); render(); });
+  mobileFilters.addEventListener('change', () => closeFilters(false));
   render();
 })();

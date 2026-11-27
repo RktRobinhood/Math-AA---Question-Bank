@@ -6,10 +6,10 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 
 | Course | Subtopics | With generated questions | Real questions only | Nothing yet | Generators offered |
 |---|---|---|---|---|---|
-| AA SL | 51 | 51 | 0 | 0 | 597 |
-| AA HL | 83 | 83 | 0 | 0 | 842 |
-| AI SL | 39 | 39 | 0 | 0 | 434 |
-| AI HL | 78 | 78 | 0 | 0 | 742 |
+| AA SL | 51 | 51 | 0 | 0 | 599 |
+| AA HL | 83 | 83 | 0 | 0 | 844 |
+| AI SL | 39 | 39 | 0 | 0 | 436 |
+| AI HL | 78 | 78 | 0 | 0 | 744 |
 
 - **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
 - **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
@@ -19,7 +19,7 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 
 ## AA SL
 
-597 generators over 348 question types are offered in AA SL. 51 of 51 subtopics have generated questions; 0 use real questions only.
+599 generators over 349 question types are offered in AA SL. 51 of 51 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **51 of 51** subtopics; full tier for 45.
 
 **Thinnest subtopics** (fewest ways of asking among the 51 with generated questions; the middle one has 11): 5.9 Kinematics problems (8 ways, 3 types); 3.5 Unit circle definitions, exact trig ratios and ambiguous case of sine rule (8 ways, 4 types); 4.4 Pearson's, scatter diagrams and equation of y on x (8 ways, 4 types); 4.10 Regression line of x on y (8 ways, 4 types); 5.10 Indefinite integration, reverse chain and substitution (8 ways, 4 types); 1.6 Simple deductive proof (8 ways, 6 types); 4.11 Formal conditional probability and independence (9 ways, 4 types); 5.4 Tangents and normals (9 ways, 4 types).
@@ -45,7 +45,7 @@ Release minimum reached for **51 of 51** subtopics; full tier for 45.
 | 2.8 Reciprocal and simple rational functions, equations of asymptotes | yes | yes | 6 of 6 | 0, 1, 2, 3, 4, 5 | 6 | 9 | 12 | 15 | no |
 | 2.9 Exponential and logarithmic functions | yes | yes | 5 of 5 | 0, 1, 2, 3, 4 | 7 | 10 | 11 | 15 | no |
 | 2.10 Solving equations graphically and analytically | yes | yes | 7 of 7 | 1, 2, 3, 4 | 7 | 9 | 9 | 33 | no |
-| 2.11 Transformations of graphs | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 7 | 12 | 13 | 17 | no |
+| 2.11 Transformations of graphs | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 8 | 13 | 14 | 17 | no |
 | 3.1 3D space, volume, angles, distance and midpoints | yes | no | 4 of 4 | 1, 2, 3, 4 | 7 | 12 | 12 | 20 | no |
 | 3.2 2D and 3D trigonometry, sine rule, cosine rule and area | yes | no | 6 of 6 | 0, 1, 2, 3, 4 | 6 | 12 | 13 | 44 | no |
 | 3.3 Applications of trigonometry | yes | yes | 2 of 2 | 0, 1, 2, 3, 4, 5 | 8 | 13 | 15 | 13 | no |
@@ -58,7 +58,7 @@ Release minimum reached for **51 of 51** subtopics; full tier for 45.
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 13 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 22 | no |
 | 4.4 Pearson's, scatter diagrams and equation of y on x | yes | yes | 2 of 2 | 1, 2, 3, 4 | 4 | 8 | 8 | 16 | no |
-| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 11 | 13 | 20 | no |
+| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 12 | 14 | 20 | no |
 | 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams | yes | yes | 4 of 4 | 1, 2, 3, 4, 5 | 7 | 11 | 12 | 30 | no |
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 10 | 10 | 20 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 6 | 14 | 14 | 19 | no |
@@ -78,11 +78,11 @@ Release minimum reached for **51 of 51** subtopics; full tier for 45.
 | 5.10 Indefinite integration, reverse chain and substitution | yes | yes | 3 of 3 | 1, 2, 3, 4 | 4 | 8 | 8 | 26 | no |
 | 5.11 Definite integrals, areas under curve onto x-axis and areas between curves | yes | yes | 3 of 3 | 1, 2, 3, 4 | 3 | 14 | 14 | 35 | no |
 
-Generators per level: level 0: 23, level 1: 85, level 2: 170, level 3: 176, level 4: 131, level 5: 13.
+Generators per level: level 0: 23, level 1: 85, level 2: 172, level 3: 176, level 4: 131, level 5: 13.
 
 ## AA HL
 
-842 generators over 448 question types are offered in AA HL. 83 of 83 subtopics have generated questions; 0 use real questions only.
+844 generators over 449 question types are offered in AA HL. 83 of 83 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **83 of 83** subtopics; full tier for 45.
 
 **Thinnest subtopics** (fewest ways of asking among the 83 with generated questions; the middle one has 9): 1.13 Modulus-argument and Euler forms of complex numbers (5 ways, 1 type); 3.16 The vector product (5 ways, 2 types); 4.13 Bayes' theorem (5 ways, 2 types); 3.11 Relationships between trigonometric functions and the symmetry of their graphs (5 ways, 3 types); 1.15 Proof by induction, by contradiction and by counterexample (6 ways, 2 types); 1.16 Systems of linear equations in up to three unknowns (6 ways, 2 types); 1.11 Partial fractions (6 ways, 3 types); 3.15 Coincident, parallel, intersecting and skew lines (6 ways, 3 types).
@@ -115,7 +115,7 @@ Release minimum reached for **83 of 83** subtopics; full tier for 45.
 | 2.8 Reciprocal and simple rational functions, equations of asymptotes | yes | yes | 6 of 6 | 0, 1, 2, 3, 4, 5 | 6 | 9 | 12 | 12 | no |
 | 2.9 Exponential and logarithmic functions | yes | yes | 5 of 5 | 0, 1, 2, 3, 4 | 7 | 10 | 11 | 9 | no |
 | 2.10 Solving equations graphically and analytically | yes | yes | 7 of 7 | 1, 2, 3, 4 | 7 | 9 | 9 | 39 | no |
-| 2.11 Transformations of graphs | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 7 | 12 | 13 | 18 | no |
+| 2.11 Transformations of graphs | yes | yes | 7 of 7 | 0, 1, 2, 3, 4 | 8 | 13 | 14 | 18 | no |
 | 2.12 Polynomial functions: factor and remainder theorems, sum and product of roots | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 9 | 9 | 33 | no |
 | 2.13 Rational functions with a quadratic numerator or denominator | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 7 | 7 | 11 | no |
 | 2.14 Odd and even functions, inverses with a restricted domain, self-inverse functions | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 7 | 7 | 15 | no |
@@ -143,7 +143,7 @@ Release minimum reached for **83 of 83** subtopics; full tier for 45.
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 7 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 17 | no |
 | 4.4 Pearson's, scatter diagrams and equation of y on x | yes | yes | 2 of 2 | 1, 2, 3, 4 | 4 | 8 | 8 | 13 | no |
-| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 11 | 13 | 12 | no |
+| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 12 | 14 | 12 | no |
 | 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams | yes | yes | 4 of 4 | 1, 2, 3, 4, 5 | 7 | 11 | 12 | 29 | no |
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 10 | 10 | 12 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 6 | 14 | 14 | 19 | no |
@@ -173,14 +173,14 @@ Release minimum reached for **83 of 83** subtopics; full tier for 45.
 | 5.18 First-order differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 14 | 14 | 27 | no |
 | 5.19 Maclaurin series | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 8 | 8 | 17 | no |
 
-Generators per level: level 0: 24, level 1: 123, level 2: 244, level 3: 267, level 4: 172, level 5: 16.
+Generators per level: level 0: 24, level 1: 123, level 2: 246, level 3: 267, level 4: 172, level 5: 16.
 
 ## AI SL
 
-434 generators over 288 question types are offered in AI SL. 39 of 39 subtopics have generated questions; 0 use real questions only.
+436 generators over 288 question types are offered in AI SL. 39 of 39 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **39 of 39** subtopics; full tier for 13.
 
-**Thinnest subtopics** (fewest ways of asking among the 39 with generated questions; the middle one has 11): 3.4 Arc length and sector area in degrees (7 ways, 2 types); 3.6 Voronoi diagrams (7 ways, 4 types); 4.4 Pearson's, scatter diagrams and equation of y on x (8 ways, 4 types); 5.4 Tangents and normals (8 ways, 4 types); 5.8 Approximating areas with the trapezoidal rule (8 ways, 4 types); 3.5 Equations of perpendicular bisectors (8 ways, 5 types); 1.6 Approximation, bounds, percentage error and estimation (8 ways, 6 types); 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams (9 ways, 5 types).
+**Thinnest subtopics** (fewest ways of asking among the 39 with generated questions; the middle one has 11): 3.4 Arc length and sector area in degrees (7 ways, 2 types); 3.6 Voronoi diagrams (7 ways, 4 types); 4.4 Pearson's, scatter diagrams and equation of y on x (8 ways, 4 types); 5.4 Tangents and normals (8 ways, 4 types); 3.5 Equations of perpendicular bisectors (8 ways, 5 types); 1.6 Approximation, bounds, percentage error and estimation (8 ways, 6 types); 5.8 Approximating areas with the trapezoidal rule (9 ways, 4 types); 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams (9 ways, 5 types).
 
 | Subtopic | Release minimum | Full | Exam types covered | Levels | Question types | Ways of asking | Generators | Real questions | Real only |
 |---|---|---|---|---|---|---|---|---|---|
@@ -208,7 +208,7 @@ Release minimum reached for **39 of 39** subtopics; full tier for 13.
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 19 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 24 | no |
 | 4.4 Pearson's, scatter diagrams and equation of y on x | yes | yes | 2 of 2 | 1, 2, 3, 4 | 4 | 8 | 8 | 12 | no |
-| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 11 | 13 | 17 | no |
+| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 12 | 14 | 17 | no |
 | 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams | yes | no | 3 of 4 | 1, 2, 3, 4, 5 | 5 | 9 | 10 | 32 | no |
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 10 | 10 | 13 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 5 | 12 | 12 | 21 | no |
@@ -222,13 +222,13 @@ Release minimum reached for **39 of 39** subtopics; full tier for 13.
 | 5.5 Integration introduction, areas between curve and x-axis | yes | no | 1 of 3 | 0, 1, 2, 3, 4, 5 | 11 | 12 | 14 | 28 | no |
 | 5.6 Stationary points: local maxima and minima | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 9 | 9 | 6 | no |
 | 5.7 Optimisation in context | yes | no | 0 of 0 | 1, 2, 3, 4 | 9 | 13 | 13 | 22 | no |
-| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 8 | 8 | 15 | no |
+| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 9 | 9 | 15 | no |
 
-Generators per level: level 0: 16, level 1: 76, level 2: 122, level 3: 103, level 4: 111, level 5: 7.
+Generators per level: level 0: 16, level 1: 76, level 2: 124, level 3: 103, level 4: 111, level 5: 7.
 
 ## AI HL
 
-742 generators over 467 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
+744 generators over 467 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **78 of 78** subtopics; full tier for 15.
 
 **Thinnest subtopics** (fewest ways of asking among the 78 with generated questions; the middle one has 9): 5.9 Further differentiation: standard derivatives, chain, product and quotient rules, related rates (5 ways, 3 types); 5.16 Euler's method for single and coupled first-order equations (5 ways, 3 types); 3.7 Radian measure (6 ways, 2 types); 3.8 The unit circle, the Pythagorean identity, the ambiguous case and graphical trigonometric equations (6 ways, 2 types); 3.13 Scalar and vector products (6 ways, 2 types); 5.12 Areas against either axis and volumes of revolution (6 ways, 3 types); 5.15 Slope fields (6 ways, 3 types); 5.17 Phase portraits for coupled linear differential equations (6 ways, 3 types).
@@ -280,7 +280,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 8 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 16 | no |
 | 4.4 Pearson's, scatter diagrams and equation of y on x | yes | yes | 2 of 2 | 1, 2, 3, 4 | 4 | 8 | 8 | 18 | no |
-| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 11 | 13 | 13 | no |
+| 4.5 Probability concepts and expected numbers | yes | yes | 2 of 2 | 0, 1, 2, 3, 4 | 7 | 12 | 14 | 13 | no |
 | 4.6 Combined, mutually exclusive, conditional, independence and probability diagrams | yes | no | 3 of 4 | 1, 2, 3, 4, 5 | 5 | 9 | 10 | 28 | no |
 | 4.7 Discrete random variables | yes | yes | 2 of 2 | 1, 2, 3, 4 | 6 | 10 | 10 | 11 | no |
 | 4.8 Binomial distribution | yes | yes | 1 of 1 | 1, 2, 3, 4 | 5 | 12 | 12 | 23 | no |
@@ -302,7 +302,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 5.5 Integration introduction, areas between curve and x-axis | yes | no | 2 of 3 | 0, 1, 2, 3, 4, 5 | 11 | 12 | 14 | 17 | no |
 | 5.6 Stationary points: local maxima and minima | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 9 | 9 | 8 | no |
 | 5.7 Optimisation in context | yes | no | 0 of 0 | 1, 2, 3, 4 | 9 | 13 | 13 | 17 | no |
-| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 8 | 8 | 10 | no |
+| 5.8 Approximating areas with the trapezoidal rule | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 9 | 9 | 10 | no |
 | 5.9 Further differentiation: standard derivatives, chain, product and quotient rules, related rates | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 5 | 5 | 37 | no |
 | 5.10 The second derivative and the second derivative test | yes | no | 0 of 0 | 1, 2, 3, 4 | 6 | 8 | 8 | 10 | no |
 | 5.11 Further integration: standard integrals, inspection and substitution | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 6 | 6 | 15 | no |
@@ -314,7 +314,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 5.17 Phase portraits for coupled linear differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 6 | 6 | 18 | no |
 | 5.18 Second-order differential equations by Euler's method | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 6 | 6 | 9 | no |
 
-Generators per level: level 0: 17, level 1: 126, level 2: 218, level 3: 180, level 4: 195, level 5: 10.
+Generators per level: level 0: 17, level 1: 126, level 2: 220, level 3: 180, level 4: 195, level 5: 10.
 
 ## Bank parts not assigned to a question type
 
