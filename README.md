@@ -19,7 +19,9 @@ Working on the bank? Start with the [glossary](GLOSSARY.md), [architecture decis
 
 ### Overview
 
-Every page has the same top bar: the course switch (**AA SL**, **AA HL**, **AI SL**, **AI HL**), the four sections (**Questions**, **Statistics**, **Syllabus**, **Practice**), the formula booklet for your course, a light/dark switch and **Your paper**. On a phone the sections move to a tab bar at the bottom.
+Every standalone page has the same top bar: the course switch (**AA SL**, **AA HL**, **AI SL**, **AI HL**), **Questions**, **Statistics**, **Syllabus**, **Practice**, **Calculator Skills**, the formula booklet for your course, **System / Light / Dark**, and **Your paper**. On a phone the sections move to a tab bar at the bottom.
+
+Navigation is defined once in `assets/js/shell.js`, including for archived questions, exam-year pages and standalone handhelds. It does not add study tools to the archive. Shared-paper aliases go straight to the canonical question. The Practice Scratchpad iframe is only the embedded calculator, not a second site page; dialogs and overlays use their parent page’s header. PDFs and design mockups under `docs/redesign-proposal/mockups/` are not bank pages. `node scripts/check-calculator-shell.mjs` checks the deployable HTML inventory.
 
 The site remembers your course and theme. Everything shows the chosen course only. A link can pick the course for the reader with `?course=aa-hl` (or `aa-sl`, `ai-sl`, `ai-hl`).
 

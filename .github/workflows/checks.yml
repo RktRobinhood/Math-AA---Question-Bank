@@ -23,6 +23,8 @@ jobs:
         run: node scripts/check-calculator-narration.mjs
       - name: Validate the data and the question-type catalogue
         run: node scripts/build.mjs --check
+      - name: Require one shared header across deployable bank pages
+        run: node scripts/check-calculator-shell.mjs
       - name: Generated practice files are up to date
         run: node scripts/build-practice.mjs --check
       - name: Check every practice generator, the selection rules and storage
