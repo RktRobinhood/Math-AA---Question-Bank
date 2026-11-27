@@ -111,7 +111,12 @@
         { "id": "two-planes-line", "asked": "a direction vector and a point of the line where two planes meet", "level": 3 },
         { "id": "three-planes", "asked": "the parameter value with no unique common point, and how the three planes then lie", "level": 3 },
         { "id": "line-plane-chain", "asked": "where a line meets a plane, the angle between them and a distance to the plane", "level": 4 },
-        { "id": "direction-change", "asked": "which direction is parallel to the plane, how the line and plane meet for a changed direction, and the angle between them", "level": 4 } ],
+        { "id": "direction-change", "asked": "which direction is parallel to the plane, how the line and plane meet for a changed direction, and the angle between them", "level": 4 },
+        {
+          "id": "translated-third-plane",
+          "asked": "a new coordinate of the common point and the plane offset for a desired coordinate",
+          "level": 3
+        } ],
       "representations": [ { "rep": "equation" } ],
       "situation": "line-plane",
       "misconceptions": [ { "text": "Giving the angle between the line and the normal as the angle with the plane" }, { "text": "Stopping at the foot of the perpendicular for a reflection" }, { "text": "Giving the obtuse angle between two planes" } ] },

@@ -1229,6 +1229,39 @@
           line ? "This is always true, so the third plane contains the line where the first two planes meet: the planes meet in a line." : "This is never true, so the equations are inconsistent: no point lies on all three planes."])] };
     } });
 
+  // Adjust the right side of one plane without changing any normal (IB AA AHL 3.18).
+  reg({ type: "t3-ahl-line-plane", unknown: "translated-third-plane", representation: "equation", format: "value", levels: [3], syllabus: ["3.18"],
+    skills: ["AHL3.18.three-planes"], title: "Move the common point by translating one of three planes",
+    build({ rng }) {
+      const axes = rng.shuffle([0, 1, 2]);
+      const frame = (v) => [0, 1, 2].map(i => v[axes.indexOf(i)]);
+      const u = rng.nonzero(-3, 3), v = rng.nonzero(-3, 3);
+      const n1 = frame([1, 0, -u]), n2v = frame([0, 1, -v]), d = frame([u, v, 1]);
+      const n3 = frame([rng.sign(), rng.sign(), 0]);
+      const offset = rng.pick([-6, -5, -4, -3, 3, 4, 5, 6]);
+      n3[axes[2]] = offset - dot(n3, d);
+      if (!n3[axes[2]]) n3[axes[2]] = 2 * offset;
+      const step = dot(n3, d);
+      const q = rvec(rng, -4, 4);
+      const rhs = [n1, n2v, n3].map(n => dot(n, q));
+      const shift = rng.pick([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5].filter(h => h % step !== 0));
+      const observed = axes[2], targetAxis = rng.pick([axes[0], axes[1]]);
+      const want = q[targetAxis] + rng.nonzero(-5, 5);
+      const moved = rat.Q(q[observed] * step + shift, step);
+      const tGoal = rat.Q(want - q[targetAxis], d[targetAxis]);
+      const newK = rat.Q(rhs[2] * tGoal.d + step * tGoal.n, tGoal.d);
+      return { params: { normals: [n1, n2v, n3], rhs, q, shift, observed, targetAxis, want },
+        stem: `The planes $\\Pi_1$: $${planeT(n1, rhs[0])}$, $\\Pi_2$: $${planeT(n2v, rhs[1])}$ and $\\Pi_3$: $${planeT(n3, rhs[2])}$ meet at $${pt("Q", q)}$. Only $\\Pi_3$ is moved. Its left-hand side stays the same and its right-hand side is replaced by $k$.`,
+        parts: [
+          P(`Find the exact $${AX[observed]}$-coordinate of the new common point when $k = ${rhs[2] + shift}$.`, 3, ans.frac(moved.n, moved.d), [
+            `The first two planes do not change. Subtract the equations for $\\mathrm{Q}$ from those for the new point. If the change in $${AX[observed]}$ is $t$, the two fixed equations give changes $${expr([[u, "t"]])}$ in $${AX[axes[0]]}$ and $${expr([[v, "t"]])}$ in $${AX[axes[1]]}$.`,
+            `The change vector is $t${col(d)}$. Substitution into the third equation gives $${expr([[step, "t"]])} = ${shift}$, so $t = ${frac(shift, step)}$.`,
+            `The new $${AX[observed]}$-coordinate is $${q[observed]} ${shift * step < 0 ? "-" : "+"} ${frac(Math.abs(shift), Math.abs(step))} = ${rat.tex(moved)}$.`]),
+          P(`Instead, choose $k$ so the common point has $${AX[targetAxis]}$-coordinate $${want}$. Find the exact value of $k$.`, 2, ans.frac(newK.n, newK.d), [
+            `On the intersection of the two fixed planes, the $${AX[targetAxis]}$-coordinate is $${expr([[q[targetAxis], ""], [d[targetAxis], "t"]])}$. Set this equal to $${want}$ to obtain $t = ${rat.tex(tGoal)}$.`,
+            `The right-hand constant in the third equation is $${expr([[rhs[2], ""], [step, "t"]])}$. Substituting this value of $t$ gives $k = ${rat.tex(newK)}$.`])] };
+    } });
+
   // ======================= 4.13 Bayes' theorem =======================
   const Pr = (s) => `\\mathrm{P}(${s})`, pc = (x) => `${num(x)}\\%`;
   reg({ type: "t4-ahl-bayes", unknown: "formula", representation: "equation", format: "value", levels: [1], syllabus: ["4.13"],

@@ -7,7 +7,7 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 | Course | Subtopics | With generated questions | Real questions only | Nothing yet | Generators offered |
 |---|---|---|---|---|---|
 | AA SL | 51 | 51 | 0 | 0 | 599 |
-| AA HL | 83 | 83 | 0 | 0 | 844 |
+| AA HL | 83 | 83 | 0 | 0 | 845 |
 | AI SL | 39 | 39 | 0 | 0 | 436 |
 | AI HL | 78 | 78 | 0 | 0 | 744 |
 
@@ -82,7 +82,7 @@ Generators per level: level 0: 23, level 1: 85, level 2: 172, level 3: 176, leve
 
 ## AA HL
 
-844 generators over 449 question types are offered in AA HL. 83 of 83 subtopics have generated questions; 0 use real questions only.
+845 generators over 449 question types are offered in AA HL. 83 of 83 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **83 of 83** subtopics; full tier for 45.
 
 **Thinnest subtopics** (fewest ways of asking among the 83 with generated questions; the middle one has 9): 1.13 Modulus-argument and Euler forms of complex numbers (5 ways, 1 type); 3.16 The vector product (5 ways, 2 types); 4.13 Bayes' theorem (5 ways, 2 types); 3.11 Relationships between trigonometric functions and the symmetry of their graphs (5 ways, 3 types); 1.15 Proof by induction, by contradiction and by counterexample (6 ways, 2 types); 1.16 Systems of linear equations in up to three unknowns (6 ways, 2 types); 1.11 Partial fractions (6 ways, 3 types); 3.15 Coincident, parallel, intersecting and skew lines (6 ways, 3 types).
@@ -138,7 +138,7 @@ Release minimum reached for **83 of 83** subtopics; full tier for 45.
 | 3.15 Coincident, parallel, intersecting and skew lines | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 6 | 6 | 11 | no |
 | 3.16 The vector product | yes | no | 0 of 0 | 1, 2, 3, 4 | 2 | 5 | 5 | 19 | no |
 | 3.17 Vector and Cartesian equations of a plane | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 6 | 6 | 16 | no |
-| 3.18 Intersections and angles between lines and planes | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 10 | 10 | 17 | no |
+| 3.18 Intersections and angles between lines and planes | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 11 | 11 | 17 | no |
 | 4.1 Concepts, reliability and sampling techniques | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 11 | 11 | 2 | no |
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 7 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 17 | no |
@@ -173,7 +173,7 @@ Release minimum reached for **83 of 83** subtopics; full tier for 45.
 | 5.18 First-order differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 14 | 14 | 27 | no |
 | 5.19 Maclaurin series | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 8 | 8 | 17 | no |
 
-Generators per level: level 0: 24, level 1: 123, level 2: 246, level 3: 267, level 4: 172, level 5: 16.
+Generators per level: level 0: 24, level 1: 123, level 2: 246, level 3: 268, level 4: 172, level 5: 16.
 
 ## AI SL
 
