@@ -1,7 +1,7 @@
 {
   "id": "CT39",
   "title": "Normal intervals & tails",
-  "intro": "Find a normal probability between two limits or beyond one limit.",
+  "intro": "A dispenser’s amounts are normally distributed with mean 20 mL and standard deviation 2 mL. Find the chance it dispenses 18–23 mL, then more than 22 mL.",
   "recording": {
     "file": "narration.mp3",
     "audioSha256": "fef42bc92a7c114c1f594daa9134daca1fe7c792e37411f1bebb75f80d321718",
@@ -45,7 +45,7 @@
     {
       "chapter": "area",
       "spoken": "Shade the area you want. Here, it’s between eighteen and twenty-three.",
-      "coach": "Shade the area between the two given bounds, 18 and 23.",
+      "coach": "Let X be the amount in mL. Shade between 18 and 23 for P(18 < X < 23). The shaded area is the probability you need.",
       "end": 5.76,
       "hold": 3,
       "keys": []
@@ -191,7 +191,7 @@
     {
       "chapter": "area-answer",
       "spoken": "Confirm the dialog. Press Enter again to calculate. The probability is about zero point seven seven five.",
-      "coach": "This is an area, about 0.775. The LCD keeps a more precise value.",
+      "coach": "P(18 < X < 23) ≈ 0.775: about 77.5% of dispensed amounts fall in that interval. The probability has no units.",
       "end": 36.8,
       "hold": 4,
       "keys": []
@@ -232,7 +232,7 @@
     {
       "chapter": "tail-fields",
       "spoken": "Enter twenty-two as the lower bound. Leave the upper bound at infinity. Keep the mean at twenty and the standard deviation at two.",
-      "coach": "Enter 22 below. Leave the upper bound at ∞. Keep μ = 20 and σ = 2.",
+      "coach": "Enter 22 in Lower Bound: values greater than 22 start there and continue up to ∞. Keep μ = 20 and σ = 2.",
       "end": 56.34,
       "hold": 10,
       "keys": [
@@ -316,7 +316,7 @@
     {
       "chapter": "tail-answer",
       "spoken": "Confirm, then press Enter again. The upper-tail probability is about zero point one five nine.",
-      "coach": "The upper-tail area is about 0.159. The LCD keeps a more precise value.",
+      "coach": "P(X > 22) ≈ 0.159: about 15.9% of dispensed amounts exceed 22 mL. The required area is to the right of 22.",
       "end": 65.423,
       "hold": 5,
       "keys": []

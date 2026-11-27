@@ -215,7 +215,9 @@ function restorePractice(){
  const {model,event,linked,threshold,error}=assignment;
  live=fresh(linked?valuesFor(model,threshold):null);
  $('challenge-title').textContent=event==='range'?'Interval practice':'Tail practice';
- $('challenge-prompt').textContent='Mean '+rawBound(model.mean)+', standard deviation '+rawBound(model.sd)+'. Find '+eventLabel(event,model)+'.';
+ $('challenge-prompt').textContent=model===task?
+  'A dispenser’s amounts are normally distributed with mean 20 mL and standard deviation 2 mL. Find the probability an amount exceeds 23 mL.':
+  'Mean '+rawBound(model.mean)+', standard deviation '+rawBound(model.sd)+'. Find '+eventLabel(event,model)+'.';
  $('hint').textContent=(event==='lower'?'Leave the lower bound at −∞. ':event==='upper'?'Leave the upper bound at ∞. ':'Enter both finite bounds in increasing order. ')+'Use the standard deviation, not the variance.';
  $('answer').value='';$('feedback').textContent='';$('feedback').className='feedback';
  $('link-notice').textContent=error??'';$('link-notice').hidden=!error;
@@ -229,7 +231,12 @@ $('answer-form').addEventListener('submit',e=>{
  if(!raw||!Number.isFinite(v)||v<0||v>1)el.textContent='Enter a probability from 0 to 1.';
  else if(v===Number(expected)&&/^(?:[01])?\.\d{4}$/.test(raw)){ok=true;el.textContent='Correct: '+expected+'. That is the requested area under the normal curve.'}
  else if(v===Number(expected)||Math.abs(v-prob)<5e-6)el.textContent='The area is right. Write the probability to four decimal places.';
- else el.textContent='Not yet. Check the shaded region, each bound, and that you used the standard deviation.';
+ else if(assignment.event!=='range'&&v===Number((1-prob).toFixed(4))){
+  const upper=assignment.event==='upper';
+  el.textContent=upper?
+   'That is the area below the cutoff. For amounts above it, use the cutoff as Lower Bound and ∞ as Upper Bound.':
+   'That is the area above the cutoff. For amounts below it, use −∞ as Lower Bound and the cutoff as Upper Bound.';
+ }else el.textContent='Not yet. Check the shaded region, each bound, and that you used the standard deviation.';
  el.classList.toggle('is-right',ok);el.classList.toggle('is-wrong',!ok);
 });
 restorePractice();
