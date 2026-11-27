@@ -68,8 +68,8 @@
       "notMapped": 24
     },
     "ai-sl": {
-      "direct": 32,
-      "limited": 7,
+      "direct": 30,
+      "limited": 9,
       "notMapped": 20
     },
     "ai-hl": {
@@ -113,8 +113,8 @@
         "notMapped": 3
       },
       "ai-sl": {
-        "direct": 9,
-        "limited": 2,
+        "direct": 7,
+        "limited": 4,
         "notMapped": 1
       },
       "ai-hl": {
@@ -728,11 +728,11 @@
       "coverage": {
         "aa-sl": "-",
         "aa-hl": "-",
-        "ai-sl": "D",
+        "ai-sl": "L",
         "ai-hl": "D"
       },
       "representativeMethod": "Use QuadReg with paired input; read a,b,c, R² and residuals; plot/follow a saved formula.",
-      "limits": "AI SL2.5–2.6; R²/residual comparison AI AHL4.13; only quadratic calculator workflow.",
+      "limits": "AI AHL4.13 nonlinear regression and R²/residuals. AI SL2.5–2.6 model use transfers; performing QuadReg is enrichment only and omitted from its filtered catalogue.",
       "narrated": false
     },
     {
@@ -745,11 +745,11 @@
       "coverage": {
         "aa-sl": "-",
         "aa-hl": "-",
-        "ai-sl": "D",
+        "ai-sl": "L",
         "ai-hl": "D"
       },
       "representativeMethod": "Run ExpReg and interpret a,b in a·b^x; positive responses and transformed-fit caveat.",
-      "limits": "AI SL2.5–2.6 modelling; ExpReg is not PowerReg, SinReg or general nonlinear least squares.",
+      "limits": "AI AHL4.13 nonlinear regression; transformed-fit interpretation relates to AHL2.10. AI SL2.5–2.6 model use transfers; performing ExpReg is enrichment only and omitted from its filtered catalogue.",
       "narrated": false
     },
     {

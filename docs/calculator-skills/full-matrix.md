@@ -35,8 +35,8 @@ D = directly relevant supported workflow within its input scope. L = narrower op
 | CT29 | 4 | D | D | D | D | Run one-variable stats and distinguish population sigma from sample SD. | Shared SL4.3; choose the right frequency input and result label. |
 | CT30 | 4 | D | D | D | D | Build a boxplot and interpret quartiles/fences/outliers. | No histogram or ogive implemented, despite catalogue title. |
 | CT31 | 4 | D | D | D | D | Run Pearson r and fit/read a linear regression using matched pairs and correct orientation. | Shared SL4.4; no reverse-fit shortcut or significance test for population rho. |
-| CT32 | 2 | - | - | D | D | Use QuadReg with paired input; read a,b,c, R² and residuals; plot/follow a saved formula. | AI SL2.5–2.6; R²/residual comparison AI AHL4.13; only quadratic calculator workflow. |
-| CT33 | 2 | - | - | D | D | Run ExpReg and interpret a,b in a·b^x; positive responses and transformed-fit caveat. | AI SL2.5–2.6 modelling; ExpReg is not PowerReg, SinReg or general nonlinear least squares. |
+| CT32 | 2 | - | - | L | D | Use QuadReg with paired input; read coefficients and distinguish fitted predictions from readings. | AI AHL4.13. For AI SL, use and interpret a quadratic model under SL2.5–2.6; QuadReg itself is enrichment, omitted from the filtered catalogue. |
+| CT33 | 2 | - | - | L | D | Run ExpReg and interpret a,b in a·b^x; positive responses and transformed-fit caveat. | AI AHL4.13; log-fit interpretation relates to AHL2.10. AI SL2.5–2.6 model use transfers, but ExpReg is enrichment and omitted from the filtered catalogue. |
 | CT34 | 2 | - | - | - | D | Create ln(y) list and fit a line against x; back-transform intercept and slope. | AI AHL2.10, semi-log only; the log–log power branch is described, not simulated. |
 | CT35 | 4 | - | - | D | D | Assign midranks for ties then use Pearson on rank lists, not raw data. | AI SL4.10; assisted because ranking is not faked as a native Spearman wizard. |
 | CT36 | 4 | D | D | D | D | Compute an expected value with weighted outcomes and guard probability totals. | Shared SL4.7 family; AI HL linear-combination variance is not covered end-to-end. |

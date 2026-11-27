@@ -25,6 +25,8 @@ const scoped={
 const omitted={
  'CT13':{'ai-sl':'The worked and default Try examples use rational graphs with denominator exclusions. CT16 covers a model threshold.'},
  'CT14':{'ai-sl':'The lesson only works through abstract exhaustive equations, not a contextual AI SL sinusoidal model.'},
+ 'CT32':{'ai-sl':'QuadReg performs nonlinear regression (AI AHL4.13). AI SL2.6 uses models without requiring this calculator workflow.'},
+ 'CT33':{'ai-sl':'ExpReg performs nonlinear regression (AI AHL4.13); its log-scale interpretation relates to AHL2.10. AI SL2.6 model use transfers, but the workflow is enrichment.'},
  'CT41':{'ai-sl':'Unknown normal parameters are enrichment; CT40 is the direct method.','ai-hl':'Unknown normal parameters are enrichment; CT40 is the direct method.'},
  'CT55':{'ai-hl':'Area between two curves is enrichment for AI HL, not its direct integration workflow.'}
 };
