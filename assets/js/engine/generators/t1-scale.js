@@ -196,11 +196,12 @@ reg('nominal-backsolve','target-monthly-balance-to-apr','1.4',['find-rate-or-pv'
 reg('real-purchasing','inflation-adjusted-balance','1.4',['real-value','future-value','compare-options'],4,'words','Separate nominal interest from real purchasing power',({rng})=>{
   const a=rng.int(28,185)*100,i=rng.int(26,72)/10,h=rng.int(13,44)/10,n=rng.int(4,16);
   const z=a*(1+i/100)**n,real=z/(1+h/100)**n,change=(real/a-1)*100;
-  return{params:{a,i,h,n},stem:`A saver invests ${euro(a)} at $${f.pct(i)}$ annual interest. Prices increase by $${f.pct(h)}$ each year. Both rates stay fixed for $${n}$ years.`,parts:[
+  return{params:{a,i,h,n},stem:`A saver invests ${euro(a)} at $${f.pct(i)}$ annual interest, compounded annually. Prices increase by $${f.pct(h)}$ each year. Both rates stay fixed for $${n}$ years.`,parts:[
     P('Find the final balance measured in today’s euros. Round to the nearest cent.',3,A.dp(closest(real,2),2),
       M(`R=\\dfrac{${num(a)}(1+${num(i/100)})^{${n}}}{(1+${num(h/100)})^{${n}}}`),
       M(`R\\approx ${dp(real,2)}\\text{ euros}`)),
-    P('Find the signed percentage change in purchasing power, to two decimal places.',3,A.dp(closest(change,2),2),
+    P('Using the unrounded real balance, find the percentage change in purchasing power. Give your answer to two decimal places, using a negative sign for a decrease.',3,A.dp(closest(change,2),2),
+      "Use the unrounded real balance for $R$.",
       M(`100\\left(\\dfrac{R}{${num(a)}}-1\\right)\\approx ${dp(change,2)}`))]};
 });
 reg('resale-fee','reverse-depreciation-and-percentage-fee','1.4',['depreciation','find-rate-or-pv'],4,'words','Reverse depreciation and a resale commission',({rng})=>{
