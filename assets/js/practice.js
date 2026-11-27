@@ -574,9 +574,12 @@
     const a = p.answer;
     let input = null;
     if (a.kind === 'number') {
+      // These counts may be whole or fractional, but the stem never asks for rounding.
+      const placeholder = q.type === 't4-expected-occurrences' && !a.sigfigs
+        ? 'your answer' : a.exact ? 'exact value or 3 s.f.' : a.sigfigs ? 'to 3 s.f.' : 'your answer';
       input = h('div', { class: 'ans-row' },
         h('input', { class: 'input', type: 'text', inputmode: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', value: state.responses[p.label] || '', disabled: done,
-          placeholder: a.exact ? 'exact value or 3 s.f.' : a.sigfigs ? 'to 3 s.f.' : 'your answer', 'aria-label': `Answer to part ${p.label}`,
+          placeholder, 'aria-label': `Answer to part ${p.label}`,
           oninput: e => { state.responses[p.label] = e.target.value; },
           onkeydown: e => { if (e.key === 'Enter' && !done) check(); } }),
         a.unit ? mx(a.unit) : null);
