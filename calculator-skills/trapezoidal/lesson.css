@@ -130,3 +130,11 @@ figure:where(.qb-calculator-lesson, .qb-calculator-lesson *){margin:0}figcaption
 @media(max-width:780px){
  .lw-stage[data-mode=watch] .lw-guide{max-height:clamp(90px,24svh,176px);overflow:auto;overscroll-behavior:contain;scrollbar-width:thin}
 }
+
+/* This follow-up belongs to the original Try problem, not the signed replay. */
+#compare-strips{margin-top:.9rem;padding-top:.65rem;border-top:1px solid var(--line)}
+#compare-strips summary{cursor:pointer;font-weight:680;color:var(--accent);align-content:center;min-height:44px}
+#compare-strips>p{font-size:.9rem;margin-bottom:.6rem}
+#compare-form{display:grid;gap:.42rem}
+#compare-form button{justify-self:start}
+#compare-feedback:not(:empty){font-weight:650;font-size:.9rem}
