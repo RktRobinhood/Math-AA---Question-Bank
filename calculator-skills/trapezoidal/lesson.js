@@ -118,7 +118,19 @@ function renderWatch(device,{beat,point,crossed,key}){
 }
 const fields=()=>Object.fromEntries(allKeys.map(k=>[k,$(k).value]));
 function refill(values){allKeys.forEach(k=>{$(k).value=values[k];});}
-let checked=null;
+let checked=null,fourCorrect=false;
+const comparisonCase=Object.freeze({four:parseModel(fresh),eight:parseModel({...fresh,n:"8"}),reference:14/3});
+const sameOrdinaryCase=()=>!isTyped&&checked&&allKeys.every(k=>experiment[k].trim()===fresh[k]);
+function comparisonFeedback(text="",cls=""){
+ const status=$("compare-feedback");status.textContent=text;status.className=cls;
+}
+function clearComparison(){
+ fourCorrect=false;
+ $("compare-strips").open=false;
+ $("compare-form").reset();
+ comparisonFeedback();
+}
+
 const state=()=>practice;
 function feedback(text="",cls=""){$("feedback").textContent=text;$("feedback").className=cls;}
 function checkInputs(p){checked=null;try{checked=parseModel(p);}catch(e){return e.message;}return "";}
@@ -133,6 +145,7 @@ function renderTry(){
  $("key-hint").textContent=s.menu?"Use the numbered menu key, or the arrows and Enter.":s.loaded?"Press Enter to run the loaded calculation.":s.stored?"Function stored. Type the weighted sum, or load it below.":"Choose Menu → Actions → Define, or load the definition below.";
  const message=$("output");message.hidden=!s.error&&!s.out;message.textContent=s.error||s.out;message.className=s.error?"error":"right";
  $("answer-form").hidden=!checked;
+ $("compare-strips").hidden=!(fourCorrect&&sameOrdinaryCase());
 }
 function handle(key){if(mode!=="try")return;pressOn(state(),key);renderTry();}
 function prepare(kind){
@@ -155,14 +168,34 @@ $("load-sum").addEventListener("click",()=>prepare("sum"));
 $("run").addEventListener("click",()=>handle("enter"));
 $("fields").addEventListener("input",()=>{
  const s=state();s.loaded=false;s.out="";s.prior="";s.error="";s.raw="";s.style="plain";s.menu="";
- experiment=fields();checkInputs(experiment);feedback();$("answer").value="";
+ experiment=fields();checkInputs(experiment);feedback();$("answer").value="";clearComparison();
  renderTry();
 });
+$("answer").addEventListener("input",()=>{feedback();clearComparison();$("compare-strips").hidden=true;});
 $("answer-form").addEventListener("submit",e=>{
  e.preventDefault();if(!checked)return;
- if(!$("answer").value.trim()){feedback("Enter your estimate before checking.","wrong");return;}
+ if(!$("answer").value.trim()){clearComparison();renderTry();feedback("Enter your estimate before checking.","wrong");return;}
  const right=M.answer($("answer").value,checked);
+ if(!right)clearComparison();
+ fourCorrect=right;renderTry();
  feedback(right?"Correct. This is the trapezoidal estimate.":"Not quite. Check h/2, the two end heights and the doubled interior heights.",right?"right":"wrong");
+});
+$("compare-form").addEventListener("input",()=>comparisonFeedback());
+$("compare-form").addEventListener("submit",e=>{
+ e.preventDefault();if(!fourCorrect||!sameOrdinaryCase())return;
+ const entered=$("estimate-eight").value.trim(),selection=$("closer-estimate").value;
+ if(!entered){comparisonFeedback("Enter your 8-strip estimate before checking.","wrong");return;}
+ const {four,eight,reference}=comparisonCase;
+ if(!M.answer(entered,eight)){
+  comparisonFeedback("Check the new strip width. Eight strips have nine heights: count each endpoint once and each inside height twice.","wrong");return;
+ }
+ if(!selection){comparisonFeedback("Your 8-strip estimate is correct. Now choose which estimate is closer to the given area.","wrong");return;}
+ const distanceFour=Math.abs(four.sum-reference),distanceEight=Math.abs(eight.sum-reference);
+ const closer=distanceFour===distanceEight?"tie":distanceFour<distanceEight?"four":"eight";
+ if(selection!==closer){
+  comparisonFeedback("Your 8-strip estimate is correct. Compare how far each estimate is from 14/3.","wrong");return;
+ }
+ comparisonFeedback("Correct. Eight strips gave a closer estimate here. More strips do not guarantee a better estimate for every function.","right");
 });
 function enterTry(device,actions){
  mode="try";returnToWatch=actions.returnToWatch;
@@ -175,7 +208,7 @@ function exitTry(){
 $("return").onclick=()=>returnToWatch?.();
 $("reset").onclick=()=>{
  practice=make();experiment={...problem};refill(experiment);checkInputs(experiment);
- $("answer").value="";renderTry();feedback();stage.focus({preventScroll:true});
+ $("answer").value="";clearComparison();renderTry();feedback();stage.focus({preventScroll:true});
 };
 document.addEventListener("keydown",e=>{
  if(e.defaultPrevented||e.target.closest?.(".top, .tabbar"))return;
