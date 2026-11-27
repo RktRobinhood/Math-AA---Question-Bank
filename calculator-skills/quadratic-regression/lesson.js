@@ -118,7 +118,11 @@ function paintTry(writeData=true){
  shown("try-picture",Boolean(correct));
  if(correct)chart($("try-picture"),data,r);else $("try-picture").replaceChildren();
  shown("transfer",Boolean(correct));
- if(correct)$("transfer").textContent="The dashed curve is the model. Use the data rows for the observed maximum.";
+ if(correct){
+  const limits=M.display(r.min)+" to "+M.display(r.max),outside=data.at<r.min||data.at>r.max;
+  $("transfer").textContent="The dashed curve covers the observed x-range ("+limits+"). Use the curve within this range for the fitted maximum and column B for the largest reading."+
+   (outside?" Your requested prediction lies outside that range. This is extrapolation; even a high R² does not guarantee it will be reliable.":"");
+ }
 
 }
 function update(next){state=next;touched=true;status("assess-feedback","");paintTry();}
