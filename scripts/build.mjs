@@ -363,7 +363,7 @@ const practiceGeneratorVersions = {
   "ai-hl-topic123.js": "tsp-bound-inference-1",
   "ai-hl-topic45.js": "20261126-correlation-assumptions-1",
   "ai-sl-own.js": "practice-exam-style-1",
-  "t1-scale.js": "20261125-b1",
+  "t1-scale.js": "real-compounding-1",
   "t5-scale.js": "20261126-easier-1",
   "topic5.js": "20261125-a1",
   "topic1.js": "geometric-graph-alt-1",
