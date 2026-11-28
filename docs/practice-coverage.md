@@ -9,7 +9,7 @@ Every generator is written for a home course, **aa-sl** unless it names another 
 | AA SL | 51 | 51 | 0 | 0 | 599 |
 | AA HL | 83 | 83 | 0 | 0 | 845 |
 | AI SL | 39 | 39 | 0 | 0 | 436 |
-| AI HL | 78 | 78 | 0 | 0 | 744 |
+| AI HL | 78 | 78 | 0 | 0 | 745 |
 
 - **Release minimum:** at least one generator at level 2 and one at level 3 or 4.
 - **Full:** every exam question type the catalogue lists for the subtopic has at least two generators (two unknowns or representations).
@@ -228,7 +228,7 @@ Generators per level: level 0: 16, level 1: 76, level 2: 124, level 3: 103, leve
 
 ## AI HL
 
-744 generators over 467 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
+745 generators over 467 question types are offered in AI HL. 78 of 78 subtopics have generated questions; 0 use real questions only.
 Release minimum reached for **78 of 78** subtopics; full tier for 15.
 
 **Thinnest subtopics** (fewest ways of asking among the 78 with generated questions; the middle one has 9): 5.9 Further differentiation: standard derivatives, chain, product and quotient rules, related rates (5 ways, 3 types); 5.16 Euler's method for single and coupled first-order equations (5 ways, 3 types); 3.7 Radian measure (6 ways, 2 types); 3.8 The unit circle, the Pythagorean identity, the ambiguous case and graphical trigonometric equations (6 ways, 2 types); 3.13 Scalar and vector products (6 ways, 2 types); 5.12 Areas against either axis and volumes of revolution (6 ways, 3 types); 5.15 Slope fields (6 ways, 3 types); 5.17 Phase portraits for coupled linear differential equations (6 ways, 3 types).
@@ -275,7 +275,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 3.13 Scalar and vector products | yes | no | 0 of 0 | 1, 2, 3, 4 | 2 | 6 | 6 | 18 | no |
 | 3.14 Graph theory: vertices, edges, degree and types of graph | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 7 | 7 | 6 | no |
 | 3.15 Adjacency matrices, walks and transition matrices for graphs | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 8 | 8 | 14 | no |
-| 3.16 Graph algorithms: Eulerian and Hamiltonian routes, spanning trees, Chinese postman and travelling salesman | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 9 | 9 | 19 | no |
+| 3.16 Graph algorithms: Eulerian and Hamiltonian routes, spanning trees, Chinese postman and travelling salesman | yes | no | 0 of 0 | 1, 2, 3, 4 | 4 | 10 | 10 | 19 | no |
 | 4.1 Concepts, reliability and sampling techniques | yes | yes | 2 of 2 | 1, 2, 3, 4 | 8 | 11 | 11 | 10 | no |
 | 4.2 Histograms, cumulative frequency graphs and box plots | yes | yes | 3 of 3 | 1, 2, 3, 4 | 7 | 12 | 12 | 8 | no |
 | 4.3 Mean, median, mode, grouped mean, standard deviation, quartiles and IQR | yes | yes | 5 of 5 | 1, 2, 3, 4 | 6 | 11 | 11 | 16 | no |
@@ -314,7 +314,7 @@ Release minimum reached for **78 of 78** subtopics; full tier for 15.
 | 5.17 Phase portraits for coupled linear differential equations | yes | no | 0 of 0 | 1, 2, 3, 4 | 3 | 6 | 6 | 18 | no |
 | 5.18 Second-order differential equations by Euler's method | yes | no | 0 of 0 | 1, 2, 3, 4 | 5 | 6 | 6 | 9 | no |
 
-Generators per level: level 0: 17, level 1: 126, level 2: 220, level 3: 180, level 4: 195, level 5: 10.
+Generators per level: level 0: 17, level 1: 126, level 2: 220, level 3: 181, level 4: 195, level 5: 10.
 
 ## Bank parts not assigned to a question type
 
