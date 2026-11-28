@@ -311,6 +311,11 @@ function mount({glass,widget,head,entry,history,error,calc,input,notify,focusCal
   if(current==='graph'&&useField==='function'&&['power','square','exp','tenpow'].includes(k)){
    print.insert('power',editable,k==='square',k==='exp'?'e':k==='tenpow'?'10':'');return true;
   }
+  if(k==='symbol-palette'){
+   if(current==='calc')popup('Symbol palette',[leaf(1,'|  Condition bar',()=>append('|')),leaf(2,'π',()=>append('π')),leaf(3,'√',()=>append('√(',')'))]);
+   else menuStatus('The condition bar is available in Calculate.');
+   return true;
+  }
   if(k==='catalog'){
    if(current==='calc')popup('Catalog',Object.keys(texts).map((t,i)=>command(i+1,t)));
    else popup('Catalog',[leaf(1,'abs(',()=>append('abs(',')')),leaf(2,'ln(',()=>append('ln(',')')),leaf(3,'log(',()=>append('log(',')')),leaf(4,'sqrt(',()=>append('sqrt(',')'))]);

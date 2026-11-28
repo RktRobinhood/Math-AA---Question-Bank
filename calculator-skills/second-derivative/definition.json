@@ -1,0 +1,573 @@
+{
+  "id": "SUP-SECOND-DERIVATIVE",
+  "title": "Use the numerical second derivative",
+  "intro": "The ramp height is f(x) = (x − 1)³ + 2(x − 1) + 3 metres, where x is the horizontal distance in metres and 0.75 ≤ x ≤ 1.25. Is (1, 3) a point of inflection? Is it stationary? Explain.",
+  "chapters": [
+    {
+      "id": "read",
+      "title": "Read the ramp problem"
+    },
+    {
+      "id": "menu",
+      "title": "Open numerical derivative"
+    },
+    {
+      "id": "function",
+      "title": "Set the derivative order"
+    },
+    {
+      "id": "left",
+      "title": "Check just before one"
+    },
+    {
+      "id": "centre",
+      "title": "Check the centre"
+    },
+    {
+      "id": "right",
+      "title": "Check just after one"
+    },
+    {
+      "id": "slope",
+      "title": "Check whether it flattens"
+    },
+    {
+      "id": "conclude",
+      "title": "Justify the result"
+    }
+  ],
+  "beats": [
+    {
+      "chapter": "read",
+      "spoken": "A ramp is three metres high at one metre along the ground. Does it change concavity there? Does it flatten? Those are two different questions.",
+      "coach": "Use the given model to compare concavity on both sides of x = 1, then test the slope at the point.",
+      "end": 12,
+      "hold": 5,
+      "keys": []
+    },
+    {
+      "chapter": "menu",
+      "spoken": "In Calculate, type derivative and open a bracket. We will put the expression, the variable x, then the derivative order inside the bracket.",
+      "coach": "Enter the function first, then x, then order 2.",
+      "end": 24,
+      "hold": 13,
+      "keys": [
+        {
+          "id": "menu-0",
+          "label": "d",
+          "ariaLabel": "d",
+          "at": 0.08333333333333333
+        },
+        {
+          "id": "menu-1",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.16666666666666666
+        },
+        {
+          "id": "menu-2",
+          "label": "r",
+          "ariaLabel": "r",
+          "at": 0.25
+        },
+        {
+          "id": "menu-3",
+          "label": "i",
+          "ariaLabel": "i",
+          "at": 0.3333333333333333
+        },
+        {
+          "id": "menu-4",
+          "label": "v",
+          "ariaLabel": "v",
+          "at": 0.4166666666666667
+        },
+        {
+          "id": "menu-5",
+          "label": "a",
+          "ariaLabel": "a",
+          "at": 0.5
+        },
+        {
+          "id": "menu-6",
+          "label": "t",
+          "ariaLabel": "t",
+          "at": 0.5833333333333334
+        },
+        {
+          "id": "menu-7",
+          "label": "i",
+          "ariaLabel": "i",
+          "at": 0.6666666666666666
+        },
+        {
+          "id": "menu-8",
+          "label": "v",
+          "ariaLabel": "v",
+          "at": 0.75
+        },
+        {
+          "id": "menu-9",
+          "label": "e",
+          "ariaLabel": "e",
+          "at": 0.8333333333333334
+        },
+        {
+          "id": "menu-10",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.9166666666666666
+        }
+      ]
+    },
+    {
+      "chapter": "function",
+      "spoken": "Type the ramp expression, then comma x and comma two. Close the bracket. The two requests the second derivative, not a square.",
+      "coach": "Inside the brackets: the expression, x, then 2.",
+      "end": 33,
+      "hold": 24,
+      "keys": [
+        {
+          "id": "function-0",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.043478260869565216
+        },
+        {
+          "id": "function-1",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.08695652173913043
+        },
+        {
+          "id": "function-2",
+          "label": "−",
+          "ariaLabel": "-",
+          "at": 0.13043478260869565
+        },
+        {
+          "id": "function-3",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.17391304347826086
+        },
+        {
+          "id": "function-4",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.21739130434782608
+        },
+        {
+          "id": "function-5",
+          "label": "^",
+          "ariaLabel": "^",
+          "at": 0.2608695652173913
+        },
+        {
+          "id": "function-6",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.30434782608695654
+        },
+        {
+          "id": "function-7",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.34782608695652173
+        },
+        {
+          "id": "function-8",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.391304347826087
+        },
+        {
+          "id": "function-9",
+          "label": "×",
+          "ariaLabel": "*",
+          "at": 0.43478260869565216
+        },
+        {
+          "id": "function-10",
+          "label": "(",
+          "ariaLabel": "(",
+          "at": 0.4782608695652174
+        },
+        {
+          "id": "function-11",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.5217391304347826
+        },
+        {
+          "id": "function-12",
+          "label": "−",
+          "ariaLabel": "-",
+          "at": 0.5652173913043478
+        },
+        {
+          "id": "function-13",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.6086956521739131
+        },
+        {
+          "id": "function-14",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.6521739130434783
+        },
+        {
+          "id": "function-15",
+          "label": "+",
+          "ariaLabel": "+",
+          "at": 0.6956521739130435
+        },
+        {
+          "id": "function-16",
+          "label": "3",
+          "ariaLabel": "3",
+          "at": 0.7391304347826086
+        },
+        {
+          "id": "function-17",
+          "label": ",",
+          "ariaLabel": ",",
+          "at": 0.782608695652174
+        },
+        {
+          "id": "function-18",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.8260869565217391
+        },
+        {
+          "id": "function-19",
+          "label": ",",
+          "ariaLabel": ",",
+          "at": 0.8695652173913043
+        },
+        {
+          "id": "function-20",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.9130434782608695
+        },
+        {
+          "id": "function-21",
+          "label": ")",
+          "ariaLabel": ")",
+          "at": 0.9565217391304348
+        }
+      ]
+    },
+    {
+      "chapter": "left",
+      "spoken": "Control, Catalog, then select the vertical bar. Type x equals zero point seven five. Press Enter. About negative one point five: concave down.",
+      "coach": "After the bar, give x. A negative second derivative means concave down.",
+      "end": 42,
+      "hold": 13,
+      "keys": [
+        {
+          "id": "left-0",
+          "label": "Ctrl",
+          "ariaLabel": "Ctrl",
+          "at": 0.09090909090909091
+        },
+        {
+          "id": "left-1",
+          "label": "Catalog",
+          "ariaLabel": "Catalog",
+          "at": 0.18181818181818182
+        },
+        {
+          "id": "left-2",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.2727272727272727
+        },
+        {
+          "id": "left-3",
+          "label": "x",
+          "ariaLabel": "x",
+          "at": 0.36363636363636365
+        },
+        {
+          "id": "left-4",
+          "label": "=",
+          "ariaLabel": "=",
+          "at": 0.45454545454545453
+        },
+        {
+          "id": "left-5",
+          "label": "0",
+          "ariaLabel": "0",
+          "at": 0.5454545454545454
+        },
+        {
+          "id": "left-6",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.6363636363636364
+        },
+        {
+          "id": "left-7",
+          "label": "7",
+          "ariaLabel": "7",
+          "at": 0.7272727272727273
+        },
+        {
+          "id": "left-8",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8181818181818182
+        },
+        {
+          "id": "left-9",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.9090909090909091
+        }
+      ]
+    },
+    {
+      "chapter": "centre",
+      "spoken": "Up opens history. Left selects the expression, not the result. Enter copies it. Change only the point to one. Zero here does not prove an inflection.",
+      "coach": "Leave the second derivative order alone. Change only the point to x = 1.",
+      "end": 54,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "centre-0",
+          "label": "↑",
+          "ariaLabel": "Up",
+          "at": 0.1
+        },
+        {
+          "id": "centre-1",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.2
+        },
+        {
+          "id": "centre-2",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.3
+        },
+        {
+          "id": "centre-3",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.4
+        },
+        {
+          "id": "centre-4",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.5
+        },
+        {
+          "id": "centre-5",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.6
+        },
+        {
+          "id": "centre-6",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.7
+        },
+        {
+          "id": "centre-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.8
+        },
+        {
+          "id": "centre-8",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.9
+        }
+      ]
+    },
+    {
+      "chapter": "right",
+      "spoken": "Recall the line again and replace the point with one point two five. It is about positive one point five, so the curve is concave up here.",
+      "coach": "Compare the signs: negative before, positive after.",
+      "end": 66,
+      "hold": 10,
+      "keys": [
+        {
+          "id": "right-0",
+          "label": "↑",
+          "ariaLabel": "Up",
+          "at": 0.1
+        },
+        {
+          "id": "right-1",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.2
+        },
+        {
+          "id": "right-2",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.3
+        },
+        {
+          "id": "right-3",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.4
+        },
+        {
+          "id": "right-4",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.5
+        },
+        {
+          "id": "right-5",
+          "label": ".",
+          "ariaLabel": ".",
+          "at": 0.6
+        },
+        {
+          "id": "right-6",
+          "label": "2",
+          "ariaLabel": "2",
+          "at": 0.7
+        },
+        {
+          "id": "right-7",
+          "label": "5",
+          "ariaLabel": "5",
+          "at": 0.8
+        },
+        {
+          "id": "right-8",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.9
+        }
+      ]
+    },
+    {
+      "chapter": "slope",
+      "spoken": "Recall the line. Set x back to one. Move left to the order and change two to one. The slope is about two, not zero. The ramp is still rising.",
+      "coach": "Change both the point and the derivative order. The first derivative is about 2.",
+      "end": 81,
+      "hold": 12,
+      "keys": [
+        {
+          "id": "slope-0",
+          "label": "↑",
+          "ariaLabel": "Up",
+          "at": 0.058823529411764705
+        },
+        {
+          "id": "slope-1",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.11764705882352941
+        },
+        {
+          "id": "slope-2",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.17647058823529413
+        },
+        {
+          "id": "slope-3",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.23529411764705882
+        },
+        {
+          "id": "slope-4",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.29411764705882354
+        },
+        {
+          "id": "slope-5",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.35294117647058826
+        },
+        {
+          "id": "slope-6",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.4117647058823529
+        },
+        {
+          "id": "slope-7",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.47058823529411764
+        },
+        {
+          "id": "slope-8",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.5294117647058824
+        },
+        {
+          "id": "slope-9",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.5882352941176471
+        },
+        {
+          "id": "slope-10",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.6470588235294118
+        },
+        {
+          "id": "slope-11",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.7058823529411765
+        },
+        {
+          "id": "slope-12",
+          "label": "←",
+          "ariaLabel": "Left",
+          "at": 0.7647058823529411
+        },
+        {
+          "id": "slope-13",
+          "label": "del",
+          "ariaLabel": "Del",
+          "at": 0.8235294117647058
+        },
+        {
+          "id": "slope-14",
+          "label": "1",
+          "ariaLabel": "1",
+          "at": 0.8823529411764706
+        },
+        {
+          "id": "slope-15",
+          "label": "enter",
+          "ariaLabel": "Enter",
+          "at": 0.9411764705882353
+        }
+      ]
+    },
+    {
+      "chapter": "conclude",
+      "spoken": "The numerics suggest a change of concavity. The exact second derivative is six times the quantity x minus one. Its sign changes at one. This is an inflection, but because the slope is not zero, it is not stationary.",
+      "coach": "f″(x) = 6(x − 1) changes sign at 1; f′(1) = 2, so the inflection is nonstationary.",
+      "end": 99,
+      "hold": 8,
+      "keys": []
+    }
+  ]
+}

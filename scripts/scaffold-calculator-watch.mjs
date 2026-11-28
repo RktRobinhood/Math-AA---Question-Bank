@@ -6,16 +6,18 @@ import {createRequire} from 'node:module';
 const require=createRequire(import.meta.url);
 const {validate}=require('../calculator-skills/handheld/watch-lesson.js');
 
-const [slug,definition,adapter,outDirectory] = process.argv.slice(2);
+const args=process.argv.slice(2);
+const neutral=args.includes('--neutral');
+const [slug,definition,adapter,outDirectory] = args.filter(arg=>arg!=='--neutral');
 if(!/^[a-z][a-z0-9-]{2,47}$/.test(slug||'')||!definition||!adapter){
- console.error('Usage: node scripts/scaffold-calculator-watch.mjs <slug> <definition.json> <adapter.js> [calculator-skills directory]');
+ console.error('Usage: node scripts/scaffold-calculator-watch.mjs <slug> <definition.json> <adapter.js> [calculator-skills directory] [--neutral]');
  process.exit(2);
 }
 const base=outDirectory?path.resolve(outDirectory):fileURLToPath(new URL('../calculator-skills/',import.meta.url));
 const to=path.join(base,slug), spec=JSON.parse(fs.readFileSync(definition,'utf8')), code=fs.readFileSync(adapter,'utf8');
 validate(spec);
 if(!code.includes('CalculatorLessonAdapter'))throw new Error('The adapter must provide window.CalculatorLessonAdapter.');
-const html=`<!doctype html>
+const legacyHtml=`<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -47,6 +49,9 @@ const html=`<!doctype html>
 </body>
 </html>
 `;
+const quoteHtml=raw=>String(raw).replace(/[&<>\"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));
+const html=neutral?fs.readFileSync(new URL('./calculator-watch-neutral.tmpl',import.meta.url),'utf8')
+ .replace('__LESSON_TITLE__',()=>quoteHtml(spec.title)):legacyHtml;
 fs.mkdirSync(to);
 try{
  for(const [file,data] of [['index.html',html],['definition.json',JSON.stringify(spec,null,2)+'\n'],['adapter.js',code]])

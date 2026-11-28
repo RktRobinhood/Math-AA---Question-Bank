@@ -312,6 +312,9 @@ window.HANDHELD_CATALOG_ROUTES={
         "path": "histogram/index.html",
         "label": "Frequency histograms (AI SL/HL) · narrated"
       }
+    ],
+    "CT51": [
+      {"path": "second-derivative/index.html", "label": "Use the numerical second derivative"}
     ]
   }
 };
