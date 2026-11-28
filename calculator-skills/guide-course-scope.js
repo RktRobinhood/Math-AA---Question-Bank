@@ -62,7 +62,8 @@ window.CALCULATOR_COURSE_SCOPE={skills:{
 },companions:{
   "linear-system-three/index.html":{"parent":"CT07","title":"Solve a 3×3 linear system","topics":["1","2"],"description":"Use LinSolve with three equations in x, y and z.","direct":["aa-hl","ai-sl","ai-hl"],"keywords":"linsolve simultaneous three equations three unknowns"},
   "maximum/index.html":{"parent":"CT12","title":"Find a graph maximum","topics":["5","2"],"description":"Check the highest point and compare it with the endpoints.","direct":["aa-sl","aa-hl","ai-sl","ai-hl"]},
-  "histogram/index.html":{"parent":"CT30","title":"Frequency histograms","topics":["4"],"description":"Use equal-width bars to display and compare frequencies.","direct":["ai-sl","ai-hl"],"note":"Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph."}
+  "histogram/index.html":{"parent":"CT30","title":"Frequency histograms","topics":["4"],"description":"Use equal-width bars to display and compare frequencies.","direct":["ai-sl","ai-hl"],"note":"Use equal-width bins and count frequencies below a cutoff. This is not a cumulative-frequency graph."},
+  "second-derivative/index.html":{"parent":"CT51","title":"Use the numerical second derivative","topics":["5"],"description":"Compare concavity on both sides of a point and check whether the curve levels off.","direct":["aa-sl","aa-hl","ai-hl"],"keywords":"second derivative concavity inflection stationary"}
 },foundations:{
   "handset-keys/index.html":{"id":"SUP-HANDSET-KEYS","title":"Find your way around the keypad","topics":["start"],"direct":["aa-sl","aa-hl","ai-sl","ai-hl"],"note":"Find trig, equals, minus and fractions. Try exact and decimal answers."},
   "handset-settings/index.html":{"id":"SUP-HANDSET-SETTINGS","title":"Set up your TI-Nspire","topics":["start"],"direct":["aa-sl","aa-hl","ai-sl","ai-hl"],"note":"Find Display Digits, Angle and Calculation Mode."}

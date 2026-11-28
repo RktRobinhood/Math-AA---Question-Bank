@@ -1,0 +1,8 @@
+A ramp is three metres high at one metre along the ground. Does it change concavity there? Does it flatten? Those are two different questions.
+In Calculate, type derivative and open a bracket. We will put the expression, the variable x, then the derivative order inside the bracket.
+Type the ramp expression, then comma x and comma two. Close the bracket. The two requests the second derivative, not a square.
+Control, Catalog, then select the vertical bar. Type x equals zero point seven five. Press Enter. About negative one point five: concave down.
+Up opens history. Left selects the expression, not the result. Enter copies it. Change only the point to one. Zero here does not prove an inflection.
+Recall the line again and replace the point with one point two five. It is about positive one point five, so the curve is concave up here.
+Recall the line. Set x back to one. Move left to the order and change two to one. The slope is about two, not zero. The ramp is still rising.
+The numerics suggest a change of concavity. The exact second derivative is six times the quantity x minus one. Its sign changes at one. This is an inflection, but because the slope is not zero, it is not stationary.

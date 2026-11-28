@@ -28,6 +28,13 @@
       "transcript": "CT03-ai.txt",
       "transcriptSha256": "f17d82d39c3e9aebf406810f28170ff2ed6db03da69b8d20bf90f24b3106b807",
       "audioDestination": "../../counting-ai/narration.mp3"
+    },
+    {
+      "id": "SUP-SECOND-DERIVATIVE",
+      "definition": "../../second-derivative/definition.json",
+      "transcript": "SUP-SECOND-DERIVATIVE.txt",
+      "transcriptSha256": "d7ba871c351a86abe68091727fc5aaccf65f8cfd8f8a3180b23674a19f98a548",
+      "audioDestination": "../../second-derivative/narration.mp3"
     }
   ]
 }

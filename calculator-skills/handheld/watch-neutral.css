@@ -1,0 +1,38 @@
+.neutral-watch-page{width:min(100%,1100px);margin:auto;padding:clamp(7px,2vw,24px) clamp(8px,2.5vw,24px)}
+.neutral-watch-crumb,.neutral-watch-notes{font:600 .8rem/1.3 system-ui;margin:0 0 .45rem}.neutral-watch-crumb a,.neutral-watch-notes a{color:inherit}
+.neutral-watch-notes{margin-top:.7rem;font-weight:500}.neutral-watch-notes p{max-width:67ch;margin:.35rem 0}
+.neutral-watch-calc{min-width:0;width:100%}
+.neutral-watch-calc[data-lane=watch]{pointer-events:none}
+.neutral-watch-calc .np-scope,.neutral-watch-calc[data-lane=watch] .np-notice{display:none!important}
+.neutral-watch-calc[data-lane=watch] .neutral-handheld{--neutral-handheld-width:var(--lw-full-fit,230px)}
+.neutral-watch-calc[data-lane=try]{width:min(100%,450px);margin:0 auto;color:var(--lw-text,#edf9f3)}
+.neutral-watch-calc[data-lane=try] .neutral-handheld{--neutral-handheld-width:clamp(166px,calc((100svh - 187px)*.4777),292px)}
+.neutral-watch-task{font:650 .83rem/1.3 system-ui;margin:.15rem .15rem .45rem}
+.neutral-watch-calc .hh-key.key-tour-held{outline:2px solid #82ffd0;background:#baffd7!important;color:#17382b!important}
+@media(max-height:650px){
+ .neutral-watch-page{padding-block-start:3px}.neutral-watch-crumb{margin-bottom:.2rem}
+}
+@media(max-width:780px) and (min-height:671px){
+ .neutral-watch-page .lw-surface>.lw-guide .qb-watch-chapters{grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+ .neutral-watch-page .lw-surface>.lw-guide .qb-watch-chapters__button{min-height:30px;padding:3px;gap:2px 4px}
+ .neutral-watch-page .lw-surface>.lw-guide .qb-watch-chapters__title{font-size:.7rem}
+ .neutral-watch-page .lw-surface>.lw-guide .qb-watch-chapters__key{font-size:.61rem;padding:1px 2px;min-width:.8rem}
+ .neutral-watch-page .lw-surface>.lw-guide .lw-coach{margin:.12rem 0 .23rem;line-height:1.2}
+}
+@container (max-width:175px){
+ .neutral-watch-calc[data-lane=watch] .neutral-glass{font-size:max(7px,4.3cqw)}
+ .neutral-watch-calc[data-lane=watch] .neutral-status{font-size:max(7px,3.8cqw)}
+ .neutral-watch-calc[data-lane=watch] .neutral-history{padding:1px 2px}
+ .neutral-watch-calc[data-lane=watch] .neutral-row{padding:0 0 1px}
+ .neutral-watch-calc[data-lane=watch] .neutral-row:nth-last-child(n+3){display:none}
+ .neutral-watch-calc[data-lane=watch] .neutral-result:not(.neutral-ratio-result){overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+}
+
+/* Keep long authored prompts readable above the native handset on small phones. */
+@media (max-width: 430px) {
+  .neutral-watch-page .lw-header {display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:.45rem;row-gap:.35rem;margin-bottom:.45rem}
+  .neutral-watch-page .lw-header > div:first-child {display:contents}
+  .neutral-watch-page .lw-header h1 {grid-column:1/-1;grid-row:1;font-size:clamp(1.38rem,6.1vw,1.65rem)}
+  .neutral-watch-page .lw-header p {grid-column:1/-1;grid-row:2;margin:0;overflow-wrap:anywhere;line-height:1.35}
+  .neutral-watch-page .lw-mode {grid-column:2;grid-row:3;justify-self:end;margin-top:.05rem}
+}

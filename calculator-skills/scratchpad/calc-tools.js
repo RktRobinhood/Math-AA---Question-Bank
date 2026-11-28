@@ -33,7 +33,26 @@
   const selected=name[1]===undefined?found[0]:found.slice().sort((a,b)=>Math.abs(a.x-guess)-Math.abs(b.x-guess))[0];
   return {value:selected.x,notice:'One approximate solution. It may not be the only one.'};
  }
+ function numericalDerivative(f,x,order){
+  if(![1,2].includes(order))throw Error('Use order 1 or 2.');
+  const h=(order===1?1e-5:1e-3)*Math.max(1,Math.abs(x));
+  const a0=(f(x)-f(x-h))/h,a1=(f(x+h)-f(x))/h;
+  if(!Number.isFinite(a0+a1)||Math.abs(a0-a1)>(order===1?.003:.05)*Math.max(1,Math.abs(a0),Math.abs(a1)))throw Error('A reliable derivative was not found at that point.');
+  return {value:order===1?(a0+a1)/2:(a1-a0)/h,notice:''};
+ }
  function evaluate(raw,ev,mode){
+  // TI non-CAS desktop keyboard spelling. This educational model supports x
+  // with an explicit evaluation point and does not store a variable or use CAS.
+  if(/^\s*derivative\s*\(/i.test(raw)){
+   const pieces=raw.split('|');
+   const parsed=pieces.length===2?args(pieces[0]):null;
+   const at=pieces.length===2&&/^\s*x\s*=\s*([^=|]+?)\s*$/i.exec(pieces[1]);
+   if(!parsed||!at||!at[1].trim()||![2,3].includes(parsed[1].length)||parsed[1].some(x=>!x)||!/^x$/i.test(parsed[1][1]))
+    throw Error('Use derivative(expression,x[,order]) | x=value.');
+   const [expr,,order]=parsed[1];
+   const f=root.TIGraphGeneral.parse(expr,{angle:mode}).evaluate;
+   return numericalDerivative(f,ev(at[1]),order===undefined?1:ev(order));
+  }
   if(!/^\s*(?:nsolve|binompdf|binomcdf|normcdf|invnorm|poisspdf|poisscdf|ncr|npr|nderivative|nint)\s*\(/i.test(raw))return null;
   const parsed=args(raw);
   if(!parsed)throw Error('Complete the command and its closing parenthesis.');
@@ -67,11 +86,7 @@
     const at=/^x\s*=\s*(.+)$/i.exec(a[1]||'');
     if(!at||![2,3].includes(a.length))throw Error('Use nDerivative(expression,x=value[,order]).');
     const x=ev(at[1]),order=a.length===2?1:ev(a[2]);
-    if(![1,2].includes(order))throw Error('Use order 1 or 2.');
-    const h=(order===1?1e-5:1e-3)*Math.max(1,Math.abs(x));
-    const a0=(f(x)-f(x-h))/h,a1=(f(x+h)-f(x))/h;
-    if(!Number.isFinite(a0+a1)||Math.abs(a0-a1)>(order===1?.003:.05)*Math.max(1,Math.abs(a0),Math.abs(a1)))throw Error('A reliable derivative was not found at that point.');
-    return value(order===1?(a0+a1)/2:(a1-a0)/h);
+    return numericalDerivative(f,x,order);
    }
    if(a.length!==4||a[1]!=='x')throw Error('Use nInt(expression,x,lower,upper).');
    const x=ev(a[2]),r=ev(a[3]);if(x===r)return value(0);

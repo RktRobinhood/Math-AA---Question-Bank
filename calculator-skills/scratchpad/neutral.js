@@ -36,8 +36,8 @@
     const allowed=new Set(['esc','ctrl','del','eq','trig','menu','scratchpad','home','doc','catalog','tab','templates','symbols','var','comma','space',...'abcdefghijklmnopqrstuvwxyz','up','down','left','right','select','power','square','exp','tenpow','lparen','rparen','pi','ee','mul','div','plus','minus','neg','dot','enter','return',...'0123456789']);
     for(const b of holder.querySelectorAll('[data-hh-key]'))if(!allowed.has(b.dataset.hhKey)){b.disabled=true;b.tabIndex=-1;b.title='Not simulated in this practice handheld';}
     let ctrl=false,stamp='',selection=[0,0],schedule=0,activeHistory=null,flashTimer=0,trigPick=0;
-    const shifted={div:'fraction',square:'sqrt',neg:'ans',del:'clear',exp:'ln',tenpow:'log',enter:'approx',return:'approx'};
-    const controls={fraction:'Control and Divide opens the fraction template',sqrt:'Control and Square opens square root',ans:'Control and Negative inserts the last answer',clear:'Control and Delete clears the entry',ln:'Control and e to a power opens natural logarithm',log:'Control and Ten to a power opens base-ten logarithm',approx:'Control and Enter calculates a decimal approximation'};
+    const shifted={div:'fraction',square:'sqrt',neg:'ans',del:'clear',exp:'ln',tenpow:'log',enter:'approx',return:'approx',catalog:'symbol-palette'};
+    const controls={fraction:'Control and Divide opens the fraction template',sqrt:'Control and Square opens square root',ans:'Control and Negative inserts the last answer',clear:'Control and Delete clears the entry',ln:'Control and e to a power opens natural logarithm',log:'Control and Ten to a power opens base-ten logarithm',approx:'Control and Enter calculates a decimal approximation','symbol-palette':'Control and Catalog opens the symbol palette'};
     for(const [key,action] of Object.entries(shifted)){
       const btn=shell.getKey(key);if(btn)btn.title=controls[action];
     }
